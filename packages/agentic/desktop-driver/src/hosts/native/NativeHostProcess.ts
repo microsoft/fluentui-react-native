@@ -334,6 +334,7 @@ export class NativeHostProcess extends EventEmitter<{
     if (message.type === 'cancelled') {
       const error = new Error(`Native driver command "${message.id}" was cancelled.`);
       error.name = 'AbortError';
+      if (message.data) Object.assign(error, { data: message.data });
       // A provider that does not report what the cancelled command left behind cannot rule out an effect.
       this.rejectPending(message.id, attachFailureEffect(error, parseMutationEffect(message.effect) ?? 'unknown'));
       return;

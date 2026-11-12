@@ -22,6 +22,34 @@ real descriptor path.
 Run the `yarn storybook`, `yarn desktop-driver`, and `yarn desktop-test`
 commands below from `apps/storybook`, where their scripts are declared.
 
+## Neutral macOS application ownership
+
+The package's opt-in AppKit contract builds the signed native helper and the
+isolated fixture described in the
+[macOS provider README](../../desktop-driver/native/macos/README.md).
+From the repository root, under the exclusive native-validation lock:
+
+```sh
+FURN_NATIVE_DRIVER_TEST=1 yarn workspace @fluentui-react-native/desktop-test test --runInBand applicationOwnership.contract
+```
+
+Set `FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY` to the provisioned stable
+identity. The suite covers supervisor/session separation, durable owner/app
+identities, launch-capable discovery, exact external-app exclusion and
+preservation, stale identities, direct-child causality, and post-launch
+cancellation. Its evidence is written to the desktop-test package's
+`artifacts/desktop/application-ownership-*/evidence.json`. The separate physical mutex
+case requires explicit `FURN_NATIVE_PHYSICAL_INPUT_TEST=1` and effective native
+permissions; a skipped case does not qualify input exclusion.
+
+An Accessibility trust flag alone is insufficient: record actual AX calls and
+failures, including `kAXErrorAPIDisabled`, without resetting TCC or changing
+privacy permissions. AppKit results support only the generic backend. They are
+not Fabric/Paper signing or TCC-responsibility qualification, do not qualify
+arbitrary descendants, and do not replace the per-renderer/descriptor gates
+below. Windows launched-application resource/survivor qualification must run on
+Windows; macOS and ordinary hosted smoke cannot establish it.
+
 ## Parameters and prerequisites
 
 Record these for every renderer run:

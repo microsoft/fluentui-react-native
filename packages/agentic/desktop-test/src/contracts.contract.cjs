@@ -1,11 +1,18 @@
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
-const os = require('node:os');
 const { pathToFileURL } = require('node:url');
 const { Writable } = require('node:stream');
 const { spawnSync } = require('node:child_process');
 const { inspect } = require('node:util');
+
+const fixtureProcessIdentity = {
+  platform: process.platform === 'win32' ? 'windows' : 'macos',
+  pid: process.pid,
+  startedAt: process.platform === 'win32' ? '2026-11-12T00:00:00.1234567Z' : '2026-11-12T00:00:00.123456Z',
+  executablePath: process.execPath,
+  interactiveSession: process.platform === 'win32' ? 'windows-session:1' : 'macos-session:1',
+};
 
 const mode = process.argv[2];
 const packageRoot = path.resolve(__dirname, '..');
@@ -51,8 +58,8 @@ async function main() {
   const { NodeDesktopCommandRunner } = await import(lib('commands.js'));
   const { DesktopServiceScope, DesktopStopRequested } = await import(lib('services.js'));
   const { loadDesktopConfig, defineDesktopConfig, resolveDesktopSpecs, resolveDesktopTestScope } = await import(lib('config.js'));
-  // Config resolution canonicalizes paths; macOS temporary directories are symlinked (/var -> /private/var).
-  const root = fs.realpathSync.native(fs.mkdtempSync(path.join(os.tmpdir(), 'desktop-harness-contract-')));
+  const root = fs.realpathSync.native(fs.mkdtempSync(path.join(process.cwd(), '.desktop-harness-contract-')));
+  process.env.FURN_DESKTOP_DRIVER_CACHE_ROOT = path.join(root, 'helper-cache');
   const out = capture();
   const err = capture();
   const reporter = (options = {}) =>
@@ -1315,6 +1322,7 @@ async function main() {
 
       const failedDirectory = path.join(root, 'failed-lock');
       const failedClaim = createDesktopWorkloadClaim({
+        processIdentity: fixtureProcessIdentity,
         runId: 'failed-run',
         targetId: 'registered-target',
         targetInstanceId: 'physical-target',
@@ -1385,6 +1393,7 @@ async function main() {
       const marker = path.join(root, 'dependent-started');
       const serviceRun = reporter({ kind: 'lifecycle' });
       const serviceSupervisor = new DesktopSupervisor({
+        processIdentity: fixtureProcessIdentity,
         target: {
           endpoint: 'win32',
           host: { kind: 'installed', application: { windowTitle: 'fixture' } },
@@ -1418,6 +1427,7 @@ async function main() {
 
       const reportLockDirectory = path.join(root, 'report-lock');
       const reportSupervisor = new DesktopSupervisor({
+        processIdentity: fixtureProcessIdentity,
         target: {
           endpoint: 'win32',
           host: { kind: 'installed', application: { windowTitle: 'fixture' } },
@@ -1445,6 +1455,7 @@ async function main() {
         directory: workloadDirectory,
       });
       const workloadSupervisor = new DesktopSupervisor({
+        processIdentity: fixtureProcessIdentity,
         target: {
           endpoint: 'win32',
           host: { kind: 'installed', application: { windowTitle: 'fixture' } },
@@ -1479,6 +1490,7 @@ async function main() {
       let removed = 0;
       const run = reporter({ kind: 'lifecycle' });
       const supervisor = new DesktopSupervisor({
+        processIdentity: fixtureProcessIdentity,
         target,
         recovery: memoryRecovery(),
         reporter: run,
@@ -1526,6 +1538,7 @@ async function main() {
       assert(!fs.existsSync(path.join(root, 'locks', 'interactive.lock')));
 
       const failing = new DesktopSupervisor({
+        processIdentity: fixtureProcessIdentity,
         target,
         recovery: memoryRecovery(),
         reporter: reporter({ kind: 'lifecycle' }),
@@ -1543,6 +1556,7 @@ async function main() {
 
       const failedCleanupLocks = path.join(root, 'failed-cleanup-locks');
       const failedCleanup = new DesktopSupervisor({
+        processIdentity: fixtureProcessIdentity,
         target,
         recovery: memoryRecovery(),
         reporter: reporter({ kind: 'lifecycle' }),
@@ -1561,7 +1575,7 @@ async function main() {
       await assert.rejects(failedCleanup.close(), /cleanup failed/);
       assert(fs.existsSync(path.join(failedCleanupLocks, 'interactive.lock')), 'uncertain cleanup must retain the workload claim');
       const { claimDesktopWorkload } = await import(lib('supervisor.js'));
-      assert.throws(() => claimDesktopWorkload('replacement', failedCleanupLocks), /Another desktop workload/);
+      await assert.rejects(claimDesktopWorkload('replacement', failedCleanupLocks, fixtureProcessIdentity), /Another desktop workload/);
 
       // The Storybook channel child's composition: one service, protected and published from the process that listens.
       const { startDesktopService } = await import(lib('driverService.js'));
@@ -1709,6 +1723,7 @@ async function main() {
             return { server, host, close: () => server.close() };
           }
           const supervisor = new DesktopSupervisor({
+            processIdentity: fixtureProcessIdentity,
             target,
             recovery,
             reporter: reporter({ kind: 'lifecycle' }),
@@ -1851,7 +1866,7 @@ async function main() {
             command: process.execPath,
             args: [path.join(packageRoot, 'config', 'cli.cjs'), '--config', configPath, '--target', 'win32', ...args],
             cwd: root,
-            env: { FIXTURE_MARKER: marker, FIXTURE_SUPPORTS_AGENT: supportsAgent ? '1' : '0' },
+            env: { HOME: root, LOCALAPPDATA: root, FIXTURE_MARKER: marker, FIXTURE_SUPPORTS_AGENT: supportsAgent ? '1' : '0' },
           });
         } catch (error) {
           failure = error;
@@ -1933,7 +1948,11 @@ async function main() {
         const child = spawnSync(
           process.execPath,
           [path.join(packageRoot, 'config', 'cli.cjs'), '--config', configPath, '--target', 'win32', '--reporter', 'json', ...args],
-          { cwd: root, encoding: 'utf8', env: { ...inherited, FIXTURE_MARKER: marker, FIXTURE_ARTIFACTS: artifacts, ...environment } },
+          {
+            cwd: root,
+            encoding: 'utf8',
+            env: { ...inherited, HOME: root, LOCALAPPDATA: root, FIXTURE_MARKER: marker, FIXTURE_ARTIFACTS: artifacts, ...environment },
+          },
         );
         const runs = fs.existsSync(artifacts) ? fs.readdirSync(artifacts) : [];
         return {
@@ -2108,6 +2127,7 @@ async function main() {
         return launch(...args);
       };
       const supervisor = new DesktopSupervisor({
+        processIdentity: fixtureProcessIdentity,
         target,
         recovery: memoryRecovery(),
         reporter: run,
@@ -2151,6 +2171,7 @@ async function main() {
       try {
         await supervisor.start();
         const duplicate = new DesktopSupervisor({
+          processIdentity: fixtureProcessIdentity,
           target,
           recovery: memoryRecovery(),
           reporter: run,

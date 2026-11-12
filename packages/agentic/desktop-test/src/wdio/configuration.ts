@@ -15,7 +15,7 @@ export type DesktopWdioSettings = {
   targetId: string;
   endpoint: DesktopEndpoint;
   renderer?: DesktopRenderer;
-  ownership: 'session' | 'external';
+  ownership: 'session' | 'supervisor' | 'external';
   specs: (string | string[])[];
   framework: string;
   reporter: string;

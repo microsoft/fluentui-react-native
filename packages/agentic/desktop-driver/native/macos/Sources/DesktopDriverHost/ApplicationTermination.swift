@@ -48,10 +48,15 @@ func terminateOwned(
   startedAt: Date,
   bounds: TerminationBounds,
   token: CancellationToken? = nil,
-  control: ProcessControl = .system
+  control: ProcessControl = .system,
+  exactStartedAt: String? = nil,
+  observeExact: (pid_t) -> ApplicationIncarnation.ExactObservation = ApplicationIncarnation.observeExact
 ) throws {
   func state() -> ApplicationIncarnation.State {
-    ApplicationIncarnation.classify(recorded: startedAt, observed: control.observe(processID))
+    if let exactStartedAt {
+      return ApplicationIncarnation.classifyExact(recorded: exactStartedAt, observed: observeExact(processID))
+    }
+    return ApplicationIncarnation.classify(recorded: startedAt, observed: control.observe(processID))
   }
   func waitForExit(milliseconds: Int) throws -> Bool {
     let deadline = DispatchTime.now() + .milliseconds(max(0, milliseconds))
@@ -105,15 +110,18 @@ func terminateOwned(
 @discardableResult
 func terminateUnleased(
   processID: pid_t,
+  startedAt: String? = nil,
   bounds: TerminationBounds,
   control: ProcessControl = .system
 ) -> Bool {
-  // A process whose start time cannot be read is either gone or not ours to signal.
-  guard let startedAt = processStartTime(processID) else {
-    return control.observe(processID).isGone
+  // Never adopt whichever incarnation happens to occupy a launch PID when cleanup eventually runs.
+  guard let startedAt, let date = parseDate(startedAt), ServiceIdentity.isTimestamp(startedAt) else {
+    return ApplicationIncarnation.observeExact(processID).isGone
   }
   do {
-    try terminateOwned(processID: processID, startedAt: startedAt, bounds: bounds, control: control)
+    try terminateOwned(
+      processID: processID, startedAt: date, bounds: bounds, control: control, exactStartedAt: startedAt
+    )
     return true
   } catch {
     writeDiagnostic("furn-desktop-driver-host: ending abandoned launch \(processID) failed: \(error)")
@@ -126,6 +134,13 @@ extension ApplicationIncarnation.Observation {
     if case .gone = self {
       return true
     }
+    return false
+  }
+}
+
+extension ApplicationIncarnation.ExactObservation {
+  var isGone: Bool {
+    if case .gone = self { return true }
     return false
   }
 }

@@ -112,6 +112,7 @@ struct HelperError: Error, CustomStringConvertible {
 
 struct CancelledError: Error {
   var effect: MutationEffect?
+  var data: JSONObject?
 }
 
 @inline(__always)

@@ -13,6 +13,15 @@ extension SelfTestRunner {
     check(classify(.started(recorded.addingTimeInterval(5))) == .exited, "application incarnation is exited after pid reuse")
     check(classify(.started(recorded.addingTimeInterval(0.5))) == .unknown, "application incarnation is unknown near its start")
     check(classify(.started(recorded.addingTimeInterval(-5))) == .unknown, "application incarnation is unknown before its start")
+    let exact = "2023-11-14T22:13:20.123456Z"
+    check(ApplicationIncarnation.classifyExact(recorded: exact, observed: .started(exact)) == .running,
+      "exact application incarnation matches without rounding")
+    check(ApplicationIncarnation.classifyExact(recorded: exact, observed: .started("2023-11-14T22:13:20.123457Z")) == .exited,
+      "exact application incarnation detects PID reuse one microsecond later")
+    check(ApplicationIncarnation.classifyExact(recorded: exact, observed: .started("2023-11-14T22:13:20.123455Z")) == .unknown,
+      "an earlier exact identity is not proof of recorded exit")
+    check(ApplicationIncarnation.classifyExact(recorded: exact, observed: .unavailable) == .unknown,
+      "exact application incarnation fails closed on permission failure")
 
     func answer(_ text: String?) -> JSONObject {
       ApplicationIncarnation.handle(text.map { Data($0.utf8) })
@@ -31,5 +40,27 @@ extension SelfTestRunner {
     check((own["ok"] as? Bool) == true && own["state"] as? String == "running", "application incarnation finds this process")
     let reused = answer(#"{"pid":\#(getpid()),"startedAt":"1970-01-01T00:00:00.000Z"}"#)
     check(reused["state"] as? String == "exited", "application incarnation treats a later start as pid reuse")
+    testExactApplicationExclusion()
+  }
+
+  private func testExactApplicationExclusion() {
+    do {
+      let own = try ServiceIdentity.inspect(getpid())
+      let first = try ExactApplicationLock.acquire(processID: getpid(), startedAt: own.startedAt)
+      defer { first.release() }
+      do {
+        let unexpected = try ExactApplicationLock.acquire(processID: getpid(), startedAt: own.startedAt)
+        unexpected.release()
+        check(false, "two application owners cannot acquire the same exact incarnation")
+      } catch {
+        check(true, "two application owners cannot acquire the same exact incarnation")
+      }
+      first.release()
+      let next = try ExactApplicationLock.acquire(processID: getpid(), startedAt: own.startedAt)
+      next.release()
+      check(true, "application exclusion is released after exact lease cleanup")
+    } catch {
+      check(false, "exact application exclusion can inspect and lock this process: \(error)")
+    }
   }
 }

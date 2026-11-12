@@ -24,6 +24,7 @@ Accessibility.
 | `Application.swift`                    | Launch/attach leases, exact process/window identity, and ownership          |
 | `ApplicationTermination.swift`         | `terminateOwned`: quit, wait, kill, and verify the exit of an owned process |
 | `ApplicationIncarnation.swift`         | One-shot `--application-incarnation`: whether a recorded process exited     |
+| `ApplicationLock.swift`                | Stable per-user exclusion for an exact application PID/kernel start time    |
 | `Accessibility.swift`                  | AX tree walking, lookup, snapshots, focus, hit testing, actions, and source |
 | `Observation.swift`                    | Provider-neutral bounded sampler: request rules, budgets, and BFS result    |
 | `AccessibilityObservation.swift`       | AX source for `observe`: multi-attribute reads, shared ids, `observe` run   |
@@ -95,7 +96,8 @@ node native/macos/fixtures/build.cjs artifacts/application-fixture
 ```
 
 The command prints the verified bundle/executable identity and window title.
-The executable accepts `--title <exact-window-title>`; its Increment button
+The executable accepts `--title <exact-window-title>` and an optional
+`--ready-file <path>` containing its PID after window creation; its Increment button
 and counter have accessibility identifiers `ownership-fixture-increment` and
 `ownership-fixture-count`. Use the normal native host launch API, or launch the
 exact executable externally for attach-preservation tests. The test owner must
@@ -188,8 +190,11 @@ transport: the helper writes a fixed diagnostic and exits with status 1 instead 
 
 The one-shot `--application-incarnation` mode reads exactly `{ "pid", "startedAt" }` from stdin and answers whether
 that exact process, a process id and its start time, has `exited`, is `running`, or cannot be told (`unknown`).
-`exited` is reported only with proof: the process id is gone (a zombie included) or now names a process that
-started more than a second later. Settlement recovery uses it to decide whether a launched application that the helper
+New leases use kernel start timestamps with exactly six fractional digits.
+For these identities, `running` requires equality and `exited` requires a gone/zombie PID
+or a strictly later kernel start time; unreadable/earlier identities are unknown.
+Legacy lower-precision records retain their historical one-second exit tolerance.
+Settlement recovery uses it to decide whether a launched application that the helper
 could not prove closed is really gone; [PROTOCOL.md](../PROTOCOL.md) defines its request and answer.
 
 The input lock lives beneath
@@ -197,6 +202,12 @@ The input lock lives beneath
 helpers started through different Aqua bootstrap namespaces still serialize
 physical input. Restricted `--release-input` accepts only the Node-owned ledger.
 `--sweep` is an operator recovery diagnostic, not normal cleanup.
+Exact application leases hold a separate owner-only `flock` beneath that root's
+`applications` directory. It excludes other helpers for the same PID and
+microsecond start identity, independent of checkouts or temporary directories.
+Attached leases only release the lock; they never terminate the app. Launched
+leases distinguish `launch-services` from `direct-child` causal ownership and
+report `uncontained`: neither promises descendant containment.
 The one-shot `--service-identity` mode describes a service process or verifies a
 service claim for `describeMacOSService` and `createMacOSServiceVerifier`; it
 uses only public process and socket information APIs and links `libbsm` for the

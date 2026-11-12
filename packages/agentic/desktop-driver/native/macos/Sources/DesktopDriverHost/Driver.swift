@@ -64,9 +64,10 @@ final class Driver {
         error.effect = effects.effect
       }
       throw error
-    } catch is CancelledError {
+    } catch var error as CancelledError {
       applications.commands.finish(entry, outcome: "cancelled", detail: failureDetail(tracked))
-      throw CancelledError(effect: tracked ? effects.effect : nil)
+      if tracked { error.effect = effects.effect }
+      throw error
     } catch {
       applications.commands.finish(entry, outcome: "internal-error", detail: failureDetail(tracked))
       guard tracked else {

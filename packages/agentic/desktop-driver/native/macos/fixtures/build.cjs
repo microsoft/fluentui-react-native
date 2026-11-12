@@ -34,12 +34,6 @@ fs.writeFileSync(
     '',
   ].join('\n'),
 );
-run('codesign', [
-  '--force',
-  '--sign',
-  process.env.FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY || '-',
-  '--timestamp=none',
-  bundle,
-]);
+run('codesign', ['--force', '--sign', process.env.FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY || '-', '--timestamp=none', bundle]);
 run('codesign', ['--verify', '--strict', bundle]);
 process.stdout.write(`${JSON.stringify({ bundle, executable, bundleIdentifier, windowTitle: 'FURN Application Ownership Fixture' })}\n`);

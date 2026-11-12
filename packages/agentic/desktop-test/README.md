@@ -61,9 +61,11 @@ when working on the package.
 - App targets and suites share one structural configuration schema.
 - WDIO owns suite sessions, globals, hooks, grouped execution, retries, and
   framework assertions.
-- The generic harness supervises services, workers, and the driver; session-owned
-  app launch and the Storybook lifecycle takeover are transitional (see
-  [lifecycle](references/lifecycle.md)).
+- The generic harness supervises services, workers, the driver, and application
+  claim resources. Launch defaults to session-owned; macOS can opt into
+  supervisor-owned launch. External attach always preserves the app. Neutral
+  exact identity helpers live at `/application-ownership`; Storybook's lifecycle
+  takeover remains transitional (see [lifecycle](references/lifecycle.md)).
 - Every run records structured results, command output, and evidence in its
   artifact directory.
 - Native helpers are explicitly built or provisioned; normal test runs use

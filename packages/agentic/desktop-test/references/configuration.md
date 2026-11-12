@@ -20,6 +20,20 @@ application identity. A Windows installed target requires an exact title and
 an executable path, AUMID, or verified owner lease; a title alone is not an
 identity. External ownership permits attach only and preserves the app.
 
+`ownership: 'session'` (the default) keeps session-owned launch semantics.
+`ownership: 'supervisor'` opts into one supervisor-owned macOS launch; successive
+sessions borrow the same application, and scope disposal closes its exact native
+incarnation. This mode is rejected on Windows/Win32 until their backend is
+qualified.
+
+For neutral macOS attach, set `ownership: 'external'` and an application
+`processIdentity: { processId, processStartedAt }` plus exact `windowTitle`.
+Use an identity captured from a native lease through the
+`/application-ownership` API: the timestamp must retain all six kernel
+fractional digits. Bundle/executable constraints are additional checks, not a
+replacement for the identity. Exact identity cannot be combined with a legacy
+`leasePath`/`leaseNonce`; Storybook's existing lease remains separate.
+
 `commands` overrides individual `prep`, `bundle`, `build`, or `run` stages.
 Each command has an executable and argument array; no shell-like string parsing
 is performed. Arguments and environment entries must not contain NUL, which no

@@ -129,6 +129,22 @@ extension SelfTestRunner {
       attempt(interrupted, token: cancelled) is CancelledError && interrupted.kills == 0,
       "a cancelled close stops waiting before it escalates to a kill"
     )
+    let exact = "2023-11-14T22:13:20.250000Z"
+    let protected = FakeProcess(startedAt: started)
+    do {
+      try terminateOwned(processID: 4242, startedAt: started, bounds: bounds, control: protected.control,
+        exactStartedAt: exact, observeExact: { _ in .started("2023-11-14T22:13:20.250001Z") })
+      check(protected.quits == 0 && protected.kills == 0, "exact cleanup never signals a PID reused one microsecond later")
+    } catch {
+      check(false, "exact cleanup recognizes proven PID reuse")
+    }
+    do {
+      try terminateOwned(processID: 4242, startedAt: started, bounds: bounds, control: protected.control,
+        exactStartedAt: exact, observeExact: { _ in .unavailable })
+      check(false, "exact cleanup refuses an unreadable incarnation")
+    } catch {
+      check(protected.quits == 0 && protected.kills == 0, "exact cleanup refuses an unreadable incarnation without signalling")
+    }
 
     testRealProcessTermination()
   }

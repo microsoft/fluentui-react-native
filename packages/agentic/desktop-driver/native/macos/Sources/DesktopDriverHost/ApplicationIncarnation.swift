@@ -23,6 +23,12 @@ enum ApplicationIncarnation {
     case unavailable
   }
 
+  enum ExactObservation {
+    case gone
+    case started(String)
+    case unavailable
+  }
+
   static func run() -> Int32 {
     let answer = handle(ServiceIdentity.readRequest())
     var line = (try? serializeJSON(answer)) ?? Data(#"{"ok":false,"reason":"request"}"#.utf8)
@@ -48,7 +54,34 @@ enum ApplicationIncarnation {
     else {
       return rejected()
     }
-    return ["ok": true, "state": classify(recorded: startedAt, observed: observe(pid)).rawValue]
+    let state = ServiceIdentity.isTimestamp(text)
+      ? classifyExact(recorded: text, observed: observeExact(pid))
+      : classify(recorded: startedAt, observed: observe(pid))
+    return ["ok": true, "state": state.rawValue]
+  }
+
+  static func classifyExact(recorded: String, observed: ExactObservation) -> State {
+    guard ServiceIdentity.isTimestamp(recorded) else { return .unknown }
+    switch observed {
+    case .gone:
+      return .exited
+    case .unavailable:
+      return .unknown
+    case .started(let actual):
+      guard ServiceIdentity.isTimestamp(actual) else { return .unknown }
+      if actual == recorded { return .running }
+      return actual > recorded ? .exited : .unknown
+    }
+  }
+
+  static func observeExact(_ pid: pid_t) -> ExactObservation {
+    do {
+      return .started(try ServiceIdentity.inspect(pid).startedAt)
+    } catch let refusal as ServiceIdentity.Refusal where refusal.reason == "exited" {
+      return .gone
+    } catch {
+      return .unavailable
+    }
   }
 
   static func classify(recorded: Date, observed: Observation) -> State {

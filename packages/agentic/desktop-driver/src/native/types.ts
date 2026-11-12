@@ -62,6 +62,8 @@ export type NativeDesktopApplicationDescriptor = {
   executablePath?: string;
   leaseNonce?: string;
   leasePath?: string;
+  /** Exact macOS attach identity. Never grants launch/termination authority and cannot be combined with a legacy lease. */
+  processIdentity?: Readonly<{ processId: number; processStartedAt: string }>;
   windowTitle?: string;
   workingDirectory?: string;
 };
@@ -119,6 +121,8 @@ export type NativeHostCancel = {
 export type NativeHostCancelled = {
   /** What the cancelled mutating command left behind. Absent means the provider cannot rule an effect out. */
   effect?: MutationEffect;
+  /** Provider lifecycle settlement evidence, including an unleased application that a cancelled launch created. */
+  data?: Record<string, unknown>;
   id: string;
   type: 'cancelled';
 };

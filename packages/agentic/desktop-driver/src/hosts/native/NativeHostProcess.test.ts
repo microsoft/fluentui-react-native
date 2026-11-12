@@ -109,6 +109,18 @@ describe('NativeHostProcess mutation effects', () => {
     await host.dispose();
   });
 
+  test('preserves application settlement evidence from a cancelled launch', async () => {
+    const data = { processId: 123, processStartedAt: '2026-11-12T00:00:00.123456Z', applicationSettlement: 'unknown' };
+    const { host } = await startHost(() => undefined, {
+      onCancel: (message, send) => send({ data, id: message.id, type: 'cancelled' }),
+    });
+    const controller = new AbortController();
+    const request = host.request('launch', {}, controller.signal);
+    controller.abort();
+    expect(await failureOf(request)).toMatchObject({ name: 'AbortError', data });
+    await host.dispose();
+  });
+
   test('treats a command that completes after its cancellation as applied', async () => {
     const { host } = await startHost(() => undefined, {
       onCancel: (message, send) => send({ id: message.id, result: {}, type: 'response' }),

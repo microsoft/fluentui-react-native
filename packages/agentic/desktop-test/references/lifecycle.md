@@ -14,8 +14,11 @@ and disposal are tracked as one resource generation. Dependencies are validated
 and topologically ordered before acquisition. Owned resources are disposed in
 reverse order; borrowed resources are recorded but never disposed.
 
-A launched application's lifetime is currently session-owned; attached
-applications have an external owner. Storybook still takes over the CLI lifecycle,
+A launched application's lifetime defaults to session-owned. macOS targets may
+opt into `ownership: 'supervisor'`: the supervisor launches once before service
+publication, lends attached leases to sessions, and closes the original exact
+incarnation only at supervisor disposal. Attached applications always have an
+external owner. Storybook still takes over the CLI lifecycle,
 with channel and embedded driver listeners in a child process. This exception is
 transitional, not a fully migrated resource graph. An integration's `run` borrows
 the supervisor's service scope: it observes the scope signal and must never close
@@ -96,17 +99,47 @@ reported as a cleanup failure, and disposal proceeds. A resource observer that
 throws does not stop disposal; its failure is reported after cleanup. A failed or
 timed-out disposal remains unsettled and retains the claim.
 
-The versioned workload record stores a random owner ID, process ID and recorded
-start timestamp, run ID, registered target ID, physical target instance ID, and each
+Schema 3 workload records store a random owner ID, process ID and optional native
+process identity, run ID, registered target ID, physical target instance ID, and each
 resource's identity, generation, ownership, readiness, and disposal state.
 Unresolved effects fence the claim. Claim inspection distinguishes a live owner,
 an exited owner, an unknown probe, and a reused PID; inspection never reclaims a
-claim, and uncertain or unsettled resources prevent release. The recorded start
-timestamp comes from the Node.js clock, not from the operating system, and
-inspection compares it exactly, so a probe that reports the operating-system start
-time classifies a live owner as a reused PID. Treat `pid-reused` as unproven until
-the claim records a helper-described start time. Reporting-session
-inheritance is separate from explicit workload-claim delegation.
+claim, and uncertain or unsettled resources prevent release. Native owner identity
+comes from desktop-driver's OS process-identity probe, not the Node.js clock.
+Schema 2 records remain readable but inspect as `unknown` without probing their
+incompatible wall-clock timestamp. A schema 3 record without a verified native
+identity also remains `unknown`; it never becomes a guessed live or reused PID.
+`claimDesktopWorkload` is asynchronous so it can resolve that identity before
+publication. Low-level/custom callers may supply a trusted identity or leave it
+unverified. A missing prebuilt helper permits an unverified claim; verification
+or permission errors are not silently downgraded. Reporting-session inheritance
+is separate from explicit workload-claim delegation.
+
+## Application resources and exact attach
+
+The neutral host records a pending application resource before dispatching a
+launch. An acquired resource adds its lease ID, native PID/start timestamp,
+lifetime, containment, and causal launch kind when the provider supplies them.
+These records appear in the workload claim alongside services and survive a
+failed cleanup. Publication failure prevents dispatch or fences an already
+dispatched launch. A failed/cancelled unleased launch stays unresolved unless the
+provider explicitly proves its exact process exited. Advisory exit events,
+duplicate lease IDs, a helper exit, and service replacement never settle it.
+
+The `/application-ownership` leaf provides `captureDesktopApplicationIdentity`
+and `desktopApplicationIdentityDescriptor`. On macOS they require the native
+six-fractional-digit OS timestamp and select an exact external incarnation
+without a Storybook lease or transferred ownership. Do not construct that
+identity from `Date`, LaunchServices dates, a title, or a bundle ID. Existing
+Storybook attach-lease code is deliberately unchanged pending its integration
+migration.
+
+macOS launched leases report `launch-services` or `direct-child`; both are
+`uncontained`. Exact primary-process cleanup does not prove arbitrary surviving
+descendants exited. Independent native helpers exclude the same exact app using
+a stable per-user application lock, separately from the workload/input locks.
+Supervisor crash recovery, interrupted publication without a captured identity,
+and arbitrary descendant reconciliation remain explicit delivery gates.
 
 Both native service paths use the real `driverService.ts` composition root
 (`@fluentui-react-native/desktop-test/driver-service`). It resolves prebuilt

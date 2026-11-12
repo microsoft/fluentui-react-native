@@ -12,6 +12,9 @@ final class ApplicationLeaseRecord {
   let storyRootTestId: String?
   let processID: pid_t
   let processStartedAt: Date
+  let exactStartedAt: String
+  let launchKind: String?
+  let exclusion: ExactApplicationLock
   let bundleIdentifier: String?
   let executablePath: String?
   let windowTitle: String
@@ -23,6 +26,9 @@ final class ApplicationLeaseRecord {
     storyRootTestId: String?,
     processID: pid_t,
     processStartedAt: Date,
+    exactStartedAt: String,
+    launchKind: String?,
+    exclusion: ExactApplicationLock,
     bundleIdentifier: String?,
     executablePath: String?,
     windowTitle: String
@@ -33,18 +39,24 @@ final class ApplicationLeaseRecord {
     self.storyRootTestId = storyRootTestId
     self.processID = processID
     self.processStartedAt = processStartedAt
+    self.exactStartedAt = exactStartedAt
+    self.launchKind = launchKind
+    self.exclusion = exclusion
     self.bundleIdentifier = bundleIdentifier
     self.executablePath = executablePath
     self.windowTitle = windowTitle
   }
 
   func json() -> JSONObject {
-    [
+    var result: JSONObject = [
       "id": id,
       "ownership": ownership,
       "processId": Int(processID),
-      "processStartedAt": formatDate(processStartedAt),
+      "processStartedAt": exactStartedAt,
+      "containment": ownership == "launched" ? "uncontained" : "external",
     ]
+    if let launchKind { result["launchKind"] = launchKind }
+    return result
   }
 }
 
@@ -89,6 +101,7 @@ private final class LaunchResultBox: @unchecked Sendable {
   var application: NSRunningApplication?
   var error: Error?
   var abandoned = false
+  var startedAt: String?
 }
 
 struct AXWindowAttributeDiagnostic {
@@ -307,6 +320,9 @@ final class ApplicationManager {
 
   func launch(_ params: JSONObject, token: CancellationToken) throws -> ApplicationLeaseRecord {
     let application = try requireObject(params["application"], "The launch request is missing its application descriptor.")
+    if application["processIdentity"] != nil {
+      try fail(ErrorCode.invalidParams, "An exact external application identity cannot authorize a launch.")
+    }
     var launchTimeout = 90_000
     if let value = params["launchTimeoutMs"] {
       guard let number = value as? NSNumber, !isBoolean(number),
@@ -333,11 +349,12 @@ final class ApplicationManager {
     let arguments = try parseArguments(application["arguments"])
     let preexisting = Set(
       NSWorkspace.shared.runningApplications
-        .filter { bundleIdentifier == nil || $0.bundleIdentifier == bundleIdentifier }
         .map(\.processIdentifier)
     )
 
     let running: NSRunningApplication
+    let startedAt: String
+    let launchKind: String
     if let appURL = try resolveApplicationURL(bundleIdentifier: bundleIdentifier, executablePath: executablePath) {
       let bundle = Bundle(url: appURL)
       if let bundleIdentifier, bundle?.bundleIdentifier != bundleIdentifier {
@@ -346,9 +363,12 @@ final class ApplicationManager {
           "The selected application bundle does not have the expected bundle identifier \"\(bundleIdentifier)\"."
         )
       }
-      running = try launchApplication(
+      let launched = try launchApplication(
         at: appURL, arguments: arguments, preexisting: preexisting, timeoutMilliseconds: launchTimeout, token: token
       )
+      running = launched.application
+      startedAt = launched.startedAt
+      launchKind = "launch-services"
       if preexisting.contains(running.processIdentifier) {
         try fail(
           ErrorCode.launchFailed,
@@ -369,17 +389,25 @@ final class ApplicationManager {
         try fail(ErrorCode.launchFailed, "Starting the application failed: \(error.localizedDescription)")
       }
       let processID = process.processIdentifier
+      guard let identity = try? ServiceIdentity.inspect(processID) else {
+        throw abandonedLaunch(processID: processID, startedAt: nil, launchKind: "direct-child",
+          error: HelperError(code: ErrorCode.launchFailed, message: "The launched child identity could not be read."))
+      }
+      startedAt = identity.startedAt
+      launchKind = "direct-child"
       let registered: NSRunningApplication?
       do {
         registered = try awaitRunningApplication(
           processID: processID, timeoutMilliseconds: launchTimeout, token: token
         )
       } catch {
-        throw abandonedLaunch(processID: processID, error: error)
+        throw abandonedLaunch(processID: processID, startedAt: startedAt, launchKind: launchKind, error: error)
       }
       guard let application = registered else {
         throw abandonedLaunch(
           processID: processID,
+          startedAt: startedAt,
+          launchKind: launchKind,
           error: HelperError(
             code: ErrorCode.launchFailed,
             message: "The launched process did not become a macOS running application."
@@ -391,7 +419,21 @@ final class ApplicationManager {
       try fail(ErrorCode.launchFailed, "The application could not be resolved for launch.")
     }
 
+    let exclusion: ExactApplicationLock
     do {
+      exclusion = try ExactApplicationLock.acquire(processID: running.processIdentifier, startedAt: startedAt)
+    } catch {
+      // Another helper may already control this process. Do not signal through its exclusion lock.
+      throw HelperError(code: ErrorCode.launchFailed, message: "The launched application could not be exclusively owned.",
+        data: ["processId": Int(running.processIdentifier), "processStartedAt": startedAt,
+          "launchKind": launchKind, "applicationSettlement": "unknown"])
+    }
+    do {
+      guard ApplicationIncarnation.classifyExact(
+        recorded: startedAt, observed: ApplicationIncarnation.observeExact(running.processIdentifier)
+      ) == .running else {
+        try fail(ErrorCode.launchFailed, "The launched application incarnation changed before it became ready.")
+      }
       try validateApplication(
         running,
         expectedBundleIdentifier: bundleIdentifier,
@@ -409,23 +451,31 @@ final class ApplicationManager {
         ownership: "launched",
         running: running,
         windowTitle: windowTitle,
-        params: params
+        params: params,
+        expectedStartedAt: startedAt,
+        launchKind: launchKind,
+        exclusion: exclusion
       )
     } catch {
-      throw abandonedLaunch(processID: running.processIdentifier, error: error)
+      throw abandonedLaunch(processID: running.processIdentifier, startedAt: startedAt, launchKind: launchKind, error: error)
     }
   }
 
   /// Ends the process a failed or cancelled launch started and returns the error to report. A process that will not
   /// exit has no lease to keep it visible, so the failure names it instead of hiding the survivor.
-  private func abandonedLaunch(processID: pid_t, error: Error) -> Error {
-    if terminateUnleased(processID: processID, bounds: .abandoned) || error is CancelledError {
-      return error
+  private func abandonedLaunch(processID: pid_t, startedAt: String?, launchKind: String, error: Error) -> Error {
+    let exited = terminateUnleased(processID: processID, startedAt: startedAt, bounds: .abandoned)
+    var data: JSONObject = ["processId": Int(processID), "launchKind": launchKind,
+      "applicationSettlement": exited ? "exited" : "unknown"]
+    if let startedAt { data["processStartedAt"] = startedAt }
+    if let cancellation = error as? CancelledError {
+      return CancelledError(effect: cancellation.effect, data: data)
     }
     return HelperError(
       code: ErrorCode.launchFailed,
-      message: "The launch failed and the application process it started did not exit.",
-      data: ["processId": Int(processID)]
+      message: exited ? "The application launch failed; its exact process exited. \(error)" :
+        "The launch failed and the application process it started could not be proven exited.",
+      data: data
     )
   }
 
@@ -456,6 +506,32 @@ final class ApplicationManager {
     let configuredBundleIdentifier = optionalString(application, "bundleIdentifier")
     let configuredExecutablePath = optionalString(application, "executablePath")
     let configuredWindowTitle = optionalString(application, "windowTitle")
+
+    if let rawIdentity = application["processIdentity"] {
+      guard application["leasePath"] == nil, application["leaseNonce"] == nil else {
+        try fail(ErrorCode.leaseInvalid, "Exact application identity cannot be combined with a legacy lease.")
+      }
+      let identity = try requireObject(rawIdentity, "The exact application identity must be an object.")
+      guard Set(identity.keys) == ["processId", "processStartedAt"],
+        let pid = try? ServiceIdentity.requiredPid(identity, "processId"),
+        let expected = optionalString(identity, "processStartedAt"),
+        ServiceIdentity.isTimestamp(expected),
+        let windowTitle = configuredWindowTitle
+      else {
+        try fail(ErrorCode.leaseInvalid, "Exact attach requires a PID, native microsecond start time, and window title.")
+      }
+      guard ApplicationIncarnation.classifyExact(recorded: expected, observed: ApplicationIncarnation.observeExact(pid)) == .running,
+        let running = NSRunningApplication(processIdentifier: pid)
+      else {
+        try fail(ErrorCode.leaseInvalid, "The exact external application incarnation is not running or cannot be verified.")
+      }
+      try validateApplication(running, expectedBundleIdentifier: configuredBundleIdentifier,
+        expectedExecutablePath: configuredExecutablePath, code: ErrorCode.leaseInvalid)
+      _ = try waitForUniqueWindow(processID: pid, exactTitle: windowTitle, timeoutMilliseconds: 10_000,
+        token: token, code: ErrorCode.attachFailed)
+      return try createLease(ownership: "attached", running: running, windowTitle: windowTitle, params: params,
+        expectedStartedAt: expected)
+    }
 
     if let leasePath = optionalString(application, "leasePath") {
       let lease = try readLease(path: leasePath, token: token)
@@ -715,7 +791,8 @@ final class ApplicationManager {
         processID: lease.processID,
         startedAt: lease.processStartedAt,
         bounds: .close,
-        token: token
+        token: token,
+        exactStartedAt: lease.exactStartedAt
       )
     }
     removeLease(leaseID)
@@ -725,9 +802,9 @@ final class ApplicationManager {
   /// True only when the leased process is provably the incarnation the lease recorded: the same process id with the same
   /// start time. A process the kernel will not describe is not proven, so callers fail closed.
   private func isRunning(_ lease: ApplicationLeaseRecord) -> Bool {
-    ApplicationIncarnation.classify(
-      recorded: lease.processStartedAt,
-      observed: ApplicationIncarnation.observe(lease.processID)
+    ApplicationIncarnation.classifyExact(
+      recorded: lease.exactStartedAt,
+      observed: ApplicationIncarnation.observeExact(lease.processID)
     ) == .running
   }
 
@@ -910,9 +987,15 @@ final class ApplicationManager {
     ownership: String,
     running: NSRunningApplication,
     windowTitle: String,
-    params: JSONObject
+    params: JSONObject,
+    expectedStartedAt: String? = nil,
+    launchKind: String? = nil,
+    exclusion: ExactApplicationLock? = nil
   ) throws -> ApplicationLeaseRecord {
-    guard let start = processStartTime(running.processIdentifier) else {
+    guard let identity = try? ServiceIdentity.inspect(running.processIdentifier),
+      let start = parseDate(identity.startedAt),
+      expectedStartedAt == nil || expectedStartedAt == identity.startedAt
+    else {
       try fail(
         ownership == "launched" ? ErrorCode.launchFailed : ErrorCode.attachFailed,
         "The application process start identity could not be read."
@@ -924,6 +1007,9 @@ final class ApplicationManager {
       storyRootTestId: optionalString(params, "storyRootTestId"),
       processID: running.processIdentifier,
       processStartedAt: start,
+      exactStartedAt: identity.startedAt,
+      launchKind: launchKind,
+      exclusion: try exclusion ?? ExactApplicationLock.acquire(processID: running.processIdentifier, startedAt: identity.startedAt),
       bundleIdentifier: running.bundleIdentifier,
       executablePath: processExecutablePath(running.processIdentifier),
       windowTitle: windowTitle
@@ -1073,13 +1159,6 @@ final class ApplicationManager {
     bundleIdentifier: String?,
     executablePath: String?
   ) throws -> URL? {
-    var byIdentifier: URL?
-    if let bundleIdentifier {
-      byIdentifier = NSWorkspace.shared.urlForApplication(withBundleIdentifier: bundleIdentifier)
-      if byIdentifier == nil {
-        try fail(ErrorCode.launchFailed, "No installed application has bundle identifier \"\(bundleIdentifier)\".")
-      }
-    }
     var byExecutable: URL?
     if let executablePath {
       var candidate = URL(fileURLWithPath: executablePath).standardizedFileURL
@@ -1091,12 +1170,16 @@ final class ApplicationManager {
         candidate.deleteLastPathComponent()
       }
     }
-    if let byIdentifier, let byExecutable {
-      guard canonicalPath(byIdentifier.path) == canonicalPath(byExecutable.path) else {
-        try fail(ErrorCode.launchFailed, "The configured bundle identifier and executable resolve to different applications.")
-      }
+    // An explicit built product is authoritative even when another checkout registered the same bundle identifier.
+    if let byExecutable { return byExecutable }
+    if executablePath != nil { return nil }
+    guard let bundleIdentifier else { return nil }
+    let candidates = Set(NSWorkspace.shared.urlsForApplications(withBundleIdentifier: bundleIdentifier)
+      .filter { FileManager.default.fileExists(atPath: $0.path) }.map { canonicalPath($0.path) })
+    guard candidates.count == 1, let selected = candidates.first else {
+      try fail(ErrorCode.launchFailed, "The bundle identifier has no unique installed application; configure an exact executable path.")
     }
-    return byIdentifier ?? byExecutable
+    return URL(fileURLWithPath: selected)
   }
 
   private func launchApplication(
@@ -1105,7 +1188,7 @@ final class ApplicationManager {
     preexisting: Set<pid_t>,
     timeoutMilliseconds: Int,
     token: CancellationToken
-  ) throws -> NSRunningApplication {
+  ) throws -> (application: NSRunningApplication, startedAt: String) {
     let configuration = NSWorkspace.OpenConfiguration()
     configuration.arguments = arguments
     configuration.activates = false
@@ -1114,16 +1197,18 @@ final class ApplicationManager {
     let result = LaunchResultBox()
     let semaphore = DispatchSemaphore(value: 0)
     NSWorkspace.shared.openApplication(at: url, configuration: configuration) { application, error in
+      let startedAt = application.flatMap { try? ServiceIdentity.inspect($0.processIdentifier).startedAt }
       result.lock.lock()
       result.application = application
       result.error = error
+      result.startedAt = startedAt
       let abandoned = result.abandoned
       result.lock.unlock()
       if abandoned, let application, !preexisting.contains(application.processIdentifier) {
         // The request is over, so nothing waits for this: end the process on its own queue, with a hung app killed.
         let processID = application.processIdentifier
         DispatchQueue.global(qos: .utility).async {
-          terminateUnleased(processID: processID, bounds: .late)
+          terminateUnleased(processID: processID, startedAt: startedAt, bounds: .late)
         }
       }
       semaphore.signal()
@@ -1140,15 +1225,17 @@ final class ApplicationManager {
       result.lock.lock()
       result.abandoned = true
       let application = result.application
+      let startedAt = result.startedAt
       result.lock.unlock()
       if let application, !preexisting.contains(application.processIdentifier) {
-        throw abandonedLaunch(processID: application.processIdentifier, error: error)
+        throw abandonedLaunch(processID: application.processIdentifier, startedAt: startedAt, launchKind: "launch-services", error: error)
       }
       throw error
     }
     result.lock.lock()
     let application = result.application
     let error = result.error
+    let startedAt = result.startedAt
     result.lock.unlock()
     if let error {
       try fail(ErrorCode.launchFailed, "Launch Services could not start the application: \(error.localizedDescription)")
@@ -1156,7 +1243,11 @@ final class ApplicationManager {
     guard let application else {
       try fail(ErrorCode.launchFailed, "Launch Services did not return the launched application.")
     }
-    return application
+    guard let startedAt else {
+      throw abandonedLaunch(processID: application.processIdentifier, startedAt: nil, launchKind: "launch-services",
+        error: HelperError(code: ErrorCode.launchFailed, message: "Launch Services did not provide a verifiable process incarnation."))
+    }
+    return (application, startedAt)
   }
 
   private func validateApplication(

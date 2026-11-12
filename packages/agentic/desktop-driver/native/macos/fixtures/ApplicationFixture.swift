@@ -29,6 +29,13 @@ final class ApplicationFixture: NSObject, NSApplicationDelegate {
     self.window = window
     window.makeKeyAndOrderFront(nil)
     NSApplication.shared.activate(ignoringOtherApps: true)
+    if let readyIndex = arguments.firstIndex(of: "--ready-file").map({ $0 + 1 }),
+      arguments.indices.contains(readyIndex)
+    {
+      try? String(ProcessInfo.processInfo.processIdentifier).write(
+        toFile: arguments[readyIndex], atomically: true, encoding: .utf8
+      )
+    }
   }
 
   @objc private func increment() {
