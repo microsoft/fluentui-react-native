@@ -230,7 +230,7 @@ for (const endpoint of endpoints) {
         try {
           await expect(pinned.inspectApplication({ ...registration(endpoint), host: pinned })).rejects.toMatchObject({ data: { reason } });
           if (reason === 'identity-start-mismatch') {
-            await expect(pinned.recoverApplication(processIdentity)).resolves.toEqual({ state: 'exited' });
+            await expect(pinned.recoverApplication(processIdentity)).resolves.toBeUndefined();
           } else {
             await expect(pinned.recoverApplication(processIdentity)).rejects.toMatchObject({ data: { reason } });
           }

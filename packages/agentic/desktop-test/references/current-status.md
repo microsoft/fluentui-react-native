@@ -2326,3 +2326,150 @@ No application/native contract was launched, no desktop campaign started,
 and no push occurred. Corrected native recovery re-verification remains
 **Not run**, awaiting an active/unlocked session and its separate grant.
 Part of #4447 and #4435.
+
+## Windows Fabric and Win32 Paper — recovery native re-verification — 2026-11-12 UTC
+
+**Observed source:** native helper and harness implementation
+`dbaf558939db31b4a3935ad68b1eb20d25d90d3e`, still stacked on #4492 at
+`6489386956c0485cb91b478a8f4adc4828f4178b`. The consumer test alone had
+the one-line assertion correction committed with this section: the public
+`NativeDesktopHost.recoverApplication` returns `Promise<void>`, after checking
+the native `{ state: 'exited' }` verdict. Its consumer must expect an undefined
+resolution, not the wire-level result. No production, protocol or F11
+file changed in this phase. The exact test diff and test-file digest are retained
+in ignored `artifacts\desktop\f10w\review-native-20261112`.
+
+**Observed session and application provenance:** both granted W2 campaigns ran
+in active/unlocked **remote** session 1, input desktop `Default`. Every native
+wrapper used the machine lock and `-RequirePhysical`; before/after gates stayed
+eligible, with no exit 75 or session change. The final consumer wrapper ran
+`21:54:54Z–21:57:02Z`. Registration and image hash were checked before each
+phase: packaged Fabric remained the `furn-81` Debug/x64 build from `bdeb0b291`,
+with no relevant native-app/source difference. Its executable SHA-256 remained
+`df9cb3559843fcfb0158ee4ab5edbae78890c4e231ebd895cbb636c24b18cd45`.
+The AUMID was
+`40411fc5-8e92-4d46-b68d-b62df44b1366_syyqehzwccsyy!App`.
+Win32 Paper used the worktree's canonical prebuilt REX
+`0.81.1-6828073195` image, its exact arguments and a fresh Win32 bundle;
+a Win32 native application build remains **Unsupported**.
+
+Fresh Win32 and Windows bundles **Passed**, with run IDs
+`3830f2d5-30b1-405b-a205-71f45dcc9490` and
+`e2fb42e1-c5ec-41b3-bae3-64cedad0aeb6`. Each consumer invocation owned a
+fresh Metro, verified its listener's native PID/start/session and worktree
+command line, and stopped it in `finally`. No preexisting Metro was adopted.
+Native scratch/cache paths stayed inside the worktree.
+
+**Observed test-first sequence:**
+
+1. Retained old helper `863cc2dbfc8f5792d22c8606376d226affbf8655fe4ded62ba78c23a29c516c7`,
+   source `ea76e931dc4cdebc87e0621a7d730f81faabce5ef902063a0512cd7c2b100f2d`:
+   **4 expected failures / 0 passed / 7 filtered skips**. Both endpoints rejected
+   stale-start recovery, including interrupted-recoverer journal settlement,
+   with `identity-start-mismatch`. This was the required native RED, not an
+   environment failure.
+2. Review-fixed helper
+   `97f0072ce22449bc5c87c05de259d3e4c46eca666e6135977432b30fa16053b2`,
+   source `3558e8597f6cfe1ee3f4e38dca2137710b80d193a5c30bf946d54065bf8bc153`:
+   the first complete run had **9 passed / 2 failed / 0 skipped**. Both failures
+   were the consumer's wrong return-value assertion; recovery resolved
+   successfully, but the test expected the native wire object. The existing
+   host identity unit contract already expects `undefined`.
+3. Correct only that assertion to `.resolves.toBeUndefined()`, retaining the
+   independent assertion that the real replacement is alive and all
+   matching-start mismatch refusals. Rerun the whole native consumer suite:
+   **11 passed / 0 failed / 0 skipped**.
+
+| Consumer case                                                                          | Windows Fabric packaged                  | Win32 Paper REX                          |
+| -------------------------------------------------------------------------------------- | ---------------------------------------- | ---------------------------------------- |
+| Exact identity, independent-service exclusion, five launches/teardowns without leaks   | **Passed**, 5/5 distinct PID/start pairs | **Passed**, 5/5 distinct PID/start pairs |
+| Stale-start settlement; matching-start session/executable/AUMID mismatches fail closed | **Passed**                               | **Passed**                               |
+| Crashed recoverer, stale journal and dead recovery barrier; live replacement preserved | **Passed**                               | **Passed**                               |
+| Crashed owner/helper and exact application journal recovery                            | **Passed**, packaged survivor recovered  | **Passed**, job-object drain reconciled  |
+| Concurrent pairs, ambiguity refusal, pinned exclusion and independent teardown         | **Passed**, 3/3 pairs                    | **Passed**, 3/3 pairs                    |
+| Physical input mutex, cancellation without effect, release and transfer                | **Passed**, one cross-endpoint case      | Same cross-endpoint case                 |
+
+Every repeated identity reported `windows-session:1`. Fabric consistently
+reported `uncontained`; REX consistently reported `job-object`. All three
+concurrent pairs on each endpoint acquired two distinct incarnations: the
+shared-PID packaged activation race was **Not induced**. Interrupted recoverers
+were identity-verified Node processes stopped by literal PIDs **54440** and
+**55808**, with recorded native starts
+`2026-11-12T21:55:28.3844388Z` and
+`2026-11-12T21:56:07.0500082Z`. The subsequent supervisor retired the dead
+recovery barrier and injected stale application record without signalling the
+real replacement. These injected recorded-start mismatches are **not** actual
+kernel PID recycling.
+
+**Exact consumer commands:** `$W2` denotes the assigned worktree and `$E`
+its `artifacts\desktop\f10w\review-native-20261112` directory. From `$W2`,
+inside the granted campaign and physical-gated machine lock:
+
+```powershell
+node -- artifacts\desktop\f10w\review-native-20261112\run-consumer.mjs red artifacts\desktop\f10w\native-20261112\selected-helper.json
+node -- artifacts\desktop\f10w\review-native-20261112\run-consumer.mjs green artifacts\desktop\f10w\review-20261112\selected-helper.json
+```
+
+The retained bounded orchestration uses `NodeDesktopCommandRunner`, the two
+explicit application descriptors, all three native/application/physical
+opt-ins, the selected immutable helper and `buildPolicy=never`. Its GREEN
+Jest child command is:
+
+```powershell
+yarn workspace @fluentui-react-native/desktop-test test --runInBand `
+  --cacheDirectory "$W2\artifacts\desktop\f10w\jest-harness" `
+  --runTestsByPath src\windowsApplicationOwnership.contract.test.ts `
+  --json --outputFile "$E\green-consumer-results.json"
+```
+
+RED adds `--testNamePattern 'native start|crashed recoverer'` and uses
+`red-consumer-results.json`. The final real consumer evidence directory is
+`windows-application-ownership-3BLzLV`; outer command report
+`32f3d6be-c4b0-4792-aeb6-a5d7df165fc0` is lifecycle-only, not the test-count
+source. `green-consumer-results.json`, `green-consumer-evidence.json`,
+`green-invocation.json`, registration receipts and `consumer-assertion-fix.diff`
+retain the actual counts, identities and dirty-test provenance. Expected RED
+and first-GREEN failures are preserved separately, not overwritten.
+
+**Observed additional validation:**
+
+- `yarn workspace @fluentui-react-native/desktop-test format`, `lint`, and
+  `build`: **Passed**.
+- `yarn workspace @fluentui-react-native/desktop-test test --runInBand
+--cacheDirectory "$W2\artifacts\desktop\f10w\jest-harness"
+--json --outputFile "$E\harness-portable-results.json"`:
+  **Passed**, **453 passed / 28 native skipped**.
+- `yarn workspace @fluentui-react-native/desktop-driver test --runInBand
+NativeDesktopHost.applicationIdentity
+--cacheDirectory "$W2\artifacts\desktop\f10w\jest-driver"
+--json --outputFile "$E\host-identity-portable-results.json"`:
+  **Passed**, **31 passed**, including the existing void-return and unsettled
+  native-verdict contracts.
+- The driver's matching native selection: **Passed**, **6 passed / 10
+  unrelated filtered skips**, including native build/cache/handshake/self-test
+  and the physical mutex. Its ledger records the exact invocation.
+- Locked default-environment `yarn clean-lage-cache` followed by
+  `yarn lage buildci`: initial attempt **Failed**, 176 successful tasks and one
+  Storybook task failure, `A stopping command cannot publish readiness` in
+  `serverIntegration`. The reported intermittent readiness failure was observed
+  again; its cause remains unproven. After remaining fail-fast test children
+  settled and the audit was clean, the **one** unchanged full rerun **Passed**:
+  **178 successful / 0 failed / 0 skipped**, 2m 38.65s. Neither attempt changed
+  default TEMP, concurrency, timeouts, dependencies or repository guidance.
+  Logs are `buildci-default.log` and `buildci-default-rerun.log`.
+
+**Closeout and limits:** both W2 campaigns ended. Native and final aggregate
+audits **Passed**: `FURN-AUDIT: no FURN desktop processes found`. No W2 app,
+helper, fixture or Metro survived. The existing three-package patch changeset
+`windows-exact-application-ownership.md` remains applicable. The test-only
+correction requires coordinator review before push; this phase has not pushed,
+edited the PR body, or started new hosted CI. Initial PR #4494 CI at `dbaf558939`
+was observed green; it does not qualify this new local test correction.
+F11 claim naming remains deferred and untouched. Real kernel PID recycling,
+shared-PID activation, arbitrary uncontained descendants and mixed-graph
+recovery remain unqualified. Part of #4447 and #4435.
+
+**Observed reference checks:** Markdown link checks for both edited ledgers
+**Passed** (15 harness links, 6 driver links). Root `yarn oxfmt --check`
+(3,163 files), `yarn check-agent-instructions`, `yarn change:check`, and
+`git diff --check` **Passed**. Receipts are retained beside the native results.
