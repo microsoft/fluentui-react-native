@@ -202,6 +202,17 @@ withdrawal, claim release, and preservation of the same external process
 incarnation. A failed mode does not suppress later modes when its cleanup is
 confirmed; unconfirmed cleanup blocks subsequent launches.
 
+Each subprocess has a 120-second internal `AbortSignal.timeout` case budget
+followed by at most 30 seconds of shutdown, below the parent's 180-second
+hard limit. Cancellation stops the supervisors and reaches readiness, MCP and
+runner-grant waits. Shutdown also waits for readiness-helper and WDIO drain.
+Failed cases exit after recording their cleanup result; successful cases must
+exit naturally, with an unref'd five-second watchdog failing any lingering
+event-loop handles. After a failed child has exited, the parent removes only
+its uniquely named descriptors through the platform private-storage API,
+checking the exited PID and exact record contents. This does not release a
+claim or establish native cleanup; uncertainty still blocks the next launch.
+
 ### Windows fixture and hosted selection
 
 The same contract runs on Windows against the existing plain Win32 fixture,
@@ -221,22 +232,30 @@ yarn workspace @fluentui-react-native/desktop-test test nativeRunner.contract --
 Windows resolves the canonical executable and unique exact title, waits through
 the supported native attach/window/find APIs for that process's `1004` status
 control to say `Ready`, then releases the readiness lease without stopping the
-external app. No new native ready-file option is required. Core modes use an
-offscreen window and accessibility input only; a read-only ownership case still
-executes when an input assertion is unsupported. The optional capture mode
+external app. No new native ready-file option is required. The Windows fixture
+receives `--lifetime-ms 135000`, slightly beyond the case budget, rather than
+its ten-minute default. Core modes use an offscreen window and accessibility
+input only. Except for the deliberate worker crash, both the ownership and
+accessibility-activation specs must execute and pass; an unsupported/skipped
+input spec cannot qualify the native consumer. `evidence.wdio` records their
+counts and explicit accessibility result. The optional capture mode
 uses an onscreen window and is skipped when
 `FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES` disables any input feature, matching
-the Windows native-contract gate. Capture/resource-link refusal remains
-unsupported, never an input or ownership pass. No mode claims physical input.
+the Windows native-contract gate. The same disabled-input policy gates macOS
+capture without changing its bundle/ready-file path. Endpoint refusal records
+`capture: "unsupported"` and `captureSkipped: true`; ownership/cleanup may
+still pass, but no capture pass is claimed. No mode claims physical input.
 
 Windows descriptors use unique names in the validated default private store.
 Project artifact ancestry is not repaired or trusted for private storage.
 The `setup-desktop-driver` action's `run-native-runner-contract: 'true'`
 explicitly provisions the fixture and selects this consumer after helper
 diagnosis. Both accessible Windows and Win32 Storybook PR jobs enable it.
-Their selection guard requires all four core modes to execute and pass;
-an all-skipped native consumer cannot make this check green. Hosted capture
-remains an explicit skipped test.
+Their selection guard requires all four core modes to execute and pass and
+checks the three non-crash evidence records for two executed/passed inner
+WDIO specs, zero skips and successful accessibility input. Neither an
+all-skipped consumer nor a silently skipped inner input spec makes this check
+green. Hosted capture remains an explicit skipped test.
 
 Retain `artifacts/desktop/f11/native-*/evidence.json` and the run reports. Do not
 copy the private descriptor directory into shared artifacts. Record source

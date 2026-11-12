@@ -51,7 +51,12 @@ The opt-in generic native MCP/WDIO consumer is
 `FURN_NATIVE_HANDOFF_APP_PATH` (signed AppKit bundle on macOS, plain Win32
 fixture executable on Windows). Follow [native qualification](native-qualification.md#generic-attach-only-mcpwdio-handoff)
 for readiness, hosted capability gates, safe private storage and evidence.
-`yarn test nativeRunnerSupport` checks host selection and readiness without
-starting a native helper. `yarn test contracts -t agent-interrupt-cli` tests
-semantic CLI interrupts with a protected fake-host service; it is not physical
-console qualification.
+`yarn test nativeRunnerSupport` checks host selection, readiness, optional
+capture, internal deadlines, exact-owner descriptor cleanup and required inner
+input execution without starting a native helper.
+`yarn test contracts -t agent-interrupt` tests semantic CLI interrupts with a
+protected fake-host service, including the historical borrowed-scope self-wait;
+it is not physical console qualification. For historical comparisons only,
+`FURN_INTERRUPT_PACKAGE_ROOT` selects an isolated built package copy for
+`agent-interrupt-borrowed-cli`. Keep historical source overrides out of the
+working tree and pass fixture values as arguments/environment, never spliced code.

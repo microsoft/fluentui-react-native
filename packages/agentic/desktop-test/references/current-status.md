@@ -1254,8 +1254,9 @@ these evidence-only markdown edits.
 
 ## Windows Ctrl+C regression and native consumer selection — 2026-11-12 UTC
 
-Source: review candidate based on `04d8d8b13177727492ef204cf190840fa8a3f2a1`
-for #4491, with the test/CI/documentation changes described here. This is
+Source: review follow-up to `0ae47d15193770f7455db306b1e4297de76b4eaf`,
+based on `04d8d8b13177727492ef204cf190840fa8a3f2a1` for #4491, with
+the test/CI/documentation changes described here. This is
 portable implementation evidence, not a new native qualification. No native
 fixture/helper/app was launched and no physical-input campaign was acquired.
 
@@ -1274,11 +1275,37 @@ descriptor removal and exact workload-claim disposition:
 
 These are in-process `process.emit('SIGINT', 'SIGINT')` dispatches in the CLI
 process, not `GenerateConsoleCtrlEvent`, physical SendInput, or a Windows
-console broadcast. The historical self-wait repair is already present from
-#4478 (`586e4c38545ca3eedccd1c9c817f2f89ce16219d`); no additional runtime
-patch is justified by these results. Physical console Ctrl+C on the Windows
-Fabric and Win32 Paper `serve --agent` paths remains **Not run** for this
-candidate pending review and the exclusive desktop grant.
+console broadcast. These four cases do not themselves reproduce the historical
+borrowed-scope self-wait and are not proof of its repair. The borrowed-scope
+regression in
+`packages\agentic\storybook-desktop\src\cli\DesktopStorybookCli.test.ts:836–861`
+checks that current integrations leave the scope to its owner.
+
+**Observed historical red/green proof:** the added
+`agent-interrupt-borrowed-cli` contract deliberately awaits the borrowed
+scope's `close()` inside the integration after a single semantic SIGINT,
+with a command-style protected fake-host service that settles first.
+An isolated copy of the current built package, overriding only `cli.ts`
+and `services.ts` with the exact source at
+`f14e2542d7980c9fc6edfc419ddff6067c573ed6` (`586e4c385^`, before #4478),
+**Fails as expected** after the 15-second subprocess deadline:
+
+- the exact child/claim owner PID matches;
+- its one owned resource is settled, but the claim remains `active`;
+- `run.json` is `incomplete`, `terminal: false`;
+- borrowed close starts and never settles.
+
+The same contract on this branch **Passes**: exit 0, terminal `passed`,
+one `run-finished`, both descriptors withdrawn, borrowed close settled and
+claim released. Retained `review-fixes/historical-source.json` identifies both
+historical blobs and source hashes; `historical-red.json`/`.log` and
+`historical-green.json`/`.log` record the exact comparison. Historical TypeScript
+was erased with the installed Babel TypeScript plugin in that scratch copy,
+not checked into the working tree. This confirms the owner-side repair already
+present from #4478 (`586e4c38545ca3eedccd1c9c817f2f89ce16219d`); no new runtime
+patch is needed for this composition. Physical console Ctrl+C on the Windows
+Fabric and Win32 Paper `serve --agent` paths remains **Not run** pending review
+and the exclusive desktop grant.
 
 **Observed selection regression:** the extracted original native consumer
 gate failed the Windows opt-in test (`Expected true; Received false`; four
@@ -1296,15 +1323,27 @@ deletion before reuse, exact external-process incarnation, stale resources,
 terminal reports, descriptor withdrawal and claim release. A cleanup-confirmed
 failure permits the next case; uncertain cleanup prevents further launches.
 Windows records use the validated default private store with unique names,
-not unsafe project ancestry or repaired ACLs.
+not unsafe project ancestry or repaired ACLs. Review corrections add a
+120-second internal abort deadline, 30-second bounded shutdown and a
+135-second Windows fixture watchdog. Passing processes must exit naturally;
+an unref'd five-second post-shutdown watchdog fails lingering handles.
+The parent knows each case's root and removes only its exited child's exact
+descriptor records through private storage with PID/content checks; it never
+releases claims or treats descriptor removal as proof of native cleanup.
 
 Both accessible Windows and Win32 Storybook PR jobs now explicitly provision
 the fixture and select the generic consumer through
 `run-native-runner-contract: 'true'`. The action requires all four ownership
-cases to execute and pass; an all-skipped result is rejected. Capture is a
-separate capability-gated case, skipped under hosted disabled-input policy;
+cases to execute and pass; an all-skipped result is rejected. Both inner WDIO
+specs must also execute/pass outside the deliberate worker crash, and the
+action verifies `evidence.wdio` counts and accessibility success for the three
+non-crash modes. A silently skipped inner input spec is not qualification.
+Capture is a separate capability-gated case, skipped under hosted disabled-input policy;
 core transport/ownership still executes without physical input. The plain
 fixture is not React Native renderer or Storybook-handoff qualification.
+The disabled-input capture gate now applies equally to macOS and Windows.
+Endpoint refusal records `capture: "unsupported"` plus `captureSkipped: true`;
+ownership/cleanup can still pass without a capture pass.
 
 Implementation checks and retained review artifacts are under
 `artifacts\desktop\f11\w1-fix`:
@@ -1329,3 +1368,49 @@ Implementation checks and retained review artifacts are under
   **Not run**, reserved for final locked validation after review.
 
 Patch changeset: `.changeset/windows-native-runner-coverage.md`.
+
+## Windows review corrections — 2026-11-12 UTC
+
+Source: `0ae47d15193770f7455db306b1e4297de76b4eaf` plus the review-fix
+working-tree changes, not a native-qualified commit. Endpoint/session kind:
+not applicable to portable checks; no native run IDs, desktop campaign,
+native helper/fixture launch or physical input. The original issue's physical
+Windows Fabric / Win32 Paper console cases remain **Not run** for this
+candidate pending review and the W1 grant.
+
+The historical comparison and review-regression red/green receipts are under
+`artifacts\desktop\f11\w1-fix\review-fixes`. The new portable support regressions
+first **Failed** 8 / **Passed** 10 (`support-red.json`), including the macOS
+policy regression and missing Windows fixture lifetime. After correction,
+`yarn workspace @fluentui-react-native/desktop-test test nativeRunnerSupport
+--runInBand` **Passed** 18 (`support-green.json`). These do not launch native
+processes or qualify the new Windows consumer.
+
+| Review regression                             | Observed portable result                                                                                                                                                                                                                                                      | Receipt                                                                                |
+| --------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| Borrowed-scope self-close after command drain | Expected **Failed** on exact pre-#4478 CLI/services: 15-second timeout, active claim, settled resource, nonterminal `incomplete`, borrowed close still pending. Same byte-identical fixture **Passed** on the branch. Historical run: `8b6be099-3f0b-4551-9905-1a40b5104197`. | `historical-source.json`, `historical-red.json`/`.log`, `historical-green.json`/`.log` |
+| Optional capture                              | **Passed**: both host policies skip disabled capture; endpoint refusal is explicitly unsupported/skipped without failing ownership. macOS bundle/ready-file arguments are unchanged.                                                                                          | `support-red.json`, `focused-green.json`                                               |
+| Deadline and failed-case records              | **Passed**: ignored work still reaches bounded shutdown; hung shutdown is bounded; Windows lifetime is 135 seconds; cleanup preserves foreign/replaced records and uses exact contents for removal. Real private-store fallback remains **Not run**.                          | `focused-green.json`                                                                   |
+| Required inner input                          | **Passed**: one executed ownership spec cannot qualify the consumer. The actual old action guard incorrectly accepts that fixture; the new guard rejects it and accepts two executed/passed specs. No native step was executed for this comparison.                           | `ci-input-red-green.json`, `focused-green.json`                                        |
+
+Final portable validation from `D:\dev\furn-w1`:
+
+- `yarn workspace @fluentui-react-native/desktop-test test contracts nativeRunner
+--runInBand --json --outputFile
+D:\dev\furn-w1\artifacts\desktop\f11\w1-fix\review-fixes\focused-green.json`:
+  **Passed** 50, **Skipped** 5, failed zero.
+- `yarn workspace @fluentui-react-native/desktop-test test --runInBand --json
+--outputFile D:\dev\furn-w1\artifacts\desktop\f11\w1-fix\review-fixes\portable-test.json`:
+  **Passed** 396, **Skipped** 12, failed zero. Native opt-ins were unset;
+  test scratch and default claims stayed under isolated project artifacts.
+- Package `yarn format`, `yarn lint`, `yarn build`: **Passed**. Root
+  `yarn format:check`, `yarn check-agent-instructions`, and `git diff --check`:
+  **Passed**.
+- `yarn markdown-link-check -c .github\markdown-link-check-config.json <file>`
+  for the four edited references and patch changeset: **Passed** (20 links).
+  Both action/workflow YAML files and all eight actual embedded PowerShell
+  blocks: **Passed** syntax-only validation (`yaml-syntax/summary.json`).
+- Native consumer modes, optional native capture, physical console Ctrl+C,
+  hosted CI and locked clean-cache `buildci`: **Not run**, reserved for the
+  coordinator's post-review W1 grant and final validation. Post-commit
+  changeset checking is recorded in the review handoff receipt.

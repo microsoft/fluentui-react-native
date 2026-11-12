@@ -24,7 +24,8 @@ export default {
     name: 'interrupt-fixture',
     supportsAgent: true,
     validate() {
-      if (!['stop', 'repeat', 'child-first', 'failed-cleanup'].includes(scenario)) throw new Error('Unknown interrupt fixture scenario.');
+      if (!['stop', 'repeat', 'child-first', 'failed-cleanup', 'borrowed-close'].includes(scenario))
+        throw new Error('Unknown interrupt fixture scenario.');
     },
     async run({ supervisor, target, agent, onReady }) {
       const host = new FakeDesktopHost({ endpoint: 'win32' });
@@ -45,59 +46,92 @@ export default {
       const publications = new Map();
       const records = new Map();
       let service;
-      await supervisor.services.contribute(
-        [
-          {
-            id: 'protected-driver',
-            ownership: 'owned',
-            prepare: ({ signal }) => ({
-              identity: 'interrupt-fixture-driver',
-              async acquire() {
-                service = await startDesktopService(host, {
-                  target: { endpoint: 'win32', id: target.id, platformName: 'windows', launchModes: ['attach'] },
-                  agent: {
-                    ...agent,
-                    async publish(connection) {
-                      publications.set(connection.descriptor, connection);
-                      const filename = path.join(root, connection.descriptor);
-                      fs.writeFileSync(filename, 'published');
-                      return async () => {
-                        fs.unlinkSync(filename);
-                        record(`withdrawn:${connection.descriptor}`);
-                      };
-                    },
+      const resources = [
+        {
+          id: 'protected-driver',
+          ownership: 'owned',
+          prepare: ({ signal }) => ({
+            identity: 'interrupt-fixture-driver',
+            async acquire() {
+              service = await startDesktopService(host, {
+                target: { endpoint: 'win32', id: target.id, platformName: 'windows', launchModes: ['attach'] },
+                agent: {
+                  ...agent,
+                  async publish(connection) {
+                    publications.set(connection.descriptor, connection);
+                    const filename = path.join(root, connection.descriptor);
+                    fs.writeFileSync(filename, 'published');
+                    return async () => {
+                      fs.unlinkSync(filename);
+                      record(`withdrawn:${connection.descriptor}`);
+                    };
                   },
-                  recovery: {
-                    storage: {
-                      read: async (name) => records.get(name),
-                      publish: async (name, contents) => {
-                        if (records.has(name)) throw new Error('Duplicate recovery record.');
-                        records.set(name, contents);
-                      },
-                      remove: async (name, contents) => records.get(name) === contents && records.delete(name),
+                },
+                recovery: {
+                  storage: {
+                    read: async (name) => records.get(name),
+                    publish: async (name, contents) => {
+                      if (records.has(name)) throw new Error('Duplicate recovery record.');
+                      records.set(name, contents);
                     },
+                    remove: async (name, contents) => records.get(name) === contents && records.delete(name),
                   },
-                  signal,
-                  guard: (work) => supervisor.services.guard(work),
-                  addSecret: (secret) => supervisor.reporter.addSecret(secret),
-                });
-                const connection = publications.get(agent.descriptor);
-                const client = new DesktopDriverClient({ url: service.url, grant: connection.grant });
-                await client.newSession({ alwaysMatch: { 'furn:target': target.id, 'furn:launchMode': 'attach' } });
-              },
-              dispose: () => service.close(),
-            }),
+                },
+                signal,
+                guard: (work) => supervisor.services.guard(work),
+                addSecret: (secret) => supervisor.reporter.addSecret(secret),
+              });
+              const connection = publications.get(agent.descriptor);
+              const client = new DesktopDriverClient({ url: service.url, grant: connection.grant });
+              await client.newSession({ alwaysMatch: { 'furn:target': target.id, 'furn:launchMode': 'attach' } });
+            },
+            dispose: () => service.close(),
+          }),
+        },
+      ];
+      if (scenario === 'borrowed-close') {
+        const plan = resources[0].prepare({ signal: supervisor.services.controller.signal });
+        await plan.acquire();
+        let complete;
+        const completed = new Promise((resolve) => (complete = resolve));
+        const start = supervisor.runner.start;
+        // Historical Storybook services were commands: they settled before the scope waited on its integration.
+        supervisor.runner.start = () => ({
+          completed,
+          waitForReadiness: async (expected) => ({ ...expected, incarnation: 'interrupt-fixture-service', processId: process.pid }),
+          async stop() {
+            await plan.dispose();
+            complete(0);
           },
-        ],
-        { targetId: target.id, targetInstanceId: target.instanceId },
-      );
+        });
+        try {
+          supervisor.services.start('protected-driver', { command: process.execPath, args: [], cwd: root, env: {} });
+        } finally {
+          supervisor.runner.start = start;
+        }
+        await supervisor.services.readyProcess('protected-driver', {
+          tier: 'service-ready',
+          service: 'protected-driver',
+          descriptor: agent.descriptor,
+        });
+      } else {
+        await supervisor.services.contribute(resources, { targetId: target.id, targetInstanceId: target.instanceId });
+      }
       process.stdout.write(`${JSON.stringify({ type: 'ready', runId: supervisor.reporter.runId })}\n`);
       onReady();
       setImmediate(() => {
         if (scenario === 'child-first') supervisor.services.fail(new Error('Injected required child exit before SIGINT.'));
         process.emit('SIGINT', 'SIGINT');
       });
-      await supervisor.services.guard(supervisor.services.waitForStop());
+      try {
+        await supervisor.services.guard(supervisor.services.waitForStop());
+      } finally {
+        if (scenario === 'borrowed-close') {
+          record('borrowed-close-start');
+          await supervisor.services.close();
+          record('borrowed-close-settled');
+        }
+      }
     },
   },
 };

@@ -80,6 +80,16 @@ console, so child exit and parent interruption can race. In-process
 semantic regression coverage; `child.kill('SIGINT')` on Windows terminates the
 child and is not graceful-console or physical-input qualification.
 
+The `agent-interrupt-borrowed-cli` contract deliberately recreates the retired
+composition: an integration awaits its borrowed scope's `close()` after stop,
+while the historical CLI guards that integration in the same scope. The
+command resource settles first; an old CLI then hangs with an active claim
+and nonterminal report. Current integrations must still leave borrowed scopes
+to their owner, as checked by the borrowed-scope regression in
+`packages\agentic\storybook-desktop\src\cli\DesktopStorybookCli.test.ts:836–861`.
+The CLI subprocess regression checks the separate owner-side repair without
+claiming a physical Windows console broadcast.
+
 The generated-descriptor service bridge allows 60 seconds per command shutdown
 phase so a nested scope can use its 45-second disposal budget and flush reporting
 and stdio before the bridge exits. A missed deadline or failed terminal handshake

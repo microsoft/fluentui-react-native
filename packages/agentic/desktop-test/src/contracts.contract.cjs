@@ -1894,8 +1894,12 @@ async function main() {
         logs.some((log) => log.includes('serve --agent requires an integration that supports agents; \\"fixture\\" does not.')),
         logs.join('\n'),
       );
-    } else if (mode === 'agent-interrupt-cli') {
-      for (const scenario of ['stop', 'repeat', 'child-first', 'failed-cleanup']) {
+    } else if (mode === 'agent-interrupt-cli' || mode === 'agent-interrupt-borrowed-cli') {
+      const interruptPackageRoot =
+        mode === 'agent-interrupt-borrowed-cli' ? (process.env.FURN_INTERRUPT_PACKAGE_ROOT ?? packageRoot) : packageRoot;
+      for (const scenario of mode === 'agent-interrupt-borrowed-cli'
+        ? ['borrowed-close']
+        : ['stop', 'repeat', 'child-first', 'failed-cleanup']) {
         const directory = path.join(root, scenario);
         const home = path.join(directory, 'home');
         fs.mkdirSync(home, { recursive: true });
@@ -1903,12 +1907,19 @@ async function main() {
         for (const name of ['FURN_DESKTOP_REPORT_CONTEXT', 'FURN_DESKTOP_PROCESS_CONTROL', 'DESKTOP_REPORTER', 'DESKTOP_EVENTS']) {
           delete env[name];
         }
+        const claims =
+          process.platform === 'win32'
+            ? path.join(home, 'Microsoft', 'FluentUIReactNative', 'desktop-test', 'workload')
+            : process.platform === 'darwin'
+              ? path.join(home, 'Library', 'Caches', 'com.microsoft.fluentui-react-native.desktop-test', 'workload')
+              : path.join(home, '.cache', 'fluentui-react-native', 'desktop-test', 'workload');
+        const claim = path.join(claims, 'interactive.lock');
         const child = spawnSync(
           process.execPath,
           [
-            path.join(packageRoot, 'config', 'cli.cjs'),
+            path.join(interruptPackageRoot, 'config', 'cli.cjs'),
             '--config',
-            path.join(packageRoot, 'fixtures', 'cli-interrupt', 'desktop.config.mjs'),
+            path.join(interruptPackageRoot, 'fixtures', 'cli-interrupt', 'desktop.config.mjs'),
             '--target',
             'win32',
             '--reporter',
@@ -1920,7 +1931,31 @@ async function main() {
           ],
           { cwd: directory, env, encoding: 'utf8', timeout: 15_000, windowsHide: true },
         );
-        assert.ifError(child.error);
+        if (child.error) {
+          const readiness = JSON.parse(child.stdout.trim() || '{}');
+          const resultPath = path.join(directory, 'reports', readiness.runId ?? 'not-ready', 'run.json');
+          const result = fs.existsSync(resultPath) ? JSON.parse(fs.readFileSync(resultPath, 'utf8')) : {};
+          const ownership = fs.existsSync(claim) ? JSON.parse(fs.readFileSync(claim, 'utf8')) : {};
+          const disposalPath = path.join(directory, 'disposal.json');
+          const disposal = fs.existsSync(disposalPath) ? JSON.parse(fs.readFileSync(disposalPath, 'utf8')) : [];
+          throw new Error(
+            `${scenario}: ${JSON.stringify({
+              deadline: 'code' in child.error ? child.error.code : child.error.message,
+              ownerPid: child.pid,
+              runId: readiness.runId,
+              claimOwnerPid: ownership.owner?.processId,
+              claim: ownership.state,
+              terminal: result.terminal,
+              status: result.status,
+              resourceCount: ownership.resources?.length,
+              ownedResourcesSettled: ownership.resources?.every(
+                (resource) => resource.ownership !== 'owned' || resource.disposal === 'settled',
+              ),
+              borrowedCloseStarted: disposal.includes('borrowed-close-start'),
+              borrowedCloseSettled: disposal.includes('borrowed-close-settled'),
+            })}`,
+          );
+        }
         assert.equal(child.signal, null, `${scenario}: ${child.stderr}`);
         const failed = scenario === 'child-first' || scenario === 'failed-cleanup';
         assert.equal(child.status, failed ? 1 : 0, `${scenario}: ${child.stderr}\n${child.stdout}`);
@@ -1942,13 +1977,7 @@ async function main() {
         assert(disposal.includes('withdrawn:runner-connection.json'));
         assert(disposal.indexOf('withdrawn:interrupt-agent.json') < disposal.indexOf('drain-start'));
         assert(disposal.includes('host-disposed'));
-        const claims =
-          process.platform === 'win32'
-            ? path.join(home, 'Microsoft', 'FluentUIReactNative', 'desktop-test', 'workload')
-            : process.platform === 'darwin'
-              ? path.join(home, 'Library', 'Caches', 'com.microsoft.fluentui-react-native.desktop-test', 'workload')
-              : path.join(home, '.cache', 'fluentui-react-native', 'desktop-test', 'workload');
-        const claim = path.join(claims, 'interactive.lock');
+        if (scenario === 'borrowed-close') assert(disposal.includes('borrowed-close-settled'));
         if (scenario === 'failed-cleanup') {
           const ownership = JSON.parse(fs.readFileSync(claim, 'utf8'));
           assert.equal(ownership.state, 'fenced');

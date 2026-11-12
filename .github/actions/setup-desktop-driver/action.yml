@@ -241,3 +241,26 @@ runs:
         if ($ownership.Count -ne 4 -or @($ownership | Where-Object { $_.status -ne 'passed' }).Count -ne 0) {
           throw 'Native handoff, operator preemption, worker crash and lost-response recovery must all execute and pass.'
         }
+        $evidence = @(
+          Get-ChildItem -Path (Split-Path $results) -Directory -Filter 'native-*' |
+            ForEach-Object {
+              $record = Join-Path $_.FullName 'evidence.json'
+              if (Test-Path $record) {
+                Get-Content -Raw -Path $record | ConvertFrom-Json
+              }
+            }
+        )
+        foreach ($mode in @('handoff', 'operator-preempt', 'lost-response')) {
+          $caseEvidence = @($evidence | Where-Object { $_.mode -eq $mode })
+          if (
+            $caseEvidence.Count -ne 1 -or
+            -not $caseEvidence[0].passed -or
+            -not $caseEvidence[0].cleanupConfirmed -or
+            $caseEvidence[0].wdio.executed -ne 2 -or
+            $caseEvidence[0].wdio.passed -ne 2 -or
+            $caseEvidence[0].wdio.skipped -ne 0 -or
+            $caseEvidence[0].wdio.accessibilityClick -ne 'passed'
+          ) {
+            throw "$mode must execute both inner WDIO ownership and accessibility-input specs; an inner skip is not qualification."
+          }
+        }

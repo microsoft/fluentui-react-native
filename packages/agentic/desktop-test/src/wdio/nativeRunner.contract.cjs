@@ -6,12 +6,25 @@ const { createRequire } = require('node:module');
 const path = require('node:path');
 const { setTimeout: delay } = require('node:timers/promises');
 const { pathToFileURL } = require('node:url');
-const { nativeRunnerCaptureEnabled, nativeRunnerEnabled, nativeRunnerFixture, waitForNativeFixture } = require('./nativeRunnerSupport.cjs');
+const {
+  nativeRunnerCaptureEnabled,
+  nativeRunnerCapture,
+  nativeRunnerEnabled,
+  nativeRunnerFixture,
+  waitForNativeFixture,
+  nativeRunnerRecords,
+  removeNativeRunnerDescriptors,
+  nativeRunnerExecution,
+  runNativeRunnerCase,
+} = require('./nativeRunnerSupport.cjs');
 
 async function main() {
   const mode = process.argv[2];
   assert(nativeRunnerEnabled(process.platform, process.env), 'Native runner contracts require the supported host and explicit opt-ins.');
-  assert(['handoff', 'operator-preempt', 'worker-crash', 'lost-response', 'capture'].includes(mode), 'Unknown native runner scenario.');
+  assert(
+    ['handoff', 'operator-preempt', 'worker-crash', 'lost-response', 'capture', 'cleanup'].includes(mode),
+    'Unknown native runner scenario.',
+  );
   if (mode === 'capture')
     assert(nativeRunnerCaptureEnabled(process.platform, process.env), 'Capture is unavailable under this host policy.');
   const packageRoot = path.resolve(__dirname, '../..');
@@ -25,15 +38,36 @@ async function main() {
   const { connectDesktopRunner, createDesktopRunnerBroker } = await import(lib('wdio/runnerConnection.js'));
   const { resolveDesktopScopeDomains } = await import('@fluentui-react-native/desktop-driver/authoring');
   const { NativeDesktopHost, resolveNativeDesktopDriver } = await import('@fluentui-react-native/desktop-driver');
-  const { createMacOSApplicationProbe, createWindowsApplicationProbe, createWindowsPrivateStorage } =
+  const { createMacOSApplicationProbe, createMacOSPrivateStorage, createWindowsApplicationProbe, createWindowsPrivateStorage } =
     await import('@fluentui-react-native/desktop-driver/authority');
+  if (mode === 'cleanup') {
+    const root = process.argv[3];
+    const parent = path.join(repositoryRoot, 'artifacts', 'desktop', 'f11');
+    assert.equal(path.dirname(root), parent, 'cleanup must name a parent-owned native case root');
+    assert(/^native-(handoff|operator-preempt|worker-crash|lost-response|capture)-/.test(path.basename(root)));
+    const ownerPid = Number(process.argv[4]);
+    assert(Number.isSafeInteger(ownerPid) && ownerPid > 0, 'cleanup requires the exited child PID');
+    const { privateRoot, agentDescriptor, runnerDescriptor } = nativeRunnerRecords(process.platform, root);
+    const artifact = await resolveNativeDesktopDriver({
+      platform: process.platform === 'win32' ? 'windows' : 'macos',
+      buildPolicy: 'never',
+    });
+    const storage =
+      process.platform === 'win32' ? await createWindowsPrivateStorage({ artifact }) : await createMacOSPrivateStorage(privateRoot);
+    const result = await removeNativeRunnerDescriptors(storage, [agentDescriptor, runnerDescriptor], ownerPid);
+    process.stdout.write(JSON.stringify(result));
+    if (result.retained.length) process.exitCode = 1;
+    return;
+  }
   const { connectWithDescriptor } = await import(pathToFileURL(path.join(mcpRoot, 'lib/connection.js')).href);
   const { createDesktopDriverMcpServer } = await import(pathToFileURL(path.join(mcpRoot, 'lib/server.js')).href);
   const { Client } = await import(pathToFileURL(mcpRequire.resolve('@modelcontextprotocol/sdk/client/index.js')).href);
   const { InMemoryTransport } = await import(pathToFileURL(mcpRequire.resolve('@modelcontextprotocol/sdk/inMemory.js')).href);
   const parent = path.join(repositoryRoot, 'artifacts', 'desktop', 'f11');
   fs.mkdirSync(parent, { recursive: true, mode: 0o700 });
-  const root = fs.mkdtempSync(path.join(parent, `native-${mode}-`));
+  const root = process.argv[3] ?? fs.mkdtempSync(path.join(parent, `native-${mode}-`));
+  assert.equal(path.dirname(root), parent, 'native case artifacts must stay in the dedicated contract directory');
+  assert(path.basename(root).startsWith(`native-${mode}-`), 'the parent must provide a case-specific artifact root');
   const evidence = {
     mode,
     passed: false,
@@ -50,9 +84,7 @@ async function main() {
   // Windows validates every storage ancestor; project scratch need not be owner-only. Use unique records in its
   // validated default store, not an ACL repair or a copy of the descriptors into artifacts.
   const windows = process.platform === 'win32';
-  const privateRoot = windows ? undefined : path.join(root, 'private');
-  const agentDescriptor = windows ? `${path.basename(root)}-agent.json` : 'agent-connection.json';
-  const runnerDescriptor = windows ? `${path.basename(root)}-runner.json` : 'runner-connection.json';
+  const { privateRoot, agentDescriptor, runnerDescriptor } = nativeRunnerRecords(process.platform, root);
   const locks = path.join(root, 'locks');
   const ready = path.join(root, 'fixture.ready');
   const fixturePlan = nativeRunnerFixture(
@@ -69,8 +101,7 @@ async function main() {
   const run = reporting('tests');
   evidence.fixture = fixturePlan.application;
   evidence.helper = { artifactId: artifact.artifactId, sourceDigest: artifact.sourceDigest, provider: artifact.provider };
-  const fixture = spawn(fixturePlan.executable, fixturePlan.args, { stdio: 'ignore', windowsHide: true });
-  fixture.once('error', () => undefined);
+  let fixture;
   const target = {
     endpoint: fixturePlan.endpoint,
     host: {
@@ -98,11 +129,26 @@ async function main() {
   let cleanup;
   let incarnation;
   let completed;
+  let readinessWork;
+  let runFinished = false;
   let readinessDisposed = !windows;
   const shutdown = () =>
     (cleanup ??= (async () => {
       const failures = [];
-      for (const close of [async () => client?.close(), async () => server?.close(), () => runner.close(), () => service.close()]) {
+      for (const close of [
+        async () => {
+          try {
+            await readinessWork;
+          } catch (error) {
+            if (!readinessDisposed) throw error;
+          }
+        },
+        async () => client?.close(),
+        async () => server?.close(),
+        () => runner.close(),
+        async () => completed,
+        () => service.close(),
+      ]) {
         try {
           await close();
         } catch (error) {
@@ -111,6 +157,7 @@ async function main() {
       }
       try {
         evidence.fixturePreserved =
+          fixture !== undefined &&
           fixture.exitCode === null &&
           fixture.signalCode === null &&
           (incarnation === undefined || (await probeApplication(incarnation)) === 'running');
@@ -121,7 +168,7 @@ async function main() {
         failures.push(error);
       }
       evidence.claimReleased = !fs.existsSync(path.join(locks, 'interactive.lock'));
-      if (fixture.pid !== undefined && fixture.exitCode === null && fixture.signalCode === null) {
+      if (fixture?.pid !== undefined && fixture.exitCode === null && fixture.signalCode === null) {
         try {
           const exited = once(fixture, 'exit', { signal: AbortSignal.timeout(5_000) });
           fixture.kill('SIGTERM');
@@ -130,7 +177,7 @@ async function main() {
           failures.push(error);
         }
       }
-      evidence.fixtureExited = fixture.pid === undefined || fixture.exitCode !== null || fixture.signalCode !== null;
+      evidence.fixtureExited = fixture?.pid === undefined || fixture.exitCode !== null || fixture.signalCode !== null;
       if (incarnation && evidence.fixtureExited) {
         try {
           assert.equal(await probeApplication(incarnation), 'exited');
@@ -140,8 +187,9 @@ async function main() {
       }
       for (const report of [run, serviceReport]) {
         try {
-          if (failures.length) report.fail(new Error('Native fixture cleanup was not confirmed.'));
+          if (failures.length && (report !== run || !runFinished)) report.fail(new Error('Native fixture cleanup was not confirmed.'));
           const result = await report.finish();
+          if (report === run) runFinished = true;
           assert.equal(result.terminal, true);
           evidence[report === run ? 'run' : 'serviceRun'] = { id: result.runId, status: result.status, counts: result.counts };
         } catch (error) {
@@ -154,21 +202,24 @@ async function main() {
       fs.writeFileSync(path.join(root, 'evidence.json'), JSON.stringify(evidence, null, 2), { mode: 0o600 });
       if (failures.length) throw new AggregateError(failures, 'Native handoff fixture cleanup failed.');
     })());
-  process.once('SIGTERM', () => void shutdown().finally(() => process.exit(143)));
-  try {
+  async function execute(signal) {
+    fixture = spawn(fixturePlan.executable, fixturePlan.args, { stdio: 'ignore', windowsHide: true });
+    fixture.once('error', () => undefined);
     if (windows) {
-      incarnation = await waitForNativeFixture({
+      readinessWork = waitForNativeFixture({
         host: new NativeDesktopHost({ artifact, application: fixturePlan.application, endpoint: fixturePlan.endpoint }),
         target,
         fixture,
         statusId: fixturePlan.statusId,
+        signal,
         onDisposed: () => {
           readinessDisposed = true;
         },
       });
+      incarnation = await readinessWork;
       evidence.readiness = 'native exact executable/title/PID and Ready control';
     } else {
-      await waitFor(ready, fixture);
+      await waitFor(ready, fixture, signal);
       assert.equal(Number(fs.readFileSync(ready, 'utf8')), fixture.pid);
       evidence.readiness = 'fixture ready-file/PID';
     }
@@ -184,7 +235,9 @@ async function main() {
     client = new Client({ name: 'native-handoff-contract', version: '1.0.0' });
     await client.connect(clientTransport);
     const call = async (name, args = {}) => {
-      const result = await client.callTool({ name, arguments: args });
+      signal.throwIfAborted();
+      const result = await client.callTool({ name, arguments: args }, undefined, { signal });
+      signal.throwIfAborted();
       modelResults.push(result);
       return result;
     };
@@ -211,19 +264,28 @@ async function main() {
     const stale = found.matches[0].ref;
     let captured;
     if (!windows || mode === 'capture') {
-      const capture = await call('desktop_capture');
-      captured = capture.content.find(({ type }) => type === 'resource_link');
-      evidence.capture = captured ? 'passed' : 'unsupported';
-      if (mode === 'capture') assert(captured, 'the selected capture contract must produce its resource link');
+      const capture = await nativeRunnerCapture({
+        enabled: nativeRunnerCaptureEnabled(process.platform, process.env),
+        capture: () => call('desktop_capture'),
+      });
+      captured = capture.artifact;
+      evidence.capture = capture.status;
+      if (capture.skipped) {
+        evidence.captureSkipped = true;
+        evidence.captureSkipReason = capture.reason;
+      }
     } else {
       evidence.capture = nativeRunnerCaptureEnabled(process.platform, process.env)
         ? 'not run (separate capture case)'
         : 'skipped (host input policy)';
     }
     await runner.open(false);
-    await assert.rejects(createDesktopRunnerBroker({ connection, targetId: target.id, addSecret: (secret) => run.addSecret(secret) }), {
-      code: 'session not created',
-    });
+    await assert.rejects(
+      createDesktopRunnerBroker({ connection, targetId: target.id, addSecret: (secret) => run.addSecret(secret), signal }),
+      {
+        code: 'session not created',
+      },
+    );
     evidence.defaultBusy = true;
     if (mode !== 'operator-preempt') {
       assert.deepEqual(json(await call('desktop_session', { action: 'relinquish' })), { relinquished: true });
@@ -245,9 +307,12 @@ async function main() {
         return response;
       };
       try {
-        await assert.rejects(createDesktopRunnerBroker({ connection, targetId: target.id, addSecret: (secret) => run.addSecret(secret) }), {
-          message: 'Injected runner acquisition response loss.',
-        });
+        await assert.rejects(
+          createDesktopRunnerBroker({ connection, targetId: target.id, addSecret: (secret) => run.addSecret(secret), signal }),
+          {
+            message: 'Injected runner acquisition response loss.',
+          },
+        );
       } finally {
         globalThis.fetch = fetcher;
       }
@@ -281,7 +346,7 @@ async function main() {
       (error) => error,
     );
     if (mode !== 'worker-crash') {
-      await waitFor(path.join(root, 'worker.ready'), fixture);
+      await waitFor(path.join(root, 'worker.ready'), fixture, signal);
       if (mode === 'operator-preempt') {
         const old = await call('desktop_check', { ref: stale, expect: { enabled: true } });
         assert(old.isError);
@@ -319,7 +384,7 @@ async function main() {
     assert.equal(JSON.parse(page.content[0].text).reason, 'observation-cursor-expired');
     const acted = json(await call('desktop_act', { steps: [{ act: { action: 'activate', ref: stale, sample: found.sample.id } }] }));
     assert.equal(acted.result.status, 'stopped');
-    if (captured) await assert.rejects(client.readResource({ uri: captured.uri }));
+    if (captured) await assert.rejects(client.readResource({ uri: captured.uri }, { signal }));
     evidence.staleResourcesRejected = true;
     json(await call('desktop_session', { action: 'close' }));
     await runner.close();
@@ -328,50 +393,72 @@ async function main() {
     assert(!grantPattern.test(JSON.stringify(modelResults)));
     assert(!grantPattern.test(output));
     const result = await run.finish();
+    runFinished = true;
     assert.equal(result.terminal, true);
     assert.equal(result.status, mode === 'worker-crash' ? 'failed' : 'passed');
-    if (mode !== 'worker-crash') assert(result.counts.executed > 0, 'ownership must execute even when input is unsupported');
+    evidence.wdio = nativeRunnerExecution(result.counts, mode);
     for (const report of [run, serviceReport]) {
       for (const entry of fs.readdirSync(report.root, { recursive: true, withFileTypes: true })) {
         if (entry.isFile()) assert(!grantPattern.test(fs.readFileSync(path.join(entry.parentPath, entry.name), 'utf8')));
       }
     }
     evidence.credentialsConfined = true;
-  } catch (error) {
-    const message = (error instanceof Error ? error.message : 'Native handoff fixture failed.').replace(
-      /fdg1\.[0-9a-f]{32}\.[A-Za-z0-9_-]{43}/g,
-      '[redacted]',
-    );
-    evidence.error = message;
-    run.fail(error);
-  } finally {
-    try {
-      await shutdown();
-      await completed;
-    } catch {
-      evidence.error ??= 'Native fixture cleanup failed.';
-    }
   }
+  const stop = new AbortController();
+  const terminate = () => stop.abort(new Error('Native runner case interrupted.'));
+  process.once('SIGTERM', terminate);
+  const deadline = await runNativeRunnerCase({
+    signal: stop.signal,
+    shutdown,
+    work: execute,
+    onAbort(reason) {
+      runner.services.fail(reason);
+      service.services.fail(reason);
+    },
+    onError(error) {
+      evidence.error ??= (error instanceof Error ? error.message : 'Native handoff fixture failed.').replace(
+        /fdg1\.[0-9a-f]{32}\.[A-Za-z0-9_-]{43}/g,
+        '[redacted]',
+      );
+      if (!runFinished) run.fail(error);
+    },
+  });
+  process.removeListener('SIGTERM', terminate);
+  evidence.deadline = deadline;
+  if (deadline.cleanupTimedOut) evidence.cleanupConfirmed = false;
   evidence.passed = !evidence.error && evidence.fixturePreserved && evidence.cleanupConfirmed;
   fs.writeFileSync(path.join(root, 'evidence.json'), JSON.stringify(evidence, null, 2), { mode: 0o600 });
-  process.stdout.write(
-    JSON.stringify({
-      mode,
-      passed: evidence.passed,
-      cleanupConfirmed: evidence.cleanupConfirmed,
-      evidence: path.join(root, 'evidence.json'),
-    }),
+  await new Promise((resolve) =>
+    process.stdout.write(
+      JSON.stringify({
+        mode,
+        passed: evidence.passed,
+        cleanupConfirmed: evidence.cleanupConfirmed,
+        capture: evidence.capture,
+        captureSkipped: evidence.captureSkipped,
+        captureSkipReason: evidence.captureSkipReason,
+        evidence: path.join(root, 'evidence.json'),
+      }),
+      resolve,
+    ),
   );
-  if (!evidence.passed) process.exitCode = 1;
+  if (!evidence.passed) process.exit(1);
+  setTimeout(() => {
+    evidence.error = 'Native contract process remained alive after shutdown.';
+    evidence.passed = false;
+    evidence.cleanupConfirmed = false;
+    fs.writeFileSync(path.join(root, 'evidence.json'), JSON.stringify(evidence, null, 2), { mode: 0o600 });
+    process.exit(1);
+  }, 5_000).unref();
 }
 
-async function waitFor(file, fixture) {
-  const deadline = Date.now() + 60_000;
+async function waitFor(file, fixture, signal) {
+  const deadline = AbortSignal.any([signal, AbortSignal.timeout(60_000)]);
   while (!fs.existsSync(file)) {
     if (fixture.pid === undefined || fixture.exitCode !== null || fixture.signalCode !== null)
       throw new Error('The native application fixture exited before readiness.');
-    if (Date.now() >= deadline) throw new Error('The native application fixture did not report readiness.');
-    await delay(50);
+    deadline.throwIfAborted();
+    await delay(50, undefined, { signal: deadline });
   }
 }
 
