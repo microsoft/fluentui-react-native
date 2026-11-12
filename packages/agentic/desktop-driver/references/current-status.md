@@ -498,3 +498,29 @@ This timing implementation changes no Swift source, physical-input
 activation, foreground checks, hit-testing, focus, or window-switch policy.
 It does not qualify those paths or remove provider-local checks. Windows
 Fabric and Win32 Paper were **not run locally** for this change.
+
+### Activation trace and deferred flashing change
+
+The W3C click path activates before its server-side hit test. The operation
+click path conditionally raises an externally obscured target and rechecks;
+in-window obstruction remains a no-effect refusal. The native physical-click
+provider independently activates under its physical-input scope, rereads the
+target, and verifies ownership of the click point. These are separate
+postconditions, not interchangeable duplicate calls. Removing the server
+activation can move hit-testing before foreground establishment; removing the
+provider activation assumes ownership cannot change between commands and
+weakens callers that use the provider independently.
+
+macOS activation sets main/raise attributes even when already frontmost.
+The menu test helper `inWindowWith` also calls activating `switchToWindow`
+while polling each candidate window and restoring its owner. Both are
+plausible flashing contributors, not established visual causes in the
+observational ListboxItem cohort.
+
+No activation optimization is shipped here. Concurrent physical-input
+corrections retain foreground/main-window postconditions, add a workspace
+fallback when acknowledged AX activation is ineffective, and keep genuine
+occlusion refused. An unqualified dedupe must not fork those semantics.
+Zero activation counters in this read-only cohort do not meet the optimization
+gate. The compatible experiment and its qualification conditions are tracked
+in [remaining work](remaining-work.md#macos-activation-and-popup-polling).
