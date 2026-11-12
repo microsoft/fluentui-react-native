@@ -37,10 +37,9 @@ merge precedence without holding the mutex across shadow-tree commits.
 Regenerate Pods and clean-build all native dependencies after changing this
 patch: the family header's layout changes.
 
-The race was exposed while qualifying F16 defect 1's oversized-preview repair
-for physical-click obstruction. Both complete Fabric lanes lost the app in
-the unchanged PGB-006 NativeSemantics window-resize callback. A clean native
-rebuild still failed, and an owned-process AddressSanitizer report recorded
+The race was exposed by the PGB-006 NativeSemantics window-resize callback
+during Fabric Storybook qualification. A clean native rebuild still failed,
+and an owned-process AddressSanitizer report recorded
 `BUS` in `folly::dynamic::type()` while `ShadowNode::clone` copied the
 unprotected native-props map during AppKit layout. This is a renderer
 concurrency fix, not a click-through or driver retry workaround. PGB-006 runs
@@ -48,61 +47,12 @@ in the full Fabric physical lane as well as the accessible lane; the original
 Checkbox, keyboard-clear, and Accordion reproductions passed without this
 backport.
 
-## Native-props regression ledger (2026-11-12 UTC)
+### Qualification
 
-The following before/after runs include E's separately owned driver and LiteUI
-fixes. They isolate the renderer prerequisite but do not claim those fixes are
-present in the standalone backport branch.
-
-- Before the backport, Fabric full physical run
-  `7bfe3fc7-bcbc-4275-ac5b-b457b66af7d7` and accessible run
-  `aebe42da-fcf5-4482-8eec-3e28401ea50c` failed PGB-006. Clean native
-  rebuild run `5314fc3d-da45-403e-b9bd-e187f0a9284c` still failed.
-  The owned-process report is
-  `artifacts/desktop/f16-macos-physical/fabric-progress-asan-report.86816`.
-- After the backport, fresh Pods and a clean Fabric native build retained
-  AddressSanitizer and passed the same forced-resize callback **1/1**, run
-  `61d2dce4-5980-49b9-a727-412da47fca71`. Native Core's Apple module and
-  Office-style bridging-header probe passed **3/3**. The build, callback,
-  sanitizer linkage, and probe log is
-  `artifacts/desktop/f16-macos-physical/native-props-clean-build-green.log`.
-- Both complete Fabric lanes then passed without retries or changed assertions:
-  physical **343 passed, 3 declared unsupported**, run
-  `3cb2f6af-69fd-44c1-8fb0-495607e37ca0`; accessible **260 passed,
-  3 declared unsupported**, run `e8ef9d6a-e3a0-4164-b692-de319aaae545`.
-  Neither lane had failed, skipped, quarantined, incomplete, retried, or flaky
-  cases. The report is
-  `artifacts/desktop/f16-macos-physical/fabric-native-props-final-lanes-qualification.json`.
-- This native build evidence is for macOS Storybook. The macOS FluentTester
-  host and any other native application consuming the root resolution were
-  **not built** in this local check; the Apple probe is not an Office host
-  application build.
-
-### Standalone bottom-layer verification
-
-Branch `user/jasonvmo/rnmacos-native-props-backport` starts directly at
-`origin/main` commit `505a2187b`, with the backport committed as `1eaa60a44`.
-It does not contain E's driver, CI, or LiteUI implementation commits.
-The following checks passed on that branch alone, in a fresh worktree:
-
-- `yarn install --immutable`: **passed**, without changing the manifest,
-  lockfile, or patches.
-- `yarn build`: **passed**.
-- From `apps/storybook`, `yarn storybook bundle --macos`,
-  `yarn storybook prep --macos`, and `yarn storybook build --macos`:
-  **passed**, with fresh Pods and DerivedData. The native build report is
-  `e9329920-eb03-4104-879e-b0c73af7820d`. AddressSanitizer remained linked;
-  the resulting native image SHA256 is
-  `0497580af4a37e99f2f092e3f9b716caa7d2936ecd5ff740e1d1ecd42251f35a`.
-- `yarn workspace @fluentui-react-native/native-core test:apple-integration`:
-  **passed, 3/3** module/bridging-header checks.
-
-The shared native lock covered this batch. The machine-local Ruby environment
-pinned the already-installed `json` gem to 2.18.0; no E product-source overlay
-was applied. The captured command/results log is E's
-`artifacts/desktop/f16-macos-physical/native-props-bottom-verify.log`.
-This standalone check builds the Fabric Storybook host; it is not a claim
-that the original input reproductions pass without E's driver/runtime fixes.
+A clean Pods and Fabric Storybook native build with AddressSanitizer passed,
+as did the PGB-006 resize callback and Native Core's CocoaPods-module and
+Office-style bridging-header probes. This qualifies the Storybook host only:
+macOS FluentTester and other native application hosts were not built locally.
 
 ## Scope and replacement
 
