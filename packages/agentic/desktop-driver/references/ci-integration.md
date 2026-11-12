@@ -110,7 +110,11 @@ This repository's current PR workflow provides examples in
   Fabric job with **no disabled input features**, runs
   `yarn storybook smoke --macos --mode stories-and-tests --input physical`,
   and uploads a distinct `Storybook_macos_fabric_physical_*` artifact with
-  its doctor report. Like the Win32 physical lane, it is an advisory pilot
+  its doctor report. The macOS physical harness establishes and verifies a
+  1024 × 768 logical-point window inside visible screen bounds, rather than
+  inheriting a persisted frame; it fails clearly if no screen fits or the host
+  cannot establish that rectangle. Other input lanes do not request this resize.
+  Like the Win32 physical lane, it is an advisory pilot
   outside the aggregate `pr` job's `needs`, not a required qualification gate.
   Local fixes and managed interactive passes do not by themselves qualify
   GitHub-hosted foreground activation, hit testing, or TCC authority;

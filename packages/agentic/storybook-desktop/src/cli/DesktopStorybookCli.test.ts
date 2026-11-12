@@ -505,6 +505,45 @@ describe('DesktopStorybookCli', () => {
         fs.rmSync(manifestPath, { force: true });
       }
     });
+
+    test.each([undefined, 'accessible', 'physical'] as const)(
+      'prepares a window before attached callbacks only for the physical lane (input=%s)',
+      async (input) => {
+        const order: string[] = [];
+        const connectStoryTraversal = jest.fn(async () => {
+          order.push('window');
+          return {
+            select: async () => undefined,
+            close: async () => {
+              order.push('closed');
+              return null;
+            },
+          };
+        });
+        const runWdio = jest.spyOn(wdioTests, 'runWdioStoryTests').mockImplementation(async () => {
+          order.push('tests');
+          return [];
+        });
+        const cli = new DesktopStorybookCli(config(), {
+          createStoryManifest: storyManifestOf(declaredStoryEntry('button--default', cases.slice(0, 1))),
+          connectStoryTraversal,
+          output: { write: () => true },
+        });
+        try {
+          await cli.test('macos', { ...connection, input });
+          expect(order).toEqual(input === 'physical' ? ['window', 'closed', 'tests'] : ['tests']);
+          if (input === 'physical') {
+            expect(connectStoryTraversal).toHaveBeenCalledWith(
+              expect.objectContaining({ input: 'physical', platform: 'macos', targetId: 'fixture', url: connection.url }),
+            );
+          } else {
+            expect(connectStoryTraversal).not.toHaveBeenCalled();
+          }
+        } finally {
+          runWdio.mockRestore();
+        }
+      },
+    );
   });
 
   test('starts the config-owned server with platform and connection options', async () => {
@@ -1193,113 +1232,120 @@ describe('DesktopStorybookCli', () => {
     expect(runSmokeTests).not.toHaveBeenCalled();
   });
 
-  test('runs authored tests after traversing the complete story index', async () => {
-    const runner = new RecordingRunner();
-    const resolveNativeDriver = jest.fn(async () => nativeDriverArtifact);
-    const events: string[] = [];
-    const writeMacOSApplicationLease = jest.fn(async () => {
-      events.push('lease');
-    });
-    const fetch = jest.fn(async (input: Parameters<typeof globalThis.fetch>[0]) => {
-      const url = input.toString();
-      if (url.endsWith('/index.json')) {
-        return new Response(
-          JSON.stringify({
-            entries: {
-              first: { id: 'first--story', type: 'story' },
-              second: { id: 'second--story', type: 'story' },
+  test.each([undefined, 'accessible', 'physical'] as const)(
+    'runs authored tests after traversing the complete story index (input=%s)',
+    async (input) => {
+      const runner = new RecordingRunner();
+      const resolveNativeDriver = jest.fn(async () => nativeDriverArtifact);
+      const events: string[] = [];
+      const writeMacOSApplicationLease = jest.fn(async () => {
+        events.push('lease');
+      });
+      const fetch = jest.fn(async (input: Parameters<typeof globalThis.fetch>[0]) => {
+        const url = input.toString();
+        if (url.endsWith('/index.json')) {
+          return new Response(
+            JSON.stringify({
+              entries: {
+                first: { id: 'first--story', type: 'story' },
+                second: { id: 'second--story', type: 'story' },
+              },
+            }),
+          );
+        }
+        return new Response('{}');
+      });
+      const runSmokeTests = jest.fn(async () => {
+        events.push('tests');
+        return {
+          endpoint: 'macos' as const,
+          finishedAt: '2026-08-30T08:00:01.000Z',
+          manifest: {
+            platform: 'macos-digest',
+            portable: 'portable-digest',
+          },
+          platformName: 'macos' as const,
+          runId: 'smoke-run',
+          schemaVersion: 1 as const,
+          startedAt: '2026-08-30T08:00:00.000Z',
+          status: 'passed' as const,
+          targetId: 'agenticstorybook-macos',
+          tests: [],
+        };
+      });
+      const cli = new DesktopStorybookCli(
+        makeConfig({
+          macos: {
+            run: { command: 'launch-storybook' },
+            smoke: {
+              stop: { command: 'stop-storybook' },
             },
-          }),
-        );
-      }
-      return new Response('{}');
-    });
-    const runSmokeTests = jest.fn(async () => {
-      events.push('tests');
-      return {
-        endpoint: 'macos' as const,
-        finishedAt: '2026-08-30T08:00:01.000Z',
-        manifest: {
-          platform: 'macos-digest',
-          portable: 'portable-digest',
-        },
-        platformName: 'macos' as const,
-        runId: 'smoke-run',
-        schemaVersion: 1 as const,
-        startedAt: '2026-08-30T08:00:00.000Z',
-        status: 'passed' as const,
-        targetId: 'agenticstorybook-macos',
-        tests: [],
-      };
-    });
-    const cli = new DesktopStorybookCli(
-      makeConfig({
-        macos: {
-          run: { command: 'launch-storybook' },
-          smoke: {
-            stop: { command: 'stop-storybook' },
-          },
-        },
-      }),
-      {
-        ...nativeDriverTestOptions,
-        createStoryManifest: createEmptyStoryManifest,
-        fetch,
-        isPortAvailable: async () => true,
-        runSmokeTests,
-        runner,
-        resolveNativeDriver,
-        writeMacOSApplicationLease,
-        connectStoryTraversal: async () => ({
-          select: async (id) => {
-            events.push(`select:${id}`);
-          },
-          close: async () => {
-            events.push('close');
-            return null;
           },
         }),
-      },
-    );
+        {
+          ...nativeDriverTestOptions,
+          createStoryManifest: createEmptyStoryManifest,
+          fetch,
+          isPortAvailable: async () => true,
+          runSmokeTests,
+          runner,
+          resolveNativeDriver,
+          writeMacOSApplicationLease,
+          connectStoryTraversal: async (options) => {
+            expect(options.input).toBe(input);
+            return {
+              select: async (id) => {
+                events.push(`select:${id}`);
+              },
+              close: async () => {
+                events.push('close');
+                return null;
+              },
+            };
+          },
+        },
+      );
 
-    await cli.smoke('macos', { mode: 'stories-and-tests' });
+      await cli.smoke('macos', { mode: 'stories-and-tests', input });
 
-    expect(events).toEqual(['lease', 'select:first--story', 'select:second--story', 'close', 'tests']);
-    expect(fetch.mock.calls.some(([input]) => input.toString().includes('select-story-sync'))).toBe(false);
-    expect(writeMacOSApplicationLease).toHaveBeenCalledWith(
-      path.join(storybookRoot, 'storybook-desktop.generated', 'driver-manifest.macos.json'),
-      120_000,
-    );
-    expect(runSmokeTests).toHaveBeenCalledWith({
-      config: cli.config,
-      commandRunner: runner,
-      errorOutput: process.stderr,
-      // eslint-disable-next-line @microsoft/sdl/no-insecure-url -- the test exercises the loopback Desktop Driver
-      driverUrl: `http://127.0.0.1:${cli.instance.driverPort}`,
-      manifest: await createEmptyStoryManifest(cli.config, 'macos'),
-      platform: 'macos',
-      report: undefined,
-      scope: { domains: { 'rn.renderer': ['fabric', 'paper'] }, values: { 'rn.renderer': 'fabric' } },
-      signal: expect.any(AbortSignal),
-      targetId: 'agenticstorybook-macos',
-    });
-    expect(fetch.mock.calls.map(([input]) => input.toString())).toContain(
-      // eslint-disable-next-line @microsoft/sdl/no-insecure-url -- the test exercises the loopback Desktop Driver
-      `http://127.0.0.1:${cli.instance.driverPort}/status`,
-    );
-    expect(runner.background[0].env).toMatchObject({
-      [STORYBOOK_SMOKE_MODE]: 'stories-and-tests',
-    });
-    expect(resolveNativeDriver).toHaveBeenCalledWith({
-      buildPolicy: undefined,
-      cacheRoot: undefined,
-      configuration: 'release',
-      helperPath: undefined,
-      installRoot: undefined,
-      macosSigningIdentity: undefined,
-      platform: 'macos',
-    });
-  });
+      expect(events).toEqual(['lease', 'select:first--story', 'select:second--story', 'close', 'tests']);
+      expect(fetch.mock.calls.some(([input]) => input.toString().includes('select-story-sync'))).toBe(false);
+      expect(writeMacOSApplicationLease).toHaveBeenCalledWith(
+        path.join(storybookRoot, 'storybook-desktop.generated', 'driver-manifest.macos.json'),
+        120_000,
+      );
+      expect(runSmokeTests).toHaveBeenCalledWith({
+        config: cli.config,
+        commandRunner: runner,
+        errorOutput: process.stderr,
+        // eslint-disable-next-line @microsoft/sdl/no-insecure-url -- the test exercises the loopback Desktop Driver
+        driverUrl: `http://127.0.0.1:${cli.instance.driverPort}`,
+        manifest: await createEmptyStoryManifest(cli.config, 'macos'),
+        platform: 'macos',
+        report: undefined,
+        scope: { domains: { 'rn.renderer': ['fabric', 'paper'] }, values: { 'rn.renderer': 'fabric' } },
+        signal: expect.any(AbortSignal),
+        targetId: 'agenticstorybook-macos',
+        input,
+      });
+      expect(fetch.mock.calls.map(([input]) => input.toString())).toContain(
+        // eslint-disable-next-line @microsoft/sdl/no-insecure-url -- the test exercises the loopback Desktop Driver
+        `http://127.0.0.1:${cli.instance.driverPort}/status`,
+      );
+      expect(runner.background[0].env).toMatchObject({
+        [STORYBOOK_SMOKE_MODE]: 'stories-and-tests',
+      });
+      expect(resolveNativeDriver).toHaveBeenCalledWith({
+        buildPolicy: undefined,
+        cacheRoot: undefined,
+        configuration: 'release',
+        helperPath: undefined,
+        installRoot: undefined,
+        macosSigningIdentity: undefined,
+        platform: 'macos',
+      });
+    },
+  );
 
   describe('outcome headers', () => {
     const stories = { entries: { first: { id: 'first--story', type: 'story' }, second: { id: 'second--story', type: 'story' } } };

@@ -391,6 +391,17 @@ export class DesktopStorybookCli {
       operation.summarize(formatDesktopStorybookSmokeTestSummary({ tests: [], wdio }));
     await this.operation('Story tests', async (operation) => {
       try {
+        if (platform === 'macos' && settings.input === 'physical') {
+          const preparation = await this.connectStoryTraversal({
+            url: activeConnection.url,
+            targetId: activeConnection.targetId,
+            platform,
+            input: settings.input,
+            fetch: this.fetch,
+            signal: this.services.controller.signal,
+          });
+          await preparation.close();
+        }
         const results = await runWdioStoryTests(
           {
             ...settings,
@@ -639,6 +650,7 @@ export class DesktopStorybookCli {
             targetId: this.targetId(platform),
             fetch: this.fetch,
             signal: this.services.controller.signal,
+            input,
           })
         : undefined;
       let traversalFailure: unknown;
