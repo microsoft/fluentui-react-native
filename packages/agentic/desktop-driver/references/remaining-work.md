@@ -1085,30 +1085,40 @@ the PR; a hosted capability skip is not completion.
 ### Windows connected-session follow-up — 2026-11-12 UTC
 
 The legacy-only activation refusal and lease-local content-popup registration
-corrections have focused native red/green evidence; the final helper also
-passes the real Paper secondary semantic case. See the separate
+corrections have focused native red/green evidence. At `3957cd6ae`, Fabric
+main/secondary semantic refusal and both endpoints' secondary physical
+delivery passed in an eligible remote session. The full native sweep then
+found a close-during-listing geometry race: 33 cases passed, one failed,
+and two macOS-only cases were skipped. The narrow native correction at
+`a53451513` has a deterministic red/green self-test, the original fixture
+case passing, and six passing isolated fixture replays. See the separate
 [Windows evidence entry](current-status.md). Keep #4441 open until:
 
-- The final helper reruns Fabric main/secondary semantic activation and both
+- The close-race correction receives coordinator review.
+- The new helper reruns Fabric main/secondary semantic activation and both
   endpoints' secondary physical clicks. Physical receipts are not themselves
   proof of the legacy Callout's native command outcome.
-- The final helper reruns
+- The new helper reruns
   `yarn test --runInBand operations.contract win32Fixture.contract nativeDriver`
   with `$env:FURN_NATIVE_DRIVER_TEST = '1'`, including registered-popup
   liveness during failed/hung content probes, the shared discovery deadline
-  and deferred retry, and truthful listed/tracked publication.
+  and deferred retry, truthful listed/tracked publication, and the
+  close-after-enumeration self-test.
+- The final-source default-environment clean-cache aggregate and affected
+  hosted Windows/Win32 lanes pass, including the legacy menu assertion
+  guard and its closing-window correction.
 
-The review follow-ups are implemented, and the default-environment clean-cache
-repository aggregate passed all 178 tasks at `cad25f8c5`. Native runs were
-paused when session 1 disconnected, locked, and lost its input desktop.
-After it became Active/unlocked again, the desktop was reserved for W1;
-W3 had only a buildci grant. Resume native/GUI/physical work only with an
+The earlier default-environment clean-cache repository aggregate passed all
+178 tasks at `cad25f8c5`; it does not qualify the later corrections. Native
+runs resumed after the disconnected session became Active/unlocked and W3
+received its grant. Both W3 campaigns ended with clean process audits.
+Further native/GUI/physical work still requires an
 Active, unlocked session, an explicit W3 desktop grant, and the serialized
 campaign; physical work additionally requires `-RequirePhysical`. No
 reconnect, session move, or skip-to-pass substitution is authorized.
 Earlier eligible physical results remain evidence for their tested
-revisions, not final-helper reruns. Authorized draft publication leaves
-these qualification gaps open.
+revisions, not new-helper reruns. Authorized draft publication leaves
+these qualification gaps and the unrun display-topology cases open.
 
 ## 9. Qualification and efficiency gates
 

@@ -1061,3 +1061,94 @@ contracts, GUI/physical runs, and push are **not run** in this segment.
 W1 retains the desktop campaign. W3 awaits its explicit grant for the final
 Fabric semantic case, both secondary physical clicks, and final native
 contracts/probe tests, then the clean-cache aggregate and publication.
+
+## Windows Fabric and Win32 Paper — final sweep and native close-race correction — 2026-11-12 UTC
+
+**App qualification revision:** `3957cd6aec1cf83c8dc62e4d56403fe942505aa4`.
+**Close-race implementation:** `a53451513eb84f5ff62dc7763bd419521c617d5b`.
+The session had returned to Active/unlocked before this campaign. All native
+commands below used the W3 campaign and serialized lock with
+`-RequirePhysical`; both preflight and postflight reported an eligible
+**remote** session with the Default input desktop. No session change was
+reported.
+
+The registered Fabric native app was reused only after checking its install
+identity and verifying no native app-source differences from its build
+revision. Metro and bundles came from this worktree. Paper used the exact
+REX executable with SHA-256
+`3ecd1f58690b029eccf06838dc23411f08b1f3765b99950091f8246aedd74725`.
+Apps, Metro, helpers, and fixtures were closed between runs.
+
+The following results used helper source
+`89cc81fbb72cb8a79852e5d4d90ce96d8b2982283086236b860289f2664ac557`,
+artifact `eb91ef8a4164080bcae787aacce3fd5aa5556d8c3d0b22d0cd0c661a50934066`.
+Run artifacts are under `artifacts\desktop\w3-qualification\runs\<run-id>`.
+
+| Endpoint / case                       | Observed result                                                                                                                                                                                          | Run ID                                 |
+| ------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
+| Fabric main/secondary semantic action | **Passed:** honest `activation-unsupported` refusal with effect `none`; no fabricated receipt, fallback, or app change.                                                                                  | `98d0ae8f-e84b-43c1-b332-7136dd676f23` |
+| Fabric secondary physical click       | **Passed:** separately registered window, complete 11-node sample, physical-pointer receipt and public `focus: confirmed`, then retirement.                                                              | `537cc479-b3d3-4ef0-93b2-d39c35177653` |
+| Paper secondary physical click        | **Passed:** exact owned tool window, complete eight-node sample, physical-pointer delivery and retirement. The legacy story has no native-command outcome, so this is not proof of the RN focus command. | `e29ff4aa-62f5-4f53-8a5e-450a5e799466` |
+
+### Observed failure and test-first correction
+
+With `$env:FURN_NATIVE_DRIVER_TEST='1'`, the requested package command
+`yarn test --runInBand operations.contract win32Fixture.contract nativeDriver`
+**failed**: 33 passed, one failed, two macOS-only cases skipped. The tool-content
+fixture failed with `no-such-window`, not a session or permission refusal.
+Its log remains `artifacts\desktop\w3-buildci\final-native-contracts.log`.
+This failed sweep is not claimed as a final native pass.
+
+A bounded diagnostic replay reproduced the failure on its first fixture.
+The command journal isolated it to `windows` immediately after the close
+button's successful accessibility click; the destroy event confirmed the
+secondary had closed. Native enumeration can return a window that closes
+before `WindowSummary` reads its geometry. This is separate from semantic
+dispatch and the E2E adapter's closing-tree race.
+
+The correction omits a geometry failure only when its code is
+`no-such-window` **and** native liveness confirms the handle has gone. A
+still-live handle's error and every unrelated error propagate. Direct
+commands for the omitted window still refuse. No input fallback,
+cross-process admission, or wire-schema change was added.
+
+A deterministic native self-test closes a secondary exactly between
+enumeration and geometry serialization. Before the guard, this command
+**failed** its new live-window-listing assertion:
+
+```powershell
+yarn test --runInBand nativeDriver --testNamePattern 'handshakes with the Windows helper'
+```
+
+After the guard, the following command **passed**, two native cases with 26
+unselected cases skipped. It includes the deterministic self-test and the
+original real-fixture registration/action/closure scenario:
+
+```powershell
+yarn test --runInBand nativeDriver win32Fixture.contract --testNamePattern 'handshakes with the Windows helper|registers only owned untitled tool roots'
+```
+
+The self-test also verifies direct closed-window refusal, propagation of an
+error for a live handle, and propagation of an unrelated error even when its
+window closes. The unchanged diagnostic replay then **passed six isolated
+fixture lifecycles**, including close polling and subsequent main-window
+actions. Retained logs under `artifacts\desktop\w3-buildci` are
+`trace-tool-contract-replay.log`, `closed-window-listing-red.log`,
+`closed-window-listing-green.log`, and `trace-tool-contract-green.log`.
+
+The fixed helper has source
+`7119f42fb101452990b7bea13daf685e90a67ad75840fba60968a5efe42f62d1`,
+artifact `e0e6fc988fc9214b91e02bd0909c099b203d4f9bfd89c45db8f8c9f9397a05e0`,
+and build fingerprint
+`afca889e68ccd07b9c1874b6d46b0c2a3a3f635e3e7b09c1b43eca20b9fb6f9c`.
+The package `yarn build` and `yarn lint`, root `yarn oxfmt --check`,
+`git diff --check`, and Markdown link checks for the native provider README
+and protocol **passed**. Patch changeset: `brave-popup-listings.md`.
+
+The new implementation needs coordinator review before push. The complete
+native selector, Fabric semantic case, and both secondary physical clicks
+must be rerun against this **new** helper; the earlier app results above do
+not qualify its new source digest. The new-source clean-cache aggregate and
+hosted CI are **not run** yet. The 200% DPI, mixed-DPI, and negative-origin
+gaps remain unchanged. Both campaigns ended, and the final audit reported
+`FURN-AUDIT: no FURN desktop processes found`.
