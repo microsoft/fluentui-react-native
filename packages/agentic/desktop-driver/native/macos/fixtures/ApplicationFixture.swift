@@ -5,6 +5,7 @@ final class ApplicationFixture: NSObject, NSApplicationDelegate {
   private var window: NSWindow?
   private var count = 0
   private let value = NSTextField(labelWithString: "Count: 0")
+  private var descendant: Process?
 
   func applicationDidFinishLaunching(_ notification: Notification) {
     let arguments = ProcessInfo.processInfo.arguments
@@ -29,6 +30,26 @@ final class ApplicationFixture: NSObject, NSApplicationDelegate {
     self.window = window
     window.makeKeyAndOrderFront(nil)
     NSApplication.shared.activate(ignoringOtherApps: true)
+    if let childIndex = arguments.firstIndex(of: "--descendant-ready-file").map({ $0 + 1 }),
+      arguments.indices.contains(childIndex)
+    {
+      let child = Process()
+      child.executableURL = URL(fileURLWithPath: "/bin/sleep")
+      child.arguments = ["300"]
+      do {
+        try child.run()
+        descendant = child
+        let record = [
+          "processId": Int(child.processIdentifier),
+          "parentProcessId": Int(ProcessInfo.processInfo.processIdentifier),
+        ]
+        let data = try JSONSerialization.data(withJSONObject: record)
+        try data.write(to: URL(fileURLWithPath: arguments[childIndex]), options: .atomic)
+      } catch {
+        NSApplication.shared.terminate(nil)
+        return
+      }
+    }
     if let readyIndex = arguments.firstIndex(of: "--ready-file").map({ $0 + 1 }),
       arguments.indices.contains(readyIndex)
     {

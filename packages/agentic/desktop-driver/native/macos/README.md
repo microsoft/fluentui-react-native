@@ -106,6 +106,13 @@ exact executable externally for attach-preservation tests. The test owner must
 stop only that process incarnation. The fixture is supporting native evidence,
 not Fabric/Paper renderer qualification.
 
+For crash-recovery contracts, `--descendant-ready-file <path>` starts a bounded
+`/bin/sleep 300` child and writes its PID and parent PID as JSON. The fixture does
+not terminate that child when its primary process exits. The contract owner
+verifies both native start identities and the parent relationship, proves the
+descendant survived, and separately stops that exact descendant. This tests the
+limits of `uncontained` ownership; it does not add descendant containment.
+
 ## Signing
 
 ### Stable development signing

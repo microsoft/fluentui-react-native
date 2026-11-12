@@ -26,3 +26,8 @@ launch/attach operations retain cross-service exact-incarnation exclusion.
 Discover live macOS application candidates from kernel PIDs rather than the
 main-run-loop-dependent workspace cache, so read-only inspection sees newly
 launched apps and still refuses duplicate identities.
+
+Native ownership contracts additionally qualify failed and interrupted
+acquisition publication, abrupt owner death and known uncontained descendants:
+uncertainty retains the workload claim until exact operator cleanup. This adds
+qualification only, not automatic survivor adoption or descendant containment.

@@ -37,7 +37,18 @@ Set `FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY` to the provisioned stable
 identity. The suite covers supervisor/session separation, durable owner/app
 identities, launch-capable discovery, exact external-app exclusion and
 preservation, stale identities, direct-child causality, and post-launch
-cancellation. Its evidence is written to the desktop-test package's
+cancellation. Publication-failure coverage uses a real launched application
+with an injected durable-publication rejection. Two separate Node owners are
+killed after native acquisition: one before publishing the acquired identity,
+the other after publishing it. Both leave a fenced claim, a surviving native
+app and a bounded known descendant; replacement remains refused even after
+the recorded owner and helper exit. The tests verify exact native identities
+and executable paths before operator cleanup, prove the descendant survives
+the primary process, and remove only the unchanged fixture claim after all
+recorded processes exit. These are native AppKit scenarios, not fake-host
+evidence or automatic recovery.
+
+Its evidence is written to the desktop-test package's
 `artifacts/desktop/application-ownership-*/evidence.json`. The separate physical mutex
 case requires explicit `FURN_NATIVE_PHYSICAL_INPUT_TEST=1` and effective native
 permissions; a skipped case does not qualify input exclusion.
@@ -65,6 +76,9 @@ Windows; macOS and ordinary hosted smoke cannot establish it.
 `containment: "uncontained"` is deliberate for both macOS launch kinds.
 An exact primary-process exit is not proof that arbitrary descendants exited.
 The native ownership cases do not qualify descendant containment.
+The crash cases qualify a known descendant and the interrupted acquisition
+publication boundary, not arbitrary descendant discovery, filesystem
+power-loss behavior, Metro/channel survivors or transparent service restart.
 
 The PR Windows setup action runs the **desktop-driver** native suite, not this
 package's application-resource contracts. The Windows/Win32 E2E and Storybook

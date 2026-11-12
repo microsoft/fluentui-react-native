@@ -465,6 +465,197 @@ nativeTest('bare executable launches are direct children, not LaunchServices own
   evidence.push({ case: 'direct-child-causal-ownership', state: 'passed' });
 });
 
+nativeTest('failed acquired-record publication retains the durable pending claim until exact cleanup', async () => {
+  const root = path.join(directory, 'publication-failure');
+  const claim = createDesktopWorkloadClaim({
+    directory: root,
+    runId: 'publication-failure',
+    targetId: target.id,
+    targetInstanceId: target.id,
+    processIdentity: await describeDesktopWorkloadOwner({ helperPath: artifact.executablePath }),
+  });
+  let identity: DesktopApplicationIdentity | undefined;
+  let refusePublication = true;
+  const host = await createDesktopApplicationHost(nativeHost(application()), {
+    target,
+    lifetime: 'session',
+    resourcePrefix: 'publication-failure',
+    onResource: (resource) => {
+      if (resource.application?.processId) {
+        identity = captureDesktopApplicationIdentity(
+          {
+            id: resource.application.leaseId!,
+            ownership: 'launched',
+            processId: resource.application.processId,
+            processStartedAt: resource.application.processStartedAt,
+          },
+          'macos',
+        );
+        if (refusePublication) throw new Error('Injected acquired-record publication failure.');
+      }
+      claim.updateResource(resource);
+    },
+  });
+  try {
+    await expect(host.launch({ ...target, host })).rejects.toThrow(/publication failed/);
+    expect(identity).toBeDefined();
+    await expect(createMacOSApplicationProbe({ artifact })(identity!)).resolves.toBe('running');
+    const persisted = JSON.parse(fs.readFileSync(path.join(root, 'interactive.lock'), 'utf8'));
+    expect(persisted).toMatchObject({
+      state: 'fenced',
+      resources: [expect.objectContaining({ readiness: 'pending', disposal: 'pending' })],
+    });
+    expect(() => claim.release()).toThrow(/unresolved effects/);
+    expect(() =>
+      createDesktopWorkloadClaim({ directory: root, runId: 'foreign', targetId: target.id, targetInstanceId: target.id }),
+    ).toThrow(/Another desktop workload/);
+  } finally {
+    refusePublication = false;
+    await host.dispose();
+    claim.release();
+  }
+  await expect(createMacOSApplicationProbe({ artifact })(identity!)).resolves.toBe('exited');
+  evidence.push({ case: 'native-acquired-publication-failure', state: 'passed', ...identity });
+});
+
+for (const phase of ['pending', 'acquired'] as const) {
+  nativeTest(`owner death with ${phase} publication preserves native survivors and fences replacement`, async () => {
+    const root = path.join(directory, `owner-death-${phase}`);
+    fs.mkdirSync(root);
+    const configurationFile = path.join(root, 'configuration.json');
+    const descendantFile = path.join(root, 'descendant.json');
+    fs.writeFileSync(
+      configurationFile,
+      JSON.stringify({
+        artifact,
+        application: application({ arguments: ['--descendant-ready-file', descendantFile] }),
+        directory: root,
+      }),
+    );
+    const child = spawn(
+      process.execPath,
+      [path.resolve(__dirname, '../fixtures/application-ownership/crash-owner.mjs'), configurationFile, phase],
+      { stdio: 'ignore' },
+    );
+    const probe = createMacOSApplicationProbe({ artifact });
+    let ownerIdentity: DesktopApplicationIdentity | undefined;
+    let helperIdentity: DesktopApplicationIdentity | undefined;
+    let appIdentity: DesktopApplicationIdentity | undefined;
+    let descendantIdentity: DesktopApplicationIdentity | undefined;
+    let claimContents: string | undefined;
+    const claimFile = path.join(root, 'interactive.lock');
+    const identify = async (pid: number, executable: string): Promise<DesktopApplicationIdentity> => {
+      const observed = await describeMacOSService({ artifact, pid });
+      expect(fs.realpathSync(observed.executablePath)).toBe(fs.realpathSync(executable));
+      return captureDesktopApplicationIdentity(
+        { id: 'fixture-process', ownership: 'attached', processId: pid, processStartedAt: observed.startedAt },
+        'macos',
+      );
+    };
+    try {
+      await once(child, 'spawn');
+      ownerIdentity = await identify(child.pid!, process.execPath);
+      await waitForFixtureFile(path.join(root, 'acquired.json'), child);
+      const acquired = JSON.parse(fs.readFileSync(path.join(root, 'acquired.json'), 'utf8'));
+      expect(acquired.owner).toMatchObject({ pid: ownerIdentity.processId, startedAt: ownerIdentity.processStartedAt });
+      appIdentity = await identify(acquired.resource.application.processId, fixture.executable);
+      expect(acquired.resource.application).toMatchObject({
+        processStartedAt: appIdentity.processStartedAt,
+        containment: 'uncontained',
+        launchKind: 'launch-services',
+      });
+      const children = spawnSync('/usr/bin/pgrep', ['-P', String(child.pid)], { encoding: 'utf8', timeout: 5000 });
+      expect(children.status).toBe(0);
+      const helperPids = children.stdout.trim().split(/\s+/).map(Number);
+      expect(helperPids).toHaveLength(1);
+      helperIdentity = await identify(helperPids[0], artifact.executablePath);
+      await waitForFixtureFile(descendantFile, child);
+      const descendant = JSON.parse(fs.readFileSync(descendantFile, 'utf8'));
+      expect(descendant.parentProcessId).toBe(appIdentity.processId);
+      descendantIdentity = await identify(descendant.processId, '/bin/sleep');
+      const parent = spawnSync('/bin/ps', ['-p', String(descendant.processId), '-o', 'ppid='], { encoding: 'utf8', timeout: 5000 });
+      expect(Number(parent.stdout.trim())).toBe(appIdentity.processId);
+      claimContents = fs.readFileSync(claimFile, 'utf8');
+      expect(JSON.parse(claimContents)).toMatchObject({
+        state: 'fenced',
+        resources: [expect.objectContaining({ readiness: phase === 'pending' ? 'pending' : 'ready', disposal: 'pending' })],
+      });
+      if (phase === 'pending') expect(JSON.parse(claimContents).resources[0].application.processId).toBeUndefined();
+      else expect(JSON.parse(claimContents).resources[0].application.processStartedAt).toBe(appIdentity.processStartedAt);
+      await expect(probe(ownerIdentity)).resolves.toBe('running');
+      child.kill('SIGKILL');
+      expect(await waitForChildExit(child)).toBe(true);
+      await waitForExactExit(helperIdentity);
+      await expect(probe(appIdentity)).resolves.toBe('running');
+      await expect(probe(descendantIdentity)).resolves.toBe('running');
+      await expect(
+        inspectDesktopWorkloadClaim(claimFile, async () => ({ state: (await probe(ownerIdentity!)) === 'exited' ? 'exited' : 'unknown' })),
+      ).resolves.toMatchObject({ state: 'exited', record: { state: 'fenced' } });
+      expect(() =>
+        createDesktopWorkloadClaim({ directory: root, runId: 'replacement', targetId: target.id, targetInstanceId: target.id }),
+      ).toThrow(/Another desktop workload/);
+      expect(fs.readFileSync(claimFile, 'utf8')).toBe(claimContents);
+      const observer = nativeHost(desktopApplicationIdentityDescriptor(appIdentity, application()));
+      try {
+        await expect(observer.inspectApplication({ ...target, host: observer })).resolves.toMatchObject({
+          processId: appIdentity.processId,
+          processStartedAt: appIdentity.processStartedAt,
+        });
+      } finally {
+        await observer.dispose();
+      }
+      await stopExactFixtureProcess(appIdentity);
+      await expect(probe(descendantIdentity)).resolves.toBe('running');
+      evidence.push({
+        case: `owner-death-${phase}-publication`,
+        state: 'passed',
+        ownerIdentity,
+        helperIdentity,
+        appIdentity,
+        descendantIdentity,
+        descendantSurvivedPrimaryExit: true,
+        automaticRecovery: false,
+      });
+    } finally {
+      if (ownerIdentity) await stopFixtureChild(child, ownerIdentity);
+      if (helperIdentity) await stopExactFixtureProcess(helperIdentity);
+      if (appIdentity) await stopExactFixtureProcess(appIdentity);
+      if (descendantIdentity) await stopExactFixtureProcess(descendantIdentity);
+      if (claimContents && fs.readFileSync(claimFile, 'utf8') === claimContents) {
+        // Only this fixture's recorded owner, helper, app and descendant have been proven exited.
+        fs.unlinkSync(claimFile);
+        evidence.push({ case: `owner-death-${phase}-operator-cleanup`, state: 'passed' });
+      }
+    }
+  });
+}
+
+async function waitForFixtureFile(filename: string, child: ChildProcess): Promise<void> {
+  const deadline = Date.now() + 30_000;
+  while (!fs.existsSync(filename)) {
+    if (child.exitCode !== null || child.signalCode !== null) throw new Error(`Fixture owner exited before ${path.basename(filename)}.`);
+    if (Date.now() >= deadline) throw new Error(`Fixture owner did not publish ${path.basename(filename)}.`);
+    await new Promise((resolve) => setTimeout(resolve, 50));
+  }
+}
+
+async function waitForExactExit(identity: DesktopApplicationIdentity): Promise<void> {
+  const probe = createMacOSApplicationProbe({ artifact });
+  const deadline = Date.now() + 10_000;
+  while ((await probe(identity)) !== 'exited') {
+    if (Date.now() >= deadline) throw new Error(`Fixture ${identity.processId} did not prove exact exit.`);
+    await new Promise((resolve) => setTimeout(resolve, 50));
+  }
+}
+
+async function stopExactFixtureProcess(identity: DesktopApplicationIdentity): Promise<void> {
+  const probe = createMacOSApplicationProbe({ artifact });
+  const state = await probe(identity);
+  if (state === 'unknown') throw new Error(`Fixture ${identity.processId} has an unreadable incarnation; refusing cleanup.`);
+  if (state === 'running') process.kill(identity.processId, 'SIGKILL');
+  await waitForExactExit(identity);
+}
+
 nativeTest('post-launch cancellation journals the exact unleased process and its settled exit', async () => {
   const ready = path.join(directory, 'cancelled.ready');
   const records: DesktopResourceRecord[] = [];
