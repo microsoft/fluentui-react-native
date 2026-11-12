@@ -1045,12 +1045,23 @@ workload holding `interactive.lock`. One focused retry of the two failed
 CLI contracts under the shared native lock passed both (28 unselected
 cases skipped). This collision is not native handoff evidence.
 
+The final locked `TF_BUILD=1 yarn lage buildci --concurrency 4` at
+`17ee49fd1` passed all 178 tasks, including the complete harness test task.
+Project-local ignored `TMPDIR` also required `GIT_CEILING_DIRECTORIES` set
+to that directory so temporary instruction-check fixtures did not discover
+the enclosing worktree; the existing 24-case instruction checker suite
+passed with that isolation. No baseline source was changed for this setup.
+The aggregate log is `artifacts/desktop/f11/qualification/buildci.log`.
+Task success does not turn the native opt-in skips into qualification.
+
 **Observed, native:** macOS 27.2.1, arm64, plain AppKit fixture (no React Native
 renderer). The explicitly stable-signed helper was ready; its noninteractive
 doctor reported Accessibility and PostEvent `false`, ScreenCapture `true`,
 console connected and unlocked. No privacy or certificate-trust changes
 were made. Native service/application identity and backend contracts passed
-27 with 15 skipped Windows cases. These do not qualify GUI handoff.
+27 with 15 skipped Windows cases. AX-dependent handoff is **blocked:
+Accessibility not granted to the signed helper**. These identity/backend
+checks do not qualify GUI handoff.
 
 | Selection and exact command                                                                                                                                             | Result                                                                                                                                        | Cleanup and retained evidence                                                                                                                                                                          |
 | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
