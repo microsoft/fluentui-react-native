@@ -389,11 +389,14 @@ final class ApplicationManager {
         try fail(ErrorCode.launchFailed, "Starting the application failed: \(error.localizedDescription)")
       }
       let processID = process.processIdentifier
-      guard let identity = try? ServiceIdentity.inspect(processID) else {
+      guard let identity = ApplicationIncarnation.captureCausalIdentity(
+        matchesProcess: { process.isRunning },
+        inspect: { try? ServiceIdentity.inspect(processID).startedAt }
+      ) else {
         throw abandonedLaunch(processID: processID, startedAt: nil, launchKind: "direct-child",
           error: HelperError(code: ErrorCode.launchFailed, message: "The launched child identity could not be read."))
       }
-      startedAt = identity.startedAt
+      startedAt = identity
       launchKind = "direct-child"
       let registered: NSRunningApplication?
       do {
@@ -465,8 +468,10 @@ final class ApplicationManager {
   /// exit has no lease to keep it visible, so the failure names it instead of hiding the survivor.
   private func abandonedLaunch(processID: pid_t, startedAt: String?, launchKind: String, error: Error) -> Error {
     let exited = terminateUnleased(processID: processID, startedAt: startedAt, bounds: .abandoned)
-    var data: JSONObject = ["processId": Int(processID), "launchKind": launchKind,
-      "applicationSettlement": exited ? "exited" : "unknown"]
+    var data = (error as? HelperError)?.data ?? (error as? CancelledError)?.data ?? [:]
+    data["processId"] = Int(processID)
+    data["launchKind"] = launchKind
+    data["applicationSettlement"] = exited ? "exited" : "unknown"
     if let startedAt { data["processStartedAt"] = startedAt }
     if let cancellation = error as? CancelledError {
       return CancelledError(effect: cancellation.effect, data: data)
@@ -1194,10 +1199,19 @@ final class ApplicationManager {
     configuration.activates = false
     configuration.addsToRecentItems = false
     configuration.createsNewApplicationInstance = true
+    configuration.allowsRunningApplicationSubstitution = false
+    configuration.promptsUserIfNeeded = false
     let result = LaunchResultBox()
     let semaphore = DispatchSemaphore(value: 0)
     NSWorkspace.shared.openApplication(at: url, configuration: configuration) { application, error in
-      let startedAt = application.flatMap { try? ServiceIdentity.inspect($0.processIdentifier).startedAt }
+      let startedAt = application.flatMap { launched in
+        ApplicationIncarnation.captureCausalIdentity(matchesProcess: {
+          // AppKit equality distinguishes application incarnations even when a PID has been reused.
+          guard !launched.isTerminated,
+            let current = NSRunningApplication(processIdentifier: launched.processIdentifier) else { return false }
+          return current.isEqual(launched)
+        }, inspect: { try? ServiceIdentity.inspect(launched.processIdentifier).startedAt })
+      }
       result.lock.lock()
       result.application = application
       result.error = error
@@ -1230,6 +1244,15 @@ final class ApplicationManager {
       if let application, !preexisting.contains(application.processIdentifier) {
         throw abandonedLaunch(processID: application.processIdentifier, startedAt: startedAt, launchKind: "launch-services", error: error)
       }
+      var data = (error as? HelperError)?.data ?? (error as? CancelledError)?.data ?? [:]
+      data["launchKind"] = "launch-services"
+      data["applicationSettlement"] = "unknown"
+      if let cancellation = error as? CancelledError {
+        throw CancelledError(effect: cancellation.effect, data: data)
+      }
+      if let failure = error as? HelperError {
+        throw HelperError(code: failure.code, message: failure.message, data: data)
+      }
       throw error
     }
     result.lock.lock()
@@ -1238,10 +1261,23 @@ final class ApplicationManager {
     let startedAt = result.startedAt
     result.lock.unlock()
     if let error {
-      try fail(ErrorCode.launchFailed, "Launch Services could not start the application: \(error.localizedDescription)")
+      let failure = error as NSError
+      var data: JSONObject = ["launchKind": "launch-services", "applicationSettlement": "unknown",
+        "launchErrorDomain": bounded(failure.domain, bytes: 160), "launchErrorCode": failure.code]
+      if let underlying = failure.userInfo[NSUnderlyingErrorKey] as? NSError {
+        data["underlyingErrorDomain"] = bounded(underlying.domain, bytes: 160)
+        data["underlyingErrorCode"] = underlying.code
+      }
+      let launchError = HelperError(code: ErrorCode.launchFailed,
+        message: "Launch Services could not start the application: \(error.localizedDescription)", data: data)
+      if let application, !preexisting.contains(application.processIdentifier) {
+        throw abandonedLaunch(processID: application.processIdentifier, startedAt: startedAt, launchKind: "launch-services", error: launchError)
+      }
+      throw launchError
     }
     guard let application else {
-      try fail(ErrorCode.launchFailed, "Launch Services did not return the launched application.")
+      try fail(ErrorCode.launchFailed, "Launch Services did not return the launched application.",
+        data: ["launchKind": "launch-services", "applicationSettlement": "unknown"])
     }
     guard let startedAt else {
       throw abandonedLaunch(processID: application.processIdentifier, startedAt: nil, launchKind: "launch-services",

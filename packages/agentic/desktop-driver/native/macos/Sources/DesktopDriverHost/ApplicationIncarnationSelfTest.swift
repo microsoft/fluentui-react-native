@@ -22,6 +22,18 @@ extension SelfTestRunner {
       "an earlier exact identity is not proof of recorded exit")
     check(ApplicationIncarnation.classifyExact(recorded: exact, observed: .unavailable) == .unknown,
       "exact application incarnation fails closed on permission failure")
+    check(ApplicationIncarnation.captureCausalIdentity(matchesProcess: { true }, inspect: { exact }) == exact,
+      "causal process capture retains an exact kernel identity")
+    var causalChecks = 0
+    let replaced = ApplicationIncarnation.captureCausalIdentity(matchesProcess: {
+      causalChecks += 1
+      return causalChecks == 1
+    }, inspect: { exact })
+    check(replaced == nil && causalChecks == 2, "causal process capture rejects replacement during inspection")
+    check(ApplicationIncarnation.captureCausalIdentity(matchesProcess: { false }, inspect: { exact }) == nil,
+      "causal process capture refuses a foreign process")
+    check(ApplicationIncarnation.captureCausalIdentity(matchesProcess: { true }, inspect: { nil }) == nil,
+      "causal process capture fails closed when the kernel identity is unavailable")
 
     func answer(_ text: String?) -> JSONObject {
       ApplicationIncarnation.handle(text.map { Data($0.utf8) })

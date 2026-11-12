@@ -60,6 +60,20 @@ function errorDetails(error: unknown, depth = 0): unknown {
   };
 }
 
+async function withCleanup(run: () => Promise<void>, cleanup: () => Promise<void>): Promise<void> {
+  try {
+    await run();
+  } catch (error) {
+    try {
+      await cleanup();
+    } catch (disposal) {
+      throw new AggregateError([error, disposal], 'Native application contract and cleanup failed.');
+    }
+    throw error;
+  }
+  await cleanup();
+}
+
 beforeAll(async () => {
   if (!enabled) return;
   const artifacts = path.join(process.cwd(), 'artifacts', 'desktop');
@@ -79,7 +93,26 @@ afterAll(() => {
   if (!directory) return;
   fs.writeFileSync(
     path.join(directory, 'evidence.json'),
-    JSON.stringify({ platform: 'macos', fixture: 'appkit', helperSigning: artifact?.signing, cases: evidence }, null, 2),
+    JSON.stringify(
+      {
+        recordedAt: new Date().toISOString(),
+        sourceRevision: spawnSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8', timeout: 5000 }).stdout?.trim() || 'unavailable',
+        workingTree: spawnSync('git', ['status', '--porcelain', '--untracked-files=no'], { encoding: 'utf8', timeout: 5000 })
+          .stdout?.trim()
+          .split('\n')
+          .filter(Boolean),
+        osVersion: spawnSync('sw_vers', ['-productVersion'], { encoding: 'utf8', timeout: 5000 }).stdout?.trim() || 'unavailable',
+        architecture: process.arch,
+        platform: 'macos',
+        fixture: 'appkit',
+        helperArtifactId: artifact?.artifactId,
+        helperSourceDigest: artifact?.sourceDigest,
+        helperSigning: artifact?.signing,
+        cases: evidence,
+      },
+      null,
+      2,
+    ),
   );
 });
 
@@ -372,30 +405,32 @@ for (const launchKind of ['direct-child', 'launch-services'] as const) {
         onResource: (record) => records.push(record),
       },
     );
-    try {
-      const failure = await host.launch({ ...target, host }).catch((error: unknown) => error);
-      expect(failure).toMatchObject({ code: 'launch-failed', data: { applicationSettlement: 'exited', launchKind } });
-      const record = records.at(-1)!;
-      expect(record).toMatchObject({ readiness: 'failed', disposal: 'settled', application: { launchKind } });
-      const identity = captureDesktopApplicationIdentity(
-        {
-          id: 'failed-launch',
-          ownership: 'launched',
-          processId: record.application!.processId,
-          processStartedAt: record.application!.processStartedAt,
-        },
-        'macos',
-      );
-      await expect(createMacOSApplicationProbe({ artifact })(identity)).resolves.toBe('exited');
-      evidence.push({
-        case: `failed-${launchKind}-exact-cleanup`,
-        state: 'passed',
-        application: record.application,
-        failure: errorDetails(failure),
-      });
-    } finally {
-      await host.dispose();
-    }
+    await withCleanup(
+      async () => {
+        const failure = await host.launch({ ...target, host }).catch((error: unknown) => error);
+        evidence.push({ case: `rejected-${launchKind}-launch`, state: 'observed', failure: errorDetails(failure), records });
+        expect(failure).toMatchObject({ code: 'launch-failed', data: { applicationSettlement: 'exited', launchKind } });
+        const record = records.at(-1)!;
+        expect(record).toMatchObject({ readiness: 'failed', disposal: 'settled', application: { launchKind } });
+        const identity = captureDesktopApplicationIdentity(
+          {
+            id: 'failed-launch',
+            ownership: 'launched',
+            processId: record.application!.processId,
+            processStartedAt: record.application!.processStartedAt,
+          },
+          'macos',
+        );
+        await expect(createMacOSApplicationProbe({ artifact })(identity)).resolves.toBe('exited');
+        evidence.push({
+          case: `failed-${launchKind}-exact-cleanup`,
+          state: 'passed',
+          application: record.application,
+          failure: errorDetails(failure),
+        });
+      },
+      () => host.dispose(),
+    );
   });
 }
 

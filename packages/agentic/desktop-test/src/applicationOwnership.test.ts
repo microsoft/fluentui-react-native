@@ -1,3 +1,6 @@
+import fs from 'node:fs';
+import path from 'node:path';
+
 import type { ApplicationLease, DesktopHost, DesktopTarget } from '@fluentui-react-native/desktop-driver';
 
 import {
@@ -6,6 +9,7 @@ import {
   desktopApplicationIdentityDescriptor,
 } from './applicationOwnership';
 import type { DesktopResourceRecord } from './resources';
+import { createDesktopWorkloadClaim } from './ownership';
 
 const owned: ApplicationLease = {
   id: 'lease-1',
@@ -136,6 +140,58 @@ describe('neutral desktop application ownership', () => {
     expect(f.records.at(-1)?.disposal).toBe('failed');
   });
 
+  test.each(['windows', 'win32'] as const)('names an uncontained %s application in the durable failed-cleanup claim', async (endpoint) => {
+    const directory = fs.mkdtempSync(path.join(process.cwd(), '.application-claim-test-'));
+    try {
+      const claim = createDesktopWorkloadClaim({
+        directory,
+        runId: 'survivor',
+        targetId: 'packaged',
+        targetInstanceId: 'packaged',
+      });
+      const f = fixture();
+      f.native.endpoint = endpoint;
+      f.native.launch.mockResolvedValueOnce({
+        id: 'uncontained-package',
+        ownership: 'launched',
+        processId: 456,
+        processStartedAt: '2026-11-12T00:00:00.1234567Z',
+        containment: 'uncontained',
+      });
+      f.native.closeApplication.mockRejectedValue(new Error('packaged survivor'));
+      const configured = { ...target, endpoint, platformName: 'windows' } satisfies Omit<DesktopTarget, 'host'>;
+      const host = await createDesktopApplicationHost(f.host, {
+        ...f.options,
+        target: configured,
+        lifetime: 'session',
+        onResource: (record) => claim.updateResource(record),
+      });
+      await host.launch({ ...configured, host });
+      await expect(host.dispose()).rejects.toThrow(/did not settle/);
+      const persisted = JSON.parse(fs.readFileSync(path.join(directory, 'interactive.lock'), 'utf8'));
+      expect(persisted).toMatchObject({
+        state: 'fenced',
+        resources: [
+          expect.objectContaining({
+            disposal: 'failed',
+            application: {
+              endpoint,
+              lifetime: 'session',
+              leaseId: 'uncontained-package',
+              processId: 456,
+              processStartedAt: '2026-11-12T00:00:00.1234567Z',
+              containment: 'uncontained',
+            },
+          }),
+        ],
+        unresolvedEffects: [expect.objectContaining({ resourceIdentity: persisted.resources[0].identity })],
+      });
+      expect(() => claim.release()).toThrow(/unresolved/);
+    } finally {
+      fs.rmSync(directory, { force: true, recursive: true });
+    }
+  });
+
   test('late acquisition is drained and exactly closed before owner disposal settles', async () => {
     const f = fixture();
     let finish!: (lease: ApplicationLease) => void;
@@ -231,6 +287,7 @@ describe('neutral desktop application ownership', () => {
     expect(() => captureDesktopApplicationIdentity({ ...owned, processStartedAt: '2026-11-12T00:00:00.123Z' }, 'macos')).toThrow(
       /microsecond/,
     );
+    expect(() => captureDesktopApplicationIdentity({ ...owned, processId: 0x80000000 }, 'macos')).toThrow(/native PID/);
     expect(() =>
       desktopApplicationIdentityDescriptor(identity, { windowTitle: 'Fixture', leasePath: 'old', leaseNonce: 'secret' }),
     ).toThrow(/legacy lease/);

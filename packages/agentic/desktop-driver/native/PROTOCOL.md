@@ -132,6 +132,9 @@ launched lease additionally reports `launchKind: "launch-services" |
 `containment: "external"`. Causal LaunchServices ownership is not parent/child
 containment. Cleanup rechecks the captured exact incarnation before each signal;
 it never adopts whichever process currently occupies a launch PID.
+Initial capture also checks the causal child or LaunchServices application
+identity before and after the kernel read. LaunchServices substitution and
+interactive authorization prompts are disabled.
 
 macOS attach descriptors may supply `processIdentity: { processId,
 processStartedAt }` with the exact native timestamp and an exact `windowTitle`.
@@ -150,6 +153,10 @@ captured `processId`, `processStartedAt` when readable, `launchKind`, and
 an unreadable or surviving incarnation is `unknown`. A pending launch whose
 LaunchServices callback has not arrived may have no process identity; callers
 must retain their pending acquisition rather than infer no effect. These
+failures may additionally include bounded `launchErrorDomain`, `launchErrorCode`,
+`underlyingErrorDomain`, and `underlyingErrorCode` diagnostics, without arbitrary
+NSError user information. A callback returning both an error and a new process
+uses the same exact-incarnation cleanup path. These
 additive fields are described in [protocol.json](protocol.json) and retain
 wire version 1.0.
 

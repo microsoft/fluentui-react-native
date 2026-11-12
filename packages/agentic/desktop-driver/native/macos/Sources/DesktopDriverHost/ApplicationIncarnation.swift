@@ -84,6 +84,13 @@ enum ApplicationIncarnation {
     }
   }
 
+  static func captureCausalIdentity(matchesProcess: () -> Bool, inspect: () -> String?) -> String? {
+    guard matchesProcess(), let startedAt = inspect(), ServiceIdentity.isTimestamp(startedAt), matchesProcess() else {
+      return nil
+    }
+    return startedAt
+  }
+
   static func classify(recorded: Date, observed: Observation) -> State {
     switch observed {
     case .gone:

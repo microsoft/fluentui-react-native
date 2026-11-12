@@ -26,6 +26,12 @@
     "launchKind": ["launch-services", "direct-child"],
     "containment": ["uncontained", "external"],
     "applicationSettlement": ["exited", "unknown"],
+    "launchServicesErrorFields": {
+      "launchErrorDomain": { "type": "string", "maxLength": 160 },
+      "launchErrorCode": { "type": "integer" },
+      "underlyingErrorDomain": { "type": "string", "maxLength": 160 },
+      "underlyingErrorCode": { "type": "integer" }
+    },
     "failureMetadataLocations": ["response.error.data", "cancelled.data"]
   }
 }
