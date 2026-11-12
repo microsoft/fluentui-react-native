@@ -2299,3 +2299,30 @@ reported `FURN-AUDIT: no FURN desktop processes found`. No W2 campaign was
 started and no owned desktop process survives. `validation-summary.json`
 and `closeout-audit.log` retain the ignored phase receipts. These portable,
 compile and hygiene results do not replace the pending native rerun.
+
+## Windows Fabric and Win32 Paper — default-environment buildci — 2026-11-12 UTC
+
+**Observed:** root `yarn clean-lage-cache` followed by `yarn lage buildci`
+passed at `68d63ccfbf008b963e59772f57aca8ac8f9ff05f`, under the W2 machine
+lock with no physical-session requirement. Default TEMP, default concurrency
+and repository guidance were unchanged.
+
+| Attempt                                                                   | Outcome                                                                                                                          |
+| ------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| Initial W2 gate, same revision                                            | **Failed**: 173 successful tasks, one failed Storybook task; server-integration child exit 1 and inline-worker aggregate timeout |
+| Full pinned-base comparison at `6489386956c0485cb91b478a8f4adc4828f4178b` | **Passed**: 178 successful tasks, 0 failed/skipped                                                                               |
+| Unchanged W2 full gate rerun                                              | **Passed**: 178 successful tasks, 0 failed/skipped, 2m 32.26s                                                                    |
+
+No source fix, dependency installation, timeout change, concurrency override,
+or guidance workaround was made. The initial failure did not reproduce in the
+base comparison or the unchanged W2 rerun. Native opt-ins remained unset:
+this aggregate is not Windows Fabric or Win32 Paper runtime qualification.
+
+All three logs and `buildci-default-summary.json` are retained in ignored
+`artifacts/desktop/f10w/review-20261112/`; the final process audit is
+`buildci-default-final-audit.log` and **Passed**:
+`FURN-AUDIT: no FURN desktop processes found`.
+No application/native contract was launched, no desktop campaign started,
+and no push occurred. Corrected native recovery re-verification remains
+**Not run**, awaiting an active/unlocked session and its separate grant.
+Part of #4447 and #4435.

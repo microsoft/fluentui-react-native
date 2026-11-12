@@ -1093,3 +1093,28 @@ Node processes; the idle rerun was clean:
 `FURN-AUDIT: no FURN desktop processes found`. No W2 desktop campaign was
 started. The old and rebuilt helper files both match their recorded SHA-256;
 the old binary remains available for the expected-failing consumer run.
+
+## Windows Fabric and Win32 Paper — default-environment buildci — 2026-11-12 UTC
+
+**Observed:** the root `yarn clean-lage-cache` followed by `yarn lage buildci`
+passed at `68d63ccfbf008b963e59772f57aca8ac8f9ff05f`: **178 successful
+tasks, 0 failed/skipped**, in 2m 32.26s. Both commands ran under the W2 machine
+lock without `-RequirePhysical`, with default TEMP and concurrency and no
+environment or repository-guidance adjustments.
+
+The first attempt at that same revision failed the Storybook server-integration
+child-exit assertion and the inline-worker aggregate's 120s timeout.
+Before considering a fix, the same full default-environment gate was run at
+pinned base `6489386956c0485cb91b478a8f4adc4828f4178b`: **Passed**, 178/0.
+The unchanged W2 rerun then passed. No source fix, timeout increase, dependency
+install, or concurrency override was made; baseline failure was not reproduced.
+
+Ignored receipts are under `artifacts/desktop/f10w/review-20261112/`:
+`buildci-default.log`, `buildci-default-base.log`,
+`buildci-default-rerun.log`, `buildci-default-summary.json`, and
+`buildci-default-final-audit.log`. The final audit **Passed**:
+`FURN-AUDIT: no FURN desktop processes found`.
+No app or native contract was launched. The desktop remained disconnected;
+both endpoints' corrected native recovery qualification remains **Not run**
+pending an active/unlocked session and a separate grant. No push occurred.
+Part of #4447 and #4435.
