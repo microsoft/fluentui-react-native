@@ -338,3 +338,21 @@ out before the observed bridge retirement; the subsequent attempt waited for
 retirement. No raw image or grant is retained in this reference. Driver
 shutdown, app cleanup, and the failed Win32 app-run reports are
 recorded in `packages/agentic/desktop-test/references/current-status.md`.
+
+## F15 macOS Paper measurement block — 2026-11-12
+
+Source `505a2187b0a2451aed7081c9260b343d55742f93`; macOS 27.2.1
+(26B131), arm64. The stable-signed helper's noninteractive doctor reported
+Accessibility=false and PostEvent=false, with ScreenCapture=true. The
+driver ledger at `packages/agentic/desktop-driver/references/current-status.md`,
+section "F15 non-AX macOS supporting evidence — 2026-11-12",
+retains the exact diagnostic command and signing identity; its local artifact
+is `artifacts/desktop/f15-20261112/doctor.json`.
+
+**Blocked:** macOS Paper MCP interaction/text/latency measurements requiring
+the app's accessibility tree or physical input need owner permission action.
+No Paper Storybook app or MCP session was launched, no measurement command
+was run, and 0 tests were selected/executed (no new pass, failure, or skip
+counts). Cleanup is N/A for MCP; the diagnostic helper exited. The non-AX
+helper self-test does not qualify the adapter or change historical measurement
+claims.

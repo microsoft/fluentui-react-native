@@ -1026,3 +1026,34 @@ macOS Accessibility block above remains unchanged; no local smoke was
 repeated. `pwsh` is unavailable locally, so its parser check remains not run;
 the actual scripts executed in these CI lanes. Keep the PR draft until the
 documentation follow-up's CI passes and the coordinator changes its status.
+
+## F15 macOS feasibility and permission block — 2026-11-12
+
+Source `505a2187b0a2451aed7081c9260b343d55742f93`; macOS 27.2.1
+(26B131), arm64 (`sw_vers`). The app exercised was
+`FurnDesktopDriverHost.app`, not a React Native consumer; renderer N/A.
+The pre-run feasibility artifact is
+`artifacts/desktop/f15-20261112/feasibility.md`.
+
+| Item                                                                                   | Needs Accessibility/PostEvent?                   | Plan / actual result                                                                                    |
+| -------------------------------------------------------------------------------------- | ------------------------------------------------ | ------------------------------------------------------------------------------------------------------- |
+| Stable helper build, signature verification, handshake and synthetic self-test         | No                                               | Passed under the machine-wide native lock; signed self-test 448 passed, 0 failed, 0 skipped checks      |
+| Strict-clear refusal and negotiation assertions                                        | No                                               | Passed 8 supporting assertions within the self-test, not successful real-element clears                 |
+| Native service/application identity contracts                                          | No                                               | Targeted native driver selection passed 27 tests, failed 0, skipped 15; default TMPDIR                  |
+| Noninteractive `doctor --permissions`                                                  | No                                               | Completed without prompting; Accessibility=false, PostEvent=false, ScreenCapture=true                   |
+| Real-element clears, Fabric/Paper Storybook descriptor lifecycle/smoke, physical input | Yes; keyboard/pointer input also needs PostEvent | Blocked: helper lacks Accessibility/PostEvent; owner action required. Not launched, 0 selected/executed |
+| Paper MCP interaction measurements                                                     | Yes                                              | Blocked by the same helper permissions; no fresh measurement                                            |
+| Windows / Win32 matching-OS contracts                                                  | Windows host required                            | Not run on this macOS host                                                                              |
+
+The driver evidence ledger at
+`packages/agentic/desktop-driver/references/current-status.md`, section
+"F15 non-AX macOS supporting evidence — 2026-11-12",
+records the exact commands, signing requirement, source/artifact digests,
+counts, and cleanup. Machine-local artifacts are under
+`artifacts/desktop/f15-20261112/`, including `helper-build.json`,
+`doctor.json`, `signed-self-test.log`, and `native-contracts.log`.
+All commands exited and subsequent process inspection found no surviving
+test/helper children. No Storybook, Metro, driver service, or MCP session was
+started for these mainline checks, and no privacy settings changed.
+These are supporting helper contracts, **not Fabric/Paper requalification**;
+the remaining acceptance matrix and historical evidence are unchanged.

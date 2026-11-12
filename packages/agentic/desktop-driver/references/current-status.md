@@ -472,3 +472,54 @@ after the disconnect, so fresh-preview fencing remains Partial. The first
 probe timed out after 10 seconds; bridge retirement occurred about 19 seconds
 after injection. A later attempt waited for retirement and retained the
 same Partial result. Physical Ctrl+C and DPI changes were not exercised.
+
+## F15 non-AX macOS supporting evidence — 2026-11-12
+
+Source `505a2187b0a2451aed7081c9260b343d55742f93`; macOS 27.2.1
+(26B131), arm64 (`sw_vers`). App: `FurnDesktopDriverHost.app` and
+process-identity contract children, not Storybook. Renderer: N/A.
+Feasibility was recorded before execution in the machine-local ignored
+artifact `artifacts/desktop/f15-20261112/feasibility.md`.
+
+All native commands ran serially through the machine-wide native lock.
+From the repository root, the shared environment was:
+
+```sh
+export FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY="FURN Desktop Driver Development"
+export FURN_DESKTOP_DRIVER_CACHE_ROOT="$PWD/artifacts/desktop/f15-20261112/native-cache"
+```
+
+| Command / selection                                                                                                                                                          | Passed / failed / skipped                                                                                                     | Cleanup / artifact locator                                                                         |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `yarn workspace @fluentui-react-native/desktop-driver exec desktop-driver --reporter json build-driver --platform macos`                                                     | Passed build and signature verification; 0 tests selected                                                                     | Build exited; `artifacts/desktop/f15-20261112/helper-build.json` and `helper-build.stderr`         |
+| `yarn workspace @fluentui-react-native/desktop-driver exec desktop-driver --reporter json doctor --platform macos --permissions`                                             | Passed diagnostic invocation; 0 tests selected. Accessibility=false, PostEvent=false, ScreenCapture=true; no prompt requested | Diagnostic helper exited; `artifacts/desktop/f15-20261112/doctor.json` and `doctor.stderr`         |
+| Signed helper `--self-test`, resolved from `helper-build.json`; exact invocation below                                                                                       | 448 / 0 / 0 checks, including 8 strict-clear refusal/negotiation assertions                                                   | Helper exited; `artifacts/desktop/f15-20261112/signed-self-test.log` and `signed-self-test.stderr` |
+| `FURN_NATIVE_DRIVER_TEST=1 yarn workspace @fluentui-react-native/desktop-driver test --runInBand nativeDriver.test applicationIncarnation.contract serviceIdentity.contract` | 27 / 0 / 15 tests; 3 passed suites, 2 platform-skipped suites; default TMPDIR                                                 | Test/helper children exited; `artifacts/desktop/f15-20261112/native-contracts.log`                 |
+
+The stable-signed self-test invocation retained the selected artifact as data,
+with a 120-second subprocess timeout:
+
+```sh
+python3 -c 'import json,subprocess; from pathlib import Path; root=Path("artifacts/desktop/f15-20261112"); artifact=json.loads((root/"helper-build.json").read_text()); print("helper="+artifact["artifactId"]); result=subprocess.run([artifact["executablePath"],"--self-test"],stdout=(root/"signed-self-test.log").open("w"),stderr=(root/"signed-self-test.stderr").open("w"),timeout=120); print("signed-self-test exit="+str(result.returncode)); raise SystemExit(result.returncode)'
+```
+
+Stable helper artifact:
+`bdc07c7c4333eeef6cf5da683128591da0564cf978cf813335b5c63494dc7903`;
+source digest:
+`b1d5233de326faf886c8d6310c2844c6857e4936686dfd493ff898f9e5ec6b9a`.
+Its designated requirement was
+`identifier "com.microsoft.fluentui-react-native.desktop-driver" and certificate leaf = H"ab592605f8619fcaa952b4a2525ae6d41296fdd7"`.
+The doctor reported the same artifact and signing requirement, an unlocked
+console session, and `promptRequested=false`. Its `ready=true` describes
+artifact availability, not permission readiness.
+
+Strict-clear coverage here is limited to four invalid-mechanism refusals,
+semantic/keyboard missing-element refusals with no effect, and probe/hello
+negotiation. **Blocked:** successful real-element clears, Fabric/Paper
+Storybook descriptor lifecycle and smoke, physical input, and Paper MCP
+interaction measurements require Accessibility/PostEvent owner action.
+They were not launched or credited as passes. No privacy settings changed.
+Process inspection after the contracts found no surviving test/helper
+processes from this worktree. This supporting evidence is **not macOS
+requalification**, native positive strict-clear qualification, or a reliability
+window; the existing F15 acceptance gaps remain open.
