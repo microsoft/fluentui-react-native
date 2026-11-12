@@ -912,3 +912,127 @@ unchanged; these local results do not qualify hosted foreground behavior.
   locks. Evidence is in
   `review-r2/process-audit-before-main-removal.json` and
   `review-r2/main-comparison-summary.json`, beneath the review artifact root.
+
+## 2026-11-12 hosted physical-window follow-up for #4500
+
+Hosted job `131453025148` in workflow run `43295615562`, at `867119f1d`,
+failed both unchanged Accordion keyboard callbacks. The retained target tree
+and screenshot show a 480 × 302 window with the preview under Storybook's
+Actions chrome. The driver correctly refused `obscured` before interaction;
+this is not an occlusion-detection defect. The previously persisted local
+932 × 782 frame concealed the hosted geometry.
+
+The harness-only policy in `d949e3c20`, refined by `cc96a3a9d`, establishes
+and freshly verifies a **1024 × 768 logical-point** window for macOS
+`--input physical` traversal and standalone attached callbacks. It uses the
+existing window-rectangle API, queries AppKit's visible screen frames without
+permission prompts, chooses a fitting screen, and centers the window with
+its integral origin clamped inside that frame. No fitting display or an
+unconfirmed rectangle fails before callbacks. There is one resize per
+preparation, not a resize retry. Accessible, compatibility, Windows and Win32
+lanes do not query or request this geometry. Native occlusion checks, input
+mechanisms, runtime layout, story assertions, and test deadlines are unchanged.
+
+### Regression and native evidence
+
+- **Observed baseline:** forcing the owned Fabric window to 480 × 302 and
+  using compatibility `--click-mode physical` reproduced both Actions
+  obstructions, run `f4e7461b-9079-4984-b4f3-ea2591c4d84d`.
+  The application subsequently grew the frame to 515 × 341; the original
+  wrapper's additional exact-480 assertion failed and is retained, not
+  credited as a passing qualification. The two callback failures themselves
+  match the hosted obstruction.
+- **Observed edge-position refusal:** the first origin-preserving clamp
+  requested 1024 × 768 at the visible screen's lower boundary, but the
+  host returned 1024 × 767. Preparation correctly failed before selecting
+  tests, run `b4c5479a-4c71-457f-9c6b-0ecae93a019f`. This motivated centering
+  away from native screen-edge constraints, not accepting a smaller window.
+- **Passed, test-first package checks:** the initial missing-policy
+  regressions failed seven cases; the centering regression then failed
+  three before its fix. `yarn test storyTraversal DesktopStorybookCli`
+  passed **86/86**; package `yarn format`, `yarn lint`, `yarn build`, and
+  ordinary parallel `yarn test` passed, with **353 passed / 4 skipped**.
+  Cases cover physical-only preparation before traversal/callbacks,
+  negative-origin and fitting secondary displays, off-screen persisted
+  frames, undersized displays, rejected geometry, and owned-session cleanup.
+- **Passed, signed native preflight:** Accessibility and PostEvent were
+  true; no prompts or privacy changes were requested. The production
+  screen query returned a visible logical frame of
+  `{x:0,y:33,width:1728,height:999}` during preflight.
+- **Passed, unchanged helper at `d949e3c20`:** fresh
+  `swift build -c release -Xswiftc -warnings-as-errors` with external scratch
+  and `--self-test` passed **463/463**; the signed Driver
+  `FURN_NATIVE_DRIVER_TEST=1 yarn test --runInBand` passed **75 suites /
+  1,241 tests**, with **6 suites / 47 tests skipped** for platform boundaries.
+  The native source digest remains
+  `dd3f28bb27bea9349bbf6e26955b8fdaf34c88eeb37b6baa7e0e1fd99552b93b`
+  at `cc96a3a9d`; the later change is confined to the Node harness, tests,
+  and documentation. Standalone-helper module/bridging-header checks are
+  not applicable.
+
+Detailed attempts, red/green package logs, preflight, and native checks are
+retained under
+`artifacts/desktop/f16-macos-physical/hosted-4500-20261112T214852Z/`.
+No missing-lease harness attempt or malformed diagnostic command is credited
+as product validation.
+
+### Current-head real-app qualification and remaining limits
+
+The GUI checks below use production Node source
+`cc96a3a9dade18f373546f2a72edbf20a41e5461`, the same signed helper, and
+prebuilt-only helper resolution with no disabled input features. All native,
+GUI, physical-input and aggregate commands used the shared native lock.
+
+| Check                                                                                    | Result                                                                                                          | Run                                    |
+| ---------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
+| Fabric bundle, renderer prep and native build                                            | Passed; consuming native/runtime sources unchanged by the later Node-only centering commit                      | `da613def-aace-4786-a5ad-396abcd06110` |
+| Fabric unchanged Accordion callbacks, forced off-screen 480 × 302 window                 | Passed, **2/2**; final window **1024 × 768**, completely inside the visible display                             | `6ef69ad4-8207-4ed1-97e6-a05be4ba7d9e` |
+| `yarn storybook smoke --macos --mode stories-and-tests --input physical --reporter json` | Passed, **343 passed / 3 declared unsupported**                                                                 | `cfdeb316-5a15-45ca-9b8b-b034ce312142` |
+| Paper bundle, renderer prep and native build                                             | Passed                                                                                                          | `a915fd88-3518-4266-94a1-6f78bb66a6cc` |
+| Paper forced-small-window callback preparation                                           | Failed before resize or callback selection: **screen locked**; owned app, helper and Metro cleaned              | `716bf45c-c7a0-47e1-891c-4a62d4510792` |
+| Paper complete physical smoke                                                            | **Not run:** locked console; do not attribute the earlier `f34c0686a` Paper passes to this Node-policy revision | None                                   |
+| Accessible lanes, Windows and Win32 native hosts                                         | **Not run:** physical-only macOS harness change; unit regressions retain their no-query/no-resize behavior      | None                                   |
+
+The passing forced-small Fabric run read back
+`{x:352,y:150,width:1024,height:768}` inside the freshly queried visible
+`{x:0,y:33,width:1728,height:1001}` frame. Both passing Fabric runs had zero
+failed, skipped, quarantined, incomplete, retried or flaky cases and empty
+owned-survivor lists. Canonical run records remain under
+`apps/storybook/artifacts/desktop/<run-id>/`; the adjacent qualification
+wrappers preserve source identity, frame before/after, and cleanup.
+
+Paper's attempt at **23:00 UTC** could not attach to its owned application.
+Nonprompting doctors at **23:06** and **23:11 UTC** confirmed
+`screenLocked:true` while Accessibility and PostEvent remained `true`.
+No input was sent, no unlock or privacy change was attempted, and no
+current-head Paper GUI success is claimed. Its fresh bundle/prep/native
+build succeeded independently of this console limitation.
+
+### Follow-up repository gate and cleanup
+
+- **Failed, required plain gate:** one locked
+  `yarn clean-lage-cache && yarn lage buildci`, with `TF_BUILD` and native
+  test overrides unset, failed the unchanged
+  `packages/agentic/storybook-desktop/src/testing/wdioRunner.test.ts`
+  fixture's **7,000 ms worker deadline**.
+  The Storybook test task reported **352 passed / 1 failed / 4 skipped**.
+  No timeout, fixture, runner, or assertion was changed. The retained
+  untouched-main cold comparison in the preceding section already shows
+  this same worker-deadline failure; no new main comparison or serial
+  acceptance is claimed for this follow-up.
+- **Passed, focused diagnostic:** package `yarn test wdioRunner` passed
+  **1/1**, in addition to the complete **353 passed / 4 skipped** package
+  run before native qualification. This does not accept the failed
+  aggregate gate. Logs are `plain-buildci.log` and
+  `wdio-runner-focused-after-gate.log` beneath the follow-up evidence root.
+- **Passed, cleanup:** after aggregate cancellation, **46** still-draining
+  owned test-process IDs were recorded; all settled naturally before the
+  bounded follow-up check, without termination. The final locked,
+  exact-worktree argv/CWD audit at **23:11:33 UTC** found no owned app,
+  Metro, helper, compiler, test worker or fixture survivors and no
+  unattributed live candidate with an unreadable CWD
+  (`final-native-process-audit.json`). The audit command completed and
+  released its lock; no additional GUI runs were attempted while locked.
+- **Passed:** changed Markdown link checks, root `yarn oxfmt --check`,
+  `yarn check-agent-instructions`, `git diff --check`, and
+  `yarn change:check` after committing the changeset.
