@@ -84,6 +84,24 @@ The coordinator:
 SwiftPM `.build`, DerivedData, editor files, and other generated output never
 participate in source identity or staging.
 
+### Application ownership fixture
+
+The native ownership contracts use a small AppKit application, independent of
+Storybook and React Native. From this package, build it into an ignored
+artifact directory:
+
+```sh
+node native/macos/fixtures/build.cjs artifacts/application-fixture
+```
+
+The command prints the verified bundle/executable identity and window title.
+The executable accepts `--title <exact-window-title>`; its Increment button
+and counter have accessibility identifiers `ownership-fixture-increment` and
+`ownership-fixture-count`. Use the normal native host launch API, or launch the
+exact executable externally for attach-preservation tests. The test owner must
+stop only that process incarnation. The fixture is supporting native evidence,
+not Fabric/Paper renderer qualification.
+
 ## Signing
 
 ### Stable development signing
