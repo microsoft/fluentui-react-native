@@ -3889,7 +3889,8 @@ void TestDriverObservation() {
     return driver.Execute("releaseElements", params, token).result;
   };
   const auto released = [&](std::vector<std::string> named) {
-    const json::Value* count = release(std::move(named)).Find("released");
+    const json::Value result = release(std::move(named));
+    const json::Value* count = result.Find("released");
     return count == nullptr ? -1 : count->AsInteger(-1);
   };
   Check(released({otherButtonId, "element-unknown"}) == 1 && released({otherButtonId}) == 0,
