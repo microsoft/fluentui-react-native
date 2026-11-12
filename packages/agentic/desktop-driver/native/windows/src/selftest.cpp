@@ -1537,6 +1537,52 @@ void TestRegisteredToolWindowLiveness() {
   applications.CloseApplication(leaseId, token);
 }
 
+void TestClosingWindowListing() {
+  WindowThread windows;
+  const HWND primary = windows.Create(L"FurnSelfTestClosingListPrimary", L"Listing primary");
+  const HWND popup = windows.Create(L"FurnSelfTestClosingListPopup", L"Closing popup", DefWindowProcW, primary);
+  Driver driver;
+  const CancellationToken token;
+  json::Value request = json::Value::Object();
+  request.Set("lease", driver.AdoptWindowForTesting(primary, L"Listing primary"));
+  const CommandResult initial = driver.Execute("windows", request, token);
+  std::string primaryId;
+  std::string popupId;
+  for (const json::Value& info : initial.result.Items()) {
+    if (info.StringField("title") == "Listing primary") primaryId = info.StringField("id");
+    if (info.StringField("title") == "Closing popup") popupId = info.StringField("id");
+  }
+  Check(!primaryId.empty() && !popupId.empty(), "the closing-window test initially lists both native windows");
+  if (primaryId.empty() || popupId.empty()) return;
+
+  driver.UseTestWindowSummaryHook([&](HWND window) {
+    if (window == popup) windows.Destroy(popup);
+  });
+  CommandResult listed;
+  const std::string code = FailureCode([&]() { listed = driver.Execute("windows", request, token); });
+  Check(code == "none" && listed.result.IsArray() && listed.result.Items().size() == 1 &&
+            listed.result.Items().front().StringField("id") == primaryId,
+        "a secondary closing after enumeration does not fail the live-window listing");
+
+  driver.UseTestWindowSummaryHook({});
+  json::Value closed = json::Value::Object();
+  closed.Set("windowId", json::Value::String(popupId));
+  Check(FailureCode([&]() { driver.Execute("getWindowRect", closed, token); }) == kErrorNoSuchWindow,
+        "the omitted closed secondary still rejects direct window commands");
+
+  driver.UseTestWindowSummaryHook([](HWND) {
+    throw HelperError(kErrorNoSuchWindow, "Injected geometry failure for a live window.");
+  });
+  Check(FailureCode([&]() { driver.Execute("windows", request, token); }) == kErrorNoSuchWindow,
+        "a geometry error for a still-live window is not mistaken for closure");
+  driver.UseTestWindowSummaryHook([&](HWND window) {
+    windows.Destroy(window);
+    throw HelperError(kErrorAutomationFailed, "Injected unrelated listing failure.");
+  });
+  Check(FailureCode([&]() { driver.Execute("windows", request, token); }) == kErrorAutomationFailed,
+        "closing a window does not suppress an unrelated listing error");
+}
+
 void TestDriverWindowEvents() {
   WindowThread windows;
   const HWND window = windows.Create(L"FurnSelfTestDriver", L"Driver window");
@@ -3951,6 +3997,7 @@ int RunSelfTest() {
   TestAttachedCloseKeepsQuarantine();
   TestWindowEventHooks();
   TestRegisteredToolWindowLiveness();
+  TestClosingWindowListing();
   TestDriverWindowEvents();
   TestInputEnvironment();
   TestInjectionIntegrity();

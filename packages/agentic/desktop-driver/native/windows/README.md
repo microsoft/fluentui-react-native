@@ -286,6 +286,12 @@ later listing. Exhausting discovery never removes an already-admitted window.
 The probe retains no element records or whole-subtree cache and never
 quarantines the session; cancellation still propagates.
 
+If a window closes after enumeration but before its geometry is serialized,
+the listing omits it and still returns the other live windows. Only a
+`no-such-window` failure confirmed by native handle liveness is absorbed;
+failures for live handles and unrelated errors still propagate. Direct
+commands for the closed window continue to fail as `no-such-window`.
+
 `windowEvents.publication.windows[].listed` includes admitted tool popups
 using those same native identity/ownership checks. It does not repeat UIA
 discovery or report an admitted live popup as `listed: false, tracked: true`.

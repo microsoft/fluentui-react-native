@@ -342,6 +342,9 @@ json::Value Driver::ProbeResult(const json::Value& params) {
 }
 
 json::Value Driver::WindowSummary(const WindowInfo& info) {
+  if (windowSummaryHook_) {
+    windowSummaryHook_(info.window);
+  }
   const WindowMetrics metrics = MeasureWindow(info.window);
   json::Value value = json::Value::Object();
   value.Set("id", json::Value::String(info.id));
@@ -638,7 +641,14 @@ CommandResult Driver::ExecuteCommand(const std::string& command, const json::Val
              [&](HWND window, DWORD processId, ULONGLONG expiresAt) {
                return automation_.HasWindowContent(window, processId, expiresAt, token);
              })) {
-      result.result.Append(WindowSummary(info));
+      try {
+        result.result.Append(WindowSummary(info));
+      } catch (const HelperError& error) {
+        // A popup can finish closing after enumeration, before its geometry is read.
+        if (error.code() != kErrorNoSuchWindow || IsWindow(info.window) != FALSE) {
+          throw;
+        }
+      }
     }
     return result;
   }

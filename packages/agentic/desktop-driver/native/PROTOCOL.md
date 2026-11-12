@@ -265,6 +265,12 @@ uses the whole budget. A read deadline does not quarantine mutations, and
 cancellation is still honored. Publication diagnostics mark admitted live
 popups as both `listed` and `tracked` without another content probe.
 
+If a Windows/Win32 window closes between enumeration and geometry
+serialization, `windows` omits it instead of failing the remaining live
+listing. This suppresses only `no-such-window` when native liveness confirms
+the handle has gone; unrelated errors and failures for still-live handles
+propagate. Direct commands for the closed window still fail.
+
 This is internal Windows admission/liveness policy: no request field, response
 shape, command, or FDR1 1.0 constant in `protocol.json` changes.
 
