@@ -266,6 +266,73 @@ nativeTest('supervisor launch survives two real sessions, records native owner/a
   });
 });
 
+nativeTest('read-only discovery sees newly launched applications and refuses new duplicate bundle identities', async () => {
+  const observer = nativeHost(application());
+  let child: ChildProcess | undefined;
+  let identity: DesktopApplicationIdentity | undefined;
+  let first: NativeDesktopHost | undefined;
+  let duplicate: ChildProcess | undefined;
+  let duplicateIdentity: DesktopApplicationIdentity | undefined;
+  let second: NativeDesktopHost | undefined;
+  try {
+    await expect(observer.inspectApplication({ ...target, host: observer })).rejects.toMatchObject({
+      data: { reason: 'no-matching-application' },
+    });
+    child = spawn(fixture.executable, [], { stdio: 'ignore' });
+    await once(child, 'spawn');
+    const childIdentity = await describeMacOSService({ artifact, pid: child.pid! });
+    identity = captureDesktopApplicationIdentity(
+      { id: 'first', ownership: 'attached', processId: child.pid!, processStartedAt: childIdentity.startedAt },
+      'macos',
+    );
+    first = nativeHost(desktopApplicationIdentityDescriptor(identity, application()));
+    await first.attach({ ...target, host: first });
+    await expect(observer.inspectApplication({ ...target, host: observer })).resolves.toMatchObject({
+      processId: identity.processId,
+      processStartedAt: identity.processStartedAt,
+    });
+    duplicate = spawn(fixture.executable, [], { stdio: 'ignore' });
+    await once(duplicate, 'spawn');
+    const nativeIdentity = await describeMacOSService({ artifact, pid: duplicate.pid! });
+    duplicateIdentity = captureDesktopApplicationIdentity(
+      { id: 'duplicate', ownership: 'attached', processId: duplicate.pid!, processStartedAt: nativeIdentity.startedAt },
+      'macos',
+    );
+    second = nativeHost(desktopApplicationIdentityDescriptor(duplicateIdentity, application()));
+    await second.attach({ ...target, host: second });
+    await expect(observer.inspectApplication({ ...target, host: observer })).rejects.toMatchObject({
+      code: 'ambiguous-target',
+    });
+    await second.dispose();
+    await stopFixtureChild(duplicate, duplicateIdentity);
+    await expect(observer.inspectApplication({ ...target, host: observer })).resolves.toMatchObject({
+      processId: identity.processId,
+      processStartedAt: identity.processStartedAt,
+    });
+    await first.dispose();
+    await stopFixtureChild(child, identity);
+    await expect(observer.inspectApplication({ ...target, host: observer })).rejects.toMatchObject({
+      data: { reason: 'no-matching-application' },
+    });
+    evidence.push({
+      case: 'fresh-read-only-discovery-and-duplicate-bundle-refusal',
+      state: 'passed',
+      processId: identity.processId,
+      processStartedAt: identity.processStartedAt,
+      duplicateProcessId: duplicateIdentity.processId,
+      duplicateProcessStartedAt: duplicateIdentity.processStartedAt,
+    });
+  } finally {
+    const cleanup = [
+      first?.dispose(),
+      observer.dispose(),
+      duplicate ? cleanupExternalFixture(duplicate, duplicateIdentity, [second?.dispose()]) : second?.dispose(),
+    ];
+    if (child) await cleanupExternalFixture(child, identity, cleanup);
+    else await Promise.all(cleanup);
+  }
+});
+
 nativeTest('independent services exclude the exact external application and preserve it after both cleanups', async () => {
   const child = spawn(fixture.executable, [], { stdio: 'ignore' });
   let identity: DesktopApplicationIdentity | undefined;

@@ -650,9 +650,7 @@ final class ApplicationManager {
         "Attaching without a lease requires an exact \"windowTitle\" in the application descriptor."
       )
     }
-    // The workspace list and isTerminated are refreshed by the main run loop, which this helper never runs, so a
-    // process that already exited can stay listed. Confirm each candidate with the kernel.
-    let candidates = NSWorkspace.shared.runningApplications.filter { application in
+    let candidates = try runningApplications().filter { application in
       guard !application.isTerminated, processIsAlive(application.processIdentifier) else {
         return false
       }
@@ -808,6 +806,18 @@ final class ApplicationManager {
       try fail(ErrorCode.attachFailed, "The application process start identity could not be read.")
     }
     return Attachment(running: running, windowTitle: windowTitle, startedAt: startedAt)
+  }
+
+  private func runningApplications() throws -> [NSRunningApplication] {
+    let processIDs: [pid_t]
+    do {
+      processIDs = try ServiceIdentity.ownProcesses()
+    } catch {
+      try fail(ErrorCode.automationFailed, "The current application processes cannot be enumerated.",
+        data: ["reason": "application-discovery-unavailable"])
+    }
+    // NSWorkspace's cached array misses new applications without a main run loop. Resolve each live PID instead.
+    return processIDs.compactMap { NSRunningApplication(processIdentifier: $0) }
   }
 
   /// Releases a lease. A launched application is proven exited first, so a process that will not die keeps its lease

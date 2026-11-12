@@ -22,3 +22,7 @@ Read-only macOS application identity inspection shares descriptor verification
 without acquiring a controlling lease or disturbing session window records.
 Storybook bridge-epoch recovery uses it on the embedded helper while real
 launch/attach operations retain cross-service exact-incarnation exclusion.
+
+Discover live macOS application candidates from kernel PIDs rather than the
+main-run-loop-dependent workspace cache, so read-only inspection sees newly
+launched apps and still refuses duplicate identities.

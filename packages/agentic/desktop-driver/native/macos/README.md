@@ -223,12 +223,12 @@ resident memory for the life of the session (about 25 KB for a `probe`, 80 KB
 for a `tree`, and 250 KB for a 500-element `observe`). A new thread that serves
 requests must drain a pool per request too.
 
-The main run loop is also what refreshes `NSWorkspace.runningApplications` and `NSRunningApplication.isTerminated`.
-Measured without it, a launched application registers within about 0.2 s, but after the process was killed
-`isTerminated` stayed false and the workspace list kept the dead process for the 15 s the probe watched; with the
-run loop pumped both updated within 0.25 s. Registration therefore needs no run loop, while exit never trusts that
-state: termination verification and lease checks read the kernel through `ApplicationIncarnation`, and attaching
-without a lease drops listed processes the kernel no longer knows.
+The main run loop refreshes `NSWorkspace.runningApplications` and `NSRunningApplication.isTerminated`.
+Without it, the workspace's cached array can omit a newly launched application and retain an exited one.
+Descriptor-based discovery therefore enumerates the current user's kernel PIDs
+and constructs `NSRunningApplication` instances directly instead of trusting that cached array.
+Enumeration failure refuses discovery; exact window and uniqueness checks still apply.
+Termination verification and lease checks independently read the kernel through `ApplicationIncarnation`.
 
 ## Application and window identity
 

@@ -360,7 +360,7 @@ enum ServiceIdentity {
   }
 
   /// Lists the processes whose effective user is the current user.
-  private static func ownProcesses() throws -> [pid_t] {
+  static func ownProcesses() throws -> [pid_t] {
     let user = getuid()
     var capacity = Int(proc_listpids(UInt32(PROC_UID_ONLY), user, nil, 0)) / MemoryLayout<pid_t>.size
     for _ in 0..<maximumTableAttempts {
