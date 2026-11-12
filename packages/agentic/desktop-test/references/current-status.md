@@ -752,3 +752,132 @@ not physical Ctrl+C. Both owned app/service processes exited, the recorded
 ports were free, and the per-user claim and default descriptor were absent.
 The separate `serve --agent` interrupt limitation above is fixed but not yet
 requalified on Windows.
+
+## Windows Fabric and Win32 Paper — #4441 connected-session qualification — 2026-11-12 UTC
+
+**Observed baseline:** `505a2187b0a2451aed7081c9260b343d55742f93`,
+Windows 11 Enterprise build 26300 x64, Node 26.13.0. Native/GUI work ran
+serially in the W3 campaign, 14:50:24–15:22:51 UTC, under the machine-wide
+lock. Every before/after physical gate reported an active unlocked
+**remote RDP** session. The attached display was one 1728 x 1084,
+origin-zero, 96-DPI / 100% monitor; no display setting changed.
+
+The registered Fabric native build was `bdeb0b291`; the compared app/native
+sources differed only in native-core version/changelog metadata, not Windows app/native
+implementation. **Inferred:** reuse was valid. Own-checkout Metro,
+generated manifests and protected bundles were used. Paper ran the prebuilt
+REX 0.81.1 host. Each supervisor matched the newly launched app's exact
+image, start time, title and window before probing it.
+
+### Per-case outcomes
+
+These are manual native/descriptor probes, not selected authored suite
+cases. **Observed** results must not be inferred from supervisor exit alone:
+
+| Case                                                                | Windows Fabric packaged                                                                                                                                  | Win32 Paper REX                                                                                                                                                                               |
+| ------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Matching-OS F16 native contracts                                    | Passed: shared Windows-provider/fixture run, 3 suites / 27 tests                                                                                         | Same shared run includes the real Win32 fixture; 2 macOS-only build cases skipped, not passes                                                                                                 |
+| Nonempty RN physical keyboard clear                                 | Passed, keyboard receipts 1 -> 2                                                                                                                         | Passed, keyboard receipts 1 -> 2                                                                                                                                                              |
+| Initially-empty accessible clear                                    | Passed, semantic-clear receipt                                                                                                                           | Passed, semantic-clear receipt                                                                                                                                                                |
+| Readonly accessible clear refusal                                   | Passed, effect none, receipts unchanged                                                                                                                  | Passed, effect none, receipts unchanged                                                                                                                                                       |
+| Separately registered secondary observation / interaction / cleanup | Passed: one exact new opaque handle, complete 11-node observation, unique control, physical-pointer click, `focus: confirmed`, then popup handle removed | Not run / partial: popup shown, but no separately registered handle                                                                                                                           |
+| Additional secondary semantic activation effect                     | Failed: applied/accessibility receipt but actual main operation status stayed `Idle`                                                                     | Not run: no registered secondary                                                                                                                                                              |
+| Fresh native preview after lost provider context                    | Not requested                                                                                                                                            | Passed: old preview rejected `ref-region-changed`; fresh unique native preview rejected `story-context-stale`; both effect none, not quarantined; state unchanged and old chrome ref survived |
+| Physical MCP click measurement                                      | Passed: 6 clicks and post-click state checks                                                                                                             | Passed: 6 clicks and post-click state checks                                                                                                                                                  |
+| Minimized capture and explicit restore                              | Passed: unsupported-operation refusal without implicit restore, then valid restored capture                                                              | Passed: same safety contract                                                                                                                                                                  |
+| 200% scale                                                          | Not run: 100% RDP scale; changing it not authorized                                                                                                      | Not run: same                                                                                                                                                                                 |
+| Mixed DPI                                                           | Not run: one attached monitor                                                                                                                            | Not run: same                                                                                                                                                                                 |
+| Negative-origin layout                                              | Not run: one origin-zero monitor; no approved eligible layout                                                                                            | Not run: same                                                                                                                                                                                 |
+| Physical console Ctrl+C                                             | Not run: separate implementation lane owns it                                                                                                            | Not run: same                                                                                                                                                                                 |
+
+The native strict-clear self-test supplies nonempty **semantic** clear
+evidence; the RN semantic endpoint probe started empty. Provider
+keyboard-denial instrumentation is not substituted for the separate real
+RN keyboard deletion. The native run skipped only the two macOS-specific
+build/signing cases.
+
+### Commands and retained evidence
+
+Run from the qualification checkout. `$CampaignTools` is the separately
+managed private campaign helper directory, not committed configuration:
+
+```powershell
+$QualificationRoot = (Get-Location).Path
+$env:FURN_NATIVE_DRIVER_TEST = '1'
+pwsh -NoProfile -File "$CampaignTools\with-native-lock.ps1" `
+  -Lane W3 -Label 'W3 qualification native strict-clear and fixture contracts' `
+  -RequirePhysical `
+  -WorkingDirectory (Join-Path $QualificationRoot 'packages\agentic\desktop-driver') -- `
+  yarn test --runInBand nativeDriver win32Fixture operations.contract
+```
+
+Endpoint lifecycle commands below each ran within the same
+`with-native-lock.ps1 -Lane W3 -RequirePhysical` scope. The local supervisor
+awaited driver readiness, ran the declared bundle stage before app launch,
+then owned probes and cleanup:
+
+```powershell
+node .\artifacts\desktop\w3-qualification\run-endpoint.mjs windows
+node .\artifacts\desktop\w3-qualification\run-endpoint.mjs win32
+node .\artifacts\desktop\w3-qualification\run-endpoint.mjs win32 --fence-only
+node .\artifacts\desktop\w3-qualification\run-endpoint.mjs windows --mcp-only --with-secondary
+node .\artifacts\desktop\w3-qualification\run-endpoint.mjs win32 --mcp-only
+node .\artifacts\desktop\w3-qualification\run-endpoint.mjs windows --secondary-only --modern-only
+node .\artifacts\desktop\w3-qualification\run-endpoint.mjs windows --secondary-only --modern-only --physical-secondary
+```
+
+Artifacts are retained locally under the qualification checkout at
+`artifacts\desktop\w3-qualification\runs\<qualification-id>\`, including
+`qualification.json`, command logs and the named probe JSON. They are not
+published package files. `artifacts\desktop\w3-qualification\qualification-summary.json`
+is the machine-readable matrix.
+
+| Case / endpoint                                 | Qualification ID                       | Probe JSON / driver run                                                                                                       |
+| ----------------------------------------------- | -------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| Clear and minimized, Fabric                     | `5c97fc26-71ef-483c-aa2a-b454d6ff4458` | `descriptor-cases-windows-clear.json`, `descriptor-cases-windows-minimized-capture.json`                                      |
+| Clear, minimized, unregistered secondary, Paper | `22332065-6fa3-4061-a2b6-93f83295ca2e` | `descriptor-cases-win32-clear.json`, `descriptor-cases-win32-minimized-capture.json`, `descriptor-cases-win32-secondary.json` |
+| Fresh-preview fence, Paper                      | `60751352-c158-40a2-b4f9-9251e15fec95` | `descriptor-cases-win32-fence.json`; driver `64d2de39-df69-4a2b-a164-fc842f0ef64e`                                            |
+| MCP physical clicks, Fabric                     | `f188fae5-67c9-47e4-9800-ea584185fed9` | `mcp-click-windows.json`; driver `57d4f6cb-2dc3-4b00-bb95-4331efd8d34b`                                                       |
+| MCP physical clicks, Paper                      | `6d474fd4-61cb-41f6-824e-7a80df68db45` | `mcp-click-win32.json`; driver `918930ba-e498-4e20-ad98-52e4187b5618`                                                         |
+| Secondary semantic failure, Fabric              | `675160f7-e069-413c-a6c8-486de0c37b69` | `descriptor-cases-windows-secondary---modern.json`; driver `a9f2e71e-71ab-40f0-a375-fd6d76a0b971`                             |
+| Secondary physical pass, Fabric                 | `7fbe3b0b-df33-476b-80e3-95b97bf19f02` | `descriptor-cases-windows-secondary---modern---physical.json`; driver `16aac92b-bb36-4742-bd29-01df381d9594`                  |
+
+### Baseline failures, scope and cleanup
+
+**Observed:** Fabric semantic activation targeted the unique native popup
+button and returned applied/accessibility, but six status checks over
+2090 ms and a final native observation remained `Idle`. Main was read
+through its cited root without changing foreground. The same test with
+physical click passed in one attempt / 79 ms. **Inferred:** native
+accessibility-pattern/renderer dispatch may acknowledge without executing
+Pressable `onPress`; no exact pattern trace was captured.
+
+**Observed:** Paper's shown Callout produced a visible, untitled root
+`Net UI Tool Window` with ToolWindow true, but no registered secondary.
+Modern Callout was absent from its catalog. **Inferred:** the provider's
+intentional untitled-toolwindow filter explains the registration gap.
+Both findings are being fixed on this branch; neither is claimed fixed
+by this baseline evidence.
+
+The Win32 fence deliberately invoked the **real** provider's bridge
+retirement while preserving the socket/native preview. In one uninterrupted
+session, old ref `hkbo1` was fenced, fresh unique ref `hkbo3` was fenced
+in the next preview epoch, and chrome ref `hkbo2` remained usable for
+presence checks. This proves injected provider-context loss, not a native
+crash, real network disconnect/reconnect, or chrome mutation.
+
+Earlier missing-catalog/setup failures, invalid probe selectors/facts and
+secondary receipt-only attempts remain in the run history; they are not
+erased by independent case passes. Fabric's final MCP case passed inside
+an enclosing run that failed its separate semantic-secondary assertion.
+Win32 window close hid REX without ending it; the uniquely owned run CLI's
+cooperative stop drained its process tree. This is not physical Ctrl+C
+verification. No other lane's portable test/build workers were stopped.
+
+All owned apps, helpers, Metro/services, sessions and child grants drained.
+Endpoint listeners were absent. Campaign end and both audits **passed**:
+`FURN-AUDIT: no FURN desktop processes found`. Display-layout and console
+qualification remain not run. MCP costs/budgets are recorded in
+`@fluentui-react-native/desktop-driver-mcp/references/current-status.md`;
+Storybook context details are in
+`@fluentui-react-native/storybook-desktop/references/current-status.md`.

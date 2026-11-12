@@ -338,3 +338,99 @@ out before the observed bridge retirement; the subsequent attempt waited for
 retirement. No raw image or grant is retained in this reference. Driver
 shutdown, app cleanup, and the failed Win32 app-run reports are
 recorded in `packages/agentic/desktop-test/references/current-status.md`.
+
+## Windows Fabric and Win32 Paper — #4441 physical MCP click measurement — 2026-11-12 UTC
+
+**Observed:** revision `505a2187b0a2451aed7081c9260b343d55742f93`,
+Windows 11 Enterprise build 26300 x64, Node 26.13.0. Packaged Windows
+Fabric reused the native build at `bdeb0b291` after confirming no native
+implementation differences; Win32 Paper used REX 0.81.1. Metro/catalogs/
+bundles came from the tested checkout. Each run held the W3 campaign and
+machine lock with `-RequirePhysical`. Before/after gates were eligible,
+unlocked **remote RDP**, one 1728 x 1084 monitor at origin zero, 96 DPI /
+100%; this was not console-session qualification.
+
+### Method and missing click cost
+
+Real MCP SDK **1.32.2** stdio connection through the private descriptor and
+native-verified service; tokenizer **gpt-tokenizer 4.1.0 / o200k_base**.
+After selecting `components-checkbox--default`, each endpoint made six
+actual `click` actions, each followed by a checked-state assertion and an
+**unscoped default observe**. Every receipt was applied/physical-pointer;
+no semantic fallback counted. All six state assertions passed and the
+checkbox ended unchecked. Each connection made 23 tool calls, zero error
+responses/readiness rejections, and closed its session. These runs did not
+exercise retries or cancellation.
+
+Discovery serialized the six-tool array using the November 8 baseline method:
+**4,691 tokens / 20,277 UTF-8 bytes (characters)**, once per connection.
+The full `tools/list` result envelope was separately 4,693 tokens / 20,287
+bytes; server instructions added 120 tokens / 591 bytes. Discovery has not
+been omitted from the accounting.
+
+| Measurement, six samples per endpoint                  | Windows Fabric                         | Win32 Paper                            |
+| ------------------------------------------------------ | -------------------------------------- | -------------------------------------- |
+| Click response text, all blocks                        | **99–106 tokens / 313–314 bytes**      | **96–103 tokens / 311–312 bytes**      |
+| Click request JSON, separately                         | 56–63 tokens / 186 bytes               | 57–64 tokens / 186 bytes               |
+| Request + response-text pair                           | 155–169 tokens / 499–500 bytes         | 153–167 tokens / 497–498 bytes         |
+| Click RPC p50                                          | **299.107 ms**                         | **308.003 ms**                         |
+| Click RPC p90 / max                                    | 369.976 ms                             | 318.208 ms                             |
+| Click + checked check + default observe, response text | 1,999–2,005 tokens / 5,537–5,546 bytes | 1,585–1,592 tokens / 5,302–5,309 bytes |
+| Same three RPCs, summed elapsed time                   | 411.849–550.601 ms                     | 431.774–473.477 ms                     |
+| Default observe completeness                           | Incomplete: maxNodes, 13 omitted       | Complete, no truncation                |
+| Default observe emitted / matched / visited            | 100 / 113 / 115                        | 99 / 99 / 124                          |
+
+Response text blocks were independently encoded; request counts encode
+user-facing `JSON.stringify({name, arguments})`, **not** JSON-RPC wire or
+model-billing totals. Opaque identifiers cause normal token variation.
+Percentiles use nearest rank; with six samples p90 is the maximum.
+`rpcElapsedMs` stops immediately after SDK `callTool` resolves, before
+tokenization, excluding service/app startup and discovery. Raw artifacts
+also retain encoding-inclusive elapsed time: p50/max 299.192/370.036 ms
+(Fabric), 308.128/318.281 ms (Paper). Earlier encoding-inclusive samples
+were not silently substituted for this RPC distribution.
+
+Default budgets on both were deadline 3000 ms, maxBytes 12288, maxDepth 24,
+maxNodes 100, maxStringLength 120, maxVisited 1500. No reduced scope or
+budget was used to claim a saving. These six local samples complete the
+previously missing physical-click row; they are not a controlled speedup
+comparison with November 8's `activate` tuple or a platform ranking.
+
+### Commands, evidence and qualification limits
+
+Exact supervisor invocations from the qualification root, inside
+`with-native-lock.ps1 -Lane W3 -RequirePhysical`:
+
+```powershell
+node .\artifacts\desktop\w3-qualification\run-endpoint.mjs windows --mcp-only --with-secondary
+node .\artifacts\desktop\w3-qualification\run-endpoint.mjs win32 --mcp-only
+```
+
+The retained supervisor owns declared Storybook driver/bundle/run commands,
+exact app identity, MCP child connection and cleanup. It is local
+qualification tooling, not a new published CLI surface. Artifacts are
+relative to that checkout:
+`artifacts\desktop\w3-qualification\runs\<qualification-id>\mcp-click-<endpoint>.json`.
+
+| Endpoint | Qualification ID                       | Driver run / MCP session                                                        | Physical session gates, UTC |
+| -------- | -------------------------------------- | ------------------------------------------------------------------------------- | --------------------------- |
+| Fabric   | `f188fae5-67c9-47e4-9800-ea584185fed9` | `57d4f6cb-2dc3-4b00-bb95-4331efd8d34b` / `b739a296-4647-4c34-bb80-a8f898fddab3` | 15:15:13.606–15:15:47.712   |
+| Paper    | `6d474fd4-61cb-41f6-824e-7a80df68db45` | `918930ba-e498-4e20-ad98-52e4187b5618` / `6df40ce1-32db-44d1-a9ba-64cc2dc6ec90` | 15:14:30.979–15:14:57.843   |
+
+Both MCP cases passed independently. Fabric's enclosing run also retained
+a **failed** secondary semantic-effect assertion; its overall exit 1 is
+not relabeled passed. A later exact-secondary physical click passed, but
+semantic activation reproduced applied/accessibility with actual status
+`Idle`. Win32's visible untitled tool-window popup was not separately
+registered. These are **Observed** open gaps being fixed on this branch;
+accessibility-pattern dispatch and the untitled-toolwindow registration
+filter are **Inferred** causes, not proven fixes.
+
+200% was **not run** (100% scale; changes unauthorized), mixed DPI was
+**not run** (one monitor), negative-origin layout was **not run** (only an
+origin-zero monitor), and physical console Ctrl+C was **not run** (separate
+implementation owner). Full per-case native results are in
+`@fluentui-react-native/desktop-test/references/current-status.md`.
+Sessions, applications and owned services drained; the campaign ended and
+pre/post-end audits passed:
+`FURN-AUDIT: no FURN desktop processes found`.

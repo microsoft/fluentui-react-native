@@ -472,3 +472,113 @@ after the disconnect, so fresh-preview fencing remains Partial. The first
 probe timed out after 10 seconds; bridge retirement occurred about 19 seconds
 after injection. A later attempt waited for retirement and retained the
 same Partial result. Physical Ctrl+C and DPI changes were not exercised.
+
+## Windows Fabric and Win32 Paper — #4441 connected-session qualification — 2026-11-12 UTC
+
+**Observed baseline:** `505a2187b0a2451aed7081c9260b343d55742f93`,
+Windows 11 Enterprise build 26300, x64, Node 26.13.0. All native runs held
+the machine-wide campaign/lock; physical gates before and after each run
+reported an active, unlocked **remote RDP** session, not a console session.
+The single attached monitor was 1728 x 1084, origin `(0,0)`, 96 DPI / 100%.
+No display settings changed. The packaged Fabric app's registered native
+build was `bdeb0b291`; comparison of the Windows app project and native-core
+sources to the tested SHA showed only native-core
+version/changelog changes. **Inferred:** native-build reuse was valid.
+Metro, generated catalogs and protected bundles came from the qualification
+checkout. Paper used the prebuilt REX 0.81.1 host.
+
+### Matching-OS F16 clear contracts
+
+F16 is issue #4467, implemented by merged PR #4468,
+`ac20660ff039f4e0dc914706ff24f548610f30aa`. From the qualification checkout,
+with `$CampaignTools` identifying the private campaign helper directory:
+
+```powershell
+$QualificationRoot = (Get-Location).Path
+$env:TEMP = Join-Path $QualificationRoot 'artifacts\native-working'
+$env:TMP = $env:TEMP
+$env:TMPDIR = $env:TEMP
+$env:FURN_NATIVE_DRIVER_TEST = '1'
+pwsh -NoProfile -File "$CampaignTools\with-native-lock.ps1" `
+  -Lane W3 -Label 'W3 qualification native strict-clear and fixture contracts' `
+  -RequirePhysical `
+  -WorkingDirectory (Join-Path $QualificationRoot 'packages\agentic\desktop-driver') -- `
+  yarn test --runInBand nativeDriver win32Fixture operations.contract
+```
+
+**Passed:** 3 suites, 27 tests; **skipped:** 2 macOS-only signed/unsigned
+build cases. This is one shared Windows-provider/Win32-fixture run, not 27
+tests per renderer. The real helper self-test negotiated `strictClear` and
+covered semantic/keyboard mechanism selection and no-dispatch refusal;
+the Windows native provider serves both endpoints. Helper artifact SHA-256:
+`d8ee05e4796fb3aa22f7b5dbf481bd8cdfb0c20b6d5d24676d689dc7900d5b3c`.
+The self-test's keyboard-denial instrumentation is not itself successful
+React Native keyboard deletion.
+
+Separate live endpoint probes **passed** actual nonempty RN keyboard clear
+(keyboard receipts 1 -> 2), accessible clear of an **initially empty**
+TextInput, and readonly accessible clear refusal with effect `none` and
+unchanged receipts. Nonempty semantic removal is native self-test evidence,
+not a claim about the initially-empty RN probe.
+
+### Secondary targeting, capture and remaining gaps
+
+All rows below are **Observed** at the baseline SHA:
+
+| Case                                     | Windows Fabric packaged                                                                                                                                                               | Win32 Paper REX                                                                               |
+| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| Separately registered secondary          | Passed: exact new opaque handle, explicit switch, complete 11-node native observation, unique `modern-callout-focus`, physical-pointer click, `focus: confirmed`, then handle removal | Not run / partial: real Callout shown, but only main registered; no secondary targeting claim |
+| Additional secondary semantic activation | Failed: applied/accessibility on the exact unique button, but six checks / 2090 ms and final native observation stayed `Idle`                                                         | Not run: no registered secondary                                                              |
+| Minimized capture                        | Passed: `unsupported operation`, still minimized, no implicit restore; explicit restore then valid 586 x 793 capture                                                                  | Passed: same refusal/restore contract; restored capture 1010 x 761                            |
+| 200% scale                               | Not run: 100% RDP scale; changing it was not authorized                                                                                                                               | Not run: same                                                                                 |
+| Mixed DPI                                | Not run: only one attached monitor                                                                                                                                                    | Not run: same                                                                                 |
+| Negative-origin layout                   | Not run: only an origin-zero monitor; no approved eligible layout                                                                                                                     | Not run: same                                                                                 |
+| Physical console Ctrl+C                  | Not run: owned by the separate implementation lane                                                                                                                                    | Not run: same                                                                                 |
+
+The semantic failure was reproduced **without** switching foreground back
+to main: main status was read through its explicitly cited native root.
+The same selector and status assertion passed with physical click in one
+attempt / 79 ms. **Inferred:** the renderer/accessibility-pattern dispatch
+path may acknowledge activation without reaching Pressable `onPress`.
+`native/windows/src/automation.cpp` tries several patterns and accepts a
+successful HRESULT; the precise selected pattern was not instrumented.
+An applied receipt alone is not application-level effect proof.
+
+On Win32, exact-process native inventory **observed** a visible, untitled,
+root `Net UI Tool Window` with ToolWindow true. **Inferred:** the deliberate
+untitled `WS_EX_TOOLWINDOW` exclusion in `CollectWindow` explains the missing
+registration. Modern Callout was absent from the actual Win32 catalog.
+No native title/style manipulation was attempted. Both open findings are
+being fixed on this connected-session branch; this entry records the
+unfixed baseline, not successful fix qualification.
+
+Exact endpoint supervisor invocations, each inside the same W3
+`with-native-lock.ps1 -RequirePhysical` wrapper:
+
+```powershell
+node .\artifacts\desktop\w3-qualification\run-endpoint.mjs windows
+node .\artifacts\desktop\w3-qualification\run-endpoint.mjs win32
+node .\artifacts\desktop\w3-qualification\run-endpoint.mjs windows --secondary-only --modern-only
+node .\artifacts\desktop\w3-qualification\run-endpoint.mjs windows --secondary-only --modern-only --physical-secondary
+```
+
+Retained artifacts are relative to that qualification checkout, not shipped
+package files: `artifacts\desktop\w3-qualification\runs\<qualification-id>\`.
+
+| Evidence                                                                          | Qualification ID                       | Report in that directory                                                                                                      |
+| --------------------------------------------------------------------------------- | -------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| Fabric clear / minimized capture                                                  | `5c97fc26-71ef-483c-aa2a-b454d6ff4458` | `descriptor-cases-windows-clear.json`, `descriptor-cases-windows-minimized-capture.json`                                      |
+| Paper clear / minimized capture / missing secondary                               | `22332065-6fa3-4061-a2b6-93f83295ca2e` | `descriptor-cases-win32-clear.json`, `descriptor-cases-win32-minimized-capture.json`, `descriptor-cases-win32-secondary.json` |
+| Fabric semantic failure, driver run `a9f2e71e-71ab-40f0-a375-fd6d76a0b971`        | `675160f7-e069-413c-a6c8-486de0c37b69` | `descriptor-cases-windows-secondary---modern.json`                                                                            |
+| Fabric physical secondary pass, driver run `16aac92b-bb36-4742-bd29-01df381d9594` | `7fbe3b0b-df33-476b-80e3-95b97bf19f02` | `descriptor-cases-windows-secondary---modern---physical.json`                                                                 |
+
+The physical secondary pass does not erase the semantic failure or earlier
+receipt-only/investigation failures. The full matrix and injected Win32
+fresh-preview fence are recorded in
+`@fluentui-react-native/desktop-test/references/current-status.md`; real MCP
+click costs are in
+`@fluentui-react-native/desktop-driver-mcp/references/current-status.md`.
+Exact owned applications, helpers, Metro and service processes drained.
+The campaign ended; pre/post-end audits both exited 0:
+`FURN-AUDIT: no FURN desktop processes found`. No physical Ctrl+C claim is
+made from the supervisor's cooperative programmatic shutdown.
