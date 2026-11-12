@@ -20,6 +20,50 @@ text on macOS. RNmacOS otherwise rejects them unconditionally because its iOS
 element provider is compiled out, which hides every Text label and `testID`
 from accessibility clients.
 
+The root also applies
+`.yarn/patches/react-native-macos-npm-0.81.9-native-props.patch`, a minimal
+backport of MIT-licensed React Native code from
+[upstream commit `923e7ddcaf4d` by OrfeasZ, #52646](https://github.com/facebook/react-native/commit/923e7ddcaf4d2de45ca7dedafbb84c6b87dbffc4).
+The upstream copyright and license in the patched source files remain intact.
+Fabric's window-resize layout can clone animated nodes on the main thread while
+JavaScript replaces their `nativeProps_DEPRECATED` map. The backport guards
+both writers and the cloning reader with one family-owned mutex, copying the
+props before releasing the lock and parsing them afterward. This preserves
+merge precedence without holding the mutex across shadow-tree commits.
+Regenerate Pods and clean-build all native dependencies after changing this
+patch: the family header's layout changes.
+
+The race was exposed while qualifying F16 defect 1's oversized-preview repair
+for physical-click obstruction. Both complete Fabric lanes lost the app in
+the unchanged PGB-006 NativeSemantics window-resize callback. A clean native
+rebuild still failed, and an owned-process AddressSanitizer report recorded
+`BUS` in `folly::dynamic::type()` while `ShadowNode::clone` copied the
+unprotected native-props map during AppKit layout. This is a renderer
+concurrency fix, not a click-through or driver retry workaround. PGB-006 runs
+in the full Fabric physical lane as well as the accessible lane; the original
+Checkbox, keyboard-clear, and Accordion reproductions passed without this
+backport. Exact before/after qualification evidence is in the
+[desktop-driver status ledger](../../desktop-driver/references/current-status.md).
+
+Recorded local evidence on November 12, 2026:
+
+- Before the backport, Fabric full physical run
+  `7bfe3fc7-bcbc-4275-ac5b-b457b66af7d7` and accessible run
+  `aebe42da-fcf5-4482-8eec-3e28401ea50c` failed PGB-006. Clean native
+  rebuild run `5314fc3d-da45-403e-b9bd-e187f0a9284c` still failed.
+  The owned-process report is
+  `artifacts/desktop/f16-macos-physical/fabric-progress-asan-report.86816`.
+- After the backport, fresh Pods and a clean Fabric native build retained
+  AddressSanitizer and passed the same forced-resize callback **1/1**, run
+  `61d2dce4-5980-49b9-a727-412da47fca71`. Native Core's Apple module and
+  Office-style bridging-header probe passed **3/3**. The build, callback,
+  sanitizer linkage, and probe log is
+  `artifacts/desktop/f16-macos-physical/native-props-clean-build-green.log`.
+- This native build evidence is for macOS Storybook. The macOS FluentTester
+  host and any other native application consuming the root resolution were
+  **not built** in this local check; the Apple probe is not an Office host
+  application build.
+
 These fixes belong in RNmacOS, not in a MenuItem-specific native host or a
 JavaScript accessibility-value workaround. The patch is used by this repository's
 native hosts; publishing native-core or components does **not** install it in a

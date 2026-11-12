@@ -35,9 +35,12 @@ issue or pull request; compilation and skipped cases are not native qualificatio
 
 ## RNmacOS upstream replacement
 
-- **Outcome:** consumers receive the macOS accessibility fixes without this repository's RNmacOS patch.
+- **Outcome:** consumers receive the macOS accessibility and native-props synchronization fixes without this repository's RNmacOS patches.
 - **Current state:** the [repository-local patch](rnmacos-patch.md) is applied only to this repository's native hosts;
   publishing native-core or components does not install it in a consumer.
 - **Done when:** the fixes land upstream or in an equivalent consuming-renderer integration, and the same native cases
   pass against that replacement before the patch is removed. Checked-state actions, AX relationships, and VoiceOver
   speech remain separate, still-unqualified semantics.
+  The native-props synchronization already has an upstream implementation; remove
+  that backport only after the pinned RNmacOS fork includes it and the animated
+  window-resize regression passes against the replacement.
