@@ -2214,3 +2214,88 @@ mixed Storybook-graph recovery, forced kernel PID recycling, the unobserved
 shared-PID packaged activation race, or a new protected-agent recovery API.
 No macOS renderer claim is made by this Windows campaign. Part of #4447 and
 #4435.
+
+## Windows Fabric and Win32 Paper — recovery review follow-up — 2026-11-12 UTC
+
+**Source:** `8b2fb7e67dc5864180c7863ac94fc3c0c3c9d6e3`, following the
+review of `6489386956c0..6bdcde61f`. The branch remains stacked on #4492 at
+`6489386956c0485cb91b478a8f4adc4828f4178b`; the base decision recorded in
+the preceding Windows sections is unchanged. No F11-owned file was changed
+for these fixes; no rebase, dependency-branch write, push, or PR occurred.
+
+**Implemented:** parsing, target validation and native old-owner probing are
+read-only and precede recovery-barrier creation. The original claim's file
+identity and exact contents are rechecked under the barrier before any
+application cleanup. A versioned `.recovery-v2` barrier atomically publishes
+the recoverer's verified native PID/start in a unique empty owner directory.
+An empty versioned root authorizes no cleanup. A later native recovery may
+retire unchanged pins only after proving their recoverers exited or their
+PIDs were reused, even if the old claim was already removed. Live, unknown,
+malformed and legacy unowned barriers remain fenced. Replacement directories
+detected during probing/cleanup are never adopted or removed.
+
+The paired native change settles an application's reused recorded PID as an
+exited incarnation without signalling its replacement. A matching application
+start still requires full identity and application-control exclusion; an
+unreadable start remains fenced. Prior native results that expected stale-start
+recovery rejection are historical, not qualification of this corrected behavior.
+
+**Observed test-first evidence:** focused tests on pre-fix `6bdcde61f` produced
+**9 failed / 31 passed**: a barrier appeared during the live-owner probe, a
+foreign target caused a temporary barrier, a changed claim inherited recovery
+authority, and interrupted barriers could not be reconciled. Ignored
+`artifacts/desktop/f10w/review-20261112/barrier-red.log` retains those failures.
+After the fixes and additional publication/replacement-race coverage:
+
+| Case                                                                           | Outcome                                   |
+| ------------------------------------------------------------------------------ | ----------------------------------------- |
+| No barrier for a live owner or foreign target                                  | **Passed**, portable                      |
+| Claim replaced during barrier acquisition cannot inherit cleanup authority     | **Passed**, portable                      |
+| Verified dead/reused recovery owner can resume partial recovery                | **Passed**, portable                      |
+| Live/unknown owner, malformed pins and legacy barriers stay fenced             | **Passed**, portable                      |
+| Interrupted publication and dead barrier after claim deletion can be retired   | **Passed**, portable                      |
+| Replacement-barrier preservation and original-plus-cleanup error retention     | **Passed**, portable                      |
+| Corrected native application-start semantics and actual killed recoverer       | **Not run** on this source; grant pending |
+| Fabric/REX repeated runs, crash recovery, concurrency and physical mutex rerun | **Not run** on this source; grant pending |
+
+**Observed commands/results:**
+
+- `yarn format`, `yarn lint`, `yarn build` in the owning harness: **Passed**.
+- `yarn workspace @fluentui-react-native/desktop-test test --runInBand windowsOwnership supervisor applicationOwnership`:
+  **Passed**, **77 passed / 21 native skipped**. Windows ownership alone has
+  **42 passing** portable cases. `focused-results.json` and
+  `focused-tests.log` retain the expanded invocation and results.
+- `yarn workspace @fluentui-react-native/desktop-test test --runInBand`:
+  **Passed**, **453 passed / 28 native skipped**, in
+  `harness-results-final.json` and `harness-tests-final.log`. An earlier full
+  attempt caught one replacement-barrier diagnostic regression; it was fixed
+  without weakening foreign-barrier preservation and the full suite rerun.
+- Driver package format/lint/build and **1,234** portable tests: **Passed**.
+  Compile-only Debug/x64 helper rebuild under the machine lock: **Passed**;
+  source digest `3558e8597f6cfe1ee3f4e38dca2137710b80d193a5c30bf946d54065bf8bc153`.
+  See the driver's matching Windows section for its binary receipt.
+
+**Native rerun prepared, not executed:** the actual-endpoint suite now has
+**11** cases. On each endpoint, an injected stale owner/application journal
+keeps the real replacements live and owned. A real child recoverer publishes
+its barrier, fences another startup, and is stopped by an identity-verified
+literal PID. The next supervisor must reconcile that dead barrier and retire
+the absent recorded application without signalling its live replacement.
+Injected start mismatch is not a claim of actual kernel PID recycling.
+The existing five-run, crash-survivor, concurrent-incarnation, and gated
+physical-mutex cases remain. Run under the granted W2 campaign with both
+explicit descriptors and native/physical opt-ins; no native skip is a pass.
+No W2 campaign was started in this phase; no renderer/session qualification is
+claimed. The existing patch changeset remains
+`windows-exact-application-ownership.md`. Final clean-cache `buildci`,
+publication and hosted CI remain **Not run**. Part of #4447 and #4435.
+
+**Observed closeout:** edited-reference/ledger Markdown links, root
+`yarn oxfmt --check` (**3,163 files**), `yarn check-agent-instructions`,
+`yarn change:check`, and `git diff --check` **Passed**. Both retained/rebuilt
+helper hashes were verified. The concurrent audit initially observed only
+the portable formatter's two Node processes; after they exited, the audit
+reported `FURN-AUDIT: no FURN desktop processes found`. No W2 campaign was
+started and no owned desktop process survives. `validation-summary.json`
+and `closeout-audit.log` retain the ignored phase receipts. These portable,
+compile and hygiene results do not replace the pending native rerun.

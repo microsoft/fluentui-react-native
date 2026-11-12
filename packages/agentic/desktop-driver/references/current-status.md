@@ -1034,3 +1034,62 @@ or packaged app from W2 survived. Review, the final one-time clean-cache
 `buildci`, push, draft PR and hosted CI remain **Not run** at this review
 handoff. The three-package patch changeset remains
 `windows-exact-application-ownership.md`. Part of #4447 and #4435.
+
+## Windows Fabric and Win32 Paper — recovery review follow-up — 2026-11-12 UTC
+
+**Scope and provenance:** the review of `6489386956c0..6bdcde61f` found that
+trusted recovery incorrectly rejected an application's reused PID. The fix is
+commit `8b2fb7e67dc5864180c7863ac94fc3c0c3c9d6e3`, still stacked on the
+pinned #4492 dependency `6489386956c0485cb91b478a8f4adc4828f4178b`.
+No rebase, dependency-branch write, push, or PR occurred.
+
+**Implemented, not yet runtime-qualified:** recovery first queries native
+creation time with `PROCESS_QUERY_LIMITED_INFORMATION`. A different time
+settles the recorded incarnation as `exited`, without application control,
+termination rights, or signals to its live replacement. An unreadable start,
+including access denied, remains fenced. A matching start still requires
+complete identity and exclusive control before exact cleanup. Inspection and
+attach continue rejecting stale pins. This supersedes the earlier ledger's
+recovery-specific stale-start refusal; that earlier native run does **not**
+qualify the corrected recovery semantics.
+
+**Observed validation:**
+
+- **Passed:** package `yarn format`, `yarn lint`, and `yarn build`.
+- **Passed:** `yarn workspace @fluentui-react-native/desktop-driver test --runInBand`
+  with native opt-in unset: **1,234 passed, 93 skipped**. Native skips are
+  not native qualification. Expanded arguments/results are retained under
+  `artifacts/desktop/f10w/review-20261112/driver-tests.log` and
+  `driver-results.json`.
+- **Passed:** compile-only Windows x64 Debug `build-driver --platform windows
+--configuration debug --cache-root artifacts/desktop/f10w/n --force
+--reporter json`, through the declared package CLI and machine lock. It
+  waited for W3's campaign, acquired the lock at `2026-11-12T16:50:25Z`,
+  launched/registered no application, and exited zero.
+  Helper source digest:
+  `3558e8597f6cfe1ee3f4e38dca2137710b80d193a5c30bf946d54065bf8bc153`;
+  executable SHA-256:
+  `97f0072ce22449bc5c87c05de259d3e4c46eca666e6135977432b30fa16053b2`.
+  Full invocation/artifact receipt: ignored `helper-build.log` in that evidence
+  directory. Compilation is not native runtime or renderer qualification.
+
+**Not run on this corrected source:** native self-test, the expanded fixture
+recovery case, and Windows Fabric/Win32 Paper consumer recovery. The opt-in
+fixture now expects a stale recorded start to return `exited` while the live
+controlled replacement survives; matching-start session/executable/AUMID
+mismatches and another controller must still fail closed. Consumer Native RED
+against the retained pre-fix helper and provider/consumer GREEN against the
+rebuilt helper await the next granted W2 campaign, under the physical-session
+gate where applicable.
+No W2 campaign or session kind is claimed for this compile/portable phase.
+Final clean-cache `buildci` and publication remain **Not run**. Part of #4447
+and #4435.
+
+**Observed closeout:** root `yarn oxfmt --check` (**3,163 files**),
+`yarn check-agent-instructions`, `yarn change:check`, `git diff --check`, and
+link checks for every edited Markdown reference and both ledgers **Passed**.
+The first concurrently requested audit saw only the portable formatter's two
+Node processes; the idle rerun was clean:
+`FURN-AUDIT: no FURN desktop processes found`. No W2 desktop campaign was
+started. The old and rebuilt helper files both match their recorded SHA-256;
+the old binary remains available for the expected-failing consumer run.
