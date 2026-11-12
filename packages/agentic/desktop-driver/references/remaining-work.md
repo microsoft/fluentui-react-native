@@ -1097,14 +1097,18 @@ passes the real Paper secondary semantic case. See the separate
   with `$env:FURN_NATIVE_DRIVER_TEST = '1'`, including registered-popup
   liveness during failed/hung content probes, the shared discovery deadline
   and deferred retry, and truthful listed/tracked publication.
-- Coordinator review follow-ups and the clean-cache repository aggregate complete.
 
-These runs are paused because session 1 disconnected, locked, and lost its
-input desktop. Resume native/GUI/physical work only with an Active, unlocked
-session and the serialized campaign; physical work additionally requires
-`-RequirePhysical`. No reconnect, session move, or skip-to-pass substitution
-is authorized. Earlier eligible physical results remain evidence for their
-tested revisions, not final-helper reruns.
+The review follow-ups are implemented, and the default-environment clean-cache
+repository aggregate passed all 178 tasks at `cad25f8c5`. Native runs were
+paused when session 1 disconnected, locked, and lost its input desktop.
+After it became Active/unlocked again, the desktop was reserved for W1;
+W3 had only a buildci grant. Resume native/GUI/physical work only with an
+Active, unlocked session, an explicit W3 desktop grant, and the serialized
+campaign; physical work additionally requires `-RequirePhysical`. No
+reconnect, session move, or skip-to-pass substitution is authorized.
+Earlier eligible physical results remain evidence for their tested
+revisions, not final-helper reruns. Authorized draft publication leaves
+these qualification gaps open.
 
 ## 9. Qualification and efficiency gates
 

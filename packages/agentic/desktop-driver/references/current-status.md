@@ -861,3 +861,68 @@ The clean-cache repository aggregate is **Not run** in this review-fix
 segment; W1 holds the buildci-only grant. It remains required before
 publication. The native cases remain in [remaining work](remaining-work.md)
 and #4441; no new native pass, physical success, or issue closure is claimed.
+
+## Windows Fabric and Win32 Paper — default-environment publication validation — 2026-11-12 UTC
+
+**Observed tested source:** `cad25f8c53855c30f2c45f3ce6655f668d09bdc9`.
+The coordinator authorized buildci-only use of the shared W3 lock, followed
+by draft publication. No app, native contract, helper runtime, or physical
+input was launched in this segment. Native opt-in remained unset. TEMP and
+concurrency used their defaults; no workaround, guidance, or timeout edits
+were made.
+
+The exact root validation command, inside the W3 machine-wide lock:
+
+```powershell
+cmd.exe /d /c "yarn clean-lage-cache && yarn lage buildci"
+```
+
+### Failure comparison and unchanged-source retry
+
+- **Failed, first branch attempt:** lock acquired at `18:33:59Z`, released
+  at `18:36:20Z`; 136 tasks succeeded and Storybook desktop tests failed.
+  Four checks failed: the WDIO worker's 7,000 ms deadline, two 10,000 ms
+  diagnostic timeouts, and the server-integration stop result.
+- **Observed cleanup:** Lage exited before its desktop-test descendants.
+  No independent WDIO command had been started outside the lock. The
+  descendants finished naturally; their recorded root PID was already gone
+  when checked. A subsequent process audit exited 0.
+- **Failed on clean baseline too:** the same default-environment command
+  ran on isolated detached `505a2187b0a2451aed7081c9260b343d55742f93`.
+  It reproduced the WDIO deadline and server-stop readiness race; baseline
+  diagnostics passed. There were 138 successful tasks and one failed task.
+  All baseline children drained before the lock released at `18:45:14Z`.
+  The disposable checkout remained clean and was removed afterward.
+- Storybook source/config, desktop-test source/config, scripts, lockfile,
+  and Lage configuration were byte-unchanged between the baseline and this
+  branch. **Inferred:** these load-sensitive failures were not caused by
+  the Windows activation/popup changes; no unrelated source fix was made.
+- **Passed, unchanged-source branch retry:** the lock was acquired at
+  `18:48:10Z`, validation started at `18:48:11Z`, and all **178 tasks passed**
+  at `18:50:53Z` (zero failed, aborted, pending, or skipped Lage tasks).
+  Owned descendant drain completed before lock release. This is a task-level
+  aggregate result, not a claim that opt-in native cases executed.
+
+The local ignored supervisor `run-buildci-and-drain.ps1` runs the exact
+command above and keeps the wrapper alive until owned Node descendants
+finish. It does not alter the test environment or send input. Logs are
+retained beneath `artifacts\desktop\w3-buildci`:
+`buildci-default.log`, `baseline-buildci-default.log`, and
+`buildci-default-rerun.log`.
+
+At `2026-11-12T18:52:16Z`, the post-run audit exited 0:
+`FURN-AUDIT: no FURN desktop processes found`. Shared state reported no
+campaign or holder. W3 started no campaign; its build-only lock was released.
+
+### Publication scope and remaining native work
+
+The final local Fabric semantic case, both final-helper secondary physical
+clicks, and final native contracts remain **Not run**. The earlier disconnect
+prevented them; after the session became Active/unlocked again, the desktop
+was reserved for W1, not a W3 native campaign. No reconnect, session move,
+display change, or native retry occurred here. The current review helper
+remains compile-only as recorded above.
+
+The default-environment aggregate requirement is now satisfied. Draft
+publication does not close #4441 or replace its outstanding native, 200%,
+mixed-DPI, negative-origin, or separate #4491 console-Ctrl+C qualification.
