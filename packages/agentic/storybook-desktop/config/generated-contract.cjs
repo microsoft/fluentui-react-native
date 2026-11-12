@@ -1,4 +1,5 @@
 // Shared by the Node integration and Metro through the trusted parent handoff. Keep this contract independent of React.
+const path = require('node:path');
 const driverManifestVersion = 3;
 const credentialsVersion = 1;
 const handoffVersion = 1;
@@ -173,11 +174,22 @@ function parseHandoff(value) {
   return parse(handoff, value, 'helper handoff');
 }
 
+function generatedPathIdentity(value, paths = path) {
+  const normalized = paths.normalize(value);
+  return paths.sep === '\\' ? normalized.toLowerCase() : normalized;
+}
+
+function sameGeneratedPath(left, right, paths = path) {
+  return generatedPathIdentity(left, paths) === generatedPathIdentity(right, paths);
+}
+
 module.exports = {
   credentialsVersion,
   driverManifestVersion,
+  generatedPathIdentity,
   handoffVersion,
   parseCredentials,
   parseDriverManifest,
   parseHandoff,
+  sameGeneratedPath,
 };

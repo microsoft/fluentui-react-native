@@ -25,6 +25,10 @@ authenticated bridge, Metro, theme, and platform chrome.
 - Driver-backed Metro uses the parent's canonical generated-schema locator and
   pinned private bridge-only data module. Never copy attachment credentials into
   the runtime or trust provenance supplied only by the generated manifest.
+- Windows Metro indexes only the workspace stub and reads the pinned private
+  bridge projection through its digest-keyed transformer. Never add a
+  cross-volume private-source watch folder or copy its nonce into public
+  generated source.
 
 ## Validation
 

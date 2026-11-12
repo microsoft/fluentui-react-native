@@ -9,10 +9,12 @@ import type { NativeDriverArtifact } from '@fluentui-react-native/desktop-driver
 import { validateDesktopCaseOptions, validateDesktopStoryTests } from '@fluentui-react-native/desktop-driver/authoring';
 import {
   credentialsVersion,
+  generatedPathIdentity,
   handoffVersion,
   parseCredentials,
   parseDriverManifest,
   parseHandoff,
+  sameGeneratedPath,
 } from '../../config/generated-contract.cjs';
 
 import type { DesktopStorybookDriverManifest } from './driverManifest.js';
@@ -63,7 +65,7 @@ async function privateStorageRoot(directory: string, artifact: NativeDriverArtif
   // Workspace ancestors can grant other users write/delete access. Let the verified helper choose its known-folder
   // root, not an environment variable, then create an independently protected namespace for this generated directory.
   const parent = await openWindowsPrivateStorage({ artifact });
-  return path.join(parent.root, `storybook-${driverManifestDigest(directory)}`);
+  return path.join(parent.root, `storybook-${driverManifestDigest(generatedPathIdentity(directory))}`);
 }
 
 export function parseStoredDriverManifest(value: unknown): StoredDriverManifest {
@@ -149,7 +151,7 @@ export async function publishDriverManifest(
     await storage.remove(runtimeModule, runtimeContents);
     throw error;
   }
-  if (previous?.credentials.root === root) {
+  if (previous && sameGeneratedPath(previous.credentials.root, root)) {
     for (const recordName of [previous.credentials.name, previous.credentials.runtimeModule]) {
       const previousContents = await storage.read(recordName);
       if (previousContents !== undefined) await storage.remove(recordName, previousContents);
@@ -180,8 +182,8 @@ export async function readDriverManifest(
   const contents = fs.readFileSync(manifestPath, 'utf8');
   const stored = parseStoredDriverManifest(JSON.parse(contents));
   if (
-    (!usesWindowsPrivateStorage(createStorage) && stored.credentials.root !== path.join(directory, '.private')) ||
-    stored.application.leasePath !== path.join(stored.credentials.root, `application-lease.${stored.endpoint}.json`)
+    (!usesWindowsPrivateStorage(createStorage) && !sameGeneratedPath(stored.credentials.root, path.join(directory, '.private'))) ||
+    !sameGeneratedPath(stored.application.leasePath, path.join(stored.credentials.root, `application-lease.${stored.endpoint}.json`))
   ) {
     throw new Error('Desktop Storybook private state must use the generated instance namespace.');
   }
@@ -192,7 +194,7 @@ export async function readDriverManifest(
     if (
       trusted.manifestDigest !== driverManifestDigest(contents) ||
       JSON.stringify(trusted.nativeDriver) !== JSON.stringify(stored.nativeDriver) ||
-      trusted.runtimeModulePath !== path.join(stored.credentials.root, stored.credentials.runtimeModule)
+      !sameGeneratedPath(trusted.runtimeModulePath, path.join(stored.credentials.root, stored.credentials.runtimeModule))
     ) {
       throw new Error('Desktop Storybook manifest does not match the trusted parent handoff.');
     }
@@ -204,7 +206,7 @@ export async function readDriverManifest(
   // Resolving the Windows per-user namespace itself launches a helper. Do it only after the parent binding and
   // executable verification above; an editable manifest must never authorize even this one-shot helper.
   const root = await privateStorageRoot(directory, artifact, createStorage);
-  if (stored.credentials.root !== root) {
+  if (!sameGeneratedPath(stored.credentials.root, root)) {
     throw new Error('Desktop Storybook private state must use the generated instance namespace.');
   }
   const storage = await createStorage(root, artifact);

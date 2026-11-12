@@ -872,15 +872,17 @@ namespace for the canonical generated directory. Reading rederives that
 namespace only after verifying the parent handoff and helper. No environment
 path, editable manifest root, relaxed ACL, or root repair chooses authority.
 Storybook now surfaces the bounded native refusal token. Metro retains its
-workspace roots and also watches the pinned private runtime projection
-outside the workspace.
+workspace roots; this initial fix also watched the private runtime projection,
+which the subsequent CI run exposed as incompatible with cross-volume Windows
+workspaces.
 
 The separate Windows setup job failed four native build/handshake/UIA
 timeout cases, but its existing Windows private-storage native contracts
 passed. This branch does not change Windows helper build, resolution,
 handshake, C++, UIA, or fixture code; setup runs before Storybook publication.
 Runner flakiness is an inference, not a confirmed explanation. The next
-same-branch CI run must establish the result; timeouts were not increased.
+same-branch CI run passed setup, supporting that inference; no timeout or
+native-helper behavior was changed.
 
 **CI-fix portable validation (default `TMPDIR`):** driver format/lint/build/test
 passed (1,222 tests; 66 skipped); Storybook integration passed (386; 4 skipped);
@@ -898,11 +900,51 @@ changeset, and whitespace checks passed. Evidence:
 `apps/storybook/artifacts/f6/ci-fix-buildci.log` and `ci-fix-links.log`.
 The Accessibility-blocked macOS consumer smoke was not repeated.
 
+**Second PR CI follow-up:** run `43150784347` on `ca27c1b0b` passed JS PR,
+all macOS lanes, Windows/Win32 PR, and Windows native-helper setup. All three
+Windows Fabric / Win32 Paper Storybook lanes opened the revised protected
+per-user namespace, then failed before smoke during Metro bundling. The
+workspace was on `D:` and private projection on `C:`; Metro's relative-path
+file map recombined the absolute cross-volume result into `D:\C:\...`.
+This confirms the new namespace works on the hosted runner, not that the
+consumer flow is qualified.
+
+The bridge projection contains the bridge nonce, so it remains protected.
+Windows/Win32 Metro now indexes only the constant workspace stub and supplies
+the pinned private buffer through its supported custom-transformer hook,
+delegating compilation/minification to the consumer's original worker. The
+worker rechecks the digest, and its cache key binds that digest to avoid
+stale nonce transforms. No cross-volume private watch folder or public
+generated source copy is created. macOS private-path behavior is unchanged.
+Windows namespace/path comparisons normalize drive letters, casing, and
+separators without replacing the independent byte-digest trust checks.
+
+**Cross-volume portable evidence:** controlled fixtures cover a `C:` private
+source with a `D:` workspace, case/drive aliases, a wrongly located stub,
+unchanged watch roots, digest tampering, nonce cache invalidation, and
+unrelated-module delegation. The actual consumer Metro worker/Babel/minifier
+also compiled both Windows targets. A bounded full Metro file-map/worker-farm
+fixture built minified Windows and Win32 bundles with the private source
+explicitly excluded from the file map. These JavaScript checks are not native
+Windows qualification. Evidence:
+`apps/storybook/artifacts/f6/crossdrive-real-worker.log` and
+`crossdrive-real-bundle-final.log`.
+
+**Cross-volume package validation (default `TMPDIR`):** format/lint/build/test
+passed for the driver (1,222 tests; 66 skipped), Storybook integration
+(387; 4 skipped), and runtime (37). The final transformer cache-key change
+also passed the 11 controlled Metro cases. Knip now explicitly includes the
+Metro config/worker entrypoints; repository lint, instruction integrity,
+changesets, whitespace, and all 90 link tasks passed. Evidence:
+`apps/storybook/artifacts/f6/crossdrive-{desktop-driver,storybook-desktop,storybook-desktop-runtime}.log`,
+`crossdrive-final-format.log`, `crossdrive-repo-checks.log`, and
+`crossdrive-repo-safeguards.log`.
+
 **Windows/Win32 qualification: pending, not sufficient yet.** Native execution
 is unavailable on this Mac, and `pwsh` is not installed, so PowerShell parser
-validation was not run. The first CI run confirms that Win32 Paper smoke
-reaches the changed protected-storage path, but it does not qualify the
-revised namespace or Windows Fabric flow. A passing same-branch run must demonstrate
+validation was not run. CI confirms both Windows Fabric and Win32 Paper reach
+the changed protected-storage path, but bundling has not yet passed on the
+revised source. A passing same-branch run must demonstrate
 version-3 smoke control, trusted helper verification, protected-DACL lease
 publication/replacement/cleanup, private runtime resolution, and live bridge
 authentication. Portable negative fixtures do not qualify Windows ACL

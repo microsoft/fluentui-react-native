@@ -65,8 +65,13 @@ Metro receives the canonical schema locator through the parent's
 against the handoff, and never reconstructs credentials from public JSON.
 The locator is trusted process configuration, not a manifest-controlled path.
 This keeps the integration CLI peer-free; the runtime remains app-owned.
-Metro explicitly watches the pinned module directory while retaining its
-workspace watch roots, so the per-user Windows projection remains resolvable.
+Windows Metro indexes the constant workspace stub and reads the pinned private
+projection through a digest-keyed transformer, rather than a cross-volume
+watch folder. The bridge nonce is still private source data; it is not copied
+into public generated output. macOS keeps its existing private-module path.
+Windows namespace identities and path comparisons normalize drive letters,
+separators, and casing; manifest and credential byte digests remain the
+independent trust binding.
 The command factory must forward `createPrivateStorage` as well as native
 helper adapters. Portable CLI tests inject storage instead of accidentally
 depending on their host; production credential publication remains unsupported

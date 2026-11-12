@@ -29,14 +29,15 @@ function createDesktopStorybookMetroConfig({ configPath }) {
     throw new TypeError('createDesktopStorybookMetroConfig requires an app-owned Storybook configPath.');
   }
 
-  const runtimeModulePath = writeRuntimeInstanceModule(path.dirname(configPath));
+  const projection = writeRuntimeInstanceModule(path.dirname(configPath));
+  const runtimeModulePath = projection.path;
   const symlinkResolver = MetroSymlinksResolver({
     resolver: 'oxc-resolver',
   });
   const config = makeMetroConfig({
     resolver: {
       resolveRequest: (context, moduleName, platform) => {
-        if (path.resolve(path.dirname(context.originModulePath), moduleName) === runtimeInstanceStub) {
+        if (path.relative(path.resolve(path.dirname(context.originModulePath), moduleName), runtimeInstanceStub) === '') {
           return { type: 'sourceFile', filePath: runtimeModulePath };
         }
         // Storybook's path-based lite-mode mock does not recognize Yarn's virtual pnpm paths.
@@ -57,15 +58,21 @@ function createDesktopStorybookMetroConfig({ configPath }) {
       unstable_allowRequireContext: true,
     },
   });
-  // Windows credentials live outside the workspace in a protected per-user namespace. Metro must watch the pinned
-  // projection's directory to hash/import that module, without losing the workspace folders chosen by makeMetroConfig.
-  config.watchFolders = [...new Set([...(config.watchFolders || []), path.dirname(runtimeModulePath)])];
+  if (!projection.windows) {
+    config.watchFolders = [...new Set([...(config.watchFolders || []), path.dirname(runtimeModulePath)])];
+  }
 
   const storybookConfig = withStorybook(config, {
     configPath,
     liteMode: true,
   });
-  return storybookConfig;
+  if (!projection.windows) return storybookConfig;
+  // Keep the bridge nonce private, but never send a cross-volume source path through Metro's file map.
+  return require('./runtime-transformer.cjs').withPrivateRuntimeProjection(storybookConfig, {
+    digest: projection.digest,
+    modulePath: runtimeInstanceStub,
+    sourcePath: runtimeModulePath,
+  });
 }
 
 function writeRuntimeInstanceModule(projectRoot) {
@@ -75,13 +82,13 @@ function writeRuntimeInstanceModule(projectRoot) {
     if (!process.env.STORYBOOK_GENERATED_CONTRACT || !path.isAbsolute(process.env.STORYBOOK_GENERATED_CONTRACT)) {
       throw new Error('Desktop Storybook Metro requires the trusted parent generated-contract locator.');
     }
-    const { parseDriverManifest, parseHandoff } = require(process.env.STORYBOOK_GENERATED_CONTRACT);
+    const { parseDriverManifest, parseHandoff, sameGeneratedPath } = require(process.env.STORYBOOK_GENERATED_CONTRACT);
     const contents = fs.readFileSync(process.env.STORYBOOK_DRIVER_MANIFEST, 'utf8');
     const manifest = parseDriverManifest(JSON.parse(contents));
     const handoff = parseHandoff(JSON.parse(process.env.STORYBOOK_DRIVER_HANDOFF || 'null'));
     if (
       createHash('sha256').update(contents).digest('hex') !== handoff.manifestDigest ||
-      handoff.runtimeModulePath !== path.join(manifest.credentials.root, manifest.credentials.runtimeModule)
+      !sameGeneratedPath(handoff.runtimeModulePath, path.join(manifest.credentials.root, manifest.credentials.runtimeModule))
     ) {
       throw new Error('Desktop Storybook manifest does not match the trusted parent handoff.');
     }
@@ -91,7 +98,11 @@ function writeRuntimeInstanceModule(projectRoot) {
     ) {
       throw new Error('Desktop Storybook runtime module does not match the trusted parent handoff.');
     }
-    return handoff.runtimeModulePath;
+    return {
+      digest: handoff.runtimeModuleDigest,
+      path: handoff.runtimeModulePath,
+      windows: manifest.endpoint === 'windows' || manifest.endpoint === 'win32',
+    };
   }
   const generatedDirectory = path.join(projectRoot, 'storybook-desktop.generated');
   const runtimeModulePath = path.join(generatedDirectory, 'runtime-instance.js');
@@ -108,7 +119,7 @@ function writeRuntimeInstanceModule(projectRoot) {
     fs.writeFileSync(runtimeModulePath, content);
   }
 
-  return runtimeModulePath;
+  return { path: runtimeModulePath, windows: false };
 }
 
 function readPort(value, fallback) {

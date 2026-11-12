@@ -3,6 +3,7 @@ import os from 'node:os';
 import path from 'node:path';
 
 import type { NativeDriverArtifact } from '@fluentui-react-native/desktop-driver';
+import { generatedPathIdentity, sameGeneratedPath } from '../../config/generated-contract.cjs';
 import { createFixturePrivateStorage } from './fixtures/privateStorage';
 import { createFixtureStoredManifest } from './fixtures/storedManifest.cjs';
 import type { DesktopStorybookDriverManifest } from './driverManifest';
@@ -120,4 +121,13 @@ test('reports the closed Windows refusal reason without exposing helper details'
   );
   await expect(publishDriverManifest(manifest, manifestPath)).rejects.toThrow('reason: ancestor');
   expect(fs.existsSync(manifestPath)).toBe(false);
+});
+
+test('pins Windows project identity across drive-letter, separator, and casing aliases without accepting another volume', () => {
+  const generated = 'D:\\agent\\Project\\generated';
+  const alias = 'd:/AGENT/project/generated';
+  expect(sameGeneratedPath(generated, alias, path.win32)).toBe(true);
+  expect(generatedPathIdentity(generated, path.win32)).toBe(generatedPathIdentity(alias, path.win32));
+  expect(sameGeneratedPath(generated, 'C:\\agent\\Project\\generated', path.win32)).toBe(false);
+  expect(sameGeneratedPath('/Project/generated', '/project/generated', path.posix)).toBe(false);
 });
