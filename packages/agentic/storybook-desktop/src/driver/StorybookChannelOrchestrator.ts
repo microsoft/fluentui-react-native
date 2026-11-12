@@ -34,8 +34,10 @@ export type StorybookChannelOrchestratorOptions = {
   timeoutMs?: number;
   errorOutput?: DesktopStorybookErrorOutput;
   recovery?: BridgeEpochRecovery;
-  /** Exclusive transport: dispatch only to the authenticated runtime, never upstream HTTP. */
+  /** Protected policy: refuse args and require authenticated direct selection. */
   controlled?: boolean;
+  /** Dispatch choice only. Legacy HTTP remains the default for direct library consumers. */
+  selectionTransport?: 'direct' | 'legacy-http';
 };
 
 type PendingSelection = {
@@ -52,6 +54,7 @@ export class StorybookChannelOrchestrator implements StoryOrchestrator {
   private readonly timeoutMs: number;
   private readonly errorOutput: DesktopStorybookErrorOutput;
   private readonly controlled: boolean;
+  private readonly selectionTransport: 'direct' | 'legacy-http';
   private readonly pending = new Map<string, PendingSelection>();
   private readonly epochs = new WeakMap<ChannelClient, string>();
   private readonly usedRequests = new WeakMap<ChannelClient, Set<string>>();
@@ -78,6 +81,7 @@ export class StorybookChannelOrchestrator implements StoryOrchestrator {
     errorOutput = process.stderr,
     recovery,
     controlled = driverManifest.agent !== undefined,
+    selectionTransport = 'legacy-http',
   }: StorybookChannelOrchestratorOptions) {
     this.driverManifest = driverManifest;
     this.fetch = fetch;
@@ -85,6 +89,7 @@ export class StorybookChannelOrchestrator implements StoryOrchestrator {
     this.timeoutMs = timeoutMs;
     this.errorOutput = errorOutput;
     this.controlled = driverManifest.agent !== undefined || controlled;
+    this.selectionTransport = this.controlled ? 'direct' : selectionTransport;
     this.journal = recovery
       ? new BridgeEpochJournal(recovery, {
           endpoint: driverManifest.endpoint,
@@ -163,23 +168,26 @@ export class StorybookChannelOrchestrator implements StoryOrchestrator {
         context.diagnostics.bridgeConnections = this.bridgeConnections;
       }
       const httpStarted = performance.now();
-      const navigation = this.controlled
-        ? Promise.resolve(client.send(JSON.stringify({ type: 'setCurrentStory', args: [{ storyId: request.storyId, viewMode: 'story' }] })))
-        : this.fetch(`${this.serverUrl}/select-story-sync/${encodeURIComponent(request.storyId)}`, {
-            method: 'POST',
-            signal: controller.signal,
-          })
-            .then(async (response) => {
-              if (!response.ok && response.status !== 408) {
-                const detail = await response.text();
-                throw new Error(
-                  `Storybook failed to select "${request.storyId}" with status ${response.status}${detail ? `: ${detail}` : '.'}`,
-                );
-              }
+      const navigation =
+        this.selectionTransport === 'direct'
+          ? Promise.resolve(
+              client.send(JSON.stringify({ type: 'setCurrentStory', args: [{ storyId: request.storyId, viewMode: 'story' }] })),
+            )
+          : this.fetch(`${this.serverUrl}/select-story-sync/${encodeURIComponent(request.storyId)}`, {
+              method: 'POST',
+              signal: controller.signal,
             })
-            .finally(() => {
-              if (context?.diagnostics) context.diagnostics.httpMs = performance.now() - httpStarted;
-            });
+              .then(async (response) => {
+                if (!response.ok && response.status !== 408) {
+                  const detail = await response.text();
+                  throw new Error(
+                    `Storybook failed to select "${request.storyId}" with status ${response.status}${detail ? `: ${detail}` : '.'}`,
+                  );
+                }
+              })
+              .finally(() => {
+                if (context?.diagnostics) context.diagnostics.httpMs = performance.now() - httpStarted;
+              });
       const [, result] = await Promise.race([Promise.all([navigation, ready]), failure]);
       this.currentStory = result;
       return result;

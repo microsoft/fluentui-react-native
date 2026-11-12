@@ -157,6 +157,13 @@ per-case timeout applies; assertion failure does not prevent independent
 cases from running, while connection or cleanup failures stop execution.
 No matching case is an error. Restart the driver and reload the app after
 editing callbacks because their digest participates in manifest freshness.
+Extraction maps are cached by complete source-content hash and source location
+within the owning test run. Smoke shares that cache across its per-story runner
+calls. Every use rereads/hashes the source and still compares the selected
+export's digest with the manifest; same-size or timestamp-preserving edits do
+not bypass freshness or descriptor validation. The cache keeps only the latest
+map per file and never survives its owning run. It caches no session, worker,
+readiness result, or native context.
 `test --list` discovers IDs without executing callbacks; `--test <glob>`
 filters names. `test` operates against an already running app/driver; smoke
 owns the complete app lifecycle.
@@ -165,7 +172,9 @@ owns the complete app lifecycle.
 
 Part of #4435. The linked **Executable story results** `run.json` artifact
 records `diagnostics` without changing test selection, readiness, or isolation.
-Run-level fields are `extractionMs`, `sourceExtractions`, and `totalMs`.
+Run-level fields are `extractionMs`, `sourceExtractions`, `sourceCacheHits`, and
+`totalMs`. Extraction counts are full-file parses; cache hits still include
+source rereading/hashing and manifest-digest verification.
 Each attempted case records `diagnostics.phases`:
 
 - `sessionAttachMs`, `manifestMs`, and `policyMs`;

@@ -42,10 +42,23 @@ replacement awaits its initial render before it becomes selectable.
 The local provider context carries the session lifetime ID and abort signal
 separately from serializable inputs. No authenticated bridge means prompt
 `bridge-unavailable`, with endpoint/renderer and effect `none`, before dispatch.
-Controlled selection sends prepare and navigation directly to the authenticated
-socket, waits for correlated runtime readiness, then the driver verifies the
-native marker within the same render deadline. Legacy unprotected selection
-additionally waits for upstream HTTP navigation. Disconnect promptly rejects
+Driver-owned normal and controlled selection send prepare and navigation
+directly to the authenticated socket, wait for correlated runtime readiness,
+then verify the native marker within the same render deadline. No competing
+HTTP mutation is sent. `selectionTransport` chooses dispatch independently of
+the `controlled` protection policy. Direct library consumers retain the
+`legacy-http` default unless they explicitly choose `direct`; legacy HTTP
+selection additionally waits for upstream navigation. A controlled service
+always forces direct selection, regardless of that option, and still refuses
+args. Normal direct selection continues to support args updates.
+
+The driver does not broadcast its direct selection mutation to other channel
+clients: only the authenticated runtime receives it. Existing unprotected
+runtime-event relaying is unchanged. This does not protect the legacy
+channel's otherwise-unprotected HTTP, WebSocket relay, or MCP endpoints;
+agent services still require the separate controlled adapter.
+
+Disconnect promptly rejects
 pending work and aborts any legacy HTTP request. Cancellation,
 disconnect, or deadline after dispatch fences that socket and leaves the
 effect unknown: the driver retains target quarantine. Late ready/error events

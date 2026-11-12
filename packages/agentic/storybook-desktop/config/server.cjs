@@ -273,6 +273,7 @@ function createChannelOrchestrator({ channelServer, driverManifest, serverUrl, S
     serverUrl,
     recovery,
     controlled: driverManifest.agent !== undefined,
+    selectionTransport: 'direct',
   });
 }
 

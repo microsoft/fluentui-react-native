@@ -102,6 +102,7 @@ function setup(
   recovery?: BridgeEpochRecovery,
   renderer: 'fabric' | 'paper' = 'fabric',
   controlled = false,
+  selectionTransport: 'direct' | 'legacy-http' = 'legacy-http',
 ) {
   const server = Object.assign(new EventEmitter(), { clients: new Set<Client>() });
   const client = new Client();
@@ -116,9 +117,93 @@ function setup(
     timeoutMs,
     recovery,
     controlled,
+    selectionTransport,
   });
   return { client, errorOutput, fetch, orchestrator, server };
 }
+
+describe('driver-owned direct selection', () => {
+  test.each(['fabric', 'paper'] as const)('%s uses only the authenticated socket and keeps normal args support', async (renderer) => {
+    const { client, orchestrator, server, fetch } = setup(undefined, 100, undefined, renderer, false, 'direct');
+    const foreign = new Client();
+    server.emit('connection', foreign);
+    client.authenticate();
+    const diagnostics = {};
+    const selection = orchestrator.selectStory(request, {
+      lifetimeId: 'owner',
+      signal: new AbortController().signal,
+      diagnostics,
+    });
+    foreign.ready({ connectionEpoch: client.epoch });
+    client.ready({ requestId: 'old-request' });
+    client.ready({ connectionEpoch: 'old-epoch' });
+    client.receive('furn:desktop:story-error', { ...request, connectionEpoch: 'old-epoch' });
+    await expect(orchestrator.getCurrentStory()).resolves.toBeNull();
+    client.ready();
+    await expect(selection).resolves.toMatchObject({ ...request, connectionEpoch: client.epoch, previewGeneration: 1 });
+    expect(client.sent.slice(-2).map(({ type }) => type)).toEqual(['furn:desktop:prepare-story', 'setCurrentStory']);
+    expect(diagnostics).not.toHaveProperty('httpMs');
+    const reset = orchestrator.resetStory({ ...request, requestId: 'reset' });
+    client.ready({ requestId: 'reset', previewGeneration: 2 });
+    await expect(reset).resolves.toMatchObject({ requestId: 'reset', previewGeneration: 2 });
+    await orchestrator.updateArgs(request.storyId, { label: 'normal args remain supported' });
+    expect(client.sent.at(-1)).toMatchObject({ type: 'updateStoryArgs' });
+    expect(foreign.sent).toHaveLength(1);
+    expect(fetch).not.toHaveBeenCalled();
+  });
+
+  test('post-dispatch cancellation quarantines direct selection despite delayed readiness', async () => {
+    const { client, orchestrator, fetch } = setup(undefined, 100, undefined, 'fabric', false, 'direct');
+    client.authenticate();
+    const controller = new AbortController();
+    const selection = orchestrator.selectStory(request, { lifetimeId: 'owner', signal: controller.signal });
+    controller.abort();
+    await expect(selection).rejects.toHaveProperty('effect', 'unknown');
+    client.ready();
+    await expect(orchestrator.resetStory({ ...request, requestId: 'next' })).rejects.toMatchObject({
+      data: { reason: 'relaunch-required' },
+      effect: 'none',
+    });
+    expect(fetch).not.toHaveBeenCalled();
+  });
+
+  test.each(['before-dispatch', 'disconnect', 'render-error', 'deadline'] as const)(
+    'direct selection preserves failure effects for %s',
+    async (failure) => {
+      const { client, orchestrator, fetch } = setup(undefined, 10, undefined, 'fabric', false, 'direct');
+      client.authenticate();
+      const controller = new AbortController();
+      if (failure === 'before-dispatch') controller.abort();
+      const selection = orchestrator.selectStory(request, { lifetimeId: 'owner', signal: controller.signal });
+      if (failure === 'disconnect') {
+        client.readyState = 3;
+        client.emit('close');
+      } else if (failure === 'render-error') {
+        client.receive('furn:desktop:story-error', { ...request, connectionEpoch: client.epoch });
+      }
+      await expect(selection).rejects.toHaveProperty('effect', failure === 'before-dispatch' ? 'none' : 'unknown');
+      await expect(orchestrator.getCurrentStory()).resolves.toBeNull();
+      if (failure !== 'before-dispatch') {
+        await expect(orchestrator.selectStory({ ...request, requestId: 'next' })).rejects.toMatchObject({
+          data: { reason: 'relaunch-required' },
+          effect: 'none',
+        });
+      }
+      expect(fetch).not.toHaveBeenCalled();
+    },
+  );
+
+  test.each(['direct', 'legacy-http'] as const)('transport %s cannot weaken controlled args refusal or request HTTP', async (transport) => {
+    const { client, orchestrator, fetch } = setup(undefined, 100, undefined, 'fabric', true, transport);
+    client.authenticate();
+    const selection = orchestrator.selectStory(request);
+    client.ready();
+    await selection;
+    await expect(orchestrator.updateArgs(request.storyId, { private: 'do-not-relay' })).rejects.toHaveProperty('effect', 'none');
+    expect(JSON.stringify(client.sent)).not.toContain('do-not-relay');
+    expect(fetch).not.toHaveBeenCalled();
+  });
+});
 
 describe('controlled channel endpoint boundary', () => {
   test('HTTP and foreign WebSocket selection, prepare and args never reach the authenticated runtime', async () => {

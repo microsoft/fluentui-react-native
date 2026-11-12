@@ -17,12 +17,14 @@ async function main() {
     { createDesktopDriverStoryHarness, createFakeStoryWindows },
     { makeDesktopStorybookConfig },
     { DesktopRunReporter },
+    { WdioExtractionCache },
   ] = await Promise.all([
     import(pathToFileURL(path.join(packageRoot, 'lib/driver/storyManifest.js')).href),
     import(pathToFileURL(path.join(packageRoot, 'lib/testing/runWdioTests.js')).href),
     import('@fluentui-react-native/desktop-driver/testing'),
     import(pathToFileURL(path.join(packageRoot, 'lib/config/index.js')).href),
     import('@fluentui-react-native/desktop-test/reporting'),
+    import(pathToFileURL(path.join(packageRoot, 'lib/testing/wdioExtractionCache.js')).href),
   ]);
   fs.writeFileSync(
     path.join(root, 'fixture.stories.ts'),
@@ -201,6 +203,28 @@ async function main() {
     }
     const filtered = await run('named', { test: '*fresh' });
     if (filtered.length !== 1 || filtered[0].testName !== 'starts fresh') throw new Error('Named test filtering failed.');
+    const extractionCache = new WdioExtractionCache();
+    await run('named', { test: '*fresh', extractionCache });
+    const extractedReport = JSON.parse(fs.readFileSync(path.join(root, 'artifacts/windows/wdio/run.json'), 'utf8'));
+    assert.equal(extractedReport.diagnostics.sourceExtractions, 1);
+    await run('pass', { extractionCache });
+    const reusedReport = JSON.parse(fs.readFileSync(path.join(root, 'artifacts/windows/wdio/run.json'), 'utf8'));
+    assert.equal(reusedReport.diagnostics.sourceExtractions, 0);
+    assert.equal(reusedReport.diagnostics.sourceCacheHits, 1);
+    const selectionsBeforeMismatch = selections.length;
+    await assert.rejects(
+      run('pass', {
+        extractionCache,
+        manifest: {
+          ...manifest,
+          entries: manifest.entries.map((entry) =>
+            entry.id === 'fixture-button--pass' ? { ...entry, wdio: { ...entry.wdio, digest: 'stale' } } : entry,
+          ),
+        },
+      }),
+      /Executable test source changed/,
+    );
+    assert.equal(selections.length, selectionsBeforeMismatch);
     let namedTimeout;
     try {
       await run('named-timeout');

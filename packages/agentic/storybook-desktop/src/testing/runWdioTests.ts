@@ -20,7 +20,7 @@ import type { DesktopStorybookConfig } from '../config/makeDesktopStorybookConfi
 import type { Platforms } from '../config/platforms.js';
 import { resolveWdioOptions, type DesktopStorybookWdioOptions } from '../config/wdio.js';
 import { NodeDesktopCommandRunner, type DesktopCommandRunner, type PreparedDesktopCommand } from '../cli/commandRunner.js';
-import { extractWdioTests } from './extractWdioTests.js';
+import { WdioExtractionCache } from './wdioExtractionCache.js';
 import { assessWdioCohort } from './laneVerdict.js';
 import {
   readApplicationIncarnation,
@@ -72,6 +72,7 @@ export type RunWdioStoryTestsOptions = DesktopStorybookWdioOptions & {
   optional?: boolean;
   /** The caller already reported the selection and announced the planned work, so this call must not repeat it. */
   announced?: boolean;
+  extractionCache?: WdioExtractionCache;
 };
 
 export class WdioStoryTestRunError extends Error {
@@ -137,11 +138,15 @@ export async function runWdioStoryTests(
     throw new Error(`No executable wdio story tests matched the requested selection${describeWdioExclusions(selection)}.`);
   }
   const extractionStarted = performance.now();
+  const extractionCache = options.extractionCache ?? new WdioExtractionCache();
   let sourceExtractions = 0;
+  let sourceCacheHits = 0;
   const cases = selection.stories.flatMap((entry) => {
     const sourceFile = path.join(options.config.resolvePackage(entry.packageName).root, entry.sourcePath);
-    sourceExtractions++;
-    const extracted = extractWdioTests(fs.readFileSync(sourceFile, 'utf8'), sourceFile).get(entry.wdio!.exportName);
+    const { tests, cacheHit } = extractionCache.read(sourceFile);
+    if (cacheHit) sourceCacheHits++;
+    else sourceExtractions++;
+    const extracted = tests.get(entry.wdio!.exportName);
     if (!extracted || extracted.digest !== entry.wdio!.digest) {
       throw new Error(`Executable test source changed for ${entry.id}; regenerate the Storybook manifest.`);
     }
@@ -496,7 +501,7 @@ export async function runWdioStoryTests(
           : 'skipped',
       ...(infrastructureFailure === undefined ? {} : { error: errorMessage(infrastructureFailure) }),
       tests: results,
-      diagnostics: { extractionMs, sourceExtractions, totalMs: performance.now() - runStarted },
+      diagnostics: { extractionMs, sourceExtractions, sourceCacheHits, totalMs: performance.now() - runStarted },
     });
     options.report?.emit({
       kind: 'artifact',
