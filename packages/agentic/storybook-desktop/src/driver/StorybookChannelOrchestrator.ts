@@ -58,12 +58,15 @@ export class StorybookChannelOrchestrator implements StoryOrchestrator {
   private readonly initializedClients = new WeakSet<ChannelClient>();
   private readonly fencedClients = new WeakSet<ChannelClient>();
   private readonly recordedClients = new WeakSet<ChannelClient>();
+  private readonly authenticatedClients = new WeakSet<ChannelClient>();
   private readonly recordings = new WeakMap<ChannelClient, Promise<void>>();
   private readonly journal?: BridgeEpochJournal;
   private bridgeClient?: ChannelClient;
   private bridgeConnected = false;
   private needsRelaunch = false;
   private selectionSequence = 0;
+  private authenticatedHellos = 0;
+  private bridgeConnections = 0;
   private currentStory: StoryReadyResult | null = null;
 
   constructor({
@@ -113,6 +116,7 @@ export class StorybookChannelOrchestrator implements StoryOrchestrator {
   }
 
   private async selectAndPrepareStory(request: StorySelectionRequest, context?: StoryProviderContext): Promise<StoryReadyResult> {
+    const started = performance.now();
     this.requireStory(request.storyId);
     if (context?.signal.aborted) throw new StoryProviderError('Story selection was cancelled before dispatch.', 'none');
     if (this.journal) await this.checkBridgeRecovery();
@@ -137,6 +141,9 @@ export class StorybookChannelOrchestrator implements StoryOrchestrator {
     void failure.catch(() => undefined);
     const ready = new Promise<StoryReadyResult>((resolve) => {
       this.pending.set(request.requestId, { epoch, reject: stop, request, resolve });
+    }).then((result) => {
+      if (context?.diagnostics) context.diagnostics.runtimeReadyMs = performance.now() - started;
+      return result;
     });
     const onAbort = () => stop(new Error('Story selection was cancelled.'));
     context?.signal.addEventListener('abort', onAbort, { once: true });
@@ -150,19 +157,29 @@ export class StorybookChannelOrchestrator implements StoryOrchestrator {
           args: [{ ...request, connectionEpoch: epoch, selectionSequence: ++this.selectionSequence }],
         }),
       );
+      if (context?.diagnostics) {
+        context.diagnostics.preparationMs = performance.now() - started;
+        context.diagnostics.authenticatedHellos = this.authenticatedHellos;
+        context.diagnostics.bridgeConnections = this.bridgeConnections;
+      }
+      const httpStarted = performance.now();
       const navigation = this.controlled
         ? Promise.resolve(client.send(JSON.stringify({ type: 'setCurrentStory', args: [{ storyId: request.storyId, viewMode: 'story' }] })))
         : this.fetch(`${this.serverUrl}/select-story-sync/${encodeURIComponent(request.storyId)}`, {
             method: 'POST',
             signal: controller.signal,
-          }).then(async (response) => {
-            if (!response.ok && response.status !== 408) {
-              const detail = await response.text();
-              throw new Error(
-                `Storybook failed to select "${request.storyId}" with status ${response.status}${detail ? `: ${detail}` : '.'}`,
-              );
-            }
-          });
+          })
+            .then(async (response) => {
+              if (!response.ok && response.status !== 408) {
+                const detail = await response.text();
+                throw new Error(
+                  `Storybook failed to select "${request.storyId}" with status ${response.status}${detail ? `: ${detail}` : '.'}`,
+                );
+              }
+            })
+            .finally(() => {
+              if (context?.diagnostics) context.diagnostics.httpMs = performance.now() - httpStarted;
+            });
       const [, result] = await Promise.race([Promise.all([navigation, ready]), failure]);
       this.currentStory = result;
       return result;
@@ -265,6 +282,11 @@ export class StorybookChannelOrchestrator implements StoryOrchestrator {
       payload.nonce !== expected.bridgeNonce
     )
       return;
+    this.authenticatedHellos++;
+    if (!this.authenticatedClients.has(client)) {
+      this.authenticatedClients.add(client);
+      this.bridgeConnections++;
+    }
     // A runtime reload can authenticate its new socket before the old socket reports close; the old context is lost either way.
     if (this.bridgeClient && this.bridgeClient !== client)
       this.retireBridge(this.bridgeClient, 'The authenticated Storybook runtime bridge was replaced by a new runtime connection.');

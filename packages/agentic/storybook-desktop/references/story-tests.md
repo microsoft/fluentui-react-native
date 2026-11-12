@@ -161,6 +161,45 @@ editing callbacks because their digest participates in manifest freshness.
 filters names. `test` operates against an already running app/driver; smoke
 owns the complete app lifecycle.
 
+### Timing and lifecycle observations
+
+Part of #4435. The linked **Executable story results** `run.json` artifact
+records `diagnostics` without changing test selection, readiness, or isolation.
+Run-level fields are `extractionMs`, `sourceExtractions`, and `totalMs`.
+Each attempted case records `diagnostics.phases`:
+
+- `sessionAttachMs`, `manifestMs`, and `policyMs`;
+- `navigationMs`, with service-local `preparationMs`, optional `httpMs`,
+  `runtimeReadyMs`, and `nativeVerificationMs`;
+- settled `workerMs`, `workerStartupMs`, `workerBodyMs`, and
+  `workerSettlementMs` when the worker supplied a result;
+- `receiptsMs`, settled `cleanupMs`, and `activityReadMs`.
+
+These are observations, not deadlines or success evidence. Navigation
+subphases overlap: HTTP completion and runtime readiness run concurrently.
+Readiness is elapsed from the start of preparation; HTTP timing starts at its
+dispatch. Do not sum those fields. Worker startup includes spec preparation,
+Node/import startup, reporter setup, and attachment; body timing surrounds the
+callback. Settlement is the remaining supervisor-observed worker time, including
+process exit and stop. Missing fields mean the phase did not complete or its
+producer could not observe it, never a zero-cost pass.
+
+`diagnostics.lifecycle` records the context and mount generations (equal under
+the default keyed remount), native marker poll count, authenticated hello and
+connection counters, and the native-verified application PID/start time when
+available. `jsInitializations: 'not-observed'` is explicit: a bridge hello can
+answer another challenge without initializing JavaScript. No runtime message,
+descriptor, or preview-reuse protocol is added.
+
+`windowActivity` reduces the existing native diagnostic rings to per-case
+notification and activation-command counters. It never retains native handles,
+window titles, argument values, or raw command details. Unsupported or failed
+reads are explicit. `observing`, registration-failure counts, and truncation
+flags limit interpretation: these are advisory lower bounds, not proof of
+foreground ownership or visible flashing. Target-window-only recording is a
+separate, permission-gated qualification; no recording is enabled by the runner.
+The observation reads themselves are included in `activityReadMs`.
+
 ## Run an input lane
 
 A lane runs only the cases that apply to one way of driving the app. The

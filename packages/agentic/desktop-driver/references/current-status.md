@@ -472,3 +472,29 @@ after the disconnect, so fresh-preview fencing remains Partial. The first
 probe timed out after 10 seconds; bridge retirement occurred about 19 seconds
 after injection. A later attempt waited for retirement and retained the
 same Partial result. Physical Ctrl+C and DPI changes were not exercised.
+
+## 2026-11-12: bounded refresh timing observations
+
+Part of #4435. Story selection can return allowlisted, service-local timing
+observations and a canonical native-verified PID/start-time pair. They are
+response diagnostics, not authenticated marker fields, context identity, or
+authority to clear quarantine. Request/run/epoch matching and fresh native
+marker verification remain unchanged; provider payloads and private values
+are not copied into these observations.
+
+The instrumented baseline ran eight independently launched macOS Fabric
+accessible cohorts, each with three passing ListboxItem callbacks and one
+declared macOS-unsupported callback. Each passing callback selected a fresh
+keyed preview/context generation; every cohort retained one verified app
+incarnation and one authenticated bridge connection during its callbacks.
+JS initialization/HMR was not observed independently and cannot be inferred
+from hello counts. No activation or main/focused-window change was observed in
+this observational cohort; a zero advisory count is not visual qualification.
+The Storybook evidence ledger,
+`packages/agentic/storybook-desktop/references/current-status.md`, records
+selection, timing, variability, and limitations.
+
+This timing implementation changes no Swift source, physical-input
+activation, foreground checks, hit-testing, focus, or window-switch policy.
+It does not qualify those paths or remove provider-local checks. Windows
+Fabric and Win32 Paper were **not run locally** for this change.

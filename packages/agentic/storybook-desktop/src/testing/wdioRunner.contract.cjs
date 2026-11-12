@@ -214,6 +214,23 @@ async function main() {
       namedTimeout = error.results.map(({ testName, status }) => ({ testName, status }));
     }
     const passed = await run('pass');
+    assert.ok(passed[0].diagnostics.lifecycle.contextGeneration >= 1);
+    assert.equal(passed[0].diagnostics.lifecycle.mountGeneration, passed[0].diagnostics.lifecycle.contextGeneration);
+    assert.equal(passed[0].diagnostics.lifecycle.jsInitializations, 'not-observed');
+    for (const phase of [
+      'sessionAttachMs',
+      'manifestMs',
+      'policyMs',
+      'navigationMs',
+      'workerStartupMs',
+      'workerBodyMs',
+      'workerMs',
+      'receiptsMs',
+      'cleanupMs',
+    ]) {
+      assert.equal(typeof passed[0].diagnostics.phases[phase], 'number', `Missing phase ${phase}`);
+      assert.ok(passed[0].diagnostics.phases[phase] >= 0);
+    }
     let skipped;
     try {
       await run('skip');

@@ -426,6 +426,41 @@ describe('durable authenticated bridge epochs', () => {
 });
 
 describe('StorybookChannelOrchestrator epochs and lifetime', () => {
+  test('attributes HTTP and correlated readiness separately without treating repeated hellos as JS initializations', async () => {
+    jest.useFakeTimers();
+    try {
+      let finish!: (response: Response) => void;
+      const { client, orchestrator } = setup(
+        jest.fn(() => new Promise<Response>((resolve) => (finish = resolve))),
+        1000,
+      );
+      client.authenticate();
+      client.hello();
+      const diagnostics = {};
+      const selection = orchestrator.selectStory(request, {
+        lifetimeId: 'session',
+        signal: new AbortController().signal,
+        diagnostics,
+      });
+      await jest.advanceTimersByTimeAsync(20);
+      client.ready();
+      await jest.advanceTimersByTimeAsync(80);
+      finish(new Response('{}'));
+      await selection;
+      expect(diagnostics).toMatchObject({
+        preparationMs: 0,
+        httpMs: 100,
+        runtimeReadyMs: 20,
+        authenticatedHellos: 2,
+        bridgeConnections: 1,
+      });
+      expect(diagnostics).not.toHaveProperty('jsInitializations');
+      expect(JSON.stringify(diagnostics)).not.toContain(manifest.bridgeNonce);
+    } finally {
+      jest.useRealTimers();
+    }
+  });
+
   test('absent and hello-only bridges reject before dispatch with no effect', async () => {
     const { client, fetch, orchestrator } = setup();
     await expect(orchestrator.selectStory(request)).rejects.toMatchObject({

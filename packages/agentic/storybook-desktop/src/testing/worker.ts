@@ -17,6 +17,7 @@ export type WdioWorkerOptions = {
   timeoutMs: number;
   platform: DesktopEndpoint;
   testName?: string;
+  startedAt?: number;
 };
 
 export function registerWdioStoryTest(options: WdioWorkerOptions, callback: WdioStoryTest): void {
@@ -30,13 +31,20 @@ export function registerWdioStoryTest(options: WdioWorkerOptions, callback: Wdio
     report?.onStop?.(() => controller.abort(new Error('Owned story worker stop requested.')));
     let recorded = false;
     let failure: unknown;
+    let startupMs: number | undefined;
+    let bodyStarted: number | undefined;
+    let bodyMs: number | undefined;
+    const timings = () => ({
+      ...(startupMs === undefined ? {} : { workerStartupMs: startupMs }),
+      ...(bodyStarted === undefined ? {} : { workerBodyMs: bodyMs ?? performance.now() - bodyStarted }),
+    });
     const recordFailure = (error: unknown) => {
       failure = error;
       const diagnostic = report?.reporter.redact(formatDesktopStorybookError(error)) ?? formatDesktopStorybookError(error);
       try {
         fs.writeFileSync(
           options.resultPath,
-          JSON.stringify({ status: 'failed', error: diagnostic, failure: report?.reporter.failure(error, 'test') }),
+          JSON.stringify({ status: 'failed', error: diagnostic, failure: report?.reporter.failure(error, 'test'), timings: timings() }),
           { mode: 0o600 },
         );
         recorded = true;
@@ -59,22 +67,32 @@ export function registerWdioStoryTest(options: WdioWorkerOptions, callback: Wdio
       }
       signal.throwIfAborted();
       let skipReason: string | undefined;
-      await callback({
-        browser: desktop.browser,
-        desktop,
-        expect,
-        platform: options.platform,
-        signal,
-        skip: (reason) => {
-          if (!reason?.trim()) {
-            throw new TypeError('Skipping a wdio story requires a reason.');
-          }
-          skipReason = reason;
-          context.skip(reason);
-        },
-      });
+      if (options.startedAt !== undefined) startupMs = Math.max(0, Date.now() - options.startedAt);
+      bodyStarted = performance.now();
+      try {
+        await callback({
+          browser: desktop.browser,
+          desktop,
+          expect,
+          platform: options.platform,
+          signal,
+          skip: (reason) => {
+            if (!reason?.trim()) {
+              throw new TypeError('Skipping a wdio story requires a reason.');
+            }
+            skipReason = reason;
+            context.skip(reason);
+          },
+        });
+      } finally {
+        bodyMs = performance.now() - bodyStarted;
+      }
       signal.throwIfAborted();
-      fs.writeFileSync(options.resultPath, JSON.stringify(skipReason ? { status: 'skipped', skipReason } : { status: 'passed' }));
+      fs.writeFileSync(
+        options.resultPath,
+        JSON.stringify({ ...(skipReason ? { status: 'skipped', skipReason } : { status: 'passed' }), timings: timings() }),
+        { mode: 0o600 },
+      );
       recorded = true;
     } catch (error) {
       recordFailure(error);
