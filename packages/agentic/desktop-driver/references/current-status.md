@@ -482,14 +482,17 @@ authority to clear quarantine. Request/run/epoch matching and fresh native
 marker verification remain unchanged; provider payloads and private values
 are not copied into these observations.
 
-The instrumented baseline ran eight independently launched macOS Fabric
-accessible cohorts, each with three passing ListboxItem callbacks and one
+The instrumented baseline ran eight independently launched accessible cohorts
+per macOS renderer, each with three passing ListboxItem callbacks and one
 declared macOS-unsupported callback. Each passing callback selected a fresh
 keyed preview/context generation; every cohort retained one verified app
 incarnation and one authenticated bridge connection during its callbacks.
 JS initialization/HMR was not observed independently and cannot be inferred
-from hello counts. No activation or main/focused-window change was observed in
-this observational cohort; a zero advisory count is not visual qualification.
+from hello counts. Fabric accepted one hello and Paper two on the same socket.
+No activation command or main/focused-window change was observed in these
+baseline cohorts; Paper recorded one application deactivation, and 16 of 24
+event samples per renderer carried truncation warnings. A zero advisory count
+is not visual qualification.
 The Storybook evidence ledger,
 `packages/agentic/storybook-desktop/references/current-status.md`, records
 selection, timing, variability, and limitations.
@@ -498,6 +501,44 @@ This timing implementation changes no Swift source, physical-input
 activation, foreground checks, hit-testing, focus, or window-switch policy.
 It does not qualify those paths or remove provider-local checks. Windows
 Fabric and Win32 Paper were **not run locally** for this change.
+
+The direct-selection Fabric candidate preserved identical coverage, fresh
+per-case generations, one app incarnation/connection per lifecycle, and no
+within-lifecycle app replacements across eight paired-by-index repetitions.
+Runner p50/p95 changed from 7939.07/8845.37 to 6680.04/6995.31 ms; navigation
+p50 changed from 753.13 to 274.20 ms. Paper's equivalent eight-plus-eight
+comparison changed runner p50/p95 from 7915.99/8755.09 to 7218.78/7811.59 ms
+and navigation p50 from 756.77 to 340.59 ms, with identical coverage and
+lifecycle invariants. Each side/renderer passed 24 callbacks plus eight
+declared unsupported. Sequential before/after blocks, cold startup
+differences, and the small observational cohort limit attribution;
+native-verification p95 worsened on both renderers (Fabric 168.00→546.11 ms;
+Paper 170.07→582.90 ms). There is no universal tail-latency, reliability,
+startup, or flashing claim.
+
+Window-scoped synchronized recordings on both sides/renderers contained four
+encoded frames each, followed by held pixels. The unvalidated whole-content
+uniformity detector returned zero candidates; persistent chrome and
+window-only capture prevent interpreting this as zero blank-preview or
+activation-flash episodes. No flash reduction was established.
+
+Focused candidate qualification on both macOS renderers passed the complete
+223-story render traversal plus five accessible callbacks (228 passes per
+renderer), and a separate sparse physical selection with 15 callbacks
+(238 passes per renderer). Button, Dropdown, native Callout, and modern
+Callout paths retained fresh per-case contexts/workers and passed popup
+isolation/dismiss/reopen checks. These are not full authored-input suites,
+MCP descriptor qualification, native cancellation/fault injection, or
+qualification of another branch's physical-input corrections.
+
+The unchanged standalone macOS helper passed a release build with
+`-Xswiftc -warnings-as-errors` and all 448 self-test checks. Focused
+`FURN_NATIVE_DRIVER_TEST=1` contracts passed 87 tests, with 16 skipped
+(Windows contracts not run locally). The final aggregate passed in the
+repository's serial-Jest CI mode after isolating Git discovery for
+project-local temporary fixtures and rerunning two timing-sensitive
+parallel-test failures. The Storybook evidence ledger records exact commands,
+failed attempts, package counts, and the final passed result.
 
 ### Activation trace and deferred flashing change
 
