@@ -485,13 +485,16 @@ are not copied into these observations.
 The instrumented baseline ran eight independently launched accessible cohorts
 per macOS renderer, each with three passing ListboxItem callbacks and one
 declared macOS-unsupported callback. Each passing callback selected a fresh
-keyed preview/context generation; every cohort retained one verified app
+preview/context generation; keyed remounts are inferred from rendering
+policy, not independently counted. Every cohort retained one verified app
 incarnation and one authenticated bridge connection during its callbacks.
 JS initialization/HMR was not observed independently and cannot be inferred
 from hello counts. Fabric accepted one hello and Paper two on the same socket.
 No activation command or main/focused-window change was observed in these
-baseline cohorts; Paper recorded one application deactivation, and 16 of 24
-event samples per renderer carried truncation warnings. A zero advisory count
+baseline cohorts; Paper recorded one application deactivation. Historical
+per-case truncation counts are withdrawn: a process-lifetime history flag
+and globally allocated sequence gaps did not establish per-case event loss.
+A zero advisory count
 is not visual qualification.
 The Storybook evidence ledger,
 `packages/agentic/storybook-desktop/references/current-status.md`, records
@@ -534,11 +537,11 @@ qualification of another branch's physical-input corrections.
 The unchanged standalone macOS helper passed a release build with
 `-Xswiftc -warnings-as-errors` and all 448 self-test checks. Focused
 `FURN_NATIVE_DRIVER_TEST=1` contracts passed 87 tests, with 16 skipped
-(Windows contracts not run locally). The final aggregate passed in the
-repository's serial-Jest CI mode after isolating Git discovery for
-project-local temporary fixtures and rerunning two timing-sensitive
-parallel-test failures. The Storybook evidence ledger records exact commands,
-failed attempts, package counts, and the final passed result.
+(Windows contracts not run locally). An earlier local aggregate passed with `TF_BUILD=1` serializing package Jest
+runs and with project-local fixture overrides; this is not PR CI mode.
+The PR workflow uses parallel `yarn lage buildci` without those overrides.
+The Storybook evidence ledger records exact commands, failed attempts,
+package counts, and the subsequent plain-command review qualification.
 
 ### Activation trace and deferred flashing change
 
@@ -565,3 +568,35 @@ occlusion refused. An unqualified dedupe must not fork those semantics.
 Zero activation counters in this read-only cohort do not meet the optimization
 gate. The compatible experiment and its qualification conditions are tracked
 in [remaining work](remaining-work.md#macos-activation-and-popup-polling).
+
+## 2026-11-12: refresh-diagnostic review corrections
+
+Part of #4435. The Storybook report now separates the native process-lifetime
+`eventsTruncated` flag into `processEventsTruncated` from a possible
+per-case `eventsTruncated` warning. A case warning requires truncated
+history whose earliest retained event is newer than the case cursor.
+Globally allocated sequence gaps are not loss evidence; the unsupported
+command-truncation inference was removed. Historical 16/17-of-24
+comparisons are withdrawn because the original bounded reports cannot
+reconstruct per-case loss. The duplicate mount-generation field was also
+removed: fresh preview generations infer remounting but do not count mounts
+independently. No native producer or activation behavior changed.
+
+The earlier `TF_BUILD=1` aggregate was local serialization, not PR CI mode.
+Under the shared native lock, plain
+`yarn clean-lage-cache && yarn lage buildci` with no environment overrides
+**failed in both candidate runs** on the `boundedCommand` termination-signal
+assertion; `privateStorage` passed in both. The identical
+command on independently installed, detached base `aadc2f359` **failed**
+that same assertion and a `privateStorage` timeout. The base worktree was
+removed after terminating its verified orphaned Jest worker. Those
+pre-existing tests and implementations were not changed.
+
+Review regressions **passed 112 tests** across four Storybook suites.
+macOS Paper manifest/bundle and full-index accessible smoke **passed**
+(223 rendered stories plus five callbacks, three extractions/two cache
+hits). A harness PATH failure before selection was corrected by invoking
+it through Yarn, without a product change. macOS Fabric and physical
+lanes were **not rerun for this follow-up**; Windows Fabric and Win32 Paper
+were **not run locally**. The earlier paired timings and window recordings
+were not repeated, and no new performance or flashing claim is made.

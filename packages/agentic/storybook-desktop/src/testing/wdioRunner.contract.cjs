@@ -239,7 +239,7 @@ async function main() {
     }
     const passed = await run('pass');
     assert.ok(passed[0].diagnostics.lifecycle.contextGeneration >= 1);
-    assert.equal(passed[0].diagnostics.lifecycle.mountGeneration, passed[0].diagnostics.lifecycle.contextGeneration);
+    assert.equal(Object.hasOwn(passed[0].diagnostics.lifecycle, 'mountGeneration'), false);
     assert.equal(passed[0].diagnostics.lifecycle.jsInitializations, 'not-observed');
     for (const phase of [
       'sessionAttachMs',
@@ -292,6 +292,10 @@ async function main() {
       if (!rejected) throw new Error(`Expected ${story} to fail.`);
       const report = JSON.parse(fs.readFileSync(path.join(root, 'artifacts/windows/wdio/run.json'), 'utf8'));
       if (report.tests[0].status !== 'failed') throw new Error(`${story} was not persisted as failed.`);
+      if (story === 'navigation-failure') {
+        assert.ok(report.tests[0].diagnostics.phases.navigationMs >= 0, 'Failed navigation retains its attempted duration.');
+        assert.equal(Object.hasOwn(report.tests[0].diagnostics.phases, 'workerMs'), false, 'An unstarted phase has no duration.');
+      }
       if (story === 'fail' && !report.tests[0].error.includes('intentional inline assertion')) {
         throw new Error('Compact reporter lost the worker assertion diagnostic.');
       }

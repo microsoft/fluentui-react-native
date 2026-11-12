@@ -174,7 +174,9 @@ Part of #4435. The linked **Executable story results** `run.json` artifact
 records `diagnostics` without changing test selection, readiness, or isolation.
 Run-level fields are `extractionMs`, `sourceExtractions`, `sourceCacheHits`, and
 `totalMs`. Extraction counts are full-file parses; cache hits still include
-source rereading/hashing and manifest-digest verification.
+source rereading/hashing, digest checks for helper modules read by the
+direct-input policy, and manifest-digest verification. A changed helper,
+including a transitive helper, invalidates the extraction and reruns the policy.
 Each attempted case records `diagnostics.phases`:
 
 - `sessionAttachMs`, `manifestMs`, and `policyMs`;
@@ -190,21 +192,30 @@ Readiness is elapsed from the start of preparation; HTTP timing starts at its
 dispatch. Do not sum those fields. Worker startup includes spec preparation,
 Node/import startup, reporter setup, and attachment; body timing surrounds the
 callback. Settlement is the remaining supervisor-observed worker time, including
-process exit and stop. Missing fields mean the phase did not complete or its
-producer could not observe it, never a zero-cost pass.
+process exit and stop. Durations recorded in `finally` include failed
+attempts; a present field does not mean that phase succeeded. Missing fields
+mean the phase was not reached or its producer did not report an observation,
+never a zero-cost pass.
 
-`diagnostics.lifecycle` records the context and mount generations (equal under
-the default keyed remount), native marker poll count, authenticated hello and
-connection counters, and the native-verified application PID/start time when
-available. `jsInitializations: 'not-observed'` is explicit: a bridge hello can
+`diagnostics.lifecycle` records the context generation, native marker poll
+count, authenticated hello and connection counters, and the native-verified
+application PID/start time when available. The context generation is the
+preview generation; a keyed remount is inferred from that generation and the
+default rendering policy, not independently observed. No separate mount
+counter is reported. `jsInitializations: 'not-observed'` is explicit: a bridge hello can
 answer another challenge without initializing JavaScript. No runtime message,
 descriptor, or preview-reuse protocol is added.
 
 `windowActivity` reduces the existing native diagnostic rings to per-case
 notification and activation-command counters. It never retains native handles,
 window titles, argument values, or raw command details. Unsupported or failed
-reads are explicit. `observing`, registration-failure counts, and truncation
-flags limit interpretation: these are advisory lower bounds, not proof of
+reads are explicit. `processEventsTruncated` is the native process-lifetime
+history flag, not a per-case loss count. `eventsTruncated` warns of possible
+case-history loss only when that history is truncated and its earliest
+retained event is newer than the case cursor. Global sequence gaps alone
+do not establish loss, and no command-truncation flag is inferred.
+`observing`, registration failures, and these history limits make the counters
+advisory lower bounds, not proof of
 foreground ownership or visible flashing. Target-window-only recording is a
 separate, permission-gated qualification; no recording is enabled by the runner.
 The observation reads themselves are included in `activityReadMs`.

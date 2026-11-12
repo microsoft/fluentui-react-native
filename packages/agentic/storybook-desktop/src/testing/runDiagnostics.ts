@@ -24,7 +24,6 @@ export type WdioCaseDiagnostics = {
   >;
   lifecycle?: {
     contextGeneration: number;
-    mountGeneration: number;
     nativeMarkerPolls?: number;
     authenticatedHellos?: number;
     bridgeConnections?: number;
@@ -79,8 +78,8 @@ export type WindowActivity =
       elementsDestroyed: number;
       activationCommands: number;
       providerActivations: number;
-      commandsTruncated: boolean;
       eventsTruncated: boolean;
+      processEventsTruncated: boolean;
     };
 
 export function windowActivityCursor(log: WindowLog): WindowActivityCursor {
@@ -90,7 +89,8 @@ export function windowActivityCursor(log: WindowLog): WindowActivityCursor {
 /** Project only fixed counters; the native log also contains application text and must not enter the run report. */
 export function summarizeWindowActivity(log: WindowLog, since: WindowActivityCursor = { command: 0, event: 0 }): WindowActivity {
   const commands = (log.commands ?? []).slice(-1024).filter(({ sequence }) => sequence > since.command);
-  const events = log.events.slice(-1024).filter(({ sequence }) => sequence > since.event);
+  const retainedEvents = log.events.slice(-1024);
+  const events = retainedEvents.filter(({ sequence }) => sequence > since.event);
   return {
     status: 'observed',
     events: events.length,
@@ -106,7 +106,7 @@ export function summarizeWindowActivity(log: WindowLog, since: WindowActivityCur
     providerActivations: commands.filter(({ detail }) =>
       ['already-frontmost', 'accessibility', 'workspace', 'accessibility+workspace'].includes(String(detail?.method)),
     ).length,
-    commandsTruncated: commands.length > 0 && commands[0].sequence > since.command + 1,
-    eventsTruncated: log.eventsTruncated || (events.length > 0 && events[0].sequence > since.event + 1),
+    eventsTruncated: (log.eventsTruncated || retainedEvents.length < log.events.length) && (retainedEvents[0]?.sequence ?? 0) > since.event,
+    processEventsTruncated: log.eventsTruncated,
   };
 }

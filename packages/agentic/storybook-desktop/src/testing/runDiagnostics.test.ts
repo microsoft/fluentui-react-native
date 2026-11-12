@@ -46,13 +46,13 @@ test('reduces native activity to bounded counters, never window titles or comman
     elementsDestroyed: 0,
     activationCommands: 1,
     providerActivations: 2,
-    commandsTruncated: true,
     eventsTruncated: true,
+    processEventsTruncated: true,
   });
   expect(JSON.stringify(activity)).not.toContain('private');
 });
 
-test('activity counters use per-case sequence deltas, preserving advisory truncation', () => {
+test('activity counters use per-case sequence deltas', () => {
   expect(
     summarizeWindowActivity(
       {
@@ -75,9 +75,50 @@ test('activity counters use per-case sequence deltas, preserving advisory trunca
     mainWindowChanges: 0,
     elementsDestroyed: 1,
     activationCommands: 0,
-    commandsTruncated: false,
     eventsTruncated: false,
+    processEventsTruncated: false,
   });
+});
+
+test.each([false, true])('sequence gaps do not imply case truncation with process history flag %s', (eventsTruncated) => {
+  const activity = summarizeWindowActivity(
+    {
+      source: 'AX',
+      observing: true,
+      eventsTruncated,
+      events: [
+        { ageMs: 2, element: 'window', notification: 'AXMainWindowChanged', sequence: 10 },
+        { ageMs: 0, element: 'window', notification: 'AXWindowCreated', sequence: 30 },
+      ],
+      commands: [
+        { ageMs: 2, command: 'activate', outcome: 'ok', sequence: 20 },
+        { ageMs: 0, command: 'activate', outcome: 'ok', sequence: 40 },
+      ],
+    },
+    { command: 20, event: 10 },
+  );
+  expect(activity).toMatchObject({
+    events: 1,
+    windowsCreated: 1,
+    activationCommands: 1,
+    eventsTruncated: false,
+    processEventsTruncated: eventsTruncated,
+  });
+  expect(activity).not.toHaveProperty('commandsTruncated');
+});
+
+test('case event truncation requires lost cursor coverage in a truncated history', () => {
+  expect(
+    summarizeWindowActivity(
+      {
+        source: 'AX',
+        observing: true,
+        eventsTruncated: true,
+        events: [{ ageMs: 0, element: 'window', notification: 'AXWindowCreated', sequence: 30 }],
+      },
+      { command: 20, event: 10 },
+    ),
+  ).toMatchObject({ eventsTruncated: true, processEventsTruncated: true });
 });
 
 test('worker timing projection rejects nonnumeric and unbounded values without retaining extra fields', () => {

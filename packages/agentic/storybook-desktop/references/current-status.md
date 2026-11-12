@@ -69,9 +69,11 @@ attributed to those differences.
 
 Each lifecycle had one verified PID/start-time pair and one authenticated bridge
 connection. Fabric accepted one hello per baseline lifecycle; Paper accepted
-two on the same connection. Each callback selected a fresh generation
-(2, 3, 4 after the traversal's first generation), with matching keyed-mount and
-context generations. No within-lifecycle application replacement or new bridge
+two on the same connection. Each callback selected a fresh preview/context
+generation (2, 3, 4 after the traversal's first generation). The historical
+`mountGeneration` field merely copied that value; keyed remounting was
+inferred from the rendering policy, not independently observed. That derived
+field has been removed. No within-lifecycle application replacement or new bridge
 connection was observed. JS initialization/HMR is explicitly **not observed**:
 neither a hello nor the absence of a new socket proves a JS initialization count.
 The keyed generation is not an instrumented React effect-mount counter.
@@ -79,8 +81,9 @@ The keyed generation is not an instrumented React effect-mount counter.
 Native activity reports retained fixed counters only. No activation command,
 provider activation, application activation, or main/focused-window change
 was observed in these baseline cohorts; Paper recorded one application
-deactivation. Sixteen of 24 callback event samples per renderer carried a
-truncation warning. `AXUIElementDestroyed`
+deactivation. The original truncation projection combined a process-lifetime
+flag with invalid sequence-gap inference; its per-case truncation counts are
+withdrawn and cannot be reconstructed from these bounded reports. `AXUIElementDestroyed`
 notifications can describe preview elements, not necessarily closed windows.
 The bounded native event ring can be truncated, and its observations are
 advisory. These counters do not establish whether a user saw a flash.
@@ -106,7 +109,9 @@ Part of #4435. Candidate implementation: `06446c276`; instrumentation:
 selection without an upstream HTTP mutation. Controlled policy remains
 independent and still refuses protected args and foreign mutation relaying.
 Full extracted export maps are cached by source content/location within one
-owning run, including across smoke's per-story calls; manifest digest checks,
+owning run, including across smoke's per-story calls. Review corrections also
+bind cache hits to digests of the helper files read by input-policy validation.
+Manifest digest checks,
 remounts, fresh sessions, fresh workers, and native marker verification remain.
 
 ### Fabric before/after
@@ -203,7 +208,7 @@ limits apply as for Fabric.
 
 ### Candidate lifecycle parity
 
-Across each renderer's 24 passing candidate callbacks, keyed-preview/context
+Across each renderer's 24 passing candidate callbacks, preview/context
 generations remained 2/3/4 per lifecycle. Fabric matched its native marker on
 the first poll in all 24 callbacks, as did both renderer baselines. Paper's
 candidate needed one poll in 12 callbacks and two polls in 12, contributing
@@ -219,8 +224,9 @@ Candidate activity retained zero activation commands, provider activations,
 application activation/deactivation, main/focused-window changes, or window
 creation in the bounded observational cohort. Generic AX element-destruction
 counts matched baseline (Fabric 96; Paper 240), not closed-window counts.
-Sixteen Fabric and 17 Paper candidate callback samples had truncated event
-history, versus 16 each on baseline. These are advisory observations, not
+The earlier 16/17-of-24 truncation comparison was invalid: sticky
+process-history flags and globally allocated sequence gaps do not establish
+per-case loss. That comparison is withdrawn. These are advisory observations, not
 proof that no activation or visual flash occurred.
 
 ### Window-only recording limits
@@ -257,7 +263,7 @@ Selected stories were Button default, Dropdown default, and modern Callout
 default/local-point/local-rectangle. This is not a full authored-test-suite
 pass. The selected callbacks produced three source extractions and two
 same-source cache hits across smoke's separate per-story runner invocations.
-Each callback still had its own session, worker, and preview/context
+Each callback still had its own session, worker, and fresh preview/context
 generation (224–228); the application incarnation and authenticated
 connection stayed stable.
 
@@ -308,7 +314,7 @@ dispatch cancellation or disconnect, native-marker verification, bounded
 diagnostic projection, source-content/location invalidation, run ownership,
 cross-invocation cache hits, and manifest-digest rejection even on a cache hit.
 
-### Final native and aggregate validation
+### Initial native and environment-overridden aggregate validation
 
 All native/GUI and aggregate commands were serialized through the shared
 native lock, with project-local temporary files.
@@ -326,19 +332,20 @@ The self-test **passed 448/448 checks**. From the driver workspace,
 skipped. No product Swift or React-module boundary changed; Office
 module/bridging-header qualification is not applicable.
 
-The single cache-cleared `yarn clean-lage-cache && yarn lage buildci` attempt
+The initial cache-cleared `yarn clean-lage-cache && yarn lage buildci` attempt
 **failed** in scripts' negative instruction fixtures: a temporary directory
 inside ignored artifacts inherited the outer Git repository. The scripts
 workspace's `yarn test` then **passed all 76 tests** with Git discovery
-bounded by the temporary directory's parent. The next plain aggregate
-**failed** two existing timing-sensitive driver tests in parallel execution
+bounded by the temporary directory's parent. The next environment-overridden aggregate
+**failed** two timing-sensitive driver tests in parallel execution
 (`boundedCommand` termination signal and `privateStorage` timeout).
 `FURN_NATIVE_DRIVER_TEST=0 yarn test boundedCommand privateStorage --runInBand`
 then **passed 73 tests**, with ten skipped.
 
-The final plain aggregate **passed** using the repository's existing
-`TF_BUILD` serial-Jest mode and the fixture environment below, without another
-cache clear:
+An earlier local aggregate **passed** with `TF_BUILD=1` serializing each
+package's Jest run and with the fixture environment below, without another
+cache clear. This was **not PR CI mode**: `.github/workflows/pr.yml` runs
+parallel `yarn lage buildci` without these overrides.
 
 ```sh
 export TMPDIR="$PWD/apps/storybook/artifacts/refresh-reduction/tmp"
@@ -349,3 +356,83 @@ TF_BUILD=1 yarn lage buildci
 Lage reported 46 successful and 132 skipped tasks, zero pending/aborted, exit
 zero. These task skips are not test-pass counts. No source changes were made
 to the instruction validator, private storage, or bounded process runner.
+
+## 2026-11-12: refresh-reduction review corrections
+
+Part of #4435. This follow-up corrects the run-owned extraction cache and
+diagnostic interpretation without changing dispatch, per-case workers,
+context verification, activation, or native protocol semantics.
+
+- Cache entries now retain content digests for every helper module read by
+  direct-input validation, including transitive helpers and failed reads.
+  Hits recheck those digests; a changed helper reruns extraction and policy
+  validation even when the story source is unchanged. Regressions change a
+  direct or transitive helper to keyboard input after a confirmed cache hit.
+- `processEventsTruncated` reports the native process-lifetime flag.
+  `eventsTruncated` reports possible per-case history loss only when a
+  truncated history no longer covers the case cursor. Globally allocated
+  sequence gaps alone do not establish loss. The unsupported
+  `commandsTruncated` inference was removed. Tests cover sticky lifetime
+  flags, global gaps, and lost cursor coverage. Historical 16/17-of-24
+  truncation comparisons above are withdrawn, not relabeled: the original
+  bounded projections cannot reconstruct actual per-case loss.
+- The duplicate `mountGeneration` field was removed. Context/preview
+  generations are observed; keyed remounts are inferred from the default
+  rendering policy, not independently counted. A runner contract requires
+  the derived field to be absent.
+- Present phase durations include failed attempts because measurement runs
+  in `finally`. Missing durations do not establish success or zero cost.
+  A runner regression verifies attempted navigation time on failure and
+  absence of worker time when the worker was never started.
+
+### Review qualification
+
+The regression-first run failed as expected before these fixes. From the
+Storybook integration workspace,
+`yarn test extractWdioTests wdioExtractionCache runDiagnostics wdioRunner --runInBand`
+then **passed 112 tests in four suites**, including a repeat with the normal
+inherited environment. Package format/lint/build passed.
+
+From `apps/storybook`, `yarn storybook manifest --macos --paper` and
+`yarn storybook bundle --macos --paper` **passed**. A full-index CLI-API smoke
+with the app-owned configuration, Paper renderer, accessible input, and the
+Button/Dropdown/modern-Callout selection **passed 228 checks**: 223 rendered
+stories and five callbacks; ten physical callbacks were excluded by input
+policy. The five callback reports showed three source extractions, two
+cross-invocation cache hits, no synthetic mount field, and separate process
+and case history flags. The first local harness invocation failed before
+selection because plain `node` did not provision Yarn's tool PATH
+(`spawn rnx-cli ENOENT`); rerunning through `yarn node` passed without a
+product change.
+
+The plain aggregate commands below ran under the shared native lock with
+the normal inherited environment: no `TF_BUILD`, `TMPDIR`, or
+`GIT_CEILING_DIRECTORIES` overrides. Unlike the earlier locally serialized
+run, they preserve parallel Jest execution. Local Node was 24.18.0; the PR
+workflow declares Node 22, so this is not complete hosted-CI parity.
+
+| Scope                      | Exact command                                | Result                                                                                                                               |
+| -------------------------- | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| Candidate, first plain run | `yarn clean-lage-cache && yarn lage buildci` | **Failed**: `boundedCommand` expected `SIGKILL`, received `SIGTERM`; 122 Lage tasks succeeded, one failed                            |
+| Detached base `aadc2f359`  | `yarn clean-lage-cache && yarn lage buildci` | **Failed**: the same `boundedCommand` assertion plus `privateStorage`'s 10-second test timeout; 129 Lage tasks succeeded, one failed |
+
+A final plain repeat of the same cache-cleared candidate command also
+**failed** the `boundedCommand` assertion (164 Lage tasks succeeded, one
+failed). `privateStorage` passed in both candidate runs. In each candidate
+driver suite, 1222 tests passed, one failed, and 66 were skipped.
+`yarn oxfmt --check`, `yarn check-agent-instructions`, and
+`yarn markdown-link-check -c .github/markdown-link-check-config.json <file>`
+for every changed Markdown file **passed**.
+
+The detached base was installed independently after its first command
+reported missing dependencies; it did not reuse candidate workspace
+modules or outputs. This reproduces the aggregate failures before the
+refresh-reduction commits. Neither unrelated test nor implementation was
+changed. The base worktree was removed, and its orphaned Jest worker was
+terminated by its verified PID.
+
+The paired performance and recording evidence above remains evidence for
+`06446c276`, not a fresh benchmark of this correction. No new speedup or
+flash-reduction claim is made. macOS Fabric and physical-input lanes were
+**not rerun in this follow-up**; their earlier qualifications remain
+historical. Windows Fabric and Win32 Paper were **not run locally**.

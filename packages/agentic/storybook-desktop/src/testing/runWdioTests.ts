@@ -297,7 +297,6 @@ export async function runWdioStoryTests(
         const application = readApplicationIncarnation(observations?.application);
         diagnostics.lifecycle = {
           contextGeneration: ready.previewGeneration,
-          mountGeneration: ready.previewGeneration,
           jsInitializations: 'not-observed',
           ...(application ? { application } : {}),
           ...(observations?.nativeMarkerPolls === undefined ? {} : { nativeMarkerPolls: observations.nativeMarkerPolls }),

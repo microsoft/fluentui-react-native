@@ -59,3 +59,35 @@ test('identical content in different source locations retains location-specific 
   expect(other.cacheHit).toBe(false);
   expect(other.tests.get('First')!.tests[0].code).not.toBe(first.tests.get('First')!.tests[0].code);
 });
+
+test.each(['direct', 'transitive'])('rechecks changed %s helper input without a story-file edit', (kind) => {
+  const helperFile = path.join(root, 'helper.ts');
+  const leafFile = path.join(root, 'leaf.ts');
+  fs.writeFileSync(
+    sourceFile,
+    `import { desktopIt } from '@fluentui-react-native/storybook-desktop/testing';
+     export const First = { wdio: [
+       desktopIt('observes', { input: 'accessible' }, async ({ browser }) => {
+         const { probe } = await import('./helper.ts');
+         await probe(browser);
+       }),
+     ] };`,
+  );
+  const safeHelper = 'export async function probe(browser) { return browser; }';
+  fs.writeFileSync(leafFile, safeHelper);
+  fs.writeFileSync(
+    helperFile,
+    kind === 'direct'
+      ? safeHelper
+      : `export async function probe(browser) {
+           const { probe } = await import('./leaf.ts');
+           await probe(browser);
+         }`,
+  );
+  const cache = new WdioExtractionCache();
+  expect(cache.read(sourceFile).cacheHit).toBe(false);
+  expect(cache.read(sourceFile).cacheHit).toBe(true);
+
+  fs.writeFileSync(kind === 'direct' ? helperFile : leafFile, `export async function probe(browser) { await browser.keys('Tab'); }`);
+  expect(() => cache.read(sourceFile)).toThrow('sends physical keyboard input');
+});
