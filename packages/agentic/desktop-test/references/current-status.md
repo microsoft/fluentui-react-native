@@ -68,7 +68,7 @@ did not retain a portable raw-report locator; do not imply otherwise.
 | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | macOS           | Live failed-cleanup and service-restart cases; Paper separately; supervisor death with Metro/channel/helper survivors; exact attached-app preservation.                                                                                                                                                            |
 | Windows / Win32 | Same-branch MCP restart/revocation/dispose/args tests; physical console Ctrl+C requalification of `serve --agent` after the idle-CLI fix; interactive input/capture rerun; naming launched (especially uncontained packaged) apps in the claim.                                                                    |
-| Storybook       | Authenticated mutation ingress, context fencing/reconnect, consistent helper build policy, manifest provenance and separate nonces.                                                                                                                                                                                |
+| Storybook       | Authenticated mutation ingress, context fencing/reconnect, consistent helper build policy. F6 now implements strict generated provenance and independent nonces; see the F6 evidence below for qualification limits.                                                                                               |
 | Recovery        | Durable uncertainty is wired in both paths; live restart qualification, ledger and exact-resource reconciliation still precede automatic reclaim. The workload claim records a Node.js-clock start time, so it needs a helper-described start time before claim inspection can prove a live owner or a reused PID. |
 | Concurrency     | No physical-input suites in parallel on one interactive desktop. Separate machines may qualify independent endpoints.                                                                                                                                                                                              |
 | Reliability     | Establish the required repeated-run window rather than interpreting aggregate past successes as a pass.                                                                                                                                                                                                            |
@@ -752,3 +752,98 @@ not physical Ctrl+C. Both owned app/service processes exited, the recorded
 ports were free, and the per-user claim and default descriptor were absent.
 The separate `serve --agent` interrupt limitation above is fixed but not yet
 requalified on Windows.
+
+## F6 generated manifest provenance — 2026-11-12
+
+Implementation source: `efd6dadeda87344911fb4000fe293c686c678602`, with
+resolved-case compatibility in `fa0681635` and the awaited shared workload
+claim in `a5de740f01ca025bf548a923ae4561b36fc9872b`.
+Generated driver manifests are strict version 3 and contain no secrets.
+Version-1 private credentials use independent bridge and macOS attachment
+nonces. The owner-private runtime module contains only bridge data and a
+data-only `export default` statement. The parent's independent handoff pins
+manifest/credential/runtime hashes and the resolved helper; the actual channel
+child validates that binding and re-verifies the executable before a helper
+can spawn. Metro receives the canonical schema locator from trusted process
+configuration, not from editable generated files. Channel lifecycle placement
+and application lease ownership have not moved.
+
+**Confirmed portable/local boundary checks:** integration package format,
+lint, build, and all 364 tests passed; four Windows-only integration tests
+were skipped on macOS. Runtime format, lint, build, and all 33 tests passed.
+The ledger-owning desktop-test package passed format, lint, build, and
+380 tests with one skip after building the MCP public entry required by its
+standalone-consumer fixture; the first test run failed only for that missing
+compiled entry.
+Controlled Metro fixtures cover missing trust inputs, unknown fields, and
+manifest/runtime tampering. Actual channel-child fixtures reject substituted
+helper path/hash, helper bytes, and unknown fields before listening or spawning.
+The real macOS private-storage adapter round-trips the records with directory
+mode `0700` and file mode `0600` and rejects a permissive credential mode.
+
+**Confirmed native helper checks:** on macOS 27.2.1 arm64, the locked
+`FURN_NATIVE_DRIVER_TEST=1 yarn workspace
+@fluentui-react-native/desktop-driver test --runInBand` run passed 1,240 tests;
+47 platform/capability tests were skipped (75 suites passed, six skipped).
+Evidence: `apps/storybook/artifacts/f6/native-contract.log`. The explicitly
+built helper uses the stable `FURN Desktop Driver Development` identity;
+`doctor --platform macos --permissions` reported ready, unlocked/on-console,
+and Screen Recording preflight true, but Accessibility and PostEvent preflight
+false. No permission prompts, privacy changes, or TCC resets were requested.
+The native consumer runs below must not be interpreted as passed from that
+helper readiness result.
+
+**Native consumer preparation:** Fabric bundle passed
+(`apps/storybook/artifacts/f6/bundle-fabric.log`). Initial Fabric prep failed
+because CocoaPods called `JSON.fast_generate` after Ruby selected JSON 3.1.
+Selecting the already installed JSON 2.18 through a worktree-local Ruby
+preload, without installing or modifying shared tools, made prep pass
+(`prep-fabric-json2.log`, run `8df5c79a-9618-423d-b65d-e9828644a75b`).
+The first Fabric smoke exposed rejection of the extractor's legitimate
+resolved `inputSource` metadata; `fa0681635` fixes it and adds declared/derived
+descriptor regressions while preserving unknown-field refusal.
+
+**Fabric native consumer: blocked, not passed.** The corrected smoke built and
+launched the app, started the verified channel, and reached authenticated
+bridge epoch recording. Native attach then reported Accessibility
+`apiDisabled` (`-25211`), and session creation failed because the target exposed
+no supported click input mode. No stories or tests executed.
+Evidence: `apps/storybook/artifacts/f6/smoke-fabric-resolved-options.log` and
+`apps/storybook/artifacts/desktop/65fb216f-89ee-43db-86a6-333b3d91331e/run.json`.
+The harness's AppleEvent cleanup also timed out (`-1712`); its leftover app
+process was verified against this worktree's executable, terminated by that
+exact PID only, and confirmed gone. No privacy workaround was attempted.
+
+**Paper native consumer: blocked, not passed.** Paper bundle and prep passed
+with the same existing-JSON-2 selection (`bundle-paper.log`, run
+`3c281fb3-eb3a-4125-a189-86ced929d6ad`; `prep-paper.log`, run
+`9b575663-fa72-4625-9f09-b745bfa1e83e`). Paper smoke also built and launched
+the app and reached bridge epoch recording, then failed on Accessibility
+`apiDisabled` and no supported click input mode. Zero tests executed.
+Evidence: `apps/storybook/artifacts/f6/smoke-paper.log` and
+`apps/storybook/artifacts/desktop/cfab6e50-9b38-45d3-b114-05b3ea995037/run.json`.
+Its AppleEvent cleanup timed out as well; the exact worktree-owned leftover
+app PID was verified, terminated, and confirmed gone. Positive Fabric/Paper
+traversal and authored-case qualification remain pending an authorized
+Accessibility/PostEvent-capable host.
+
+**Final repository checks:** after `yarn clean-lage-cache`, the locked
+`TF_BUILD=1 yarn lage buildci --concurrency 4` passed all 178 tasks.
+The existing test wrapper uses `TF_BUILD` only to run Jest in-band; it does not
+skip agentic tests. Evidence:
+`apps/storybook/artifacts/f6/buildci-serialized-jest.log`.
+The first aggregate attempt caught formatting of the awaited claim (fixed
+in `fa0681635`). A subsequent default-parallel aggregate passed 103 tasks but
+failed the existing bounded-command test with `SIGTERM` rather than the
+expected `SIGKILL`; a child startup/deadline race under load is inferred, not
+proven. The in-band aggregate was its single justified retry; no unrelated
+test or production behavior was changed.
+
+Windows/Win32 native execution is not available on this Mac. The PR's
+`windows-storybook` setup runs the real Windows private-storage contract
+(owner/DACL/root identity/reparse/hard-link refusal), and both Windows Fabric
+and Win32 Paper smoke jobs exercise publication, child helper verification,
+private runtime-module resolution, and live bridge authentication. The
+platform-neutral negative provenance/schema fixtures run in the Ubuntu unit
+lane. These CI lanes are sufficient for the changed Windows-specific paths;
+their same-branch results remain pending, not local passes.
