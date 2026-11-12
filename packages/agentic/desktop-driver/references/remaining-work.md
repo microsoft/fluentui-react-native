@@ -1094,8 +1094,10 @@ passes the real Paper secondary semantic case. See the separate
   proof of the legacy Callout's native command outcome.
 - The final helper reruns
   `yarn test --runInBand operations.contract win32Fixture.contract nativeDriver`
-  with `$env:FURN_NATIVE_DRIVER_TEST = '1'`.
-- Coordinator review and the clean-cache repository aggregate complete.
+  with `$env:FURN_NATIVE_DRIVER_TEST = '1'`, including registered-popup
+  liveness during failed/hung content probes, the shared discovery deadline
+  and deferred retry, and truthful listed/tracked publication.
+- Coordinator review follow-ups and the clean-cache repository aggregate complete.
 
 These runs are paused because session 1 disconnected, locked, and lost its
 input desktop. Resume native/GUI/physical work only with an Active, unlocked

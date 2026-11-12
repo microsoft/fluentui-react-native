@@ -20,8 +20,8 @@ Remove-Item Env:\FURN_NATIVE_DRIVER_TEST
 ```
 
 Without `FURN_NATIVE_DRIVER_TEST=1` the suite is skipped. Use `--runInBand`: the scenarios share one desktop and one
-build cache, and each starts its own helper process because the mutation quarantine is process-wide. A full run takes
-about one minute. The onscreen scenario needs an unlocked interactive desktop for hit testing and capture; every other
+build cache, and each starts its own helper process because the mutation quarantine is process-wide. Hang scenarios
+include bounded provider-recovery waits. The onscreen scenario needs an unlocked interactive desktop for hit testing and capture; every other
 scenario places the window off every monitor. `yarn test --runInBand protectedService` runs the protected-service suite,
 and `yarn test --runInBand operations.contract` runs the agent-operation
 suite described below. The latter activates the fixture and sends real
@@ -78,7 +78,11 @@ The default tree has 18 nodes; `--nodes N` yields about `N + 24` in total.
   only `ScrollIntoView` are refused before dispatch, without quarantine; an ordinary Invoke remains usable.
 - **Untitled tool roots:** only visible, positive-size application content owned by the main window is registered.
   Unowned roots, unrelated owner chains, empty content, hidden roots, zero-size roots, and tooltip roots stay excluded.
-  Closing the content root retires its identity without affecting the main window.
+  Publication marks the admitted popup as both listed and tracked; closing it retires its identity without affecting the main window.
+- **Popup liveness under a hung provider:** an admitted popup stays listable and its rectangle readable under the same identity.
+  New-popup discovery remains bounded across multiple candidates, and deferred content appears after the provider recovers.
+  The helper self-test separately injects failed probes and an exhausted shared deadline to prove that registered popups
+  bypass UIA and unprobed candidates retry on the next listing.
 - **Hung provider (`--hang-ms 14000`):** reads and clicks fail as `automation-failed`, windows stay listable, and the
   helper recovers once the app responds.
 - **Stuck provider (`--stuck-ms 8000`):** the first click settles as `mutation-indeterminate`, later guarded mutations

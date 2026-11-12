@@ -474,46 +474,54 @@ void Automation::Initialize() {
   automation_ = automation;
 }
 
-bool Automation::HasWindowContent(HWND window, DWORD processId, const CancellationToken& token) {
+bool Automation::HasWindowContent(HWND window, DWORD processId, ULONGLONG expiresAt, const CancellationToken& token) {
   token.ThrowIfCancelled();
+  const ULONGLONG now = GetTickCount64();
+  if (now >= expiresAt) return false;
+  const DWORD timeoutMs = static_cast<DWORD>(std::min<ULONGLONG>(expiresAt - now, kProviderCallTimeoutMs));
   const auto automation = automation_;
   const auto walker = contentWalker_;
   const auto content = std::make_shared<bool>(false);
   try {
-    const HRESULT result = BoundedRead(
-        [automation, walker, window, processId, content]() {
+    const HRESULT result = RunBoundedProviderCall(
+        ProviderCall::Read, [automation, walker, window, processId, content, expiresAt]() {
+          if (GetTickCount64() >= expiresAt) return kUiaTimeoutResult;
+          // A late read must not start another transaction after the deadline.
+          const auto checked = [expiresAt](HRESULT result) {
+            return SUCCEEDED(result) && GetTickCount64() >= expiresAt ? kUiaTimeoutResult : result;
+          };
           winrt::com_ptr<IUIAutomationElement> root;
-          HRESULT result = automation->ElementFromHandle(window, root.put());
+          HRESULT result = checked(automation->ElementFromHandle(window, root.put()));
           if (FAILED(result) || !root) return FAILED(result) ? result : E_FAIL;
           int rootProcessId = 0;
-          result = root->get_CurrentProcessId(&rootProcessId);
+          result = checked(root->get_CurrentProcessId(&rootProcessId));
           if (FAILED(result)) return result;
           if (rootProcessId != static_cast<int>(processId)) return S_FALSE;
           UIA_HWND rootWindow{};
-          result = root->get_CurrentNativeWindowHandle(&rootWindow);
+          result = checked(root->get_CurrentNativeWindowHandle(&rootWindow));
           if (FAILED(result)) return result;
           if (rootWindow != window) return S_FALSE;
           CONTROLTYPEID rootType = 0;
-          result = root->get_CurrentControlType(&rootType);
+          result = checked(root->get_CurrentControlType(&rootType));
           if (FAILED(result)) return result;
           if (rootType == UIA_ToolTipControlTypeId) return S_FALSE;
           winrt::com_ptr<IUIAutomationElement> child;
-          result = walker->GetFirstChildElement(root.get(), child.put());
+          result = checked(walker->GetFirstChildElement(root.get(), child.put()));
           if (FAILED(result) || !child) return FAILED(result) ? result : S_FALSE;
           int childProcessId = 0;
-          result = child->get_CurrentProcessId(&childProcessId);
+          result = checked(child->get_CurrentProcessId(&childProcessId));
           if (FAILED(result)) return result;
           BOOL isContent = FALSE;
-          result = child->get_CurrentIsContentElement(&isContent);
+          result = checked(child->get_CurrentIsContentElement(&isContent));
           if (FAILED(result)) return result;
           CONTROLTYPEID type = 0;
-          result = child->get_CurrentControlType(&type);
+          result = checked(child->get_CurrentControlType(&type));
           if (FAILED(result)) return result;
           *content = childProcessId == static_cast<int>(processId) && isContent != FALSE &&
                      type != UIA_ToolTipControlTypeId;
           return S_OK;
         },
-        "Reading the owned window content");
+        timeoutMs, "Reading the owned window content", kErrorAutomationFailed);
     token.ThrowIfCancelled();
     return SUCCEEDED(result) && *content;
   } catch (const HelperError&) {

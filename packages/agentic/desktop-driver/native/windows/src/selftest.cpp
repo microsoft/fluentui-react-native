@@ -965,12 +965,12 @@ class WindowThread {
   WindowThread(const WindowThread&) = delete;
   WindowThread& operator=(const WindowThread&) = delete;
 
-  HWND Create(const wchar_t* className, const wchar_t* title, WNDPROC procedure = DefWindowProcW) {
+  HWND Create(const wchar_t* className, const wchar_t* title, WNDPROC procedure = DefWindowProcW, HWND owner = nullptr) {
     HWND window = nullptr;
-    Run([&window, className, title, procedure]() {
+    Run([&window, className, title, procedure, owner]() {
       RegisterTestWindowClass(className, procedure);
       window = CreateWindowExW(WS_EX_NOACTIVATE | WS_EX_TOOLWINDOW, className, title, WS_POPUP, -32000, -32000, 64, 64,
-                               nullptr, nullptr, GetModuleHandleW(nullptr), nullptr);
+                               owner, nullptr, GetModuleHandleW(nullptr), nullptr);
       if (window != nullptr) {
         ShowWindow(window, SW_SHOWNOACTIVATE);
       }
@@ -1456,6 +1456,85 @@ void TestWindowEventHooks() {
   Check(!monitor.IsObserving(processId), "closing the last lease stops observing its process");
   Check(FailureCode([&]() { applications.WindowEventLog(leaseId); }) == kErrorNoSuchLease,
         "a closed lease has no event log");
+}
+
+void TestRegisteredToolWindowLiveness() {
+  WindowThread windows;
+  const HWND primary = windows.Create(L"FurnSelfTestToolPrimary", L"Tool primary");
+  const HWND popup = windows.Create(L"FurnSelfTestToolPopup", L"", DefWindowProcW, primary);
+  ApplicationManager applications;
+  const CancellationToken token;
+  const std::string leaseId = applications.AdoptWindowForTesting(primary, L"Tool primary").id;
+  const auto findPopup = [popup](const std::vector<WindowInfo>& listed) {
+    const auto found = std::find_if(listed.begin(), listed.end(),
+                                     [popup](const WindowInfo& info) { return info.window == popup; });
+    return found == listed.end() ? std::string{} : found->id;
+  };
+  std::size_t probes = 0;
+  const auto initial = applications.Windows(leaseId, token, [&](HWND window, DWORD processId, ULONGLONG) {
+    probes += 1;
+    return window == popup && processId == GetCurrentProcessId();
+  });
+  const std::string popupId = findPopup(initial);
+  Check(!popupId.empty() && probes == 1, "an owned tool popup is admitted once after content proof");
+  if (popupId.empty()) return;
+
+  probes = 0;
+  const auto unavailable = applications.Windows(leaseId, token, [&](HWND, DWORD, ULONGLONG) {
+    probes += 1;
+    return false;
+  });
+  Check(findPopup(unavailable) == popupId && probes == 0,
+        "a registered tool popup stays listable without repeating a failed content probe");
+
+  std::vector<WindowInfo> failed;
+  const std::string code = FailureCode([&]() {
+    failed = applications.Windows(leaseId, token, [&](HWND, DWORD, ULONGLONG) -> bool {
+      probes += 1;
+      throw HelperError(kErrorAutomationFailed, "Injected content probe failure.");
+    });
+  });
+  Check(code == "none" && findPopup(failed) == popupId && probes == 0,
+        "a registered tool popup never enters a failing provider probe");
+  Check(findPopup(applications.Windows(leaseId, token)) == popupId,
+        "a registered tool popup remains listable when content discovery is unavailable");
+
+  const json::Value log = applications.WindowEventLog(leaseId);
+  const json::Value* publication = log.Find("publication");
+  const json::Value* published = publication == nullptr ? nullptr : publication->Find("windows");
+  const auto containsListedPopup = [](const json::Value& entry) {
+    return entry.StringField("className") == "FurnSelfTestToolPopup" &&
+           entry.BoolField("listed") && entry.BoolField("tracked");
+  };
+  Check(published != nullptr &&
+            std::any_of(published->Items().begin(), published->Items().end(), containsListedPopup),
+        "publication marks an admitted tool popup as both listed and tracked");
+
+  const HWND deferredFirst = windows.Create(L"FurnSelfTestDeferredTool", L"", DefWindowProcW, primary);
+  const HWND deferredSecond = windows.Create(L"FurnSelfTestDeferredTool", L"", DefWindowProcW, primary);
+  probes = 0;
+  const ULONGLONG started = GetTickCount64();
+  const auto bounded = applications.Windows(leaseId, token, [&](HWND, DWORD, ULONGLONG expiresAt) {
+    probes += 1;
+    const ULONGLONG now = GetTickCount64();
+    if (now < expiresAt) Sleep(static_cast<DWORD>(expiresAt - now + 10));
+    return false;
+  });
+  Check(probes == 1 && GetTickCount64() - started < 2500 && bounded.size() == 2 && findPopup(bounded) == popupId,
+        "one exhausted discovery deadline defers new popups but keeps registered windows listable");
+
+  probes = 0;
+  ULONGLONG sharedDeadline = 0;
+  bool shared = true;
+  const auto retried = applications.Windows(leaseId, token, [&](HWND window, DWORD, ULONGLONG expiresAt) {
+    probes += 1;
+    if (sharedDeadline == 0) sharedDeadline = expiresAt;
+    shared = shared && sharedDeadline == expiresAt;
+    return window == deferredFirst || window == deferredSecond;
+  });
+  Check(probes == 2 && shared && retried.size() == 4 && findPopup(retried) == popupId,
+        "a later listing retries deferred candidates under one fresh shared discovery deadline");
+  applications.CloseApplication(leaseId, token);
 }
 
 void TestDriverWindowEvents() {
@@ -3871,6 +3950,7 @@ int RunSelfTest() {
   TestLeaseRegistrationFailure();
   TestAttachedCloseKeepsQuarantine();
   TestWindowEventHooks();
+  TestRegisteredToolWindowLiveness();
   TestDriverWindowEvents();
   TestInputEnvironment();
   TestInjectionIntegrity();

@@ -269,12 +269,26 @@ Global title discovery still excludes untitled tool-window roots. Within an
 exact-process application lease, `windows` also admits an untitled tool popup
 when it is visible, has positive native bounds, and its same-process owner
 chain reaches the verified primary window. Known tooltip and IME helper
-classes stay excluded. A bounded UIA content-view probe must verify the exact
-native root handle/process and find an exact-process content child; tooltip content and unreadable content do not
-qualify. This probe retains no element records or whole-subtree cache and never
-quarantines the session. The helper rechecks ownership, process, visibility,
-bounds, and the primary/candidate fingerprints after the provider read before
-registering the opaque window identity.
+classes stay excluded. Initial admission requires a bounded UIA content-view
+probe to verify the exact native root handle/process and find an exact-process
+content child; tooltip content and unreadable content do not qualify. The
+helper rechecks ownership, process, visibility, bounds, and the
+primary/candidate fingerprints after the provider read before registering the
+opaque window identity.
+
+An admitted popup remains listable through Win32 liveness checks while its
+lease, process, thread, class, visibility, bounds, and owner chain still match.
+It is not probed again, so a provider timeout or temporary content re-layout
+cannot masquerade as window closure. All new candidates share one 1,000 ms
+discovery deadline per `windows` call, including `ElementFromHandle` and content
+reads; candidates not proved before that deadline are omitted and retried on a
+later listing. Exhausting discovery never removes an already-admitted window.
+The probe retains no element records or whole-subtree cache and never
+quarantines the session; cancellation still propagates.
+
+`windowEvents.publication.windows[].listed` includes admitted tool popups
+using those same native identity/ownership checks. It does not repeat UIA
+discovery or report an admitted live popup as `listed: false, tracked: true`.
 
 ### Input authority
 

@@ -755,3 +755,103 @@ The post-review clean-cache repository aggregate and final native/physical
 reruns are still pending. Outstanding qualification stays tracked in
 [remaining work](remaining-work.md) / #4441; no issue is closed and no
 final-helper physical-success claim is made here.
+
+## Windows Fabric and Win32 Paper — popup liveness review fixes — 2026-11-12 UTC
+
+**Observed source base:** `96b91661e2886aa4a22bd3f08b485e51d11c90d7`
+plus the then-uncommitted review fixes below. This section supplements the
+earlier Windows evidence; it does not rerun or relabel that evidence. The
+earlier section's final helper was the pre-review `b47212dc…` artifact.
+No macOS code, ledger section, or qualification changed.
+
+### Admission, liveness, and publication
+
+Registered untitled popups now bypass UIA content discovery when their lease,
+process, thread/class, primary identity, and owned-content native predicates
+still match. A failed content read or temporary re-layout therefore cannot
+remove a live, admitted popup from `windows`. New candidates share one
+1,000 ms deadline per listing; UIA waits use its remaining time, late reads
+stop before another transaction, and unprobed candidates retry later.
+Exhausting discovery does not skip registered windows later in the listing.
+Publication diagnostics now include admitted live popups as `listed` as well
+as `tracked`, without another content probe.
+
+**Test-first authoring:** the gated fixture regressions and native self-test
+were added before production edits. The self-test injects false, throwing,
+and unavailable content probes, an exhausted shared deadline, a later retry,
+and listed/tracked publication assertions. The fixture checks hung-provider
+popup retention/rectangle reads and bounded new-popup discovery/recovery;
+its existing admission case also checks publication. Native red/green
+execution is **Not run**, not inferred as passed: the desktop remains paused.
+
+### Compile-only and portable validation
+
+The helper-only build used the shared W3 lock, no campaign, and no launch.
+The following build command is shown with its cache-root argument relative to
+the driver package; the recorded invocation resolved that path absolutely:
+
+```powershell
+yarn desktop-driver build-driver --platform windows --cache-root ..\..\..\artifacts\desktop\w3-review\native-cache
+```
+
+**Passed** x64 release compilation, including the new native self-test.
+Lock acquisition was at `2026-11-12T17:45:53Z`, and the wrapper released
+successfully with exit 0. No helper, fixture, REX, packaged app, or Metro was
+launched. This is compilation, not native runtime qualification.
+
+- Artifact: `eb91ef8a4164080bcae787aacce3fd5aa5556d8c3d0b22d0cd0c661a50934066`
+- Source digest: `89cc81fbb72cb8a79852e5d4d90ce96d8b2982283086236b860289f2664ac557`
+- Build fingerprint: `7b38faa5c0eeba1ace7441d613a3f0c126915f78eff58c4a32466825c4e11854`
+- Build log: `artifacts\desktop\w3-review\helper-build.log`
+
+From `packages\agentic\desktop-driver`, with native opt-in unset:
+
+```powershell
+Remove-Item Env:FURN_NATIVE_DRIVER_TEST -ErrorAction SilentlyContinue
+yarn test --runInBand win32Fixture nativeDriver
+yarn test --runInBand
+```
+
+**Passed:** focused portable checks, eight tests; 20 native tests **skipped**.
+The full portable suite passed 73 suites / 1,201 tests, with eight native
+suites / 95 tests **skipped**, not passed. Logs are
+`tests-authored-portable.log`, `focused-portable-final.log`, and
+`portable-tests.log` beneath `artifacts\desktop\w3-review`.
+
+From the checkout root, **passed**:
+
+```powershell
+yarn workspace @fluentui-react-native/desktop-driver format
+yarn workspace @fluentui-react-native/desktop-driver lint
+yarn workspace @fluentui-react-native/desktop-driver build
+```
+
+The README, protocol, helper/fixture references, and patch changeset describe
+the same policy. FDR1 fields, commands, and `native/protocol.json` remain
+unchanged. Root `yarn oxfmt --check`, `git diff --check`, and
+`yarn markdown-link-check -c .github\markdown-link-check-config.json <changed-file>`
+**passed** for all seven changed Markdown files (66 links).
+Committed changeset validation follows this review-fix commit.
+
+### Remaining session-gated runs
+
+One permitted check at **2026-11-12T17:52:11Z** observed remote session 1 as
+Disconnected, locked, LogonUI running, with no input desktop. No GUI or native
+contract was attempted; no reconnect or session move was attempted.
+
+Still **Not run (session disconnected / W3 desktop grant required)**:
+
+- Final-helper Fabric main/secondary semantic case.
+- Fabric and Paper secondary physical clicks, under `-RequirePhysical`.
+- Final native selector below, including the new failed/hung-probe,
+  shared-deadline/retry, and publication regressions plus the native self-test.
+
+```powershell
+$env:FURN_NATIVE_DRIVER_TEST = '1'
+yarn test --runInBand operations.contract win32Fixture.contract nativeDriver
+```
+
+The clean-cache repository aggregate is **Not run** in this review-fix
+segment; W1 holds the buildci-only grant. It remains required before
+publication. The native cases remain in [remaining work](remaining-work.md)
+and #4441; no new native pass, physical success, or issue closure is claimed.

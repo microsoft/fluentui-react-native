@@ -635,7 +635,9 @@ CommandResult Driver::ExecuteCommand(const std::string& command, const json::Val
     result.result = json::Value::Array();
     for (const WindowInfo& info : applications_.Windows(
              lease->StringField("id"), token,
-             [&](HWND window, DWORD processId) { return automation_.HasWindowContent(window, processId, token); })) {
+             [&](HWND window, DWORD processId, ULONGLONG expiresAt) {
+               return automation_.HasWindowContent(window, processId, expiresAt, token);
+             })) {
       result.result.Append(WindowSummary(info));
     }
     return result;
