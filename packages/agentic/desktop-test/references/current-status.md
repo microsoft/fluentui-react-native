@@ -1103,7 +1103,7 @@ Windows driver-only native suite and ordinary E2E/smoke jobs do not exercise
 the new harness survivor contracts; Windows CI is insufficient for those
 gates. This is partial F10-M delivery, not full issue completion.
 
-### Final repository validation
+### Pre-review repository validation
 
 At source `48717724f0df1e8f89d76b66c48d37fac93e871b`,
 `yarn clean-lage-cache` passed once, followed by the locked aggregate:
@@ -1184,3 +1184,28 @@ under the exclusive lock; log:
 `artifacts/desktop/f10m/review-harness-final.log`.
 These safety passes do not close any positive AX, physical-input, renderer,
 descendant, interrupted-publication or Windows-native gate above.
+
+### Final review-fix repository validation
+
+At clean source `e74043b0e6eb5b452e9023bc60c70ba6c9540600`, one combined
+clean-cache aggregate passed under the exclusive native-validation lock:
+
+```sh
+env -u FURN_NATIVE_DRIVER_TEST \
+  -u FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY \
+  -u FURN_DESKTOP_DRIVER_CACHE_ROOT \
+  TMPDIR="$PWD/artifacts/desktop/f10m/review-buildci-tmp" \
+  GIT_CEILING_DIRECTORIES="$PWD/artifacts/desktop/f10m/review-buildci-tmp" \
+  TF_BUILD=1 \
+  bash -c 'yarn clean-lage-cache && yarn lage buildci --concurrency 4'
+```
+
+Result: **passed, 178 successful tasks, 0 skipped, 0 pending/aborted/failed**.
+All owning workspace aggregate tasks passed; native-only overrides were not
+inherited. `TF_BUILD=1` retains the supported in-band Jest task, and the Git
+ceiling isolates project-local temporary Git fixtures. No source, dependency or
+test waiver was needed. Log:
+`artifacts/desktop/f10m/review-buildci-final.log`.
+The code remains the native-qualified `62e6552028ea8fb81e76d430379321145fab709c`;
+subsequent changes record evidence only. Positive native acceptance gates remain
+open, so delivery is draft and does not close #4446.

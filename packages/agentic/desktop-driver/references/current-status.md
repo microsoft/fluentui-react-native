@@ -539,3 +539,13 @@ Raw evidence is
 `packages/agentic/desktop-test/artifacts/desktop/application-ownership-JMEGuu/evidence.json`;
 commands and exact primary identities are in the harness ledger.
 Positive AX and renderer qualification remain blocked/not run as above.
+
+The final review-fix `yarn clean-lage-cache && yarn lage buildci --concurrency 4`
+passed under the exclusive lock at clean source
+`e74043b0e6eb5b452e9023bc60c70ba6c9540600`: 178 successful tasks,
+0 skipped/pending/aborted/failed. Project-local TMPDIR/Git-ceiling isolation and
+the declared `TF_BUILD=1` in-band test task were used, with native-only
+signing/cache/opt-in overrides removed. Log:
+`artifacts/desktop/f10m/review-buildci-final.log`.
+The harness ledger records the exact invocation. This aggregate is portable
+repository validation, not additional positive native qualification.
