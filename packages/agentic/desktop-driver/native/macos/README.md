@@ -40,7 +40,7 @@ Accessibility.
 | `ObservationSelfTest.swift`            | Synthetic-tree, randomized differential, and command checks for `observe`   |
 | `ServiceIdentitySelfTest.swift`        | URL, claim, listener-policy, and live describe/verify checks                |
 | `InputIntegritySelfTest.swift`         | Recorded input: counted buttons and drags, cancelled clicks, fail-closed    |
-| `PhysicalInputSelfTest.swift`          | External-hit identity, foreground fallback, and verified keyboard clear     |
+| `PhysicalInputSelfTest.swift`          | Hit-owner scope, foreground fallback, and verified keyboard clear           |
 | `HostLifecycleSelfTest.swift`          | In-process host: end of input, write failure, invalid JSON, queued work     |
 | `ApplicationTerminationSelfTest.swift` | Termination verification against fake and real child processes              |
 | `CaptureSelectionSelfTest.swift`       | Pure capture-window selection and `visible` without geometry                |
@@ -406,10 +406,12 @@ A physical click first hit-tests its target. When another element owns the
 point, `element click intercepted` names the occluding element, or the external
 application and process that own it.
 
-An external hit has an opaque window identity distinct from the target,
-including when it belongs to another window of the same application. This lets
-the agent operation raise the target and recheck instead of mistaking an
-external obstruction for one inside the target window. A hit on the target's
+Only a hit proven to belong to another process has an opaque window identity
+distinct from the target, allowing the agent to activate the target and recheck.
+A same-process covering window, or a hit whose owner cannot be established,
+retains the target's obstruction scope and is refused before activation, with
+effect `none`. Raising through a same-application popup could dismiss or reorder
+it, so that is not a physical click. A hit on the target's
 own window or chrome is not proof that its descendants receive input:
 genuinely covered or clipped controls remain refused.
 

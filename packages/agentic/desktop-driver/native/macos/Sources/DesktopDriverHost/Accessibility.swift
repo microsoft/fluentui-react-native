@@ -1019,12 +1019,17 @@ final class AccessibilityEngine {
     let windowFrame = (try? window.currentFrame()) ?? .zero
     var ownerID: pid_t = 0
     var name = "External desktop window"
-    if AXUIElementGetPid(hit, &ownerID) == .success {
-      let owner = processIdentity(ownerID)
-      let ownerName = owner["name"] as? String ?? "unknown application"
-      name = ownerID == window.processID
-        ? "Another window of the target application"
-        : "External desktop window of \(ownerName) (pid \(ownerID))"
+    // Same-process and unproven owners retain the agent's no-activation obstruction scope.
+    var hitWindowID = window.id
+    if AXUIElementGetPid(hit, &ownerID) == .success && ownerID > 0 {
+      if ownerID == window.processID {
+        name = "Another window of the target application"
+      } else {
+        let owner = processIdentity(ownerID)
+        let ownerName = owner["name"] as? String ?? "unknown application"
+        name = "External desktop window of \(ownerName) (pid \(ownerID))"
+        hitWindowID = externalID
+      }
     }
     return ElementSnapshot(
       id: externalID,
@@ -1048,7 +1053,7 @@ final class AccessibilityEngine {
       text: nil,
       value: nil,
       visible: .supported(true),
-      windowID: externalID
+      windowID: hitWindowID
     )
   }
 

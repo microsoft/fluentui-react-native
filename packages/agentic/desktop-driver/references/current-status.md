@@ -488,7 +488,7 @@ self-contained ledger commit `9393fe896`. Normal merge `adde47dfd` makes
 that branch an ancestor of E. Its three-dot diff contains only E-owned
 files, not the backport, manifest, lockfile, or Native Core documents.
 All original implementation commits, including `1492afe57`, are retained.
-The final
+The phase-1
 signed helper source digest is
 `26c8f8e9060d0e10b26d6b7cab0ced556a172b29c1c14aac2429ce3e0773ebea`.
 Local evidence is under `artifacts/desktop/f16-macos-physical/`, with consumer
@@ -507,18 +507,24 @@ reports under `apps/storybook/artifacts/desktop/<run-id>/`.
   932 × 782: Input FocusTreatment's entry field started at window-relative
   y = 31.5 while its preview started at y = 76, and the actual hit was the
   Tone combobox. LiteUI's fixed-height, centered decorator placed oversized
-  stories behind native chrome. Its macOS/Windows decorator now uses the
+  stories behind native chrome. Its macOS decorator now uses the
   existing Win32 pattern: a scrollable viewport with naturally growing
-  content, centering only when there is spare space. No hit-test ancestor is
+  content, centering only when there is spare space. Windows retains the
+  prior non-scrolling container; the review added an explicit platform
+  entrypoint and a regression that rejects the extra Windows scroller.
+  No hit-test ancestor is
   accepted as the target and no story assertion changed. The unchanged
   oversized Input callback now passes, including all native focus and
   geometry assertions. At normal geometry the real descriptor's MCP
   Checkbox click, checked state, and physical receipt pass. Separately, the native
   `externalWindowSnapshot` incorrectly assigned an external hit the target
   window's identity, preventing the agent operation's foreground activation.
-  External hits now have distinct opaque window identities, including other
-  windows of the same application. A native regression failed before that
-  fix; existing in-window obstruction checks remain unchanged. Two attempts
+  Only hits proven to belong to another process now have distinct opaque
+  window identities. Same-process covering windows and unproven owners retain
+  the target's no-activation obstruction scope: raising through a popup could
+  dismiss or reorder it. Review regressions failed for both owner cases
+  before that correction; agent coverage verifies `obscured`, effect `none`,
+  and no activation or pointer input. Two attempts
   to place a standalone external fixture in the foreground did not establish
   the fixture precondition; they are not external-occlusion qualification.
   At 480 × 302 the Controls addon still covers the Checkbox's native center,
@@ -740,7 +746,7 @@ legacy macOS compatibility jobs retain their `physicalClick` mask: fixing
 external-hit identity and passing managed local input do not qualify hosted
 foreground behavior or remove genuine clipped/covered controls.
 
-### Final repository acceptance
+### Phase-1 repository checks (plain gate not accepted)
 
 - **Failed, initial aggregate:** the required locked
   `yarn clean-lage-cache && yarn lage buildci` first stopped on this ledger's
@@ -757,12 +763,14 @@ foreground behavior or remove genuine clipped/covered controls.
   timeout, or assertion in this area was modified
   (`buildci-final-retry.log`, `buildci-final-complete.log`, and
   `bounded-command-focused-final.log`).
-- **Passed, final locked aggregate:** `TF_BUILD=1 yarn lage buildci`, using
+- **Passed, serial diagnostic only:** `TF_BUILD=1 yarn lage buildci`, using
   the repository's existing serial-Jest mode in `scripts/src/tasks/jest.ts`,
   completed **18 tasks with 160 cached/skipped tasks**, zero pending or
   aborted tasks, and exit code 0 (`buildci-final-serial.log`). There was
   no second cache clear. Serial execution does not change the selected
-  assertions or establish the earlier timing cause.
+  assertions or establish the earlier timing cause. This is not acceptance
+  of the PR's plain, parallel `yarn lage buildci` gate; that gate failed twice
+  locally as recorded above.
 - **Passed:** changed Markdown link checks for all **11 files**, root
   `yarn oxfmt --check`, `yarn check-agent-instructions`, and
   `git diff --check`, plus `yarn change:check`. All source changesets were
@@ -785,9 +793,13 @@ this is not a promise to click covered content. The external-occlusion
 fixture did not establish its foreground precondition, so that native
 scenario remains unqualified.
 
-The shared viewport's Windows/Win32 native behavior, hosted macOS
-foreground behavior, macOS FluentTester, and other native application
-hosts were not run locally. Native Core's module/bridging-header probes
+Windows and Win32 native hosts were not run locally. Windows' shared
+non-scrolling layout has been restored to the baseline; the new scrollable
+entrypoint is macOS-only, and Win32's existing viewport is unchanged.
+Hosted macOS foreground behavior, macOS FluentTester, and other native
+application hosts were not run locally. Native Core's module/bridging-header probes
 are compile checks, not Office application qualification. The separate
-backport ledger records the immutable install and fresh native build of
-the bottom branch without E's driver/runtime sources.
+private evidence at `artifacts/pr-evidence/rnmacos-backport.md` records the
+immutable install and fresh native build of the bottom branch without E's
+driver/runtime sources; session evidence is not shipped in Native Core's
+published reference.

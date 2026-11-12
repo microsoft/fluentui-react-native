@@ -12,7 +12,20 @@ extension SelfTestRunner {
       frame: CGRect(x: 0, y: 0, width: 800, height: 600),
       title: "Test"
     )
-    let external = AccessibilityEngine().externalWindowSnapshot(window: window, hit: applicationElement)
+    let accessibility = AccessibilityEngine()
+    let sameProcess = accessibility.externalWindowSnapshot(window: window, hit: applicationElement)
+    check(
+      sameProcess.windowID == window.id && sameProcess.parentID == nil,
+      "a covering window in the target process retains the no-activation obstruction scope"
+    )
+    let unknownProcess = accessibility.externalWindowSnapshot(window: window, hit: AXUIElementCreateSystemWide())
+    check(
+      unknownProcess.windowID == window.id,
+      "an unproven hit owner never permits raising through a possibly same-process covering window"
+    )
+    let external = accessibility.externalWindowSnapshot(
+      window: window, hit: AXUIElementCreateApplication(getppid())
+    )
     check(
       external.windowID != window.id && external.parentID == nil,
       "an external hit never impersonates the target window and blocks its pre-click activation"

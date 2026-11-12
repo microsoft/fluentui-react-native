@@ -151,6 +151,19 @@ describe('act', () => {
       expect(activated).toEqual([]);
     });
 
+    test('refuses a macOS same-process covering-window snapshot before activation or input', async () => {
+      const { activated, runtime } = clicking(() =>
+        snapshotOf({ id: 'covering-window', name: 'Another window of the target application', role: 'window', windowId: 'w1' }),
+      );
+      const click = jest.spyOn(runtime.runtime.host, 'click');
+      const { ref, sample } = await provenGo(runtime);
+      const failure = await failureOf(act(runtime, { action: 'click', ref, sample }));
+      expect(failure).toMatchObject({ code: 'element click intercepted', data: { reason: 'obscured' } });
+      expect(effectOf(failure)).toMatchObject({ disposition: 'rejected', effect: 'none' });
+      expect(activated).toEqual([]);
+      expect(click).not.toHaveBeenCalled();
+    });
+
     test('raises the window when another window covers it, and reports the raise when the point is still covered', async () => {
       const { activated, runtime } = clicking(() => covering('w2'));
       const { ref, sample } = await provenGo(runtime);
