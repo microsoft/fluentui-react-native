@@ -803,3 +803,66 @@ private evidence at `artifacts/pr-evidence/rnmacos-backport.md` records the
 immutable install and fresh native build of the bottom branch without E's
 driver/runtime sources; session evidence is not shipped in Native Core's
 published reference.
+
+### Review remediation and requalification
+
+The review fixes are committed separately: `5bdfc133f` keeps Native Core's
+published backport reference durable, `2a166010e` scopes the viewport to the
+macOS platform entrypoint, and `f34c0686a` restores same-process occlusion
+refusal. The lower branch was merged normally, without rewriting the original
+commits. The shared Windows decorator is byte-identical to `505a2187b`;
+its regression preserves the existing non-scroll parent around story scrollers.
+macOS and Win32 retain their scrollable viewport tests. Windows and Win32
+native hosts remain **not run**, not newly qualified by these React tests.
+
+The new native regressions failed **461/463** before the owner-scope fix:
+same-process and unproven hit owners incorrectly permitted activation.
+They now retain the target's no-activation scope, while the actual foreign-PID
+case retains a distinct identity. The agent regression verifies `obscured`,
+rejected mutation, effect `none`, no activation, and no pointer dispatch.
+The Windows layout regression failed on the unwanted extra scroller before
+the platform split. No story callback, assertion, or timeout was weakened.
+Red/green and package-check evidence is under
+`artifacts/desktop/f16-macos-physical/review-r2/`.
+
+All app runs below use production source `f34c0686a` and the newly provisioned
+signed helper source digest
+`dd3f28bb27bea9349bbf6e26955b8fdaf34c88eeb37b6baa7e0e1fd99552b93b`.
+`desktop-driver doctor --platform macos --permissions` passed with Accessibility,
+PostEvent, and Screen Recording preflight true and no prompt requested.
+GUI resolution was prebuilt-only and physical runs had no disabled input
+features. Native and GUI commands ran under the shared lock.
+
+| Check                                                                                                       | Result                                                                                       |
+| ----------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| Strict release Swift build with `-Xswiftc -warnings-as-errors`, external scratch root; helper `--self-test` | Passed; **463/463** native checks                                                            |
+| Runtime `yarn format`, `yarn lint`, `yarn build`, `yarn test --runInBand`                                   | Passed; **26/26** tests                                                                      |
+| Driver `yarn format`, `yarn lint`, `yarn build`, focused `yarn test src/operations/act.test.ts --runInBand` | Passed; **10/10** agent tests                                                                |
+| Driver `FURN_NATIVE_DRIVER_TEST=1 yarn test --runInBand`, stable signing, default TMPDIR                    | Passed; **75 suites / 1,241 tests**, **6 suites / 47 tests skipped** for platform boundaries |
+| Real-descriptor MCP Checkbox click on Fabric and Paper                                                      | Passed; checked state verified and **one physical-click receipt** each                       |
+| Required keyboard clear on Fabric and Paper                                                                 | Passed; typed value verified, then empty verified; keyboard receipts, no semantic clear      |
+| Unchanged Accordion callbacks on Fabric and Paper                                                           | Passed; **2/2** each                                                                         |
+
+The standalone Swift helper has no CocoaPods-module or Office bridging-header
+integration; those checks are **not applicable** to this helper-only revision.
+The renderer backport and its previously qualified native-host boundary are
+unchanged.
+
+From `apps/storybook`, each renderer passed bundle, renderer-specific prep and
+native build, then both complete smoke lanes:
+
+| Renderer | Command                                                                                            | Result                                 | Run                                    |
+| -------- | -------------------------------------------------------------------------------------------------- | -------------------------------------- | -------------------------------------- |
+| Fabric   | `yarn storybook smoke --macos --mode stories-and-tests --input physical --reporter json`           | **343 passed, 3 declared unsupported** | `2a9eb215-a86f-4f8d-ad18-df6ac473d738` |
+| Fabric   | `yarn storybook smoke --macos --mode stories-and-tests --input accessible --reporter json`         | **260 passed, 3 declared unsupported** | `82a66e7e-6bef-4f28-a9b2-fa95468564f2` |
+| Paper    | `yarn storybook smoke --macos --paper --mode stories-and-tests --input physical --reporter json`   | **343 passed, 3 declared unsupported** | `34bb7859-f333-47a6-a88e-9208e43a4b85` |
+| Paper    | `yarn storybook smoke --macos --paper --mode stories-and-tests --input accessible --reporter json` | **259 passed, 3 declared unsupported** | `87bc44d4-a335-49bc-ba2d-6dde7a79bcc0` |
+
+All four lanes had zero failed, skipped, quarantined, incomplete, retried, or
+flaky cases. Their canonical reports remain under
+`apps/storybook/artifacts/desktop/<run-id>/`. The wrapper reports
+`fabric-review-r2-lanes-qualification.json` and
+`paper-review-r2-lanes-qualification.json`, alongside the real-descriptor and
+Accordion qualification reports, record source identity and empty owned
+survivor lists between runs. Existing hosted compatibility masks remain
+unchanged; these local results do not qualify hosted foreground behavior.
