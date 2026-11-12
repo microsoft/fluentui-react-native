@@ -663,3 +663,95 @@ Receipts, exact commands, job logs and doctor artifacts are retained under
 provisioner is **Not run** at this receipt. Local nativeRunner and physical
 console Ctrl+C remain **Not run** because the desktop session is disconnected
 and no desktop campaign is granted. Portable loading is not native evidence.
+
+## Windows native fixture consumers and console cleanup — 2026-11-12 UTC
+
+**Observed at `b1bbb26df880252a184ea5a3d2e1848bd811e83f`:** explicit
+`yarn desktop-driver build-driver --platform windows` and
+`yarn desktop-driver doctor --platform windows` **Passed**, the latter
+with `ready: true`. Built ESM fixture provisioning succeeded without Jest.
+The C++ fixture and provider/protocol sources are unchanged; verified helper
+artifact `d8ee05e4796fb3aa22f7b5dbf481bd8cdfb0c20b6d5d24676d689dc7900d5b3c`
+was used.
+
+With `FURN_NATIVE_DRIVER_TEST=1`, the locked root command
+`yarn workspace @fluentui-react-native/desktop-driver test
+serviceIdentity.contract applicationIncarnation.contract nativeDriver
+--runInBand --json --outputFile
+<repository-root>\artifacts\desktop\f11\w1-native\native-driver-jest.json` **Passed**:
+24 tests passed, zero failed, 19 macOS-only cases skipped. This mixed
+selection includes the new ordinary-Node ESM import regression as well as
+the Windows native identity/backend contracts. No skip is a native pass.
+
+The newly enabled Windows desktop-test consumer also **Passed** all five
+outer modes against the plain Win32 fixture: handoff, operator preemption,
+worker-crash recovery, lost successful runner-grant response and capture.
+The four non-crash modes each executed two inner specs, including native
+accessibility input, with zero skips. Crash recovery intentionally produced
+a terminal failed WDIO run before reuse. Every mode confirmed native deletion,
+descriptor withdrawal and workload-claim release while preserving the
+external fixture; only the scenario's own launcher then ended it.
+This qualifies generic native transport/ownership, not React Native rendering
+or Storybook runner handoff.
+
+Separately, physical console Ctrl+C **Passed** for real Storybook
+`desktop-test serve --agent` on both renderers in an active unlocked RDP
+session (`sessionKind: remote`). Exact-console foreground/isolation checks
+preceded four real `SendInput` keyboard events; the observer received console
+`SIGINT`, and no semantic signal generation was used. Both apps had completed
+authenticated Button story/native-marker and MCP observation checks; the
+MCP session was closed before interrupting the long-lived service.
+
+| Endpoint                    | Terminal passed lifecycle              | CLI / Yarn / observer exit |
+| --------------------------- | -------------------------------------- | -------------------------- |
+| Windows Fabric packaged app | `75c40800-571c-4d8f-9fa1-debf876f0664` | 0 / 0 / 0                  |
+| Win32 Paper REX             | `9a5c618f-d54d-4599-b36f-e3fd5b5436b9` | 0 / 0 / 0                  |
+
+The service withdrew its descriptor, released its claim and preserved the
+same running app incarnation. Its recorded external launcher then closed
+that app. Metro, channel and helper cleanup completed without survivors.
+Fabric reused the verified registered `bdeb0b291` native build because its
+Windows native sources are unchanged; the app config was inherited with an
+explicit verified AUMID/title, not a title-only target. Paper used the prebuilt
+REX host and a fresh bundle carrying the serving instance/manifest identity;
+a Paper native build remains **Unsupported**.
+
+All live commands used the granted W1 campaign and
+`with-native-lock.ps1 -Lane W1 -RequirePhysical`. Exact reproduction,
+session/lock receipts, native identities, run IDs and per-mode results are in
+`artifacts\desktop\f11\w1-native`; physical roots are
+`physical-windows-UmfSj6` and `physical-win32-sssEyg`.
+The owning harness reference
+`packages/agentic/desktop-test/references/current-status.md` records its
+commands and the historical Ctrl+C regression proof separately.
+
+Workflow `43284867711` reached the Windows native consumer in jobs
+`131415841258` and `131415842551` after the built-import correction.
+Both ran three successful ownership modes, including two accessibility specs,
+but their lost-response case failed on an exact-message assertion before
+WDIO. Source `b1bbb26d` repairs that test composition in desktop-test and
+passes it natively; it does not change the client's legitimate transport-error
+wrapping. Corrected-head hosted coverage is pending publication here.
+
+The campaign is ended. Broad audit exit 2 names only four foreign portable
+W5 Jest/Yarn processes with no listeners; zero W1 native/GUI processes remain,
+and no foreign process was stopped. Native helper builds, JavaScript-only
+checks and capability skips are not substituted for the live results above.
+
+**Portable closeout:** three fresh locked default-environment
+`cmd.exe /d /c "yarn clean-lage-cache && yarn lage buildci"` attempts
+**Failed**, each only on the unchanged Storybook integration test
+`hosts the Storybook channel and Stage 1 smoke-test target in one process`
+with `A stopping command cannot publish readiness.`. The test and readiness
+source match main and review base `04d8d8b13`; no unrelated source,
+timeout, TEMP/Git-ceiling or concurrency workaround was added. The owning
+package's full default-concurrency `yarn workspace
+@fluentui-react-native/storybook-desktop test` **Passed** 340 with three
+skips. This is not a passing aggregate receipt for the current source.
+Details and the unchanged-source object IDs are in the harness ledger and
+`artifacts\desktop\f11\w1-native\aggregate-readiness-source-comparison.json`.
+The final attempt began with a clean audit; the failure is not attributed
+to foreign work. Owned fail-fast portable workers exited naturally; the
+foreign owner removed its abandoned processes. Final audit **Passed**:
+`FURN-AUDIT: no FURN desktop processes found`. Ledger format, instruction
+and link checks passed.

@@ -471,3 +471,86 @@ packages\agentic\desktop-driver-mcp\references\current-status.md` passed
 (six links). Root `yarn oxfmt --check`, `yarn change:check` and
 `git diff --check` passed. No clean-cache `buildci` rerun was required for
 these evidence-only markdown edits.
+
+## Windows native consumer and physical serve cleanup — 2026-11-12 UTC
+
+**Observed, tested source `b1bbb26df880252a184ea5a3d2e1848bd811e83f`:**
+the Windows generic private-descriptor MCP/WDIO consumer now executes against
+an explicitly provisioned plain Win32 fixture. In the granted W1 campaign,
+with an active unlocked RDP session (`sessionKind: remote`), native opt-in and
+the exact fixture path, the locked command
+`yarn workspace @fluentui-react-native/desktop-test test
+nativeRunner.contract --runInBand --json --outputFile
+<repository-root>\artifacts\desktop\f11\w1-native\native-runner-jest.json` **Passed** all
+five outer cases, with zero skips.
+
+| MCP/runner mode                                      | Result                                        | Native WDIO run                        |
+| ---------------------------------------------------- | --------------------------------------------- | -------------------------------------- |
+| Explicit handoff and fresh MCP reopen                | Passed, 2/2 inner specs                       | `a9849169-7f2b-46e6-87de-3e0b8b8e7a3f` |
+| Operator preemption and exclusive runner reservation | Passed, 2/2                                   | `2a1f63bd-3ac0-4951-beb5-860a2a92b69c` |
+| Worker crash and confirmed parent drain/reuse        | Passed recovery; expected terminal failed run | `9c1a8447-2a6c-4ca6-b027-8bc302df3fc7` |
+| Lost real HTTP-200 runner-grant response             | Passed, 2/2                                   | `4e7d50fa-b055-407c-bfe2-443fe2bc504f` |
+| Target capture and stale-resource invalidation       | Passed, 2/2 and real capture                  | `047e8166-c3d2-4fb9-b785-288519b3342d` |
+
+Every non-crash mode executed the accessibility-input spec, rather than
+silently skipping it. Each mode preserved the exact attached fixture
+incarnation through service cleanup, removed both private descriptors and
+the claim, then ended only its own fixture. Credential confinement and
+fresh-session/stale-resource checks passed. This plain fixture qualifies
+generic native ownership, not a React Native renderer or Storybook runner
+handoff. The separate Windows driver identity/backend selection passed
+24 and skipped 19 macOS cases.
+
+The previous hosted consumer in workflow `43284867711` ran on both Windows
+job `131415841258` and Win32 accessible job `131415842551`: handoff,
+preemption and crash recovery passed, but lost-response failed before WDIO
+because it compared the injected error's message with the correctly wrapped
+transport error. Capture was policy-skipped. The current harness correction
+checks the typed failure's original cause and shares the actual successful
+response-loss injection with the portable HTTP runner. Its native
+lost-response pass above confirms that reservation/drain/reopen path; no
+adapter runtime or error-redaction change was needed.
+
+**Observed, real Storybook consumers:** physical Ctrl+C also **Passed**
+after authenticated `components-button--appearance` native-marker selection
+and MCP observation on Windows Fabric and Win32 Paper. The MCP session and
+adapter were closed before interruption. An isolated, visible, focused
+console received four `SendInput` key events and recorded console `SIGINT`;
+no `GenerateConsoleCtrlEvent` or synthetic Node signal was used. The exact
+CLI, Yarn and observer each exited 0; both lifecycle reports are terminal
+passed, descriptors were withdrawn, claims released and apps preserved until
+their external launcher closed them.
+
+Fabric lifecycle: `75c40800-571c-4d8f-9fa1-debf876f0664`.
+Paper lifecycle: `9a5c618f-d54d-4599-b36f-e3fd5b5436b9`.
+Reports are under `apps\storybook\artifacts\desktop\<run-id>`.
+The unchanged registered Fabric native build was reused after identity/source
+comparison. Paper used a serving-instance/driver-manifest-matched bundle
+and the prebuilt REX host; its native build remains **Unsupported**.
+
+Every native/input command used
+`with-native-lock.ps1 -Lane W1 -RequirePhysical`. Evidence and reproduction
+are retained under `artifacts\desktop\f11\w1-native`, including
+`contracts.json`, `physical-windows-UmfSj6`, `physical-win32-sssEyg` and
+the session/lock/audit receipts. No private descriptor was copied into those
+artifacts. The campaign is ended with zero W1 native/GUI survivors. The broad
+audit's four remaining candidates are foreign portable W5 Jest/Yarn processes,
+with no listeners; none was terminated. Corrected-head hosted confirmation is
+pending publication at this receipt, not inferred from earlier green checks.
+
+**Portable closeout:** locked default-environment
+`cmd.exe /d /c "yarn clean-lage-cache && yarn lage buildci"` **Failed**
+three fresh attempts on the same Storybook integration readiness test,
+`hosts the Storybook channel and Stage 1 smoke-test target in one process`
+(`A stopping command cannot publish readiness.`). The test and lifecycle
+source are unchanged from main/review base; the full owning package's
+default-concurrency `yarn workspace
+@fluentui-react-native/storybook-desktop test` **Passed** 340 with three
+skips. No unrelated source/deadline or environment workaround was added,
+and no passing aggregate is claimed for this head. Exact failures and
+source comparison are retained under the same evidence root and in the
+harness ledger. The last aggregate began with a clean audit, so the failure
+is not attributed to the foreign portable chain. Owned portable workers
+exited naturally; that foreign owner removed its abandoned processes.
+Final audit **Passed**: `FURN-AUDIT: no FURN desktop processes found`.
+Changed-ledger format, instruction and link checks also passed.
