@@ -940,6 +940,12 @@ changesets, whitespace, and all 90 link tasks passed. Evidence:
 `crossdrive-final-format.log`, `crossdrive-repo-checks.log`, and
 `crossdrive-repo-safeguards.log`.
 
+**Cross-volume repository validation:** source `e760a36de` passed all 178
+`TF_BUILD=1 yarn lage buildci --concurrency 4` tasks after
+`yarn clean-lage-cache`. Both commands held the shared native lock and used
+the default `TMPDIR`; no native smoke or privacy-setting change was repeated.
+Evidence: `apps/storybook/artifacts/f6/crossdrive-buildci.log`.
+
 **Windows/Win32 qualification: pending, not sufficient yet.** Native execution
 is unavailable on this Mac, and `pwsh` is not installed, so PowerShell parser
 validation was not run. CI confirms both Windows Fabric and Win32 Paper reach
