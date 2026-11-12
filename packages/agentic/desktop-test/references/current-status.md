@@ -1522,3 +1522,36 @@ The post-run process audit **Passed**, exit zero:
 No app, native fixture/helper, native/GUI contract or physical Ctrl+C was
 launched; no campaign or push occurred. Native qualification remains
 **Not run**, awaiting its separate grant.
+
+## Windows hosted nativeRunner provisioning correction — 2026-11-12 UTC
+
+**Observed:** PR workflow `43279226602`, branch source
+`23f974a727ca2627690304cbecee0fa96cb6de83`, selected the new Windows consumer
+but did not reach it. Windows Storybook job `131395742955` and Win32
+accessible Storybook job `131395742289` both failed while importing the
+driver's built fixture provisioner: `ERR_MODULE_NOT_FOUND` for an extensionless
+dependency. All four nativeRunner ownership modes and their accessibility-input
+specs are therefore **Not run**, not skipped or passed. No flake rerun was used.
+
+The owning driver repair is tested at
+`0e2dcb26ca156133cb577fc81869b23cebf1df3a`: explicit Node ESM imports and the
+existing package-root anchor replace Jest-only resolution and `__dirname`.
+The portable regression reproduces the hosted failure before the correction
+and passes afterward; it never compiles or starts the native fixture. The
+fixture, native protocol, consumer opt-ins, cleanup rules and macOS path are
+unchanged. The driver's provisioning receipt is in
+`packages/agentic/desktop-driver/references/current-status.md`.
+
+**Observed, portable:** from the repository root,
+`yarn workspace @fluentui-react-native/desktop-test test nativeRunnerSupport
+--runInBand` **Passed**, all 18 cases. The driver suite passed 1,212 and skipped 88. The locked default-environment
+`yarn clean-lage-cache && yarn lage buildci` **Passed**, all 178 tasks with
+zero cache hits or failures, 2m 52.86s. Package format/lint/build, root format
+and instruction checks, changed-document links and committed changesets passed.
+Receipts are in `artifacts\desktop\f11\w1-fix\push-ci`.
+
+No local native/GUI workload or physical input was launched; no desktop
+campaign was started. Hosted requalification is pending the correction's push.
+Local nativeRunner and physical console Ctrl+C remain **Not run** while the
+desktop session is disconnected. This receipt does not upgrade the earlier
+connected endpoint evidence to a rerun of the new consumer.

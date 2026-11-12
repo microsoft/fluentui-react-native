@@ -623,3 +623,43 @@ packages\agentic\desktop-driver\references\current-status.md` passed
 (six links). Root `yarn oxfmt --check`, `yarn change:check` and
 `git diff --check` passed. No clean-cache `buildci` rerun was required for
 these evidence-only markdown edits.
+
+## Windows hosted native-runner fixture provisioning — 2026-11-12 UTC
+
+**Observed:** hosted PR run `43279226602` at branch source
+`23f974a727ca2627690304cbecee0fa96cb6de83` failed before the selected native
+MCP/WDIO consumer in Windows Storybook job `131395742955` and Win32
+accessible Storybook job `131395742289`. Both helpers passed `doctor`; the
+Windows job additionally passed 1,254 driver tests with 45 capability/platform
+skips. These are not nativeRunner passes: its ownership modes and accessibility
+input were **Not run** in both jobs.
+
+The fixture provisioner's built ESM import failed with `ERR_MODULE_NOT_FOUND`
+for its extensionless `NativeDesktopHost` dependency. The test-only source also
+used CommonJS `__dirname`. The repair uses `.js` specifiers and the existing
+package-root anchor, preserving the fixture source directory for both Jest and
+built Node consumers. The C++ fixture, helper protocol, cache policy and native
+entrypoints are unchanged.
+
+**Observed, portable:** tested repair source
+`0e2dcb26ca156133cb577fc81869b23cebf1df3a`. From this package,
+`yarn test nativeDriver -t 'loads Windows fixture provisioning from built ESM'
+--runInBand` was **Failed as expected** before the repair with the exact hosted
+import error, then **Passed** after building the correction. It imports the
+actual built module in an ordinary Node subprocess, without Jest's resolver,
+native compilation or application launch.
+
+`yarn format`, `yarn lint`, `yarn build` and `yarn test --runInBand` all
+**Passed**; the complete portable driver suite passed 1,212 and skipped 88.
+The root `yarn clean-lage-cache && yarn lage buildci`, serialized through
+`with-native-lock.ps1 -Lane W1`, **Passed** with inherited temporary-directory
+settings and default concurrency: 178 successful tasks, zero cache hits or
+failures, 2m 52.86s. No native opt-in or physical-session requirement was used.
+The first post-run audit reported another lane's portable Yarn cache-clean
+process, not a process owned by this repair; it was not terminated.
+
+Receipts, exact commands, job logs and doctor artifacts are retained under
+`artifacts\desktop\f11\w1-fix\push-ci`. Hosted requalification of the repaired
+provisioner is **Not run** at this receipt. Local nativeRunner and physical
+console Ctrl+C remain **Not run** because the desktop session is disconnected
+and no desktop campaign is granted. Portable loading is not native evidence.
