@@ -1,3 +1,4 @@
+import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -49,6 +50,18 @@ function fixture() {
 }
 
 describe('neutral desktop application ownership', () => {
+  test('the crash-owner fixture retires nonzero when its parent never reaches cleanup', () => {
+    const result = spawnSync(
+      process.execPath,
+      [path.resolve(__dirname, '../fixtures/application-ownership/crash-owner.mjs'), '--retirement-probe'],
+      { encoding: 'utf8', timeout: 5000 },
+    );
+    expect(result.error).toBeUndefined();
+    expect(result.signal).toBeNull();
+    expect(result.status).toBe(1);
+    expect(result.stderr).toBe('The native crash-owner retirement deadline expired.\n');
+  });
+
   test('publishes the possible launch before dispatch and journals the acquired exact process', async () => {
     const f = fixture();
     f.native.launch.mockImplementationOnce(async () => {

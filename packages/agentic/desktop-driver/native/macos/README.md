@@ -104,7 +104,8 @@ and counter have accessibility identifiers `ownership-fixture-increment` and
 `ownership-fixture-count`. Use the normal native host launch API, or launch the
 exact executable externally for attach-preservation tests. The test owner must
 stop only that process incarnation. The fixture is supporting native evidence,
-not Fabric/Paper renderer qualification.
+not Fabric/Paper renderer qualification. Its main run loop requests termination
+after five minutes if the test owner never cleans it up.
 
 For crash-recovery contracts, `--descendant-ready-file <path>` starts a bounded
 `/bin/sleep 300` child and writes its PID and parent PID as JSON. The fixture does
@@ -112,6 +113,9 @@ not terminate that child when its primary process exits. The contract owner
 verifies both native start identities and the parent relationship, proves the
 descendant survived, and separately stops that exact descendant. This tests the
 limits of `uncontained` ownership; it does not add descendant containment.
+The crash-owner Node fixture waits at most two minutes before exiting nonzero;
+the helper then observes EOF. These fixture-only retirement bounds do not
+settle or remove an abandoned workload claim.
 
 ## Signing
 

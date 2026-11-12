@@ -31,3 +31,5 @@ Native ownership contracts additionally qualify failed and interrupted
 acquisition publication, abrupt owner death and known uncontained descendants:
 uncertainty retains the workload claim until exact operator cleanup. This adds
 qualification only, not automatic survivor adoption or descendant containment.
+Abandoned qualification owners now retire nonzero after two minutes, and the
+AppKit fixture requests termination after five minutes; workload fences remain.

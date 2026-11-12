@@ -48,6 +48,14 @@ the primary process, and remove only the unchanged fixture claim after all
 recorded processes exit. These are native AppKit scenarios, not fake-host
 evidence or automatic recovery.
 
+The ready crash-owner fixture retires with exit code 1 after two minutes if
+the parent cannot perform exact cleanup. Its portable `--retirement-probe`
+executes the same wait with a short deadline without acquiring a claim or
+starting a helper/application. The AppKit fixture requests its own termination
+after five minutes, and its `/bin/sleep 300` descendant already has a finite
+lifetime. Neither deadline clears a claim or authorizes guessed PID cleanup;
+native identity verification is still required by the parent.
+
 Its evidence is written to the desktop-test package's
 `artifacts/desktop/application-ownership-*/evidence.json`. The separate physical mutex
 case requires explicit `FURN_NATIVE_PHYSICAL_INPUT_TEST=1` and effective native

@@ -5,7 +5,14 @@ import { NativeDesktopHost } from '@fluentui-react-native/desktop-driver';
 import { createDesktopApplicationHost } from '../../lib/applicationOwnership.js';
 import { createDesktopWorkloadClaim, describeDesktopWorkloadOwner } from '../../lib/ownership.js';
 
+function waitForRetirement(timeoutMilliseconds) {
+  Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, timeoutMilliseconds);
+  process.stderr.write('The native crash-owner retirement deadline expired.\n');
+  process.exit(1);
+}
+
 const [configurationFile, phase] = process.argv.slice(2);
+if (configurationFile === '--retirement-probe') waitForRetirement(25);
 const { artifact, application, directory } = JSON.parse(fs.readFileSync(configurationFile, 'utf8'));
 if (phase !== 'pending' && phase !== 'acquired') throw new Error('Unknown publication interruption phase.');
 const processIdentity = await describeDesktopWorkloadOwner({ helperPath: artifact.executablePath });
@@ -30,7 +37,7 @@ await createDesktopApplicationHost(native, {
         mode: 0o600,
       });
       // The parent kills this exact owner while publication or startup is interrupted.
-      Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0);
+      waitForRetirement(120_000);
     }
   },
 });

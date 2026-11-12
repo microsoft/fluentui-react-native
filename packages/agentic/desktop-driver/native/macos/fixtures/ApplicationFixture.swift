@@ -8,6 +8,10 @@ final class ApplicationFixture: NSObject, NSApplicationDelegate {
   private var descendant: Process?
 
   func applicationDidFinishLaunching(_ notification: Notification) {
+    // A crashed test owner must not leave this uncontained fixture running indefinitely.
+    DispatchQueue.main.asyncAfter(deadline: .now() + 300) {
+      NSApplication.shared.terminate(nil)
+    }
     let arguments = ProcessInfo.processInfo.arguments
     let titleIndex = arguments.firstIndex(of: "--title").map { $0 + 1 }
     let title = titleIndex.flatMap { arguments.indices.contains($0) ? arguments[$0] : nil }
