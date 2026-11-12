@@ -90,7 +90,6 @@ function supervisor(endpoint: Endpoint, lockDirectory: string, ownership: 'super
       reporter,
       reportSession: { reporter, delegated: true, environment: {}, close: async () => 0 },
       lockDirectory,
-      recovery: { root: path.join(directory, `${endpoint}-settlement`) },
     }),
   };
 }
@@ -317,39 +316,79 @@ for (const endpoint of endpoints) {
   });
 }
 
-nativeTest('Windows Fabric: concurrent packaged activations never clean up the winning service application', async () => {
-  for (let iteration = 0; iteration < 3; iteration++) {
-    const contenders = [host('windows'), host('windows')];
-    let identity: NativeApplicationIdentity | undefined;
-    try {
-      await Promise.all(contenders.map((native) => native.probe()));
-      const attempts = await Promise.allSettled(contenders.map((native) => native.launch({ ...registration('windows'), host: native })));
-      const winners = attempts.flatMap((attempt, index) => (attempt.status === 'fulfilled' ? [{ lease: attempt.value, index }] : []));
-      expect(winners).toHaveLength(1);
-      const winner = winners[0];
-      identity = await contenders[winner.index].inspectApplication({ ...registration('windows'), host: contenders[winner.index] });
-      for (const [index, attempt] of attempts.entries()) {
-        if (attempt.status === 'rejected') {
-          expect(attempt.reason).toMatchObject({
-            data: { reason: expect.stringMatching(/^application-(lock-busy|preexisting)$/) },
-          });
-          await contenders[index].dispose();
+for (const endpoint of endpoints) {
+  nativeTest(`${endpoint}: concurrent launches preserve each exact winning incarnation and reject ambiguous inspection`, async () => {
+    for (let iteration = 0; iteration < 3; iteration++) {
+      const contenders = [host(endpoint), host(endpoint)];
+      const observers: NativeDesktopHost[] = [];
+      const identities: NativeApplicationIdentity[] = [];
+      try {
+        await Promise.all(contenders.map((native) => native.probe()));
+        const attempts = await Promise.allSettled(contenders.map((native) => native.launch({ ...registration(endpoint), host: native })));
+        const winners = attempts.flatMap((attempt, index) => (attempt.status === 'fulfilled' ? [{ lease: attempt.value, index }] : []));
+        expect(winners.length).toBeGreaterThan(0);
+        for (const winner of winners) {
+          const {
+            schemaVersion: _schemaVersion,
+            endpoint: _endpoint,
+            ...identity
+          } = captureDesktopApplicationIdentity(winner.lease, endpoint);
+          identities.push(identity);
         }
+        expect(new Set(identities.map((identity) => JSON.stringify([identity.processId, identity.processStartedAt]))).size).toBe(
+          winners.length,
+        );
+        for (const [index, attempt] of attempts.entries()) {
+          if (attempt.status === 'rejected') {
+            expect(attempt.reason).toMatchObject({
+              data: { reason: expect.stringMatching(/^application-(lock-busy|preexisting)$/) },
+            });
+            await contenders[index].dispose();
+          }
+        }
+        const unpinned = host(endpoint);
+        observers.push(unpinned);
+        if (winners.length > 1) {
+          await expect(unpinned.inspectApplication({ ...registration(endpoint), host: unpinned })).rejects.toMatchObject({
+            data: { reason: 'application-identity-ambiguous' },
+          });
+        }
+        for (const identity of identities) {
+          const pinned = new NativeDesktopHost({
+            artifact,
+            endpoint,
+            application: { ...targets.get(endpoint)!.host.application, processIdentity: identity },
+          });
+          observers.push(pinned);
+          expect(await ended(identity)).toBe(false);
+          expect(await pinned.inspectApplication({ ...registration(endpoint), host: pinned })).toEqual(identity);
+          await expect(pinned.attach({ ...registration(endpoint), host: pinned })).rejects.toMatchObject({
+            data: { reason: 'application-lock-busy' },
+          });
+        }
+        await contenders[winners[0].index].closeApplication(winners[0].lease);
+        await waitFor('one exact concurrent incarnation to exit', async () => ((await ended(identities[0])) ? true : undefined));
+        for (const identity of identities.slice(1)) expect(await ended(identity)).toBe(false);
+        cases.push({
+          case: 'concurrent-launch',
+          endpoint,
+          iteration,
+          identities,
+          rejectedContenders: attempts.filter((attempt) => attempt.status === 'rejected').length,
+          state: 'observed',
+        });
+      } finally {
+        await cleanupAll(
+          'Concurrent launch qualification cleanup failed.',
+          [...observers, ...contenders].reverse().map((native) => () => native.dispose()),
+        );
       }
-      expect(await ended(identity)).toBe(false);
-      expect(await contenders[winner.index].inspectApplication({ ...registration('windows'), host: contenders[winner.index] })).toEqual(
-        identity,
-      );
-      cases.push({ case: 'concurrent-packaged-activation', endpoint: 'windows', iteration, identity, state: 'observed' });
-    } finally {
-      await cleanupAll(
-        'Concurrent packaged activation cleanup failed.',
-        contenders.reverse().map((native) => () => native.dispose()),
-      );
+      for (const identity of identities) {
+        await waitFor('every exact concurrent incarnation to exit', async () => ((await ended(identity)) ? true : undefined));
+      }
     }
-    if (identity) await waitFor('the concurrent activation winner to exit', async () => ((await ended(identity!)) ? true : undefined));
-  }
-});
+  });
+}
 
 nativeTest(
   'Windows Fabric and Win32 Paper: independent helpers share the physical input mutex',
