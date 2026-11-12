@@ -4,7 +4,11 @@ import os from 'node:os';
 import path from 'node:path';
 
 jest.mock('@rnx-kit/metro-config', () => ({
-  makeMetroConfig: (config: object) => ({ ...config, serializer: { getPolyfills: () => ['base-polyfill'] } }),
+  makeMetroConfig: (config: object) => ({
+    ...config,
+    serializer: { getPolyfills: () => ['base-polyfill'] },
+    watchFolders: ['existing-workspace'],
+  }),
 }));
 jest.mock('@rnx-kit/metro-resolver-symlinks', () => () => jest.fn());
 jest.mock('@storybook/react-native/withStorybook', () => ({ withStorybook: (config: unknown) => config }));
@@ -35,8 +39,7 @@ describe('controlled Metro generation fixtures', () => {
     fs.rmSync(root, { force: true, recursive: true });
   });
 
-  function controlledManifest() {
-    const privateRoot = path.join(root, 'storybook-desktop.generated', '.private');
+  function controlledManifest(privateRoot = path.join(root, 'storybook-desktop.generated', '.private')) {
     const runtimeModulePath = path.join(privateRoot, 'runtime-fixture.js');
     const runtimeContents = 'export default {"bridgeNonce":"bridge-only"};\n';
     const nativeDriver = {
@@ -84,6 +87,7 @@ describe('controlled Metro generation fixtures', () => {
     };
     const manifestPath = path.join(root, 'storybook-desktop.generated', 'driver-manifest.json');
     const contents = JSON.stringify(manifest);
+    fs.mkdirSync(path.dirname(manifestPath), { recursive: true });
     fs.mkdirSync(privateRoot, { recursive: true, mode: 0o700 });
     fs.writeFileSync(runtimeModulePath, runtimeContents, { mode: 0o600 });
     fs.writeFileSync(manifestPath, contents);
@@ -130,6 +134,21 @@ describe('controlled Metro generation fixtures', () => {
     ).toEqual({ type: 'sourceFile', filePath: fixture.runtimeModulePath });
     expect(fs.readFileSync(fixture.runtimeModulePath, 'utf8')).toBe(fixture.runtimeContents);
     expect(fs.existsSync(path.join(root, 'storybook-desktop.generated', 'runtime-instance.js'))).toBe(false);
+  });
+
+  test('watches a pinned projection outside the app workspace while preserving existing workspace roots', () => {
+    const fixture = controlledManifest(path.join(root, 'per-user-state', 'storybook-fixture'));
+    const project = path.join(root, 'workspace', 'app');
+    const config = createDesktopStorybookMetroConfig({ configPath: path.join(project, 'src') });
+    expect(config.watchFolders).toEqual(['existing-workspace', path.dirname(fixture.runtimeModulePath)]);
+    expect(
+      config.resolver.resolveRequest(
+        { originModulePath: path.join(__dirname, 'createDesktopStorybookApp.tsx') },
+        '../config/runtime-instance.cjs',
+        'windows',
+      ),
+    ).toEqual({ type: 'sourceFile', filePath: fixture.runtimeModulePath });
+    expect(fs.existsSync(path.join(project, 'storybook-desktop.generated'))).toBe(false);
   });
 
   test.each(['missing-handoff', 'missing-contract', 'unknown-field', 'manifest-tamper', 'runtime-tamper'])(

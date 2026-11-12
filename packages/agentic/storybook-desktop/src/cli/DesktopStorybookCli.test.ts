@@ -1624,8 +1624,10 @@ describe('createDesktopStorybookCommand', () => {
 
   test('forwards the selected smoke mode and isolated instance to a package-owned lifecycle', async () => {
     const runner = new RecordingRunner();
+    const createPrivateStorage = jest.fn(createFixturePrivateStorage);
     const program = createDesktopStorybookCommand({
       ...nativeDriverTestOptions,
+      createPrivateStorage,
       config: makeConfig({
         windows: {
           smoke: {
@@ -1642,6 +1644,7 @@ describe('createDesktopStorybookCommand', () => {
     try {
       await program.parseAsync(['node', 'test', 'smoke', '--windows', '--mode', 'stories-and-tests']);
 
+      expect(createPrivateStorage).toHaveBeenCalled();
       expect(runner.foreground[0]).toMatchObject({
         command: 'smoke-windows',
         env: {

@@ -175,7 +175,10 @@ process recovery, automatic discovery, or supervisor wiring.
 `PrivateStorage` contract through the verified Windows helper's one-shot
 `--private-storage` mode, so the operating system judges ownership from open
 handles and Node never trusts a path check. The default root is a per-user
-folder under the local application data folder. An override must be a canonical
+folder under the local application data folder, resolved through the OS
+known-folder API rather than an environment variable. The returned `root`
+identifies that validated directory, allowing consumers to open independently
+protected child namespaces without guessing the platform location. An override must be a canonical
 absolute local-drive path of at most 240 characters whose parent exists. A
 missing root is created atomically with an owner-only protected DACL (one allow
 entry giving the current user full control); an existing root is validated and

@@ -852,11 +852,49 @@ only to run Jest in-band; it does not skip agentic tests. Evidence:
 `apps/storybook/artifacts/f6/review-links.log` and `review-buildci.log`.
 The Accessibility-blocked macOS consumer smoke was not repeated for review.
 
+**First PR CI follow-up (2026-11-12):** run `43145388693` on
+`2739349a3` exposed five Linux CLI fixture failures and both Win32 smoke
+lanes refusing private storage before any stories ran. The Linux cause is
+confirmed: the command factory dropped the injected `createPrivateStorage`
+adapter. It now forwards that option, and platform selection explicitly
+supports macOS/Windows while other production credential paths fail closed.
+Portable contracts inject storage and simulate all three platform branches.
+
+The Win32 logs retained only the generic unsafe-storage message, not the
+adapter's non-enumerable refusal reason; the exact native refusal category
+cannot be recovered from that evidence. Native inspection confirms that the
+workspace root was checked before creation and ancestor grants allowing
+untrusted child replacement are refused. Unsafe hosted-workspace ancestry
+is therefore an inferred cause, not a confirmed refusal category.
+Windows publication now asks the verified helper for its OS-selected per-user
+known-folder root and opens a deterministic, independently protected child
+namespace for the canonical generated directory. Reading rederives that
+namespace only after verifying the parent handoff and helper. No environment
+path, editable manifest root, relaxed ACL, or root repair chooses authority.
+Storybook now surfaces the bounded native refusal token. Metro retains its
+workspace roots and also watches the pinned private runtime projection
+outside the workspace.
+
+The separate Windows setup job failed four native build/handshake/UIA
+timeout cases, but its existing Windows private-storage native contracts
+passed. This branch does not change Windows helper build, resolution,
+handshake, C++, UIA, or fixture code; setup runs before Storybook publication.
+Runner flakiness is an inference, not a confirmed explanation. The next
+same-branch CI run must establish the result; timeouts were not increased.
+
+**CI-fix portable validation (default `TMPDIR`):** driver format/lint/build/test
+passed (1,222 tests; 66 skipped); Storybook integration passed (386; 4 skipped);
+runtime passed (34). The new contracts cover OS dispatch, helper-selected
+project isolation, trust-before-helper ordering, changed-root and tamper
+refusal, protected child calls, and outside-workspace Metro resolution.
+Evidence: `apps/storybook/artifacts/f6/ci-fix-{driver,integration,runtime}.log`.
+These simulated-platform results are not Windows ACL qualification.
+
 **Windows/Win32 qualification: pending, not sufficient yet.** Native execution
 is unavailable on this Mac, and `pwsh` is not installed, so PowerShell parser
-validation was not run. The configured private-storage contracts and Windows
-Fabric/Win32 Paper smoke jobs are candidate coverage, not observed evidence
-that these revised paths work. A passing same-branch run must demonstrate
+validation was not run. The first CI run confirms that Win32 Paper smoke
+reaches the changed protected-storage path, but it does not qualify the
+revised namespace or Windows Fabric flow. A passing same-branch run must demonstrate
 version-3 smoke control, trusted helper verification, protected-DACL lease
 publication/replacement/cleanup, private runtime resolution, and live bridge
 authentication. Portable negative fixtures do not qualify Windows ACL

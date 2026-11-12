@@ -92,6 +92,7 @@ export function createDesktopStorybookCommand(options: CreateDesktopStorybookCom
         return new DesktopStorybookCli(config, {
           buildNativeDriver: options.buildNativeDriver,
           runner: options.runner,
+          createPrivateStorage: options.createPrivateStorage,
           createStoryManifest: options.createStoryManifest,
           fetch: options.fetch,
           output: options.output,

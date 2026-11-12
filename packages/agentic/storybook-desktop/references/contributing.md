@@ -37,6 +37,13 @@ The public generated JSON contains credential references, never either nonce.
 runtime data module through desktop-driver's owner-private storage adapter:
 POSIX directory/file modes `0700`/`0600` with ownership/ACL checks on macOS,
 and the native owner/DACL/reparse/root-identity boundary on Windows.
+Windows uses a deterministic, project-specific child of the helper-selected
+per-user known-folder root, not the generated workspace directory: a hosted
+workspace's ancestors can grant other principals child replacement rights.
+Both the parent and child are opened by the existing native adapter; neither
+ACL requirements nor reparse/root-identity checks are relaxed. The adapter's
+validated root, not `LOCALAPPDATA` or editable manifest fields, chooses the
+location. Its closed refusal reason is included in Storybook diagnostics.
 Application attachment leases stay in that private namespace. Their random nonce
 is independent of the runtime bridge nonce; the lease nonce never reaches Metro.
 Publication resolves the existing generated directory once, so symlinked project
@@ -58,6 +65,12 @@ Metro receives the canonical schema locator through the parent's
 against the handoff, and never reconstructs credentials from public JSON.
 The locator is trusted process configuration, not a manifest-controlled path.
 This keeps the integration CLI peer-free; the runtime remains app-owned.
+Metro explicitly watches the pinned module directory while retaining its
+workspace watch roots, so the per-user Windows projection remains resolvable.
+The command factory must forward `createPrivateStorage` as well as native
+helper adapters. Portable CLI tests inject storage instead of accidentally
+depending on their host; production credential publication remains unsupported
+on hosts other than macOS and Windows.
 
 Do not launch a native channel by copying only a generated manifest or by
 inventing a handoff from its fields. Use the owning CLI lifecycle. The explicit

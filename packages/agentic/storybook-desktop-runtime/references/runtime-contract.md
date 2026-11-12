@@ -92,6 +92,10 @@ unknown generated fields and mismatched manifest/module hashes before using
 the owner's private bridge-only module. It never uses the generated helper
 path or receives the independent application-attachment nonce. The parent
 publishes credentials through OS private storage, not default-mode files.
+On Windows the projection lives in the helper-selected per-user namespace
+outside the workspace. Metro adds that pinned module's directory to its
+watch folders without replacing the existing workspace roots; it does not
+copy the projection or attachment credentials into public generated output.
 The generated module's only statement is `export default <JSON>`; the constant
 runtime loader imports it through Metro's resolver instead of embedding values
 in executable polyfill source. The old global instance remains a compatibility

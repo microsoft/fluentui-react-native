@@ -57,6 +57,9 @@ function createDesktopStorybookMetroConfig({ configPath }) {
       unstable_allowRequireContext: true,
     },
   });
+  // Windows credentials live outside the workspace in a protected per-user namespace. Metro must watch the pinned
+  // projection's directory to hash/import that module, without losing the workspace folders chosen by makeMetroConfig.
+  config.watchFolders = [...new Set([...(config.watchFolders || []), path.dirname(runtimeModulePath)])];
 
   const storybookConfig = withStorybook(config, {
     configPath,

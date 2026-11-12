@@ -33,10 +33,38 @@ type Handoff = {
 };
 export type CreateStorybookPrivateStorage = (root: string, artifact: NativeDriverArtifact) => Promise<PrivateStorage>;
 
-export const createStorybookPrivateStorage: CreateStorybookPrivateStorage = (root, artifact) => {
-  if (process.platform === 'win32') return createWindowsPrivateStorage({ artifact, root });
-  return createMacOSPrivateStorage(root);
+export const createStorybookPrivateStorage: CreateStorybookPrivateStorage = async (root, artifact) => {
+  if (process.platform === 'win32') return openWindowsPrivateStorage({ artifact, root });
+  if (process.platform === 'darwin') return createMacOSPrivateStorage(root);
+  throw new Error(
+    `Desktop Storybook private credentials are unsupported on ${process.platform}. Use a macOS or Windows host; portable tests must inject a private-storage adapter.`,
+  );
 };
+
+async function openWindowsPrivateStorage(options: Parameters<typeof createWindowsPrivateStorage>[0]) {
+  try {
+    return await createWindowsPrivateStorage(options);
+  } catch (error) {
+    const reason = error instanceof Error && 'reason' in error ? error.reason : undefined;
+    if (typeof reason !== 'string' || !/^[a-z]{1,16}$/.test(reason)) throw error;
+    throw new Error(
+      `Desktop Storybook Windows private storage was refused (reason: ${reason}). A protected-DACL root with trusted ancestors is required.`,
+      { cause: error },
+    );
+  }
+}
+
+function usesWindowsPrivateStorage(createStorage: CreateStorybookPrivateStorage): boolean {
+  return process.platform === 'win32' && createStorage === createStorybookPrivateStorage;
+}
+
+async function privateStorageRoot(directory: string, artifact: NativeDriverArtifact, createStorage: CreateStorybookPrivateStorage) {
+  if (!usesWindowsPrivateStorage(createStorage)) return path.join(directory, '.private');
+  // Workspace ancestors can grant other users write/delete access. Let the verified helper choose its known-folder
+  // root, not an environment variable, then create an independently protected namespace for this generated directory.
+  const parent = await openWindowsPrivateStorage({ artifact });
+  return path.join(parent.root, `storybook-${driverManifestDigest(directory)}`);
+}
 
 export function parseStoredDriverManifest(value: unknown): StoredDriverManifest {
   const manifest = parseDriverManifest(value) as StoredDriverManifest;
@@ -65,7 +93,7 @@ export async function publishDriverManifest(
   // Resolve the existing directory once; storage continues checking the canonical ancestors on every operation.
   const directory = fs.realpathSync(path.dirname(outputPath));
   outputPath = path.join(directory, path.basename(outputPath));
-  const root = path.join(directory, '.private');
+  const root = await privateStorageRoot(directory, manifest.nativeDriver, createStorage);
   const storage = await createStorage(root, manifest.nativeDriver);
   const id = randomUUID();
   const name = `credentials-${id}.json`;
@@ -152,7 +180,7 @@ export async function readDriverManifest(
   const contents = fs.readFileSync(manifestPath, 'utf8');
   const stored = parseStoredDriverManifest(JSON.parse(contents));
   if (
-    stored.credentials.root !== path.join(directory, '.private') ||
+    (!usesWindowsPrivateStorage(createStorage) && stored.credentials.root !== path.join(directory, '.private')) ||
     stored.application.leasePath !== path.join(stored.credentials.root, `application-lease.${stored.endpoint}.json`)
   ) {
     throw new Error('Desktop Storybook private state must use the generated instance namespace.');
@@ -173,7 +201,13 @@ export async function readDriverManifest(
     // macOS lease writers only read private records, without executing a helper. Windows always needs trusted provenance.
     throw new Error('Desktop Storybook requires a trusted parent helper handoff.');
   }
-  const storage = await createStorage(stored.credentials.root, artifact);
+  // Resolving the Windows per-user namespace itself launches a helper. Do it only after the parent binding and
+  // executable verification above; an editable manifest must never authorize even this one-shot helper.
+  const root = await privateStorageRoot(directory, artifact, createStorage);
+  if (stored.credentials.root !== root) {
+    throw new Error('Desktop Storybook private state must use the generated instance namespace.');
+  }
+  const storage = await createStorage(root, artifact);
   const record = await storage.read(stored.credentials.name);
   if (trusted && (record === undefined || trusted.credentialsDigest !== driverManifestDigest(record))) {
     throw new Error('Desktop Storybook credentials do not match the trusted parent handoff.');

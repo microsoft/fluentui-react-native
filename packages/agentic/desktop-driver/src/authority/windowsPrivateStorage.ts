@@ -35,9 +35,12 @@ const publicationFailed = (reason: string): Error =>
 
 /**
  * Opens the Windows owner-only state root through the Windows helper. The parent must already exist. Existing roots are
- * validated, never repaired. Failures carry a fixed message and a non-enumerable `reason` for diagnostics only.
+ * validated, never repaired. The returned root is the canonical directory validated by the helper, including when the
+ * helper selected its per-user default. Failures carry a fixed message and a non-enumerable `reason` for diagnostics only.
  */
-export async function createWindowsPrivateStorage(options: WindowsPrivateStorageOptions): Promise<PrivateStorage> {
+export async function createWindowsPrivateStorage(
+  options: WindowsPrivateStorageOptions,
+): Promise<PrivateStorage & { readonly root: string }> {
   if (process.platform !== 'win32') {
     throw new Error('Windows private storage is unsupported on this platform; use a validated native ownership adapter.');
   }
@@ -77,6 +80,7 @@ export async function createWindowsPrivateStorage(options: WindowsPrivateStorage
   }
 
   return {
+    root,
     async read(name) {
       assertPrivateRecordName(name);
       const answer = await call({ name, operation: 'read' }, readAnswer, unsafeStorage);
