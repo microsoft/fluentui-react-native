@@ -810,3 +810,36 @@ worktree processes and no shared/fixture claims. Four test workers briefly
 outlived the failed aggregate but all exited naturally before cleanup
 inspection. The final verifier and lock reacquisition passed. The harness
 ledger preserves each exact command and every failed attempt.
+
+### 2026-11-12 review follow-up: bounded qualification fixtures
+
+Source commit `0fb6cd47fccc4f6210797b25085e7b56aa8ca4fe` bounds the
+ready crash-owner fixture to a 120-second wait followed by exit 1 and adds
+four lines requesting AppKit fixture termination on the main queue after
+300 seconds. The `/bin/sleep 300` descendant was already bounded. Its focused
+portable regression exercises the same wait with a short deadline and no
+native resources. Production helper/ownership behavior, exact-identity
+cleanup and durable claim fences are unchanged.
+
+The portable regression failed with `ETIMEDOUT` before the fix and passed
+afterward. The focused harness suite passed 30 with no skips. Both owning
+packages' format, lint and build passed; full portable suites passed driver
+1,237 with 66 skipped and harness 410 with 14 skipped.
+
+**Native build passed, runtime blocked:** under the shared native lock,
+`node packages/agentic/desktop-driver/native/macos/fixtures/build.cjs artifacts/desktop/f10m/retirement-followup-20261112/fixture`
+compiled and strictly verified the stable-signed fixture. Nonprompting
+doctor reported `screenLocked=true`, despite effective permission preflights.
+No application was launched. The earlier native and Fabric/Paper passes are
+pre-fix evidence present at `16558610ff2bd14775430f86c738c12947fe81ee`,
+not qualification of the new retirement deadlines.
+
+The single fresh `yarn clean-lage-cache && yarn lage buildci` failed only the
+unchanged `boundedCommand.test.ts:31` SIGKILL/SIGTERM assertion, with driver
+1,236 passed, 1 failed, 66 skipped. No environment/concurrency override or
+retry was used. Separate links passed 90 tasks. Final locked audits found
+zero worktree workloads/unreadable candidates; no signals were issued.
+
+The harness ledger's "Review follow-up: bounded fixture retirement" section
+records exact commands and limitations. Evidence is retained under
+`artifacts/desktop/f10m/retirement-followup-20261112/`.

@@ -1831,3 +1831,94 @@ absence are retained in `cleanup-first.json`, `cleanup-first.log` and
 No helper, fixture, descendant, application, driver service or Metro from
 this qualification remains. Copied execution scripts were removed after use;
 their JSON results and command logs remain as ignored evidence.
+
+#### Review follow-up: bounded fixture retirement — 2026-11-12
+
+Source commit `0fb6cd47fccc4f6210797b25085e7b56aa8ca4fe` addresses the
+reviewed indefinite crash-owner wait. The changed executable source is limited
+to `fixtures/application-ownership/crash-owner.mjs`, its regression in the
+existing `src/applicationOwnership.test.ts`, and four lines in
+`packages/agentic/desktop-driver/native/macos/fixtures/ApplicationFixture.swift`.
+The ready owner now waits
+at most 120 seconds, emits a fixed diagnostic and exits 1. The AppKit fixture
+requests termination on its main queue after 300 seconds; its existing
+`/bin/sleep 300` descendant was already bounded.
+
+Production ownership, helper protocol, parent cleanup, identity verification
+and claim settlement are unchanged. In particular, failure to obtain an owner
+identity still does not authorize signalling a guessed PID. Owner retirement
+allows helper EOF; neither fixture deadline settles an abandoned workload
+claim or implements automatic recovery.
+
+**Observed portable regression:** with the shared wait still unbounded, the
+new `--retirement-probe` test failed with `spawnSync ETIMEDOUT` after five
+seconds. After adding the timeout, the same probe exited 1 with the expected
+diagnostic. It uses a 25 ms deadline through the same wait function, before
+acquiring any claim or starting a helper/application. This is portable
+retirement evidence, not a native owner-death or five-minute AppKit runtime
+pass.
+
+Exact commands and results at the source commit:
+
+- `node --check packages/agentic/desktop-test/fixtures/application-ownership/crash-owner.mjs`:
+  passed.
+- `yarn workspace @fluentui-react-native/desktop-test test --runInBand applicationOwnership.test ownership.test`:
+  passed 30, failed 0, skipped 0.
+- `yarn workspace @fluentui-react-native/desktop-driver format`,
+  `yarn workspace @fluentui-react-native/desktop-driver lint` and
+  `yarn workspace @fluentui-react-native/desktop-driver build`: each passed.
+- `yarn workspace @fluentui-react-native/desktop-test format`,
+  `yarn workspace @fluentui-react-native/desktop-test lint` and
+  `yarn workspace @fluentui-react-native/desktop-test build`: each passed.
+- `yarn workspace @fluentui-react-native/desktop-driver test --runInBand`:
+  passed 1,237, failed 0, skipped 66; native opt-in absent.
+- `yarn workspace @fluentui-react-native/desktop-test test --runInBand`:
+  passed 410, failed 0, skipped 14; native opt-in absent.
+
+Under the shared native lock, using the existing stable signing identity and
+helper cache, these commands also completed:
+
+```sh
+yarn workspace @fluentui-react-native/desktop-driver exec desktop-driver \
+  --reporter json doctor --platform macos --permissions
+node packages/agentic/desktop-driver/native/macos/fixtures/build.cjs \
+  artifacts/desktop/f10m/retirement-followup-20261112/fixture
+```
+
+Doctor exited 0 with `promptRequested=false`, Accessibility/PostEvent/
+ScreenCapture preflight true, and **`screenLocked=true`**. The fixture
+compiled and passed strict signature verification; it was not launched.
+**Current native runtime qualification is blocked by the locked console.**
+The prior 13 native cases and Fabric/Paper passes above remain evidence of
+pre-fix content, present at `16558610ff2bd14775430f86c738c12947fe81ee`;
+they are not reruns of this retirement change. No unlock, privacy alteration
+or native GUI retry was attempted.
+
+The one required follow-up `yarn clean-lage-cache && yarn lage buildci`
+cleared the cache, then **failed** only the unchanged
+`boundedCommand.test.ts:31` SIGKILL-versus-SIGTERM assertion: driver tests
+passed 1,236, failed 1, skipped 66. Private-storage tests passed in this run.
+Both implicated test files and their implementations are byte-unchanged from
+pinned main `041ac8b9894aeaa7e1aa273baa2ece4e46298b94`.
+The aggregate used the native lock, inherited TMPDIR, no `TF_BUILD`, no native
+opt-in and no concurrency override. It was not retried. Root instruction,
+package-content and publishing checks passed within that failed aggregate;
+these individual passes do not make the aggregate green.
+
+Separate `yarn lage test-links --verbose --grouped` passed 90 tasks.
+`yarn markdown-link-check -c .github/markdown-link-check-config.json <file>`
+passed for the five changed Markdown files listed above, with unchanged
+12/6/19/2/0 link counts.
+
+Final locked command-line/working-directory audits at 23:23:50 and 23:23:53
+UTC found no worktree workloads or unreadable candidates and issued no
+signals. The initial audit conservatively counted its own short-lived
+`lsof` child; the corrected audit excludes only that exact known audit PID
+and its own ancestor chain. No application, Metro or native ownership
+fixture was launched in this follow-up.
+
+Evidence: `artifacts/desktop/f10m/retirement-followup-20261112/`, including
+`retirement-unbounded-red.log`, `retirement-green.log`,
+`driver-portable.log`, `harness-portable.log`, `doctor.json`,
+`fixture-build.json`, `plain-aggregate.log`, `test-links.log`,
+`changed-markdown-links.log`, `cleanup.json` and `cleanup-final.json`.
