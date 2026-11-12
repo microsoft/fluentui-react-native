@@ -798,7 +798,7 @@ helper path/hash, helper bytes, and unknown fields before listening or spawning.
 The real macOS private-storage adapter round-trips the records with directory
 mode `0700` and file mode `0600` and rejects a permissive credential mode.
 
-**Confirmed native helper checks:** on macOS 27.2.1 arm64, the locked
+**Pre-review native helper checks:** on macOS 27.2.1 arm64, the locked
 `FURN_NATIVE_DRIVER_TEST=1 yarn workspace
 @fluentui-react-native/desktop-driver test --runInBand` run passed 1,240 tests;
 47 platform/capability tests were skipped (75 suites passed, six skipped).
@@ -844,17 +844,13 @@ app PID was verified, terminated, and confirmed gone. Positive Fabric/Paper
 traversal and authored-case qualification remain pending an authorized
 Accessibility/PostEvent-capable host.
 
-**Initial repository checks (before review fixes):** after `yarn clean-lage-cache`, the locked
-`TF_BUILD=1 yarn lage buildci --concurrency 4` passed all 178 tasks.
-The existing test wrapper uses `TF_BUILD` only to run Jest in-band; it does not
-skip agentic tests. Evidence:
-`apps/storybook/artifacts/f6/buildci-serialized-jest.log`.
-The first aggregate attempt caught formatting of the awaited claim (fixed
-in `fa0681635`). A subsequent default-parallel aggregate passed 103 tasks but
-failed the existing bounded-command test with `SIGTERM` rather than the
-expected `SIGKILL`; a child startup/deadline race under load is inferred, not
-proven. The in-band aggregate was its single justified retry; no unrelated
-test or production behavior was changed.
+**Reviewed repository checks:** source `ffb4944db` passed all 90
+`yarn lage test-links --verbose --grouped` tasks. After `yarn clean-lage-cache`,
+the locked `TF_BUILD=1 yarn lage buildci --concurrency 4` passed all 178 tasks
+with the default macOS `TMPDIR`. The existing test wrapper uses `TF_BUILD`
+only to run Jest in-band; it does not skip agentic tests. Evidence:
+`apps/storybook/artifacts/f6/review-links.log` and `review-buildci.log`.
+The Accessibility-blocked macOS consumer smoke was not repeated for review.
 
 **Windows/Win32 qualification: pending, not sufficient yet.** Native execution
 is unavailable on this Mac, and `pwsh` is not installed, so PowerShell parser
