@@ -2,5 +2,6 @@
 
 ---
 
-Record F15 macOS non-Accessibility supporting evidence and the remaining
-permission blocks. Documentation only; no package release.
+Record F15 macOS supporting evidence, the resolved permission prerequisite,
+and bounded native/consumer qualification results and remaining gaps.
+Documentation only; no package release.
