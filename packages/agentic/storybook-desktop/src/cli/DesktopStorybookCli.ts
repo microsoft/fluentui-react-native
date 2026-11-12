@@ -650,7 +650,7 @@ export class DesktopStorybookCli {
             targetId: this.targetId(platform),
             fetch: this.fetch,
             signal: this.services.controller.signal,
-            input,
+            input: resolveWdioOptions({ ...this.config.wdio, ...(input ? { input } : {}) }).input,
           })
         : undefined;
       let traversalFailure: unknown;

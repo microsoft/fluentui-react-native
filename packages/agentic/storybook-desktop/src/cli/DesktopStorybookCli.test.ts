@@ -1232,9 +1232,15 @@ describe('DesktopStorybookCli', () => {
     expect(runSmokeTests).not.toHaveBeenCalled();
   });
 
-  test.each([undefined, 'accessible', 'physical'] as const)(
-    'runs authored tests after traversing the complete story index (input=%s)',
-    async (input) => {
+  test.each([
+    [undefined, undefined, undefined],
+    ['accessible', undefined, 'accessible'],
+    ['physical', undefined, 'physical'],
+    [undefined, 'physical', 'physical'],
+    ['accessible', 'physical', 'accessible'],
+  ] as const)(
+    'runs authored tests after traversing the complete story index (input=%s, DESKTOP_INPUT=%s)',
+    async (input, environmentInput, effectiveInput) => {
       const runner = new RecordingRunner();
       const resolveNativeDriver = jest.fn(async () => nativeDriverArtifact);
       const events: string[] = [];
@@ -1292,7 +1298,7 @@ describe('DesktopStorybookCli', () => {
           resolveNativeDriver,
           writeMacOSApplicationLease,
           connectStoryTraversal: async (options) => {
-            expect(options.input).toBe(input);
+            expect(options.input).toBe(effectiveInput);
             return {
               select: async (id) => {
                 events.push(`select:${id}`);
@@ -1306,7 +1312,15 @@ describe('DesktopStorybookCli', () => {
         },
       );
 
-      await cli.smoke('macos', { mode: 'stories-and-tests', input });
+      const previousInput = process.env.DESKTOP_INPUT;
+      if (environmentInput === undefined) delete process.env.DESKTOP_INPUT;
+      else process.env.DESKTOP_INPUT = environmentInput;
+      try {
+        await cli.smoke('macos', { mode: 'stories-and-tests', ...(input ? { input } : {}) });
+      } finally {
+        if (previousInput === undefined) delete process.env.DESKTOP_INPUT;
+        else process.env.DESKTOP_INPUT = previousInput;
+      }
 
       expect(events).toEqual(['lease', 'select:first--story', 'select:second--story', 'close', 'tests']);
       expect(fetch.mock.calls.some(([input]) => input.toString().includes('select-story-sync'))).toBe(false);
