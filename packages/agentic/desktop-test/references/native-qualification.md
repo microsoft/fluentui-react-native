@@ -168,6 +168,44 @@ The F3/F4/F5 cases are integration gates, not claims about the F15 baseline.
 Run them only on the combined source that contains those tracks. Until then,
 record them as **Not run**.
 
+## Generic attach-only MCP/WDIO handoff
+
+This is independent of the Storybook procedure and its renderer/context gates.
+Provision the plain AppKit ownership fixture separately, with bundle identifier
+`com.microsoft.furn.application-ownership-fixture`, executable
+`Contents/MacOS/fixture`, `--title`/`--ready-file` arguments, and accessibility
+identifiers `ownership-fixture-increment`/`ownership-fixture-count`. It must be
+built and signed explicitly, never downloaded or compiled by this test.
+Build the changed driver, harness, and MCP workspaces first. Provision the
+verified stable-signed helper and run noninteractive permission diagnostics,
+as above.
+
+Under the exclusive native-desktop lock, from the repository root:
+
+```sh
+FURN_NATIVE_DRIVER_TEST=1 \
+FURN_NATIVE_HANDOFF_APP_PATH=/path/to/FurnOwnershipFixture.app \
+yarn workspace @fluentui-react-native/desktop-test test nativeRunner.contract --runInBand
+```
+
+The opt-in contract uses the actual private descriptors and native listener
+verification, MCP SDK transport, native attach sessions, and WDIO/Jasmine.
+It checks bounded busy, explicit relinquish, refusal of MCP while the runner
+owns the target, fresh sessions/resources, worker-crash drain, credential
+confinement, and preservation of the fixture's exact PID through service
+shutdown. Only the test that spawned the fixture terminates it afterward.
+Capture/resource-link coverage is explicitly marked unsupported when the
+endpoint refuses capture.
+
+The normal handoff runs first; a failure stops before the crash scenario.
+Retain `artifacts/desktop/f11/native-*/evidence.json` and the run reports. Do not
+copy the private descriptor directory into shared artifacts. Record source
+revision, fixture revision, helper identity, selected/executed cases, native
+permission failures, cleanup, and skipped/not-run scenarios separately.
+Absent the explicit opt-ins, the test is skipped, not qualified. This contract
+does not qualify Windows/Win32, Storybook handoff, retained launches, physical
+input, cross-connection resume, or replay.
+
 ## Windows Fabric and Win32 Paper
 
 The procedure is the same with these substitutions. `--paper` is invalid on
