@@ -472,3 +472,322 @@ after the disconnect, so fresh-preview fencing remains Partial. The first
 probe timed out after 10 seconds; bridge retirement occurred about 19 seconds
 after injection. A later attempt waited for retirement and retained the
 same Partial result. Physical Ctrl+C and DPI changes were not exercised.
+
+## 2026-11-12 UTC macOS physical-input postconditions (F16)
+
+Part of [#4441](https://github.com/microsoft/fluentui-react-native/issues/4441)
+and [#4435](https://github.com/microsoft/fluentui-react-native/issues/4435).
+This section is independent of the F15 ledger update in
+[#4493](https://github.com/microsoft/fluentui-react-native/pull/4493).
+The implementation commits are `6aa7a68ba`, `5baf9f735`, and `e0af46b38`,
+based on `505a2187b`; they include menu-independent selection, the LiteUI
+viewport fix, and bounded pointer acknowledgment. The separate renderer
+prerequisite was first committed as `1492afe57`; the independently verified
+backport branch starts at `505a2187b`, with patch commit `1eaa60a44` and
+self-contained ledger commit `9393fe896`. Normal merge `adde47dfd` makes
+that branch an ancestor of E. Its three-dot diff contains only E-owned
+files, not the backport, manifest, lockfile, or Native Core documents.
+All original implementation commits, including `1492afe57`, are retained.
+The final
+signed helper source digest is
+`26c8f8e9060d0e10b26d6b7cab0ced556a172b29c1c14aac2429ce3e0773ebea`.
+Local evidence is under `artifacts/desktop/f16-macos-physical/`, with consumer
+reports under `apps/storybook/artifacts/desktop/<run-id>/`.
+
+### Findings and fixes
+
+- **Physical click: observed preview overflow and a separate identity defect.**
+  A controlled 480 × 302 Paper window reproduced interception. Raw
+  application-scoped and system-wide AX hit tests found the Controls addon
+  button over the checkbox, not the checkbox. F15's Accordion screenshots
+  show the same small-window, clipped-preview layout. Accepting any
+  hit-tested ancestor window would therefore dispatch input to the wrong
+  control. The guarded full physical run
+  `8f464c02-6e09-4bbc-8007-059310e01c93` then exposed the same class at
+  932 × 782: Input FocusTreatment's entry field started at window-relative
+  y = 31.5 while its preview started at y = 76, and the actual hit was the
+  Tone combobox. LiteUI's fixed-height, centered decorator placed oversized
+  stories behind native chrome. Its macOS/Windows decorator now uses the
+  existing Win32 pattern: a scrollable viewport with naturally growing
+  content, centering only when there is spare space. No hit-test ancestor is
+  accepted as the target and no story assertion changed. The unchanged
+  oversized Input callback now passes, including all native focus and
+  geometry assertions. At normal geometry the real descriptor's MCP
+  Checkbox click, checked state, and physical receipt pass. Separately, the native
+  `externalWindowSnapshot` incorrectly assigned an external hit the target
+  window's identity, preventing the agent operation's foreground activation.
+  External hits now have distinct opaque window identities, including other
+  windows of the same application. A native regression failed before that
+  fix; existing in-window obstruction checks remain unchanged. Two attempts
+  to place a standalone external fixture in the foreground did not establish
+  the fixture precondition; they are not external-occlusion qualification.
+  At 480 × 302 the Controls addon still covers the Checkbox's native center,
+  even with the scrollable decorator; the driver correctly rejects that
+  unusable preview with effect `none`. The fix does not promise to click
+  through chrome or implicitly resize a caller's window.
+- **Keyboard clear: false-success root and ignored shortcut observed;
+  menu-route explanation inferred.** The helper returned after posting
+  Command-A/Delete, without checking native focus, selection, or the empty
+  value. The first guarded full Paper physical run exposed the original
+  Input callback's ignored Command-A: focus and foreground were established,
+  the Select All menu item was enabled, but the selected range remained
+  `{ location: 3, length: 0 }`. Explicit Unicode Command-A, physical pointer
+  focus, and holding the chord until acknowledgment did not correct it.
+  Physical Command-Up followed by Command-Shift-Down selected the complete
+  value in the same field and cleared it. Keyboard clear now uses those
+  document-navigation chords once, without the application's Select All menu
+  route; the precise Paper menu-dispatch cause is not established.
+  It confirms focus, waits for complete selection when
+  `AXSelectedTextRange` is exposed, posts Delete once, and verifies an empty
+  value. Unreadable values refuse before keys; unacknowledged selection,
+  retained text, and cancellation retain the posted input's partial effect.
+  There is no key replay, semantic fallback, or story assertion change.
+- **Foreground activation: inferred from F15 evidence, observed in the
+  regression.** F15 recorded a successful AXFrontmost setter with
+  `frontmost=false`; the old fallback ran only for setter errors. Activation
+  now checks the postcondition and requests workspace activation once when
+  the acknowledged AX write did not establish foreground state. The final
+  foreground/main-window checks remain mandatory. No Accordion story or
+  assertion was changed.
+- **Pointer acknowledgment: an exposed timing gap, with inferred connection
+  to the full-run failure.** Run `c741b8d5-1a4b-49a0-b2f8-24ba25e8e8c1`
+  stopped at Button Default because the pointer was not at its requested
+  coordinate; the same callback passed on a fresh isolated run. Code checked
+  the asynchronous move only once, after 16 ms. A recorded-input regression
+  reproduced delayed OS observation, and another exposed lost cancellation
+  during that acknowledgment. Position is now read for a bounded roughly
+  200 ms, without reposting the motion or pressing a button until verified.
+  The specific full-run delay/interference cause is not established.
+- **Fabric renderer prerequisite: failing reader observed, concurrent writer
+  inferred.** Full physical and accessible qualification exposed a crash in
+  the unchanged PGB-006 window-resize callback. A fresh DerivedData/native
+  rebuild still failed. The owned-process AddressSanitizer report recorded
+  main-thread `BUS` in `folly::dynamic::type()` while `ShadowNode::clone`
+  copied `nativeProps_DEPRECATED` during AppKit layout. The installed fork
+  had an unguarded cloning reader and two UIManager writers. The
+  minimal upstream MIT backport documented in
+  `@fluentui-react-native/native-core/references/rnmacos-patch.md` gives
+  them the family-owned mutex from React Native commit
+  `923e7ddcaf4d2de45ca7dedafbb84c6b87dbffc4`, releasing it before parsing
+  and shadow-tree commits. The concurrent writer is inferred from source
+  and the upstream correction, not established by ThreadSanitizer.
+  The backport is required for the complete Fabric physical lane's PGB-006
+  resize case, not for the three original input reproductions.
+
+### Native and focused qualification
+
+The responsible process tree had Accessibility, PostEvent, and Screen
+Recording authority; permission diagnostics requested no prompts. Native,
+GUI, physical-input, and aggregate commands use the shared native lock.
+The helper is standalone: CocoaPods-module and Office bridging-header
+qualification do not apply.
+
+- **Passed:** `swift build -c release -Xswiftc -warnings-as-errors` with a
+  worktree-local scratch root; helper self-test **461/461**. The first regression
+  run failed seven new checks; the external-hit regression then failed
+  independently before its fix. The menu-independent selection regression
+  failed **458/459** before its fix. Pointer acknowledgment and cancellation
+  regressed **459/461** before their fix. Logs: `native-regressions-red.log`,
+  `native-hit-regression-red.log`, `document-selection-red.log`, and
+  `document-selection-green.log`, `pointer-ack-red.log`, and
+  `pointer-ack-green.log`.
+- **Passed:** driver `yarn format`, `yarn lint`, `yarn build`, and focused
+  `yarn test act.test sessionInput --runInBand`: **24 passed, 62 skipped**
+  (the selector also discovers opt-in platform contracts).
+- **Passed:** complete driver suite with `FURN_NATIVE_DRIVER_TEST=1` and
+  stable signing, **75 suites / 1,240 tests passed; 6 suites / 47 tests
+  skipped**, including the macOS native build, framing, authority, and
+  incarnation contracts. The final complete run took **151.668 seconds**
+  (`native-package-contracts-post-backport-repeat.log`); an earlier complete
+  run also passed (`native-package-contracts-final.log`). Skipped contracts
+  are not native qualification.
+- **Failed, final native-suite repeat:** **1,238 passed, 2 failed,
+  47 skipped** (`native-package-contracts-post-backport.log`). Both failures
+  are the existing `nativeDriver.test.ts` macOS helper build/sign/reuse
+  contracts exceeding their unchanged **240-second** test deadlines. Other
+  contracts passed. No native-source change accompanied this repeat, and
+  the timeout cause is not established; the earlier passing suite does not
+  turn this failed repeat into a pass.
+- **Passed after timeout isolation:** unchanged
+  `yarn test nativeDriver.test --runInBand` with native opt-in and signing,
+  **10 passed, 1 skipped**, in **106.588 seconds**
+  (`native-package-contracts-focused-after-timeout.log`), followed by the
+  complete passing suite above. No test deadline, source, or assertion was
+  relaxed. These passes do not establish the earlier elapsed-time cause.
+- **Passed:** runtime `yarn format`, `yarn lint`, `yarn build`, and
+  `yarn test --runInBand`: **25/25**, four suites. The added LiteUI viewport
+  contract failed first, alongside two passing Win32 cases
+  (`liteui-viewport-red.log`), then all three focused cases passed.
+- **Passed, Paper:** bundle and native build after the viewport change;
+  unchanged oversized Input FocusTreatment callback **1/1**, run
+  `70b6f0cd-b569-4d80-9a11-8495aa9fc68c`
+  (`paper-viewport-fixed-callbacks-treatment-qualification.json`).
+- **Passed, Paper:** real MCP descriptor Checkbox physical click, checked
+  state, `physical-click: 1`; required-keyboard clear verified empty with
+  `keyboard: 2` and no semantic-clear receipt
+  (`paper-native-props-final-qualification.json`, final helper digest above).
+- **Passed, Fabric:** the same real-descriptor MCP click, checked state, and
+  physical receipt, plus required-keyboard clear with verified typed/empty
+  values and `keyboard: 2`, without semantic fallback
+  (`fabric-native-props-final-qualification.json`, source `1492afe57`).
+- **Passed, Paper:** the original Input callback, without retries or changed
+  assertions, run `7a7a9962-1633-4060-b4a6-aa5fdaeb5939`, **1/1**
+  (`paper-document-fixed-callbacks-input-qualification.json`). The earlier
+  full physical run `99a6f266-3f9d-471e-8ca8-75d879b5205b` failed honestly
+  with partial effect before Delete; the held-chord experiment also failed.
+  Neither result is counted as a pass.
+- **Passed, Paper:** both unmodified Accordion callbacks through
+  `yarn storybook test --macos --paper --test '*ACC-001*' --input physical --reporter json`,
+  **2/2**, run `9cc7f6b4-63e2-484e-98a1-a57bab79174b`
+  (`paper-native-props-final-callbacks-qualification.json`). The unchanged
+  oversized Input callback also passed **1/1**, run
+  `da79154b-fce2-4137-b324-1b870e9133a7`
+  (`paper-native-props-final-callbacks-treatment-qualification.json`).
+- **Passed, Fabric:** both unchanged Accordion callbacks, **2/2**, run
+  `e2dc76d4-40c4-46ff-a2e1-238777623093`; oversized Input FocusTreatment
+  callback **1/1**, run `db6b223f-cc45-465e-8952-89383d5c5c2e`
+  (`fabric-native-props-final-callbacks-qualification.json` and
+  `fabric-native-props-final-callbacks-treatment-qualification.json`).
+- **Passed, Paper accessible smoke:** final helper, **259 passed, 3 declared
+  unsupported**, run `e638b907-df55-412a-b1ae-fdebd3df522a`, with no failed,
+  skipped, or quarantined cases. Declared native projection gaps are not
+  passes.
+- **Passed, Paper physical smoke:** isolated full rerun, **343 passed,
+  3 declared unsupported**, run `b0ad0949-786d-4550-a620-402a4f4609ba`,
+  including the original Input, focus-treatment, and Accordion callbacks.
+  There were no failed, skipped, quarantined, retried, flaky, or incomplete
+  cases (`paper-final-physical-repeat-lanes-qualification.json`).
+- **Failed, Paper physical smoke:** run
+  `3067945a-9c0f-460a-8895-8c8b0387fc01` stopped during Radio story
+  navigation, before callbacks: **82 passed, 3 failed, 138 unfinished work
+  items**. The first context change did not settle; subsequent mutations
+  correctly refused the quarantined target. A fresh accessible run passed
+  the same catalog; this does not establish a physical-input root cause or
+  count as successful physical qualification. The isolated full physical
+  rerun above passed without changing production code, policy, assertions,
+  or callback retries; the earlier failure remains recorded.
+- An instrumented MCP attempt with pre-click menu/AX probing stopped before
+  dispatch with `automation-failed`, not an obstruction. Final descriptor
+  checks omit that extra diagnostic interposition and pass. Instrumentation
+  causality is not established; the failed attempt remains in
+  `paper-pointer-fixed-qualification.json`.
+- **Failed before the backport, Fabric full smokes:** physical run
+  `7bfe3fc7-bcbc-4275-ac5b-b457b66af7d7` reached **295 passed, 1 failed,
+  3 declared unsupported**; accessible run
+  `aebe42da-fcf5-4482-8eec-3e28401ea50c` reached **246 passed, 1 failed,
+  3 declared unsupported**. Both lost the application during PGB-006's
+  window resize, and ownership checks refused stale-window evidence.
+  The same unchanged callback passed **1/1** in isolation, run
+  `7daeeea1-5042-4dd8-9efa-0b227b33a9a1`
+  (`fabric-callbacks-progress-current-qualification.json`). The isolated
+  pass does not qualify either full lane.
+- **Failed before the backport, clean Fabric resize:** fresh DerivedData and
+  a native rebuild retained AddressSanitizer but still lost the application
+  in the unchanged forced PGB-006 callback, run
+  `5314fc3d-da45-403e-b9bd-e187f0a9284c`. The later owned-process report
+  `fabric-progress-asan-report.86816` pinpointed the native-props copy.
+  Diagnostic stdout/stderr redirection changed the result; those passes
+  are not evidence of a fix.
+- **Passed after the backport, clean Fabric resize:** deleted only this
+  worktree's Pods and DerivedData, regenerated dependencies, bundled, and
+  built the native app. The unchanged forced callback passed **1/1**, run
+  `61d2dce4-5980-49b9-a727-412da47fca71`, with AddressSanitizer still linked.
+  Native Core's Apple module/Office-style bridging-header probe passed
+  **3/3** (`native-props-clean-build-green.log`). This probe is not an
+  Office application build.
+- **Passed after the backport, complete Fabric physical smoke:**
+  `yarn storybook smoke --macos --mode stories-and-tests --input physical --reporter json`,
+  **343 passed, 3 declared unsupported**, run
+  `3cb2f6af-69fd-44c1-8fb0-495607e37ca0`.
+- **Passed after the backport, complete Fabric accessible smoke:**
+  `yarn storybook smoke --macos --mode stories-and-tests --input accessible --reporter json`,
+  **260 passed, 3 declared unsupported**, run
+  `e8ef9d6a-e3a0-4164-b692-de319aaae545`. Both final Fabric lanes had zero
+  failed, skipped, quarantined, incomplete, retried, or flaky cases and no
+  owned process survivors
+  (`fabric-native-props-final-lanes-qualification.json`). Their ordinary
+  launch path retained AddressSanitizer; no diagnostic output redirection
+  or callback assertion change was used to make them pass.
+- **Passed after the backport, complete Paper physical smoke:**
+  `yarn storybook smoke --macos --paper --mode stories-and-tests --input physical --reporter json`,
+  **343 passed, 3 declared unsupported**, run
+  `064e399f-2bd0-4913-9996-f2cb3b5aead6`. The application smoke exited
+  successfully with zero failed, skipped, quarantined, incomplete, retried,
+  or flaky cases. The local wrapper then failed its additional cleanup
+  assertion: a substring-only process detector counted the queued
+  standalone-build `bash` and `lockf` commands because their arguments
+  mentioned the future native image. Both recorded PIDs are wrappers,
+  not app/helper/Metro survivors. The original evidence is retained in
+  `paper-native-props-final-lanes-qualification.json`, with the exact
+  classification in `paper-native-props-final-cleanup-classification.json`.
+  The ignored harness now checks executable identity; no product code,
+  assertion, or smoke result was changed, and no physical input was replayed
+  to conceal this harness failure.
+- **Passed after the backport, complete Paper accessible smoke:**
+  `yarn storybook smoke --macos --paper --mode stories-and-tests --input accessible --reporter json`,
+  **259 passed, 3 declared unsupported**, run
+  `4882b35f-20a4-442a-a097-5fb5b572000e`. This separate complete run used the
+  corrected harness and had zero failed, skipped, quarantined, incomplete,
+  retried, or flaky cases and no owned survivors
+  (`paper-native-props-accessible-final-lanes-qualification.json`).
+
+### Hosted policy
+
+The new advisory `macos-storybook-physical` Fabric job has no disabled input
+features, runs the explicit physical lane, and uploads its own artifacts.
+It is not in the aggregate `pr` job's `needs`. Existing Fabric, Paper, and
+legacy macOS compatibility jobs retain their `physicalClick` mask: fixing
+external-hit identity and passing managed local input do not qualify hosted
+foreground behavior or remove genuine clipped/covered controls.
+
+### Final repository acceptance
+
+- **Failed, initial aggregate:** the required locked
+  `yarn clean-lage-cache && yarn lage buildci` first stopped on this ledger's
+  new sibling-package Markdown link. It was corrected to the
+  package-qualified code span required by R-PKGDOC-005, and
+  `yarn check-agent-instructions` passed.
+- **Failed, ordinary parallel aggregate retries:** the unchanged
+  `boundedCommand.test.ts` escalation fixture received `SIGTERM` rather
+  than its expected `SIGKILL`. Its child installs the ignored-signal
+  handler after Node startup, with no readiness handshake before the
+  300 ms deadline; a startup/deadline race under aggregate load is inferred,
+  not directly timed. The focused serial check passed **7/7**, and the
+  complete opt-in driver suite above also passed unchanged. No source,
+  timeout, or assertion in this area was modified
+  (`buildci-final-retry.log`, `buildci-final-complete.log`, and
+  `bounded-command-focused-final.log`).
+- **Passed, final locked aggregate:** `TF_BUILD=1 yarn lage buildci`, using
+  the repository's existing serial-Jest mode in `scripts/src/tasks/jest.ts`,
+  completed **18 tasks with 160 cached/skipped tasks**, zero pending or
+  aborted tasks, and exit code 0 (`buildci-final-serial.log`). There was
+  no second cache clear. Serial execution does not change the selected
+  assertions or establish the earlier timing cause.
+- **Passed:** changed Markdown link checks for all **11 files**, root
+  `yarn oxfmt --check`, `yarn check-agent-instructions`, and
+  `git diff --check`, plus `yarn change:check`. All source changesets were
+  committed before the changeset check.
+- **Passed, cleanup:** the locked exact-worktree argv and Node CWD scan at
+  **18:14:43 UTC** found no E-owned app, Metro, helper, compiler, or fixture
+  survivors (`process-cleanup-final.json`). This includes the standalone
+  backport child worktree, excludes other owners, and terminates none of
+  their processes. The audit command completed and released its lock.
+  Diagnostic launch wrappers and copied dependency/backport scratch were
+  removed; qualification evidence and both Git worktrees remain.
+
+### Local disposition and remaining limits
+
+F15's three input findings are resolved locally on this branch at usable
+window geometry: both renderers have real-descriptor physical receipts,
+verified keyboard clear, and passing unchanged Accordion callbacks.
+Genuine chrome overlap in a 480 × 302 window still refuses input safely;
+this is not a promise to click covered content. The external-occlusion
+fixture did not establish its foreground precondition, so that native
+scenario remains unqualified.
+
+The shared viewport's Windows/Win32 native behavior, hosted macOS
+foreground behavior, macOS FluentTester, and other native application
+hosts were not run locally. Native Core's module/bridging-header probes
+are compile checks, not Office application qualification. The separate
+backport ledger records the immutable install and fresh native build of
+the bottom branch without E's driver/runtime sources.
