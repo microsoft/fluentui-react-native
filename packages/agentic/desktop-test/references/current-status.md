@@ -1685,3 +1685,85 @@ removed its abandoned W5 chain. The final audit **Passed**:
 `aborted-aggregate-cleanup-audit.log` are under the same evidence root.
 Formatting, instruction validation and all three changed-ledger link checks
 also **Passed**.
+
+## Windows default-aggregate follow-up — 2026-11-12 UTC
+
+**Observed, source `2bf750f9e87919124eee9e0c567eb377603cc9cd`:** the final
+locked default-environment
+`cmd.exe /d /c "yarn clean-lage-cache && yarn lage buildci"` **Passed**
+all 178 tasks, zero failed, from **20:52:21 to 20:55:29 UTC**.
+TEMP/TMP/TMPDIR and concurrency remained inherited defaults; native opt-in,
+Git-ceiling and Lage pool overrides were absent. No source, test deadline,
+dependency manifest or environment guidance changed during this follow-up.
+This supersedes the earlier lack of aggregate acceptance for this source,
+without erasing the three failed attempts.
+
+The exact earlier failure was
+`@fluentui-react-native/storybook-desktop#test`,
+`packages/agentic/storybook-desktop/src/driver/serverIntegration.test.ts` →
+`desktop Storybook server integration` →
+`hosts the Storybook channel and Stage 1 smoke-test target in one process`:
+`A stopping command cannot publish readiness.` at
+`packages/agentic/desktop-test/src/processControl.ts:112`.
+
+**Controlled baseline:** a new detached worktree at
+`origin/main` (`505a2187b0a2451aed7081c9260b343d55742f93`) used its own
+immutable dependency restore, not linked branch build output. The same
+locked default command **Failed** at 20:42:15–20:44:20 UTC, but differently:
+`@fluentui-react-native/desktop-driver#test`,
+`packages/agentic/desktop-driver/src/server/operations.test.ts` →
+`Desktop Driver agent operations` → `the caller leaving` →
+`abandons a walk when the caller disconnects, journals it as cancelled, and keeps the session usable`.
+The post-cancellation `session.find()` expected `outcome: "unique"` and
+received `"inconclusive"` at line 405. Storybook's task was incomplete,
+so that run does **not** reproduce the readiness failure on main.
+One unchanged default repeat at 20:47:34–20:50:39 UTC **Passed** all 178
+tasks, including Storybook. Both baseline audits were clean; the scratch
+worktree and its remaining empty directories were removed before the head run.
+
+**Persistent-state audit, 20:41–20:46 UTC:**
+
+| Location / state                                                     | Observation and timestamp                                                                                                                                                             |
+| -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `%LOCALAPPDATA%\Microsoft\FluentUIReactNative\desktop-test\workload` | Empty: no interactive lock, claim, report or recovery file. Last modified at the initial inventory: 20:04:25 UTC.                                                                     |
+| `%LOCALAPPDATA%\com.microsoft.fluentui-react-native.desktop-driver`  | No agent, runner or active service descriptor. Thirteen durable settlement records; directory last modified 19:40:25 UTC before cleanup.                                              |
+| `%LOCALAPPDATA%\Microsoft\FluentUIReactNative\desktop-driver\native` | Shared immutable native cache, not a descriptor/claim store; existing cache root dates from August 31. Left untouched.                                                                |
+| `apps\storybook\storybook-desktop.generated`                         | No lease, claim, lock, ready or connection files. Windows/Win32 manifests modified 19:36:48 / 19:40:06 UTC; runtime instance 19:40:08 UTC; retained generated WDIO spec 18:00:37 UTC. |
+| `apps\storybook\artifacts\desktop`                                   | All eight existing `run.json` reports terminal. Physical Fabric/Paper reports last modified 19:37:28 / 19:40:25 UTC. No per-user `run.json` found.                                    |
+| Registered Fabric app                                                | Existing verified `furn-81` build; package directory / manifest modified November 10 at 15:08:37 / 15:08:26 UTC. No registration change made by this campaign.                        |
+| Firewall / loopback                                                  | Existing app rule and exemption only, queried read-only at 20:41:51 UTC. Those APIs expose no modification timestamps. Neither setting was changed.                                   |
+
+Two bridge-epoch records belonged exactly to the physical campaign's Fabric
+and Paper application incarnations, created at 19:37:24 and 19:40:22 UTC.
+At **20:46:53 UTC**, the verified Windows storage/probe APIs confirmed
+each recorded PID/start-time pair against its own qualification receipt
+and proved that exact application had exited. Compare-and-remove deleted
+only those two unchanged records. The other eleven records, including
+unrelated quarantines, were preserved. These were settled recovery records,
+not active claims or live descriptors. No process was killed.
+
+**Diagnosis boundary:** identical source was not runtime proof of
+pre-existence. Main's first error differed; its repeat and the final head
+both passed. The readiness test waits 20 seconds, and the reported guard
+rejects a producer frame received after stop begins. Aggregate CPU load was
+observed at 96% across 24 logical processors; load-sensitive startup/stop
+timing remains **Inferred**, not an established root cause. The fake-host
+server path does not open the native service/recovery store. Neither a
+same-error main reproduction nor a causal repair by deleting those epoch
+records is claimed. No unrelated runtime or timeout workaround was added.
+
+Final post-head process audit **Passed**:
+`FURN-AUDIT: no FURN desktop processes found`. Baseline/head command
+receipts, state inventories, exact-identity cleanup, scratch removal and
+audits are retained in `artifacts\desktop\f11\w1-buildci-followup`.
+
+**Hosted confirmation:** workflow `43297198219` at branch source
+`2bf750f9e` completed **successfully, zero failed jobs**. Windows Storybook
+job `131458546719` and Win32 accessible job `131458546805` each recorded
+four ownership cases passed, one capture-policy skip and zero failures.
+Handoff, preemption and lost-response each executed/passed both inner
+specs with zero skips and `accessibilityClick: passed`; worker-crash
+recovery passed around its deliberately failed inner run. Downloaded
+artifacts, not outer Jest totals alone, establish these counts. No flake
+rerun was used. The existing physical/native qualification remains
+separate; this follow-up launched no app and made no new native claim.

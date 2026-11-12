@@ -554,3 +554,29 @@ is not attributed to the foreign portable chain. Owned portable workers
 exited naturally; that foreign owner removed its abandoned processes.
 Final audit **Passed**: `FURN-AUDIT: no FURN desktop processes found`.
 Changed-ledger format, instruction and link checks also passed.
+
+## Windows default-aggregate follow-up — 2026-11-12 UTC
+
+**Observed at `2bf750f9e`:** locked default
+`cmd.exe /d /c "yarn clean-lage-cache && yarn lage buildci"` **Passed**
+178 tasks, zero failed, at 20:52:21–20:55:29 UTC. No source, test deadline
+or environment/concurrency workaround changed. Detached main first failed
+a different driver cancellation/reuse assertion, then its unchanged default
+repeat passed 178; the earlier Storybook readiness error's exact cause is
+not proven pre-existing or attributed to campaign state.
+
+No agent/runner descriptor, active claim or generated lease survived.
+Only two exact exited campaign application epochs were compare-and-removed
+through verified native APIs; unrelated recovery records were retained.
+The scratch worktree was removed, no app/OS setting changed, and final
+process audit **Passed**, no FURN processes found. The owning harness
+receipt in `packages/agentic/desktop-test/references/current-status.md`
+records locations, timestamps and the causal-evidence limits.
+
+Hosted workflow `43297198219` finished **successfully**, zero failed jobs:
+Windows `131458546719` and Win32 accessible `131458546805` each executed
+four passing ownership modes with one capture-policy skip. Handoff,
+preemption and lost-response each passed both inner specs, zero skips,
+with `accessibilityClick: passed`. This confirms hosted generic native
+consumer coverage; it does not broaden the earlier physical Storybook
+or macOS evidence.
