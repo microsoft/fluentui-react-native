@@ -843,3 +843,98 @@ zero worktree workloads/unreadable candidates; no signals were issued.
 The harness ledger's "Review follow-up: bounded fixture retirement" section
 records exact commands and limitations. Evidence is retained under
 `artifacts/desktop/f10m/retirement-followup-20261112/`.
+
+## Windows Fabric and Win32 Paper — F10-W application ownership — 2026-11-12 UTC
+
+**Source and dependency:** Windows implementation commit
+`6e881e1a05fef735c1b9bacd7d123285f47269ff`, branch
+`user/jasonvmo/desktop-windows-app-ownership`, stacked on F10-M #4492 at
+exactly `6489386956c0485cb91b478a8f4adc4828f4178b`. The intended draft PR
+base is `user/jasonvmo/desktop-macos-app-ownership`; its independently owned
+branch must not be rewritten. This implements the same neutral
+`applicationOwnership` host/resource model, schema 3 claims, native OS owner
+identity, `processIdentity`, `inspectApplication`, and launch settlement
+metadata, rather than a parallel Windows contract. Application naming uses
+the existing neutral publication seam; no additional F11 #4448/#4491-owned
+file changes were made relative to the pinned base.
+
+**Observed, portable Windows host:** the driver's declared format, lint and
+TypeScript build passed. With native opt-in unset, the full driver suite
+passed **74 suites / 1,234 tests**, with **9 suites / 93 tests skipped**.
+The focused `NativeDesktopHost.applicationIdentity` suite passed **31 tests**,
+covering malformed/missing Windows image/session/AUMID/start evidence,
+read-only inspection and trusted recovery response/input validation.
+Test-first failures were observed before implementing the Windows boundary;
+those fake-helper tests do not establish native exclusion or cleanup.
+
+Commands ran from the worktree root; `$W2` denotes that root. `TEMP`/`TMP`
+were scoped to its ignored `artifacts\desktop\f10w\scratch` directory and
+`FURN_NATIVE_DRIVER_TEST` was unset.
+
+| Command                                                                                                                                                                 | Result                              |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- |
+| `yarn workspace @fluentui-react-native/desktop-driver format`                                                                                                           | Passed                              |
+| `yarn workspace @fluentui-react-native/desktop-driver lint`                                                                                                             | Passed                              |
+| `yarn workspace @fluentui-react-native/desktop-driver build`                                                                                                            | Passed                              |
+| `yarn workspace @fluentui-react-native/desktop-driver test --runInBand --cacheDirectory "$W2\artifacts\desktop\f10w\jest-driver"`                                       | Passed; native opt-ins skipped      |
+| `yarn workspace @fluentui-react-native/desktop-driver test --runInBand NativeDesktopHost.applicationIdentity --cacheDirectory "$W2\artifacts\desktop\f10w\jest-driver"` | Passed 31 tests                     |
+| `yarn check-agent-instructions`                                                                                                                                         | Passed                              |
+| `yarn oxfmt --check`                                                                                                                                                    | Passed repository-wide, 3,163 files |
+
+Ignored run evidence: `artifacts/desktop/f10w/portable-20261112/driver-test.log`,
+`driver-build.log`, `driver-lint.log`, and `changed-markdown-links.log`.
+Every changed Markdown file's link check passed. The root formatter
+deliberately excludes `.changeset/*.md`; the committed patch changeset
+`windows-exact-application-ownership.md` covers driver, harness and Storybook.
+
+**Observed, compile only:** the locked direct `buildWindowsDriver` Debug/x64
+invocation (`buildId: f10w-compile-02`, staging
+`artifacts/desktop/f10w/b2`) passed in **35.09 seconds, 0 warnings / 0 errors**.
+All seven changed C++ source/header files match the successful build's source
+snapshot byte-for-byte. The first compile failed on a self-test `std::wstring`
+argument, corrected to `.c_str()` before the successful build. Native build
+log: `artifacts/desktop/f10w/b2/build.log`; output:
+`artifacts/desktop/f10w/b2/output/furn-desktop-driver-host.exe`.
+No helper self-test, fixture or application was executed by this compile.
+
+**Implementation, not native qualification:** Windows leases and inspection
+retain canonical image, seven-digit native creation time, session and packaged
+AUMID. Exact pins reject a one-tick mismatch and ambiguous candidates. A
+per-incarnation nonwaiting semaphore excludes controlling helpers; a losing
+packaged activation receives no cleanup authority over another controller.
+Unpackaged launches retain suspended-create / Job Object containment.
+Packaged activation stays explicitly `uncontained`: a post-activation job
+cannot remove its already-running race and may encounter existing job
+restrictions. Exact primary-process cleanup is not arbitrary-descendant proof.
+
+| Native acceptance case                                     | Windows Fabric packaged | Win32 Paper REX | Reason / required next evidence                                              |
+| ---------------------------------------------------------- | ----------------------- | --------------- | ---------------------------------------------------------------------------- |
+| Exact AUMID / image / REX incarnation, start and session   | Not run                 | Not run         | Awaiting the lane's granted desktop campaign                                 |
+| Native one-tick/session/image rejection and ambiguity      | Not run                 | Not run         | Authored native fixture/consumer contracts; portable tests do not prove this |
+| Cross-service exact-application exclusion                  | Not run                 | Not run         | Must use independent real helpers                                            |
+| Job containment / explicitly fenced packaged activation    | Not run                 | Not run         | Runtime process/lease evidence required                                      |
+| Physical input mutex                                       | Not run                 | Not run         | Requires physical opt-in and connected/unlocked session gate                 |
+| Acquired survivor journaling and next-run exact recovery   | Not run                 | Not run         | Requires identity-verified helper/owner fault injection                      |
+| Five consecutive launches/teardowns without identity leaks | Not run                 | Not run         | Required separately on both real endpoints                                   |
+
+Native session kind is **not sampled**: no GUI/physical campaign has run.
+Planned provider command, under the exclusive lock:
+`$env:FURN_NATIVE_DRIVER_TEST='1'; yarn workspace @fluentui-react-native/desktop-driver test --runInBand applicationOwnership.contract`.
+The consumer runbook is
+`packages/agentic/desktop-test/references/native-qualification.md`,
+“Neutral Windows application ownership”; it additionally exercises three
+paired packaged activations and physical input across both endpoint helpers.
+The pre-campaign audit observed `FURN-AUDIT: no FURN desktop processes found`;
+no W2 campaign was started. These are preparation results, not native or
+hosted-CI qualification. Part of #4447 and #4435.
+
+Preparation closeout on the implementation SHA above: the post-commit
+focused driver rerun passed **31 tests**. `yarn change:check` passed;
+`yarn lage test-links --verbose --grouped` passed **90 tasks, 0
+failed/skipped**. The two appended Windows ledgers' link checks passed
+(driver 6 links, harness 15), and `yarn oxfmt --check` again passed
+3,163 files. Only Windows evidence text followed those checks; no native or
+runtime source changed. Additional ignored provenance under
+`artifacts/desktop/f10w/portable-20261112/`:
+`tested-source-revision.txt`, `compile-source-evidence.json`,
+`driver-focused-committed.log`, `test-links.log`, and `root-format.log`.
