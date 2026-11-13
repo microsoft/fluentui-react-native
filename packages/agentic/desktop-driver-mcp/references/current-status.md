@@ -7,7 +7,7 @@ owner_paths:
 
 # Current adapter and measurement status
 
-**Work in progress, updated 2026-11-08.** The adapter is a thin client, not a
+**Work in progress, updated 2026-11-12.** The adapter is a thin client, not a
 supervisor. Keep this package name until actual harness-owned management tools
 land; a later `desktop-mcp` facade must retain driver-only use and plan published
 compatibility. Done below describes implementation, not full native qualification.
@@ -74,7 +74,8 @@ tokenizer/version, serialized UTF-8 bytes and characters, text tokens,
 instructions overhead, projection/budgets, sample count, cold/warm timing,
 success/retry/cancellation/cleanup counts, and approved artifact locator.
 Do not claim token reductions from reducing information scope or omitting
-discovery. macOS Paper measurements are currently **not recorded here**.
+discovery. New macOS Paper samples are recorded in the dated F15
+permission-enabled follow-up below; they do not fill earlier provenance gaps.
 
 ### Windows Fabric and Win32 Paper - 2026-11-08 UTC
 
@@ -339,6 +340,170 @@ out before the observed bridge retirement; the subsequent attempt waited for
 retirement. No raw image or grant is retained in this reference. Driver
 shutdown, app cleanup, and the failed Win32 app-run reports are
 recorded in `packages/agentic/desktop-test/references/current-status.md`.
+
+## F15 macOS Paper measurement prerequisite — 2026-11-12
+
+Source `505a2187b0a2451aed7081c9260b343d55742f93`; macOS 27.2.1
+(26B131), arm64. The stable-signed helper's noninteractive doctor reported
+Accessibility=false and PostEvent=false, with ScreenCapture=true. The
+driver ledger at `packages/agentic/desktop-driver/references/current-status.md`,
+section "F15 non-AX macOS supporting evidence — 2026-11-12",
+retains the exact diagnostic command and signing identity; its local artifact
+is `artifacts/desktop/f15-20261112/doctor.json`.
+
+The initial pass was **blocked**: macOS Paper MCP interaction/text/latency
+measurements needed Accessibility/PostEvent. That prerequisite was resolved
+later the same day; it is no longer an owner-action block.
+In the initial pass no Paper Storybook app or MCP session was launched, no measurement command
+was run, and 0 tests were selected/executed (no new pass, failure, or skip
+counts). Cleanup is N/A for MCP; the diagnostic helper exited. The non-AX
+helper self-test does not qualify the adapter or change historical measurement
+claims.
+
+### F15 permission-enabled MCP follow-up — 2026-11-12
+
+**Observed, partial; not macOS requalification.** Source:
+`141b88b4b81a1bd9a0472de533681f9274d8cb00`; macOS 27.2.1 (26B131),
+arm64. App: Agentic Components Storybook / ReactTestApp, bundle
+`com.microsoft.fluentui.agenticstorybook.id915e78595`.
+Fabric target: `macos-a6dfeaccb13e643a`; Paper target:
+`macos-de43c71d45415315`. Nonprompting doctor reported
+Accessibility/PostEvent/ScreenCapture true; no privacy changes were made.
+All native/GUI commands used the machine-wide native lock and the stable
+`FURN Desktop Driver Development` identity/cache described in the driver
+ledger's F15 follow-up.
+
+The local evidence root is `artifacts/desktop/f15-20261112T115411Z/`.
+The session-local probe used the public MCP SDK 1.32.2 and shipped
+desktop-driver-mcp 0.1.3 stdio CLI with the real private
+`agent-connection.json` descriptor. No grant or descriptor contents were
+printed or copied to evidence. Tokenizer: `gpt-tokenizer` 4.1.0,
+`o200k_base`; compact JSON for discovery, newline-joined MCP text blocks for
+operation text. UTF-8 bytes and JavaScript characters were recorded
+independently. These bounded samples are not a controlled cold-start
+benchmark, reliability window or cross-client qualification.
+
+Fabric command, from the repository root:
+`node artifacts/desktop/f15-20261112T115411Z/qualify.mjs fabric lifecycle`.
+It starts `yarn storybook driver --macos --agent --reporter json`, then
+`yarn storybook run --macos --reporter json` in `apps/storybook`.
+Results: **10 passed, 1 failed, 0 skipped manual checks** in
+`fabric-lifecycle-qualification.json`. Revocation, dispose-during-open,
+ambiguous CREATE and failed DELETE before/after dispatch used the SDK
+in-memory transport with the real native service and verified descriptor:
+response loss was injected at the public typed-client method boundary,
+not with a TCP proxy or by forcing native cleanup failure. Each connection
+drained and the target reservation could be reacquired.
+
+The stdio pass observed same-port service replacement, authoritative
+invalidation of the old session, fresh verified discovery, `no-session`
+refusal of the old mutation, target capture/resource reading, session-close
+resource expiry and read cancellation. The first group-SIGTERM harness
+attempt retained a descriptor and failed restart; it remains recorded in
+`fabric-qualification.json`, with exact-record reconciliation in
+`descriptor-reconciliation.json`. It is not a successful ordinary shutdown.
+
+Fabric's physical checkbox click **failed**, not passed: the sequence stopped
+before dispatch (`element click intercepted`, `obscured`, effect `none`).
+Its 107-token / 438-byte / 1,187.5-ms response measures a refusal.
+No successful physical click/check/observe interaction cost is claimed.
+The driver's F15 open finding records the reproduction and routing.
+
+| Fabric measurement                           | Observed result                                                                                                            |
+| -------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| Six-tool discovery                           | 4,693 tokens; 20,287 UTF-8 bytes / characters                                                                              |
+| Server instructions, additional to discovery | 120 tokens; 591 UTF-8 bytes / characters                                                                                   |
+| First attach after discovery                 | 846.4 ms; one sample, excludes service/app startup                                                                         |
+| Default observe, 20 calls per story          | Median 21.9–27.8 ms across stories; p90 1,127.7–1,669.0 ms; maximum 1,680.2 ms; 905–948 tokens, 2,778–3,061 bytes per call |
+| Idle delta, 20 calls per story               | Median 21.5–26.3 ms; p90 1,122.0–1,671.9 ms; maximum 1,688.1 ms; 151–152 tokens, 464–469 bytes per call                    |
+| Read cancellation                            | Caller aborted after 301.5 ms; subsequent observe passed; no mutation cancellation claim                                   |
+
+The three stories were `components-button--appearance`,
+`components-checkbox--constrained-text` and `components-menu--default`.
+The default 100-node projection completed in all 60 observations and all
+60 deltas; no retries. The slow maxima are retained rather than hidden by
+the medians. These samples do not establish equal information content to
+historical Windows or other story projections.
+
+#### Paper descriptor, interactions and completeness
+
+From the repository root,
+`node artifacts/desktop/f15-20261112T115411Z/qualify.mjs paper`
+used `yarn storybook driver --macos --paper --agent --reporter json`
+and `yarn storybook run --macos --paper --reporter json`.
+It recorded **14 passed, 4 failed, 0 skipped manual assertions**
+(`paper-qualification.json`), not selected suite tests. The four failures
+were keyboard clear, its dependent semantic-clear precondition, refused
+physical Checkbox click and unsupported semantic Checkbox activation.
+The latter two sequences were `stopped` despite non-error MCP envelopes;
+they were not accepted as interactions.
+
+The same real-descriptor lifetime/fault boundaries described for Fabric
+passed on Paper, including same-port invalidation, fresh discovery,
+`no-session` old-mutation refusal, read cancellation followed by a usable
+session, target PNG resource reading/hash verification and expiry on close.
+The exact app PID/start-time/executable survived session and service close.
+Paper's channel survived one 22-second idle interval. The fault probes
+wrapped public typed-client methods, not native cleanup or TCP failures.
+
+Discovery independently matched Fabric: six tools, **4,693 tokens /
+20,287 UTF-8 bytes / characters**, plus 120 tokens / 591 bytes of server
+instructions. First attach was 831.6 ms, excluding service/app startup.
+All latency values below are client wall time; p90 uses nearest rank.
+Each row has 20 calls, zero retries and zero call failures. Defaults used
+the 100-node projection, not a full-tree request.
+
+| Paper story / operation                          | p50 / p90 / max, ms      | Text tokens | UTF-8 bytes | Complete projections |
+| ------------------------------------------------ | ------------------------ | ----------- | ----------- | -------------------- |
+| `components-button--appearance`, observe         | 31.8 / 1,142.7 / 1,689.3 | 1,188–1,189 | 3,533–3,537 | 20 / 20              |
+| Same story, delta                                | 31.5 / 1,152.0 / 1,671.9 | 151–152     | 465–467     | 20 / 20              |
+| `components-checkbox--constrained-text`, observe | 34.1 / 1,688.0 / 1,698.8 | 1,201–1,202 | 3,750–3,752 | 20 / 20              |
+| Same story, delta                                | 33.9 / 1,696.4 / 1,701.6 | 151–152     | 465–467     | 20 / 20              |
+| `components-menu--default`, observe              | 34.1 / 1,158.7 / 1,706.5 | 1,313–1,322 | 3,862–3,866 | **0 / 20**           |
+| Same story, delta                                | 36.4 / 1,159.7 / 1,710.1 | 151–152     | 468–470     | 20 / 20              |
+
+**Observed:** each Paper Menu observation emitted 100 of 103 matching
+nodes, `maxNodes`, three omitted; these are incomplete observations, not
+full-information comparison samples. Complete deltas do not repair that
+truncation. Fabric's complete projections and these Paper projections are
+not equivalent scopes. Window dimensions and display scale were not
+retained for this run; the cached stable helper and running app make these
+warm operation samples, not controlled cold-start measurements.
+Paper read cancellation took 302.2 ms; post-dispatch mutation cancellation
+was **Not run**.
+
+The Paper physical-click refusal cost 1,172.4 ms / 106 tokens / 438 bytes;
+the provider's **Unsupported** semantic activation cost 743.9 ms /
+79 tokens / 329 bytes. Neither is a successful click/check/observe cost.
+The independent
+`node artifacts/desktop/f15-20261112T115411Z/qualify.mjs paper input`
+probe recorded **4 passed, 1 failed, 0 skipped manual checks**:
+semantic clear, physical-input delivery, protected args and the following
+real stdio MCP interaction passed; Paper keyboard clear still failed after
+bounded polling. Exact harnesses and defect reproduction are retained in the
+driver and consumer ledgers.
+
+| Successful Paper Input interaction, one sample                  | ms      | Tokens | UTF-8 bytes |
+| --------------------------------------------------------------- | ------- | ------ | ----------- |
+| `desktop_act` type `F15`, keyboard mechanism, applied/completed | 837.5   | 74     | 261         |
+| `desktop_check` value equals `F15`, passed on first read        | 30.1    | 96     | 322         |
+| Closing default `desktop_observe`, complete, 90 emitted nodes   | 1,148.2 | 1,201  | 3,611       |
+| Sum of those three calls                                        | 2,015.7 | 1,371  | 4,194       |
+
+This sum excludes discovery, attach, story reset and close. No mutation was
+retried; each measured call ran once. It is a successful text-entry/value
+interaction, **not physical Checkbox activation** and not directly comparable
+to historical toggle costs or projections. Artifact:
+`paper-input-qualification.json`.
+
+**Cleanup passed:** `cleanup-audit.json`, 2026-11-12T12:20:26Z, records no
+worktree processes, no listeners on 39860/23935/28029, no descriptor and
+no per-user workload claim; the native-lock wrapper exited and the lock
+was unheld afterward. Reliability, durable TCC continuity, other MCP clients,
+native cleanup/survivor faults and the outstanding F3/F4/F5 acceptance
+cases listed in the consumer ledger remain **Not run** on this source.
+Both renderer smokes failed; the permission prerequisite is resolved but
+#4441's macOS acceptance is not met.
 
 ## F11 explicit relinquish — 2026-11-12
 
