@@ -9,6 +9,8 @@ import { desktopTestSelectionEnvironment, serializeDesktopTestSelection } from '
 import type { DesktopSupervisor } from '../supervisor.js';
 import type { DesktopWdioSettings } from './configuration.js';
 import { wdioGroupId } from './identity.js';
+import { createDesktopRunnerBroker } from './runnerConnection.js';
+import type { DesktopRunnerConnection } from './runnerConnection.js';
 
 const desktopWdioSettingsEnvironment = 'DESKTOP_WDIO_SETTINGS';
 
@@ -36,10 +38,14 @@ export async function runDesktopWdioSuite(
   config: ResolvedDesktopConfig,
   suiteName: string,
   input?: DesktopInputLane,
+  attached?: { connection: DesktopRunnerConnection; preempt?: boolean },
 ): Promise<void> {
   const suite = config.config.suites?.[suiteName];
   if (!suite || suite.kind !== 'wdio') throw new Error(`No standalone WDIO suite "${suiteName}" is configured.`);
   assertDesktopSuiteSupportsInput(suiteName, suite, input);
+  if (attached && supervisor.target.host.ownership !== 'external') {
+    throw new Error('An existing agent service can run only an external, attach-only target.');
+  }
   const specs = resolveDesktopSpecs(suite, supervisor.target.endpoint, config.projectRoot);
   const workIds: string[] = [];
   for (const selected of specs) {
@@ -62,7 +68,7 @@ export async function runDesktopWdioSuite(
   modulePath('@wdio/local-runner');
   modulePath(`@wdio/${suite.framework}-framework`);
   const settings: DesktopWdioSettings = {
-    url: supervisor.server.url,
+    url: attached?.connection.url ?? supervisor.server.url,
     targetId: supervisor.target.id,
     endpoint: supervisor.target.endpoint,
     renderer: supervisor.target.host.renderer,
@@ -77,6 +83,7 @@ export async function runDesktopWdioSuite(
     timeoutMs: suite.timeoutMs ?? 60_000,
     launchTimeoutMs: supervisor.target.launchTimeoutMs ?? 180_000,
     readiness: suite.readiness ?? supervisor.target.readiness,
+    scopedRunner: attached !== undefined,
   };
   const settingsPath = supervisor.reporter.artifactPath('wdio.settings.json');
   fs.writeFileSync(settingsPath, JSON.stringify({ configurationModule: new URL('./configuration.js', import.meta.url).href, settings }), {
@@ -93,28 +100,48 @@ export async function runDesktopWdioSuite(
     testScopes: config.config.testScopes,
     values: resolveDesktopTestScope(config.testScopes, supervisor.target),
   });
-  await supervisor.worker(
-    {
-      command: process.execPath,
-      args: [fileURLToPath(new URL('../../config/launcher.cjs', import.meta.url)), pathToFileURL(launcher).href, configPath],
-      cwd: config.projectRoot,
-      env: {
-        E2ETEST_PLATFORM: supervisor.target.endpoint,
-        NATIVE_TESTING: 'false',
-        [desktopTestSelectionEnvironment]: selection,
-        [desktopWdioSettingsEnvironment]: settingsPath,
+  const broker = attached
+    ? await createDesktopRunnerBroker({
+        ...attached,
+        targetId: supervisor.target.id,
+        addSecret: (secret) => supervisor.reporter.addSecret(secret),
+        signal: supervisor.services.controller.signal,
+      })
+    : undefined;
+  let failure: unknown;
+  try {
+    await supervisor.worker(
+      {
+        command: process.execPath,
+        args: [fileURLToPath(new URL('../../config/launcher.cjs', import.meta.url)), pathToFileURL(launcher).href, configPath],
+        cwd: config.projectRoot,
+        env: {
+          E2ETEST_PLATFORM: supervisor.target.endpoint,
+          NATIVE_TESTING: 'false',
+          [desktopTestSelectionEnvironment]: selection,
+          [desktopWdioSettingsEnvironment]: settingsPath,
+          ...broker?.environment,
+        },
+        label: `WDIO ${suiteName} (${supervisor.target.endpoint})`,
       },
-      label: `WDIO ${suiteName} (${supervisor.target.endpoint})`,
-    },
-    suiteDeadline(suite, specs.length),
-    async (code) => {
-      await supervisor.reporter.assertSuccessful(workIds, suite.optional);
-      if (code !== 0)
-        throw new Error(
-          `WDIO suite "${suiteName}" exited with code ${code} without a corresponding engine failure; see the retained worker log.`,
-        );
-    },
-  );
+      suiteDeadline(suite, specs.length),
+      async (code) => {
+        await supervisor.reporter.assertSuccessful(workIds, suite.optional);
+        if (code !== 0)
+          throw new Error(
+            `WDIO suite "${suiteName}" exited with code ${code} without a corresponding engine failure; see the retained worker log.`,
+          );
+      },
+    );
+  } catch (error) {
+    failure = error;
+  }
+  try {
+    await broker?.close();
+  } catch (cleanup) {
+    throw new AggregateError(failure === undefined ? [cleanup] : [failure, cleanup], 'WDIO runner cleanup failed.');
+  }
+  if (failure !== undefined) throw failure;
 }
 
 function suiteDeadline(suite: DesktopWdioSuite, groups: number): number {

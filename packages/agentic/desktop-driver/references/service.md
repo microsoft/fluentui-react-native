@@ -338,7 +338,8 @@ const client = createDesktopDriverClient({ grant: agent.token, url: service.url 
   `client.delegateConnection()` returns a separate driver-only client;
   `child.revokeConnection()` awaits self-cleanup and remains retryable with
   terminal-only proof after revocation. See [security](security.md) for the
-  eight-edge depth and 4096-grant service-lifetime limits.
+  eight-edge depth, 4096 live/draining grant limit, and bounded settled
+  cleanup-proof history. Successful drains restore capacity without restarting.
 - A grant's session closes after `idleSessionTimeoutMs` without a request for
   it, ten minutes by default. Every request for the session renews it, and a
   running request is never interrupted by expiry. Pass `0` to disable expiry.
