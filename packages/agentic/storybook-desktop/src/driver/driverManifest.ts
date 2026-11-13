@@ -1,6 +1,6 @@
 import { randomBytes } from 'node:crypto';
-import fs from 'node:fs';
 import path from 'node:path';
+import { driverManifestVersion } from '../../config/generated-contract.cjs';
 
 import type { DesktopStoryManifest, NativeDesktopApplicationDescriptor, NativeDriverArtifact } from '@fluentui-react-native/desktop-driver';
 import type { DesktopInputLane } from '@fluentui-react-native/desktop-driver/authoring';
@@ -11,6 +11,8 @@ import type { DesktopStorybookInstance } from '../config/instance.js';
 import type { Platforms } from '../config/platforms.js';
 import type { DesktopStorybookWdioOptions } from '../config/wdio.js';
 import type { WdioSelectionContext } from '../testing/selection.js';
+import { publishDriverManifest } from './generatedManifest.js';
+import type { CreateStorybookPrivateStorage } from './generatedManifest.js';
 
 /** Asks the channel service to protect its driver with a grant authority and publish one agent's connection. */
 export type DesktopStorybookAgentManifest = {
@@ -44,7 +46,7 @@ export type DesktopStorybookDriverManifest = {
   platformManifestDigest: string;
   portablePlanDigest: string;
   renderer: 'fabric' | 'paper';
-  schemaVersion: 2;
+  schemaVersion: 3;
   /**
    * The scope domains and the values this target holds, which declared test `scope` selection reads. The driver's
    * CLI resolves them from the full desktop configuration, which a smoke control process does not have.
@@ -98,7 +100,7 @@ export function createDesktopStorybookDriverManifest({
     throw new Error(`Native Desktop Driver is disabled for ${platform}.`);
   }
   const generated = path.join(config.projectRoot, 'storybook-desktop.generated');
-  const leasePath = path.join(generated, `application-lease.${platform}.json`);
+  const leasePath = path.join(generated, '.private', `application-lease.${platform}.json`);
   return Object.freeze({
     ...(agent
       ? {
@@ -113,7 +115,7 @@ export function createDesktopStorybookDriverManifest({
     application: Object.freeze({
       ...nativeOptions.application,
       ...(platform === 'macos' ? { bundleIdentifier: instance.bundleIdentifier } : {}),
-      leaseNonce: bridgeNonce,
+      leaseNonce: randomBytes(24).toString('base64url'),
       leasePath,
     }),
     appName: config.appName,
@@ -127,7 +129,7 @@ export function createDesktopStorybookDriverManifest({
     platformManifestDigest: storyManifest.platformManifestDigest,
     portablePlanDigest: storyManifest.portablePlanDigest,
     renderer,
-    schemaVersion: 2,
+    schemaVersion: driverManifestVersion,
     ...(scope
       ? { scope: Object.freeze({ domains: Object.freeze({ ...scope.domains }), values: Object.freeze({ ...scope.values }) }) }
       : {}),
@@ -139,14 +141,12 @@ export function createDesktopStorybookDriverManifest({
   });
 }
 
-export function writeDesktopStorybookDriverManifest(manifest: DesktopStorybookDriverManifest, outputPath: string): void {
-  fs.mkdirSync(path.dirname(outputPath), { recursive: true });
-  fs.rmSync(manifest.application.leasePath, { force: true });
-  if (manifest.agent) fs.rmSync(manifest.agent.readyPath, { force: true });
-  const content = `${JSON.stringify(manifest, null, 2)}\n`;
-  if (!fs.existsSync(outputPath) || fs.readFileSync(outputPath, 'utf8') !== content) {
-    fs.writeFileSync(outputPath, content);
-  }
+export function writeDesktopStorybookDriverManifest(
+  manifest: DesktopStorybookDriverManifest,
+  outputPath: string,
+  createStorage?: CreateStorybookPrivateStorage,
+): Promise<string> {
+  return publishDriverManifest(manifest, outputPath, createStorage);
 }
 
 /** Where the running driver instance for an endpoint publishes its manifest. */

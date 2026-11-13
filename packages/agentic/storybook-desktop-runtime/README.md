@@ -9,6 +9,10 @@ Consumers normally install and invoke `storybook-desktop`; this package is
 separate so the CLI package stays peer-free and receives the runtime workspace
 locator.
 
+Driver-backed Metro validates the parent's versioned manifest handoff and
+loads its owner-private bridge-only data module; attachment credentials never
+enter the app bundle. Test config evaluation only in controlled fixture roots.
+
 Win32 test generations reset the preview subtree and its scroll position while
 preserving the surrounding desktop chrome preferences.
 The macOS and Win32 story decorators use a scrollable viewport that centers

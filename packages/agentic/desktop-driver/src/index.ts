@@ -129,6 +129,7 @@ export {
   verifyNativeDriverArtifact,
 } from './native/index.js';
 export type {
+  NativeApplicationIdentity,
   NativeDesktopApplicationDescriptor,
   NativeDriverArchitecture,
   NativeDriverArtifact,

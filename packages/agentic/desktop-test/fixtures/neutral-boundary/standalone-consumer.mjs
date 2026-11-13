@@ -19,6 +19,7 @@ const entries = {
   './process-control': await import('@fluentui-react-native/desktop-test/process-control'),
   './resources': await import('@fluentui-react-native/desktop-test/resources'),
   './ownership': await import('@fluentui-react-native/desktop-test/ownership'),
+  './application-ownership': await import('@fluentui-react-native/desktop-test/application-ownership'),
   './jasmine': await import('@fluentui-react-native/desktop-test/jasmine'),
   './wdio': await import('@fluentui-react-native/desktop-test/wdio'),
 };

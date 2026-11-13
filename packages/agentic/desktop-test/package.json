@@ -70,6 +70,11 @@
       "import": "./lib/ownership.js",
       "default": "./src/ownership.ts"
     },
+    "./application-ownership": {
+      "types": "./lib/applicationOwnership.d.ts",
+      "import": "./lib/applicationOwnership.js",
+      "default": "./src/applicationOwnership.ts"
+    },
     "./jasmine": {
       "types": "./lib/jasmine/index.d.ts",
       "import": "./lib/jasmine/index.js",

@@ -63,7 +63,7 @@ export async function resolveDesktopApplication(
     if (target.endpoint === 'macos') {
       const bundleIdentifier = app.macos?.bundleIdentifier ?? 'com.microsoft.ReactTestApp';
       application =
-        configured.bundleIdentifier || configured.executablePath || configured.leasePath
+        configured.bundleIdentifier || configured.executablePath || configured.leasePath || configured.processIdentity
           ? { bundleIdentifier, windowTitle, ...configured }
           : { executablePath: await resolveBuiltMacosApplication(target, app, bundleIdentifier, signal), windowTitle, ...configured };
     } else {
@@ -107,7 +107,7 @@ export async function resolveDesktopApplication(
     }
   }
   if (target.endpoint === 'macos') {
-    if (!application.bundleIdentifier && !application.executablePath && !application.leasePath)
+    if (!application.bundleIdentifier && !application.executablePath && !application.leasePath && !application.processIdentity)
       throw new Error('macOS application identity is missing.');
     if (application.workingDirectory) throw new Error('workingDirectory is currently supported only by the Windows helper.');
   } else {

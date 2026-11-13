@@ -1,5 +1,15 @@
 import type { DesktopServiceReadyRecord } from './processControl.js';
 
+export type DesktopApplicationResource = Readonly<{
+  endpoint: 'macos' | 'windows' | 'win32';
+  lifetime: 'session' | 'supervisor' | 'external';
+  leaseId?: string;
+  processId?: number;
+  processStartedAt?: string;
+  containment?: 'external' | 'job-object' | 'uncontained';
+  launchKind?: 'launch-services' | 'direct-child';
+}>;
+
 export type DesktopResourceServiceReadyRecord = Readonly<DesktopServiceReadyRecord>;
 
 export type DesktopResourceOwnership = 'owned' | 'borrowed';
@@ -16,6 +26,7 @@ export type DesktopResourceRecord = Readonly<{
   readiness: DesktopResourceReadiness;
   disposal: DesktopResourceDisposal;
   serviceReady?: DesktopResourceServiceReadyRecord;
+  application?: DesktopApplicationResource;
 }>;
 
 export type DesktopResourcePlan = {

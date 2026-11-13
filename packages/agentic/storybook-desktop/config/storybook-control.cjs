@@ -2,6 +2,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { pathToFileURL } = require('node:url');
 const { writeDesktopStorybookFailure } = require('./diagnostics.cjs');
+const { parseDriverManifest } = require('./generated-contract.cjs');
 
 const host = process.env.STORYBOOK_WS_HOST || '127.0.0.1';
 const port = Number(process.env.STORYBOOK_WS_PORT) || 7007;
@@ -169,19 +170,7 @@ function readDriverManifest() {
   if (!manifestPath || !fs.existsSync(manifestPath)) {
     throw new Error('STORYBOOK_DRIVER_MANIFEST must identify the generated driver manifest when running authored tests.');
   }
-  const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
-  if (
-    manifest.schemaVersion !== 2 ||
-    !['macos', 'win32', 'windows'].includes(manifest.endpoint) ||
-    !Number.isInteger(manifest.driverPort) ||
-    typeof manifest.targetId !== 'string' ||
-    manifest.storyManifest?.schemaVersion !== 1 ||
-    !Array.isArray(manifest.storyManifest.entries)
-  ) {
-    throw new Error(`Invalid Desktop Driver manifest at ${manifestPath}.`);
-  }
-
-  return manifest;
+  return parseDriverManifest(JSON.parse(fs.readFileSync(manifestPath, 'utf8')));
 }
 
 async function main() {

@@ -27,6 +27,9 @@ Agent-served channels reject alternate HTTP mutations and never relay client
 WebSocket frames; selection/reset go through the session-owning driver grant,
 and args remain unsupported. Non-agent channels are explicitly legacy
 unprotected mode; see [integration](references/integration.md).
+Generated driver manifests contain no credentials. Owner-private bridge and
+attachment records have separate nonces, and child processes require the
+parent's independent manifest/helper handoff before starting native services.
 The [reference index](references/README.md) routes platform, readiness, and
 troubleshooting tasks.
 Package agents should start from [AGENTS.md](AGENTS.md).

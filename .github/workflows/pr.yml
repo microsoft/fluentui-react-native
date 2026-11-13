@@ -475,6 +475,7 @@ jobs:
         with:
           platform: windows
           run-native-contract: 'true'
+          run-native-runner-contract: 'true'
           disabled-input-features: keyboard,physicalClick,wheel
 
       - name: Prep Windows Storybook
@@ -508,6 +509,10 @@ jobs:
           path: |
             apps/storybook/artifacts/windows
             apps/storybook/artifacts/desktop
+            artifacts/desktop/f11/native-runner-jest.json
+            artifacts/desktop/f11/native-*/evidence.json
+            artifacts/desktop/f11/native-*/*/run.json
+            artifacts/desktop/f11/native-*/*/events.jsonl
             ${{ steps.desktop-driver.outputs.doctor-path }}
             ${{ steps.desktop-driver.outputs.cache-root }}/v1/artifacts/**/build.log
             ${{ steps.desktop-driver.outputs.cache-root }}/v1/diagnostics/**
@@ -586,6 +591,7 @@ jobs:
         uses: ./.github/actions/setup-desktop-driver
         with:
           platform: win32
+          run-native-runner-contract: 'true'
           disabled-input-features: keyboard,physicalClick,wheel
 
       - name: Smoke test Win32 Storybook
@@ -600,6 +606,10 @@ jobs:
           path: |
             apps/storybook/artifacts/win32
             apps/storybook/artifacts/desktop
+            artifacts/desktop/f11/native-runner-jest.json
+            artifacts/desktop/f11/native-*/evidence.json
+            artifacts/desktop/f11/native-*/*/run.json
+            artifacts/desktop/f11/native-*/*/events.jsonl
             ${{ steps.desktop-driver.outputs.doctor-path }}
             ${{ steps.desktop-driver.outputs.cache-root }}/v1/artifacts/**/build.log
             ${{ steps.desktop-driver.outputs.cache-root }}/v1/diagnostics/**

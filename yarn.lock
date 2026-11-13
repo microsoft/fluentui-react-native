@@ -4948,6 +4948,7 @@ __metadata:
     "@react-native/babel-preset": "npm:^0.81.0"
     "@rnx-kit/metro-config": "catalog:"
     "@rnx-kit/metro-resolver-symlinks": "catalog:"
+    "@rnx-kit/tools-react-native": "catalog:"
     "@storybook/react-native": "npm:^10.7.1"
     "@storybook/react-native-theming": "npm:^10.7.1"
     "@storybook/react-native-ui-common": "npm:^10.7.1"
