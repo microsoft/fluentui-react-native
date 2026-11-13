@@ -158,4 +158,36 @@ describe('connection grant routes', () => {
       await harness.close();
     }
   });
+
+  test('rejects a request authenticated before its owner drained even when target probing finishes later', async () => {
+    const authority = new DesktopAuthority();
+    const parent = authority.issue({ label: 'agent', targets: '*' });
+    const harness = await createDesktopDriverTestHarness({}, undefined, { authority });
+    const client = createDesktopDriverClient({ grant: parent.token, url: harness.server.url });
+    let entered!: () => void;
+    let finish!: () => void;
+    const started = new Promise<void>((resolve) => (entered = resolve));
+    const pending = new Promise<void>((resolve) => (finish = resolve));
+    const probe = harness.host.probe.bind(harness.host);
+    jest.spyOn(harness.host, 'probe').mockImplementationOnce(async (signal) => {
+      entered();
+      await pending;
+      return probe(signal);
+    });
+    const launch = jest.spyOn(harness.host, 'launch');
+    try {
+      const child = await client.delegateConnection();
+      const opening = expect(child.newSession({ alwaysMatch: { 'furn:target': harness.target.id } })).rejects.toMatchObject({
+        code: 'session not created',
+      });
+      await started;
+      await child.revokeConnection();
+      finish();
+      await opening;
+      expect(launch).not.toHaveBeenCalled();
+    } finally {
+      finish();
+      await harness.close();
+    }
+  });
 });

@@ -59,7 +59,10 @@ const requestIdInput = z
 
 const sessionInput = z
   .strictObject({
-    action: z.enum(['status', 'open', 'close']).default('status').describe('status lists targets and the open session.'),
+    action: z
+      .enum(['status', 'open', 'close', 'relinquish'])
+      .default('status')
+      .describe('relinquish cancels work and confirms controller drain.'),
     clickMode: z
       .enum(['accessibility', 'auto', 'physical'])
       .optional()
@@ -126,7 +129,7 @@ export function createDesktopDriverMcpServer(options: DesktopDriverMcpServerOpti
     {
       annotations: { destructiveHint: false, idempotentHint: false, openWorldHint: false, readOnlyHint: false },
       description:
-        'Lists the desktop targets the service offers and the open session, opens a session on one target, or closes it. One session is open at a time.',
+        'Lists targets, opens or closes a session, or relinquishes control after draining it for an external runner. One session is open at a time.',
       inputSchema: sessionInput,
       title: 'Desktop session',
     },
@@ -142,6 +145,8 @@ export function createDesktopDriverMcpServer(options: DesktopDriverMcpServerOpti
           );
         case 'close':
           return jsonResult(await controller.close());
+        case 'relinquish':
+          return jsonResult(await controller.relinquish());
         default:
           return jsonResult(await controller.status());
       }

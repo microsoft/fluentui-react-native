@@ -18,6 +18,71 @@ unmatched pattern is an error rather than silently reduced coverage. Keep
 target definitions in the application config and reference them from suite
 workspaces.
 
+## Reuse an attached agent service
+
+A generic target with `host.ownership: "external"` can share one protected
+service between MCP and standalone WDIO, without restarting the listener or
+acquiring another machine workload claim:
+
+```sh
+yarn desktop-test --target macos serve --agent
+# In the MCP connection: desktop_session { "action": "relinquish" }
+yarn desktop-test --target macos test --suite regression --attach-agent
+# Once the runner exits, the same MCP connection may open a fresh session.
+```
+
+The service publishes a separate private `runner-connection.json` alongside
+the driver-only `agent-connection.json`. Both verify the native listener's
+identity before sending credentials. `test --attach-agent --descriptor <name>
+--root <path>` selects the existing runner record; the flags are discovery
+inputs, not arbitrary service URLs. `serve --runner-descriptor <name>` changes
+its name. Direct library hosts can disable publication with `agent.runner:
+false`.
+
+The default handoff is an immediate `target-busy` result. MCP must explicitly
+relinquish and await confirmed cleanup. Alternatively an operator may start
+the service with `--allow-runner-preempt`, then request `test --attach-agent
+--preempt`; the flag alone confers no authority. Preemption fences new
+commands, cancels and awaits in-flight native work, and confirms session
+deletion before a target-scoped, attach-only runner grant is returned. A
+failed drain retains the busy fence; revocation notification is not proof.
+Preemption is limited to delegated driver-only controllers. A descriptor root
+or a connection retaining workload/recovery authority returns `target-busy`
+and must explicitly relinquish, so unrelated descriptor users are not revoked.
+After a preempted MCP child is authoritatively rejected and the runner drains,
+the same MCP connection can open with a fresh child.
+
+The parent runner keeps the reservation between WDIO workers, hands each
+worker a distinct driver-only child via private process transport, and awaits
+its terminal drain in `onWorkerEnd` before another group or retry starts.
+A worker crash therefore cannot leave a session for the next controller to
+reuse. Runner shutdown drains the entire connection subtree even when a
+worker or acquisition response was lost. Credentials travel only in private
+descriptors, environment, and request closures; never put them in hooks,
+capabilities, settings, generated configuration, command arguments, or logs.
+
+The launcher captures and removes broker credentials before importing user
+hooks. Each worker receives only its own child token through WDIO's private
+`runnerEnv`, never through the launcher's `process.env`; the worker captures
+and removes it before user hooks or specs load. Hooks, specs, and children
+they spawn therefore do not inherit broker or worker credential variables.
+The per-worker `runnerEnv` entry is cleared at worker end. Node bootstrap and
+preloads run before configuration capture and remain trusted: the worker token
+exists in the fork environment during that bootstrap window. This transport
+does not isolate mutually hostile code running as the same operating-system
+account.
+
+Each handoff opens a new session: old element references, observation cursors,
+uniqueness proofs, and session-qualified artifact links expire. There is no
+cross-MCP-connection resume or automatic replay. The externally owned app is
+left running. Supervisor-retained launches and Storybook integration handoff
+are not supported by this phase. The CSF exception is unchanged: its runner
+owns the session and its isolated Node worker only borrows it.
+
+An attached runner cannot change an existing host's input masks. In particular,
+`--input accessible` still refuses a host that has not already disabled
+keyboard, physical click, and wheel; do not weaken that check to reuse a service.
+
 ## Native page adapter
 
 Use the desktop driver's registered WebdriverIO binding for native
