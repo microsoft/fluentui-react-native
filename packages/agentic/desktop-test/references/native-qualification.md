@@ -22,6 +22,78 @@ real descriptor path.
 Run the `yarn storybook`, `yarn desktop-driver`, and `yarn desktop-test`
 commands below from `apps/storybook`, where their scripts are declared.
 
+## Neutral macOS application ownership
+
+The package's opt-in AppKit contract builds the signed native helper and the
+isolated fixture described in the
+`packages/agentic/desktop-driver/native/macos/README.md` provider guide.
+From the repository root, under the exclusive native-validation lock:
+
+```sh
+FURN_NATIVE_DRIVER_TEST=1 yarn workspace @fluentui-react-native/desktop-test test --runInBand applicationOwnership.contract
+```
+
+Set `FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY` to the provisioned stable
+identity. The suite covers supervisor/session separation, durable owner/app
+identities, launch-capable discovery, exact external-app exclusion and
+preservation, stale identities, direct-child causality, and post-launch
+cancellation. Publication-failure coverage uses a real launched application
+with an injected durable-publication rejection. Two separate Node owners are
+killed after native acquisition: one before publishing the acquired identity,
+the other after publishing it. Both leave a fenced claim, a surviving native
+app and a bounded known descendant; replacement remains refused even after
+the recorded owner and helper exit. The tests verify exact native identities
+and executable paths before operator cleanup, prove the descendant survives
+the primary process, and remove only the unchanged fixture claim after all
+recorded processes exit. These are native AppKit scenarios, not fake-host
+evidence or automatic recovery.
+
+The ready crash-owner fixture retires with exit code 1 after two minutes if
+the parent cannot perform exact cleanup. Its portable `--retirement-probe`
+executes the same wait with a short deadline without acquiring a claim or
+starting a helper/application. The AppKit fixture requests its own termination
+after five minutes, and its `/bin/sleep 300` descendant already has a finite
+lifetime. Neither deadline clears a claim or authorizes guessed PID cleanup;
+native identity verification is still required by the parent.
+
+Its evidence is written to the desktop-test package's
+`artifacts/desktop/application-ownership-*/evidence.json`. The separate physical mutex
+case requires explicit `FURN_NATIVE_PHYSICAL_INPUT_TEST=1` and effective native
+permissions; a skipped case does not qualify input exclusion.
+
+When Accessibility is unavailable, the non-positive safety subset can still
+qualify native OS-owner inspection, pre-spawn/LaunchServices rejection settlement
+and claim reuse, and exact cleanup after rejected launch:
+
+```sh
+FURN_NATIVE_DRIVER_TEST=1 yarn workspace @fluentui-react-native/desktop-test test --runInBand applicationOwnership.contract --testNamePattern 'kernel owner identity|failed native'
+```
+
+Record the actual AX rejection and exact primary-process cleanup. Passing this
+subset is not positive supervisor lifetime, external-app preservation,
+application exclusion, physical-input or renderer qualification.
+
+An Accessibility trust flag alone is insufficient: record actual AX calls and
+failures, including `kAXErrorAPIDisabled`, without resetting TCC or changing
+privacy permissions. AppKit results support only the generic backend. They are
+not Fabric/Paper signing or TCC-responsibility qualification, do not qualify
+arbitrary descendants, and do not replace the per-renderer/descriptor gates
+below. Windows launched-application resource/survivor qualification must run on
+Windows; macOS and ordinary hosted smoke cannot establish it.
+
+`containment: "uncontained"` is deliberate for both macOS launch kinds.
+An exact primary-process exit is not proof that arbitrary descendants exited.
+The native ownership cases do not qualify descendant containment.
+The crash cases qualify a known descendant and the interrupted acquisition
+publication boundary, not arbitrary descendant discovery, filesystem
+power-loss behavior, Metro/channel survivors or transparent service restart.
+
+The PR Windows setup action runs the **desktop-driver** native suite, not this
+package's application-resource contracts. The Windows/Win32 E2E and Storybook
+smoke jobs do not exercise failed packaged-launch survivor journaling/recovery.
+Those jobs are insufficient for that acceptance gate; portable schema tests
+must not be presented as Windows native qualification.
+
 ## Parameters and prerequisites
 
 Record these for every renderer run:

@@ -51,6 +51,13 @@ describe('desktop supervisor input lane', () => {
       reportSession: { reporter, delegated: true, environment: {}, close: async () => 0 },
       // Never contend for the real per-user workload claim.
       lockDirectory: path.join(artifactsRoot, 'locks'),
+      processIdentity: {
+        platform: 'macos',
+        pid: process.pid,
+        startedAt: '2026-11-12T00:00:00.123456Z',
+        executablePath: process.execPath,
+        interactiveSession: 'macos-session:1',
+      },
       ...(input ? { input } : {}),
     });
     try {

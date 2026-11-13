@@ -90,6 +90,8 @@ export type ApplicationLease = {
   ownership: 'attached' | 'launched';
   processId?: number;
   processStartedAt?: string;
+  /** LaunchServices causality is not direct child-process containment. */
+  launchKind?: 'launch-services' | 'direct-child';
 };
 
 export type DesktopWindow = {

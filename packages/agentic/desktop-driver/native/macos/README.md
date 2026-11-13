@@ -24,6 +24,7 @@ Accessibility.
 | `Application.swift`                    | Launch/attach leases, exact process/window identity, and ownership          |
 | `ApplicationTermination.swift`         | `terminateOwned`: quit, wait, kill, and verify the exit of an owned process |
 | `ApplicationIncarnation.swift`         | One-shot `--application-incarnation`: whether a recorded process exited     |
+| `ApplicationLock.swift`                | Stable per-user exclusion for an exact application PID/kernel start time    |
 | `Accessibility.swift`                  | AX tree walking, lookup, snapshots, focus, hit testing, actions, and source |
 | `Observation.swift`                    | Provider-neutral bounded sampler: request rules, budgets, and BFS result    |
 | `AccessibilityObservation.swift`       | AX source for `observe`: multi-attribute reads, shared ids, `observe` run   |
@@ -83,6 +84,38 @@ The coordinator:
 
 SwiftPM `.build`, DerivedData, editor files, and other generated output never
 participate in source identity or staging.
+
+### Application ownership fixture
+
+The native ownership contracts use a small AppKit application, independent of
+Storybook and React Native. From this package, build it into an ignored
+artifact directory:
+
+```sh
+node native/macos/fixtures/build.cjs artifacts/desktop/application-fixture
+```
+
+The command prints the verified bundle/executable identity and window title.
+The arm64 fixture pins its compiler and bundle minimum macOS version to 11.0,
+matching the helper instead of inheriting a newer machine deployment target.
+The executable accepts `--title <exact-window-title>` and an optional
+`--ready-file <path>` containing its PID after window creation; its Increment button
+and counter have accessibility identifiers `ownership-fixture-increment` and
+`ownership-fixture-count`. Use the normal native host launch API, or launch the
+exact executable externally for attach-preservation tests. The test owner must
+stop only that process incarnation. The fixture is supporting native evidence,
+not Fabric/Paper renderer qualification. Its main run loop requests termination
+after five minutes if the test owner never cleans it up.
+
+For crash-recovery contracts, `--descendant-ready-file <path>` starts a bounded
+`/bin/sleep 300` child and writes its PID and parent PID as JSON. The fixture does
+not terminate that child when its primary process exits. The contract owner
+verifies both native start identities and the parent relationship, proves the
+descendant survived, and separately stops that exact descendant. This tests the
+limits of `uncontained` ownership; it does not add descendant containment.
+The crash-owner Node fixture waits at most two minutes before exiting nonzero;
+the helper then observes EOF. These fixture-only retirement bounds do not
+settle or remove an abandoned workload claim.
 
 ## Signing
 
@@ -170,8 +203,11 @@ transport: the helper writes a fixed diagnostic and exits with status 1 instead 
 
 The one-shot `--application-incarnation` mode reads exactly `{ "pid", "startedAt" }` from stdin and answers whether
 that exact process, a process id and its start time, has `exited`, is `running`, or cannot be told (`unknown`).
-`exited` is reported only with proof: the process id is gone (a zombie included) or now names a process that
-started more than a second later. Settlement recovery uses it to decide whether a launched application that the helper
+New leases use kernel start timestamps with exactly six fractional digits.
+For these identities, `running` requires equality and `exited` requires a gone/zombie PID
+or a strictly later kernel start time; unreadable/earlier identities are unknown.
+Legacy lower-precision records retain their historical one-second exit tolerance.
+Settlement recovery uses it to decide whether a launched application that the helper
 could not prove closed is really gone; [PROTOCOL.md](../PROTOCOL.md) defines its request and answer.
 
 The input lock lives beneath
@@ -179,6 +215,12 @@ The input lock lives beneath
 helpers started through different Aqua bootstrap namespaces still serialize
 physical input. Restricted `--release-input` accepts only the Node-owned ledger.
 `--sweep` is an operator recovery diagnostic, not normal cleanup.
+Exact application leases hold a separate owner-only `flock` beneath that root's
+`applications` directory. It excludes other helpers for the same PID and
+microsecond start identity, independent of checkouts or temporary directories.
+Attached leases only release the lock; they never terminate the app. Launched
+leases distinguish `launch-services` from `direct-child` causal ownership and
+report `uncontained`: neither promises descendant containment.
 The one-shot `--service-identity` mode describes a service process or verifies a
 service claim for `describeMacOSService` and `createMacOSServiceVerifier`; it
 uses only public process and socket information APIs and links `libbsm` for the
@@ -192,12 +234,12 @@ resident memory for the life of the session (about 25 KB for a `probe`, 80 KB
 for a `tree`, and 250 KB for a 500-element `observe`). A new thread that serves
 requests must drain a pool per request too.
 
-The main run loop is also what refreshes `NSWorkspace.runningApplications` and `NSRunningApplication.isTerminated`.
-Measured without it, a launched application registers within about 0.2 s, but after the process was killed
-`isTerminated` stayed false and the workspace list kept the dead process for the 15 s the probe watched; with the
-run loop pumped both updated within 0.25 s. Registration therefore needs no run loop, while exit never trusts that
-state: termination verification and lease checks read the kernel through `ApplicationIncarnation`, and attaching
-without a lease drops listed processes the kernel no longer knows.
+The main run loop refreshes `NSWorkspace.runningApplications` and `NSRunningApplication.isTerminated`.
+Without it, the workspace's cached array can omit a newly launched application and retain an exited one.
+Descriptor-based discovery therefore enumerates the current user's kernel PIDs
+and constructs `NSRunningApplication` instances directly instead of trusting that cached array.
+Enumeration failure refuses discovery; exact window and uniqueness checks still apply.
+Termination verification and lease checks independently read the kernel through `ApplicationIncarnation`.
 
 ## Application and window identity
 

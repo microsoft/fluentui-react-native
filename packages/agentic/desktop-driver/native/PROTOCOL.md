@@ -125,6 +125,60 @@ and `external` for an attached application it never ends. A provider that omits
 `containment` makes no containment claim. The field is additive and does not
 change the wire version.
 
+The macOS provider emits its kernel `proc_pidinfo` start timestamp with exactly
+six fractional digits and `Z`, never a LaunchServices launch-date estimate. Its
+launched lease additionally reports `launchKind: "launch-services" |
+"direct-child"` and `containment: "uncontained"`; an attached lease reports
+`containment: "external"`. Causal LaunchServices ownership is not parent/child
+containment. Cleanup rechecks the captured exact incarnation before each signal;
+it never adopts whichever process currently occupies a launch PID.
+Initial capture also checks the causal child or LaunchServices application
+identity before and after the kernel read. LaunchServices substitution and
+interactive authorization prompts are disabled.
+
+macOS attach descriptors may supply `processIdentity: { processId,
+processStartedAt }` with the exact native timestamp and an exact `windowTitle`.
+Optional bundle/executable constraints must also match. This external identity
+cannot be combined with `leasePath`/`leaseNonce`, cannot authorize launch, and
+never grants termination authority. Existing Storybook lease files remain a
+separate, legacy identity path. Independent helpers hold a stable per-user
+exclusive lock for each exact application incarnation until its lease is
+released. Lock contention never permits signalling another helper's application.
+The macOS-only `inspectApplication` command accepts the same configured target
+parameters as `attach` and returns only `{ processId, processStartedAt }`. It
+performs the same descriptor, legacy-lease/nonce, bundle/executable, exact-window
+and uniqueness checks, with the exact kernel incarnation captured before window
+discovery and rechecked afterwards. It does not create an application lease,
+acquire an application or physical-input lock, register windows/elements, or
+grant control/termination authority. Identity observation can therefore run on
+the session's helper while its controlling lease remains held, without stealing
+window records or permitting another service to attach. Cancellation and
+unverifiable identity/Accessibility fail closed. Other providers do not implement
+this command.
+Other lock failures after a proven launch use exact-incarnation cleanup and
+report `exited` only when that primary process is confirmed gone.
+Explicit app paths are authoritative; bundle-only launch rejects
+multiple distinct registered existing bundle paths rather than selecting one.
+
+A failed or cancelled macOS launch reports
+`applicationSettlement: "not-started" | "exited" | "unknown"` in
+`response.error.data` or `cancelled.data`. `not-started` proves rejection before
+process creation or a completed LaunchServices failure with no application.
+`exited` requires exact cleanup proof; an unreadable or surviving incarnation is
+`unknown`. A process that was created is named by its captured `processId`,
+`processStartedAt` when readable, and `launchKind`. A pending launch whose
+LaunchServices callback has not arrived may have no process identity; callers
+must retain their pending acquisition rather than infer no effect. Node also
+marks a dispatched launch `unknown` if its helper transport fails before a
+response. A legacy provider's ordinary no-data rejection is not evidence of a
+created process. These failures may additionally include bounded
+`launchErrorDomain`, `launchErrorCode`,
+`underlyingErrorDomain`, and `underlyingErrorCode` diagnostics, without arbitrary
+NSError user information. A callback returning both an error and a new process
+uses the same exact-incarnation cleanup path. These
+additive fields are described in [protocol.json](protocol.json) and retain
+wire version 1.0.
+
 Element snapshots can additionally include `required` as a supported Boolean
 or an unsupported value with its reason. Older or non-supporting providers may
 omit it; the Node boundary treats absence as unsupported. This is additive
@@ -526,6 +580,9 @@ The helper stops side effects, unwinds command-local work, and emits:
 
 `effect` is the mutation effect described above and is present for mutating
 commands. A queued request that is cancelled before it starts reports `none`.
+An optional `data` object preserves lifecycle settlement evidence, including
+the exact unleased application from a cancelled macOS launch. It is not a
+mutation-effect verdict and never authorizes a retry.
 
 Node retains the session queue and physical-input ownership until the request
 settles. Failure to settle before the cancellation deadline is fatal to the
@@ -597,11 +654,13 @@ privacy access. `--service-identity` follows the one-shot contract below; see
 [the macOS service verifier](../references/security.md#macos-service-verifier).
 `--application-incarnation` also follows it: the request is exactly
 `{"pid":<positive 31-bit integer>,"startedAt":"<ISO 8601 time>"}`, and the
-answer is `{"ok":true,"state":"running"|"exited"|"unknown"}`. `running` means
-the process id names a process whose start time is within 10 ms of `startedAt`;
-`exited` means the process id is free or a zombie, or names a process that
-started more than one second later; anything else, including a process the
-kernel will not show this user, is `unknown`. See
+answer is `{"ok":true,"state":"running"|"exited"|"unknown"}`. For canonical
+macOS six-fractional-digit UTC identities, `running` requires exact equality;
+`exited` means the PID is gone/a zombie or names a strictly later kernel
+incarnation, including a one-microsecond difference. An earlier timestamp or
+unreadable identity is `unknown`. Legacy timestamps keep the old compatibility
+policy: `running` within 10 ms, `exited` only when gone or more than one second
+later. Legacy precision must not be used to authorize exact owned cleanup. See
 [settlement journal and recovery](../references/security.md#settlement-journal-and-recovery).
 
 The Windows provider additionally implements:
