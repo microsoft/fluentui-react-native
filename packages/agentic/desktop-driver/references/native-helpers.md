@@ -161,6 +161,14 @@ not set this policy.
 Never edit an artifact or selection in place. Rebuild and allow the resolver to
 publish a new immutable selection.
 
+Repository CI explicitly provisions the plain Win32 fixture through the built
+test-only `lib/native/windows/win32FixtureSupport.js` module's
+`fixtureExecutable()` function. That module supports direct Node ESM loading,
+without Jest's source resolver, and anchors fixture sources in the driver
+package rather than the caller's directory. Importing it is portable and does
+not build or launch anything. Calling the builder requires the Windows
+toolchain and publishes only to the fixture cache; it never launches the app.
+
 ## Verification
 
 Every artifact is checked before use:

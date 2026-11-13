@@ -123,6 +123,10 @@ existing private child client, never another connection's child. This retains
 known-session cleanup responsibility rather than resuming across connections.
 A replacement service or an authoritative invalid/revoked
 session invalidates old references; open a new session and observe again.
+Authoritative child rejection also discards its cached binding. Once an
+operator-preempting runner has drained, the same MCP connection can delegate a
+fresh child from the still-live descriptor; it cannot reuse the revoked child
+or any old references, cursors, proofs, or artifact links.
 Nothing automatically replays the failed operation.
 
 Operations, acquisition, close, and complete resource reads are serialized per
@@ -145,10 +149,11 @@ retry an incomplete cleanup while the process remains alive.
 There is no resume across different MCP connections and no crash-safe native
 recovery promise; see [current status](current-status.md).
 
-The authority limits delegation to eight edges and 4096 grants per service
-incarnation, including revoked roots/children. Exhaustion is explicit and
-requires an operator-controlled drain and service replacement. Cleanup proof
-is never silently evicted or reused.
+The authority limits delegation to eight edges and 4096 live or not-yet-drained
+grants. Successful subtree drains restore capacity without restarting.
+Pending and failed cleanup proof is never evicted; terminal retry proof for
+the last 4096 fully drained records remains available. Older settled records
+expire and their credentials fail closed, without recovering driver authority.
 
 ## Embedding
 

@@ -95,10 +95,13 @@ export class DesktopDriverClient {
     return this.request('DELETE', '/furn/grants/current');
   }
 
-  async newSession(capabilities: NewSessionCapabilities): Promise<DesktopSessionClient> {
-    const value = await this.request<{ capabilities: Record<string, unknown>; sessionId: string }>('POST', '/session', {
-      capabilities,
-    });
+  async newSession(capabilities: NewSessionCapabilities, options: DesktopClientCallOptions = {}): Promise<DesktopSessionClient> {
+    const value = await this.request<{ capabilities: Record<string, unknown>; sessionId: string }>(
+      'POST',
+      '/session',
+      { capabilities },
+      options.signal,
+    );
     return new DesktopSessionClient(this, value.sessionId, value.capabilities);
   }
 

@@ -67,7 +67,28 @@ Interrupts stay handled until cleanup completes. The first SIGINT, SIGTERM, or
 SIGHUP requests a graceful stop; the second force-kills owned process trees
 while cleanup continues; the third exits immediately with status 128 plus the
 signal number and leaves the claim for inspection. An interrupted one-shot run
-reports `incomplete`.
+reports terminal `incomplete` and exits 1. A clean long-lived `serve` stop is
+terminal `passed` and exits 0 after descriptor withdrawal, grant/session drain,
+listener and reporting transport close, and exact claim release. A required
+child's failure delivered before the interrupt remains a failed run, not a
+successful cancellation. Failed disposal retains the fenced claim even though
+the terminal report is written and the CLI exits 1.
+
+On Windows a physical console Ctrl+C reaches every process attached to that
+console, so child exit and parent interruption can race. In-process
+`process.emit('SIGINT', 'SIGINT')` exercises the installed handler but is only
+semantic regression coverage; `child.kill('SIGINT')` on Windows terminates the
+child and is not graceful-console or physical-input qualification.
+
+The `agent-interrupt-borrowed-cli` contract deliberately recreates the retired
+composition: an integration awaits its borrowed scope's `close()` after stop,
+while the historical CLI guards that integration in the same scope. The
+command resource settles first; an old CLI then hangs with an active claim
+and nonterminal report. Current integrations must still leave borrowed scopes
+to their owner, as checked by the borrowed-scope regression in
+`packages\agentic\storybook-desktop\src\cli\DesktopStorybookCli.test.ts:836–861`.
+The CLI subprocess regression checks the separate owner-side repair without
+claiming a physical Windows console broadcast.
 
 The generated-descriptor service bridge allows 60 seconds per command shutdown
 phase so a nested scope can use its 45-second disposal budget and flush reporting
@@ -142,6 +163,17 @@ Integrations contribute through the public
 than taking over CLI output and supervision. Management/run API schemas belong here.
 Attached-app MCP/WDIO handoff can be developed independently of supervisor-owned
 native launch, but both must wait for session drain and preserve external apps.
+
+Generic attach-only services now support an explicit
+[MCP/WDIO handoff](wdio-suites.md#reuse-an-attached-agent-service). The serving
+supervisor retains its claim, listener, host, and required services. The
+standalone runner borrows that service but owns its reserved grant subtree;
+WDIO owns each worker session. Worker completion, crash, cancellation, and
+parent cleanup all await terminal grant drain before releasing the reservation.
+Old sessions and their references/cursors/proofs/artifact links are never
+transferred. A cleanup failure is not permission to start a new controller.
+This does not retain a session-launched application or migrate Storybook's
+transitional lifecycle.
 
 Configured target aliases receive distinct registered IDs while retaining the
 same physical `instanceId` when they resolve to the same application identity.
