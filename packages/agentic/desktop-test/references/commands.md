@@ -16,6 +16,7 @@ workspace's declared script.
 | `prep`, `bundle`, `build`, `run`     | Run the selected target adapter stage                |
 | `test --suite <name> --list`         | Resolve groups without launching a target            |
 | `test --suite <name>`                | Run the selected WDIO suite                          |
+| `test --suite <name> --attach-agent` | Reuse a generic external-app agent service           |
 | `test --suite <name> --input <lane>` | Run one input lane (`accessible` or `physical`)      |
 | `serve --reporter json`              | Start the real driver listener and required services |
 | `serve --agent`                      | Also require grants and publish an agent descriptor  |
@@ -47,7 +48,11 @@ Clients create sessions explicitly.
 Stop any command with Ctrl+C, SIGTERM, or SIGHUP. The first interrupt stops the
 running stage or suite and every owned service, and the command exits once
 cleanup completes, including a `serve` whose target is served by an imported
-integration. A second interrupt force-kills owned process trees; a third exits
+integration. A clean `serve` stop writes a terminal `passed` lifecycle report,
+releases its settled claim, and exits 0; an interrupted one-shot is terminal
+`incomplete` and exits 1. A child/service failure or failed cleanup remains
+`failed` (exit 1), and unsettled cleanup retains a fenced claim.
+A second interrupt force-kills owned process trees; a third exits
 at once and may leave the workload claim behind. See
 [lifecycle](lifecycle.md#lifecycle-and-ownership).
 
@@ -58,8 +63,16 @@ Desktop Driver MCP adapter reads. The record is `agent-connection.json` under
 the platform's private storage root unless `--descriptor <name>` or
 `--root <path>` say otherwise; the readiness document adds its
 `agentDescriptor` name, and the grant never appears in output or artifacts.
-Stopping `serve` removes the descriptor before revoking the grant. Ordinary
-WDIO clients cannot connect to a service started with `--agent`. A target
+Stopping `serve` removes the descriptor before revoking and draining the grant.
+Ordinary unauthenticated WDIO clients cannot connect to a service started with
+`--agent`. Generic external-app targets additionally publish a separate
+`runner-connection.json` for `test --attach-agent`. Runner reuse takes no second
+claim or listener; it defaults to busy and requires explicit relinquish or
+operator-authorized preemption. `serve --runner-descriptor <name>` selects its
+record; `serve --allow-runner-preempt` opts into preemption authority. On
+`test`, `--descriptor`, `--root`, and `--preempt` require `--attach-agent`.
+See [attached runner handoff](wdio-suites.md#reuse-an-attached-agent-service)
+for the drain barrier and unsupported phases. A target
 served by an imported integration accepts `--agent` only when the integration
 declares `supportsAgent`; its `run` receives the descriptor and root and
 publishes the connection from the process that serves the driver. Storybook

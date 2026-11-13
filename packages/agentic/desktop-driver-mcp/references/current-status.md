@@ -19,22 +19,23 @@ and the generalized management facet is
 
 ## Capability matrix
 
-| Capability                                          | State                           | Boundary/remaining work                                                                                                                                                                                               |
-| --------------------------------------------------- | ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Six tools over shared driver schemas                | Done                            | Session, observe, act, check, capture, story. No separate execution path.                                                                                                                                             |
-| Private descriptor and native identity verification | Done                            | Verifies before sending a grant. Uses the driver's `/native`, `/authority`, and `/client` subpaths, not its WebdriverIO-heavy root; boundary tests guard this dependency. No model URL/token/config/executable input. |
-| Single-flight connection/session lifetime           | Done                            | Serial acquisition, close, operations and resource reads; late acquisition after dispose is cleaned up.                                                                                                               |
-| Same-port protected restart/revocation              | Done in deterministic contracts | Invalid authority is forgotten; next call re-verifies discovery. No mutation replay. Live endpoint reruns remain required.                                                                                            |
-| Same-authority transport retry                      | Done, bounded semantics         | Retain known session cleanup responsibility and rebind only after verification of the same incarnation/principal. This is not cross-MCP-connection resume.                                                            |
-| Lost create response                                | Fenced; child drain implemented | `session-uncertain`; no repeated acquisition. Connection disposal revokes and drains the child, including unknown session ids. Live descriptor-path reruns not run for this change.                                   |
-| Failed delete/disconnect                            | Done with limits                | Keep known-session responsibility; bounded dispose wait leaves late cleanup attached. Unreachable-service cleanup cannot be guaranteed; service drain/expiry remains necessary.                                       |
-| Launch-mode discovery                               | Done                            | Status lists effective launch/attach modes; no predictable attach-first failure against launch-only targets.                                                                                                          |
-| Progress, cancellation, paged image resources       | Done                            | Progress does not renew idle sessions; artifacts are session-bound and hash-checked.                                                                                                                                  |
-| Storybook control                                   | Experimental                    | Driver selection/marker path exists; channel ingress/reconnect and full exclusive context authority remain incomplete.                                                                                                |
-| Per-connection attenuated grants                    | Done in deterministic contracts | Each controller delegates a distinct driver-only child after verification; target/scope subsets and terminal-only cleanup retry. Native descriptor-path qualification not run for this change.                        |
-| Cross-connection session resume                     | Intentionally unsupported       | No lease/grace or ownership-transfer protocol. Same-controller rediscovery retains its existing child; no automatic replay or cross-connection resume.                                                                |
-| Workload/test orchestration tools                   | Work in progress                | Belong to a future harness control/client surface; adapter never becomes the resource owner.                                                                                                                          |
-| General MCP-client qualification                    | Work in progress                | SDK stdio evidence exists; client-specific resource/image/cancellation behavior needs independent runs.                                                                                                               |
+| Capability                                          | State                           | Boundary/remaining work                                                                                                                                                                                                                                                                                                             |
+| --------------------------------------------------- | ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Six tools over shared driver schemas                | Done                            | Session, observe, act, check, capture, story. No separate execution path.                                                                                                                                                                                                                                                           |
+| Private descriptor and native identity verification | Done                            | Verifies before sending a grant. Uses the driver's `/native`, `/authority`, and `/client` subpaths, not its WebdriverIO-heavy root; boundary tests guard this dependency. No model URL/token/config/executable input.                                                                                                               |
+| Single-flight connection/session lifetime           | Done                            | Serial acquisition, close, operations and resource reads; late acquisition after dispose is cleaned up.                                                                                                                                                                                                                             |
+| Same-port protected restart/revocation              | Done in deterministic contracts | Invalid authority is forgotten; next call re-verifies discovery. No mutation replay. Live endpoint reruns remain required.                                                                                                                                                                                                          |
+| Same-authority transport retry                      | Done, bounded semantics         | Retain known session cleanup responsibility and rebind only after verification of the same incarnation/principal. This is not cross-MCP-connection resume.                                                                                                                                                                          |
+| Lost create response                                | Fenced; child drain implemented | `session-uncertain`; no repeated acquisition. Connection disposal revokes and drains the child, including unknown session ids. Live descriptor-path reruns not run for this change.                                                                                                                                                 |
+| Failed delete/disconnect                            | Done with limits                | Keep known-session responsibility; bounded dispose wait leaves late cleanup attached. Unreachable-service cleanup cannot be guaranteed; service drain/expiry remains necessary.                                                                                                                                                     |
+| Launch-mode discovery                               | Done                            | Status lists effective launch/attach modes; no predictable attach-first failure against launch-only targets.                                                                                                                                                                                                                        |
+| Progress, cancellation, paged image resources       | Done                            | Progress does not renew idle sessions; artifacts are session-bound and hash-checked.                                                                                                                                                                                                                                                |
+| Storybook control                                   | Experimental                    | Driver selection/marker path exists; channel ingress/reconnect and full exclusive context authority remain incomplete.                                                                                                                                                                                                              |
+| Per-connection attenuated grants                    | Done in deterministic contracts | Each controller delegates a distinct driver-only child after verification; target/scope subsets and terminal-only cleanup retry. Native descriptor-path qualification not run for this change.                                                                                                                                      |
+| Explicit controller relinquish                      | Done in deterministic contracts | Immediate admission fence and cancellation; return only after child/session drain. Failures retain retryable cleanup responsibility. Fresh open expires old references, cursors, proofs and artifact links. Generic attach-only runner integration is in desktop-test; Storybook and native endpoint qualification remain separate. |
+| Cross-connection session resume                     | Intentionally unsupported       | No lease/grace or ownership-transfer protocol. Same-controller rediscovery retains its existing child; no automatic replay or cross-connection resume.                                                                                                                                                                              |
+| Workload/test orchestration tools                   | Work in progress                | Belong to a future harness control/client surface; adapter never becomes the resource owner.                                                                                                                                                                                                                                        |
+| General MCP-client qualification                    | Work in progress                | SDK stdio evidence exists; client-specific resource/image/cancellation behavior needs independent runs.                                                                                                                                                                                                                             |
 
 See [connection](connection.md) and [tools](tools.md) for exact behavior.
 Native and Storybook limitations are tracked in
@@ -338,3 +339,275 @@ out before the observed bridge retirement; the subsequent attempt waited for
 retirement. No raw image or grant is retained in this reference. Driver
 shutdown, app cleanup, and the failed Win32 app-run reports are
 recorded in `packages/agentic/desktop-test/references/current-status.md`.
+
+## F11 explicit relinquish — 2026-11-12
+
+Source `5c9d0191e` includes explicit `desktop_session` relinquish with an
+immediate admission fence, cancellation, and awaited connection-subtree
+drain. A failed drain retains retryable cleanup responsibility. A fresh
+session after relinquish rejects old references, cursors, proofs and
+artifact links; no cross-connection resume or replay is added.
+Authoritative rejection discards the cached child binding. After operator
+preemption and runner drain, the same MCP connection delegates a fresh child;
+old references, cursors, proofs and artifact links remain invalid.
+Package format, lint, build, and all 32 tests passed, including
+deterministic resource invalidation, late/lost acquisition and failed-drain
+cases. The default-`TMPDIR` focused server selection passed 31 cases,
+including the preempt → runner drain → fresh MCP session regression.
+These are portable semantics, not native qualification.
+
+The real private-descriptor AppKit consumer at `87bc8b710` reached verified
+discovery but failed native session creation on macOS 27.2.1 arm64:
+`The target does not support any click input mode.` The stable-signed
+helper doctor reported Accessibility/PostEvent `false`; no privacy settings
+were changed. Native relinquish/handoff and worker-crash drain did not run.
+Both descriptors and the workload claim were removed; the externally owned
+fixture survived service shutdown and only its spawning test stopped it.
+The Accessibility-blocked native contract was not repeated for review fixes.
+
+Exact commands, revisions, one corrected-fixture retry, cleanup evidence
+and local artifact locators are in
+`@fluentui-react-native/desktop-test/references/current-status.md`.
+Windows/Win32 native handoff is not covered by the existing PR smoke/E2E
+selection and remains not run. Storybook integration and retained-launch
+ownership remain separate follow-up phases.
+
+## Windows Fabric and Win32 Paper — F11 handoff qualification — 2026-11-12 UTC
+
+**Observed:** source `c9753208d0f5602d28510d84ededf3f2fc3c3855`;
+Windows x64, active/unlocked RDP (`sessionKind: remote`). Live runs were
+inside W1's campaign and the machine-wide `with-native-lock.ps1 -Lane W1
+-RequirePhysical` wrapper; before/after session gates stayed eligible.
+No physical-input delivery is claimed.
+
+The real MCP SDK/server used `connectWithDescriptor`, native Windows listener
+verification and a separate attenuated controller child. The generic
+`DesktopSupervisor` published agent/runner descriptors in the validated
+default private store. It served externally owned apps, not the unsupported
+Storybook integration handoff. From the worktree root, the retained
+reproduction commands are:
+
+```powershell
+node artifacts\desktop\f11\w1\qualify.cjs windows
+node artifacts\desktop\f11\w1\qualify.cjs win32
+```
+
+Windows attached to the exact registered packaged Storybook AUMID (Fabric),
+with Metro from this worktree using the app's declared
+`yarn start --no-interactive --port 8081`. The registered build at
+`bdeb0b291` was reused because the native-source comparison found only
+native-core changelog/version metadata changes. Win32 attached to the exact
+resolved prebuilt REX `ReactTest.exe` (Paper), after the app's declared
+`yarn storybook bundle --win32` passed. The public native launcher maintained
+application ownership separately from the agent service.
+
+| Native MCP/runner case                              | Windows Fabric                                                  | Win32 Paper                                                     |
+| --------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- |
+| Runner defaults to busy while MCP owns a session    | Passed (`target-busy`)                                          | Passed (`target-busy`)                                          |
+| `desktop_session` explicit relinquish               | Passed; returned confirmed relinquish                           | Passed; returned confirmed relinquish                           |
+| Operator-authorized preemption                      | Passed; old adapter binding refused, then runner-exclusive busy | Passed; old adapter binding refused, then runner-exclusive busy |
+| Normal runner drain and fresh MCP reopen            | Passed                                                          | Passed                                                          |
+| Identity-checked, literal-PID worker kill and drain | Passed recovery; intentionally failed WDIO run                  | Passed recovery; intentionally failed WDIO run                  |
+| Lost real HTTP 200 runner-grant response            | Passed; parent drain restored admission                         | Passed; parent drain restored admission                         |
+| Old reference/cursor/capture-link rejection         | Passed                                                          | Passed                                                          |
+
+During preemption the old adapter operation reported `service-unavailable`;
+an attempted open then returned `target-busy` during runner ownership.
+After runner cleanup, the same MCP connection opened a new child/session.
+No old session or resources were resumed or replayed. Lost-response injection
+discarded the real native service's acquisition-response body before the typed
+client received it; it did not substitute a fake listener.
+
+| Endpoint       | Local evidence root                       | Normal / preempt / crash run IDs                                                                                         |
+| -------------- | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| Windows Fabric | `artifacts\desktop\f11\w1\windows-3tYoml` | `a3bf02e2-df22-4a63-92f8-686057ef2a80` / `24d38403-b4e5-49d6-9e0f-d1d123e4fb17` / `8f702133-e18a-41f0-b05d-ce5fcb5cff1a` |
+| Win32 Paper    | `artifacts\desktop\f11\w1\win32-BefbqE`   | `d79fd672-df2d-4943-8b40-c017a8978380` / `f1f17781-08aa-4cac-a6d8-34cb13bd749b` / `a09a8c20-1380-4933-a7a3-9c2d786352c3` |
+
+Each root retains `evidence.json`, `run.json`, command logs and crash-process
+identity. Normal/preempt runs each have one selected/executed/passed test,
+zero skips and `terminal: true`. Crash runs are terminal **failed**, with one
+selected, zero completed and one incomplete test: killing workers `34752`
+(Windows) and `29856` (Win32) intentionally prevented the final reporting
+handshake. Parent cleanup completed and fresh MCP attach proved reuse.
+Both service lifecycle reports are terminal passed; both service workload
+claims and descriptors were removed. The same external app process
+incarnation survived service shutdown, then its recorded launcher closed it.
+No processes survived; audit: `FURN-AUDIT: no FURN desktop processes found`.
+The campaign is ended.
+
+Native worker environment checks found no broker/worker credential variables;
+model output and a scan of 45 retained text/config/report files contained no
+bearer credential. This is observed confinement, not isolation from hostile
+same-account code or Node preloads. Helper artifact:
+`d8ee05e4796fb3aa22f7b5dbf481bd8cdfb0c20b6d5d24676d689dc7900d5b3c`.
+
+**Observed, supporting checks:** `yarn build` passed. With native opt-ins unset,
+uncached `yarn workspace @fluentui-react-native/desktop-driver-mcp test
+--runInBand` passed all 32; driver passed 1,211/skipped 88; harness passed
+376/skipped eight. Logs are under `artifacts\desktop\f11\w1`. The additional
+Windows native identity/backend selection passed 23 and skipped 19 macOS
+cases, including all 15 Windows cases skipped by the earlier macOS selection.
+The protected-service selection passed three; its recovering-quarantine case
+was **failed/environment-blocked** by project scratch ancestry (`ancestor`).
+Default protected storage opened and supported both live runs; no ACL change
+was made. Windows permission diagnostics are **unsupported**, not passed.
+
+**Remaining CI gap:** desktop-test's native MCP/WDIO consumer is darwin-gated,
+with a macOS-only fixture. On Windows, `FURN_NATIVE_DRIVER_TEST=1 yarn
+workspace @fluentui-react-native/desktop-test test nativeRunner.contract
+--runInBand` skips its sole case, including a locked repeat with the fixture
+path opt-in naming the installed REX executable. Both plain endpoint
+`desktop-driver doctor` commands passed (`ready: true`); their `--permissions`
+variants are unsupported. Driver native contracts/Storybook smoke
+selection do not cover this consumer handoff. A Windows fixture and explicit
+consumer selection are handed back for implementation; no source or CI fix
+was made here. The existing three-package `scoped-runner-handoff` patch
+changeset remains. Storybook handoff, retained launches and cross-connection
+resume/replay remain separate phases.
+
+**Evidence validation:** `yarn markdown-link-check -c
+.github\markdown-link-check-config.json
+packages\agentic\desktop-driver-mcp\references\current-status.md` passed
+(six links). Root `yarn oxfmt --check`, `yarn change:check` and
+`git diff --check` passed. No clean-cache `buildci` rerun was required for
+these evidence-only markdown edits.
+
+## Windows native consumer and physical serve cleanup — 2026-11-12 UTC
+
+**Observed, tested source `b1bbb26df880252a184ea5a3d2e1848bd811e83f`:**
+the Windows generic private-descriptor MCP/WDIO consumer now executes against
+an explicitly provisioned plain Win32 fixture. In the granted W1 campaign,
+with an active unlocked RDP session (`sessionKind: remote`), native opt-in and
+the exact fixture path, the locked command
+`yarn workspace @fluentui-react-native/desktop-test test
+nativeRunner.contract --runInBand --json --outputFile
+<repository-root>\artifacts\desktop\f11\w1-native\native-runner-jest.json` **Passed** all
+five outer cases, with zero skips.
+
+| MCP/runner mode                                      | Result                                        | Native WDIO run                        |
+| ---------------------------------------------------- | --------------------------------------------- | -------------------------------------- |
+| Explicit handoff and fresh MCP reopen                | Passed, 2/2 inner specs                       | `a9849169-7f2b-46e6-87de-3e0b8b8e7a3f` |
+| Operator preemption and exclusive runner reservation | Passed, 2/2                                   | `2a1f63bd-3ac0-4951-beb5-860a2a92b69c` |
+| Worker crash and confirmed parent drain/reuse        | Passed recovery; expected terminal failed run | `9c1a8447-2a6c-4ca6-b027-8bc302df3fc7` |
+| Lost real HTTP-200 runner-grant response             | Passed, 2/2                                   | `4e7d50fa-b055-407c-bfe2-443fe2bc504f` |
+| Target capture and stale-resource invalidation       | Passed, 2/2 and real capture                  | `047e8166-c3d2-4fb9-b785-288519b3342d` |
+
+Every non-crash mode executed the accessibility-input spec, rather than
+silently skipping it. Each mode preserved the exact attached fixture
+incarnation through service cleanup, removed both private descriptors and
+the claim, then ended only its own fixture. Credential confinement and
+fresh-session/stale-resource checks passed. This plain fixture qualifies
+generic native ownership, not a React Native renderer or Storybook runner
+handoff. The separate Windows driver identity/backend selection passed
+24 and skipped 19 macOS cases.
+
+The previous hosted consumer in workflow `43284867711` ran on both Windows
+job `131415841258` and Win32 accessible job `131415842551`: handoff,
+preemption and crash recovery passed, but lost-response failed before WDIO
+because it compared the injected error's message with the correctly wrapped
+transport error. Capture was policy-skipped. The current harness correction
+checks the typed failure's original cause and shares the actual successful
+response-loss injection with the portable HTTP runner. Its native
+lost-response pass above confirms that reservation/drain/reopen path; no
+adapter runtime or error-redaction change was needed.
+
+**Observed, real Storybook consumers:** physical Ctrl+C also **Passed**
+after authenticated `components-button--appearance` native-marker selection
+and MCP observation on Windows Fabric and Win32 Paper. The MCP session and
+adapter were closed before interruption. An isolated, visible, focused
+console received four `SendInput` key events and recorded console `SIGINT`;
+no `GenerateConsoleCtrlEvent` or synthetic Node signal was used. The exact
+CLI, Yarn and observer each exited 0; both lifecycle reports are terminal
+passed, descriptors were withdrawn, claims released and apps preserved until
+their external launcher closed them.
+
+Fabric lifecycle: `75c40800-571c-4d8f-9fa1-debf876f0664`.
+Paper lifecycle: `9a5c618f-d54d-4599-b36f-e3fd5b5436b9`.
+Reports are under `apps\storybook\artifacts\desktop\<run-id>`.
+The unchanged registered Fabric native build was reused after identity/source
+comparison. Paper used a serving-instance/driver-manifest-matched bundle
+and the prebuilt REX host; its native build remains **Unsupported**.
+
+Every native/input command used
+`with-native-lock.ps1 -Lane W1 -RequirePhysical`. Evidence and reproduction
+are retained under `artifacts\desktop\f11\w1-native`, including
+`contracts.json`, `physical-windows-UmfSj6`, `physical-win32-sssEyg` and
+the session/lock/audit receipts. No private descriptor was copied into those
+artifacts. The campaign is ended with zero W1 native/GUI survivors. The broad
+audit's four remaining candidates are foreign portable W5 Jest/Yarn processes,
+with no listeners; none was terminated. Corrected-head hosted confirmation is
+pending publication at this receipt, not inferred from earlier green checks.
+
+**Portable closeout:** locked default-environment
+`cmd.exe /d /c "yarn clean-lage-cache && yarn lage buildci"` **Failed**
+three fresh attempts on the same Storybook integration readiness test,
+`hosts the Storybook channel and Stage 1 smoke-test target in one process`
+(`A stopping command cannot publish readiness.`). The test and lifecycle
+source are unchanged from main/review base; the full owning package's
+default-concurrency `yarn workspace
+@fluentui-react-native/storybook-desktop test` **Passed** 340 with three
+skips. No unrelated source/deadline or environment workaround was added,
+and no passing aggregate is claimed for this head. Exact failures and
+source comparison are retained under the same evidence root and in the
+harness ledger. The last aggregate began with a clean audit, so the failure
+is not attributed to the foreign portable chain. Owned portable workers
+exited naturally; that foreign owner removed its abandoned processes.
+Final audit **Passed**: `FURN-AUDIT: no FURN desktop processes found`.
+Changed-ledger format, instruction and link checks also passed.
+
+## Windows default-aggregate follow-up — 2026-11-12 UTC
+
+**Observed at `2bf750f9e`:** locked default
+`cmd.exe /d /c "yarn clean-lage-cache && yarn lage buildci"` **Passed**
+178 tasks, zero failed, at 20:52:21–20:55:29 UTC. No source, test deadline
+or environment/concurrency workaround changed. Detached main first failed
+a different driver cancellation/reuse assertion, then its unchanged default
+repeat passed 178; the earlier Storybook readiness error's exact cause is
+not proven pre-existing or attributed to campaign state.
+
+No agent/runner descriptor, active claim or generated lease survived.
+Only two exact exited campaign application epochs were compare-and-removed
+through verified native APIs; unrelated recovery records were retained.
+The scratch worktree was removed, no app/OS setting changed, and final
+process audit **Passed**, no FURN processes found. The owning harness
+receipt in `packages/agentic/desktop-test/references/current-status.md`
+records locations, timestamps and the causal-evidence limits.
+
+Hosted workflow `43297198219` finished **successfully**, zero failed jobs:
+Windows `131458546719` and Win32 accessible `131458546805` each executed
+four passing ownership modes with one capture-policy skip. Handoff,
+preemption and lost-response each passed both inner specs, zero skips,
+with `accessibilityClick: passed`. This confirms hosted generic native
+consumer coverage; it does not broaden the earlier physical Storybook
+or macOS evidence.
+
+## F11 rebased macOS positive qualification — 2026-11-12 UTC
+
+**Observed at `5dbadb53b10cd81ccf1e15739e213f0046d93323`:** real native
+descriptor verification, MCP SDK transport, and WDIO/Jasmine passed all five
+generic AppKit modes: relinquish/handoff, operator preemption, worker crash,
+lost successful runner-grant response, and target capture. Every non-crash
+mode passed both inner ownership/accessibility-input specs with zero skips;
+the intentional crash's terminal failed inner run was drain-confirmed before
+a fresh MCP session. Stale resources and credential confinement passed.
+All fixtures were preserved through service shutdown, descriptors removed,
+claims released, and exact spawned fixtures subsequently ended.
+
+The stable-signed helper's noninteractive doctor reported Accessibility,
+PostEvent and ScreenCapture **true**, with no prompt. This supersedes the
+earlier macOS permission-blocked attempt, not the preserved Windows receipts.
+The rebase retained all Windows additions from
+`11820d6330f4ea591bed400193b13e793970b5bd` onto
+`041ac8b9894aeaa7e1aa273baa2ece4e46298b94`; no runtime fix was needed.
+MCP format, lint, build and **32 portable tests passed**; focused server tests
+passed **31**. See `packages/agentic/desktop-test/references/current-status.md`,
+under "F11 rebased macOS positive qualification — 2026-11-12 UTC", for exact
+commands, native identities, run IDs and cleanup.
+Storybook/F9, retained launches/F10, physical input, general MCP-client
+qualification, cross-connection resume and replay remain separate.
+Final portable aggregate acceptance remains **blocked** by the unchanged
+driver bounded-command `SIGKILL`/`SIGTERM` assertion under plain default
+parallel execution, despite passing owning/MCP suites and native qualification.
+The owning harness receipt retains both failures, the additional first-run
+private-storage timeout, and the passing focused diagnostic; no unrelated
+test or environment workaround was applied.

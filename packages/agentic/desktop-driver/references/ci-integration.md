@@ -121,6 +121,13 @@ This repository's current PR workflow provides examples in
 
 The Windows Storybook jobs upload their doctor report, successful native build
 log, and preserved failed-build diagnostics with the Storybook artifacts.
+Both accessible Windows and Win32 jobs also explicitly provision the plain
+Win32 fixture and select desktop-test's native MCP/WDIO consumer. Its four
+ownership modes must pass, and each non-crash mode must execute both its
+ownership and accessibility-input specs without skips. This fixture qualifies
+generic native handoff, not React Native rendering or physical input. The
+fixture provisioner loads as built Node ESM; the portable native-driver suite
+checks that import without compiling or launching a native executable.
 Neither `prep` nor `smoke` may compile a helper after the explicit build step.
 Because GitHub-hosted Windows is not qualified to provide authoritative global
 input, the accessible jobs disable keyboard, physical-click, and wheel

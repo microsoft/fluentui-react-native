@@ -112,6 +112,187 @@ async function open(client: Client, harness: DesktopDriverTestHarness): Promise<
 }
 
 describe('desktop-driver-mcp', () => {
+  test('relinquish fences admission immediately and waits for terminal deletion before issuing a fresh child', async () => {
+    const harness = await createDesktopDriverTestHarness({ features });
+    const controller = new DesktopController(async () => testConnection(harness));
+    const entered = deferred();
+    const finish = deferred();
+    const release = harness.host.releaseActions.bind(harness.host);
+    try {
+      const session = await controller.open({ launch: true, target: harness.target.id });
+      const owner = harness.server.sessions.get(session.id).owner?.grantId;
+      jest.spyOn(harness.host, 'releaseActions').mockImplementationOnce(async (signal) => {
+        entered.resolve();
+        await finish.promise;
+        return release(signal);
+      });
+      let completed = false;
+      const handoff = controller.relinquish().then((result) => {
+        completed = true;
+        return result;
+      });
+      await entered.promise;
+      await expect(controller.status()).rejects.toMatchObject({ reason: 'controller-draining' });
+      await expect(controller.open({ launch: true, target: harness.target.id })).rejects.toMatchObject({ reason: 'controller-draining' });
+      expect(completed).toBe(false);
+      finish.resolve();
+      await expect(handoff).resolves.toEqual({ relinquished: true });
+      expect(() => harness.server.sessions.get(session.id)).toThrow();
+      expect(controller.session).toBeUndefined();
+      await expect(controller.readArtifact(session.id, 'a1')).rejects.toMatchObject({ reason: 'artifact-expired' });
+      const next = await controller.open({ launch: true, target: harness.target.id });
+      expect(harness.server.sessions.get(next.id).owner?.grantId).not.toBe(owner);
+    } finally {
+      finish.resolve();
+      await controller.dispose();
+      await harness.close();
+    }
+  });
+
+  test('relinquish cancels a running operation rather than waiting behind its queue', async () => {
+    const harness = await createDesktopDriverTestHarness({ features });
+    const controller = new DesktopController(async () => testConnection(harness));
+    const entered = deferred();
+    try {
+      await controller.open({ launch: true, target: harness.target.id });
+      const observe = harness.host.observe.bind(harness.host);
+      jest.spyOn(harness.host, 'observe').mockImplementationOnce(async (request, signal) => {
+        entered.resolve();
+        await new Promise<void>((resolve) => {
+          if (signal?.aborted) resolve();
+          else signal?.addEventListener('abort', () => resolve(), { once: true });
+        });
+        signal?.throwIfAborted();
+        return observe(request, signal);
+      });
+      const pending = controller.run('observe', {});
+      const cancelled = expect(pending).rejects.toMatchObject({ reason: 'cancelled' });
+      await entered.promise;
+      await expect(controller.relinquish()).resolves.toEqual({ relinquished: true });
+      await cancelled;
+      expect(controller.session).toBeUndefined();
+    } finally {
+      await controller.dispose();
+      await harness.close();
+    }
+  });
+
+  test.each(['lost-response', 'drain-failure'] as const)('failed relinquish retains a retryable drain fence after %s', async (failure) => {
+    const harness = await createDesktopDriverTestHarness({ features });
+    let injected = false;
+    const connection = testConnection(harness, async (input, init) => {
+      const response = await fetch(input, init);
+      if (!injected && String(input).endsWith('/furn/grants/current') && failure === 'lost-response') {
+        injected = true;
+        await response.body?.cancel();
+        throw new Error('injected response loss');
+      }
+      return response;
+    });
+    const controller = new DesktopController(async () => connection);
+    try {
+      const session = await controller.open({ launch: true, target: harness.target.id });
+      if (failure === 'drain-failure')
+        jest.spyOn(harness.server.sessions, 'deleteOwnedBy').mockRejectedValueOnce(new Error('injected drain failure'));
+      await expect(controller.relinquish()).rejects.toMatchObject({ reason: 'drain-incomplete' });
+      await expect(controller.status()).rejects.toMatchObject({ reason: 'controller-draining' });
+      await expect(controller.relinquish()).resolves.toEqual({ relinquished: true });
+      expect(() => harness.server.sessions.get(session.id)).toThrow();
+      await expect(controller.open({ launch: true, target: harness.target.id })).resolves.toBeDefined();
+    } finally {
+      await controller.dispose();
+      await harness.close();
+    }
+  });
+
+  test('the MCP relinquish action expires session-bound artifacts, references, cursors, and proofs', async () => {
+    await withFixture({}, async ({ client, harness }) => {
+      const previous = await open(client, harness);
+      const observed = json(await call(client, 'desktop_observe', { observe: { budget: { maxNodes: 1 } } })).result as {
+        next: string;
+        sample: { id: string };
+      };
+      const found = json(await call(client, 'desktop_observe', { find: { automationId: 'button-primary' } })).result as {
+        matches: { ref: string }[];
+        sample: { id: string };
+      };
+      const captured = await call(client, 'desktop_capture');
+      const link = captured.content.find((block) => block.type === 'resource_link');
+      expect(link).toBeDefined();
+      const stale = found.matches[0].ref;
+      expect(json(await call(client, 'desktop_session', { action: 'relinquish' }))).toEqual({ relinquished: true });
+      await open(client, harness);
+      const checked = await call(client, 'desktop_check', { ref: stale, expect: { enabled: true } });
+      expect(checked.isError).toBe(true);
+      expect(json(checked)).toMatchObject({ reason: expect.stringMatching(/^ref-/) });
+      const page = await call(client, 'desktop_observe', { read: { cursor: observed.next } });
+      expect(page.isError).toBe(true);
+      expect(json(page)).toMatchObject({ reason: 'observation-cursor-expired' });
+      const acted = await call(client, 'desktop_act', { steps: [{ act: { action: 'activate', ref: stale, sample: found.sample.id } }] });
+      expect(json(acted)).toMatchObject({ result: { status: 'stopped', steps: [{ error: { reason: expect.any(String) } }] } });
+      if (link?.type === 'resource_link') await expect(client.readResource({ uri: link.uri })).rejects.toThrow();
+      expect(() => harness.server.sessions.get(previous)).toThrow();
+    });
+  });
+
+  test('recovers a fresh child after runner preemption while old resources remain invalid', async () => {
+    await withFixture({}, async ({ client, harness }) => {
+      harness.target.launchModes = ['attach'];
+      const request = { action: 'open', launch: false, target: harness.target.id };
+      const opened = await call(client, 'desktop_session', request);
+      expect(opened.isError).toBeUndefined();
+      const previous = json(opened).id as string;
+      const owner = harness.server.sessions.get(previous).owner?.grantId;
+      const observed = json(await call(client, 'desktop_observe', { observe: { budget: { maxNodes: 1 } } })).result as { next: string };
+      const found = json(await call(client, 'desktop_observe', { find: { automationId: 'button-primary' } })).result as {
+        matches: { ref: string }[];
+        sample: { id: string };
+      };
+      const captured = await call(client, 'desktop_capture');
+      const link = captured.content.find((block) => block.type === 'resource_link');
+      expect(link).toBeDefined();
+      const authority = connections.get(harness)!.authority;
+      const operator = authority.issue({
+        label: 'operator',
+        targets: [harness.target.id],
+        scopes: ['driver-control', 'declared-workload', 'operator-recovery'],
+      });
+      const root = createDesktopDriverClient({ grant: operator.token, url: harness.server.url });
+      const connection = await root.request<{ token: string }>('POST', '/furn/grants/runner-connection', {});
+      const runner = createDesktopDriverClient({ grant: connection.token, url: harness.server.url });
+      try {
+        const reservation = await runner.request<{ token: string }>('POST', '/furn/grants/runner', {
+          target: harness.target.id,
+          handoff: 'preempt',
+        });
+        const invalidated = await call(client, 'desktop_session');
+        expect(invalidated.isError).toBe(true);
+        expect(json(invalidated)).toMatchObject({ reason: 'service-unavailable' });
+        const worker = await createDesktopDriverClient({ grant: reservation.token, url: harness.server.url }).delegateConnection();
+        await worker.newSession({ alwaysMatch: { 'furn:target': harness.target.id, 'furn:launchMode': 'attach' } });
+        await runner.revokeConnection();
+        const reopened = await call(client, 'desktop_session', request);
+        expect(reopened.isError).toBeUndefined();
+        const next = json(reopened).id as string;
+        expect(harness.server.sessions.get(next).owner?.grantId).not.toBe(owner);
+        expect(() => harness.server.sessions.get(previous)).toThrow();
+        const checked = await call(client, 'desktop_check', { ref: found.matches[0].ref, expect: { enabled: true } });
+        expect(checked.isError).toBe(true);
+        expect(json(checked)).toMatchObject({ reason: expect.stringMatching(/^ref-/) });
+        const page = await call(client, 'desktop_observe', { read: { cursor: observed.next } });
+        expect(page.isError).toBe(true);
+        expect(json(page)).toMatchObject({ reason: 'observation-cursor-expired' });
+        const acted = await call(client, 'desktop_act', {
+          steps: [{ act: { action: 'activate', ref: found.matches[0].ref, sample: found.sample.id } }],
+        });
+        expect(json(acted)).toMatchObject({ result: { status: 'stopped', steps: [{ error: { reason: expect.any(String) } }] } });
+        if (link?.type === 'resource_link') await expect(client.readResource({ uri: link.uri })).rejects.toThrow();
+      } finally {
+        await runner.revokeConnection();
+      }
+    });
+  });
+
   test('isolates controllers sharing a descriptor principal instead of sharing sessions', async () => {
     const harness = await createDesktopDriverTestHarness({ features });
     const first = new DesktopController(async () => testConnection(harness));

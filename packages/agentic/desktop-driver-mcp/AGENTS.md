@@ -31,6 +31,10 @@ only maps them onto MCP.
   same-incarnation/descriptor-principal rediscovery; never share or resume another
   connection's session. Disposal awaits child revocation, keeping terminal-only
   cleanup proof for lost responses and failed drains; unauthorized is not cleanup.
+- Explicit relinquish fences admission and aborts current calls immediately,
+  before queued cleanup. Return success only after confirmed child/session
+  drain; retain the fence/proof after failure. Reopening uses a fresh child and
+  invalidates old session resources, never cross-connection resume.
 - Tie every artifact link to its session. Artifact ids restart in each session.
 - Progress ticks come from the adapter and never reach the service, so a waiting
   model does not keep an idle session alive. Cancellation aborts the HTTP call,

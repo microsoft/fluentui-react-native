@@ -7,8 +7,9 @@ import {
   describeWindowsService,
   publishConnectionDescriptor,
 } from '@fluentui-react-native/desktop-driver/authority';
-import type { DesktopAuthority } from '@fluentui-react-native/desktop-driver/authority';
+import type { DesktopAuthority, GrantScope } from '@fluentui-react-native/desktop-driver/authority';
 import type { ResolvedDesktopTarget } from './config.js';
+import { defaultRunnerDescriptor } from './wdio/runnerConnection.js';
 
 /** The record name the Desktop Driver MCP adapter reads by default. */
 export const defaultAgentDescriptor = 'agent-connection.json';
@@ -18,6 +19,8 @@ export type DesktopAgentConnectionOptions = {
   descriptor?: string;
   /** The private storage root, which the adapter reads with `--root`. Defaults to the platform location. */
   root?: string;
+  /** Generic attach-only services also publish a separate workload connection; Storybook handoff is not supported. */
+  runner?: false | { descriptor?: string; allowPreempt?: boolean };
   /** Replaces native publication; tests supply it. Returns the descriptor's removal. */
   publish?: PublishDesktopAgentConnection;
 };
@@ -88,6 +91,7 @@ export type PublishDesktopAgentOptions = {
   signal?: AbortSignal;
   /** Bounds publication by its owner's lifetime, such as a service scope's guard. */
   guard?: <T>(work: Promise<T>) => Promise<T>;
+  role?: 'agent' | 'runner';
 };
 
 /**
@@ -96,8 +100,22 @@ export type PublishDesktopAgentOptions = {
  */
 export async function publishDesktopAgent(options: PublishDesktopAgentOptions): Promise<DesktopAgentPublication> {
   const { artifact, authority, connection, target } = options;
-  const descriptor = connection.descriptor ?? defaultAgentDescriptor;
-  const grant = authority.issue({ label: 'agent', targets: [target.id] });
+  if (
+    connection.runner !== undefined &&
+    connection.runner !== false &&
+    (typeof connection.runner !== 'object' ||
+      connection.runner === null ||
+      (connection.runner.allowPreempt !== undefined && typeof connection.runner.allowPreempt !== 'boolean'))
+  ) {
+    throw new TypeError('Runner publication requires options with an optional boolean allowPreempt.');
+  }
+  const runner = options.role === 'runner';
+  const runnerOptions = connection.runner || undefined;
+  const descriptor = runner ? (runnerOptions?.descriptor ?? defaultRunnerDescriptor) : (connection.descriptor ?? defaultAgentDescriptor);
+  const scopes: GrantScope[] = runner
+    ? ['driver-control', 'declared-workload', ...(runnerOptions?.allowPreempt ? (['operator-recovery'] as const) : [])]
+    : ['driver-control'];
+  const grant = authority.issue({ label: runner ? 'wdio' : 'agent', targets: [target.id], scopes });
   options.addSecret?.(grant.token);
   const publish = connection.publish ?? createNativeAgentPublisher(artifact ? async () => artifact : undefined);
   let publication: Promise<() => Promise<unknown>> | undefined;
@@ -117,7 +135,7 @@ export async function publishDesktopAgent(options: PublishDesktopAgentOptions): 
     remove = await (options.guard ? options.guard(publication) : publication);
   } catch (error) {
     void publication?.then((late) => late()).catch(() => undefined);
-    authority.revoke(grant.id);
+    await authority.revokeAndDrain(grant.id);
     throw error;
   }
   let withdrawal: Promise<void> | undefined;
@@ -128,8 +146,11 @@ export async function publishDesktopAgent(options: PublishDesktopAgentOptions): 
         try {
           await remove();
         } finally {
-          authority.revoke(grant.id);
+          await authority.revokeAndDrain(grant.id);
         }
-      })()),
+      })().catch((error: unknown) => {
+        withdrawal = undefined;
+        throw error;
+      })),
   });
 }
