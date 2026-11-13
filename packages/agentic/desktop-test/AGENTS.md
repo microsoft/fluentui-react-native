@@ -19,6 +19,10 @@ and bounded structured output contract.
   config fields and invalid app/suite references.
 - WDIO owns suite sessions. Do not create competing WebDriver sessions from
   hooks.
+- Attached agent-service runners borrow the existing claim/listener. Keep
+  target reservations until every worker grant is drain-confirmed; a crash or
+  revocation callback alone never releases them. Credentials stay out of WDIO
+  capabilities/generated settings and are registered for redaction before use.
 - Cleanup only resources whose ownership was recorded; interactive runs use
   the per-user workload lock.
 - Never count skipped capabilities, empty work, or incomplete work as passing

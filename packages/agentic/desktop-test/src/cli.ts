@@ -25,8 +25,18 @@ import { DesktopStopRequested } from './services.js';
 import { handleDesktopInterrupts } from './signals.js';
 import { DesktopSupervisor } from './supervisor.js';
 import { assertDesktopSuiteSupportsInput, runDesktopWdioSuite } from './wdio/run.js';
+import { connectDesktopRunner, defaultRunnerDescriptor } from './wdio/runnerConnection.js';
 
-type AgentFlags = { agent?: boolean; descriptor?: string; root?: string };
+type AgentFlags = { agent?: boolean; descriptor?: string; root?: string; runnerDescriptor?: string; allowRunnerPreempt?: boolean };
+type TestFlags = {
+  suite: string;
+  list?: boolean;
+  input?: string;
+  attachAgent?: boolean;
+  descriptor?: string;
+  root?: string;
+  preempt?: boolean;
+};
 
 // How long an integration may take to unwind after a stop request or scope failure before the scope is closed anyway.
 const INTEGRATION_STOP_TIMEOUT_MS = 60_000;
@@ -56,18 +66,24 @@ export async function runDesktopTestCli(argv = process.argv): Promise<void> {
     .option('--agent', 'require a grant on every route and publish one agent connection descriptor')
     .option('--descriptor <name>', `agent connection descriptor record name (default ${defaultAgentDescriptor})`)
     .option('--root <path>', 'private storage root for the agent descriptor; defaults to the platform location')
+    .option('--runner-descriptor <name>', `attach-only runner descriptor record (default ${defaultRunnerDescriptor})`)
+    .option('--allow-runner-preempt', 'explicitly grant the attach-only runner operator authority to preempt an existing controller')
     .action((options: AgentFlags) => execute('serve', undefined, options));
   program
     .command('test')
     .requiredOption('--suite <name>', 'configured suite')
     .option('--list', 'resolve exact spec groups without launching')
+    .option('--attach-agent', 'reuse an existing generic attach-only agent service; never acquire a second workload claim')
+    .option('--descriptor <name>', `existing runner descriptor (default ${defaultRunnerDescriptor}); requires --attach-agent`)
+    .option('--root <path>', 'existing descriptor private storage root; requires --attach-agent')
+    .option('--preempt', 'request operator-authorized preemption instead of the default busy result; requires --attach-agent')
     .addOption(
       new Option(
         '--input <lane>',
         `run one input lane: accessible (keyboard, physical click and wheel masked) or physical; falls back to ${desktopInputEnvironment}`,
       ).choices([...desktopInputLanes]),
     )
-    .action((options: { suite: string; list?: boolean; input?: string }) => execute('test', options));
+    .action((options: TestFlags) => execute('test', options));
   let reporterMode: ResolvedDesktopReporterMode = 'plain';
   let reporterResolutionError: unknown;
   try {
@@ -96,7 +112,7 @@ export async function runDesktopTestCli(argv = process.argv): Promise<void> {
 
   async function execute(
     action: DesktopStage | 'build-driver' | 'serve' | 'test',
-    test?: { suite: string; list?: boolean; input?: string },
+    test?: TestFlags,
     agentFlags: AgentFlags = {},
   ): Promise<void> {
     const options = program.opts<{
@@ -132,6 +148,14 @@ export async function runDesktopTestCli(argv = process.argv): Promise<void> {
     if (options.paper) target = selectDesktopRenderer(target, 'paper');
     const suite = test ? config.config.suites?.[test.suite] : undefined;
     if (test && !suite) throw Object.assign(new Error(`Unknown suite "${test.suite}".`), { code: 'config' });
+    if (test && !test.attachAgent && (test.descriptor !== undefined || test.root !== undefined || test.preempt)) {
+      throw Object.assign(new TypeError('--descriptor, --root and --preempt require --attach-agent.'), { code: 'config' });
+    }
+    if (test?.attachAgent && (suite?.kind !== 'wdio' || target.host.ownership !== 'external' || config.config.integration)) {
+      throw Object.assign(new TypeError('--attach-agent requires a generic standalone WDIO suite and an external target.'), {
+        code: 'config',
+      });
+    }
     if (test?.list && test.input !== undefined) {
       throw Object.assign(new TypeError('--list resolves spec files, which do not depend on the input lane; omit --input.'), {
         code: 'config',
@@ -156,8 +180,14 @@ export async function runDesktopTestCli(argv = process.argv): Promise<void> {
       : undefined;
     const input = requestedLane?.input;
     if (suite?.kind === 'wdio') assertDesktopSuiteSupportsInput(test!.suite, suite, input);
-    if (!agentFlags.agent && (agentFlags.descriptor !== undefined || agentFlags.root !== undefined))
-      throw Object.assign(new TypeError('--descriptor and --root require --agent.'), { code: 'config' });
+    if (
+      !agentFlags.agent &&
+      (agentFlags.descriptor !== undefined ||
+        agentFlags.root !== undefined ||
+        agentFlags.runnerDescriptor !== undefined ||
+        agentFlags.allowRunnerPreempt)
+    )
+      throw Object.assign(new TypeError('Descriptor and runner publication options require --agent.'), { code: 'config' });
     // An integration serves through its own lifecycle, so it must publish the agent connection itself.
     if (agentFlags.agent && config.config.integration?.run && config.config.integration.supportsAgent !== true)
       throw Object.assign(
@@ -170,6 +200,9 @@ export async function runDesktopTestCli(argv = process.argv): Promise<void> {
       ? {
           ...(agentFlags.descriptor === undefined ? {} : { descriptor: agentFlags.descriptor }),
           ...(agentFlags.root === undefined ? {} : { root: agentFlags.root }),
+          ...(agentFlags.runnerDescriptor === undefined && !agentFlags.allowRunnerPreempt
+            ? {}
+            : { runner: { descriptor: agentFlags.runnerDescriptor, allowPreempt: agentFlags.allowRunnerPreempt } }),
         }
       : undefined;
     let ready = false;
@@ -182,7 +215,9 @@ export async function runDesktopTestCli(argv = process.argv): Promise<void> {
       optional: suite?.kind === 'wdio' && suite.optional,
       context: { endpoint: target.endpoint, renderer: target.host.renderer },
       // The supervisor starts the driver, and starts it masked for an accessible lane.
-      ...(requestedLane ? { lane: createDesktopInputLane(requestedLane.input, requestedLane.source, 'host-masked') } : {}),
+      ...(requestedLane
+        ? { lane: createDesktopInputLane(requestedLane.input, requestedLane.source, test?.attachAgent ? undefined : 'host-masked') }
+        : {}),
       reporterMode,
       eventLevel,
       suppressFinalOutput: action === 'serve' ? () => ready : false,
@@ -224,6 +259,10 @@ export async function runDesktopTestCli(argv = process.argv): Promise<void> {
           kind: 'diagnostic',
           payload: { level: 'info', message: `Verified helper ${artifact.artifactId} at ${artifact.executablePath}` },
         });
+      } else if (test?.attachAgent && suite?.kind === 'wdio') {
+        await owner.open(false);
+        const connection = await connectDesktopRunner({ descriptor: test.descriptor, root: test.root });
+        await runDesktopWdioSuite(owner, config, test.suite, input, { connection, preempt: test.preempt });
       } else if (config.config.integration?.run && suite?.kind !== 'wdio') {
         await owner.open(['test', 'serve', 'run'].includes(action));
         await owner.startResources();

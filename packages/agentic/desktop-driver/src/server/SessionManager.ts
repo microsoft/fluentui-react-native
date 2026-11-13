@@ -43,6 +43,7 @@ export type MutationOptions = {
 export type SessionOwner = {
   grantId: string;
   label: string;
+  controllerId?: string;
 };
 
 /** Who has a target reserved, as far as a contending caller may be told. `label` is set only for a grant's session. */
@@ -54,6 +55,8 @@ type TargetHolder = {
 };
 
 export type SessionManagerOptions = {
+  /** Checks the live authority at every admission, including requests authenticated before an earlier drain. */
+  isOwnerActive?: (grantId: string) => boolean;
   /**
    * Closes a grant's session after this many milliseconds without a request for it. The clock runs only while none of the
    * session's requests is queued or running, so a long command never expires its own session. Sessions without an owner
@@ -128,8 +131,15 @@ export class SessionManager {
   private readonly sessions = new Map<string, DesktopSession>();
   private readonly sessionsByTarget = new Map<string, string>();
   private readonly reservedTargets = new Map<string, TargetHolder>();
+  private readonly runnerReservations = new Map<string, TargetHolder>();
+  private readonly handoffs = new Map<string, { owner: SessionOwner; controller: AbortController; settled: Promise<void> }>();
   private readonly commandQueues = new Map<string, Promise<void>>();
-  private readonly inFlightCreates = new Map<Promise<void>, { controller: AbortController; grantId?: string }>();
+  private readonly inFlightCreates = new Map<
+    Promise<void>,
+    { controller: AbortController; grantId?: string; controllerId?: string; targetId: string }
+  >();
+  private readonly failedCreates = new Map<string, { target: DesktopTarget; owner?: SessionOwner; lease?: ApplicationLease }>();
+  private readonly failedCreateDrains = new Map<string, Promise<void>>();
   private readonly revokedOwners = new Set<string>();
   private readonly quarantines = new Map<string, QuarantineRecord>();
   private inputQueue: Promise<void> = Promise.resolve();
@@ -144,6 +154,7 @@ export class SessionManager {
   private readonly probeApplication: ProbeApplication | undefined;
   private readonly probeDeadlineMs: number;
   private readonly redactSessionIds: boolean;
+  private readonly isOwnerActive: SessionManagerOptions['isOwnerActive'];
 
   constructor(options: SessionManagerOptions = {}) {
     this.idleTimeoutMs = options.idleTimeoutMs ?? 0;
@@ -151,6 +162,7 @@ export class SessionManager {
     this.probeApplication = options.probeApplication;
     this.probeDeadlineMs = options.probeDeadlineMs ?? defaultStorageDeadlineMs;
     this.redactSessionIds = options.redactSessionIds === true;
+    this.isOwnerActive = options.isOwnerActive;
   }
 
   /**
@@ -259,9 +271,79 @@ export class SessionManager {
     return (
       this.sessionsByTarget.has(targetId) ||
       this.reservedTargets.has(targetId) ||
+      this.runnerReservations.has(targetId) ||
+      this.handoffs.has(targetId) ||
       this.mutatingTargets.has(targetId) ||
       this.recoveringTargets.has(targetId)
     );
+  }
+
+  private isRevokedOwner(grantId: string): boolean {
+    return this.revokedOwners.has(grantId) || this.isOwnerActive?.(grantId) === false;
+  }
+
+  /**
+   * Reserves admission before draining the previous owner. Notification of revocation is not proof: the supplied drain
+   * must settle and the target must have no session, opening lease, or mutation before this controller can create.
+   */
+  reserveRunner(
+    targetId: string,
+    owner: SessionOwner,
+    acquireOwner: () => SessionOwner,
+    preempt?: (grantId: string) => Promise<void>,
+    signal?: AbortSignal,
+  ): Promise<void> {
+    if (this.closing || this.isRevokedOwner(owner.grantId)) {
+      return Promise.reject(new WebDriverError('session not created', 'Runner authority is unavailable.'));
+    }
+    if (this.handoffs.has(targetId)) return Promise.reject(this.createBusyError(targetId));
+    const sessionId = this.sessionsByTarget.get(targetId);
+    const session = sessionId ? this.sessions.get(sessionId) : undefined;
+    const holder = this.runnerReservations.get(targetId) ?? this.reservedTargets.get(targetId);
+    const previous = holder?.grantId ?? session?.owner?.grantId;
+    if (this.isHeld(targetId) && (!preempt || !previous)) return Promise.reject(this.createBusyError(targetId));
+    // Launch retention belongs to an explicit application owner, not to an attach-only handoff.
+    if (session?.lease.ownership === 'launched') {
+      return Promise.reject(new WebDriverError('unsupported operation', 'Runner handoff supports attached applications only.'));
+    }
+    const controller = new AbortController();
+    const abort = () => controller.abort(signal?.reason);
+    signal?.addEventListener('abort', abort, { once: true });
+    if (signal?.aborted) abort();
+    let complete!: () => void;
+    const settled = new Promise<void>((resolve) => (complete = resolve));
+    this.handoffs.set(targetId, { owner, controller, settled });
+    const result = (async () => {
+      try {
+        if (previous) await preempt!(previous);
+        controller.signal.throwIfAborted();
+        if (this.closing || this.isRevokedOwner(owner.grantId)) {
+          throw new WebDriverError('session not created', 'Runner authority was revoked while draining.');
+        }
+        if (
+          this.sessionsByTarget.has(targetId) ||
+          this.reservedTargets.has(targetId) ||
+          this.runnerReservations.has(targetId) ||
+          this.mutatingTargets.has(targetId) ||
+          this.recoveringTargets.has(targetId) ||
+          [...this.inFlightCreates.values()].some((create) => create.targetId === targetId)
+        ) {
+          throw this.createBusyError(targetId);
+        }
+        const runner = acquireOwner();
+        this.runnerReservations.set(targetId, {
+          grantId: runner.grantId,
+          label: runner.label,
+          lifecycle: 'active',
+          since: new Date().toISOString(),
+        });
+      } finally {
+        signal?.removeEventListener('abort', abort);
+        this.handoffs.delete(targetId);
+        complete();
+      }
+    })();
+    return result;
   }
 
   create(
@@ -277,7 +359,7 @@ export class SessionManager {
     }
     // Checked in the same tick that the create registers as in flight, so a create is either rejected here or awaited
     // by deleteOwnedBy.
-    if (owner && this.revokedOwners.has(owner.grantId)) {
+    if (owner && (this.isRevokedOwner(owner.grantId) || (owner.controllerId && this.isRevokedOwner(owner.controllerId)))) {
       return Promise.reject(new WebDriverError('session not created', 'The grant for this request was revoked.'));
     }
     const controller = new AbortController();
@@ -286,7 +368,7 @@ export class SessionManager {
       () => undefined,
       () => undefined,
     );
-    this.inFlightCreates.set(settled, { controller, ...(owner ? { grantId: owner.grantId } : {}) });
+    this.inFlightCreates.set(settled, { controller, targetId: target.id, ...owner });
     void settled.finally(() => this.inFlightCreates.delete(settled));
     return result;
   }
@@ -297,6 +379,7 @@ export class SessionManager {
       clearTimeout(timer);
     }
     this.idleTimers.clear();
+    for (const { controller } of this.handoffs.values()) controller.abort();
     for (const { controller } of this.inFlightCreates.values()) {
       controller.abort();
     }
@@ -308,7 +391,7 @@ export class SessionManager {
   async waitForCreates(grantId?: string): Promise<void> {
     while (true) {
       const pending = Array.from(this.inFlightCreates.entries())
-        .filter(([, create]) => grantId === undefined || create.grantId === grantId)
+        .filter(([, create]) => grantId === undefined || create.grantId === grantId || create.controllerId === grantId)
         .map(([promise]) => promise);
       if (pending.length === 0) {
         return;
@@ -338,8 +421,12 @@ export class SessionManager {
     if (this.closing) {
       throw new WebDriverError('session not created', 'Desktop Driver is shutting down.');
     }
-    if (owner && this.revokedOwners.has(owner.grantId)) {
+    if (owner && (this.isRevokedOwner(owner.grantId) || (owner.controllerId && this.isRevokedOwner(owner.controllerId)))) {
       throw new WebDriverError('session not created', 'The grant for this request was revoked.');
+    }
+    const runner = this.runnerReservations.get(target.id);
+    if (this.handoffs.has(target.id) || (runner && runner.grantId !== (owner?.controllerId ?? owner?.grantId))) {
+      throw this.createBusyError(target.id);
     }
     const quarantine = this.quarantines.get(target.id);
     if (quarantine) {
@@ -380,7 +467,7 @@ export class SessionManager {
       if (this.closing) {
         throw new WebDriverError('session not created', 'Desktop Driver shut down while the target was starting.');
       }
-      if (owner && this.revokedOwners.has(owner.grantId)) {
+      if (owner && (this.isRevokedOwner(owner.grantId) || (owner.controllerId && this.isRevokedOwner(owner.controllerId)))) {
         throw new WebDriverError('session not created', 'The grant for this request was revoked.');
       }
       const session: DesktopSession = {
@@ -422,31 +509,19 @@ export class SessionManager {
       this.armIdleTimer(session.id);
       return session;
     } catch (error) {
-      await this.runInputCommand(() =>
-        withCommandTimeout((signal) => target.host.releaseActions(signal), 10_000, `Releasing input for target "${target.id}"`),
-      ).catch(() => undefined);
-      if (lease) {
-        const failedLease = lease;
-        await withCommandTimeout(
-          (signal) => target.host.closeApplication(failedLease, signal),
-          10_000,
-          `Closing failed target "${target.id}"`,
-        ).catch(() => undefined);
-      } else if (leasePromise) {
+      // The timeout has awaited native settlement, but an aborted attach may still have returned a lease.
+      lease ??= await leasePromise?.catch(() => undefined);
+      this.failedCreates.set(target.id, { target, owner, lease });
+      try {
+        await this.cleanupFailedCreate(target.id);
+      } catch (cleanup) {
         releaseReservation = false;
-        await leasePromise
-          .then(async (lateLease) => {
-            await this.runInputCommand(() =>
-              withCommandTimeout((signal) => target.host.releaseActions(signal), 10_000, `Releasing late input for target "${target.id}"`),
-            ).catch(() => undefined);
-            await withCommandTimeout(
-              (signal) => target.host.closeApplication(lateLease, signal),
-              10_000,
-              `Closing late target "${target.id}"`,
-            ).catch(() => undefined);
-          })
-          .catch(() => undefined)
-          .finally(() => this.reservedTargets.delete(target.id));
+        this.reservedTargets.set(target.id, {
+          ...(owner ? { grantId: owner.grantId, label: owner.label } : {}),
+          lifecycle: 'draining',
+          since: new Date().toISOString(),
+        });
+        throw new AggregateError([error, cleanup], 'Session acquisition and drain failed.');
       }
       throw error;
     } finally {
@@ -454,6 +529,31 @@ export class SessionManager {
         this.reservedTargets.delete(target.id);
       }
     }
+  }
+
+  private cleanupFailedCreate(targetId: string): Promise<void> {
+    const pending = this.failedCreateDrains.get(targetId);
+    if (pending) return pending;
+    const result = this.drainFailedCreate(targetId).finally(() => this.failedCreateDrains.delete(targetId));
+    this.failedCreateDrains.set(targetId, result);
+    return result;
+  }
+
+  private async drainFailedCreate(targetId: string): Promise<void> {
+    const failed = this.failedCreates.get(targetId);
+    if (!failed) return;
+    await this.runInputCommand(() =>
+      withCommandTimeout((signal) => failed.target.host.releaseActions(signal), 10_000, 'Releasing input after failed acquisition'),
+    );
+    if (failed.lease) {
+      await withCommandTimeout(
+        (signal) => failed.target.host.closeApplication(failed.lease!, signal),
+        10_000,
+        'Closing a failed acquisition',
+      );
+    }
+    this.failedCreates.delete(targetId);
+    this.reservedTargets.delete(targetId);
   }
 
   /**
@@ -464,6 +564,7 @@ export class SessionManager {
     const sessionId = this.sessionsByTarget.get(targetId);
     const session = sessionId ? this.sessions.get(sessionId) : undefined;
     const holder: TargetHolder | undefined =
+      this.runnerReservations.get(targetId) ??
       this.reservedTargets.get(targetId) ??
       (session
         ? {
@@ -798,7 +899,10 @@ export class SessionManager {
   }
 
   async deleteAll(): Promise<void> {
+    await Promise.all([...this.handoffs.values()].map(({ settled }) => settled));
     await this.deleteWhere(() => true, 'One or more desktop sessions failed to close.');
+    for (const targetId of this.failedCreates.keys()) await this.cleanupFailedCreate(targetId);
+    this.runnerReservations.clear();
   }
 
   /**
@@ -807,23 +911,36 @@ export class SessionManager {
    */
   async deleteOwnedBy(grantId: string): Promise<void> {
     this.revokedOwners.add(grantId);
+    const handoffs = [...this.handoffs.values()].filter(({ owner }) => owner.grantId === grantId || owner.controllerId === grantId);
+    for (const { controller } of handoffs) controller.abort();
     for (const [targetId, reservation] of this.reservedTargets) {
       if (reservation.grantId === grantId) {
         this.reservedTargets.set(targetId, { ...reservation, lifecycle: 'draining' });
       }
     }
     for (const create of this.inFlightCreates.values()) {
-      if (create.grantId === grantId) {
+      if (create.grantId === grantId || create.controllerId === grantId) {
         create.controller.abort();
       }
     }
     for (const session of this.sessions.values()) {
-      if (session.owner?.grantId === grantId) {
+      if (session.owner?.grantId === grantId || session.owner?.controllerId === grantId) {
         this.beginDraining(session);
       }
     }
+    await Promise.all(handoffs.map(({ settled }) => settled));
     await this.waitForCreates(grantId);
-    await this.deleteWhere((session) => session.owner?.grantId === grantId, 'One or more sessions of a revoked grant failed to close.');
+    await this.deleteWhere(
+      (session) => session.owner?.grantId === grantId || session.owner?.controllerId === grantId,
+      'One or more sessions of a revoked grant failed to close.',
+    );
+    for (const [targetId, failed] of this.failedCreates) {
+      if (failed.owner?.grantId === grantId || failed.owner?.controllerId === grantId) await this.cleanupFailedCreate(targetId);
+    }
+    for (const [targetId, reservation] of this.runnerReservations) {
+      if (reservation.grantId === grantId) this.runnerReservations.delete(targetId);
+    }
+    if (this.isOwnerActive?.(grantId) === false) this.revokedOwners.delete(grantId);
   }
 
   private async deleteWhere(predicate: (session: DesktopSession) => boolean, summary: string): Promise<void> {
@@ -852,6 +969,7 @@ export class SessionManager {
     if (session.lifecycle === 'active') {
       session.lifecycle = 'draining';
       session.commandAbortController.abort();
+      session.closeRequested.abort();
     }
     this.reservedTargets.set(session.target.id, {
       ...(session.owner ? { grantId: session.owner.grantId, label: session.owner.label } : {}),
