@@ -120,6 +120,36 @@ test('physical macOS traversal centers a visible 1024x768 window before selectin
   }
 });
 
+test('clamps the physical window to a hosted display visible frame', async () => {
+  const { calls, connect } = windowSetup({
+    input: 'physical',
+    screens: [{ x: 0, y: 25, width: 1024, height: 743 }],
+  });
+  const traversal = await connect();
+  await traversal.close();
+  expect(calls.find(({ url, method }) => url.endsWith('/window/rect') && method === 'POST')?.body).toEqual({
+    x: 1,
+    y: 26,
+    width: 1022,
+    height: 741,
+  });
+});
+
+test('clamps to Dock-reduced visible bounds and keeps the larger requested width', async () => {
+  const { calls, connect } = windowSetup({
+    input: 'physical',
+    screens: [{ x: 0, y: 24, width: 1440, height: 700 }],
+  });
+  const traversal = await connect();
+  await traversal.close();
+  expect(calls.find(({ url, method }) => url.endsWith('/window/rect') && method === 'POST')?.body).toEqual({
+    x: 208,
+    y: 25,
+    width: 1024,
+    height: 698,
+  });
+});
+
 test.each([
   { platform: 'macos' as const, input: undefined },
   { platform: 'macos' as const, input: 'accessible' as const },
@@ -152,6 +182,25 @@ test('centers within negative-origin visible bounds and can use a fitting second
   });
 });
 
+test('chooses the screen with the largest clamped physical window before considering overlap', async () => {
+  const { calls, connect } = windowSetup({
+    input: 'physical',
+    current: { x: 600, y: 600, width: 480, height: 302 },
+    screens: [
+      { x: 0, y: 24, width: 1024, height: 700 },
+      { x: 1200, y: 30, width: 1600, height: 900 },
+    ],
+  });
+  const traversal = await connect();
+  await traversal.close();
+  expect(calls.find(({ url, method }) => url.endsWith('/window/rect') && method === 'POST')?.body).toEqual({
+    x: 1488,
+    y: 96,
+    width: 1024,
+    height: 768,
+  });
+});
+
 test('keeps an off-screen persisted window away from the visible screen edges', async () => {
   const { calls, connect } = windowSetup({
     input: 'physical',
@@ -168,16 +217,37 @@ test('keeps an off-screen persisted window away from the visible screen edges', 
   });
 });
 
-test('refuses an undersized display before resizing and releases its session', async () => {
+test('clamps a smaller display while keeping the window inside its visible bounds', async () => {
   const { calls, connect } = windowSetup({ input: 'physical', screens: [{ x: 0, y: 24, width: 800, height: 550 }] });
-  await expect(connect()).rejects.toThrow('No visible macOS screen can fit the physical-lane 1024x768 window');
+  const traversal = await connect();
+  await traversal.close();
+  expect(calls.find(({ url, method }) => url.endsWith('/window/rect') && method === 'POST')?.body).toEqual({
+    x: 1,
+    y: 25,
+    width: 798,
+    height: 548,
+  });
+});
+
+test('reports the target and observed frames when no positive physical window fits', async () => {
+  const screens = [{ x: 0, y: 24, width: 1, height: 1 }];
+  const { calls, connect } = windowSetup({ input: 'physical', screens });
+  await expect(connect()).rejects.toThrow(/1024x768.*visible frames.*1.*1/i);
   expect(calls.some(({ url, method }) => url.endsWith('/window/rect') && method === 'POST')).toBe(false);
   expect(calls.at(-1)).toMatchObject({ method: 'DELETE', url: 'https://driver/session/session' });
 });
 
+test('reports invalid visible frames instead of ignoring them', async () => {
+  const screens = [{ x: 0, y: 24, width: 0, height: 550 }];
+  const { connect } = windowSetup({ input: 'physical', screens });
+  await expect(connect()).rejects.toThrow(/invalid window bounds.*visible frames.*0.*550/i);
+});
+
 test('does not accept a host that leaves the window smaller than requested', async () => {
-  const { calls, connect } = windowSetup({ input: 'physical', reported: { x: 256, y: 192, width: 480, height: 302 } });
-  await expect(connect()).rejects.toThrow('The macOS host did not establish the physical-lane 1024x768 window');
+  const screens = [{ x: 0, y: 24, width: 800, height: 550 }];
+  const reported = { x: 1, y: 25, width: 798, height: 547 };
+  const { calls, connect } = windowSetup({ input: 'physical', screens, reported });
+  await expect(connect()).rejects.toThrow(/requested.*798.*548.*received.*798.*547.*visible frames/i);
   expect(calls.filter(({ url, method }) => url.endsWith('/window/rect') && method === 'POST')).toHaveLength(1);
   expect(calls.at(-1)).toMatchObject({ method: 'DELETE', url: 'https://driver/session/session' });
 });

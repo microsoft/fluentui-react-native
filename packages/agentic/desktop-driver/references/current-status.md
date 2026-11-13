@@ -1076,3 +1076,18 @@ remained declared locked; no GUI/physical run, privacy change, prompt, or
 unlock attempt was made. Detailed red/green, package, aggregate and cleanup
 records are in
 `artifacts/desktop/f16-macos-physical/review-env-input-20261112T232312Z/`.
+
+### Hosted visible-frame clamp and native requalification
+
+Hosted macOS physical job `131573011450` on `b66140d7b7b04cb33d8b6910c6f41a16651af713` failed before selecting stories because no visible screen fit the 1024 × 768 target. On November 13, the user chose to clamp the physical-lane window size to the available visible frame. The follow-up keeps the 1024 × 768 maximum, adds a one-point inset on each edge, chooses the largest clamped area (overlap breaks ties), verifies the exact requested rectangle, and includes target/requested/actual/visible geometry in failures. Accessible, compatibility, Windows and Win32 lanes remain unchanged.
+
+- **Passed, native Fabric at `b66140d7b`:** `DESKTOP_INPUT=physical yarn storybook smoke --macos --mode stories-and-tests --reporter json`; **343 passed, 3 declared unsupported, 0 failed**. The signed helper source digest was `dd3f28bb27bea9349bbf6e26955b8fdaf34c88eeb37b6baa7e0e1fd99552b93b`; the fresh app build included the RNmacOS native-props patch. The visible frame was 1728 × 999, so the 1024 × 768 target was unchanged.
+- **Paper native retry at the same head:** the first full env-only physical smoke passed 254, failed 7 and reported 1 unsupported; six failures were obscured by the unrelated Captive Network Assistant window, and one reported an unsupported native hit-test operation. No process was signalled. After that OS window disappeared, the repeated full smoke passed **343, 3 declared unsupported, 0 failed**.
+- **Passed, current clamp working tree on Paper:** env-only physical Accordion smoke, **225/225**, no unsupported or failed cases. Accessible Button callbacks on the prior `b661` source passed **1/1 on both Fabric and Paper** without a physical window preset; existing unit tests assert accessible/compatibility/Windows traversal does not resize.
+- **Not completed, current clamp working tree on Fabric:** `bundle --macos` passed, but the subsequent `prep --macos` stopped in `pod install` with `undefined method 'fast_generate' for module JSON`; no build or smoke followed. Native source and app configuration were not changed by the clamp.
+- The hosted failure is the reason for the current clamp change, not a story or hit-test failure. The post-clamp hosted run is pending publication and CI.
+
+Detailed native receipts are in
+`artifacts/desktop/f16-macos-physical/native-b66140d7-20261113T000145Z/`,
+including the initial Paper failure, the passing rerun, current Paper smoke,
+and failed Fabric preparation.

@@ -91,14 +91,17 @@ Legacy callback collections are not eligible for input-lane runs. Input lanes
 cannot be combined with an explicit non-`auto` click mode. See
 [story tests](story-tests.md#run-an-input-lane).
 
-On macOS, physical-lane `test` and `smoke` runs establish and verify a
-**1024 × 768 logical-point** window before traversal or callbacks. The harness
-centers the window inside a visible screen, clamping its origin to exclude menu-bar and
-Dock space, and can use a fitting secondary screen. It fails before tests if
-no screen can fit that size or the host does not establish the requested
-rectangle; it never shrinks the window to conceal that failure. Accessible
-and compatibility runs do not resize the window. Native occlusion checks
-remain authoritative; the harness does not hide Storybook chrome or overlays.
+On macOS, physical-lane `test` and `smoke` runs establish and verify a window
+up to **1024 × 768 logical points** before traversal or callbacks. Its size is
+clamped to the largest visible screen frame with a one-point inset on every
+edge, and the window is centered there; equal-sized candidates prefer the
+screen with more overlap with the current window. For example, a 1024 × 743
+visible frame yields a 1022 × 741 window. The harness fails before tests if no
+screen can host a positive window or the host does not establish the exact
+requested rectangle, and includes the target and observed geometry in the
+error. Accessible and compatibility runs do not resize the window. Native
+occlusion checks remain authoritative; the harness does not hide Storybook
+chrome or overlays.
 
 The TypeScript API exposes the same operations through `DesktopStorybookCli`.
 Higher-level supervisors should inject their shared reporter, runner, and

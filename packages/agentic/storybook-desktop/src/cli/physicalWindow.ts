@@ -3,8 +3,8 @@ import { execFile } from 'node:child_process';
 import type { Rect } from '@fluentui-react-native/desktop-driver';
 import type { DesktopSessionClient } from '@fluentui-react-native/desktop-driver/client';
 
-const width = 1024;
-const height = 768;
+const target = { width: 1024, height: 768 };
+const edgeInset = 1;
 
 const visibleScreensScript = [
   "ObjC.import('AppKit');",
@@ -43,7 +43,7 @@ export async function readMacOSVisibleScreenFrames(signal: AbortSignal): Promise
   });
   const frames: unknown = JSON.parse(output);
   if (!Array.isArray(frames) || frames.length > 64 || !frames.every(isRect)) {
-    throw new Error('The macOS visible-screen query returned invalid window bounds.');
+    throw new Error(`The macOS visible-screen query returned invalid window bounds: ${JSON.stringify(frames)}.`);
   }
   return frames;
 }
@@ -56,35 +56,54 @@ export async function preparePhysicalWindow(
   const current = await session.command<Rect>('GET', '/window/rect', undefined, signal);
   if (!isRect(current)) throw new Error('The macOS host returned an invalid window rectangle.');
   const screens = await visibleScreenFrames(signal);
-  let chosen: { rect: Rect; overlap: number } | undefined;
+  let chosen: { rect: Rect; area: number; overlap: number } | undefined;
   for (const screen of screens) {
-    if (!isRect(screen)) throw new Error('The macOS visible-screen query returned invalid window bounds.');
-    const minX = Math.ceil(screen.x);
-    const minY = Math.ceil(screen.y);
-    const maxX = Math.floor(screen.x + screen.width - width);
-    const maxY = Math.floor(screen.y + screen.height - height);
-    if (maxX < minX || maxY < minY) continue;
+    if (!isRect(screen)) {
+      throw new Error(`The macOS visible-screen query returned invalid window bounds. Visible frames: ${JSON.stringify(screens)}.`);
+    }
+    const minX = Math.ceil(screen.x + edgeInset);
+    const minY = Math.ceil(screen.y + edgeInset);
+    const maxVisibleX = Math.floor(screen.x + screen.width - edgeInset);
+    const maxVisibleY = Math.floor(screen.y + screen.height - edgeInset);
+    const windowWidth = Math.min(target.width, maxVisibleX - minX);
+    const windowHeight = Math.min(target.height, maxVisibleY - minY);
+    if (windowWidth <= 0 || windowHeight <= 0) continue;
+    const maxX = maxVisibleX - windowWidth;
+    const maxY = maxVisibleY - windowHeight;
     const overlap =
       Math.max(0, Math.min(current.x + current.width, screen.x + screen.width) - Math.max(current.x, screen.x)) *
       Math.max(0, Math.min(current.y + current.height, screen.y + screen.height) - Math.max(current.y, screen.y));
-    if (!chosen || overlap > chosen.overlap) {
+    const area = windowWidth * windowHeight;
+    if (!chosen || area > chosen.area || (area === chosen.area && overlap > chosen.overlap)) {
       chosen = {
+        area,
         overlap,
         rect: {
-          // Avoid screen-edge constraints changing the requested size during the native resize.
-          x: Math.min(maxX, Math.max(minX, Math.round(screen.x + (screen.width - width) / 2))),
-          y: Math.min(maxY, Math.max(minY, Math.round(screen.y + (screen.height - height) / 2))),
-          width,
-          height,
+          x: Math.min(maxX, Math.max(minX, Math.round(screen.x + (screen.width - windowWidth) / 2))),
+          y: Math.min(maxY, Math.max(minY, Math.round(screen.y + (screen.height - windowHeight) / 2))),
+          width: windowWidth,
+          height: windowHeight,
         },
       };
     }
   }
-  if (!chosen) throw new Error('No visible macOS screen can fit the physical-lane 1024x768 window.');
+  if (!chosen) {
+    throw new Error(
+      `No visible macOS screen can host a positive physical-lane window (target ${target.width}x${target.height}). Visible frames: ${JSON.stringify(screens)}.`,
+    );
+  }
   await session.command('POST', '/window/rect', chosen.rect, signal);
   const actual = await session.command<Rect>('GET', '/window/rect', undefined, signal);
-  if (!isRect(actual) || actual.x !== chosen.rect.x || actual.y !== chosen.rect.y || actual.width !== width || actual.height !== height) {
-    throw new Error('The macOS host did not establish the physical-lane 1024x768 window inside visible screen bounds.');
+  if (
+    !isRect(actual) ||
+    actual.x !== chosen.rect.x ||
+    actual.y !== chosen.rect.y ||
+    actual.width !== chosen.rect.width ||
+    actual.height !== chosen.rect.height
+  ) {
+    throw new Error(
+      `The macOS host did not establish the requested physical-lane window ${JSON.stringify(chosen.rect)}; received ${JSON.stringify(actual)}. Visible frames: ${JSON.stringify(screens)}.`,
+    );
   }
 }
 
