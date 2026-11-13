@@ -40,7 +40,7 @@ export class WebDriverError extends Error {
     return {
       error: this.code,
       message: this.message,
-      stacktrace: this.stack ?? '',
+      stacktrace: '',
       ...(this.data ? { data: this.data } : {}),
     };
   }
