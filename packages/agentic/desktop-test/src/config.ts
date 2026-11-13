@@ -24,7 +24,7 @@ export type DesktopStage = 'prep' | 'bundle' | 'build' | 'run';
 export type DesktopHostConfig = {
   kind: 'installed' | 'react-native-test-app' | 'rex';
   application?: NativeDesktopApplicationDescriptor;
-  ownership?: 'session' | 'external';
+  ownership?: 'session' | 'supervisor' | 'external';
   renderer?: DesktopRenderer;
   appConfigPath?: string;
   component?: string;
@@ -145,7 +145,9 @@ export function validateDesktopConfig(value: unknown): asserts value is DesktopC
     const host = object(target.host, `${id}.host`);
     keys(host, ['kind', 'application', 'ownership', 'renderer', 'appConfigPath', 'component', 'windowTitle', 'bundleRoot'], `${id}.host`);
     oneOf(host.kind, ['installed', 'react-native-test-app', 'rex'], `${id}.host.kind`);
-    optionalEnum(host.ownership, ['session', 'external'], `${id}.host.ownership`);
+    optionalEnum(host.ownership, ['session', 'supervisor', 'external'], `${id}.host.ownership`);
+    if (host.ownership === 'supervisor' && (target.endpoint ?? id) !== 'macos')
+      throw new TypeError('Supervisor-owned application launch is currently supported only on macOS.');
     optionalEnum(host.renderer, ['fabric', 'paper'], `${id}.host.renderer`);
     for (const field of ['appConfigPath', 'component', 'windowTitle', 'bundleRoot']) {
       if (host[field] !== undefined) text(host[field], `${id}.host.${field}`);
@@ -154,7 +156,11 @@ export function validateDesktopConfig(value: unknown): asserts value is DesktopC
     if (host.kind === 'react-native-test-app' && (target.endpoint ?? id) === 'win32') {
       throw new TypeError('Win32 uses REX, not react-native-test-app.');
     }
-    if (host.application !== undefined) validateApplication(host.application, `${id}.host.application`);
+    if (host.application !== undefined) {
+      validateApplication(host.application, `${id}.host.application`);
+      if (object(host.application, 'application').processIdentity !== undefined && (target.endpoint ?? id) !== 'macos')
+        throw new TypeError('Exact application processIdentity attach is currently supported only on macOS.');
+    }
     if (host.kind === 'installed' && host.application === undefined)
       throw new TypeError(`${id}: installed hosts require application identity.`);
     if (target.readiness !== undefined) validateReadiness(target.readiness);
@@ -451,17 +457,38 @@ function validateApplication(value: unknown, context: string): void {
   const application = object(value, context);
   keys(
     application,
-    ['arguments', 'aumid', 'bundleIdentifier', 'executablePath', 'leaseNonce', 'leasePath', 'windowTitle', 'workingDirectory'],
+    [
+      'arguments',
+      'aumid',
+      'bundleIdentifier',
+      'executablePath',
+      'leaseNonce',
+      'leasePath',
+      'processIdentity',
+      'windowTitle',
+      'workingDirectory',
+    ],
     context,
   );
   for (const [field, setting] of Object.entries(application)) {
     if (field === 'arguments') {
       if (!Array.isArray(setting) || !setting.every((item) => typeof item === 'string'))
         throw new TypeError(`${context}.arguments must be strings.`);
+    } else if (field === 'processIdentity') {
+      const identity = object(setting, `${context}.processIdentity`);
+      keys(identity, ['processId', 'processStartedAt'], `${context}.processIdentity`);
+      positive(identity.processId, `${context}.processIdentity.processId`);
+      if (!Number.isSafeInteger(identity.processId) || Number(identity.processId) > 0x7fffffff)
+        throw new TypeError(`${context}.processIdentity.processId must be a positive 31-bit integer.`);
+      text(identity.processStartedAt, `${context}.processIdentity.processStartedAt`);
+      if (!/^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{6}Z$/.test(String(identity.processStartedAt)))
+        throw new TypeError(`${context}.processIdentity.processStartedAt requires a native microsecond timestamp.`);
     } else text(setting, `${context}.${field}`);
   }
   if (Boolean(application.leasePath) !== Boolean(application.leaseNonce))
     throw new TypeError(`${context}: leasePath and leaseNonce must be paired.`);
+  if (application.processIdentity !== undefined && application.leasePath)
+    throw new TypeError(`${context}: processIdentity cannot be combined with a legacy lease.`);
 }
 
 function validateReadiness(value: unknown): void {

@@ -65,10 +65,12 @@ when working on the package.
   `test --attach-agent`; see [runner ownership](references/wdio-suites.md#reuse-an-attached-agent-service).
   Per-worker credentials are scrubbed before user hooks/specs; Node bootstrap
   and preloads remain trusted during the initial fork-environment window.
-  Storybook handoff and retained session launches remain unsupported.
-- The generic harness supervises services, workers, and the driver; session-owned
-  app launch and the Storybook lifecycle takeover are transitional (see
-  [lifecycle](references/lifecycle.md)).
+- The generic harness supervises services, workers, the driver, and application
+  claim resources. Launch defaults to session-owned; macOS can opt into
+  supervisor-owned launch. External attach always preserves the app. Neutral
+  exact identity helpers live at `/application-ownership`; Storybook handoff and
+  lifecycle takeover remain transitional, and retained session launches remain
+  unsupported (see [lifecycle](references/lifecycle.md)).
 - Every run records structured results, command output, and evidence in its
   artifact directory.
 - Native helpers are explicitly built or provisioned; normal test runs use

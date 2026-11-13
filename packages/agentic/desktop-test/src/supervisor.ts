@@ -11,9 +11,10 @@ import type { DesktopIntegration } from './integration.js';
 import { NodeDesktopCommandRunner, deadline } from './commands.js';
 import type { PreparedDesktopCommand, RunningDesktopCommand } from './commands.js';
 import { DesktopServiceScope } from './services.js';
-import { createDesktopWorkloadClaim } from './ownership.js';
-import type { DesktopWorkloadClaim } from './ownership.js';
+import { createDesktopWorkloadClaim, describeDesktopWorkloadOwner } from './ownership.js';
+import type { DesktopWorkloadClaim, DesktopWorkloadProcessIdentity } from './ownership.js';
 import { resolveDesktopApplication } from './adapters.js';
+import { createDesktopApplicationHost } from './applicationOwnership.js';
 import { DesktopRunReporter } from './reporting/collector.js';
 import type { DesktopReportWriter } from './reporting/collector.js';
 import type { DesktopReportSession } from './reporting/session.js';
@@ -28,6 +29,8 @@ export type DesktopSupervisorOptions = {
   workload?: { kind: 'delegated'; claim: DesktopWorkloadClaim };
   hostFactory?: (target: ResolvedDesktopTarget) => Promise<DesktopHost>;
   lockDirectory?: string;
+  /** Trusted native identity override, useful to custom hosts that do not resolve a native driver artifact. */
+  processIdentity?: DesktopWorkloadProcessIdentity;
   /**
    * Protects the service with a grant authority and publishes one agent's connection descriptor once the target is
    * ready. Every route then requires a grant, so only clients given one, such as the Desktop Driver MCP adapter, connect.
@@ -89,6 +92,9 @@ export class DesktopSupervisor {
           targetId: this.target.id,
           targetInstanceId: this.target.instanceId,
           directory: this.options.lockDirectory,
+          processIdentity:
+            this.options.processIdentity ??
+            (this.options.hostFactory ? undefined : await describeDesktopWorkloadOwner(this.target.nativeDriver)),
         });
         this.ownsWorkloadClaim = true;
       }
@@ -148,6 +154,21 @@ export class DesktopSupervisor {
         signal: this.services.controller.signal,
         guard: (work) => this.services.guard(work),
         addSecret: (secret) => this.reporter.addSecret(secret),
+        prepareHost: (host) =>
+          createDesktopApplicationHost(host, {
+            target: options.target,
+            lifetime: this.target.host.ownership ?? 'session',
+            resourcePrefix: `${this.reporter.runId}:${this.target.instanceId}`,
+            onResource: (resource) => {
+              try {
+                this.workloadClaim?.updateResource(resource);
+              } catch (error) {
+                this.ownershipUncertain = true;
+                this.services.fail(error instanceof Error ? error : new Error(String(error)));
+                throw error;
+              }
+            },
+          }),
         createTarget: (host) =>
           this.options.integration?.createTarget?.({ host, target: this.target, reporter: this.reporter }) ?? Promise.resolve(undefined),
       };
@@ -293,12 +314,17 @@ export class DesktopSupervisor {
   }
 }
 
-export function claimDesktopWorkload(runId: string, directory?: string): () => void {
+export async function claimDesktopWorkload(
+  runId: string,
+  directory?: string,
+  processIdentity?: DesktopWorkloadProcessIdentity,
+): Promise<() => void> {
   const claim = createDesktopWorkloadClaim({
     runId,
     targetId: 'unregistered',
     targetInstanceId: 'unregistered',
     directory,
+    processIdentity: processIdentity ?? (await describeDesktopWorkloadOwner()),
   });
   return () => claim.release();
 }

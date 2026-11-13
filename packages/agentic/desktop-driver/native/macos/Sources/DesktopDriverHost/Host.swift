@@ -23,6 +23,7 @@ func createHello() -> JSONObject {
       "elementCapture",
       "find",
       "hitTest",
+      "inspectApplication",
       "keyboard",
       "launch",
       "performAccessibilityAction",
@@ -289,7 +290,7 @@ final class Host {
 
     if let cancellation {
       driver.releaseInput()
-      writeCancelled(request.id, effect: cancellation.effect)
+      writeCancelled(request.id, effect: cancellation.effect, data: cancellation.data)
     }
     condition.lock()
     activeID = nil
@@ -371,7 +372,7 @@ final class Host {
     }
   }
 
-  private func writeCancelled(_ id: String, effect: MutationEffect? = nil) {
+  private func writeCancelled(_ id: String, effect: MutationEffect? = nil, data: JSONObject? = nil) {
     var message: JSONObject = [
       "type": "cancelled",
       "id": id,
@@ -379,6 +380,7 @@ final class Host {
     if let effect {
       message["effect"] = effect.rawValue
     }
+    if let data { message["data"] = data }
     do {
       try writer?.writeJSON(message)
     } catch {

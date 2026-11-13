@@ -106,12 +106,17 @@ readiness contracts change.
 Authenticated bridge epochs are recorded by `BridgeEpochJournal` in the
 service factory's private endpoint/target namespace, separately from settlement
 and quarantine. The record binds renderer and epoch to a native-verified PID
-and process start time. Identity resolution uses a temporary attached helper,
-disposed without closing the app or altering an active session's window records.
+and process start time. On macOS, `createApplicationIdentityResolver` uses the
+session helper's read-only `inspectApplication` operation: descriptor/lease
+verification and exact-window discovery never acquire another controlling
+lease or alter window/element records. The existing per-incarnation application
+lock still excludes foreign controlling services. Windows/Win32 retain their
+temporary attached identity helper, disposed without closing the app or
+altering an active session's window records.
 Readiness remains disabled until the record is published; a missing startup
 lease can be retried on the next story command, never assumed verified.
 After a service restart, only a matching record, a `running` exact-incarnation
-probe, and a matching current native attachment justify `relaunch-required`.
+probe, and a matching current native identity justify `relaunch-required`.
 Initial absence, an unknown/failed probe, or a replaced process stays
 `bridge-unavailable`, with no navigation dispatched. Proven exited/replaced
 records are removed; reauthentication replaces the old epoch. Neither record

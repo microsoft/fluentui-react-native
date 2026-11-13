@@ -21,6 +21,7 @@ import type {
   Rect,
 } from '../../host/types.js';
 import type {
+  NativeApplicationIdentity,
   NativeDesktopApplicationDescriptor,
   NativeDriverArtifact,
   NativeDriverProvider,
@@ -118,6 +119,29 @@ export class NativeDesktopHost implements DesktopHost {
 
   async attach(target: DesktopTarget, signal?: AbortSignal): Promise<ApplicationLease> {
     return this.request('attach', this.targetParams(target), signal);
+  }
+
+  /** macOS descriptor verification without acquiring a lease, application lock, or window/element records. */
+  async inspectApplication(target: DesktopTarget, signal?: AbortSignal): Promise<NativeApplicationIdentity> {
+    if (this.endpoint !== 'macos') throw new HostUnsupportedError('Read-only application identity inspection is macOS-only.');
+    const result = await this.request<Partial<NativeApplicationIdentity> | null>('inspectApplication', this.targetParams(target), signal);
+    if (
+      !result ||
+      typeof result !== 'object' ||
+      Object.keys(result).length !== 2 ||
+      typeof result.processId !== 'number' ||
+      !Number.isInteger(result.processId) ||
+      result.processId < 1 ||
+      result.processId > 0x7fffffff ||
+      typeof result.processStartedAt !== 'string' ||
+      !/^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{6}Z$/.test(result.processStartedAt) ||
+      !Number.isFinite(Date.parse(result.processStartedAt))
+    ) {
+      throw new HostWebDriverError('unknown error', 'The native helper returned an invalid application identity.', {
+        nativeCode: 'invalid-application-identity',
+      });
+    }
+    return Object.freeze({ processId: result.processId, processStartedAt: result.processStartedAt });
   }
 
   async closeApplication(lease: ApplicationLease, signal?: AbortSignal): Promise<void> {
