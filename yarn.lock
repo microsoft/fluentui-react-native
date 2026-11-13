@@ -6801,11 +6801,11 @@ __metadata:
   linkType: hard
 
 "@microsoft/esrp-npm-release@npm:^0.1.2":
-  version: 0.1.2
-  resolution: "@microsoft/esrp-npm-release@npm:0.1.2"
+  version: 0.1.7
+  resolution: "@microsoft/esrp-npm-release@npm:0.1.7"
   bin:
     esrp-npm-release: bin/esrp-npm-release.js
-  checksum: 10c0/f5482fa2433b211d9b5bfacfcf2a148424c1d41352f7cb26416951fb82edd70ab0995fca510f58774d6fc0f2055960bd0853f6956875e8c336e1d9577963a1e8
+  checksum: 10c0/db2f332ae42df5684480fa5dbd6751712ecc3f41c1073608b835a48cdb48a3534e87ad8ab0265859dffd6b0bab5980e4dccd478b2280051544d0ce3f05e16bb8
   languageName: node
   linkType: hard
 
