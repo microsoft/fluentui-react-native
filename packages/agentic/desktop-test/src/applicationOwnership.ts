@@ -1,4 +1,5 @@
 import { randomUUID } from 'node:crypto';
+import path from 'node:path';
 
 import type {
   ApplicationLease,
@@ -10,14 +11,32 @@ import type { DesktopApplicationResource, DesktopResourceRecord } from './resour
 
 export type DesktopApplicationIdentity = Readonly<{
   schemaVersion: 1;
-  endpoint: 'macos';
+  endpoint: 'macos' | 'windows' | 'win32';
   processId: number;
   processStartedAt: string;
+  executablePath?: string;
+  interactiveSession?: string;
+  aumid?: string;
 }>;
 
 /** Captures the native kernel identity. Legacy millisecond/LaunchServices lease timestamps cannot be upgraded. */
-export function captureDesktopApplicationIdentity(lease: ApplicationLease, endpoint: 'macos'): DesktopApplicationIdentity {
-  const identity = { schemaVersion: 1 as const, endpoint, processId: lease.processId, processStartedAt: lease.processStartedAt };
+export function captureDesktopApplicationIdentity(
+  lease: ApplicationLease,
+  endpoint: DesktopApplicationIdentity['endpoint'],
+): DesktopApplicationIdentity {
+  const identity = {
+    schemaVersion: 1 as const,
+    endpoint,
+    processId: lease.processId,
+    processStartedAt: lease.processStartedAt,
+    ...(endpoint === 'macos'
+      ? {}
+      : {
+          executablePath: lease.executablePath,
+          interactiveSession: lease.interactiveSession,
+          ...(lease.aumid === undefined ? {} : { aumid: lease.aumid }),
+        }),
+  };
   validateIdentity(identity);
   return Object.freeze(identity);
 }
@@ -31,9 +50,16 @@ export function desktopApplicationIdentityDescriptor(
   if (application.leasePath || application.leaseNonce)
     throw new TypeError('An exact application identity cannot be combined with a legacy lease.');
   if (!application.windowTitle) throw new TypeError('An exact application attach requires a window title.');
+  if (
+    identity.endpoint !== 'macos' &&
+    ((application.aumid !== undefined && application.aumid !== identity.aumid) ||
+      (application.executablePath !== undefined && application.executablePath.toLowerCase() !== identity.executablePath!.toLowerCase()))
+  )
+    throw new TypeError('The application descriptor differs from the recorded exact identity.');
+  const { schemaVersion: _schemaVersion, endpoint: _endpoint, ...processIdentity } = identity;
   return Object.freeze({
     ...application,
-    processIdentity: Object.freeze({ processId: identity.processId, processStartedAt: identity.processStartedAt }),
+    processIdentity: Object.freeze(processIdentity),
   });
 }
 
@@ -52,8 +78,6 @@ type Entry = { record: DesktopResourceRecord; lease?: ApplicationLease; uncertai
  * allowed to signal an application; an advisory exit notification never settles a resource.
  */
 export async function createDesktopApplicationHost(host: DesktopHost, options: DesktopApplicationHostOptions): Promise<DesktopHost> {
-  if (options.lifetime === 'supervisor' && options.target.endpoint !== 'macos')
-    throw new TypeError('Supervisor-owned application launch is currently supported only on macOS.');
   const entries = new Map<string, Entry>();
   const inFlight = new Set<Promise<ApplicationLease>>();
   let retained: ApplicationLease | undefined;
@@ -106,6 +130,9 @@ export async function createDesktopApplicationHost(host: DesktopHost, options: D
         leaseId: lease.id,
         ...(lease.processId === undefined ? {} : { processId: lease.processId }),
         ...(lease.processStartedAt === undefined ? {} : { processStartedAt: lease.processStartedAt }),
+        ...(lease.executablePath === undefined ? {} : { executablePath: lease.executablePath }),
+        ...(lease.interactiveSession === undefined ? {} : { interactiveSession: lease.interactiveSession }),
+        ...(lease.aumid === undefined ? {} : { aumid: lease.aumid }),
         ...(lease.containment === undefined ? {} : { containment: lease.containment }),
         ...(lease.launchKind === undefined ? {} : { launchKind: lease.launchKind }),
       });
@@ -126,7 +153,13 @@ export async function createDesktopApplicationHost(host: DesktopHost, options: D
         ...entry.record.application!,
         ...(Number.isSafeInteger(data?.processId) && Number(data?.processId) > 0 ? { processId: Number(data?.processId) } : {}),
         ...(typeof data?.processStartedAt === 'string' ? { processStartedAt: data.processStartedAt } : {}),
-        ...(data?.launchKind === 'launch-services' || data?.launchKind === 'direct-child' ? { launchKind: data.launchKind } : {}),
+        ...(typeof data?.executablePath === 'string' ? { executablePath: data.executablePath } : {}),
+        ...(typeof data?.interactiveSession === 'string' ? { interactiveSession: data.interactiveSession } : {}),
+        ...(typeof data?.aumid === 'string' ? { aumid: data.aumid } : {}),
+        ...(data?.launchKind === 'launch-services' || data?.launchKind === 'direct-child' || data?.launchKind === 'packaged-activation'
+          ? { launchKind: data.launchKind }
+          : {}),
+        ...(data?.containment === 'job-object' || data?.containment === 'uncontained' ? { containment: data.containment } : {}),
       });
       if (!entry.lease) {
         const effect = error && typeof error === 'object' && 'effect' in error ? error.effect : undefined;
@@ -224,7 +257,7 @@ export async function createDesktopApplicationHost(host: DesktopHost, options: D
     try {
       await host.probe();
       retained = await track(acquire({ ...options.target, host }, true));
-      captureDesktopApplicationIdentity(retained, 'macos');
+      captureDesktopApplicationIdentity(retained, options.target.endpoint);
     } catch (error) {
       try {
         await wrapped.dispose();
@@ -242,15 +275,34 @@ function validateIdentity(value: unknown): asserts value is DesktopApplicationId
   if (
     !identity ||
     identity.schemaVersion !== 1 ||
-    identity.endpoint !== 'macos' ||
+    !['macos', 'windows', 'win32'].includes(identity.endpoint) ||
     !Number.isSafeInteger(identity.processId) ||
     identity.processId < 1 ||
     identity.processId > 0x7fffffff ||
     typeof identity.processStartedAt !== 'string' ||
-    !/^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{6}Z$/.test(identity.processStartedAt)
+    !(
+      identity.endpoint === 'macos'
+        ? /^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{6}Z$/
+        : /^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{7}Z$/
+    ).test(identity.processStartedAt) ||
+    !Number.isFinite(Date.parse(identity.processStartedAt))
   ) {
-    throw new TypeError('A macOS application identity requires an exact native PID and microsecond start timestamp.');
+    throw new TypeError(
+      'An application identity requires an exact native PID and microsecond (macOS) or 100 ns (Windows) start timestamp.',
+    );
   }
+  if (
+    identity.endpoint !== 'macos' &&
+    (typeof identity.executablePath !== 'string' ||
+      !path.win32.isAbsolute(identity.executablePath) ||
+      identity.executablePath.length > 4096 ||
+      /\p{Cc}/u.test(identity.executablePath) ||
+      typeof identity.interactiveSession !== 'string' ||
+      !/^windows-session:[0-9]{1,10}$/.test(identity.interactiveSession) ||
+      (identity.aumid !== undefined &&
+        (typeof identity.aumid !== 'string' || !identity.aumid || identity.aumid.length > 4096 || /\p{Cc}/u.test(identity.aumid))))
+  )
+    throw new TypeError('A Windows application identity requires a native executable, AUMID when packaged, and session evidence.');
 }
 
 function errorData(error: unknown): Record<string, unknown> | undefined {

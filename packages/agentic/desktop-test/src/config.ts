@@ -11,6 +11,7 @@ import type { DesktopScopeDomains, DesktopScopeValues } from '@fluentui-react-na
 import type { DesktopReporterMode } from '@fluentui-react-native/desktop-driver/cli/reporter';
 import type { DesktopIntegration } from './integration.ts';
 import { orderDesktopResourceContributions } from './resources.ts';
+import { captureDesktopApplicationIdentity } from './applicationOwnership.ts';
 
 export type DesktopCommand = {
   command: string;
@@ -146,8 +147,6 @@ export function validateDesktopConfig(value: unknown): asserts value is DesktopC
     keys(host, ['kind', 'application', 'ownership', 'renderer', 'appConfigPath', 'component', 'windowTitle', 'bundleRoot'], `${id}.host`);
     oneOf(host.kind, ['installed', 'react-native-test-app', 'rex'], `${id}.host.kind`);
     optionalEnum(host.ownership, ['session', 'supervisor', 'external'], `${id}.host.ownership`);
-    if (host.ownership === 'supervisor' && (target.endpoint ?? id) !== 'macos')
-      throw new TypeError('Supervisor-owned application launch is currently supported only on macOS.');
     optionalEnum(host.renderer, ['fabric', 'paper'], `${id}.host.renderer`);
     for (const field of ['appConfigPath', 'component', 'windowTitle', 'bundleRoot']) {
       if (host[field] !== undefined) text(host[field], `${id}.host.${field}`);
@@ -157,9 +156,7 @@ export function validateDesktopConfig(value: unknown): asserts value is DesktopC
       throw new TypeError('Win32 uses REX, not react-native-test-app.');
     }
     if (host.application !== undefined) {
-      validateApplication(host.application, `${id}.host.application`);
-      if (object(host.application, 'application').processIdentity !== undefined && (target.endpoint ?? id) !== 'macos')
-        throw new TypeError('Exact application processIdentity attach is currently supported only on macOS.');
+      validateApplication(host.application, `${id}.host.application`, (target.endpoint ?? id) as DesktopEndpoint);
     }
     if (host.kind === 'installed' && host.application === undefined)
       throw new TypeError(`${id}: installed hosts require application identity.`);
@@ -453,7 +450,7 @@ function validateTestScope(value: unknown, domains: DesktopScopeDomains, id: str
   resolveDesktopScopeValues(scope, domains, `${id}.testScope`);
 }
 
-function validateApplication(value: unknown, context: string): void {
+function validateApplication(value: unknown, context: string, endpoint: DesktopEndpoint): void {
   const application = object(value, context);
   keys(
     application,
@@ -476,13 +473,19 @@ function validateApplication(value: unknown, context: string): void {
         throw new TypeError(`${context}.arguments must be strings.`);
     } else if (field === 'processIdentity') {
       const identity = object(setting, `${context}.processIdentity`);
-      keys(identity, ['processId', 'processStartedAt'], `${context}.processIdentity`);
-      positive(identity.processId, `${context}.processIdentity.processId`);
-      if (!Number.isSafeInteger(identity.processId) || Number(identity.processId) > 0x7fffffff)
-        throw new TypeError(`${context}.processIdentity.processId must be a positive 31-bit integer.`);
-      text(identity.processStartedAt, `${context}.processIdentity.processStartedAt`);
-      if (!/^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{6}Z$/.test(String(identity.processStartedAt)))
-        throw new TypeError(`${context}.processIdentity.processStartedAt requires a native microsecond timestamp.`);
+      keys(
+        identity,
+        endpoint === 'macos'
+          ? ['processId', 'processStartedAt']
+          : ['processId', 'processStartedAt', 'executablePath', 'interactiveSession', 'aumid'],
+        `${context}.processIdentity`,
+      );
+      captureDesktopApplicationIdentity(
+        { ...identity, id: 'configured-external-identity', ownership: 'attached' } as Parameters<
+          typeof captureDesktopApplicationIdentity
+        >[0],
+        endpoint,
+      );
     } else text(setting, `${context}.${field}`);
   }
   if (Boolean(application.leasePath) !== Boolean(application.leaseNonce))

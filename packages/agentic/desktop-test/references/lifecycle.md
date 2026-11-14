@@ -14,7 +14,7 @@ and disposal are tracked as one resource generation. Dependencies are validated
 and topologically ordered before acquisition. Owned resources are disposed in
 reverse order; borrowed resources are recorded but never disposed.
 
-A launched application's lifetime defaults to session-owned. macOS targets may
+A launched application's lifetime defaults to session-owned. Native targets may
 opt into `ownership: 'supervisor'`: the supervisor launches once before service
 publication, lends attached leases to sessions, and closes the original exact
 incarnation only at supervisor disposal. Attached applications always have an
@@ -109,7 +109,8 @@ on Windows, and `~/.cache/fluentui-react-native/desktop-test/workload` elsewhere
 independent of `TMPDIR`, so every checkout contends for the same claim. Claim
 records are replaced atomically. If a crash leaves a lock, inspect its recorded owner and verify
 that process and its resources have stopped before removing that exact lock.
-There is no automatic stale-lock recovery.
+There is no general automatic stale-lock recovery. The bounded Windows native
+application reconciliation described below is the only startup exception.
 
 The supervisor registers each owned resource before acquisition starts. If
 cancellation wins while acquisition is in flight, shutdown waits for that work;
@@ -141,6 +142,8 @@ is separate from explicit workload-claim delegation.
 The neutral host records a pending application resource before dispatching a
 launch. An acquired resource adds its lease ID, native PID/start timestamp,
 lifetime, containment, and causal launch kind when the provider supplies them.
+Windows/Win32 also retain the canonical executable, native session, and AUMID
+when packaged, including on a failed cleanup.
 These records appear in the workload claim alongside services and survive a
 failed cleanup. Publication failure prevents dispatch or fences an already
 dispatched launch. A failed/cancelled unleased launch settles when the provider
@@ -158,12 +161,71 @@ identity from `Date`, LaunchServices dates, a title, or a bundle ID. Existing
 Storybook attach-lease code is deliberately unchanged pending its integration
 migration.
 
+On Windows/Win32 they require all seven native fractional creation-time digits,
+canonical executable, session, and the captured AUMID when packaged. The
+REX image/PID/start/session tuple denotes one host incarnation. A one-tick
+start mismatch, conflicting descriptor, ambiguous process/window match, or
+unknown evidence is rejected. Read-only identity inspection does not take
+application/input control or change live window identifiers.
+
 macOS launched leases report `launch-services` or `direct-child`; both are
 `uncontained`. Exact primary-process cleanup does not prove arbitrary surviving
 descendants exited. Independent native helpers exclude the same exact app using
 a stable per-user application lock, separately from the workload/input locks.
-Supervisor crash recovery, interrupted publication without a captured identity,
-and arbitrary descendant reconciliation remain explicit delivery gates.
+macOS supervisor crash recovery, interrupted publication without a captured
+identity, and arbitrary descendant reconciliation remain explicit delivery gates.
+
+### Bounded Windows application reconciliation
+
+Before creating its replacement claim or listener, the Windows native supervisor
+may reconcile a schema 3 claim for the same registered target and physical
+instance. The native owner probe must prove the old owner exited or its PID now
+has a different exact creation time. A live or unknown owner never authorizes
+cleanup. Each owned application must have a successfully acquired lease, ready
+resource record, complete Windows identity, session/supervisor lifetime, and
+consistent launch kind/containment. Borrowed applications are never terminated.
+
+Read-only parsing, target validation and the native owner probe precede barrier
+publication; a live or foreign claim creates no barrier. Recovery then holds an
+exclusive sibling `.recovery-v2` directory and rechecks the exact claim file
+identity/content under it and around asynchronous work. Its empty, uniquely named
+owner directory atomically records the recoverer's verified native PID/start.
+No recovery effect is allowed before that pin is the sole, identity-checked
+owner. An empty versioned root therefore represents interrupted publication and
+can be retired safely.
+
+A subsequent native recovery may remove only the unchanged unique pin of a
+recoverer proven exited or PID-reused, including after the claim was already
+removed. A live or unknown recoverer, malformed pins, replacement directories,
+and legacy unowned `.recovery` barriers remain fenced. Clearing a stale barrier
+does not itself authorize application cleanup; the old claim must still pass
+all recovery checks.
+
+The native recoverer first queries application creation time with limited
+rights. A reused application PID proves the recorded incarnation exited and is
+settled without signalling, controlling, or requesting termination rights to its
+current occupant. An unreadable start, including access denied, remains fenced.
+For a matching start, the query handle prevents PID reuse while full identity
+and per-incarnation control are acquired for exact cleanup. Each successful
+application settlement is durably recorded before proceeding, so a failed later
+cleanup does not replay settled resources. Only then may the old claim be removed.
+
+The recognized in-owner WebDriver listener dies with that exact Node owner.
+Unknown services, process-backed service receipts, pending/unleased launches,
+mixed resource graphs, and effects other than matching recorded resource
+disposal remain fenced **before** any application cleanup is dispatched.
+Custom-host factories and delegated claims do not acquire this native recovery
+authority implicitly. This does not clear durable native/Storybook mutation
+quarantine or provide a model-facing recovery route.
+
+Windows unpackaged launches report `direct-child` / `job-object`. Packaged
+activation reports `packaged-activation` / `uncontained`, deliberately avoiding
+an unreliable post-activation job assignment. Failed cleanup keeps its acquired
+exact primary process in the claim; exact recovery does not prove arbitrary
+uncontained descendants exited. The helper never puts an attached application
+in an owned job.
+
+### Service composition and durable quarantine
 
 Both native service paths use the real `driverService.ts` composition root
 (`@fluentui-react-native/desktop-test/driver-service`). It resolves prebuilt
@@ -188,7 +250,7 @@ record is valid. Only an exact recorded process ID/start-time probe can prove
 application exit; native exit events and service death are not proof.
 `service.recoverTarget` retains the driver's trusted exact-quarantine-ID
 operator API; no new listing, offline recovery command, or model-facing
-recovery route is exposed. Automatic stale-claim removal remains unsupported.
+recovery route is exposed. General automatic stale-claim removal remains unsupported.
 Inspect exact resources before explicit operator recovery; restarting alone
 never clears uncertain native or Storybook mutations.
 

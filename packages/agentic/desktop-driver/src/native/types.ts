@@ -56,7 +56,14 @@ export type NativeDriverResolveOptions = NativeDriverBuildOptions & {
 };
 
 /** Native-verified process identity without a controlling application lease. */
-export type NativeApplicationIdentity = Readonly<{ processId: number; processStartedAt: string }>;
+export type NativeApplicationIdentity = Readonly<{
+  processId: number;
+  processStartedAt: string;
+  /** Required Windows evidence; the executable also distinguishes each Win32 REX host incarnation. */
+  executablePath?: string;
+  interactiveSession?: string;
+  aumid?: string;
+}>;
 
 export type NativeDesktopApplicationDescriptor = {
   arguments?: readonly string[];
@@ -65,7 +72,7 @@ export type NativeDesktopApplicationDescriptor = {
   executablePath?: string;
   leaseNonce?: string;
   leasePath?: string;
-  /** Exact macOS attach identity. Never grants launch/termination authority and cannot be combined with a legacy lease. */
+  /** Exact native attach identity. Never grants launch/termination authority and cannot be combined with a legacy lease. */
   processIdentity?: NativeApplicationIdentity;
   windowTitle?: string;
   workingDirectory?: string;

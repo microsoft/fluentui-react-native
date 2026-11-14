@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 import { createDesktopDriverClient, createDesktopDriverServer, NativeDriverError } from '@fluentui-react-native/desktop-driver';
-import type { ApplicationLease, DesktopTarget } from '@fluentui-react-native/desktop-driver';
+import type { DesktopTarget } from '@fluentui-react-native/desktop-driver';
 import { FakeDesktopHost } from '@fluentui-react-native/desktop-driver/testing';
 import { createDesktopWorkloadClaim } from '@fluentui-react-native/desktop-test';
 import { createDesktopApplicationHost } from '@fluentui-react-native/desktop-test/application-ownership';
@@ -12,15 +12,30 @@ import { BridgeEpochJournal } from './BridgeEpochJournal';
 
 const identity = { processId: 123, processStartedAt: '2026-11-12T00:00:00.123456Z' };
 
-test.each(['fabric', 'paper'] as const)(
-  'launch → claim → embedded-driver attach → %s epoch inspection retains exact application exclusion',
-  async (renderer) => {
+test.each([
+  ['macos', 'fabric'],
+  ['macos', 'paper'],
+  ['windows', 'fabric'],
+  ['win32', 'paper'],
+] as const)(
+  'launch → claim → embedded-driver attach → %s %s epoch inspection retains exact application exclusion',
+  async (endpoint, renderer) => {
+    const observed =
+      endpoint === 'macos'
+        ? identity
+        : {
+            ...identity,
+            processStartedAt: '2026-11-12T00:00:00.1234567Z',
+            executablePath: 'C:\\apps\\ReactApp.exe',
+            interactiveSession: 'windows-session:2',
+          };
+    const incarnation = { processId: observed.processId, processStartedAt: observed.processStartedAt };
     const directory = fs.mkdtempSync(path.join(process.cwd(), '.application-identity-test-'));
     const registration = {
-      endpoint: 'macos',
+      endpoint,
       id: 'storybook',
       launchModes: ['attach'],
-      platformName: 'macos',
+      platformName: endpoint === 'macos' ? 'macos' : 'windows',
       renderer,
     } satisfies Omit<DesktopTarget, 'host'>;
     const claim = createDesktopWorkloadClaim({
@@ -29,11 +44,11 @@ test.each(['fabric', 'paper'] as const)(
       targetId: registration.id,
       targetInstanceId: registration.id,
     });
-    const native = new FakeDesktopHost({ endpoint: 'macos' });
+    const native = new FakeDesktopHost({ endpoint });
     let held = false;
     jest.spyOn(native, 'launch').mockImplementation(async () => {
       held = true;
-      return { ...identity, id: 'owned-application', ownership: 'launched', containment: 'uncontained' };
+      return { ...observed, id: 'owned-application', ownership: 'launched', containment: 'uncontained' };
     });
     jest.spyOn(native, 'closeApplication').mockImplementation(async () => {
       held = false;
@@ -41,14 +56,14 @@ test.each(['fabric', 'paper'] as const)(
     const inspectApplication = jest.fn(async (_target: DesktopTarget, signal?: AbortSignal) => {
       signal?.throwIfAborted();
       expect(held).toBe(true);
-      return identity;
+      return observed;
     });
     const createIdentityHost = jest.fn(() => {
-      const foreign = new FakeDesktopHost({ endpoint: 'macos' });
+      const foreign = new FakeDesktopHost({ endpoint });
       jest.spyOn(foreign, 'attach').mockImplementation(async () => {
         if (held)
           throw new NativeDriverError('attach-failed', 'Another service controls this incarnation.', { reason: 'application-lock-busy' });
-        return { ...identity, id: 'foreign-application', ownership: 'attached' };
+        return { ...observed, id: 'foreign-application', ownership: 'attached' };
       });
       return foreign;
     });
@@ -61,13 +76,13 @@ test.each(['fabric', 'paper'] as const)(
     let server: Awaited<ReturnType<typeof createDesktopDriverServer>> | undefined;
     try {
       expect(claim.record.resources).toEqual([
-        expect.objectContaining({ ownership: 'owned', application: expect.objectContaining(identity) }),
+        expect.objectContaining({ ownership: 'owned', application: expect.objectContaining(observed) }),
       ]);
       const target = { ...registration, host };
       server = await createDesktopDriverServer({ port: 0, targets: [target] });
       const client = createDesktopDriverClient({ url: server.url });
       const session = await client.newSession({
-        alwaysMatch: { platformName: 'macos', 'furn:target': registration.id, 'furn:launchMode': 'attach' },
+        alwaysMatch: { platformName: registration.platformName, 'furn:target': registration.id, 'furn:launchMode': 'attach' },
       });
       const before = await session.getWindowHandles();
       const records = new Map<string, string>();
@@ -89,7 +104,7 @@ test.each(['fabric', 'paper'] as const)(
       await expect(journal.requiresRelaunch()).resolves.toBe(true);
       expect(inspectApplication).toHaveBeenCalledTimes(2);
       expect(createIdentityHost).not.toHaveBeenCalled();
-      expect(JSON.parse(records.get('bridge-epoch.json')!)).toMatchObject({ application: identity, epoch: 'authenticated-epoch' });
+      expect(JSON.parse(records.get('bridge-epoch.json')!)).toMatchObject({ application: incarnation, epoch: 'authenticated-epoch' });
       await expect(session.getWindowHandles()).resolves.toEqual(before);
       const foreign = createIdentityHost();
       await expect(foreign.attach({ ...registration, host: foreign })).rejects.toMatchObject({
@@ -112,9 +127,15 @@ test.each(['fabric', 'paper'] as const)(
   },
 );
 
-test.each(['windows', 'win32'] as const)('keeps %s identity attachments isolated and disposes them on failure', async (endpoint) => {
+test.each(['windows', 'win32'] as const)('uses read-only %s inspection without a temporary controlling attachment', async (endpoint) => {
   const host = new FakeDesktopHost({ endpoint });
-  const inspectApplication = jest.fn();
+  const nativeIdentity = {
+    ...identity,
+    processStartedAt: '2026-11-12T00:00:00.1234567Z',
+    executablePath: 'C:\\apps\\ReactTest.exe',
+    interactiveSession: 'windows-session:2',
+  };
+  const inspectApplication = jest.fn().mockResolvedValueOnce(nativeIdentity).mockRejectedValueOnce(new Error('Identity unavailable'));
   const attach = jest.spyOn(host, 'attach');
   const dispose = jest.spyOn(host, 'dispose');
   const resolve = createApplicationIdentityResolver({
@@ -122,12 +143,12 @@ test.each(['windows', 'win32'] as const)('keeps %s identity attachments isolated
     target: { endpoint, host, id: 'storybook', platformName: 'windows' },
     createIdentityHost: () => host,
   });
-  const lease: ApplicationLease = { ...identity, id: 'external-application', ownership: 'attached' };
-  attach.mockResolvedValueOnce(lease).mockRejectedValueOnce(new Error('Identity unavailable'));
-  await expect(resolve()).resolves.toEqual(identity);
+  attach.mockRejectedValue(new Error('A temporary controlling attachment is not permitted'));
+  await expect(resolve()).resolves.toEqual({ processId: nativeIdentity.processId, processStartedAt: nativeIdentity.processStartedAt });
   await expect(resolve()).rejects.toThrow('Identity unavailable');
-  expect(inspectApplication).not.toHaveBeenCalled();
-  expect(dispose).toHaveBeenCalledTimes(2);
+  expect(inspectApplication).toHaveBeenCalledTimes(2);
+  expect(attach).not.toHaveBeenCalled();
+  expect(dispose).not.toHaveBeenCalled();
 });
 
 test('a failed macOS observation neither falls back to controlling attachment nor disposes the session host', async () => {
