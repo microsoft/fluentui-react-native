@@ -120,12 +120,17 @@ final class InputController {
     }
     pointer = target
     try token.wait(milliseconds: 16)
-    guard let observed = environment.pointerLocation() else {
-      try fail(ErrorCode.inputFailed, "macOS did not report the pointer position, so the move to the requested native element coordinate is unverified.")
+    for attempt in 0..<12 {
+      try token.throwIfCancelled()
+      guard let observed = environment.pointerLocation() else {
+        try fail(ErrorCode.inputFailed, "macOS did not report the pointer position, so the move to the requested native element coordinate is unverified.")
+      }
+      if abs(observed.x - target.x) <= 2 && abs(observed.y - target.y) <= 2 {
+        return
+      }
+      if attempt + 1 < 12 { try token.wait(milliseconds: 16) }
     }
-    if abs(observed.x - target.x) > 2 || abs(observed.y - target.y) > 2 {
-      try fail(ErrorCode.inputFailed, "macOS did not move the pointer to the requested native element coordinate.")
-    }
+    try fail(ErrorCode.inputFailed, "macOS did not move the pointer to the requested native element coordinate.")
   }
 
   func pointerDown(_ button: Int, token: CancellationToken) throws {
@@ -230,8 +235,13 @@ final class InputController {
     }
   }
 
-  func pressCommandADelete(token: CancellationToken) throws {
-    try chord([.keyCode(55), .keyCode(0)], token: token)
+  func selectAll(token: CancellationToken) throws {
+    // Text-system navigation does not depend on the application's Select All menu command.
+    try chord([.keyCode(55), .keyCode(126)], token: token)
+    try chord([.keyCode(55), .keyCode(56), .keyCode(125)], token: token)
+  }
+
+  func deleteSelection(token: CancellationToken) throws {
     try chord([.keyCode(51)], token: token)
   }
 

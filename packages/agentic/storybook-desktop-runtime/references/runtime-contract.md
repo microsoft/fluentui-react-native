@@ -37,9 +37,14 @@ the story viewport, so retained scroll position cannot put the next test's
 controls behind the chrome. Sidebar and addon preferences remain outside that
 remount.
 
-The Win32 story decorator uses a scrollable viewport with naturally sized
-content. Small stories remain centered; oversized stories start within the
-viewport and can scroll instead of overflowing behind the chrome.
+The macOS and Win32 story decorators use a scrollable viewport with
+naturally sized content. Small stories remain centered; oversized stories
+start within the viewport and can scroll instead of overflowing behind the
+chrome. The content container grows to fill short previews, rather than
+fixing tall stories to the viewport height. Native keyboard focus can scroll
+later controls into view without changing their size.
+Windows retains its non-scrolling, fixed-height centered story container;
+the macOS viewport does not wrap Windows stories or nest their scrollers.
 
 ## Theme and chrome
 

@@ -106,6 +106,54 @@ extension SelfTestRunner {
       }
     }
 
+    do {
+      let recorder = InputRecorder()
+      let ledger = EffectLedger()
+      var environment = recorder.environment
+      let readPointer = environment.pointerLocation
+      var reads = 0
+      environment.pointerLocation = {
+        reads += 1
+        return reads < 4 ? .zero : readPointer()
+      }
+      let input = InputController(effects: ledger, environment: environment)
+      do {
+        try input.movePointer(to: target, durationMilliseconds: 0, token: CancellationToken())
+        check(
+          reads >= 4 && recorder.count(.mouseMoved) == 1 && ledger.effect == .noEffect,
+          "pointer placement waits for delayed OS acknowledgment without posting the move again"
+        )
+      } catch {
+        check(false, "delayed pointer acknowledgment succeeds without replay: \(error)")
+      }
+    }
+
+    do {
+      let recorder = InputRecorder()
+      let ledger = EffectLedger()
+      let token = CancellationToken()
+      var environment = recorder.environment
+      var reads = 0
+      environment.pointerLocation = {
+        reads += 1
+        if reads > 1 { token.cancel() }
+        return .zero
+      }
+      let input = InputController(effects: ledger, environment: environment)
+      do {
+        try input.click(at: target, token: token)
+        check(false, "cancellation while waiting for pointer placement stops the click")
+      } catch is CancelledError {
+        check(
+          recorder.count(.mouseMoved) == 1 && recorder.count(.leftMouseDown) == 0
+            && ledger.effect == .noEffect,
+          "cancellation during pointer acknowledgment never posts a button press or replays motion"
+        )
+      } catch {
+        check(false, "pointer acknowledgment preserves cancellation: \(error)")
+      }
+    }
+
     // A button press, a drag with the button held, and the release all count; a cancelled click is not "none".
     do {
       let recorder = InputRecorder()
