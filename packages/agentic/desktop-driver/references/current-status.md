@@ -1096,6 +1096,7 @@ Detailed native receipts are in
 `artifacts/desktop/f16-macos-physical/native-b66140d7-20261113T000145Z/`,
 including the initial Paper failure, the passing rerun, current Paper smoke,
 and failed Fabric preparation.
+
 ## 2026-11-12: bounded refresh timing observations
 
 Part of #4435. Story selection can return allowlisted, service-local timing
