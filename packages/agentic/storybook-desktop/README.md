@@ -23,6 +23,14 @@ Read [integration](references/integration.md) for app wiring and
 [story-tests](references/story-tests.md) to author inline `wdio` callbacks.
 Use `--reporter json` for bounded machine-readable summaries or NDJSON for
 live progress.
+Executable story artifacts include bounded phase/lifecycle observations;
+see [story-test diagnostics](references/story-tests.md#timing-and-lifecycle-observations).
+Part of #4435.
+Driver-owned navigation selects directly on the authenticated runtime socket,
+then verifies correlated readiness and the native marker without a competing
+HTTP mutation; see [readiness](references/readiness.md). Test extraction is
+cached by source content within its owning run, without reusing previews,
+workers, or sessions.
 Agent-served channels reject alternate HTTP mutations and never relay client
 WebSocket frames; selection/reset go through the session-owning driver grant,
 and args remain unsupported. Non-agent channels are explicitly legacy

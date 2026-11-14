@@ -20,8 +20,17 @@ import type { DesktopStorybookConfig } from '../config/makeDesktopStorybookConfi
 import type { Platforms } from '../config/platforms.js';
 import { resolveWdioOptions, type DesktopStorybookWdioOptions } from '../config/wdio.js';
 import { NodeDesktopCommandRunner, type DesktopCommandRunner, type PreparedDesktopCommand } from '../cli/commandRunner.js';
-import { extractWdioTests } from './extractWdioTests.js';
+import { WdioExtractionCache } from './wdioExtractionCache.js';
 import { assessWdioCohort } from './laneVerdict.js';
+import {
+  readApplicationIncarnation,
+  readWorkerTimings,
+  summarizeWindowActivity,
+  windowActivityCursor,
+  type WdioCaseDiagnostics,
+  type WdioWorkerTimings,
+  type WindowActivityCursor,
+} from './runDiagnostics.js';
 import {
   csfTestId,
   decideWdioSelection,
@@ -45,6 +54,7 @@ export type WdioStoryTestResult = {
   input?: TestInputReport;
   evidenceErrors?: string[];
   artifacts?: readonly DesktopArtifact[];
+  diagnostics?: WdioCaseDiagnostics;
 };
 
 export type RunWdioStoryTestsOptions = DesktopStorybookWdioOptions & {
@@ -62,6 +72,7 @@ export type RunWdioStoryTestsOptions = DesktopStorybookWdioOptions & {
   optional?: boolean;
   /** The caller already reported the selection and announced the planned work, so this call must not repeat it. */
   announced?: boolean;
+  extractionCache?: WdioExtractionCache;
 };
 
 export class WdioStoryTestRunError extends Error {
@@ -113,6 +124,7 @@ export async function runWdioStoryTests(
   options: RunWdioStoryTestsOptions,
   runner?: DesktopCommandRunner,
 ): Promise<readonly WdioStoryTestResult[]> {
+  const runStarted = performance.now();
   const settings = resolveWdioOptions(options);
   const selection = decideWdioSelection(options.manifest, settings, { platform: options.platform, scope: options.scope });
   const planned = plannedWdioWork(selection, settings);
@@ -125,9 +137,16 @@ export async function runWdioStoryTests(
   if (selection.stories.length === 0) {
     throw new Error(`No executable wdio story tests matched the requested selection${describeWdioExclusions(selection)}.`);
   }
+  const extractionStarted = performance.now();
+  const extractionCache = options.extractionCache ?? new WdioExtractionCache();
+  let sourceExtractions = 0;
+  let sourceCacheHits = 0;
   const cases = selection.stories.flatMap((entry) => {
     const sourceFile = path.join(options.config.resolvePackage(entry.packageName).root, entry.sourcePath);
-    const extracted = extractWdioTests(fs.readFileSync(sourceFile, 'utf8'), sourceFile).get(entry.wdio!.exportName);
+    const { tests, cacheHit } = extractionCache.read(sourceFile);
+    if (cacheHit) sourceCacheHits++;
+    else sourceExtractions++;
+    const extracted = tests.get(entry.wdio!.exportName);
     if (!extracted || extracted.digest !== entry.wdio!.digest) {
       throw new Error(`Executable test source changed for ${entry.id}; regenerate the Storybook manifest.`);
     }
@@ -140,6 +159,7 @@ export async function runWdioStoryTests(
         return [{ entry, code, testName: name, descriptor: decision?.descriptor, gap: decision?.gap }];
       });
   });
+  const extractionMs = performance.now() - extractionStarted;
   if (cases.length === 0) throw new Error('No executable wdio tests matched the requested selection.');
   const plannedIds = new Set(planned.map(({ workId }) => workId));
   if (cases.length !== plannedIds.size || cases.some(({ entry, testName }) => !plannedIds.has(csfTestId(entry.id, testName)))) {
@@ -178,11 +198,21 @@ export async function runWdioStoryTests(
       phase = 'connection';
       const started = Date.now();
       activeStarted = started;
+      const diagnostics: WdioCaseDiagnostics = { phases: {} };
+      const measure = async <T>(name: keyof WdioCaseDiagnostics['phases'], action: () => T | Promise<T>): Promise<T> => {
+        const start = performance.now();
+        try {
+          return await action();
+        } finally {
+          diagnostics.phases[name] = (diagnostics.phases[name] ?? 0) + performance.now() - start;
+        }
+      };
       const result: WdioStoryTestResult = {
         storyId: entry.id,
         ...(testName === undefined ? {} : { testName }),
         status: 'failed',
         durationMs: 0,
+        diagnostics,
       };
       activeResult = result;
       const testId = csfTestId(entry.id, testName);
@@ -218,30 +248,61 @@ export async function runWdioStoryTests(
       const clickMode = resolveDesktopClickMode(descriptor, settings.clickMode, settings.input);
       const inputMode = settings.input ?? 'compatibility';
       // The supervisor owns the session, so even a crashed or timed-out Node worker cannot strand it.
-      const desktop = await connectDesktopWebdriver({
-        clickMode,
-        inputMode,
-        launchMode: 'attach',
-        platformName: options.platform === 'macos' ? 'macos' : 'windows',
-        targetId: options.targetId,
-        url: options.url,
-      });
+      const desktop = await measure('sessionAttachMs', () =>
+        connectDesktopWebdriver({
+          clickMode,
+          inputMode,
+          launchMode: 'attach',
+          platformName: options.platform === 'macos' ? 'macos' : 'windows',
+          targetId: options.targetId,
+          url: options.url,
+        }),
+      );
+      let activityCursor: WindowActivityCursor | undefined;
       let failure: unknown;
       try {
         phase = 'manifest verification';
-        const live = await desktop.listStories();
+        const live = await measure('manifestMs', () => desktop.listStories());
         if (live.endpoint !== options.platform || live.platformManifestDigest !== options.manifest.platformManifestDigest) {
           throw new Error('The running Storybook manifest is stale or targets a different platform. Restart storybook driver and the app.');
         }
         // The driver refuses input outside the policy before dispatch, so a lane holds even on a host with no masks. A
         // driver that does not confirm the policy fails closed rather than running cases it cannot hold or attribute.
         phase = 'input policy verification';
-        const confirmed = desktop.browser.capabilities['furn:inputMode'];
-        if (confirmed !== inputMode) throw new InputPolicyError(inputMode, confirmed);
-        const missing = missingDesktopRequirements(descriptor, desktop.browser.capabilities['furn:features'], clickMode);
-        if (missing.length) throw new MissingRequirementsError(missing);
+        await measure('policyMs', () => {
+          const confirmed = desktop.browser.capabilities['furn:inputMode'];
+          if (confirmed !== inputMode) throw new InputPolicyError(inputMode, confirmed);
+          const missing = missingDesktopRequirements(descriptor, desktop.browser.capabilities['furn:features'], clickMode);
+          if (missing.length) throw new MissingRequirementsError(missing);
+        });
+        if (desktop.session.recordsWindowEvents()) {
+          activityCursor = await measure('activityReadMs', async () => {
+            try {
+              return windowActivityCursor(await desktop.session.getWindowEvents());
+            } catch {
+              diagnostics.windowActivity = { status: 'unavailable' };
+              return undefined;
+            }
+          });
+        } else {
+          diagnostics.windowActivity = { status: 'not-supported' };
+        }
         phase = 'navigation';
-        await desktop.openStory(entry.id);
+        const ready = await measure('navigationMs', () => desktop.openStory(entry.id));
+        const observations = ready.diagnostics;
+        for (const key of ['preparationMs', 'httpMs', 'runtimeReadyMs', 'nativeVerificationMs'] as const) {
+          const value = observations?.[key];
+          if (typeof value === 'number' && Number.isFinite(value) && value >= 0) diagnostics.phases[key] = value;
+        }
+        const application = readApplicationIncarnation(observations?.application);
+        diagnostics.lifecycle = {
+          contextGeneration: ready.previewGeneration,
+          jsInitializations: 'not-observed',
+          ...(application ? { application } : {}),
+          ...(observations?.nativeMarkerPolls === undefined ? {} : { nativeMarkerPolls: observations.nativeMarkerPolls }),
+          ...(observations?.authenticatedHellos === undefined ? {} : { authenticatedHellos: observations.authenticatedHellos }),
+          ...(observations?.bridgeConnections === undefined ? {} : { bridgeConnections: observations.bridgeConnections }),
+        };
         const resultPath = path.join(directory, `${index}.json`);
         const workerOptions: WdioWorkerOptions = {
           attachment: {
@@ -254,6 +315,7 @@ export async function runWdioStoryTests(
           platform: options.platform,
           testName,
           timeoutMs: settings.timeoutMs,
+          startedAt: Date.now(),
         };
         const specPath = path.join(directory, `${index}.test.mjs`);
         fs.writeFileSync(
@@ -263,37 +325,46 @@ export async function runWdioStoryTests(
           { mode: 0o600 },
         );
         phase = 'execution';
-        const outcome = await runWorker(
-          commands,
-          {
-            command: process.execPath,
-            label: `wdio "${displayName}"`,
-            // Forced exit races HTTP handle teardown on Windows. The supervisor
-            // still bounds and terminates workers that do not exit naturally.
-            args: [
-              '--test',
-              '--test-concurrency=1',
-              `--test-timeout=${Math.min(settings.timeoutMs + 5000, 2_147_483_647)}`,
-              `--test-reporter=${settings.reporter}`,
-              specPath,
-            ],
-            cwd: options.config.projectRoot,
-            env: {},
-            category: 'worker',
-            context,
-          },
-          Math.min(settings.timeoutMs + 5000, 2_147_483_647),
-          resultPath,
-          displayName,
-          options.signal,
+        const outcome = await measure('workerMs', () =>
+          runWorker(
+            commands,
+            {
+              command: process.execPath,
+              label: `wdio "${displayName}"`,
+              // Forced exit races HTTP handle teardown on Windows. The supervisor
+              // still bounds and terminates workers that do not exit naturally.
+              args: [
+                '--test',
+                '--test-concurrency=1',
+                `--test-timeout=${Math.min(settings.timeoutMs + 5000, 2_147_483_647)}`,
+                `--test-reporter=${settings.reporter}`,
+                specPath,
+              ],
+              cwd: options.config.projectRoot,
+              env: {},
+              category: 'worker',
+              context,
+            },
+            Math.min(settings.timeoutMs + 5000, 2_147_483_647),
+            resultPath,
+            displayName,
+            options.signal,
+            (timings) => Object.assign(diagnostics.phases, timings),
+          ),
         );
+        if (diagnostics.phases.workerStartupMs !== undefined && diagnostics.phases.workerBodyMs !== undefined) {
+          diagnostics.phases.workerSettlementMs = Math.max(
+            0,
+            diagnostics.phases.workerMs! - diagnostics.phases.workerStartupMs - diagnostics.phases.workerBodyMs,
+          );
+        }
         result.status = outcome.status;
         if (outcome.status === 'skipped') {
           result.skipReason = outcome.skipReason;
         }
         // Read before teardown: the receipts belong to the session and end with it.
         phase = 'input verification';
-        result.input = await readDeliveredInput(desktop, descriptor, clickMode, outcome.status === 'passed');
+        result.input = await measure('receiptsMs', () => readDeliveredInput(desktop, descriptor, clickMode, outcome.status === 'passed'));
         if (result.input.undeclared) throw new UndeclaredInputError(describeUndeclaredDesktopInput(result.input.undeclared));
       } catch (error) {
         if (error instanceof MissingRequirementsError) {
@@ -332,12 +403,24 @@ export async function runWdioStoryTests(
             writeDesktopStorybookFailure(`evidence for "${displayName}"`, evidenceError, options.errorOutput);
           }
           // What a failed case delivered attributes the failure. A session that cannot answer leaves it unknown.
-          if (phase === 'execution') result.input = await readDeliveredInput(desktop, descriptor, clickMode, false).catch(() => undefined);
+          if (phase === 'execution')
+            result.input = await measure('receiptsMs', () => readDeliveredInput(desktop, descriptor, clickMode, false)).catch(
+              () => undefined,
+            );
         }
+      }
+      if (activityCursor) {
+        await measure('activityReadMs', async () => {
+          try {
+            diagnostics.windowActivity = summarizeWindowActivity(await desktop.session.getWindowEvents(), activityCursor);
+          } catch {
+            diagnostics.windowActivity = { status: 'unavailable' };
+          }
+        });
       }
       phase = 'session cleanup';
       try {
-        await desktop.delete();
+        await measure('cleanupMs', () => desktop.delete());
       } catch (cleanupError) {
         options.report?.fail(cleanupError, 'cleanup', testId);
         throw new AggregateError(
@@ -417,6 +500,7 @@ export async function runWdioStoryTests(
           : 'skipped',
       ...(infrastructureFailure === undefined ? {} : { error: errorMessage(infrastructureFailure) }),
       tests: results,
+      diagnostics: { extractionMs, sourceExtractions, sourceCacheHits, totalMs: performance.now() - runStarted },
     });
     options.report?.emit({
       kind: 'artifact',
@@ -466,6 +550,7 @@ async function runWorker(
   resultPath: string,
   storyId: string,
   signal?: AbortSignal,
+  onTimings?: (timings: WdioWorkerTimings) => void,
 ): Promise<WorkerResult> {
   const worker = runner.start(command);
   let timer: ReturnType<typeof setTimeout> | undefined;
@@ -489,6 +574,7 @@ async function runWorker(
       }),
     ]);
     const outcome: unknown = fs.existsSync(resultPath) ? JSON.parse(fs.readFileSync(resultPath, 'utf8')) : undefined;
+    if (outcome && typeof outcome === 'object' && 'timings' in outcome) onTimings?.(readWorkerTimings(outcome.timings));
     if (
       typeof outcome === 'object' &&
       outcome !== null &&

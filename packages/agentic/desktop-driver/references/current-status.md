@@ -478,6 +478,134 @@ probe timed out after 10 seconds; bridge retirement occurred about 19 seconds
 after injection. A later attempt waited for retirement and retained the
 same Partial result. Physical Ctrl+C and DPI changes were not exercised.
 
+## 2026-11-12: bounded refresh timing observations
+
+Part of #4435. Story selection can return allowlisted, service-local timing
+observations and a canonical native-verified PID/start-time pair. They are
+response diagnostics, not authenticated marker fields, context identity, or
+authority to clear quarantine. Request/run/epoch matching and fresh native
+marker verification remain unchanged; provider payloads and private values
+are not copied into these observations.
+
+The instrumented baseline ran eight independently launched accessible cohorts
+per macOS renderer, each with three passing ListboxItem callbacks and one
+declared macOS-unsupported callback. Each passing callback selected a fresh
+preview/context generation; keyed remounts are inferred from rendering
+policy, not independently counted. Every cohort retained one verified app
+incarnation and one authenticated bridge connection during its callbacks.
+JS initialization/HMR was not observed independently and cannot be inferred
+from hello counts. Fabric accepted one hello and Paper two on the same socket.
+No activation command or main/focused-window change was observed in these
+baseline cohorts; Paper recorded one application deactivation. Historical
+per-case truncation counts are withdrawn: a process-lifetime history flag
+and globally allocated sequence gaps did not establish per-case event loss.
+A zero advisory count
+is not visual qualification.
+The Storybook evidence ledger,
+`packages/agentic/storybook-desktop/references/current-status.md`, records
+selection, timing, variability, and limitations.
+
+This timing implementation changes no Swift source, physical-input
+activation, foreground checks, hit-testing, focus, or window-switch policy.
+It does not qualify those paths or remove provider-local checks. Windows
+Fabric and Win32 Paper were **not run locally** for this change.
+
+The direct-selection Fabric candidate preserved identical coverage, fresh
+per-case generations, one app incarnation/connection per lifecycle, and no
+within-lifecycle app replacements across eight paired-by-index repetitions.
+Runner p50/p95 changed from 7939.07/8845.37 to 6680.04/6995.31 ms; navigation
+p50 changed from 753.13 to 274.20 ms. Paper's equivalent eight-plus-eight
+comparison changed runner p50/p95 from 7915.99/8755.09 to 7218.78/7811.59 ms
+and navigation p50 from 756.77 to 340.59 ms, with identical coverage and
+lifecycle invariants. Each side/renderer passed 24 callbacks plus eight
+declared unsupported. Sequential before/after blocks, cold startup
+differences, and the small observational cohort limit attribution;
+native-verification p95 worsened on both renderers (Fabric 168.00→546.11 ms;
+Paper 170.07→582.90 ms). There is no universal tail-latency, reliability,
+startup, or flashing claim.
+
+Window-scoped synchronized recordings on both sides/renderers contained four
+encoded frames each, followed by held pixels. The unvalidated whole-content
+uniformity detector returned zero candidates; persistent chrome and
+window-only capture prevent interpreting this as zero blank-preview or
+activation-flash episodes. No flash reduction was established.
+
+Focused candidate qualification on both macOS renderers passed the complete
+223-story render traversal plus five accessible callbacks (228 passes per
+renderer), and a separate sparse physical selection with 15 callbacks
+(238 passes per renderer). Button, Dropdown, native Callout, and modern
+Callout paths retained fresh per-case contexts/workers and passed popup
+isolation/dismiss/reopen checks. These are not full authored-input suites,
+MCP descriptor qualification, native cancellation/fault injection, or
+qualification of another branch's physical-input corrections.
+
+The unchanged standalone macOS helper passed a release build with
+`-Xswiftc -warnings-as-errors` and all 448 self-test checks. Focused
+`FURN_NATIVE_DRIVER_TEST=1` contracts passed 87 tests, with 16 skipped
+(Windows contracts not run locally). An earlier local aggregate passed with `TF_BUILD=1` serializing package Jest
+runs and with project-local fixture overrides; this is not PR CI mode.
+The PR workflow uses parallel `yarn lage buildci` without those overrides.
+The Storybook evidence ledger records exact commands, failed attempts,
+package counts, and the subsequent plain-command review qualification.
+
+### Activation trace and deferred flashing change
+
+The W3C click path activates before its server-side hit test. The operation
+click path conditionally raises an externally obscured target and rechecks;
+in-window obstruction remains a no-effect refusal. The native physical-click
+provider independently activates under its physical-input scope, rereads the
+target, and verifies ownership of the click point. These are separate
+postconditions, not interchangeable duplicate calls. Removing the server
+activation can move hit-testing before foreground establishment; removing the
+provider activation assumes ownership cannot change between commands and
+weakens callers that use the provider independently.
+
+macOS activation sets main/raise attributes even when already frontmost.
+The menu test helper `inWindowWith` also calls activating `switchToWindow`
+while polling each candidate window and restoring its owner. Both are
+plausible flashing contributors, not established visual causes in the
+observational ListboxItem cohort.
+
+No activation optimization is shipped here. Concurrent physical-input
+corrections retain foreground/main-window postconditions, add a workspace
+fallback when acknowledged AX activation is ineffective, and keep genuine
+occlusion refused. An unqualified dedupe must not fork those semantics.
+Zero activation counters in this read-only cohort do not meet the optimization
+gate. The compatible experiment and its qualification conditions are tracked
+in [remaining work](remaining-work.md#macos-activation-and-popup-polling).
+
+## 2026-11-12: refresh-diagnostic review corrections
+
+Part of #4435. The Storybook report now separates the native process-lifetime
+`eventsTruncated` flag into `processEventsTruncated` from a possible
+per-case `eventsTruncated` warning. A case warning requires truncated
+history whose earliest retained event is newer than the case cursor.
+Globally allocated sequence gaps are not loss evidence; the unsupported
+command-truncation inference was removed. Historical 16/17-of-24
+comparisons are withdrawn because the original bounded reports cannot
+reconstruct per-case loss. The duplicate mount-generation field was also
+removed: fresh preview generations infer remounting but do not count mounts
+independently. No native producer or activation behavior changed.
+
+The earlier `TF_BUILD=1` aggregate was local serialization, not PR CI mode.
+Under the shared native lock, plain
+`yarn clean-lage-cache && yarn lage buildci` with no environment overrides
+**failed in both candidate runs** on the `boundedCommand` termination-signal
+assertion; `privateStorage` passed in both. The identical
+command on independently installed, detached base `aadc2f359` **failed**
+that same assertion and a `privateStorage` timeout. The base worktree was
+removed after terminating its verified orphaned Jest worker. Those
+pre-existing tests and implementations were not changed.
+
+Review regressions **passed 112 tests** across four Storybook suites.
+macOS Paper manifest/bundle and full-index accessible smoke **passed**
+(223 rendered stories plus five callbacks, three extractions/two cache
+hits). A harness PATH failure before selection was corrected by invoking
+it through Yarn, without a product change. macOS Fabric and physical
+lanes were **not rerun for this follow-up**; Windows Fabric and Win32 Paper
+were **not run locally**. The earlier paired timings and window recordings
+were not repeated, and no new performance or flashing claim is made.
+
 ## 2026-11-12: macOS exact application identity backend
 
 Source `76a2be59abfde3a7bcb0abd8d86a2052e7378274`, macOS 27.2.1 arm64,

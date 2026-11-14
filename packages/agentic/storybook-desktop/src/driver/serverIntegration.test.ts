@@ -148,6 +148,11 @@ describe('desktop Storybook server integration', () => {
         },
       });
       await expect(session.selectStory('components-button--default', 'integration-run')).resolves.toEqual({
+        diagnostics: {
+          application: { processId: 1000, processStartedAt: '1970-01-01T00:00:00.000Z' },
+          nativeMarkerPolls: 1,
+          nativeVerificationMs: expect.any(Number),
+        },
         previewGeneration: 1,
         runId: 'integration-run',
         storyId: 'components-button--default',

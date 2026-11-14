@@ -41,12 +41,28 @@ export type StoryReadyResult = {
   requestId?: string;
   runId: string;
   storyId: string;
+  /** Service-local observations, not part of the authenticated runtime marker or readiness decision. */
+  diagnostics?: StorySelectionDiagnostics & {
+    application?: { processId: number; processStartedAt: string };
+  };
+};
+
+export type StorySelectionDiagnostics = {
+  preparationMs?: number;
+  httpMs?: number;
+  runtimeReadyMs?: number;
+  nativeVerificationMs?: number;
+  nativeMarkerPolls?: number;
+  authenticatedHellos?: number;
+  bridgeConnections?: number;
 };
 
 /** Local provider lifetime; never included in channel messages or serialized operation inputs. */
 export type StoryProviderContext = {
   lifetimeId: string;
   signal: AbortSignal;
+  /** Optional, fixed numeric observations. Never include runtime payloads or credentials here. */
+  diagnostics?: StorySelectionDiagnostics;
 };
 
 export class StoryProviderError extends Error {

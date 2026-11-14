@@ -94,6 +94,10 @@ copy them here. `src/cli/inputLane.ts` resolves the requested lane,
 `config/transform-story-tests.cjs` is both the Metro Babel plugin and the shared
 AST library: its `rejectDirectInput` check runs from `src/testing/extractWdioTests.ts`
 only, because the Metro transform has no validated descriptor to judge by.
+Run-owned extraction entries retain digests for every helper module that
+check reads, including transitive helpers and unreadable files. Recheck those
+dependencies on a cache hit; a source-file digest alone cannot preserve the
+direct-input policy when helpers change.
 
 Keep story callbacks statically extractable and authentication checks
 fail-closed. Update references when commands, supported config, outputs, or
