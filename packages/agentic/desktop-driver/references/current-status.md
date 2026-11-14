@@ -1096,6 +1096,133 @@ Detailed native receipts are in
 `artifacts/desktop/f16-macos-physical/native-b66140d7-20261113T000145Z/`,
 including the initial Paper failure, the passing rerun, current Paper smoke,
 and failed Fabric preparation.
+## 2026-11-12: bounded refresh timing observations
+
+Part of #4435. Story selection can return allowlisted, service-local timing
+observations and a canonical native-verified PID/start-time pair. They are
+response diagnostics, not authenticated marker fields, context identity, or
+authority to clear quarantine. Request/run/epoch matching and fresh native
+marker verification remain unchanged; provider payloads and private values
+are not copied into these observations.
+
+The instrumented baseline ran eight independently launched accessible cohorts
+per macOS renderer, each with three passing ListboxItem callbacks and one
+declared macOS-unsupported callback. Each passing callback selected a fresh
+preview/context generation; keyed remounts are inferred from rendering
+policy, not independently counted. Every cohort retained one verified app
+incarnation and one authenticated bridge connection during its callbacks.
+JS initialization/HMR was not observed independently and cannot be inferred
+from hello counts. Fabric accepted one hello and Paper two on the same socket.
+No activation command or main/focused-window change was observed in these
+baseline cohorts; Paper recorded one application deactivation. Historical
+per-case truncation counts are withdrawn: a process-lifetime history flag
+and globally allocated sequence gaps did not establish per-case event loss.
+A zero advisory count
+is not visual qualification.
+The Storybook evidence ledger,
+`packages/agentic/storybook-desktop/references/current-status.md`, records
+selection, timing, variability, and limitations.
+
+This timing implementation changes no Swift source, physical-input
+activation, foreground checks, hit-testing, focus, or window-switch policy.
+It does not qualify those paths or remove provider-local checks. Windows
+Fabric and Win32 Paper were **not run locally** for this change.
+
+The direct-selection Fabric candidate preserved identical coverage, fresh
+per-case generations, one app incarnation/connection per lifecycle, and no
+within-lifecycle app replacements across eight paired-by-index repetitions.
+Runner p50/p95 changed from 7939.07/8845.37 to 6680.04/6995.31 ms; navigation
+p50 changed from 753.13 to 274.20 ms. Paper's equivalent eight-plus-eight
+comparison changed runner p50/p95 from 7915.99/8755.09 to 7218.78/7811.59 ms
+and navigation p50 from 756.77 to 340.59 ms, with identical coverage and
+lifecycle invariants. Each side/renderer passed 24 callbacks plus eight
+declared unsupported. Sequential before/after blocks, cold startup
+differences, and the small observational cohort limit attribution;
+native-verification p95 worsened on both renderers (Fabric 168.00→546.11 ms;
+Paper 170.07→582.90 ms). There is no universal tail-latency, reliability,
+startup, or flashing claim.
+
+Window-scoped synchronized recordings on both sides/renderers contained four
+encoded frames each, followed by held pixels. The unvalidated whole-content
+uniformity detector returned zero candidates; persistent chrome and
+window-only capture prevent interpreting this as zero blank-preview or
+activation-flash episodes. No flash reduction was established.
+
+Focused candidate qualification on both macOS renderers passed the complete
+223-story render traversal plus five accessible callbacks (228 passes per
+renderer), and a separate sparse physical selection with 15 callbacks
+(238 passes per renderer). Button, Dropdown, native Callout, and modern
+Callout paths retained fresh per-case contexts/workers and passed popup
+isolation/dismiss/reopen checks. These are not full authored-input suites,
+MCP descriptor qualification, native cancellation/fault injection, or
+qualification of another branch's physical-input corrections.
+
+The unchanged standalone macOS helper passed a release build with
+`-Xswiftc -warnings-as-errors` and all 448 self-test checks. Focused
+`FURN_NATIVE_DRIVER_TEST=1` contracts passed 87 tests, with 16 skipped
+(Windows contracts not run locally). An earlier local aggregate passed with `TF_BUILD=1` serializing package Jest
+runs and with project-local fixture overrides; this is not PR CI mode.
+The PR workflow uses parallel `yarn lage buildci` without those overrides.
+The Storybook evidence ledger records exact commands, failed attempts,
+package counts, and the subsequent plain-command review qualification.
+
+### Activation trace and deferred flashing change
+
+The W3C click path activates before its server-side hit test. The operation
+click path conditionally raises an externally obscured target and rechecks;
+in-window obstruction remains a no-effect refusal. The native physical-click
+provider independently activates under its physical-input scope, rereads the
+target, and verifies ownership of the click point. These are separate
+postconditions, not interchangeable duplicate calls. Removing the server
+activation can move hit-testing before foreground establishment; removing the
+provider activation assumes ownership cannot change between commands and
+weakens callers that use the provider independently.
+
+macOS activation sets main/raise attributes even when already frontmost.
+The menu test helper `inWindowWith` also calls activating `switchToWindow`
+while polling each candidate window and restoring its owner. Both are
+plausible flashing contributors, not established visual causes in the
+observational ListboxItem cohort.
+
+No activation optimization is shipped here. Concurrent physical-input
+corrections retain foreground/main-window postconditions, add a workspace
+fallback when acknowledged AX activation is ineffective, and keep genuine
+occlusion refused. An unqualified dedupe must not fork those semantics.
+Zero activation counters in this read-only cohort do not meet the optimization
+gate. The compatible experiment and its qualification conditions are tracked
+in [remaining work](remaining-work.md#macos-activation-and-popup-polling).
+
+## 2026-11-12: refresh-diagnostic review corrections
+
+Part of #4435. The Storybook report now separates the native process-lifetime
+`eventsTruncated` flag into `processEventsTruncated` from a possible
+per-case `eventsTruncated` warning. A case warning requires truncated
+history whose earliest retained event is newer than the case cursor.
+Globally allocated sequence gaps are not loss evidence; the unsupported
+command-truncation inference was removed. Historical 16/17-of-24
+comparisons are withdrawn because the original bounded reports cannot
+reconstruct per-case loss. The duplicate mount-generation field was also
+removed: fresh preview generations infer remounting but do not count mounts
+independently. No native producer or activation behavior changed.
+
+The earlier `TF_BUILD=1` aggregate was local serialization, not PR CI mode.
+Under the shared native lock, plain
+`yarn clean-lage-cache && yarn lage buildci` with no environment overrides
+**failed in both candidate runs** on the `boundedCommand` termination-signal
+assertion; `privateStorage` passed in both. The identical
+command on independently installed, detached base `aadc2f359` **failed**
+that same assertion and a `privateStorage` timeout. The base worktree was
+removed after terminating its verified orphaned Jest worker. Those
+pre-existing tests and implementations were not changed.
+
+Review regressions **passed 112 tests** across four Storybook suites.
+macOS Paper manifest/bundle and full-index accessible smoke **passed**
+(223 rendered stories plus five callbacks, three extractions/two cache
+hits). A harness PATH failure before selection was corrected by invoking
+it through Yarn, without a product change. macOS Fabric and physical
+lanes were **not rerun for this follow-up**; Windows Fabric and Win32 Paper
+were **not run locally**. The earlier paired timings and window recordings
+were not repeated, and no new performance or flashing claim is made.
 
 ## 2026-11-12: macOS exact application identity backend
 
@@ -1467,6 +1594,414 @@ zero worktree workloads/unreadable candidates; no signals were issued.
 The harness ledger's "Review follow-up: bounded fixture retirement" section
 records exact commands and limitations. Evidence is retained under
 `artifacts/desktop/f10m/retirement-followup-20261112/`.
+
+## Windows Fabric and Win32 Paper — F10-W application ownership — 2026-11-12 UTC
+
+**Source and dependency:** Windows implementation commit
+`6e881e1a05fef735c1b9bacd7d123285f47269ff`, branch
+`user/jasonvmo/desktop-windows-app-ownership`, stacked on F10-M #4492 at
+exactly `6489386956c0485cb91b478a8f4adc4828f4178b`. The intended draft PR
+base is `user/jasonvmo/desktop-macos-app-ownership`; its independently owned
+branch must not be rewritten. This implements the same neutral
+`applicationOwnership` host/resource model, schema 3 claims, native OS owner
+identity, `processIdentity`, `inspectApplication`, and launch settlement
+metadata, rather than a parallel Windows contract. Application naming uses
+the existing neutral publication seam; no additional F11 #4448/#4491-owned
+file changes were made relative to the pinned base.
+
+**Observed, portable Windows host:** the driver's declared format, lint and
+TypeScript build passed. With native opt-in unset, the full driver suite
+passed **74 suites / 1,234 tests**, with **9 suites / 93 tests skipped**.
+The focused `NativeDesktopHost.applicationIdentity` suite passed **31 tests**,
+covering malformed/missing Windows image/session/AUMID/start evidence,
+read-only inspection and trusted recovery response/input validation.
+Test-first failures were observed before implementing the Windows boundary;
+those fake-helper tests do not establish native exclusion or cleanup.
+
+Commands ran from the worktree root; `$W2` denotes that root. `TEMP`/`TMP`
+were scoped to its ignored `artifacts\desktop\f10w\scratch` directory and
+`FURN_NATIVE_DRIVER_TEST` was unset.
+
+| Command                                                                                                                                                                 | Result                              |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- |
+| `yarn workspace @fluentui-react-native/desktop-driver format`                                                                                                           | Passed                              |
+| `yarn workspace @fluentui-react-native/desktop-driver lint`                                                                                                             | Passed                              |
+| `yarn workspace @fluentui-react-native/desktop-driver build`                                                                                                            | Passed                              |
+| `yarn workspace @fluentui-react-native/desktop-driver test --runInBand --cacheDirectory "$W2\artifacts\desktop\f10w\jest-driver"`                                       | Passed; native opt-ins skipped      |
+| `yarn workspace @fluentui-react-native/desktop-driver test --runInBand NativeDesktopHost.applicationIdentity --cacheDirectory "$W2\artifacts\desktop\f10w\jest-driver"` | Passed 31 tests                     |
+| `yarn check-agent-instructions`                                                                                                                                         | Passed                              |
+| `yarn oxfmt --check`                                                                                                                                                    | Passed repository-wide, 3,163 files |
+
+Ignored run evidence: `artifacts/desktop/f10w/portable-20261112/driver-test.log`,
+`driver-build.log`, `driver-lint.log`, and `changed-markdown-links.log`.
+Every changed Markdown file's link check passed. The root formatter
+deliberately excludes `.changeset/*.md`; the committed patch changeset
+`windows-exact-application-ownership.md` covers driver, harness and Storybook.
+
+**Observed, compile only:** the locked direct `buildWindowsDriver` Debug/x64
+invocation (`buildId: f10w-compile-02`, staging
+`artifacts/desktop/f10w/b2`) passed in **35.09 seconds, 0 warnings / 0 errors**.
+All seven changed C++ source/header files match the successful build's source
+snapshot byte-for-byte. The first compile failed on a self-test `std::wstring`
+argument, corrected to `.c_str()` before the successful build. Native build
+log: `artifacts/desktop/f10w/b2/build.log`; output:
+`artifacts/desktop/f10w/b2/output/furn-desktop-driver-host.exe`.
+No helper self-test, fixture or application was executed by this compile.
+
+**Implementation, not native qualification:** Windows leases and inspection
+retain canonical image, seven-digit native creation time, session and packaged
+AUMID. Exact pins reject a one-tick mismatch and ambiguous candidates. A
+per-incarnation nonwaiting semaphore excludes controlling helpers; a losing
+packaged activation receives no cleanup authority over another controller.
+Unpackaged launches retain suspended-create / Job Object containment.
+Packaged activation stays explicitly `uncontained`: a post-activation job
+cannot remove its already-running race and may encounter existing job
+restrictions. Exact primary-process cleanup is not arbitrary-descendant proof.
+
+| Native acceptance case                                     | Windows Fabric packaged | Win32 Paper REX | Reason / required next evidence                                              |
+| ---------------------------------------------------------- | ----------------------- | --------------- | ---------------------------------------------------------------------------- |
+| Exact AUMID / image / REX incarnation, start and session   | Not run                 | Not run         | Awaiting the lane's granted desktop campaign                                 |
+| Native one-tick/session/image rejection and ambiguity      | Not run                 | Not run         | Authored native fixture/consumer contracts; portable tests do not prove this |
+| Cross-service exact-application exclusion                  | Not run                 | Not run         | Must use independent real helpers                                            |
+| Job containment / explicitly fenced packaged activation    | Not run                 | Not run         | Runtime process/lease evidence required                                      |
+| Physical input mutex                                       | Not run                 | Not run         | Requires physical opt-in and connected/unlocked session gate                 |
+| Acquired survivor journaling and next-run exact recovery   | Not run                 | Not run         | Requires identity-verified helper/owner fault injection                      |
+| Five consecutive launches/teardowns without identity leaks | Not run                 | Not run         | Required separately on both real endpoints                                   |
+
+Native session kind is **not sampled**: no GUI/physical campaign has run.
+Planned provider command, under the exclusive lock:
+`$env:FURN_NATIVE_DRIVER_TEST='1'; yarn workspace @fluentui-react-native/desktop-driver test --runInBand applicationOwnership.contract`.
+The consumer runbook is
+`packages/agentic/desktop-test/references/native-qualification.md`,
+“Neutral Windows application ownership”; it additionally exercises three
+paired packaged activations and physical input across both endpoint helpers.
+The pre-campaign audit observed `FURN-AUDIT: no FURN desktop processes found`;
+no W2 campaign was started. These are preparation results, not native or
+hosted-CI qualification. Part of #4447 and #4435.
+
+Preparation closeout on the implementation SHA above: the post-commit
+focused driver rerun passed **31 tests**. `yarn change:check` passed;
+`yarn lage test-links --verbose --grouped` passed **90 tasks, 0
+failed/skipped**. The two appended Windows ledgers' link checks passed
+(driver 6 links, harness 15), and `yarn oxfmt --check` again passed
+3,163 files. Only Windows evidence text followed those checks; no native or
+runtime source changed. Additional ignored provenance under
+`artifacts/desktop/f10w/portable-20261112/`:
+`tested-source-revision.txt`, `compile-source-evidence.json`,
+`driver-focused-committed.log`, `test-links.log`, and `root-format.log`.
+
+## Windows Fabric and Win32 Paper — F10-W native qualification — 2026-11-12 UTC
+
+**Observed source:** application qualification ran at
+`8343dc0c48a2de01475454c892e7a295523caa75`; helper/self-test correction
+`4a4b87f37b574820b93e342b68721d931be07c55` follows implementation
+`6e881e1a05fef735c1b9bacd7d123285f47269ff`. The branch remains
+`user/jasonvmo/desktop-windows-app-ownership`, pinned on #4492 at
+`6489386956c0485cb91b478a8f4adc4828f4178b`. The coordinator handoff
+`W2-base-decision.md` records **STACK**: W2 implements the inherited neutral
+application host/resource model, schema-3 native owner claims, exact process pins,
+inspection and settlement messages, rather than a second Windows model.
+Application naming required no new F11-owned file edits. The eventual draft PR
+base remains `user/jasonvmo/desktop-macos-app-ownership`; later dependency
+movement does not authorize a rebase, merge or dependency-branch push.
+
+**Observed host and identity:** Windows build 26300 x64, Node 26.13.0,
+active/unlocked RDP (`sessionKind: remote`, `windows-session:1`). Every native
+command used the exclusive W2 lock and `-RequirePhysical`; before/after gates
+stayed eligible. The actual endpoint helper's SHA256/artifact identity is
+`863cc2dbfc8f5792d22c8606376d226affbf8655fe4ded62ba78c23a29c516c7`,
+source digest
+`ea76e931dc4cdebc87e0621a7d730f81faabce5ef902063a0512cd7c2b100f2d`,
+Debug/x64. Resolution was prebuilt-only.
+
+The registered Fabric build was reused from the coordinator-specified
+`furn-81` worktree, built at `bdeb0b291`: no Windows app/native-core Windows
+source differs from that build. Its generated `RnwNewArch` and `UseFabric`
+properties are true. All five ordinary native identities matched the registered
+manifest's exact image and AUMID
+`40411fc5-8e92-4d46-b68d-b62df44b1366_syyqehzwccsyy!App`.
+Metro and both JavaScript bundles came from W2. Win32 used the canonical
+prebuilt REX `ReactTest.exe` and W2's Paper bundle; Win32 native app build is
+**Unsupported**, not a skipped build.
+
+**Observed provider result:** `nativeDriver`'s selected Windows build/reuse/
+resolution/handshake contract and all five new `applicationOwnership` fixture
+cases passed: **2 suites / 6 tests passed**, 10 unrelated filtered cases skipped.
+This includes the native C++ self-test and the actual physical mutex fixture.
+The first self-test run failed because an existing release-count assertion
+kept a pointer into a destroyed temporary JSON result. Commit `4a4b87f37`
+retains the result for the assertion; the native rerun passed. This is a
+self-test lifetime fix, not a change to release behavior.
+
+From `packages/agentic/desktop-driver`, the exact selected test command was:
+
+```powershell
+yarn test --runInBand --cacheDirectory "$W2\artifacts\desktop\f10w\jest-driver" --runTestsByPath src\native\nativeDriver.test.ts src\native\windows\applicationOwnership.contract.test.ts --testNamePattern 'Windows exact application ownership|builds, reuses, resolves, and handshakes with the Windows helper' --json --outputFile "$W2\artifacts\desktop\f10w\native-20261112\driver-native-fixed-results.json"
+```
+
+Inherited settings were `FURN_NATIVE_DRIVER_TEST=1`,
+`FURN_NATIVE_PHYSICAL_INPUT_TEST=1`, native cache
+`$W2\artifacts\desktop\f10w\n`, configuration `debug`, build policy `never`,
+and project-local `TEMP`/`TMP`. From `apps/storybook`,
+`yarn desktop-driver doctor --platform windows --configuration debug --cache-root "$W2\artifacts\desktop\f10w\n"`
+**passed** against the selected artifact. An initial doctor without the explicit
+configuration selected its CLI default `release` and correctly reported no
+verified prebuilt; that setup attempt was not a native application result.
+
+The separate real-endpoint consumer suite passed **9 tests / 0 failed /
+0 skipped**:
+
+| Case                                                                  | Windows Fabric packaged                                                  | Win32 Paper REX                                          |
+| --------------------------------------------------------------------- | ------------------------------------------------------------------------ | -------------------------------------------------------- |
+| Exact AUMID/image/REX incarnation, native start and session           | Passed                                                                   | Passed                                                   |
+| Start/session/image mismatch; independent exact-controller exclusion  | Passed                                                                   | Passed                                                   |
+| Multiple actual matching processes/windows refuse unpinned inspection | Passed, three pairs                                                      | Passed, three pairs                                      |
+| Containment or explicit exact-identity fencing                        | Passed, `uncontained` and journaled                                      | Passed, `job-object`                                     |
+| Physical Shift contention, effect-none cancellation and transfer      | Passed                                                                   | Passed                                                   |
+| Live-owner fence, acquired journal and next-run recovery              | Passed, packaged app survived helper crash then exited by exact recovery | Passed, Job Object drained then the claim was reconciled |
+| Repeated launches and settled teardown                                | Passed 5/5, five distinct incarnations                                   | Passed 5/5, five distinct incarnations                   |
+| Close one concurrent winner without ending the other                  | Passed 3/3 pairs                                                         | Passed 3/3 pairs                                         |
+
+Both packaged contenders started distinct processes in every pair. Same exact
+incarnation exclusion was independently proved by pinned attach, but a
+**shared-PID packaged activation race was not induced**. Actual kernel PID
+recycling was **Not run**; the real fixture's one-100-ns-tick mismatch and both
+endpoints' stale-start refusal passed. Arbitrary uncontained descendants and
+mixed Storybook-graph recovery remain outside this bounded qualification.
+
+Ignored evidence root: `artifacts/desktop/f10w/native-20261112/`.
+`driver-native.log` retains the initial failure;
+`driver-native-fixed.log` and `driver-native-fixed-results.json` retain the
+green provider run. `qualification-summary.json`, `selected-helper.json`,
+`application-build-provenance.json` and `consumer-evidence-final.json` record
+the tested source, binary hash, registration, bundles and per-case identities.
+The real consumer run is `windows-application-ownership-GiW4x1`; outer command
+report `4ed98f8f-8ebb-49ca-ac90-2ee6caece7dc` is a lifecycle report, not the
+test-count source. The harness ledger records the full consumer commands.
+
+**Observed closeout:** all W2 campaigns ended; before/after audits were clean:
+`FURN-AUDIT: no FURN desktop processes found`. No helper, fixture, Metro, REX
+or packaged app from W2 survived. Review, the final one-time clean-cache
+`buildci`, push, draft PR and hosted CI remain **Not run** at this review
+handoff. The three-package patch changeset remains
+`windows-exact-application-ownership.md`. Part of #4447 and #4435.
+
+## Windows Fabric and Win32 Paper — recovery review follow-up — 2026-11-12 UTC
+
+**Scope and provenance:** the review of `6489386956c0..6bdcde61f` found that
+trusted recovery incorrectly rejected an application's reused PID. The fix is
+commit `8b2fb7e67dc5864180c7863ac94fc3c0c3c9d6e3`, still stacked on the
+pinned #4492 dependency `6489386956c0485cb91b478a8f4adc4828f4178b`.
+No rebase, dependency-branch write, push, or PR occurred.
+
+**Implemented, not yet runtime-qualified:** recovery first queries native
+creation time with `PROCESS_QUERY_LIMITED_INFORMATION`. A different time
+settles the recorded incarnation as `exited`, without application control,
+termination rights, or signals to its live replacement. An unreadable start,
+including access denied, remains fenced. A matching start still requires
+complete identity and exclusive control before exact cleanup. Inspection and
+attach continue rejecting stale pins. This supersedes the earlier ledger's
+recovery-specific stale-start refusal; that earlier native run does **not**
+qualify the corrected recovery semantics.
+
+**Observed validation:**
+
+- **Passed:** package `yarn format`, `yarn lint`, and `yarn build`.
+- **Passed:** `yarn workspace @fluentui-react-native/desktop-driver test --runInBand`
+  with native opt-in unset: **1,234 passed, 93 skipped**. Native skips are
+  not native qualification. Expanded arguments/results are retained under
+  `artifacts/desktop/f10w/review-20261112/driver-tests.log` and
+  `driver-results.json`.
+- **Passed:** compile-only Windows x64 Debug `build-driver --platform windows
+--configuration debug --cache-root artifacts/desktop/f10w/n --force
+--reporter json`, through the declared package CLI and machine lock. It
+  waited for W3's campaign, acquired the lock at `2026-11-12T16:50:25Z`,
+  launched/registered no application, and exited zero.
+  Helper source digest:
+  `3558e8597f6cfe1ee3f4e38dca2137710b80d193a5c30bf946d54065bf8bc153`;
+  executable SHA-256:
+  `97f0072ce22449bc5c87c05de259d3e4c46eca666e6135977432b30fa16053b2`.
+  Full invocation/artifact receipt: ignored `helper-build.log` in that evidence
+  directory. Compilation is not native runtime or renderer qualification.
+
+**Not run on this corrected source:** native self-test, the expanded fixture
+recovery case, and Windows Fabric/Win32 Paper consumer recovery. The opt-in
+fixture now expects a stale recorded start to return `exited` while the live
+controlled replacement survives; matching-start session/executable/AUMID
+mismatches and another controller must still fail closed. Consumer Native RED
+against the retained pre-fix helper and provider/consumer GREEN against the
+rebuilt helper await the next granted W2 campaign, under the physical-session
+gate where applicable.
+No W2 campaign or session kind is claimed for this compile/portable phase.
+Final clean-cache `buildci` and publication remain **Not run**. Part of #4447
+and #4435.
+
+**Observed closeout:** root `yarn oxfmt --check` (**3,163 files**),
+`yarn check-agent-instructions`, `yarn change:check`, `git diff --check`, and
+link checks for every edited Markdown reference and both ledgers **Passed**.
+The first concurrently requested audit saw only the portable formatter's two
+Node processes; the idle rerun was clean:
+`FURN-AUDIT: no FURN desktop processes found`. No W2 desktop campaign was
+started. The old and rebuilt helper files both match their recorded SHA-256;
+the old binary remains available for the expected-failing consumer run.
+
+## Windows Fabric and Win32 Paper — default-environment buildci — 2026-11-12 UTC
+
+**Observed:** the root `yarn clean-lage-cache` followed by `yarn lage buildci`
+passed at `68d63ccfbf008b963e59772f57aca8ac8f9ff05f`: **178 successful
+tasks, 0 failed/skipped**, in 2m 32.26s. Both commands ran under the W2 machine
+lock without `-RequirePhysical`, with default TEMP and concurrency and no
+environment or repository-guidance adjustments.
+
+The first attempt at that same revision failed the Storybook server-integration
+child-exit assertion and the inline-worker aggregate's 120s timeout.
+Before considering a fix, the same full default-environment gate was run at
+pinned base `6489386956c0485cb91b478a8f4adc4828f4178b`: **Passed**, 178/0.
+The unchanged W2 rerun then passed. No source fix, timeout increase, dependency
+install, or concurrency override was made; baseline failure was not reproduced.
+
+Ignored receipts are under `artifacts/desktop/f10w/review-20261112/`:
+`buildci-default.log`, `buildci-default-base.log`,
+`buildci-default-rerun.log`, `buildci-default-summary.json`, and
+`buildci-default-final-audit.log`. The final audit **Passed**:
+`FURN-AUDIT: no FURN desktop processes found`.
+No app or native contract was launched. The desktop remained disconnected;
+both endpoints' corrected native recovery qualification remains **Not run**
+pending an active/unlocked session and a separate grant. No push occurred.
+Part of #4447 and #4435.
+
+## Windows Fabric and Win32 Paper — recovery native re-verification — 2026-11-12 UTC
+
+**Observed source:** native implementation
+`dbaf558939db31b4a3935ad68b1eb20d25d90d3e`, stacked on pinned #4492
+`6489386956c0485cb91b478a8f4adc4828f4178b`. The helper and public host API
+were unchanged in this phase. The harness consumer needed a test-only fix:
+`recoverApplication` checks native `{ state: 'exited' }` internally and resolves
+`Promise<void>`, so the consumer must expect `undefined`. That one-line
+assertion correction is committed with this evidence and needs review before
+publication; no production, protocol or F11 file changed.
+
+**Observed granted native session:** active/unlocked **remote** session 1,
+input desktop `Default`, with eligible before/after checks for every native
+wrapper. Both W2 campaigns used the machine lock and `-RequirePhysical`; no
+exit 75 or session change occurred. The final consumer wrapper ran
+`21:54:54Z–21:57:02Z`. Fabric registration was checked before each phase and
+remained the `furn-81` Debug/x64 build at `bdeb0b291`, with no relevant native
+source difference and executable SHA-256
+`df9cb3559843fcfb0158ee4ab5edbae78890c4e231ebd895cbb636c24b18cd45`.
+The exact AUMID remained
+`40411fc5-8e92-4d46-b68d-b62df44b1366_syyqehzwccsyy!App`.
+REX Paper used the canonical worktree image `0.81.1-6828073195`, exact launch
+arguments, a fresh Win32 bundle and owned worktree Metro. A Win32 native-app
+build remains **Unsupported**.
+
+**Observed native RED/GREEN:** the retained pre-review helper's source was
+`ea76e931dc4cdebc87e0621a7d730f81faabce5ef902063a0512cd7c2b100f2d`,
+executable SHA-256
+`863cc2dbfc8f5792d22c8606376d226affbf8655fe4ded62ba78c23a29c516c7`.
+It produced **4 expected failures / 0 passed / 7 filtered skips** across the
+two endpoints' stale-start and crashed-recoverer cases:
+`recoverApplication` rejected with `identity-start-mismatch`.
+
+The selected review-fixed consumer helper had source
+`3558e8597f6cfe1ee3f4e38dca2137710b80d193a5c30bf946d54065bf8bc153`
+and executable SHA-256
+`97f0072ce22449bc5c87c05de259d3e4c46eca666e6135977432b30fa16053b2`.
+Its first consumer run had **9 passed / 2 failed**, solely because the test
+expected the wire object rather than the host's void resolution.
+After correcting only that assertion, all **11 consumers passed / 0 failed /
+0 skipped**. Native recovery settles a different recorded start without
+control/termination access or replacement signals; matching-start
+session/executable/AUMID mismatches still fail closed. Unreadable native starts
+remain fenced; no real protected-process access-denial case was induced here.
+
+**Exact provider command:** from the driver package, inside the granted
+physical-gated machine lock, with `FURN_NATIVE_DRIVER_TEST=1`,
+`FURN_NATIVE_PHYSICAL_INPUT_TEST=1`, Debug configuration and worktree-local
+scratch/cache. `$W2` denotes the assigned worktree; `$E` is its ignored
+`artifacts\desktop\f10w\review-native-20261112` directory.
+The direct-helper override is unset for the cache-resolution contract.
+
+```powershell
+yarn test --runInBand `
+  --cacheDirectory "$W2\artifacts\desktop\f10w\jest-driver" `
+  --runTestsByPath src\native\nativeDriver.test.ts src\native\windows\applicationOwnership.contract.test.ts `
+  --testNamePattern 'Windows exact application ownership|builds, reuses, resolves, and handshakes with the Windows helper' `
+  --json --outputFile "$E\driver-green-results.json"
+```
+
+| Provider/self-test case                                                                          | Outcome         |
+| ------------------------------------------------------------------------------------------------ | --------------- |
+| Build, reuse, resolve, handshake and Windows helper self-test                                    | **Passed**      |
+| Noncontrolling inspection and exclusion of another independent helper                            | **Passed**      |
+| Reused recorded start settles without signalling the live replacement; other mismatches rejected | **Passed**      |
+| Multiple matching process/window candidates rejected                                             | **Passed**      |
+| Five contained exact-identity launch/close cycles                                                | **Passed**, 5/5 |
+| Independent applications serialize through the physical input mutex                              | **Passed**      |
+
+Final provider result: **6 passed / 0 failed / 10 unrelated filtered skips**.
+The first invocation mistakenly set a direct-helper path, so the five ownership
+cases passed but the isolated cache test resolved that explicit artifact
+instead of its temporary build. Removing the conflicting invocation override,
+without changing source, produced the full passing result. Both receipts are
+preserved; this was not a resolver fix or an additional production defect.
+
+**Observed real consumer results:** both endpoints passed five distinct
+PID/start incarnations, exact independent-service exclusion, native mismatch
+refusals, crashed-recoverer barrier retirement, crashed-owner journal
+reconciliation and three concurrent pairs. Fabric consistently reported
+`uncontained` and exact survivor cleanup; REX reported `job-object` and
+reconciled its job drain. The cross-endpoint physical-mutex case passed with
+cancellation, release and transfer. All recorded application sessions were
+`windows-session:1`. The crash fixtures verified each owned child's native
+identity before literal-PID termination; the new dead-recoverer PIDs were
+**54440** and **55808**. Live replacements survived stale-record retirement.
+The harness's matching section records all 11 cases and exact consumer
+commands.
+
+Ignored evidence root: `artifacts\desktop\f10w\review-native-20261112`.
+`driver-green-results.json`, `red-consumer-results.json`,
+`green-initial-consumer-results.json`, `green-consumer-results.json`,
+`green-consumer-evidence.json`, `consumer-assertion-fix.diff` and
+`qualification-summary-final.json` retain the failures, corrected results,
+digests and actual test-source provenance. Final consumer evidence:
+`windows-application-ownership-3BLzLV`; lifecycle report
+`32f3d6be-c4b0-4792-aeb6-a5d7df165fc0` has no test counts.
+
+**Observed portable/aggregate closeout:** harness format/lint/build and
+**453** portable tests **Passed** (**28** native skips). Existing driver
+`NativeDesktopHost.applicationIdentity` contracts **Passed**, **31/31**.
+Locked default-environment `yarn clean-lage-cache` then `yarn lage buildci`
+initially **Failed** the reported intermittent Storybook `serverIntegration`
+readiness assertion, `A stopping command cannot publish readiness`
+(`176` successful tasks, one failed). The cause remains unproven.
+After the fail-fast test children settled and a clean audit, the sole unchanged
+full rerun **Passed**, **178 successful / 0 failed / 0 skipped**, 2m 38.65s.
+No TEMP, concurrency, timeout, dependency or guidance workaround was applied.
+Both W2 campaigns ended and the final audit **Passed**:
+`FURN-AUDIT: no FURN desktop processes found`.
+
+**Publication/remaining limits:** no push or PR-body update occurred because
+the test-only correction needs review. Initial PR #4494 CI at `dbaf558939`
+was observed green: run `43282149276`, all **19/19** checks successful.
+Windows job `131405956387` selected the ownership provider suite
+(`PASS applicationOwnership.contract.test.ts`; **4** nonphysical ownership
+cases selected, physical case gated off; full driver **1,281 passed /
+46 skipped**). The Win32 jobs did not select that ownership step, and the
+actual-endpoint consumer opt-in was absent: **0/11** consumers hosted.
+These are historical hosted counts, not new CI for the local test correction
+or substitutes for this physical campaign. F11 claim naming is deferred and
+untouched. Actual kernel PID recycling and shared-PID activation were
+**Not induced**; all concurrent winners were distinct. Arbitrary uncontained
+descendants and mixed-graph recovery remain unqualified. The existing
+`windows-exact-application-ownership.md` patch changeset remains applicable.
+Part of #4447 and #4435.
+
+**Observed reference checks:** Markdown links in both edited ledgers
+**Passed** (6 driver links, 15 harness links). Root `yarn oxfmt --check`
+(3,163 files), `yarn check-agent-instructions`, `yarn change:check`, and
+`git diff --check` **Passed**. Their receipts are in the same ignored evidence
+directory.
 
 ## F15 non-AX macOS supporting evidence — 2026-11-12
 

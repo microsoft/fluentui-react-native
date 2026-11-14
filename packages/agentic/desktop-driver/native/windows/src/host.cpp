@@ -31,6 +31,17 @@ std::string BoundedField(std::string_view value, std::size_t maximumBytes) {
   return value.size() <= maximumBytes ? std::string(value) : std::string(value.substr(0, maximumBytes)) + "...";
 }
 
+json::Value ApplicationLifecycleData(const json::Value& value) {
+  json::Value result = json::Value::Object();
+  for (const char* key : {"applicationSettlement", "processId", "processStartedAt", "executablePath",
+                        "interactiveSession", "aumid", "launchKind", "containment"}) {
+    if (const json::Value* field = value.Find(key); field != nullptr) {
+      result.Set(key, field->IsString() ? json::Value::String(BoundedField(field->AsString(), 4096)) : *field);
+    }
+  }
+  return result;
+}
+
 }  // namespace
 
 json::Value CreateHello() {
@@ -50,7 +61,8 @@ json::Value CreateHello() {
   json::Value features = json::Value::Array();
   for (const char* feature : {"accessibilityActions", "accessibilityClick", "performAccessibilityAction",
                               "activeElement", "boundedObservation", "capture", "elementCapture",
-                              "find", "hitTest", "keyboard", "launch", "attach", "pointer", "probe", "releaseActions",
+                              "find", "hitTest", "keyboard", "launch", "attach", "inspectApplication", "recoverApplication",
+                              "pointer", "probe", "releaseActions",
                               "setWindowRect", "source", "strictClear", "tree", "wheel", "windowEvents"}) {
     features.Append(json::Value::String(std::string(feature)));
   }
@@ -125,12 +137,12 @@ bool Host::WriteResponse(const std::string& id, const std::string& command, cons
 
 bool Host::WriteError(const std::string& id, const std::string& command, const std::string& code,
                       const std::string& message, std::optional<MutationEffect> effect,
-                      const std::string& reason) noexcept {
+                      const std::string& reason, const json::Value& lifecycle) noexcept {
   try {
     json::Value error = json::Value::Object();
     error.Set("code", json::Value::String(code));
     error.Set("message", json::Value::String(BoundedField(message, 4096)));
-    json::Value data = json::Value::Object();
+    json::Value data = ApplicationLifecycleData(lifecycle);
     data.Set("command", json::Value::String(BoundedField(command, 256)));
     if (!reason.empty()) {
       data.Set("reason", json::Value::String(BoundedField(reason, 128)));
@@ -155,11 +167,13 @@ bool Host::WriteError(const std::string& id, const std::string& command, const s
   }
 }
 
-bool Host::WriteCancelled(const std::string& id, std::optional<MutationEffect> effect) noexcept {
+bool Host::WriteCancelled(const std::string& id, std::optional<MutationEffect> effect,
+                          const json::Value& lifecycle) noexcept {
   try {
     json::Value cancelled = json::Value::Object();
     cancelled.Set("type", json::Value::String(std::string("cancelled")));
     cancelled.Set("id", json::Value::String(id));
+    if (!lifecycle.IsNull()) cancelled.Set("data", ApplicationLifecycleData(lifecycle));
     if (effect) {
       cancelled.Set("effect", json::Value::String(std::string(MutationEffectName(*effect))));
     }
@@ -176,6 +190,7 @@ bool Host::WriteCancelled(const std::string& id, std::optional<MutationEffect> e
 
 void Host::HandleCancel(const std::string& id) {
   std::optional<MutationEffect> effect;
+  json::Value lifecycle;
   {
     const std::lock_guard<std::mutex> guard(mutex_);
     if (activeId_ == id) {
@@ -196,12 +211,16 @@ void Host::HandleCancel(const std::string& id) {
       if (IsTrackedMutation(queued->command)) {
         effect = MutationEffect::None;
       }
+      if (queued->command == "launch") {
+        lifecycle = json::Value::Object();
+        lifecycle.Set("applicationSettlement", json::Value::String(std::string("not-started")));
+      }
       queue_.erase(queued);
     }
   }
   // A queued or already-settled request has no running side effects, so the
   // acknowledgement can be written immediately.
-  WriteCancelled(id, effect);
+  WriteCancelled(id, effect, lifecycle);
 }
 
 void Host::WorkerLoop() {
@@ -225,6 +244,7 @@ void Host::WorkerLoop() {
 
     bool cancelled = false;
     std::optional<MutationEffect> cancelledEffect;
+    json::Value cancelledLifecycle;
     bool commandSucceeded = false;
     bool wroteResult = true;
     try {
@@ -237,8 +257,9 @@ void Host::WorkerLoop() {
     } catch (const CancelledError& error) {
       cancelled = true;
       cancelledEffect = error.effect();
+      cancelledLifecycle = error.data();
     } catch (const HelperError& error) {
-      wroteResult = WriteError(request.id, request.command, error.code(), error.what(), error.effect(), error.reason());
+      wroteResult = WriteError(request.id, request.command, error.code(), error.what(), error.effect(), error.reason(), error.data());
     } catch (const winrt::hresult_error& error) {
       wroteResult = WriteError(request.id, request.command, kErrorInternal, ToUtf8(error.message().c_str()));
     } catch (const std::exception& error) {
@@ -247,7 +268,7 @@ void Host::WorkerLoop() {
 
     if (cancelled) {
       driver_.ReleaseInput();
-      wroteResult = WriteCancelled(request.id, cancelledEffect);
+      wroteResult = WriteCancelled(request.id, cancelledEffect, cancelledLifecycle);
     }
 
     {

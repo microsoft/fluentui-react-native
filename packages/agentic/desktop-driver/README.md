@@ -33,10 +33,11 @@ a new verified selection; finding fresh elements alone cannot restore readiness.
 | React Native Windows Fabric | Windows 11        | `x64`                   | C++20, UI Automation, SendInput, Windows Graphics Capture   |
 | React Native Win32 Paper    | Windows 11        | `x64`                   | Same Windows helper and protocol                            |
 
-V1 permits one active WebDriver session per registered target in one service;
-cross-service application exclusion remains work in progress. Native builds run
-only on the target operating system. Installation never compiles or downloads a
-helper.
+V1 permits one active WebDriver session per registered target in one service.
+Native helpers also exclude controlling the same exact application incarnation
+across services; endpoint qualification and recovery limits are recorded in
+[current status](references/current-status.md). Native builds run only on the
+target operating system. Installation never compiles or downloads a helper.
 
 ## Start here
 

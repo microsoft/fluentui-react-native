@@ -94,6 +94,94 @@ smoke jobs do not exercise failed packaged-launch survivor journaling/recovery.
 Those jobs are insufficient for that acceptance gate; portable schema tests
 must not be presented as Windows native qualification.
 
+## Neutral Windows application ownership
+
+The Windows provider fixture suite is opt-in and needs an eligible interactive
+session and the exclusive native-validation lock:
+
+```powershell
+$env:FURN_NATIVE_DRIVER_TEST = '1'
+yarn workspace @fluentui-react-native/desktop-driver test --runInBand applicationOwnership.contract
+```
+
+It exercises native read-only inspection, exact 100 ns start/session/executable/AUMID
+checks, reused-incarnation recovery without signalling the live replacement,
+ambiguity, cross-helper application exclusion, and five contained fixture
+launch/close cycles. Its additional input-mutex case requires
+`FURN_NATIVE_PHYSICAL_INPUT_TEST=1`. A skipped physical case is not input
+qualification. The Win32 fixture is supporting provider evidence, not Windows
+Fabric or REX application qualification.
+
+For actual consumer qualification, first explicitly build the helper, prepare
+the Windows Fabric packaged app and its own Metro instance, and bundle the
+Win32 Paper REX app. Set `FURN_OWNERSHIP_WINDOWS_APPLICATION` and
+`FURN_OWNERSHIP_WIN32_APPLICATION` to JSON application descriptors resolved from
+the owning app's canonical config. The Windows descriptor must identify the
+registered AUMID and exact title; the REX descriptor includes the verified
+`ReactTest.exe`, working directory, bundle/component arguments, and exact title.
+These are trusted test inputs, not WebDriver capabilities. Do not select another
+worktree's Metro or fabricate an application identity.
+
+Under the exclusive lock and connected/unlocked desktop gate:
+
+```powershell
+$env:FURN_NATIVE_DRIVER_TEST = '1'
+$env:FURN_NATIVE_APPLICATION_OWNERSHIP_TEST = '1'
+$env:FURN_NATIVE_PHYSICAL_INPUT_TEST = '1'
+yarn workspace @fluentui-react-native/desktop-test test --runInBand windowsApplicationOwnership.contract
+```
+
+The suite requires a verified prebuilt helper and both explicit descriptors.
+Supervisors use the native per-user private-store default. An arbitrary project
+directory is not necessarily a safe replacement: native ancestor-owner/ACL
+checks still apply, and a refused root must not be repaired or bypassed merely
+to run this suite.
+Separately on Windows Fabric packaged and Win32 Paper REX it checks:
+
+- Five consecutive supervisor launches/teardowns, exact application and claim
+  evidence, two borrowed sessions per launch, unchanged window identifiers
+  during inspection, cross-service exclusion, and no surviving old incarnation.
+- Start/session/executable/AUMID inspection mismatch rejection without signalling
+  the app. Recovery retires a mismatched start as an exited recorded incarnation;
+  other mismatches with a matching start remain rejected.
+- A journaled acquired application in a child owner; identity-verified,
+  literal-PID helper/owner fault injection; a live-owner fence; then real
+  supervisor startup recovery of the exact old application and claim.
+  Windows remains `uncontained` and must actually survive helper death; REX's
+  Job Object must drain instead.
+- A stale journal with injected old native owner/application start times while
+  the actual replacements remain live and owned. A real child recoverer publishes
+  its barrier, fences another startup, and is stopped by identity-verified
+  literal PID. The next supervisor must retire that dead recoverer's barrier and
+  the absent recorded application without signalling its live replacement.
+  This models PID reuse by start mismatch; it does not claim kernel PID recycling.
+- Physical-input mutex contention across the two real endpoint helpers, with
+  explicit cancellation and release. Run this only under the physical-session
+  gate; semantic activation does not establish it.
+
+Three paired launches on each endpoint also prove that winning controllers have
+distinct exact incarnations, an unpinned descriptor refuses multiple matches,
+another helper cannot attach to either pinned winner, and closing one winner
+preserves the other. A multi-instance packaged host may start two distinct
+processes; that is not an exclusion failure. When activation instead returns
+the same incarnation, a refused contender must not clean up the winner. Record
+whether that shared-incarnation activation race was actually induced rather
+than treating two distinct winning processes as proof of the losing path.
+
+Evidence is written to the desktop-test package's
+`artifacts/desktop/windows-application-ownership-*/evidence.json`, including
+source/helper identities, endpoint descriptors, process evidence and case
+outcomes. Also record the registered app build, renderer, session kind, exact
+commands, and before/after process audits in the Windows ledger. Keep private
+machine paths in ignored artifacts, not public evidence.
+
+The crash-owner helper is a contract fixture, not a second production service
+factory. Unknown resources/effects, unleased launches, legacy/unverified claims,
+and live, unknown, or legacy recovery barriers remain fenced rather than
+force-reclaimed. Only a verified dead/reused recovery owner can be resumed. This suite
+does not qualify mixed Storybook service-graph recovery, arbitrary uncontained
+descendants, or a new protected-agent recovery API.
+
 ## Parameters and prerequisites
 
 Record these for every renderer run:

@@ -4,12 +4,14 @@
 
 #include <deque>
 #include <functional>
+#include <memory>
 #include <optional>
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
 #include <utility>
 #include <vector>
+#include <winrt/base.h>
 
 #include "common.h"
 #include "events.h"
@@ -37,6 +39,16 @@ inline constexpr char kContainmentJobObject[] = "job-object";
 inline constexpr char kContainmentUncontained[] = "uncontained";
 inline constexpr char kContainmentExternal[] = "external";
 
+struct ApplicationControlLock {
+  ApplicationControlLock(HANDLE value, DWORD pid, FILETIME started) : handle(value), processId(pid), startTime(started) {}
+  ApplicationControlLock(const ApplicationControlLock&) = delete;
+  ApplicationControlLock& operator=(const ApplicationControlLock&) = delete;
+  ~ApplicationControlLock();
+  HANDLE handle{nullptr};
+  DWORD processId{0};
+  FILETIME startTime{};
+};
+
 struct ApplicationLease {
   std::string id;
   std::string ownership;  // "attached" or "launched"
@@ -45,6 +57,12 @@ struct ApplicationLease {
   std::string storyRootTestId;
   DWORD processId{0};
   FILETIME startTime{};
+  std::wstring executablePath;
+  std::wstring aumid;
+  std::string interactiveSession;
+  std::string launchKind;
+  std::shared_ptr<ApplicationControlLock> control;
+  std::shared_ptr<ApplicationControlLock> launchRootControl;
   std::wstring windowTitle;
   HANDLE process{nullptr};
   // The containment Job Object of a kContainmentJobObject launch, else null.
@@ -62,6 +80,8 @@ class ApplicationManager {
 
   const ApplicationLease& Launch(const json::Value& params, const CancellationToken& token);
   const ApplicationLease& Attach(const json::Value& params, const CancellationToken& token);
+  json::Value InspectApplication(const json::Value& params, const CancellationToken& token);
+  json::Value RecoverApplication(const json::Value& params, const CancellationToken& token);
   void CloseApplication(const std::string& leaseId, const CancellationToken& token);
   void Dispose(const CancellationToken& token);
   std::vector<WindowInfo> Windows(const std::string& leaseId, const CancellationToken& token);
@@ -103,6 +123,15 @@ class ApplicationManager {
   }
 
  private:
+  struct ResolvedAttachment {
+    DWORD processId{0};
+    winrt::handle process;
+    HWND window{nullptr};
+    std::wstring title;
+  };
+  ResolvedAttachment ResolveAttachment(const json::Value& params, const CancellationToken& token);
+  const ApplicationLease& LaunchImpl(const json::Value& params, const CancellationToken& token);
+  json::Value launchFailureData_{json::Value::Object()};
   static constexpr std::size_t kMaximumRetiredWindowIds = 256;
 
   struct WindowRecord {
@@ -128,7 +157,8 @@ class ApplicationManager {
   json::Value PublicationDiagnostic(const ApplicationLease& lease) const;
   ApplicationLease& CreateLease(std::string ownership, DWORD processId, HANDLE process, HWND primaryWindow,
                                 const std::wstring& title, const json::Value& params,
-                                std::string containment, HANDLE job = nullptr);
+                                std::string containment, HANDLE job = nullptr,
+                                std::shared_ptr<ApplicationControlLock> launchRootControl = {});
   void TrackPendingCleanupProcess(DWORD processId, HANDLE process);
 
   struct PendingCleanupProcess {

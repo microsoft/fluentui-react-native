@@ -5,7 +5,7 @@ import type { OperationCurrentStory, OperationStories } from '../operations/runt
 import { HostStaleError, WebDriverError } from '../protocol/errors.js';
 import { attachFailureEffect, readFailureEffect } from '../protocol/settlement.js';
 import { withCommandTimeout } from '../protocol/timeouts.js';
-import type { StoryOrchestrator, StoryReadyResult, StorySelectionRequest } from '../storybook.js';
+import type { StoryOrchestrator, StoryReadyResult, StorySelectionDiagnostics, StorySelectionRequest } from '../storybook.js';
 import { matchesStoryMarker, parseStoryMarker, StoryBridgeUnavailableError } from '../storybook.js';
 import type { DesktopSession, SessionManager } from './SessionManager.js';
 
@@ -32,7 +32,8 @@ export async function changeStory(
     try {
       return await withCommandTimeout(
         async (signal) => {
-          const context = { lifetimeId: session.id, signal };
+          const diagnostics: StorySelectionDiagnostics = {};
+          const context = { lifetimeId: session.id, signal, diagnostics };
           const result = await (change === 'reset'
             ? orchestrator.resetStory(request, context)
             : orchestrator.selectStory(request, context));
@@ -43,11 +44,36 @@ export async function changeStory(
           ) {
             throw new WebDriverError('unknown error', 'Storybook returned readiness for a different selection.');
           }
-          const verified = await verifyStoryMarker(session, result, signal);
+          const started = performance.now();
+          const verified = await verifyStoryMarker(session, result, signal, diagnostics);
+          diagnostics.nativeVerificationMs = performance.now() - started;
           signal.throwIfAborted();
           unavailableContexts.delete(session);
           session.story = result;
-          return { result, verified };
+          const observations: NonNullable<StoryReadyResult['diagnostics']> = {};
+          for (const key of [
+            'preparationMs',
+            'httpMs',
+            'runtimeReadyMs',
+            'nativeVerificationMs',
+            'nativeMarkerPolls',
+            'authenticatedHellos',
+            'bridgeConnections',
+          ] as const) {
+            const value = diagnostics[key];
+            if (typeof value === 'number' && Number.isFinite(value) && value >= 0) observations[key] = value;
+          }
+          const { processId, processStartedAt } = session.lease;
+          if (
+            Number.isSafeInteger(processId) &&
+            processId! > 0 &&
+            processStartedAt &&
+            processStartedAt.length <= 64 &&
+            Number.isFinite(Date.parse(processStartedAt))
+          ) {
+            observations.application = { processId: processId!, processStartedAt: new Date(processStartedAt).toISOString() };
+          }
+          return { result: { ...result, diagnostics: observations }, verified };
         },
         session.desktopTimeouts.storyRender,
         'Changing Storybook context',
@@ -152,7 +178,12 @@ export async function assertStoryContext(session: DesktopSession, sessions: Sess
 }
 
 /** Polls the story root until it shows `expected`. Returns false when the target has no native story root. */
-async function verifyStoryMarker(session: DesktopSession, expected: StoryReadyResult, signal: AbortSignal): Promise<boolean> {
+async function verifyStoryMarker(
+  session: DesktopSession,
+  expected: StoryReadyResult,
+  signal: AbortSignal,
+  diagnostics?: StorySelectionDiagnostics,
+): Promise<boolean> {
   const testId = session.target.storyRootTestId;
   if (!testId) {
     if (expected.markerVersion === 1) {
@@ -162,6 +193,7 @@ async function verifyStoryMarker(session: DesktopSession, expected: StoryReadyRe
   }
   for (;;) {
     signal.throwIfAborted();
+    if (diagnostics) diagnostics.nativeMarkerPolls = (diagnostics.nativeMarkerPolls ?? 0) + 1;
     const markers = await readMarkers(session, testId, signal);
     if (markers.some((marker) => matchesStoryMarker(marker, expected))) {
       return true;

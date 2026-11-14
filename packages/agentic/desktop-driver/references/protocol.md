@@ -228,6 +228,16 @@ detached root reports `stale element reference`.
 
 ## Storybook readiness
 
+Part of #4435. Successful selection/reset responses may include `diagnostics`
+with fixed numeric preparation, HTTP completion, correlated-ready,
+native-verification and marker-poll observations, authenticated hello/connection
+counts, and the native-verified application PID/start time. Providers fill an
+optional local `StoryProviderContext.diagnostics`; it is never sent to the
+runtime. The service allowlists finite nonnegative numbers before returning
+them. These observations are not authenticated marker fields, are not part of
+context identity, and never authorize readiness or recovery. In particular,
+hello counts are not JavaScript initialization counts.
+
 When a target provides a `StoryOrchestrator`, the consumer validates:
 
 - instance, target, endpoint, and catalog identity;

@@ -6,8 +6,11 @@ export type DesktopApplicationResource = Readonly<{
   leaseId?: string;
   processId?: number;
   processStartedAt?: string;
+  executablePath?: string;
+  interactiveSession?: string;
+  aumid?: string;
   containment?: 'external' | 'job-object' | 'uncontained';
-  launchKind?: 'launch-services' | 'direct-child';
+  launchKind?: 'launch-services' | 'direct-child' | 'packaged-activation';
 }>;
 
 export type DesktopResourceServiceReadyRecord = Readonly<DesktopServiceReadyRecord>;

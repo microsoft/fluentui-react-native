@@ -99,7 +99,7 @@ specifiers, so keep it that way.
   lock.
 - Add native self-tests for provider-local parsing, state, cancellation,
   identity, capture geometry, or recovery changes.
-- On macOS, observers use `NativeDesktopHost.inspectApplication`, not another
+- On every native endpoint, observers use `NativeDesktopHost.inspectApplication`, not another
   controlling `attach`. It validates the configured descriptor and exact window
   without taking an application lock or changing session window/element records.
   Keep the exclusive per-incarnation lock on every real launch/attach.

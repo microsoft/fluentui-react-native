@@ -14,6 +14,7 @@ import type { Platforms } from '../config/platforms.js';
 import { resolveWdioOptions } from '../config/wdio.js';
 import { describeWdioCounts, hasExecutedWdioCase } from '../testing/laneVerdict.js';
 import { runWdioStoryTests, WdioStoryTestRunError, type WdioStoryTestResult } from '../testing/runWdioTests.js';
+import { WdioExtractionCache } from '../testing/wdioExtractionCache.js';
 import { decideWdioSelection, describeWdioExclusions, plannedWdioWork, type WdioSelectionContext } from '../testing/selection.js';
 import { writeDesktopStorybookFailure, type DesktopStorybookErrorOutput } from '../../config/diagnostics.cjs';
 import type { DesktopCommandRunner } from './commandRunner.js';
@@ -97,6 +98,7 @@ async function runSmokeTests(
   const startedAt = new Date().toISOString();
   const tests: DesktopStoryTestResult[] = [];
   const wdio: WdioStoryTestResult[] = [];
+  const extractionCache = new WdioExtractionCache();
   const failures: unknown[] = [];
   const staticFailures = new Map<string, Error>();
   for (const storyId of storyIds) options.report?.emit({ kind: 'work-selected', payload: { workId: `smoke:${storyId}`, label: storyId } });
@@ -142,6 +144,7 @@ async function runSmokeTests(
                 signal: options.signal,
                 optional: true,
                 announced: true,
+                extractionCache,
               },
               options.commandRunner,
             )),
