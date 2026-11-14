@@ -84,7 +84,9 @@ class ApplicationManager {
   json::Value RecoverApplication(const json::Value& params, const CancellationToken& token);
   void CloseApplication(const std::string& leaseId, const CancellationToken& token);
   void Dispose(const CancellationToken& token);
-  std::vector<WindowInfo> Windows(const std::string& leaseId, const CancellationToken& token);
+  std::vector<WindowInfo> Windows(
+      const std::string& leaseId, const CancellationToken& token,
+      const std::function<bool(HWND, DWORD, ULONGLONG)>& hasContent = {});
 
   WindowInfo RequireWindow(const std::string& windowId);
   const ApplicationLease* FindLease(const std::string& leaseId) const;
@@ -153,6 +155,7 @@ class ApplicationManager {
   void RetireWindow(const std::string& windowId);
   void RetireClosedWindows(const std::string& leaseId);
   bool IsWindowClosed(const WindowRecord& record) const;
+  bool HasRegisteredWindowIdentity(HWND window, const ApplicationLease& lease) const;
   bool ForegroundBelongsToLease(const ApplicationLease& lease, HWND foreground) const;
   json::Value PublicationDiagnostic(const ApplicationLease& lease) const;
   ApplicationLease& CreateLease(std::string ownership, DWORD processId, HANDLE process, HWND primaryWindow,

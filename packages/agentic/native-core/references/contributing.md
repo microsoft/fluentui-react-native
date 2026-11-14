@@ -55,6 +55,11 @@ full catalog before running the selected native tests.
 Add `--paper` to run the macOS Paper lane; a successful Paper build alone does
 not establish Paper runtime or input parity.
 
+The legacy Callout `WindowCommands` story exposes
+`agentic-storybook-callout-focus` and `agentic-storybook-callout-blur` on its
+actual command buttons. Use those identities for unique secondary-window
+input proofs; a text child or an arbitrary unnamed button is not a substitute.
+
 Executable cases are declared with `desktopIt` and its `requires` list (see
 `@fluentui-react-native/storybook-desktop/references/story-tests.md`), not with run-time
 `skip` guards. Cases that click or type declare `physical-click` and `keyboard`, which

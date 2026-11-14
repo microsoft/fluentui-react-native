@@ -52,6 +52,7 @@ constexpr unsigned int kCloseTimeoutMs = 5000;
 constexpr unsigned int kTerminateWaitMs = 2000;
 constexpr unsigned int kActivationTimeoutMs = 2000;
 constexpr unsigned int kWindowResponseTimeoutMs = 2000;
+constexpr DWORD kWindowContentDiscoveryBudgetMs = 1000;
 constexpr UINT kWindowProbeMessageTimeoutMs = 200;
 constexpr unsigned int kWindowRestoreTimeoutMs = 500;
 constexpr DWORD kLaunchCleanupGraceMs = 250;
@@ -71,6 +72,12 @@ struct EnumerationContext {
   std::vector<HWND> windows;
 };
 
+bool IsVisibleSizedRoot(HWND window) {
+  RECT bounds{};
+  return IsWindowVisible(window) != FALSE && GetAncestor(window, GA_ROOT) == window &&
+         GetWindowRect(window, &bounds) != FALSE && !IsEmptyRect(bounds);
+}
+
 BOOL CALLBACK CollectWindow(HWND window, LPARAM parameter) {
   auto* context = reinterpret_cast<EnumerationContext*>(parameter);
   DWORD processId = 0;
@@ -78,18 +85,11 @@ BOOL CALLBACK CollectWindow(HWND window, LPARAM parameter) {
   if (context->processId != 0 && processId != context->processId) {
     return TRUE;
   }
-  if (IsWindowVisible(window) == FALSE) {
-    return TRUE;
-  }
-  if (GetAncestor(window, GA_ROOT) != window) {
+  if (!IsVisibleSizedRoot(window)) {
     return TRUE;
   }
   const LONG_PTR exStyle = GetWindowLongPtrW(window, GWL_EXSTYLE);
   if ((exStyle & WS_EX_TOOLWINDOW) != 0 && ReadWindowTitle(window).empty()) {
-    return TRUE;
-  }
-  RECT bounds{};
-  if (GetWindowRect(window, &bounds) == FALSE || IsEmptyRect(bounds)) {
     return TRUE;
   }
   context->windows.push_back(window);
@@ -128,6 +128,30 @@ WindowFingerprint ReadWindowFingerprint(HWND window) {
     fingerprint.className.assign(className, static_cast<std::size_t>(length));
   }
   return fingerprint;
+}
+
+bool IsOwnedContentCandidate(HWND window, HWND primaryWindow, DWORD expectedProcessId) {
+  DWORD processId = 0;
+  GetWindowThreadProcessId(window, &processId);
+  if (primaryWindow == nullptr || window == primaryWindow || processId != expectedProcessId ||
+      !IsVisibleSizedRoot(window) || (GetWindowLongPtrW(window, GWL_STYLE) & WS_POPUP) == 0) {
+    return false;
+  }
+  const WindowFingerprint fingerprint = ReadWindowFingerprint(window);
+  if (fingerprint.className.empty()) return false;
+  const wchar_t* const helperClasses[] = {L"tooltips_class32", L"IME", L"MSCTFIME UI", L"CiceroUIWndFrame"};
+  for (const wchar_t* helperClass : helperClasses) {
+    if (CompareStringOrdinal(fingerprint.className.c_str(), -1, helperClass, -1, TRUE) == CSTR_EQUAL) return false;
+  }
+  HWND owner = GetWindow(window, GW_OWNER);
+  for (std::size_t depth = 0; owner != nullptr && depth < 32; ++depth) {
+    DWORD ownerProcessId = 0;
+    GetWindowThreadProcessId(owner, &ownerProcessId);
+    if (ownerProcessId != expectedProcessId) return false;
+    if (owner == primaryWindow) return true;
+    owner = GetWindow(owner, GW_OWNER);
+  }
+  return false;
 }
 
 std::string ReadFileWithRetry(const std::wstring& path, const CancellationToken& token) {
@@ -1153,6 +1177,19 @@ bool ApplicationManager::IsWindowClosed(const WindowRecord& record) const {
   return record.window == nullptr || IsWindow(record.window) == FALSE || windowEvents_.IsClosed(record.id);
 }
 
+bool ApplicationManager::HasRegisteredWindowIdentity(HWND window, const ApplicationLease& lease) const {
+  const auto id = windowIdsByHandle_.find(window);
+  if (id == windowIdsByHandle_.end()) return false;
+  const auto record = windowsById_.find(id->second);
+  if (record == windowsById_.end() || record->second.leaseId != lease.id ||
+      record->second.processId != lease.processId || IsWindowClosed(record->second)) return false;
+  DWORD processId = 0;
+  GetWindowThreadProcessId(window, &processId);
+  const WindowFingerprint fingerprint = ReadWindowFingerprint(window);
+  return processId == lease.processId && record->second.threadId == fingerprint.threadId &&
+         record->second.className == fingerprint.className;
+}
+
 void ApplicationManager::RetireWindow(const std::string& windowId) {
   const auto entry = windowsById_.find(windowId);
   if (entry != windowsById_.end()) {
@@ -1897,13 +1934,16 @@ json::Value ApplicationManager::RecoverApplication(const json::Value& params, co
   return exited();
 }
 
-std::vector<WindowInfo> ApplicationManager::Windows(const std::string& leaseId, const CancellationToken& token) {
+std::vector<WindowInfo> ApplicationManager::Windows(
+    const std::string& leaseId, const CancellationToken& token,
+    const std::function<bool(HWND, DWORD, ULONGLONG)>& hasContent) {
   const auto entry = leases_.find(leaseId);
   if (entry == leases_.end()) {
     Fail(kErrorNoSuchLease, "The requested application lease is not held by this helper.");
   }
   ApplicationLease& lease = entry->second;
   token.ThrowIfCancelled();
+  const ULONGLONG contentDeadline = GetTickCount64() + kWindowContentDiscoveryBudgetMs;
   if (!IsProcessAlive(lease.process)) {
     Fail(kErrorNoSuchLease, "The leased application process has exited.");
   }
@@ -1912,11 +1952,30 @@ std::vector<WindowInfo> ApplicationManager::Windows(const std::string& leaseId, 
   // Closed windows leave the table before the live ones register, so a handle
   // reused by a later window can never keep its predecessor's identifier.
   RetireClosedWindows(leaseId);
-  for (const HWND window : EnumerateTopLevelWindows(lease.processId)) {
+  for (const HWND window : EnumerateAllTopLevelWindows(lease.processId)) {
+    token.ThrowIfCancelled();
+    DWORD processId = 0;
+    GetWindowThreadProcessId(window, &processId);
+    if (processId != lease.processId || !IsVisibleSizedRoot(window)) continue;
+    const std::wstring title = ReadWindowTitle(window);
+    if ((GetWindowLongPtrW(window, GWL_EXSTYLE) & WS_EX_TOOLWINDOW) != 0 && title.empty()) {
+      if (!HasRegisteredWindowIdentity(lease.primaryWindow, lease) ||
+          !IsOwnedContentCandidate(window, lease.primaryWindow, lease.processId)) continue;
+      // Content proves initial admission, not whether an admitted window closed.
+      if (!HasRegisteredWindowIdentity(window, lease)) {
+        if (!hasContent || GetTickCount64() >= contentDeadline) continue;
+        const WindowFingerprint before = ReadWindowFingerprint(window);
+        if (!hasContent(window, lease.processId, contentDeadline)) continue;
+        const WindowFingerprint after = ReadWindowFingerprint(window);
+        if (!HasRegisteredWindowIdentity(lease.primaryWindow, lease) ||
+            !IsOwnedContentCandidate(window, lease.primaryWindow, lease.processId) ||
+            before.threadId != after.threadId || before.className != after.className) continue;
+      }
+    }
     WindowInfo info;
     info.window = window;
     info.processId = lease.processId;
-    info.title = ReadWindowTitle(window);
+    info.title = title;
     info.primary = window == lease.primaryWindow || (lease.primaryWindow == nullptr && info.title == lease.windowTitle);
     info.id = RegisterWindow(window, lease.processId, leaseId, info.primary, info.title);
     results.push_back(std::move(info));
@@ -2278,7 +2337,10 @@ json::Value ApplicationManager::PublicationDiagnostic(const ApplicationLease& le
     const WindowDescriptor descriptor = DescribeWindow(window);
     json::Value entry = json::Value::Object();
     entry.Set("className", json::Value::String(descriptor.className));
-    entry.Set("listed", json::Value::Bool(std::find(listed.begin(), listed.end(), window) != listed.end()));
+    const bool admittedPopup = HasRegisteredWindowIdentity(window, lease) &&
+                               HasRegisteredWindowIdentity(lease.primaryWindow, lease) &&
+                               IsOwnedContentCandidate(window, lease.primaryWindow, lease.processId);
+    entry.Set("listed", json::Value::Bool(std::find(listed.begin(), listed.end(), window) != listed.end() || admittedPopup));
     entry.Set("owned", json::Value::Bool(descriptor.owned));
     if (descriptor.hasTitle) {
       entry.Set("title", json::Value::String(descriptor.title));

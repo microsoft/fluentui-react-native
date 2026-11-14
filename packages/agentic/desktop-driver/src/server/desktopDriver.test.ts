@@ -9,6 +9,63 @@ import { createDesktopDriverTestHarness } from '../testing/protocolHarness.js';
 import type { DesktopStoryManifest, StoryOrchestrator, StoryReadyResult } from '../storybook.js';
 
 describe('Desktop Driver W3C remote end', () => {
+  test('reads a specified live window without activation or changing the selected window', async () => {
+    const harness = await createDesktopDriverTestHarness({
+      windows: [
+        { id: 'main', title: 'Main', elements: [] },
+        {
+          id: 'menu',
+          title: '',
+          elements: [
+            {
+              id: 'menu-root',
+              role: 'menu',
+              scope: 'secondary-window',
+              windowId: 'menu',
+              rect: { x: 0, y: 0, width: 100, height: 100 },
+            },
+          ],
+        },
+      ],
+    });
+    try {
+      const client = createDesktopDriverClient({ url: harness.server.url });
+      const session = await client.newSession({
+        alwaysMatch: { platformName: 'windows', 'furn:target': harness.target.id },
+      });
+      const actions = [...harness.host.actions];
+      const tree = await session.getWindowTree('menu');
+      expect(tree).toEqual([expect.objectContaining({ role: 'menu' })]);
+      expect(await session.getWindowHandle()).toBe('main');
+      expect(harness.host.actions).toEqual(actions);
+      await session.delete();
+    } finally {
+      await harness.close();
+    }
+  });
+
+  test('refuses unlisted and closed windows before trying to inspect their trees', async () => {
+    const harness = await createDesktopDriverTestHarness();
+    try {
+      const client = createDesktopDriverClient({ url: harness.server.url });
+      const session = await client.newSession({
+        alwaysMatch: { platformName: 'windows', 'furn:target': harness.target.id },
+      });
+      const tree = jest.spyOn(harness.host, 'tree');
+      const [window] = await session.getWindowHandles();
+      for (const handle of ['unlisted', window]) {
+        if (handle === window) await harness.host.closeWindow(window);
+        await expect(session.getWindowTree(handle)).rejects.toMatchObject({
+          code: 'no such window',
+        });
+      }
+      expect(tree).not.toHaveBeenCalled();
+      await session.delete();
+    } finally {
+      await harness.close();
+    }
+  });
+
   test.each([
     undefined,
     { supported: false as const, reason: 'Not exposed.' },

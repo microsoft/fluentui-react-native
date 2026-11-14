@@ -309,6 +309,37 @@ either differs. A recycled handle of the same class on the same thread whose
 destroy notification was never delivered is indistinguishable. Event delivery
 across integrity levels is untested.
 
+Global title discovery still excludes untitled tool-window roots. Within an
+exact-process application lease, `windows` also admits an untitled tool popup
+when it is visible, has positive native bounds, and its same-process owner
+chain reaches the verified primary window. Known tooltip and IME helper
+classes stay excluded. Initial admission requires a bounded UIA content-view
+probe to verify the exact native root handle/process and find an exact-process
+content child; tooltip content and unreadable content do not qualify. The
+helper rechecks ownership, process, visibility, bounds, and the
+primary/candidate fingerprints after the provider read before registering the
+opaque window identity.
+
+An admitted popup remains listable through Win32 liveness checks while its
+lease, process, thread, class, visibility, bounds, and owner chain still match.
+It is not probed again, so a provider timeout or temporary content re-layout
+cannot masquerade as window closure. All new candidates share one 1,000 ms
+discovery deadline per `windows` call, including `ElementFromHandle` and content
+reads; candidates not proved before that deadline are omitted and retried on a
+later listing. Exhausting discovery never removes an already-admitted window.
+The probe retains no element records or whole-subtree cache and never
+quarantines the session; cancellation still propagates.
+
+If a window closes after enumeration but before its geometry is serialized,
+the listing omits it and still returns the other live windows. Only a
+`no-such-window` failure confirmed by native handle liveness is absorbed;
+failures for live handles and unrelated errors still propagate. Direct
+commands for the closed window continue to fail as `no-such-window`.
+
+`windowEvents.publication.windows[].listed` includes admitted tool popups
+using those same native identity/ownership checks. It does not repeat UIA
+discovery or report an admitted live popup as `listed: false, tracked: true`.
+
 ### Input authority
 
 Before physical input the helper evaluates the desktop it would inject into and
@@ -446,7 +477,7 @@ read of a large tree.
 ### Unsettled mutations
 
 UI Automation mutations (`SetFocus`, `Invoke`, `Toggle`, `Select`,
-`Expand`/`Collapse`, `DoDefaultAction`, and `SetValue`) run on a bounded worker
+`Expand`/`Collapse`, and `SetValue`) run on a bounded worker
 with a five-second deadline because a suspended or busy application can stall
 its UI thread indefinitely. A deadline does not cancel the provider call: the
 application can still apply the effect later. The helper therefore reports
@@ -466,14 +497,23 @@ transaction timeouts. A cancelled read simply stops waiting. A cancelled
 mutation is abandoned and quarantined exactly like one that timed out, so its
 effect is `unknown` and the refusal says it was cancelled before it settled.
 
-Click tries `Invoke`, `Toggle`, `SelectionItem`, `ExpandCollapse`, then
-`LegacyIAccessible`. On Win32 controls `Invoke` is posted: the provider accepts
+Accessibility click tries `Invoke`, `Toggle`, `SelectionItem`, then
+`ExpandCollapse`. On Win32 controls `Invoke` is posted: the provider accepts
 the call and the application applies the effect afterwards, so callers poll for
 the visible result. Only a pattern the element does not implement moves on to
 the next one, and only an element without any of them is unsupported; a pattern
 query that fails otherwise fails as `automation-failed`, and one for an element
 that went away as `stale-element`. Named accessibility actions and a `semantic`
 clear classify their pattern queries the same way.
+
+Legacy-only activation is refused before dispatch as `unsupported-operation`
+with `data.reason: activation-unsupported` and effect `none`, even when the
+LegacyIAccessible bridge advertises a nonempty default action. The bridge can
+acknowledge `DoDefaultAction` without delivering an actionable UIA pattern.
+`ScrollIntoView` alone is not activation. Node preserves the reason and native
+code, records no input delivery, and never retries physically on its own. A
+caller may explicitly request physical click under the normal input policy;
+an indeterminate mutation must never be replayed as a fallback.
 
 While quarantined, `click`, `clear`, `sendKeys`, `performActions`,
 `performAccessibilityAction`, `activate`,

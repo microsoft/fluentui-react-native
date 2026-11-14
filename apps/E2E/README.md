@@ -138,6 +138,17 @@ Native setup retains initial
 window bounds: it does **not** emulate the old maximize hook. Popup lookup
 remains scoped to the selected window.
 
+On Windows and Win32, the assertion-dialog safety check inspects each secondary
+window without selecting or activating it, so it cannot dismiss an open menu.
+Only a single accessibility `menu` root without nested dialogs or windows is
+recognized as an expected popup. A tree read reporting `no such window` is
+treated as a closed popup. Empty or unrecognized roots fail the check only
+when a fresh window listing still includes that handle, avoiding false
+assertions while a menu closes. Every other tree-read error still fails the
+test rather than being treated as no assertion.
+The native-task-library bypass, Android page check, and other runners' existing
+window-count check are unchanged.
+
 WebdriverIO 10 throws a `StrictSelectorError` when a selector matches several
 elements, where WebdriverIO 9 took the first match. A native tree can expose
 several elements for one `testID` (a container and its children), and the page

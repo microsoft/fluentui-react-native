@@ -277,6 +277,11 @@ export class DesktopSessionClient {
     return this.command('GET', '/furn/tree', undefined, options?.signal);
   }
 
+  /** Reads a live window in this session without selecting it or changing native focus. */
+  getWindowTree(windowId: string, options?: DesktopClientCallOptions): Promise<DesktopTreeNode[]> {
+    return this.command('GET', `/furn/window/${encodeURIComponent(windowId)}/tree`, undefined, options?.signal);
+  }
+
   getWindowEvents(options?: DesktopClientCallOptions): Promise<DesktopWindowEventLog> {
     return this.command('GET', '/furn/window-events', undefined, options?.signal);
   }

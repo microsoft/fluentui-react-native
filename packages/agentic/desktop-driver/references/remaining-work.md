@@ -1103,6 +1103,36 @@ have evidence at the final revision, implementation changesets are present,
 and the final clean-cache repository aggregate passes. Only then prepare/push
 the PR; a hosted capability skip is not completion.
 
+### Windows connected-session follow-up — 2026-11-12 UTC
+
+The legacy-only activation refusal and lease-local content-popup registration
+corrections and close-during-listing guard have reviewed test-first evidence.
+At clean revision `6c626602c`, with the new helper and an eligible remote
+session, Fabric main/secondary semantic refusal and both endpoints'
+secondary physical delivery passed. The complete native selector passed
+34 tests with two macOS-only skips, including failed/hung-probe retention,
+the shared discovery deadline and deferred retry, truthful publication,
+and the deterministic close-after-enumeration self-test. The
+default-environment clean-cache aggregate passed all 178 tasks on its first
+attempt. See the separate [Windows evidence entry](current-status.md).
+
+Keep #4441 open for the unrun 200% DPI, mixed-DPI, and negative-origin cases
+and other issue-owned gaps. Native delivery receipts do not prove the
+legacy Callout's unreported RN focus-command outcome. Current-head hosted
+Windows/Win32 coverage, including the legacy menu assertion guard and its
+closing-window correction, is tracked in draft PR #4498; earlier-head CI
+does not qualify later code.
+
+The W3 campaign ended, owned aggregate descendants drained before lock
+release, and post-campaign/post-aggregate process audits were clean.
+Further native/GUI/physical work still requires an
+Active, unlocked session, an explicit W3 desktop grant, and the serialized
+campaign; physical work additionally requires `-RequirePhysical`. No
+reconnect, session move, or skip-to-pass substitution is authorized.
+Earlier eligible physical results remain evidence for their tested
+revisions, not new-helper reruns. Authorized draft publication leaves
+these qualification gaps and the unrun display-topology cases open.
+
 ## 9. Qualification and efficiency gates
 
 | Lane                                       | Required scope                                                                                                                 |
