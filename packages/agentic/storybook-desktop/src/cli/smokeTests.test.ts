@@ -194,6 +194,25 @@ describe('runDesktopStorybookSmokeTests', () => {
     expect(deleteSession).toHaveBeenCalledTimes(1);
   });
 
+  test('shares one extraction cache across per-story calls, but not across separate smoke runs', async () => {
+    options.manifest = {
+      ...manifest,
+      entries: [buttonId, inputId].map((id) => ({ ...story(id, true), tests: undefined })),
+    };
+    const connect = jest.fn();
+    const runWdio: jest.MockedFunction<typeof runWdioStoryTests> = jest.fn(async ({ story }) => [
+      { storyId: story!, status: 'passed' as const, durationMs: 1 },
+    ]);
+    await runDesktopStorybookSmokeTests(options, connect, runWdio);
+    const first = runWdio.mock.calls[0][0].extractionCache;
+    expect(first).toBeDefined();
+    expect(runWdio.mock.calls[1][0].extractionCache).toBe(first);
+    await runDesktopStorybookSmokeTests(options, connect, runWdio);
+    expect(runWdio.mock.calls[2][0].extractionCache).not.toBe(first);
+    expect(runWdio.mock.calls[3][0].extractionCache).toBe(runWdio.mock.calls[2][0].extractionCache);
+    expect(connect).not.toHaveBeenCalled();
+  });
+
   test.each(['storyPattern', 'testTag'] as const)('rejects an empty %s before connecting', async (key) => {
     options[key] = ' ';
     const connect = jest.fn();

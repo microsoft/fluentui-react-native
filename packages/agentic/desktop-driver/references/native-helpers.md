@@ -161,6 +161,14 @@ not set this policy.
 Never edit an artifact or selection in place. Rebuild and allow the resolver to
 publish a new immutable selection.
 
+Repository CI explicitly provisions the plain Win32 fixture through the built
+test-only `lib/native/windows/win32FixtureSupport.js` module's
+`fixtureExecutable()` function. That module supports direct Node ESM loading,
+without Jest's source resolver, and anchors fixture sources in the driver
+package rather than the caller's directory. Importing it is portable and does
+not build or launch anything. Calling the builder requires the Windows
+toolchain and publishes only to the fixture cache; it never launches the app.
+
 ## Verification
 
 Every artifact is checked before use:
@@ -199,6 +207,18 @@ the first malformed frame the decoder drops its buffer and ignores later
 output.
 
 ### Shutdown and cancellation
+
+Windows and Win32 application leases retain native 100 ns creation time,
+canonical image, session, and AUMID when packaged. Read-only
+`inspectApplication` never takes controlling application ownership or changes
+session window records. Exact PID/start application exclusion is independent
+of the physical-input mutex. Trusted survivor recovery queries creation time
+with limited rights first: a reused PID proves the recorded incarnation exited,
+without signalling or taking control of its replacement. An unreadable start
+remains fenced. A matching start still requires the complete identity and
+exclusive application control before cleanup.
+See the [Windows provider](../native/windows/README.md#application-identity)
+and [wire contract](../native/PROTOCOL.md#windows-application-ownership).
 
 Every failure takes one terminal path: Node stops the helper, recovers input
 the helper may have left depressed, and then rejects each pending request

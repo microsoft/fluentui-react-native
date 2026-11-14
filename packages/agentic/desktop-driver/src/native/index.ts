@@ -9,6 +9,7 @@ export {
 export { nativeDriverWireProtocol } from './constants.js';
 export { NativeDriverError } from './NativeDriverError.js';
 export type {
+  NativeApplicationIdentity,
   NativeDesktopApplicationDescriptor,
   NativeDriverArchitecture,
   NativeDriverArtifact,

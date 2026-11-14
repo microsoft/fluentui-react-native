@@ -78,6 +78,9 @@ specifiers, so keep it that way.
 - Propagate `AbortSignal` to every host operation.
 - Do not release queues or input locks until a timed-out native command settles.
 - Preserve attached apps and clean only exact owned resources.
+- Callers resolve existing private-storage parent directories before opening them.
+  macOS storage keeps rejecting symlink ancestors on subsequent operations and
+  identifies the failing ancestor in ownership/permissions diagnostics.
 - Keep native events advisory and queries authoritative.
 - Use opaque public window/element IDs and native liveness checks.
 - A Storybook preview reset invalidates preview elements, not app chrome or
@@ -96,6 +99,10 @@ specifiers, so keep it that way.
   lock.
 - Add native self-tests for provider-local parsing, state, cancellation,
   identity, capture geometry, or recovery changes.
+- On every native endpoint, observers use `NativeDesktopHost.inspectApplication`, not another
+  controlling `attach`. It validates the configured descriptor and exact window
+  without taking an application lock or changing session window/element records.
+  Keep the exclusive per-incarnation lock on every real launch/attach.
 - Add or update the opt-in Node native contract when build, cache, selection,
   signing, or handshake behavior changes.
 - On Windows, extend the Win32 fixture contract

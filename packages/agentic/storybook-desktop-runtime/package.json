@@ -48,6 +48,7 @@
     "@fluentui-react-native/native-core": "workspace:*",
     "@rnx-kit/metro-config": "catalog:",
     "@rnx-kit/metro-resolver-symlinks": "catalog:",
+    "@rnx-kit/tools-react-native": "catalog:",
     "@storybook/react-native": "^10.7.1",
     "@storybook/react-native-theming": "^10.7.1",
     "@storybook/react-native-ui-common": "^10.7.1",
@@ -96,6 +97,10 @@
   "furn": {
     "jestPlatform": "macos",
     "knip": {
+      "extraEntries": [
+        "config/metro.cjs",
+        "config/runtime-transformer.cjs"
+      ],
       "ignoreDependencies": [
         "@fluentui-react-native/native-core"
       ]

@@ -404,8 +404,10 @@ function importedHelper(callee, fromFile) {
 function readHelperModule(file, context) {
   if (context.modules.has(file)) return context.modules.get(file);
   let helper = null;
+  let source;
   try {
-    const ast = parseSync(fs.readFileSync(file, 'utf8'), {
+    source = fs.readFileSync(file, 'utf8');
+    const ast = parseSync(source, {
       babelrc: false,
       configFile: false,
       filename: file,
@@ -446,6 +448,7 @@ function readHelperModule(file, context) {
     // A helper this check cannot parse is left to the run-time policy, like any other input it cannot see.
     helper = null;
   }
+  context.onReadHelper?.(file, source);
   context.modules.set(file, helper);
   return helper;
 }
@@ -503,9 +506,9 @@ function findPhysicalInput(root, file, context, helper) {
  * refused by the accessible lane's input policy when the case runs, and the case's receipts are checked against its
  * declaration in every lane.
  */
-function rejectDirectInput(callback, { name, input, inputSource, sourceFile }) {
+function rejectDirectInput(callback, { name, input, inputSource, sourceFile, onReadHelper }) {
   if (input === 'physical') return;
-  const finding = findPhysicalInput(callback, sourceFile, { modules: new Map(), functions: new Map() });
+  const finding = findPhysicalInput(callback, sourceFile, { modules: new Map(), functions: new Map(), onReadHelper });
   if (!finding) return;
   const subject = name ? `"${name}"` : 'This case';
   const declared = inputSource === 'declared';

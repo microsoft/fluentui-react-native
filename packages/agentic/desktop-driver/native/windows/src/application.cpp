@@ -17,6 +17,7 @@
 
 #include "geometry.h"
 #include "settlement.h"
+#include "winsecurity.h"
 
 namespace furn {
 
@@ -244,6 +245,131 @@ std::wstring ReadProcessApplicationUserModelId(HANDLE process) {
   }
   value.resize(length - 1);
   return value;
+}
+
+json::Value ReadExactApplicationIdentity(DWORD processId, HANDLE process) {
+  if (!IsProcessAlive(process)) {
+    throw HelperError(kErrorAttachFailed, "The application process has exited.", "application-exited");
+  }
+  RequireProcessInHelperSession(processId, kErrorAttachFailed);
+  HANDLE rawToken = nullptr;
+  if (OpenProcessToken(process, TOKEN_QUERY, &rawToken) == FALSE) {
+    throw HelperError(kErrorAttachFailed, "The application owner cannot be verified.", "application-identity-unknown");
+  }
+  const ScopedHandle token(rawToken);
+  const Sid owner = TokenUserSid(token.Get());
+  const Sid self = CurrentUserSid();
+  if (!owner.Valid() || !self.Valid() || !self.Equals(owner.Get())) {
+    throw HelperError(kErrorAttachFailed, "The application does not belong to the current user.", "identity-user-mismatch");
+  }
+  FILETIME started{};
+  DWORD session = 0;
+  const std::wstring image = NormalizeExecutablePath(ReadProcessImagePath(process));
+  if (!TryReadProcessStartTime(process, started) || FileTimeTicks(started) == 0 || image.empty() ||
+      ProcessIdToSessionId(processId, &session) == FALSE) {
+    throw HelperError(kErrorAttachFailed, "The application's exact native identity cannot be read.", "application-identity-unknown");
+  }
+  json::Value identity = json::Value::Object();
+  identity.Set("processId", json::Value::Integer(processId));
+  identity.Set("processStartedAt", json::Value::String(FormatFileTimeIso8601(started)));
+  identity.Set("executablePath", json::Value::String(CanonicalizeExecutablePath(image)));
+  identity.Set("interactiveSession", json::Value::String("windows-session:" + std::to_string(session)));
+  UINT32 length = 0;
+  const LONG measured = GetApplicationUserModelId(process, &length, nullptr);
+  if (measured != APPMODEL_ERROR_NO_APPLICATION) {
+    const std::wstring aumid = measured == ERROR_INSUFFICIENT_BUFFER ? ReadProcessApplicationUserModelId(process) : std::wstring();
+    if (aumid.empty()) {
+      throw HelperError(kErrorAttachFailed, "The application's packaged identity cannot be verified.", "application-identity-unknown");
+    }
+    identity.Set("aumid", json::Value::String(aumid));
+  }
+  return identity;
+}
+
+bool BoundedIdentityText(const json::Value* value) {
+  if (value == nullptr || !value->IsString() || value->AsString().empty() || value->AsString().size() > 4096 ||
+      !IsStrictUtf8(value->AsString())) {
+    return false;
+  }
+  const std::wstring text = value->AsWide();
+  return std::none_of(text.begin(), text.end(),
+                      [](wchar_t character) { return character < 0x20 || (character >= 0x7f && character <= 0x9f); });
+}
+
+void RequireWindowsEndpoint(const json::Value& params) {
+  const std::string endpoint = params.StringField("endpoint", "windows");
+  if (endpoint != "windows" && endpoint != "win32") Fail(kErrorInvalidParams, "The Windows provider requires a Windows endpoint.");
+}
+
+void RequireResolvedPrimary(HWND window, DWORD expectedPid, const std::wstring& title, HANDLE process) {
+  DWORD actualPid = 0;
+  GetWindowThreadProcessId(window, &actualPid);
+  if (actualPid != expectedPid || ReadWindowTitle(window) != title || !IsProcessAlive(process)) {
+    throw HelperError(kErrorAttachFailed, "The resolved application/window identity changed.", "application-identity-changed");
+  }
+}
+
+DWORD RequireExactIdentity(const json::Value& identity) {
+  if (!identity.IsObject() || identity.Members().size() < 4 || identity.Members().size() > 5) {
+    throw HelperError(kErrorInvalidParams, "Windows processIdentity requires exact native process, executable and session evidence.",
+                      "application-identity-invalid");
+  }
+  for (const auto& member : identity.Members()) {
+    if (member.first != "processId" && member.first != "processStartedAt" && member.first != "executablePath" &&
+        member.first != "interactiveSession" && member.first != "aumid") {
+      throw HelperError(kErrorInvalidParams, "Windows processIdentity contains an unknown field.", "application-identity-invalid");
+    }
+  }
+  const json::Value* pid = identity.Find("processId");
+  const double number = pid == nullptr ? 0 : pid->AsNumber();
+  FILETIME started{};
+  const std::string timestamp = identity.StringField("processStartedAt");
+  const std::string session = identity.StringField("interactiveSession");
+  if (pid == nullptr || !pid->IsNumber() || !std::isfinite(number) || std::floor(number) != number ||
+      number < 1 || number > 2147483647 || !TryParseIso8601(timestamp, started) ||
+      FormatFileTimeIso8601(started) != timestamp || !BoundedIdentityText(identity.Find("executablePath")) ||
+      !std::filesystem::path(identity.WideField("executablePath")).is_absolute() ||
+      !session.starts_with("windows-session:") || session.size() < 17 || session.size() > 26 ||
+      !std::all_of(session.begin() + 16, session.end(), [](char character) { return character >= '0' && character <= '9'; }) ||
+      (identity.Has("aumid") && !BoundedIdentityText(identity.Find("aumid")))) {
+    throw HelperError(kErrorInvalidParams, "Windows processIdentity is incomplete or not in native canonical form.",
+                      "application-identity-invalid");
+  }
+  return static_cast<DWORD>(number);
+}
+
+void VerifyExactIdentity(const json::Value& expected, const json::Value& actual) {
+  if (expected.StringField("processStartedAt") != actual.StringField("processStartedAt")) {
+    throw HelperError(kErrorAttachFailed, "The recorded PID names a different process incarnation.", "identity-start-mismatch");
+  }
+  if (expected.StringField("interactiveSession") != actual.StringField("interactiveSession")) {
+    throw HelperError(kErrorAttachFailed, "The recorded application session differs.", "identity-session-mismatch");
+  }
+  if (_wcsicmp(expected.WideField("executablePath").c_str(), actual.WideField("executablePath").c_str()) != 0) {
+    throw HelperError(kErrorAttachFailed, "The recorded application executable differs.", "identity-executable-mismatch");
+  }
+  if (expected.StringField("aumid") != actual.StringField("aumid")) {
+    throw HelperError(kErrorAttachFailed, "The recorded application AUMID differs.", "identity-aumid-mismatch");
+  }
+}
+
+std::shared_ptr<ApplicationControlLock> AcquireApplicationControl(DWORD processId, const FILETIME& started) {
+  // No waiter retains a handle: after a crash the last handle closes and the semaphore disappears. A semaphore,
+  // unlike a recursive mutex, also excludes another manager on the same thread.
+  const std::wstring name = L"Local\\FurnDesktopDriverApplication-v1-" + std::to_wstring(processId) + L"-" +
+                            std::to_wstring(FileTimeTicks(started));
+  winrt::handle semaphore{CreateSemaphoreW(nullptr, 1, 1, name.c_str())};
+  if (!semaphore) {
+    throw HelperError(kErrorAttachFailed, "The exact application control lock cannot be opened.", "application-lock-unavailable");
+  }
+  const DWORD waited = WaitForSingleObject(semaphore.get(), 0);
+  if (waited != WAIT_OBJECT_0) {
+    throw HelperError(kErrorAttachFailed, "Another native service controls this exact application incarnation.",
+                      waited == WAIT_TIMEOUT ? "application-lock-busy" : "application-lock-unavailable");
+  }
+  auto lock = std::make_shared<ApplicationControlLock>(semaphore.get(), processId, started);
+  semaphore.detach();
+  return lock;
 }
 
 bool ProcessStartedForLaunch(HANDLE process, const FILETIME& launchStartedAt) {
@@ -954,6 +1080,13 @@ bool RestoreWindow(HWND window, const CancellationToken& token) {
   }
 }
 
+ApplicationControlLock::~ApplicationControlLock() {
+  if (handle != nullptr) {
+    ReleaseSemaphore(handle, 1, nullptr);
+    CloseHandle(handle);
+  }
+}
+
 ApplicationManager::~ApplicationManager() {
   try {
     const CancellationToken idle;
@@ -1114,7 +1247,7 @@ const ApplicationLease& ApplicationManager::AdoptWindowForTesting(HWND window, c
 ApplicationLease& ApplicationManager::CreateLease(std::string ownership, DWORD processId, HANDLE process,
                                                   HWND primaryWindow, const std::wstring& title,
                                                   const json::Value& params, std::string containment,
-                                                  HANDLE job) {
+                                                  HANDLE job, std::shared_ptr<ApplicationControlLock> launchRootControl) {
   ApplicationLease lease;
   lease.id = NextIdentifier("lease");
   lease.ownership = std::move(ownership);
@@ -1124,11 +1257,37 @@ ApplicationLease& ApplicationManager::CreateLease(std::string ownership, DWORD p
   lease.processId = processId;
   lease.primaryWindow = primaryWindow;
   lease.windowTitle = title;
+  lease.launchRootControl = std::move(launchRootControl);
   // The start time proves which incarnation of the process the lease names; a
   // lease without it would later read as a process that already exited.
   if (process != nullptr && !TryReadProcessStartTime(process, lease.startTime)) {
     Fail(lease.ownership == "launched" ? kErrorLaunchFailed : kErrorAttachFailed,
          "The leased application process start time could not be read.");
+  }
+  const json::Value identity = ReadExactApplicationIdentity(processId, process);
+  lease.executablePath = identity.WideField("executablePath");
+  lease.aumid = identity.WideField("aumid");
+  lease.interactiveSession = identity.StringField("interactiveSession");
+  if (lease.ownership == "launched") {
+    lease.launchKind = lease.containment == kContainmentJobObject ? "direct-child" : "packaged-activation";
+  }
+  if (lease.launchRootControl && lease.launchRootControl->processId == processId &&
+      FileTimeTicks(lease.launchRootControl->startTime) == FileTimeTicks(lease.startTime)) {
+    lease.control = lease.launchRootControl;
+  }
+  for (const auto& entry : leases_) {
+    if (entry.second.processId == processId && FileTimeTicks(entry.second.startTime) == FileTimeTicks(lease.startTime)) {
+      lease.control = entry.second.control;
+      break;
+    }
+    if (entry.second.launchRootControl && entry.second.launchRootControl->processId == processId &&
+        FileTimeTicks(entry.second.launchRootControl->startTime) == FileTimeTicks(lease.startTime)) {
+      lease.control = entry.second.launchRootControl;
+      break;
+    }
+  }
+  if (!lease.control) {
+    lease.control = AcquireApplicationControl(processId, lease.startTime);
   }
   const std::string id = lease.id;
   leases_.emplace(id, std::move(lease));
@@ -1182,9 +1341,32 @@ ApplicationLease& ApplicationManager::CreateLease(std::string ownership, DWORD p
 }
 
 const ApplicationLease& ApplicationManager::Launch(const json::Value& params, const CancellationToken& token) {
+  launchFailureData_ = json::Value::Object();
+  launchFailureData_.Set("applicationSettlement", json::Value::String(std::string("not-started")));
+  try {
+    return LaunchImpl(params, token);
+  } catch (HelperError& error) {
+    error.SetData(launchFailureData_);
+    throw;
+  } catch (CancelledError& error) {
+    error.SetData(launchFailureData_);
+    throw;
+  } catch (const std::exception& error) {
+    HelperError failure(kErrorLaunchFailed, error.what());
+    failure.SetData(launchFailureData_);
+    throw failure;
+  }
+}
+
+const ApplicationLease& ApplicationManager::LaunchImpl(const json::Value& params, const CancellationToken& token) {
+  token.ThrowIfCancelled();
+  RequireWindowsEndpoint(params);
   const json::Value* application = params.Find("application");
   if (application == nullptr || !application->IsObject()) {
     Fail(kErrorInvalidParams, "The launch request is missing its application descriptor.");
+  }
+  if (application->Has("processIdentity") || application->Has("leasePath") || application->Has("leaseNonce")) {
+    Fail(kErrorInvalidParams, "An external application identity cannot authorize a launch.");
   }
   const json::Value* timeout = params.Find("launchTimeoutMs");
   const double configuredTimeout = params.NumberField("launchTimeoutMs", kLaunchTimeoutMs);
@@ -1238,6 +1420,7 @@ const ApplicationLease& ApplicationManager::Launch(const json::Value& params, co
   // Null for packaged activation: Windows creates that process, so the helper
   // owns only the exact activated process and never claims its descendants.
   winrt::handle containmentJob;
+  std::shared_ptr<ApplicationControlLock> launchControl;
   try {
     if (!aumid.empty()) {
       winrt::com_ptr<IApplicationActivationManager> manager;
@@ -1245,6 +1428,7 @@ const ApplicationLease& ApplicationManager::Launch(const json::Value& params, co
                    CoCreateInstance(CLSID_ApplicationActivationManager, nullptr, CLSCTX_LOCAL_SERVER,
                                     IID_PPV_ARGS(manager.put())));
       CoAllowSetForegroundWindow(manager.get(), nullptr);
+      launchFailureData_.Set("applicationSettlement", json::Value::String(std::string("unknown")));
       CheckHresult(kErrorLaunchFailed, "Activating the packaged application",
                    manager->ActivateApplication(aumid.c_str(), arguments.empty() ? nullptr : arguments.c_str(),
                                                 AO_NOERRORUI, &launchRoot.processId));
@@ -1259,8 +1443,9 @@ const ApplicationLease& ApplicationManager::Launch(const json::Value& params, co
              "The activated application process identity could not be read.");
       }
       if (!ProcessStartedForLaunch(launchRoot.process.get(), launchStartedAt)) {
-        Fail(kErrorLaunchFailed,
-             "Packaged activation reused a pre-existing process. Use attach mode instead.");
+        launchFailureData_.Set("applicationSettlement", json::Value::String(std::string("not-started")));
+        throw HelperError(kErrorLaunchFailed, "Packaged activation reused a pre-existing process. Use attach mode instead.",
+                          "application-preexisting");
       }
       // The root anchors ancestry and is ended on failure, so a process that
       // does not prove the requested identity, such as one that reused the
@@ -1270,6 +1455,13 @@ const ApplicationLease& ApplicationManager::Launch(const json::Value& params, co
              "The activated process does not report the requested application identity, so the helper left "
              "it running and did not lease it.");
       }
+      launchFailureData_ = ReadExactApplicationIdentity(launchRoot.processId, launchRoot.process.get());
+      launchFailureData_.Set("applicationSettlement", json::Value::String(std::string("unknown")));
+      launchFailureData_.Set("launchKind", json::Value::String(std::string("packaged-activation")));
+      launchFailureData_.Set("containment", json::Value::String(std::string(kContainmentUncontained)));
+      // Concurrent activations can return the same new process. Losing control
+      // must not grant cleanup authority over the winning service's application.
+      launchControl = AcquireApplicationControl(launchRoot.processId, launchRoot.startTime);
       launchRoot.trusted = true;
       winrt::handle cleanupProcess = DuplicateProcessHandle(launchRoot.process.get());
       if (!cleanupProcess) {
@@ -1302,6 +1494,7 @@ const ApplicationLease& ApplicationManager::Launch(const json::Value& params, co
       mainThread.attach(information.hThread);
       winrt::handle created;
       created.attach(information.hProcess);
+      launchFailureData_.Set("applicationSettlement", json::Value::String(std::string("unknown")));
       launchRoot.processId = information.dwProcessId;
       launchRoot.process = DuplicateProcessHandle(created.get());
       const DWORD duplicateError = launchRoot.process ? ERROR_SUCCESS : GetLastError();
@@ -1326,6 +1519,11 @@ const ApplicationLease& ApplicationManager::Launch(const json::Value& params, co
         Fail(kErrorLaunchFailed,
              "The created application process identity could not be read.");
       }
+      launchFailureData_ = ReadExactApplicationIdentity(launchRoot.processId, launchRoot.process.get());
+      launchFailureData_.Set("applicationSettlement", json::Value::String(std::string("unknown")));
+      launchFailureData_.Set("launchKind", json::Value::String(std::string("direct-child")));
+      launchFailureData_.Set("containment", json::Value::String(std::string(kContainmentJobObject)));
+      launchControl = AcquireApplicationControl(launchRoot.processId, launchRoot.startTime);
       if (ResumeThread(mainThread.get()) == static_cast<DWORD>(-1)) {
         FailLastError(kErrorLaunchFailed, "Resuming the contained unpackaged application",
                       GetLastError());
@@ -1373,8 +1571,8 @@ const ApplicationLease& ApplicationManager::Launch(const json::Value& params, co
         candidates.emplace_back(window, owner);
       }
       if (candidates.size() > 1) {
-        Fail(kErrorAmbiguousTarget,
-             "The launch created multiple matching windows titled \"" + ToUtf8(windowTitle) + "\".");
+        throw HelperError(kErrorAmbiguousTarget, "The launch created multiple matching application windows.",
+                          "application-identity-ambiguous");
       }
       if (candidates.size() == 1) {
         matched = candidates.front().first;
@@ -1414,11 +1612,21 @@ const ApplicationLease& ApplicationManager::Launch(const json::Value& params, co
       }
     }
     const char* containment = containmentJob ? kContainmentJobObject : kContainmentUncontained;
-    const ApplicationLease& lease = CreateLease("launched", matchedProcessId, owned.get(), matched,
-                                                 windowTitle, params, containment, containmentJob.get());
-    owned.detach();
-    containmentJob.detach();
-    return lease;
+    try {
+      launchFailureData_ = ReadExactApplicationIdentity(matchedProcessId, owned.get());
+      launchFailureData_.Set("applicationSettlement", json::Value::String(std::string("unknown")));
+      launchFailureData_.Set("launchKind", json::Value::String(std::string(containmentJob ? "direct-child" : "packaged-activation")));
+      launchFailureData_.Set("containment", json::Value::String(std::string(containment)));
+      RequireResolvedPrimary(matched, matchedProcessId, windowTitle, owned.get());
+      const ApplicationLease& lease = CreateLease("launched", matchedProcessId, owned.get(), matched,
+                                                 windowTitle, params, containment, containmentJob.get(), launchControl);
+      owned.detach();
+      containmentJob.detach();
+      return lease;
+    } catch (...) {
+      launchProcesses.Track(matchedProcessId, std::move(owned));
+      throw;
+    }
   } catch (...) {
     const std::exception_ptr original = std::current_exception();
     std::string cleanupFailure;
@@ -1438,11 +1646,17 @@ const ApplicationLease& ApplicationManager::Launch(const json::Value& params, co
     for (TrackedLaunchProcess& tracked : launchProcesses.ReleaseRemaining()) {
       TrackPendingCleanupProcess(tracked.processId, tracked.process.detach());
     }
+    if (cleanupFailure.empty() && (launchRoot.trusted || containmentJob)) {
+      launchFailureData_.Set("applicationSettlement", json::Value::String(std::string("exited")));
+    }
     RethrowWithCleanup(original, cleanupFailure);
   }
 }
 
-const ApplicationLease& ApplicationManager::Attach(const json::Value& params, const CancellationToken& token) {
+ApplicationManager::ResolvedAttachment ApplicationManager::ResolveAttachment(const json::Value& params,
+                                                                              const CancellationToken& token) {
+  token.ThrowIfCancelled();
+  RequireWindowsEndpoint(params);
   const json::Value* application = params.Find("application");
   if (application == nullptr || !application->IsObject()) {
     Fail(kErrorInvalidParams, "The attach request is missing its application descriptor.");
@@ -1451,6 +1665,34 @@ const ApplicationLease& ApplicationManager::Attach(const json::Value& params, co
   const std::wstring leasePath = application->WideField("leasePath");
   std::wstring windowTitle = application->WideField("windowTitle");
   RequireInteractiveWindowStation(kErrorUnsupported);
+
+  if (const json::Value* identity = application->Find("processIdentity"); identity != nullptr) {
+    if (!leasePath.empty() || application->Has("leaseNonce") || windowTitle.empty()) {
+      Fail(kErrorInvalidParams, "An exact processIdentity attach requires a title and cannot use a legacy lease.");
+    }
+    const DWORD processId = RequireExactIdentity(*identity);
+    winrt::handle process = OpenProcessForIdentity(processId, kErrorAttachFailed);
+    const json::Value actual = ReadExactApplicationIdentity(processId, process.get());
+    VerifyExactIdentity(*identity, actual);
+    const std::wstring configuredImage = application->WideField("executablePath");
+    const std::wstring configuredAumid = application->WideField("aumid");
+    if ((!configuredImage.empty() &&
+         _wcsicmp(CanonicalizeExecutablePath(configuredImage).c_str(), actual.WideField("executablePath").c_str()) != 0) ||
+        (!configuredAumid.empty() && configuredAumid != actual.WideField("aumid"))) {
+      throw HelperError(kErrorAttachFailed, "The descriptor differs from the exact process identity.", "application-identity-mismatch");
+    }
+    std::vector<HWND> matches;
+    for (const HWND window : EnumerateTopLevelWindows(processId)) {
+      token.ThrowIfCancelled();
+      if (ReadWindowTitle(window) == windowTitle) matches.push_back(window);
+    }
+    if (matches.size() != 1) {
+      throw HelperError(matches.empty() ? kErrorAttachFailed : kErrorAmbiguousTarget,
+                        "The exact application must have one matching primary window.",
+                        matches.empty() ? "application-window-missing" : "application-identity-ambiguous");
+    }
+    return {processId, std::move(process), matches.front(), windowTitle};
+  }
 
   if (!leasePath.empty()) {
     const std::string contents = ReadFileWithRetry(leasePath, token);
@@ -1544,10 +1786,7 @@ const ApplicationLease& ApplicationManager::Attach(const json::Value& params, co
            "The leased application shows " + std::to_string(matches.size()) + " windows titled \"" +
                ToUtf8(windowTitle) + "\".");
     }
-    const ApplicationLease& attached = CreateLease("attached", processId, process.get(), matches.front(),
-                                                    windowTitle, params, kContainmentExternal);
-    process.detach();
-    return attached;
+    return {processId, std::move(process), matches.front(), windowTitle};
   }
 
   if (windowTitle.empty()) {
@@ -1598,17 +1837,16 @@ const ApplicationLease& ApplicationManager::Attach(const json::Value& params, co
     }
   }
   if (unverifiable > 0) {
-    Fail(kErrorAmbiguousTarget,
-         std::to_string(unverifiable) + " window(s) titled \"" + ToUtf8(windowTitle) +
-             "\" belong to a process whose identity cannot be read, so the target cannot be proven unique.");
+    throw HelperError(kErrorAmbiguousTarget, "A matching window's process identity cannot be read; uniqueness is unknown.",
+                      "application-identity-unknown");
   }
   if (matches.empty()) {
-    Fail(kErrorAttachFailed, "No window titled \"" + ToUtf8(windowTitle) + "\" is currently open.");
+    throw HelperError(kErrorAttachFailed, "No process/window matches the configured application.",
+                      "no-matching-application");
   }
   if (matches.size() > 1) {
-    Fail(kErrorAmbiguousTarget,
-         std::to_string(matches.size()) + " windows are titled \"" + ToUtf8(windowTitle) +
-             "\", so the target is ambiguous.");
+    throw HelperError(kErrorAmbiguousTarget, "Multiple process/window candidates match the application descriptor.",
+                      "application-identity-ambiguous");
   }
   DWORD processId = 0;
   GetWindowThreadProcessId(matches.front(), &processId);
@@ -1616,10 +1854,84 @@ const ApplicationLease& ApplicationManager::Attach(const json::Value& params, co
       !ProcessMatchesLaunchIdentity(matchedProcess.get(), aumid, executablePath)) {
     Fail(kErrorAttachFailed, "The application identity changed while attaching.");
   }
-  const ApplicationLease& attached = CreateLease("attached", processId, matchedProcess.get(), matches.front(),
-                                                  windowTitle, params, kContainmentExternal);
-  matchedProcess.detach();
+  return {processId, std::move(matchedProcess), matches.front(), windowTitle};
+}
+
+const ApplicationLease& ApplicationManager::Attach(const json::Value& params, const CancellationToken& token) {
+  ResolvedAttachment resolved = ResolveAttachment(params, token);
+  RequireResolvedPrimary(resolved.window, resolved.processId, resolved.title, resolved.process.get());
+  const ApplicationLease& attached = CreateLease("attached", resolved.processId, resolved.process.get(), resolved.window,
+                                                resolved.title, params, kContainmentExternal);
+  resolved.process.detach();
   return attached;
+}
+
+json::Value ApplicationManager::InspectApplication(const json::Value& params, const CancellationToken& token) {
+  ResolvedAttachment resolved = ResolveAttachment(params, token);
+  token.ThrowIfCancelled();
+  const json::Value identity = ReadExactApplicationIdentity(resolved.processId, resolved.process.get());
+  RequireResolvedPrimary(resolved.window, resolved.processId, resolved.title, resolved.process.get());
+  return identity;
+}
+
+json::Value ApplicationManager::RecoverApplication(const json::Value& params, const CancellationToken& token) {
+  RequireWindowsEndpoint(params);
+  const json::Value* identity = params.Find("identity");
+  if (identity == nullptr) Fail(kErrorInvalidParams, "Exact application recovery requires its recorded identity.");
+  const DWORD processId = RequireExactIdentity(*identity);
+  token.ThrowIfCancelled();
+  RequireInteractiveWindowStation(kErrorUnsupported);
+  const auto exited = [] {
+    json::Value result = json::Value::Object();
+    result.Set("state", json::Value::String(std::string("exited")));
+    return result;
+  };
+  winrt::handle query{OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION, FALSE, processId)};
+  if (!query) {
+    if (GetLastError() == ERROR_INVALID_PARAMETER) return exited();
+    throw HelperError(kErrorCleanupFailed, "The recorded application's creation time cannot be inspected.",
+                      "application-identity-unknown");
+  }
+  FILETIME started{};
+  if (!TryReadProcessStartTime(query.get(), started) || FileTimeTicks(started) == 0) {
+    throw HelperError(kErrorCleanupFailed, "The application start identity cannot be read.", "application-identity-unknown");
+  }
+  if (FormatFileTimeIso8601(started) != identity->StringField("processStartedAt")) {
+    // A replacement proves the recorded incarnation exited. Never request termination rights or control of it.
+    return exited();
+  }
+  // Keep the query handle open: its process object prevents PID reuse while upgrading access for exact cleanup.
+  winrt::handle process{OpenProcess(kOwnedProcessAccess, FALSE, processId)};
+  if (!process && GetLastError() != ERROR_INVALID_PARAMETER) {
+    throw HelperError(kErrorCleanupFailed, "The recorded application process cannot be inspected.", "application-identity-unknown");
+  }
+  if (process) {
+    const DWORD state = WaitForSingleObject(process.get(), 0);
+    if (state != WAIT_OBJECT_0 && state != WAIT_TIMEOUT) {
+      throw HelperError(kErrorCleanupFailed, "The recorded application's liveness cannot be proven.", "application-identity-unknown");
+    }
+    if (state == WAIT_OBJECT_0) {
+      return exited();
+    }
+    VerifyExactIdentity(*identity, ReadExactApplicationIdentity(processId, process.get()));
+    const auto control = AcquireApplicationControl(processId, started);
+    token.ThrowIfCancelled();
+    PostCloseToExactProcessWindows(processId, started);
+    const Deadline graceful(kCloseTimeoutMs);
+    while (IsProcessAlive(process.get()) && !graceful.Expired()) token.Wait(50);
+    if (IsProcessAlive(process.get())) {
+      token.ThrowIfCancelled();
+      if (TerminateProcess(process.get(), 0) == FALSE && IsProcessAlive(process.get())) {
+        throw HelperError(kErrorCleanupFailed, "The recorded application could not be ended.", "application-recovery-unsettled");
+      }
+      const Deadline forced(kTerminateWaitMs);
+      while (IsProcessAlive(process.get()) && !forced.Expired()) token.Wait(50);
+      if (IsProcessAlive(process.get())) {
+        throw HelperError(kErrorCleanupFailed, "Exact application exit was not confirmed.", "application-recovery-unsettled");
+      }
+    }
+  }
+  return exited();
 }
 
 std::vector<WindowInfo> ApplicationManager::Windows(
@@ -2087,6 +2399,10 @@ json::Value ApplicationManager::SerializeLease(const ApplicationLease& lease) co
   if (!started.empty()) {
     value.Set("processStartedAt", json::Value::String(started));
   }
+  value.Set("executablePath", json::Value::String(lease.executablePath));
+  value.Set("interactiveSession", json::Value::String(lease.interactiveSession));
+  if (!lease.aumid.empty()) value.Set("aumid", json::Value::String(lease.aumid));
+  if (!lease.launchKind.empty()) value.Set("launchKind", json::Value::String(lease.launchKind));
   return value;
 }
 

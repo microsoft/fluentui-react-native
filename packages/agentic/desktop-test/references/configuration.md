@@ -17,8 +17,31 @@ installed-app example.
 Targets select `macos`, `windows`, or `win32` endpoints and describe an
 `installed`, `react-native-test-app`, or `rex` host. Prefer an exact
 application identity. A Windows installed target requires an exact title and
-an executable path, AUMID, or verified owner lease; a title alone is not an
+an executable path, AUMID, exact native process identity, or verified owner lease; a title alone is not an
 identity. External ownership permits attach only and preserves the app.
+
+`ownership: 'session'` (the default) keeps session-owned launch semantics.
+`ownership: 'supervisor'` opts into one supervisor-owned launch; successive
+sessions borrow the same application, and scope disposal closes its exact native
+incarnation. macOS, Windows and Win32 use their own native identity/cleanup
+backend; qualification is recorded separately for each renderer in
+[current status](current-status.md).
+
+For neutral macOS attach, set `ownership: 'external'` and an application
+`processIdentity: { processId, processStartedAt }` plus exact `windowTitle`.
+Use an identity captured from a native lease through the
+`/application-ownership` API: the timestamp must retain all six kernel
+fractional digits. Bundle/executable constraints are additional checks, not a
+replacement for the identity. Exact identity cannot be combined with a legacy
+`leasePath`/`leaseNonce`; Storybook's existing lease remains separate.
+
+For Windows/Win32 exact attach, `processIdentity` additionally requires
+`executablePath` and `interactiveSession: "windows-session:<id>"`, plus `aumid`
+when packaged. Preserve all seven fractional creation-time digits (100 ns).
+Capture this identity from a native lease or read-only native inspection, not
+from `Date`, a title, an AUMID alone, or a guessed REX PID. The canonical
+`ReactTest.exe` image plus PID/start/session identifies one REX incarnation.
+Exact identity is external attach evidence, never launch/termination authority.
 
 `commands` overrides individual `prep`, `bundle`, `build`, or `run` stages.
 Each command has an executable and argument array; no shell-like string parsing

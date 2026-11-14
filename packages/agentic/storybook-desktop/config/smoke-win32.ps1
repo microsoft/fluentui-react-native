@@ -19,12 +19,13 @@ $storybookPort = if ($env:STORYBOOK_WS_PORT) { [int]$env:STORYBOOK_WS_PORT } els
 $driverPort = if ($env:STORYBOOK_DRIVER_PORT) { [int]$env:STORYBOOK_DRIVER_PORT } else { 0 }
 $cliPath = Join-Path $PSScriptRoot 'cli.cjs'
 $controlPath = Join-Path $PSScriptRoot 'storybook-control.cjs'
+$leaseControlPath = Join-Path $PSScriptRoot 'application-lease.cjs'
 $hostPath = Join-Path $PSScriptRoot 'run-win32.cjs'
 $requiredStories = @($RequiredStoryIds -split ',' | Where-Object { $_ })
-$applicationLeasePath = $null
+$applicationLeaseDigest = $null
 
-if ($SmokeMode -eq 'stories-and-tests' -and (-not $driverPort -or -not $env:STORYBOOK_DRIVER_MANIFEST)) {
-  throw 'STORYBOOK_DRIVER_PORT and STORYBOOK_DRIVER_MANIFEST are required for stories-and-tests smoke mode.'
+if ($SmokeMode -eq 'stories-and-tests' -and (-not $driverPort -or -not $env:STORYBOOK_DRIVER_MANIFEST -or -not $env:STORYBOOK_DRIVER_HANDOFF)) {
+  throw 'STORYBOOK_DRIVER_PORT, STORYBOOK_DRIVER_MANIFEST, and STORYBOOK_DRIVER_HANDOFF are required for stories-and-tests smoke mode.'
 }
 
 New-Item -ItemType Directory -Path $logRoot -Force | Out-Null
@@ -47,29 +48,15 @@ function Write-ApplicationLease {
     [Microsoft.Management.Infrastructure.CimInstance]$ProcessInfo
   )
 
-  $driverManifest = Get-Content -LiteralPath $env:STORYBOOK_DRIVER_MANIFEST -Raw | ConvertFrom-Json
-  if (
-    $driverManifest.schemaVersion -ne 2 -or
-    -not $driverManifest.application.leasePath -or
-    -not $driverManifest.application.leaseNonce
-  ) {
-    throw "Invalid native Desktop Driver manifest at '$($env:STORYBOOK_DRIVER_MANIFEST)'."
+  $leaseArguments = @($leaseControlPath, 'publish', '--process-id', [string]$Process.Id,
+    '--process-started-at', $Process.StartTime.ToUniversalTime().ToString('o'),
+    '--window-title', $WindowTitle, '--executable-path', [string]$ProcessInfo.ExecutablePath)
+  if ($applicationLeaseDigest) { $leaseArguments += @('--previous-digest', $applicationLeaseDigest) }
+  $digest = & node @leaseArguments
+  if ($LASTEXITCODE -ne 0 -or $digest -notmatch '^[0-9a-f]{64}$') {
+    throw 'Win32 application lease publication failed.'
   }
-  $leasePath = [string]$driverManifest.application.leasePath
-  $leaseDirectory = Split-Path -Parent $leasePath
-  New-Item -ItemType Directory -Path $leaseDirectory -Force | Out-Null
-  $temporaryPath = "$leasePath.$PID.tmp"
-  @{
-    schemaVersion = 1
-    endpoint = 'win32'
-    nonce = [string]$driverManifest.application.leaseNonce
-    processId = $Process.Id
-    processStartedAt = $Process.StartTime.ToUniversalTime().ToString('o')
-    windowTitle = $WindowTitle
-    executablePath = [string]$ProcessInfo.ExecutablePath
-  } | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath $temporaryPath -Encoding utf8NoBOM
-  Move-Item -LiteralPath $temporaryPath -Destination $leasePath -Force
-  return $leasePath
+  return [string]$digest
 }
 
 function Wait-ForApp {
@@ -192,7 +179,7 @@ try {
   Add-OwnedProcess -Id $appProcessInfo.ParentProcessId
   Add-OwnedProcess -Id $appProcess.Id
   if ($SmokeMode -eq 'stories-and-tests') {
-    $applicationLeasePath = Write-ApplicationLease -Process $appProcess -ProcessInfo $appProcessInfo
+    $applicationLeaseDigest = Write-ApplicationLease -Process $appProcess -ProcessInfo $appProcessInfo
   }
 
   Wait-ForAutomationId -Process $appProcess -AutomationId (StorybookId 'sidebar-header')
@@ -218,8 +205,17 @@ try {
 } finally {
   $cleanupFailure = $null
   try { Stop-OwnedServices } catch { $cleanupFailure = $_.Exception }
-  if ($applicationLeasePath) {
-    Remove-Item -LiteralPath $applicationLeasePath -Force -ErrorAction SilentlyContinue
+  if ($applicationLeaseDigest) {
+    try {
+      & node $leaseControlPath remove $applicationLeaseDigest
+      if ($LASTEXITCODE -ne 0) { throw 'Win32 application lease cleanup failed.' }
+    } catch {
+      if ($cleanupFailure) {
+        $cleanupFailure = [System.AggregateException]::new('Service and application lease cleanup failed.', [System.Exception[]]@($cleanupFailure, $_.Exception))
+      } else {
+        $cleanupFailure = $_.Exception
+      }
+    }
   }
   for ($index = $ownedProcessIds.Count - 1; $index -ge 0; $index -= 1) {
     $ownedProcessId = $ownedProcessIds[$index]

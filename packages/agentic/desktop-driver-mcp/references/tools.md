@@ -26,7 +26,7 @@ UTF-8 bytes. See [measurement history](current-status.md).
 
 ## desktop_session
 
-`action` is `status` (the default), `open`, or `close`.
+`action` is `status` (the default), `open`, `close`, or `relinquish`.
 
 - `status` lists the targets the grant allows, with their endpoint, platform,
   renderer, effective `launchModes`, and whether a target is quarantined, plus
@@ -39,6 +39,16 @@ UTF-8 bytes. See [measurement history](current-status.md).
   One session is open at a time; opening a second fails with `session-open`.
 - `close` confirms deletion before forgetting the known session. Closing the MCP
   connection stops admissions and attempts bounded cleanup, including late opens.
+- `relinquish` stops admission immediately, cancels current operations, revokes
+  the connection child, and waits for native settlement and session deletion.
+  It returns `{ relinquished: true }` only after that drain. The operator's
+  standalone attach-only runner can then reserve the target without restarting
+  services. After the runner drains, this MCP connection may `open` with a
+  fresh child/session. Old references, cursors, proofs, and artifact links
+  expire; nothing is resumed or replayed. A failed drain reports
+  `drain-incomplete` and keeps new work fenced with `controller-draining`;
+  retry `relinquish`, never ordinary session work, until cleanup is confirmed.
+  This does not start a runner or grant workload/preemption rights to the model.
 
 ## desktop_observe
 
@@ -114,7 +124,7 @@ A tool failure is an `isError` result with one JSON text block:
 | `mutation`  | For an action, whether it was applied, rejected, or indeterminate, and whether it quarantined the target. |
 
 The adapter's own reasons are `no-session`, `session-open`,
-`session-uncertain`, `connection-closed`, `service-unavailable`, `cancelled`,
+`session-uncertain`, `connection-closed`, `controller-draining`, `drain-incomplete`, `service-unavailable`, `cancelled`,
 and `internal`. A malformed call is
 refused with the schema's validation message.
 

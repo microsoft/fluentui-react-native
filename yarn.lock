@@ -4948,6 +4948,7 @@ __metadata:
     "@react-native/babel-preset": "npm:^0.81.0"
     "@rnx-kit/metro-config": "catalog:"
     "@rnx-kit/metro-resolver-symlinks": "catalog:"
+    "@rnx-kit/tools-react-native": "catalog:"
     "@storybook/react-native": "npm:^10.7.1"
     "@storybook/react-native-theming": "npm:^10.7.1"
     "@storybook/react-native-ui-common": "npm:^10.7.1"
@@ -19596,9 +19597,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-macos@patch:react-native-macos@npm%3A0.81.9#~/.yarn/patches/react-native-macos-npm-0.81.9-aa583a0648.patch":
+"react-native-macos@patch:react-native-macos@npm%3A0.81.9#~/.yarn/patches/react-native-macos-npm-0.81.9-aa583a0648.patch&~/.yarn/patches/react-native-macos-npm-0.81.9-native-props.patch":
   version: 0.81.9
-  resolution: "react-native-macos@patch:react-native-macos@npm%3A0.81.9#~/.yarn/patches/react-native-macos-npm-0.81.9-aa583a0648.patch::version=0.81.9&hash=fdc083"
+  resolution: "react-native-macos@patch:react-native-macos@npm%3A0.81.9#~/.yarn/patches/react-native-macos-npm-0.81.9-aa583a0648.patch&~/.yarn/patches/react-native-macos-npm-0.81.9-native-props.patch::version=0.81.9&hash=63578b"
   dependencies:
     "@jest/create-cache-key-function": "npm:^29.7.0"
     "@react-native-macos/virtualized-lists": "npm:0.81.9"
@@ -19644,7 +19645,7 @@ __metadata:
   bin:
     react-native: cli.js
     react-native-macos: cli.js
-  checksum: 10c0/c4dd2eda84eea704dc205b31bb5ddbc6f58f26a23fa99f14d66ebf6b4637407a0ebb66096df4c34f8923910426a326e586184e2efa62e006257b984608d39f86
+  checksum: 10c0/3d565e0d0a494b81519e5d86a8322aec279170317e7b5dc77ef1f3b8b786706cb342fc1626f5348bc3e3f67a501f46616b13c43f1f02842b21022f91597c8806
   languageName: node
   linkType: hard
 

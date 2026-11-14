@@ -11,6 +11,7 @@ import type { DesktopScopeDomains, DesktopScopeValues } from '@fluentui-react-na
 import type { DesktopReporterMode } from '@fluentui-react-native/desktop-driver/cli/reporter';
 import type { DesktopIntegration } from './integration.ts';
 import { orderDesktopResourceContributions } from './resources.ts';
+import { captureDesktopApplicationIdentity } from './applicationOwnership.ts';
 
 export type DesktopCommand = {
   command: string;
@@ -24,7 +25,7 @@ export type DesktopStage = 'prep' | 'bundle' | 'build' | 'run';
 export type DesktopHostConfig = {
   kind: 'installed' | 'react-native-test-app' | 'rex';
   application?: NativeDesktopApplicationDescriptor;
-  ownership?: 'session' | 'external';
+  ownership?: 'session' | 'supervisor' | 'external';
   renderer?: DesktopRenderer;
   appConfigPath?: string;
   component?: string;
@@ -145,7 +146,7 @@ export function validateDesktopConfig(value: unknown): asserts value is DesktopC
     const host = object(target.host, `${id}.host`);
     keys(host, ['kind', 'application', 'ownership', 'renderer', 'appConfigPath', 'component', 'windowTitle', 'bundleRoot'], `${id}.host`);
     oneOf(host.kind, ['installed', 'react-native-test-app', 'rex'], `${id}.host.kind`);
-    optionalEnum(host.ownership, ['session', 'external'], `${id}.host.ownership`);
+    optionalEnum(host.ownership, ['session', 'supervisor', 'external'], `${id}.host.ownership`);
     optionalEnum(host.renderer, ['fabric', 'paper'], `${id}.host.renderer`);
     for (const field of ['appConfigPath', 'component', 'windowTitle', 'bundleRoot']) {
       if (host[field] !== undefined) text(host[field], `${id}.host.${field}`);
@@ -154,7 +155,9 @@ export function validateDesktopConfig(value: unknown): asserts value is DesktopC
     if (host.kind === 'react-native-test-app' && (target.endpoint ?? id) === 'win32') {
       throw new TypeError('Win32 uses REX, not react-native-test-app.');
     }
-    if (host.application !== undefined) validateApplication(host.application, `${id}.host.application`);
+    if (host.application !== undefined) {
+      validateApplication(host.application, `${id}.host.application`, (target.endpoint ?? id) as DesktopEndpoint);
+    }
     if (host.kind === 'installed' && host.application === undefined)
       throw new TypeError(`${id}: installed hosts require application identity.`);
     if (target.readiness !== undefined) validateReadiness(target.readiness);
@@ -447,21 +450,48 @@ function validateTestScope(value: unknown, domains: DesktopScopeDomains, id: str
   resolveDesktopScopeValues(scope, domains, `${id}.testScope`);
 }
 
-function validateApplication(value: unknown, context: string): void {
+function validateApplication(value: unknown, context: string, endpoint: DesktopEndpoint): void {
   const application = object(value, context);
   keys(
     application,
-    ['arguments', 'aumid', 'bundleIdentifier', 'executablePath', 'leaseNonce', 'leasePath', 'windowTitle', 'workingDirectory'],
+    [
+      'arguments',
+      'aumid',
+      'bundleIdentifier',
+      'executablePath',
+      'leaseNonce',
+      'leasePath',
+      'processIdentity',
+      'windowTitle',
+      'workingDirectory',
+    ],
     context,
   );
   for (const [field, setting] of Object.entries(application)) {
     if (field === 'arguments') {
       if (!Array.isArray(setting) || !setting.every((item) => typeof item === 'string'))
         throw new TypeError(`${context}.arguments must be strings.`);
+    } else if (field === 'processIdentity') {
+      const identity = object(setting, `${context}.processIdentity`);
+      keys(
+        identity,
+        endpoint === 'macos'
+          ? ['processId', 'processStartedAt']
+          : ['processId', 'processStartedAt', 'executablePath', 'interactiveSession', 'aumid'],
+        `${context}.processIdentity`,
+      );
+      captureDesktopApplicationIdentity(
+        { ...identity, id: 'configured-external-identity', ownership: 'attached' } as Parameters<
+          typeof captureDesktopApplicationIdentity
+        >[0],
+        endpoint,
+      );
     } else text(setting, `${context}.${field}`);
   }
   if (Boolean(application.leasePath) !== Boolean(application.leaseNonce))
     throw new TypeError(`${context}: leasePath and leaseNonce must be paired.`);
+  if (application.processIdentity !== undefined && application.leasePath)
+    throw new TypeError(`${context}: processIdentity cannot be combined with a legacy lease.`);
 }
 
 function validateReadiness(value: unknown): void {

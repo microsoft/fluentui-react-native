@@ -9,5 +9,93 @@
     "headerBytes": 12,
     "jsonType": 1,
     "binaryType": 2
+  },
+  "windowsApplicationOwnership": {
+    "processIdentity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["processId", "processStartedAt", "executablePath", "interactiveSession"],
+      "properties": {
+        "processId": { "type": "integer", "minimum": 1, "maximum": 2147483647 },
+        "processStartedAt": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{7}Z$"
+        },
+        "executablePath": { "type": "string", "minLength": 1, "maxLength": 4096 },
+        "interactiveSession": { "type": "string", "pattern": "^windows-session:[0-9]{1,10}$" },
+        "aumid": { "type": "string", "minLength": 1, "maxLength": 4096 }
+      }
+    },
+    "identityInspection": {
+      "command": "inspectApplication",
+      "result": { "$ref": "#/windowsApplicationOwnership/processIdentity" },
+      "acquiresLease": false,
+      "registersWindows": false
+    },
+    "survivorRecovery": {
+      "command": "recoverApplication",
+      "identity": { "$ref": "#/windowsApplicationOwnership/processIdentity" },
+      "result": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["state"],
+        "properties": {
+          "state": {
+            "const": "exited",
+            "description": "The recorded incarnation exited, including a reused PID whose live replacement is never signalled."
+          }
+        }
+      },
+      "trustedWorkloadOwnerOnly": true,
+      "creationTimeQuery": "PROCESS_QUERY_LIMITED_INFORMATION",
+      "pidReuseSettlement": "exited-without-signalling-current-process",
+      "unreadableCreationTime": "fail-closed",
+      "holdsApplicationControlLockForCleanup": true
+    },
+    "applicationControl": "session-local-nonwaiting-semaphore-pid-and-native-start",
+    "launchKind": ["direct-child", "packaged-activation"],
+    "containment": ["job-object", "uncontained", "external"],
+    "applicationSettlement": ["not-started", "exited", "unknown"],
+    "failureMetadataFields": [
+      "applicationSettlement",
+      "processId",
+      "processStartedAt",
+      "executablePath",
+      "interactiveSession",
+      "aumid",
+      "launchKind",
+      "containment"
+    ],
+    "failureMetadataLocations": ["response.error.data", "cancelled.data"]
+  },
+  "macosApplicationOwnership": {
+    "processIdentity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["processId", "processStartedAt"],
+      "properties": {
+        "processId": { "type": "integer", "minimum": 1, "maximum": 2147483647 },
+        "processStartedAt": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{6}Z$"
+        }
+      }
+    },
+    "identityInspection": {
+      "command": "inspectApplication",
+      "result": { "$ref": "#/macosApplicationOwnership/processIdentity" },
+      "acquiresLease": false,
+      "registersWindows": false
+    },
+    "launchKind": ["launch-services", "direct-child"],
+    "containment": ["uncontained", "external"],
+    "applicationSettlement": ["not-started", "exited", "unknown"],
+    "launchServicesErrorFields": {
+      "launchErrorDomain": { "type": "string", "maxLength": 163 },
+      "launchErrorCode": { "type": "integer" },
+      "underlyingErrorDomain": { "type": "string", "maxLength": 163 },
+      "underlyingErrorCode": { "type": "integer" }
+    },
+    "failureMetadataLocations": ["response.error.data", "cancelled.data"]
   }
 }

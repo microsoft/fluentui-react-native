@@ -53,6 +53,30 @@ async function withStories(body: (fixture: Fixture) => Promise<void>, options: F
 }
 
 describe('story operations', () => {
+  test('selection reports local phase timing and the verified app incarnation without serializing provider context', async () => {
+    await withStories(async ({ harness, session }) => {
+      const state = harness.server.sessions.get(session.id);
+      state.lease.processId = 123;
+      state.lease.processStartedAt = '2026-11-12T00:00:00.000Z';
+      const select = harness.storyOrchestrator!.selectStory.bind(harness.storyOrchestrator);
+      harness.storyOrchestrator!.selectStory = async (request, context) => {
+        Object.assign(context?.diagnostics ?? {}, { preparationMs: 2, runtimeReadyMs: 3, nonce: 'never-report-this' });
+        return select(request, context);
+      };
+      const ready = await session.selectStory(manifest.entries[0].id);
+      expect(ready.diagnostics).toMatchObject({
+        preparationMs: 2,
+        runtimeReadyMs: 3,
+        nativeVerificationMs: expect.any(Number),
+        nativeMarkerPolls: 1,
+        application: { processId: 123, processStartedAt: '2026-11-12T00:00:00.000Z' },
+      });
+      expect(JSON.stringify(ready)).not.toContain('never-report-this');
+      expect(ready).not.toHaveProperty('signal');
+      expect(ready).not.toHaveProperty('lifetimeId');
+    });
+  });
+
   test('built-in manifest, current, reset and args routes all propagate local provider context', async () => {
     await withStories(async ({ harness, session }) => {
       const orchestrator = harness.storyOrchestrator!;

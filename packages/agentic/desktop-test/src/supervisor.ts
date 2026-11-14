@@ -1,6 +1,9 @@
 import path from 'node:path';
 
-import type { DesktopDriverServer, DesktopHost } from '@fluentui-react-native/desktop-driver';
+import { NativeDesktopHost, NativeDriverError } from '@fluentui-react-native/desktop-driver';
+import type { DesktopDriverServer, DesktopHost, NativeDriverArtifact } from '@fluentui-react-native/desktop-driver';
+import { describeWindowsService } from '@fluentui-react-native/desktop-driver/authority';
+import { resolveNativeDesktopDriver } from '@fluentui-react-native/desktop-driver/native';
 import { accessibleLaneMaskedFeatures } from '@fluentui-react-native/desktop-driver/authoring';
 import type { DesktopInputLane } from '@fluentui-react-native/desktop-driver/authoring';
 import type { DesktopAgentConnectionOptions } from './agentConnection.js';
@@ -11,9 +14,10 @@ import type { DesktopIntegration } from './integration.js';
 import { NodeDesktopCommandRunner, deadline } from './commands.js';
 import type { PreparedDesktopCommand, RunningDesktopCommand } from './commands.js';
 import { DesktopServiceScope } from './services.js';
-import { createDesktopWorkloadClaim } from './ownership.js';
-import type { DesktopWorkloadClaim } from './ownership.js';
+import { createDesktopWorkloadClaim, describeDesktopWorkloadOwner, recoverWindowsDesktopWorkloadClaim } from './ownership.js';
+import type { DesktopWorkloadClaim, DesktopWorkloadProcessIdentity } from './ownership.js';
 import { resolveDesktopApplication } from './adapters.js';
+import { createDesktopApplicationHost } from './applicationOwnership.js';
 import { DesktopRunReporter } from './reporting/collector.js';
 import type { DesktopReportWriter } from './reporting/collector.js';
 import type { DesktopReportSession } from './reporting/session.js';
@@ -28,6 +32,8 @@ export type DesktopSupervisorOptions = {
   workload?: { kind: 'delegated'; claim: DesktopWorkloadClaim };
   hostFactory?: (target: ResolvedDesktopTarget) => Promise<DesktopHost>;
   lockDirectory?: string;
+  /** Trusted native identity override, useful to custom hosts that do not resolve a native driver artifact. */
+  processIdentity?: DesktopWorkloadProcessIdentity;
   /**
    * Protects the service with a grant authority and publishes one agent's connection descriptor once the target is
    * ready. Every route then requires a grant, so only clients given one, such as the Desktop Driver MCP adapter, connect.
@@ -54,6 +60,7 @@ export class DesktopSupervisor {
   private resourceStartPromise?: Promise<void>;
   private closePromise?: Promise<void>;
   private ownershipUncertain = false;
+  private nativeArtifact?: NativeDriverArtifact;
   private readonly environment: Record<string, string> = {};
   private readonly workers = new Set<RunningDesktopCommand>();
   private readonly options: DesktopSupervisorOptions;
@@ -84,11 +91,34 @@ export class DesktopSupervisor {
       if (this.options.workload?.kind === 'delegated') {
         this.workloadClaim = this.options.workload.claim;
       } else {
+        let processIdentity = this.options.processIdentity;
+        if (!this.options.hostFactory && process.platform === 'win32' && this.target.endpoint !== 'macos') {
+          try {
+            this.nativeArtifact = await resolveNativeDesktopDriver({
+              ...this.target.nativeDriver,
+              platform: this.target.endpoint,
+              buildPolicy: 'never',
+              signal: this.services.controller.signal,
+            });
+          } catch (error) {
+            this.nativeArtifact = undefined;
+            // A portable resource/reporting scope need not start a native service. It cannot recover without a helper.
+            if (!(error instanceof NativeDriverError) || error.code !== 'no-verified-prebuilt') throw error;
+          }
+          if (this.nativeArtifact) {
+            processIdentity ??= await describeWindowsService({ artifact: this.nativeArtifact, pid: process.pid });
+            await this.recoverWindowsClaim(this.nativeArtifact, processIdentity);
+          }
+        } else {
+          processIdentity ??= this.options.hostFactory ? undefined : await describeDesktopWorkloadOwner(this.target.nativeDriver);
+        }
+        this.services.controller.signal.throwIfAborted();
         this.workloadClaim = createDesktopWorkloadClaim({
           runId: this.reporter.runId,
           targetId: this.target.id,
           targetInstanceId: this.target.instanceId,
           directory: this.options.lockDirectory,
+          processIdentity,
         });
         this.ownsWorkloadClaim = true;
       }
@@ -111,6 +141,47 @@ export class DesktopSupervisor {
       this.ownsWorkloadClaim = false;
       throw error;
     }
+  }
+
+  private async recoverWindowsClaim(artifact: NativeDriverArtifact, processIdentity: DesktopWorkloadProcessIdentity): Promise<void> {
+    const endpoint = this.target.endpoint;
+    if (endpoint === 'macos') throw new Error('Windows workload recovery requires a Windows endpoint.');
+    let host: NativeDesktopHost | undefined;
+    let failure: unknown;
+    try {
+      await recoverWindowsDesktopWorkloadClaim({
+        directory: this.options.lockDirectory,
+        endpoint,
+        targetId: this.target.id,
+        targetInstanceId: this.target.instanceId,
+        processIdentity,
+        probeOwner: async (owner) => {
+          try {
+            const described = await describeWindowsService({ artifact, pid: owner.processId });
+            return { state: 'alive', processStartedAt: described.startedAt };
+          } catch (error) {
+            return error !== null && typeof error === 'object' && 'reason' in error && error.reason === 'exited'
+              ? { state: 'exited' }
+              : { state: 'unknown' };
+          }
+        },
+        recoverApplication: async (identity) => {
+          host ??= new NativeDesktopHost({ artifact, application: {}, endpoint });
+          await host.recoverApplication(identity, this.services.controller.signal);
+        },
+      });
+    } catch (error) {
+      failure = error;
+    }
+    try {
+      await host?.dispose();
+    } catch (cleanup) {
+      throw new AggregateError(
+        failure === undefined ? [cleanup] : [failure, cleanup],
+        'Exact Windows workload recovery or helper disposal failed.',
+      );
+    }
+    if (failure !== undefined) throw failure;
   }
 
   startResources(): Promise<void> {
@@ -148,6 +219,21 @@ export class DesktopSupervisor {
         signal: this.services.controller.signal,
         guard: (work) => this.services.guard(work),
         addSecret: (secret) => this.reporter.addSecret(secret),
+        prepareHost: (host) =>
+          createDesktopApplicationHost(host, {
+            target: options.target,
+            lifetime: this.target.host.ownership ?? 'session',
+            resourcePrefix: `${this.reporter.runId}:${this.target.instanceId}`,
+            onResource: (resource) => {
+              try {
+                this.workloadClaim?.updateResource(resource);
+              } catch (error) {
+                this.ownershipUncertain = true;
+                this.services.fail(error instanceof Error ? error : new Error(String(error)));
+                throw error;
+              }
+            },
+          }),
         createTarget: (host) =>
           this.options.integration?.createTarget?.({ host, target: this.target, reporter: this.reporter }) ?? Promise.resolve(undefined),
       };
@@ -212,6 +298,7 @@ export class DesktopSupervisor {
       ...options,
       ...(this.options.input === 'accessible' ? { disabledInputFeatures: accessibleLaneMaskedFeatures } : {}),
       application,
+      ...(this.nativeArtifact ? { artifact: this.nativeArtifact } : {}),
       nativeDriver: this.target.nativeDriver,
       endpoint: this.target.endpoint,
       onStderr: (text) =>
@@ -293,12 +380,17 @@ export class DesktopSupervisor {
   }
 }
 
-export function claimDesktopWorkload(runId: string, directory?: string): () => void {
+export async function claimDesktopWorkload(
+  runId: string,
+  directory?: string,
+  processIdentity?: DesktopWorkloadProcessIdentity,
+): Promise<() => void> {
   const claim = createDesktopWorkloadClaim({
     runId,
     targetId: 'unregistered',
     targetInstanceId: 'unregistered',
     directory,
+    processIdentity: processIdentity ?? (await describeDesktopWorkloadOwner()),
   });
   return () => claim.release();
 }

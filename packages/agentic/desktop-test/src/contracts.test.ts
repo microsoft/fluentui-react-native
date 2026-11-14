@@ -15,6 +15,8 @@ describe('neutral desktop harness contracts', () => {
     'services',
     'lifecycle',
     'interrupt-cli',
+    'agent-interrupt-cli',
+    'agent-interrupt-borrowed-cli',
     'resources',
     'owned-service',
     'agent',

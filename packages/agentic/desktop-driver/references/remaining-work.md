@@ -55,6 +55,27 @@ contracts into the owning references and remove completed work here.
 
 ## 1. Architecture decision
 
+### macOS activation and popup polling
+
+Part of #4435. The 2026-11-12 refresh-reduction work deliberately leaves
+activation semantics unchanged; the [status ledger](current-status.md)
+records the source trace and bounded observational evidence.
+
+Measure activating menu/popup polling before changing it. Trial explicitly
+non-activating, window-scoped reads rather than silently changing
+`switchToWindow`. Separately, skipping a raise requires fresh foreground,
+main-window, and visibility evidence within the provider's physical-input
+scope. Neither recent server activation nor an acknowledged AX request alone
+proves that postcondition. Preserve independent provider callers, real
+occlusion refusal, hit-testing, focus, cancellation, and input serialization.
+
+Completion requires paired target-window recordings and matching physical,
+accessibility, popup, and multiwindow qualification on both macOS renderers,
+compatible with the concurrent physical-input corrections. No implementation
+or flashing reduction is claimed by this measurement-only decision.
+
+### Shared operation architecture
+
 **Build an MCP-first agent interface over a transport-neutral operation layer
 inside the existing driver service. Keep the CLI as a thin secondary client.
 Do not create another permanent daemon.**

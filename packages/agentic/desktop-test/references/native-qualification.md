@@ -22,6 +22,166 @@ real descriptor path.
 Run the `yarn storybook`, `yarn desktop-driver`, and `yarn desktop-test`
 commands below from `apps/storybook`, where their scripts are declared.
 
+## Neutral macOS application ownership
+
+The package's opt-in AppKit contract builds the signed native helper and the
+isolated fixture described in the
+`packages/agentic/desktop-driver/native/macos/README.md` provider guide.
+From the repository root, under the exclusive native-validation lock:
+
+```sh
+FURN_NATIVE_DRIVER_TEST=1 yarn workspace @fluentui-react-native/desktop-test test --runInBand applicationOwnership.contract
+```
+
+Set `FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY` to the provisioned stable
+identity. The suite covers supervisor/session separation, durable owner/app
+identities, launch-capable discovery, exact external-app exclusion and
+preservation, stale identities, direct-child causality, and post-launch
+cancellation. Publication-failure coverage uses a real launched application
+with an injected durable-publication rejection. Two separate Node owners are
+killed after native acquisition: one before publishing the acquired identity,
+the other after publishing it. Both leave a fenced claim, a surviving native
+app and a bounded known descendant; replacement remains refused even after
+the recorded owner and helper exit. The tests verify exact native identities
+and executable paths before operator cleanup, prove the descendant survives
+the primary process, and remove only the unchanged fixture claim after all
+recorded processes exit. These are native AppKit scenarios, not fake-host
+evidence or automatic recovery.
+
+The ready crash-owner fixture retires with exit code 1 after two minutes if
+the parent cannot perform exact cleanup. Its portable `--retirement-probe`
+executes the same wait with a short deadline without acquiring a claim or
+starting a helper/application. The AppKit fixture requests its own termination
+after five minutes, and its `/bin/sleep 300` descendant already has a finite
+lifetime. Neither deadline clears a claim or authorizes guessed PID cleanup;
+native identity verification is still required by the parent.
+
+Its evidence is written to the desktop-test package's
+`artifacts/desktop/application-ownership-*/evidence.json`. The separate physical mutex
+case requires explicit `FURN_NATIVE_PHYSICAL_INPUT_TEST=1` and effective native
+permissions; a skipped case does not qualify input exclusion.
+
+When Accessibility is unavailable, the non-positive safety subset can still
+qualify native OS-owner inspection, pre-spawn/LaunchServices rejection settlement
+and claim reuse, and exact cleanup after rejected launch:
+
+```sh
+FURN_NATIVE_DRIVER_TEST=1 yarn workspace @fluentui-react-native/desktop-test test --runInBand applicationOwnership.contract --testNamePattern 'kernel owner identity|failed native'
+```
+
+Record the actual AX rejection and exact primary-process cleanup. Passing this
+subset is not positive supervisor lifetime, external-app preservation,
+application exclusion, physical-input or renderer qualification.
+
+An Accessibility trust flag alone is insufficient: record actual AX calls and
+failures, including `kAXErrorAPIDisabled`, without resetting TCC or changing
+privacy permissions. AppKit results support only the generic backend. They are
+not Fabric/Paper signing or TCC-responsibility qualification, do not qualify
+arbitrary descendants, and do not replace the per-renderer/descriptor gates
+below. Windows launched-application resource/survivor qualification must run on
+Windows; macOS and ordinary hosted smoke cannot establish it.
+
+`containment: "uncontained"` is deliberate for both macOS launch kinds.
+An exact primary-process exit is not proof that arbitrary descendants exited.
+The native ownership cases do not qualify descendant containment.
+The crash cases qualify a known descendant and the interrupted acquisition
+publication boundary, not arbitrary descendant discovery, filesystem
+power-loss behavior, Metro/channel survivors or transparent service restart.
+
+The PR Windows setup action runs the **desktop-driver** native suite, not this
+package's application-resource contracts. The Windows/Win32 E2E and Storybook
+smoke jobs do not exercise failed packaged-launch survivor journaling/recovery.
+Those jobs are insufficient for that acceptance gate; portable schema tests
+must not be presented as Windows native qualification.
+
+## Neutral Windows application ownership
+
+The Windows provider fixture suite is opt-in and needs an eligible interactive
+session and the exclusive native-validation lock:
+
+```powershell
+$env:FURN_NATIVE_DRIVER_TEST = '1'
+yarn workspace @fluentui-react-native/desktop-driver test --runInBand applicationOwnership.contract
+```
+
+It exercises native read-only inspection, exact 100 ns start/session/executable/AUMID
+checks, reused-incarnation recovery without signalling the live replacement,
+ambiguity, cross-helper application exclusion, and five contained fixture
+launch/close cycles. Its additional input-mutex case requires
+`FURN_NATIVE_PHYSICAL_INPUT_TEST=1`. A skipped physical case is not input
+qualification. The Win32 fixture is supporting provider evidence, not Windows
+Fabric or REX application qualification.
+
+For actual consumer qualification, first explicitly build the helper, prepare
+the Windows Fabric packaged app and its own Metro instance, and bundle the
+Win32 Paper REX app. Set `FURN_OWNERSHIP_WINDOWS_APPLICATION` and
+`FURN_OWNERSHIP_WIN32_APPLICATION` to JSON application descriptors resolved from
+the owning app's canonical config. The Windows descriptor must identify the
+registered AUMID and exact title; the REX descriptor includes the verified
+`ReactTest.exe`, working directory, bundle/component arguments, and exact title.
+These are trusted test inputs, not WebDriver capabilities. Do not select another
+worktree's Metro or fabricate an application identity.
+
+Under the exclusive lock and connected/unlocked desktop gate:
+
+```powershell
+$env:FURN_NATIVE_DRIVER_TEST = '1'
+$env:FURN_NATIVE_APPLICATION_OWNERSHIP_TEST = '1'
+$env:FURN_NATIVE_PHYSICAL_INPUT_TEST = '1'
+yarn workspace @fluentui-react-native/desktop-test test --runInBand windowsApplicationOwnership.contract
+```
+
+The suite requires a verified prebuilt helper and both explicit descriptors.
+Supervisors use the native per-user private-store default. An arbitrary project
+directory is not necessarily a safe replacement: native ancestor-owner/ACL
+checks still apply, and a refused root must not be repaired or bypassed merely
+to run this suite.
+Separately on Windows Fabric packaged and Win32 Paper REX it checks:
+
+- Five consecutive supervisor launches/teardowns, exact application and claim
+  evidence, two borrowed sessions per launch, unchanged window identifiers
+  during inspection, cross-service exclusion, and no surviving old incarnation.
+- Start/session/executable/AUMID inspection mismatch rejection without signalling
+  the app. Recovery retires a mismatched start as an exited recorded incarnation;
+  other mismatches with a matching start remain rejected.
+- A journaled acquired application in a child owner; identity-verified,
+  literal-PID helper/owner fault injection; a live-owner fence; then real
+  supervisor startup recovery of the exact old application and claim.
+  Windows remains `uncontained` and must actually survive helper death; REX's
+  Job Object must drain instead.
+- A stale journal with injected old native owner/application start times while
+  the actual replacements remain live and owned. A real child recoverer publishes
+  its barrier, fences another startup, and is stopped by identity-verified
+  literal PID. The next supervisor must retire that dead recoverer's barrier and
+  the absent recorded application without signalling its live replacement.
+  This models PID reuse by start mismatch; it does not claim kernel PID recycling.
+- Physical-input mutex contention across the two real endpoint helpers, with
+  explicit cancellation and release. Run this only under the physical-session
+  gate; semantic activation does not establish it.
+
+Three paired launches on each endpoint also prove that winning controllers have
+distinct exact incarnations, an unpinned descriptor refuses multiple matches,
+another helper cannot attach to either pinned winner, and closing one winner
+preserves the other. A multi-instance packaged host may start two distinct
+processes; that is not an exclusion failure. When activation instead returns
+the same incarnation, a refused contender must not clean up the winner. Record
+whether that shared-incarnation activation race was actually induced rather
+than treating two distinct winning processes as proof of the losing path.
+
+Evidence is written to the desktop-test package's
+`artifacts/desktop/windows-application-ownership-*/evidence.json`, including
+source/helper identities, endpoint descriptors, process evidence and case
+outcomes. Also record the registered app build, renderer, session kind, exact
+commands, and before/after process audits in the Windows ledger. Keep private
+machine paths in ignored artifacts, not public evidence.
+
+The crash-owner helper is a contract fixture, not a second production service
+factory. Unknown resources/effects, unleased launches, legacy/unverified claims,
+and live, unknown, or legacy recovery barriers remain fenced rather than
+force-reclaimed. Only a verified dead/reused recovery owner can be resumed. This suite
+does not qualify mixed Storybook service-graph recovery, arbitrary uncontained
+descendants, or a new protected-agent recovery API.
+
 ## Parameters and prerequisites
 
 Record these for every renderer run:
@@ -167,6 +327,112 @@ supervisor path at a time; do not start `storybook driver --agent` and
 The F3/F4/F5 cases are integration gates, not claims about the F15 baseline.
 Run them only on the combined source that contains those tracks. Until then,
 record them as **Not run**.
+
+## Generic attach-only MCP/WDIO handoff
+
+This is independent of the Storybook procedure and its renderer/context gates.
+On macOS, provision the plain AppKit ownership fixture separately, with bundle identifier
+`com.microsoft.furn.application-ownership-fixture`, executable
+`Contents/MacOS/fixture`, `--title`/`--ready-file` arguments, and accessibility
+identifiers `ownership-fixture-increment`/`ownership-fixture-count`. It must be
+built and signed explicitly, never downloaded or compiled by this test.
+Build the changed driver, harness, and MCP workspaces first. Provision the
+verified stable-signed helper and run noninteractive permission diagnostics,
+as above.
+
+Under the exclusive native-desktop lock, from the repository root:
+
+```sh
+FURN_NATIVE_DRIVER_TEST=1 \
+FURN_NATIVE_HANDOFF_APP_PATH=/path/to/FurnOwnershipFixture.app \
+yarn workspace @fluentui-react-native/desktop-test test nativeRunner.contract --runInBand
+```
+
+The opt-in contract uses the actual private descriptors and native listener
+verification, MCP SDK transport, native attach sessions, and WDIO/Jasmine.
+It checks bounded busy, explicit relinquish, refusal of MCP while the runner
+owns the target, fresh sessions/resources, worker-crash drain, credential
+confinement, and preservation of the fixture's exact PID through service
+shutdown. Only the test that spawned the fixture terminates it afterward.
+Operator preemption and loss of a real HTTP 200 runner-grant response are
+separate modes alongside handoff and worker crash. Every mode verifies
+attach-only refusal, busy/exclusive admission, deletion before reuse, stale
+references/cursors, terminal reports, credential confinement, descriptor
+withdrawal, claim release, and preservation of the same external process
+incarnation. A failed mode does not suppress later modes when its cleanup is
+confirmed; unconfirmed cleanup blocks subsequent launches.
+The response-loss fault discards an actual successful HTTP response and checks
+the client's typed transport failure and exact injected cause, not an unwrapped
+top-level message. The portable runner contract uses the same fault routine
+against its real HTTP service and verifies reservation fencing and subsequent
+worker drain without a native helper.
+
+Each subprocess has a 120-second internal `AbortSignal.timeout` case budget
+followed by at most 30 seconds of shutdown, below the parent's 180-second
+hard limit. Cancellation stops the supervisors and reaches readiness, MCP and
+runner-grant waits. Shutdown also waits for readiness-helper and WDIO drain.
+Failed cases exit after recording their cleanup result; successful cases must
+exit naturally, with an unref'd five-second watchdog failing any lingering
+event-loop handles. After a failed child has exited, the parent removes only
+its uniquely named descriptors through the platform private-storage API,
+checking the exited PID and exact record contents. This does not release a
+claim or establish native cleanup; uncertainty still blocks the next launch.
+
+### Windows fixture and hosted selection
+
+The same contract runs on Windows against the existing plain Win32 fixture,
+not an AppKit bundle or a React Native host. Provision
+`furn-win32-fixture.exe` explicitly with the driver package's test-only
+`lib/native/windows/win32FixtureSupport.js` `fixtureExecutable()` builder.
+The built module loads directly with Node ESM, without a Jest loader; importing
+it does not build or launch anything. Calling the builder uses the Windows
+toolchain and native cache but does not launch anything. The consumer test
+never builds or downloads its fixture. With the verified helper already
+provisioned, run from the repository root under the exclusive desktop lock:
+
+```powershell
+$env:FURN_NATIVE_DRIVER_TEST = '1'
+$env:FURN_NATIVE_HANDOFF_APP_PATH = '<absolute path to furn-win32-fixture.exe>'
+yarn workspace @fluentui-react-native/desktop-test test nativeRunner.contract --runInBand
+```
+
+Windows resolves the canonical executable and unique exact title, waits through
+the supported native attach/window/find APIs for that process's `1004` status
+control to say `Ready`, then releases the readiness lease without stopping the
+external app. No new native ready-file option is required. The Windows fixture
+receives `--lifetime-ms 135000`, slightly beyond the case budget, rather than
+its ten-minute default. Core modes use an offscreen window and accessibility
+input only. Except for the deliberate worker crash, both the ownership and
+accessibility-activation specs must execute and pass; an unsupported/skipped
+input spec cannot qualify the native consumer. `evidence.wdio` records their
+counts and explicit accessibility result. The optional capture mode
+uses an onscreen window and is skipped when
+`FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES` disables any input feature, matching
+the Windows native-contract gate. The same disabled-input policy gates macOS
+capture without changing its bundle/ready-file path. Endpoint refusal records
+`capture: "unsupported"` and `captureSkipped: true`; ownership/cleanup may
+still pass, but no capture pass is claimed. No mode claims physical input.
+
+Windows descriptors use unique names in the validated default private store.
+Project artifact ancestry is not repaired or trusted for private storage.
+The `setup-desktop-driver` action's `run-native-runner-contract: 'true'`
+explicitly provisions the fixture and selects this consumer after helper
+diagnosis. Both accessible Windows and Win32 Storybook PR jobs enable it.
+Their selection guard requires all four core modes to execute and pass and
+checks the three non-crash evidence records for two executed/passed inner
+WDIO specs, zero skips and successful accessibility input. Neither an
+all-skipped consumer nor a silently skipped inner input spec makes this check
+green. Hosted capture remains an explicit skipped test.
+
+Retain `artifacts/desktop/f11/native-*/evidence.json` and the run reports. Do not
+copy the private descriptor directory into shared artifacts. Record source
+revision, fixture revision, helper identity, selected/executed cases, native
+permission failures, cleanup, and skipped/not-run scenarios separately.
+Absent the explicit opt-ins, the tests are skipped, not qualified. The plain
+fixture does not qualify React Native Windows Fabric/Win32 Paper rendering,
+Storybook handoff, retained launches, physical input, cross-connection resume,
+or replay. Physical console Ctrl+C on both RN endpoints is a separate lifecycle
+qualification, not supplied by the semantic CLI regression.
 
 ## Windows Fabric and Win32 Paper
 

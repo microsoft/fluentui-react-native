@@ -602,7 +602,7 @@ CommandResult Driver::Execute(const std::string& command, const json::Value& par
 CommandResult Driver::ExecuteCommand(const std::string& command, const json::Value& params,
                                      const CancellationToken& token) {
   CommandResult result;
-  token.ThrowIfCancelled();
+  if (command != "launch") token.ThrowIfCancelled();
   if (IsGuardedMutation(command)) {
     RequireMutationsAllowed();
   }
@@ -615,6 +615,11 @@ CommandResult Driver::ExecuteCommand(const std::string& command, const json::Val
     const ApplicationLease& lease =
         command == "launch" ? applications_.Launch(params, token) : applications_.Attach(params, token);
     result.result = applications_.SerializeLease(lease);
+    return result;
+  }
+  if (command == "inspectApplication" || command == "recoverApplication") {
+    result.result = command == "inspectApplication" ? applications_.InspectApplication(params, token)
+                                                     : applications_.RecoverApplication(params, token);
     return result;
   }
   if (command == "closeApplication") {

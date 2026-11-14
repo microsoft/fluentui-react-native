@@ -13,7 +13,11 @@ export type ExtractedWdioStory = {
   tests: readonly { name?: string; code: string; options?: ResolvedDesktopCaseOptions }[];
 };
 
-export function extractWdioTests(code: string, sourceFile: string): ReadonlyMap<string, ExtractedWdioStory> {
+export function extractWdioTests(
+  code: string,
+  sourceFile: string,
+  onReadHelper?: (file: string, source: string | undefined) => void,
+): ReadonlyMap<string, ExtractedWdioStory> {
   const tests = new Map<string, ExtractedWdioStory>();
   transformSync(code, {
     babelrc: false,
@@ -30,7 +34,13 @@ export function extractWdioTests(code: string, sourceFile: string): ReadonlyMap<
                 const compiledCode = compileWdioTest(callback, sourceFile, code);
                 const descriptor = options === undefined ? undefined : validateDesktopCaseOptions(options, `${sourceFile}.wdio`);
                 if (descriptor !== undefined) {
-                  rejectDirectInput(callback, { name, input: descriptor.input, inputSource: descriptor.inputSource, sourceFile });
+                  rejectDirectInput(callback, {
+                    name,
+                    input: descriptor.input,
+                    inputSource: descriptor.inputSource,
+                    sourceFile,
+                    onReadHelper,
+                  });
                 }
                 return {
                   ...(name === undefined ? {} : { name }),

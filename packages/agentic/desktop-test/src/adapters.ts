@@ -63,7 +63,7 @@ export async function resolveDesktopApplication(
     if (target.endpoint === 'macos') {
       const bundleIdentifier = app.macos?.bundleIdentifier ?? 'com.microsoft.ReactTestApp';
       application =
-        configured.bundleIdentifier || configured.executablePath || configured.leasePath
+        configured.bundleIdentifier || configured.executablePath || configured.leasePath || configured.processIdentity
           ? { bundleIdentifier, windowTitle, ...configured }
           : { executablePath: await resolveBuiltMacosApplication(target, app, bundleIdentifier, signal), windowTitle, ...configured };
     } else {
@@ -78,7 +78,7 @@ export async function resolveDesktopApplication(
         );
       }
       application = { windowTitle, ...configured };
-      if (!application.aumid && !application.executablePath && !application.leasePath) {
+      if (!application.aumid && !application.executablePath && !application.leasePath && !application.processIdentity) {
         const manifestPath = path.join(target.projectRoot, 'windows', 'ReactApp.Package', 'bin', 'x64', 'Debug', 'AppxManifest.xml');
         if (!fs.existsSync(manifestPath))
           throw new Error(
@@ -107,13 +107,15 @@ export async function resolveDesktopApplication(
     }
   }
   if (target.endpoint === 'macos') {
-    if (!application.bundleIdentifier && !application.executablePath && !application.leasePath)
+    if (!application.bundleIdentifier && !application.executablePath && !application.leasePath && !application.processIdentity)
       throw new Error('macOS application identity is missing.');
     if (application.workingDirectory) throw new Error('workingDirectory is currently supported only by the Windows helper.');
   } else {
     if (!application.windowTitle) throw new Error('Windows applications require an exact window title.');
-    if (!application.aumid && !application.executablePath && !application.leasePath) {
-      throw new Error('A title alone is not an application identity; configure an executable, AUMID, or verified owner lease.');
+    if (!application.aumid && !application.executablePath && !application.leasePath && !application.processIdentity) {
+      throw new Error(
+        'A title alone is not an application identity; configure an executable, AUMID, exact processIdentity, or verified owner lease.',
+      );
     }
   }
   return Object.freeze(application);

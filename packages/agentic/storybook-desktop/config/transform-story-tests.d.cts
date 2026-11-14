@@ -24,6 +24,7 @@ declare namespace storyTests {
       inputSource: 'declared' | 'derived';
       /** The story file, so helpers imported from relative modules are followed. */
       sourceFile?: string;
+      onReadHelper?: (file: string, source: string | undefined) => void;
     },
   ): void;
 }

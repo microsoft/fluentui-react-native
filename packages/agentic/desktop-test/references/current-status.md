@@ -7,7 +7,7 @@ owner_paths:
 
 # Current lifecycle and qualification status
 
-**Work in progress, updated 2026-11-08.** Done means the listed implementation,
+**Work in progress, updated 2026-11-12.** Done means the listed implementation,
 not full cross-platform qualification. This package is the intended neutral
 workload host; the existing Storybook lifecycle takeover is transitional.
 No new coordinator package, daemon, dynamic plugin loader, or package rename
@@ -30,9 +30,9 @@ and its sub-issues.
 | Durable quarantine wiring                                | Done               | Both native service paths use owner-only storage and exact-incarnation probes; restart is not recovery proof. Live endpoint qualification remains separate.                                                                                                                                                                                                                                                                                                                                                                                                         |
 | Supervisor crash containment                             | Work in progress   | Cooperative Node service lifelines and correlated service readiness implemented; portable parent/wrapper crash, late-spawn, failed-withdrawal and stalled-child contracts. Live macOS survivors remain unqualified; no automatic reclaim. Windows: the helper's Job Object ends an unpackaged app it launched when the helper dies (qualified with REX); packaged launches are `uncontained` and survive in a fenced claim. Non-detached children are hard-terminated with a crashed owner (observed A/B), so the three crash-disposal contracts are skipped there. |
 | Storybook resource contributions                         | Work in progress   | Current integration substitutes its CLI lifecycle; retain the channel/driver child until relocation is justified and qualified.                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| MCP/WDIO handoff                                         | Work in progress   | Must await drain/deletion; attached-app handoff is independent of future supervisor-owned launch.                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| Supervisor-owned app lifetime                            | Work in progress   | Current session-owned launch/externally owned attach semantics remain; never silently retain or terminate another owner's app.                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| Cross-service/multi-target claims                        | Work in progress   | Configured aliases now have distinct registered IDs while retaining physical identity; exact-application exclusion and input-mutex qualification remain open.                                                                                                                                                                                                                                                                                                                                                                                                       |
+| MCP/WDIO handoff                                         | Work in progress   | Generic attach-only phase is implemented and qualified on real macOS AppKit and Windows/Win32 fixtures: bounded busy, operator preemption, settled deletion, exclusive reservation, worker-crash/lost-response drain, fresh resources, and credential confinement. Storybook handoff remains deferred; see the dated F11 receipts below.                                                                                                                                                                                                                            |
+| Supervisor-owned app lifetime                            | Work in progress   | Opt-in macOS supervisor launch, neutral exact attach, causal ownership and application claim resources are implemented. Session-owned launch remains the default; external attach never transfers ownership. Signed AppKit supervisor/session lifetime, exact cleanup and external preservation passed on 2026-11-12. Renderer evidence is scoped below; descendants, interrupted native publication and Storybook lifecycle relocation remain gates.                                                                                                               |
+| Cross-service/multi-target claims                        | Work in progress   | Configured aliases have distinct registered IDs while retaining physical identity. Exact macOS application exclusion, lease release and the physical-input mutex passed signed AppKit contracts on 2026-11-12; cross-platform and broader lifecycle qualification remains open.                                                                                                                                                                                                                                                                                     |
 | Bounded persisted run/status/artifact queries            | Done               | Harness-local read service/client; atomic snapshots, terminal evidence, scoped expiring grants, bounded pages and allowlisted opaque artifact IDs. No management transport.                                                                                                                                                                                                                                                                                                                                                                                         |
 | Workload management/control API                          | Work in progress   | Future management selects only declared workload IDs, not commands/paths/environment; lifecycle/handoff gates still apply.                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | Automatic service reuse and per-user daemon              | Deferred           | Requires exact identity/config matching and evidence of need. Never adopt an unknown port occupant.                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
@@ -64,14 +64,14 @@ did not retain a portable raw-report locator; do not imply otherwise.
 
 ## Full-submission checklist
 
-| Area            | Remaining evidence/work                                                                                                                                                                                                                                                                                            |
-| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| macOS           | Live failed-cleanup and service-restart cases; Paper separately; supervisor death with Metro/channel/helper survivors; exact attached-app preservation.                                                                                                                                                            |
-| Windows / Win32 | Same-branch MCP restart/revocation/dispose/args tests; physical console Ctrl+C requalification of `serve --agent` after the idle-CLI fix; interactive input/capture rerun; naming launched (especially uncontained packaged) apps in the claim.                                                                    |
-| Storybook       | Authenticated mutation ingress, context fencing/reconnect, consistent helper build policy, manifest provenance and separate nonces.                                                                                                                                                                                |
-| Recovery        | Durable uncertainty is wired in both paths; live restart qualification, ledger and exact-resource reconciliation still precede automatic reclaim. The workload claim records a Node.js-clock start time, so it needs a helper-described start time before claim inspection can prove a live owner or a reused PID. |
-| Concurrency     | No physical-input suites in parallel on one interactive desktop. Separate machines may qualify independent endpoints.                                                                                                                                                                                              |
-| Reliability     | Establish the required repeated-run window rather than interpreting aggregate past successes as a pass.                                                                                                                                                                                                            |
+| Area            | Remaining evidence/work                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| macOS           | Signed AppKit and separate Fabric/Paper positive lifecycle, inspection, exclusion and exact primary cleanup passed on 2026-11-12. Rebased native contracts also pass interrupted acquisition publication, owner death with native app/known-descendant survivors, retained claim fences and exact operator cleanup. Arbitrary descendants, Metro/channel survivors, automatic recovery and repeated-run reliability remain unqualified. |
+| Windows / Win32 | Same-branch MCP restart/revocation/dispose/args tests; physical console Ctrl+C requalification of `serve --agent`; interactive input/capture rerun. Generic launched-application claim fields and durable survivor contracts are implemented; live uncontained packaged-survivor journaling/recovery remains not run for this change.                                                                                                   |
+| Storybook       | Authenticated mutation ingress, context fencing/reconnect, consistent helper build policy. F6 strict provenance and independent nonces are qualified by same-branch Windows Fabric and both Win32 Paper lanes in run 43156299266; see the F6 evidence below for scope and limits.                                                                                                                                                       |
+| Recovery        | Durable uncertainty is wired in both paths; live restart qualification, ledger and exact-resource reconciliation still precede automatic reclaim. Claim schema 3 records the driver's OS start identity; schema 2 and unverified claims inspect as unknown. LIFE-8's clock-estimate mismatch is fixed; LIFE-9's existing stable per-user claim root has a TMPDIR regression contract. Automatic reclaim remains unsupported.            |
+| Concurrency     | No physical-input suites in parallel on one interactive desktop. Separate machines may qualify independent endpoints.                                                                                                                                                                                                                                                                                                                   |
+| Reliability     | Establish the required repeated-run window rather than interpreting aggregate past successes as a pass.                                                                                                                                                                                                                                                                                                                                 |
 
 Tracking: live macOS, Windows, and Win32 requalification
 [#4441](https://github.com/microsoft/fluentui-react-native/issues/4441);
@@ -881,3 +881,2756 @@ not physical Ctrl+C. Both owned app/service processes exited, the recorded
 ports were free, and the per-user claim and default descriptor were absent.
 The separate `serve --agent` interrupt limitation above is fixed but not yet
 requalified on Windows.
+
+## F6 generated manifest provenance — 2026-11-12
+
+Implementation source: `efd6dadeda87344911fb4000fe293c686c678602`, with
+resolved-case compatibility in `fa0681635` and the awaited shared workload
+claim in `a5de740f01ca025bf548a923ae4561b36fc9872b`.
+Generated driver manifests are strict version 3 and contain no secrets.
+Version-1 private credentials use independent bridge and application attachment
+nonces. The owner-private runtime module contains only bridge data and a
+data-only `export default` statement. The parent's independent handoff pins
+manifest/credential/runtime hashes and the resolved helper; the actual channel
+child validates that binding and re-verifies the executable before a helper
+can spawn. Metro receives the canonical schema locator from trusted process
+configuration, not from editable generated files. Channel lifecycle placement
+and application lease ownership have not moved.
+
+Review fixes route Windows/Win32 smoke lease publication, replacement, and
+cleanup through the trusted Node helper and OS private-storage adapter;
+PowerShell receives only a digest receipt. Smoke control now uses the strict
+shared version-3 parser. Publication resolves the existing generated directory
+once before opening private storage, supporting symlinked projects and macOS
+`/var` aliases while retaining later fail-closed ancestor validation and
+actionable diagnostics.
+
+**Portable/local boundary checks:** the initial 364-test integration result
+used a project-local temporary directory and did not qualify stock macOS
+temporary paths. Review exposed that gap; those counts are superseded by the
+default-`TMPDIR` review validation below. Runtime format, lint, build, and all
+33 tests pass with the default temporary directory. The driver package passed
+format, lint, build, and 1,221 portable tests with 66 skips; focused private
+storage tests passed 65 with ten platform skips.
+The reviewed integration package passes format, lint, build, and 379 tests
+with four Windows-only skips. Its focused generated-manifest, lease, and real
+WDIO-runner contract selection passed 38 tests, including the actual v3 smoke
+control path. The ledger-owning harness passes format, lint, build, and
+380 tests with one skip; its claim-sensitive tests ran under the shared lock.
+These review runs used the default macOS `TMPDIR`, without an override.
+The channel-child rejection fixture now canonicalizes its temporary parent
+too, ensuring it reaches helper/hash refusal instead of an alias-path error.
+Evidence: `apps/storybook/artifacts/f6/review-{driver-focused,driver-test,integration-focused,integration-final,runtime,harness}.log`.
+Controlled Metro fixtures cover missing trust inputs, unknown fields, and
+manifest/runtime tampering. Actual channel-child fixtures reject substituted
+helper path/hash, helper bytes, and unknown fields before listening or spawning.
+The real macOS private-storage adapter round-trips the records with directory
+mode `0700` and file mode `0600` and rejects a permissive credential mode.
+
+**Pre-review native helper checks:** on macOS 27.2.1 arm64, the locked
+`FURN_NATIVE_DRIVER_TEST=1 yarn workspace
+@fluentui-react-native/desktop-driver test --runInBand` run passed 1,240 tests;
+47 platform/capability tests were skipped (75 suites passed, six skipped).
+Evidence: `apps/storybook/artifacts/f6/native-contract.log`. The explicitly
+built helper uses the stable `FURN Desktop Driver Development` identity;
+`doctor --platform macos --permissions` reported ready, unlocked/on-console,
+and Screen Recording preflight true, but Accessibility and PostEvent preflight
+false. No permission prompts, privacy changes, or TCC resets were requested.
+The native consumer runs below must not be interpreted as passed from that
+helper readiness result.
+
+**Native consumer preparation:** Fabric bundle passed
+(`apps/storybook/artifacts/f6/bundle-fabric.log`). Initial Fabric prep failed
+because CocoaPods called `JSON.fast_generate` after Ruby selected JSON 3.1.
+Selecting the already installed JSON 2.18 through a worktree-local Ruby
+preload, without installing or modifying shared tools, made prep pass
+(`prep-fabric-json2.log`, run `8df5c79a-9618-423d-b65d-e9828644a75b`).
+The first Fabric smoke exposed rejection of the extractor's legitimate
+resolved `inputSource` metadata; `fa0681635` fixes it and adds declared/derived
+descriptor regressions while preserving unknown-field refusal.
+
+**Fabric native consumer: blocked, not passed.** The corrected smoke built and
+launched the app, started the verified channel, and reached authenticated
+bridge epoch recording. Native attach then reported Accessibility
+`apiDisabled` (`-25211`), and session creation failed because the target exposed
+no supported click input mode. No stories or tests executed.
+Evidence: `apps/storybook/artifacts/f6/smoke-fabric-resolved-options.log` and
+`apps/storybook/artifacts/desktop/65fb216f-89ee-43db-86a6-333b3d91331e/run.json`.
+The harness's AppleEvent cleanup also timed out (`-1712`); its leftover app
+process was verified against this worktree's executable, terminated by that
+exact PID only, and confirmed gone. No privacy workaround was attempted.
+
+**Paper native consumer: blocked, not passed.** Paper bundle and prep passed
+with the same existing-JSON-2 selection (`bundle-paper.log`, run
+`3c281fb3-eb3a-4125-a189-86ced929d6ad`; `prep-paper.log`, run
+`9b575663-fa72-4625-9f09-b745bfa1e83e`). Paper smoke also built and launched
+the app and reached bridge epoch recording, then failed on Accessibility
+`apiDisabled` and no supported click input mode. Zero tests executed.
+Evidence: `apps/storybook/artifacts/f6/smoke-paper.log` and
+`apps/storybook/artifacts/desktop/cfab6e50-9b38-45d3-b114-05b3ea995037/run.json`.
+Its AppleEvent cleanup timed out as well; the exact worktree-owned leftover
+app PID was verified, terminated, and confirmed gone. Positive Fabric/Paper
+traversal and authored-case qualification remain pending an authorized
+Accessibility/PostEvent-capable host.
+
+**Reviewed repository checks:** source `ffb4944db` passed all 90
+`yarn lage test-links --verbose --grouped` tasks. After `yarn clean-lage-cache`,
+the locked `TF_BUILD=1 yarn lage buildci --concurrency 4` passed all 178 tasks
+with the default macOS `TMPDIR`. The existing test wrapper uses `TF_BUILD`
+only to run Jest in-band; it does not skip agentic tests. Evidence:
+`apps/storybook/artifacts/f6/review-links.log` and `review-buildci.log`.
+The Accessibility-blocked macOS consumer smoke was not repeated for review.
+
+**First PR CI follow-up (2026-11-12):** run `43145388693` on
+`2739349a3` exposed five Linux CLI fixture failures and both Win32 smoke
+lanes refusing private storage before any stories ran. The Linux cause is
+confirmed: the command factory dropped the injected `createPrivateStorage`
+adapter. It now forwards that option, and platform selection explicitly
+supports macOS/Windows while other production credential paths fail closed.
+Portable contracts inject storage and simulate all three platform branches.
+
+The Win32 logs retained only the generic unsafe-storage message, not the
+adapter's non-enumerable refusal reason; the exact native refusal category
+cannot be recovered from that evidence. Native inspection confirms that the
+workspace root was checked before creation and ancestor grants allowing
+untrusted child replacement are refused. Unsafe hosted-workspace ancestry
+is therefore an inferred cause, not a confirmed refusal category.
+Windows publication now asks the verified helper for its OS-selected per-user
+known-folder root and opens a deterministic, independently protected child
+namespace for the canonical generated directory. Reading rederives that
+namespace only after verifying the parent handoff and helper. No environment
+path, editable manifest root, relaxed ACL, or root repair chooses authority.
+Storybook now surfaces the bounded native refusal token. Metro retains its
+workspace roots; this initial fix also watched the private runtime projection,
+which the subsequent CI run exposed as incompatible with cross-volume Windows
+workspaces.
+
+The separate Windows setup job failed four native build/handshake/UIA
+timeout cases, but its existing Windows private-storage native contracts
+passed. This branch does not change Windows helper build, resolution,
+handshake, C++, UIA, or fixture code; setup runs before Storybook publication.
+Runner flakiness is an inference, not a confirmed explanation. The next
+same-branch CI run passed setup, supporting that inference; no timeout or
+native-helper behavior was changed.
+
+**CI-fix portable validation (default `TMPDIR`):** driver format/lint/build/test
+passed (1,222 tests; 66 skipped); Storybook integration passed (386; 4 skipped);
+runtime passed (34). The new contracts cover OS dispatch, helper-selected
+project isolation, trust-before-helper ordering, changed-root and tamper
+refusal, protected child calls, and outside-workspace Metro resolution.
+Evidence: `apps/storybook/artifacts/f6/ci-fix-{driver,integration,runtime}.log`.
+These simulated-platform results are not Windows ACL qualification.
+
+**CI-fix repository validation:** source `17032203b` passed all 178
+`TF_BUILD=1 yarn lage buildci --concurrency 4` tasks after
+`yarn clean-lage-cache`; both commands held the shared native lock and used
+the default `TMPDIR`. Links passed all 90 tasks. Repository lint, instruction,
+changeset, and whitespace checks passed. Evidence:
+`apps/storybook/artifacts/f6/ci-fix-buildci.log` and `ci-fix-links.log`.
+The Accessibility-blocked macOS consumer smoke was not repeated.
+
+**Second PR CI follow-up:** run `43150784347` on `ca27c1b0b` passed JS PR,
+all macOS lanes, Windows/Win32 PR, and Windows native-helper setup. All three
+Windows Fabric / Win32 Paper Storybook lanes opened the revised protected
+per-user namespace, then failed before smoke during Metro bundling. The
+workspace was on `D:` and private projection on `C:`; Metro's relative-path
+file map recombined the absolute cross-volume result into `D:\C:\...`.
+This confirms the new namespace works on the hosted runner, not that the
+consumer flow is qualified.
+
+The bridge projection contains the bridge nonce, so it remains protected.
+Windows/Win32 Metro now indexes only the constant workspace stub and supplies
+the pinned private buffer through its supported custom-transformer hook,
+delegating compilation/minification to the consumer's original worker. The
+worker rechecks the digest, and its cache key binds that digest to avoid
+stale nonce transforms. No cross-volume private watch folder or public
+generated source copy is created. macOS private-path behavior is unchanged.
+Windows namespace/path comparisons normalize drive letters, casing, and
+separators without replacing the independent byte-digest trust checks.
+
+**Cross-volume portable evidence:** controlled fixtures cover a `C:` private
+source with a `D:` workspace, case/drive aliases, a wrongly located stub,
+unchanged watch roots, digest tampering, nonce cache invalidation, and
+unrelated-module delegation. The actual consumer Metro worker/Babel/minifier
+also compiled both Windows targets. A bounded full Metro file-map/worker-farm
+fixture built minified Windows and Win32 bundles with the private source
+explicitly excluded from the file map. These JavaScript checks are not native
+Windows qualification. Evidence:
+`apps/storybook/artifacts/f6/crossdrive-real-worker.log` and
+`crossdrive-real-bundle-final.log`.
+
+**Cross-volume package validation (default `TMPDIR`):** format/lint/build/test
+passed for the driver (1,222 tests; 66 skipped), Storybook integration
+(387; 4 skipped), and runtime (37). The final transformer cache-key change
+also passed the 11 controlled Metro cases. Knip now explicitly includes the
+Metro config/worker entrypoints; repository lint, instruction integrity,
+changesets, whitespace, and all 90 link tasks passed. Evidence:
+`apps/storybook/artifacts/f6/crossdrive-{desktop-driver,storybook-desktop,storybook-desktop-runtime}.log`,
+`crossdrive-final-format.log`, `crossdrive-repo-checks.log`, and
+`crossdrive-repo-safeguards.log`.
+
+**Cross-volume repository validation:** source `e760a36de` passed all 178
+`TF_BUILD=1 yarn lage buildci --concurrency 4` tasks after
+`yarn clean-lage-cache`. Both commands held the shared native lock and used
+the default `TMPDIR`; no native smoke or privacy-setting change was repeated.
+Evidence: `apps/storybook/artifacts/f6/crossdrive-buildci.log`.
+
+**Windows/Win32 qualification: sufficient for F6's changed paths.**
+[Run 43156299266](https://github.com/microsoft/fluentui-react-native/actions/runs/43156299266)
+passed on source `58ec7ab4fb7ce6e449d0e351ecb02352bf88f319` on
+2026-11-12. Full job logs and the uploaded terminal `run.json` reports agree:
+
+| Lane / job                                                                                                                               | Full story index rendered | Authored tests                        | Aggregate                                            |
+| ---------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- | ------------------------------------- | ---------------------------------------------------- |
+| Windows Fabric accessible / [130976919836](https://github.com/microsoft/fluentui-react-native/actions/runs/43156299266/job/130976919836) | 215/215                   | 40/40 passed                          | 255 selected, executed, and passed                   |
+| Win32 Paper accessible / [130976919943](https://github.com/microsoft/fluentui-react-native/actions/runs/43156299266/job/130976919943)    | 188/188                   | 45/45 passed                          | 233 selected, executed, and passed                   |
+| Win32 Paper physical / [130976920038](https://github.com/microsoft/fluentui-react-native/actions/runs/43156299266/job/130976920038)      | 188/188                   | 100 passed; 1 quarantined unsupported | 289 selected; 288 executed and passed; 1 unsupported |
+
+All three reports have zero failed, skipped, incomplete, retried, or flaky
+tests and zero groups not run. Each navigation result has a distinct story
+ID and passed; the render totals match the complete runtime index, not an
+early-stop subset. The physical lane's existing #4373 quarantine is not a
+pass or an F6 failure.
+
+The five required paths are exercised in **each** lane. The successful
+guarded execution establishes the mandatory checks below; these checks do
+not emit separate success messages or upload secret records:
+
+1. **Version-3 control:**
+   `packages/agentic/storybook-desktop/config/storybook-control.cjs` uses the strict shared
+   generated-contract parser before driver traversal and authored tests.
+   The rendered-story and authored-test results above therefore cross the
+   v3 gate in all three lanes.
+2. **Trusted helper verification:** each log records native Storybook/WebDriver
+   readiness before traversal. The channel child's
+   `packages/agentic/storybook-desktop/config/server.cjs`
+   requires the inherited parent handoff and awaits `readDriverManifest`,
+   which checks its independent byte/helper binding and calls
+   `verifyNativeDriverArtifact` before opening Windows private storage or
+   starting the native service. Readiness plus completed native traversal
+   demonstrates this guarded spawn path, not merely parent-side resolution.
+3. **Protected-DACL lease lifecycle:** both PowerShell scripts require a
+   successful trusted Node publication and digest receipt before control,
+   and propagate lease-helper cleanup failures. Successful script completion
+   exercises publication, native consumption, and receipt-checked cleanup in
+   all lanes. Windows Fabric additionally stops/relaunches the app between
+   its stories/tests phases and replaces the lease using the prior receipt;
+   the Win32 lanes use one app incarnation. The Windows job also passed the
+   real NTFS `privateStorage.contract.test.ts` (log line 436), including
+   exclusive publication/removal and refusal of permissive root/record ACLs,
+   junctions, hard links, and replaced roots. This is native boundary
+   evidence, not portable mock coverage or an independent post-run ACL dump.
+4. **Private runtime resolution:** all three logs finish writing the minified
+   Windows/Win32 bundle before native startup. On these hosted runners the
+   workspace is on `D:` and the protected per-user projection is on `C:`.
+   The Windows runtime transformer must read and hash-check that private
+   buffer before delegating the workspace stub to Metro's original worker;
+   the subsequent authenticated render confirms the resulting bundle works.
+5. **Live bridge authentication:** successful native story selections require
+   `StorybookChannelOrchestrator.acceptHello` to match the nonce, instance,
+   endpoint, target, manifest digest, and connection epoch, followed by
+   correlated render-ready responses. The 215/188/188 successful selections
+   prove live authenticated runtime traffic, not just a listening server.
+
+**Evidence locators:** the Windows full log records bundle completion at
+line 655, native readiness at 669-670, all stories at 709, authored tests at
+1230, and terminal totals at 2295. Win32 accessible uses lines 502,
+508-511, 1097, and 1118; Win32 physical uses 499, 505-508, 1809, and 1845.
+The three artifacts are `Storybook_windows_fabric_43156299266_1`
+(13916946307), `Storybook_win32_paper_accessible_43156299266_1`
+(13917010025), and `Storybook_win32_paper_physical_43156299266_1`
+(13916318019). Their main smoke reports under `apps/storybook/artifacts/desktop`
+are respectively `414aa6f1-a539-4d67-9aa4-a92db05b58a4/run.json`,
+`00cae5a0-ef44-45cf-aaa9-68485ecf2403/run.json`, and
+`e5767c29-e4b1-4a9b-9685-8cdf8e0d3ee1/run.json`. Full logs, inventory,
+and extracted reports are retained locally under ignored
+`apps/storybook/artifacts/f6/ci-43156299266/`.
+
+**Limits:** collected channel stderr includes non-terminal
+`bridge-unavailable` navigation diagnostics on Windows and an authenticated
+epoch `lease-invalid` diagnostic on Win32 physical. Do not infer their
+original timing from the buffered output, diagnostic-free operation, or
+general bridge-recovery qualification from the terminal passes. The local
+macOS Accessibility block above remains unchanged; no local smoke was
+repeated. `pwsh` is unavailable locally, so its parser check remains not run;
+the actual scripts executed in these CI lanes. Keep the PR draft until the
+documentation follow-up's CI passes and the coordinator changes its status.
+
+## 2026-11-12: F10-M neutral application ownership
+
+Implementation source:
+`76a2be59abfde3a7bcb0abd8d86a2052e7378274`.
+Host: macOS 27.2.1, arm64, isolated signed AppKit fixture; no React renderer.
+The helper used the stable `FURN Desktop Driver Development` identity,
+artifact `73d2e52b2ad9fbd51410301399f3b784a2d17ae8c2b34ebb12b36cd9b41626a1`,
+source digest `b0e40122cc2226ffa65486677af7ba2495e1138cbc2c7e70af22fd36671e796f`.
+Evidence records the exact source revision and the three documentation-only
+working-tree changes present during the run.
+
+The neutral `application-ownership` public entry provides exact macOS attach
+identity and opt-in supervisor-owned launch; session launch stays the default.
+Attached apps remain external. Both macOS launch kinds are explicitly
+uncontained: LaunchServices causal ownership is not direct-child containment.
+Pending and acquired applications are claim resources, including exact
+PID/start and launch/containment metadata when available. Unknown publication
+or cleanup outcomes remain fenced. `claimDesktopWorkload` is now asynchronous;
+schema 3 uses the driver's OS start-time identity, and schema 2/unverified
+identities inspect as unknown. Existing Storybook lease migration remains
+deferred until after F9.
+
+All commands below ran under the exclusive native-validation lock with
+project-local ignored `TMPDIR`; native commands additionally used
+`FURN_NATIVE_DRIVER_TEST=1`, the stable signing identity, and an isolated helper
+cache. Commands are shown from the repository root.
+
+| Selection                                         | Exact command                                                                                                                                                | Result                                                       | Workspace-relative artifact                        |
+| ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------ | -------------------------------------------------- |
+| Full portable harness                             | `yarn workspace @fluentui-react-native/desktop-test test --runInBand`                                                                                        | Passed 399, failed 0, skipped 9; 25 suites passed, 1 skipped | `artifacts/desktop/f10m/harness-unit-final.log`    |
+| Native owner and rejected-launch safety           | `yarn workspace @fluentui-react-native/desktop-test test --runInBand applicationOwnership.contract --testNamePattern 'kernel owner identity\|failed native'` | Passed 3, failed 0, skipped 5                                | `artifacts/desktop/f10m/native-negative-final.log` |
+| Native identity and application exclusion backend | `yarn workspace @fluentui-react-native/desktop-driver test --runInBand applicationIncarnation serviceIdentity`                                               | Passed 69, failed 0, skipped 14; 4 suites passed, 2 skipped  | `artifacts/desktop/f10m/native-identity-final.log` |
+
+The first full harness run had one missing compiled `desktop-driver-mcp`
+boundary dependency. Building that unchanged workspace corrected the
+prerequisite; all eight standalone-consumer boundary cases then passed,
+including the new public entry, and the full harness rerun above passed.
+Portable Windows/Win32 cases prove durable launched-app survivor records and
+fail-closed claims only; they are not native packaged-survivor qualification.
+
+Native evidence:
+`packages/agentic/desktop-test/artifacts/desktop/application-ownership-0fNQ8C/evidence.json`.
+Schema 3 inspected its native OS owner as live. Both direct-child and
+LaunchServices launches reached actual AX queries, which returned
+`apiDisabled` (-25211), then journaled and settled their exact primary-process
+identities. Direct child PID 8558 started at
+`2026-11-12T02:37:23.794023Z`; LaunchServices PID 8616 started at
+`2026-11-12T02:37:24.304837Z`. Native probes proved those incarnations exited;
+an independent process check found both PIDs absent and no fixture/helper
+process under this worktree. No external process was terminated.
+Post-run verification is retained at
+`artifacts/desktop/f10m/native-cleanup-final.json`.
+
+An earlier fixture inherited Mach-O minimum macOS 28.0 on this 27.2.1 host.
+LaunchServices failed before publishing a PID
+(`NSCocoaErrorDomain` 256, underlying `NSOSStatusErrorDomain` -10825);
+that older implementation left the pending resource uncertain. Completed
+no-application failures are settled by the review follow-up below.
+The corrected fixture pins the helper's macOS 11.0 minimum in both compiler
+target and bundle metadata;
+`vtool` confirmed 11.0 and the corrected rejected-launch run passed above.
+The earlier evidence is retained at
+`packages/agentic/desktop-test/artifacts/desktop/application-ownership-UiVcfS/evidence.json`.
+
+**Remaining qualification:** positive supervisor/session lifecycle, exact
+external-app preservation and independent-service application exclusion are
+blocked: Accessibility is not granted to the signed helper. Physical-input
+mutex qualification is not run; PostEvent preflight is also false. Separate
+macOS Fabric and Paper signing/TCC-responsibility lanes are not run on this
+branch because of that permission block. No privacy settings were changed.
+Arbitrary surviving descendants, interrupted native publication and live
+Windows/Win32 uncontained packaged-survivor claims remain gates. The PR's
+Windows driver-only native suite and ordinary E2E/smoke jobs do not exercise
+the new harness survivor contracts; Windows CI is insufficient for those
+gates. This is partial F10-M delivery, not full issue completion.
+
+### Pre-review repository validation
+
+At source `48717724f0df1e8f89d76b66c48d37fac93e871b`,
+`yarn clean-lage-cache` passed once, followed by the locked aggregate:
+
+```sh
+TMPDIR="$PWD/artifacts/desktop/f10m/buildci-tmp" \
+GIT_CEILING_DIRECTORIES="$PWD/artifacts/desktop/f10m/buildci-tmp" \
+TF_BUILD=1 yarn lage buildci --concurrency 4
+```
+
+Result: passed, 176 successful tasks, 2 cache skips, 0 pending/aborted/failed.
+`TF_BUILD=1` selects the declared Jest task's in-band runner; the Git ceiling
+keeps project-local temporary test fixtures from discovering the outer
+repository. No baseline tests or dependencies were changed for this setup.
+An initial aggregate stopped at two owned cross-package guidance links;
+replacing them with explicit code paths fixed the policy violation, and
+`yarn check-agent-instructions` then passed. The corrected aggregate above
+passed, including all owning workspace test/lint tasks. Package format/build
+checks passed separately. `yarn lage test-links --concurrency 4` passed 90
+tasks with no failures. Logs: `artifacts/desktop/f10m/buildci-first.log`,
+`artifacts/desktop/f10m/buildci-final.log` and
+`artifacts/desktop/f10m/test-links-final.log`. Aggregate success does not
+qualify the blocked or unrun native gates above.
+
+### Review follow-up: launch rejection and lock-failure settlement
+
+Source `62e6552028ea8fb81e76d430379321145fab709c` fixes the three review
+findings. Native pre-spawn rejection and completed LaunchServices failure with
+no application report `applicationSettlement: 'not-started'`. Ordinary no-data
+macOS/Windows/Win32 rejections release the claim; reported process identity,
+unknown or unrecognized settlement, lost dispatched responses and completion
+after cancellation remain fenced. An acquired lease is never cleared by the
+no-data fallback. The async `claimDesktopWorkload` export and awaited Storybook
+caller are unchanged; desktop-test now has a **minor** changeset.
+
+Default-TMPDIR focused tests used only project-local test files and Jest cache.
+Native commands ran under the exclusive lock, with the stable signing identity,
+native opt-in, an isolated helper cache and project-local temporary storage:
+
+| Selection                                              | Exact command                                                                                                                                                | Result                                                        |
+| ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------- |
+| Default-TMPDIR ownership                               | `yarn workspace @fluentui-react-native/desktop-test test --runInBand applicationOwnership.test --cacheDirectory "$PWD/artifacts/desktop/f10m/jest-cache"`    | Passed 24, failed 0, skipped 0                                |
+| Default-TMPDIR transport                               | `yarn workspace @fluentui-react-native/desktop-driver test --runInBand NativeHostProcess --cacheDirectory "$PWD/artifacts/desktop/f10m/jest-cache"`          | Passed 59, failed 0, skipped 0                                |
+| Signed helper rebuild                                  | `yarn workspace @fluentui-react-native/desktop-driver exec desktop-driver build-driver --platform macos --force`                                             | Passed                                                        |
+| Native identity and termination                        | `yarn workspace @fluentui-react-native/desktop-driver test --runInBand nativeDriver.test applicationIncarnation serviceIdentity`                             | Passed 79, failed 0, skipped 15; 5 suites passed, 2 skipped   |
+| AppKit safety                                          | `yarn workspace @fluentui-react-native/desktop-test test --runInBand applicationOwnership.contract --testNamePattern 'kernel owner identity\|failed native'` | Passed 4, failed 0, skipped 5                                 |
+| Portable CLI retry, native-only environment removed    | `yarn workspace @fluentui-react-native/desktop-test test --runInBand contracts --testNamePattern 'agent-cli\|lane-cli'`                                      | Passed 2, failed 0, skipped 28 unselected                     |
+| Full portable harness, native-only environment removed | `yarn workspace @fluentui-react-native/desktop-test test --runInBand`                                                                                        | Passed 409, failed 0, skipped 10; 25 suites passed, 1 skipped |
+
+The native self-test distinguishes actual flock contention from other errors.
+Injected EBADF cleans up a real causally owned child and proves its exact exit;
+injected EWOULDBLOCK preserves its real child. The AppKit safety case proves
+claim release/reacquisition for exact-identity launch refusal, a missing direct
+executable, a missing installed bundle, and a completed LaunchServices rejection.
+Both AX-rejected launch kinds still prove exact-primary cleanup.
+
+New evidence:
+`packages/agentic/desktop-test/artifacts/desktop/application-ownership-JMEGuu/evidence.json`;
+it records a clean source tree. Helper artifact:
+`1d68fae8df504432900e30e5b2a6714029762f5dd690cd953a8ef07b1f5da4f3`;
+source digest:
+`2c8ac56b2b824b05b1cb10d358050dfb643b44eb6e209508d53eaa0f2744b0f8`.
+Direct-child PID 70283/start `2026-11-12T03:14:29.097020Z` and
+LaunchServices PID 70323/start `2026-11-12T03:14:29.588927Z` were proved exited.
+Independent post-run inspection found both PIDs absent and no own-worktree
+fixture/helper process. Logs:
+`artifacts/desktop/f10m/review-focused-final.log`,
+`artifacts/desktop/f10m/review-native-final.log` and
+`artifacts/desktop/f10m/review-native-cleanup.json`.
+An extra full portable run in the native batch initially passed 407, failed 2,
+skipped 10 because the HOME-isolating CLI fixtures inherited native-only
+signing/cache settings and could not resolve the configured signing identity.
+Removing `FURN_NATIVE_DRIVER_TEST`,
+`FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY` and
+`FURN_DESKTOP_DRIVER_CACHE_ROOT` corrected the invocation, without a source or
+fixture change. Both affected cases and then the full portable suite passed
+under the exclusive lock; log:
+`artifacts/desktop/f10m/review-harness-final.log`.
+These safety passes do not close any positive AX, physical-input, renderer,
+descendant, interrupted-publication or Windows-native gate above.
+
+### Final review-fix repository validation
+
+At clean source `e74043b0e6eb5b452e9023bc60c70ba6c9540600`, one combined
+clean-cache aggregate passed under the exclusive native-validation lock:
+
+```sh
+env -u FURN_NATIVE_DRIVER_TEST \
+  -u FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY \
+  -u FURN_DESKTOP_DRIVER_CACHE_ROOT \
+  TMPDIR="$PWD/artifacts/desktop/f10m/review-buildci-tmp" \
+  GIT_CEILING_DIRECTORIES="$PWD/artifacts/desktop/f10m/review-buildci-tmp" \
+  TF_BUILD=1 \
+  bash -c 'yarn clean-lage-cache && yarn lage buildci --concurrency 4'
+```
+
+Result: **passed, 178 successful tasks, 0 skipped, 0 pending/aborted/failed**.
+All owning workspace aggregate tasks passed; native-only overrides were not
+inherited. `TF_BUILD=1` retains the supported in-band Jest task, and the Git
+ceiling isolates project-local temporary Git fixtures. No source, dependency or
+test waiver was needed. Log:
+`artifacts/desktop/f10m/review-buildci-final.log`.
+The code remains the native-qualified `62e6552028ea8fb81e76d430379321145fab709c`;
+subsequent changes record evidence only. Positive native acceptance gates remain
+open, so delivery is draft and does not close #4446.
+
+### CI regression follow-up: read-only application identity
+
+CI run `43148275374` at `0bd0ad6f7cc1e862169a422b7614a95adf899584`
+failed both macOS Storybook renderers with `application-lock-busy` while
+recording the authenticated bridge epoch. The actual WebDriver session's
+native helper held its legitimate exact-incarnation application lock.
+Storybook's recovery callback ignored that helper and created another
+`NativeDesktopHost` whose temporary `attach` requested competing control.
+This was not a workload-claim leak or an ownership handoff.
+The passing macOS E2E artifact reports 62 tests with session ownership:
+`desktop-test/src/wdio/configuration.ts` selects `launch`, not the Storybook
+attach/recovery path, and that lane has no Storybook bridge-epoch journal.
+
+Fix source `5e360734e9b85bd4732aabc47c7654bb7211c3d3` introduces the
+macOS-only read-only `inspectApplication` operation. It shares descriptor,
+legacy nonce/lease, executable/bundle and exact-window verification, capturing
+the kernel identity before discovery and rechecking it afterwards. It does
+not acquire control or register windows/elements. Storybook uses the existing
+session helper; every real launch/attach retains exclusive exact-incarnation
+control, and foreign controlling services still receive
+`application-lock-busy`. Windows/Win32 keep their previous isolated identity
+attachment path. Unsupported old helpers fail closed rather than falling
+back to controlling macOS attachment.
+
+All three owning packages passed their declared format, build and lint checks.
+Build/test/lint batches and native qualification used the exclusive
+native-validation lock. Focused tests kept the default TMPDIR unchanged;
+their fixtures and Jest caches are project-local. The full
+suites instead used project-local TMPDIR and the matching Git ceiling because
+existing broad fixtures use `os.tmpdir()` and this task forbids system
+temporary-directory writes. This is a declared deviation from the requested
+default-TMPDIR full-suite invocation, not default-TMPDIR full-suite evidence.
+
+| Selection                                    | Exact command                                                                                                                                                                                                                                 | Result                                                                             |
+| -------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| Default-TMPDIR native adapter                | `yarn workspace @fluentui-react-native/desktop-driver test --runInBand NativeDesktopHost.applicationIdentity --cacheDirectory "$PWD/artifacts/desktop/f10m/ci-regression/jest-driver"`                                                        | Passed 11, failed 0, skipped 0                                                     |
+| Default-TMPDIR composed Storybook regression | `yarn workspace @fluentui-react-native/storybook-desktop test --runInBand applicationIdentity --cacheDirectory "$PWD/artifacts/desktop/f10m/ci-regression/jest-storybook"`                                                                    | Passed 5, failed 0, skipped 0                                                      |
+| Default-TMPDIR claim/ownership regressions   | `yarn workspace @fluentui-react-native/desktop-test test --runInBand applicationOwnership.test ownership.test --cacheDirectory "$PWD/artifacts/desktop/f10m/ci-regression/jest-harness"`                                                      | Passed 29, failed 0, skipped 0                                                     |
+| Full portable driver                         | `yarn workspace @fluentui-react-native/desktop-driver test --runInBand --cacheDirectory "$PWD/artifacts/desktop/f10m/ci-regression/jest-desktop-driver-full"`                                                                                 | Passed 1,236, failed 0, skipped 66                                                 |
+| Full portable harness                        | `yarn workspace @fluentui-react-native/desktop-test test --runInBand --cacheDirectory "$PWD/artifacts/desktop/f10m/ci-regression/jest-desktop-test-full"`                                                                                     | Passed 409, failed 0, skipped 10                                                   |
+| Full portable Storybook                      | `yarn workspace @fluentui-react-native/storybook-desktop test --runInBand --cacheDirectory "$PWD/artifacts/desktop/f10m/ci-regression/jest-storybook-desktop-full"`                                                                           | Passed 344, failed 0, skipped 4                                                    |
+| Stable-signed helper rebuild                 | `yarn workspace @fluentui-react-native/desktop-driver exec desktop-driver build-driver --platform macos --force`                                                                                                                              | Passed                                                                             |
+| Noninteractive permissions                   | `yarn workspace @fluentui-react-native/desktop-driver exec desktop-driver doctor --platform macos --permissions`                                                                                                                              | Passed diagnostics; Accessibility/PostEvent preflight false, Screen Recording true |
+| Native identity/termination/backend          | `yarn workspace @fluentui-react-native/desktop-driver test --runInBand nativeDriver.test applicationIncarnation serviceIdentity --cacheDirectory "$PWD/artifacts/desktop/f10m/ci-regression/jest-driver-native"`                              | Passed 79, failed 0, skipped 15                                                    |
+| AppKit safety                                | `yarn workspace @fluentui-react-native/desktop-test test --runInBand applicationOwnership.contract --testNamePattern 'kernel owner identity\|failed native' --cacheDirectory "$PWD/artifacts/desktop/f10m/ci-regression/jest-harness-native"` | Passed 4, failed 0, skipped 5                                                      |
+
+The composed regression covers launch, application claim publication,
+embedded-driver attach and authenticated epoch observation separately for
+Fabric and Paper, with retained window identity and rejected foreign control.
+The native self-test additionally refuses missing, malformed and stale
+inspection descriptors before AX discovery. The positive AppKit contracts now
+inspect an application while its controlling session and foreign helper are
+present, but those AX-dependent cases remain locally blocked, not passed.
+
+The stable-signed native run used a clean source tree. Helper artifact:
+`982f3cfa696bbde7f9868186ae9365d59014fd656687e5cbec2de74863280ed3`;
+source digest:
+`6bafaf5835d9cd22410992466a8d8f86086ff6b3b3efd182b3a48922f698527c`.
+AppKit evidence:
+`packages/agentic/desktop-test/artifacts/desktop/application-ownership-mwo1d2/evidence.json`.
+Rejected direct-child PID 53320/start `2026-11-12T04:18:28.787757Z` and
+LaunchServices PID 53360/start `2026-11-12T04:18:29.263568Z` were proved exited;
+independent post-run inspection found both PIDs absent and no own-worktree
+fixture/helper process. No privacy settings were changed.
+
+Logs and curated CI analysis are under
+`artifacts/desktop/f10m/ci-regression/`: `focused-default-tmp.log`,
+`package-validation.log`, `native-validation.log`, `native-cleanup.json` and
+`ci-analysis.json`. Actual macOS Storybook Fabric/Paper CI requalification at
+the fix is pending. Local positive AX/physical input, descendant, interrupted
+publication and Windows-native acceptance gates above remain open; keep draft.
+
+#### Final CI-regression aggregate
+
+The first clean-cache aggregate at documentation revision
+`a7c37b86abdfc3847824480300315cf88eebaf42` failed the Storybook test task
+after 112 successful tasks. Its output stopped after 13 passing Jest files,
+without an assertion, stack, summary or termination cause. The cause remains
+unestablished. The unchanged full Storybook suite then passed 344 with 4
+skipped under the identical aggregate environment; that reproduction is not
+a successful aggregate.
+
+A second clean-cache aggregate serialized package tasks to remove
+inter-package fixture/process overlap. Under the exclusive native-validation
+lock, the following invocation passed **178 tasks**, with 0 skipped, failed,
+pending or aborted, in 6m 12.39s:
+
+```sh
+env -u FURN_NATIVE_DRIVER_TEST \
+  -u FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY \
+  -u FURN_DESKTOP_DRIVER_CACHE_ROOT \
+  TMPDIR="$PWD/artifacts/desktop/f10m/ci-regression/buildci-tmp" \
+  GIT_CEILING_DIRECTORIES="$PWD/artifacts/desktop/f10m/ci-regression/buildci-tmp" \
+  TF_BUILD=1 \
+  bash -c 'set -euo pipefail; git rev-parse HEAD; git status --short; yarn clean-lage-cache && yarn lage buildci --concurrency 1'
+```
+
+No source or test waiver was applied between these runs. Serialization is
+the retry's isolation measure, not a proven diagnosis of the first failure.
+Logs: `artifacts/desktop/f10m/ci-regression/buildci.log`,
+`artifacts/desktop/f10m/ci-regression/storybook-buildci-environment.log`
+and `artifacts/desktop/f10m/ci-regression/buildci-final.log`.
+Runtime source remains the native-qualified `5e360734e`; subsequent changes
+record evidence only. This is portable repository validation, not positive
+AX or renderer qualification. Actual macOS Storybook Fabric/Paper CI and the
+other native acceptance gates remain pending; keep draft.
+
+### 2026-11-12 AX-enabled F10-M qualification
+
+**Observed.** This evidence supersedes the earlier Accessibility/PostEvent
+block, not the remaining descendant/publication gates. Source is
+`9395737943d7e1402a40a67a41dc605ef0afb24b` plus this delivery's live
+macOS discovery fix. Host: macOS 27.2.1 arm64. Feasibility was recorded before
+execution at
+`artifacts/desktop/f10m/ax-qualification-20261112/feasibility.json`.
+Every native, GUI, physical-input and aggregate command used
+`$HOME/Library/Caches/furn-overnight/with-native-lock.sh`.
+The default TMPDIR was retained for this requalification; the older
+project-local-TMPDIR qualification remains historical.
+
+The requested diagnostic passed:
+
+```sh
+env FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY="FURN Desktop Driver Development" \
+  FURN_DESKTOP_DRIVER_CACHE_ROOT="$PWD/artifacts/desktop/f10m/helper" \
+  FURN_DESKTOP_DRIVER_BUILD_POLICY=never \
+  yarn workspace @fluentui-react-native/desktop-driver exec desktop-driver \
+  --reporter json doctor --platform macos --permissions
+```
+
+Accessibility, PostEvent and ScreenCapture preflight were `true`; the screen
+was unlocked/on-console and `promptRequested=false`. Stable signed helper:
+`1429ce4663795bad31f545086ef80bffb83e9b9533287964991c5527388b2f6c`;
+source digest
+`c17944691081d30a320cf6e4393a5bb0ce6cece8dd71295a400dbc5e6a53b3cb`.
+The certificate leaf and designated requirement match the driver's evidence
+above. Process ancestry reaches `Rex Server.app`; the effective permission
+result is scoped to that responsible process tree. **Inferred, not qualified:**
+these passes do not establish that the helper bundle independently owns a
+durable grant or that another terminal/CI process tree inherits it.
+
+The initial full AppKit run passed 8 and failed 1. Its newly launched app was
+missing from the standalone helper's cached `NSWorkspace` application list.
+The new warmed-discovery regression failed before the native fix (1 failed,
+9 skipped). Live descriptor discovery now uses current-user kernel PID
+enumeration with fresh `NSRunningApplication` objects; exact identity,
+ambiguity refusal and launch causality remain enforced. The final focused run
+passed **39, failed 0, skipped 0**:
+
+```sh
+env FURN_NATIVE_DRIVER_TEST=1 FURN_NATIVE_PHYSICAL_INPUT_TEST=1 \
+  FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY="FURN Desktop Driver Development" \
+  FURN_DESKTOP_DRIVER_CACHE_ROOT="$PWD/artifacts/desktop/f10m/helper" \
+  yarn workspace @fluentui-react-native/desktop-test test --runInBand \
+  applicationOwnership.contract applicationOwnership.test ownership.test \
+  --cacheDirectory "$PWD/artifacts/desktop/f10m/ax-qualification-20261112/jest-native-harness"
+```
+
+Ten native tests cover positive supervisor/session lifecycle, exact OS owner
+identity, external preservation, independent-service application exclusion
+and lease release, read-only observation with retained windows, warmed
+discovery and duplicate-bundle refusal, stale identity, direct-child and
+LaunchServices causality, cancellation, rejected launch cleanup, and the
+physical-input mutex. The remaining 29 are portable regressions. Physical
+input was limited to the mutex's Shift down/up sequence.
+
+During implementation, two experimental LaunchServices attempts could not
+publish causal ownership. They were not silently treated as owned or exited.
+The run-specific executable paths, native start identities and launch-time
+intervals were checked before exact operator cleanup; native probes then
+reported both exited (PIDs 63263 and 65041). The experimental change to launch
+preexistence discovery was reverted; only descriptor discovery is changed.
+Evidence:
+`orphan-native-launch-cleanup.json`, `orphan-physical-launch-cleanup.json`,
+the red/experimental/green logs and `discovery-probe.json` under
+`artifacts/desktop/f10m/ax-qualification-20261112/`.
+Final passing AppKit identities and cleanup:
+`packages/agentic/desktop-test/artifacts/desktop/application-ownership-1V0SrR/evidence.json`.
+
+#### Real Storybook renderer procedure and boundaries
+
+The ignored qualifier
+`artifacts/desktop/f10m/ax-qualification-20261112/qualify-renderer.mjs`
+uses the declared app commands below from `apps/storybook`. Fabric omits
+`--paper`; Paper adds it to every renderer-specific command. Preparation is
+rerun when changing renderer:
+
+```sh
+yarn storybook --reporter json instance --macos
+yarn storybook --reporter json bundle --macos
+yarn storybook --reporter json prep --macos
+yarn storybook --reporter json manifest --macos
+yarn storybook --reporter json driver --macos --input accessible
+yarn storybook --reporter json run --macos
+STORYBOOK_SMOKE_STORY=components-button--default \
+  yarn storybook --reporter json smoke --macos --mode stories-and-tests --input accessible
+```
+
+Only `run` applies the worktree instance bundle ID. Before restarting the
+driver, the qualifier quits the exact app it launched and closes the old
+driver/Metro/channel. Its observer is started before app launch to exercise
+warmed discovery. Startup polling retries only read-only missing/incomplete
+AX discovery, never launch, attach or another mutation.
+
+The real-app checks use public `DesktopSupervisor`, native-host, identity,
+claim-inspection and driver-client APIs. Two independent services have
+separate claim directories and native helpers. The first attaches; both
+helpers can inspect its exact app identity without changing window handles.
+The second's native controlling attach returns `application-lock-busy`, and
+its WebDriver new-session request is refused. Releasing the first session
+lets the second attach. Deleting sessions and closing both external owners
+preserves the app. A separate supervisor-owned launch then survives two
+borrowed sessions, publishes its exact owned application resource and exits
+only at supervisor disposal. Each neutral claim verifies schema 3, native
+owner start identity, registered target and target-instance IDs; its claim is
+absent after settled close.
+
+**Observed integration limit:** Storybook's outer CLI claim still uses
+`unregistered` target/instance placeholders and no application resource
+journal. Its OS owner identity and run ID are verified separately. This
+qualification does not pretend that the deferred Storybook lifecycle/lease
+relocation after F9 has happened; the exact registered application-resource
+assertions are on the neutral supervisor claims.
+
+The first Fabric prep attempt failed before any app/service launch because
+the installed Ruby 4.0.6 selected JSON 3.1.0, which lacks the `fast_generate`
+entry used by this CocoaPods toolchain. Selecting the already-installed
+JSON 2.18.0 through a project-local Ruby preload fixed prep. The preload
+contains only `gem 'json', '=2.18.0'`; no gem installation, generated-source
+patch, Podfile change or global Ruby configuration change was made.
+Renderer invocations use:
+
+```sh
+env RUBYOPT="-r$PWD/artifacts/desktop/f10m/ax-qualification-20261112/ruby-json-version.rb" \
+  FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY="FURN Desktop Driver Development" \
+  FURN_DESKTOP_DRIVER_CACHE_ROOT="$PWD/artifacts/desktop/f10m/helper" \
+  FURN_DESKTOP_DRIVER_BUILD_POLICY=never \
+  node artifacts/desktop/f10m/ax-qualification-20261112/qualify-renderer.mjs fabric
+```
+
+For Paper, the final argument is `paper`. The machine-wide native-lock
+wrapper encloses each complete invocation, including cleanup. The qualifier
+selects Button/Default by manifest title/name, not an assumed slug.
+`STORYBOOK_SMOKE_STORY` filters authored callbacks, not catalog traversal.
+The accessible lane executes the Button semantics callback; its declared
+physical-pointer callback is excluded at selection, not counted as passed
+or skipped.
+
+Failed exploratory Fabric attempts remain separate artifacts:
+`fabric-prep-json3-failure/`, `fabric-orchestrator-scope-failure/`,
+`fabric-ax-startup-failure/` and `fabric-orchestrator-refusal-failure/`.
+The latter three corrected qualifier assumptions: the transitional outer
+claim is not a registered neutral claim; initial AX queries can be incomplete;
+and native conflict metadata is not the WebDriver error shape. They did not
+change production behavior. The scope failure required scoped command-tree
+shutdown; its three ports and claim were then verified absent in
+`driver-exact-cleanup.json`. The startup failure occurred before the qualifier
+captured a lease identity, so its original zero cleanup-failure count is not
+proof that its app exited. Operator cleanup separately checked the unique
+native PID, worktree executable, instance bundle ID and start within the
+successful `run` interval before signaling that exact app; the native probe
+reported exited in `run-candidate-exact-cleanup.json`. No unknown process or
+foreign application was adopted or killed.
+
+#### Observed renderer results
+
+| Renderer     | Qualification checks passed / failed / skipped | Smoke selected / executed / passed / failed / skipped / unsupported | Smoke artifact                                                                   |
+| ------------ | ---------------------------------------------- | ------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| macOS Fabric | 9 / 0 / 0; cleanup failures 0                  | 224 / 224 / 224 / 0 / 0 / 0; retries 0                              | `apps/storybook/artifacts/desktop/616bf2e8-a675-408f-bd56-2e09982ea969/run.json` |
+| macOS Paper  | 9 / 0 / 0; cleanup failures 0                  | 224 / 224 / 224 / 0 / 0 / 0; retries 0                              | `apps/storybook/artifacts/desktop/19358539-eed2-49e9-9c9a-79b5e7db4e9f/run.json` |
+
+Each smoke traversed 223 catalog entries plus the one manifest-selected
+Button semantics callback. The accessible input policy excluded one physical
+callback before selection; no physical callback is included in those passes.
+Both renderer doctors observed the same stable signed helper artifact and
+effective permissions recorded above. This qualifies the observed Fabric and
+Paper signing/TCC responsibility path separately; it is not first-run,
+clean-machine, PPPC or revoked-permission qualification.
+
+| Renderer | Externally attached run-owned app, PID / native start | Supervisor-owned app, PID / native start | Exact cleanup                                                                                                      |
+| -------- | ----------------------------------------------------- | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| Fabric   | 82677 / `2026-11-12T10:56:35.279027Z`                 | 83427 / `2026-11-12T10:56:38.528966Z`    | External app preserved through both external owners, then explicitly quit; supervisor app exited at owner disposal |
+| Paper    | 93753 / `2026-11-12T11:03:02.610130Z`                 | 94499 / `2026-11-12T11:03:04.921261Z`    | Same independently observed preservation and exact disposal                                                        |
+
+Both renderer runs closed driver/channel/Metro ports 33637, 18878 and 38843
+before restart and after smoke, removed all neutral and outer CLI claims,
+and found the instance application absent after smoke. Raw checks, identities,
+claims, process ancestry, signing/preflight and command logs:
+`artifacts/desktop/f10m/ax-qualification-20261112/fabric/evidence.json`
+and
+`artifacts/desktop/f10m/ax-qualification-20261112/paper/evidence.json`.
+
+**Still not run/unqualified:** arbitrary surviving descendants, interrupted
+native publication, supervisor-death survivors and live failed-cleanup/restart
+fault injection; native Windows/Win32 packaged-survivor journaling/recovery;
+and the repeated-run reliability window. First-run durable helper-owned
+TCC grants, clean-machine/PPPC/revocation behavior and another responsible
+process tree are not inferred from these passes. Storybook lifecycle/lease
+relocation remains deferred after F9. **Windows CI sufficient: no; keep draft.**
+Apple/Office module and bridging-header checks are inapplicable to this
+standalone helper.
+
+#### Final package validation and scope correction
+
+**Observed.** All three owning packages passed their declared
+`yarn workspace @fluentui-react-native/<package> format --check`, `build`
+and `lint` commands, for `desktop-driver`, `desktop-test` and
+`storybook-desktop`. The harness build/format/lint were repeated after its
+regression-fixture refinement. Command log: `package-validation.log` in the
+qualification artifact root.
+
+The initial broad native-enabled batch passed the full driver suite, then
+failed the harness suite: **416 passed, 3 failed, 1 skipped**. Two portable
+CLI fixtures intentionally substitute HOME, but inherited the native signing
+override, making the signing identity unavailable in that isolated home.
+Those are not portable results without native environment overrides.
+The third failure was a LaunchServices acquisition in the discovery test's
+setup: the helper could not prove causal incarnation, returned
+`applicationSettlement=unknown` with PID 9037, and did not kill a guessed
+process. Its precise cause remains unestablished. It is not a successful
+launch or a resolved reliability gate.
+
+Operator cleanup verified the unique run-owned fixture executable, exact
+kernel start `2026-11-12T11:12:39.767964Z` and native-suite interval before
+signaling PID 9037; the native probe then proved exited. Evidence:
+`native-suite-candidate-cleanup.json` and
+`packages/agentic/desktop-test/artifacts/desktop/application-ownership-Kd4tXB/evidence.json`.
+The discovery-only regression now starts both external children directly,
+captures their native identities, and waits for exact attached windows.
+It still warms discovery before launch, observes through another controlling
+helper, refuses duplicate bundle identities and verifies disappearance.
+This removes unrelated LaunchServices setup from that regression; it neither
+fixes nor weakens causal ownership capture. Existing supervisor/causal-launch
+tests remain selected.
+
+The corrected validation keeps the signing/native opt-ins only on matching-OS
+native selections and clears them for portable full suites. Every command
+below ran under the native lock with the default TMPDIR unchanged:
+
+| Selection                              | Exact command                                                                                                                                                                                                                             | Passed / failed / skipped                |
+| -------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
+| Full signed native-enabled driver      | `yarn workspace @fluentui-react-native/desktop-driver test --runInBand --cacheDirectory "$PWD/artifacts/desktop/f10m/ax-qualification-20261112/jest-desktop-driver-full"`                                                                 | 1,255 / 0 / 47                           |
+| Final signed ownership and regressions | `yarn workspace @fluentui-react-native/desktop-test test --runInBand applicationOwnership.contract applicationOwnership.test ownership.test --cacheDirectory "$PWD/artifacts/desktop/f10m/ax-qualification-20261112/jest-native-harness"` | 39 / 0 / 0; all 10 native tests selected |
+| Full portable driver                   | `yarn workspace @fluentui-react-native/desktop-driver test --runInBand --cacheDirectory "$PWD/artifacts/desktop/f10m/ax-qualification-20261112/jest-desktop-driver-portable"`                                                             | 1,236 / 0 / 66                           |
+| Full portable harness                  | `yarn workspace @fluentui-react-native/desktop-test test --runInBand --cacheDirectory "$PWD/artifacts/desktop/f10m/ax-qualification-20261112/jest-desktop-test-portable"`                                                                 | 409 / 0 / 11                             |
+| Full portable Storybook                | `yarn workspace @fluentui-react-native/storybook-desktop test --runInBand --cacheDirectory "$PWD/artifacts/desktop/f10m/ax-qualification-20261112/jest-storybook-desktop-portable"`                                                       | 344 / 0 / 4                              |
+
+Signed/native rows use `FURN_NATIVE_DRIVER_TEST=1`, the signing identity and
+helper cache above; the ownership row additionally enables
+`FURN_NATIVE_PHYSICAL_INPUT_TEST=1`. Portable rows explicitly unset
+`FURN_NATIVE_DRIVER_TEST`, `FURN_NATIVE_PHYSICAL_INPUT_TEST`,
+`FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY`,
+`FURN_DESKTOP_DRIVER_CACHE_ROOT` and `FURN_DESKTOP_DRIVER_BUILD_POLICY`.
+The 11 portable harness skips include all 10 opt-in AppKit tests; their
+separate signed pass is not inferred from that portable run.
+
+Logs: `full-native-suites.log` (includes the failed broad attempt) and
+`validation-final.log` (all corrected selections passed), under
+`artifacts/desktop/f10m/ax-qualification-20261112/`.
+Final AppKit evidence:
+`packages/agentic/desktop-test/artifacts/desktop/application-ownership-1V0SrR/evidence.json`,
+with the unchanged signed helper/source digest qualified by both renderers.
+**Still unqualified:** reliable LaunchServices causal-identity acquisition
+when the native snapshot cannot be proven; the unknown-publication/survivor
+and other gates listed above remain open. No automatic reclaim is claimed.
+
+#### Final aggregate and cleanup
+
+**Observed.** The single final clean-cache aggregate ran under the exclusive
+native-validation lock, without changing the default TMPDIR:
+
+```sh
+"$HOME/Library/Caches/furn-overnight/with-native-lock.sh" \
+  env -u FURN_NATIVE_DRIVER_TEST -u FURN_NATIVE_PHYSICAL_INPUT_TEST \
+  -u FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY \
+  -u FURN_DESKTOP_DRIVER_CACHE_ROOT -u FURN_DESKTOP_DRIVER_BUILD_POLICY \
+  TF_BUILD=1 bash -c 'set -euo pipefail;
+node -e '\''console.log(JSON.stringify({tmpdir:require("node:os").tmpdir(),nativeOptIn:process.env.FURN_NATIVE_DRIVER_TEST??null}))'\'';
+yarn clean-lage-cache && yarn lage buildci --concurrency 1'
+```
+
+**Passed 178 tasks, failed 0, skipped 0, pending 0, aborted 0**, in
+6m 50.47s. The recorded Node snapshot confirms the default macOS temporary
+directory and no native opt-in. The portable aggregate does not replace the
+separate signed native or real-renderer qualification. Full output:
+`artifacts/desktop/f10m/ax-qualification-20261112/buildci-final.log`.
+
+After the aggregate, the final read-only cleanup verification ran:
+
+```sh
+"$HOME/Library/Caches/furn-overnight/with-native-lock.sh" \
+  env FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY="FURN Desktop Driver Development" \
+  FURN_DESKTOP_DRIVER_CACHE_ROOT="$PWD/artifacts/desktop/f10m/helper" \
+  FURN_DESKTOP_DRIVER_BUILD_POLICY=never \
+  node artifacts/desktop/f10m/ax-qualification-20261112/verify-cleanup.mjs
+"$HOME/Library/Caches/furn-overnight/with-native-lock.sh" true
+```
+
+**Passed:** signed public native probes reported all **31** recorded exact
+incarnations exited; all three reported driver/channel/Metro ports refused
+connections; scoped current-user command-line and working-directory
+inspection found **0** worktree workload processes. Only the verifier, its
+command ancestors and its `lsof` child were excluded. The shared workload
+claim was absent, with **0** remaining `interactive.lock` files in eight
+native/renderer/failed-attempt artifact roots. Neither unknown nor foreign
+processes were signaled. The locked verifier exited 0; the following locked
+`true` successfully reacquired and released the machine-wide lock.
+
+Evidence: `cleanup-final.json` and `cleanup-final.log` under
+`artifacts/desktop/f10m/ax-qualification-20261112/`. The qualifier, installed-gem
+selector and final verifier remain as ignored execution artifacts; the
+experimental Swift diagnostic and completed operator-cleanup scratch scripts
+were removed, preserving their JSON/log evidence. No helper, fixture, app,
+driver service or Metro from this worktree remains. The causal-acquisition,
+survivor, containment, interrupted-publication and TCC/reliability limitations
+above are unchanged; keep the PR draft.
+
+Final documentation checks passed:
+
+| Exact command                                                                                                                      | Observed result                      |
+| ---------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
+| `yarn markdown-link-check -c .github/markdown-link-check-config.json packages/agentic/desktop-driver/native/macos/README.md`       | Passed 12 links                      |
+| `yarn markdown-link-check -c .github/markdown-link-check-config.json packages/agentic/desktop-driver/references/current-status.md` | Passed 6 links                       |
+| `yarn markdown-link-check -c .github/markdown-link-check-config.json packages/agentic/desktop-test/references/current-status.md`   | Passed 15 links                      |
+| `yarn markdown-link-check -c .github/markdown-link-check-config.json .changeset/neutral-macos-application-ownership.md`            | Passed; 0 links                      |
+| `yarn lage test-links --verbose --grouped`                                                                                         | Passed 90 tasks, failed 0, skipped 0 |
+| `yarn oxfmt --check`                                                                                                               | Passed repository-wide, 3,159 files  |
+
+Logs in the qualification artifact root:
+`changed-markdown-links-final.log`, `test-links-final.log` and
+`root-format-final.log`. `git diff --check` also passed. Only documentation
+result capture followed the final aggregate; no native/runtime source
+changed after the separately qualified renderer builds.
+
+### Rebased F10-M publication and survivor qualification — 2026-11-12
+
+The macOS layer was rebased in place from
+`6489386956c0485cb91b478a8f4adc4828f4178b` onto main
+`041ac8b9894aeaa7e1aa273baa2ece4e46298b94` (F6), yielding
+`d58d473b7bbef26619db596f420fa837687badf3`. The awaited Storybook claim
+was already present in F6; conflict resolution retained it and both independent
+evidence ledgers. No Windows native source was changed.
+`yarn install --immutable` passed with existing peer-dependency warnings.
+
+Qualification-only commit
+`d5a7530a9f2d4cb78721a36c1109b5c36fbdc5a1` adds three real AppKit
+scenarios; production ownership and helper behavior are unchanged:
+
+- Acquired-resource publication throws after native launch. The complete
+  pending claim remains fenced, refuses release/replacement, and settles only
+  after exact native cleanup and successful publication.
+- An independent owner is killed with `SIGKILL` after native acquisition but
+  before acquired-identity publication. The durable pending record survives;
+  no guessed identity is adopted, and replacement remains refused.
+- Another independent owner is killed after acquired-identity publication.
+  Its native app and known `/bin/sleep` descendant survive owner/helper exit.
+  Read-only inspection verifies the surviving app. The descendant also
+  survives exact primary-process cleanup, confirming `uncontained` semantics.
+  Both crash tests verify native owner/helper/app/descendant identities and
+  the initial child-parent relationship before exact operator cleanup. Only
+  the unchanged fixture claim is then removed.
+
+**Observed:** macOS 27.2.1 arm64, stable signer
+`FURN Desktop Driver Development`. All native operations ran under the shared
+native lock, with inherited TMPDIR. Nonprompting doctor passed with
+Accessibility/PostEvent/ScreenCapture preflight true and unlocked/on-console.
+The helper artifact and source digest remain
+`1429ce4663795bad31f545086ef80bffb83e9b9533287964991c5527388b2f6c`
+and `c17944691081d30a320cf6e4393a5bb0ce6cece8dd71295a400dbc5e6a53b3cb`.
+
+The focused command below passed **42 tests: 13 native, 29 portable; no failures
+or skips**. It ran the exact fixture/test content subsequently committed above.
+
+```sh
+FURN_NATIVE_DRIVER_TEST=1 FURN_NATIVE_PHYSICAL_INPUT_TEST=1 \
+FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY="FURN Desktop Driver Development" \
+FURN_DESKTOP_DRIVER_CACHE_ROOT="$PWD/artifacts/desktop/f10m/helper" \
+yarn workspace @fluentui-react-native/desktop-test test --runInBand \
+  applicationOwnership.contract applicationOwnership.test ownership.test \
+  --cacheDirectory "$PWD/artifacts/desktop/f10m/rebased-qualification-20261112/jest-ownership"
+```
+
+Evidence: `packages/agentic/desktop-test/artifacts/desktop/application-ownership-kffNMN/evidence.json`.
+Raw command output is under
+`artifacts/desktop/f10m/rebased-qualification-20261112/`.
+
+Full package validation also passed:
+
+| Exact command                                                                                                                                                            | Observed result                                                                                                              |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------- |
+| `yarn workspace @fluentui-react-native/desktop-driver format --check`                                                                                                    | Passed                                                                                                                       |
+| `yarn workspace @fluentui-react-native/desktop-driver lint`                                                                                                              | Passed                                                                                                                       |
+| `yarn workspace @fluentui-react-native/desktop-driver build`                                                                                                             | Passed                                                                                                                       |
+| `yarn workspace @fluentui-react-native/desktop-test format --check`                                                                                                      | Passed                                                                                                                       |
+| `yarn workspace @fluentui-react-native/desktop-test lint`                                                                                                                | Passed                                                                                                                       |
+| `yarn workspace @fluentui-react-native/desktop-test build`                                                                                                               | Passed                                                                                                                       |
+| `yarn workspace @fluentui-react-native/storybook-desktop format --check`                                                                                                 | Passed                                                                                                                       |
+| `yarn workspace @fluentui-react-native/storybook-desktop lint`                                                                                                           | Passed                                                                                                                       |
+| `yarn workspace @fluentui-react-native/storybook-desktop build`                                                                                                          | Passed                                                                                                                       |
+| `yarn workspace @fluentui-react-native/desktop-driver test --runInBand --cacheDirectory "$PWD/artifacts/desktop/f10m/rebased-qualification-20261112/jest-driver-native"` | Passed 1,256; failed 0; skipped 47. Native opt-in, stable signing and the helper cache above were set for this command only. |
+| `yarn workspace @fluentui-react-native/desktop-test test --runInBand --cacheDirectory "$PWD/artifacts/desktop/f10m/rebased-qualification-20261112/jest-harness"`         | Passed 409; failed 0; skipped 14. Native/signing overrides absent; the 13 AppKit cases passed separately.                    |
+| `yarn workspace @fluentui-react-native/storybook-desktop test --runInBand --cacheDirectory "$PWD/artifacts/desktop/f10m/rebased-qualification-20261112/jest-storybook"`  | Passed 392; failed 0; skipped 4. Native/signing overrides absent.                                                            |
+
+The native driver suite includes exact-incarnation probes, refusal of
+unreadable foreign process identity, stale-start/PID-reuse classification and
+native self-tests. Stale timestamps supplied against live PIDs and synthetic
+microsecond-reuse self-tests are not an observation of forced OS PID recycling.
+The physical ownership mutex uses only bounded Shift down/up.
+
+**Remaining scope:** the crash fixtures prove a bounded known descendant,
+not arbitrary descendant discovery or containment. They interrupt acquisition
+publication, not a machine power loss during filesystem rename. Actual TCC
+revocation, helper-owned durable grants outside the observed responsible
+process tree, automatic survivor adoption, Metro/channel survivor topology,
+transparent restart and repeated-run reliability remain unqualified.
+The earlier unverifiable LaunchServices causal snapshot is not erased by these
+passing launches. F9 lifecycle relocation and F11 retained-app handoff are
+separate work; this change implements neither.
+
+#### Rebased Fabric and Paper consumer passes
+
+Both renderers were independently rebuilt/prepared and qualified at
+`ca88c289c0fbd79b03dbd43b9bd85f0b21e7e800` (documentation after the
+qualification-only commit). Each passed **all 9 ownership/lifecycle checks**,
+with **0 cleanup failures**. Their declared accessible smokes each passed
+**224, failed 0, skipped 0, unsupported 0, retries 0**: 223 catalog traversals
+and one manifest-selected Button semantics callback. One physical callback
+was excluded before selection, not passed or skipped.
+
+Commands ran from `apps/storybook`, separately for Fabric and Paper, under the
+native lock. The helper signing/cache settings above were supplied.
+The existing project-local Ruby preload selected installed JSON 2.18.0 for
+CocoaPods; no dependencies, privacy settings, native project sources or
+global Ruby settings were changed.
+
+| Exact command                                                                                                                                       | Observed result                                |
+| --------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------- |
+| `yarn storybook --reporter json instance --macos`                                                                                                   | Passed                                         |
+| `yarn storybook --reporter json bundle --macos`                                                                                                     | Passed                                         |
+| `yarn storybook --reporter json prep --macos`                                                                                                       | Passed                                         |
+| `yarn storybook --reporter json manifest --macos`                                                                                                   | Passed                                         |
+| `yarn storybook --reporter json driver --macos --input accessible`                                                                                  | Passed readiness and settled shutdown          |
+| `yarn storybook --reporter json run --macos`                                                                                                        | Passed native build and exact instance launch  |
+| `STORYBOOK_SMOKE_STORY=components-button--default yarn storybook --reporter json smoke --macos --mode stories-and-tests --input accessible`         | Passed 224/224                                 |
+| `yarn storybook --reporter json instance --macos --paper`                                                                                           | Passed                                         |
+| `yarn storybook --reporter json bundle --macos --paper`                                                                                             | Passed                                         |
+| `yarn storybook --reporter json prep --macos --paper`                                                                                               | Passed                                         |
+| `yarn storybook --reporter json manifest --macos --paper`                                                                                           | Passed                                         |
+| `yarn storybook --reporter json driver --macos --paper --input accessible`                                                                          | Passed readiness and settled shutdown          |
+| `yarn storybook --reporter json run --macos --paper`                                                                                                | Passed native build and exact instance launch  |
+| `STORYBOOK_SMOKE_STORY=components-button--default yarn storybook --reporter json smoke --macos --paper --mode stories-and-tests --input accessible` | Passed 224/224                                 |
+| `yarn workspace @fluentui-react-native/desktop-driver exec desktop-driver --reporter json doctor --platform macos --permissions`                    | Passed separately for each renderer; no prompt |
+
+Real neutral supervisor-owned apps survived two borrowed sessions and exited
+only at supervisor disposal. Externally attached apps survived both independent
+owners' cleanup. Cross-helper controlling attach returned
+`application-lock-busy`; independent WebDriver control was refused until the
+first lease was released. Read-only inspection succeeded while control was
+held and preserved window handles. Schema-3 claims carried verified native
+owner/application and registered target/instance identities. F6 provenance
+behavior remained intact. Storybook's outer CLI claim still has its documented
+transitional placeholders; this is not F9 integration.
+
+Evidence: `fabric/evidence.json` and `paper/evidence.json` under the new
+qualification artifact root. Smoke reports:
+`apps/storybook/artifacts/desktop/15518d7a-d662-49ae-a76d-f4c0cd5e2fc3/run.json`
+(Fabric) and
+`apps/storybook/artifacts/desktop/92d22b26-24cc-4d87-a4b7-229d24f478b1/run.json`
+(Paper). Both observed the same stable signer/designated requirement with
+effective permissions under the `Rex Server.app` responsible process tree;
+this is not first-run, clean-machine or permission-revocation qualification.
+Apple/Office module and bridging-header checks are inapplicable to this
+standalone helper. Windows/Win32 native ownership qualification belongs to
+the independent upper layer and was not run here.
+
+#### Plain aggregate, documentation and final cleanup
+
+The required aggregate **is not green**. It ran under the native lock with
+inherited environment: `TF_BUILD` and native/signing overrides absent,
+default TMPDIR retained, and no concurrency override. The cache was cleared
+once; subsequent plain attempts used only results from that fresh run.
+
+| Exact command                                                                                         | Observed result                                                                                                                                                                                    |
+| ----------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `yarn lage test-links --verbose --grouped`                                                            | Passed 90 tasks, failed 0, skipped 0                                                                                                                                                               |
+| `yarn clean-lage-cache && yarn lage buildci`                                                          | Failed in `check-package-contents`: desktop-test's `yarn pack --dry-run --json` exited 1; underlying cause unestablished. Log: `buildci.log`.                                                      |
+| `yarn workspace @fluentui-react-native/desktop-test pack --dry-run --json`                            | Passed immediately without changes. Log: `desktop-test-pack.log`.                                                                                                                                  |
+| `yarn lage buildci` (first retry)                                                                     | Failed driver tests: known `boundedCommand` parallel-startup assertion expected SIGKILL but observed SIGTERM; unmodified `privateStorage` test also exceeded 10 seconds. Log: `buildci-retry.log`. |
+| `yarn workspace @fluentui-react-native/desktop-driver test --runInBand boundedCommand privateStorage` | Passed 73, failed 0, skipped 10. This focused serial diagnostic is not aggregate acceptance. Log: `aggregate-failures-focused.log`.                                                                |
+| `yarn lage buildci` (final unchanged retry)                                                           | Failed only the same `boundedCommand` assertion; driver tests passed 1,236, failed 1, skipped 66. The private-storage test passed. Log: `buildci-final.log`.                                       |
+
+Both failing test sources and their implementations are unchanged from pinned
+main. No assertion, timeout, concurrency policy or environment was altered to
+hide these failures. The passing full signed suite, focused contracts and
+renderer runs remain distinct evidence; they do not turn the failed plain
+aggregate into a pass.
+
+Changed Markdown link checks passed using
+`yarn markdown-link-check -c .github/markdown-link-check-config.json <file>`:
+`packages/agentic/desktop-driver/native/macos/README.md` (12 links),
+`packages/agentic/desktop-driver/references/current-status.md` (6),
+`packages/agentic/desktop-test/references/current-status.md` (19),
+`packages/agentic/desktop-test/references/native-qualification.md` (2), and
+`.changeset/neutral-macos-application-ownership.md` (0).
+
+**Observed final cleanup:** native probes proved all **24** recorded exact
+incarnations exited; all **3** reported driver/channel/Metro ports refused
+connections. Scoped command-line and working-directory checks found **0**
+worktree workload processes. The shared claim and all claims beneath the
+three native/renderer evidence roots were absent. The native lock was then
+reacquired and released successfully.
+
+An earlier cleanup scan saw four orphaned test workers/children from the
+failed aggregate. All four exited naturally before the bounded cleanup
+inspection; no signal was needed. Their initial failure and subsequent
+absence are retained in `cleanup-first.json`, `cleanup-first.log` and
+`aggregate-worker-cleanup.json`. The final successful verifier wrote
+`cleanup-final.json` and `cleanup-final.log` in the new artifact root.
+No helper, fixture, descendant, application, driver service or Metro from
+this qualification remains. Copied execution scripts were removed after use;
+their JSON results and command logs remain as ignored evidence.
+
+#### Review follow-up: bounded fixture retirement — 2026-11-12
+
+Source commit `0fb6cd47fccc4f6210797b25085e7b56aa8ca4fe` addresses the
+reviewed indefinite crash-owner wait. The changed executable source is limited
+to `fixtures/application-ownership/crash-owner.mjs`, its regression in the
+existing `src/applicationOwnership.test.ts`, and four lines in
+`packages/agentic/desktop-driver/native/macos/fixtures/ApplicationFixture.swift`.
+The ready owner now waits
+at most 120 seconds, emits a fixed diagnostic and exits 1. The AppKit fixture
+requests termination on its main queue after 300 seconds; its existing
+`/bin/sleep 300` descendant was already bounded.
+
+Production ownership, helper protocol, parent cleanup, identity verification
+and claim settlement are unchanged. In particular, failure to obtain an owner
+identity still does not authorize signalling a guessed PID. Owner retirement
+allows helper EOF; neither fixture deadline settles an abandoned workload
+claim or implements automatic recovery.
+
+**Observed portable regression:** with the shared wait still unbounded, the
+new `--retirement-probe` test failed with `spawnSync ETIMEDOUT` after five
+seconds. After adding the timeout, the same probe exited 1 with the expected
+diagnostic. It uses a 25 ms deadline through the same wait function, before
+acquiring any claim or starting a helper/application. This is portable
+retirement evidence, not a native owner-death or five-minute AppKit runtime
+pass.
+
+Exact commands and results at the source commit:
+
+- `node --check packages/agentic/desktop-test/fixtures/application-ownership/crash-owner.mjs`:
+  passed.
+- `yarn workspace @fluentui-react-native/desktop-test test --runInBand applicationOwnership.test ownership.test`:
+  passed 30, failed 0, skipped 0.
+- `yarn workspace @fluentui-react-native/desktop-driver format`,
+  `yarn workspace @fluentui-react-native/desktop-driver lint` and
+  `yarn workspace @fluentui-react-native/desktop-driver build`: each passed.
+- `yarn workspace @fluentui-react-native/desktop-test format`,
+  `yarn workspace @fluentui-react-native/desktop-test lint` and
+  `yarn workspace @fluentui-react-native/desktop-test build`: each passed.
+- `yarn workspace @fluentui-react-native/desktop-driver test --runInBand`:
+  passed 1,237, failed 0, skipped 66; native opt-in absent.
+- `yarn workspace @fluentui-react-native/desktop-test test --runInBand`:
+  passed 410, failed 0, skipped 14; native opt-in absent.
+
+Under the shared native lock, using the existing stable signing identity and
+helper cache, these commands also completed:
+
+```sh
+yarn workspace @fluentui-react-native/desktop-driver exec desktop-driver \
+  --reporter json doctor --platform macos --permissions
+node packages/agentic/desktop-driver/native/macos/fixtures/build.cjs \
+  artifacts/desktop/f10m/retirement-followup-20261112/fixture
+```
+
+Doctor exited 0 with `promptRequested=false`, Accessibility/PostEvent/
+ScreenCapture preflight true, and **`screenLocked=true`**. The fixture
+compiled and passed strict signature verification; it was not launched.
+**Current native runtime qualification is blocked by the locked console.**
+The prior 13 native cases and Fabric/Paper passes above remain evidence of
+pre-fix content, present at `16558610ff2bd14775430f86c738c12947fe81ee`;
+they are not reruns of this retirement change. No unlock, privacy alteration
+or native GUI retry was attempted.
+
+The one required follow-up `yarn clean-lage-cache && yarn lage buildci`
+cleared the cache, then **failed** only the unchanged
+`boundedCommand.test.ts:31` SIGKILL-versus-SIGTERM assertion: driver tests
+passed 1,236, failed 1, skipped 66. Private-storage tests passed in this run.
+Both implicated test files and their implementations are byte-unchanged from
+pinned main `041ac8b9894aeaa7e1aa273baa2ece4e46298b94`.
+The aggregate used the native lock, inherited TMPDIR, no `TF_BUILD`, no native
+opt-in and no concurrency override. It was not retried. Root instruction,
+package-content and publishing checks passed within that failed aggregate;
+these individual passes do not make the aggregate green.
+
+Separate `yarn lage test-links --verbose --grouped` passed 90 tasks.
+`yarn markdown-link-check -c .github/markdown-link-check-config.json <file>`
+passed for the five changed Markdown files listed above, with unchanged
+12/6/19/2/0 link counts.
+
+Final locked command-line/working-directory audits at 23:23:50 and 23:23:53
+UTC found no worktree workloads or unreadable candidates and issued no
+signals. The initial audit conservatively counted its own short-lived
+`lsof` child; the corrected audit excludes only that exact known audit PID
+and its own ancestor chain. No application, Metro or native ownership
+fixture was launched in this follow-up.
+
+Evidence: `artifacts/desktop/f10m/retirement-followup-20261112/`, including
+`retirement-unbounded-red.log`, `retirement-green.log`,
+`driver-portable.log`, `harness-portable.log`, `doctor.json`,
+`fixture-build.json`, `plain-aggregate.log`, `test-links.log`,
+`changed-markdown-links.log`, `cleanup.json` and `cleanup-final.json`.
+
+## Windows Fabric and Win32 Paper — F10-W application ownership — 2026-11-12 UTC
+
+**Source and base decision:** implementation commit
+`6e881e1a05fef735c1b9bacd7d123285f47269ff`, branch
+`user/jasonvmo/desktop-windows-app-ownership`, **stacked on #4492** at
+`6489386956c0485cb91b478a8f4adc4828f4178b`; draft PR base remains
+`user/jasonvmo/desktop-macos-app-ownership`. The Windows side implements its
+neutral application host/resources, claim schema 3, native OS owner identity,
+exact process pins, inspection and launch settlement messages. A separate
+claim schema or duplicate service factory was not introduced. This pins the
+dependency; later #4492 movement is not authorization to rebase, merge or
+push to its branch.
+
+Application resources can be named through the inherited neutral publication
+seam without touching F11's CLI, service, agent connection, WDIO, session,
+grant, client or MCP files. The base's existing `driverService.ts` changes
+remain inherited only; W2 adds no edits to an F11-owned file.
+
+**Observed, test-first portable evidence:** new Windows identity/recovery
+tests failed before implementation, then passed. Later red/green regressions
+covered recovery barriers after claim removal, inconsistent containment,
+unrecognized/invalid owner probes, preserving recovery plus barrier failures,
+and portable service/reporting scopes without a prebuilt helper. The focused
+Windows suite now has **31 passing tests** and supervisor suite **11**.
+Existing neutral ownership tests also pass. Storybook identity tests pass
+**7**, including Windows Fabric and Win32 Paper read-only resolution alongside
+both macOS renderers; the epoch journal deliberately retains its existing
+PID/start schema instead of taking another controlling attachment.
+
+Full portable results:
+
+| Package           | Passed suites / tests | Skipped suites / tests | Interpretation                                     |
+| ----------------- | --------------------- | ---------------------- | -------------------------------------------------- |
+| desktop-driver    | 74 / 1,234            | 9 / 93                 | Native opt-ins unset; not native qualification     |
+| desktop-test      | 25 / 442              | 3 / 25                 | Native/unsupported-platform opt-ins remain skipped |
+| storybook-desktop | 23 / 347              | 1 / 3                  | Portable integration; not renderer qualification   |
+
+The first full harness attempt failed because the new eager Windows helper
+resolution also affected portable scopes; focused failures reproduced it,
+and the fix permits only `no-verified-prebuilt` to retain that existing
+non-native behavior. Other verification failures still abort. A stale claim
+cannot be recovered without a verified helper. The existing public boundary
+fixture also needed the desktop-driver-mcp public entries built; no MCP source
+was changed. Both failures were resolved before the full green harness rerun.
+
+Commands below ran from the worktree root; `$W2` denotes that root.
+`TEMP`/`TMP` were scoped to its ignored `artifacts\desktop\f10w\scratch`;
+`FURN_NATIVE_DRIVER_TEST` was unset.
+
+| Command                                                                                                                                 | Observed result                   |
+| --------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- |
+| `yarn workspace @fluentui-react-native/desktop-test format`                                                                             | Passed                            |
+| `yarn workspace @fluentui-react-native/desktop-test lint`                                                                               | Passed                            |
+| `yarn workspace @fluentui-react-native/desktop-test build`                                                                              | Passed                            |
+| `yarn workspace @fluentui-react-native/desktop-test test --runInBand --cacheDirectory "$W2\artifacts\desktop\f10w\jest-harness"`        | Passed 442; skipped 25            |
+| `yarn workspace @fluentui-react-native/storybook-desktop format`                                                                        | Passed                            |
+| `yarn workspace @fluentui-react-native/storybook-desktop lint`                                                                          | Passed                            |
+| `yarn workspace @fluentui-react-native/storybook-desktop build`                                                                         | Passed                            |
+| `yarn workspace @fluentui-react-native/storybook-desktop test --runInBand --cacheDirectory "$W2\artifacts\desktop\f10w\jest-storybook"` | Passed 347; skipped 3             |
+| `yarn workspace @fluentui-react-native/desktop-driver-mcp build`                                                                        | Passed; existing boundary fixture |
+| `yarn check-agent-instructions`                                                                                                         | Passed                            |
+| `yarn oxfmt --check`                                                                                                                    | Passed, 3,163 files               |
+
+Ignored evidence run: `artifacts/desktop/f10w/portable-20261112/`.
+Logs include `harness-test-initial.log`, final `harness-test.log`,
+`driver-test.log`, `storybook-test.log`, each owning build/lint log, and
+`changed-markdown-links.log`. Per-file link checks passed for driver README,
+native protocol, Windows provider README, driver contributing/native-helpers,
+harness README/configuration/lifecycle/native-qualification, Storybook
+contributing, and the three-package patch changeset. The root formatter
+intentionally excludes `.changeset/*.md`.
+
+**Observed, helper build only:** the locked Debug/x64 `buildWindowsDriver`
+compile with build ID `f10w-compile-02` passed, 0 warnings/errors. Its seven
+changed C++ files match the compiled snapshot. Native build evidence is
+`artifacts/desktop/f10w/b2/build.log`. No application, fixture, native
+self-test or physical-input case has run, and session kind is **not sampled**.
+The pre-campaign audit reported
+`FURN-AUDIT: no FURN desktop processes found`; no W2 campaign was started.
+
+**Implemented, still requiring native proof:** Windows/Win32 supervisor
+ownership, exact external pins and acquired resource evidence now include
+canonical executable, native seven-digit creation time, session, and packaged
+AUMID. The native supervisor can reconcile an acquired exact app only after
+the old owner is proven exited/reused, before its replacement claim/listener.
+It serializes recovery, validates file identity/content and resource/effect
+consistency, durably records partial progress, and preserves external apps.
+Unknown services/resources, pending/unleased launches, mixed service graphs,
+interrupted recovery, unverified owners, and unrelated effects remain fenced.
+Custom hosts/delegated claims acquire no automatic native termination authority.
+There is no general stale-lock remover, quarantine reset, or new protected
+agent recovery route. Mixed Storybook graph and arbitrary uncontained-descendant
+recovery are not qualified by this bounded application-only path.
+
+| Native gate                                                  | Windows Fabric packaged | Win32 Paper REX | Required evidence / limit                                                         |
+| ------------------------------------------------------------ | ----------------------- | --------------- | --------------------------------------------------------------------------------- |
+| Exact application/native owner identity                      | Not run                 | Not run         | AUMID or canonical REX/executable, PID/start/session from real native evidence    |
+| PID-reuse/mismatch and ambiguity rejection                   | Not run                 | Not run         | Real mismatch/fixture cases; actual OS PID reuse only if inducible                |
+| Containment or explicit packaged fencing                     | Not run                 | Not run         | Packaged stays `uncontained`; REX must report Job Object and drain on helper exit |
+| Cross-service application exclusion and physical input mutex | Not run                 | Not run         | Independent helpers, physical opt-in and connected/unlocked session gate          |
+| Acquired survivor journal and next-run recovery              | Not run                 | Not run         | Literal-PID, identity-verified helper/owner fault injection                       |
+| Repeated-run reliability                                     | Not run                 | Not run         | Five launches/teardowns and no old exact incarnation or claim leak                |
+
+The opt-in consumer command is
+`$env:FURN_NATIVE_DRIVER_TEST='1'; $env:FURN_NATIVE_APPLICATION_OWNERSHIP_TEST='1'; $env:FURN_NATIVE_PHYSICAL_INPUT_TEST='1'; yarn workspace @fluentui-react-native/desktop-test test --runInBand windowsApplicationOwnership.contract`.
+It requires explicitly resolved Windows AUMID and REX JSON descriptors and a
+verified prebuilt helper, under the granted exclusive physical desktop
+campaign. Each endpoint gets five launch/teardown iterations and two borrowed
+sessions per launch, stale identity checks, cross-service exclusion, and
+journal recovery. Three paired packaged activations also check that the
+losing launcher does not clean up the winning service's app.
+See `references/native-qualification.md`, “Neutral Windows application
+ownership”. No skips above establish these gates. The final clean-cache
+`yarn lage buildci`, independent review, push, draft PR and hosted CI remain
+not run at this preparation checkpoint. Part of #4447 and #4435.
+
+Preparation closeout pinned to the implementation SHA above:
+
+| Post-commit command                                                                                                                                                                                   | Result                              |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- |
+| `yarn workspace @fluentui-react-native/desktop-test test --runInBand windowsOwnership supervisor applicationOwnership.test ownership.test --cacheDirectory "$W2\artifacts\desktop\f10w\jest-harness"` | Passed 71 tests                     |
+| `yarn workspace @fluentui-react-native/storybook-desktop test --runInBand applicationIdentity --cacheDirectory "$W2\artifacts\desktop\f10w\jest-storybook"`                                           | Passed 7 tests                      |
+| `yarn change:check`                                                                                                                                                                                   | Passed                              |
+| `yarn lage test-links --verbose --grouped`                                                                                                                                                            | Passed 90 tasks; 0 failed/skipped   |
+| `yarn oxfmt --check`                                                                                                                                                                                  | Passed repository-wide, 3,163 files |
+
+For each file below, the exact checker invocation was
+`yarn markdown-link-check -c .github\markdown-link-check-config.json <file>`;
+all file arguments are worktree-relative:
+
+| File                                                               | Result          |
+| ------------------------------------------------------------------ | --------------- |
+| `packages\agentic\desktop-driver\README.md`                        | Passed 16 links |
+| `packages\agentic\desktop-driver\native\PROTOCOL.md`               | Passed 5 links  |
+| `packages\agentic\desktop-driver\native\windows\README.md`         | Passed 8 links  |
+| `packages\agentic\desktop-driver\references\contributing.md`       | Passed 4 links  |
+| `packages\agentic\desktop-driver\references\native-helpers.md`     | Passed 8 links  |
+| `packages\agentic\desktop-driver\references\current-status.md`     | Passed 6 links  |
+| `packages\agentic\desktop-test\README.md`                          | Passed 7 links  |
+| `packages\agentic\desktop-test\references\configuration.md`        | Passed 1 link   |
+| `packages\agentic\desktop-test\references\lifecycle.md`            | Passed 1 link   |
+| `packages\agentic\desktop-test\references\native-qualification.md` | Passed 2 links  |
+| `packages\agentic\desktop-test\references\current-status.md`       | Passed 15 links |
+| `packages\agentic\storybook-desktop\references\contributing.md`    | Passed; 0 links |
+| `.changeset\windows-exact-application-ownership.md`                | Passed; 0 links |
+
+The same ignored evidence root retains `tested-source-revision.txt`,
+`compile-source-evidence.json`, each `*-focused-committed.log`,
+`test-links.log`, `root-format.log`, and `pre-campaign-audit.log`.
+Only appended Windows result capture followed the checks; no macOS ledger
+section or native/runtime source was changed.
+
+## Windows Fabric and Win32 Paper — F10-W native qualification — 2026-11-12 UTC
+
+**Observed source and dependency:** real application qualification ran at
+`8343dc0c48a2de01475454c892e7a295523caa75`, on
+`user/jasonvmo/desktop-windows-app-ownership`. The coordinator handoff
+`W2-base-decision.md` records **STACK** on #4492 at exactly
+`6489386956c0485cb91b478a8f4adc4828f4178b`, implementing its neutral application
+host/resources, schema-3 native owner claims, process pins, inspection and
+settlement contracts. Application resource naming uses the inherited seam,
+without new edits to F11's CLI, service, agent connection, WDIO, session,
+grant, client or MCP files. The eventual draft PR base is
+`user/jasonvmo/desktop-macos-app-ownership`. Its independently owned head may
+advance or never merge; this pinned dependency is not permission to rebase,
+merge, rewrite history or push to that branch.
+
+**Observed environment:** Windows build 26300 x64, Node 26.13.0, active/unlocked
+RDP, `sessionKind: remote`, native `windows-session:1`. Every native command ran
+under the exclusive W2 lock with `-RequirePhysical`; the session remained
+eligible before and after each command, with no exit-75 or session-change
+result. The helper used Debug/x64, prebuilt-only resolution, artifact/SHA256
+`863cc2dbfc8f5792d22c8606376d226affbf8655fe4ded62ba78c23a29c516c7`,
+source digest
+`ea76e931dc4cdebc87e0621a7d730f81faabce5ef902063a0512cd7c2b100f2d`.
+Private machine paths are retained only in ignored artifacts.
+
+The registered Windows Fabric product was reused from the
+coordinator-specified `furn-81` build at `bdeb0b291`: there are no Windows
+app/native-core Windows source changes relative to that build, and the
+generated `RnwNewArch`/`UseFabric` values are true. All five native ordinary-run
+identities matched its registered manifest image and AUMID
+`40411fc5-8e92-4d46-b68d-b62df44b1366_syyqehzwccsyy!App`.
+Windows Metro was owned by W2 on 8081 and passed `/status`; both bundles were
+produced from W2. Win32 used its canonical prebuilt REX `ReactTest.exe`, Paper,
+and the W2 bundle/component/working-directory descriptor. Native Win32 app
+build is **Unsupported**.
+
+**Observed corrections before the green run:**
+
+- The selected native helper contract initially failed an existing C++ assertion
+  that dereferenced a destroyed temporary JSON release result. Commit
+  `4a4b87f37b574820b93e342b68721d931be07c55` retains the result, and the complete
+  selected native contract/self-test rerun passed. Release behavior is unchanged.
+- The first real consumer run passed 3 and failed 5. The fixture's arbitrary
+  project settlement root was correctly refused with native reason `ancestor`;
+  this worktree's ancestors allow broader modification. The final fixture uses
+  the normal native per-user private-store default, without changing ACLs,
+  permissions or the provider's fail-closed checks.
+- Paired packaged activation produced two different PID/start incarnations,
+  not two owners of one incarnation. Commit `8343dc0c4` corrects that fixture
+  assumption: three pairs on **each** endpoint now prove distinct controlling
+  incarnations, unpinned ambiguity refusal, pinned cross-service exclusion, and
+  that closing one winner preserves the other. Refused contenders, if present,
+  are disposed before checking the winners. All observed pairs had two distinct
+  winners; the shared-PID activation race was not induced.
+
+The corrected fixture passed format, lint and TypeScript build. Its focused
+portable selection passed **31 tests**, with **9 native cases skipped** because
+native opt-in was unset; the later real native run, not those skips, qualifies
+the cases below. Earlier full portable results remain the preparation results
+above. The corrected provider selection passed **6 tests**, including all five
+new real-process fixture cases, with 10 unrelated filtered cases skipped.
+
+**Observed final application result: 9 passed, 0 failed, 0 skipped**, one suite,
+at `2026-11-12T16:04:04.248Z`. The 27 evidence rows include iteration receipts
+and case verdicts; they are not 27 tests.
+
+| Case                                            | Windows Fabric packaged | Win32 Paper REX           | Native evidence                                                                                                                                                          |
+| ----------------------------------------------- | ----------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Exact identity                                  | Passed                  | Passed                    | Canonical image, PID, seven-digit creation time, session; packaged AUMID or exact REX incarnation                                                                        |
+| Read-only inspection and borrowed sessions      | Passed                  | Passed                    | Unchanged window ids; two sessions per supervisor launch; first deletion preserves the app                                                                               |
+| Start/session/executable mismatch               | Passed                  | Passed                    | Both inspect and trusted recovery refuse the wrong identity without ending the real process                                                                              |
+| Ambiguous matching processes/windows            | Passed                  | Passed                    | Three pairs of two actual incarnations; unpinned inspection refuses, exact pins remain readable                                                                          |
+| Independent-service exact application exclusion | Passed                  | Passed                    | Independent helper's pinned attach fails `application-lock-busy`; observations do not take control                                                                       |
+| Containment or explicit fencing                 | Passed, `uncontained`   | Passed, `job-object`      | Packaged survivor stays journaled and fenced; REX exits with the crashed helper's job                                                                                    |
+| Survivor journal and next-run recovery          | Passed                  | Passed                    | Acquired application resource; live owner refused; literal-PID helper/owner stops after full native identity verification; next supervisor reconciles before replacement |
+| Physical-input mutex                            | Passed                  | Passed                    | Native Shift down, second helper cancelled with `AbortError`/effect `none`, release then transfer                                                                        |
+| Repeated-run reliability                        | Passed 5/5              | Passed 5/5                | Five distinct PID/start tuples per endpoint, two borrowed sessions each; no exact old process or claim leak                                                              |
+| Concurrent cleanup isolation                    | Passed 3/3 pairs        | Passed 3/3 pairs          | Closing one exact winner leaves the other alive; final cleanup proves every incarnation exited                                                                           |
+| Actual kernel PID recycling                     | Not run                 | Not run                   | Not induced; provider's one-100-ns-tick stale pin and real endpoint start mismatch both passed                                                                           |
+| Shared-PID packaged activation race             | Not run                 | Unsupported, not packaged | Every actual Windows pair created two distinct processes; no claim that this exercised a losing shared-PID launch                                                        |
+
+The crash receipts include packaged PID **10984**, creation time
+`2026-11-12T16:02:38.6619313Z`, helper **37916**, owner **35708**; and REX
+PID **35844**, creation time `2026-11-12T16:03:18.2246578Z`, helper **34864**,
+owner **37256**. Native evidence verified each fault-injection identity again
+immediately before a single literal-PID stop. The packaged process survived
+helper death, the live owner fenced replacement, and after owner exit the next
+supervisor ended that exact app and removed the old claim. REX's Job Object
+drained on helper death; its next supervisor reconciled the acquired dead app
+and claim. No broad name-based termination was used.
+
+Commands below are the inner workspace commands issued through the required W2
+lock with `-RequirePhysical`. `$W2` denotes the assigned worktree, `$E` its
+`artifacts\desktop\f10w\native-20261112` evidence directory. `TEMP`/`TMP` point
+to `$W2\artifacts\desktop\f10w\scratch`; the native cache is
+`$W2\artifacts\desktop\f10w\n`, configuration `debug`, build policy `never`.
+
+| Workspace / command                                                                                                                                                                                                                                                                               | Observed result                                                                          |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| Storybook: `yarn desktop-driver build-driver --platform windows --configuration debug --cache-root "$W2\artifacts\desktop\f10w\n"`                                                                                                                                                                | Passed initial explicit build; provider contract explicitly rebuilt the corrected source |
+| Storybook: `yarn desktop-driver doctor --platform windows --configuration debug --cache-root "$W2\artifacts\desktop\f10w\n"`                                                                                                                                                                      | Passed selected final artifact                                                           |
+| Storybook: `yarn storybook bundle --win32`                                                                                                                                                                                                                                                        | Passed; run `14c14c80-0da7-48ad-ac14-47e0c257fbe1`                                       |
+| Storybook: `yarn storybook bundle --windows`                                                                                                                                                                                                                                                      | Passed; run `f6ba6fb4-25c9-49a2-9928-8b2430abc83b`                                       |
+| Repository root: `node .yarn\releases\yarn-4.18.0.cjs workspace @fluentui-react-native/agentic-components-storybook start --port 8081`                                                                                                                                                            | Passed owned Metro `/status` and final shutdown                                          |
+| Repository root: `node .yarn\releases\yarn-4.18.0.cjs workspace @fluentui-react-native/desktop-test test --runInBand --cacheDirectory "$W2\artifacts\desktop\f10w\jest-harness" --runTestsByPath src\windowsApplicationOwnership.contract.test.ts --json --outputFile "$E\consumer-results.json"` | Passed 9, failed 0, skipped 0                                                            |
+
+The consumer inherited `FURN_NATIVE_DRIVER_TEST=1`,
+`FURN_NATIVE_APPLICATION_OWNERSHIP_TEST=1`,
+`FURN_NATIVE_PHYSICAL_INPUT_TEST=1`, and the two explicit JSON descriptors in
+`windows-application.json` / `win32-application.json`. REX's descriptor came
+from the owning adapter, not guessed host arguments. No input features were
+masked. The command runner owned Metro and awaited its normal resource cleanup;
+the outer report's “lifecycle (no tests)” is not the native test verdict.
+
+**Ignored evidence:** `artifacts/desktop/f10w/native-20261112/` contains
+`consumer-results.json`, `consumer-evidence-final.json`,
+`qualification-summary.json`, `selected-helper.json`,
+`application-build-provenance.json`, `metro-identity.json`, `doctor-debug.log`,
+both bundle logs, corrected provider logs, and preserved initial failed
+attempts. Canonical native evidence is
+`packages/agentic/desktop-test/artifacts/desktop/windows-application-ownership-GiW4x1/evidence.json`;
+the outer command report is
+`artifacts/desktop/f10w/native-20261112/commands/4ed98f8f-8ebb-49ca-ac90-2ee6caece7dc/run.json`.
+Registration, executable/bundle hashes, source revision, real PID/start/session
+receipts, and every case outcome are retained there. Machine-specific paths
+and crash-owner request/ready records remain ignored, not public.
+
+**Observed closeout:** all W2 campaigns ended. Final audit:
+`FURN-AUDIT: no FURN desktop processes found`; no owned helper, fixture, Metro,
+REX or packaged app survived. No push or PR was made. Independent review, the
+final one-time locked clean-cache `buildci`, and hosted CI remain **Not run**.
+The existing three-package patch changeset is
+`windows-exact-application-ownership.md`.
+
+**Limits:** the tests do not establish arbitrary uncontained-descendant cleanup,
+mixed Storybook-graph recovery, forced kernel PID recycling, the unobserved
+shared-PID packaged activation race, or a new protected-agent recovery API.
+No macOS renderer claim is made by this Windows campaign. Part of #4447 and
+#4435.
+
+## Windows Fabric and Win32 Paper — recovery review follow-up — 2026-11-12 UTC
+
+**Source:** `8b2fb7e67dc5864180c7863ac94fc3c0c3c9d6e3`, following the
+review of `6489386956c0..6bdcde61f`. The branch remains stacked on #4492 at
+`6489386956c0485cb91b478a8f4adc4828f4178b`; the base decision recorded in
+the preceding Windows sections is unchanged. No F11-owned file was changed
+for these fixes; no rebase, dependency-branch write, push, or PR occurred.
+
+**Implemented:** parsing, target validation and native old-owner probing are
+read-only and precede recovery-barrier creation. The original claim's file
+identity and exact contents are rechecked under the barrier before any
+application cleanup. A versioned `.recovery-v2` barrier atomically publishes
+the recoverer's verified native PID/start in a unique empty owner directory.
+An empty versioned root authorizes no cleanup. A later native recovery may
+retire unchanged pins only after proving their recoverers exited or their
+PIDs were reused, even if the old claim was already removed. Live, unknown,
+malformed and legacy unowned barriers remain fenced. Replacement directories
+detected during probing/cleanup are never adopted or removed.
+
+The paired native change settles an application's reused recorded PID as an
+exited incarnation without signalling its replacement. A matching application
+start still requires full identity and application-control exclusion; an
+unreadable start remains fenced. Prior native results that expected stale-start
+recovery rejection are historical, not qualification of this corrected behavior.
+
+**Observed test-first evidence:** focused tests on pre-fix `6bdcde61f` produced
+**9 failed / 31 passed**: a barrier appeared during the live-owner probe, a
+foreign target caused a temporary barrier, a changed claim inherited recovery
+authority, and interrupted barriers could not be reconciled. Ignored
+`artifacts/desktop/f10w/review-20261112/barrier-red.log` retains those failures.
+After the fixes and additional publication/replacement-race coverage:
+
+| Case                                                                           | Outcome                                   |
+| ------------------------------------------------------------------------------ | ----------------------------------------- |
+| No barrier for a live owner or foreign target                                  | **Passed**, portable                      |
+| Claim replaced during barrier acquisition cannot inherit cleanup authority     | **Passed**, portable                      |
+| Verified dead/reused recovery owner can resume partial recovery                | **Passed**, portable                      |
+| Live/unknown owner, malformed pins and legacy barriers stay fenced             | **Passed**, portable                      |
+| Interrupted publication and dead barrier after claim deletion can be retired   | **Passed**, portable                      |
+| Replacement-barrier preservation and original-plus-cleanup error retention     | **Passed**, portable                      |
+| Corrected native application-start semantics and actual killed recoverer       | **Not run** on this source; grant pending |
+| Fabric/REX repeated runs, crash recovery, concurrency and physical mutex rerun | **Not run** on this source; grant pending |
+
+**Observed commands/results:**
+
+- `yarn format`, `yarn lint`, `yarn build` in the owning harness: **Passed**.
+- `yarn workspace @fluentui-react-native/desktop-test test --runInBand windowsOwnership supervisor applicationOwnership`:
+  **Passed**, **77 passed / 21 native skipped**. Windows ownership alone has
+  **42 passing** portable cases. `focused-results.json` and
+  `focused-tests.log` retain the expanded invocation and results.
+- `yarn workspace @fluentui-react-native/desktop-test test --runInBand`:
+  **Passed**, **453 passed / 28 native skipped**, in
+  `harness-results-final.json` and `harness-tests-final.log`. An earlier full
+  attempt caught one replacement-barrier diagnostic regression; it was fixed
+  without weakening foreign-barrier preservation and the full suite rerun.
+- Driver package format/lint/build and **1,234** portable tests: **Passed**.
+  Compile-only Debug/x64 helper rebuild under the machine lock: **Passed**;
+  source digest `3558e8597f6cfe1ee3f4e38dca2137710b80d193a5c30bf946d54065bf8bc153`.
+  See the driver's matching Windows section for its binary receipt.
+
+**Native rerun prepared, not executed:** the actual-endpoint suite now has
+**11** cases. On each endpoint, an injected stale owner/application journal
+keeps the real replacements live and owned. A real child recoverer publishes
+its barrier, fences another startup, and is stopped by an identity-verified
+literal PID. The next supervisor must reconcile that dead barrier and retire
+the absent recorded application without signalling its live replacement.
+Injected start mismatch is not a claim of actual kernel PID recycling.
+The existing five-run, crash-survivor, concurrent-incarnation, and gated
+physical-mutex cases remain. Run under the granted W2 campaign with both
+explicit descriptors and native/physical opt-ins; no native skip is a pass.
+No W2 campaign was started in this phase; no renderer/session qualification is
+claimed. The existing patch changeset remains
+`windows-exact-application-ownership.md`. Final clean-cache `buildci`,
+publication and hosted CI remain **Not run**. Part of #4447 and #4435.
+
+**Observed closeout:** edited-reference/ledger Markdown links, root
+`yarn oxfmt --check` (**3,163 files**), `yarn check-agent-instructions`,
+`yarn change:check`, and `git diff --check` **Passed**. Both retained/rebuilt
+helper hashes were verified. The concurrent audit initially observed only
+the portable formatter's two Node processes; after they exited, the audit
+reported `FURN-AUDIT: no FURN desktop processes found`. No W2 campaign was
+started and no owned desktop process survives. `validation-summary.json`
+and `closeout-audit.log` retain the ignored phase receipts. These portable,
+compile and hygiene results do not replace the pending native rerun.
+
+## Windows Fabric and Win32 Paper — default-environment buildci — 2026-11-12 UTC
+
+**Observed:** root `yarn clean-lage-cache` followed by `yarn lage buildci`
+passed at `68d63ccfbf008b963e59772f57aca8ac8f9ff05f`, under the W2 machine
+lock with no physical-session requirement. Default TEMP, default concurrency
+and repository guidance were unchanged.
+
+| Attempt                                                                   | Outcome                                                                                                                          |
+| ------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| Initial W2 gate, same revision                                            | **Failed**: 173 successful tasks, one failed Storybook task; server-integration child exit 1 and inline-worker aggregate timeout |
+| Full pinned-base comparison at `6489386956c0485cb91b478a8f4adc4828f4178b` | **Passed**: 178 successful tasks, 0 failed/skipped                                                                               |
+| Unchanged W2 full gate rerun                                              | **Passed**: 178 successful tasks, 0 failed/skipped, 2m 32.26s                                                                    |
+
+No source fix, dependency installation, timeout change, concurrency override,
+or guidance workaround was made. The initial failure did not reproduce in the
+base comparison or the unchanged W2 rerun. Native opt-ins remained unset:
+this aggregate is not Windows Fabric or Win32 Paper runtime qualification.
+
+All three logs and `buildci-default-summary.json` are retained in ignored
+`artifacts/desktop/f10w/review-20261112/`; the final process audit is
+`buildci-default-final-audit.log` and **Passed**:
+`FURN-AUDIT: no FURN desktop processes found`.
+No application/native contract was launched, no desktop campaign started,
+and no push occurred. Corrected native recovery re-verification remains
+**Not run**, awaiting an active/unlocked session and its separate grant.
+Part of #4447 and #4435.
+
+## Windows Fabric and Win32 Paper — recovery native re-verification — 2026-11-12 UTC
+
+**Observed source:** native helper and harness implementation
+`dbaf558939db31b4a3935ad68b1eb20d25d90d3e`, still stacked on #4492 at
+`6489386956c0485cb91b478a8f4adc4828f4178b`. The consumer test alone had
+the one-line assertion correction committed with this section: the public
+`NativeDesktopHost.recoverApplication` returns `Promise<void>`, after checking
+the native `{ state: 'exited' }` verdict. Its consumer must expect an undefined
+resolution, not the wire-level result. No production, protocol or F11
+file changed in this phase. The exact test diff and test-file digest are retained
+in ignored `artifacts\desktop\f10w\review-native-20261112`.
+
+**Observed session and application provenance:** both granted W2 campaigns ran
+in active/unlocked **remote** session 1, input desktop `Default`. Every native
+wrapper used the machine lock and `-RequirePhysical`; before/after gates stayed
+eligible, with no exit 75 or session change. The final consumer wrapper ran
+`21:54:54Z–21:57:02Z`. Registration and image hash were checked before each
+phase: packaged Fabric remained the `furn-81` Debug/x64 build from `bdeb0b291`,
+with no relevant native-app/source difference. Its executable SHA-256 remained
+`df9cb3559843fcfb0158ee4ab5edbae78890c4e231ebd895cbb636c24b18cd45`.
+The AUMID was
+`40411fc5-8e92-4d46-b68d-b62df44b1366_syyqehzwccsyy!App`.
+Win32 Paper used the worktree's canonical prebuilt REX
+`0.81.1-6828073195` image, its exact arguments and a fresh Win32 bundle;
+a Win32 native application build remains **Unsupported**.
+
+Fresh Win32 and Windows bundles **Passed**, with run IDs
+`3830f2d5-30b1-405b-a205-71f45dcc9490` and
+`e2fb42e1-c5ec-41b3-bae3-64cedad0aeb6`. Each consumer invocation owned a
+fresh Metro, verified its listener's native PID/start/session and worktree
+command line, and stopped it in `finally`. No preexisting Metro was adopted.
+Native scratch/cache paths stayed inside the worktree.
+
+**Observed test-first sequence:**
+
+1. Retained old helper `863cc2dbfc8f5792d22c8606376d226affbf8655fe4ded62ba78c23a29c516c7`,
+   source `ea76e931dc4cdebc87e0621a7d730f81faabce5ef902063a0512cd7c2b100f2d`:
+   **4 expected failures / 0 passed / 7 filtered skips**. Both endpoints rejected
+   stale-start recovery, including interrupted-recoverer journal settlement,
+   with `identity-start-mismatch`. This was the required native RED, not an
+   environment failure.
+2. Review-fixed helper
+   `97f0072ce22449bc5c87c05de259d3e4c46eca666e6135977432b30fa16053b2`,
+   source `3558e8597f6cfe1ee3f4e38dca2137710b80d193a5c30bf946d54065bf8bc153`:
+   the first complete run had **9 passed / 2 failed / 0 skipped**. Both failures
+   were the consumer's wrong return-value assertion; recovery resolved
+   successfully, but the test expected the native wire object. The existing
+   host identity unit contract already expects `undefined`.
+3. Correct only that assertion to `.resolves.toBeUndefined()`, retaining the
+   independent assertion that the real replacement is alive and all
+   matching-start mismatch refusals. Rerun the whole native consumer suite:
+   **11 passed / 0 failed / 0 skipped**.
+
+| Consumer case                                                                          | Windows Fabric packaged                  | Win32 Paper REX                          |
+| -------------------------------------------------------------------------------------- | ---------------------------------------- | ---------------------------------------- |
+| Exact identity, independent-service exclusion, five launches/teardowns without leaks   | **Passed**, 5/5 distinct PID/start pairs | **Passed**, 5/5 distinct PID/start pairs |
+| Stale-start settlement; matching-start session/executable/AUMID mismatches fail closed | **Passed**                               | **Passed**                               |
+| Crashed recoverer, stale journal and dead recovery barrier; live replacement preserved | **Passed**                               | **Passed**                               |
+| Crashed owner/helper and exact application journal recovery                            | **Passed**, packaged survivor recovered  | **Passed**, job-object drain reconciled  |
+| Concurrent pairs, ambiguity refusal, pinned exclusion and independent teardown         | **Passed**, 3/3 pairs                    | **Passed**, 3/3 pairs                    |
+| Physical input mutex, cancellation without effect, release and transfer                | **Passed**, one cross-endpoint case      | Same cross-endpoint case                 |
+
+Every repeated identity reported `windows-session:1`. Fabric consistently
+reported `uncontained`; REX consistently reported `job-object`. All three
+concurrent pairs on each endpoint acquired two distinct incarnations: the
+shared-PID packaged activation race was **Not induced**. Interrupted recoverers
+were identity-verified Node processes stopped by literal PIDs **54440** and
+**55808**, with recorded native starts
+`2026-11-12T21:55:28.3844388Z` and
+`2026-11-12T21:56:07.0500082Z`. The subsequent supervisor retired the dead
+recovery barrier and injected stale application record without signalling the
+real replacement. These injected recorded-start mismatches are **not** actual
+kernel PID recycling.
+
+**Exact consumer commands:** `$W2` denotes the assigned worktree and `$E`
+its `artifacts\desktop\f10w\review-native-20261112` directory. From `$W2`,
+inside the granted campaign and physical-gated machine lock:
+
+```powershell
+node -- artifacts\desktop\f10w\review-native-20261112\run-consumer.mjs red artifacts\desktop\f10w\native-20261112\selected-helper.json
+node -- artifacts\desktop\f10w\review-native-20261112\run-consumer.mjs green artifacts\desktop\f10w\review-20261112\selected-helper.json
+```
+
+The retained bounded orchestration uses `NodeDesktopCommandRunner`, the two
+explicit application descriptors, all three native/application/physical
+opt-ins, the selected immutable helper and `buildPolicy=never`. Its GREEN
+Jest child command is:
+
+```powershell
+yarn workspace @fluentui-react-native/desktop-test test --runInBand `
+  --cacheDirectory "$W2\artifacts\desktop\f10w\jest-harness" `
+  --runTestsByPath src\windowsApplicationOwnership.contract.test.ts `
+  --json --outputFile "$E\green-consumer-results.json"
+```
+
+RED adds `--testNamePattern 'native start|crashed recoverer'` and uses
+`red-consumer-results.json`. The final real consumer evidence directory is
+`windows-application-ownership-3BLzLV`; outer command report
+`32f3d6be-c4b0-4792-aeb6-a5d7df165fc0` is lifecycle-only, not the test-count
+source. `green-consumer-results.json`, `green-consumer-evidence.json`,
+`green-invocation.json`, registration receipts and `consumer-assertion-fix.diff`
+retain the actual counts, identities and dirty-test provenance. Expected RED
+and first-GREEN failures are preserved separately, not overwritten.
+
+**Observed additional validation:**
+
+- `yarn workspace @fluentui-react-native/desktop-test format`, `lint`, and
+  `build`: **Passed**.
+- `yarn workspace @fluentui-react-native/desktop-test test --runInBand
+--cacheDirectory "$W2\artifacts\desktop\f10w\jest-harness"
+--json --outputFile "$E\harness-portable-results.json"`:
+  **Passed**, **453 passed / 28 native skipped**.
+- `yarn workspace @fluentui-react-native/desktop-driver test --runInBand
+NativeDesktopHost.applicationIdentity
+--cacheDirectory "$W2\artifacts\desktop\f10w\jest-driver"
+--json --outputFile "$E\host-identity-portable-results.json"`:
+  **Passed**, **31 passed**, including the existing void-return and unsettled
+  native-verdict contracts.
+- The driver's matching native selection: **Passed**, **6 passed / 10
+  unrelated filtered skips**, including native build/cache/handshake/self-test
+  and the physical mutex. Its ledger records the exact invocation.
+- Locked default-environment `yarn clean-lage-cache` followed by
+  `yarn lage buildci`: initial attempt **Failed**, 176 successful tasks and one
+  Storybook task failure, `A stopping command cannot publish readiness` in
+  `serverIntegration`. The reported intermittent readiness failure was observed
+  again; its cause remains unproven. After remaining fail-fast test children
+  settled and the audit was clean, the **one** unchanged full rerun **Passed**:
+  **178 successful / 0 failed / 0 skipped**, 2m 38.65s. Neither attempt changed
+  default TEMP, concurrency, timeouts, dependencies or repository guidance.
+  Logs are `buildci-default.log` and `buildci-default-rerun.log`.
+
+**Closeout and limits:** both W2 campaigns ended. Native and final aggregate
+audits **Passed**: `FURN-AUDIT: no FURN desktop processes found`. No W2 app,
+helper, fixture or Metro survived. The existing three-package patch changeset
+`windows-exact-application-ownership.md` remains applicable. The test-only
+correction requires coordinator review before push; this phase has not pushed,
+edited the PR body, or started new hosted CI. Initial PR #4494 CI at `dbaf558939`
+was observed green; it does not qualify this new local test correction.
+F11 claim naming remains deferred and untouched. Real kernel PID recycling,
+shared-PID activation, arbitrary uncontained descendants and mixed-graph
+recovery remain unqualified. Part of #4447 and #4435.
+
+**Observed reference checks:** Markdown link checks for both edited ledgers
+**Passed** (15 harness links, 6 driver links). Root `yarn oxfmt --check`
+(3,163 files), `yarn check-agent-instructions`, `yarn change:check`, and
+`git diff --check` **Passed**. Receipts are retained beside the native results.
+
+## F15 macOS feasibility and resolved permission block — 2026-11-12
+
+The table below preserves the initial, non-AX pass. The permission prerequisite
+was resolved later the same day; see the permission-enabled follow-up below.
+
+Source `505a2187b0a2451aed7081c9260b343d55742f93`; macOS 27.2.1
+(26B131), arm64 (`sw_vers`). The app exercised was
+`FurnDesktopDriverHost.app`, not a React Native consumer; renderer N/A.
+The pre-run feasibility artifact is
+`artifacts/desktop/f15-20261112/feasibility.md`.
+
+| Item                                                                                   | Needs Accessibility/PostEvent?                   | Plan / actual result                                                                               |
+| -------------------------------------------------------------------------------------- | ------------------------------------------------ | -------------------------------------------------------------------------------------------------- |
+| Stable helper build, signature verification, handshake and synthetic self-test         | No                                               | Passed under the machine-wide native lock; signed self-test 448 passed, 0 failed, 0 skipped checks |
+| Strict-clear refusal and negotiation assertions                                        | No                                               | Passed 8 supporting assertions within the self-test, not successful real-element clears            |
+| Native service/application identity contracts                                          | No                                               | Targeted native driver selection passed 27 tests, failed 0, skipped 15; default TMPDIR             |
+| Noninteractive `doctor --permissions`                                                  | No                                               | Completed without prompting; Accessibility=false, PostEvent=false, ScreenCapture=true              |
+| Real-element clears, Fabric/Paper Storybook descriptor lifecycle/smoke, physical input | Yes; keyboard/pointer input also needs PostEvent | Initial pass: not run, 0 selected/executed; permission prerequisite subsequently resolved below    |
+| Paper MCP interaction measurements                                                     | Yes                                              | Initial pass: not run; permission prerequisite subsequently resolved below                         |
+| Windows / Win32 matching-OS contracts                                                  | Windows host required                            | Not run on this macOS host                                                                         |
+
+The driver evidence ledger at
+`packages/agentic/desktop-driver/references/current-status.md`, section
+"F15 non-AX macOS supporting evidence — 2026-11-12",
+records the exact commands, signing requirement, source/artifact digests,
+counts, and cleanup. Machine-local artifacts are under
+`artifacts/desktop/f15-20261112/`, including `helper-build.json`,
+`doctor.json`, `signed-self-test.log`, and `native-contracts.log`.
+All commands exited and subsequent process inspection found no surviving
+test/helper children. No Storybook, Metro, driver service, or MCP session was
+started for these mainline checks, and no privacy settings changed.
+These are supporting helper contracts, **not Fabric/Paper requalification**;
+the remaining acceptance matrix and historical evidence are unchanged.
+
+### F15 permission-enabled consumer follow-up — 2026-11-12
+
+**Observed, partial; not macOS requalification.** Source:
+`141b88b4b81a1bd9a0472de533681f9274d8cb00`, macOS 27.2.1 (26B131),
+arm64. Consumer: Agentic Components Storybook / ReactTestApp, instance
+`d915e78595`, bundle `com.microsoft.fluentui.agenticstorybook.id915e78595`;
+targets `macos-a6dfeaccb13e643a` (Fabric) and `macos-de43c71d45415315`
+(Paper). The stable-signed nonprompting doctor
+now reports Accessibility/PostEvent/ScreenCapture true, an unlocked console
+and `promptRequested=false`. This is evidence from this PR's tree only.
+
+Native/GUI commands were serialized by
+`$HOME/Library/Caches/furn-overnight/with-native-lock.sh`, with
+`FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY="FURN Desktop Driver Development"`
+and `FURN_DESKTOP_DRIVER_CACHE_ROOT="$PWD/artifacts/desktop/f15-20261112/native-cache"`
+set from the repository root. The feasibility note, qualification harness,
+logs and redacted JSON are retained in the ignored machine-local directory
+`artifacts/desktop/f15-20261112T115411Z/`. No permission prompts or privacy
+changes were made.
+
+| Renderer / command from `apps/storybook`                                                                                   | Result / passed, failed, skipped                                                                             | Report under `apps/storybook/artifacts/desktop/<run-id>/run.json` |
+| -------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------- |
+| Fabric: `yarn storybook bundle --macos --reporter json`                                                                    | Passed stage; 0 tests                                                                                        | `22ed99ad-99d3-464b-91e0-b0e41f426674`                            |
+| Fabric: `yarn storybook prep --macos --reporter json`                                                                      | Initial stage failed before selection: installed Ruby JSON 3.1 removed `fast_generate`; 0 tests              | `ebf07ee0-38df-4c79-85cb-3d3b3d4dd42c`                            |
+| Fabric: same `prep`, with `RUBYOPT="-r$PWD/artifacts/desktop/f15-20261112T115411Z/pin-json.rb"` set at the repository root | Passed using already installed JSON 2.18.0; no package/product changes; 0 tests                              | `e5e4aeea-dd87-4088-ab19-de09a740e338`                            |
+| Fabric: `yarn storybook smoke --macos --mode stories-and-tests --reporter json`                                            | **Failed**: 225 selected/executed, 223 passed, 2 failed, 0 skipped; 0 retries/flaky; later callbacks not run | `8e1bfc4a-3037-42af-8d52-47739db9065d`                            |
+| Paper: `yarn storybook bundle --macos --paper --reporter json`                                                             | Passed stage; 0 tests                                                                                        | `f0d64be2-6b22-4692-9ddb-97dbe827a2a5`                            |
+| Paper: `yarn storybook prep --macos --paper --reporter json` with the same Ruby selection                                  | Passed stage; 0 tests                                                                                        | `2bdd101c-6269-4c3d-8e1c-edb2bd3ba34a`                            |
+| Paper: `yarn storybook smoke --macos --paper --mode stories-and-tests --reporter json`                                     | **Failed**: 225 selected/executed, 223 passed, 2 failed, 0 skipped; 0 retries/flaky; later callbacks not run | `9f8bb135-907f-419c-8c23-d543fc201230`                            |
+
+Each renderer's 223 passing entries were story traversal, not authored input
+passes. Each report recorded zero unsupported, declared-unsupported,
+quarantined and incomplete work; those zero counters do not mean the later
+authored callbacks ran. Selection excluded ten platform entries for each
+renderer and one additional scope entry for Paper. Both failed callbacks belong to
+`components-accordion--keyboard-disclosure`: `focusByTab`'s initial
+physical click was rejected as obscured by the app's own native window;
+Fabric's second callback instead reported foreground activation failure.
+Later authored work was not
+silently counted as skipped or passed. **Open finding:** see the driver's F15
+follow-up for reproduction and suggested ownership.
+
+The separate real-descriptor command
+`node artifacts/desktop/f15-20261112T115411Z/qualify.mjs fabric lifecycle`
+(repository root) recorded **10 passed, 1 failed, 0 skipped manual checks**.
+It used `yarn storybook driver --macos --agent --reporter json` and
+`yarn storybook run --macos --reporter json`, never `build` as a substitute
+for the instance-aware `run`. Passing cases included grant revocation,
+failed DELETE before/after dispatch, ambiguous CREATE, disposal during open,
+read cancellation, target capture/resource expiry, attached-app preservation
+and same-port service replacement. The failure was a refused MCP checkbox
+physical click, not a successful interaction. Fault-injection probes used the MCP SDK
+in-memory transport with the real verified descriptor/native service; normal
+operations used the shipped stdio adapter.
+
+`node artifacts/desktop/f15-20261112T115411Z/qualify.mjs fabric preservation`
+added **1 passed, 0 failed, 0 skipped manual check**: select/reset and stale
+preview rejection through the protected descriptor, then helper-described
+PID/start-time/executable equality after session and service close.
+Artifacts: `fabric-lifecycle-qualification.json` and
+`fabric-preservation-qualification.json` in the follow-up directory.
+
+Paper's separate command,
+`node artifacts/desktop/f15-20261112T115411Z/qualify.mjs paper`, used
+`yarn storybook driver --macos --paper --agent --reporter json` and
+`yarn storybook run --macos --paper --reporter json`. It recorded
+**14 passed, 4 failed, 0 skipped manual assertions**:
+revocation, delayed-open disposal, ambiguous CREATE, both DELETE-loss
+boundaries, owned select/reset, stale-preview rejection, read cancellation,
+capture/resource expiry, attached-app preservation and same-port replacement
+passed. The real channel survived 22 seconds idle. This is a bounded lifetime
+check, not a reliability window. The physical Checkbox click was refused
+before dispatch (`obscured`); semantic activation was **Unsupported** by the
+provider. The keyboard-clear assertion failed with a nonempty value, and the
+next semantic-clear assertion failed its dependent precondition without
+attempting that mutation. Do not count these as four independent defects.
+
+The independent follow-up,
+`node artifacts/desktop/f15-20261112T115411Z/qualify.mjs paper input`,
+recorded **4 passed, 1 failed, 0 skipped manual checks**. Value polling
+confirmed the keyboard-clear failure was not merely the immediate read:
+100 reads with 50-ms waits still found two characters. Semantic clear,
+independent physical pointer/keyboard/text/wheel delivery, protected-args
+refusal and a successful MCP type/value-check/observe interaction passed.
+No mutation was retried. The driver ledger records receipts, reproduction
+and suggested ownership; the MCP ledger records the Paper measurements.
+Original results remain in `paper-qualification.json`, with the exact full
+harness archived as `paper-harness.mjs` (SHA-256
+`d43c92e080896d4c29ea64b1c7cf5226009e807fe131ab68d6c2059e7fbe77e5`);
+the follow-up is `paper-input-qualification.json` / `paper-input-harness.mjs`.
+Paper driver runs were `53a421b0-d2f2-4037-97f0-d32b4c557dbd`
+and `600456f7-575b-4f2b-877e-07387a0004c4`; their companion
+`run.json` files report zero selected suite tests, not these manual counts.
+
+Routine shutdown signalled only each exact owning CLI, which exited 0;
+driver/channel/Metro exited and the descriptor was withdrawn. The app's
+exact incarnation was preserved until this operator terminated its own app.
+Apps were quit before another `run` and before renderer changes.
+An earlier harness attempt broadcast SIGTERM to its whole process group,
+leaving a stale descriptor and failing restart. It is retained as **9 passed,
+4 failed, 0 skipped manual checks** in `fabric-qualification.json`; initial
+context-readiness and dependent clear checks also failed there.
+After proving service PID 51504 exited and its three ports had no listeners,
+the exact stale record was removed with validated storage's compare-and-remove
+API (`descriptor-reconciliation.json`). This is operator reconciliation, not
+automatic recovery or a clean shutdown pass for that attempt.
+
+**Observed final cleanup, passed:** after all app/service runs,
+`node artifacts/desktop/f15-20261112T115411Z/audit-cleanup.mjs` ran
+under the native lock at 2026-11-12T12:20:26Z. It found no processes from
+this worktree, no listeners on 39860/23935/28029, no default descriptor
+and no per-user workload claim (`cleanup-audit.json`). The first audit
+mistook a concurrently running evidence-summary shell for a survivor;
+that diagnostic is retained in `cleanup-audit-initial.json`. The isolated
+audit passed without killing or ignoring any process. The wrapper exited 0,
+and subsequent `lsof` found the machine-wide `native.lock` unheld.
+
+**Remaining qualification:** the failed authored Accordion callbacks and
+unexecuted later callbacks, refused physical Checkbox activation and Paper
+keyboard clear must be resolved. Native cleanup-failure retention, injected
+startup/shutdown survivors, story quarantine/recovery, mutation cancellation,
+correlated readiness/render faults, lost-context fencing/recovery, registered
+secondary windows, protected HTTP/WS ingress, launch-mode discovery and
+explicit legacy separation were **Not run** on this source. Fabric idle
+lifetime, the reliability window and durable TCC continuity were **Not run**.
+Windows/Win32 were **Not run** on this macOS host. Typed-client response-loss
+tests do not establish native failure containment. #4441's macOS acceptance
+remains open; no sibling-branch evidence or successful smoke is inferred.
+
+## F11 generic attach-only handoff — 2026-11-12
+
+Reviewed implementation source: `5c9d0191e` (including `4aafeeabb` and `87bc8b710`).
+Native selection ran at `87bc8b710`. This is the generic attached-application
+phase of [#4448](https://github.com/microsoft/fluentui-react-native/issues/4448),
+not the blocked Storybook integration or retained-launch phases.
+
+**Confirmed, portable:** driver, harness, and MCP package format, lint, and
+build checks passed. Driver tests passed 1,233 with 66 skipped; MCP tests
+passed 32; the locked complete harness suite passed 382 with two skipped.
+The real WDIO deterministic normal-handoff and worker-crash tests
+passed, including a lost runner-grant response, target exclusion, final
+subtree drain, fresh-session resources, and credential confinement.
+An earlier unlocked harness run passed 380, failed two default-claim CLI
+contracts, and skipped two; the lane failure explicitly reported another
+workload holding `interactive.lock`. One focused retry of the two failed
+CLI contracts under the shared native lock passed both (28 unselected
+cases skipped). This collision is not native handoff evidence.
+
+**Review fixes:** live/draining grant capacity is reusable beyond 4096
+connections; bounded settled history never evicts pending/failed cleanup
+proof. Busy/failed handoffs issue no runner grant. Descriptor roots and
+workload/recovery holders refuse preempt with `target-busy` and an explicit
+relinquish requirement. A preempted MCP child is discarded after authoritative
+rejection so the same connection can reopen with fresh resources after runner
+drain.
+
+Broker credentials are captured and scrubbed before user hook import. WDIO
+receives each worker token through its per-worker `runnerEnv`, not launcher
+`process.env`; workers scrub it before hooks/specs and their children execute.
+Real hook-import, launcher-hook, worker-hook and spec-child probes pass.
+The worker's Node bootstrap/preload window remains trusted because its child
+token initially arrives in the fork environment; this is not same-account
+hostile-code isolation.
+
+The focused commands below passed using the untouched default `TMPDIR`:
+
+| Exact command                                                                                                                                | Result                                                                |
+| -------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| `yarn workspace @fluentui-react-native/desktop-driver test 'authority/(grants\|delegation)\|server/(runnerHandoff\|delegation)' --runInBand` | Passed 51; includes 4,101 drained delegation cycles and root fencing. |
+| `yarn workspace @fluentui-react-native/desktop-driver-mcp test server --runInBand`                                                           | Passed 31; includes preempt/reopen and stale-resource refusal.        |
+| `yarn workspace @fluentui-react-native/desktop-test test runner --runInBand`                                                                 | Passed two; skipped the native opt-in case. Shared native lock used.  |
+
+Review-validation logs are under `artifacts/desktop/f11/review/`. The complete
+driver and harness suites used the shared native lock. Full-suite scratch was
+project-local with matching `GIT_CEILING_DIRECTORIES`; no native opt-ins were set.
+The Accessibility-blocked native contract was deliberately not repeated.
+
+After review fixes, `yarn lage test-links --verbose --grouped` passed all
+90 tasks. Then `yarn clean-lage-cache` passed and the locked
+`TF_BUILD=1 yarn lage buildci --concurrency 4` passed all 178 tasks in
+2m 2.60s, with no pending or aborted tasks. Source was `5c9d0191e`; the
+matching project-local `TMPDIR`/`GIT_CEILING_DIRECTORIES` isolation and native
+opt-in skips were unchanged. Log: `artifacts/desktop/f11/review/buildci.log`.
+The remaining ledger update records results only, not additional source changes.
+
+The earlier locked `TF_BUILD=1 yarn lage buildci --concurrency 4` at
+`17ee49fd1` passed all 178 tasks, including the complete harness test task.
+Project-local ignored `TMPDIR` also required `GIT_CEILING_DIRECTORIES` set
+to that directory so temporary instruction-check fixtures did not discover
+the enclosing worktree; the existing 24-case instruction checker suite
+passed with that isolation. No baseline source was changed for this setup.
+The aggregate log is `artifacts/desktop/f11/qualification/buildci.log`.
+Task success does not turn the native opt-in skips into qualification.
+
+**Observed, native:** macOS 27.2.1, arm64, plain AppKit fixture (no React Native
+renderer). The explicitly stable-signed helper was ready; its noninteractive
+doctor reported Accessibility and PostEvent `false`, ScreenCapture `true`,
+console connected and unlocked. No privacy or certificate-trust changes
+were made. Native service/application identity and backend contracts passed
+27 with 15 skipped Windows cases. AX-dependent handoff is **blocked:
+Accessibility not granted to the signed helper**. These identity/backend
+checks do not qualify GUI handoff.
+
+| Selection and exact command                                                                                                                                             | Result                                                                                                                                        | Cleanup and retained evidence                                                                                                                                                                          |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `FURN_NATIVE_DRIVER_TEST=1 yarn workspace @fluentui-react-native/desktop-driver test serviceIdentity.contract applicationIncarnation.contract nativeDriver --runInBand` | Passed 27, failed 0, skipped 15                                                                                                               | `artifacts/desktop/f11/qualification/native-identity.log`                                                                                                                                              |
+| `FURN_NATIVE_DRIVER_TEST=1 FURN_NATIVE_HANDOFF_APP_PATH=<signed-fixture> yarn workspace @fluentui-react-native/desktop-test test nativeRunner.contract --runInBand`     | Failed 1; environment-blocked before a session opened: `The target does not support any click input mode.` Worker-crash scenario **not run**. | `artifacts/desktop/f11/native-handoff-5L2MVX/evidence.json`; fixture survived service shutdown, both descriptors removed, claim released; only its spawning test then ended the exact fixture process. |
+
+Both native commands and helper/fixture builds used the exclusive native
+lock. The first handoff attempt used an older fixture binary without
+`--ready-file` and failed readiness; it is retained at
+`artifacts/desktop/f11/native-handoff-En89el/evidence.json`. The one corrected
+fixture retry built and signed the readiness-capable source from
+`27b109072`; it reached native-verified private discovery and the permission
+gate above. Helper artifact identity:
+`e4a23c0ec3cc9ddcf07fde2153bdf260b7b85f65bd0a6851275dd55a6ccf0fd3`.
+Redacted logs and helper diagnostics are under
+`artifacts/desktop/f11/qualification/`; private descriptors are not retained.
+
+**Not run:** successful native MCP → WDIO → MCP handoff, native worker-crash
+drain, and Windows/Win32 native transport/lifecycle handoff. Existing PR
+Windows/Win32 E2E and Storybook smoke jobs do not select this generic
+descriptor-path contract; Windows CI is **not sufficient** for F11.
+Storybook integration still requires F9, retained launches require explicit
+F10 ownership, and cross-MCP-connection resume/replay remain unsupported.
+
+## Windows Fabric and Win32 Paper — F11 handoff qualification — 2026-11-12 UTC
+
+**Observed:** tested `c9753208d0f5602d28510d84ededf3f2fc3c3855` on
+Windows x64, active/unlocked RDP, `sessionKind: remote`. The W1 campaign and
+machine-wide native lock serialized all native/live work; the before/after
+`-RequirePhysical` gates stayed eligible. The probes perform native
+window discovery, observation and capture, not physical input.
+
+**As-is native consumer contract:** from this package,
+`FURN_NATIVE_DRIVER_TEST=1 yarn test nativeRunner.contract --runInBand`
+**skipped its one case** on Windows. The guard requires `darwin` and a signed
+AppKit fixture; its CJS implementation hardcodes a macOS executable path,
+bundle identity, endpoint and controls. Merely changing the Jest platform
+guard cannot qualify Windows. `artifacts\desktop\f11\w1\native-runner-gate.json`
+records the skip. A locked repeat with **both** opt-ins set, including
+`FURN_NATIVE_HANDOFF_APP_PATH` naming the installed REX executable, still
+skipped that case (`native-runner-gate-both-optins.json`).
+A platform fixture/CI-selection change is proposed separately,
+not implemented in this evidence-only lane.
+
+**Observed, real consumer:** the retained
+`artifacts\desktop\f11\w1\qualify.cjs` composes the real supervisor service,
+Windows-verified owner-only private descriptors, MCP SDK client/server and
+WDIO/Jasmine. Commands, from the worktree root:
+
+```powershell
+node artifacts\desktop\f11\w1\qualify.cjs windows
+node artifacts\desktop\f11\w1\qualify.cjs win32
+```
+
+Each command ran through `with-native-lock.ps1 -Lane W1 -RequirePhysical`
+inside the granted W1 campaign. This is generic externally owned,
+attach-only application handoff, **not** Storybook integration handoff.
+Windows used the registered Fabric app's exact AUMID, with Metro from this
+worktree via the app's declared `yarn start --no-interactive --port 8081`.
+Win32 used the resolved prebuilt REX `ReactTest.exe` and its configured
+component/title/production bundle, after `yarn storybook bundle --win32`
+**passed** (bundle run `f13082d6-4b6c-428f-92e0-00a42035890d`).
+The public native host owned each external launch separately from the service.
+No native app rebuild was needed: the diff against the registered
+`bdeb0b291` build changes no Windows app/native-core native source, only
+native-core changelog/version metadata. Win32 native build is **unsupported**.
+
+| Case                        | Windows Fabric                       | Win32 Paper                          | Observed evidence                                                                                                                                                                                                                                           |
+| --------------------------- | ------------------------------------ | ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Busy by default             | Passed                               | Passed                               | Runner grant acquisition refused `target-busy` while MCP held the native session.                                                                                                                                                                           |
+| Explicit relinquish         | Passed                               | Passed                               | MCP returned `relinquished: true`; WDIO attached; MCP was refused during runner ownership and opened a fresh session afterward.                                                                                                                             |
+| Operator preemption         | Passed                               | Passed                               | Service opted into preemption; old MCP binding failed closed (`service-unavailable`), then MCP was busy during WDIO and regained a fresh session after drain.                                                                                               |
+| Normal runner exit          | Passed                               | Passed                               | Native WDIO window query completed; each one-test run passed; fresh MCP attach succeeded after awaited runner cleanup.                                                                                                                                      |
+| Runner worker crash         | Passed recovery; injected run failed | Passed recovery; injected run failed | Identity-checked literal `Stop-Process -Id 34752` / `Stop-Process -Id 29856` ran under the held lock. Parent detected the missing reporting handshake, drain completed and fresh MCP attach succeeded.                                                      |
+| Lost acquisition response   | Passed                               | Passed                               | The real service returned HTTP 200 from `/furn/grants/runner`; the transport discarded its body and threw before the typed client received it. Broker cleanup revoked/drained its parent; fresh MCP attach succeeded without knowing the lost runner token. |
+| Old resources after handoff | Passed                               | Passed                               | Old observation reference/cursor and capture resource link were refused after a fresh session.                                                                                                                                                              |
+| Credential confinement      | Passed observed probes               | Passed observed probes               | Real worker spec environment contained no broker/worker credential variables; model output and 45 retained text/config/report files contained no bearer credential. Portable hook/spec-child probes also passed.                                            |
+
+Native evidence roots, each containing `evidence.json`, terminal `run.json`
+files, generated WDIO settings and command logs:
+
+| Endpoint / phase | Run ID                                 | Terminal result                                                  |
+| ---------------- | -------------------------------------- | ---------------------------------------------------------------- |
+| Windows service  | `78e18335-571f-41c7-a724-3bab30b41fd1` | Passed lifecycle; no test cases claimed                          |
+| Windows normal   | `a3bf02e2-df22-4a63-92f8-686057ef2a80` | Passed: one selected/executed/passed                             |
+| Windows preempt  | `24d38403-b4e5-49d6-9e0f-d1d123e4fb17` | Passed: one selected/executed/passed                             |
+| Windows crash    | `8f702133-e18a-41f0-b05d-ce5fcb5cff1a` | Failed as injected: one selected, zero completed, one incomplete |
+| Win32 service    | `f7ef9875-059f-432a-9daa-2bcb1e384917` | Passed lifecycle; no test cases claimed                          |
+| Win32 normal     | `d79fd672-df2d-4943-8b40-c017a8978380` | Passed: one selected/executed/passed                             |
+| Win32 preempt    | `f1f17781-08aa-4cac-a6d8-34cb13bd749b` | Passed: one selected/executed/passed                             |
+| Win32 crash      | `a09a8c20-1380-4933-a7a3-9c2d786352c3` | Failed as injected: one selected, zero completed, one incomplete |
+
+Windows root: `artifacts\desktop\f11\w1\windows-3tYoml`.
+Win32 root: `artifacts\desktop\f11\w1\win32-BefbqE`.
+The crash directories retain process identity and the literal-PID kill script.
+Both runs used helper
+`d8ee05e4796fb3aa22f7b5dbf481bd8cdfb0c20b6d5d24676d689dc7900d5b3c`.
+The original external application process/start time remained running through
+service shutdown; only its own recorded launcher then closed it. Both private
+descriptors and each service workload claim were removed, with no cleanup
+failure. The default per-user workload claim was also absent. **Inferred:**
+claim release confirms the service's owned-resource settlement checks succeeded;
+absence is not an additional persisted claim state.
+
+One initial Windows reproduction stopped at an overly strict nested
+`assert.rejects` comparison in the local evidence harness, before relinquish.
+Its `windows-dqAIsk/evidence.json` records complete cleanup; correcting that
+assertion required no product change. Two storage-diagnostic invocations
+failed because the external lock wrapper split a single command argument;
+adding an unused second argument allowed the actual diagnostic to execute.
+These are harness failures, not passing product cases.
+
+**Additional native contracts:** driver identity/backend selection passed
+23, skipped 19 macOS cases, including **all 15 Windows cases** skipped in the
+earlier macOS run. `protectedService.contract` passed three, with the
+recovering-quarantine case **failed/environment-blocked before its assertions**:
+project-local scratch ancestry was refused (`ancestor`). The default private
+store opened and supported both live passes; no ACL was changed.
+Per-case results and reasons: `artifacts\desktop\f11\w1\case-mapping.json`,
+`protected-service.json`, `storage-probe.json`. Windows/Win32
+`yarn desktop-driver doctor --platform windows` and `--platform win32`
+each **passed**, reporting `ready: true`; `doctor --permissions` returned
+**unsupported**, not passed.
+
+**Portable checks, native opt-ins unset, uncached:**
+
+| Exact command                                                               | Result                                 |
+| --------------------------------------------------------------------------- | -------------------------------------- |
+| `yarn build`                                                                | Passed                                 |
+| `yarn workspace @fluentui-react-native/desktop-driver test --runInBand`     | Passed 1,211; skipped 88; failed zero  |
+| `yarn workspace @fluentui-react-native/desktop-test test --runInBand`       | Passed 376; skipped eight; failed zero |
+| `yarn workspace @fluentui-react-native/desktop-driver-mcp test --runInBand` | Passed 32; skipped zero; failed zero   |
+
+Logs/JSON results are under `artifacts\desktop\f11\w1`. Test scratch was
+project-local, with matching `TEMP`, `TMP` and `GIT_CEILING_DIRECTORIES`.
+No install was needed. Existing `.changeset/scoped-runner-handoff.md` covers
+the three published packages. No product source, test or CI configuration was
+changed. Native Storybook handoff, retained launches, cross-connection resume
+and replay remain outside F11's generic phase.
+
+The Windows/Win32 generic consumer remains absent from hosted selection;
+Windows driver-native contracts and Storybook smokes do not replace it.
+This coverage change is handed back for implementation. W1's campaign is
+ended; final audit: `FURN-AUDIT: no FURN desktop processes found`.
+
+**Evidence validation:** `yarn markdown-link-check -c
+.github\markdown-link-check-config.json
+packages\agentic\desktop-test\references\current-status.md` passed
+(15 links). Root `yarn oxfmt --check`, `yarn change:check` and
+`git diff --check` passed. No clean-cache `buildci` rerun was required for
+these evidence-only markdown edits.
+
+## Windows Ctrl+C regression and native consumer selection — 2026-11-12 UTC
+
+Source: review follow-up to `0ae47d15193770f7455db306b1e4297de76b4eaf`,
+based on `04d8d8b13177727492ef204cf190840fa8a3f2a1` for #4491, with
+the test/CI/documentation changes described here. This is
+portable implementation evidence, not a new native qualification. No native
+fixture/helper/app was launched and no physical-input campaign was acquired.
+
+**Observed:** `contracts` mode `agent-interrupt-cli` already passes against
+that unchanged baseline. It runs the actual `serve --agent` CLI in a subprocess
+with a protected fake-host service and actual descriptor/grant drains. It
+checks bounded process exit, terminal `run.json`, exactly one `run-finished`,
+descriptor removal and exact workload-claim disposition:
+
+| Semantic stimulus                        | Regression result | Terminal report / exit / claim                                   |
+| ---------------------------------------- | ----------------- | ---------------------------------------------------------------- |
+| First SIGINT after ready                 | Passed            | `passed`, exit 0, released                                       |
+| Second SIGINT during session drain       | Passed            | `passed`, exit 0, released                                       |
+| Required child failure before SIGINT     | Passed            | Expected `failed`, exit 1, released after settled cleanup        |
+| Session disposal failure during shutdown | Passed            | Expected `failed`, exit 1, fenced with unresolved cleanup effect |
+
+These are in-process `process.emit('SIGINT', 'SIGINT')` dispatches in the CLI
+process, not `GenerateConsoleCtrlEvent`, physical SendInput, or a Windows
+console broadcast. These four cases do not themselves reproduce the historical
+borrowed-scope self-wait and are not proof of its repair. The borrowed-scope
+regression in
+`packages\agentic\storybook-desktop\src\cli\DesktopStorybookCli.test.ts:836–861`
+checks that current integrations leave the scope to its owner.
+
+**Observed historical red/green proof:** the added
+`agent-interrupt-borrowed-cli` contract deliberately awaits the borrowed
+scope's `close()` inside the integration after a single semantic SIGINT,
+with a command-style protected fake-host service that settles first.
+An isolated copy of the current built package, overriding only `cli.ts`
+and `services.ts` with the exact source at
+`f14e2542d7980c9fc6edfc419ddff6067c573ed6` (`586e4c385^`, before #4478),
+**Fails as expected** after the 15-second subprocess deadline:
+
+- the exact child/claim owner PID matches;
+- its one owned resource is settled, but the claim remains `active`;
+- `run.json` is `incomplete`, `terminal: false`;
+- borrowed close starts and never settles.
+
+The same contract on this branch **Passes**: exit 0, terminal `passed`,
+one `run-finished`, both descriptors withdrawn, borrowed close settled and
+claim released. Retained `review-fixes/historical-source.json` identifies both
+historical blobs and source hashes; `historical-red.json`/`.log` and
+`historical-green.json`/`.log` record the exact comparison. Historical TypeScript
+was erased with the installed Babel TypeScript plugin in that scratch copy,
+not checked into the working tree. This confirms the owner-side repair already
+present from #4478 (`586e4c38545ca3eedccd1c9c817f2f89ce16219d`); no new runtime
+patch is needed for this composition. Physical console Ctrl+C on the Windows
+Fabric and Win32 Paper `serve --agent` paths remains **Not run** pending review
+and the exclusive desktop grant.
+
+**Observed selection regression:** the extracted original native consumer
+gate failed the Windows opt-in test (`Expected true; Received false`; four
+other selection cases passed). After parameterization, the portable selection,
+platform-fixture, hosted-capture-gate and exact native-readiness tests pass.
+The macOS bundle executable/ready-file path is preserved. Windows uses the
+prebuilt plain Win32 fixture with native exact executable/title/PID and
+`1004: Ready` polling, not an invented ready-file option. No native source
+or protocol change was needed.
+
+The native consumer now selects handoff, operator preemption, worker crash
+and lost real HTTP-200 runner-grant response as separate cases. Its crash
+fixture records the real worker session before exiting, and each mode checks
+deletion before reuse, exact external-process incarnation, stale resources,
+terminal reports, descriptor withdrawal and claim release. A cleanup-confirmed
+failure permits the next case; uncertain cleanup prevents further launches.
+Windows records use the validated default private store with unique names,
+not unsafe project ancestry or repaired ACLs. Review corrections add a
+120-second internal abort deadline, 30-second bounded shutdown and a
+135-second Windows fixture watchdog. Passing processes must exit naturally;
+an unref'd five-second post-shutdown watchdog fails lingering handles.
+The parent knows each case's root and removes only its exited child's exact
+descriptor records through private storage with PID/content checks; it never
+releases claims or treats descriptor removal as proof of native cleanup.
+
+Both accessible Windows and Win32 Storybook PR jobs now explicitly provision
+the fixture and select the generic consumer through
+`run-native-runner-contract: 'true'`. The action requires all four ownership
+cases to execute and pass; an all-skipped result is rejected. Both inner WDIO
+specs must also execute/pass outside the deliberate worker crash, and the
+action verifies `evidence.wdio` counts and accessibility success for the three
+non-crash modes. A silently skipped inner input spec is not qualification.
+Capture is a separate capability-gated case, skipped under hosted disabled-input policy;
+core transport/ownership still executes without physical input. The plain
+fixture is not React Native renderer or Storybook-handoff qualification.
+The disabled-input capture gate now applies equally to macOS and Windows.
+Endpoint refusal records `capture: "unsupported"` plus `captureSkipped: true`;
+ownership/cleanup can still pass without a capture pass.
+
+Implementation checks and retained review artifacts are under
+`artifacts\desktop\f11\w1-fix`:
+
+- `yarn workspace @fluentui-react-native/desktop-test test contracts --runInBand
+--testNamePattern agent-interrupt-cli`: **Passed** before the new coverage
+  changes; `interrupt-first.json` records one Jest contract/four scenarios.
+- `yarn workspace @fluentui-react-native/desktop-test test nativeRunnerSupport
+--runInBand`: expected **Failed** before the gate fix (`native-selection-red.json`);
+  the focused combined selection/interrupt run then **Passed** 11,
+  **Skipped** 35 (`focused-green.json`, including name-filtered cases).
+- Package `yarn format`, `yarn lint`, `yarn build`: **Passed**. Action/workflow
+  YAML and both new embedded PowerShell blocks: **Passed** syntax validation
+  without executing native code.
+- `yarn workspace @fluentui-react-native/desktop-test test --runInBand`:
+  **Passed** 388, **Skipped** 12, failed zero (`portable-test.json` and
+  `portable-test.log`). Native opt-ins were unset; temporary data and
+  `HOME`/`LOCALAPPDATA` claims were isolated under project artifacts.
+- New native consumer, optional native capture and physical Ctrl+C:
+  **Not run**; review and W1 desktop authorization are still required.
+  Hosted CI: **Not run** for the unpushed candidate. Clean-cache `buildci`:
+  **Not run**, reserved for final locked validation after review.
+
+Patch changeset: `.changeset/windows-native-runner-coverage.md`.
+
+## Windows review corrections — 2026-11-12 UTC
+
+Source: `0ae47d15193770f7455db306b1e4297de76b4eaf` plus the review-fix
+working-tree changes, not a native-qualified commit. Endpoint/session kind:
+not applicable to portable checks; no native run IDs, desktop campaign,
+native helper/fixture launch or physical input. The original issue's physical
+Windows Fabric / Win32 Paper console cases remain **Not run** for this
+candidate pending review and the W1 grant.
+
+The historical comparison and review-regression red/green receipts are under
+`artifacts\desktop\f11\w1-fix\review-fixes`. The new portable support regressions
+first **Failed** 8 / **Passed** 10 (`support-red.json`), including the macOS
+policy regression and missing Windows fixture lifetime. After correction,
+`yarn workspace @fluentui-react-native/desktop-test test nativeRunnerSupport
+--runInBand` **Passed** 18 (`support-green.json`). These do not launch native
+processes or qualify the new Windows consumer.
+
+| Review regression                             | Observed portable result                                                                                                                                                                                                                                                      | Receipt                                                                                |
+| --------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| Borrowed-scope self-close after command drain | Expected **Failed** on exact pre-#4478 CLI/services: 15-second timeout, active claim, settled resource, nonterminal `incomplete`, borrowed close still pending. Same byte-identical fixture **Passed** on the branch. Historical run: `8b6be099-3f0b-4551-9905-1a40b5104197`. | `historical-source.json`, `historical-red.json`/`.log`, `historical-green.json`/`.log` |
+| Optional capture                              | **Passed**: both host policies skip disabled capture; endpoint refusal is explicitly unsupported/skipped without failing ownership. macOS bundle/ready-file arguments are unchanged.                                                                                          | `support-red.json`, `focused-green.json`                                               |
+| Deadline and failed-case records              | **Passed**: ignored work still reaches bounded shutdown; hung shutdown is bounded; Windows lifetime is 135 seconds; cleanup preserves foreign/replaced records and uses exact contents for removal. Real private-store fallback remains **Not run**.                          | `focused-green.json`                                                                   |
+| Required inner input                          | **Passed**: one executed ownership spec cannot qualify the consumer. The actual old action guard incorrectly accepts that fixture; the new guard rejects it and accepts two executed/passed specs. No native step was executed for this comparison.                           | `ci-input-red-green.json`, `focused-green.json`                                        |
+
+Final portable validation from `D:\dev\furn-w1`:
+
+- `yarn workspace @fluentui-react-native/desktop-test test contracts nativeRunner
+--runInBand --json --outputFile
+D:\dev\furn-w1\artifacts\desktop\f11\w1-fix\review-fixes\focused-green.json`:
+  **Passed** 50, **Skipped** 5, failed zero.
+- `yarn workspace @fluentui-react-native/desktop-test test --runInBand --json
+--outputFile D:\dev\furn-w1\artifacts\desktop\f11\w1-fix\review-fixes\portable-test.json`:
+  **Passed** 396, **Skipped** 12, failed zero. Native opt-ins were unset;
+  test scratch and default claims stayed under isolated project artifacts.
+- Package `yarn format`, `yarn lint`, `yarn build`: **Passed**. Root
+  `yarn format:check`, `yarn check-agent-instructions`, and `git diff --check`:
+  **Passed**.
+- `yarn markdown-link-check -c .github\markdown-link-check-config.json <file>`
+  for the four edited references and patch changeset: **Passed** (20 links).
+  Both action/workflow YAML files and all eight actual embedded PowerShell
+  blocks: **Passed** syntax-only validation (`yaml-syntax/summary.json`).
+- Native consumer modes, optional native capture, physical console Ctrl+C,
+  hosted CI and locked clean-cache `buildci`: **Not run**, reserved for the
+  coordinator's post-review W1 grant and final validation. Post-commit
+  changeset checking is recorded in the review handoff receipt.
+
+## Windows portable clean-cache/buildci — review fixes — 2026-11-12 UTC
+
+Tested source: `d94c8787dd76a1be08cbf2827cc57edb6a3a18f2`, including the
+review fixes at `78236d3e8502b743055bf5cf3c48eed58a8926a3` and two
+validation-guidance commits. Scope: portable repository validation only.
+The coordinator authorized the W1 lock without `-RequirePhysical` while
+the desktop was disconnected; no campaign, app, native fixture/helper
+launch, native/GUI contract or physical console Ctrl+C was run. Endpoint,
+session kind and native run IDs are not applicable.
+
+Receipts are under `artifacts\desktop\f11\w1-fix\portable-buildci`.
+All aggregate commands ran through `with-native-lock.ps1 -Lane W1`
+from the worktree root, with `FURN_NATIVE_DRIVER_TEST` unset:
+
+- `cmd.exe /d /c "yarn clean-lage-cache && yarn lage buildci"`:
+  cache clear **Passed** once; the initial aggregate **Failed**. With
+  project-local temporary files, Git discovery escaped synthetic test
+  repositories into the enclosing ignored worktree. The scripts suite
+  reported 58 passed / 18 failed (`buildci.log`).
+- Setting `TEMP`, `TMP`, `TMPDIR` and `GIT_CEILING_DIRECTORIES` to the same
+  project-local scratch directory restores fixture isolation without a
+  product-code change. `yarn workspace @fluentui-react-native/scripts test`:
+  **Passed** 76 / failed zero (`scripts-git-isolation-green.log`).
+  The operating guidance is committed in `8cbead3f6`.
+- The default-parallel `yarn lage buildci` rerun **Failed** the existing
+  15-second cold-worker `StorybookUI` test (`buildci-rerun.log`).
+  `yarn workspace @fluentui-react-native/storybook-desktop-runtime test
+StorybookUI --runInBand`: **Passed** both unchanged tests
+  (`storybook-ui-focused.log`); no assertions or deadlines were relaxed.
+- `yarn lage buildci` with `LAGE_POOL_CONCURRENCY=2` and the isolated Git
+  boundary: **Passed**, exit zero, 5m 55.78s (`buildci-bounded.log`).
+  Lage reported 81 successful tasks, 97 reused fresh-cache tasks, and zero
+  failed/pending/aborted tasks. Cache reuse follows the one initial clear;
+  it is not native capability coverage. Scheduling guidance is committed
+  in `d94c8787d`.
+
+**Observed hygiene:** the pre-run audit was clean. After the first failed
+aggregate, its portable Node test children drained naturally and a later
+audit was clean; an aborted fake-host runner fixture was preserved outside
+the formatted source tree. No process was terminated. The final aggregate
+released the W1 lock by `2026-11-12T17:45:39.6650962Z`. The required
+post-buildci audit returned exit 2, `FURN-AUDIT: 6 candidate process(es):`,
+all foreign W3 Node test/build processes started after that release; no W1
+candidate survived (`post-buildci-audit.log`). Those processes were not
+touched; that shared-host snapshot was not globally clean. The later
+closeout audit **Passed**, exit zero:
+`FURN-AUDIT: no FURN desktop processes found` (`closeout-audit.log`).
+
+Root `yarn format:check`, `yarn check-agent-instructions`, Markdown link
+checks for the edited development guide, and committed `yarn change:check`:
+**Passed**. Native consumer modes, the repeated native driver contracts,
+optional native capture, physical console Ctrl+C, and hosted CI remain
+**Not run**. No push was made.
+
+## Windows default-environment acceptance and guidance reverts — 2026-11-12 UTC
+
+This supersedes the preceding controlled-environment acceptance receipt.
+Tested source: `015998677c0912625e0f7e30b107c674a90fec4c`. Receipts:
+`artifacts\desktop\f11\w1-fix\default-buildci`.
+
+**Observed original failures:** the first aggregate failed only
+`@fluentui-react-native/scripts#test`: 18 negative assertions in
+`scripts/src/tasks/agentInstructions.test.ts` expected diagnostics but received an
+empty issues list. `exact-failures.json` records every exact test name,
+location and `AssertionError [ERR_ASSERTION]` message. The earlier
+project-local `TEMP` was an execution choice to keep transient files local,
+not an F11 or nativeRunner requirement. It made the synthetic repositories
+discover their ignored enclosing worktree.
+
+The checker/test blobs match branch base `04d8d8b13` and local `origin/main`
+`505a2187b` exactly. An extracted, byte-identical base-source copy reproduced
+all 18 failures with that override; its source files were then removed.
+`baseline-red.json` and `source-comparison.json` retain the proof. The
+separate later `StorybookUI` failure was `Exceeded timeout of 15000 ms for a
+test` in `resets the whole Win32 preview for a new test generation without
+resetting chrome preferences`. The entire runtime package is identical at
+base/main/head; both unchanged focused tests pass with inherited defaults.
+No full baseline aggregate is claimed, and no new F11 test required a fix.
+
+The first default-environment aggregate passed the instruction tests but
+failed the existing driver test `abandons a walk when the caller
+disconnects, journals it as cancelled, and keeps the session usable` at
+`packages/agentic/desktop-driver/src/server/operations.test.ts:405`: expected `unique`, received
+`inconclusive`. That test and find implementation match base/main; all
+39 unchanged focused tests pass, and the unchanged default aggregate
+retry passed. **Inferred:** these aggregate-only failures are timing-sensitive,
+not evidence that the branch needs altered repository-wide test settings.
+
+Both out-of-scope guidance commits were reversed with new `git revert`
+commits: `b5b82795a` reverts `d94c8787d`; `015998677` reverts `8cbead3f6`.
+The development guide is restored exactly to its pre-guidance contents.
+No assertions, test budgets, product code or machine-wide settings changed.
+
+**Final fresh acceptance:** from the worktree root, through
+`with-native-lock.ps1 -Lane W1` without `-RequirePhysical`,
+`cmd.exe /d /c "yarn clean-lage-cache && yarn lage buildci"` **Passed**,
+exit zero, 2m 45.87s (`final-default-buildci.log`). `TEMP`/`TMP`/`TMPDIR`
+were inherited unchanged; concurrency was default; Git-ceiling, Lage-pool
+and native-driver opt-ins were absent. All 178 Lage tasks succeeded, with
+zero cache hits, failures, pending or aborted tasks. Native capability
+skips are not passes.
+
+The post-run process audit **Passed**, exit zero:
+`FURN-AUDIT: no FURN desktop processes found` (`final-default-audit.log`).
+No app, native fixture/helper, native/GUI contract or physical Ctrl+C was
+launched; no campaign or push occurred. Native qualification remains
+**Not run**, awaiting its separate grant.
+
+## Windows hosted nativeRunner provisioning correction — 2026-11-12 UTC
+
+**Observed:** PR workflow `43279226602`, branch source
+`23f974a727ca2627690304cbecee0fa96cb6de83`, selected the new Windows consumer
+but did not reach it. Windows Storybook job `131395742955` and Win32
+accessible Storybook job `131395742289` both failed while importing the
+driver's built fixture provisioner: `ERR_MODULE_NOT_FOUND` for an extensionless
+dependency. All four nativeRunner ownership modes and their accessibility-input
+specs are therefore **Not run**, not skipped or passed. No flake rerun was used.
+
+The owning driver repair is tested at
+`0e2dcb26ca156133cb577fc81869b23cebf1df3a`: explicit Node ESM imports and the
+existing package-root anchor replace Jest-only resolution and `__dirname`.
+The portable regression reproduces the hosted failure before the correction
+and passes afterward; it never compiles or starts the native fixture. The
+fixture, native protocol, consumer opt-ins, cleanup rules and macOS path are
+unchanged. The driver's provisioning receipt is in
+`packages/agentic/desktop-driver/references/current-status.md`.
+
+**Observed, portable:** from the repository root,
+`yarn workspace @fluentui-react-native/desktop-test test nativeRunnerSupport
+--runInBand` **Passed**, all 18 cases. The driver suite passed 1,212 and skipped 88. The locked default-environment
+`yarn clean-lage-cache && yarn lage buildci` **Passed**, all 178 tasks with
+zero cache hits or failures, 2m 52.86s. Package format/lint/build, root format
+and instruction checks, changed-document links and committed changesets passed.
+Receipts are in `artifacts\desktop\f11\w1-fix\push-ci`.
+
+No local native/GUI workload or physical input was launched; no desktop
+campaign was started. Hosted requalification is pending the correction's push.
+Local nativeRunner and physical console Ctrl+C remain **Not run** while the
+desktop session is disconnected. This receipt does not upgrade the earlier
+connected endpoint evidence to a rerun of the new consumer.
+
+## Windows native runner and physical console interruption — 2026-11-12 UTC
+
+**Observed, source `b1bbb26df880252a184ea5a3d2e1848bd811e83f`:** the W1
+campaign ran with an active, unlocked RDP session (`sessionKind: remote`).
+Every live command used the exclusive native lock and `-RequirePhysical`.
+No input-feature mask, privacy change or implicit native download was used.
+
+The explicitly provisioned plain Win32 fixture now exercises the generic
+MCP/WDIO consumer on Windows. From the repository root, with
+`FURN_NATIVE_DRIVER_TEST=1` and `FURN_NATIVE_HANDOFF_APP_PATH` naming that
+fixture, `yarn workspace @fluentui-react-native/desktop-test test
+nativeRunner.contract --runInBand --json --outputFile
+<repository-root>\artifacts\desktop\f11\w1-native\native-runner-jest.json` **Passed** all five
+outer cases, with zero skips. This fixture is not a React Native renderer.
+
+| Mode                       | Result                                        | Inner WDIO run ID                      | Executed / passed                        |
+| -------------------------- | --------------------------------------------- | -------------------------------------- | ---------------------------------------- |
+| Handoff                    | Passed                                        | `a9849169-7f2b-46e6-87de-3e0b8b8e7a3f` | 2 / 2                                    |
+| Operator preemption        | Passed                                        | `2a1f63bd-3ac0-4951-beb5-860a2a92b69c` | 2 / 2                                    |
+| Worker crash               | Passed recovery; expected terminal failed run | `9c1a8447-2a6c-4ca6-b027-8bc302df3fc7` | 0 / 0; interrupted by the injected crash |
+| Lost runner-grant response | Passed                                        | `4e7d50fa-b055-407c-bfe2-443fe2bc504f` | 2 / 2                                    |
+| Capture                    | Passed, including a real target capture       | `047e8166-c3d2-4fb9-b785-288519b3342d` | 2 / 2                                    |
+
+Every non-crash mode executed both ownership and accessibility-input specs,
+with zero inner skips. Every mode preserved its exact external fixture
+incarnation through service cleanup, withdrew both descriptors, released
+its workload claim, wrote terminal reports, and then ended its own fixture.
+No cleanup deadline fired. Full service run IDs and per-mode evidence are in
+`artifacts\desktop\f11\w1-native\contracts.json`; the corresponding roots are
+`native-handoff-5ZFlJt`, `native-operator-preempt-arz9P9`,
+`native-worker-crash-FyizDx`, `native-lost-response-7745sB` and
+`native-capture-6v7nle` under `artifacts\desktop\f11`.
+
+**Observed, physical console Ctrl+C:** the real app consumer ran
+`yarn desktop-test --config <registered-identity-config> --target
+<windows|win32> --reporter json serve --agent --descriptor <unique-name>`.
+The ignored qualification config imports the app's actual config and adds
+only the verified registered Fabric AUMID/title; it does not replace the
+Storybook integration. A separate owned observer ran the repository's Yarn
+entry in a new visible console. Console process inspection proved isolation
+from the controller, and the emitter checked that exact window was foreground
+immediately before inserting Ctrl-down, C-down, C-up and Ctrl-up with
+`SendInput`. The observer recorded real console `SIGINT`; no
+`GenerateConsoleCtrlEvent` or injected Node signal was used.
+
+| Endpoint                    | Result | Lifecycle run ID                       | Exact CLI / Yarn / observer exits |
+| --------------------------- | ------ | -------------------------------------- | --------------------------------- |
+| Windows Fabric packaged app | Passed | `75c40800-571c-4d8f-9fa1-debf876f0664` | 0 / 0 / 0                         |
+| Win32 Paper REX             | Passed | `9a5c618f-d54d-4599-b36f-e3fd5b5436b9` | 0 / 0 / 0                         |
+
+Both apps first completed authenticated `components-button--appearance`
+selection with native marker verification and a native MCP observation.
+The MCP session/adapter was closed before interrupting the still-running
+service. Each interrupt inserted exactly four key events, wrote a terminal
+`passed` lifecycle report, released the per-user claim and withdrew the
+descriptor. Each borrowed app remained running through service shutdown,
+then its exact recorded launcher closed it. No owned service/app survived.
+This confirms the inherited #4478 repair on the physical Windows console
+path; the historical borrowed-close fixture's red-before/green-after proof
+remains separate from this physical evidence.
+
+Reproduction owners are retained as
+`node artifacts\desktop\f11\w1-native\physical-case.cjs windows` and the
+same command with `win32`, each inside the granted W1 campaign and
+`with-native-lock.ps1 -Lane W1 -RequirePhysical`. Physical receipts are in
+`physical-windows-UmfSj6` and `physical-win32-sssEyg` beneath that root.
+The unchanged registered Fabric native build `bdeb0b291` was reused after
+package identity and native-source comparison. Two earlier Fabric setup
+attempts were **Not run** for Ctrl+C: missing generated renderer properties,
+then no local built manifest. `yarn storybook prep --windows` and the
+supported explicit registered identity resolved those prerequisites; both
+failed startup attempts exited terminally with no retained claim.
+Win32 native build is **Unsupported**; the prebuilt REX host used a fresh
+`yarn storybook bundle --win32` with the serving instance's port, ID and
+driver manifest, as the platform recipe requires.
+
+**Hosted correction:** workflow `43284867711` at prior branch head
+`644388cc32e3b65854572ebe18abef6ecdce93b5` provisioned the fixture and
+executed four ownership modes in Windows job `131415841258` and Win32
+accessible job `131415842551`. Each passed handoff, preemption and crash
+recovery; handoff/preemption each executed both inner specs. Lost-response
+failed before WDIO because its assertion expected an unwrapped error message;
+capture was policy-skipped. This was not a flake. The current correction
+shares that real HTTP-200 response-loss fault with the portable HTTP runner
+and checks the typed transport error's exact original cause instead. It was
+red with the hosted message mismatch, green after repair, and now passes the
+native lost-response case above. The full portable harness suite **Passed**
+396 with 12 native/platform skips; build and lint also passed.
+
+The campaign is ended. The post-campaign broad audit reported four
+**foreign portable** W5 Jest/Yarn processes, no listeners and zero owned
+native/GUI survivors; none was terminated. Exact audit, session and lock
+receipts are under `artifacts\desktop\f11\w1-native`. Hosted confirmation of
+the corrected head is pending publication at this receipt; those earlier
+partial hosted counts are not a four-mode CI pass.
+
+**Portable closeout, not aggregate acceptance:** the locked default-environment
+`cmd.exe /d /c "yarn clean-lage-cache && yarn lage buildci"` **Failed** in
+three fresh attempts at this source. Each failed only
+`@fluentui-react-native/storybook-desktop#test` →
+`desktop Storybook server integration` →
+`hosts the Storybook channel and Stage 1 smoke-test target in one process`,
+with `A stopping command cannot publish readiness.` at
+`packages/agentic/desktop-test/src/processControl.ts:112`.
+Both that lifecycle source and
+`packages/agentic/storybook-desktop/src/driver/serverIntegration.test.ts`
+are byte-identical at main, review base `04d8d8b13` and the tested head.
+Timing sensitivity is **Inferred**, not a reproduced base-runtime result:
+`yarn workspace @fluentui-react-native/storybook-desktop test
+serverIntegration --runInBand` **Passed** 9 with one platform skip, and
+the whole unchanged package's default-concurrency
+`yarn workspace @fluentui-react-native/storybook-desktop test` **Passed**
+340 with three skips. No unrelated source or test deadline was changed.
+TEMP/TMP/TMPDIR and concurrency stayed at inherited defaults; native opt-in,
+Git-ceiling and Lage pool overrides were absent. This failed aggregate does
+not replace the earlier source's passing receipt or qualify this head.
+
+The final attempt began with a clean audit; its same failure therefore is
+not attributed to the foreign portable work. Its fail-fast return briefly
+left owned portable Jest workers running; they subsequently exited
+naturally, without a process kill. The foreign process owner separately
+removed its abandoned W5 chain. The final audit **Passed**:
+`FURN-AUDIT: no FURN desktop processes found`. Receipts
+`default-buildci{,-rerun}.json`, `clean-default-buildci.json`,
+`aggregate-readiness-source-comparison.json`,
+`aggregate-readiness-{focused,package}.json` and
+`aborted-aggregate-cleanup-audit.log` are under the same evidence root.
+Formatting, instruction validation and all three changed-ledger link checks
+also **Passed**.
+
+## Windows default-aggregate follow-up — 2026-11-12 UTC
+
+**Observed, source `2bf750f9e87919124eee9e0c567eb377603cc9cd`:** the final
+locked default-environment
+`cmd.exe /d /c "yarn clean-lage-cache && yarn lage buildci"` **Passed**
+all 178 tasks, zero failed, from **20:52:21 to 20:55:29 UTC**.
+TEMP/TMP/TMPDIR and concurrency remained inherited defaults; native opt-in,
+Git-ceiling and Lage pool overrides were absent. No source, test deadline,
+dependency manifest or environment guidance changed during this follow-up.
+This supersedes the earlier lack of aggregate acceptance for this source,
+without erasing the three failed attempts.
+
+The exact earlier failure was
+`@fluentui-react-native/storybook-desktop#test`,
+`packages/agentic/storybook-desktop/src/driver/serverIntegration.test.ts` →
+`desktop Storybook server integration` →
+`hosts the Storybook channel and Stage 1 smoke-test target in one process`:
+`A stopping command cannot publish readiness.` at
+`packages/agentic/desktop-test/src/processControl.ts:112`.
+
+**Controlled baseline:** a new detached worktree at
+`origin/main` (`505a2187b0a2451aed7081c9260b343d55742f93`) used its own
+immutable dependency restore, not linked branch build output. The same
+locked default command **Failed** at 20:42:15–20:44:20 UTC, but differently:
+`@fluentui-react-native/desktop-driver#test`,
+`packages/agentic/desktop-driver/src/server/operations.test.ts` →
+`Desktop Driver agent operations` → `the caller leaving` →
+`abandons a walk when the caller disconnects, journals it as cancelled, and keeps the session usable`.
+The post-cancellation `session.find()` expected `outcome: "unique"` and
+received `"inconclusive"` at line 405. Storybook's task was incomplete,
+so that run does **not** reproduce the readiness failure on main.
+One unchanged default repeat at 20:47:34–20:50:39 UTC **Passed** all 178
+tasks, including Storybook. Both baseline audits were clean; the scratch
+worktree and its remaining empty directories were removed before the head run.
+
+**Persistent-state audit, 20:41–20:46 UTC:**
+
+| Location / state                                                     | Observation and timestamp                                                                                                                                                             |
+| -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `%LOCALAPPDATA%\Microsoft\FluentUIReactNative\desktop-test\workload` | Empty: no interactive lock, claim, report or recovery file. Last modified at the initial inventory: 20:04:25 UTC.                                                                     |
+| `%LOCALAPPDATA%\com.microsoft.fluentui-react-native.desktop-driver`  | No agent, runner or active service descriptor. Thirteen durable settlement records; directory last modified 19:40:25 UTC before cleanup.                                              |
+| `%LOCALAPPDATA%\Microsoft\FluentUIReactNative\desktop-driver\native` | Shared immutable native cache, not a descriptor/claim store; existing cache root dates from August 31. Left untouched.                                                                |
+| `apps\storybook\storybook-desktop.generated`                         | No lease, claim, lock, ready or connection files. Windows/Win32 manifests modified 19:36:48 / 19:40:06 UTC; runtime instance 19:40:08 UTC; retained generated WDIO spec 18:00:37 UTC. |
+| `apps\storybook\artifacts\desktop`                                   | All eight existing `run.json` reports terminal. Physical Fabric/Paper reports last modified 19:37:28 / 19:40:25 UTC. No per-user `run.json` found.                                    |
+| Registered Fabric app                                                | Existing verified `furn-81` build; package directory / manifest modified November 10 at 15:08:37 / 15:08:26 UTC. No registration change made by this campaign.                        |
+| Firewall / loopback                                                  | Existing app rule and exemption only, queried read-only at 20:41:51 UTC. Those APIs expose no modification timestamps. Neither setting was changed.                                   |
+
+Two bridge-epoch records belonged exactly to the physical campaign's Fabric
+and Paper application incarnations, created at 19:37:24 and 19:40:22 UTC.
+At **20:46:53 UTC**, the verified Windows storage/probe APIs confirmed
+each recorded PID/start-time pair against its own qualification receipt
+and proved that exact application had exited. Compare-and-remove deleted
+only those two unchanged records. The other eleven records, including
+unrelated quarantines, were preserved. These were settled recovery records,
+not active claims or live descriptors. No process was killed.
+
+**Diagnosis boundary:** identical source was not runtime proof of
+pre-existence. Main's first error differed; its repeat and the final head
+both passed. The readiness test waits 20 seconds, and the reported guard
+rejects a producer frame received after stop begins. Aggregate CPU load was
+observed at 96% across 24 logical processors; load-sensitive startup/stop
+timing remains **Inferred**, not an established root cause. The fake-host
+server path does not open the native service/recovery store. Neither a
+same-error main reproduction nor a causal repair by deleting those epoch
+records is claimed. No unrelated runtime or timeout workaround was added.
+
+Final post-head process audit **Passed**:
+`FURN-AUDIT: no FURN desktop processes found`. Baseline/head command
+receipts, state inventories, exact-identity cleanup, scratch removal and
+audits are retained in `artifacts\desktop\f11\w1-buildci-followup`.
+
+**Hosted confirmation:** workflow `43297198219` at branch source
+`2bf750f9e` completed **successfully, zero failed jobs**. Windows Storybook
+job `131458546719` and Win32 accessible job `131458546805` each recorded
+four ownership cases passed, one capture-policy skip and zero failures.
+Handoff, preemption and lost-response each executed/passed both inner
+specs with zero skips and `accessibilityClick: passed`; worker-crash
+recovery passed around its deliberately failed inner run. Downloaded
+artifacts, not outer Jest totals alone, establish these counts. No flake
+rerun was used. The existing physical/native qualification remains
+separate; this follow-up launched no app and made no new native claim.
+
+## F11 rebased macOS positive qualification — 2026-11-12 UTC
+
+**Observed source:** `5dbadb53b10cd81ccf1e15739e213f0046d93323`, rebased onto
+F6 squash/main `041ac8b9894aeaa7e1aa273baa2ece4e46298b94`.
+The original branch/lease was `11820d6330f4ea591bed400193b13e793970b5bd`;
+the historical base was `505a2187b0a2451aed7081c9260b343d55742f93`.
+The owning worktree first fast-forwarded its older `c9753208d` tip, retaining
+all fourteen Windows additions, then replayed all 22 branch commits. The
+only conflict appended F6 and F11 evidence at the same location in this file:
+both complete sections were retained. Range-diff reports 20 identical patches
+and two documentation-context-only changes. Windows fixture/provisioning,
+nativeRunner, input and response-loss code, hosted actions, and Windows ledgers
+were preserved. No new runtime or native-provider behavior was changed.
+
+### Real native consumer
+
+macOS **27.2.1, arm64**, plain AppKit ownership fixture; no React Native
+renderer. The explicitly provisioned, signature-verified
+`FurnOwnershipFixture.app` uses the readiness-capable source
+`27b109072002e5bd83a35c97ff9633311a74e5c7`, bundle identifier
+`com.microsoft.furn.application-ownership-fixture`, unique per-mode titles,
+and its exact ready-file/PID. It is not downloaded or compiled by the consumer.
+The stable-signed helper artifact is
+`e4a23c0ec3cc9ddcf07fde2153bdf260b7b85f65bd0a6851275dd55a6ccf0fd3`,
+source digest
+`b1d5233de326faf886c8d6310c2844c6857e4936686dfd493ff898f9e5ec6b9a`.
+Noninteractive doctor reported **Accessibility, PostEvent and ScreenCapture
+all true**, console connected/unlocked, and `promptRequested: false`.
+The earlier permission-blocked macOS attempt remains historical, not the
+current F11 qualification boundary. No permission, TCC or certificate change
+was made.
+
+All commands below ran from the repository root. Native/helper commands,
+portable suites and the final aggregate used the shared exclusive native lock.
+`SIGNING` below denotes the existing `FURN Desktop Driver Development`
+identity; the actual native commands set
+`FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY="FURN Desktop Driver Development"`.
+`FIXTURE` denotes the absolute path to the owning worktree's
+`artifacts/desktop/f11/application-fixture/FurnOwnershipFixture.app`.
+
+| Exact command (with the stated native environment)                                                                                                                      | Result                                                                                                                              |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `yarn workspace @fluentui-react-native/desktop-driver exec desktop-driver build-driver --platform macos --json`                                                         | **Passed**, verified existing stable-signed artifact                                                                                |
+| `yarn workspace @fluentui-react-native/desktop-driver exec desktop-driver doctor --platform macos --permissions --json`                                                 | **Passed**, all three permission preflights true; no prompt                                                                         |
+| `codesign --verify --strict artifacts/desktop/f11/application-fixture/FurnOwnershipFixture.app`                                                                         | **Passed**                                                                                                                          |
+| `FURN_NATIVE_DRIVER_TEST=1 FURN_NATIVE_HANDOFF_APP_PATH="$FIXTURE" yarn workspace @fluentui-react-native/desktop-test test nativeRunner.contract --runInBand`           | **Passed 5/5, zero skips**, 31.267 seconds                                                                                          |
+| `FURN_NATIVE_DRIVER_TEST=1 yarn workspace @fluentui-react-native/desktop-driver test serviceIdentity.contract applicationIncarnation.contract nativeDriver --runInBand` | **Passed 28; skipped 15 Windows cases**. Selection includes portable built-ESM provisioning regression, not 28 purely native tests. |
+
+| Mode / receipt directory under `artifacts/desktop/f11/` | Inner WDIO run ID                      | Observed outcome                                                                                                                                                   |
+| ------------------------------------------------------- | -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `native-handoff-cZN2uI`                                 | `737589dd-cd90-493f-8bb1-251a4e057b72` | Explicit relinquish; 2 selected/executed/passed, zero skips                                                                                                        |
+| `native-operator-preempt-gaSxgd`                        | `76a5b401-0022-417c-a559-87b5d24c3753` | Operator-authorized preemption; 2 selected/executed/passed, zero skips                                                                                             |
+| `native-worker-crash-D3uh4Z`                            | `861bc143-5388-4802-8194-e323ef317ee2` | Outer native drain/reuse contract passed; deliberate exit 17 leaves terminal **failed** inner run with 1 selected/incomplete, 0 completed; not an inner input pass |
+| `native-lost-response-kklnxj`                           | `96b708e7-63a9-44c1-a0a3-eb3f4e87ff6b` | Real successful grant-response loss and confirmed drain; 2 selected/executed/passed, zero skips                                                                    |
+| `native-capture-xGUWSZ`                                 | `791c6749-826e-4929-b35a-cf1cb8b9cadf` | Target-scoped capture; 2 selected/executed/passed, zero skips                                                                                                      |
+
+Every non-crash mode passed the real accessibility-click spec, not merely the
+outer Jest assertion. Every mode opened native sessions through verified
+private discovery and the MCP SDK, exercised actual WDIO/Jasmine, rejected
+stale resources, confirmed worker drain and credential confinement, withdrew
+both descriptors, released its claim, and preserved the exact external
+fixture incarnation through service shutdown. Only its owning test then
+terminated that fixture and verified exit. All five receipts report
+`cleanupConfirmed: true`; no case deadline or cleanup timeout fired. Captures
+were confined to the registered fixture. No Metro or Storybook app was started.
+
+### Portable checks and scope
+
+`yarn install --immutable` **Passed** after the F6 manifest/lockfile update
+(existing peer warnings). For each of `desktop-driver`, `desktop-test` and
+`desktop-driver-mcp`, the exact commands
+`yarn workspace @fluentui-react-native/<package> format`,
+`yarn workspace @fluentui-react-native/<package> lint` and
+`yarn workspace @fluentui-react-native/<package> build` each **Passed**.
+
+| Exact portable command                                                             | Result                                                             |
+| ---------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| `yarn workspace @fluentui-react-native/desktop-driver test 'authority/(grants      | delegation)                                                        | server/(runnerHandoff | delegation)' --runInBand` | **Passed 51** |
+| `yarn workspace @fluentui-react-native/desktop-test test runner --runInBand`       | **Passed 20; skipped 5 native opt-ins**, separately executed above |
+| `yarn workspace @fluentui-react-native/desktop-driver-mcp test server --runInBand` | **Passed 31**                                                      |
+| `yarn workspace @fluentui-react-native/desktop-driver test --runInBand`            | **Passed 1,235; skipped 66**                                       |
+| `yarn workspace @fluentui-react-native/desktop-test test --runInBand`              | **Passed 402; skipped 6**                                          |
+| `yarn workspace @fluentui-react-native/desktop-driver-mcp test --runInBand`        | **Passed 32**                                                      |
+
+`yarn lage test-links --verbose --grouped` **Passed all 90 tasks**.
+The first locked plain `yarn clean-lage-cache && yarn lage buildci`
+cleared the cache, then **failed** `check-agent-instructions`: two newly added
+ledger links crossed package guidance boundaries (43 successful tasks,
+85 pending). They were corrected to package-qualified text references; this
+was a documentation error, not a native or runtime failure.
+
+The corrected `yarn check-agent-instructions` **Passed**. The next locked
+plain `yarn lage buildci` **Failed** the driver task: `boundedCommand.test.ts`
+expected `SIGKILL` but received `SIGTERM`, and the first macOS private-storage
+publication test exceeded its 10-second budget (1,233 driver tests passed,
+66 skipped, two failed). Both test files and their implementations are
+byte-identical to pinned main. This establishes unchanged source, not a newly
+executed baseline reproduction or the private-storage timeout's cause.
+The locked diagnostic
+`yarn workspace @fluentui-react-native/desktop-driver test boundedCommand privateStorage --runInBand`
+**Passed 73, skipped 10** without source or deadline changes.
+
+One unchanged, locked plain `yarn lage buildci` repeat **Failed again** on
+the same bounded-command `SIGKILL`/`SIGTERM` assertion: driver **1,234 passed,
+66 skipped, one failed**; private storage passed. Lage reported **61 successful,
+109 cached/skipped tasks, one failed**, with other tasks interrupted, so no
+complete aggregate acceptance is claimed. The known parallel child-startup
+race was not hidden, patched, or worked around; the diagnostic pass is not
+aggregate acceptance. `TF_BUILD` and native opt-ins were unset, inherited
+`TMPDIR` and default concurrency were unchanged, and the cache was cleared
+once before the first aggregate. The exact failures remain in `buildci.log`,
+`buildci-corrected.log`, and `buildci-default-repeat.log` beside the focused
+diagnostic receipt. **The macOS positive native gate is closed; final portable
+aggregate acceptance remains blocked.**
+
+Receipts and doctor output are under
+`artifacts/desktop/f11/requalification-20261112/`; per-mode `evidence.json`
+and terminal `run.json` files remain in the directories above. No private
+descriptor or grant is copied into shared evidence.
+
+**Boundaries:** generic attach-only macOS handoff is positively qualified.
+Existing Windows local/hosted evidence above is preserved, not re-executed on
+this Mac or asserted for the rewritten SHA. Storybook/F9 handoff, F10 retained
+launches, React Native renderer qualification, physical pointer/keyboard input,
+cross-connection resume and automatic replay are **not qualified by this run**
+and remain outside this phase. Publication, post-rebase hosted CI, and the PR
+draft/readiness decision remain coordinator-owned.

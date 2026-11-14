@@ -31,6 +31,8 @@ export type DesktopServiceOptions = {
   addSecret?: (secret: string) => void;
   signal?: AbortSignal;
   guard?: <T>(work: Promise<T>) => Promise<T>;
+  /** Trusted neutral application-lifetime wrapper, installed before integration target context is created. */
+  prepareHost?: (host: DesktopHost) => Promise<DesktopHost>;
   /** Optional application-specific target context; native authority remains in the driver. */
   createTarget?: (
     host: DesktopHost,
@@ -38,7 +40,7 @@ export type DesktopServiceOptions = {
   ) => Promise<Pick<DesktopTarget, 'storyOrchestrator' | 'storyRootTestId'> | undefined>;
 };
 
-export type DesktopService = DesktopDriverServer & { readonly agentDescriptor?: string };
+export type DesktopService = DesktopDriverServer & { readonly agentDescriptor?: string; readonly runnerDescriptor?: string };
 
 export type NativeDesktopServiceOptions = Omit<NativeDesktopHostOptions, 'artifact'> &
   DesktopServiceOptions & {
@@ -68,8 +70,10 @@ export async function startDesktopService(
   const authority = options.agent ? new DesktopAuthority() : undefined;
   let server: DesktopDriverServer | undefined;
   let publication: DesktopAgentPublication | undefined;
+  let runnerPublication: DesktopAgentPublication | undefined;
   try {
     const recovery = await resolveRecovery(options, artifact);
+    desktopHost = (await options.prepareHost?.(desktopHost)) ?? desktopHost;
     // Only the declared story context is taken: an integration cannot replace the target's identity or launch modes.
     const added = await options.createTarget?.(desktopHost, recovery);
     const target = {
@@ -99,14 +103,41 @@ export async function startDesktopService(
         signal: options.signal,
         guard: options.guard,
       });
+      if (
+        options.agent.runner !== false &&
+        !target.storyOrchestrator &&
+        target.launchModes?.length === 1 &&
+        target.launchModes[0] === 'attach'
+      ) {
+        runnerPublication = await publishDesktopAgent({
+          authority: authority!,
+          connection: options.agent,
+          target: { endpoint: options.target.endpoint, id: options.target.id },
+          url: server.url,
+          role: 'runner',
+          ...(artifact ? { artifact } : {}),
+          addSecret: options.addSecret,
+          signal: options.signal,
+          guard: options.guard,
+        });
+      } else if (options.agent.runner && !runnerPublication) {
+        throw new Error('Runner descriptors require a generic attach-only target.');
+      }
     }
   } catch (error) {
-    try {
-      if (server) await server.close();
-      else await desktopHost.dispose();
-    } catch (cleanup) {
-      throw new AggregateError([error, cleanup], 'Desktop service startup and disposal failed.');
+    const failures: unknown[] = [];
+    for (const step of [
+      async () => runnerPublication?.withdraw(),
+      async () => publication?.withdraw(),
+      () => (server ? server.close() : desktopHost.dispose()),
+    ]) {
+      try {
+        await step();
+      } catch (cleanup) {
+        failures.push(cleanup);
+      }
     }
+    if (failures.length) throw new AggregateError([error, ...failures], 'Desktop service startup and disposal failed.');
     throw error;
   }
   const listening = server;
@@ -116,10 +147,13 @@ export async function startDesktopService(
     get agentDescriptor() {
       return closing ? undefined : publication?.descriptor;
     },
+    get runnerDescriptor() {
+      return closing ? undefined : runnerPublication?.descriptor;
+    },
     close: () =>
       (closing ??= (async () => {
         const failures: unknown[] = [];
-        for (const step of [async () => publication?.withdraw(), () => listening.close()]) {
+        for (const step of [async () => runnerPublication?.withdraw(), async () => publication?.withdraw(), () => listening.close()]) {
           try {
             await step();
           } catch (error) {

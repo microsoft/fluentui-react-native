@@ -100,7 +100,7 @@
     "moment@npm:^2.24.0": "2.31.0",
     "moment@npm:^2.29.4": "2.31.0",
     "path-to-regexp@npm:8.3.0": "^8.4.2",
-    "react-native-macos": "patch:react-native-macos@npm%3A0.81.9#~/.yarn/patches/react-native-macos-npm-0.81.9-aa583a0648.patch",
+    "react-native-macos": "patch:react-native-macos@npm%3A0.81.9#~/.yarn/patches/react-native-macos-npm-0.81.9-aa583a0648.patch&~/.yarn/patches/react-native-macos-npm-0.81.9-native-props.patch",
     "react-native-windows": "0.81.35",
     "shell-quote": "1.11.0",
     "smol-toml@npm:^1.6.1": "1.9.0",

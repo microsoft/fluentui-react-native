@@ -1,4 +1,5 @@
 import { spawn } from 'node:child_process';
+import path from 'node:path';
 
 import type {
   ApplicationLease,
@@ -21,6 +22,7 @@ import type {
   Rect,
 } from '../../host/types.js';
 import type {
+  NativeApplicationIdentity,
   NativeDesktopApplicationDescriptor,
   NativeDriverArtifact,
   NativeDriverProvider,
@@ -59,6 +61,47 @@ const defaultCancellationTimeoutMs: Readonly<Record<NativeDriverProvider, number
 
 /** The most stderr text or output kept from the input recovery process. */
 const maximumRecoveryOutputBytes = 16 * 1024;
+
+function requireApplicationIdentity(value: unknown, endpoint: DesktopEndpoint): NativeApplicationIdentity {
+  const result = value as Partial<NativeApplicationIdentity> | null;
+  const windows = endpoint !== 'macos';
+  if (
+    !result ||
+    typeof result !== 'object' ||
+    Array.isArray(result) ||
+    Object.keys(result).some(
+      (key) =>
+        !(
+          windows ? ['processId', 'processStartedAt', 'executablePath', 'interactiveSession', 'aumid'] : ['processId', 'processStartedAt']
+        ).includes(key),
+    ) ||
+    typeof result.processId !== 'number' ||
+    !Number.isInteger(result.processId) ||
+    result.processId < 1 ||
+    result.processId > 0x7fffffff ||
+    typeof result.processStartedAt !== 'string' ||
+    !(
+      windows
+        ? /^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{7}Z$/
+        : /^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{6}Z$/
+    ).test(result.processStartedAt) ||
+    !Number.isFinite(Date.parse(result.processStartedAt)) ||
+    (windows &&
+      (typeof result.executablePath !== 'string' ||
+        !path.win32.isAbsolute(result.executablePath) ||
+        result.executablePath.length > 4096 ||
+        /\p{Cc}/u.test(result.executablePath) ||
+        typeof result.interactiveSession !== 'string' ||
+        !/^windows-session:[0-9]{1,10}$/.test(result.interactiveSession) ||
+        (result.aumid !== undefined &&
+          (typeof result.aumid !== 'string' || result.aumid.length < 1 || result.aumid.length > 4096 || /\p{Cc}/u.test(result.aumid)))))
+  ) {
+    throw new HostWebDriverError('unknown error', 'The native application identity is invalid.', {
+      nativeCode: 'invalid-application-identity',
+    });
+  }
+  return Object.freeze({ ...result } as NativeApplicationIdentity);
+}
 
 export class NativeDesktopHost implements DesktopHost {
   readonly endpoint: DesktopEndpoint;
@@ -118,6 +161,27 @@ export class NativeDesktopHost implements DesktopHost {
 
   async attach(target: DesktopTarget, signal?: AbortSignal): Promise<ApplicationLease> {
     return this.request('attach', this.targetParams(target), signal);
+  }
+
+  /** Descriptor verification without acquiring a lease, application lock, or window/element records. */
+  async inspectApplication(target: DesktopTarget, signal?: AbortSignal): Promise<NativeApplicationIdentity> {
+    return requireApplicationIdentity(await this.request('inspectApplication', this.targetParams(target), signal), this.endpoint);
+  }
+
+  /** Trusted workload recovery only; no WebDriver route exposes termination of a recorded Windows survivor. */
+  async recoverApplication(identity: NativeApplicationIdentity, signal?: AbortSignal): Promise<void> {
+    if (this.endpoint === 'macos') throw new HostUnsupportedError('Exact survivor recovery is Windows-only.');
+    const verified = requireApplicationIdentity(identity, this.endpoint);
+    const result = await this.request<{ state?: unknown } | null>(
+      'recoverApplication',
+      { identity: verified, endpoint: this.endpoint },
+      signal,
+    );
+    if (!result || typeof result !== 'object' || Object.keys(result).length !== 1 || result.state !== 'exited') {
+      throw new HostWebDriverError('unknown error', 'The native helper did not prove exact application exit.', {
+        nativeCode: 'application-recovery-unsettled',
+      });
+    }
   }
 
   async closeApplication(lease: ApplicationLease, signal?: AbortSignal): Promise<void> {

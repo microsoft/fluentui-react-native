@@ -13,7 +13,9 @@ import { STORYBOOK_SMOKE_MODE } from '../config/commands';
 import { DesktopStorybookConfig, makeDesktopStorybookConfig } from '../config/makeDesktopStorybookConfig';
 import { FURN_STORYBOOK_BUNDLE_IDENTIFIER, FURN_STORYBOOK_INSTANCE_ID } from '../config/instance';
 import { FURN_STORYBOOK_PLATFORM } from '../config/platforms';
-import { desktopStorybookTargetId } from '../driver/driverManifest';
+import { createDesktopStorybookDriverManifest, writeDesktopStorybookDriverManifest } from '../driver/driverManifest';
+import { createFixturePrivateStorage } from '../driver/fixtures/privateStorage';
+import { readDriverManifest } from '../driver/generatedManifest';
 import * as wdioTests from '../testing/runWdioTests';
 import type { DesktopCommandRunner, PreparedDesktopCommand, RunningDesktopCommand } from './commandRunner';
 import { createDesktopStorybookCommand } from './createDesktopStorybookCommand';
@@ -68,11 +70,17 @@ const nativeDriverArtifact: NativeDriverArtifact = {
   wireProtocol: { major: 1, minor: 0 },
 };
 const nativeDriverTestOptions = {
+  createPrivateStorage: createFixturePrivateStorage,
   buildNativeDriver: async () => nativeDriverArtifact,
-  resolveNativeDriver: async () => nativeDriverArtifact,
+  resolveNativeDriver: async ({ platform }: { platform: string }) => nativeDriverFor(platform),
   writeMacOSApplicationLease: async () => undefined,
   connectStoryTraversal: async () => ({ select: async () => undefined, close: async () => null }),
 };
+function nativeDriverFor(platform: string): NativeDriverArtifact {
+  return platform === 'macos'
+    ? { ...nativeDriverArtifact, provider: 'macos', endpoints: ['macos'], signing: { mode: 'adhoc' } }
+    : { ...nativeDriverArtifact, endpoints: ['windows', 'win32'] };
+}
 const createEmptyStoryManifest = async (_config: unknown, platform: 'macos' | 'windows' | 'win32') => ({
   endpoint: platform,
   entries: [],
@@ -165,11 +173,20 @@ describe('macOS application leases', () => {
 
   test('keeps the lease naming the one running application', async () => {
     const root = fs.mkdtempSync(path.join(os.tmpdir(), 'furn-storybook-macos-lease-'));
-    const leasePath = path.join(root, 'application.json');
+    const leasePath = path.join(root, '.private', 'application-lease.macos.json');
     const manifestPath = path.join(root, 'driver-manifest.json');
-    fs.writeFileSync(
+    const config = makeConfig();
+    const created = createDesktopStorybookDriverManifest({
+      config,
+      instance: new DesktopStorybookCli(config).instance,
+      nativeDriver: nativeDriverFor('macos'),
+      platform: 'macos',
+      storyManifest: await createEmptyStoryManifest(config, 'macos'),
+    });
+    await writeDesktopStorybookDriverManifest(
+      { ...created, application: { ...created.application, bundleIdentifier: 'com.example.storybook', leasePath } },
       manifestPath,
-      JSON.stringify({ application: { bundleIdentifier: 'com.example.storybook', leaseNonce: 'nonce', leasePath } }),
+      createFixturePrivateStorage,
     );
     const running = (processId: number): MacOSRunningApplication => ({
       executablePath: '/Applications/Storybook.app/Contents/MacOS/Storybook',
@@ -199,6 +216,7 @@ describe('macOS application leases', () => {
       await expect(
         maintainMacOSApplicationLease(manifestPath, controller.signal, {
           intervalMs: 1,
+          createPrivateStorage: createFixturePrivateStorage,
           onWarning: (message) => warnings.push(message),
           queryApplications: async (bundleIdentifier) => {
             expect(bundleIdentifier).toBe('com.example.storybook');
@@ -487,16 +505,17 @@ describe('DesktopStorybookCli', () => {
         output: { write: jest.fn() },
       });
       fs.mkdirSync(path.dirname(manifestPath), { recursive: true });
-      fs.writeFileSync(
-        manifestPath,
-        JSON.stringify({
-          endpoint: 'macos',
-          instanceId: cli.instance.id,
-          renderer: 'fabric',
-          driverPort: 7100,
-          targetId: desktopStorybookTargetId(config(), 'macos', 'fabric'),
+      await writeDesktopStorybookDriverManifest(
+        createDesktopStorybookDriverManifest({
+          config: config(),
+          instance: { ...cli.instance, driverPort: 7100 },
+          nativeDriver: nativeDriverFor('macos'),
+          platform: 'macos',
+          storyManifest: await createEmptyStoryManifest(config(), 'macos'),
           wdio: { input: 'accessible' },
         }),
+        manifestPath,
+        createFixturePrivateStorage,
       );
       try {
         // The only case needs a physical keyboard, so only the inherited accessible lane can leave it out.
@@ -621,15 +640,15 @@ describe('DesktopStorybookCli', () => {
 
     try {
       await expect(new DesktopStorybookCli(makeConfig(), options).driver('macos')).rejects.toThrow('exited unexpectedly');
-      const fabricManifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+      const fabricManifest = await readDriverManifest(manifestPath, undefined, createFixturePrivateStorage);
       await expect(new DesktopStorybookCli(makeConfig(), { ...options, paper: true }).driver('macos')).rejects.toThrow(
         'exited unexpectedly',
       );
-      const paperManifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+      const paperManifest = await readDriverManifest(manifestPath, undefined, createFixturePrivateStorage);
       await expect(new DesktopStorybookCli(makeConfig(), { ...options, paper: true }).driver('macos')).rejects.toThrow(
         'exited unexpectedly',
       );
-      const repeatedPaperManifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+      const repeatedPaperManifest = await readDriverManifest(manifestPath, undefined, createFixturePrivateStorage);
 
       expect(fabricManifest.renderer).toBe('fabric');
       expect(paperManifest.renderer).toBe('paper');
@@ -1195,7 +1214,7 @@ describe('DesktopStorybookCli', () => {
 
   test('runs authored tests after traversing the complete story index', async () => {
     const runner = new RecordingRunner();
-    const resolveNativeDriver = jest.fn(async () => nativeDriverArtifact);
+    const resolveNativeDriver = jest.fn(async () => nativeDriverFor('macos'));
     const events: string[] = [];
     const writeMacOSApplicationLease = jest.fn(async () => {
       events.push('lease');
@@ -1605,8 +1624,10 @@ describe('createDesktopStorybookCommand', () => {
 
   test('forwards the selected smoke mode and isolated instance to a package-owned lifecycle', async () => {
     const runner = new RecordingRunner();
+    const createPrivateStorage = jest.fn(createFixturePrivateStorage);
     const program = createDesktopStorybookCommand({
       ...nativeDriverTestOptions,
+      createPrivateStorage,
       config: makeConfig({
         windows: {
           smoke: {
@@ -1623,6 +1644,7 @@ describe('createDesktopStorybookCommand', () => {
     try {
       await program.parseAsync(['node', 'test', 'smoke', '--windows', '--mode', 'stories-and-tests']);
 
+      expect(createPrivateStorage).toHaveBeenCalled();
       expect(runner.foreground[0]).toMatchObject({
         command: 'smoke-windows',
         env: {
@@ -1671,7 +1693,7 @@ describe('createDesktopStorybookCommand', () => {
         args: ['start', '--no-interactive', '--port', expect.any(String)],
         env: { STORYBOOK_DRIVER_MANIFEST: manifestPath },
       });
-      const firstManifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8')) as Record<string, unknown>;
+      const firstManifest = await readDriverManifest(manifestPath, undefined, createFixturePrivateStorage);
       expect(firstManifest).toMatchObject({
         endpoint: 'win32',
         targetId: 'agenticstorybook-win32',
@@ -1690,7 +1712,7 @@ describe('createDesktopStorybookCommand', () => {
       await expect(
         secondProgram.parseAsync(['node', 'test', 'driver', '--win32', '--host', 'localhost', '--port', '7102']),
       ).rejects.toThrow('exited unexpectedly');
-      const secondManifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8')) as Record<string, unknown>;
+      const secondManifest = await readDriverManifest(manifestPath, undefined, createFixturePrivateStorage);
       expect(secondManifest.bridgeNonce).toBe(firstManifest.bridgeNonce);
     } finally {
       fs.rmSync(manifestPath, { force: true });

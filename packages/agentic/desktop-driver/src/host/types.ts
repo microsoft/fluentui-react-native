@@ -90,6 +90,11 @@ export type ApplicationLease = {
   ownership: 'attached' | 'launched';
   processId?: number;
   processStartedAt?: string;
+  executablePath?: string;
+  interactiveSession?: string;
+  aumid?: string;
+  /** OS activation is not direct child-process containment. */
+  launchKind?: 'launch-services' | 'direct-child' | 'packaged-activation';
 };
 
 export type DesktopWindow = {

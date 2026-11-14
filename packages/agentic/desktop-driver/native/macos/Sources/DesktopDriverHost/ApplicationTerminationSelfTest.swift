@@ -129,8 +129,88 @@ extension SelfTestRunner {
       attempt(interrupted, token: cancelled) is CancelledError && interrupted.kills == 0,
       "a cancelled close stops waiting before it escalates to a kill"
     )
+    let exact = "2023-11-14T22:13:20.250000Z"
+    let protected = FakeProcess(startedAt: started)
+    do {
+      try terminateOwned(processID: 4242, startedAt: started, bounds: bounds, control: protected.control,
+        exactStartedAt: exact, observeExact: { _ in .started("2023-11-14T22:13:20.250001Z") })
+      check(protected.quits == 0 && protected.kills == 0, "exact cleanup never signals a PID reused one microsecond later")
+    } catch {
+      check(false, "exact cleanup recognizes proven PID reuse")
+    }
+    do {
+      try terminateOwned(processID: 4242, startedAt: started, bounds: bounds, control: protected.control,
+        exactStartedAt: exact, observeExact: { _ in .unavailable })
+      check(false, "exact cleanup refuses an unreadable incarnation")
+    } catch {
+      check(protected.quits == 0 && protected.kills == 0, "exact cleanup refuses an unreadable incarnation without signalling")
+    }
 
     testRealProcessTermination()
+    testLaunchLockFailure()
+    testRejectedLaunchSettlement()
+  }
+
+  private func testRejectedLaunchSettlement() {
+    let manager = ApplicationManager()
+    let requests: [JSONObject] = [
+      [:],
+      ["application": ["processIdentity": ["processId": 1]]],
+      ["application": [:], "launchTimeoutMs": 0],
+      ["application": ["executablePath": "/dev/null/furn-missing-executable", "windowTitle": "Never launched"]],
+      ["application": ["bundleIdentifier": "com.microsoft.furn.nonexistent-self-test", "windowTitle": "Never launched"]],
+    ]
+    for request in requests {
+      do {
+        _ = try manager.launch(request, token: CancellationToken())
+        check(false, "a rejected launch cannot acquire an application")
+      } catch {
+        check((error as? HelperError)?.data?["applicationSettlement"] as? String == "not-started",
+          "a pre-spawn rejection proves that no application started")
+      }
+    }
+  }
+
+  private func testLaunchLockFailure() {
+    for failure in [EWOULDBLOCK, EBADF] {
+      let process = Process()
+      process.executableURL = URL(fileURLWithPath: "/bin/sleep")
+      process.arguments = ["60"]
+      do {
+        try process.run()
+      } catch {
+        check(false, "the failed-lock self-test can start a child")
+        continue
+      }
+      defer {
+        if process.isRunning { kill(process.processIdentifier, SIGKILL) }
+        process.waitUntilExit()
+      }
+      do {
+        let identity = try ServiceIdentity.inspect(process.processIdentifier)
+        do {
+          let unexpected = try ExactApplicationLock.acquireLaunched(
+            processID: process.processIdentifier, startedAt: identity.startedAt, launchKind: "direct-child",
+            acquire: { _, _ in throw ExactApplicationLock.lockFailure(failure) }
+          )
+          unexpected.release()
+          check(false, "a failed application lock never grants ownership")
+        } catch {
+          let settlement = (error as? HelperError)?.data?["applicationSettlement"] as? String
+          if failure == EWOULDBLOCK {
+            check(settlement == "unknown" &&
+              ApplicationIncarnation.classifyExact(recorded: identity.startedAt,
+                observed: ApplicationIncarnation.observeExact(process.processIdentifier)) == .running,
+              "lock contention preserves the exact application controlled by another helper")
+          } else {
+            check(settlement == "exited" && ApplicationIncarnation.observeExact(process.processIdentifier).isGone,
+              "a non-contention lock failure ends the proven launch and reports exact exit")
+          }
+        }
+      } catch {
+        check(false, "the failed-lock self-test can inspect its exact child: \(error)")
+      }
+    }
   }
 
   private func testRealProcessTermination() {

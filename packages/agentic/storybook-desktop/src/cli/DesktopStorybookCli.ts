@@ -1,4 +1,5 @@
 import { spawn } from 'node:child_process';
+import { randomUUID } from 'node:crypto';
 import fs from 'node:fs';
 import { createServer } from 'node:net';
 import path from 'node:path';
@@ -50,6 +51,12 @@ import {
   type CreateDesktopStorybookDriverManifestOptions,
   type DesktopStorybookDriverManifest,
 } from '../driver/driverManifest.js';
+import {
+  createStorybookPrivateStorage,
+  parseStoredDriverManifest,
+  readDriverManifest,
+  type CreateStorybookPrivateStorage,
+} from '../driver/generatedManifest.js';
 import { NodeDesktopCommandRunner, STORYBOOK_VERBOSE } from './commandRunner.js';
 import type { DesktopCommandRunner, PreparedDesktopCommand, RunningDesktopCommand } from './commandRunner.js';
 import { formatDesktopStorybookSmokeTestSummary, runDesktopStorybookSmokeTests } from './smokeTests.js';
@@ -86,6 +93,8 @@ export type DesktopStorybookCliOptions = {
   runSmokeTests?: typeof runDesktopStorybookSmokeTests;
   connectStoryTraversal?: typeof connectStoryTraversal;
   resolveNativeDriver?: typeof resolveNativeDesktopDriver;
+  /** Trusted OS storage adapter override for controlled fixtures. */
+  createPrivateStorage?: CreateStorybookPrivateStorage;
   /** Resolves a Windows or Win32 desktop target's verified application identity for `driver --agent`. */
   resolveDesktopApplication?: typeof resolveDesktopApplication;
   writeMacOSApplicationLease?: typeof writeMacOSApplicationLease;
@@ -139,6 +148,8 @@ export class DesktopStorybookCli {
   private readonly runSmokeTests: typeof runDesktopStorybookSmokeTests;
   private readonly connectStoryTraversal: typeof connectStoryTraversal;
   private readonly resolveNativeDriver: typeof resolveNativeDesktopDriver;
+  private readonly createPrivateStorage: CreateStorybookPrivateStorage;
+  private readonly driverHandoffs = new Map<string, string>();
   private readonly resolveDesktopApplication: typeof resolveDesktopApplication;
   private readonly writeMacOSApplicationLease: typeof writeMacOSApplicationLease;
   private readonly maintainMacOSApplicationLease: typeof maintainMacOSApplicationLease;
@@ -184,6 +195,7 @@ export class DesktopStorybookCli {
     this.runSmokeTests = options.runSmokeTests ?? runDesktopStorybookSmokeTests;
     this.connectStoryTraversal = options.connectStoryTraversal ?? connectStoryTraversal;
     this.resolveNativeDriver = options.resolveNativeDriver ?? resolveNativeDesktopDriver;
+    this.createPrivateStorage = options.createPrivateStorage ?? createStorybookPrivateStorage;
     this.resolveDesktopApplication = options.resolveDesktopApplication ?? resolveDesktopApplication;
     this.writeMacOSApplicationLease = options.writeMacOSApplicationLease ?? writeMacOSApplicationLease;
     this.maintainMacOSApplicationLease = options.maintainMacOSApplicationLease ?? maintainMacOSApplicationLease;
@@ -456,7 +468,7 @@ export class DesktopStorybookCli {
     if (!fs.existsSync(manifestPath)) {
       throw new Error(`Start storybook driver --${platform} and launch the app before running storybook test.`);
     }
-    const manifest: unknown = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+    const manifest = parseStoredDriverManifest(JSON.parse(fs.readFileSync(manifestPath, 'utf8')));
     if (
       typeof manifest !== 'object' ||
       manifest === null ||
@@ -779,7 +791,14 @@ export class DesktopStorybookCli {
     const renderer = this.renderer(platform);
     const driverManifest = createDesktopStorybookDriverManifest({
       ...(agent ? { agent } : {}),
-      bridgeNonce: readReusableBridgeNonce(outputPath, instance, storyManifest.platformManifestDigest, renderer),
+      bridgeNonce: await readReusableBridgeNonce(
+        outputPath,
+        instance,
+        storyManifest.platformManifestDigest,
+        renderer,
+        nativeDriver,
+        this.createPrivateStorage,
+      ),
       config: this.config,
       instance,
       nativeDriver,
@@ -789,7 +808,8 @@ export class DesktopStorybookCli {
       storyManifest,
       ...(wdio ? { wdio } : {}),
     });
-    writeDesktopStorybookDriverManifest(driverManifest, outputPath);
+    const handoff = await writeDesktopStorybookDriverManifest(driverManifest, outputPath, this.createPrivateStorage);
+    this.driverHandoffs.set(outputPath, handoff);
     return { manifest: driverManifest, path: outputPath };
   }
 
@@ -1057,7 +1077,16 @@ export class DesktopStorybookCli {
               [FURN_STORYBOOK_BUNDLE_IDENTIFIER]: instance.bundleIdentifier,
               STORYBOOK_WS_PORT: String(instance.storybookPort),
               STORYBOOK_DRIVER_PORT: String(instance.driverPort),
-              ...(instance.driverManifestPath ? { STORYBOOK_DRIVER_MANIFEST: instance.driverManifestPath } : {}),
+              ...(instance.driverManifestPath
+                ? {
+                    STORYBOOK_DRIVER_MANIFEST: instance.driverManifestPath,
+                    STORYBOOK_DRIVER_HANDOFF: this.driverHandoffs.get(instance.driverManifestPath) ?? '',
+                    STORYBOOK_GENERATED_CONTRACT: path.join(
+                      this.config.resolvePackage('@fluentui-react-native/storybook-desktop').root,
+                      'config/generated-contract.cjs',
+                    ),
+                  }
+                : {}),
               RCT_METRO_PORT: String(instance.metroPort),
               ...(instance.macosXcconfigPath ? { XCODE_XCCONFIG_FILE: instance.macosXcconfigPath } : {}),
             }
@@ -1082,17 +1111,19 @@ function reportOutput(
   };
 }
 
-function readReusableBridgeNonce(
+async function readReusableBridgeNonce(
   manifestPath: string,
   instance: DesktopStorybookInstance,
   platformManifestDigest: string,
   renderer: 'fabric' | 'paper',
-): string | undefined {
+  nativeDriver: NativeDriverArtifact,
+  createStorage: CreateStorybookPrivateStorage,
+): Promise<string | undefined> {
   if (!fs.existsSync(manifestPath)) {
     return undefined;
   }
   try {
-    const current = JSON.parse(fs.readFileSync(manifestPath, 'utf8')) as Record<string, unknown>;
+    const current = await readDriverManifest(manifestPath, undefined, createStorage, nativeDriver);
     return current.instanceId === instance.id &&
       current.storybookPort === instance.storybookPort &&
       current.driverPort === instance.driverPort &&
@@ -1139,7 +1170,7 @@ export async function writeMacOSApplicationLease(manifestPath: string, timeoutMs
   if (process.platform !== 'darwin') {
     throw new Error('A macOS application lease can only be written on macOS.');
   }
-  const application = readMacOSLeaseApplication(manifestPath);
+  const application = await readMacOSLeaseApplication(manifestPath);
   const runningApplication = await waitForMacOSApplication(application.bundleIdentifier, timeoutMs);
   writeMacOSApplicationLeaseFile(application, runningApplication);
 }
@@ -1150,6 +1181,8 @@ export type MaintainMacOSApplicationLeaseOptions = {
   queryApplications?: (bundleIdentifier: string) => Promise<MacOSRunningApplication[]>;
   /** Receives each distinct query failure once, such as more than one running instance. */
   onWarning?: (message: string) => void;
+  /** Trusted OS storage adapter override for controlled fixtures. */
+  createPrivateStorage?: CreateStorybookPrivateStorage;
 };
 
 /**
@@ -1160,13 +1193,13 @@ export type MaintainMacOSApplicationLeaseOptions = {
 export async function maintainMacOSApplicationLease(
   manifestPath: string,
   signal: AbortSignal,
-  { intervalMs = 2000, queryApplications, onWarning }: MaintainMacOSApplicationLeaseOptions = {},
+  { intervalMs = 2000, queryApplications, onWarning, createPrivateStorage }: MaintainMacOSApplicationLeaseOptions = {},
 ): Promise<never> {
   if (!queryApplications && process.platform !== 'darwin') {
     throw new Error('A macOS application lease can only be written on macOS.');
   }
   const query = queryApplications ?? queryMacOSApplications;
-  const application = readMacOSLeaseApplication(manifestPath);
+  const application = await readMacOSLeaseApplication(manifestPath, createPrivateStorage);
   let leased: string | undefined;
   let warned: string | undefined;
   for (;;) {
@@ -1194,14 +1227,11 @@ export async function maintainMacOSApplicationLease(
   }
 }
 
-function readMacOSLeaseApplication(manifestPath: string): { bundleIdentifier: string; leaseNonce: string; leasePath: string } {
-  const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8')) as {
-    application?: {
-      bundleIdentifier?: string;
-      leaseNonce?: string;
-      leasePath?: string;
-    };
-  };
+async function readMacOSLeaseApplication(
+  manifestPath: string,
+  createStorage?: CreateStorybookPrivateStorage,
+): Promise<{ bundleIdentifier: string; leaseNonce: string; leasePath: string }> {
+  const manifest = await readDriverManifest(manifestPath, undefined, createStorage);
   const application = manifest.application;
   if (!application?.bundleIdentifier || !application.leaseNonce || !application.leasePath) {
     throw new Error(`The Desktop Driver manifest at "${manifestPath}" does not contain a complete macOS application descriptor.`);
@@ -1215,7 +1245,7 @@ export function writeMacOSApplicationLeaseFile(
 ): void {
   validateMacOSRunningApplication(runningApplication);
   const processStartedAt = new Date(runningApplication.processStartedAt * 1000);
-  const temporaryPath = `${application.leasePath}.${process.pid}.tmp`;
+  const temporaryPath = `${application.leasePath}.${randomUUID()}.tmp`;
   fs.mkdirSync(path.dirname(application.leasePath), { mode: 0o700, recursive: true });
   try {
     fs.writeFileSync(
@@ -1233,7 +1263,7 @@ export function writeMacOSApplicationLeaseFile(
         null,
         2,
       )}\n`,
-      { mode: 0o600 },
+      { flag: 'wx', mode: 0o600 },
     );
     fs.renameSync(temporaryPath, application.leasePath);
     fs.chmodSync(application.leasePath, 0o600);

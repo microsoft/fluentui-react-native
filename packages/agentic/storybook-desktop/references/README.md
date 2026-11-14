@@ -18,4 +18,4 @@ owner_paths:
 | `storybook-desktop.win32`           | [Win32](platforms/win32.md)           | Bundling or running the REX host                           |
 | `storybook-desktop.troubleshooting` | [Troubleshooting](troubleshooting.md) | Diagnosing build, extraction, readiness, or smoke failures |
 | `storybook-desktop.contributing`    | [Contributing](contributing.md)       | Editing package code or tests                              |
-| `storybook-desktop.current-status`  | [Current status](current-status.md)   | Checking endpoint evidence and remaining native gaps       |
+| `storybook-desktop.current-status`  | [Current evidence](current-status.md) | Checking endpoint evidence, bounded measurements, and qualification gaps |
