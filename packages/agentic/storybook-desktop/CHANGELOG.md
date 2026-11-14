@@ -1,5 +1,57 @@
 # @fluentui-react-native/storybook-desktop
 
+## 0.4.6
+
+### Patch Changes
+
+- 1b42a88: Add bounded, service-local story selection timings and per-case execution/lifecycle observations without changing authenticated readiness, preview remounts, or worker/session isolation. Part of #4435.
+  
+  Use authenticated direct navigation for driver-owned story selection and cache complete extracted test maps by source content and observed helper digests within the owning run. Preserve normal args support, protected args refusal, manifest-digest verification, and the legacy HTTP default for direct library consumers. Report process-history truncation separately from possible per-case loss; preview generations infer remounts rather than independently counting them.
+- 041ac8b: Separate Storybook bridge and attachment credentials in owner-private storage, validate versioned generated manifests, and pin native helper provenance through the trusted parent handoff before child processes can spawn helpers.
+  
+  Use helper-selected per-user namespaces on Windows and forward private-storage adapters into platform-neutral CLI contracts. Resolve protected Windows projections through a digest-keyed Metro transformer on the constant workspace stub, avoiding cross-volume file-map paths and public secret copies. Normalize Windows namespace path identities while preserving macOS behavior.
+- c57dcd8: Add opt-in neutral macOS supervisor-owned application launch, exact kernel
+  incarnation attach and cleanup, and cross-helper application exclusion. Record
+  pending and acquired applications as workload claim resources, including
+  uncontained launches and uncertain failures.
+  
+  Workload claim schema 3 uses the driver's OS process identity instead of an
+  uptime-derived wall-clock estimate. Legacy or unverified identities remain
+  unknown during inspection. `claimDesktopWorkload` now returns a promise and
+  must be awaited; the Storybook integration awaits it before starting.
+  
+  Pre-spawn and rejected LaunchServices acquisitions release their claims.
+  Dispatched or surviving acquisitions remain fenced, and non-contention lock
+  failures clean up only the exact application that the helper launched.
+  
+  Read-only macOS application identity inspection shares descriptor verification
+  without acquiring a controlling lease or disturbing session window records.
+  Storybook bridge-epoch recovery uses it on the embedded helper while real
+  launch/attach operations retain cross-service exact-incarnation exclusion.
+  
+  Discover live macOS application candidates from kernel PIDs rather than the
+  main-run-loop-dependent workspace cache, so read-only inspection sees newly
+  launched apps and still refuses duplicate identities.
+  
+  Native ownership contracts additionally qualify failed and interrupted
+  acquisition publication, abrupt owner death and known uncontained descendants:
+  uncertainty retains the workload claim until exact operator cleanup. This adds
+  qualification only, not automatic survivor adoption or descendant containment.
+  Abandoned qualification owners now retire nonzero after two minutes, and the
+  AppKit fixture requests termination after five minutes; workload fences remain.
+- 9a66d89: Add exact Windows and Win32 application identities, read-only inspection, cross-service application control exclusion, and bounded recovery of acquired Windows application resources from verified crashed owners. Retire reused recorded incarnations without signalling their replacements, and resume interrupted recovery barriers only after verifying their native owners exited. Keep packaged activation explicitly uncontained and uncertain launches fenced. Resolve Storybook bridge identities without acquiring another controlling attachment.
+- Updated dependencies [1b42a88]
+- Updated dependencies [041ac8b]
+- Updated dependencies [c57dcd8]
+- Updated dependencies [f2a3037]
+- Updated dependencies [041ac8b]
+- Updated dependencies [9a66d89]
+- Updated dependencies [f2a3037]
+- Updated dependencies [f2a3037]
+- Updated dependencies [f2a3037]
+  - @fluentui-react-native/desktop-driver@0.5.3
+  - @fluentui-react-native/desktop-test@0.3.0
+
 ## 0.4.5
 
 ### Patch Changes

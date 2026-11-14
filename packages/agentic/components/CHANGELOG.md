@@ -1,5 +1,12 @@
 # @fluentui-react-native/components
 
+## 0.8.3
+
+### Patch Changes
+
+- Updated dependencies [24d3972]
+  - @fluentui-react-native/native-core@0.2.3
+
 ## 0.8.2
 
 ### Patch Changes

@@ -1,5 +1,54 @@
 # @fluentui-react-native/desktop-test
 
+## 0.3.0
+
+### Minor Changes
+
+- c57dcd8: Add opt-in neutral macOS supervisor-owned application launch, exact kernel
+  incarnation attach and cleanup, and cross-helper application exclusion. Record
+  pending and acquired applications as workload claim resources, including
+  uncontained launches and uncertain failures.
+  
+  Workload claim schema 3 uses the driver's OS process identity instead of an
+  uptime-derived wall-clock estimate. Legacy or unverified identities remain
+  unknown during inspection. `claimDesktopWorkload` now returns a promise and
+  must be awaited; the Storybook integration awaits it before starting.
+  
+  Pre-spawn and rejected LaunchServices acquisitions release their claims.
+  Dispatched or surviving acquisitions remain fenced, and non-contention lock
+  failures clean up only the exact application that the helper launched.
+  
+  Read-only macOS application identity inspection shares descriptor verification
+  without acquiring a controlling lease or disturbing session window records.
+  Storybook bridge-epoch recovery uses it on the embedded helper while real
+  launch/attach operations retain cross-service exact-incarnation exclusion.
+  
+  Discover live macOS application candidates from kernel PIDs rather than the
+  main-run-loop-dependent workspace cache, so read-only inspection sees newly
+  launched apps and still refuses duplicate identities.
+  
+  Native ownership contracts additionally qualify failed and interrupted
+  acquisition publication, abrupt owner death and known uncontained descendants:
+  uncertainty retains the workload claim until exact operator cleanup. This adds
+  qualification only, not automatic survivor adoption or descendant containment.
+  Abandoned qualification owners now retire nonzero after two minutes, and the
+  AppKit fixture requests termination after five minutes; workload fences remain.
+
+### Patch Changes
+
+- 041ac8b: Record F6 Storybook manifest provenance, independent credential purposes, and platform qualification evidence in the lifecycle submission ledger.
+- f2a3037: Add attach-only scoped runner grants, drain-confirmed MCP relinquish and standalone WDIO handoff, with parent-owned worker-crash cleanup and private credential transport. Bound live/draining grant authority separately from settled cleanup history, preserve shared descriptor roots during preemption, and allow preempted MCP controllers to reopen with fresh authority. Deliver worker credentials individually and scrub them before user hooks/specs and their children run; Node bootstrap remains trusted. Storybook handoff and retained launched applications remain unsupported.
+- 9a66d89: Add exact Windows and Win32 application identities, read-only inspection, cross-service application control exclusion, and bounded recovery of acquired Windows application resources from verified crashed owners. Retire reused recorded incarnations without signalling their replacements, and resume interrupted recovery barriers only after verifying their native owners exited. Keep packaged activation explicitly uncontained and uncertain launches fenced. Resolve Storybook bridge identities without acquiring another controlling attachment.
+- f2a3037: Add Windows native private-descriptor MCP/WDIO consumer coverage for handoff, operator preemption, worker crash and lost runner-grant response, with explicit fixture readiness, bounded cleanup, optional capture and required accessibility-input execution in hosted CI. Cover terminal agent-serve interruption, the historical borrowed-scope self-wait, repeated signals and fenced failed cleanup without treating semantic SIGINT as physical console input.
+- f2a3037: Validate native runner response loss through the client's typed transport failure and original cause. Share the real-successful-response fault with the portable runner contract while retaining reservation fencing, confirmed drain and fresh-session checks.
+- Updated dependencies [1b42a88]
+- Updated dependencies [c57dcd8]
+- Updated dependencies [f2a3037]
+- Updated dependencies [041ac8b]
+- Updated dependencies [9a66d89]
+- Updated dependencies [f2a3037]
+  - @fluentui-react-native/desktop-driver@0.5.3
+
 ## 0.2.5
 
 ### Patch Changes

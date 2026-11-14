@@ -1,5 +1,18 @@
 # @fluentui-react-native/desktop-driver-mcp
 
+## 0.1.4
+
+### Patch Changes
+
+- f2a3037: Add attach-only scoped runner grants, drain-confirmed MCP relinquish and standalone WDIO handoff, with parent-owned worker-crash cleanup and private credential transport. Bound live/draining grant authority separately from settled cleanup history, preserve shared descriptor roots during preemption, and allow preempted MCP controllers to reopen with fresh authority. Deliver worker credentials individually and scrub them before user hooks/specs and their children run; Node bootstrap remains trusted. Storybook handoff and retained launched applications remain unsupported.
+- Updated dependencies [1b42a88]
+- Updated dependencies [c57dcd8]
+- Updated dependencies [f2a3037]
+- Updated dependencies [041ac8b]
+- Updated dependencies [9a66d89]
+- Updated dependencies [f2a3037]
+  - @fluentui-react-native/desktop-driver@0.5.3
+
 ## 0.1.3
 
 ### Patch Changes
