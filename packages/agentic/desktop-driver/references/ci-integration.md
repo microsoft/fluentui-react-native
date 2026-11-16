@@ -94,18 +94,30 @@ mode is intentionally render-only and does not require a helper.
 This repository's current PR workflow provides examples in
 `.github/workflows/pr.yml`:
 
-- `macos-storybook` builds packages, bundles, prepares pods, and runs macOS
-  `stories-and-tests`. The shared `.github/actions/setup-desktop-driver` action
+- `macos-storybook` and `macos-paper-storybook` build packages, bundle, prepare
+  pods, and run macOS `stories-and-tests` on Fabric and Paper respectively.
+  The shared `.github/actions/setup-desktop-driver` action
   creates a job-local cache, explicitly builds the helper, runs noninteractive
   permission diagnostics without prompting or modifying TCC, and pins later
   resolution to that verified artifact. GitHub-hosted runners use an ad hoc
   signature because changing trust settings requires interactive
   authorization. A managed self-hosted runner can instead pass a
   pre-provisioned stable identity through the action's
-  `macos-signing-identity` input. The hosted job also disables physical clicks
-  because its desktop can report input authority while another native element
-  intercepts the target center; managed interactive qualification leaves
-  physical input enabled;
+  `macos-signing-identity` input. These compatibility jobs retain their
+  `physicalClick` mask pending hosted qualification: input authority alone does
+  not establish that the intended native element received the pointer;
+- `macos-storybook-physical` ("macOS Storybook PR (physical)") mirrors the
+  Fabric job with **no disabled input features**, runs
+  `yarn storybook smoke --macos --mode stories-and-tests --input physical`,
+  and uploads a distinct `Storybook_macos_fabric_physical_*` artifact with
+  its doctor report. The macOS physical harness establishes and verifies a
+  1024 × 768 logical-point window centered inside visible screen bounds, rather than
+  inheriting a persisted frame; it fails clearly if no screen fits or the host
+  cannot establish that rectangle. Other input lanes do not request this resize.
+  Like the Win32 physical lane, it is an advisory pilot
+  outside the aggregate `pr` job's `needs`, not a required qualification gate.
+  Local fixes and managed interactive passes do not by themselves qualify
+  GitHub-hosted foreground activation, hit testing, or TCC authority;
 - `windows-storybook` prepares the generated app, installs the required Windows
   App Runtime for that app, runs the shared Windows native build contract,
   and asks the same setup action to verify the `windows` endpoint before
@@ -161,7 +173,9 @@ Full Keyboard Access feature. A locked/noninteractive session or missing TCC
 authority still prevents physical input; the macOS helper reports a locked or
 switched-out session as `input-unavailable` with a `session` diagnostic, also
 shown by `doctor --permissions`. The hosted `physicalClick` policy
-still causes tests requiring physical clicks to skip explicitly. Keyboard-only
+in the compatibility jobs still causes tests requiring physical clicks to skip
+explicitly. The separate physical pilot leaves that policy unset; unsupported
+input must remain visible as incomplete coverage, never a pass. Keyboard-only
 CI coverage does not establish physical-click or complete focus qualification.
 
 ## macOS runners and signing
