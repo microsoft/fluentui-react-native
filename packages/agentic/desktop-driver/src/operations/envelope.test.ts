@@ -130,6 +130,11 @@ describe('invalidInputError', () => {
 describe('operationFailure', () => {
   const context = { operation: 'observe', requestId: 'r7' };
 
+  test('does not expose stack traces in WebDriver errors', () => {
+    const error = new WebDriverError('unknown error', 'The helper failed.');
+    expect(error.toJSON().stacktrace).toBe('');
+  });
+
   test('names the operation, request, and schema version, and drops the stack', () => {
     const failure = operationFailure(operationError('invalid argument', 'invalid-input', 'No.'), context);
     expect(failure).toMatchObject({
