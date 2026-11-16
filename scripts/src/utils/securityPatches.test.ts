@@ -23,6 +23,48 @@ function installedPackage(name: string, version: string, patched = true) {
   return { root, manifest, require, module: require(root) };
 }
 
+it('Windows CLI configuration loads without probing PowerShell on other hosts', { skip: process.platform === 'win32' }, () => {
+  const require = createRequire(new URL('../../../apps/storybook/package.json', import.meta.url));
+  assert.doesNotThrow(() => require('@react-native-windows/cli'));
+  const { getHealthChecks } = require('@react-native-windows/cli/lib-commonjs/commands/healthCheck/healthChecks.js');
+  assert.equal(getHealthChecks(), undefined);
+});
+
+it('basic-ftp ignores inherited MLSD fact names without losing file metadata', () => {
+  const { module: ftp } = installedPackage('basic-ftp', '6.2.6', false);
+  for (const fact of ['__proto__', 'constructor', 'toString']) {
+    const [file] = ftp.parseList(`${fact}=x;type=file;size=10; example.txt`);
+    assert.equal(file.name, 'example.txt');
+    assert.equal(file.size, 10);
+    assert.equal(file.isFile, true);
+  }
+});
+
+it('fast-xml-parser rejects unterminated stop-node tags without repeated scanning', () => {
+  const { module: xml } = installedPackage('fast-xml-parser', '5.12.0', false);
+  const parser = new xml.XMLParser({ stopNodes: ['stop'] });
+  const start = performance.now();
+  assert.throws(() => parser.parse('<stop>' + '<a '.repeat(30_000)), /Unexpected end/);
+  assert.ok(performance.now() - start < 1000, 'Unterminated stop-node tags must not block for seconds');
+  assert.deepEqual(parser.parse('<stop>literal <a /></stop>'), { stop: 'literal <a />' });
+});
+
+it('Hono applies CSRF protection to cross-origin hyperlink auditing requests', async () => {
+  const { module: hono, require } = installedPackage('hono', '4.13.17', false);
+  const { csrf } = require('hono/csrf');
+  const app = new hono.Hono();
+  app.use('*', csrf());
+  app.post('/', (context: { text: (value: string) => Response }) => context.text('updated'));
+  for (const origin of ['https://other.example', 'https://service.example']) {
+    const response = await app.request('https://service.example/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/ping', Origin: origin },
+      body: 'PING',
+    });
+    assert.equal(response.status, origin === 'https://service.example' ? 200 : 403);
+  }
+});
+
 it('deepmerge cannot poison a result through either input or nested placeholders', () => {
   const { root, require } = installedPackage('deepmerge', '4.3.1');
   for (const entry of ['dist/cjs.js', 'dist/umd.js']) {
