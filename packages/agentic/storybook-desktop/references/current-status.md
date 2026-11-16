@@ -99,6 +99,7 @@ The complete native clear/capture/MCP matrix is in
 `@fluentui-react-native/desktop-test/references/current-status.md`;
 MCP response costs and default-observe completeness are in
 `@fluentui-react-native/desktop-driver-mcp/references/current-status.md`.
+
 ## 2026-11-12: refresh-reduction timing baseline
 
 Part of #4435. This section records bounded measurements, not a reliability

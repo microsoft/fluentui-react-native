@@ -436,6 +436,7 @@ implementation owner). Full per-case native results are in
 Sessions, applications and owned services drained; the campaign ended and
 pre/post-end audits passed:
 `FURN-AUDIT: no FURN desktop processes found`.
+
 ## F15 macOS Paper measurement prerequisite — 2026-11-12
 
 Source `505a2187b0a2451aed7081c9260b343d55742f93`; macOS 27.2.1

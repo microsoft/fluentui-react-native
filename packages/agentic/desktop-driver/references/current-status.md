@@ -1235,6 +1235,7 @@ publication head will be recorded in draft PR #4498, separately from
 earlier-head hosted evidence. The 200% DPI, mixed-DPI, and negative-origin
 cases remain **not run** for the previously recorded authorization/topology
 reasons; console Ctrl+C remains separate work in #4491.
+
 ## 2026-11-12: bounded refresh timing observations
 
 Part of #4435. Story selection can return allowlisted, service-local timing
