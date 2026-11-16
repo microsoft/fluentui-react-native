@@ -304,7 +304,7 @@ a popup stays listable using native identity and ownership rather than another
 UIA read. New candidates share one 1,000 ms discovery budget per listing and
 are retried later when that budget is exhausted. This does not broaden global title discovery.
 See the [Windows identity rules](../native/windows/README.md#window-events-and-identity)
-and [Windows qualification evidence](current-status.md).
+and the Windows entries in [native qualification](current-status.md#native-qualification).
 
 ## Diagnostics
 

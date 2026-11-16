@@ -46,8 +46,9 @@ portable safety fixes may land before complete native qualification. Full
 submission still requires the shared architecture and separate macOS, Windows
 Fabric, and Win32 Paper evidence for the changed surfaces. Do not describe a
 macOS-only or capability-skipped result as cross-platform parity.
-The [current-status ledger](current-status.md) owns capability/measurement
-summaries; the sections below retain outstanding delivery work and prior evidence.
+The [current status](current-status.md) owns the capability summary and the
+latest result per endpoint; the sections below retain outstanding delivery work
+and prior evidence.
 
 This is the canonical open-work plan under R-PKGDOC-009. Each milestone states
 its outcome and completion condition. As implementation lands, move durable
@@ -58,8 +59,23 @@ contracts into the owning references and remove completed work here.
 ### macOS activation and popup polling
 
 Part of #4435. The 2026-11-12 refresh-reduction work deliberately leaves
-activation semantics unchanged; the [status ledger](current-status.md)
-records the source trace and bounded observational evidence.
+activation semantics unchanged. Its bounded timing observations are in the
+"Story selection and refresh reduction" and "Visual flash claims" sections of
+`@fluentui-react-native/storybook-desktop/references/current-status.md`.
+
+Source trace: the W3C click path activates before its server-side hit test.
+The operation click path conditionally raises an externally obscured target and
+rechecks; in-window obstruction remains a no-effect refusal. The native
+physical-click provider independently activates under its physical-input scope,
+rereads the target, and verifies ownership of the click point. These are
+separate postconditions, not interchangeable duplicate calls: removing the
+server activation can move hit-testing before foreground establishment, and
+removing the provider activation assumes ownership cannot change between
+commands and weakens callers that use the provider independently. macOS
+activation sets main/raise attributes even when already frontmost, and the menu
+test helper `inWindowWith` calls activating `switchToWindow` while polling each
+candidate window and restoring its owner. Both are plausible flashing
+contributors, not established visual causes.
 
 Measure activating menu/popup polling before changing it. Trial explicitly
 non-activating, window-scoped reads rather than silently changing
@@ -1114,7 +1130,8 @@ secondary physical delivery passed. The complete native selector passed
 the shared discovery deadline and deferred retry, truthful publication,
 and the deterministic close-after-enumeration self-test. The
 default-environment clean-cache aggregate passed all 178 tasks on its first
-attempt. See the separate [Windows evidence entry](current-status.md).
+attempt. See the Windows Fabric and Win32 Paper entries in
+[native qualification](current-status.md#native-qualification).
 
 Keep #4441 open for the unrun 200% DPI, mixed-DPI, and negative-origin cases
 and other issue-owned gaps. Native delivery receipts do not prove the

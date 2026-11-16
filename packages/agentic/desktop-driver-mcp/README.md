@@ -5,9 +5,9 @@ coding agents the Desktop Driver agent operations: bounded observation,
 element search, actions, checks with waits, captures, and Storybook story
 selection on a native macOS or Windows application.
 
-**Work in progress:** [current status](references/current-status.md) records
-implemented connection safeguards, orchestration gaps, native qualification
-requirements, and measured MCP discovery costs.
+**Work in progress:** [current status](references/current-status.md) summarizes
+implemented connection safeguards, open orchestration work, per-endpoint native
+qualification, and the latest measured MCP discovery costs.
 
 Agents working in this package start at [AGENTS.md](AGENTS.md).
 
