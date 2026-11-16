@@ -72,13 +72,15 @@ operator-authorized preemption. `serve --runner-descriptor <name>` selects its
 record; `serve --allow-runner-preempt` opts into preemption authority. On
 `test`, `--descriptor`, `--root`, and `--preempt` require `--attach-agent`.
 See [attached runner handoff](wdio-suites.md#reuse-an-attached-agent-service)
-for the drain barrier and unsupported phases. A target
-served by an imported integration accepts `--agent` only when the integration
-declares `supportsAgent`; its `run` receives the descriptor and root and
-publishes the connection from the process that serves the driver. Storybook
-does, through its `driver --agent` command; other integrations reject it. A
-target with `host.ownership: "external"` accepts only attach sessions, which
-suits an application someone else started.
+for the drain barrier and unsupported phases. A target served by an imported
+integration accepts `serve --agent` only when its `contribute()` plan declares
+a hosted driver. The integration workload receives the descriptor and private
+storage root inside the neutral supervisor scope; the plan cannot replace that
+scope's claim, cancellation, reporting, or cleanup. Storybook publishes its
+connection from the channel child through this path; other integrations reject
+it. Targets with `host.ownership: "external"` accept only attach sessions;
+`"supervisor"` launches once and retains the exact application incarnation for
+attach-only sessions.
 
 For macOS RN Test App projects, run bundle before `prep`; CocoaPods embeds only
 resources present during pod installation. Changing the renderer requires

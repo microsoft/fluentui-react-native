@@ -10,7 +10,6 @@ import { resolveDesktopScopeDomains, resolveDesktopScopeValues } from '@fluentui
 import type { DesktopScopeDomains, DesktopScopeValues } from '@fluentui-react-native/desktop-driver/authoring/input';
 import type { DesktopReporterMode } from '@fluentui-react-native/desktop-driver/cli/reporter';
 import type { DesktopIntegration } from './integration.ts';
-import { orderDesktopResourceContributions } from './resources.ts';
 import { captureDesktopApplicationIdentity } from './applicationOwnership.ts';
 
 export type DesktopCommand = {
@@ -282,17 +281,15 @@ export function validateDesktopConfig(value: unknown): asserts value is DesktopC
   }
   if (config.integration !== undefined) {
     const integration = object(config.integration, 'integration');
-    keys(integration, ['name', 'validate', 'supportsAgent', 'createTarget', 'resources', 'run', 'configure'], 'integration');
+    keys(integration, ['name', 'validate', 'createTarget', 'contribute', 'configure'], 'integration');
     text(integration.name, 'integration.name');
     if (typeof integration.validate !== 'function') throw new TypeError('An integration must expose validate().');
-    if (integration.supportsAgent !== undefined && typeof integration.supportsAgent !== 'boolean')
-      throw new TypeError('integration.supportsAgent must be a boolean.');
     if (integration.createTarget !== undefined && typeof integration.createTarget !== 'function')
       throw new TypeError('integration.createTarget must be a function.');
     if (integration.configure !== undefined && typeof integration.configure !== 'function')
       throw new TypeError('integration.configure must be a function.');
-    if (integration.run !== undefined && typeof integration.run !== 'function') throw new TypeError('integration.run must be a function.');
-    if (integration.resources !== undefined) orderDesktopResourceContributions(integration.resources);
+    if (integration.contribute !== undefined && typeof integration.contribute !== 'function')
+      throw new TypeError('integration.contribute must be a function.');
     integration.validate();
   }
 }

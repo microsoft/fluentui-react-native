@@ -275,6 +275,21 @@ function makeConfig(platformOptions = {}) {
 }
 
 describe('DesktopStorybookCli', () => {
+  test('resolves a stable real workload target for legacy Storybook configuration', () => {
+    const cli = new DesktopStorybookCli(makeConfig());
+    const target = cli.workloadTarget('macos');
+
+    expect(target).toMatchObject({
+      endpoint: 'macos',
+      id: 'agenticstorybook-macos',
+      instanceId: cli.instance.id,
+      registrationId: 'agenticstorybook-macos',
+      host: { kind: 'react-native-test-app', ownership: 'external', renderer: 'fabric' },
+    });
+    expect(target.id).not.toBe('unregistered');
+    expect(target.instanceId).not.toBe('unregistered');
+  });
+
   test('discovers and filters named callbacks without connecting to an app', async () => {
     const output = { write: jest.fn() };
     const config = makeDesktopStorybookConfig({ projectRoot: storybookRoot, wdio: { test: 'semantics' } });

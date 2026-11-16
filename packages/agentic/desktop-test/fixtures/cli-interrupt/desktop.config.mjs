@@ -22,12 +22,14 @@ export default {
   reporting: { artifactsRoot: path.join(root, 'reports') },
   integration: {
     name: 'interrupt-fixture',
-    supportsAgent: true,
     validate() {
       if (!['stop', 'repeat', 'child-first', 'failed-cleanup', 'borrowed-close'].includes(scenario))
         throw new Error('Unknown interrupt fixture scenario.');
     },
-    async run({ supervisor, target, agent, onReady }) {
+    contribute({ action }) {
+      return {
+        ...(action === 'serve' ? { driver: { kind: 'hosted' } } : {}),
+        workload: async ({ supervisor, target, agent, onReady }) => {
       const host = new FakeDesktopHost({ endpoint: 'win32' });
       const closeApplication = host.closeApplication.bind(host);
       host.closeApplication = async (...args) => {
@@ -101,6 +103,7 @@ export default {
           waitForReadiness: async (expected) => ({ ...expected, incarnation: 'interrupt-fixture-service', processId: process.pid }),
           async stop() {
             await plan.dispose();
+            record('borrowed-close-settled');
             complete(0);
           },
         });
@@ -126,12 +129,10 @@ export default {
       try {
         await supervisor.services.guard(supervisor.services.waitForStop());
       } finally {
-        if (scenario === 'borrowed-close') {
-          record('borrowed-close-start');
-          await supervisor.services.close();
-          record('borrowed-close-settled');
-        }
+        if (scenario === 'borrowed-close') record('borrowed-close-start');
       }
+        },
+      };
     },
   },
 };

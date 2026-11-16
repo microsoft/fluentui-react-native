@@ -11,8 +11,9 @@ import { startDesktopService, startNativeDesktopService } from './driverService.
 import type { DesktopService, DesktopServiceOptions } from './driverService.js';
 import type { DesktopCommand, ResolvedDesktopTarget } from './config.js';
 import type { DesktopIntegration } from './integration.js';
+import type { DesktopIntegrationPlan } from './integration.js';
 import { NodeDesktopCommandRunner, deadline } from './commands.js';
-import type { PreparedDesktopCommand, RunningDesktopCommand } from './commands.js';
+import type { DesktopCommandRunner, PreparedDesktopCommand, RunningDesktopCommand } from './commands.js';
 import { DesktopServiceScope } from './services.js';
 import { createDesktopWorkloadClaim, describeDesktopWorkloadOwner, recoverWindowsDesktopWorkloadClaim } from './ownership.js';
 import type { DesktopWorkloadClaim, DesktopWorkloadProcessIdentity } from './ownership.js';
@@ -29,6 +30,8 @@ export type DesktopSupervisorOptions = {
   reporter: DesktopReportWriter;
   reportSession?: DesktopReportSession;
   integration?: DesktopIntegration;
+  integrationPlan?: DesktopIntegrationPlan;
+  runner?: DesktopCommandRunner;
   workload?: { kind: 'delegated'; claim: DesktopWorkloadClaim };
   hostFactory?: (target: ResolvedDesktopTarget) => Promise<DesktopHost>;
   lockDirectory?: string;
@@ -50,7 +53,7 @@ export type DesktopSupervisorOptions = {
 export class DesktopSupervisor {
   readonly reporter: DesktopReportWriter;
   readonly target: ResolvedDesktopTarget;
-  readonly runner: NodeDesktopCommandRunner;
+  readonly runner: DesktopCommandRunner;
   readonly services: DesktopServiceScope;
   private serverValue?: DesktopService;
   private transport?: ReportTransport;
@@ -70,13 +73,17 @@ export class DesktopSupervisor {
     this.target = options.target;
     this.reporter = options.reporter;
     Object.assign(this.environment, options.reportSession?.environment);
-    this.runner = new NodeDesktopCommandRunner({ reporter: this.reporter, environment: this.environment });
+    this.runner = options.runner ?? new NodeDesktopCommandRunner({ reporter: this.reporter, environment: this.environment });
     this.services = new DesktopServiceScope(this.runner, this.reporter, this.reporter.runId);
   }
 
   get server(): DesktopDriverServer {
     if (!this.serverValue) throw new Error('Desktop supervisor has not started.');
     return this.serverValue;
+  }
+
+  terminate(): void {
+    this.runner.terminate?.();
   }
 
   /** The record name of the published agent connection descriptor, once it is published. */
@@ -186,7 +193,7 @@ export class DesktopSupervisor {
 
   startResources(): Promise<void> {
     return (this.resourceStartPromise ??= (() => {
-      const contributions = this.options.integration?.resources ?? [];
+      const contributions = this.options.integrationPlan?.resources ?? [];
       const serviceIds = new Set(['webdriver', ...(this.target.services ?? []).map(({ id }) => id)]);
       for (const contribution of contributions) {
         if (serviceIds.has(contribution.id)) {
@@ -212,7 +219,7 @@ export class DesktopSupervisor {
           platformName: this.target.endpoint === 'macos' ? 'macos' : 'windows',
           renderer: this.target.host.renderer,
           launchTimeoutMs: this.target.launchTimeoutMs,
-          launchModes: this.target.host.ownership === 'external' ? ['attach'] : ['launch'],
+          launchModes: this.target.host.ownership === 'external' || this.target.host.ownership === 'supervisor' ? ['attach'] : ['launch'],
         },
         agent: this.options.agent,
         recovery: this.options.recovery,
@@ -363,7 +370,7 @@ export class DesktopSupervisor {
       for (const worker of this.workers) await close('worker', () => worker.stop({ failed: true }));
       this.workers.clear();
       await close('services', () => this.services.close());
-      await close('commands', () => this.runner.close());
+      if (this.runner.close) await close('commands', () => this.runner.close!());
       if (this.transport) await close('reporting', () => this.transport!.close());
       if (this.ownsWorkloadClaim && this.workloadClaim && failures.length === 0 && !this.ownershipUncertain) {
         try {

@@ -20,9 +20,11 @@ workspaces.
 
 ## Reuse an attached agent service
 
-A generic target with `host.ownership: "external"` can share one protected
-service between MCP and standalone WDIO, without restarting the listener or
-acquiring another machine workload claim:
+A generic target with `host.ownership: "external"` or `"supervisor"` can share
+one protected service between MCP and standalone WDIO, without restarting the
+listener or acquiring another machine workload claim. A supervisor-owned app
+is launched once by the service and exposed as attach-only for subsequent
+sessions:
 
 ```sh
 yarn desktop-test --target macos serve --agent

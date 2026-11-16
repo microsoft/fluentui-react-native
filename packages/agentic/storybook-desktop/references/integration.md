@@ -58,14 +58,15 @@ configuration, WDIO sessions, service ownership, and aggregate reporting are
 owned by `@fluentui-react-native/desktop-test`. Runtime bridge and chrome are
 owned by `@fluentui-react-native/storybook-desktop-runtime`.
 
-This is the current implementation boundary, not the finished layering.
-`DesktopIntegration.run` takes over the lifecycle and readiness presentation;
-the channel child hosts both channel and driver listeners, with Metro in another
-child. The approved direction retains these processes initially and moves
-resource/workload ownership into the neutral desktop-test host. Storybook will
-contribute catalog/channel/context and CSF runner resources; the runtime stays
-Node-free. Do not add a separate coordinator package or move supervision into
-desktop-driver or MCP.
+The neutral `DesktopSupervisor` owns the workload claim, report session,
+cancellation, resources, and cleanup. An imported integration implements a
+side-effect-free `contribute()` plan for the selected action, then runs its
+workload inside that scope. Storybook keeps its channel child (which hosts both
+channel and driver listeners) and Metro child; both are registered with the
+supervisor's resource scope. The Storybook CLI remains a reusable command
+surface, not an alternate lifecycle owner. Keep the runtime Node-free. Do not
+add a separate coordinator package or move supervision into desktop-driver or
+MCP.
 
 Owned Node services inherit the neutral harness's per-command socket lifeline
 through a Node preload. Its authenticated handshake gates entry, including

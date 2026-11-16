@@ -210,14 +210,14 @@ nativeTest('failed native pre-spawn and rejected LaunchServices launches release
   }
 });
 
-nativeTest('supervisor launch survives two real sessions, records native owner/application identity, and closes exactly', async () => {
+nativeTest('supervisor launch is retained for attach-only sessions and closes exactly', async () => {
   const { owner, host, lockDirectory, reporter } = await supervisor('retained', application(), 'supervisor');
   const probe = createMacOSApplicationProbe({ artifact });
   let lease: ApplicationLease | undefined;
   try {
     await owner.start();
     const client = createDesktopDriverClient({ url: owner.server.url });
-    expect(await client.status()).toMatchObject({ targets: [{ id: 'retained', launchModes: ['launch'] }] });
+    expect(await client.status()).toMatchObject({ targets: [{ id: 'retained', launchModes: ['attach'] }] });
     const capabilities = { alwaysMatch: { platformName: 'macos', 'furn:target': 'retained' } };
     const first = await client.newSession(capabilities);
     lease = owner.server.sessions.get(first.id).lease;

@@ -9,6 +9,8 @@ import {
   resolveDesktopApplication,
   resolveDesktopTestScope,
 } from '@fluentui-react-native/desktop-test';
+import { selectDesktopRenderer } from '@fluentui-react-native/desktop-test/config';
+import type { ResolvedDesktopTarget } from '@fluentui-react-native/desktop-test';
 import { runDesktopOperation, type DesktopOperation, type DesktopReportWriter } from '@fluentui-react-native/desktop-test/reporting';
 import { resolveDesktopScopeDomains } from '@fluentui-react-native/desktop-driver/authoring';
 import { formatDesktopReporterValue } from '@fluentui-react-native/desktop-driver/cli/reporter';
@@ -519,6 +521,40 @@ export class DesktopStorybookCli {
     };
     if (this.reporterMode === 'json' || this.reporterMode === 'ndjson') this.writeStructured(value);
     else this.output.write(`${JSON.stringify(value, null, 2)}\n`);
+  }
+
+  /** Returns the registered claim identity, synthesizing a stable target for legacy Storybook configuration. */
+  workloadTarget(platform: Platforms): ResolvedDesktopTarget {
+    const configured = this.config.getDesktopTarget(platform);
+    if (configured) {
+      return platform === 'macos' ? selectDesktopRenderer(configured, this.renderer(platform)) : configured;
+    }
+
+    const id = this.targetId(platform);
+    const nativeDriver = this.config.getNativeDriverOptions(platform);
+    return {
+      endpoint: platform,
+      id,
+      registrationId: id,
+      instanceId: this.instance.id,
+      projectRoot: this.config.projectRoot,
+      configPath: path.join(this.config.projectRoot, 'storybook.config.mts'),
+      host: {
+        kind: platform === 'win32' ? 'rex' : 'react-native-test-app',
+        ownership: 'external',
+        renderer: this.renderer(platform),
+        ...(nativeDriver !== false && nativeDriver.application ? { application: nativeDriver.application } : {}),
+      },
+      ...(nativeDriver === false
+        ? {}
+        : {
+            nativeDriver: {
+              ...(nativeDriver.cacheRoot ? { cacheRoot: nativeDriver.cacheRoot } : {}),
+              ...(nativeDriver.helperPath ? { helperPath: nativeDriver.helperPath } : {}),
+              ...(nativeDriver.installRoot ? { installRoot: nativeDriver.installRoot } : {}),
+            },
+          }),
+    };
   }
 
   async buildDriver(platform: Platforms, options: DesktopStorybookBuildDriverOptions = {}): Promise<NativeDriverArtifact> {

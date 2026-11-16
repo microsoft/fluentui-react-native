@@ -91,6 +91,22 @@ async function main() {
           }),
         /Unknown integration field/,
       );
+      for (const legacyField of ['run', 'supportsAgent']) {
+        assert.throws(
+          () =>
+            defineDesktopConfig({
+              ...app,
+              integration: {
+                name: 'fixture',
+                validate() {
+                  throw new Error('Legacy integration fields must be rejected before validation.');
+                },
+                [legacyField]: () => undefined,
+              },
+            }),
+          /Unknown integration field/,
+        );
+      }
       assert.throws(
         () => defineDesktopConfig({ ...app, targets: { win32: { use: { config: 'app.mjs', target: 'win32' }, host: {} } } }),
         /ambiguous/,
@@ -1828,7 +1844,7 @@ async function main() {
       await closing;
     } else if (mode === 'agent-cli') {
       const { createDesktopReportSession } = await import(lib('reporting/session.js'));
-      // serve --agent passes the agent options to an integration that serves agents, and rejects one that does not.
+      // serve --agent passes descriptor options to a hosted-driver integration and rejects one without a driver.
       const configPath = path.join(root, 'desktop.config.mjs');
       fs.writeFileSync(
         configPath,
@@ -1839,17 +1855,20 @@ async function main() {
           "  targets: { win32: { host: { kind: 'installed', application: { executablePath: 'not-launched.exe' } } } },",
           '  integration: {',
           "    name: 'fixture',",
-          "    supportsAgent: process.env.FIXTURE_SUPPORTS_AGENT === '1',",
           '    validate() {},',
-          '    async run({ action, agent, reporterMode }) {',
-          '      fs.writeFileSync(process.env.FIXTURE_MARKER, JSON.stringify({ action, agent: agent ?? null, reporterMode }));',
+          '    contribute() {',
+          "      return process.env.FIXTURE_CONTRIBUTES_DRIVER === '1' ? { driver: { kind: 'hosted' }, workload: async ({ action, agent, reporterMode }) => {",
+          '        fs.writeFileSync(process.env.FIXTURE_MARKER, JSON.stringify({ action, agent: agent ?? null, reporterMode }));',
+          "      } } : { workload: async ({ action, agent, reporterMode }) => {",
+          '        fs.writeFileSync(process.env.FIXTURE_MARKER, JSON.stringify({ action, agent: agent ?? null, reporterMode }));',
+          '      } };',
           '    },',
           '  },',
           '};',
           '',
         ].join('\n'),
       );
-      const invoke = async (supportsAgent, args) => {
+      const invoke = async (contributesDriver, args) => {
         const session = await createDesktopReportSession({
           artifactsRoot: root,
           errorOutput: err,
@@ -1859,14 +1878,19 @@ async function main() {
           summary: false,
         });
         const runner = new NodeDesktopCommandRunner({ reporter: session.reporter, environment: session.environment });
-        const marker = path.join(root, `marker-${supportsAgent}-${args.join('-').replace(/[^a-z-]/g, '')}.json`);
+        const marker = path.join(root, `marker-${contributesDriver}-${args.join('-').replace(/[^a-z-]/g, '')}.json`);
         let failure;
         try {
           await runner.run({
             command: process.execPath,
             args: [path.join(packageRoot, 'config', 'cli.cjs'), '--config', configPath, '--target', 'win32', ...args],
             cwd: root,
-            env: { HOME: root, LOCALAPPDATA: root, FIXTURE_MARKER: marker, FIXTURE_SUPPORTS_AGENT: supportsAgent ? '1' : '0' },
+            env: {
+              HOME: root,
+              LOCALAPPDATA: root,
+              FIXTURE_MARKER: marker,
+              FIXTURE_CONTRIBUTES_DRIVER: contributesDriver ? '1' : '0',
+            },
           });
         } catch (error) {
           failure = error;
@@ -1906,7 +1930,7 @@ async function main() {
       assert.equal(refused.marker, undefined);
       const logs = commandLogs();
       assert(
-        logs.some((log) => log.includes('serve --agent requires an integration that supports agents; \\"fixture\\" does not.')),
+        logs.some((log) => log.includes('contribute a hosted driver.')),
         logs.join('\n'),
       );
     } else if (mode === 'agent-interrupt-cli' || mode === 'agent-interrupt-borrowed-cli') {
@@ -2022,9 +2046,11 @@ async function main() {
           '  integration: {',
           "    name: 'fixture',",
           '    validate() {},',
-          '    async run({ action, suite, input, supervisor }) {',
+          '    contribute() {',
+          '      return { workload: async ({ action, suite, input, supervisor }) => {',
           '      fs.writeFileSync(process.env.FIXTURE_MARKER, JSON.stringify({ action, suite, input: input ?? null }));',
           "      supervisor.reporter.emit({ kind: 'test-result', payload: { testId: 'fixture', title: 'fixture', attempt: 0, status: 'passed', durationMs: 1 } });",
+          '      } };',
           '    },',
           '  },',
           '};',

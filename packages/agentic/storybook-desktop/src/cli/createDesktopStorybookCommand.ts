@@ -2,7 +2,7 @@ import { Command, InvalidArgumentError, Option } from 'commander';
 import { randomUUID } from 'node:crypto';
 import path from 'node:path';
 import {
-  claimDesktopWorkload,
+  DesktopSupervisor,
   DesktopServiceScope,
   DesktopStopRequested,
   handleDesktopInterrupts,
@@ -243,7 +243,8 @@ export async function runDesktopStorybookCli(argv: readonly string[] = process.a
   const program = createDesktopStorybookCommand(options);
   let session: DesktopReportSession | undefined;
   let runner: NodeDesktopCommandRunner | undefined;
-  let releaseClaim: (() => void) | undefined;
+  let supervisor: DesktopSupervisor | undefined;
+  let ownsServices = false;
   let releaseInterrupts: (() => void) | undefined;
   let actionName = '';
   let longLived = false;
@@ -317,8 +318,6 @@ export async function runDesktopStorybookCli(argv: readonly string[] = process.a
       verbose: program.opts<{ verbose?: boolean }>().verbose,
       onFatal: (error) => options.services?.fail(error),
     });
-    if (!session.delegated && ['driver', 'smoke'].includes(action.name()))
-      releaseClaim = await claimDesktopWorkload(session.reporter.runId);
     options.reporter = session.reporter;
     if (normalized.deprecated) {
       if (reporterMode === 'json' || reporterMode === 'ndjson') {
@@ -330,10 +329,36 @@ export async function runDesktopStorybookCli(argv: readonly string[] = process.a
         process.stderr.write('Warning: test --reporter is deprecated; use --test-reporter instead.\n');
       }
     }
-    runner = new NodeDesktopCommandRunner({ reporter: session.reporter, environment: session.environment });
-    options.runner = runner;
-    options.services = new DesktopServiceScope(runner, session.reporter);
-    session.onStop?.(() => options.services!.requestStop());
+    const commandRunner = options.runner ?? new NodeDesktopCommandRunner({ reporter: session.reporter, environment: session.environment });
+    runner = commandRunner instanceof NodeDesktopCommandRunner ? commandRunner : undefined;
+    if (!options.services && !session.delegated && ['driver', 'smoke'].includes(action.name())) {
+      const platform = selectedPlatform(actionOptions) ?? options.config.platform;
+      if (!platform) {
+        throw Object.assign(new Error('Select --windows, --macos, or --win32, or set FURN_STORYBOOK_PLATFORM.'), { code: 'usage' });
+      }
+      const api = new DesktopStorybookCli(options.config, {
+        paper: actionOptions.paper ?? options.paper,
+        reporter: session.reporter,
+        runner: commandRunner,
+        reporterMode,
+      });
+      supervisor = new DesktopSupervisor({
+        target: api.workloadTarget(platform),
+        reporter: session.reporter,
+        reportSession: session,
+        runner: commandRunner,
+      });
+      options.runner = supervisor.runner;
+      options.services = supervisor.services;
+      await supervisor.open();
+    } else {
+      options.runner = commandRunner;
+      if (!options.services) {
+        options.services = new DesktopServiceScope(commandRunner, session.reporter);
+        ownsServices = true;
+      }
+    }
+    session.onStop?.(() => options.services?.requestStop());
     const reporter = session.reporter;
     releaseInterrupts = handleDesktopInterrupts({
       stop: () => options.services?.requestStop(),
@@ -345,7 +370,8 @@ export async function runDesktopStorybookCli(argv: readonly string[] = process.a
             message: `Received ${signal} during shutdown; force-stopping owned commands. Interrupt again to exit without cleanup.`,
           },
         });
-        runner?.terminate();
+        if (supervisor) supervisor.terminate();
+        else runner?.terminate();
       },
     });
   });
@@ -364,17 +390,14 @@ export async function runDesktopStorybookCli(argv: readonly string[] = process.a
     // Interrupt handlers stay installed until cleanup completes, so a repeated signal escalates instead of killing the CLI.
     try {
       try {
-        await options.services?.close();
-        await runner?.close();
+        if (supervisor) await supervisor.close();
+        else {
+          if (ownsServices) await options.services?.close();
+          await runner?.close();
+        }
       } catch (error) {
         options.reporter?.fail(error, 'cleanup');
         failure = failure === undefined ? error : new AggregateError([failure, error], 'Storybook execution and cleanup failed.');
-      }
-      try {
-        releaseClaim?.();
-      } catch (error) {
-        options.reporter?.fail(error, 'cleanup');
-        failure ??= error;
       }
       if (session) process.exitCode = await session.close(failure);
     } finally {

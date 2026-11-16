@@ -33,6 +33,8 @@ export type DesktopCommandRunOptions = { signal?: AbortSignal };
 export interface DesktopCommandRunner {
   run(command: PreparedDesktopCommand, options?: DesktopCommandRunOptions): Promise<void>;
   start(command: PreparedDesktopCommand, options?: DesktopCommandRunOptions): RunningDesktopCommand;
+  terminate?(): void;
+  close?(): Promise<void>;
 }
 export type NodeDesktopCommandRunnerOptions = {
   reporter?: DesktopReportWriter;

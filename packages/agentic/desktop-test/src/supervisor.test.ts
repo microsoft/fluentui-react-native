@@ -44,7 +44,7 @@ describe('desktop supervisor input lane', () => {
     fs.rmSync(artifactsRoot, { force: true, recursive: true });
   });
 
-  async function nativeServiceOptions(input?: DesktopInputLane) {
+  async function nativeServiceOptions(input?: DesktopInputLane, ownership?: 'session' | 'supervisor' | 'external') {
     const output = { write: () => true };
     const reporter = new DesktopRunReporter({ artifactsRoot, errorOutput: output, output, reporterMode: 'plain', summary: false });
     const target: ResolvedDesktopTarget = {
@@ -54,7 +54,7 @@ describe('desktop supervisor input lane', () => {
       instanceId: 'fixture-1',
       projectRoot: artifactsRoot,
       configPath: path.join(artifactsRoot, 'desktop.config.mts'),
-      host: { kind: 'installed' },
+      host: { kind: 'installed', ...(ownership ? { ownership } : {}) },
     };
     const supervisor = new DesktopSupervisor({
       target,
@@ -88,6 +88,11 @@ describe('desktop supervisor input lane', () => {
   test.each([['physical' as const], [undefined]])('leaves the native host unmasked for %s', async (input) => {
     const options = await nativeServiceOptions(input);
     expect(options).not.toHaveProperty('disabledInputFeatures');
+  });
+
+  test('retained supervisor-owned applications expose attach-only sessions', async () => {
+    const options = await nativeServiceOptions(undefined, 'supervisor');
+    expect(options.target.launchModes).toEqual(['attach']);
   });
 });
 

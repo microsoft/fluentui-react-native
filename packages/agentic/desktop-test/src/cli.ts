@@ -19,7 +19,6 @@ import type { DesktopAgentConnectionOptions } from './agentConnection.js';
 import { loadDesktopConfig, resolveDesktopSpecs, selectDesktopRenderer } from './config.js';
 import type { DesktopStage } from './config.js';
 import { createDesktopInputLane, desktopInputEnvironment, requestedDesktopInputLane } from './reporting/lane.js';
-import { deadline } from './commands.js';
 import { createDesktopReportSession } from './reporting/session.js';
 import { DesktopStopRequested } from './services.js';
 import { handleDesktopInterrupts } from './signals.js';
@@ -37,9 +36,6 @@ type TestFlags = {
   root?: string;
   preempt?: boolean;
 };
-
-// How long an integration may take to unwind after a stop request or scope failure before the scope is closed anyway.
-const INTEGRATION_STOP_TIMEOUT_MS = 60_000;
 
 export async function runDesktopTestCli(argv = process.argv): Promise<void> {
   tolerateClosedDesktopStdout();
@@ -73,7 +69,7 @@ export async function runDesktopTestCli(argv = process.argv): Promise<void> {
     .command('test')
     .requiredOption('--suite <name>', 'configured suite')
     .option('--list', 'resolve exact spec groups without launching')
-    .option('--attach-agent', 'reuse an existing generic attach-only agent service; never acquire a second workload claim')
+    .option('--attach-agent', 'reuse an external or retained generic agent service without a second workload claim')
     .option('--descriptor <name>', `existing runner descriptor (default ${defaultRunnerDescriptor}); requires --attach-agent`)
     .option('--root <path>', 'existing descriptor private storage root; requires --attach-agent')
     .option('--preempt', 'request operator-authorized preemption instead of the default busy result; requires --attach-agent')
@@ -151,8 +147,13 @@ export async function runDesktopTestCli(argv = process.argv): Promise<void> {
     if (test && !test.attachAgent && (test.descriptor !== undefined || test.root !== undefined || test.preempt)) {
       throw Object.assign(new TypeError('--descriptor, --root and --preempt require --attach-agent.'), { code: 'config' });
     }
-    if (test?.attachAgent && (suite?.kind !== 'wdio' || target.host.ownership !== 'external' || config.config.integration)) {
-      throw Object.assign(new TypeError('--attach-agent requires a generic standalone WDIO suite and an external target.'), {
+    if (
+      test?.attachAgent &&
+      (suite?.kind !== 'wdio' ||
+        (target.host.ownership !== 'external' && target.host.ownership !== 'supervisor') ||
+        config.config.integration)
+    ) {
+      throw Object.assign(new TypeError('--attach-agent requires a generic WDIO suite and an external or retained target.'), {
         code: 'config',
       });
     }
@@ -188,14 +189,6 @@ export async function runDesktopTestCli(argv = process.argv): Promise<void> {
         agentFlags.allowRunnerPreempt)
     )
       throw Object.assign(new TypeError('Descriptor and runner publication options require --agent.'), { code: 'config' });
-    // An integration serves through its own lifecycle, so it must publish the agent connection itself.
-    if (agentFlags.agent && config.config.integration?.run && config.config.integration.supportsAgent !== true)
-      throw Object.assign(
-        new TypeError(`serve --agent requires an integration that supports agents; "${config.config.integration.name}" does not.`),
-        {
-          code: 'config',
-        },
-      );
     const agent: DesktopAgentConnectionOptions | undefined = agentFlags.agent
       ? {
           ...(agentFlags.descriptor === undefined ? {} : { descriptor: agentFlags.descriptor }),
@@ -205,6 +198,27 @@ export async function runDesktopTestCli(argv = process.argv): Promise<void> {
             : { runner: { descriptor: agentFlags.runnerDescriptor, allowPreempt: agentFlags.allowRunnerPreempt } }),
         }
       : undefined;
+    const integrationPlan =
+      action !== 'build-driver' && suite?.kind !== 'wdio'
+        ? config.config.integration?.contribute?.({
+            config,
+            target,
+            action,
+            ...(test?.suite ? { suite: test.suite } : {}),
+            ...(input ? { input } : {}),
+            ...(agent ? { agent } : {}),
+          })
+        : undefined;
+    if (
+      agentFlags.agent &&
+      config.config.integration &&
+      action === 'serve' &&
+      integrationPlan?.driver?.kind !== 'hosted'
+    ) {
+      throw Object.assign(new TypeError(`serve --agent requires integration "${config.config.integration.name}" to contribute a hosted driver.`), {
+        code: 'config',
+      });
+    }
     let ready = false;
     const markReady = () => {
       ready = true;
@@ -230,6 +244,7 @@ export async function runDesktopTestCli(argv = process.argv): Promise<void> {
       reporter,
       reportSession: session,
       integration: config.config.integration,
+      ...(integrationPlan ? { integrationPlan } : {}),
       ...(agent ? { agent } : {}),
       ...(input ? { input } : {}),
     });
@@ -244,7 +259,7 @@ export async function runDesktopTestCli(argv = process.argv): Promise<void> {
             message: `Received ${signal} during shutdown; force-stopping owned commands. Interrupt again to exit without cleanup.`,
           },
         });
-        owner.runner.terminate();
+        owner.terminate();
       },
     });
     let failure: unknown;
@@ -263,47 +278,27 @@ export async function runDesktopTestCli(argv = process.argv): Promise<void> {
         await owner.open(false);
         const connection = await connectDesktopRunner({ descriptor: test.descriptor, root: test.root });
         await runDesktopWdioSuite(owner, config, test.suite, input, { connection, preempt: test.preempt });
-      } else if (config.config.integration?.run && suite?.kind !== 'wdio') {
+      } else if (integrationPlan?.workload) {
         await owner.open(['test', 'serve', 'run'].includes(action));
         await owner.startResources();
         if (action === 'test' || action === 'serve') await owner.startConfiguredServices();
         owner.services.controller.signal.throwIfAborted();
-        // The integration borrows this scope, and close() waits for the work the scope tracks, so the run is not tracked:
-        // it observes the scope signal and is awaited here, bounded, before the owner closes the scope.
-        const run = Promise.resolve(
-          config.config.integration.run({
-            config,
-            target,
-            supervisor: owner,
-            action,
-            suite: test?.suite,
-            ...(input ? { input } : {}),
-            ...(agent ? { agent } : {}),
-            ...(action === 'serve' ? { reporterMode, onReady: markReady } : {}),
-          }),
+        const run = owner.services.guard(
+          Promise.resolve(
+            integrationPlan.workload({
+              config,
+              target,
+              supervisor: owner,
+              action,
+              ...(action === 'serve' ? { reporterMode } : {}),
+              ...(test?.suite ? { suite: test.suite } : {}),
+              ...(input ? { input } : {}),
+              ...(agent ? { agent } : {}),
+              ...(action === 'serve' ? { onReady: markReady } : {}),
+            }),
+          ),
         );
-        const outcome = run.then(
-          () => undefined,
-          (error: unknown) => ({ error }),
-        );
-        try {
-          await Promise.race([run, owner.services.waitForStop()]);
-        } catch (error) {
-          const late = await deadline(outcome, INTEGRATION_STOP_TIMEOUT_MS, 'Waiting for the integration to stop').catch(
-            (timeout: unknown) => ({ error: timeout }),
-          );
-          const lateError = late?.error;
-          if (
-            lateError === undefined ||
-            lateError === error ||
-            lateError instanceof DesktopStopRequested ||
-            lateError === owner.services.controller.signal.reason
-          )
-            throw error;
-          throw error instanceof DesktopStopRequested
-            ? lateError
-            : new AggregateError([error, lateError], 'The integration failed while stopping.');
-        }
+        await run;
       } else if (action !== 'test' && action !== 'serve') {
         await owner.open(action === 'run');
         for (const command of desktopStageCommands(target, action)) {

@@ -1,4 +1,9 @@
-import type { DesktopIntegration } from '@fluentui-react-native/desktop-test';
+import type {
+  DesktopIntegrationRequest,
+  DesktopIntegrationWorkloadContext,
+  ResolvedDesktopConfig,
+  ResolvedDesktopTarget,
+} from '@fluentui-react-native/desktop-test';
 
 import { storybook } from './integration';
 
@@ -19,20 +24,33 @@ jest.mock('@fluentui-react-native/storybook-desktop/cli', () => ({
   },
 }));
 
-test('serve passes the agent connection and output format to the driver; other actions do not', async () => {
+test('contributes the driver workload without taking over the supervisor lifecycle', async () => {
   const integration = storybook({ storyPackages: [] });
-  const supervisor = { reporter: {}, runner: {}, services: {} };
-  const run = (context: Partial<Parameters<NonNullable<DesktopIntegration['run']>>[0]>) =>
-    integration.run!({
-      config: { projectRoot: __dirname },
-      target: { endpoint: 'win32', host: { renderer: 'paper' } },
-      supervisor,
-      ...context,
-    } as Parameters<NonNullable<DesktopIntegration['run']>>[0]);
-
-  await run({ action: 'serve', agent: { descriptor: 'storybook.json' }, reporterMode: 'json' });
-  await run({ action: 'serve', reporterMode: 'plain' });
-  await run({ action: 'prep', reporterMode: 'json' });
+  const config = { projectRoot: __dirname } as ResolvedDesktopConfig;
+  const target = { endpoint: 'win32', host: { renderer: 'paper' } } as ResolvedDesktopTarget;
+  const supervisor = { reporter: {}, runner: {}, services: {} } as DesktopIntegrationWorkloadContext['supervisor'];
+  const request = (action: DesktopIntegrationRequest['action']): DesktopIntegrationRequest => ({ config, target, action });
+  const serve = integration.contribute!(request('serve'));
+  const prep = integration.contribute!(request('prep'));
+  expect(serve.driver).toEqual({ kind: 'hosted' });
+  expect(prep.driver).toBeUndefined();
+  await serve.workload!({
+    ...request('serve'),
+    supervisor,
+    agent: { descriptor: 'storybook.json' },
+    reporterMode: 'json',
+    onReady: jest.fn(),
+  });
+  await serve.workload!({
+    ...request('serve'),
+    supervisor,
+    reporterMode: 'plain',
+  });
+  await prep.workload!({
+    ...request('prep'),
+    supervisor,
+    reporterMode: 'json',
+  });
 
   expect(mockCalls.map(({ method, options, args }) => [method, options.reporterMode, args])).toEqual([
     ['driver', 'json', ['win32', { agent: { descriptor: 'storybook.json' } }]],
