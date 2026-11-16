@@ -1,5 +1,59 @@
 # @fluentui-react-native/desktop-driver
 
+## 0.5.3
+
+### Patch Changes
+
+- c10baa5: Keep Windows and Win32 window listings available when a secondary window closes between discovery and native geometry serialization, without hiding failures for live windows.
+- 1b42a88: Add bounded, service-local story selection timings and per-case execution/lifecycle observations without changing authenticated readiness, preview remounts, or worker/session isolation. Part of #4435.
+  
+  Use authenticated direct navigation for driver-owned story selection and cache complete extracted test maps by source content and observed helper digests within the owning run. Preserve normal args support, protected args refusal, manifest-digest verification, and the legacy HTTP default for direct library consumers. Report process-history truncation separately from possible per-case loss; preview generations infer remounts rather than independently counting them.
+- c57dcd8: Add opt-in neutral macOS supervisor-owned application launch, exact kernel
+  incarnation attach and cleanup, and cross-helper application exclusion. Record
+  pending and acquired applications as workload claim resources, including
+  uncontained launches and uncertain failures.
+  
+  Workload claim schema 3 uses the driver's OS process identity instead of an
+  uptime-derived wall-clock estimate. Legacy or unverified identities remain
+  unknown during inspection. `claimDesktopWorkload` now returns a promise and
+  must be awaited; the Storybook integration awaits it before starting.
+  
+  Pre-spawn and rejected LaunchServices acquisitions release their claims.
+  Dispatched or surviving acquisitions remain fenced, and non-contention lock
+  failures clean up only the exact application that the helper launched.
+  
+  Read-only macOS application identity inspection shares descriptor verification
+  without acquiring a controlling lease or disturbing session window records.
+  Storybook bridge-epoch recovery uses it on the embedded helper while real
+  launch/attach operations retain cross-service exact-incarnation exclusion.
+  
+  Discover live macOS application candidates from kernel PIDs rather than the
+  main-run-loop-dependent workspace cache, so read-only inspection sees newly
+  launched apps and still refuses duplicate identities.
+  
+  Native ownership contracts additionally qualify failed and interrupted
+  acquisition publication, abrupt owner death and known uncontained descendants:
+  uncertainty retains the workload claim until exact operator cleanup. This adds
+  qualification only, not automatic survivor adoption or descendant containment.
+  Abandoned qualification owners now retire nonzero after two minutes, and the
+  AppKit fixture requests termination after five minutes; workload fences remain.
+- c10baa5: Add a session-scoped, non-activating window tree query so consumers can distinguish legitimate secondary menus from unexpected dialogs without dismissing the menu.
+- f2a3037: Add attach-only scoped runner grants, drain-confirmed MCP relinquish and standalone WDIO handoff, with parent-owned worker-crash cleanup and private credential transport. Bound live/draining grant authority separately from settled cleanup history, preserve shared descriptor roots during preemption, and allow preempted MCP controllers to reopen with fresh authority. Deliver worker credentials individually and scrub them before user hooks/specs and their children run; Node bootstrap remains trusted. Storybook handoff and retained launched applications remain unsupported.
+- 041ac8b: Identify the unsafe ancestor when macOS private storage rejects directory aliases, permissions, or ACLs.
+  
+  Expose the Windows helper's validated storage root so consumers can create protected namespaces beneath its OS-selected per-user location.
+- 5ee3dc7: Keep hit-test windows from other macOS processes distinct while refusing same-process and unproven obstructions before activation, fall back to workspace activation when an acknowledged Accessibility request does not establish foreground state, wait for pointer placement without replaying motion, and use menu-independent document selection with verified focus, selection, and empty-value postconditions before reporting keyboard-clear success.
+- c10baa5: Record Windows Fabric and Win32 Paper connected-session qualification,
+  physical MCP click costs, explicit untested display scenarios, and the
+  remaining secondary-window semantic activation and registration gaps.
+- c10baa5: Refuse Windows legacy-only semantic activation before dispatch, preserving machine-readable reasons without recording a delivery or implicitly retrying with physical input.
+  
+  Register untitled Windows secondary tool popups only when their exact-process ownership and bounded UIA content are verified, retaining helper-window exclusions.
+  
+  Keep admitted popups listable through transient provider failures, share one bounded discovery deadline across new candidates, and include admitted popups in publication diagnostics.
+- 9a66d89: Add exact Windows and Win32 application identities, read-only inspection, cross-service application control exclusion, and bounded recovery of acquired Windows application resources from verified crashed owners. Retire reused recorded incarnations without signalling their replacements, and resume interrupted recovery barriers only after verifying their native owners exited. Keep packaged activation explicitly uncontained and uncertain launches fenced. Resolve Storybook bridge identities without acquiring another controlling attachment.
+- f2a3037: Make the test-only Win32 fixture provisioner loadable as built Node ESM so hosted Windows native MCP/WDIO consumer qualification can provision its fixture explicitly without a Jest loader.
+
 ## 0.5.2
 
 ### Patch Changes
