@@ -11,7 +11,7 @@ integration in `@fluentui-react-native/storybook-desktop`.
 
 **Work in progress:** [current status](references/current-status.md) separates
 implemented capabilities from incomplete ownership/recovery guarantees and
-records consumer qualification evidence.
+links the latest per-endpoint qualification results.
 
 ## Quick start
 

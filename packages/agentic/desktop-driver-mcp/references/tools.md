@@ -13,7 +13,7 @@ result, and failure reasons are defined once in `@fluentui-react-native/desktop-
 service rejects is rejected here first, before anything reaches the service.
 Unknown fields are refused. The historical tool list measured about 20.3 KB;
 the test bounds serialized JavaScript **characters** at 22,000, not tokens or
-UTF-8 bytes. See [measurement history](current-status.md).
+UTF-8 bytes. See [measurements](current-status.md#measurements).
 
 | Tool              | Calls                                                               | Hints                       |
 | ----------------- | ------------------------------------------------------------------- | --------------------------- |

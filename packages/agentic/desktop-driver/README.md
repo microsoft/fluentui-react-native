@@ -13,8 +13,8 @@ fake hosts for contract tests. It does not depend on Storybook, React, or React
 Native.
 
 **Work in progress:** see [current status](references/current-status.md) for
-implemented capabilities, incomplete lifecycle guarantees, endpoint qualification,
-and measured token/latency history.
+implemented capabilities, incomplete lifecycle guarantees, the latest
+per-endpoint qualification results, and measured token/latency results.
 
 Story providers use the existing `/storybook` subpath for `StoryProviderContext`,
 `StoryBridgeUnavailableError`, and the versioned marker verifier. Built-in routes
@@ -35,7 +35,7 @@ a new verified selection; finding fresh elements alone cannot restore readiness.
 
 V1 permits one active WebDriver session per registered target in one service.
 Native helpers also exclude controlling the same exact application incarnation
-across services; endpoint qualification and recovery limits are recorded in
+across services; endpoint qualification and recovery limits are summarized in
 [current status](references/current-status.md). Native builds run only on the
 target operating system. Installation never compiles or downloads a helper.
 

@@ -172,8 +172,10 @@ Evidence is written to the desktop-test package's
 `artifacts/desktop/windows-application-ownership-*/evidence.json`, including
 source/helper identities, endpoint descriptors, process evidence and case
 outcomes. Also record the registered app build, renderer, session kind, exact
-commands, and before/after process audits in the Windows ledger. Keep private
-machine paths in ignored artifacts, not public evidence.
+commands, and before/after process audits in the pull request description or
+tracking issue; the Windows endpoint sections of the package status documents
+keep only the latest result with a link. Keep private machine paths in ignored
+artifacts, not public evidence.
 
 The crash-owner helper is a contract fixture, not a second production service
 factory. Unknown resources/effects, unleased launches, legacy/unverified claims,
@@ -512,5 +514,5 @@ that no `%LOCALAPPDATA%\Microsoft\FluentUIReactNative\desktop-test\workload\inte
 remain, that the channel, Metro, and WebDriver ports reported by the driver
 have no listeners, and that no app process from the run survives. Hosted physical-input
 or capture skips are skips, not passes. Keep descriptor-path results separate
-from smoke/WDIO and deterministic fake-host results in all three package
-status ledgers.
+from smoke/WDIO and deterministic fake-host results in the run record and in
+every package status document's per-endpoint results.

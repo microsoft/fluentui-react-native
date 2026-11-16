@@ -5,527 +5,203 @@ owner_paths:
   - packages/agentic/storybook-desktop
 ---
 
-# Native qualification status
+# Current status
 
-## Windows Fabric and Win32 Paper — #4441 connected-session qualification — 2026-11-12 UTC
+This document records the status of Storybook desktop qualification: Windows Fabric and Win32 Paper connected-session results, direct story selection, refresh reduction, and lifecycle parity.
+Done means the stated implementation exists and is covered by deterministic tests; it does not mean every native endpoint is qualified.
+Parent issue: [#4435](https://github.com/microsoft/fluentui-react-native/issues/4435).
+See the [integration guide](integration.md) and the [reference index](README.md).
+Harness, driver and MCP evidence lives in `@fluentui-react-native/desktop-test/references/current-status.md`, `@fluentui-react-native/desktop-driver/references/current-status.md` and `@fluentui-react-native/desktop-driver-mcp/references/current-status.md`.
 
-**Observed baseline:** `505a2187b0a2451aed7081c9260b343d55742f93`,
-Windows 11 Enterprise build 26300 x64, Node 26.13.0. Packaged Windows
-Fabric reused native build `bdeb0b291` after comparison found only
-native-core metadata/version differences; **Inferred:** reuse was valid.
-Win32 Paper used REX 0.81.1. Own-checkout Metro, manifests and protected
-bundles served both endpoints. Native/GUI runs were serialized in the W3
-campaign with `-RequirePhysical`; before/after gates stayed eligible,
-unlocked **remote RDP**, not console. One 1728 x 1084 origin-zero monitor
-at 96 DPI / 100% was attached; settings were not changed.
+## Status overview
 
-### Win32 fresh-preview fencing
+Direct story selection and run-owned extraction caching are implemented and measured on macOS only.
+Fresh-preview fencing for injected provider-context loss is qualified on Win32 Paper at baseline `505a2187b`.
+Windows Fabric modern Callout physical-pointer interaction passed; semantic-activation refusal and Win32 Paper tool-window registration landed in PR [#4498](https://github.com/microsoft/fluentui-react-native/pull/4498) and passed local native checks at its final source `6c626602c`.
+Console-session (non-RDP), 200% and mixed DPI, and negative-origin cases are not qualified.
 
-**Passed, Observed:** after a verified Checkbox selection, an injected
-stimulus called the real orchestrator's bridge-retirement path while
-deliberately preserving the socket and native preview. Old preview ref
-`hkbo1` at epoch `(1,1)` rejected mutation with `ref-region-changed`.
-A newly found, unique **native** checkbox ref `hkbo3` at epoch `(1,2)`
-then rejected mutation with `story-context-stale`. Both were effect-none,
-not quarantined; the checkbox remained unchecked. Pre-established chrome
-ref `hkbo2` survived, and old/fresh chrome presence checks passed.
+- **Preview fencing and context loss:** Qualified (Win32 Paper, injected provider-context loss only). Native crash, real socket reconnect and chrome mutation are not covered. See [Preview fencing and context loss](#preview-fencing-and-context-loss). Tracking: [#4441](https://github.com/microsoft/fluentui-react-native/issues/4441).
 
-This closes the earlier bounded fresh-preview-fence gap for **injected
-provider-context loss**. It does not claim a native crash, actual socket
-disconnect/reconnect, transparent upstream reconnection, chrome mutation,
-or quarantine recovery.
+- **Secondary windows:** Qualified (Windows Fabric and Win32 Paper, remote RDP session, limited cases). Display-scale, negative-origin and console cases are not run. See [Secondary windows](#secondary-windows). Tracking: [#4441](https://github.com/microsoft/fluentui-react-native/issues/4441).
 
-Exact local qualification invocation, inside the machine-wide
-`with-native-lock.ps1 -Lane W3 -RequirePhysical` scope:
+- **Story selection and refresh reduction:** Qualified (macOS Fabric and macOS Paper, bounded cohort). Windows Fabric and Win32 Paper are not run. See [Story selection and refresh reduction](#story-selection-and-refresh-reduction). Tracking: [#4449](https://github.com/microsoft/fluentui-react-native/issues/4449).
 
-```powershell
-node .\artifacts\desktop\w3-qualification\run-endpoint.mjs win32 --fence-only
-```
+- **Lifecycle parity:** Qualified (macOS Fabric and macOS Paper, observed). JS initialization and HMR counts are not observed. See [Lifecycle parity](#lifecycle-parity). Tracking: [#4449](https://github.com/microsoft/fluentui-react-native/issues/4449).
 
-Qualification ID `60751352-c158-40a2-b4f9-9251e15fec95`, driver run
-`64d2de39-df69-4a2b-a164-fc842f0ef64e`, session
-`08419564-7f43-48d2-9e08-b0f971590a95`. Artifacts relative to the tested
-qualification checkout:
-`artifacts\desktop\w3-qualification\runs\60751352-c158-40a2-b4f9-9251e15fec95\descriptor-cases-win32-fence.json`
-and `qualification.json` in the same directory. The harness explicitly read
-current-story state before injecting loss. These retained local scripts
-are not a new published Storybook CLI or supported fault-injection API.
+- **Visual flash claims:** Deferred. No flash-reduction claim is made. See [Visual flash claims](#visual-flash-claims). Tracking: [#4449](https://github.com/microsoft/fluentui-react-native/issues/4449).
 
-### Secondary-window observations and open fixes
+- **Native qualification:** Qualified (macOS Fabric and macOS Paper direct selection; Windows Fabric and Win32 Paper limited to the connected-session fencing and secondary-window cases). Windows refresh-reduction, console and display-scale lanes are not run. See [Native qualification](#native-qualification). Tracking: [#4441](https://github.com/microsoft/fluentui-react-native/issues/4441), [#4451](https://github.com/microsoft/fluentui-react-native/issues/4451).
 
-| Case                                        | Observed outcome                                                                                                                                                                 |
-| ------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Fabric separately registered modern Callout | Passed: exact distinct opaque handle, switch, complete 11-node observation, unique `modern-callout-focus`, actual physical-pointer click, `focus: confirmed`, then popup removal |
-| Fabric secondary semantic activation        | Failed: exact same control returned applied/accessibility, but main status stayed `Idle` over six checks / 2090 ms and final native observation                                  |
-| Paper separately registered Callout         | Not run / partial: legacy popup shown, but only main registered; modern Callout absent from actual catalog                                                                       |
-| 200%                                        | Not run: current scale 100%; changing it unauthorized                                                                                                                            |
-| Mixed DPI                                   | Not run: one attached monitor                                                                                                                                                    |
-| Negative-origin layout                      | Not run: origin-zero monitor only; no approved eligible layout                                                                                                                   |
-| Physical console Ctrl+C                     | Not run: separate implementation lane owns it                                                                                                                                    |
+## Preview fencing and context loss
 
-The Fabric status assertion read main through its explicit native root
-without switching foreground; physical click passed once / 79 ms.
-**Inferred:** accessibility-pattern/renderer dispatch may acknowledge an
-activation without reaching Pressable `onPress`; the selected pattern was
-not instrumented. Paper native inventory **observed** a visible untitled
-root `Net UI Tool Window`, ToolWindow true. **Inferred:** the driver's
-untitled `WS_EX_TOOLWINDOW` filter prevents its registration. These two
-gaps are being fixed on this branch; this entry does not qualify the fixes.
+Scope: Win32 Paper stale-ref rejection after the Storybook preview context is lost.
 
-Exact bounded follow-ups, under the same physical-gated campaign wrapper:
+### Behavior and limits
 
-```powershell
-node .\artifacts\desktop\w3-qualification\run-endpoint.mjs windows --secondary-only --modern-only
-node .\artifacts\desktop\w3-qualification\run-endpoint.mjs windows --secondary-only --modern-only --physical-secondary
-```
+- After provider-context loss, a ref from the old preview is rejected with `ref-region-changed`.
+- A freshly found native ref in the new preview epoch is rejected with `story-context-stale` until the story context is re-established.
+- Both rejections are effect-none and do not quarantine the session.
+- Chrome refs established before the loss survive.
+- Qualification injected the loss through the orchestrator's bridge-retirement path while keeping the socket and native preview.
+- The qualification harness reads current-story state before injecting loss; it is retained local tooling, not a published CLI or fault-injection API.
+- Not claimed: native crash, actual socket disconnect and reconnect, transparent upstream reconnection, chrome mutation, or quarantine recovery.
 
-Semantic failure: qualification `675160f7-e069-413c-a6c8-486de0c37b69`,
-driver `a9f2e71e-71ab-40f0-a375-fd6d76a0b971`; report
-`artifacts\desktop\w3-qualification\runs\675160f7-e069-413c-a6c8-486de0c37b69\descriptor-cases-windows-secondary---modern.json`.
-Physical pass: qualification `7fbe3b0b-df33-476b-80e3-95b97bf19f02`,
-driver `16aac92b-bb36-4742-bd29-01df381d9594`; same artifact-root layout,
-`descriptor-cases-windows-secondary---modern---physical.json`.
-Paper inventory: qualification `22332065-6fa3-4061-a2b6-93f83295ca2e`,
-`descriptor-cases-win32-secondary.json`.
+### Open work
 
-The supervisor ran supported driver/bundle/run stages in order, bundling
-before launch and using actual readiness identity. Earlier setup,
-unsupported-story, invalid-selector/fact and receipt-only failures remain
-retained, not silently counted as passes. Session/child grants drained,
-the exact owned apps/services stopped, and the W3 campaign ended.
-Pre/post-end audits passed:
-`FURN-AUDIT: no FURN desktop processes found`.
-The complete native clear/capture/MCP matrix is in
-`@fluentui-react-native/desktop-test/references/current-status.md`;
-MCP response costs and default-observe completeness are in
-`@fluentui-react-native/desktop-driver-mcp/references/current-status.md`.
+- [#4441](https://github.com/microsoft/fluentui-react-native/issues/4441): requalify on later revisions and the remaining lost-context variants.
 
-## 2026-11-12: refresh-reduction timing baseline
+## Secondary windows
 
-Part of #4435. This section records bounded measurements, not a reliability
-claim or a full-catalog test pass. The product baseline is the instrumented
-parent of the navigation optimization, stacked on PR #4490
-(`aadc2f3591d15f5d43496d7f069fa8d0d32d5384`).
+Scope: separately registered popup windows such as the modern Callout.
 
-### Method and coverage
+### Behavior and limits
 
-The public `DesktopStorybookCli` API ran eight independently launched
-lifecycles per macOS renderer in the accessible lane. An injected fetch
-narrowed only the CLI's traversal index to the real
-`components-listboxitem--native-selection` entry; the server's authenticated
-manifest, runtime, native helper, and authored callbacks were unchanged.
-Every lifecycle traversed that story, ran its three supported callbacks in
-declaration order, and reported its one declared macOS-unsupported callback.
-App, channel, helper, and Metro cleanup completed before the next lifecycle.
-This deliberately bounded index is **not** complete smoke traversal.
+- Windows Fabric modern Callout registers as a distinct window with an opaque handle; a complete observation, a unique focus target and a physical-pointer click with `focus: confirmed` passed.
+- Windows legacy-only semantic activation is refused before dispatch with `activation-unsupported`, because an accessibility default action does not prove the Pressable ran.
+- Win32 Paper registers an untitled tool popup only after exact-process ownership, native identity, visible bounds and bounded content checks.
+- The Paper legacy story publishes no native focus-command outcome, so its physical-pointer receipt proves native delivery, not the React Native focus command.
+- Paper's modern Callout is absent from the Paper catalog, so Paper modern-Callout secondary coverage does not exist.
+- Secondary windows are inspected without activation through the read-only window-tree route.
+- Not run: 200% scaling, mixed DPI and negative-origin layouts.
 
-The measurements below are from the executable-story `run.json`, excluding
-application/service startup and traversal. Millisecond p50 is the median; p95
-uses inclusive linear interpolation. Phase samples are 24 executed callbacks;
-runner-total samples are eight lifecycles. Navigation subphases overlap and
-must not be added together. The first lifecycle can include cold caches.
+### Open work
 
-| Baseline phase               | Fabric p50 ms | Fabric p95 ms | Paper p50 ms | Paper p95 ms |
-| ---------------------------- | ------------: | ------------: | -----------: | -----------: |
-| Session attach               |       1192.22 |       1612.56 |      1094.93 |      1609.26 |
-| Manifest                     |          2.62 |          3.37 |         2.60 |         3.14 |
-| Input policy                 |          0.01 |          0.04 |         0.01 |         0.04 |
-| Preparation                  |          0.13 |          0.17 |         0.13 |         0.24 |
-| Upstream HTTP                |        503.23 |        504.56 |       503.08 |       503.95 |
-| Correlated runtime readiness |         28.77 |        562.62 |        25.86 |       458.94 |
-| Native marker verification   |         75.07 |        168.00 |        97.40 |       170.07 |
-| Complete navigation          |        753.13 |        812.97 |       756.77 |       792.62 |
-| Worker startup               |        203.00 |        215.85 |       196.50 |       207.40 |
-| Worker body                  |        505.18 |        533.74 |       523.32 |       556.19 |
-| Settled worker               |        723.34 |        750.74 |       736.00 |       789.32 |
-| Receipts                     |          2.62 |          2.93 |         2.46 |         2.76 |
-| Session cleanup              |        115.24 |        126.77 |       108.93 |       115.69 |
-| Diagnostic native reads      |         13.33 |         18.08 |         6.79 |         9.11 |
+- [#4441](https://github.com/microsoft/fluentui-react-native/issues/4441): the unrun display-scale, negative-origin and console cases.
 
-Runner-total p50/p95 were **7939.07 / 8845.37 ms**; aggregate duration was
-**63950.71 ms**. Sample variance was **306828.83 ms²** (range
-7478.77–9245.48 ms). Complete lifecycle p50/p95, including startup and
-traversal, were 19887.17 / 28433.88 ms, with 171994.83 ms aggregate and
-19950017.41 ms² sample variance. These different totals are not interchangeable.
+## Story selection and refresh reduction
 
-Paper runner-total p50/p95 were **7915.99 / 8755.09 ms**, aggregate
-**60909.13 ms**, sample variance **2199477.39 ms²**, and range
-4123.59–8794.34 ms. Complete lifecycle p50/p95 were 19928.62 / 62342.92 ms,
-aggregate 224024.71 ms, and variance 529506165.46 ms². The first Paper
-lifecycle totaled 84945.44 ms including cold startup, but had an unusually
-short runner
-(4123.59 ms); both remain included. The first Fabric baseline also had
-recording/cold-cache overhead. No startup or reliability improvement is
-attributed to those differences.
+Scope: the driver-owned channel factory and the run-owned extraction cache.
 
-### Lifecycle and observation limits
+### Behavior and limits
 
-Each lifecycle had one verified PID/start-time pair and one authenticated bridge
-connection. Fabric accepted one hello per baseline lifecycle; Paper accepted
-two on the same connection. Each callback selected a fresh preview/context
-generation (2, 3, 4 after the traversal's first generation). The historical
-`mountGeneration` field merely copied that value; keyed remounting was
-inferred from the rendering policy, not independently observed. That derived
-field has been removed. No within-lifecycle application replacement or new bridge
-connection was observed. JS initialization/HMR is explicitly **not observed**:
-neither a hello nor the absence of a new socket proves a JS initialization count.
-The keyed generation is not an instrumented React effect-mount counter.
+- Agent sessions select stories directly through the authenticated channel without an upstream HTTP mutation.
+- Controlled policy remains independent: protected story args are refused and foreign mutation relaying is refused.
+- Extracted export maps are cached by source content and location within one owning run, including across smoke's per-story calls.
+- Cache hits are bound to digests of every helper module read by input-policy validation, including transitive helpers and failed reads; a changed helper reruns extraction.
+- Manifest digest checks, per-case remounts, fresh sessions, fresh workers and native marker verification remain on every callback.
+- Phase durations include failed attempts; a missing duration does not mean success or zero cost.
+- `processEventsTruncated` reports the native process-lifetime flag; `eventsTruncated` reports per-case history loss only when the history no longer covers the case cursor.
+- Session reuse, worker sharing, preview reuse, new isolation descriptors and runtime protocol expansion are not implemented.
+- Attach is the dominant remaining cost, so a session or worker investigation is eligible but needs its own paired benefit and ownership evidence.
 
-Native activity reports retained fixed counters only. No activation command,
-provider activation, application activation, or main/focused-window change
-was observed in these baseline cohorts; Paper recorded one application
-deactivation. The original truncation projection combined a process-lifetime
-flag with invalid sequence-gap inference; its per-case truncation counts are
-withdrawn and cannot be reconstructed from these bounded reports. `AXUIElementDestroyed`
-notifications can describe preview elements, not necessarily closed windows.
-The bounded native event ring can be truncated, and its observations are
-advisory. These counters do not establish whether a user saw a flash.
+### Open work
 
-Target-window-only ScreenCaptureKit recordings remain local in ignored
-consumer artifacts. They are separate evidence, not committed media.
-Paired candidate/renderer evidence and visual analysis must be recorded before
-claiming a speedup or flash reduction.
+- [#4449](https://github.com/microsoft/fluentui-react-native/issues/4449): session and worker investigation and the Windows measurements.
 
-### Gates
+## Lifecycle parity
 
-Session attachment is a material, dominant cost in this cohort; the conditional
-session/worker investigation gate is eligible. No session reuse, worker
-sharing, worker-isolation flag, preview reuse, or runtime protocol expansion is
-implemented by the timing work. Such a trial still needs independently paired
-benefit and ownership/settlement evidence. Windows Fabric and Win32 Paper:
-**not run locally**.
+### Behavior and limits
 
-## 2026-11-12: direct-selection candidate
+- Each lifecycle has one verified app incarnation and one authenticated bridge connection; macOS Fabric accepts one hello and macOS Paper two on the same connection.
+- Each callback selects a fresh preview and context generation.
+- Keyed remounting is inferred from the rendering policy, not counted; the duplicate `mountGeneration` field no longer exists.
+- JS initialization and HMR counts are not observed, and generations are not React effect-mount counters.
+- Native activity reports are advisory fixed counters; AX element-destruction counts describe preview elements, not closed windows.
+- Window-oriented test helpers can activate the app without physical input; this does not identify a painted flash or justify removing foreground guarantees.
 
-Part of #4435. Candidate implementation: `06446c276`; instrumentation:
-`f0feebc90`. The driver-owned channel factory now uses authenticated direct
-selection without an upstream HTTP mutation. Controlled policy remains
-independent and still refuses protected args and foreign mutation relaying.
-Full extracted export maps are cached by source content/location within one
-owning run, including across smoke's per-story calls. Review corrections also
-bind cache hits to digests of the helper files read by input-policy validation.
-Manifest digest checks,
-remounts, fresh sessions, fresh workers, and native marker verification remain.
+### Open work
 
-### Fabric before/after
+- [#4449](https://github.com/microsoft/fluentui-react-native/issues/4449): an independent JS-initialization counter, if needed.
 
-Eight baseline and eight candidate lifecycles selected identical callbacks in
-identical order: 24 passed and eight declared unsupported on each side.
-These are sequential before/after blocks, not randomized alternating runs.
-Phase samples are 24 callbacks; extraction samples and totals are eight runs.
-Values below are p50 / p95 milliseconds.
+## Visual flash claims
+
+### Behavior and limits
+
+- Window-only ScreenCaptureKit recordings exist only as local artifacts.
+- The near-uniform-luma detector is not a validated blank-preview or activation-flash classifier; chrome, variable-rate recordings and window-only pixels limit it.
+- No speedup or flash-reduction claim is made without paired candidate and renderer evidence plus visual analysis.
+
+### Open work
+
+- [#4449](https://github.com/microsoft/fluentui-react-native/issues/4449): validated visual analysis, if a flash claim is wanted.
+
+## Native qualification
+
+Results are per endpoint and tied to the revision that produced them; skipped checks are not passes.
+Full per-run evidence (commands, counts, run ids, artifact locators, cleanup outcome) lives in the linked pull requests and issues.
+
+### macOS Fabric
+
+- **Direct selection, accessible lane:** full-index run rendered 223 stories and passed five callbacks (228 passes, no failures or unsupported results) at candidate `06446c276`. Evidence: [#4496](https://github.com/microsoft/fluentui-react-native/pull/4496).
+
+- **Direct selection, physical lane:** 223 stories plus 15 callbacks passed (238 passes) at `06446c276`; sparse regression evidence, not the full physical suite. Evidence: [#4496](https://github.com/microsoft/fluentui-react-native/pull/4496).
+
+- **Review corrections:** not requalified natively; earlier qualification is historical for `06446c276`.
+
+### macOS Paper
+
+- **Direct selection, accessible lane:** 223 stories plus five callbacks passed (228 passes) at `06446c276`. Evidence: [#4496](https://github.com/microsoft/fluentui-react-native/pull/4496).
+
+- **Direct selection, physical lane:** 223 plus 15 callbacks passed (238 passes) at `06446c276`.
+
+- **Review-correction smoke:** full-index accessible smoke with Button, Dropdown and modern Callout selection passed 228 checks; ten physical callbacks were excluded by input policy.
+
+### Windows Fabric
+
+- **Secondary window:** at `6c626602c` the modern Callout physical-pointer click passed (`focus: confirmed`) and semantic activation was refused before dispatch with effect none and no fallback. Evidence: [#4498](https://github.com/microsoft/fluentui-react-native/pull/4498).
+
+- **Environment:** Windows 11 Enterprise build 26300 x64, remote RDP session (not console), one 1728 x 1084 monitor at 96 DPI.
+
+- **Not run:** 200%, mixed DPI and negative-origin layouts. Refresh-reduction measurements not run.
+
+### Win32 Paper
+
+- **Fresh-preview fencing:** passed for injected provider-context loss at baseline `505a2187b` (REX 0.81.1). Evidence: [#4498](https://github.com/microsoft/fluentui-react-native/pull/4498).
+
+- **Secondary tool window:** the owned untitled tool popup registered, a complete eight-node sample was read, and a physical-pointer click passed at `6c626602c` (native delivery only). Evidence: [#4498](https://github.com/microsoft/fluentui-react-native/pull/4498).
+
+- **Not run:** refresh-reduction measurements.
+
+### Hosted CI and portable evidence
+
+- Portable Storybook integration, driver and root checks passed for the refresh-reduction work; JavaScript tests are not native qualification.
+- The cache-cleared `yarn lage buildci` aggregate failed on timing-sensitive driver tests (`boundedCommand`, `privateStorage`) on the candidate and on base `aadc2f359`, so it is not hosted-CI parity; tracked in [#4349](https://github.com/microsoft/fluentui-react-native/issues/4349).
+
+## Measurements
+
+Revision: candidate `06446c276` against its instrumented parent; stacked on PR [#4490](https://github.com/microsoft/fluentui-react-native/pull/4490) (`aadc2f359`).
+Platform: macOS, accessible lane, Fabric and Paper separately.
+Method: eight independently launched lifecycles per renderer and side, run through the public `DesktopStorybookCli` API with the traversal index narrowed to `components-listboxitem--native-selection`; three callbacks passed and one declared macOS-unsupported callback was reported per lifecycle.
+Samples: phase samples are 24 callbacks; extraction samples and totals are eight lifecycles; values are p50 / p95 milliseconds (inclusive linear interpolation).
+Caveats: rows omitted for unchanged phases and lifecycle totals (which include startup and traversal); sequential before/after blocks (not randomized), small cohort, no system-load control, first lifecycle may include cold caches, navigation subphases overlap and must not be added, no reliability or startup claim.
+Evidence: [#4496](https://github.com/microsoft/fluentui-react-native/pull/4496).
+
+### macOS Fabric
 
 | Phase                        | Baseline          | Candidate         |
 | ---------------------------- | ----------------- | ----------------- |
 | Session attach               | 1192.22 / 1612.56 | 1088.67 / 1611.77 |
-| Manifest                     | 2.62 / 3.37       | 2.90 / 3.88       |
-| Input policy                 | 0.01 / 0.04       | 0.01 / 0.02       |
-| Preparation                  | 0.13 / 0.17       | 0.15 / 0.20       |
 | Upstream HTTP                | 503.23 / 504.56   | Not dispatched    |
 | Correlated runtime readiness | 28.77 / 562.62    | 31.78 / 538.64    |
 | Native marker verification   | 75.07 / 168.00    | 72.32 / 546.11    |
 | Complete navigation          | 753.13 / 812.97   | 274.20 / 788.37   |
-| Worker startup               | 203.00 / 215.85   | 201.50 / 212.85   |
-| Worker body                  | 505.18 / 533.74   | 510.90 / 533.80   |
-| Settled worker               | 723.34 / 750.74   | 729.28 / 758.36   |
-| Worker settlement            | 18.12 / 20.96     | 19.63 / 21.90     |
-| Receipts                     | 2.62 / 2.93       | 2.67 / 2.98       |
-| Session cleanup              | 115.24 / 126.77   | 118.25 / 126.46   |
-| Diagnostic native reads      | 13.33 / 18.08     | 7.81 / 14.71      |
-| Extraction                   | 6.50 / 10.34      | 6.50 / 8.67       |
+| Runner total                 | 7939.07 / 8845.37 | 6680.04 / 6995.31 |
 
-| Fabric total               | Baseline            | Candidate           |
-| -------------------------- | ------------------- | ------------------- |
-| Runner p50 / p95 ms        | 7939.07 / 8845.37   | 6680.04 / 6995.31   |
-| Runner aggregate ms        | 63950.71            | 53173.56            |
-| Runner sample variance ms² | 306828.83           | 91557.04            |
-| Runner range ms            | 7478.77–9245.48     | 6192.64–7031.09     |
-| Lifecycle p50 / p95 ms     | 19887.17 / 28433.88 | 18461.08 / 28733.43 |
-| Lifecycle aggregate ms     | 171994.83           | 162636.05           |
-| Lifecycle variance ms²     | 19950017.41         | 30801394.39         |
+Runner median was 15.9% lower; paired-by-index median delta −1141.99 ms (10,000-resample bootstrap 95% interval −1887.49 to −782.75 ms, fixed seed).
+Navigation median improved while native-verification p95 worsened.
 
-The bounded Fabric runner median was 15.9% lower. Matching repetitions by
-index gave a median candidate-minus-baseline delta of −1141.99 ms; a
-10,000-resample paired-median bootstrap interval was
-−1887.49 to −782.75 ms (95%, fixed seed). This does not account for
-temporal/system-load bias or establish reliability. Navigation's median
-improved while native-verification p95 worsened; no universal tail-latency
-or startup claim follows. This single-source cohort parsed once per run on
-both sides and does not measure the cross-story cache benefit.
-
-### Paper before/after
-
-The same eight-plus-eight design, callback selection/order, and accessible
-lane passed 24 callbacks and eight declared unsupported on each side.
-Values are p50 / p95 milliseconds, with 24 callback samples or eight
-extraction/total samples.
+### macOS Paper
 
 | Phase                        | Baseline          | Candidate         |
 | ---------------------------- | ----------------- | ----------------- |
 | Session attach               | 1094.93 / 1609.26 | 1434.73 / 1621.30 |
-| Manifest                     | 2.60 / 3.14       | 2.69 / 3.11       |
-| Input policy                 | 0.01 / 0.04       | 0.01 / 0.01       |
-| Preparation                  | 0.13 / 0.24       | 0.14 / 0.20       |
 | Upstream HTTP                | 503.08 / 503.95   | Not dispatched    |
 | Correlated runtime readiness | 25.86 / 458.94    | 26.28 / 456.76    |
 | Native marker verification   | 97.40 / 170.07    | 167.26 / 582.90   |
 | Complete navigation          | 756.77 / 792.62   | 340.59 / 787.83   |
-| Worker startup               | 196.50 / 207.40   | 193.00 / 201.85   |
-| Worker body                  | 523.32 / 556.19   | 529.44 / 547.30   |
-| Settled worker               | 736.00 / 789.32   | 741.24 / 756.44   |
-| Worker settlement            | 15.94 / 18.23     | 16.09 / 17.49     |
-| Receipts                     | 2.46 / 2.76       | 2.44 / 2.62       |
-| Session cleanup              | 108.93 / 115.69   | 106.57 / 114.07   |
-| Diagnostic native reads      | 6.79 / 9.11       | 7.09 / 12.84      |
-| Extraction                   | 6.44 / 8.97       | 6.64 / 9.77       |
+| Runner total                 | 7915.99 / 8755.09 | 7218.78 / 7811.59 |
 
-| Paper total                | Baseline            | Candidate           |
-| -------------------------- | ------------------- | ------------------- |
-| Runner p50 / p95 ms        | 7915.99 / 8755.09   | 7218.78 / 7811.59   |
-| Runner aggregate ms        | 60909.13            | 57610.90            |
-| Runner sample variance ms² | 2199477.39          | 210172.97           |
-| Runner range ms            | 4123.59–8794.34     | 6440.61–7996.85     |
-| Lifecycle p50 / p95 ms     | 19928.62 / 62342.92 | 18921.30 / 60994.39 |
-| Lifecycle aggregate ms     | 224024.71           | 215170.59           |
-| Lifecycle variance ms²     | 529506165.46        | 519947445.91        |
+Runner median was 8.8% lower; paired-by-index median delta −760.17 ms (95% interval −1120.33 to −192.13 ms); one pair regressed by 3245.12 ms and no samples were dropped.
+Session-attach and native-verification medians worsened; the candidate needed one marker poll in 12 callbacks and two in 12, and fresh verification was never bypassed.
+The baseline's first lifecycle was unusually short (runner 4123.59 ms) and is retained.
 
-The bounded Paper runner median was 8.8% lower. Paired-by-index median
-candidate-minus-baseline delta was −760.17 ms; its 10,000-resample bootstrap
-95% interval was −1120.33 to −192.13 ms. One pair regressed by 3245.12 ms;
-no samples were dropped. Cold first-lifecycle totals, including startup, were
-retained on both sides (baseline 84945.44 ms, candidate 83318.31 ms).
-Session-attach and native
-verification medians worsened despite faster median navigation. The same
-non-randomization, small-cohort, system-load, reliability, and cache-benefit
-limits apply as for Fabric.
+## Maintaining this document
 
-### Candidate lifecycle parity
-
-Across each renderer's 24 passing candidate callbacks, preview/context
-generations remained 2/3/4 per lifecycle. Fabric matched its native marker on
-the first poll in all 24 callbacks, as did both renderer baselines. Paper's
-candidate needed one poll in 12 callbacks and two polls in 12, contributing
-to its slower native verification; fresh verification was never bypassed.
-All eight lifecycles per side had distinct
-verified app incarnations, one authenticated socket per lifecycle, and no
-within-lifecycle app replacements or extra accepted hellos during callbacks.
-Fabric accepted one hello and Paper two on the same connection. No independent
-JS-init/HMR counter was added, and keyed generations do not count React
-effect mounts.
-
-Candidate activity retained zero activation commands, provider activations,
-application activation/deactivation, main/focused-window changes, or window
-creation in the bounded observational cohort. Generic AX element-destruction
-counts matched baseline (Fabric 96; Paper 240), not closed-window counts.
-The earlier 16/17-of-24 truncation comparison was invalid: sticky
-process-history flags and globally allocated sequence gaps do not establish
-per-case loss. That comparison is withdrawn. These are advisory observations, not
-proof that no activation or visual flash occurred.
-
-### Window-only recording limits
-
-Separate synchronized recording lifecycles used only the target Storybook
-window, outside the performance cohorts. All recordings were 1864×1564:
-
-| Renderer / revision | Duration seconds | Encoded frames | Last encoded timestamp seconds | Uniform-content candidates |
-| ------------------- | ---------------: | -------------: | -----------------------------: | -------------------------: |
-| Fabric baseline     |            8.037 |              4 |                          0.102 |                          0 |
-| Fabric candidate    |            7.273 |              4 |                          0.103 |                          0 |
-| Paper baseline      |            8.590 |              4 |                          0.103 |                          0 |
-| Paper candidate     |            7.862 |              4 |                          0.100 |                          0 |
-
-The candidate detector measured near-uniform luma in a padded window-content
-crop; it is **not a validated blank-preview or activation-flash classifier**.
-The crop includes persistent Storybook chrome, variable-rate recordings hold
-their last frame, and window-only pixels cannot establish foreground/window
-raising behavior. There is **no measured flash-reduction claim**. Raw media
-and derived image samples remain local, ignored artifacts.
-
-Phase 2 therefore ships measurement and a source-traced compatible proposal,
-not an activation change. Phase 3's investigation gate is eligible because
-attach is material, but pooling/startup changes remain deferred without their
-own benefit and ownership/settlement evidence. Phase 4, new isolation
-descriptors, preview reuse, and runtime protocol expansion remain excluded.
-
-### Focused native qualification and cache ownership
-
-The Fabric full-index accessible run rendered all 223 real catalog stories
-and passed five selected callbacks (228 canonical passes, no failures or
-unsupported results; run `57cf8594-addf-4cd3-9e60-5e1907a46b09`).
-Selected stories were Button default, Dropdown default, and modern Callout
-default/local-point/local-rectangle. This is not a full authored-test-suite
-pass. The selected callbacks produced three source extractions and two
-same-source cache hits across smoke's separate per-story runner invocations.
-Each callback still had its own session, worker, and fresh preview/context
-generation (224–228); the application incarnation and authenticated
-connection stayed stable.
-
-Fabric physical qualification also rendered all 223 stories and passed
-15 selected callbacks (238 canonical passes, no failures or unsupported
-results; run `6ba319db-cada-4e66-a000-513015b2610b`). Selection covered
-Button default, Dropdown default, modern Callout default, and native
-Callout default/window-commands. Four source extractions and one cache hit
-were recorded. Dropdown's open-list keyboard case preceded its
-initially-collapsed semantic case; fresh per-case remounting prevented the
-open popup from contaminating the latter. Native and modern Callout
-dismiss/reopen, outside-click, anchor input, and Escape cases passed.
-This is sparse physical regression evidence, not the full physical suite
-or a qualification of concurrent physical-input fixes on another branch.
-
-Paper passed the same full-index selections: 223 rendered stories plus five
-accessible callbacks (228 canonical passes; run
-`c6e2032d-76ee-4021-bc96-3e1c73be60ff`) and 223 plus 15 physical callbacks
-(238 passes; run `9351f32d-29fe-4e6e-ae3d-cadd85a51989`). Neither lane had
-failures, skips, unsupported callbacks, retries, or incomplete work.
-Source extraction/cache-hit counts matched Fabric (3/2 accessible, 4/1
-physical). Fresh callback generations were 224–228 and 224–238 respectively;
-each lane retained one verified app incarnation and authenticated socket,
-with two accepted hellos.
-
-Fabric's three accessible Callout callbacks each observed two activation
-commands
-and two provider activations during their worker interval, plus focused-window
-changes. This shows that window-oriented test helpers can activate even
-without physical input; it does not identify a painted flash or justify
-removing foreground guarantees. The timing cohort itself observed no
-activation commands on either side.
-
-### Package validation
-
-| Workspace / command                                                                      | Result                                                                        |
-| ---------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| Storybook integration: `yarn format && yarn lint && yarn build && yarn test --runInBand` | **Passed**; 405 tests passed, four skipped, 28 suites                         |
-| Driver: `yarn format && yarn lint && yarn build`                                         | **Passed**                                                                    |
-| Driver portable: `FURN_NATIVE_DRIVER_TEST=0 yarn test --runInBand`                       | **Passed**; 1223 tests passed, 66 skipped, 73 suites passed and eight skipped |
-| Root: `yarn oxfmt --check`                                                               | **Passed**                                                                    |
-| Root: `yarn check-agent-instructions`                                                    | **Passed**                                                                    |
-| Root: `yarn change:check` after committing patch changesets                              | **Passed**                                                                    |
-
-New regressions cover direct dispatch without HTTP, normal args versus
-protected args refusal, correlated/stale/foreign readiness, uncertainty after
-dispatch cancellation or disconnect, native-marker verification, bounded
-diagnostic projection, source-content/location invalidation, run ownership,
-cross-invocation cache hits, and manifest-digest rejection even on a cache hit.
-
-### Initial native and environment-overridden aggregate validation
-
-All native/GUI and aggregate commands were serialized through the shared
-native lock, with project-local temporary files.
-
-From `apps/storybook`, the strict standalone-helper build **passed**:
-
-```sh
-swift build --package-path ../../packages/agentic/desktop-driver/native/macos --scratch-path artifacts/refresh-reduction/native-strict-build -c release -Xswiftc -warnings-as-errors
-artifacts/refresh-reduction/native-strict-build/release/furn-desktop-driver-host --self-test
-```
-
-The self-test **passed 448/448 checks**. From the driver workspace,
-`FURN_NATIVE_DRIVER_TEST=1 yarn test nativeDriver nativeCache applicationIncarnation serviceIdentity --runInBand`
-**passed 87 tests**, with 16 skipped, six suites passed and two Windows suites
-skipped. No product Swift or React-module boundary changed; Office
-module/bridging-header qualification is not applicable.
-
-The initial cache-cleared `yarn clean-lage-cache && yarn lage buildci` attempt
-**failed** in scripts' negative instruction fixtures: a temporary directory
-inside ignored artifacts inherited the outer Git repository. The scripts
-workspace's `yarn test` then **passed all 76 tests** with Git discovery
-bounded by the temporary directory's parent. The next environment-overridden aggregate
-**failed** two timing-sensitive driver tests in parallel execution
-(`boundedCommand` termination signal and `privateStorage` timeout).
-`FURN_NATIVE_DRIVER_TEST=0 yarn test boundedCommand privateStorage --runInBand`
-then **passed 73 tests**, with ten skipped.
-
-An earlier local aggregate **passed** with `TF_BUILD=1` serializing each
-package's Jest run and with the fixture environment below, without another
-cache clear. This was **not PR CI mode**: `.github/workflows/pr.yml` runs
-parallel `yarn lage buildci` without these overrides.
-
-```sh
-export TMPDIR="$PWD/apps/storybook/artifacts/refresh-reduction/tmp"
-export GIT_CEILING_DIRECTORIES="$PWD/apps/storybook/artifacts/refresh-reduction"
-TF_BUILD=1 yarn lage buildci
-```
-
-Lage reported 46 successful and 132 skipped tasks, zero pending/aborted, exit
-zero. These task skips are not test-pass counts. No source changes were made
-to the instruction validator, private storage, or bounded process runner.
-
-## 2026-11-12: refresh-reduction review corrections
-
-Part of #4435. This follow-up corrects the run-owned extraction cache and
-diagnostic interpretation without changing dispatch, per-case workers,
-context verification, activation, or native protocol semantics.
-
-- Cache entries now retain content digests for every helper module read by
-  direct-input validation, including transitive helpers and failed reads.
-  Hits recheck those digests; a changed helper reruns extraction and policy
-  validation even when the story source is unchanged. Regressions change a
-  direct or transitive helper to keyboard input after a confirmed cache hit.
-- `processEventsTruncated` reports the native process-lifetime flag.
-  `eventsTruncated` reports possible per-case history loss only when a
-  truncated history no longer covers the case cursor. Globally allocated
-  sequence gaps alone do not establish loss. The unsupported
-  `commandsTruncated` inference was removed. Tests cover sticky lifetime
-  flags, global gaps, and lost cursor coverage. Historical 16/17-of-24
-  truncation comparisons above are withdrawn, not relabeled: the original
-  bounded projections cannot reconstruct actual per-case loss.
-- The duplicate `mountGeneration` field was removed. Context/preview
-  generations are observed; keyed remounts are inferred from the default
-  rendering policy, not independently counted. A runner contract requires
-  the derived field to be absent.
-- Present phase durations include failed attempts because measurement runs
-  in `finally`. Missing durations do not establish success or zero cost.
-  A runner regression verifies attempted navigation time on failure and
-  absence of worker time when the worker was never started.
-
-### Review qualification
-
-The regression-first run failed as expected before these fixes. From the
-Storybook integration workspace,
-`yarn test extractWdioTests wdioExtractionCache runDiagnostics wdioRunner --runInBand`
-then **passed 112 tests in four suites**, including a repeat with the normal
-inherited environment. Package format/lint/build passed.
-
-From `apps/storybook`, `yarn storybook manifest --macos --paper` and
-`yarn storybook bundle --macos --paper` **passed**. A full-index CLI-API smoke
-with the app-owned configuration, Paper renderer, accessible input, and the
-Button/Dropdown/modern-Callout selection **passed 228 checks**: 223 rendered
-stories and five callbacks; ten physical callbacks were excluded by input
-policy. The five callback reports showed three source extractions, two
-cross-invocation cache hits, no synthetic mount field, and separate process
-and case history flags. The first local harness invocation failed before
-selection because plain `node` did not provision Yarn's tool PATH
-(`spawn rnx-cli ENOENT`); rerunning through `yarn node` passed without a
-product change.
-
-The plain aggregate commands below ran under the shared native lock with
-the normal inherited environment: no `TF_BUILD`, `TMPDIR`, or
-`GIT_CEILING_DIRECTORIES` overrides. Unlike the earlier locally serialized
-run, they preserve parallel Jest execution. Local Node was 24.18.0; the PR
-workflow declares Node 22, so this is not complete hosted-CI parity.
-
-| Scope                      | Exact command                                | Result                                                                                                                               |
-| -------------------------- | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| Candidate, first plain run | `yarn clean-lage-cache && yarn lage buildci` | **Failed**: `boundedCommand` expected `SIGKILL`, received `SIGTERM`; 122 Lage tasks succeeded, one failed                            |
-| Detached base `aadc2f359`  | `yarn clean-lage-cache && yarn lage buildci` | **Failed**: the same `boundedCommand` assertion plus `privateStorage`'s 10-second test timeout; 129 Lage tasks succeeded, one failed |
-
-A final plain repeat of the same cache-cleared candidate command also
-**failed** the `boundedCommand` assertion (164 Lage tasks succeeded, one
-failed). `privateStorage` passed in both candidate runs. In each candidate
-driver suite, 1222 tests passed, one failed, and 66 were skipped.
-`yarn oxfmt --check`, `yarn check-agent-instructions`, and
-`yarn markdown-link-check -c .github/markdown-link-check-config.json <file>`
-for every changed Markdown file **passed**.
-
-The detached base was installed independently after its first command
-reported missing dependencies; it did not reuse candidate workspace
-modules or outputs. This reproduces the aggregate failures before the
-refresh-reduction commits. Neither unrelated test nor implementation was
-changed. The base worktree was removed, and its orphaned Jest worker was
-terminated by its verified PID.
-
-The paired performance and recording evidence above remains evidence for
-`06446c276`, not a fresh benchmark of this correction. No new speedup or
-flash-reduction claim is made. macOS Fabric and physical-input lanes were
-**not rerun in this follow-up**; their earlier qualifications remain
-historical. Windows Fabric and Win32 Paper were **not run locally**.
+- Edit only the topic your change affects, and keep that topic's line in the status overview in step with it.
+- Describe what is true now. Do not add dated entries, run logs, or "updated" stamps.
+- Record per-run evidence (commands, counts, run ids, artifact locations, cleanup outcome) in the pull request description or the tracking issue, and keep only the latest result for each endpoint here with a link to that record.
+- Put remaining-work detail in the tracking issue and link the issue from the topic's open-work list; remove the link when the issue closes.
+- Write one sentence or fact per line, and keep a blank line between adjacent list entries that different changes are likely to edit, so concurrent changes merge independently.
+- Historical results stay tied to the revision that produced them and are never reported as qualifying a later revision.
+- Skipped checks are not passes; report each endpoint (macOS Fabric, macOS Paper, Windows Fabric, Win32 Paper) separately.
+- The detailed per-run ledger that preceded this format is preserved in git history: `git show a7af2b4b2:packages/agentic/storybook-desktop/references/current-status.md`.

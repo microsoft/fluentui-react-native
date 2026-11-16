@@ -22,6 +22,7 @@ add a package to the registry when it adopts this standard.
 - **R-PKGDOC-007:** Changes to behavior, commands, configuration, outputs, or contracts update the owning reference in the same change, and update `AGENTS.md` or `README.md` when their entry-point information changes.
 - **R-PKGDOC-008:** Published packages include their `AGENTS.md`, `README.md`, reference index, every reference document, and local linked assets. Validate the actual Yarn pack inventory; build caches and generated artifacts must not ship.
 - **R-PKGDOC-009:** Governed packages have no `PLAN.md` or other plan files outside `references/`. Unfinished or explicitly deferred work lives in an indexed `<package>/references/remaining-work.md`. When work completes, move durable behavior into the owning reference and delete the item rather than marking it done; delete the file when no work remains.
+- **R-PKGDOC-010:** A package's `<package>/references/current-status.md` is a status overview followed by stable topic sections, not a dated log. It describes what is true now, keeps only the latest result for each native endpoint with a link to the pull request or issue that holds the full evidence, and links open work to its tracking issue instead of restating it. Per-run commands, counts, and artifact locators belong in the pull request or issue. Edit only the topic a change affects so concurrent changes merge cleanly.
 
 ## Package entry points
 
