@@ -283,6 +283,29 @@ verify a service's process and listener before a credential is sent, and to
 prove a quarantined application's recorded process exited. See the
 [Windows provider guide](../native/windows/README.md#authority-helper-modes).
 
+## Windows activation and secondary content windows
+
+The shared Windows/Win32 provider activates through actionable UIA `Invoke`,
+`Toggle`, `SelectionItem`, or `ExpandCollapse` patterns. A legacy default-action
+acknowledgment is not sufficient dispatch evidence. Legacy-only controls,
+including controls exposing only `ScrollIntoView`, are refused before dispatch
+with `unsupported-operation`, reason `activation-unsupported`, and effect
+`none`. The public error retains the reason and native code, without an input
+receipt, quarantine, or implicit physical retry. Callers may explicitly choose
+physical click where policy permits; an unsettled mutation is not a safe
+fallback opportunity.
+
+An application lease can register an untitled, visible, positive-size tool
+popup only when its exact-process owner chain reaches the verified primary
+window and a bounded UIA read proves exact-process content. Known IME/tooltip
+helper classes, unrelated owner chains, hidden or zero-size roots, and
+unreadable or empty content stay excluded from initial admission. Once admitted,
+a popup stays listable using native identity and ownership rather than another
+UIA read. New candidates share one 1,000 ms discovery budget per listing and
+are retried later when that budget is exhausted. This does not broaden global title discovery.
+See the [Windows identity rules](../native/windows/README.md#window-events-and-identity)
+and [Windows qualification evidence](current-status.md).
+
 ## Diagnostics
 
 `doctor` uses prebuilt-only resolution:

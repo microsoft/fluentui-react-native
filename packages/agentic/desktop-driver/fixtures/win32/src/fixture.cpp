@@ -14,12 +14,15 @@
 //   --child-pid-file <path> start one offscreen descendant copy of this fixture and
 //                      write "<descendant pid> <parent pid>" to this file, so a
 //                      contract can prove which processes an owned launch reaches
+//   --no-default-action <0|1> add an MSAA control whose no-op default method returns S_OK
+//   --tool-windows <0|1> add a button that opens content and non-content tool roots
 #define NOMINMAX
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 
 #include <objbase.h>
 #include <oleauto.h>
+#include <oleacc.h>
 
 #include <commctrl.h>
 #include <shellapi.h>
@@ -31,12 +34,15 @@
 #include <cstdlib>
 #include <string>
 #include <thread>
+#include <vector>
 
 namespace {
 
 constexpr wchar_t kMainClass[] = L"FurnWin32Fixture";
 constexpr wchar_t kDialogClass[] = L"FurnWin32FixtureDialog";
 constexpr wchar_t kStuckClass[] = L"FurnWin32FixtureStuck";
+constexpr wchar_t kNoActionClass[] = L"FurnWin32FixtureNoAction";
+constexpr wchar_t kToolClass[] = L"FurnWin32FixtureTool";
 
 constexpr int kActivateButton = 1001;
 constexpr int kNameEdit = 1002;
@@ -48,12 +54,19 @@ constexpr int kHangButton = 1007;
 constexpr int kNameLabel = 1008;
 constexpr int kStuckControl = 1009;
 constexpr int kTree = 1010;
+constexpr int kNoActionControl = 1011;
+constexpr int kToolButton = 1012;
+constexpr int kPassiveControl = 1013;
 constexpr int kMenuIncrement = 2001;
 constexpr int kMenuExit = 2002;
 constexpr int kMenuAbout = 2003;
 constexpr int kDialogOk = 3001;
 constexpr int kDialogLabel = 3002;
+constexpr int kToolAction = 3101;
+constexpr int kToolClose = 3102;
 constexpr UINT kStuckApplied = WM_APP + 1;
+constexpr UINT kNoActionDispatched = WM_APP + 2;
+constexpr UINT kToolApplied = WM_APP + 3;
 
 struct Options {
   std::wstring title = L"FURN Win32 Fixture";
@@ -62,6 +75,8 @@ struct Options {
   DWORD stuckMilliseconds = 0;
   DWORD lifetimeMilliseconds = 600000;
   bool offscreen = false;
+  bool noDefaultAction = false;
+  bool toolWindows = false;
   std::wstring childPidFile;
   std::wstring stuckStartedFile;
 };
@@ -73,6 +88,8 @@ HWND dialogWindow = nullptr;
 int activations = 0;
 int renames = 0;
 int stuckApplications = 0;
+int toolActivations = 0;
+std::vector<HWND> toolWindows;
 
 Options ParseOptions() {
   Options parsed;
@@ -100,6 +117,10 @@ Options ParseOptions() {
       parsed.offscreen = _wtoi(value) != 0;
     } else if (name == L"--child-pid-file") {
       parsed.childPidFile = value;
+    } else if (name == L"--no-default-action") {
+      parsed.noDefaultAction = _wtoi(value) != 0;
+    } else if (name == L"--tool-windows") {
+      parsed.toolWindows = _wtoi(value) != 0;
     }
   }
   LocalFree(arguments);
@@ -158,9 +179,9 @@ void CreateMenuBar(HWND window) {
 // Automation thread, so the UI thread stays responsive, and applies its effect
 // only when the wait ends: a mutation whose outcome the client cannot know,
 // like a wedged or very slow application.
-class StuckProvider : public IRawElementProviderSimple, public IInvokeProvider {
+class StuckProvider : public IRawElementProviderSimple, public IInvokeProvider, public IScrollItemProvider {
  public:
-  explicit StuckProvider(HWND window) : window_(window) {}
+  explicit StuckProvider(HWND window) : window_(window), passive_(GetDlgCtrlID(window) == kPassiveControl) {}
 
   ULONG STDMETHODCALLTYPE AddRef() override { return ++references_; }
 
@@ -180,6 +201,8 @@ class StuckProvider : public IRawElementProviderSimple, public IInvokeProvider {
       *object = static_cast<IRawElementProviderSimple*>(this);
     } else if (id == __uuidof(IInvokeProvider)) {
       *object = static_cast<IInvokeProvider*>(this);
+    } else if (id == __uuidof(IScrollItemProvider) && passive_) {
+      *object = static_cast<IScrollItemProvider*>(this);
     } else {
       *object = nullptr;
       return E_NOINTERFACE;
@@ -201,8 +224,11 @@ class StuckProvider : public IRawElementProviderSimple, public IInvokeProvider {
       return E_POINTER;
     }
     *provider = nullptr;
-    if (pattern == UIA_InvokePatternId) {
+    if (pattern == UIA_InvokePatternId && !passive_) {
       *provider = static_cast<IInvokeProvider*>(this);
+      AddRef();
+    } else if (pattern == UIA_ScrollItemPatternId && passive_) {
+      *provider = static_cast<IScrollItemProvider*>(this);
       AddRef();
     }
     return S_OK;
@@ -218,10 +244,10 @@ class StuckProvider : public IRawElementProviderSimple, public IInvokeProvider {
       value->lVal = UIA_ButtonControlTypeId;
     } else if (property == UIA_NamePropertyId) {
       value->vt = VT_BSTR;
-      value->bstrVal = SysAllocString(L"Stuck action");
+      value->bstrVal = SysAllocString(passive_ ? L"No action pattern" : L"Stuck action");
     } else if (property == UIA_AutomationIdPropertyId) {
       value->vt = VT_BSTR;
-      value->bstrVal = SysAllocString(std::to_wstring(kStuckControl).c_str());
+      value->bstrVal = SysAllocString(std::to_wstring(passive_ ? kPassiveControl : kStuckControl).c_str());
     }
     return S_OK;
   }
@@ -234,6 +260,10 @@ class StuckProvider : public IRawElementProviderSimple, public IInvokeProvider {
   }
 
   HRESULT STDMETHODCALLTYPE Invoke() override {
+    if (passive_) {
+      PostMessageW(mainWindow, kNoActionDispatched, 0, 0);
+      return S_OK;
+    }
     if (!options.stuckStartedFile.empty()) {
       const HANDLE started = CreateFileW(options.stuckStartedFile.c_str(), GENERIC_WRITE, FILE_SHARE_READ, nullptr,
                                          CREATE_NEW, FILE_ATTRIBUTE_NORMAL, nullptr);
@@ -247,9 +277,12 @@ class StuckProvider : public IRawElementProviderSimple, public IInvokeProvider {
     return S_OK;
   }
 
+  HRESULT STDMETHODCALLTYPE ScrollIntoView() override { return S_OK; }
+
  private:
   std::atomic<ULONG> references_{1};
   HWND window_;
+  bool passive_;
 };
 
 LRESULT CALLBACK StuckProc(HWND window, UINT message, WPARAM wparam, LPARAM lparam) {
@@ -269,7 +302,8 @@ LRESULT CALLBACK StuckProc(HWND window, UINT message, WPARAM wparam, LPARAM lpar
       GetClientRect(window, &bounds);
       FrameRect(context, &bounds, static_cast<HBRUSH>(GetStockObject(BLACK_BRUSH)));
       SetBkMode(context, TRANSPARENT);
-      DrawTextW(context, L"Stuck action", -1, &bounds, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+      DrawTextW(context, GetDlgCtrlID(window) == kPassiveControl ? L"No action pattern" : L"Stuck action", -1, &bounds,
+                 DT_CENTER | DT_VCENTER | DT_SINGLELINE);
       EndPaint(window, &paint);
       return 0;
     }
@@ -277,6 +311,150 @@ LRESULT CALLBACK StuckProc(HWND window, UINT message, WPARAM wparam, LPARAM lpar
       break;
   }
   return DefWindowProcW(window, message, wparam, lparam);
+}
+
+// Keep the normal MSAA properties without an actionable pattern. The default
+// action acknowledges a call without effect, exercising the driver's refusal
+// of legacy-only activation.
+class NoActionAccessible : public IAccessible {
+ public:
+  explicit NoActionAccessible(IAccessible* standard) : standard_(standard) {}
+  ~NoActionAccessible() { standard_->Release(); }
+
+  ULONG STDMETHODCALLTYPE AddRef() override { return ++references_; }
+  ULONG STDMETHODCALLTYPE Release() override {
+    const ULONG remaining = --references_;
+    if (remaining == 0) {
+      delete this;
+    }
+    return remaining;
+  }
+  HRESULT STDMETHODCALLTYPE QueryInterface(REFIID id, void** object) override {
+    if (object == nullptr) return E_POINTER;
+    *object = nullptr;
+    if (id != IID_IUnknown && id != IID_IDispatch && id != IID_IAccessible) return E_NOINTERFACE;
+    *object = static_cast<IAccessible*>(this);
+    AddRef();
+    return S_OK;
+  }
+  HRESULT STDMETHODCALLTYPE GetTypeInfoCount(UINT* count) override { return standard_->GetTypeInfoCount(count); }
+  HRESULT STDMETHODCALLTYPE GetTypeInfo(UINT index, LCID locale, ITypeInfo** info) override {
+    return standard_->GetTypeInfo(index, locale, info);
+  }
+  HRESULT STDMETHODCALLTYPE GetIDsOfNames(REFIID id, LPOLESTR* names, UINT count, LCID locale, DISPID* ids) override {
+    return standard_->GetIDsOfNames(id, names, count, locale, ids);
+  }
+  HRESULT STDMETHODCALLTYPE Invoke(DISPID member, REFIID id, LCID locale, WORD flags, DISPPARAMS* params,
+                                    VARIANT* result, EXCEPINFO* exception, UINT* argument) override {
+    return standard_->Invoke(member, id, locale, flags, params, result, exception, argument);
+  }
+  HRESULT STDMETHODCALLTYPE get_accParent(IDispatch** parent) override { return standard_->get_accParent(parent); }
+  HRESULT STDMETHODCALLTYPE get_accChildCount(long* count) override { return standard_->get_accChildCount(count); }
+  HRESULT STDMETHODCALLTYPE get_accChild(VARIANT child, IDispatch** result) override {
+    return standard_->get_accChild(child, result);
+  }
+  HRESULT STDMETHODCALLTYPE get_accName(VARIANT child, BSTR* result) override { return standard_->get_accName(child, result); }
+  HRESULT STDMETHODCALLTYPE get_accValue(VARIANT child, BSTR* result) override { return standard_->get_accValue(child, result); }
+  HRESULT STDMETHODCALLTYPE get_accDescription(VARIANT child, BSTR* result) override {
+    return standard_->get_accDescription(child, result);
+  }
+  HRESULT STDMETHODCALLTYPE get_accRole(VARIANT, VARIANT* result) override {
+    if (result == nullptr) return E_POINTER;
+    VariantInit(result);
+    result->vt = VT_I4;
+    result->lVal = ROLE_SYSTEM_STATICTEXT;
+    return S_OK;
+  }
+  HRESULT STDMETHODCALLTYPE get_accState(VARIANT child, VARIANT* result) override { return standard_->get_accState(child, result); }
+  HRESULT STDMETHODCALLTYPE get_accHelp(VARIANT child, BSTR* result) override { return standard_->get_accHelp(child, result); }
+  HRESULT STDMETHODCALLTYPE get_accHelpTopic(BSTR* file, VARIANT child, long* topic) override {
+    return standard_->get_accHelpTopic(file, child, topic);
+  }
+  HRESULT STDMETHODCALLTYPE get_accKeyboardShortcut(VARIANT child, BSTR* result) override {
+    return standard_->get_accKeyboardShortcut(child, result);
+  }
+  HRESULT STDMETHODCALLTYPE get_accFocus(VARIANT* result) override { return standard_->get_accFocus(result); }
+  HRESULT STDMETHODCALLTYPE get_accSelection(VARIANT* result) override { return standard_->get_accSelection(result); }
+  HRESULT STDMETHODCALLTYPE get_accDefaultAction(VARIANT, BSTR* result) override {
+    if (result == nullptr) return E_POINTER;
+    *result = nullptr;
+    return S_FALSE;
+  }
+  HRESULT STDMETHODCALLTYPE accSelect(long flags, VARIANT child) override { return standard_->accSelect(flags, child); }
+  HRESULT STDMETHODCALLTYPE accLocation(long* x, long* y, long* width, long* height, VARIANT child) override {
+    return standard_->accLocation(x, y, width, height, child);
+  }
+  HRESULT STDMETHODCALLTYPE accNavigate(long direction, VARIANT from, VARIANT* result) override {
+    return standard_->accNavigate(direction, from, result);
+  }
+  HRESULT STDMETHODCALLTYPE accHitTest(long x, long y, VARIANT* result) override { return standard_->accHitTest(x, y, result); }
+  HRESULT STDMETHODCALLTYPE accDoDefaultAction(VARIANT) override {
+    PostMessageW(mainWindow, kNoActionDispatched, 0, 0);
+    return S_OK;
+  }
+  HRESULT STDMETHODCALLTYPE put_accName(VARIANT child, BSTR value) override { return standard_->put_accName(child, value); }
+  HRESULT STDMETHODCALLTYPE put_accValue(VARIANT child, BSTR value) override { return standard_->put_accValue(child, value); }
+
+ private:
+  std::atomic<ULONG> references_{1};
+  IAccessible* standard_;
+};
+
+LRESULT CALLBACK NoActionProc(HWND window, UINT message, WPARAM wparam, LPARAM lparam) {
+  if (message == WM_GETOBJECT && static_cast<LONG>(lparam) == OBJID_CLIENT) {
+    IAccessible* standard = nullptr;
+    if (SUCCEEDED(CreateStdAccessibleObject(window, OBJID_CLIENT, IID_IAccessible, reinterpret_cast<void**>(&standard)))) {
+      auto* accessible = new NoActionAccessible(standard);
+      const LRESULT result = LresultFromObject(IID_IAccessible, wparam, accessible);
+      accessible->Release();
+      return result;
+    }
+  }
+  return DefWindowProcW(window, message, wparam, lparam);
+}
+
+LRESULT CALLBACK ToolProc(HWND window, UINT message, WPARAM wparam, LPARAM lparam) {
+  if (message == WM_COMMAND) {
+    if (LOWORD(wparam) == kToolAction) {
+      PostMessageW(mainWindow, kToolApplied, 0, 0);
+      return 0;
+    }
+    if (LOWORD(wparam) == kToolClose) {
+      DestroyWindow(window);
+      return 0;
+    }
+  }
+  return DefWindowProcW(window, message, wparam, lparam);
+}
+
+void OpenToolWindows(HWND owner) {
+  if (!toolWindows.empty()) return;
+  INITCOMMONCONTROLSEX controls{sizeof(INITCOMMONCONTROLSEX), ICC_WIN95_CLASSES};
+  InitCommonControlsEx(&controls);
+  RECT bounds{};
+  GetWindowRect(owner, &bounds);
+  const auto create = [&](HWND parent, bool content, bool visible, bool empty, const wchar_t* className = kToolClass) {
+    const HWND tool = CreateWindowExW(WS_EX_TOOLWINDOW | WS_EX_NOACTIVATE | WS_EX_TOPMOST, className, L"",
+                                      WS_POPUP | WS_BORDER, bounds.left + Scale(30, owner), bounds.top + Scale(80, owner),
+                                      empty ? 0 : Scale(280, owner), empty ? 0 : Scale(120, owner),
+                                      parent, nullptr, GetModuleHandleW(nullptr), nullptr);
+    if (tool == nullptr) return static_cast<HWND>(nullptr);
+    toolWindows.push_back(tool);
+    if (content) {
+      AddChild(tool, L"BUTTON", L"Tool action", WS_TABSTOP | BS_PUSHBUTTON, kToolAction, 10, 10, 120, 28);
+      AddChild(tool, L"BUTTON", L"Close tool", WS_TABSTOP | BS_PUSHBUTTON, kToolClose, 10, 50, 120, 28);
+    }
+    if (visible) ShowWindow(tool, SW_SHOWNOACTIVATE);
+    return tool;
+  };
+  create(owner, true, true, false);
+  const HWND unowned = create(nullptr, true, true, false);
+  create(unowned, true, true, false);
+  create(owner, false, true, false);
+  create(owner, true, false, false);
+  create(owner, true, true, true);
+  create(owner, true, true, false, TOOLTIPS_CLASSW);
+  SetStatus(L"Opened " + std::to_wstring(toolWindows.size()) + L" tool windows");
 }
 
 void CreateMainControls(HWND window) {
@@ -295,6 +473,13 @@ void CreateMainControls(HWND window) {
   }
   if (options.nodes > 0) {
     CreateTree(window);
+  }
+  if (options.noDefaultAction) {
+    AddChild(window, kNoActionClass, L"No default action", 0, kNoActionControl, 10, 140, 200, 28);
+    AddChild(window, kStuckClass, L"", 0, kPassiveControl, 10, 180, 200, 28);
+  }
+  if (options.toolWindows) {
+    AddChild(window, L"BUTTON", L"Open tool windows", WS_TABSTOP | BS_PUSHBUTTON, kToolButton, 10, 140, 180, 28);
   }
 }
 
@@ -364,6 +549,9 @@ LRESULT CALLBACK MainProc(HWND window, UINT message, WPARAM wparam, LPARAM lpara
         case kDialogButton:
           OpenDialog(window);
           return 0;
+        case kToolButton:
+          OpenToolWindows(window);
+          return 0;
         case kHangButton:
           // A busy or suspended application: nothing is pumped until this returns.
           Sleep(options.hangMilliseconds);
@@ -379,6 +567,13 @@ LRESULT CALLBACK MainProc(HWND window, UINT message, WPARAM wparam, LPARAM lpara
     case kStuckApplied:
       stuckApplications += 1;
       SetStatus(L"Stuck action applied " + std::to_wstring(stuckApplications) + L" times");
+      return 0;
+    case kNoActionDispatched:
+      SetStatus(L"Nonactionable default dispatched");
+      return 0;
+    case kToolApplied:
+      toolActivations += 1;
+      SetStatus(L"Tool activated " + std::to_wstring(toolActivations) + L" times");
       return 0;
     case WM_DESTROY:
       PostQuitMessage(0);
@@ -403,6 +598,12 @@ void RegisterClasses(HINSTANCE instance) {
   RegisterClassExW(&windowClass);
   windowClass.lpfnWndProc = StuckProc;
   windowClass.lpszClassName = kStuckClass;
+  RegisterClassExW(&windowClass);
+  windowClass.lpfnWndProc = NoActionProc;
+  windowClass.lpszClassName = kNoActionClass;
+  RegisterClassExW(&windowClass);
+  windowClass.lpfnWndProc = ToolProc;
+  windowClass.lpszClassName = kToolClass;
   RegisterClassExW(&windowClass);
 }
 

@@ -84,6 +84,8 @@ Implemented `furn` extensions:
 - `POST /session/{id}/furn/story/reset`;
 - `POST /session/{id}/furn/story/args`;
 - `GET /session/{id}/furn/tree`;
+- `GET /session/{id}/furn/window/{window-id}/tree`, reading a currently listed
+  session window without selecting or activating it (`DesktopSessionClient.getWindowTree`);
 - `GET /session/{id}/furn/window-events`, when the `windowEvents` feature is
   advertised in `furn:features`;
 - `GET /session/{id}/furn/ops` and `POST /session/{id}/furn/ops/{name}`, the
@@ -97,6 +99,12 @@ monotonic clock, each with an `ageMs`. Live window events carry a descriptor
 with role, subrole, title, frame, and the matching WindowServer window so
 transient popups and sheets remain identifiable after they close. The log is
 evidence for diagnosis only; window and element queries remain authoritative.
+
+The explicit-window tree query refreshes the session's window list and refuses
+an unlisted or closed ID with `no such window` before asking for its tree. It
+does not change the selected window, native focus, input state, or preview
+generation. Like `furn/tree`, it returns a full compact tree rather than a
+budgeted agent observation; use agent operations for bounded observations.
 
 Navigation, history, cookies, frames, shadow roots, prompts, printing,
 arbitrary JavaScript execution, browser CSS values, and new-window creation

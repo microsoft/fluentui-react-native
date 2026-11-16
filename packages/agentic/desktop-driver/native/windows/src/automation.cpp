@@ -467,9 +467,67 @@ void Automation::Initialize() {
                automation->get_RawViewWalker(rawWalker_.put()));
   CheckHresult(kErrorAutomationFailed, "Reading the UI Automation control walker",
                automation->get_ControlViewWalker(controlWalker_.put()));
+  CheckHresult(kErrorAutomationFailed, "Reading the UI Automation content walker",
+               automation->get_ContentViewWalker(contentWalker_.put()));
   CheckHresult(kErrorAutomationFailed, "Reading the UI Automation not-supported sentinel",
                UiaGetReservedNotSupportedValue(notSupportedValue_.put()));
   automation_ = automation;
+}
+
+bool Automation::HasWindowContent(HWND window, DWORD processId, ULONGLONG expiresAt, const CancellationToken& token) {
+  token.ThrowIfCancelled();
+  const ULONGLONG now = GetTickCount64();
+  if (now >= expiresAt) return false;
+  const DWORD timeoutMs = static_cast<DWORD>(std::min<ULONGLONG>(expiresAt - now, kProviderCallTimeoutMs));
+  const auto automation = automation_;
+  const auto walker = contentWalker_;
+  const auto content = std::make_shared<bool>(false);
+  try {
+    const HRESULT result = RunBoundedProviderCall(
+        ProviderCall::Read, [automation, walker, window, processId, content, expiresAt]() {
+          if (GetTickCount64() >= expiresAt) return kUiaTimeoutResult;
+          // A late read must not start another transaction after the deadline.
+          const auto checked = [expiresAt](HRESULT result) {
+            return SUCCEEDED(result) && GetTickCount64() >= expiresAt ? kUiaTimeoutResult : result;
+          };
+          winrt::com_ptr<IUIAutomationElement> root;
+          HRESULT result = checked(automation->ElementFromHandle(window, root.put()));
+          if (FAILED(result) || !root) return FAILED(result) ? result : E_FAIL;
+          int rootProcessId = 0;
+          result = checked(root->get_CurrentProcessId(&rootProcessId));
+          if (FAILED(result)) return result;
+          if (rootProcessId != static_cast<int>(processId)) return S_FALSE;
+          UIA_HWND rootWindow{};
+          result = checked(root->get_CurrentNativeWindowHandle(&rootWindow));
+          if (FAILED(result)) return result;
+          if (rootWindow != window) return S_FALSE;
+          CONTROLTYPEID rootType = 0;
+          result = checked(root->get_CurrentControlType(&rootType));
+          if (FAILED(result)) return result;
+          if (rootType == UIA_ToolTipControlTypeId) return S_FALSE;
+          winrt::com_ptr<IUIAutomationElement> child;
+          result = checked(walker->GetFirstChildElement(root.get(), child.put()));
+          if (FAILED(result) || !child) return FAILED(result) ? result : S_FALSE;
+          int childProcessId = 0;
+          result = checked(child->get_CurrentProcessId(&childProcessId));
+          if (FAILED(result)) return result;
+          BOOL isContent = FALSE;
+          result = checked(child->get_CurrentIsContentElement(&isContent));
+          if (FAILED(result)) return result;
+          CONTROLTYPEID type = 0;
+          result = checked(child->get_CurrentControlType(&type));
+          if (FAILED(result)) return result;
+          *content = childProcessId == static_cast<int>(processId) && isContent != FALSE &&
+                     type != UIA_ToolTipControlTypeId;
+          return S_OK;
+        },
+        timeoutMs, "Reading the owned window content", kErrorAutomationFailed);
+    token.ThrowIfCancelled();
+    return SUCCEEDED(result) && *content;
+  } catch (const HelperError&) {
+    token.ThrowIfCancelled();
+    return false;
+  }
 }
 
 winrt::com_ptr<IUIAutomationElement> Automation::ParentOf(IUIAutomationElement* element) const {
@@ -1402,7 +1460,8 @@ void Automation::AccessibilityClick(const std::string& elementId, const Cancella
                  BoundedRead([expand, state]() { return expand->get_CurrentExpandCollapseState(state.get()); },
                              "Reading the expand state"));
     if (*state == ExpandCollapseState_LeafNode) {
-      Fail(kErrorUnsupported, "The element is a leaf node and cannot be activated through accessibility.");
+      throw HelperError(kErrorUnsupported, "The element is a leaf node and cannot be activated through accessibility.",
+                         "activation-unsupported");
     }
     const bool collapse = *state == ExpandCollapseState_Expanded;
     CheckClickResult("Expanding or collapsing the element",
@@ -1410,18 +1469,11 @@ void Automation::AccessibilityClick(const std::string& elementId, const Cancella
                                      "Expanding or collapsing the element"));
     return;
   }
-  const auto legacyQuery =
-      QueryPattern<IUIAutomationLegacyIAccessiblePattern>(element.get(), UIA_LegacyIAccessiblePatternId);
-  if (RequirePatternQuery(legacyQuery, "Reading the element's LegacyIAccessible pattern")) {
-    const winrt::com_ptr<IUIAutomationLegacyIAccessiblePattern> legacy = legacyQuery.pattern;
-    CheckClickResult("Invoking the legacy accessibility default action",
-                     CountedMutation([legacy]() { return legacy->DoDefaultAction(); },
-                                     "Invoking the legacy accessibility default action"));
-    return;
-  }
-  Fail(kErrorUnsupported,
-       "The element does not implement an Invoke, Toggle, SelectionItem, ExpandCollapse, or LegacyIAccessible pattern, so an "
-       "accessibility click is unavailable.");
+  // The legacy bridge can synthesize a nonempty default action and acknowledge
+  // it without dispatching any actionable UIA pattern.
+  throw HelperError(kErrorUnsupported,
+                     "The element does not implement an actionable Invoke, Toggle, SelectionItem, or ExpandCollapse pattern.",
+                     "activation-unsupported");
 }
 
 json::Value Automation::AccessibilityActions(const std::string& elementId, const CancellationToken& token) {

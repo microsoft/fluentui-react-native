@@ -84,6 +84,8 @@ class Driver {
   }
   // Replaces the hit test that checks where a pointer press or scroll lands.
   void UseTestHitTester(ClickHitTester hitTest) { hitTester_ = hitTest; }
+  // Runs after enumeration, immediately before a listed window's geometry is read.
+  void UseTestWindowSummaryHook(std::function<void(HWND)> hook) { windowSummaryHook_ = std::move(hook); }
 
  private:
   CommandResult ExecuteCommand(const std::string& command, const json::Value& params, const CancellationToken& token);
@@ -166,6 +168,7 @@ class Driver {
   ForegroundReader foregroundReader_;
   WindowActivator activator_;
   ClickHitTester hitTester_{&WindowFromPoint};
+  std::function<void(HWND)> windowSummaryHook_;
 };
 
 }  // namespace furn

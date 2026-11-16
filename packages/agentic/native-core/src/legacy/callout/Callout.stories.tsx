@@ -76,10 +76,20 @@ const CalloutExample = ({ defaultVisible = false, onDismiss, onShow, showWindowC
             <Text style={styles.body}>This content is hosted in a separate native window.</Text>
             {showWindowCommands && (
               <View style={styles.commandRow}>
-                <Pressable accessibilityRole="button" onPress={() => calloutRef.current?.focusWindow()} style={styles.command}>
+                <Pressable
+                  accessibilityRole="button"
+                  onPress={() => calloutRef.current?.focusWindow()}
+                  style={styles.command}
+                  testID="agentic-storybook-callout-focus"
+                >
                   <Text>Focus window</Text>
                 </Pressable>
-                <Pressable accessibilityRole="button" onPress={() => calloutRef.current?.blurWindow()} style={styles.command}>
+                <Pressable
+                  accessibilityRole="button"
+                  onPress={() => calloutRef.current?.blurWindow()}
+                  style={styles.command}
+                  testID="agentic-storybook-callout-blur"
+                >
                   <Text>Blur window</Text>
                 </Pressable>
               </View>

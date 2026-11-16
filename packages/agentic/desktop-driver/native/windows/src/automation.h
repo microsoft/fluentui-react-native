@@ -79,6 +79,10 @@ class Automation {
 
   void Initialize();
 
+  // A bounded content-view probe for an already identity-checked secondary
+  // window. It retains no element records; unreadable content is not proven.
+  // expiresAt is the shared windows-call deadline in GetTickCount64 units.
+  bool HasWindowContent(HWND window, DWORD processId, ULONGLONG expiresAt, const CancellationToken& token);
   std::vector<ElementSnapshot> SnapshotWindowTree(const WindowContext& context, const CancellationToken& token);
   std::vector<ElementSnapshot> Find(const WindowContext& context, const std::string& rootElementId,
                                     const Selector& selector, const CancellationToken& token);
@@ -158,6 +162,7 @@ class Automation {
   winrt::com_ptr<IUIAutomationCondition> rawViewCondition_;
   winrt::com_ptr<IUIAutomationTreeWalker> rawWalker_;
   winrt::com_ptr<IUIAutomationTreeWalker> controlWalker_;
+  winrt::com_ptr<IUIAutomationTreeWalker> contentWalker_;
   winrt::com_ptr<IUnknown> notSupportedValue_;
   ElementRegistry registry_;
 };

@@ -1,3 +1,5 @@
+import { createDesktopDriverClient, DesktopSessionClient, WebDriverError } from '@fluentui-react-native/desktop-driver';
+import type { DesktopTreeNode } from '@fluentui-react-native/desktop-driver';
 import { Keys } from './consts.js';
 
 /** A page object getter, or the element it has already resolved to. */
@@ -5,6 +7,42 @@ export type PageElement = ChainablePromiseElement | WebdriverIO.Element;
 
 export function isNativeDesktop(): boolean {
   return browser.capabilities.browserName === 'furn-native-desktop';
+}
+
+export async function hasUnexpectedNativeDesktopWindow(handles: readonly string[]): Promise<boolean> {
+  if (handles.length <= 1) return false;
+  const current = await browser.getWindowHandle();
+  const url = `${browser.options.protocol}://${browser.options.hostname}:${browser.options.port}${browser.options.path}`;
+  const session = new DesktopSessionClient(
+    createDesktopDriverClient({ url }),
+    browser.sessionId,
+    Object.fromEntries(Object.entries(browser.capabilities)),
+  );
+  for (const handle of handles) {
+    if (handle === current) continue;
+    // Switching windows would activate the target and can dismiss the menu being tested.
+    let roots: DesktopTreeNode[];
+    try {
+      roots = await session.getWindowTree(handle);
+    } catch (error) {
+      if (error instanceof WebDriverError && error.code === 'no such window') continue;
+      throw error;
+    }
+    // A closing popup can lose its content before its window disappears.
+    if (!isExpectedMenuTree(roots) && (await browser.getWindowHandles()).includes(handle)) return true;
+  }
+  return false;
+}
+
+function isExpectedMenuTree(roots: readonly DesktopTreeNode[]): boolean {
+  if (roots.length !== 1 || roots[0].role !== 'menu') return false;
+  const pending = [...roots];
+  while (pending.length > 0) {
+    const node = pending.pop()!;
+    if (node.role === 'dialog' || node.role === 'window') return false;
+    pending.push(...node.children);
+  }
+  return true;
 }
 
 export async function sendNativeDesktopKeys(element: PageElement, keys: readonly Keys[]): Promise<void> {

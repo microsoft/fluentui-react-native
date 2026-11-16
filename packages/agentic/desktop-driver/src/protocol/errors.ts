@@ -76,7 +76,7 @@ function convertToWebDriverError(error: unknown): WebDriverError {
     return new WebDriverError('stale element reference', error.message);
   }
   if (error instanceof HostUnsupportedError) {
-    return new WebDriverError('unsupported operation', error.message);
+    return new WebDriverError('unsupported operation', error.message, error.data);
   }
   return new WebDriverError('unknown error', error instanceof Error ? error.message : String(error));
 }
@@ -101,8 +101,11 @@ export class HostStaleError extends Error {
 }
 
 export class HostUnsupportedError extends Error {
-  constructor(message: string) {
+  readonly data?: Record<string, unknown>;
+
+  constructor(message: string, data?: Record<string, unknown>) {
     super(message);
     this.name = 'HostUnsupportedError';
+    this.data = data;
   }
 }

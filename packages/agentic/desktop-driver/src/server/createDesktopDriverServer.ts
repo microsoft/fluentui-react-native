@@ -629,6 +629,19 @@ async function route(context: RouteContext, sessions: SessionManager, targets: T
       );
       return buildDesktopTree(snapshots);
     }
+    if (method === 'GET' && command[1] === 'window' && command[2] && command[3] === 'tree' && command.length === 4) {
+      const windowId = command[2];
+      session.windows = await hostCommand(session, 'Reading application windows', (signal) =>
+        session.target.host.windows(session.lease, signal),
+      );
+      if (!session.windows.some(({ id }) => id === windowId)) {
+        throw new WebDriverError('no such window', `Window "${windowId}" does not exist in this session.`);
+      }
+      const snapshots = await hostCommand(session, 'Reading a window accessibility tree', (signal) =>
+        session.target.host.tree(windowId, signal),
+      );
+      return buildDesktopTree(snapshots);
+    }
     if (method === 'GET' && command[1] === 'window-events' && command.length === 2) {
       const windowEvents = session.target.host.windowEvents?.bind(session.target.host);
       if (!windowEvents) {

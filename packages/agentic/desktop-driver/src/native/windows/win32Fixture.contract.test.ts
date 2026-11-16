@@ -32,6 +32,7 @@ type Retention = { privateBytes: number; retainedElementLimit: number; retainedE
 type WindowEventReport = {
   events: { descriptor?: { title?: string }; notification: string; windowId?: string }[];
   observing: boolean;
+  publication: { windows: { className: string; listed: boolean; tracked: boolean }[] };
   retention: Retention;
   source: string;
 };
@@ -232,6 +233,102 @@ describe('Windows helper against a plain Win32 application', () => {
           : undefined;
       });
       expect(report).toMatchObject({ observing: true, source: 'WinEvent' });
+    } finally {
+      await session.dispose();
+    }
+  });
+
+  windowsTest.each(['1011', '1013'])('refuses legacy-only activation of a nonactionable control (%s)', async (automationId) => {
+    const session = await FixtureSession.start('no-default-action', { args: ['--no-default-action', '1'] });
+    try {
+      const target = await session.control(session.main.id, automationId);
+      const { actions } = await session.call<{ actions: string[] }>('accessibilityActions', { elementId: target.id });
+      expect(actions).toEqual(automationId === '1013' ? ['ScrollIntoView'] : []);
+      await expect(session.host.request('click', { elementId: target.id, mode: 'accessibility' })).rejects.toMatchObject({
+        code: 'unsupported-operation',
+        data: { reason: 'activation-unsupported' },
+        effect: 'none',
+      });
+      expect(await session.status()).toBe('Ready');
+      await session.click('1001');
+      await waitFor('the actionable control to remain usable', async () => (await session.status()) === 'Activated 1 times');
+    } finally {
+      await session.dispose();
+    }
+  });
+
+  windowsTest('registers only owned untitled tool roots containing application content', async () => {
+    const session = await FixtureSession.start('tool-content', { args: ['--tool-windows', '1'] });
+    try {
+      expect(await session.windows()).toHaveLength(1);
+      await session.click('1012');
+      await waitFor('all content and excluded tool roots to open', async () => (await session.status()) === 'Opened 7 tool windows');
+      const secondary = await waitFor('the owned content tool window', async () => {
+        const windows = await session.windows();
+        return windows.length === 2 ? windows.find((window) => window.id !== session.main.id) : undefined;
+      });
+      expect(secondary.title).toBe('');
+      const tools = (await session.eventReport()).publication.windows.filter((window) => window.className === 'FurnWin32FixtureTool');
+      expect(tools.filter((window) => window.listed)).toEqual([expect.objectContaining({ listed: true, tracked: true })]);
+      expect(tools.filter((window) => !window.tracked).every((window) => !window.listed)).toBe(true);
+      expect(await session.control(secondary.id, '3101')).toMatchObject({ name: 'Tool action', role: 'button' });
+      await session.click('3101', secondary.id);
+      await waitFor('the secondary action to reach the application', async () => (await session.status()) === 'Tool activated 1 times');
+      await session.click('3102', secondary.id);
+      await waitFor('the content tool window to close', async () => (await session.windows()).length === 1);
+      await expect(session.host.request('getWindowRect', { windowId: secondary.id })).rejects.toMatchObject({ code: 'no-such-window' });
+      await session.click('1001');
+      await waitFor('the main window to remain usable', async () => (await session.status()) === 'Activated 1 times');
+    } finally {
+      await session.dispose();
+    }
+  });
+
+  windowsTest('keeps an admitted owned popup listable while its provider is hung', async () => {
+    const session = await FixtureSession.start('tool-hang', { args: ['--tool-windows', '1', '--hang-ms', '22000'] });
+    try {
+      const hang = await session.control(session.main.id, '1007');
+      await session.click('1012');
+      await waitFor('the tool roots to open', async () => (await session.status()) === 'Opened 7 tool windows');
+      const secondary = await waitFor('the owned tool popup to register', async () =>
+        (await session.windows()).find((window) => window.id !== session.main.id),
+      );
+      await session.press(hang);
+      await delay(300);
+
+      for (let attempt = 0; attempt < 2; attempt += 1) {
+        const startedAt = Date.now();
+        const listed = await session.windows();
+        expect(Date.now() - startedAt).toBeLessThan(2_500);
+        expect(listed.map((window) => window.id)).toEqual(expect.arrayContaining([session.main.id, secondary.id]));
+        expect(await session.call('getWindowRect', { windowId: secondary.id })).toMatchObject(secondary.rect);
+      }
+    } finally {
+      await session.dispose();
+    }
+  });
+
+  windowsTest('bounds new-popup discovery while its provider is hung and recovers later', async () => {
+    const session = await FixtureSession.start('tool-probe-budget', { args: ['--tool-windows', '1', '--hang-ms', '22000'] });
+    try {
+      const hang = await session.control(session.main.id, '1007');
+      await session.click('1012');
+      await waitFor('the tool roots to open without listing them', async () => (await session.status()) === 'Opened 7 tool windows');
+      await session.press(hang);
+      await delay(300);
+
+      const startedAt = Date.now();
+      const listed = await session.windows();
+      expect(Date.now() - startedAt).toBeLessThan(2_500);
+      expect(listed).toContainEqual(session.main);
+      // Providers that still answer may prove content even while the UI thread is busy.
+      expect(listed.length).toBeLessThanOrEqual(2);
+
+      await waitFor('the provider to respond again', async () => (await session.status().catch(() => undefined)) === 'Hang finished', {
+        intervalMs: 250,
+        timeoutMs: 40_000,
+      });
+      await waitFor('the deferred content popup to register', async () => (await session.windows()).length === 2);
     } finally {
       await session.dispose();
     }

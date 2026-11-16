@@ -12,7 +12,7 @@ import {
   TESTPAGE_BUTTONS_SCROLLVIEWER,
   TESTPAGE_CONTENT_SCROLLVIEWER,
 } from './consts.js';
-import { isNativeDesktop, scrollNativeDesktopElement, sendNativeDesktopKeys } from './nativeDesktop.js';
+import { hasUnexpectedNativeDesktopWindow, isNativeDesktop, scrollNativeDesktopElement, sendNativeDesktopKeys } from './nativeDesktop.js';
 import type { PageElement } from './nativeDesktop.js';
 
 const DUMMY_CHAR = '';
@@ -440,9 +440,9 @@ export abstract class BasePage {
    * WHY/HOW: Unfortunately, some Asserts don't take focus away from the test app. Because of this, the test execution is able
    * to continue without realizing an assert as popped up (unless the assert is a crashing one).
    *
-   * In order to detect an assert, this function gets the number of window handles currently open within the test app.
-   * Only one instance SHOULD be open at a time (the app itself). If another instance of the app is open, we know an assert dialogue
-   * has popped up. With this information, we know to fail the test.
+   * Unexpected secondary windows can indicate a non-focusing assert. Windows native menus are legitimate secondary
+   * windows, so inspect their accessibility roots without changing focus. Unrecognized windows still fail the check,
+   * and an unreadable window fails the test rather than silently claiming no assert.
    *
    * Additionally, you might think it's logical to simply place this in the afterEach() hook so it's called after every test (rather than duplicating this call in every test).
    * Unfortunately, afterEach() is designed for setup/teardown - not for determining if a test should fail or not.
@@ -456,8 +456,10 @@ export abstract class BasePage {
     if (PLATFORM === 'android') {
       return !(await this.isPageLoaded());
     }
-    // If more than 1 instance of the app is open, we know an assert dialogue popped up.
     const windowHandles = await browser.getWindowHandles();
+    if (isNativeDesktop() && browser.capabilities.platformName === 'windows') {
+      return hasUnexpectedNativeDesktopWindow(windowHandles);
+    }
     return windowHandles.length > 1;
   }
 

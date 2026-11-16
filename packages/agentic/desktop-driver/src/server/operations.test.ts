@@ -8,6 +8,7 @@ import type { FakeDesktopHostOptions } from '../hosts/fake/FakeDesktopHost.js';
 import { translateNativeError } from '../hosts/native/NativeDesktopHost.js';
 import { NativeDriverError } from '../native/NativeDriverError.js';
 import type { OperationCatalogEntry } from '../operations/index.js';
+import { attachFailureEffect } from '../protocol/settlement.js';
 import { createFakeTree, fakeTreeSize } from '../testing/fakeTree.js';
 import type { FakeTreeShape } from '../testing/fakeTree.js';
 import { createDesktopDriverTestHarness } from '../testing/protocolHarness.js';
@@ -493,6 +494,39 @@ describe('Desktop Driver agent operations', () => {
   });
 
   describe('act', () => {
+    test('keeps a native activation refusal without a receipt or implicit physical fallback', async () => {
+      await withFixture({ windows: actWindow }, async ({ harness, session }) => {
+        const click = jest.spyOn(harness.host, 'click').mockImplementationOnce(async () => {
+          throw translateNativeError(
+            attachFailureEffect(
+              new NativeDriverError('unsupported-operation', 'No default action is available.', {
+                reason: 'activation-unsupported',
+              }),
+              'none',
+            ),
+          );
+        });
+        const before = await session.getInput();
+
+        await expect(session.act({ action: 'activate', find: { automationId: 'save' } })).rejects.toMatchObject({
+          code: 'unsupported operation',
+          data: {
+            mutation: rejected(),
+            nativeCode: 'unsupported-operation',
+            reason: 'activation-unsupported',
+          },
+        });
+        expect(await session.getInput()).toEqual(before);
+        expect(click.mock.calls.map(([, mode]) => mode)).toEqual(['accessibility']);
+        expect(harness.host.actions.filter((action) => action.type === 'click')).toEqual([]);
+
+        await expect(session.act({ action: 'click', find: { automationId: 'save' } })).resolves.toMatchObject({
+          result: { disposition: 'applied', mechanism: 'physical-pointer' },
+        });
+        expect(click.mock.calls.map(([, mode]) => mode)).toEqual(['accessibility', 'physical']);
+      });
+    });
+
     test('clicks, activates, types into, and clears a proven element, and says how each was carried out', async () => {
       await withFixture({ windows: actWindow }, async ({ harness, session }) => {
         await expect(session.act({ action: 'click', ...(await proven(session, 'agree')) })).resolves.toMatchObject({

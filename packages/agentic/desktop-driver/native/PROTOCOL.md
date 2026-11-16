@@ -380,6 +380,27 @@ events:
 Queries remain authoritative. Events can invalidate state or wake waits but do
 not replace a liveness or state query.
 
+For Windows/Win32, an untitled tool popup needs verified native ownership and
+UIA content for initial admission to its exact-process lease. Subsequent
+`windows` queries retain its opaque identity using native lease/process,
+thread/class, visibility, bounds, and ownership checks, without calling UIA
+again. A provider timeout or transient content failure is not window closure.
+All new popup-content probes share one 1,000 ms discovery deadline per
+`windows` request. Unproved or unprobed candidates are omitted and can be
+retried by a later request; admitted windows remain listable even if discovery
+uses the whole budget. A read deadline does not quarantine mutations, and
+cancellation is still honored. Publication diagnostics mark admitted live
+popups as both `listed` and `tracked` without another content probe.
+
+If a Windows/Win32 window closes between enumeration and geometry
+serialization, `windows` omits it instead of failing the remaining live
+listing. This suppresses only `no-such-window` when native liveness confirms
+the handle has gone; unrelated errors and failures for still-live handles
+propagate. Direct commands for the closed window still fail.
+
+This is internal Windows admission/liveness policy: no request field, response
+shape, command, or FDR1 1.0 constant in `protocol.json` changes.
+
 Helpers that advertise the `windowEvents` feature also accept a `windowEvents`
 command with the target `lease` and return a bounded diagnostic log of recent
 window notifications and helper commands, and publish a `window-closed` event
@@ -426,6 +447,22 @@ whose key matches. If no action or more than one action matches, it fails
 one input turn and refuses a display name the element does not publish
 exactly once, so a key never reaches a different action than the one the
 agent named.
+
+### Windows accessibility activation
+
+For the shared Windows/Win32 provider, accessibility `click` requires an
+actionable `Invoke`, `Toggle`, `SelectionItem`, or `ExpandCollapse` pattern.
+LegacyIAccessible default-action metadata, even when nonempty, and a
+`ScrollIntoView` pattern alone do not prove an activation can be dispatched.
+Without an actionable pattern, the helper fails `unsupported-operation` with
+`data.reason` `activation-unsupported` and effect `none` before mutation. Node
+retains the native code and reason, records no delivery, and does not
+implicitly retry with physical input. An explicit permitted physical request
+is a separate operation; an indeterminate mutation must not be replayed.
+
+This is a provider dispatch-policy correction using the existing error and
+effect fields. FDR1 framing, commands, and the 1.0 wire constants in
+`protocol.json` are unchanged.
 
 ### Clear mechanisms
 

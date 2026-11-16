@@ -89,6 +89,24 @@ describe('NativeDesktopHost error translation', () => {
     });
   });
 
+  test('preserves a no-dispatch activation refusal without making it an uncertain mutation', () => {
+    const translated = translateNativeError(
+      attachFailureEffect(
+        new NativeDriverError('unsupported-operation', 'No default action is available.', { reason: 'activation-unsupported' }),
+        'none',
+      ),
+    );
+
+    expect(translated).toMatchObject({ name: 'HostUnsupportedError' });
+    expect(toWebDriverError(translated)).toMatchObject({
+      code: 'unsupported operation',
+      data: { nativeCode: 'unsupported-operation', reason: 'activation-unsupported' },
+    });
+    expect(readFailureEffect(translated)).toBe('none');
+    expect(dispositionOfFailure(translated)).toBe('rejected');
+    expect(readProviderQuarantine(translated)).toBe(false);
+  });
+
   describe('provider settlement codes', () => {
     test.each<[nativeCode: string, effect: string, disposition: string]>([
       ['mutation-indeterminate', 'unknown', 'indeterminate'],

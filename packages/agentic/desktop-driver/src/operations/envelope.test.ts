@@ -13,6 +13,15 @@ import {
 } from './envelope';
 import { maxRequestIdLength } from './limits';
 
+describe('WebDriverError', () => {
+  test('does not expose stack traces in its serialized response', () => {
+    const error = new WebDriverError('unknown error', 'Failed.');
+    error.stack = 'Error: Failed.\n    at /private/source.js:1:1';
+
+    expect(error.toJSON().stacktrace).toBe('');
+  });
+});
+
 describe('parseOperationRequest', () => {
   test('defaults a missing body or input to an empty input', () => {
     expect(parseOperationRequest(undefined)).toEqual({ input: {} });

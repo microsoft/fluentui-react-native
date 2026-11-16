@@ -20,8 +20,8 @@ Remove-Item Env:\FURN_NATIVE_DRIVER_TEST
 ```
 
 Without `FURN_NATIVE_DRIVER_TEST=1` the suite is skipped. Use `--runInBand`: the scenarios share one desktop and one
-build cache, and each starts its own helper process because the mutation quarantine is process-wide. A full run takes
-about one minute. The onscreen scenario needs an unlocked interactive desktop for hit testing and capture; every other
+build cache, and each starts its own helper process because the mutation quarantine is process-wide. Hang scenarios
+include bounded provider-recovery waits. The onscreen scenario needs an unlocked interactive desktop for hit testing and capture; every other
 scenario places the window off every monitor. `yarn test --runInBand protectedService` runs the protected-service suite,
 and `yarn test --runInBand operations.contract` runs the agent-operation
 suite described below. The latter activates the fixture and sends real
@@ -29,14 +29,16 @@ pointer and keyboard input.
 
 ## Options
 
-| Option                  | Default              | Effect                                                                             |
-| ----------------------- | -------------------- | ---------------------------------------------------------------------------------- |
-| `--title <text>`        | `FURN Win32 Fixture` | Main window title; the contract passes a unique value per scenario.                |
-| `--nodes <count>`       | `0`                  | Adds a tree view with this many `Item N` entries.                                  |
-| `--hang-ms <count>`     | `20000`              | How long the **Hang** button blocks the UI thread.                                 |
-| `--stuck-ms <count>`    | `0` (no control)     | Adds a control whose UI Automation `Invoke` blocks this long on a provider thread. |
-| `--offscreen <0\|1>`    | `0`                  | Places the main window off every monitor.                                          |
-| `--lifetime-ms <count>` | `600000`             | Exits after this long even when the UI thread is blocked; `0` never exits.         |
+| Option                       | Default              | Effect                                                                                                         |
+| ---------------------------- | -------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `--title <text>`             | `FURN Win32 Fixture` | Main window title; the contract passes a unique value per scenario.                                            |
+| `--nodes <count>`            | `0`                  | Adds a tree view with this many `Item N` entries.                                                              |
+| `--hang-ms <count>`          | `20000`              | How long the **Hang** button blocks the UI thread.                                                             |
+| `--stuck-ms <count>`         | `0` (no control)     | Adds a control whose UI Automation `Invoke` blocks this long on a provider thread.                             |
+| `--no-default-action <0\|1>` | `0`                  | Adds MSAA and passive-UIA controls that acknowledge a legacy default action without an actionable UIA pattern. |
+| `--tool-windows <0\|1>`      | `0`                  | Adds a button opening owned application-content and excluded helper-like tool roots.                           |
+| `--offscreen <0\|1>`         | `0`                  | Places the main window off every monitor.                                                                      |
+| `--lifetime-ms <count>`      | `600000`             | Exits after this long even when the UI thread is blocked; `0` never exits.                                     |
 
 The lifetime watchdog is the only cleanup guarantee for an abandoned run: the fixture is not in a Job Object.
 
@@ -44,18 +46,22 @@ The lifetime watchdog is the only cleanup guarantee for an abandoned run: the fi
 
 The window is shown without activation. Ids are `AutomationId` values.
 
-| Id          | Control                                                 | Behavior                                                                                                  |
-| ----------- | ------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| 1004        | Status label, initially `Ready`                         | Reports results: `Activated N times`, `Hang finished`, `Stuck action applied N times`.                    |
-| 1001        | **Activate** button                                     | Counts activations in the status label.                                                                   |
-| 1005        | **Rename window** button                                | Appends ` - renamed N` to the title; the helper window id is unchanged.                                   |
-| 1006        | **Open dialog** button                                  | Opens the owned popup `Fixture dialog` (label 3002 `Dialog open`, button 3001 `Dialog OK`).               |
-| 1007        | **Hang** button                                         | Blocks the UI thread for `--hang-ms`.                                                                     |
-| 1008, 1002  | `Name:` label and edit                                  | Keyboard and `clear` target.                                                                              |
-| 1003        | **Enabled** checkbox                                    | Toggle pattern target.                                                                                    |
-| 1009        | **Stuck action** (`--stuck-ms` only)                    | `Invoke` blocks on a provider thread, then applies once.                                                  |
-| 1010        | `Items` tree view (`--nodes` only)                      | `Item N` entries for tree-size and retention scenarios.                                                   |
-| 2001 - 2003 | Menu bar `File` (`Increment`, `Exit`), `Help` (`About`) | Menu items in the UI Automation tree. Opening a menu popup needs activation, so popups are not qualified. |
+| Id          | Control                                                 | Behavior                                                                                                                |
+| ----------- | ------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| 1004        | Status label, initially `Ready`                         | Reports results: `Activated N times`, `Hang finished`, `Stuck action applied N times`.                                  |
+| 1001        | **Activate** button                                     | Counts activations in the status label.                                                                                 |
+| 1005        | **Rename window** button                                | Appends ` - renamed N` to the title; the helper window id is unchanged.                                                 |
+| 1006        | **Open dialog** button                                  | Opens the owned popup `Fixture dialog` (label 3002 `Dialog open`, button 3001 `Dialog OK`).                             |
+| 1007        | **Hang** button                                         | Blocks the UI thread for `--hang-ms`.                                                                                   |
+| 1008, 1002  | `Name:` label and edit                                  | Keyboard and `clear` target.                                                                                            |
+| 1003        | **Enabled** checkbox                                    | Toggle pattern target.                                                                                                  |
+| 1009        | **Stuck action** (`--stuck-ms` only)                    | `Invoke` blocks on a provider thread, then applies once.                                                                |
+| 1010        | `Items` tree view (`--nodes` only)                      | `Item N` entries for tree-size and retention scenarios.                                                                 |
+| 1011        | `No default action` (`--no-default-action` only)        | Advertises no default action; an attempted dispatch changes the status to `Nonactionable default dispatched`.           |
+| 1012        | **Open tool windows** (`--tool-windows` only)           | Opens seven untitled tool roots; only the main-owned, visible, positive-size content root is eligible for registration. |
+| 1013        | `No action pattern` (`--no-default-action` only)        | Advertises only `ScrollIntoView`; a legacy default-action acknowledgment must not count as activation.                  |
+| 3101, 3102  | **Tool action**, **Close tool**                         | Content-window activation updates the main status; closing retires the secondary identity.                              |
+| 2001 - 2003 | Menu bar `File` (`Increment`, `Exit`), `Help` (`About`) | Menu items in the UI Automation tree. Opening a menu popup needs activation, so popups are not qualified.               |
 
 The default tree has 18 nodes; `--nodes N` yields about `N + 24` in total.
 
@@ -68,6 +74,15 @@ The default tree has 18 nodes; `--nodes N` yields about `N + 24` in total.
 - **Title change:** an asynchronous rename keeps the window id and publishes `EVENT_OBJECT_NAMECHANGE`.
 - **Owned popup:** the owner rejects clicks as `element-not-interactable` while the dialog is open; closing the dialog
   publishes `window-closed` and `EVENT_OBJECT_DESTROY`.
+- **Legacy-only activation:** both an MSAA control without default-action metadata and a native UIA button exposing
+  only `ScrollIntoView` are refused before dispatch, without quarantine; an ordinary Invoke remains usable.
+- **Untitled tool roots:** only visible, positive-size application content owned by the main window is registered.
+  Unowned roots, unrelated owner chains, empty content, hidden roots, zero-size roots, and tooltip roots stay excluded.
+  Publication marks the admitted popup as both listed and tracked; closing it retires its identity without affecting the main window.
+- **Popup liveness under a hung provider:** an admitted popup stays listable and its rectangle readable under the same identity.
+  New-popup discovery remains bounded across multiple candidates, and deferred content appears after the provider recovers.
+  The helper self-test separately injects failed probes and an exhausted shared deadline to prove that registered popups
+  bypass UIA and unprobed candidates retry on the next listing.
 - **Hung provider (`--hang-ms 14000`):** reads and clicks fail as `automation-failed`, windows stay listable, and the
   helper recovers once the app responds.
 - **Stuck provider (`--stuck-ms 8000`):** the first click settles as `mutation-indeterminate`, later guarded mutations
@@ -101,6 +116,8 @@ operation routes rather than raw helper commands:
   and journals without action names or typed content.
 - A stuck named Invoke that quarantines later operations even after its
   late application effect is observed exactly once.
+- A no-action activation refusal preserves its machine reason, proves no effect, and leaves input receipts and
+  subsequent legitimate activation intact.
 
 Physical click and crop alignment have been checked at 100% and 150% scale.
 Other DPI configurations and React Native applications remain separate
