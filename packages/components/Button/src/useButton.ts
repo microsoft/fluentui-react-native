@@ -46,13 +46,15 @@ export const useButton = (props: ButtonProps): ButtonInfo => {
   );
   const pressable = usePressableState({ ...rest, onPress: onClickWithFocus, onBlur: shouldOnlyFireIfPressed ? onBlurInner : onBlur });
 
+  const { onKeyDown: onKeyDownProp } = props;
   const onKeyDown = React.useCallback(
     (e) => {
       if (!disabled && (e.nativeEvent.key === 'Enter' || e.nativeEvent.key === ' ')) {
         isProcessingKeyboardInvocation = true;
       }
+      onKeyDownProp?.(e);
     },
-    [disabled],
+    [disabled, onKeyDownProp],
   );
   const onKeyPress = React.useCallback(
     (e) => {
@@ -96,8 +98,8 @@ export const useButton = (props: ButtonProps): ButtonInfo => {
   return {
     props: {
       ...onKeyProps,
-      ...(Platform.OS === ('win32' as any) && { onKeyDown: onKeyDown }),
       ...pressable.props, // allow user key events to override those set by us
+      ...(Platform.OS === ('win32' as any) && { onKeyDown: onKeyDown }),
       /**
        * https://github.com/facebook/react-native/issues/34986
        * Due to a bug in React Native, unconditionally passing this may cause unnecessary re-renders.
