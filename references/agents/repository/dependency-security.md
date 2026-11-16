@@ -155,6 +155,31 @@ confirm their normal modules load without extraction, resolve `extract-zip` to
 `ignore:`, regenerate and deduplicate the lockfile, then prove the browser
 archive path fails closed and the native tooling still works.
 
+## Published security fixes
+
+The November 16, 2026 refresh fixes nine advisories with published releases:
+
+- `@hono/node-server` 2.1.6 and `hono` 4.13.17 replace the vulnerable MCP SDK
+  transitive dependencies. This repository's MCP adapter uses stdio, not the
+  SDK's Hono HTTP transport; retain the fixed lockfile selections anyway.
+- `basic-ftp` 6.2.6 fixes inherited MLSD fact-handler lookups. Its path is
+  Markdown link checking through `proxy-agent`, `pac-proxy-agent`, and
+  `get-uri`; keep the existing narrow resolution rather than restoring 5.x.
+- `fast-xml-parser` 5.12.0 fixes unterminated stop-node scanning in React Native
+  CLI and test-app tooling. Update both the older CLI's narrow resolution and
+  the compatible 5.x lockfile paths.
+
+The scripts security suite checks FTP metadata parsing, bounded XML parsing,
+and Hono hyperlink-auditing CSRF protection against the installed releases.
+It also verifies that the published Windows CLI loads on non-Windows hosts:
+CLI 0.81.11 supersedes the local 0.81.8 PowerShell-discovery patch.
+
+The seven-day gate was unchanged. All 19 newly selected npm versions predate
+the session cutoff of November 9, 2026 at 17:51:33.340 UTC. React Native Windows
+0.81.38 is the newest eligible 0.81 patch at that cutoff; 0.81.40 and 0.85.2
+were published on November 13 and are too young. The 0.85 platform migration
+is intentionally outside this compatible-update scope.
+
 ## Carried security backports
 
 The root resolutions carry the following focused Yarn patches. Run
