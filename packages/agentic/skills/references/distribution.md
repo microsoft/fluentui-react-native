@@ -9,11 +9,13 @@ owner_paths:
 
 ## Ownership
 
-The four public workflows are authored in the FURN repository's root skill
-directory. A reviewed export configuration selects those workflows and the
-portable shared reference subset. Generation rebases bundled links and records
-source/output SHA-256 hashes, stable document IDs, the source commit, and
-catalog package versions. Generated files are never another authored authority.
+The four public workflows, shared portable references, and reviewed catalog are
+authored and tracked inside this package. They ship byte-for-byte, without
+export-time path rewriting or copies from the repository knowledge base.
+Generation writes only root discovery adapters, plugin manifests, license, and
+provenance. The adapters are checked in so clean repository checkouts discover
+the public workflows before any build. They delegate to canonical package
+sources and must never become another authored authority.
 
 The suite owns workflow orchestration, package selection, and shared public
 guidance. Implementing packages own APIs, protocols, contracts, and exact
@@ -25,8 +27,9 @@ working-tree paths. Permission to read a source is not permission to republish i
 
 Select the consuming workspace before resolving dependencies. Read its
 installed package documentation, inspecting package versions and the selected
-public entry point. The catalog records an exact inspected source snapshot,
-not an unbounded promise for future versions. A version mismatch requires
+public entry point. The catalog explicitly declares allowed package documentation paths;
+provenance records inspected source versions, not an unbounded promise for
+future versions. A version mismatch requires
 checking the installed documentation and relevant contract; missing or
 incompatible resources stop the dependent operation with an explicit reason.
 
@@ -62,15 +65,22 @@ precedence or caching behavior is assumed.
 
 ## Contributor validation
 
-In the FURN source workspace, `yarn prebuild` regenerates the distribution;
-`yarn lint` detects stale or extra generated files; `yarn test` exercises
-installation. `prepack` regenerates from source, including clean checkouts.
+In the FURN source workspace, `yarn prebuild` regenerates adapters and metadata;
+`yarn lint` detects drift in those derived files; `yarn test` exercises
+installation. `prepack` validates canonical sources and regenerates only
+derived files, including clean checkouts. It never rewrites public source.
 No install-time lifecycle script runs for consumers.
 
 The root instruction check validates source routing, metadata, prerequisites,
-and in-memory exported link closure, and reports description/body/reference
-sizes with `--verbose`. The pack check verifies actual generated payload
-inclusion using Yarn's pack inventory. Generator tests live in the repository
+and package-contained public resource closure, and reports
+description/body/reference sizes with `--verbose`. Resolved realpaths cannot
+escape the package, and symlinked public resources are rejected. External
+package documentation must be explicitly allowlisted in the catalog; repository
+policies, contributing guides, and status ledgers are not public prerequisites.
+Historical source paths in identified evidence references remain observations,
+not resource dependencies. These static checks do not sandbox agent tools.
+The pack check verifies canonical and derived file inclusion using Yarn's
+actual pack inventory. Metadata and boundary tests live in the repository
 scripts workspace. New published content requires a changeset.
 
 Keep the 60-word description and prerequisite-depth-three constraints. Report

@@ -3,29 +3,32 @@ import { createHash } from 'node:crypto';
 import { existsSync, lstatSync, mkdirSync, readFileSync, readdirSync, realpathSync, rmSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 
-import { collectAnchors, extractLinks, extractPrerequisites, parseFrontmatter } from '../tasks/agentInstructions.ts';
+import {
+  collectAnchors,
+  extractLinks,
+  extractPackageSpecifiers,
+  extractPrerequisites,
+  parseFrontmatter,
+} from '../tasks/agentInstructions.ts';
 
-export const SKILL_EXPORTS = 'scripts/agent-content/exports.json';
+export const SKILL_PACKAGE = 'packages/agentic/skills';
+const REGISTRY = 'references/agents/repository/package-guidance-packages.json';
+const CATALOG = 'catalog/packages.json';
+const GENERATED = ['LICENSE', 'plugin.json', '.claude-plugin/plugin.json', 'provenance.json'];
 
-type CatalogEntry = { workspace: string; purpose: string; entry_points: string[]; targets: string[] };
-type ExportConfig = {
-  schema_version: number;
-  package: string;
-  skills: string[];
-  references: string[];
-  host_obligations: string[];
-  packages: CatalogEntry[];
-};
+type CatalogEntry = { name: string; purpose: string; entry_points: string[]; integration_targets: string[]; reference_paths: string[] };
 type SourceFile = { source: string; target: string; content: string; id?: string };
 export type SkillDistribution = {
   packagePath: string;
   files: Map<string, string>;
+  adapters: Map<string, string>;
   metrics: { name: string; descriptionCharacters: number; bodyBytes: number; directReferenceBytes: number }[];
 };
 
 const hash = (text: string) => createHash('sha256').update(text).digest('hex');
 const json = (value: unknown) => `${JSON.stringify(value, null, 2)}\n`;
 const local = (target: string) => !/^[a-z][a-z0-9+.-]*:/i.test(target);
+const strings = (value: unknown): value is string[] => Array.isArray(value) && value.every((item) => typeof item === 'string');
 
 function safePath(value: string): string {
   if (
@@ -37,195 +40,204 @@ function safePath(value: string): string {
     path.posix.normalize(value) !== value ||
     value === '..' ||
     value.startsWith('../')
-  ) {
+  )
     throw new Error(`Invalid distribution path: ${String(value)}`);
-  }
   return value;
 }
 
-function readSource(root: string, file: string): string {
-  const absolute = path.join(root, safePath(file));
-  const relative = path.relative(realpathSync(root), realpathSync(absolute));
+function readOwned(root: string, owner: string, file: string): string {
+  const absolute = path.join(root, owner, safePath(file));
+  const relative = path.relative(realpathSync(path.join(root, owner)), realpathSync(absolute));
   if (relative === '..' || relative.startsWith(`..${path.sep}`) || path.isAbsolute(relative) || !lstatSync(absolute).isFile()) {
-    throw new Error(`Source escapes the repository or is not a regular file: ${file}`);
+    throw new Error(`Resource escapes its package or is not a regular file: ${owner}/${file}`);
   }
   return readFileSync(absolute, 'utf8');
+}
+
+function listOwned(root: string, owner: string, directory: string): string[] {
+  const result: string[] = [];
+  const walk = (relative: string) => {
+    const full = path.join(root, owner, relative);
+    const stat = lstatSync(full, { throwIfNoEntry: false });
+    if (!stat) return;
+    if (stat.isSymbolicLink()) throw new Error(`Symlink in public source: ${relative}`);
+    if (stat.isDirectory()) for (const child of readdirSync(full).sort()) walk(`${relative}/${child}`);
+    else if (stat.isFile()) result.push(relative);
+    else throw new Error(`Not a regular public resource: ${relative}`);
+  };
+  walk(directory);
+  return result;
 }
 
 function resolveTarget(from: string, target: string): { file: string; fragment: string } {
   const separator = target.indexOf('#');
   const pathname = separator < 0 ? target : target.slice(0, separator);
-  const fragment = separator < 0 ? '' : target.slice(separator);
-  if (pathname.startsWith('/')) throw new Error(`Absolute Markdown link in ${from}: ${target}`);
-  return {
-    file: pathname ? safePath(path.posix.join(path.posix.dirname(from), decodeURIComponent(pathname))) : from,
-    fragment,
-  };
+  const decoded = decodeURIComponent(pathname);
+  if (decoded.startsWith('/')) throw new Error(`Absolute public resource link in ${from}: ${target}`);
+  const file = decoded ? path.posix.join(path.posix.dirname(from), decoded) : from;
+  try {
+    safePath(file);
+  } catch {
+    throw new Error(`Public resource escapes package in ${from}: ${target}`);
+  }
+  return { file, fragment: separator < 0 ? '' : target.slice(separator + 1) };
 }
 
-/** Rebase only actual Markdown links, leaving code examples and external URLs unchanged. */
-function rewriteLinks(text: string, remap: (target: string) => string): string {
-  let fenced = false;
-  return text
-    .split('\n')
-    .map((line) => {
-      if (/^\s*(```|~~~)/.test(line)) {
-        fenced = !fenced;
-        return line;
-      }
-      if (fenced) return line;
-      return line
-        .split(/(`[^`]*`)/)
-        .map((part, index) =>
-          index % 2
-            ? part
-            : part
-                .replace(/(\]\(<?)([^)\s>]+)(>?)/g, (_, start: string, target: string, end: string) => `${start}${remap(target)}${end}`)
-                .replace(/^(\s{0,3}\[[^\]\n]+\]:[ \t]*)(\S+)/, (_, start: string, target: string) => `${start}${remap(target)}`),
-        )
-        .join('');
-    })
-    .join('\n');
-}
-
-/** Build the complete public payload in memory. No generated files or installed dependencies are required. */
+/** Validate canonical package sources without transforming or writing their contents. */
 export function createSkillDistribution(root: string): SkillDistribution {
-  const configText = readSource(root, SKILL_EXPORTS);
-  const config = JSON.parse(configText) as ExportConfig;
-  if (
-    config.schema_version !== 1 ||
-    !Array.isArray(config.skills) ||
-    !Array.isArray(config.references) ||
-    !Array.isArray(config.packages) ||
-    !Array.isArray(config.host_obligations)
-  ) {
-    throw new Error('Invalid skill export configuration');
-  }
-  const packagePath = safePath(config.package);
-  const manifest = JSON.parse(readSource(root, `${packagePath}/package.json`)) as { name: string; version: string; description: string };
+  if (lstatSync(path.join(root, SKILL_PACKAGE)).isSymbolicLink()) throw new Error('Skills package source must not be a symlink');
+  const read = (file: string) => readOwned(root, SKILL_PACKAGE, file);
+  const manifest = JSON.parse(read('package.json')) as { name: string; version: string; description: string };
   if (manifest.name !== '@fluentui-react-native/skills') throw new Error('Unexpected skill distribution package');
-  for (const obligation of config.host_obligations) {
-    if (!/^R-[A-Z0-9]+-\d{3}$/.test(obligation) || !readSource(root, 'AGENTS.md').includes(obligation)) {
+  for (const obligation of ['R-REPO-003', 'R-VALID-003']) {
+    if (!readOwned(root, '.', 'AGENTS.md').includes(obligation))
       throw new Error(`Host repository no longer routes required obligation ${obligation}`);
-    }
   }
+  const catalogText = read(CATALOG);
+  const catalog = JSON.parse(catalogText) as { schema_version: number; packages: CatalogEntry[] };
+  if (catalog.schema_version !== 1 || !Array.isArray(catalog.packages)) throw new Error('Invalid public package catalog');
+  const registry = JSON.parse(readOwned(root, '.', REGISTRY)) as { packages: string[] };
+  if (!strings(registry.packages)) throw new Error('Invalid workspace documentation registry');
+  const owners = new Map(
+    registry.packages.map((workspace) => {
+      const content = readOwned(root, workspace, 'package.json');
+      const pkg = JSON.parse(content) as { name: string; version: string; private?: boolean; exports?: Record<string, unknown> };
+      return [pkg.name, { workspace, pkg, content }] as const;
+    }),
+  );
+  const allowedReferences = new Map<string, Set<string>>();
+  const packageVersions = catalog.packages.map((entry) => {
+    const owner = owners.get(entry.name);
+    if (
+      !owner ||
+      owner.pkg.private ||
+      typeof entry.purpose !== 'string' ||
+      !strings(entry.entry_points) ||
+      entry.entry_points.some((point) => !Object.hasOwn(owner.pkg.exports ?? {}, point)) ||
+      !strings(entry.integration_targets) ||
+      entry.integration_targets.some((target) => !['ios', 'android', 'macos', 'windows', 'win32'].includes(target)) ||
+      !strings(entry.reference_paths) ||
+      allowedReferences.has(entry.name)
+    )
+      throw new Error(`Invalid catalog capabilities: ${entry.name}`);
+    for (const reference of entry.reference_paths) {
+      if (
+        !reference.startsWith('references/') ||
+        !reference.endsWith('.md') ||
+        /(?:^|\/)(?:contributing|current-status|remaining-work)\.md$/.test(reference)
+      ) {
+        throw new Error(`Repository-only or invalid documentation dependency: ${entry.name}/${reference}`);
+      }
+      readOwned(root, owner.workspace, reference);
+    }
+    allowedReferences.set(entry.name, new Set(entry.reference_paths));
+    return { name: owner.pkg.name, version: owner.pkg.version, source_manifest_sha256: hash(owner.content) };
+  });
 
   const sources: SourceFile[] = [];
-  for (const name of config.skills) {
-    if (!/^furn-[a-z0-9]+(?:-[a-z0-9]+)*$/.test(name) || name.length > 64) throw new Error(`Invalid exported skill name: ${name}`);
-    const source = `.github/skills/${name}/SKILL.md`;
-    const content = readSource(root, source);
+  const adapters = new Map<string, string>();
+  const skills = listOwned(root, SKILL_PACKAGE, 'skills');
+  if (!skills.length) throw new Error('Public suite contains no skills');
+  for (const target of skills) {
+    const name = /^skills\/(furn-[a-z0-9]+(?:-[a-z0-9]+)*)\/SKILL\.md$/.exec(target)?.[1];
+    if (!name || name.length > 64) throw new Error(`Invalid public skill source: ${target}`);
+    const content = read(target);
     if (!content.startsWith(`---\nname: ${name}\n`)) throw new Error(`Skill identity mismatch: ${name}`);
     const description = /^description: ([^\n]+)$/m.exec(content)?.[1] ?? '';
-    if (!description || description.length > 1024 || description.split(/\s+/).length > 60) {
-      throw new Error(`Exported skill description exceeds its budget or is missing: ${name}`);
-    }
-    sources.push({ source, target: `skills/${name}/SKILL.md`, content });
-  }
-  const ids = new Set<string>();
-  for (const source of config.references) {
-    if (!source.startsWith('references/agents/') || source.includes('/evals/') || !source.endsWith('.md')) {
-      throw new Error(`Not a portable reference source: ${source}`);
-    }
-    const content = readSource(root, source);
-    const meta = parseFrontmatter(content);
-    if (typeof meta === 'string' || !['instruction-reference', 'evidence-reference'].includes(meta.kind)) {
-      throw new Error(`Invalid exported reference: ${source}`);
-    }
-    if (ids.has(meta.id)) throw new Error(`Duplicate exported reference ID: ${meta.id}`);
-    ids.add(meta.id);
-    sources.push({ source, target: `references/shared/${source.slice('references/agents/'.length)}`, content, id: meta.id });
-  }
-  sources.push({ source: 'LICENSE', target: 'LICENSE', content: readSource(root, 'LICENSE') });
-
-  const catalog = config.packages.map((entry) => {
-    const packageManifest = JSON.parse(readSource(root, `${safePath(entry.workspace)}/package.json`)) as {
-      name: string;
-      version: string;
-      private?: boolean;
-      exports?: Record<string, unknown>;
-    };
-    if (packageManifest.private || typeof packageManifest.name !== 'string' || typeof packageManifest.version !== 'string') {
-      throw new Error(`Catalog must identify a published package: ${entry.workspace}`);
-    }
-    if (
-      typeof entry.purpose !== 'string' ||
-      !Array.isArray(entry.entry_points) ||
-      entry.entry_points.some((point) => !Object.hasOwn(packageManifest.exports ?? {}, point)) ||
-      !Array.isArray(entry.targets) ||
-      entry.targets.some((target) => !['ios', 'android', 'macos', 'windows', 'win32'].includes(target))
-    ) {
-      throw new Error(`Invalid catalog capabilities: ${entry.workspace}`);
-    }
-    return {
-      name: packageManifest.name,
-      version: packageManifest.version,
-      purpose: entry.purpose,
-      entry_points: entry.entry_points,
-      integration_targets: entry.targets,
-    };
-  });
-  if (new Set(catalog.map(({ name }) => name)).size !== catalog.length) throw new Error('Duplicate catalog package');
-  sources.push({ source: SKILL_EXPORTS, target: 'catalog/packages.json', content: json({ schema_version: 1, packages: catalog }) });
-  const targets = new Map(sources.map((source) => [source.source, source]));
-  if (targets.size !== sources.length || new Set(sources.map(({ target }) => target)).size !== sources.length) {
-    throw new Error('Duplicate distribution source or destination');
-  }
-  const files = new Map<string, string>();
-  for (const source of sources) {
-    files.set(
-      source.target,
-      source.source.endsWith('.md')
-        ? rewriteLinks(source.content, (target) => {
-            if (!local(target)) return target;
-            const resolved = resolveTarget(source.source, target);
-            const destination = targets.get(resolved.file);
-            if (!destination) throw new Error(`Unbundled reference from ${source.source}: ${target}`);
-            if (resolved.fragment && !collectAnchors(destination.content).has(decodeURIComponent(resolved.fragment.slice(1)))) {
-              throw new Error(`Missing exported anchor from ${source.source}: ${target}`);
-            }
-            return `${path.posix.relative(path.posix.dirname(source.target), destination.target) || path.posix.basename(source.target)}${resolved.fragment}`;
-          })
-        : source.content,
+    if (!description || description.length > 1024 || description.split(/\s+/).length > 60)
+      throw new Error(`Skill description exceeds its budget or is missing: ${name}`);
+    const header = /^---\n[\s\S]*?\n---\n/.exec(content)![0];
+    const source = `${SKILL_PACKAGE}/${target}`;
+    sources.push({ source, target, content });
+    adapters.set(
+      `.github/skills/${name}/SKILL.md`,
+      `${header}\n<!-- Generated by scripts/agent-content/build.mts. Do not edit. -->\n\n## Read first\n\n[Canonical workflow](../../../${source}).\n\nFollow its instructions for this task.\n`,
     );
   }
+  const ids = new Set<string>();
+  for (const target of listOwned(root, SKILL_PACKAGE, 'references/shared')) {
+    const content = read(target);
+    const meta = parseFrontmatter(content);
+    if (!target.endsWith('.md') || typeof meta === 'string' || !['instruction-reference', 'evidence-reference'].includes(meta.kind)) {
+      throw new Error(`Invalid public reference: ${target}`);
+    }
+    if (ids.has(meta.id)) throw new Error(`Duplicate public reference ID: ${meta.id}`);
+    ids.add(meta.id);
+    sources.push({ source: `${SKILL_PACKAGE}/${target}`, target, content, id: meta.id });
+  }
+  sources.push({ source: `${SKILL_PACKAGE}/${CATALOG}`, target: CATALOG, content: catalogText });
+  const files = new Map(sources.map(({ target, content }) => [target, content]));
 
-  // Bundled rule references and explicit prerequisites must close over the selected public subset.
+  for (const { target: file, content: text } of sources.filter(({ target }) => target.endsWith('.md'))) {
+    const metadata = file.startsWith('references/') ? parseFrontmatter(text) : undefined;
+    const evidence = metadata && typeof metadata !== 'string' && metadata.kind === 'evidence-reference';
+    const body = text.slice(text.indexOf('\n---\n') + 5);
+    if (!evidence && /(?:^|[\s(`])(?:\.github\/|packages\/|apps\/|scripts\/|references\/agents\/)/m.test(body)) {
+      throw new Error(`Repository-only prerequisite in public source: ${file}`);
+    }
+    const resourceLinks = [
+      ...extractLinks(text),
+      ...[...body.matchAll(/\b(?:href|src)[ \t]*=[ \t]*["']([^"']+)["']/gi)].map((match) => ({ target: match[1] })),
+    ];
+    for (const link of resourceLinks) {
+      if (!local(link.target)) {
+        if (!/^https?:\/\//i.test(link.target)) throw new Error(`Unsupported public resource scheme in ${file}: ${link.target}`);
+        continue;
+      }
+      const resolved = resolveTarget(file, link.target);
+      if (!files.has(resolved.file)) throw new Error(`Unbundled reference from ${file}: ${link.target}`);
+      if (resolved.fragment && !collectAnchors(files.get(resolved.file)!).has(decodeURIComponent(resolved.fragment))) {
+        throw new Error(`Missing public anchor from ${file}: ${link.target}`);
+      }
+      read(resolved.file);
+    }
+    if (!evidence) {
+      for (const match of body.matchAll(/`((?:\.\.?\/)[^`\s]+)`/g)) {
+        const resource = resolveTarget(file, match[1]);
+        if (!files.has(resource.file)) throw new Error(`Unbundled code-span resource in ${file}: ${match[1]}`);
+        read(resource.file);
+      }
+    }
+    for (const reference of extractPackageSpecifiers(text)) {
+      if (reference.packagePath && !allowedReferences.get(reference.packageName)?.has(reference.packagePath)) {
+        throw new Error(`Undeclared documentation dependency in ${file}: ${reference.packageName}/${reference.packagePath}`);
+      }
+    }
+  }
   const rules = new Set<string>();
   for (const text of files.values()) {
     for (const match of text.matchAll(/^\s*[-*]\s+\*\*([RC]-[A-Z0-9]+-\d{3}):\*\*/gm)) rules.add(match[1]);
   }
   for (const [file, text] of files) {
-    if (!file.endsWith('.md')) continue;
-    for (const match of text.matchAll(/\b[RC]-[A-Z0-9]+-\d{3}\b/g)) {
-      if (!rules.has(match[0])) throw new Error(`Unbundled rule ${match[0]} in ${file}`);
-    }
+    if (file.endsWith('.md'))
+      for (const match of text.matchAll(/\b[RC]-[A-Z0-9]+-\d{3}\b/g)) {
+        if (!rules.has(match[0])) throw new Error(`Unbundled rule ${match[0]} in ${file}`);
+      }
   }
   const prerequisiteFiles = (file: string) =>
     extractPrerequisites(files.get(file) ?? '')
       .filter(({ target }) => local(target))
       .map(({ target }) => resolveTarget(file, target).file);
   const depth = (file: string, stack: string[]): number => {
-    if (stack.includes(file)) throw new Error(`Exported prerequisite cycle at ${file}`);
+    if (stack.includes(file)) throw new Error(`Public prerequisite cycle at ${file}`);
     const next = prerequisiteFiles(file);
     const result = next.length ? 1 + Math.max(...next.map((nextFile) => depth(nextFile, [...stack, file]))) : 0;
-    if (result > 3) throw new Error(`Exported prerequisite depth exceeds three at ${file}`);
+    if (result > 3) throw new Error(`Public prerequisite depth exceeds three at ${file}`);
     return result;
   };
   for (const file of files.keys()) if (file.endsWith('.md')) depth(file, []);
-
+  files.set('LICENSE', readOwned(root, '.', 'LICENSE'));
   const plugin = { name: 'furn', version: manifest.version, description: manifest.description };
   files.set('plugin.json', json({ $schema: 'https://agent-plugins.org/schemas/1.0.0/plugin.schema.json', ...plugin }));
   files.set('.claude-plugin/plugin.json', json(plugin));
+  const inputs = [
+    ...sources.map(({ source }) => source),
+    `${SKILL_PACKAGE}/package.json`,
+    'LICENSE',
+    ...catalog.packages.map(({ name }) => `${owners.get(name)!.workspace}/package.json`),
+  ].sort();
   let commit: string | null = null;
   let dirty: boolean | null = null;
-  const inputs = [
-    ...new Set([
-      ...sources.map(({ source }) => source),
-      `${packagePath}/package.json`,
-      ...config.packages.map(({ workspace }) => `${workspace}/package.json`),
-    ]),
-  ].sort();
   try {
     commit = execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim();
     dirty = Boolean(
@@ -236,16 +248,9 @@ export function createSkillDistribution(root: string): SkillDistribution {
       }).trim(),
     );
   } catch {
-    // Filesystem fixtures and source archives have no Git metadata; content hashes still identify every input.
+    // Source archives have no Git metadata; content hashes still identify every input.
   }
-  const sourceHashes = sources.map(({ source, target, id }) => ({
-    source,
-    path: target,
-    ...(id ? { id } : {}),
-    source_sha256: hash(readSource(root, source)),
-    sha256: hash(files.get(target)!),
-  }));
-  const generated = ['plugin.json', '.claude-plugin/plugin.json'].map((file) => ({ path: file, sha256: hash(files.get(file)!) }));
+  const sourceByTarget = new Map(sources.map((source) => [source.target, source]));
   files.set(
     'provenance.json',
     json({
@@ -254,65 +259,70 @@ export function createSkillDistribution(root: string): SkillDistribution {
       version: manifest.version,
       source_commit: commit,
       source_dirty: dirty,
-      export_sha256: hash(configText),
-      inputs: inputs.map((source) => ({ source, sha256: hash(readSource(root, source)) })),
-      files: [...sourceHashes, ...generated],
+      catalog_sha256: hash(catalogText),
+      packages: packageVersions,
+      inputs: inputs.map((source) => ({ source, sha256: hash(readOwned(root, '.', source)) })),
+      files: [...files].map(([file, text]) => {
+        const source = sourceByTarget.get(file);
+        return {
+          path: file,
+          ...(source ? { source: source.source, source_sha256: hash(source.content), ...(source.id ? { id: source.id } : {}) } : {}),
+          sha256: hash(text),
+        };
+      }),
     }),
   );
-  const metrics = config.skills.map((name) => {
-    const text = files.get(`skills/${name}/SKILL.md`)!;
-    const dependencies = new Set<string>();
-    const addPrerequisites = (file: string) => {
-      if (dependencies.has(file)) return;
-      dependencies.add(file);
-      prerequisiteFiles(file).forEach(addPrerequisites);
-    };
-    for (const { target } of extractLinks(text).filter(({ target }) => local(target))) {
-      const file = resolveTarget(`skills/${name}/SKILL.md`, target).file;
-      if (file.startsWith('references/')) addPrerequisites(file);
-    }
-    return {
-      name,
-      descriptionCharacters: (/^description: ([^\n]+)$/m.exec(text)?.[1] ?? '').length,
-      bodyBytes: Buffer.byteLength(text.slice(text.indexOf('\n---\n') + 5)),
-      directReferenceBytes: [...dependencies].reduce((total, file) => total + Buffer.byteLength(files.get(file) ?? ''), 0),
-    };
-  });
-  return { packagePath, files, metrics };
+  const metrics = sources
+    .filter(({ target }) => target.startsWith('skills/'))
+    .map(({ target, content }) => {
+      const dependencies = new Set<string>();
+      const addPrerequisites = (file: string) => {
+        if (dependencies.has(file)) return;
+        dependencies.add(file);
+        prerequisiteFiles(file).forEach(addPrerequisites);
+      };
+      for (const link of extractLinks(content).filter(({ target }) => local(target))) {
+        const file = resolveTarget(target, link.target).file;
+        if (file.startsWith('references/')) addPrerequisites(file);
+      }
+      return {
+        name: target.split('/')[1],
+        descriptionCharacters: (/^description: ([^\n]+)$/m.exec(content)?.[1] ?? '').length,
+        bodyBytes: Buffer.byteLength(content.slice(content.indexOf('\n---\n') + 5)),
+        directReferenceBytes: [...dependencies].reduce((total, file) => total + Buffer.byteLength(files.get(file) ?? ''), 0),
+      };
+    });
+  return { packagePath: SKILL_PACKAGE, files, adapters, metrics };
 }
 
-function generatedPaths(packageRoot: string): string[] {
-  const result: string[] = [];
-  const walk = (relative: string) => {
-    const full = path.join(packageRoot, relative);
-    const stat = lstatSync(full, { throwIfNoEntry: false });
-    if (!stat) return;
-    if (stat.isSymbolicLink()) throw new Error(`Symlink in generated skill output: ${relative}`);
-    if (stat.isDirectory()) {
-      for (const child of readdirSync(full).sort()) walk(`${relative}/${child}`);
-    } else result.push(relative);
-  };
-  for (const file of ['skills', 'references/shared', 'catalog', 'provenance.json', 'plugin.json', '.claude-plugin', 'LICENSE']) walk(file);
-  return result;
+export function checkSkillAdapters(root: string, result = createSkillDistribution(root)): void {
+  for (const [file, text] of result.adapters) {
+    if (!existsSync(path.join(root, file)) || readOwned(root, '.', file) !== text)
+      throw new Error(`Stale skill discovery adapter: ${file}`);
+  }
 }
 
-/** Check-only detects stale/extra outputs; generation removes only named files in the owned output directories. */
+/** Write only derived metadata and discovery adapters. Canonical skills, references, and catalog are never rewritten. */
 export function writeSkillDistribution(root: string, check = false): SkillDistribution {
   const result = createSkillDistribution(root);
-  const packageRoot = path.join(root, result.packagePath);
-  const existing = generatedPaths(packageRoot);
-  const stale = existing.filter((file) => !result.files.has(file));
-  const changed = [...result.files].filter(
-    ([file, text]) => !existsSync(path.join(packageRoot, file)) || readFileSync(path.join(packageRoot, file), 'utf8') !== text,
-  );
+  const generated = new Map(GENERATED.map((file) => [`${SKILL_PACKAGE}/${file}`, result.files.get(file)!]));
+  const stale = listOwned(root, SKILL_PACKAGE, '.claude-plugin').filter((file) => file !== '.claude-plugin/plugin.json');
+  const output = new Map([...generated, ...result.adapters]);
+  const changed = [...output].filter(([file, text]) => !existsSync(path.join(root, file)) || readOwned(root, '.', file) !== text);
   if (check) {
     if (stale.length || changed.length)
-      throw new Error(`Stale skill distribution: ${[...stale, ...changed.map(([file]) => file)].join(', ')}`);
+      throw new Error(`Stale skill metadata or adapter: ${[...stale, ...changed.map(([file]) => file)].join(', ')}`);
     return result;
   }
-  for (const file of stale) rmSync(path.join(packageRoot, file));
+  for (const file of stale) rmSync(path.join(root, SKILL_PACKAGE, file));
   for (const [file, text] of changed) {
-    const target = path.join(packageRoot, file);
+    const target = path.join(root, file);
+    // Existing generated directories/files cannot redirect writes through symlinks.
+    let parent = root;
+    for (const part of file.split('/')) {
+      parent = path.join(parent, part);
+      if (lstatSync(parent, { throwIfNoEntry: false })?.isSymbolicLink()) throw new Error(`Symlink in derived output: ${file}`);
+    }
     mkdirSync(path.dirname(target), { recursive: true });
     writeFileSync(target, text);
   }

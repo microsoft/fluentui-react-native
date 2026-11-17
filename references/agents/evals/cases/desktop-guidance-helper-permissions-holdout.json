@@ -12,7 +12,7 @@
       "native_platforms": ["macos"]
     },
     "required_reads": [
-      ".github/skills/furn-desktop-testing/SKILL.md",
+      "packages/agentic/skills/skills/furn-desktop-testing/SKILL.md",
       "packages/agentic/desktop-test/references/platforms.md",
       "packages/agentic/desktop-driver/references/native-helpers.md",
       "packages/agentic/desktop-driver/native/macos/README.md"

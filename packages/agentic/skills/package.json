@@ -19,7 +19,7 @@
     "!config/**/*.test.mjs",
     "skills/",
     "references/",
-    "catalog/",
+    "catalog/packages.json",
     "provenance.json",
     "plugin.json",
     ".claude-plugin/plugin.json"

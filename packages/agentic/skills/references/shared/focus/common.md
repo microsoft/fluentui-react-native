@@ -16,9 +16,8 @@ native focus adapter. Then load only the applicable platform detail:
 
 These files define FURN-pattern authoring and review obligations, not universal
 React Native behavior. Keep the target's reviewed contract and source-specific
-divergences authoritative. FURN contributors track open native qualification
-gates in `@fluentui-react-native/components/references/remaining-work.md`;
-other consumers qualify their own hosts rather than inheriting those results.
+divergences authoritative. Qualify the actual consumer host; another
+repository's qualification results do not establish its behavior.
 
 ## Behavioral authority and platform evidence
 

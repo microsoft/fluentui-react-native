@@ -4,7 +4,7 @@ import { findGitRoot } from 'workspace-tools';
 import { checkAgentInstructions } from './agentInstructions.ts';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
-import { createSkillDistribution, SKILL_EXPORTS } from '../utils/skillDistribution.ts';
+import { checkSkillAdapters, createSkillDistribution, SKILL_PACKAGE } from '../utils/skillDistribution.ts';
 
 export class CheckAgentInstructionsCommand extends Command {
   static override paths = [['check-agent-instructions']];
@@ -23,9 +23,10 @@ export class CheckAgentInstructionsCommand extends Command {
   async execute() {
     const root = findGitRoot(process.cwd());
     const { issues, report } = checkAgentInstructions(root);
-    if (existsSync(path.join(root, SKILL_EXPORTS))) {
+    if (existsSync(path.join(root, SKILL_PACKAGE, 'package.json'))) {
       try {
         const distribution = createSkillDistribution(root);
+        checkSkillAdapters(root, distribution);
         if (this.verbose) {
           for (const entry of distribution.metrics) {
             console.log(
@@ -37,7 +38,7 @@ export class CheckAgentInstructionsCommand extends Command {
           );
         }
       } catch (error) {
-        issues.push({ file: SKILL_EXPORTS, message: error instanceof Error ? error.message : String(error) });
+        issues.push({ file: SKILL_PACKAGE, message: error instanceof Error ? error.message : String(error) });
       }
     }
     if (this.verbose) {

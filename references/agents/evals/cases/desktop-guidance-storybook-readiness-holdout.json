@@ -12,7 +12,7 @@
       "native_platforms": ["macos"]
     },
     "required_reads": [
-      ".github/skills/furn-desktop-testing/SKILL.md",
+      "packages/agentic/skills/skills/furn-desktop-testing/SKILL.md",
       "apps/storybook/AGENTS.md",
       "apps/storybook/agent-map.yaml",
       "packages/agentic/storybook-desktop/references/commands.md",

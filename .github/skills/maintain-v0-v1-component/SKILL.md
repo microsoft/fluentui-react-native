@@ -7,7 +7,7 @@ license: MIT
 # Maintain v0 and v1 components
 
 v0 and v1 are maintenance-only (R-V0-001 and R-V1-001). A request for a new component uses the
-[agentic authoring skill](../furn-component-authoring/SKILL.md). A read-only review uses
+[agentic authoring skill](../../../packages/agentic/skills/skills/furn-component-authoring/SKILL.md). A read-only review uses
 [review-component](../review-component/SKILL.md).
 
 ## Workflow
@@ -22,7 +22,7 @@ v0 and v1 are maintenance-only (R-V0-001 and R-V1-001). A request for a new comp
 3. Add overlays only when the change triggers them:
    - native root, registration, codegen, podspec, or native project: the
      [native component skill](../implement-native-component/SKILL.md) checklist;
-   - focus, keyboard activation, or focus visuals: [common focus authoring](../../../references/agents/focus/common.md)
+   - focus, keyboard activation, or focus visuals: [common focus authoring](../../../packages/agentic/skills/references/shared/focus/common.md)
      and its platform file;
    - token values or theme behavior: design [tokens](../../../packages/agentic/design/references/tokens.md) and
      [theming](../../../packages/agentic/design/references/theming.md);

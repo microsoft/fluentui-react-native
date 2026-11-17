@@ -9,8 +9,9 @@ Portable, task-oriented workflows for Copilot CLI, Codex, and Claude:
 
 Shared accessibility and focus guidance ships once with the suite. Runtime API
 documentation stays with its implementing package; this package has no runtime
-package dependencies. Its catalog identifies inspected source versions and
-integration targets, **not blanket native qualification**.
+package dependencies. Its authored catalog lists capabilities and allowed
+documentation dependencies; provenance records inspected versions. Integration
+targets are **not blanket native qualification**.
 
 ## Install in a project
 
@@ -44,6 +45,12 @@ registration does not copy it. A plugin envelope is included at the package
 root, with a Claude compatibility manifest. Exact plugin interoperability is
 a separate qualification surface; direct project-local installation is the
 portable default.
+
+Public skills, shared references, and the catalog are tracked sources inside
+this package and ship without content rewriting. Root `.github/skills`
+discovery adapters are generated and checked in for clean source checkouts;
+they are not the public workflow source. Only adapters and derived metadata
+need regeneration.
 
 See the [distribution reference](references/distribution.md) for boundaries,
 compatibility, provenance, source ownership, and checks, and

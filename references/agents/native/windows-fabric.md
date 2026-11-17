@@ -13,7 +13,7 @@ against the installed `react-native-windows` package before adopting guidance
 from a newer RNW branch.
 
 For behavior, native target lifetime, and modern React refs, read
-[common focus authoring](../focus/common.md) and [Windows/Win32 focus authoring](../focus/windows-win32.md).
+[common focus authoring](../../../packages/agentic/skills/references/shared/focus/common.md) and [Windows/Win32 focus authoring](../../../packages/agentic/skills/references/shared/focus/windows-win32.md).
 Shipped V1 Win32 behavior is also the model for Fabric, but Office Win32 Paper
 is not the UWP XAML Paper implementation described in the compatibility table
 below. Do not transfer its native registration or view-manager assumptions.

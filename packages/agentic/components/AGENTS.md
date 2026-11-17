@@ -22,8 +22,9 @@ Read the [user guide](README.md), then select the narrowest topic in the [refere
 
 Implementation and planning use the `furn-component-authoring` skill, contracts use the
 `furn-component-contract-authoring` skill, cross-component extraction uses the `agentic-component-optimization`
-skill, and reviews use the `review-component` skill. Focus work starts with the repository's common focus reference
-(`focus.common`), then `focus.windows-win32` or `focus.macos`; V1 Win32 is the behavioral baseline for both Windows
+skill, and reviews use the `review-component` skill. Focus work starts with `focus.common`,
+then `focus.windows-win32` or `focus.macos`, indexed in `@fluentui-react-native/skills/references/README.md`;
+V1 Win32 is the behavioral baseline for both Windows
 endpoints. Native views, codegen, or registration use the `implement-native-component` skill. Storybook application,
 Metro, bundle, or CocoaPods work follows `apps/storybook/AGENTS.md`.
 

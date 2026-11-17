@@ -9,7 +9,8 @@ routes each task to the workflow and references it needs; load only what the tas
 - **`AGENTS.md` files** hold safeguards and local invariants. Copilot CLI loads applicable files from the repository,
   working directory, ancestors, and directories in the path of files being worked on. Read the scoped entries below
   when a task touches them.
-- **Skills** in [`.github/skills`](.github/skills) define task workflows.
+- **Skills:** [`.github/skills`](.github/skills) holds repository workflows and generated discovery adapters.
+  Public workflow sources live in [the skills package](packages/agentic/skills/AGENTS.md).
 - **[Shared references](references/agents/README.md)** in `references/agents/` hold reusable recipes and repository
   knowledge, indexed by task.
 - **Product contracts** (`SPEC.md`, `spec/`, `CONTRACT.md`), protocols, and package documentation stay with their
@@ -46,19 +47,19 @@ These apply to every task.
 
 Classify the change with the [classification guide](references/agents/components/classification.md), then use:
 
-| Task                                                                                | Skill                                                                                          |
-| ----------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| Choose FURN packages, public entry points, or integration boundaries                | [furn-choose-packages](.github/skills/furn-choose-packages/SKILL.md)                           |
-| New component, or change or plan a change to an agentic component or primitive      | [furn-component-authoring](.github/skills/furn-component-authoring/SKILL.md)                   |
-| Agentic contract-only or contract-feasibility work                                  | [furn-component-contract-authoring](.github/skills/furn-component-contract-authoring/SKILL.md) |
-| Fix or maintain an existing v0 or v1 component (not native-core `/legacy`)          | [maintain-v0-v1-component](.github/skills/maintain-v0-v1-component/SKILL.md)                   |
-| Review a component change of any generation                                         | [review-component](.github/skills/review-component/SKILL.md)                                   |
-| Native component, TurboModule, service, codegen, or a native-core `/legacy` wrapper | [implement-native-component](.github/skills/implement-native-component/SKILL.md)               |
-| Cross-component agentic extraction or dependency direction                          | [agentic-component-optimization](.github/skills/agentic-component-optimization/SKILL.md)       |
-| Desktop test configuration, execution, reporting, helpers, or CI                    | [furn-desktop-testing](.github/skills/furn-desktop-testing/SKILL.md)                           |
-| Change or review the desktop testing package source                                 | [maintain-desktop-testing](.github/skills/maintain-desktop-testing/SKILL.md)                   |
-| Storybook app catalog, Metro, CocoaPods, or native builds                           | [agentic-storybook-development](.github/skills/agentic-storybook-development/SKILL.md)         |
-| Dependency vulnerability remediation                                                | [fix-security-issues](.github/skills/fix-security-issues/SKILL.md)                             |
+| Task                                                                                | Skill                                                                                                          |
+| ----------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| Choose FURN packages, public entry points, or integration boundaries                | [furn-choose-packages](packages/agentic/skills/skills/furn-choose-packages/SKILL.md)                           |
+| New component, or change or plan a change to an agentic component or primitive      | [furn-component-authoring](packages/agentic/skills/skills/furn-component-authoring/SKILL.md)                   |
+| Agentic contract-only or contract-feasibility work                                  | [furn-component-contract-authoring](packages/agentic/skills/skills/furn-component-contract-authoring/SKILL.md) |
+| Fix or maintain an existing v0 or v1 component (not native-core `/legacy`)          | [maintain-v0-v1-component](.github/skills/maintain-v0-v1-component/SKILL.md)                                   |
+| Review a component change of any generation                                         | [review-component](.github/skills/review-component/SKILL.md)                                                   |
+| Native component, TurboModule, service, codegen, or a native-core `/legacy` wrapper | [implement-native-component](.github/skills/implement-native-component/SKILL.md)                               |
+| Cross-component agentic extraction or dependency direction                          | [agentic-component-optimization](.github/skills/agentic-component-optimization/SKILL.md)                       |
+| Desktop test configuration, execution, reporting, helpers, or CI                    | [furn-desktop-testing](packages/agentic/skills/skills/furn-desktop-testing/SKILL.md)                           |
+| Change or review the desktop testing package source                                 | [maintain-desktop-testing](.github/skills/maintain-desktop-testing/SKILL.md)                                   |
+| Storybook app catalog, Metro, CocoaPods, or native builds                           | [agentic-storybook-development](.github/skills/agentic-storybook-development/SKILL.md)                         |
+| Dependency vulnerability remediation                                                | [fix-security-issues](.github/skills/fix-security-issues/SKILL.md)                                             |
 
 Other repository work starts from the [reference index](references/agents/README.md): architecture, commands and
 validation, TypeScript, release, focus, and native guidance. Design tokens and theming start from the

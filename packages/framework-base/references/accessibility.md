@@ -41,9 +41,10 @@ The current transport contract is:
 | macOS           | `Toggle` | `Select` | C-A11Y-003; custom actions, not an inferred `AXPress` mapping              |
 | Other platforms | `Toggle` | `Select` | Existing custom declarations; not native pattern or gesture qualification  |
 
-The version-bound source evidence, including installed-package paths, is in the
-repository's action transport evidence reference (`accessibility.action-transport-evidence`),
-which defines each `C-A11Y` claim. Verify a renderer before claiming support on another platform.
+The version-bound source evidence, including installed-package paths, is in
+`@fluentui-react-native/skills/references/shared/accessibility/action-transport-evidence.md`
+(`accessibility.action-transport-evidence`), which defines each `C-A11Y` claim.
+Verify a renderer before claiming support on another platform.
 
 Keep caller labels in JavaScript rather than replacing them with guessed localized text, because macOS Fabric ignores
 labels when constructing custom actions (C-A11Y-003). Do not map toggle/select to `activate`, synthesize `onPress`, or

@@ -8,9 +8,16 @@ Read the [user guide](README.md) and [reference index](references/README.md).
 
 ## Invariants
 
-- Author workflows once in the repository's root `.github/skills/` directory.
-  The export configuration selects sources; never hand-edit generated
-  `skills/`, `references/shared/`, plugin manifests, or `provenance.json`.
+- Author public workflows in this package's `skills/` and portable knowledge
+  in `references/shared/`. These are tracked canonical sources, not generated
+  copies. The reviewed package/dependency catalog lives in `catalog/`.
+- Generate only root `.github/skills/furn-*/` discovery adapters, plugin
+  manifests, license, and provenance. Never hand-edit derived files. Keep
+  discovery adapters checked in so clean checkouts work before building.
+- Public resource links must resolve inside this package, including realpaths.
+  External package-documentation locators must appear in the catalog's explicit
+  reference allowlist. Repository source paths are evidence locators only,
+  never consumer prerequisites.
 - Package-owned API knowledge stays with the implementing package. Bundle only
   reviewed portable shared guidance, preserving reference and evidence IDs.
 - Never apply FURN contributor policy to an unrelated consumer. Resolve
