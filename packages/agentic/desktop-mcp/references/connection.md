@@ -20,10 +20,11 @@ target. The management connector obtains a distinct principal for each MCP
 connection, and the driver controller separately delegates its own child.
 The model never receives either credential.
 
-`desktop-test serve --agent` publishes both descriptors after generic or
-hosted Storybook listeners are ready. Workloads must be explicitly opted into the trusted
-catalog. Standalone `storybook driver --agent` publishes driver and runner
-descriptors, not a supervisor management root. See
+`desktop-test serve --agent` and `storybook driver --agent` publish the
+supervisor descriptor after the driver is ready. Storybook also publishes its
+runner descriptor before readiness. Workloads must be explicitly opted into
+the trusted catalog; legacy Storybook configuration without declared suites
+has an empty catalog. See
 `@fluentui-react-native/desktop-test/references/management.md`.
 
 Use `--driver-only` to read the original `agent-connection.json` without
