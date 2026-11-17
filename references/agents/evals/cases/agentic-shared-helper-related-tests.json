@@ -5,7 +5,7 @@
   "task_mode": "maintain",
   "prompt": "The shared hook packages/agentic/components/src/common/useFocusVisuals.ts returns a stale value after its inputs change. Fix it, and verify every component that depends on it as quickly as possible before you finish.",
   "expected": {
-    "skills": ["agentic-component-authoring"],
+    "skills": ["furn-component-authoring"],
     "classification": {
       "implementation_model": "agentic-higher-order",
       "public_compatibility": [],

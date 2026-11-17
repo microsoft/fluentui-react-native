@@ -18,9 +18,9 @@ add a package to the registry when it adopts this standard.
 - **R-PKGDOC-003:** The package that implements a behavior owns its guidance. Consumers retain app-specific configuration and link to the owner.
 - **R-PKGDOC-004:** Each package reference Markdown file has the standard frontmatter and a stable, globally unique ID. Its package index lists the ID, document, and a concrete "Read when" condition.
 - **R-PKGDOC-005:** Relative Markdown links in shipped package guidance resolve inside the same package. Cross-package references use the package name and package-relative path in code spans; repository rules use rule IDs.
-- **R-PKGDOC-006:** Project skills live in root `.github/skills/`. A skill is a concise router to package references and repository safeguards, not a second home for package knowledge. Delegated tasks receive required entry-point and reference paths explicitly.
+- **R-PKGDOC-006:** Authored project skills live in root `.github/skills/`. A skill is a concise router to package references and repository safeguards, not a second home for package knowledge. The skills distribution may generate its explicitly selected public workflows and shared references for packing; generated copies are not authored project skills. Delegated tasks receive required entry-point and reference paths explicitly.
 - **R-PKGDOC-007:** Changes to behavior, commands, configuration, outputs, or contracts update the owning reference in the same change, and update `AGENTS.md` or `README.md` when their entry-point information changes.
-- **R-PKGDOC-008:** Published packages include their `AGENTS.md`, `README.md`, reference index, every reference document, and local linked assets. Validate the actual Yarn pack inventory; build caches and generated artifacts must not ship.
+- **R-PKGDOC-008:** Published packages include their `AGENTS.md`, `README.md`, reference index, every reference document, and local linked assets. Validate the actual Yarn pack inventory; build caches and incidental generated artifacts must not ship. The skills package's declared, validated generated distribution is intentional published content.
 - **R-PKGDOC-009:** Governed packages have no `PLAN.md` or other plan files outside `references/`. Unfinished or explicitly deferred work lives in an indexed `<package>/references/remaining-work.md`. When work completes, move durable behavior into the owning reference and delete the item rather than marking it done; delete the file when no work remains.
 - **R-PKGDOC-010:** A package's `<package>/references/current-status.md` is a status overview followed by stable topic sections, not a dated log. It describes what is true now, keeps only the latest result for each native endpoint with a link to the pull request or issue that holds the full evidence, and links open work to its tracking issue instead of restating it. Per-run commands, counts, and artifact locators belong in the pull request or issue. Edit only the topic a change affects so concurrent changes merge cleanly.
 
@@ -46,6 +46,13 @@ Copilot CLI inherits skill directories from parent `.github/skills/` locations,
 not child package directories. Keep runnable skill entry points in the
 repository root. Skill descriptions must be valid YAML, name their task
 boundary, and remain within the checker word limit.
+
+The public subset is distributed by `@fluentui-react-native/skills`. Its
+reviewed export configuration lives in the repository's
+`scripts/agent-content/exports.json`; it generates a pack-only payload and
+one shared reference tree rather than moving package-owned API manuals.
+Keep FURN-specific commands and release obligations in the source checkout's
+root/scoped instructions. Consumers follow their own host's rules.
 
 In package references, use relative links only within the same package. To
 point at another package, write its npm name and the path from its package

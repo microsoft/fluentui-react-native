@@ -5,7 +5,7 @@
   "task_mode": "plan",
   "prompt": "Plan adding a new 'tinted' appearance to the agentic Button in packages/agentic/components/src/components/button. Plan only.",
   "expected": {
-    "skills": ["agentic-component-authoring"],
+    "skills": ["furn-component-authoring"],
     "classification": {
       "implementation_model": "agentic-higher-order",
       "public_compatibility": ["ref-prop"],

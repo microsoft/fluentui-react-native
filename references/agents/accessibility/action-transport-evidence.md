@@ -7,8 +7,8 @@ owner_paths:
 
 # Accessibility action transport evidence
 
-Version-bound observations behind the toggle and select transport contract in the
-[framework-base accessibility reference](../../../packages/framework-base/references/accessibility.md). Installed
+Version-bound observations behind the toggle and select transport contract in
+`@fluentui-react-native/framework-base/references/accessibility.md`. Installed
 paths are relative to each platform package's root. Recheck these claims when a pinned renderer version changes.
 
 - **C-A11Y-001:** React Native Windows Fabric dispatches lowercase `toggle` and `select` action names from

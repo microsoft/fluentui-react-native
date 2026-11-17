@@ -7,7 +7,7 @@ license: MIT
 # Maintain v0 and v1 components
 
 v0 and v1 are maintenance-only (R-V0-001 and R-V1-001). A request for a new component uses the
-[agentic authoring skill](../agentic-component-authoring/SKILL.md). A read-only review uses
+[agentic authoring skill](../furn-component-authoring/SKILL.md). A read-only review uses
 [review-component](../review-component/SKILL.md).
 
 ## Workflow

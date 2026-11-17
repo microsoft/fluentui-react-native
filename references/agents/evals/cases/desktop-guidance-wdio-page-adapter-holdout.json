@@ -5,14 +5,14 @@
   "task_mode": "toolchain",
   "prompt": "A Windows application-level WDIO/Jasmine suite has a native page adapter whose isDisplayed() call fails while trying to execute DOM JavaScript. Diagnose the likely integration issue and describe the correct binding and ownership model without editing files.",
   "expected": {
-    "skills": ["desktop-testing"],
+    "skills": ["furn-desktop-testing"],
     "classification": {
       "implementation_model": "none",
       "public_compatibility": [],
       "native_platforms": ["windows"]
     },
     "required_reads": [
-      ".github/skills/desktop-testing/SKILL.md",
+      ".github/skills/furn-desktop-testing/SKILL.md",
       "packages/agentic/desktop-test/AGENTS.md",
       "packages/agentic/desktop-test/references/wdio-suites.md",
       "packages/agentic/desktop-driver/references/test-integration.md"

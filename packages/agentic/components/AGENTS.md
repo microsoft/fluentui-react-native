@@ -20,8 +20,8 @@ Read the [user guide](README.md), then select the narrowest topic in the [refere
 | Shared helpers, dependencies, or cross-component extraction             | [Source boundaries](references/source-boundaries.md)                                         |
 | Commands, source ownership, or open work                                | [Contributing](references/contributing.md) or [remaining work](references/remaining-work.md) |
 
-Implementation and planning use the `agentic-component-authoring` skill, contracts use the
-`agentic-component-contract-authoring` skill, cross-component extraction uses the `agentic-component-optimization`
+Implementation and planning use the `furn-component-authoring` skill, contracts use the
+`furn-component-contract-authoring` skill, cross-component extraction uses the `agentic-component-optimization`
 skill, and reviews use the `review-component` skill. Focus work starts with the repository's common focus reference
 (`focus.common`), then `focus.windows-win32` or `focus.macos`; V1 Win32 is the behavioral baseline for both Windows
 endpoints. Native views, codegen, or registration use the `implement-native-component` skill. Storybook application,
@@ -31,7 +31,7 @@ Metro, bundle, or CocoaPods work follows `apps/storybook/AGENTS.md`.
 
 - **R-AGENTIC-001:** Before implementing a higher-order component whose contract is absent, stale, still a draft, or
   accompanied by new source evidence, create or revise its source-backed contract through the
-  `agentic-component-contract-authoring` skill and complete its review gate. Never mechanically promote a web-authored
+  `furn-component-contract-authoring` skill and complete its review gate. Never mechanically promote a web-authored
   specification.
 - **R-AGENTIC-002:** This package targets React 19.1.4 or newer. Expose a stable native root ref through the `ref` prop,
   receive it as part of the component props, and forward it to the declared root slot. Do not use `forwardRef`.

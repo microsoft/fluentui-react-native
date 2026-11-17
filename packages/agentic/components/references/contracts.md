@@ -14,7 +14,7 @@ material is evidence for authoring that contract; it is never promoted
 mechanically into this public package.
 
 Use the
-`agentic-component-contract-authoring` skill to interpret Flex/X3, Fluent v9, HTML/CSS, visual, local-foundation, or
+`furn-component-contract-authoring` skill to interpret Flex/X3, Fluent v9, HTML/CSS, visual, local-foundation, or
 composite evidence. Use the component authoring skill after the contract has
 passed its pre-code review.
 

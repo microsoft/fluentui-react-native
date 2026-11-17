@@ -5,7 +5,7 @@
   "task_mode": "implement",
   "prompt": "Fix the agentic Popover in packages/agentic/components/src/components/popover so pressing its trigger while the popover is open dismisses it with the 'trigger' reason. Keep your edit-and-check loop fast, and validate the finished change.",
   "expected": {
-    "skills": ["agentic-component-authoring"],
+    "skills": ["furn-component-authoring"],
     "classification": {
       "implementation_model": "agentic-higher-order",
       "public_compatibility": [],

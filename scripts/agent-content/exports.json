@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "package": "packages/agentic/skills",
+  "skills": ["furn-choose-packages", "furn-component-authoring", "furn-component-contract-authoring", "furn-desktop-testing"],
+  "references": [
+    "references/agents/portable/context.md",
+    "references/agents/portable/accessibility.md",
+    "references/agents/accessibility/action-transport-evidence.md",
+    "references/agents/focus/common.md",
+    "references/agents/focus/windows-win32.md",
+    "references/agents/focus/macos.md",
+    "references/agents/focus/platform-evidence.md"
+  ],
+  "host_obligations": ["R-REPO-003", "R-VALID-003"],
+  "packages": [
+    {
+      "workspace": "packages/agentic/components",
+      "purpose": "Styled Fluent components and unstyled primitives; modern component authoring patterns and contracts.",
+      "entry_points": [".", "./primitives"],
+      "targets": ["ios", "android", "macos", "windows", "win32"]
+    },
+    {
+      "workspace": "packages/agentic/design",
+      "purpose": "Themes, tokens, appearance, styling, and optional color utilities.",
+      "entry_points": [".", "./theming", "./themes", "./styling", "./color-lib"],
+      "targets": ["ios", "android", "macos", "windows", "win32"]
+    },
+    {
+      "workspace": "packages/framework-base",
+      "purpose": "Component patterns, slots, JSX runtime, interaction, accessibility, and focus foundations.",
+      "entry_points": [".", "./jsx-runtime"],
+      "targets": ["ios", "android", "macos", "windows", "win32"]
+    },
+    {
+      "workspace": "packages/agentic/native-core",
+      "purpose": "Opt-in native components and services. Verify endpoint capabilities and host registration before use.",
+      "entry_points": [".", "./macos", "./windows", "./win32"],
+      "targets": ["macos", "windows", "win32"]
+    },
+    {
+      "workspace": "packages/agentic/desktop-test",
+      "purpose": "Application-neutral desktop app/suite lifecycle, WDIO integration, and reporting.",
+      "entry_points": [".", "./config", "./wdio", "./reporting"],
+      "targets": ["macos", "windows", "win32"]
+    },
+    {
+      "workspace": "packages/agentic/desktop-driver",
+      "purpose": "Desktop WebDriver, native helpers, typed clients, and bounded agent operations.",
+      "entry_points": [".", "./client", "./agent", "./operations"],
+      "targets": ["macos", "windows", "win32"]
+    },
+    {
+      "workspace": "packages/agentic/desktop-driver-mcp",
+      "purpose": "Optional MCP adapter for agent operations against an already provisioned desktop driver.",
+      "entry_points": ["."],
+      "targets": ["macos", "windows", "win32"]
+    },
+    {
+      "workspace": "packages/agentic/storybook-desktop",
+      "purpose": "Optional Storybook integration, extraction, lifecycle commands, and story test callbacks.",
+      "entry_points": [".", "./config", "./testing", "./cli"],
+      "targets": ["macos", "windows", "win32"]
+    }
+  ]
+}

@@ -4854,6 +4854,16 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@fluentui-react-native/skills@workspace:packages/agentic/skills":
+  version: 0.0.0-use.local
+  resolution: "@fluentui-react-native/skills@workspace:packages/agentic/skills"
+  dependencies:
+    "@fluentui-react-native/scripts": "workspace:*"
+  bin:
+    furn-skills: ./config/install.mjs
+  languageName: unknown
+  linkType: soft
+
 "@fluentui-react-native/spinner@workspace:*, @fluentui-react-native/spinner@workspace:packages/experimental/Spinner":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/spinner@workspace:packages/experimental/Spinner"

@@ -19,6 +19,7 @@ documents a task needs; links are navigation, not instructions to load everythin
 | [`components/`](components)       | Classification, v0 and v1 recipes, and legacy test apps                     |
 | [`focus/`](focus)                 | Desktop focus behavior across component generations                         |
 | [`accessibility/`](accessibility) | Version-bound accessibility action evidence                                 |
+| [`portable/`](portable)           | Consumer context and shared public workflow guidance                        |
 | [`native/`](native)               | Native components, modules, and platform guidance                           |
 | [`evals/`](evals/README.md)       | Portable evaluation case fixtures; not instructions                         |
 
@@ -43,6 +44,8 @@ documents a task needs; links are navigation, not instructions to load everythin
 | `focus.macos`                             | [macOS focus](focus/macos.md)                                                         | Focus work on macOS                                                             |
 | `focus.platform-evidence`                 | [Desktop focus platform evidence](focus/platform-evidence.md)                         | Checking or updating a version-bound focus observation (`C-FOCUS-*`)            |
 | `accessibility.action-transport-evidence` | [Accessibility action transport evidence](accessibility/action-transport-evidence.md) | Checking or updating toggle/select transport observations (`C-A11Y-*`)          |
+| `portable.context`                        | [Portable consumer context](portable/context.md)                                      | Using a public FURN workflow or resolving installed package references          |
+| `portable.accessibility`                  | [Portable accessibility guidance](portable/accessibility.md)                          | Authoring component semantics or qualifying native accessibility actions        |
 | `native.components-and-modules`           | [Native components and modules](native/components-and-modules.md)                     | Any native component, module, service, or native-backed wrapper                 |
 | `native.apple-office`                     | [Apple native authoring and Office integration](native/apple-office.md)               | Any iOS or macOS Swift, Objective-C, header, podspec, or bridge-manager change  |
 | `native.windows-fabric`                   | [Windows Fabric native components](native/windows-fabric.md)                          | React Native Windows Fabric views, codegen, registration, or UIA                |

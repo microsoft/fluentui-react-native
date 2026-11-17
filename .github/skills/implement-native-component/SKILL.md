@@ -36,7 +36,7 @@ ownership and qualification rules (R-NATIVE-001 through R-NATIVE-003).
      platform file;
    - accessibility actions:
      [framework-base accessibility reference](../../../packages/framework-base/references/accessibility.md);
-   - the JavaScript wrapper: the [agentic skill](../agentic-component-authoring/SKILL.md),
+   - the JavaScript wrapper: the [agentic skill](../furn-component-authoring/SKILL.md),
      [v0 recipe](../../../references/agents/components/v0.md), or [v1 recipe](../../../references/agents/components/v1.md).
 4. Implement with the TypeScript specification, codegen configuration, native props, events, commands, and registration
    kept consistent. Preserve public APIs and registration names (R-NATIVE-002) and keep fork imports in platform files

@@ -1,0 +1,51 @@
+{
+  "name": "@fluentui-react-native/skills",
+  "version": "0.1.0",
+  "description": "Portable Fluent UI React Native agent workflows and shared authoring knowledge",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "packages/agentic/skills"
+  },
+  "bin": {
+    "furn-skills": "./config/install.mjs"
+  },
+  "files": [
+    "AGENTS.md",
+    "README.md",
+    "LICENSE",
+    "config/install.mjs",
+    "!config/**/*.test.mjs",
+    "skills/",
+    "references/",
+    "catalog/",
+    "provenance.json",
+    "plugin.json",
+    ".claude-plugin/plugin.json"
+  ],
+  "type": "module",
+  "exports": {
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "tsc -b",
+    "prebuild": "node ../../../scripts/agent-content/build.mts",
+    "prepack": "node ../../../scripts/agent-content/build.mts",
+    "format": "fluentui-scripts format",
+    "lint": "fluentui-scripts lint && node ../../../scripts/agent-content/build.mts --check",
+    "test": "node --test config/install.test.mjs"
+  },
+  "devDependencies": {
+    "@fluentui-react-native/scripts": "workspace:*"
+  },
+  "engines": {
+    "node": "^22.19.0 || ^24.0.0 || >=26.0.0"
+  },
+  "furn": {
+    "packageType": "tooling"
+  },
+  "rnx-kit": {
+    "extends": "@fluentui-react-native/scripts/kit-config"
+  }
+}

@@ -31,6 +31,7 @@ const PREREQUISITE_SENTENCE = /\b(?:read|load)\b[^.]*\bfirst\b|\bstarts? with\b/
 const ROUTING_COLUMNS = new Set(['skill', 'workflow']);
 const SKILL_LINK = /(?:^|\/)\.github\/skills\/([^/]+)\/SKILL\.md$/;
 const SKIP_DIRS = new Set(['node_modules', 'lib', 'lib-commonjs', 'dist', '.git', 'Pods', 'build', 'DerivedData']);
+const GENERATED_SKILL_DIRS = new Set(['packages/agentic/skills/skills', 'packages/agentic/skills/references/shared']);
 const REPO_PATH_PREFIXES = ['.github/', 'apps/', 'packages/', 'references/', 'scripts/', 'docs/'];
 
 const TASK_MODES = new Set(['implement', 'maintain', 'review', 'plan', 'contract', 'optimize', 'toolchain', 'security']);
@@ -60,7 +61,7 @@ export function listFiles(root: string): string[] {
       for (const entry of readdirSync(path.join(root, dir), { withFileTypes: true })) {
         const rel = dir ? `${dir}/${entry.name}` : entry.name;
         if (entry.isDirectory()) {
-          if (!SKIP_DIRS.has(entry.name)) {
+          if (!SKIP_DIRS.has(entry.name) && !GENERATED_SKILL_DIRS.has(rel)) {
             walk(rel);
           }
         } else if (entry.isFile()) {

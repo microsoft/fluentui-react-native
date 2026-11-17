@@ -8,6 +8,7 @@
     "packages/agentic/desktop-mcp",
     "packages/agentic/desktop-test",
     "packages/agentic/native-core",
+    "packages/agentic/skills",
     "packages/agentic/storybook-desktop",
     "packages/agentic/storybook-desktop-runtime",
     "packages/framework-base"
