@@ -44,6 +44,7 @@ export function storybook(options: DesktopStorybookConfigOptions = {}): Storyboo
                     reporter: supervisor.reporter,
                     runner: supervisor.runner,
                     services: supervisor.services,
+                    supervisor,
                   });
                   return api.startDriver(target.endpoint, { ...(agent ? { agent } : {}), ...(input ? { input } : {}) });
                 },

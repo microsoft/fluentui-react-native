@@ -9,7 +9,12 @@ import {
 } from '@fluentui-react-native/desktop-test';
 import { selectDesktopRenderer } from '@fluentui-react-native/desktop-test/config';
 import { connectDesktopRunner, defaultRunnerDescriptor } from '@fluentui-react-native/desktop-test/runner-connection';
-import type { DesktopHostedDriverReady, ResolvedDesktopConfig, ResolvedDesktopTarget } from '@fluentui-react-native/desktop-test';
+import type {
+  DesktopHostedDriverReady,
+  DesktopSupervisor,
+  ResolvedDesktopConfig,
+  ResolvedDesktopTarget,
+} from '@fluentui-react-native/desktop-test';
 import type { DesktopRunnerConnection } from '@fluentui-react-native/desktop-test/runner-connection';
 import { runDesktopOperation, type DesktopOperation, type DesktopReportWriter } from '@fluentui-react-native/desktop-test/reporting';
 import { resolveDesktopScopeDomains } from '@fluentui-react-native/desktop-driver/authoring';
@@ -75,6 +80,11 @@ type ResolvedDesktopStorybookInstance = DesktopStorybookInstance & {
   macosXcconfigPath?: string;
 };
 
+type OwnedMacOSApplication = {
+  target: ResolvedDesktopTarget;
+  application: NativeDesktopApplicationDescriptor & { windowTitle: string };
+};
+
 export type DesktopStorybookBuildDriverOptions = {
   force?: boolean;
 };
@@ -106,6 +116,8 @@ export type DesktopStorybookCliOptions = {
   reporter?: DesktopReportWriter;
   reporterMode?: ResolvedDesktopReporterMode;
   services?: DesktopServiceScope;
+  /** The neutral owner whose claim and service scope authorize a retained application. */
+  supervisor?: DesktopSupervisor;
   /** Called once `server` or `driver` has written its readiness record. */
   onReady?: () => void;
 };
@@ -187,6 +199,7 @@ export class DesktopStorybookCli {
   private readonly reporterMode?: ResolvedDesktopReporterMode;
   private readonly structuredOutput: Pick<NodeJS.WriteStream, 'write'>;
   private readonly services: DesktopServiceScope;
+  private readonly supervisor?: DesktopSupervisor;
   // A borrowed scope belongs to its caller, which may be awaiting this command inside the scope's tracked work; closing
   // it here would wait on that work. The caller closes it.
   private readonly ownsServices: boolean;
@@ -212,6 +225,7 @@ export class DesktopStorybookCli {
       });
     this.services = options.services ?? new DesktopServiceScope(this.runner, this.reporter);
     this.ownsServices = options.services === undefined;
+    this.supervisor = options.supervisor;
     this.buildNativeDriver = options.buildNativeDriver ?? buildNativeDesktopDriver;
     this.createStoryManifest = options.createStoryManifest ?? createDesktopStoryManifest;
     this.fetch = options.fetch ?? globalThis.fetch;
@@ -318,6 +332,18 @@ export class DesktopStorybookCli {
   async startDriver(platform: Platforms, options: DesktopStorybookDriverOptions = {}): Promise<DesktopStorybookDriverReady> {
     validateServerOptions(options);
     validateDriverHost(options.host);
+    const target = this.workloadTarget(platform);
+    const retained = target.host.ownership === 'supervisor';
+    if (retained) {
+      if (!this.supervisor || this.supervisor.services !== this.services) {
+        throw new Error('A retained Storybook application requires the claimed neutral supervisor and its service scope.');
+      }
+      this.supervisor.assertWorkloadClaim(target);
+      if (platform !== 'macos') {
+        throw new Error(`Retained Storybook applications are not yet supported for ${platform}.`);
+      }
+    }
+    const macApplication = retained ? this.ownedMacOSApplication(this.instance) : undefined;
     const wdio = resolveWdioOptions({ ...this.config.wdio, ...(options.input ? { input: options.input } : {}) });
     const agent = options.agent && {
       descriptor: options.agent.descriptor ?? defaultAgentDescriptor,
@@ -355,6 +381,13 @@ export class DesktopStorybookCli {
       wdio,
     );
     resolvedInstance.driverManifestPath = driverManifest.path;
+    let ownedApplication: NativeDesktopApplicationDescriptor | undefined;
+    if (macApplication) {
+      resolvedInstance.macosXcconfigPath = writeMacOSInstanceConfig(this.config.projectRoot, resolvedInstance);
+      await this.executeAction('bundle', platform, resolvedInstance);
+      await this.executeAction('build', platform, resolvedInstance);
+      ownedApplication = await this.resolveOwnedMacOSApplication(resolvedInstance, macApplication);
+    }
     if (platform === 'macos') await this.startMacOSApplicationLease(driverManifest.path);
     const metro = this.services.start('metro', {
       ...this.prepareCommand(defaultMetroCommand(resolvedInstance), platform, resolvedInstance),
@@ -371,6 +404,7 @@ export class DesktopStorybookCli {
         },
         platform,
         resolvedInstance,
+        ownedApplication,
       ),
       listener: { service: 'storybook-channel-listener', port: storybookPort },
     });
@@ -385,6 +419,13 @@ export class DesktopStorybookCli {
       120_000,
     );
     assertSameReadinessProducer(channelListener, channelReady);
+    if (ownedApplication) {
+      await this.waitForMacOSApplicationLease(driverManifest.path, {
+        timeoutMs: 120_000,
+        signal: this.services.controller.signal,
+        createStorage: this.createPrivateStorage,
+      });
+    }
     return {
       targetId: this.targetId(platform),
       url: loopbackUrl(driverPort),
@@ -778,6 +819,60 @@ export class DesktopStorybookCli {
     await this.executePlan(plan, platform, instance);
   }
 
+  private ownedMacOSApplication(instance: DesktopStorybookInstance): OwnedMacOSApplication {
+    const target = this.workloadTarget('macos');
+    const application: NativeDesktopApplicationDescriptor | undefined = this.requireNativeDriverOptions('macos').application;
+    if (
+      target.host.kind !== 'react-native-test-app' ||
+      !application?.windowTitle ||
+      application.processIdentity ||
+      application.leasePath ||
+      application.leaseNonce
+    ) {
+      throw new Error('An owned macOS Storybook application requires a launchable RN Test App target with an exact window title.');
+    }
+    if (
+      application.bundleIdentifier &&
+      application.bundleIdentifier !== this.config.macosBundleIdentifier &&
+      application.bundleIdentifier !== instance.bundleIdentifier
+    ) {
+      throw new Error('The configured macOS bundle identifier conflicts with the instance-specific built product.');
+    }
+    return { target, application: { ...application, windowTitle: application.windowTitle } };
+  }
+
+  private async resolveOwnedMacOSApplication(
+    instance: DesktopStorybookInstance,
+    { target, application: configured }: OwnedMacOSApplication,
+  ): Promise<NativeDesktopApplicationDescriptor> {
+    const resolved = await this.services.guard(
+      this.resolveDesktopApplication(
+        {
+          ...target,
+          host: {
+            ...target.host,
+            windowTitle: configured.windowTitle,
+            application: { ...configured, bundleIdentifier: undefined, executablePath: undefined },
+          },
+        },
+        this.services.controller.signal,
+        { macosBundleIdentifier: instance.bundleIdentifier },
+      ),
+    );
+    if (!resolved.executablePath || !path.isAbsolute(resolved.executablePath)) {
+      throw new Error('An owned macOS Storybook application requires the exact built application executable.');
+    }
+    if (configured.executablePath) {
+      const expected = fs.realpathSync.native(configured.executablePath);
+      const executable = fs.realpathSync.native(resolved.executablePath);
+      const bundle = path.dirname(path.dirname(path.dirname(executable)));
+      if (expected !== executable && expected !== bundle) {
+        throw new Error('The configured macOS application does not match the verified built product.');
+      }
+    }
+    return { ...resolved, bundleIdentifier: instance.bundleIdentifier };
+  }
+
   private async runNativeSmokeLifecycle(
     platform: Platforms,
     smoke: DesktopSmokeOptions,
@@ -789,27 +884,8 @@ export class DesktopStorybookCli {
     const failures: unknown[] = [];
     try {
       const target = this.workloadTarget(platform);
-      const macApplication: NativeDesktopApplicationDescriptor | undefined =
-        native.kind === 'macos' ? this.requireNativeDriverOptions(platform).application : undefined;
-      if (
-        native.kind === 'macos' &&
-        (target.host.kind !== 'react-native-test-app' ||
-          !macApplication?.windowTitle ||
-          macApplication.processIdentity ||
-          macApplication.leasePath ||
-          macApplication.leaseNonce)
-      ) {
-        throw new Error('Native macOS smoke requires a launchable RN Test App target with an exact window title.');
-      }
-      if (
-        native.kind === 'macos' &&
-        macApplication?.bundleIdentifier &&
-        macApplication.bundleIdentifier !== this.config.macosBundleIdentifier &&
-        macApplication.bundleIdentifier !== instance.bundleIdentifier
-      ) {
-        throw new Error('The configured macOS bundle identifier conflicts with the instance-specific built product.');
-      }
-      const windowTitle = native.kind === 'macos' ? macApplication!.windowTitle! : native.windowTitle;
+      const macApplication = native.kind === 'macos' ? this.ownedMacOSApplication(instance) : undefined;
+      const windowTitle = native.kind === 'macos' ? macApplication!.application.windowTitle : native.windowTitle;
       await this.executeAction('bundle', platform, instance);
       if (native.kind === 'macos') await this.executeAction('build', platform, instance);
       if (native.kind === 'windows') {
@@ -841,48 +917,30 @@ export class DesktopStorybookCli {
           instance,
         );
       }
-      const resolvedApplication = await this.services.guard(
-        this.resolveDesktopApplication(
-          {
-            ...target,
-            host: {
-              ...target.host,
-              ...(native.kind === 'win32' ? { kind: 'rex', component: native.component } : {}),
-              windowTitle,
-              application:
-                native.kind === 'macos'
-                  ? { ...macApplication, bundleIdentifier: undefined, executablePath: undefined, windowTitle }
-                  : { ...target.host.application, windowTitle },
-            },
-          },
-          this.services.controller.signal,
-          native.kind === 'windows'
-            ? { configuration: native.configuration ?? 'Debug' }
-            : native.kind === 'macos'
-              ? { macosBundleIdentifier: instance.bundleIdentifier }
-              : {},
-        ),
-      );
+      const resolvedApplication = macApplication
+        ? await this.resolveOwnedMacOSApplication(instance, macApplication)
+        : await this.services.guard(
+            this.resolveDesktopApplication(
+              {
+                ...target,
+                host: {
+                  ...target.host,
+                  ...(native.kind === 'win32' ? { kind: 'rex', component: native.component } : {}),
+                  windowTitle,
+                  application: { ...target.host.application, windowTitle },
+                },
+              },
+              this.services.controller.signal,
+              native.kind === 'windows' ? { configuration: native.configuration ?? 'Debug' } : {},
+            ),
+          );
       const application =
         native.kind === 'win32'
           ? {
               ...resolvedApplication,
               arguments: [...(resolvedApplication.arguments ?? []), 'crashOnRedBox', 'debugBundlePath', 'index'],
             }
-          : native.kind === 'macos'
-            ? { ...resolvedApplication, bundleIdentifier: instance.bundleIdentifier }
-            : resolvedApplication;
-      if (native.kind === 'macos' && (!application.executablePath || !path.isAbsolute(application.executablePath))) {
-        throw new Error('Native macOS smoke requires the exact built application executable.');
-      }
-      if (native.kind === 'macos' && macApplication?.executablePath) {
-        const configured = fs.realpathSync.native(macApplication.executablePath);
-        const executable = fs.realpathSync.native(application.executablePath!);
-        const bundle = path.dirname(path.dirname(path.dirname(executable)));
-        if (configured !== executable && configured !== bundle) {
-          throw new Error('The configured macOS application does not match the verified built product.');
-        }
-      }
+          : resolvedApplication;
       const configuredServer = this.config.getPlatformOptions(platform).server;
       const server = smoke.server ?? configuredServer;
       if (!server) throw new Error('Native smoke requires its owned Storybook channel.');
@@ -928,11 +986,7 @@ export class DesktopStorybookCli {
                 identity: `storybook-smoke:${instance.id}:${phase}`,
                 acquire: async () => {
                   running = this.runner.start({
-                    ...this.prepareCommand(
-                      { ...server, env: { ...server.env, STORYBOOK_SMOKE_APPLICATION: JSON.stringify(application) } },
-                      platform,
-                      instance,
-                    ),
+                    ...this.prepareCommand(server, platform, instance, application),
                     label: `Storybook ${phase}`,
                     category: 'service',
                     context: { service: `storybook-${phase}` },
@@ -1629,6 +1683,7 @@ export class DesktopStorybookCli {
     command: DesktopCommand,
     platform: Platforms,
     instance?: ResolvedDesktopStorybookInstance,
+    ownedApplication?: NativeDesktopApplicationDescriptor,
   ): PreparedDesktopCommand {
     return {
       ...command,
@@ -1636,6 +1691,7 @@ export class DesktopStorybookCli {
       cwd: command.cwd ? resolveFromProject(this.config.projectRoot, command.cwd) : this.config.projectRoot,
       env: {
         ...command.env,
+        STORYBOOK_OWNED_APPLICATION: ownedApplication ? JSON.stringify(ownedApplication) : '',
         [FURN_STORYBOOK_PLATFORM]: platform,
         ...(platform === 'macos' ? { RCT_NEW_ARCH_ENABLED: this.paper ? '0' : '1' } : {}),
         [STORYBOOK_VERBOSE]: this.verbose ? '1' : '0',

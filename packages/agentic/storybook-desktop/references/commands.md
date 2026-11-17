@@ -160,6 +160,9 @@ driver and manifest-backed smoke own a read-only application lease maintainer
 through desktop-test. It tracks the verified app across relaunch, withdraws
 its lease on ambiguity or shutdown, and preserves foreign records. An attached
 `storybook test` waits for that host-owned lease; it never writes one.
+With `host.ownership: 'supervisor'`, a claimed macOS driver builds and retains
+its instance-specific application, then waits for the lease before readiness.
+Retained Storybook startup on Windows and Win32 currently fails closed.
 The native lease-v1 reader retains its one-second start-time tolerance.
 Nothing maintains a Windows or Win32
 lease, so on those platforms the agent attaches by the app's verified identity

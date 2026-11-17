@@ -704,6 +704,7 @@ const workloadRun = z.strictObject({
   handle,
   requestId: boundedId,
   workload: boundedId,
+  storyId: desktopWorkloadInputSchema.shape.storyId,
   lane: z.enum(['accessible', 'physical']),
   phase: z.enum(['queued', 'running', 'settled']),
   cancellation: z.enum(['none', 'requested']),
@@ -801,7 +802,10 @@ function parseWorkloadResponse(input: DesktopWorkloadInput, value: unknown): Des
   if (['run', 'status', 'cancel'].includes(input.action) && 'run' in answer && answer.run) {
     if (input.handle && answer.run.handle !== input.handle) throw new Error('Mismatched desktop workload response.');
     if (input.requestId && answer.run.requestId !== input.requestId) throw new Error('Mismatched desktop workload response.');
-    if (input.action === 'run' && (answer.run.workload !== input.workload || answer.run.lane !== input.lane))
+    if (
+      input.action === 'run' &&
+      (answer.run.workload !== input.workload || answer.run.lane !== input.lane || answer.run.storyId !== input.storyId)
+    )
       throw new Error('Mismatched desktop workload response.');
     return answer;
   }

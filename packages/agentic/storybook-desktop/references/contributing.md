@@ -48,8 +48,10 @@ Application attachment leases stay in that private namespace. Their random nonce
 is independent of the runtime bridge nonce; the lease nonce never reaches Metro.
 Publication resolves the existing generated directory once, so symlinked project
 paths and macOS `/var` aliases work without weakening subsequent ancestor checks.
-Windows and Win32 native smoke use desktop-test's retained application wrapper
-inside the supervised channel. `src/driver/smokeApplication.ts` publishes the
+Native smoke and supervisor-owned macOS Storybook drivers use desktop-test's
+retained application wrapper inside the supervised channel. Install the bridge
+observer before retained launch so its initial render cannot be missed.
+On Windows and Win32, `src/driver/retainedApplication.ts` publishes the
 native PID/start/AUMID or executable through `applicationLease.ts`, which
 verifies the parent handoff before opening protected DACL storage. The owner
 retains only a digest receipt; replacement and cleanup cannot overwrite or

@@ -38,6 +38,8 @@ async function startDesktopStorybookServer({
   let agentReadyPath;
   let keepAlive;
   let closing;
+  let acquisitionStarted = false;
+  let unregisterDisposal;
   const close = (error) =>
     (closing ??= (async () => {
       const failures = error === undefined ? [] : [error];
@@ -76,8 +78,11 @@ async function startDesktopStorybookServer({
       process.exitCode = await report.close(
         failures.length ? new AggregateError(failures, 'Storybook channel service failed.') : undefined,
       );
-      unregisterDisposal();
-      if (failures.length) throw new AggregateError(failures, 'Storybook channel disposal is incomplete.');
+      unregisterDisposal?.();
+      if (failures.length) {
+        if (!acquisitionStarted && failures.length === 1 && error !== undefined) finishDesktopProcess();
+        throw new AggregateError(failures, 'Storybook channel disposal is incomplete.');
+      }
       finishDesktopProcess();
     })().finally(() => releaseInterrupts?.()));
   const settle = async (error) => {
@@ -100,7 +105,6 @@ async function startDesktopStorybookServer({
       process.exitCode = 1;
     });
   };
-  const unregisterDisposal = registerDesktopProcessDisposal(() => settle());
   report.onStop?.(stop);
   // Handlers stay installed until close completes; nothing can be forced, so a repeated signal only warns before exiting.
   const releaseInterrupts = handleDesktopInterrupts({
@@ -115,6 +119,7 @@ async function startDesktopStorybookServer({
       }),
   });
   try {
+    unregisterDisposal = await registerDesktopProcessDisposal(() => settle());
     controller.signal.throwIfAborted();
     let driverManifest;
     if (driverManifestPath) {
@@ -123,6 +128,7 @@ async function startDesktopStorybookServer({
         driverManifest = parseStoredDriverManifest(JSON.parse(fs.readFileSync(driverManifestPath, 'utf8')));
       } else {
         if (!process.env.STORYBOOK_DRIVER_HANDOFF) throw new Error('Native Storybook requires its trusted parent helper handoff.');
+        acquisitionStarted = true;
         driverManifest = await readDriverManifest(driverManifestPath, process.env.STORYBOOK_DRIVER_HANDOFF);
       }
     }
@@ -152,6 +158,7 @@ async function startDesktopStorybookServer({
       report.reporter.addSecret(driverManifest.application.leaseNonce);
       report.reporter.addSecret(driverManifest.bridgeNonce);
     }
+    acquisitionStarted = true;
     if (agent) {
       controlledChannel = await createControlledChannelServer({ host, port, configPath, buildIndex, onFailure: fatal });
       server = controlledChannel.channel;
@@ -198,12 +205,32 @@ async function startDesktopStorybookServer({
           ],
         });
       } else {
-        const smokeApplication = process.env.STORYBOOK_SMOKE_APPLICATION ? JSON.parse(process.env.STORYBOOK_SMOKE_APPLICATION) : undefined;
-        if (smokeApplication && agent) throw new Error('Owned native smoke applications require a non-agent endpoint.');
+        const ownedApplication = process.env.STORYBOOK_OWNED_APPLICATION ? JSON.parse(process.env.STORYBOOK_OWNED_APPLICATION) : undefined;
+        const makeOrchestrator = (targetHost, recovery) =>
+          createChannelOrchestrator({
+            channelServer: server,
+            driverManifest,
+            serverUrl: loopbackUrl(host, port),
+            StorybookChannelOrchestrator,
+            recovery: {
+              ...recovery,
+              resolveApplication: createApplicationIdentityResolver({
+                host: targetHost,
+                target: { ...target, host: targetHost },
+                createIdentityHost: () =>
+                  new NativeDesktopHost({
+                    application: agent?.application ?? driverManifest.application,
+                    artifact: driverManifest.nativeDriver,
+                    endpoint: driverManifest.endpoint,
+                  }),
+              }),
+            },
+          });
+        let retainedOrchestrator;
         driver = await startNativeDesktopService({
           signal: controller.signal,
           // Windows agents verify the app's AUMID or executable; nothing maintains a lease there.
-          application: smokeApplication ?? agent?.application ?? driverManifest.application,
+          application: ownedApplication ?? agent?.application ?? driverManifest.application,
           artifact: driverManifest.nativeDriver,
           endpoint: driverManifest.endpoint,
           host,
@@ -223,11 +250,13 @@ async function startDesktopStorybookServer({
               }
             : {}),
           target,
-          ...(smokeApplication
+          ...(ownedApplication
             ? {
-                prepareHost: async (targetHost) => {
-                  const { prepareSmokeApplicationHost } = await import('../lib/driver/smokeApplication.js');
-                  return prepareSmokeApplicationHost(targetHost, {
+                prepareHost: async (targetHost, recovery) => {
+                  // Observe the runtime socket before launch, including an initial render faster than native identity capture.
+                  retainedOrchestrator = makeOrchestrator(targetHost, recovery);
+                  const { prepareRetainedStorybookApplicationHost } = await import('../lib/driver/retainedApplication.js');
+                  return prepareRetainedStorybookApplicationHost(targetHost, {
                     target,
                     manifestPath: driverManifestPath,
                     handoff: process.env.STORYBOOK_DRIVER_HANDOFF,
@@ -236,32 +265,14 @@ async function startDesktopStorybookServer({
                     onResource: (resource) =>
                       report.reporter.emit({
                         kind: 'diagnostic',
-                        payload: { level: 'info', message: `Native smoke application resource: ${JSON.stringify(resource)}` },
+                        payload: { level: 'info', message: `Retained application resource: ${JSON.stringify(resource)}` },
                       }),
                   });
                 },
               }
             : {}),
           createTarget: async (targetHost, recovery) => ({
-            storyOrchestrator: createChannelOrchestrator({
-              channelServer: server,
-              driverManifest,
-              serverUrl: loopbackUrl(host, port),
-              StorybookChannelOrchestrator,
-              recovery: {
-                ...recovery,
-                resolveApplication: createApplicationIdentityResolver({
-                  host: targetHost,
-                  target: { ...target, host: targetHost },
-                  createIdentityHost: () =>
-                    new NativeDesktopHost({
-                      application: agent?.application ?? driverManifest.application,
-                      artifact: driverManifest.nativeDriver,
-                      endpoint: driverManifest.endpoint,
-                    }),
-                }),
-              },
-            }),
+            storyOrchestrator: retainedOrchestrator ?? makeOrchestrator(targetHost, recovery),
           }),
         });
       }

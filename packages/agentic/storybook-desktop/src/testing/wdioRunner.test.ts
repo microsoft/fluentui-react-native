@@ -1,10 +1,9 @@
 import { spawn } from 'node:child_process';
 import path from 'node:path';
 
-// This aggregate contract starts dozens of Node workers, including intentional timeouts.
-test('executes isolated inline code and releases sessions after assertion failures, timeouts, and crashes', async () => {
-  const result = await new Promise<Record<string, unknown>>((resolve, reject) => {
-    const child = spawn(process.execPath, [path.join(__dirname, 'wdioRunner.contract.cjs')], {
+function runContract(mode: 'protected' | 'legacy'): Promise<{ output: string; diagnostics: string }> {
+  return new Promise((resolve, reject) => {
+    const child = spawn(process.execPath, [path.join(__dirname, 'wdioRunner.contract.cjs'), mode], {
       stdio: ['ignore', 'pipe', 'pipe'],
     });
     const stdout: Buffer[] = [];
@@ -16,24 +15,32 @@ test('executes isolated inline code and releases sessions after assertion failur
       if (code !== 0) {
         reject(new Error(Buffer.concat(stderr).toString('utf8') || `Inline test contract exited with ${code}.`));
       } else {
-        const output = Buffer.concat(stdout).toString('utf8');
-        const diagnostics = Buffer.concat(stderr).toString('utf8');
-        if (
-          !diagnostics.includes('intentional inline assertion') ||
-          !diagnostics.includes('wdio "fixture-button--fail" during execution') ||
-          !diagnostics.includes('wdio "fixture-button--navigation-failure" during navigation') ||
-          !diagnostics.includes('Storybook context did not settle.') ||
-          !diagnostics.includes('wdio "fixture-button--lane / accessible only" during input policy verification') ||
-          diagnostics.includes('Navigation refused before dispatch') ||
-          output.includes('[storybook] OK wdio "fixture-button--exit-zero"')
-        ) {
-          reject(new Error('Assertion diagnostics were lost.'));
-        } else {
-          resolve(JSON.parse(output.split('\nWDIO_RESULT ')[1]));
-        }
+        resolve({ output: Buffer.concat(stdout).toString('utf8'), diagnostics: Buffer.concat(stderr).toString('utf8') });
       }
     });
   });
+}
+
+test('isolates protected worker grants, cancellation, and cleanup fencing', async () => {
+  const { output } = await runContract('protected');
+  expect(output).toContain('\nWDIO_PROTECTED_OK\n');
+}, 120_000);
+
+// This contract starts dozens of Node workers, including intentional timeouts.
+test('executes isolated inline code and releases sessions after assertion failures, timeouts, and crashes', async () => {
+  const { output, diagnostics } = await runContract('legacy');
+  if (
+    !diagnostics.includes('intentional inline assertion') ||
+    !diagnostics.includes('wdio "fixture-button--fail" during execution') ||
+    !diagnostics.includes('wdio "fixture-button--navigation-failure" during navigation') ||
+    !diagnostics.includes('Storybook context did not settle.') ||
+    !diagnostics.includes('wdio "fixture-button--lane / accessible only" during input policy verification') ||
+    diagnostics.includes('Navigation refused before dispatch') ||
+    output.includes('[storybook] OK wdio "fixture-button--exit-zero"')
+  ) {
+    throw new Error('Assertion diagnostics were lost.');
+  }
+  const result: Record<string, unknown> = JSON.parse(output.split('\nWDIO_RESULT ')[1]);
   expect(result).toMatchObject({
     passed: ['fixture-button--pass'],
     skipped: ['fixture-button--skip'],

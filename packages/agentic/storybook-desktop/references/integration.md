@@ -72,10 +72,19 @@ surface, not an alternate lifecycle owner. Keep the runtime Node-free. Do not
 add a separate coordinator package or move supervision into desktop-driver or
 MCP.
 
+For a macOS target with `host.ownership: 'supervisor'`, the channel retains
+the instance-specific built application across attached sessions. The CLI
+requires the matching live supervisor claim, verifies the built product, and
+waits for its private application lease before reporting readiness. The bridge
+observes the channel before launch so an early initial render is not lost.
+The enclosing channel owns application settlement; uncertain settlement fences
+the claim. Windows and Win32 retained Storybook startup is not yet supported.
+External applications remain borrowed and are never terminated by this path.
+
 Owned Node services inherit the neutral harness's per-command socket lifeline
 through a Node preload. Its authenticated handshake gates entry, including
-late-spawned descendants. The channel registers explicit disposal before
-acquiring resources: stop or parent loss aborts initialization, awaits late
+late-spawned descendants. The channel awaits parent acknowledgement of explicit
+disposal registration before acquiring resources: stop or parent loss aborts initialization, awaits late
 acquisitions, then withdraws the agent descriptor through the shared F1 service
 and awaits durable driver settlement before closing the channel. The native
 helper remains owned by that service and its existing stdio transport.

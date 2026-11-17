@@ -4,9 +4,10 @@ import path from 'node:path';
 
 import type { DesktopStoryManifestEntry, NativeDriverArtifact } from '@fluentui-react-native/desktop-driver';
 import { validateDesktopCaseOptions } from '@fluentui-react-native/desktop-driver/authoring';
-import { DesktopServiceScope } from '@fluentui-react-native/desktop-test';
-import type { DesktopSupervisor, ResolvedDesktopConfig, ResolvedDesktopTarget } from '@fluentui-react-native/desktop-test';
+import { DesktopServiceScope, DesktopSupervisor } from '@fluentui-react-native/desktop-test';
+import type { ResolvedDesktopConfig, ResolvedDesktopTarget } from '@fluentui-react-native/desktop-test';
 import { selectDesktopRenderer } from '@fluentui-react-native/desktop-test/config';
+import { DesktopRunReporter } from '@fluentui-react-native/desktop-test/reporting';
 import type { DesktopReportWriter } from '@fluentui-react-native/desktop-test/reporting';
 
 import { createWindowsSmokeOptions, createWin32SmokeOptions, STORYBOOK_SMOKE_MODE } from '../config/commands';
@@ -284,6 +285,181 @@ describe('DesktopStorybookCli', () => {
     return { events, runner, options, config, tests, ui, fetch };
   }
 
+  function retainedDriverFixture(platform: 'macos' | 'windows' | 'win32' = 'macos', paper = false) {
+    const f = nativeSmokeFixture(platform);
+    const base = new DesktopStorybookCli(f.config, { ...f.options, paper }).workloadTarget(platform);
+    const retained: ResolvedDesktopTarget = { ...base, host: { ...base.host, ownership: 'supervisor' } };
+    const target = platform === 'macos' ? selectDesktopRenderer(retained, paper ? 'paper' : 'fabric') : retained;
+    jest.spyOn(f.config, 'getDesktopTarget').mockReturnValue(target);
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'storybook-retained-driver-'));
+    const output = { write: () => true };
+    const reporter = new DesktopRunReporter({ artifactsRoot: root, output, errorOutput: output, summary: false });
+    const supervisor = (selected: ResolvedDesktopTarget = target) =>
+      new DesktopSupervisor({
+        target: selected,
+        reporter,
+        reportSession: { reporter, delegated: true, environment: {}, close: async () => 0 },
+        lockDirectory: path.join(root, 'locks'),
+        runner: f.runner,
+        hostFactory: async () => {
+          throw new Error('The native host belongs to the channel.');
+        },
+      });
+    const cli = (owner?: DesktopSupervisor) =>
+      new DesktopStorybookCli(f.config, {
+        ...f.options,
+        paper,
+        reporter,
+        ...(owner ? { services: owner.services, supervisor: owner } : {}),
+      });
+    return { ...f, target, root, supervisor, cli };
+  }
+
+  test('retained Storybook launch requires the supervisor and a live matching claim before any effects', async () => {
+    const f = retainedDriverFixture();
+    const owner = f.supervisor();
+    try {
+      await expect(f.cli().startDriver('macos', { agent: {} })).rejects.toThrow('requires the claimed neutral supervisor');
+      await owner.open(false);
+      await expect(f.cli(owner).startDriver('macos', { agent: {} })).rejects.toThrow('matching desktop workload claim');
+      expect(f.runner.foreground).toEqual([]);
+      expect(f.runner.background).toEqual([]);
+      expect(f.options.resolveDesktopApplication).not.toHaveBeenCalled();
+    } finally {
+      await owner.close();
+      fs.rmSync(f.root, { force: true, recursive: true });
+    }
+  });
+
+  test('retained Storybook launch rejects a claim belonging to another target instance', async () => {
+    const f = retainedDriverFixture();
+    const owner = f.supervisor({ ...f.target, instanceId: 'other-instance' });
+    try {
+      await owner.open();
+      await expect(f.cli(owner).startDriver('macos', { agent: {} })).rejects.toThrow('matching desktop workload claim');
+      expect(f.runner.foreground).toEqual([]);
+      expect(f.runner.background).toEqual([]);
+    } finally {
+      await owner.close();
+      fs.rmSync(f.root, { force: true, recursive: true });
+    }
+  });
+
+  test.each([false, true])('starts a claimed retained macOS agent with its verified product (paper=%s)', async (paper) => {
+    const f = retainedDriverFixture('macos', paper);
+    const owner = f.supervisor();
+    const api = f.cli(owner);
+    try {
+      await owner.open();
+      const ready = await api.startDriver('macos', { agent: { descriptor: 'agent.json' }, input: 'accessible' });
+      const channel = f.runner.background.find((command) => command.context?.service === 'storybook-channel')!;
+      expect(ready).toMatchObject({
+        targetId: f.target.id,
+        agentDescriptor: 'agent.json',
+        runnerDescriptor: 'runner-connection.json',
+        serviceReady: { service: 'storybook-channel', descriptor: 'agent.json' },
+      });
+      expect(JSON.parse(channel.env.STORYBOOK_OWNED_APPLICATION)).toEqual({
+        bundleIdentifier: api.instance.bundleIdentifier,
+        executablePath: '/Fixture/Host.app/Contents/MacOS/Host',
+        windowTitle: 'Agentic Components Storybook',
+      });
+      expect(JSON.parse(fs.readFileSync(channel.env.STORYBOOK_DRIVER_MANIFEST, 'utf8')).agent.descriptor).toBe('agent.json');
+      expect(f.options.resolveDesktopApplication).toHaveBeenCalledWith(
+        expect.objectContaining({
+          id: f.target.id,
+          host: expect.objectContaining({
+            renderer: paper ? 'paper' : 'fabric',
+            application: expect.objectContaining({ bundleIdentifier: undefined, executablePath: undefined }),
+          }),
+        }),
+        expect.any(AbortSignal),
+        { macosBundleIdentifier: api.instance.bundleIdentifier },
+      );
+      expect(f.runner.foreground.map(({ command }) => command)).toContain('build-native');
+      expect(f.runner.foreground.every(({ env }) => env.STORYBOOK_OWNED_APPLICATION === '')).toBe(true);
+      expect(f.events.indexOf('lease-observed')).toBeGreaterThan(f.events.indexOf('start:storybook-channel'));
+    } finally {
+      await owner.close();
+      expect(f.events.slice(-3)).toEqual(['stop:storybook-channel', 'stop:metro', 'lease-withdrawn']);
+      fs.rmSync(f.root, { force: true, recursive: true });
+    }
+  });
+
+  test('does not start retained services when the macOS product cannot be verified', async () => {
+    const f = retainedDriverFixture();
+    const owner = f.supervisor();
+    f.options.resolveDesktopApplication.mockResolvedValueOnce({ windowTitle: 'Agentic Components Storybook', executablePath: '' });
+    try {
+      await owner.open();
+      await expect(f.cli(owner).startDriver('macos', { agent: {} })).rejects.toThrow('exact built application executable');
+      expect(f.runner.background).toEqual([]);
+      expect(f.events).toEqual([]);
+    } finally {
+      await owner.close();
+      fs.rmSync(f.root, { force: true, recursive: true });
+    }
+  });
+
+  test('cancellation while waiting for the retained macOS lease closes the claimed services', async () => {
+    const f = retainedDriverFixture();
+    const owner = f.supervisor();
+    const api = new DesktopStorybookCli(f.config, {
+      ...f.options,
+      services: owner.services,
+      supervisor: owner,
+      waitForMacOSApplicationLease: async () => {
+        owner.services.requestStop();
+        owner.services.controller.signal.throwIfAborted();
+      },
+    });
+    try {
+      await owner.open();
+      await expect(api.startDriver('macos', { agent: {} })).rejects.toThrow('stop requested');
+    } finally {
+      await owner.close();
+      expect(f.events.slice(-3)).toEqual(['stop:storybook-channel', 'stop:metro', 'lease-withdrawn']);
+      fs.rmSync(f.root, { force: true, recursive: true });
+    }
+  });
+
+  test.each(['windows', 'win32'] as const)('refuses retained %s Storybook before starting services', async (platform) => {
+    const f = retainedDriverFixture(platform);
+    const owner = f.supervisor();
+    try {
+      await owner.open();
+      await expect(f.cli(owner).startDriver(platform, { agent: {} })).rejects.toThrow(`not yet supported for ${platform}`);
+      expect(f.runner.foreground).toEqual([]);
+      expect(f.runner.background).toEqual([]);
+    } finally {
+      await owner.close();
+      fs.rmSync(f.root, { force: true, recursive: true });
+    }
+  });
+
+  test('an external Storybook driver cannot inherit an owned-application launch request', async () => {
+    const runner = new RecordingRunner();
+    const services = new DesktopServiceScope(runner);
+    const cli = new DesktopStorybookCli(
+      makeConfig({ macos: { server: { command: 'channel', env: { STORYBOOK_OWNED_APPLICATION: '{"foreign":true}' } } } }),
+      {
+        ...nativeDriverTestOptions,
+        createStoryManifest: createEmptyStoryManifest,
+        fetch: async () => new Response('{}'),
+        isPortAvailable: async () => true,
+        runner,
+        services,
+      },
+    );
+    try {
+      await cli.startDriver('macos', { agent: {} });
+      expect(runner.background.every(({ env }) => env.STORYBOOK_OWNED_APPLICATION === '')).toBe(true);
+      expect(runner.foreground).toEqual([]);
+    } finally {
+      await services.close();
+    }
+  });
+
   test.each(['macos', 'windows', 'win32'] as const)('owns %s smoke phases and releases traversal before tests', async (platform) => {
     const f = nativeSmokeFixture(platform);
     const cli = new DesktopStorybookCli(f.config, f.options);
@@ -345,11 +521,11 @@ describe('DesktopStorybookCli', () => {
             ],
     );
     expect(f.runner.foreground.some((command) => command.args.some((arg) => /smoke-(windows|win32)\.ps1$/.test(arg)))).toBe(false);
-    const phases = f.runner.background.filter((command) => command.env.STORYBOOK_SMOKE_APPLICATION);
+    const phases = f.runner.background.filter((command) => command.env.STORYBOOK_OWNED_APPLICATION);
     expect(phases).toHaveLength(platform === 'windows' ? 2 : 1);
     expect(phases.every((command) => command.env.STORYBOOK_DRIVER_HANDOFF && command.env.STORYBOOK_DRIVER_MANIFEST)).toBe(true);
     if (platform === 'macos') {
-      expect(JSON.parse(phases[0].env.STORYBOOK_SMOKE_APPLICATION)).toEqual({
+      expect(JSON.parse(phases[0].env.STORYBOOK_OWNED_APPLICATION)).toEqual({
         bundleIdentifier: cli.instance.bundleIdentifier,
         executablePath: '/Fixture/Host.app/Contents/MacOS/Host',
         windowTitle: 'Agentic Components Storybook',
@@ -373,7 +549,7 @@ describe('DesktopStorybookCli', () => {
         ),
         30_000,
       );
-      expect(JSON.parse(phases[0].env.STORYBOOK_SMOKE_APPLICATION).arguments).toContain('crashOnRedBox');
+      expect(JSON.parse(phases[0].env.STORYBOOK_OWNED_APPLICATION).arguments).toContain('crashOnRedBox');
       expect(f.runner.foreground.some((command) => command.command === 'pwsh')).toBe(false);
     }
   });
@@ -382,7 +558,7 @@ describe('DesktopStorybookCli', () => {
     const f = nativeSmokeFixture('macos');
     await new DesktopStorybookCli(f.config, f.options).smoke('macos', { mode: 'stories' });
     expect(f.tests).not.toHaveBeenCalled();
-    expect(f.runner.background.some((command) => command.env.STORYBOOK_SMOKE_APPLICATION && command.env.STORYBOOK_DRIVER_HANDOFF)).toBe(
+    expect(f.runner.background.some((command) => command.env.STORYBOOK_OWNED_APPLICATION && command.env.STORYBOOK_DRIVER_HANDOFF)).toBe(
       true,
     );
     expect(f.events).toContain('lease-observed');

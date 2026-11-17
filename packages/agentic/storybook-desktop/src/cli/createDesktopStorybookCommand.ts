@@ -118,6 +118,7 @@ export function createDesktopStorybookCommand(options: CreateDesktopStorybookCom
           reporter: options.reporter,
           reporterMode,
           services: options.services,
+          supervisor: options.supervisor,
           onReady: options.onReady,
         });
       }));

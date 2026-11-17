@@ -97,9 +97,11 @@ if (encoded) {
     });
   }
   globalThis[Symbol.for('furn.desktop.process-control')] = {
-    register(dispose) {
+    async register(dispose) {
       if (finished || stopping) throw new Error('Owned process is already stopping.');
       disposers.add(dispose);
+      await publish('disposal-registered', {});
+      if (finished || stopping) throw new Error('Owned process stopped during disposal registration.');
       return () => disposers.delete(dispose);
     },
     async ready(readiness) {

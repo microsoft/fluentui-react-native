@@ -96,6 +96,23 @@ export class DesktopSupervisor {
     return this.serverValue?.runnerDescriptor;
   }
 
+  /** Requires this live supervisor to hold the interactive claim for the selected target and instance. */
+  assertWorkloadClaim(target: Pick<ResolvedDesktopTarget, 'id' | 'instanceId'> = this.target): void {
+    const owner = this.workloadClaim?.record.owner;
+    if (
+      !this.opened ||
+      this.closePromise ||
+      this.services.controller.signal.aborted ||
+      !owner ||
+      owner.targetId !== this.target.id ||
+      owner.targetInstanceId !== this.target.instanceId ||
+      owner.targetId !== target.id ||
+      owner.targetInstanceId !== target.instanceId
+    ) {
+      throw new Error('A live supervisor must own the matching desktop workload claim before launching an application.');
+    }
+  }
+
   async open(interactive = true): Promise<void> {
     if (this.closePromise) throw new Error('Desktop supervisor is closing.');
     if (this.opened) return;

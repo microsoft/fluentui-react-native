@@ -9,6 +9,8 @@ const { inspect } = require('node:util');
 const { createFixtureStoredManifest } = require('../driver/fixtures/storedManifest.cjs');
 
 async function main() {
+  const mode = process.argv[2] ?? 'all';
+  assert.ok(['all', 'protected', 'legacy'].includes(mode), 'Unknown inline WDIO contract mode.');
   const packageRoot = path.resolve(__dirname, '..', '..');
   const projectRoot = path.resolve(packageRoot, '..', '..', '..', 'apps', 'storybook');
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'furn-inline-wdio-'));
@@ -180,225 +182,232 @@ async function main() {
       ...overrides,
     });
   try {
-    const authority = new DesktopAuthority();
-    const protectedHost = new FakeDesktopHost({ storyRootTestId: 'story-root' });
-    /** @type {import('@fluentui-react-native/desktop-driver').DesktopTarget} */
-    const protectedTarget = {
-      endpoint: 'windows',
-      host: protectedHost,
-      id: 'protected-windows',
-      launchModes: ['attach'],
-      platformName: 'windows',
-      renderer: 'fabric',
-      storyOrchestrator: new FakeStoryOrchestrator(manifest, protectedHost),
-      storyRootTestId: 'story-root',
-    };
-    const protectedServer = await createDesktopDriverServer({ authority, targets: [protectedTarget] });
-    const runnerGrant = authority.issue({
-      label: 'wdio',
-      targets: [protectedTarget.id],
-      scopes: ['driver-control', 'declared-workload'],
-    });
-    const agentGrant = authority.issue({ label: 'agent', targets: [protectedTarget.id] });
-    const protectedConnection = {
-      client: createDesktopDriverClient({ grant: runnerGrant.token, url: protectedServer.url }),
-      url: protectedServer.url,
-    };
-    const contender = createDesktopDriverClient({ grant: agentGrant.token, url: protectedServer.url });
-    const capabilities = { alwaysMatch: { 'furn:target': protectedTarget.id, 'furn:launchMode': 'attach' } };
-    const secrets = [runnerGrant.token, agentGrant.token];
-    const checks = [];
-    const tokenKeys = [];
-    const protectedReport = new DesktopRunReporter({ artifactsRoot: path.join(root, 'protected-reports'), summary: false });
-    for (const secret of secrets) protectedReport.addSecret(secret);
-    const commandRunner = new NodeDesktopCommandRunner({ reporter: protectedReport });
-    const observingRunner = {
-      start(command) {
-        if (command.category === 'worker') {
-          const token = command.env.DESKTOP_WDIO_WORKER_TOKEN;
-          assert.ok(token, 'The child grant must be passed through a private environment variable.');
-          tokenKeys.push(token);
-          const spec = fs.readFileSync(command.args.at(-1), 'utf8');
-          for (const secret of secrets) assert.ok(!spec.includes(secret), 'Generated specs must not contain grants.');
-          protectedReport.emit({ kind: 'output', payload: { stream: 'stdout', text: `redaction probe ${token}` } });
-          checks.push(
-            contender.newSession(capabilities).then(
-              () => {
-                throw new Error('The target was available while a worker held the reservation.');
-              },
-              (error) => assert.equal(error.data?.reason, 'target-busy'),
-            ),
-          );
-        }
-        return commandRunner.start(command);
-      },
-    };
-    try {
-      const protectedResults = await runWdioStoryTests(
-        {
-          config,
-          manifest,
-          platform: 'windows',
-          targetId: protectedTarget.id,
-          url: protectedServer.url,
-          story: 'fixture-button--protected',
-          timeoutMs: 2000,
-          report: protectedReport,
-          runner: { connection: protectedConnection, addSecret: (secret) => secrets.push(secret) },
-        },
-        observingRunner,
-      );
-      await Promise.all(checks);
-      assert.deepEqual(
-        protectedResults.map(({ status }) => status),
-        ['passed', 'passed'],
-      );
-      assert.equal(new Set(tokenKeys).size, 2, 'Each worker must receive a distinct grant.');
-      const session = await contender.newSession(capabilities);
-      await session.delete();
-      await commandRunner.close();
-      await protectedReport.finish();
-      assertNoSecrets(protectedReport.root, secrets);
-
-      const leakReport = new DesktopRunReporter({ artifactsRoot: path.join(root, 'redaction-reports'), summary: false });
-      const leakCommands = new NodeDesktopCommandRunner({ reporter: leakReport });
-      const diagnostics = [];
-      const leakRunner = {
-        start(command) {
-          const token = command.env.DESKTOP_WDIO_WORKER_TOKEN;
-          assert.ok(token);
-          return leakCommands.start({ ...command, env: { ...command.env, FURN_TEST_SECRET_PROBE: token } });
-        },
+    if (mode !== 'legacy') {
+      const authority = new DesktopAuthority();
+      const protectedHost = new FakeDesktopHost({ storyRootTestId: 'story-root' });
+      /** @type {import('@fluentui-react-native/desktop-driver').DesktopTarget} */
+      const protectedTarget = {
+        endpoint: 'windows',
+        host: protectedHost,
+        id: 'protected-windows',
+        launchModes: ['attach'],
+        platformName: 'windows',
+        renderer: 'fabric',
+        storyOrchestrator: new FakeStoryOrchestrator(manifest, protectedHost),
+        storyRootTestId: 'story-root',
       };
-      const protectedOptions = (story) => ({
-        config,
-        manifest,
-        platform: 'windows',
-        targetId: protectedTarget.id,
-        url: protectedServer.url,
-        story,
-        timeoutMs: 2000,
-        report: leakReport,
-        errorOutput: { write: (text) => diagnostics.push(String(text)) },
-        runner: { connection: protectedConnection, addSecret: (secret) => secrets.push(secret) },
+      const protectedServer = await createDesktopDriverServer({ authority, targets: [protectedTarget] });
+      const runnerGrant = authority.issue({
+        label: 'wdio',
+        targets: [protectedTarget.id],
+        scopes: ['driver-control', 'declared-workload'],
       });
-      try {
-        await assert.rejects(runWdioStoryTests(protectedOptions('fixture-button--protected-failure'), leakRunner), (error) => {
-          for (const secret of secrets) assert.ok(!inspect(error, { depth: null }).includes(secret));
-          return error instanceof WdioStoryTestRunError;
-        });
-        assertNoSecrets(leakReport.root, secrets);
-        const skipped = await runWdioStoryTests({ ...protectedOptions('fixture-button--protected-skip'), optional: true }, leakRunner);
-        assert.equal(skipped[0].skipReason, '[REDACTED]');
-        await leakCommands.close();
-        await leakReport.finish();
-        for (const secret of secrets) assert.ok(!diagnostics.join('').includes(secret));
-        assertNoSecrets(leakReport.root, secrets);
-      } finally {
-        await leakCommands.close();
-      }
-
-      const cancelReport = new DesktopRunReporter({ artifactsRoot: path.join(root, 'cancel-reports'), summary: false });
-      const cancelCommands = new NodeDesktopCommandRunner({ reporter: cancelReport });
-      const controller = new AbortController();
-      const cancellation = Object.assign(new Error('cancel fixture'), { name: 'AbortError' });
-      let workerStarted = () => undefined;
-      const started = new Promise((resolve) => (workerStarted = () => resolve(undefined)));
-      const cancelRunner = {
+      const agentGrant = authority.issue({ label: 'agent', targets: [protectedTarget.id] });
+      const protectedConnection = {
+        client: createDesktopDriverClient({ grant: runnerGrant.token, url: protectedServer.url }),
+        url: protectedServer.url,
+      };
+      const contender = createDesktopDriverClient({ grant: agentGrant.token, url: protectedServer.url });
+      const capabilities = { alwaysMatch: { 'furn:target': protectedTarget.id, 'furn:launchMode': 'attach' } };
+      const secrets = [runnerGrant.token, agentGrant.token];
+      const checks = [];
+      const tokenKeys = [];
+      const protectedReport = new DesktopRunReporter({ artifactsRoot: path.join(root, 'protected-reports'), summary: false });
+      for (const secret of secrets) protectedReport.addSecret(secret);
+      const commandRunner = new NodeDesktopCommandRunner({ reporter: protectedReport });
+      const observingRunner = {
         start(command) {
-          const running = cancelCommands.start(command);
-          workerStarted();
-          return running;
+          if (command.category === 'worker') {
+            const token = command.env.DESKTOP_WDIO_WORKER_TOKEN;
+            assert.ok(token, 'The child grant must be passed through a private environment variable.');
+            tokenKeys.push(token);
+            const spec = fs.readFileSync(command.args.at(-1), 'utf8');
+            for (const secret of secrets) assert.ok(!spec.includes(secret), 'Generated specs must not contain grants.');
+            protectedReport.emit({ kind: 'output', payload: { stream: 'stdout', text: `redaction probe ${token}` } });
+            checks.push(
+              contender.newSession(capabilities).then(
+                () => {
+                  throw new Error('The target was available while a worker held the reservation.');
+                },
+                (error) => assert.equal(error.data?.reason, 'target-busy'),
+              ),
+            );
+          }
+          return commandRunner.start(command);
         },
       };
       try {
-        const running = runWdioStoryTests(
+        const protectedResults = await runWdioStoryTests(
           {
             config,
             manifest,
             platform: 'windows',
             targetId: protectedTarget.id,
             url: protectedServer.url,
-            story: 'fixture-button--timeout',
+            story: 'fixture-button--protected',
             timeoutMs: 2000,
-            report: cancelReport,
-            signal: controller.signal,
-            runner: { connection: protectedConnection },
+            report: protectedReport,
+            runner: { connection: protectedConnection, addSecret: (secret) => secrets.push(secret) },
           },
-          cancelRunner,
+          observingRunner,
         );
-        await started;
-        controller.abort(cancellation);
-        await assert.rejects(running, (error) => error === cancellation);
-        await cancelCommands.close();
-        const cancelled = await cancelReport.finish();
-        assert.ok(['cancelled', 'incomplete'].includes(cancelled.status), 'Cancellation must not become a test failure.');
-        assert.ok(!cancelled.failures.some(({ kind }) => kind === 'cleanup'), 'Confirmed cancellation must release the runner.');
-        const afterCancel = await contender.newSession(capabilities);
-        await afterCancel.delete();
-      } finally {
-        await cancelCommands.close();
-      }
+        await Promise.all(checks);
+        assert.deepEqual(
+          protectedResults.map(({ status }) => status),
+          ['passed', 'passed'],
+        );
+        assert.equal(new Set(tokenKeys).size, 2, 'Each worker must receive a distinct grant.');
+        const session = await contender.newSession(capabilities);
+        await session.delete();
+        await commandRunner.close();
+        await protectedReport.finish();
+        assertNoSecrets(protectedReport.root, secrets);
 
-      const fencedReport = new DesktopRunReporter({ artifactsRoot: path.join(root, 'fenced-reports'), summary: false });
-      const fencedCommands = new NodeDesktopCommandRunner({ reporter: fencedReport });
-      const uncertainRunner = {
-        start(command) {
-          const running = fencedCommands.start(command);
-          return {
-            ...running,
-            stop: async (options) => {
-              await running.stop(options);
-              throw new Error('injected unconfirmed worker exit');
-            },
-          };
-        },
-      };
-      try {
-        await assert.rejects(
-          runWdioStoryTests(
+        const leakReport = new DesktopRunReporter({ artifactsRoot: path.join(root, 'redaction-reports'), summary: false });
+        const leakCommands = new NodeDesktopCommandRunner({ reporter: leakReport });
+        const diagnostics = [];
+        const leakRunner = {
+          start(command) {
+            const token = command.env.DESKTOP_WDIO_WORKER_TOKEN;
+            assert.ok(token);
+            return leakCommands.start({ ...command, env: { ...command.env, FURN_TEST_SECRET_PROBE: token } });
+          },
+        };
+        const protectedOptions = (story) => ({
+          config,
+          manifest,
+          platform: 'windows',
+          targetId: protectedTarget.id,
+          url: protectedServer.url,
+          story,
+          timeoutMs: 2000,
+          report: leakReport,
+          errorOutput: { write: (text) => diagnostics.push(String(text)) },
+          runner: { connection: protectedConnection, addSecret: (secret) => secrets.push(secret) },
+        });
+        try {
+          await assert.rejects(runWdioStoryTests(protectedOptions('fixture-button--protected-failure'), leakRunner), (error) => {
+            for (const secret of secrets) assert.ok(!inspect(error, { depth: null }).includes(secret));
+            return error instanceof WdioStoryTestRunError;
+          });
+          assertNoSecrets(leakReport.root, secrets);
+          const skipped = await runWdioStoryTests({ ...protectedOptions('fixture-button--protected-skip'), optional: true }, leakRunner);
+          assert.equal(skipped[0].skipReason, '[REDACTED]');
+          await leakCommands.close();
+          await leakReport.finish();
+          for (const secret of secrets) assert.ok(!diagnostics.join('').includes(secret));
+          assertNoSecrets(leakReport.root, secrets);
+        } finally {
+          await leakCommands.close();
+        }
+
+        const cancelReport = new DesktopRunReporter({ artifactsRoot: path.join(root, 'cancel-reports'), summary: false });
+        const cancelCommands = new NodeDesktopCommandRunner({ reporter: cancelReport });
+        const controller = new AbortController();
+        const cancellation = Object.assign(new Error('cancel fixture'), { name: 'AbortError' });
+        let workerStarted = () => undefined;
+        const started = new Promise((resolve) => (workerStarted = () => resolve(undefined)));
+        const cancelRunner = {
+          start(command) {
+            const running = cancelCommands.start(command);
+            workerStarted();
+            return running;
+          },
+        };
+        try {
+          const running = runWdioStoryTests(
             {
               config,
               manifest,
               platform: 'windows',
               targetId: protectedTarget.id,
               url: protectedServer.url,
-              story: 'fixture-button--protected',
-              test: 'first',
+              story: 'fixture-button--timeout',
               timeoutMs: 2000,
-              report: fencedReport,
+              report: cancelReport,
+              signal: controller.signal,
               runner: { connection: protectedConnection },
             },
-            uncertainRunner,
-          ),
-          (error) =>
-            error instanceof Error &&
-            error instanceof WdioStoryTestRunError &&
-            'results' in error &&
-            Array.isArray(error.results) &&
-            error.results[0]?.error.includes('Could not confirm worker and session cleanup'),
-        );
-        await assert.rejects(
-          contender.newSession(capabilities),
-          (error) =>
-            typeof error === 'object' &&
-            error !== null &&
-            'data' in error &&
-            typeof error.data === 'object' &&
-            error.data !== null &&
-            'reason' in error.data &&
-            error.data.reason === 'target-busy',
-        );
-        const fencedResult = await fencedReport.finish();
-        assert.ok(
-          fencedResult.failures.some(({ kind }) => kind === 'cleanup'),
-          'Unconfirmed exit must report cleanup failure.',
-        );
+            cancelRunner,
+          );
+          await started;
+          controller.abort(cancellation);
+          await assert.rejects(running, (error) => error === cancellation);
+          await cancelCommands.close();
+          const cancelled = await cancelReport.finish();
+          assert.ok(['cancelled', 'incomplete'].includes(cancelled.status), 'Cancellation must not become a test failure.');
+          assert.ok(!cancelled.failures.some(({ kind }) => kind === 'cleanup'), 'Confirmed cancellation must release the runner.');
+          const afterCancel = await contender.newSession(capabilities);
+          await afterCancel.delete();
+        } finally {
+          await cancelCommands.close();
+        }
+
+        const fencedReport = new DesktopRunReporter({ artifactsRoot: path.join(root, 'fenced-reports'), summary: false });
+        const fencedCommands = new NodeDesktopCommandRunner({ reporter: fencedReport });
+        const uncertainRunner = {
+          start(command) {
+            const running = fencedCommands.start(command);
+            return {
+              ...running,
+              stop: async (options) => {
+                await running.stop(options);
+                throw new Error('injected unconfirmed worker exit');
+              },
+            };
+          },
+        };
+        try {
+          await assert.rejects(
+            runWdioStoryTests(
+              {
+                config,
+                manifest,
+                platform: 'windows',
+                targetId: protectedTarget.id,
+                url: protectedServer.url,
+                story: 'fixture-button--protected',
+                test: 'first',
+                timeoutMs: 2000,
+                report: fencedReport,
+                runner: { connection: protectedConnection },
+              },
+              uncertainRunner,
+            ),
+            (error) =>
+              error instanceof Error &&
+              error instanceof WdioStoryTestRunError &&
+              'results' in error &&
+              Array.isArray(error.results) &&
+              error.results[0]?.error.includes('Could not confirm worker and session cleanup'),
+          );
+          await assert.rejects(
+            contender.newSession(capabilities),
+            (error) =>
+              typeof error === 'object' &&
+              error !== null &&
+              'data' in error &&
+              typeof error.data === 'object' &&
+              error.data !== null &&
+              'reason' in error.data &&
+              error.data.reason === 'target-busy',
+          );
+          const fencedResult = await fencedReport.finish();
+          assert.ok(
+            fencedResult.failures.some(({ kind }) => kind === 'cleanup'),
+            'Unconfirmed exit must report cleanup failure.',
+          );
+        } finally {
+          await fencedCommands.close();
+        }
       } finally {
-        await fencedCommands.close();
+        await protectedServer.close();
       }
-    } finally {
-      await protectedServer.close();
+    }
+
+    if (mode === 'protected') {
+      process.stdout.write('\nWDIO_PROTECTED_OK\n');
+      return;
     }
 
     const platforms = {};

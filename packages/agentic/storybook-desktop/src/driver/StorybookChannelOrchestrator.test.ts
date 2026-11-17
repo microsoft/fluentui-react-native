@@ -451,6 +451,23 @@ describe('durable authenticated bridge epochs', () => {
     replacement.ready({ connectionEpoch: replacement.epoch });
     await expect(selection).resolves.toMatchObject({ connectionEpoch: replacement.epoch });
   });
+
+  test('an early render is usable only after the same socket authenticates and records its native identity', async () => {
+    const store = recovery();
+    const state = setup(undefined, 100, store);
+    state.client.receive('storyRendered', request.storyId);
+    await expect(state.orchestrator.selectStory(request)).rejects.toMatchObject({
+      data: { reason: 'bridge-unavailable' },
+      effect: 'none',
+    });
+    state.client.hello();
+    const selection = state.orchestrator.selectStory(request);
+    await new Promise<void>((resolve) => setImmediate(resolve));
+    state.client.ready();
+    await expect(selection).resolves.toMatchObject({ connectionEpoch: state.client.epoch });
+    expect(store.resolveApplication).toHaveBeenCalled();
+  });
+
   test('storage and verified-identity failures never enable dispatch', async () => {
     const store = recovery();
     store.resolveApplication.mockRejectedValue(new Error('Identity unavailable'));

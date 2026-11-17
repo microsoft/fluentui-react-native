@@ -465,6 +465,69 @@ describe('verified supervisor management connection', () => {
     await connection.close();
   });
 
+  test('preserves and verifies selected story IDs across admission and reconciliation', async () => {
+    await service.close();
+    const prepared: (string | undefined)[] = [];
+    service = new DesktopWorkloadService({
+      catalog: [{ id: 'stories', kind: 'csf-wdio', lanes: ['accessible'] }],
+      prepare: async ({ bindReporter, storyId }) => {
+        prepared.push(storyId);
+        const reporter = new DesktopRunReporter({
+          artifactsRoot: root,
+          output: { write: () => true },
+          errorOutput: { write: () => true },
+          reporterMode: 'json',
+          summary: false,
+        });
+        bindReporter(reporter);
+        return {
+          runId: reporter.runId,
+          root: reporter.root,
+          run: (signal) => runWork(reporter, signal),
+          finish: async (failure) => {
+            if (failure !== undefined) reporter.fail(failure);
+            await reporter.finish();
+          },
+        };
+      },
+    });
+    await publish();
+    const connection = await connectDesktopSupervisor({ storage, verifyService: verify });
+    const input = {
+      action: 'run' as const,
+      workload: 'stories',
+      lane: 'accessible' as const,
+      requestId: 'selected',
+      storyId: 'components-button--default',
+    };
+    const admitted = await connection.request(input);
+    if (!('run' in admitted) || !admitted.run) throw new Error('Expected the accepted run.');
+    expect(admitted.run.storyId).toBe(input.storyId);
+    expect(await connection.request({ action: 'status', requestId: input.requestId })).toMatchObject({
+      run: { handle: admitted.run.handle, storyId: input.storyId },
+    });
+    expect((await settled(connection, admitted.run.handle)).storyId).toBe(input.storyId);
+
+    const fetch = globalThis.fetch;
+    const spy = jest.spyOn(globalThis, 'fetch').mockImplementation(async (url, init) => {
+      const response = await fetch(url, init);
+      if (String(url).endsWith('/workloads') && init?.body && JSON.parse(String(init.body)).action === 'run') {
+        const payload = (await response.json()) as { run: { storyId: string } };
+        payload.run.storyId = 'components-other--default';
+        return new Response(JSON.stringify(payload), { status: response.status, headers: response.headers });
+      }
+      return response;
+    });
+    await expect(connection.request({ ...input, requestId: 'mismatched' })).rejects.toMatchObject({ code: 'ambiguous' });
+    spy.mockRestore();
+    const recovered = await connection.request({ action: 'status', requestId: 'mismatched' });
+    if (!('run' in recovered) || !recovered.run) throw new Error('Expected the accepted run.');
+    expect(recovered.run.storyId).toBe(input.storyId);
+    expect((await settled(connection, recovered.run.handle)).outcome).toBe('passed');
+    expect(prepared).toEqual([input.storyId, input.storyId]);
+    await connection.close();
+  });
+
   test('a lost connection-creation response reuses the same connection ID', async () => {
     await publish();
     const fetch = globalThis.fetch;

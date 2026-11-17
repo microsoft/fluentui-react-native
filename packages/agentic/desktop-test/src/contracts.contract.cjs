@@ -1770,6 +1770,28 @@ async function main() {
       const { createDesktopDriverClient } = await import('@fluentui-react-native/desktop-driver/client');
       const siblingRecovery = memoryRecovery();
       const siblingTarget = { endpoint: 'win32', id: 'bridge-target', platformName: 'windows' };
+      const compositionSteps = [];
+      let preparedRecovery;
+      const composed = await startDesktopService(new FakeDesktopHost({ endpoint: 'win32' }), {
+        target: siblingTarget,
+        recovery: siblingRecovery,
+        prepareHost: async (host, recovery) => {
+          preparedRecovery = recovery;
+          await recovery.storage.publish('prepare-context.json', 'observing');
+          compositionSteps.push('prepare');
+          return host;
+        },
+        createTarget: async (_host, recovery) => {
+          assert.equal(recovery, preparedRecovery);
+          assert.equal(await recovery.storage.read('prepare-context.json'), 'observing');
+          compositionSteps.push('target');
+          return undefined;
+        },
+      });
+      await composed.close();
+      assert.deepEqual(compositionSteps, ['prepare', 'target']);
+      assert.equal(siblingRecovery.records.size, 1);
+      siblingRecovery.records.clear();
       for (const [index, port] of [0, undefined].entries()) {
         const service = await startDesktopService(new FakeDesktopHost({ endpoint: 'win32' }), {
           target: siblingTarget,

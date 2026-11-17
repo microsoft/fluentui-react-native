@@ -13,7 +13,7 @@ export type DesktopServiceReadyRecord = DesktopServiceReady & { incarnation: str
 /** A Node HTTP listener that must receive the parent's readiness probe after binding its expected port. */
 export type DesktopOwnedListener = { service: string; port: number };
 type ChildControl = {
-  register(dispose: () => Promise<void>): () => void;
+  register(dispose: () => Promise<void>): Promise<() => void>;
   ready(readiness: DesktopServiceReady): Promise<void>;
   finish(): void;
 };
@@ -24,10 +24,10 @@ function childControl(): ChildControl | undefined {
   return (globalThis as typeof globalThis & { [controlKey]?: ChildControl })[controlKey];
 }
 
-/** Register before the first asynchronous acquisition; disposal must await startup and durable settlement. */
-export function registerDesktopProcessDisposal(dispose: () => Promise<void>): () => void {
+/** Await registration before acquisition; disposal must await startup and durable settlement. */
+export async function registerDesktopProcessDisposal(dispose: () => Promise<void>): Promise<() => void> {
   if (process.env[DESKTOP_PROCESS_CONTROL] && !childControl()) throw new Error('Owned process lifeline preload is missing.');
-  return childControl()?.register(dispose) ?? (() => undefined);
+  return (await childControl()?.register(dispose)) ?? (() => undefined);
 }
 
 export async function publishDesktopServiceReady(readiness: DesktopServiceReady): Promise<void> {
@@ -66,6 +66,7 @@ export function createDesktopProcessControl(onFailure: (error: Error) => void) {
     let buffer = '';
     let processId: number | undefined;
     let disposed = false;
+    let disposalRegistered = false;
     let socketError: Error | undefined;
     let socketErrorWasUnexpected = false;
     // 'close' always follows 'error'; defer so producer loss (e.g. ECONNRESET on SIGKILL) keeps its specific diagnosis.
@@ -82,9 +83,13 @@ export function createDesktopProcessControl(onFailure: (error: Error) => void) {
         if (record.processId !== processId) continue;
         records.delete(service);
         const listener = listenerServices.delete(service);
-        if (stopping && (disposed || listener)) continue;
+        if (stopping && (disposed || (listener && !disposalRegistered))) continue;
         producerLost = true;
         fail(new Error(`Owned service "${service}" lost its readiness producer without settled disposal.`));
+      }
+      if (disposalRegistered && !disposed && !producerLost) {
+        producerLost = true;
+        fail(new Error(`Owned process "${processId}" lost its disposal producer without settled disposal.`));
       }
       for (const [service, record] of probes) if (record.processId === processId) probes.delete(service);
       if (socketError && socketErrorWasUnexpected && !producerLost) fail(socketError);
@@ -117,6 +122,12 @@ export function createDesktopProcessControl(onFailure: (error: Error) => void) {
               continue;
             }
             if (frame.type === 'disposal-failed') throw new Error(`Owned process disposal failed: ${String(frame.message)}`);
+            if (frame.type === 'disposal-registered') {
+              if (disposed || typeof frame.requestId !== 'string') throw new Error('Invalid owned process disposal registration.');
+              disposalRegistered = true;
+              socket.write(`${JSON.stringify({ type: 'acknowledged', requestId: frame.requestId })}\n`);
+              continue;
+            }
             if (frame.type === 'listener-closed') {
               const record = typeof frame.service === 'string' ? records.get(frame.service) : undefined;
               if (!record || record.processId !== processId || !listenerServices.has(record.service))

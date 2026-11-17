@@ -25,7 +25,10 @@ modules and the leaf `@fluentui-react-native/desktop-driver/authoring/input`; im
 everything else from desktop-driver as types only. The storybook-desktop
 `sourceConfig` test guards this.
 
-The service factory resolves recovery before calling `createTarget(host, recovery)`.
+The service factory resolves recovery before calling `prepareHost(host, recovery)` and
+`createTarget(host, recovery)`. A retained integration can install its event
+observers before launching the application, while still creating its target
+context against the prepared host.
 The second argument exposes the same owner-only storage and exact-incarnation
 probe used by settlement. Integration-specific sibling records share the stable
 `settlement-<sha256(endpoint,targetId)>-` prefix; listener ports, rotating nonces,

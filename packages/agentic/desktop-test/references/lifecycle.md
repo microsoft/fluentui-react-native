@@ -62,6 +62,12 @@ command incarnation, and producer PID alongside the resource generation.
 Only `service-ready` is accepted; target acquisition, application readiness,
 and context readiness require separate verification.
 
+Cooperative producers await parent acknowledgement of disposal registration
+before acquiring resources. Once registered, a producer lost without settled
+disposal fences its resource even if it never published service readiness, or
+published only a listener. Listener-only processes without registered
+disposers retain their existing signal-based shutdown behavior.
+
 Cleanup drains worker reporting and stdio, closes sessions, releases owned
 input, and stops exact owned process trees. Services and resources are disposed
 together in reverse acquisition order. An externally owned app is preserved.

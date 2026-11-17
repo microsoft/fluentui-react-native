@@ -29,6 +29,15 @@ if (mode === 'late') {
 } else if (mode === 'borrowed') {
   fs.writeFileSync(marker, String(process.pid));
   setInterval(() => undefined, 60_000);
+} else if (mode === 'startup-unsettled' || mode === 'listener-startup-unsettled') {
+  await control.register(async () => process.exit(0));
+  if (mode === 'listener-startup-unsettled') {
+    const server = http.createServer((_request, response) => response.end('ready'));
+    server.listen(Number(marker), '127.0.0.1', () => fs.writeFileSync(preload, 'acquisition started'));
+  } else {
+    fs.writeFileSync(marker, 'acquisition started');
+    setInterval(() => undefined, 60_000);
+  }
 } else if (
   mode === 'listener' ||
   mode === 'listener-close' ||
@@ -69,7 +78,7 @@ if (mode === 'late') {
       await report.close();
       control.finish();
     })());
-  control.register(dispose);
+  await control.register(dispose);
   report.onStop(dispose);
   await control.ready({ tier: 'service-ready', service: 'fixture', descriptor: 'fixture.json' });
   fs.writeFileSync(marker, String(process.pid));
@@ -77,7 +86,7 @@ if (mode === 'late') {
   const keepAlive = setInterval(() => undefined, 60_000);
   fs.writeFileSync(`${marker}.socket`, JSON.parse(process.env.FURN_DESKTOP_PROCESS_CONTROL).address);
   fs.writeFileSync(marker, String(process.pid));
-  control.register(async () => {
+  await control.register(async () => {
     if (mode === 'stalled') await new Promise(() => undefined);
     if (mode === 'failed') throw new Error('Injected descriptor withdrawal failure.');
     await new Promise((resolve) => setTimeout(resolve, 30));

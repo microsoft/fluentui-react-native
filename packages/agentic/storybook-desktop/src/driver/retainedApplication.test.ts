@@ -1,5 +1,5 @@
 import type { ApplicationLease, DesktopHost } from '@fluentui-react-native/desktop-driver';
-import { prepareSmokeApplicationHost } from './smokeApplication';
+import { prepareRetainedStorybookApplicationHost } from './retainedApplication';
 import type { updateWindowsApplicationLease } from './applicationLease';
 
 function fixture(endpoint: 'macos' | 'windows' | 'win32') {
@@ -57,7 +57,7 @@ test.each(['windows', 'win32'] as const)(
   'retains the exact %s application across attached sessions and withdraws its lease last',
   async (endpoint) => {
     const f = fixture(endpoint);
-    const host = await prepareSmokeApplicationHost(f.host, f.options);
+    const host = await prepareRetainedStorybookApplicationHost(f.host, f.options);
     const lease = await host.attach({ ...f.options.target, host });
     await host.closeApplication(lease);
     expect(f.native.closeApplication).not.toHaveBeenCalled();
@@ -80,7 +80,7 @@ test.each(['windows', 'win32'] as const)(
 
 test('retains the macOS application without publishing a competing Windows lease', async () => {
   const f = fixture('macos');
-  const host = await prepareSmokeApplicationHost(f.host, f.options);
+  const host = await prepareRetainedStorybookApplicationHost(f.host, f.options);
   const lease = await host.attach({ ...f.options.target, host });
   await host.closeApplication(lease);
   expect(f.native.closeApplication).not.toHaveBeenCalled();
@@ -93,7 +93,7 @@ test('retains the macOS application without publishing a competing Windows lease
 
 test('preserves the protected lease and reports uncertain native cleanup', async () => {
   const f = fixture('windows');
-  const host = await prepareSmokeApplicationHost(f.host, f.options);
+  const host = await prepareRetainedStorybookApplicationHost(f.host, f.options);
   f.native.closeApplication.mockRejectedValueOnce(new Error('exact-incarnation close failed'));
   await expect(host.dispose()).rejects.toThrow('did not settle');
   expect(f.events).not.toContain('remove');
@@ -103,17 +103,17 @@ test('failed lease publication closes only the acquired application and aggregat
   const f = fixture('win32');
   f.updateLease.mockRejectedValueOnce(new Error('foreign lease'));
   f.native.closeApplication.mockRejectedValueOnce(new Error('native cleanup failed'));
-  await expect(prepareSmokeApplicationHost(f.host, f.options)).rejects.toMatchObject({
+  await expect(prepareRetainedStorybookApplicationHost(f.host, f.options)).rejects.toMatchObject({
     errors: [expect.objectContaining({ message: 'foreign lease' }), expect.any(AggregateError)],
   });
   expect(f.updateLease).toHaveBeenCalledTimes(1);
 });
 
-test('pre-cancelled smoke performs no native acquisition or lease publication', async () => {
+test('pre-cancelled startup performs no native acquisition or lease publication', async () => {
   const f = fixture('windows');
-  await expect(prepareSmokeApplicationHost(f.host, { ...f.options, signal: AbortSignal.abort(new Error('cancelled')) })).rejects.toThrow(
-    'cancelled',
-  );
+  await expect(
+    prepareRetainedStorybookApplicationHost(f.host, { ...f.options, signal: AbortSignal.abort(new Error('cancelled')) }),
+  ).rejects.toThrow('cancelled');
   expect(f.native.launch).not.toHaveBeenCalled();
   expect(f.updateLease).not.toHaveBeenCalled();
 });

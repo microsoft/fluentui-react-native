@@ -3,8 +3,8 @@ import type { DesktopResourceRecord } from '@fluentui-react-native/desktop-test/
 import type { DesktopHost, DesktopTarget } from '@fluentui-react-native/desktop-driver';
 import { updateWindowsApplicationLease } from './applicationLease.js';
 
-/** One native owner lends its retained application to traversal and authored-test sessions. */
-export async function prepareSmokeApplicationHost(
+/** One native owner lends its retained application to attached driver sessions. */
+export async function prepareRetainedStorybookApplicationHost(
   host: DesktopHost,
   options: {
     target: Omit<DesktopTarget, 'host'>;
@@ -38,7 +38,7 @@ export async function prepareSmokeApplicationHost(
         if (record.readiness === 'ready') application = record.application;
       },
     });
-    if (!application?.processId || !application.processStartedAt) throw new Error('Native smoke launch has no exact identity.');
+    if (!application?.processId || !application.processStartedAt) throw new Error('The retained application launch has no exact identity.');
     if (options.target.endpoint !== 'macos') {
       digest = await updateLease(options.manifestPath, options.handoff, {
         operation: 'publish',
@@ -49,7 +49,7 @@ export async function prepareSmokeApplicationHost(
           ...(options.target.endpoint === 'windows' ? { aumid: application.aumid } : { executablePath: application.executablePath }),
         },
       });
-      if (!digest) throw new Error('Native smoke application lease publication returned no receipt.');
+      if (!digest) throw new Error('Retained application lease publication returned no receipt.');
     }
     options.signal.throwIfAborted();
     return new Proxy(owned, {
@@ -63,7 +63,7 @@ export async function prepareSmokeApplicationHost(
     try {
       await close();
     } catch (cleanup) {
-      throw new AggregateError([error, cleanup], 'Smoke application setup and cleanup failed.');
+      throw new AggregateError([error, cleanup], 'Retained application setup and cleanup failed.');
     }
     throw error;
   }

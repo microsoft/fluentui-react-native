@@ -238,6 +238,56 @@ describe('owned process lifelines', () => {
     }
   });
 
+  test.each(['startup-unsettled', 'listener-startup-unsettled'])(
+    'fences a lost application-owning producer during startup (%s)',
+    async (mode) => {
+      const holder = net.createServer();
+      await new Promise<void>((resolve) => holder.listen(0, '127.0.0.1', resolve));
+      const port = (holder.address() as net.AddressInfo).port;
+      await new Promise<void>((resolve, reject) => holder.close((error) => (error ? reject(error) : resolve())));
+      const marker = path.join(root, 'acquisition');
+      const runner = new NodeDesktopCommandRunner({ logDirectory: root, output: quiet, errorOutput: quiet });
+      const scope = new DesktopServiceScope(runner);
+      const records: DesktopResourceRecord[] = [];
+      scope.setResourceObserver((record) => records.push(record));
+      let running: RunningDesktopCommand | undefined;
+      try {
+        await scope.contribute(
+          [
+            {
+              id: 'application-owner',
+              ownership: 'owned',
+              prepare: () => ({
+                identity: 'application-owner',
+                acquire: async () => {
+                  running = runner.start({
+                    command: process.execPath,
+                    args: mode === 'startup-unsettled' ? [fixture, mode, marker] : [fixture, mode, String(port), marker],
+                    cwd: root,
+                    env: {},
+                    ...(mode === 'listener-startup-unsettled' ? { listener: { service: 'owned-listener', port } } : {}),
+                  });
+                  if (mode === 'listener-startup-unsettled')
+                    await running.waitForReadiness!({ tier: 'service-ready', service: 'owned-listener' }, 5000);
+                  await waitUntil(() => fs.existsSync(marker));
+                },
+                dispose: async () => running?.stop(),
+              }),
+            },
+          ],
+          { targetId: 'fixture-target', targetInstanceId: 'fixture-instance' },
+        );
+        await expect(scope.close()).rejects.toThrow('did not shut down cleanly');
+        await expect(running!.stop()).rejects.toThrow('without settled disposal');
+        expect(records.at(-1)).toMatchObject({ ownership: 'owned', disposal: 'failed' });
+        expect(fs.existsSync(marker)).toBe(true);
+      } finally {
+        await scope.close().catch(() => undefined);
+        await runner.close();
+      }
+    },
+  );
+
   test('records an authenticated process receipt in an owned resource generation', async () => {
     const marker = path.join(root, 'descriptor');
     const runner = new NodeDesktopCommandRunner({ logDirectory: root, output: quiet });
