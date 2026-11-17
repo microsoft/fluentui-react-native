@@ -253,9 +253,9 @@ non-agent driver running and use the supported filtered command:
 yarn storybook test --macos --story '<story-id-glob>' --test '<test-name-glob>'
 ```
 
-Do not use `storybook test` against an agent-served instance; it has no grant.
-Manifest-backed `smoke` also uses a non-agent driver session; it has no
-`--agent` option or descriptor-grant input. Qualify its driver-backed
+For an agent-served instance, use `storybook test --attach-agent`; an ordinary
+test has no grant. Manifest-backed `smoke` uses a non-agent driver session; it
+has no `--agent` option or descriptor-grant input. Qualify its driver-backed
 traversal separately from the protected descriptor path below.
 For every run record selected, executed, passed, failed, skipped, unsupported,
 incomplete, retries, flaky count, and the cleanup result. Empty work is not a
