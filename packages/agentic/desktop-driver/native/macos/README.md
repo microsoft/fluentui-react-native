@@ -744,4 +744,4 @@ service trust boundary.
 - [Quartz Event Services](https://developer.apple.com/documentation/coregraphics/quartz-event-services)
 - [ScreenCaptureKit](https://developer.apple.com/documentation/screencapturekit)
 - [Resetting access to protected resources](https://developer.apple.com/documentation/xcode/resetting-access-to-protected-resources-in-macos)
-- [Privacy Preferences Policy Control](https://support.apple.com/guide/deployment/privacy-preferences-policy-control-payload-dep38df53c2a/web)
+- [Privacy Preferences Policy Control](https://developer.apple.com/documentation/devicemanagement/privacypreferencespolicycontrol)

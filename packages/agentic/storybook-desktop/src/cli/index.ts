@@ -7,6 +7,7 @@ export {
   DesktopStorybookCli,
   type DesktopStorybookBuildDriverOptions,
   type DesktopStorybookCliOptions,
+  type DesktopStorybookDriverReady,
   type DesktopStorybookPrepOptions,
   type DesktopStorybookServerOptions,
   type DesktopStorybookTestOptions,

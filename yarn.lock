@@ -3311,11 +3311,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/desktop-driver-mcp@workspace:packages/agentic/desktop-driver-mcp"
   dependencies:
-    "@fluentui-react-native/desktop-driver": "workspace:*"
+    "@fluentui-react-native/desktop-mcp": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
-    "@modelcontextprotocol/sdk": "npm:^1.32.2"
-    commander: "npm:^14.0.2"
-    zod: "npm:^4.6.7"
   bin:
     desktop-driver-mcp: ./config/cli.cjs
   languageName: unknown
@@ -3331,6 +3328,22 @@ __metadata:
     zod: "npm:^4.6.7"
   bin:
     desktop-driver: ./config/cli.cjs
+  languageName: unknown
+  linkType: soft
+
+"@fluentui-react-native/desktop-mcp@workspace:*, @fluentui-react-native/desktop-mcp@workspace:packages/agentic/desktop-mcp":
+  version: 0.0.0-use.local
+  resolution: "@fluentui-react-native/desktop-mcp@workspace:packages/agentic/desktop-mcp"
+  dependencies:
+    "@fluentui-react-native/desktop-driver": "workspace:*"
+    "@fluentui-react-native/desktop-test": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@modelcontextprotocol/sdk": "npm:^1.32.2"
+    commander: "npm:^14.0.2"
+    js-tiktoken: "npm:1.0.21"
+    zod: "npm:^4.6.7"
+  bin:
+    desktop-mcp: ./config/cli.cjs
   languageName: unknown
   linkType: soft
 
@@ -3351,6 +3364,7 @@ __metadata:
     expect-webdriverio: "catalog:"
     import-meta-resolve: "npm:4.2.0"
     webdriverio: "catalog:"
+    zod: "npm:^4.6.7"
   bin:
     desktop-test: ./config/cli.cjs
   languageName: unknown
@@ -16442,6 +16456,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"js-tiktoken@npm:1.0.21":
+  version: 1.0.21
+  resolution: "js-tiktoken@npm:1.0.21"
+  dependencies:
+    base64-js: "npm:^1.5.1"
+  checksum: 10c0/49a0b1e8915d271b84b5c2217fcab37de3124cfbba7e9901d3d9afb1acdd931f0ff7025ed94587dd1b59ae5c04cc19949c2869823854ee7f2f3f81678db276f3
+  languageName: node
+  linkType: hard
+
 "js-tokens@npm:^3.0.0 || ^4.0.0, js-tokens@npm:^4.0.0":
   version: 4.0.0
   resolution: "js-tokens@npm:4.0.0"
@@ -17366,6 +17389,23 @@ __metadata:
     nullthrows: "npm:^1.1.1"
     walker: "npm:^1.0.7"
   checksum: 10c0/69dbbac5eea43f94493ac974ba05c0d4c7f7eaca9a4ff6823b341513ea4eee3d9f23f6ea0fb081a749aa445e49542da2933699c1f1205a29aca88c4d23efecdd
+  languageName: node
+  linkType: hard
+
+"metro-file-map@patch:metro-file-map@npm%3A0.83.8#~/.yarn/patches/metro-file-map-npm-0.83.8-79c1dd6341.patch":
+  version: 0.83.8
+  resolution: "metro-file-map@patch:metro-file-map@npm%3A0.83.8#~/.yarn/patches/metro-file-map-npm-0.83.8-79c1dd6341.patch::version=0.83.8&hash=416372"
+  dependencies:
+    debug: "npm:^4.4.0"
+    fb-watchman: "npm:^2.0.0"
+    flow-enums-runtime: "npm:^0.0.6"
+    graceful-fs: "npm:^4.2.4"
+    invariant: "npm:^2.2.4"
+    jest-worker: "npm:^29.7.0"
+    micromatch: "npm:^4.0.4"
+    nullthrows: "npm:^1.1.1"
+    walker: "npm:^1.0.7"
+  checksum: 10c0/ff1d6fb88d61dcb59032da58da16217a76f966bd3f0b8ab6b35c6dba8a2cc464d8bcfad4b1fdf4a4220e60f5e278f2924fa53d969022e88e45beef77f9d81c50
   languageName: node
   linkType: hard
 

@@ -11,7 +11,7 @@ This document records the status of Storybook desktop qualification: Windows Fab
 Done means the stated implementation exists and is covered by deterministic tests; it does not mean every native endpoint is qualified.
 Parent issue: [#4435](https://github.com/microsoft/fluentui-react-native/issues/4435).
 See the [integration guide](integration.md) and the [reference index](README.md).
-Harness, driver and MCP evidence lives in `@fluentui-react-native/desktop-test/references/current-status.md`, `@fluentui-react-native/desktop-driver/references/current-status.md` and `@fluentui-react-native/desktop-driver-mcp/references/current-status.md`.
+Harness, driver and MCP evidence lives in `@fluentui-react-native/desktop-test/references/current-status.md`, `@fluentui-react-native/desktop-driver/references/current-status.md` and `@fluentui-react-native/desktop-mcp/references/current-status.md`.
 
 ## Status overview
 
@@ -28,9 +28,11 @@ Console-session (non-RDP), 200% and mixed DPI, and negative-origin cases are not
 
 - **Lifecycle parity:** Qualified (macOS Fabric and macOS Paper, observed). JS initialization and HMR counts are not observed. See [Lifecycle parity](#lifecycle-parity). Tracking: [#4449](https://github.com/microsoft/fluentui-react-native/issues/4449).
 
+- **Hosted resources and protected runners:** Implemented with portable coverage and partial native evidence; selected protected handoffs passed on macOS Fabric, macOS Paper, Windows Fabric and Win32 Paper, while broader native qualification remains open. See [Hosted resources and protected runners](#hosted-resources-and-protected-runners). Tracking: [#4449](https://github.com/microsoft/fluentui-react-native/issues/4449), [#4450](https://github.com/microsoft/fluentui-react-native/issues/4450).
+
 - **Visual flash claims:** Deferred. No flash-reduction claim is made. See [Visual flash claims](#visual-flash-claims). Tracking: [#4449](https://github.com/microsoft/fluentui-react-native/issues/4449).
 
-- **Native qualification:** Qualified (macOS Fabric and macOS Paper direct selection; Windows Fabric and Win32 Paper limited to the connected-session fencing and secondary-window cases). Windows refresh-reduction, console and display-scale lanes are not run. See [Native qualification](#native-qualification). Tracking: [#4441](https://github.com/microsoft/fluentui-react-native/issues/4441), [#4451](https://github.com/microsoft/fluentui-react-native/issues/4451).
+- **Native qualification:** Partial per endpoint; non-agent smoke does not qualify protected Storybook workloads. Windows refresh-reduction, console and display-scale lanes are not run. See [Native qualification](#native-qualification). Tracking: [#4441](https://github.com/microsoft/fluentui-react-native/issues/4441), [#4451](https://github.com/microsoft/fluentui-react-native/issues/4451).
 
 ## Preview fencing and context loss
 
@@ -103,6 +105,26 @@ Scope: the driver-owned channel factory and the run-owned extraction cache.
 
 - [#4449](https://github.com/microsoft/fluentui-react-native/issues/4449): an independent JS-initialization counter, if needed.
 
+## Hosted resources and protected runners
+
+### Behavior and limits
+
+- Storybook and desktop-test share a neutral owner for hosted-driver acquisition, readiness and management publication.
+- Metro and channel readiness require correlated owned-listener receipts; the driver remains in the channel child.
+- A protected runner holds one reservation across cases and gives each worker a distinct drain-confirmed grant.
+- macOS lease maintenance is host-owned; default macOS and Windows/Win32 native smoke retain their exact supervisor-launched applications in the channel child.
+- macOS smoke verifies the built instance bundle and renderer, and never stops another app merely because it shares a bundle identifier.
+- A claimed macOS, Windows, or Win32 driver can retain its exact built app across protected sessions; retained Win32 Paper and Windows Fabric startup each passed a selected native handoff.
+- Retained Windows and Win32 readiness waits for the app's authenticated initial render, and retained Metro tolerates transient directories, so a cold debug bundle or a deleted runner workspace no longer surfaces as `bridge-unavailable` or a Metro crash.
+- Non-agent smokes do not qualify protected workloads. Separate local macOS runs passed selected retained-app handoff and managed cases on Fabric and Paper.
+
+- Exact macOS primary-app cleanup does not prove that arbitrary uncontained descendants exited.
+
+### Open work
+
+- [#4449](https://github.com/microsoft/fluentui-react-native/issues/4449): qualify Storybook handoff, retained launches and lease maintenance on each native endpoint.
+- [#4450](https://github.com/microsoft/fluentui-react-native/issues/4450): qualify managed Storybook workloads through the real supervisor descriptor.
+
 ## Visual flash claims
 
 ### Behavior and limits
@@ -122,6 +144,10 @@ Full per-run evidence (commands, counts, run ids, artifact locators, cleanup out
 
 ### macOS Fabric
 
+- **Protected handoff:** at `8bbc3741d` (integrated source `a52302ebe`, later changes documentation-only), an accessible Button case and a physical Checkbox case each passed once attached and once managed. First story selection succeeded without retries after readiness; MCP-to-runner-to-MCP handoff retained the same app, and the exact primary app, descriptors and claim settled. The helper was ad-hoc signed; broader fault and stable-signing qualification remain open. Evidence: [#4510](https://github.com/microsoft/fluentui-react-native/pull/4510).
+
+- **Owned non-agent smoke:** a candidate worktree based on `474941a38` passed 223 navigations and 37 accessible callbacks, and 223 navigations and 120 physical callbacks; each lane had three declared unsupported cases. The accessible run preceded the final identity guard; the physical run included it. Evidence: [#4510](https://github.com/microsoft/fluentui-react-native/pull/4510).
+
 - **Direct selection, accessible lane:** full-index run rendered 223 stories and passed five callbacks (228 passes, no failures or unsupported results) at candidate `06446c276`. Evidence: [#4496](https://github.com/microsoft/fluentui-react-native/pull/4496).
 
 - **Direct selection, physical lane:** 223 stories plus 15 callbacks passed (238 passes) at `06446c276`; sparse regression evidence, not the full physical suite. Evidence: [#4496](https://github.com/microsoft/fluentui-react-native/pull/4496).
@@ -129,6 +155,10 @@ Full per-run evidence (commands, counts, run ids, artifact locators, cleanup out
 - **Review corrections:** not requalified natively; earlier qualification is historical for `06446c276`.
 
 ### macOS Paper
+
+- **Protected handoff:** at `8bbc3741d` (integrated source `a52302ebe`, later changes documentation-only), an accessible Button case and a physical Checkbox case each passed once attached and once managed. First story selection succeeded without retries after readiness; MCP-to-runner-to-MCP handoff retained the same app, and the exact primary app, descriptors and claim settled. The helper was ad-hoc signed; an earlier launch could not capture an exact start time and was manually reconciled after its app exited, with cause unknown. Evidence: [#4510](https://github.com/microsoft/fluentui-react-native/pull/4510).
+
+- **Owned non-agent smoke:** a candidate worktree based on `474941a38` passed 223 navigations and 36 accessible callbacks, and 223 navigations and 120 physical callbacks; each lane had three declared unsupported cases. Both runs preceded the final identity guard; a later guarded render-only run passed 223 navigations. Evidence: [#4510](https://github.com/microsoft/fluentui-react-native/pull/4510).
 
 - **Direct selection, accessible lane:** 223 stories plus five callbacks passed (228 passes) at `06446c276`. Evidence: [#4496](https://github.com/microsoft/fluentui-react-native/pull/4496).
 
@@ -138,6 +168,10 @@ Full per-run evidence (commands, counts, run ids, artifact locators, cleanup out
 
 ### Windows Fabric
 
+- **Retained Storybook handoff and workload:** at `a52302ebe`, in an unlocked remote RDP session on the accessible lane with a temporary local `ownership: 'supervisor'` target setting, one ReactApp process stayed the same incarnation across MCP select of `components-avatar--activity-ring-toggle` (marker-verified) and observe, a refused attached runner (the target already had an active session), relinquish, the attached case (1/1 passed), the attached full suite (40/40 passed, 11 excluded by platform), MCP reopen and select, close, and the managed workload (1/1 passed, cleanup settled). A console Ctrl+C then wrote a terminal `passed` lifecycle report, settled the app, and withdrew the descriptors and claim; no process or listener remained. Earlier attempts found three defects, now fixed: the protected driver refused the Avatar test's story-args update; Metro crashed on deleted runner and jest temporary directories (ENOENT in `FallbackWatcher`); and readiness was published before a cold debug bundle loaded, so every operation reported `bridge-unavailable`. Two attempts left their claims fenced on a Metro receipt whose disposal failed; each was reconciled manually after every recorded PID was verified exited. A managed workload started while the same MCP connection held a session was refused for that reason; that was a harness error. Evidence: [#4510](https://github.com/microsoft/fluentui-react-native/pull/4510).
+
+- **Hosted non-agent smoke:** at `474941a38`, 250 of 251 selected checks passed and a modern Callout placement assertion failed; eight groups were not run. Inferred cause: the owner window sat low on the small hosted work area, so the native popup flipped above its anchor, and the popup does not follow owner moves. The test now moves the owner to the top of the work area and narrows it, and the story repositions its presentation after the layout change; the test waits for that confirmed reposition before asserting. A first attempt clicked the story's reposition control, which hosted Windows refused because the accessible lane cannot activate modern Pressables. At `0a369ebe5` the hosted accessible smoke passed 255 of 255 selected checks, including all three placement cases, with no groups skipped. Evidence: [#4510](https://github.com/microsoft/fluentui-react-native/pull/4510).
+
 - **Secondary window:** at `6c626602c` the modern Callout physical-pointer click passed (`focus: confirmed`) and semantic activation was refused before dispatch with effect none and no fallback. Evidence: [#4498](https://github.com/microsoft/fluentui-react-native/pull/4498).
 
 - **Environment:** Windows 11 Enterprise build 26300 x64, remote RDP session (not console), one 1728 x 1084 monitor at 96 DPI.
@@ -145,6 +179,11 @@ Full per-run evidence (commands, counts, run ids, artifact locators, cleanup out
 - **Not run:** 200%, mixed DPI and negative-origin layouts. Refresh-reduction measurements not run.
 
 ### Win32 Paper
+
+- **Retained Storybook handoff and workload:** at `0a121ba85` (integrated source `a52302ebe`, later changes documentation-only), in an unlocked remote RDP session on the accessible lane with a temporary local `ownership: 'supervisor'` target setting (supervisor run `515576ca`), one REX process (PID 43864) stayed the same incarnation across MCP select of `components-avatar--activity-ring-toggle` (marker-verified on the first call, 339 ms, no retries) and observe, a refused attached runner (the target already had an active session; 0 selected), relinquish, the attached case (1/1 passed), the attached full suite (45/45 passed, 2 excluded by platform), MCP reopen and select, close, and the managed workload `dwr_103a42b0…` (1/1 passed, cleanup settled). A console Ctrl+C then wrote a terminal `passed` lifecycle report and settled the owned app; no process, listener, descriptor or claim remained. Physical input and capture were not run.
+- **Earlier retained run:** at `d04c064da`, before the readiness gate, the supervisor launched one REX process that stayed the same incarnation across MCP select (marker-verified), a refused attached runner (`target-busy`), relinquish, the attached `components-button--default` case (1/1 passed), MCP reopen and the managed workload (1/1 passed, cleanup settled). A console Ctrl+C then wrote a terminal `passed` report, closed the app and released the lease, descriptors and claim. An earlier attempt at `d3734eea4` reported `bridge-unavailable` for every selection because the bundle predated the private bridge module. Evidence: [#4510](https://github.com/microsoft/fluentui-react-native/pull/4510).
+
+- **Non-agent smoke:** a local render-only run passed 188 stories at `41c604371`; hosted accessible smoke passed 233 checks and physical smoke passed 288 with one quarantined unsupported case at `474941a38`. Evidence: [#4510](https://github.com/microsoft/fluentui-react-native/pull/4510).
 
 - **Fresh-preview fencing:** passed for injected provider-context loss at baseline `505a2187b` (REX 0.81.1). Evidence: [#4498](https://github.com/microsoft/fluentui-react-native/pull/4498).
 
@@ -155,6 +194,9 @@ Full per-run evidence (commands, counts, run ids, artifact locators, cleanup out
 ### Hosted CI and portable evidence
 
 - Portable Storybook integration, driver and root checks passed for the refresh-reduction work; JavaScript tests are not native qualification.
+
+- Hosted macOS Fabric and Paper smokes passed at `474941a38` before the ownership-safe macOS smoke change; they do not qualify that later candidate. Evidence: [#4510](https://github.com/microsoft/fluentui-react-native/pull/4510).
+
 - The cache-cleared `yarn lage buildci` aggregate failed on timing-sensitive driver tests (`boundedCommand`, `privateStorage`) on the candidate and on base `aadc2f359`, so it is not hosted-CI parity; tracked in [#4349](https://github.com/microsoft/fluentui-react-native/issues/4349).
 
 ## Measurements

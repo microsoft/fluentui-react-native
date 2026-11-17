@@ -4,7 +4,11 @@ import os from 'node:os';
 import path from 'node:path';
 
 import { verifyNativeDriverArtifact } from '@fluentui-react-native/desktop-driver/native';
-import { updateWindowsApplicationLease } from './applicationLease';
+import {
+  createStorybookMacOSApplicationLeaseResource,
+  updateWindowsApplicationLease,
+  waitForStorybookMacOSApplicationLease,
+} from './applicationLease';
 import { createFixturePrivateStorage } from './fixtures/privateStorage';
 import { createFixtureStoredManifest } from './fixtures/storedManifest.cjs';
 import { driverManifestDigest, publishDriverManifest } from './generatedManifest';
@@ -13,6 +17,131 @@ jest.mock('@fluentui-react-native/desktop-driver/native', () => ({
   ...jest.requireActual('@fluentui-react-native/desktop-driver/native'),
   verifyNativeDriverArtifact: jest.fn(async (artifact) => artifact),
 }));
+
+describe('host-owned macOS Storybook application lease', () => {
+  let root: string;
+  let manifestPath: string;
+  let leasePath: string;
+  let handoff: string;
+
+  beforeEach(async () => {
+    root = fs.mkdtempSync(path.join(fs.realpathSync(os.tmpdir()), 'storybook-macos-lease-'));
+    manifestPath = path.join(root, 'driver-manifest.json');
+    leasePath = path.join(root, '.private', 'application-lease.macos.json');
+    const stored = createFixtureStoredManifest(root, {
+      endpoint: 'macos',
+      entries: [],
+      platformManifestDigest: 'platform',
+      portablePlanDigest: 'portable',
+      schemaVersion: 1,
+    });
+    const { credentials: _credentials, ...manifest } = stored;
+    handoff = await publishDriverManifest(
+      {
+        ...manifest,
+        bridgeNonce: 'bridge-only',
+        application: { ...manifest.application, bundleIdentifier: 'com.example.storybook', leaseNonce: 'attach-only' },
+      },
+      manifestPath,
+      createFixturePrivateStorage,
+    );
+    jest.mocked(verifyNativeDriverArtifact).mockClear();
+  });
+  afterEach(() => fs.rmSync(root, { force: true, recursive: true }));
+
+  test('tracks the verified app through relaunch and withdraws its own record on shutdown', async () => {
+    const state = {
+      observation: {
+        processId: 123,
+        processStartedAt: '2026-11-12T00:00:00.123456Z',
+        executablePath: '/Applications/Fixture.app/Contents/MacOS/Fixture',
+      },
+    };
+    const inspector = { inspect: jest.fn(async () => state.observation), close: jest.fn(async () => undefined) };
+    const openInspector = jest.fn(async () => inspector);
+    const addSecret = jest.fn();
+    const onFailure = jest.fn();
+    const controller = new AbortController();
+    const resource = createStorybookMacOSApplicationLeaseResource({
+      manifestPath,
+      handoff,
+      createStorage: createFixturePrivateStorage,
+      openInspector,
+      addSecret,
+      onFailure,
+      intervalMs: 10,
+    });
+    const plan = resource.prepare({ signal: controller.signal, targetId: 'fixture', targetInstanceId: 'instance' });
+    expect(openInspector).not.toHaveBeenCalled();
+    await plan.acquire(controller.signal);
+    try {
+      await waitForStorybookMacOSApplicationLease(manifestPath, { timeoutMs: 2000, createStorage: createFixturePrivateStorage });
+      expect(JSON.parse(fs.readFileSync(leasePath, 'utf8'))).toMatchObject({
+        ...state.observation,
+        bundleIdentifier: 'com.example.storybook',
+        nonce: 'attach-only',
+        windowTitle: 'Fixture',
+      });
+      expect(addSecret).toHaveBeenCalledWith('attach-only');
+      expect(openInspector).toHaveBeenCalledWith(
+        expect.objectContaining({
+          targetId: 'fixture',
+          selector: { bundleIdentifier: 'com.example.storybook', windowTitle: 'Fixture' },
+        }),
+      );
+      state.observation = { ...state.observation, processId: 456, processStartedAt: '2026-11-12T00:00:01.123456Z' };
+      for (let attempt = 0; attempt < 200; attempt++) {
+        if (fs.existsSync(leasePath) && JSON.parse(fs.readFileSync(leasePath, 'utf8')).processId === 456) break;
+        await new Promise<void>((resolve) => setTimeout(resolve, 10));
+      }
+      expect(JSON.parse(fs.readFileSync(leasePath, 'utf8')).processId).toBe(456);
+      expect(onFailure).not.toHaveBeenCalled();
+    } finally {
+      await plan.dispose();
+    }
+    expect(inspector.close).toHaveBeenCalledTimes(1);
+    expect(fs.existsSync(leasePath)).toBe(false);
+  });
+
+  test('refuses a changed manifest before opening an inspector', async () => {
+    const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+    manifest.targetId = 'different-target';
+    fs.writeFileSync(manifestPath, JSON.stringify(manifest));
+    const openInspector = jest.fn();
+    const controller = new AbortController();
+    const plan = createStorybookMacOSApplicationLeaseResource({
+      manifestPath,
+      handoff,
+      createStorage: createFixturePrivateStorage,
+      openInspector,
+      addSecret: jest.fn(),
+      onFailure: jest.fn(),
+    }).prepare({ signal: controller.signal, targetId: 'fixture', targetInstanceId: 'instance' });
+    await expect(plan.acquire(controller.signal)).rejects.toThrow('trusted parent handoff');
+    await plan.dispose();
+    expect(openInspector).not.toHaveBeenCalled();
+  });
+
+  test('a waiting client refuses a foreign lease and does not remove it', async () => {
+    fs.writeFileSync(leasePath, JSON.stringify({ schemaVersion: 1, endpoint: 'macos', nonce: 'foreign' }));
+    await expect(
+      waitForStorybookMacOSApplicationLease(manifestPath, { timeoutMs: 100, createStorage: createFixturePrivateStorage }),
+    ).rejects.toThrow('does not match');
+    expect(JSON.parse(fs.readFileSync(leasePath, 'utf8')).nonce).toBe('foreign');
+  });
+
+  test('a waiting client respects its cancellation without publishing a lease', async () => {
+    const controller = new AbortController();
+    const waiting = waitForStorybookMacOSApplicationLease(manifestPath, {
+      timeoutMs: 2000,
+      signal: controller.signal,
+      createStorage: createFixturePrivateStorage,
+    });
+    controller.abort(new Error('run cancelled'));
+    await expect(waiting).rejects.toThrow('run cancelled');
+    expect(fs.existsSync(leasePath)).toBe(false);
+  });
+});
 
 describe.each(['windows', 'win32'] as const)('%s smoke application lease', (endpoint) => {
   let root: string;
@@ -82,7 +211,9 @@ describe.each(['windows', 'win32'] as const)('%s smoke application lease', (endp
       createStorage,
     );
     expect(remove).toHaveBeenCalledWith(path.basename(leasePath), firstRecord);
-    await updateWindowsApplicationLease(manifestPath, handoff, { operation: 'remove', digest: first! }, createStorage);
+    await expect(
+      updateWindowsApplicationLease(manifestPath, handoff, { operation: 'remove', digest: first! }, createStorage),
+    ).rejects.toThrow('foreign record was preserved');
     expect(JSON.parse(fs.readFileSync(leasePath, 'utf8')).processId).toBe(456);
     await updateWindowsApplicationLease(manifestPath, handoff, { operation: 'remove', digest: second! }, createStorage);
     expect(fs.existsSync(leasePath)).toBe(false);

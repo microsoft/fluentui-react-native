@@ -451,6 +451,23 @@ describe('durable authenticated bridge epochs', () => {
     replacement.ready({ connectionEpoch: replacement.epoch });
     await expect(selection).resolves.toMatchObject({ connectionEpoch: replacement.epoch });
   });
+
+  test('an early render is usable only after the same socket authenticates and records its native identity', async () => {
+    const store = recovery();
+    const state = setup(undefined, 100, store);
+    state.client.receive('storyRendered', request.storyId);
+    await expect(state.orchestrator.selectStory(request)).rejects.toMatchObject({
+      data: { reason: 'bridge-unavailable' },
+      effect: 'none',
+    });
+    state.client.hello();
+    const selection = state.orchestrator.selectStory(request);
+    await new Promise<void>((resolve) => setImmediate(resolve));
+    state.client.ready();
+    await expect(selection).resolves.toMatchObject({ connectionEpoch: state.client.epoch });
+    expect(store.resolveApplication).toHaveBeenCalled();
+  });
+
   test('storage and verified-identity failures never enable dispatch', async () => {
     const store = recovery();
     store.resolveApplication.mockRejectedValue(new Error('Identity unavailable'));
@@ -544,6 +561,25 @@ describe('StorybookChannelOrchestrator epochs and lifetime', () => {
     } finally {
       jest.useRealTimers();
     }
+  });
+
+  test('the initial-bridge wait observes without dispatch until authentication, render and recording complete', async () => {
+    const { client, orchestrator } = setup();
+    let settled = false;
+    const waiting = orchestrator.waitForInitialBridge(new AbortController().signal).then(() => (settled = true));
+    client.hello();
+    await Promise.resolve();
+    expect(settled).toBe(false);
+    client.receive('storyRendered', request.storyId);
+    await waiting;
+    expect(client.sent.map(({ type }) => type)).toEqual(['furn:desktop:request-hello']);
+    await expect(orchestrator.waitForInitialBridge(AbortSignal.abort())).resolves.toBeUndefined();
+
+    const aborted = setup().orchestrator;
+    const controller = new AbortController();
+    const cancelled = aborted.waitForInitialBridge(controller.signal);
+    controller.abort(new Error('stopped'));
+    await expect(cancelled).rejects.toThrow('stopped');
   });
 
   test('absent and hello-only bridges reject before dispatch with no effect', async () => {

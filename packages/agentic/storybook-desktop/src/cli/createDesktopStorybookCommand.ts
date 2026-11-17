@@ -2,11 +2,12 @@ import { Command, InvalidArgumentError, Option } from 'commander';
 import { randomUUID } from 'node:crypto';
 import path from 'node:path';
 import {
-  claimDesktopWorkload,
-  DesktopServiceScope,
+  acquireHostedDesktopDriver,
+  createDesktopRunContext,
   DesktopStopRequested,
-  handleDesktopInterrupts,
+  formatDesktopHostReady,
 } from '@fluentui-react-native/desktop-test';
+import type { DesktopRunContext, DesktopSupervisor } from '@fluentui-react-native/desktop-test';
 import {
   desktopEventLevels,
   desktopReporterModes,
@@ -17,10 +18,6 @@ import {
   tolerateClosedDesktopStdout,
 } from '@fluentui-react-native/desktop-driver/cli/reporter';
 import type { DesktopEventLevel } from '@fluentui-react-native/desktop-test/reporting';
-import { NodeDesktopCommandRunner } from '@fluentui-react-native/desktop-test/commands';
-import { createDesktopReportSession } from '@fluentui-react-native/desktop-test/reporting';
-import type { DesktopReportSession } from '@fluentui-react-native/desktop-test/reporting';
-
 import { desktopSmokeModes, type DesktopSmokeMode } from '../config/commands.js';
 import type { DesktopStorybookConfig } from '../config/makeDesktopStorybookConfig.js';
 import type { Platforms } from '../config/platforms.js';
@@ -43,16 +40,29 @@ type PlatformFlags = {
 };
 
 type ServerFlags = PlatformFlags & DesktopStorybookServerOptions;
-type DriverFlags = ServerFlags & { agent?: boolean; descriptor?: string; root?: string; input?: 'accessible' | 'physical' };
+type DriverFlags = ServerFlags & {
+  agent?: boolean;
+  descriptor?: string;
+  supervisorDescriptor?: string;
+  root?: string;
+  runnerDescriptor?: string;
+  allowRunnerPreempt?: boolean;
+  input?: 'accessible' | 'physical';
+};
 type ManifestFlags = PlatformFlags & { out?: string };
 type SmokeFlags = PlatformFlags & { mode: DesktopSmokeMode; input?: 'accessible' | 'physical' };
 type BuildDriverFlags = PlatformFlags & DesktopStorybookBuildDriverOptions;
 type PrepFlags = PlatformFlags & { driver: DesktopStorybookPrepOptions['driver'] };
 type GetApi = (flags: PlatformFlags) => Promise<DesktopStorybookCli>;
+type ExecuteAction = (work: () => Promise<void>) => Promise<void>;
 
 export type CreateDesktopStorybookCommandOptions = DesktopStorybookCliOptions & {
   config?: DesktopStorybookConfig;
   cwd?: string;
+  /** @internal Runs the selected action in the neutral desktop run scope. */
+  executeAction?: ExecuteAction;
+  /** @internal The neutral owner shared by long-lived driver resources. */
+  supervisor?: DesktopSupervisor;
 };
 
 export function createDesktopStorybookCommand(options: CreateDesktopStorybookCommandOptions = {}): Command {
@@ -103,30 +113,33 @@ export function createDesktopStorybookCommand(options: CreateDesktopStorybookCom
           runSmokeTests: options.runSmokeTests,
           connectStoryTraversal: options.connectStoryTraversal,
           resolveNativeDriver: options.resolveNativeDriver,
-          writeMacOSApplicationLease: options.writeMacOSApplicationLease,
+          createMacOSApplicationLeaseResource: options.createMacOSApplicationLeaseResource,
+          waitForMacOSApplicationLease: options.waitForMacOSApplicationLease,
           reporter: options.reporter,
           reporterMode,
           services: options.services,
+          supervisor: options.supervisor,
           onReady: options.onReady,
         });
       }));
 
-  addServerCommand(program, getApi);
+  const executeAction: ExecuteAction = (work) => (options.executeAction ? options.executeAction(work) : work());
+  addServerCommand(program, getApi, executeAction);
   addBuildDriverCommand(program, getApi);
-  addDriverCommand(program, getApi);
+  addDriverCommand(program, getApi, executeAction, options);
   addManifestCommand(program, getApi);
   addInstanceCommand(program, getApi);
-  addTestCommand(program, getApi);
-  addPrepCommand(program, getApi);
-  addActionCommand(program, 'bundle', 'Generate stories and create the platform JavaScript bundle.', getApi);
-  addActionCommand(program, 'run', 'Build and launch the native Storybook app.', getApi);
-  addActionCommand(program, 'build', 'Build the native Storybook app without launching it.', getApi);
-  addSmokeCommand(program, getApi);
+  addTestCommand(program, getApi, executeAction);
+  addPrepCommand(program, getApi, executeAction);
+  addActionCommand(program, 'bundle', 'Generate stories and create the platform JavaScript bundle.', getApi, executeAction);
+  addActionCommand(program, 'run', 'Build and launch the native Storybook app.', getApi, executeAction);
+  addActionCommand(program, 'build', 'Build the native Storybook app without launching it.', getApi, executeAction);
+  addSmokeCommand(program, getApi, executeAction);
 
   return program;
 }
 
-function addTestCommand(program: Command, getApi: GetApi): void {
+function addTestCommand(program: Command, getApi: GetApi, executeAction: ExecuteAction): void {
   const command = program
     .command('test')
     .description('Run executable wdio story callbacks against the running Storybook app.')
@@ -136,6 +149,10 @@ function addTestCommand(program: Command, getApi: GetApi): void {
     .option('--tag <tag>', 'filter story tags')
     .option('--url <url>', 'Desktop Driver URL (requires --target)')
     .option('--target <id>', 'registered target ID (requires --url)')
+    .option('--attach-agent', 'reuse the protected Storybook driver through its private runner descriptor')
+    .option('--descriptor <name>', 'private runner descriptor record (requires --attach-agent)')
+    .option('--root <path>', 'private runner storage root (requires --attach-agent)')
+    .option('--preempt', 'request operator-authorized runner preemption (requires --attach-agent)')
     .addOption(new Option('--input <mode>', 'select accessible or physical input tests').choices(['accessible', 'physical']))
     .option('--timeout-ms <milliseconds>', 'timeout per executable test', Number)
     .addOption(new Option('--test-reporter <reporter>', 'Node test reporter').choices(['spec', 'tap', 'dot']))
@@ -146,22 +163,28 @@ function addTestCommand(program: Command, getApi: GetApi): void {
       throw new InvalidArgumentError('--input cannot be combined with --click-mode.');
     }
     const api = await getApi(flags);
-    await api.test(resolvePlatform(flags, api), {
-      clickMode: flags.clickMode,
-      input: flags.input,
-      list: flags.list,
-      testReporter: flags.testReporter,
-      story: flags.story,
-      tag: flags.tag,
-      test: flags.test,
-      target: flags.target,
-      timeoutMs: flags.timeoutMs,
-      url: flags.url,
-    });
+    await executeAction(() =>
+      api.test(resolvePlatform(flags, api), {
+        clickMode: flags.clickMode,
+        input: flags.input,
+        list: flags.list,
+        testReporter: flags.testReporter,
+        story: flags.story,
+        tag: flags.tag,
+        test: flags.test,
+        target: flags.target,
+        attachAgent: flags.attachAgent,
+        descriptor: flags.descriptor,
+        root: flags.root,
+        preempt: flags.preempt,
+        timeoutMs: flags.timeoutMs,
+        url: flags.url,
+      }),
+    );
   });
 }
 
-function addPrepCommand(program: Command, getApi: GetApi): void {
+function addPrepCommand(program: Command, getApi: GetApi, executeAction: ExecuteAction): void {
   const command = program
     .command('prep')
     .description('Prepare the native helper, dependencies, and generated projects.')
@@ -169,7 +192,7 @@ function addPrepCommand(program: Command, getApi: GetApi): void {
   addPlatformOptions(command);
   command.action(async (flags: PrepFlags) => {
     const api = await getApi(flags);
-    await api.prep(resolvePlatform(flags, api), { driver: flags.driver });
+    await executeAction(() => api.prep(resolvePlatform(flags, api), { driver: flags.driver }));
   });
 }
 
@@ -183,7 +206,12 @@ function addBuildDriverCommand(program: Command, getApi: GetApi): void {
   });
 }
 
-function addDriverCommand(program: Command, getApi: GetApi): void {
+function addDriverCommand(
+  program: Command,
+  getApi: GetApi,
+  executeAction: ExecuteAction,
+  options: CreateDesktopStorybookCommandOptions,
+): void {
   const command = program
     .command('driver')
     .description('Start the Storybook channel, MCP, and embedded Desktop Driver servers.')
@@ -191,15 +219,26 @@ function addDriverCommand(program: Command, getApi: GetApi): void {
     .option('--port <port>', 'Storybook channel port; defaults to the enlistment-specific port', parsePort)
     .option('--agent', 'require a grant on every driver route and publish one agent connection descriptor')
     .option('--descriptor <name>', 'agent connection descriptor record name (default agent-connection.json)')
-    .option('--root <path>', 'private storage root for the agent descriptor; defaults to the platform location');
+    .option('--supervisor-descriptor <name>', 'workload supervisor descriptor record (default supervisor-connection.json)')
+    .option('--root <path>', 'private storage root for the agent descriptor; defaults to the platform location')
+    .option('--runner-descriptor <name>', 'attach-only runner descriptor record (default runner-connection.json)')
+    .option('--allow-runner-preempt', 'authorize explicit runner preemption of an existing controller');
   command.addOption(new Option('--input <mode>', 'default input lane for Storybook tests').choices(['accessible', 'physical']));
   addPlatformOptions(command);
   command.action(async (flags: DriverFlags) => {
-    if (!flags.agent && (flags.descriptor !== undefined || flags.root !== undefined)) {
-      throw new InvalidArgumentError('--descriptor and --root require --agent.');
+    if (
+      !flags.agent &&
+      (flags.descriptor !== undefined ||
+        flags.supervisorDescriptor !== undefined ||
+        flags.root !== undefined ||
+        flags.runnerDescriptor ||
+        flags.allowRunnerPreempt)
+    ) {
+      throw new InvalidArgumentError('Descriptor and runner publication options require --agent.');
     }
     const api = await getApi(flags);
-    await api.driver(resolvePlatform(flags, api), {
+    const platform = resolvePlatform(flags, api);
+    const driverOptions = {
       host: flags.host,
       port: flags.port,
       input: flags.input,
@@ -208,9 +247,50 @@ function addDriverCommand(program: Command, getApi: GetApi): void {
             agent: {
               ...(flags.descriptor === undefined ? {} : { descriptor: flags.descriptor }),
               ...(flags.root === undefined ? {} : { root: flags.root }),
+              ...(flags.runnerDescriptor === undefined && !flags.allowRunnerPreempt
+                ? {}
+                : {
+                    runner: {
+                      ...(flags.runnerDescriptor === undefined ? {} : { descriptor: flags.runnerDescriptor }),
+                      ...(flags.allowRunnerPreempt ? { allowPreempt: true } : {}),
+                    },
+                  }),
             },
           }
         : {}),
+    };
+    await executeAction(async () => {
+      const owner = options.supervisor;
+      if (!owner) {
+        if (flags.agent) throw new Error('A protected Storybook driver requires a neutral supervisor.');
+        return api.driver(platform, driverOptions);
+      }
+      await owner.startConfiguredServices();
+      const config = api.managementConfig(platform);
+      const readiness = await acquireHostedDesktopDriver({
+        supervisor: owner,
+        request: {
+          config,
+          target: owner.target,
+          action: 'serve',
+          ...(flags.input ? { input: flags.input } : {}),
+          ...(driverOptions.agent ? { agent: driverOptions.agent } : {}),
+        },
+        driver: { kind: 'hosted', acquire: () => api.startDriver(platform, driverOptions) },
+        supervisorDescriptor: flags.supervisorDescriptor,
+        managedWorkload: async ({ supervisor, connection, input, storyId, addSecret }) => {
+          const worker = new DesktopStorybookCli(api.config, {
+            paper: api.paper,
+            reporter: supervisor.reporter,
+            runner: supervisor.runner,
+            services: supervisor.services,
+          });
+          await worker.testManaged(platform, { connection, input, storyId, addSecret });
+        },
+      });
+      (options.output ?? process.stdout).write(formatDesktopHostReady(options.reporterMode ?? 'plain', readiness));
+      options.onReady?.();
+      await owner.services.waitForStop();
     });
   });
 }
@@ -241,10 +321,8 @@ export async function runDesktopStorybookCli(argv: readonly string[] = process.a
     ready = true;
   };
   const program = createDesktopStorybookCommand(options);
-  let session: DesktopReportSession | undefined;
-  let runner: NodeDesktopCommandRunner | undefined;
-  let releaseClaim: (() => void) | undefined;
-  let releaseInterrupts: (() => void) | undefined;
+  let execution: DesktopRunContext | undefined;
+  options.executeAction = (work) => (execution ? execution.run(undefined, () => work()) : work());
   let actionName = '';
   let longLived = false;
   let failure: unknown;
@@ -305,24 +383,38 @@ export async function runDesktopStorybookCli(argv: readonly string[] = process.a
         : undefined;
     actionName = action.name();
     longLived = ['driver', 'server'].includes(actionName);
-    session = await createDesktopReportSession({
-      ...options.config.desktop?.reporting,
-      artifactsRoot: options.config.desktop?.reporting.artifactsRoot ?? path.join(options.config.projectRoot, 'artifacts', 'desktop'),
-      kind: ['test', 'smoke'].includes(action.name()) ? 'tests' : 'lifecycle',
-      ...(lane ? { lane } : {}),
+    if (!platform) {
+      throw Object.assign(new Error('Select --windows, --macos, or --win32, or set FURN_STORYBOOK_PLATFORM.'), { code: 'usage' });
+    }
+    const api = new DesktopStorybookCli(options.config, {
+      paper: actionOptions.paper ?? options.paper,
       reporterMode,
-      eventLevel,
-      // A long-lived command's readiness record is its only output; before readiness, a failure reports its summary.
-      suppressFinalOutput: longLived ? () => ready : false,
-      verbose: program.opts<{ verbose?: boolean }>().verbose,
-      onFatal: (error) => options.services?.fail(error),
     });
-    if (!session.delegated && ['driver', 'smoke'].includes(action.name()))
-      releaseClaim = await claimDesktopWorkload(session.reporter.runId);
-    options.reporter = session.reporter;
+    execution = await createDesktopRunContext({
+      target: api.workloadTarget(platform),
+      reporting: {
+        ...options.config.desktop?.reporting,
+        artifactsRoot: options.config.desktop?.reporting.artifactsRoot ?? path.join(options.config.projectRoot, 'artifacts', 'desktop'),
+        kind: ['test', 'smoke'].includes(action.name()) ? 'tests' : 'lifecycle',
+        ...(lane ? { lane } : {}),
+        reporterMode,
+        eventLevel,
+        // A long-lived command's readiness record is its only output; before readiness, a failure reports its summary.
+        suppressFinalOutput: longLived ? () => ready : false,
+        verbose: program.opts<{ verbose?: boolean }>().verbose,
+      },
+      independent: false,
+      claim: ['driver', 'smoke'].includes(action.name()),
+      interrupts: true,
+      strictCleanup: false,
+    });
+    options.reporter = execution.reporter;
+    options.runner = execution.supervisor.runner;
+    options.services = execution.supervisor.services;
+    options.supervisor = execution.supervisor;
     if (normalized.deprecated) {
       if (reporterMode === 'json' || reporterMode === 'ndjson') {
-        session.reporter.emit({
+        execution.reporter.emit({
           kind: 'diagnostic',
           payload: { level: 'warning', message: 'test --reporter is deprecated; use --test-reporter instead.' },
         });
@@ -330,66 +422,30 @@ export async function runDesktopStorybookCli(argv: readonly string[] = process.a
         process.stderr.write('Warning: test --reporter is deprecated; use --test-reporter instead.\n');
       }
     }
-    runner = new NodeDesktopCommandRunner({ reporter: session.reporter, environment: session.environment });
-    options.runner = runner;
-    options.services = new DesktopServiceScope(runner, session.reporter);
-    session.onStop?.(() => options.services!.requestStop());
-    const reporter = session.reporter;
-    releaseInterrupts = handleDesktopInterrupts({
-      stop: () => options.services?.requestStop(),
-      terminate: (signal) => {
-        reporter.emit({
-          kind: 'diagnostic',
-          payload: {
-            level: 'warning',
-            message: `Received ${signal} during shutdown; force-stopping owned commands. Interrupt again to exit without cleanup.`,
-          },
-        });
-        runner?.terminate();
-      },
-    });
   });
   try {
     await program.parseAsync([...normalized.argv]);
   } catch (error) {
     if (error && typeof error === 'object' && 'exitCode' in error && error.exitCode === 0) return;
     if (!(error instanceof DesktopStopRequested)) failure = reporterResolutionError ?? error;
-    else if (session && !longLived)
+    else if (execution && !longLived)
       // An interrupted one-shot command did not finish: leave its scope open so the run reports incomplete, not passed.
-      session.reporter.emit(
+      execution.reporter.emit(
         { kind: 'scope-start', payload: { label: `${actionName} (interrupted)`, category: 'phase' } },
         `interrupted-${randomUUID()}`,
       );
   } finally {
-    // Interrupt handlers stay installed until cleanup completes, so a repeated signal escalates instead of killing the CLI.
-    try {
-      try {
-        await options.services?.close();
-        await runner?.close();
-      } catch (error) {
-        options.reporter?.fail(error, 'cleanup');
-        failure = failure === undefined ? error : new AggregateError([failure, error], 'Storybook execution and cleanup failed.');
-      }
-      try {
-        releaseClaim?.();
-      } catch (error) {
-        options.reporter?.fail(error, 'cleanup');
-        failure ??= error;
-      }
-      if (session) process.exitCode = await session.close(failure);
-    } finally {
-      releaseInterrupts?.();
-    }
+    if (execution) process.exitCode = await execution.finish(failure);
   }
   if (failure !== undefined) {
     if (options.reporterMode === 'json' || options.reporterMode === 'ndjson') {
-      if (!session) {
+      if (!execution) {
         process.stdout.write(formatDesktopReporterError(options.reporterMode, failure));
         process.exitCode = 1;
       }
       return;
     }
-    if (!session && parseDiagnostics) {
+    if (!execution && parseDiagnostics) {
       process.stderr.write(parseDiagnostics);
       process.exitCode = 1;
       return;
@@ -427,17 +483,23 @@ export function normalizeLegacyTestReporter(argv: readonly string[]): { argv: st
   return { argv: result, deprecated };
 }
 
-function addActionCommand(program: Command, action: 'bundle' | 'run' | 'build', description: string, getApi: GetApi): void {
+function addActionCommand(
+  program: Command,
+  action: 'bundle' | 'run' | 'build',
+  description: string,
+  getApi: GetApi,
+  executeAction: ExecuteAction,
+): void {
   const command = program.command(action).description(description);
   addPlatformOptions(command);
   command.action(async (flags: PlatformFlags) => {
     const api = await getApi(flags);
     const platform = resolvePlatform(flags, api);
-    await api[action](platform);
+    await executeAction(() => api[action](platform));
   });
 }
 
-function addSmokeCommand(program: Command, getApi: GetApi): void {
+function addSmokeCommand(program: Command, getApi: GetApi, executeAction: ExecuteAction): void {
   const command = program
     .command('smoke')
     .description('Launch the app, traverse every story, optionally run authored tests, and shut the app down.')
@@ -453,11 +515,11 @@ function addSmokeCommand(program: Command, getApi: GetApi): void {
       throw new InvalidArgumentError('--input requires --mode stories-and-tests.');
     }
     const api = await getApi(flags);
-    await api.smoke(resolvePlatform(flags, api), { mode: flags.mode, input: flags.input });
+    await executeAction(() => api.smoke(resolvePlatform(flags, api), { mode: flags.mode, input: flags.input }));
   });
 }
 
-function addServerCommand(program: Command, getApi: GetApi): void {
+function addServerCommand(program: Command, getApi: GetApi, executeAction: ExecuteAction): void {
   const command = program
     .command('server')
     .description('Start the Storybook channel and MCP server.')
@@ -466,10 +528,12 @@ function addServerCommand(program: Command, getApi: GetApi): void {
   addPlatformOptions(command);
   command.action(async (flags: ServerFlags) => {
     const api = await getApi(flags);
-    await api.server(resolvePlatform(flags, api), {
-      host: flags.host,
-      port: flags.port,
-    });
+    await executeAction(() =>
+      api.server(resolvePlatform(flags, api), {
+        host: flags.host,
+        port: flags.port,
+      }),
+    );
   });
 }
 

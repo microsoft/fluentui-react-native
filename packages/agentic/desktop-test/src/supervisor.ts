@@ -11,8 +11,9 @@ import { startDesktopService, startNativeDesktopService } from './driverService.
 import type { DesktopService, DesktopServiceOptions } from './driverService.js';
 import type { DesktopCommand, ResolvedDesktopTarget } from './config.js';
 import type { DesktopIntegration } from './integration.js';
+import type { DesktopIntegrationPlan } from './integration.js';
 import { NodeDesktopCommandRunner, deadline } from './commands.js';
-import type { PreparedDesktopCommand, RunningDesktopCommand } from './commands.js';
+import type { DesktopCommandRunner, PreparedDesktopCommand, RunningDesktopCommand } from './commands.js';
 import { DesktopServiceScope } from './services.js';
 import { createDesktopWorkloadClaim, describeDesktopWorkloadOwner, recoverWindowsDesktopWorkloadClaim } from './ownership.js';
 import type { DesktopWorkloadClaim, DesktopWorkloadProcessIdentity } from './ownership.js';
@@ -29,6 +30,8 @@ export type DesktopSupervisorOptions = {
   reporter: DesktopReportWriter;
   reportSession?: DesktopReportSession;
   integration?: DesktopIntegration;
+  integrationPlan?: DesktopIntegrationPlan;
+  runner?: DesktopCommandRunner;
   workload?: { kind: 'delegated'; claim: DesktopWorkloadClaim };
   hostFactory?: (target: ResolvedDesktopTarget) => Promise<DesktopHost>;
   lockDirectory?: string;
@@ -50,7 +53,7 @@ export type DesktopSupervisorOptions = {
 export class DesktopSupervisor {
   readonly reporter: DesktopReportWriter;
   readonly target: ResolvedDesktopTarget;
-  readonly runner: NodeDesktopCommandRunner;
+  readonly runner: DesktopCommandRunner;
   readonly services: DesktopServiceScope;
   private serverValue?: DesktopService;
   private transport?: ReportTransport;
@@ -70,7 +73,7 @@ export class DesktopSupervisor {
     this.target = options.target;
     this.reporter = options.reporter;
     Object.assign(this.environment, options.reportSession?.environment);
-    this.runner = new NodeDesktopCommandRunner({ reporter: this.reporter, environment: this.environment });
+    this.runner = options.runner ?? new NodeDesktopCommandRunner({ reporter: this.reporter, environment: this.environment });
     this.services = new DesktopServiceScope(this.runner, this.reporter, this.reporter.runId);
   }
 
@@ -79,9 +82,35 @@ export class DesktopSupervisor {
     return this.serverValue;
   }
 
+  terminate(): void {
+    this.runner.terminate?.();
+  }
+
   /** The record name of the published agent connection descriptor, once it is published. */
   get agentDescriptor(): string | undefined {
     return this.serverValue?.agentDescriptor;
+  }
+
+  /** The attach-only runner descriptor, when this service can lend the target to a separate workload. */
+  get runnerDescriptor(): string | undefined {
+    return this.serverValue?.runnerDescriptor;
+  }
+
+  /** Requires this live supervisor to hold the interactive claim for the selected target and instance. */
+  assertWorkloadClaim(target: Pick<ResolvedDesktopTarget, 'id' | 'instanceId'> = this.target): void {
+    const owner = this.workloadClaim?.record.owner;
+    if (
+      !this.opened ||
+      this.closePromise ||
+      this.services.controller.signal.aborted ||
+      !owner ||
+      owner.targetId !== this.target.id ||
+      owner.targetInstanceId !== this.target.instanceId ||
+      owner.targetId !== target.id ||
+      owner.targetInstanceId !== target.instanceId
+    ) {
+      throw new Error('A live supervisor must own the matching desktop workload claim before launching an application.');
+    }
   }
 
   async open(interactive = true): Promise<void> {
@@ -186,7 +215,7 @@ export class DesktopSupervisor {
 
   startResources(): Promise<void> {
     return (this.resourceStartPromise ??= (() => {
-      const contributions = this.options.integration?.resources ?? [];
+      const contributions = this.options.integrationPlan?.resources ?? [];
       const serviceIds = new Set(['webdriver', ...(this.target.services ?? []).map(({ id }) => id)]);
       for (const contribution of contributions) {
         if (serviceIds.has(contribution.id)) {
@@ -212,7 +241,7 @@ export class DesktopSupervisor {
           platformName: this.target.endpoint === 'macos' ? 'macos' : 'windows',
           renderer: this.target.host.renderer,
           launchTimeoutMs: this.target.launchTimeoutMs,
-          launchModes: this.target.host.ownership === 'external' ? ['attach'] : ['launch'],
+          launchModes: this.target.host.ownership === 'external' || this.target.host.ownership === 'supervisor' ? ['attach'] : ['launch'],
         },
         agent: this.options.agent,
         recovery: this.options.recovery,
@@ -341,6 +370,8 @@ export class DesktopSupervisor {
     try {
       await worker.stop({ failed: failure !== undefined || code !== 0 });
     } catch (error) {
+      this.ownershipUncertain = true;
+      this.reporter.fail(error, 'cleanup', 'worker');
       throw new AggregateError(failure === undefined ? [error] : [failure, error], 'Desktop worker and cleanup failed.');
     } finally {
       this.workers.delete(worker);
@@ -363,7 +394,7 @@ export class DesktopSupervisor {
       for (const worker of this.workers) await close('worker', () => worker.stop({ failed: true }));
       this.workers.clear();
       await close('services', () => this.services.close());
-      await close('commands', () => this.runner.close());
+      if (this.runner.close) await close('commands', () => this.runner.close!());
       if (this.transport) await close('reporting', () => this.transport!.close());
       if (this.ownsWorkloadClaim && this.workloadClaim && failures.length === 0 && !this.ownershipUncertain) {
         try {
@@ -378,21 +409,6 @@ export class DesktopSupervisor {
       if (failures.length) throw new AggregateError(failures, 'Desktop supervisor cleanup failed.');
     })());
   }
-}
-
-export async function claimDesktopWorkload(
-  runId: string,
-  directory?: string,
-  processIdentity?: DesktopWorkloadProcessIdentity,
-): Promise<() => void> {
-  const claim = createDesktopWorkloadClaim({
-    runId,
-    targetId: 'unregistered',
-    targetInstanceId: 'unregistered',
-    directory,
-    processIdentity: processIdentity ?? (await describeDesktopWorkloadOwner()),
-  });
-  return () => claim.release();
 }
 
 function orderServices<T extends { id: string; dependsOn?: readonly string[] }>(services: readonly T[]): readonly T[] {

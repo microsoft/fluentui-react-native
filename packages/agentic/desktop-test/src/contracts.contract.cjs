@@ -57,7 +57,9 @@ async function main() {
   const { DesktopRunReporter } = await import(lib('reporting/collector.js'));
   const { NodeDesktopCommandRunner } = await import(lib('commands.js'));
   const { DesktopServiceScope, DesktopStopRequested } = await import(lib('services.js'));
-  const { loadDesktopConfig, defineDesktopConfig, resolveDesktopSpecs, resolveDesktopTestScope } = await import(lib('config.js'));
+  const { loadDesktopConfig, defineDesktopConfig, resolveDesktopSpecs, resolveDesktopTestScope, selectDesktopRenderer } = await import(
+    lib('config.js')
+  );
   const root = fs.realpathSync.native(fs.mkdtempSync(path.join(process.cwd(), '.desktop-harness-contract-')));
   process.env.FURN_DESKTOP_DRIVER_CACHE_ROOT = path.join(root, 'helper-cache');
   const out = capture();
@@ -74,7 +76,10 @@ async function main() {
       assert.equal(typeof source.defineDesktopConfig, 'function', 'config must be source-loadable');
       const app = {
         schemaVersion: 1,
-        targets: { win32: { host: { kind: 'installed', application: { executablePath: 'app.exe', windowTitle: 'Fixture' } } } },
+        targets: {
+          win32: { host: { kind: 'installed', application: { executablePath: 'app.exe', windowTitle: 'Fixture' } } },
+          macos: { host: { kind: 'react-native-test-app' } },
+        },
       };
       assert.throws(() => defineDesktopConfig({ ...app, unrecognized: true }), /Unknown/);
       assert.throws(
@@ -91,6 +96,22 @@ async function main() {
           }),
         /Unknown integration field/,
       );
+      for (const legacyField of ['run', 'supportsAgent']) {
+        assert.throws(
+          () =>
+            defineDesktopConfig({
+              ...app,
+              integration: {
+                name: 'fixture',
+                validate() {
+                  throw new Error('Legacy integration fields must be rejected before validation.');
+                },
+                [legacyField]: () => undefined,
+              },
+            }),
+          /Unknown integration field/,
+        );
+      }
       assert.throws(
         () => defineDesktopConfig({ ...app, targets: { win32: { use: { config: 'app.mjs', target: 'win32' }, host: {} } } }),
         /ambiguous/,
@@ -115,6 +136,13 @@ async function main() {
       assert.equal(referred.targets.alias.instanceId, referred.targets.aliasTwo.instanceId);
       assert.equal(referred.targets.alias.host.application.executablePath, path.join(root, 'app', 'app.exe'));
       assert.equal(referred.reporting.artifactsRoot, path.join(root, 'suite', 'reports'));
+      const fabric = direct.targets.macos;
+      const paper = selectDesktopRenderer(fabric, 'paper');
+      assert.equal(fabric.host.renderer, 'fabric');
+      assert.equal(selectDesktopRenderer(fabric, 'fabric').id, fabric.id);
+      assert.notEqual(paper.id, fabric.id);
+      assert.equal(selectDesktopRenderer(paper, 'fabric').id, fabric.id);
+      assert.equal(selectDesktopRenderer(paper, 'paper').instanceId, paper.instanceId);
       fs.writeFileSync(
         path.join(root, 'cycle.mjs'),
         'export default {schemaVersion:1, targets:{win32:{use:{config:"cycle.mjs",target:"win32"}}}}',
@@ -187,6 +215,16 @@ async function main() {
         host: { kind: 'react-native-test-app', renderer, application },
       });
       const leasePath = path.join(root, 'lease.json');
+      await assert.rejects(
+        resolveDesktopApplication(target('paper', { bundleIdentifier: 'com.example.Other' }), undefined, {
+          macosBundleIdentifier: 'com.example.Expected',
+        }),
+        /valid, matching RN Test App bundle identifier/,
+      );
+      await assert.rejects(
+        resolveDesktopApplication(target('paper'), undefined, { macosBundleIdentifier: '../invalid' }),
+        /valid, matching RN Test App bundle identifier/,
+      );
       assert.deepEqual(
         { ...(await resolveDesktopApplication(target('paper', { leasePath }))) },
         { bundleIdentifier: 'com.microsoft.ReactTestApp', windowTitle: 'Fixture Window', leasePath },
@@ -231,6 +269,19 @@ async function main() {
         await assert.rejects(resolveDesktopApplication(target('paper')), /does not declare RCTNewArchEnabled/);
         writeInfo({ identifier: 'com.example.Other' });
         await assert.rejects(resolveDesktopApplication(target('paper')), /expected bundle identifier com\.microsoft\.ReactTestApp/);
+        assert.equal(
+          (
+            await resolveDesktopApplication(target('paper', { executablePath: undefined }), undefined, {
+              macosBundleIdentifier: 'com.example.Other',
+            })
+          ).executablePath,
+          path.join(contents, 'MacOS', 'ReactTestApp'),
+          'a generated bundle variant still resolves the exact built product',
+        );
+        await assert.rejects(
+          resolveDesktopApplication(target('paper'), undefined, { macosBundleIdentifier: 'com.example.Expected' }),
+          /expected bundle identifier com\.example\.Expected/,
+        );
         writeInfo();
         fs.rmSync(embedded);
         await assert.rejects(resolveDesktopApplication(target('paper')), /does not embed index\.macos\.jsbundle.*bundle, then prep/);
@@ -1475,7 +1526,7 @@ async function main() {
       delegatedClaim.release();
     } else if (mode === 'agent') {
       const { DesktopSupervisor } = await import(lib('supervisor.js'));
-      const { FakeDesktopHost } = await import('@fluentui-react-native/desktop-driver/testing');
+      const { FakeDesktopHost, FakeStoryOrchestrator } = await import('@fluentui-react-native/desktop-driver/testing');
       const { createDesktopDriverClient } = await import('@fluentui-react-native/desktop-driver/client');
       const target = {
         endpoint: 'win32',
@@ -1574,8 +1625,18 @@ async function main() {
       await failedCleanup.start();
       await assert.rejects(failedCleanup.close(), /cleanup failed/);
       assert(fs.existsSync(path.join(failedCleanupLocks, 'interactive.lock')), 'uncertain cleanup must retain the workload claim');
-      const { claimDesktopWorkload } = await import(lib('supervisor.js'));
-      await assert.rejects(claimDesktopWorkload('replacement', failedCleanupLocks, fixtureProcessIdentity), /Another desktop workload/);
+      const { createDesktopWorkloadClaim } = await import(lib('ownership.js'));
+      assert.throws(
+        () =>
+          createDesktopWorkloadClaim({
+            runId: 'replacement',
+            targetId: target.id,
+            targetInstanceId: target.instanceId,
+            directory: failedCleanupLocks,
+            processIdentity: fixtureProcessIdentity,
+          }),
+        /Another desktop workload/,
+      );
 
       // The Storybook channel child's composition: one service, protected and published from the process that listens.
       const { startDesktopService } = await import(lib('driverService.js'));
@@ -1622,6 +1683,45 @@ async function main() {
       }
       await service.close();
       assert.deepEqual(steps, ['publish', 'withdraw', 'dispose'], 'withdraw the descriptor before closing the listener');
+
+      /** @type {import('@fluentui-react-native/desktop-driver/storybook').DesktopStoryManifest} */
+      const storyManifest = {
+        endpoint: 'win32',
+        entries: [],
+        platformManifestDigest: 'platform-digest',
+        portablePlanDigest: 'portable-digest',
+        schemaVersion: 1,
+      };
+      for (const runner of [undefined, false, {}]) {
+        const storyHost = new FakeDesktopHost({ endpoint: 'win32', storyRootTestId: 'story-root' });
+        const storyPublished = [];
+        const storyWithdrawn = [];
+        const storyService = await startDesktopService(storyHost, {
+          target: { ...serviceTarget, launchModes: ['attach'] },
+          recovery: memoryRecovery(),
+          createTarget: async () => ({
+            storyOrchestrator: new FakeStoryOrchestrator(storyManifest, storyHost),
+            storyRootTestId: 'story-root',
+          }),
+          agent: {
+            ...(runner === undefined ? {} : { runner }),
+            publish: async ({ descriptor }) => {
+              storyPublished.push(descriptor);
+              return async () => void storyWithdrawn.push(descriptor);
+            },
+          },
+        });
+        try {
+          assert.deepEqual(
+            storyPublished,
+            runner && typeof runner === 'object' ? ['agent-connection.json', 'runner-connection.json'] : ['agent-connection.json'],
+          );
+          assert.equal(storyService.runnerDescriptor, runner && typeof runner === 'object' ? 'runner-connection.json' : undefined);
+        } finally {
+          await storyService.close();
+        }
+        assert.deepEqual(storyWithdrawn, [...storyPublished].reverse(), 'withdraw runner before the agent descriptor');
+      }
 
       const failedSteps = [];
       await assert.rejects(
@@ -1670,6 +1770,28 @@ async function main() {
       const { createDesktopDriverClient } = await import('@fluentui-react-native/desktop-driver/client');
       const siblingRecovery = memoryRecovery();
       const siblingTarget = { endpoint: 'win32', id: 'bridge-target', platformName: 'windows' };
+      const compositionSteps = [];
+      let preparedRecovery;
+      const composed = await startDesktopService(new FakeDesktopHost({ endpoint: 'win32' }), {
+        target: siblingTarget,
+        recovery: siblingRecovery,
+        prepareHost: async (host, recovery) => {
+          preparedRecovery = recovery;
+          await recovery.storage.publish('prepare-context.json', 'observing');
+          compositionSteps.push('prepare');
+          return host;
+        },
+        createTarget: async (_host, recovery) => {
+          assert.equal(recovery, preparedRecovery);
+          assert.equal(await recovery.storage.read('prepare-context.json'), 'observing');
+          compositionSteps.push('target');
+          return undefined;
+        },
+      });
+      await composed.close();
+      assert.deepEqual(compositionSteps, ['prepare', 'target']);
+      assert.equal(siblingRecovery.records.size, 1);
+      siblingRecovery.records.clear();
       for (const [index, port] of [0, undefined].entries()) {
         const service = await startDesktopService(new FakeDesktopHost({ endpoint: 'win32' }), {
           target: siblingTarget,
@@ -1828,28 +1950,42 @@ async function main() {
       await closing;
     } else if (mode === 'agent-cli') {
       const { createDesktopReportSession } = await import(lib('reporting/session.js'));
-      // serve --agent passes the agent options to an integration that serves agents, and rejects one that does not.
+      // serve --agent passes descriptor options to a hosted-driver integration and rejects one without a driver.
       const configPath = path.join(root, 'desktop.config.mjs');
       fs.writeFileSync(
         configPath,
         [
           "import fs from 'node:fs';",
+          "import path from 'node:path';",
           'export default {',
           '  schemaVersion: 1,',
           "  targets: { win32: { host: { kind: 'installed', application: { executablePath: 'not-launched.exe' } } } },",
           '  integration: {',
           "    name: 'fixture',",
-          "    supportsAgent: process.env.FIXTURE_SUPPORTS_AGENT === '1',",
           '    validate() {},',
-          '    async run({ action, agent, reporterMode }) {',
-          '      fs.writeFileSync(process.env.FIXTURE_MARKER, JSON.stringify({ action, agent: agent ?? null, reporterMode }));',
+          '    contribute({ action }) {',
+          "      if (action === 'serve' && process.env.FIXTURE_CONTRIBUTES_DRIVER === '1') return {",
+          "        driver: { kind: 'hosted', acquire: async ({ agent, target, supervisor }) => {",
+          '          fs.writeFileSync(process.env.FIXTURE_MARKER, JSON.stringify({ action, agent: agent ?? null }));',
+          '          setImmediate(() => supervisor.services.requestStop());',
+          "          const descriptor = agent?.descriptor ?? 'agent-connection.json';",
+          "          return { targetId: target.id, url: 'http://127.0.0.1:1234',",
+          '            ...(agent ? { agentDescriptor: descriptor } : {}),',
+          '            ...(agent?.root ? { root: path.resolve(agent.root) } : {}),',
+          "            serviceReady: { tier: 'service-ready', service: 'fixture', incarnation: 'fixture', processId: process.pid,",
+          '              ...(agent ? { descriptor } : {}) } };',
+          '        } },',
+          '      };',
+          '      return { workload: async ({ action, agent }) => {',
+          '        fs.writeFileSync(process.env.FIXTURE_MARKER, JSON.stringify({ action, agent: agent ?? null }));',
+          '      } };',
           '    },',
           '  },',
           '};',
           '',
         ].join('\n'),
       );
-      const invoke = async (supportsAgent, args) => {
+      const invoke = async (contributesDriver, args) => {
         const session = await createDesktopReportSession({
           artifactsRoot: root,
           errorOutput: err,
@@ -1859,14 +1995,28 @@ async function main() {
           summary: false,
         });
         const runner = new NodeDesktopCommandRunner({ reporter: session.reporter, environment: session.environment });
-        const marker = path.join(root, `marker-${supportsAgent}-${args.join('-').replace(/[^a-z-]/g, '')}.json`);
+        const marker = path.join(root, `marker-${contributesDriver}-${args.join('-').replace(/[^a-z-]/g, '')}.json`);
         let failure;
         try {
           await runner.run({
             command: process.execPath,
-            args: [path.join(packageRoot, 'config', 'cli.cjs'), '--config', configPath, '--target', 'win32', ...args],
+            args: [
+              '--import',
+              pathToFileURL(path.join(packageRoot, 'fixtures', 'cli-interrupt', 'mock-management-loader.mjs')).href,
+              path.join(packageRoot, 'config', 'cli.cjs'),
+              '--config',
+              configPath,
+              '--target',
+              'win32',
+              ...args,
+            ],
             cwd: root,
-            env: { HOME: root, LOCALAPPDATA: root, FIXTURE_MARKER: marker, FIXTURE_SUPPORTS_AGENT: supportsAgent ? '1' : '0' },
+            env: {
+              HOME: root,
+              LOCALAPPDATA: root,
+              FIXTURE_MARKER: marker,
+              FIXTURE_CONTRIBUTES_DRIVER: contributesDriver ? '1' : '0',
+            },
           });
         } catch (error) {
           failure = error;
@@ -1882,7 +2032,6 @@ async function main() {
           .filter((entry) => entry.isFile() && entry.name.endsWith('.log'))
           .map((entry) => fs.readFileSync(path.join(entry.parentPath, entry.name), 'utf8'));
       const privateRoot = path.join(root, 'private');
-      // serve writes no final output, so only serve receives the output format for the integration's readiness record.
       const served = await invoke(true, [
         '--reporter',
         'ndjson',
@@ -1897,16 +2046,15 @@ async function main() {
       assert.deepEqual(served.marker, {
         action: 'serve',
         agent: { descriptor: 'storybook.json', root: privateRoot },
-        reporterMode: 'ndjson',
       });
-      assert.deepEqual((await invoke(true, ['serve'])).marker, { action: 'serve', agent: null, reporterMode: 'ndjson' });
+      assert.deepEqual((await invoke(true, ['serve'])).marker, { action: 'serve', agent: null });
       assert.deepEqual((await invoke(true, ['--reporter', 'ndjson', 'prep'])).marker, { action: 'prep', agent: null });
       const refused = await invoke(false, ['serve', '--agent']);
       assert(refused.failure, 'an integration that does not serve agents must refuse --agent');
       assert.equal(refused.marker, undefined);
       const logs = commandLogs();
       assert(
-        logs.some((log) => log.includes('serve --agent requires an integration that supports agents; \\"fixture\\" does not.')),
+        logs.some((log) => log.includes('contribute a hosted driver.')),
         logs.join('\n'),
       );
     } else if (mode === 'agent-interrupt-cli' || mode === 'agent-interrupt-borrowed-cli') {
@@ -1932,6 +2080,8 @@ async function main() {
         const child = spawnSync(
           process.execPath,
           [
+            '--import',
+            pathToFileURL(path.join(packageRoot, 'fixtures', 'cli-interrupt', 'mock-management-loader.mjs')).href,
             path.join(interruptPackageRoot, 'config', 'cli.cjs'),
             '--config',
             path.join(interruptPackageRoot, 'fixtures', 'cli-interrupt', 'desktop.config.mjs'),
@@ -1976,6 +2126,7 @@ async function main() {
         assert.equal(child.status, failed ? 1 : 0, `${scenario}: ${child.stderr}\n${child.stdout}`);
         const readiness = JSON.parse(child.stdout.trim());
         assert.equal(readiness.type, 'ready');
+        if (interruptPackageRoot === packageRoot) assert.equal(readiness.supervisorDescriptor, 'supervisor-connection.json');
         const reports = path.join(directory, 'reports', readiness.runId);
         const result = JSON.parse(fs.readFileSync(path.join(reports, 'run.json'), 'utf8'));
         assert.equal(result.terminal, true, `${scenario}: ${JSON.stringify(result)}`);
@@ -2022,9 +2173,11 @@ async function main() {
           '  integration: {',
           "    name: 'fixture',",
           '    validate() {},',
-          '    async run({ action, suite, input, supervisor }) {',
+          '    contribute() {',
+          '      return { workload: async ({ action, suite, input, supervisor }) => {',
           '      fs.writeFileSync(process.env.FIXTURE_MARKER, JSON.stringify({ action, suite, input: input ?? null }));',
           "      supervisor.reporter.emit({ kind: 'test-result', payload: { testId: 'fixture', title: 'fixture', attempt: 0, status: 'passed', durationMs: 1 } });",
+          '      } };',
           '    },',
           '  },',
           '};',

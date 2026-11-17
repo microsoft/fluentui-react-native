@@ -9,7 +9,7 @@ import { createDesktopStorybookInstance } from '../config/instance';
 import { makeDesktopStorybookConfig } from '../config/makeDesktopStorybookConfig';
 import { createDesktopStorybookDriverManifest, writeDesktopStorybookDriverManifest } from './driverManifest';
 import { createFixturePrivateStorage } from './fixtures/privateStorage';
-import { parseStoredDriverManifest, readDriverManifest } from './generatedManifest';
+import { parseStoredDriverManifest, publishDriverManifest, readDriverManifest } from './generatedManifest';
 
 const appRoot = path.resolve(__dirname, '../../../../../apps/storybook');
 const hash = (contents: string) => createHash('sha256').update(contents).digest('hex');
@@ -93,6 +93,16 @@ describe('generated manifest trust handoff', () => {
     expect(fs.existsSync(marker)).toBe(false);
   });
 
+  test('preserves an existing application lease rather than adopting it during manifest publication', async () => {
+    const manifest = await readDriverManifest(manifestPath, undefined, createFixturePrivateStorage);
+    const existing = JSON.stringify({ nonce: 'foreign-owner' });
+    fs.writeFileSync(manifest.application.leasePath, existing);
+    const previousManifest = fs.readFileSync(manifestPath, 'utf8');
+    await expect(publishDriverManifest(manifest, manifestPath, createFixturePrivateStorage)).rejects.toThrow('already owned');
+    expect(fs.readFileSync(manifest.application.leasePath, 'utf8')).toBe(existing);
+    expect(fs.readFileSync(manifestPath, 'utf8')).toBe(previousManifest);
+  });
+
   test.each(['root', 'nativeDriver', 'signing', 'application', 'agent', 'credentials', 'wdio', 'storyManifest'])(
     'rejects unknown %s fields instead of stripping them',
     (section) => {
@@ -135,6 +145,20 @@ describe('generated manifest trust handoff', () => {
     credentials.leaseNonce = credentials.bridgeNonce;
     fs.writeFileSync(credentialsPath, JSON.stringify(credentials));
     await expect(readDriverManifest(manifestPath, undefined, createFixturePrivateStorage)).rejects.toThrow('distinct purposes');
+  });
+
+  test('accepts strict v3 manifests while reserving runner publication for v4', () => {
+    const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+    const agent = { descriptor: 'agent.json', readyPath: path.join(root, 'ready.json') };
+    expect(parseStoredDriverManifest({ ...manifest, schemaVersion: 3, agent }).schemaVersion).toBe(3);
+    const runner = { descriptor: 'runner.json', allowPreempt: false };
+    expect(parseStoredDriverManifest({ ...manifest, agent: { ...agent, runner } }).agent?.runner).toEqual(runner);
+    expect(() => parseStoredDriverManifest({ ...manifest, schemaVersion: 3, agent: { ...agent, runner } })).toThrow(
+      'driver manifest identity',
+    );
+    expect(() => parseStoredDriverManifest({ ...manifest, agent: { ...agent, runner: { ...runner, token: 'secret' } } })).toThrow(
+      'driver manifest',
+    );
   });
 
   test.each(['credentials', 'handoff'])('rejects unknown %s fields', async (section) => {

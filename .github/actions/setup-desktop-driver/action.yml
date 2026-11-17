@@ -238,8 +238,8 @@ runs:
         }
         $report = Get-Content -Raw -Path $results | ConvertFrom-Json
         $ownership = @($report.testResults.assertionResults | Where-Object { $_.title -notmatch '\bcapture\b' })
-        if ($ownership.Count -ne 4 -or @($ownership | Where-Object { $_.status -ne 'passed' }).Count -ne 0) {
-          throw 'Native handoff, operator preemption, worker crash and lost-response recovery must all execute and pass.'
+        if ($ownership.Count -ne 5 -or @($ownership | Where-Object { $_.status -ne 'passed' }).Count -ne 0) {
+          throw 'Native handoff, operator preemption, worker crash, lost-response recovery and managed handoff must all execute and pass.'
         }
         $evidence = @(
           Get-ChildItem -Path (Split-Path $results) -Directory -Filter 'native-*' |
@@ -250,7 +250,7 @@ runs:
               }
             }
         )
-        foreach ($mode in @('handoff', 'operator-preempt', 'lost-response')) {
+        foreach ($mode in @('handoff', 'operator-preempt', 'lost-response', 'managed')) {
           $caseEvidence = @($evidence | Where-Object { $_.mode -eq $mode })
           if (
             $caseEvidence.Count -ne 1 -or
@@ -263,4 +263,15 @@ runs:
           ) {
             throw "$mode must execute both inner WDIO ownership and accessibility-input specs; an inner skip is not qualification."
           }
+        }
+        $managed = @($evidence | Where-Object { $_.mode -eq 'managed' })
+        if (
+          $managed.Count -ne 1 -or
+          -not $managed[0].lostAdmissionReconciled -or
+          -not $managed[0].managedHandoff -or
+          -not $managed[0].credentialsConfined -or
+          $managed[0].managedCancellation.cleanup -ne 'settled' -or
+          -not (@('failed', 'incomplete') -contains $managed[0].managedCancellation.outcome)
+        ) {
+          throw 'Managed handoff must reconcile a lost admission, settle cancellation and preserve credential confinement.'
         }

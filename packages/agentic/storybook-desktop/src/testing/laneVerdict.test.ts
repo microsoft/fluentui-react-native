@@ -56,8 +56,20 @@ describe('WDIO cohort verdict', () => {
     });
   });
 
+  test('cancelled work is incomplete even when the cohort is optional', () => {
+    expect(assessWdioCohort({ results: [result('a', 'passed'), result('b', 'cancelled')], selected: 2, optional: true })).toMatchObject({
+      executed: true,
+      incomplete: true,
+      message: expect.stringContaining('selected tests were cancelled'),
+    });
+    expect(assessWdioCohort({ results: [result('a', 'cancelled')], selected: 1, optional: true })).toMatchObject({
+      executed: false,
+      incomplete: true,
+    });
+  });
+
   test('counts only passes and failures as executed', () => {
-    expect(hasExecutedWdioCase([result('a', 'skipped'), result('b', 'unsupported')])).toBe(false);
+    expect(hasExecutedWdioCase([result('a', 'skipped'), result('b', 'unsupported'), result('c', 'cancelled')])).toBe(false);
     expect(hasExecutedWdioCase([result('a', 'failed')])).toBe(true);
   });
 
@@ -73,7 +85,7 @@ describe('WDIO cohort verdict', () => {
     ).toBe('1 passed, 0 failed, 0 skipped, 3 unsupported (1 declared, 1 quarantined)');
   });
 
-  test('counts every status that is not a pass, a skip or unsupported as failed', () => {
+  test('counts unknown failures while reporting cancellation separately', () => {
     expect(
       describeWdioCounts([
         { status: 'passed' },
@@ -82,6 +94,6 @@ describe('WDIO cohort verdict', () => {
         { status: 'cancelled' },
         { status: 'infrastructure-error' },
       ]),
-    ).toBe('1 passed, 4 failed, 0 skipped');
+    ).toBe('1 passed, 3 failed, 0 skipped, 1 cancelled');
   });
 });

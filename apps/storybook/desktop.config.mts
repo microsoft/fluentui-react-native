@@ -1,7 +1,7 @@
 import {
   createWindowsSmokeOptions,
   createWin32RunCommand,
-  createWin32SmokeCommand,
+  createWin32SmokeOptions,
   storybook,
 } from '@fluentui-react-native/storybook-desktop/config';
 import { defineDesktopConfig } from '@fluentui-react-native/desktop-test/config';
@@ -22,7 +22,7 @@ export default defineDesktopConfig({
     win32: { host: { kind: 'rex', renderer: 'paper', ...win32Host }, commands: { run: createWin32RunCommand(win32Host) } },
   },
   reporting: { artifactsRoot: './artifacts/desktop' },
-  suites: { stories: { kind: 'csf-wdio' } },
+  suites: { stories: { kind: 'csf-wdio', agent: { lanes: ['accessible', 'physical'] } } },
   integration: storybook({
     storyPackages: [
       [
@@ -56,13 +56,11 @@ export default defineDesktopConfig({
         }),
       },
       win32: {
-        smoke: {
-          command: createWin32SmokeCommand({
-            ...win32Host,
-            testIDPrefix: appManifest.storybook.testIDPrefix,
-            requiredStoryIds: ['native-callout--default', 'native-callout--placement', 'native-callout--window-commands'],
-          }),
-        },
+        smoke: createWin32SmokeOptions({
+          ...win32Host,
+          testIDPrefix: appManifest.storybook.testIDPrefix,
+          requiredStoryIds: ['native-callout--default', 'native-callout--placement', 'native-callout--window-commands'],
+        }),
       },
     },
   }),

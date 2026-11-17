@@ -1,8 +1,7 @@
 export {
-  createWindowsSmokeCommand,
   createWindowsSmokeOptions,
   createWin32RunCommand,
-  createWin32SmokeCommand,
+  createWin32SmokeOptions,
   desktopSmokeModes,
   desktopStorybookActions,
   STORYBOOK_SMOKE_MODE,

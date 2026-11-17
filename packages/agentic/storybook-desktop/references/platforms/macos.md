@@ -18,6 +18,13 @@ bundle or other resource. CocoaPods includes only resources present during
 the log's path; use `--verbose` to stream native diagnostics live instead. Do
 not patch generated Pod sources or workspace files.
 
+Default smoke builds the instance-specific RN Test App and launches its
+verified product through the channel's native application owner. Cleanup
+attempts that exact app before withdrawing the host's read-only attach lease;
+an unsettled app keeps the workload claim fenced. It never stops every
+application with the same bundle identifier. A custom run command requires an
+explicit smoke lifecycle and ownership-safe stop.
+
 Storybook app diagnostics and native permissions are documented in the
 consumer's agent entry point and the repository permissions reference. Only
 the app's Podfile is hand-authored; generated Pods and DerivedData remain

@@ -1,3 +1,4 @@
+import http from 'node:http';
 import net from 'node:net';
 
 // --import waits for this handshake before executing the entry point, including in late-spawned Node descendants.
@@ -83,27 +84,101 @@ if (encoded) {
   await handshake;
   if (stopping) throw new Error('Owned process stopped before its entry point.');
   socket.unref();
+  async function publish(type, payload) {
+    if (finished || stopping) throw new Error('A stopping process cannot publish readiness.');
+    const requestId = `${process.pid}-${pending.size}-${Date.now()}`;
+    await new Promise((resolve, reject) => {
+      const timer = setTimeout(() => {
+        pending.delete(requestId);
+        reject(new Error('Owned service readiness was not acknowledged.'));
+      }, 5000);
+      pending.set(requestId, { resolve, reject, timer });
+      socket.write(`${JSON.stringify({ type, requestId, ...payload })}\n`);
+    });
+  }
   globalThis[Symbol.for('furn.desktop.process-control')] = {
-    register(dispose) {
+    async register(dispose) {
       if (finished || stopping) throw new Error('Owned process is already stopping.');
       disposers.add(dispose);
+      await publish('disposal-registered', {});
+      if (finished || stopping) throw new Error('Owned process stopped during disposal registration.');
       return () => disposers.delete(dispose);
     },
     async ready(readiness) {
-      if (finished || stopping) throw new Error('A stopping process cannot publish readiness.');
-      const requestId = `${process.pid}-${pending.size}-${Date.now()}`;
-      await new Promise((resolve, reject) => {
-        const timer = setTimeout(() => {
-          pending.delete(requestId);
-          reject(new Error('Owned service readiness was not acknowledged.'));
-        }, 5000);
-        pending.set(requestId, { resolve, reject, timer });
-        socket.write(`${JSON.stringify({ type: 'ready', requestId, readiness })}\n`);
-      });
+      await publish('ready', { readiness });
+    },
+    async listenerProbe(service) {
+      await publish('listener-probe', { service });
     },
     finish() {
       finished = true;
       socket.end('{"type":"disposed"}\n');
     },
   };
+
+  const listenerValue = process.env.FURN_DESKTOP_OWNED_LISTENER;
+  if (listenerValue) {
+    const listener = JSON.parse(listenerValue);
+    if (
+      typeof listener.service !== 'string' ||
+      !listener.service ||
+      typeof listener.probe !== 'string' ||
+      !listener.probe ||
+      !Number.isSafeInteger(listener.port) ||
+      listener.port < 1 ||
+      listener.port > 65535
+    )
+      throw new TypeError('Invalid owned listener expectation.');
+    const listen = net.Server.prototype.listen;
+    net.Server.prototype.listen = function (...args) {
+      if (!(this instanceof http.Server)) return listen.apply(this, args);
+      const first = args[0];
+      const candidate =
+        typeof first === 'object' && first !== null
+          ? first.fd === undefined && first.handle === undefined && !first.reusePort
+            ? Number(first.port)
+            : NaN
+          : typeof first === 'number' || (typeof first === 'string' && /^[0-9]+$/.test(first))
+            ? Number(first)
+            : NaN;
+      if (candidate !== listener.port) return listen.apply(this, args);
+      const server = this;
+      const observe = () => {
+        const address = server.address();
+        if (!address || typeof address === 'string' || address.port !== listener.port) return;
+        const ready = publish('listener-bound', {
+          readiness: { tier: 'service-ready', service: listener.service },
+        });
+        void ready.catch(lost);
+        let probed = false;
+        const reportProbe = (request) => {
+          if (probed || request.headers['x-furn-desktop-listener-probe'] !== listener.probe) return;
+          probed = true;
+          void globalThis[Symbol.for('furn.desktop.process-control')].listenerProbe(listener.service).catch(lost);
+        };
+        server.prependListener('request', reportProbe);
+        let closed = false;
+        const reportClosure = () => {
+          if (!closed && !finished) {
+            closed = true;
+            socket.write(`${JSON.stringify({ type: 'listener-closed', service: listener.service })}\n`);
+          }
+        };
+        server.once('close', () => {
+          server.removeListener('request', reportProbe);
+          void ready.then(reportClosure, () => undefined);
+        });
+        void ready.then(() => {
+          if (!server.listening) reportClosure();
+        }, lost);
+      };
+      server.once('listening', observe);
+      try {
+        return listen.apply(server, args);
+      } catch (error) {
+        server.removeListener('listening', observe);
+        throw error;
+      }
+    };
+  }
 }

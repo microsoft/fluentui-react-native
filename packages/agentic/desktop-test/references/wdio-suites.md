@@ -20,9 +20,11 @@ workspaces.
 
 ## Reuse an attached agent service
 
-A generic target with `host.ownership: "external"` can share one protected
-service between MCP and standalone WDIO, without restarting the listener or
-acquiring another machine workload claim:
+A generic target with `host.ownership: "external"` or `"supervisor"` can share
+one protected service between MCP and standalone WDIO, without restarting the
+listener or acquiring another machine workload claim. A supervisor-owned app
+is launched once by the service and exposed as attach-only for subsequent
+sessions:
 
 ```sh
 yarn desktop-test --target macos serve --agent
@@ -61,6 +63,13 @@ worker or acquisition response was lost. Credentials travel only in private
 descriptors, environment, and request closures; never put them in hooks,
 capabilities, settings, generated configuration, command arguments, or logs.
 
+Trusted integrations can use `connectDesktopRunner` and
+`acquireDesktopRunnerReservation` from `desktop-test/wdio` to hold the same
+reservation in process. Register each secret before use, wait for the worker
+to exit and delete its session, then close its worker grant before acquiring
+another. An ambiguous worker acquisition prevents further delegation until
+the reservation is closed and its entire authority subtree drains.
+
 The launcher captures and removes broker credentials before importing user
 hooks. Each worker receives only its own child token through WDIO's private
 `runnerEnv`, never through the launcher's `process.env`; the worker captures
@@ -75,13 +84,16 @@ account.
 Each handoff opens a new session: old element references, observation cursors,
 uniqueness proofs, and session-qualified artifact links expire. There is no
 cross-MCP-connection resume or automatic replay. The externally owned app is
-left running. Supervisor-retained launches and Storybook integration handoff
-are not supported by this phase. The CSF exception is unchanged: its runner
-owns the session and its isolated Node worker only borrows it.
+left running; a supervisor-retained app remains owned by the serving host.
+Storybook's protected channel also publishes a runner descriptor. Its CSF
+runner holds the reservation across cases, owns each session, and gives each
+isolated Node worker a separate grant to borrow that session.
 
-An attached runner cannot change an existing host's input masks. In particular,
+An attached runner cannot change an existing host's input masks. Generic WDIO
 `--input accessible` still refuses a host that has not already disabled
-keyboard, physical click, and wheel; do not weaken that check to reuse a service.
+keyboard, physical click, and wheel; do not weaken that check to reuse a
+service. Storybook's CSF runner instead verifies its strict per-session input
+policy and may use that accessible policy on an unmasked host.
 
 ## Native page adapter
 

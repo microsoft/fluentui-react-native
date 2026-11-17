@@ -38,6 +38,7 @@ paths. The console format is described in
 | `instance --<platform>`                       | Inspect the active instance's ports and target      |
 | `test --<platform> --list`                    | Discover authored executable story-test IDs         |
 | `test --<platform> --test <glob>`             | Run matching isolated story callbacks               |
+| `test --<platform> --attach-agent`            | Borrow a protected driver through its runner record |
 | `test --<platform> --input accessible`        | Select accessible and `both` descriptor cases       |
 | `test --<platform> --list --input physical`   | Preview a lane's selection and exclusions           |
 | `driver --<platform> --input accessible`      | Start a driver that masks physical input            |
@@ -60,22 +61,40 @@ match no tests fail. Use `STORYBOOK_SMOKE_STORY` and `STORYBOOK_SMOKE_TAG`
 for focused smoke cases.
 
 `test` runs callbacks against an already running app and driver; `smoke` owns
-the complete app lifecycle. The generic smoke path needs a platform stop
-command, except macOS, whose bundle-ID stop is supplied. Prefer the shared
-`createWindowsSmokeOptions`, `createWin32SmokeCommand`, and
+the complete app lifecycle. Default macOS RN Test App smoke builds the
+instance-specific product and retains its exact native application lease in the
+channel; it never stops other processes with the same bundle identifier. A
+custom macOS run command or non-RN Test App target must explicitly configure
+its own smoke lifecycle and safe stop command. Prefer the shared
+`createWindowsSmokeOptions`, `createWin32SmokeOptions`, and
 `createWin32RunCommand` factories instead of copying app lifecycle scripts.
-The Windows Fabric smoke restarts its exact owned app after traversal before
-running authored tests against the warm Metro bundle.
+The smoke factories return typed native plans, not coordinator commands.
+The neutral scope owns Metro and each channel/app generation; the channel uses
+desktop-test's retained native application owner so sessions borrow the same
+helper's exact lease. On macOS, cleanup attempts the app and channel before
+withdrawing the separately maintained read-only attach lease; an unsettled
+channel keeps the workload claim fenced. The Windows Fabric smoke drains its first generation
+after traversal, then starts a new channel/app generation before authored
+tests against the warm Metro bundle. It selects the first manifest story and
+waits for authenticated native readiness before callbacks.
 
 Smoke runs derive an instance identity from the canonical consumer-project
 root. The identity coordinates app bundle identity, Storybook/driver ports,
 Metro, generated runtime identity, and exact process cleanup. Windows RN Test
 App retains its required Metro port 8081; do not run concurrent Metro-backed
-Windows smokes.
+Windows smokes. Metro and channel readiness require proof that an owned child
+bound the expected listener and received the HTTP readiness probe; a foreign
+listener is never adopted.
 
-Windows and Win32 PowerShell smoke owners wait up to 75 seconds for each service
-bridge to exit, allowing its 60-second cooperative shutdown budget to complete.
-Nonzero exits and expired deadlines remain cleanup failures.
+All native smoke modes, including macOS render-only smoke, use a trusted driver
+manifest and authenticated driver traversal. Windows refuses an occupied fixed Metro port before any build,
+registration, or launch. PowerShell performs only Windows framework/package
+registration; it neither starts services nor owns smoke cleanup. Win32 uses
+the native REX launch descriptor with crash-on-redbox, verifies required IDs in
+both catalogs and native desktop chrome through accessibility, and checks its
+owned host remains alive. Failed native settlement retains the protected lease.
+Foreign lease records are preserved and reported as cleanup failures. No
+port-observed PID authorizes application ownership or cleanup.
 
 Storybook test and stories-and-tests smoke commands accept
 `--input accessible|physical`. The lane filters `desktopIt` cases by their
@@ -110,6 +129,10 @@ CLI stops its work through the scope signal but never closes that scope, which
 stays with the supervisor that created it. A `DesktopStorybookCli` that creates
 its own scope closes it when the command ends. Stage commands receive the scope
 signal, so a stop or interrupt ends a running stage instead of waiting for it.
+The low-level `DesktopStorybookCli.driver()` API hosts the driver only; it does
+not publish management. A programmatically created command requires an
+injected neutral supervisor for `driver --agent`, rather than silently
+starting a protected driver without the management root.
 
 JSON mode emits one compact command result, or one readiness record for the
 long-running `driver` and `server` commands. Their readiness records are
@@ -124,11 +147,26 @@ descriptor for the Desktop Driver MCP adapter: `agent-connection.json` under
 the platform's private storage root unless `--descriptor <name>` or
 `--root <path>` say otherwise. Readiness waits for that publication and adds
 `agentDescriptor`; stopping removes the descriptor before revoking the grant.
-`desktop-test --target <name> serve --agent` routes here for a Storybook
-target. Agent mode disables the channel's unauthenticated MCP endpoint, so
+Both `desktop-test --target <name> serve --agent` and standalone
+`storybook driver --agent` publish the verified supervisor management root
+after the driver and runner are ready. `--supervisor-descriptor <name>` selects
+its private record. Legacy Storybook configuration has an empty managed
+workload catalog until suites are declared in `desktop.config`.
+Structured driver readiness has supervisor-owned identity fields and a nested
+`integration` object with Storybook instance and port details.
+Agent mode disables the channel's unauthenticated MCP endpoint, so
 agents select stories through the adapter's `desktop_story`. On macOS the
-command keeps the application lease naming the one running app instance, so
-agents attach without `storybook test`. Nothing maintains a Windows or Win32
+driver and manifest-backed smoke own a read-only application lease maintainer
+through desktop-test. It tracks the verified app across relaunch, withdraws
+its lease on ambiguity or shutdown, and preserves foreign records. An attached
+`storybook test` waits for that host-owned lease; it never writes one.
+With `host.ownership: 'supervisor'`, a claimed macOS driver builds and retains
+its instance-specific application, then waits for the lease before readiness.
+On Windows and Win32 it builds (Win32: bundles), registers, and launches the exact
+application before readiness; registration refuses a package identity registered from another
+checkout.
+The native lease-v1 reader retains its one-second start-time tolerance.
+Without a retained app, nothing maintains a Windows or Win32
 lease, so on those platforms the agent attaches by the app's verified identity
 instead: a configured `nativeDriver.application` AUMID or executable path, or
 else the desktop target's registered package AUMID (RN Test App) or REX
@@ -137,9 +175,15 @@ the command fails before starting services when it cannot verify an identity.
 A platform whose smoke options declare a fixed Metro URL, such as
 `createWindowsSmokeOptions` for the RN Test App Windows Debug host, which always
 loads from port 8081, gets Metro on that port; the command fails when the port
-is in use rather than serving a bundle the app never reads. `storybook test` refuses an
-agent-served instance because WDIO holds no grant, and the fake driver
-(`STORYBOOK_NATIVE_DRIVER_FAKE=1`) refuses agent mode. NDJSON
+is in use rather than serving a bundle the app never reads. Use
+`storybook test --attach-agent` for an agent-served instance; an ordinary
+unprotected test refuses that instance. Runner reuse defaults to busy:
+relinquish the MCP session first, or start the driver with
+`--allow-runner-preempt` and explicitly request `test --attach-agent --preempt`.
+`--descriptor` and `--root` select the private runner record. The runner holds
+one reservation across cases and gives each worker a distinct grant; failed
+drain fences the reservation. The fake driver (`STORYBOOK_NATIVE_DRIVER_FAKE=1`)
+refuses agent mode. NDJSON
 streams bounded report events and finishes one-shot runs with a summary.
 Structured modes keep normal stderr empty.
 

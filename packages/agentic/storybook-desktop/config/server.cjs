@@ -38,6 +38,8 @@ async function startDesktopStorybookServer({
   let agentReadyPath;
   let keepAlive;
   let closing;
+  let acquisitionStarted = false;
+  let unregisterDisposal;
   const close = (error) =>
     (closing ??= (async () => {
       const failures = error === undefined ? [] : [error];
@@ -76,8 +78,11 @@ async function startDesktopStorybookServer({
       process.exitCode = await report.close(
         failures.length ? new AggregateError(failures, 'Storybook channel service failed.') : undefined,
       );
-      unregisterDisposal();
-      if (failures.length) throw new AggregateError(failures, 'Storybook channel disposal is incomplete.');
+      unregisterDisposal?.();
+      if (failures.length) {
+        if (!acquisitionStarted && failures.length === 1 && error !== undefined) finishDesktopProcess();
+        throw new AggregateError(failures, 'Storybook channel disposal is incomplete.');
+      }
       finishDesktopProcess();
     })().finally(() => releaseInterrupts?.()));
   const settle = async (error) => {
@@ -100,7 +105,6 @@ async function startDesktopStorybookServer({
       process.exitCode = 1;
     });
   };
-  const unregisterDisposal = registerDesktopProcessDisposal(() => settle());
   report.onStop?.(stop);
   // Handlers stay installed until close completes; nothing can be forced, so a repeated signal only warns before exiting.
   const releaseInterrupts = handleDesktopInterrupts({
@@ -115,6 +119,7 @@ async function startDesktopStorybookServer({
       }),
   });
   try {
+    unregisterDisposal = await registerDesktopProcessDisposal(() => settle());
     controller.signal.throwIfAborted();
     let driverManifest;
     if (driverManifestPath) {
@@ -123,6 +128,7 @@ async function startDesktopStorybookServer({
         driverManifest = parseStoredDriverManifest(JSON.parse(fs.readFileSync(driverManifestPath, 'utf8')));
       } else {
         if (!process.env.STORYBOOK_DRIVER_HANDOFF) throw new Error('Native Storybook requires its trusted parent helper handoff.');
+        acquisitionStarted = true;
         driverManifest = await readDriverManifest(driverManifestPath, process.env.STORYBOOK_DRIVER_HANDOFF);
       }
     }
@@ -134,6 +140,11 @@ async function startDesktopStorybookServer({
         typeof agent.descriptor !== 'string' ||
         typeof agent.readyPath !== 'string' ||
         (agent.root !== undefined && typeof agent.root !== 'string') ||
+        (agent.runner !== undefined &&
+          (typeof agent.runner !== 'object' ||
+            agent.runner === null ||
+            typeof agent.runner.descriptor !== 'string' ||
+            typeof agent.runner.allowPreempt !== 'boolean')) ||
         (agent.application !== undefined &&
           (typeof agent.application !== 'object' ||
             agent.application === null ||
@@ -147,6 +158,7 @@ async function startDesktopStorybookServer({
       report.reporter.addSecret(driverManifest.application.leaseNonce);
       report.reporter.addSecret(driverManifest.bridgeNonce);
     }
+    acquisitionStarted = true;
     if (agent) {
       controlledChannel = await createControlledChannelServer({ host, port, configPath, buildIndex, onFailure: fatal });
       server = controlledChannel.channel;
@@ -174,6 +186,7 @@ async function startDesktopStorybookServer({
         storyRootTestId: `${driverManifest.testIDPrefix}-story-root`,
         launchModes: ['attach'],
       };
+      let retainedOrchestrator;
       if (process.env.STORYBOOK_NATIVE_DRIVER_FAKE === '1') {
         const { createDesktopDriverServer } = await import('@fluentui-react-native/desktop-driver');
         const { createFakeStoryWindows, FakeDesktopHost, FakeStoryOrchestrator } =
@@ -193,10 +206,31 @@ async function startDesktopStorybookServer({
           ],
         });
       } else {
+        const ownedApplication = process.env.STORYBOOK_OWNED_APPLICATION ? JSON.parse(process.env.STORYBOOK_OWNED_APPLICATION) : undefined;
+        const makeOrchestrator = (targetHost, recovery) =>
+          createChannelOrchestrator({
+            channelServer: server,
+            driverManifest,
+            serverUrl: loopbackUrl(host, port),
+            StorybookChannelOrchestrator,
+            recovery: {
+              ...recovery,
+              resolveApplication: createApplicationIdentityResolver({
+                host: targetHost,
+                target: { ...target, host: targetHost },
+                createIdentityHost: () =>
+                  new NativeDesktopHost({
+                    application: agent?.application ?? driverManifest.application,
+                    artifact: driverManifest.nativeDriver,
+                    endpoint: driverManifest.endpoint,
+                  }),
+              }),
+            },
+          });
         driver = await startNativeDesktopService({
           signal: controller.signal,
           // Windows agents verify the app's AUMID or executable; nothing maintains a lease there.
-          application: agent?.application ?? driverManifest.application,
+          application: ownedApplication ?? agent?.application ?? driverManifest.application,
           artifact: driverManifest.nativeDriver,
           endpoint: driverManifest.endpoint,
           host,
@@ -207,35 +241,54 @@ async function startDesktopStorybookServer({
           ...(maskedFeatures ? { disabledInputFeatures: maskedFeatures } : {}),
           ...(agent
             ? {
-                agent: { descriptor: agent.descriptor, ...(agent.root === undefined ? {} : { root: agent.root }) },
+                agent: {
+                  descriptor: agent.descriptor,
+                  ...(agent.root === undefined ? {} : { root: agent.root }),
+                  ...(agent.runner === undefined ? {} : { runner: agent.runner }),
+                },
                 addSecret: (secret) => report.reporter.addSecret(secret),
               }
             : {}),
           target,
+          ...(ownedApplication
+            ? {
+                prepareHost: async (targetHost, recovery) => {
+                  // Observe the runtime socket before launch, including an initial render faster than native identity capture.
+                  retainedOrchestrator = makeOrchestrator(targetHost, recovery);
+                  const { prepareRetainedStorybookApplicationHost } = await import('../lib/driver/retainedApplication.js');
+                  return prepareRetainedStorybookApplicationHost(targetHost, {
+                    target,
+                    manifestPath: driverManifestPath,
+                    handoff: process.env.STORYBOOK_DRIVER_HANDOFF,
+                    windowTitle: driverManifest.application.windowTitle,
+                    signal: controller.signal,
+                    onResource: (resource) =>
+                      report.reporter.emit({
+                        kind: 'diagnostic',
+                        payload: { level: 'info', message: `Retained application resource: ${JSON.stringify(resource)}` },
+                      }),
+                  });
+                },
+              }
+            : {}),
           createTarget: async (targetHost, recovery) => ({
-            storyOrchestrator: createChannelOrchestrator({
-              channelServer: server,
-              driverManifest,
-              serverUrl: loopbackUrl(host, port),
-              StorybookChannelOrchestrator,
-              recovery: {
-                ...recovery,
-                resolveApplication: createApplicationIdentityResolver({
-                  host: targetHost,
-                  target: { ...target, host: targetHost },
-                  createIdentityHost: () =>
-                    new NativeDesktopHost({
-                      application: agent?.application ?? driverManifest.application,
-                      artifact: driverManifest.nativeDriver,
-                      endpoint: driverManifest.endpoint,
-                    }),
-                }),
-              },
-            }),
+            storyOrchestrator: retainedOrchestrator ?? makeOrchestrator(targetHost, recovery),
           }),
         });
       }
       controller.signal.throwIfAborted();
+      if (retainedOrchestrator) {
+        // A retained debug app may still be loading a cold Metro bundle; agents and runners must not observe readiness
+        // until its authenticated runtime has rendered, or every story operation fails as bridge-unavailable.
+        const timeoutMs = Number(process.env.STORYBOOK_INITIAL_RENDER_TIMEOUT_MS) || 300_000;
+        const timeout = AbortSignal.timeout(timeoutMs);
+        try {
+          await retainedOrchestrator.waitForInitialBridge(AbortSignal.any([controller.signal, timeout]));
+        } catch (error) {
+          if (!timeout.aborted || controller.signal.aborted) throw error;
+          throw new Error(`The retained Storybook application did not render its initial story within ${timeoutMs} ms.`);
+        }
+      }
       if (agent) {
         agentReadyPath = agent.readyPath;
         writeAgentReady(agentReadyPath, agent.descriptor);

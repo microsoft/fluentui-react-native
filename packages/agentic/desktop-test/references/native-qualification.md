@@ -5,6 +5,7 @@ owner_paths:
   - packages/agentic/desktop-test
   - packages/agentic/desktop-driver
   - packages/agentic/desktop-driver-mcp
+  - packages/agentic/desktop-mcp
   - packages/agentic/storybook-desktop
 ---
 
@@ -240,8 +241,10 @@ yarn storybook prep --macos --paper
 yarn storybook smoke --macos --paper --mode stories-and-tests
 ```
 
-`smoke` traverses the declared stories and, in `stories-and-tests` mode, runs
-the selected static and authored callbacks. It does not expose a `--test`
+`smoke` builds and launches the exact instance-specific app through the native
+owner, traverses the declared stories and, in `stories-and-tests` mode, runs
+the selected static and authored callbacks. The app is uncontained; only its
+verified primary process is owned. It does not expose a `--test`
 filter. `STORYBOOK_SMOKE_STORY` and `STORYBOOK_SMOKE_TAG` can request focused
 coverage, but always read the terminal `run.json` counts and work selection:
 the provisional run recorded below supplied a story environment selector yet
@@ -252,9 +255,9 @@ non-agent driver running and use the supported filtered command:
 yarn storybook test --macos --story '<story-id-glob>' --test '<test-name-glob>'
 ```
 
-Do not use `storybook test` against an agent-served instance; it has no grant.
-Manifest-backed `smoke` also uses a non-agent driver session; it has no
-`--agent` option or descriptor-grant input. Qualify its driver-backed
+For an agent-served instance, use `storybook test --attach-agent`; an ordinary
+test has no grant. Manifest-backed `smoke` uses a non-agent driver session; it
+has no `--agent` option or descriptor-grant input. Qualify its driver-backed
 traversal separately from the protected descriptor path below.
 For every run record selected, executed, passed, failed, skipped, unsupported,
 incomplete, retries, flaky count, and the cleanup result. Empty work is not a
@@ -279,7 +282,8 @@ supervisor path at a time; do not start `storybook driver --agent` and
    `yarn storybook run --macos --paper` for Paper. Use the same renderer
    selection as the driver. Keep the driver service running. Confirm the app
    connects to the instance from the driver's readiness record before opening
-   an MCP session.
+   an MCP session. Launch Services may reuse an existing app: a bundle
+   identifier alone does not establish ownership or authorize termination.
 3. Connect `desktop-driver-mcp` using its default
    `agent-connection.json` descriptor. Confirm the adapter verified the native
    service identity before any grant is used. Use a real MCP client and the
@@ -357,7 +361,7 @@ owns the target, fresh sessions/resources, worker-crash drain, credential
 confinement, and preservation of the fixture's exact PID through service
 shutdown. Only the test that spawned the fixture terminates it afterward.
 Operator preemption and loss of a real HTTP 200 runner-grant response are
-separate modes alongside handoff and worker crash. Every mode verifies
+separate modes alongside handoff and worker crash. These driver-only modes verify
 attach-only refusal, busy/exclusive admission, deletion before reuse, stale
 references/cursors, terminal reports, credential confinement, descriptor
 withdrawal, claim release, and preservation of the same external process
@@ -368,6 +372,13 @@ the client's typed transport failure and exact injected cause, not an unwrapped
 top-level message. The portable runner contract uses the same fault routine
 against its real HTTP service and verifies reservation fencing and subsequent
 worker drain without a native helper.
+
+The managed mode additionally publishes and verifies the real supervisor
+descriptor, reconciles a deliberately lost admission response without
+resubmission, cancels and drains that run, and completes a second accessible
+WDIO workload through the supervisor MCP tool. It records cancellation outcome
+separately from cleanup and checks credential confinement after report
+finalization. It is not a Storybook or renderer qualification.
 
 Each subprocess has a 120-second internal `AbortSignal.timeout` case budget
 followed by at most 30 seconds of shutdown, below the parent's 180-second
@@ -420,16 +431,19 @@ Project artifact ancestry is not repaired or trusted for private storage.
 The `setup-desktop-driver` action's `run-native-runner-contract: 'true'`
 explicitly provisions the fixture and selects this consumer after helper
 diagnosis. Both accessible Windows and Win32 Storybook PR jobs enable it.
-Their selection guard requires all four core modes to execute and pass and
-checks the three non-crash evidence records for two executed/passed inner
+Their selection guard requires all five core modes to execute and pass and
+checks the four non-crash evidence records for two executed/passed inner
 WDIO specs, zero skips and successful accessibility input. Neither an
 all-skipped consumer nor a silently skipped inner input spec makes this check
-green. Hosted capture remains an explicit skipped test.
+green. It also checks the managed admission, cancellation, and credential
+evidence. Hosted capture remains an explicit skipped test.
 
 Retain `artifacts/desktop/f11/native-*/evidence.json` and the run reports. Do not
 copy the private descriptor directory into shared artifacts. Record source
 revision, fixture revision, helper identity, selected/executed cases, native
 permission failures, cleanup, and skipped/not-run scenarios separately.
+`worktreeDirty: true` identifies provisional evidence that is not attributable
+to the recorded `revision` alone.
 Absent the explicit opt-ins, the tests are skipped, not qualified. The plain
 fixture does not qualify React Native Windows Fabric/Win32 Paper rendering,
 Storybook handoff, retained launches, physical input, cross-connection resume,

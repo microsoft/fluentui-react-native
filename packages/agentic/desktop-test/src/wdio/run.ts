@@ -43,8 +43,8 @@ export async function runDesktopWdioSuite(
   const suite = config.config.suites?.[suiteName];
   if (!suite || suite.kind !== 'wdio') throw new Error(`No standalone WDIO suite "${suiteName}" is configured.`);
   assertDesktopSuiteSupportsInput(suiteName, suite, input);
-  if (attached && supervisor.target.host.ownership !== 'external') {
-    throw new Error('An existing agent service can run only an external, attach-only target.');
+  if (attached && supervisor.target.host.ownership !== 'external' && supervisor.target.host.ownership !== 'supervisor') {
+    throw new Error('An existing agent service can run only an external or retained, attach-only target.');
   }
   const specs = resolveDesktopSpecs(suite, supervisor.target.endpoint, config.projectRoot);
   const workIds: string[] = [];
@@ -139,6 +139,7 @@ export async function runDesktopWdioSuite(
   try {
     await broker?.close();
   } catch (cleanup) {
+    supervisor.reporter.fail(cleanup, 'cleanup', 'runner');
     throw new AggregateError(failure === undefined ? [cleanup] : [failure, cleanup], 'WDIO runner cleanup failed.');
   }
   if (failure !== undefined) throw failure;

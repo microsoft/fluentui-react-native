@@ -16,6 +16,8 @@ import type { DesktopDriverServer, ProbeApplication } from '@fluentui-react-nati
 import { publishDesktopAgent } from './agentConnection.js';
 import type { DesktopAgentConnectionOptions, DesktopAgentPublication, DesktopAgentTarget } from './agentConnection.js';
 
+type DesktopServiceRecovery = { storage: PrivateStorage; probeApplication?: ProbeApplication };
+
 export type DesktopServiceOptions = {
   target: Omit<DesktopTarget, 'host'>;
   port?: number;
@@ -32,11 +34,11 @@ export type DesktopServiceOptions = {
   signal?: AbortSignal;
   guard?: <T>(work: Promise<T>) => Promise<T>;
   /** Trusted neutral application-lifetime wrapper, installed before integration target context is created. */
-  prepareHost?: (host: DesktopHost) => Promise<DesktopHost>;
+  prepareHost?: (host: DesktopHost, recovery: DesktopServiceRecovery) => Promise<DesktopHost>;
   /** Optional application-specific target context; native authority remains in the driver. */
   createTarget?: (
     host: DesktopHost,
-    recovery: { storage: PrivateStorage; probeApplication?: ProbeApplication },
+    recovery: DesktopServiceRecovery,
   ) => Promise<Pick<DesktopTarget, 'storyOrchestrator' | 'storyRootTestId'> | undefined>;
 };
 
@@ -73,7 +75,7 @@ export async function startDesktopService(
   let runnerPublication: DesktopAgentPublication | undefined;
   try {
     const recovery = await resolveRecovery(options, artifact);
-    desktopHost = (await options.prepareHost?.(desktopHost)) ?? desktopHost;
+    desktopHost = (await options.prepareHost?.(desktopHost, recovery)) ?? desktopHost;
     // Only the declared story context is taken: an integration cannot replace the target's identity or launch modes.
     const added = await options.createTarget?.(desktopHost, recovery);
     const target = {
@@ -103,12 +105,9 @@ export async function startDesktopService(
         signal: options.signal,
         guard: options.guard,
       });
-      if (
-        options.agent.runner !== false &&
-        !target.storyOrchestrator &&
-        target.launchModes?.length === 1 &&
-        target.launchModes[0] === 'attach'
-      ) {
+      // Story hosts opt in until their integration supplies a per-instance runner descriptor.
+      const runnerEnabled = options.agent.runner !== false && (!target.storyOrchestrator || options.agent.runner !== undefined);
+      if (runnerEnabled && target.launchModes?.length === 1 && target.launchModes[0] === 'attach') {
         runnerPublication = await publishDesktopAgent({
           authority: authority!,
           connection: options.agent,
@@ -121,7 +120,7 @@ export async function startDesktopService(
           guard: options.guard,
         });
       } else if (options.agent.runner && !runnerPublication) {
-        throw new Error('Runner descriptors require a generic attach-only target.');
+        throw new Error('Runner descriptors require an attach-only target.');
       }
     }
   } catch (error) {
@@ -166,10 +165,7 @@ export async function startDesktopService(
   };
 }
 
-async function resolveRecovery(
-  options: DesktopServiceOptions,
-  artifact?: NativeDriverArtifact,
-): Promise<{ storage: PrivateStorage; probeApplication?: ProbeApplication }> {
+async function resolveRecovery(options: DesktopServiceOptions, artifact?: NativeDriverArtifact): Promise<DesktopServiceRecovery> {
   if (options.recovery?.storage && options.recovery.root !== undefined)
     throw new TypeError('Desktop recovery accepts a storage adapter or a root, not both.');
   const endpoint = options.target.endpoint;

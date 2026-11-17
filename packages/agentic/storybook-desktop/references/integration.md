@@ -58,19 +58,39 @@ configuration, WDIO sessions, service ownership, and aggregate reporting are
 owned by `@fluentui-react-native/desktop-test`. Runtime bridge and chrome are
 owned by `@fluentui-react-native/storybook-desktop-runtime`.
 
-This is the current implementation boundary, not the finished layering.
-`DesktopIntegration.run` takes over the lifecycle and readiness presentation;
-the channel child hosts both channel and driver listeners, with Metro in another
-child. The approved direction retains these processes initially and moves
-resource/workload ownership into the neutral desktop-test host. Storybook will
-contribute catalog/channel/context and CSF runner resources; the runtime stays
-Node-free. Do not add a separate coordinator package or move supervision into
-desktop-driver or MCP.
+The neutral `DesktopSupervisor` owns the workload claim, report session,
+cancellation, resources, and cleanup. An imported integration implements a
+side-effect-free `contribute()` plan for the selected action, then runs its
+workload inside that scope. For `serve`, it contributes a hosted-driver
+acquisition that returns a typed correlated receipt and public Storybook
+details; the supervisor verifies and publishes management before emitting
+readiness. Standalone `storybook driver` uses the same acquisition path.
+Storybook keeps its channel child (which hosts both
+channel and driver listeners) and Metro child; both are registered with the
+supervisor's resource scope. The Storybook CLI remains a reusable command
+surface, not an alternate lifecycle owner. Keep the runtime Node-free. Do not
+add a separate coordinator package or move supervision into desktop-driver or
+MCP.
+
+For a macOS target with `host.ownership: 'supervisor'`, the channel retains
+the instance-specific built application across attached sessions. The CLI
+requires the matching live supervisor claim, verifies the built product, and
+waits for its private application lease before reporting readiness. The bridge
+observes the channel before launch so an early initial render is not lost.
+The enclosing channel owns application settlement; uncertain settlement fences
+the claim. On Windows and Win32 a retained driver first publishes the private bridge module, then
+runs the native smoke build path against it (bundle; for Windows also prep, build, and package
+registration), resolves the exact launch identity, and uses it as the agent attach identity. It
+republishes the manifest with that identity and the same bridge, and fails closed if the bundled
+bridge module would change. A configured process, lease, or conflicting identity also fails
+closed. The channel publishes the private Windows lease before service readiness. Retained Win32
+loads its prebuilt bundle without Metro.
+External applications remain borrowed and are never terminated by this path.
 
 Owned Node services inherit the neutral harness's per-command socket lifeline
 through a Node preload. Its authenticated handshake gates entry, including
-late-spawned descendants. The channel registers explicit disposal before
-acquiring resources: stop or parent loss aborts initialization, awaits late
+late-spawned descendants. The channel awaits parent acknowledgement of explicit
+disposal registration before acquiring resources: stop or parent loss aborts initialization, awaits late
 acquisitions, then withdraws the agent descriptor through the shared F1 service
 and awaits durable driver settlement before closing the channel. The native
 helper remains owned by that service and its existing stdio transport.
@@ -79,7 +99,14 @@ helper remains owned by that service and its existing stdio transport.
 command incarnation, and producer PID. The neutral resource scope validates
 and retains that receipt on the owned channel's resource generation before
 the CLI reports readiness. The generated `agent-ready.*.json` file
-is a compatibility breadcrumb only, never readiness authority. The receipt
+is a compatibility breadcrumb only, never readiness authority. For a
+supervisor-retained Windows or Win32 application, the channel writes that
+breadcrumb and publishes `service-ready` only after the retained app's
+authenticated runtime has said hello and rendered its initial story, bounded by
+`STORYBOOK_INITIAL_RENDER_TIMEOUT_MS` (default 300 s). A cold debug bundle can
+take tens of seconds after the window appears, and agents, runners and MCP do
+not retry `bridge-unavailable`. This wait only observes the bridge and dispatches
+nothing. Otherwise the receipt
 does not prove target acquisition, application readiness, or authenticated
 context/render readiness. Borrowed applications and external services are not
 enrolled in the lifeline or implicitly terminated. Missing/failed withdrawal
@@ -114,16 +141,16 @@ transport diagnostics or journals.
 
 Without an agent manifest the upstream channel is **legacy unprotected mode**,
 including its HTTP mutation handlers, WebSocket relay and MCP endpoint. It is
-not an authority boundary. Channel-only `smoke --mode stories` retains this
-legacy path. Manifest-backed traversal (`stories-and-tests`, and the Windows/
-Win32 control script when a driver manifest is supplied) opens one driver
+not an authority boundary. Default macOS, Windows and Win32 native smoke uses
+manifest-backed traversal, including `stories` mode; a custom channel-only
+smoke remains legacy. Manifest-backed traversal opens one driver
 session, selects each story through it, and deletes that session before authored
 tests acquire their own. It never falls back to upstream selection after a
 driver failure. Only pre-dispatch `bridge-unavailable` can be retried;
 uncertain navigation and `relaunch-required` fail without replay. The first
 story's retry budget covers a cold development bundle
 (`STORYBOOK_SMOKE_INITIAL_RENDER_TIMEOUT_MS`, default 300 s); later stories
-use 30 s. The Windows smoke relaunches the app between its `stories` and
+use 15 s. The Windows smoke relaunches the app between its `stories` and
 `tests` phases, so the `tests` phase first selects the first manifest story
 with the same budget and waits for authenticated readiness before authored
 tests navigate. A relaunched runtime that has said hello but not yet sent its
@@ -131,6 +158,27 @@ initial `storyRendered` reports `bridge-unavailable`, not `relaunch-required`,
 so this wait keeps retrying. A reloaded runtime whose new socket authenticates
 before the old socket closes retires the old bridge in the same way. Authored-test
 navigation itself does not wait for the bridge.
+
+Native smoke contributes settings rather than shell coordinators. The borrowed
+neutral scope registers Metro and phase-scoped
+channel resources before acquisition and drains them in reverse order. Each
+channel uses desktop-test's supervisor-lifetime application wrapper with the
+same native helper used by attached sessions: independent launch/attach
+controllers would compete for its application lock. The exact native identity
+is reported before protected application-lease publication. Cleanup closes
+the retained native lease before withdrawing its digest-receipted private
+record, and refuses changed records. Windows restarts the owned channel/app
+generation between phases, without restarting Metro. A failed phase disposal
+prevents relaunch and authored tests and leaves the parent claim fenced.
+macOS validates the built product's instance bundle identifier and renderer,
+retains the exact application in the channel, and attempts its cleanup before
+withdrawing the separate read-only attach lease. A failed cleanup fences the
+claim; the read-only lease is not proof of settlement. Its native launch is
+uncontained; other same-bundle processes are never termination targets.
+Application resource diagnostics live in the inherited report; the parent
+claim records the enclosing channel resource, not a separately recoverable
+application. Bounded automatic native application reconciliation therefore
+does not reclaim this composite resource after an unacknowledged crash.
 
 Epoch/cancellation-aware providers reject stale preview mutations without
 invalidating chrome or live secondary windows. Interrupted navigation still

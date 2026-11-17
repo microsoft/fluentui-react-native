@@ -22,6 +22,8 @@ export type DesktopStorybookAgentManifest = {
   readyPath: string;
   /** The private storage root, which the adapter reads with `--root`. Defaults to the platform location. */
   root?: string;
+  /** Public runner publication settings; the descriptor's bearer grant stays in private storage. */
+  runner?: { allowPreempt: boolean; descriptor: string };
   /**
    * The identity an agent's attach session verifies instead of the application lease. Windows and Win32 have no lease
    * maintainer, so the driver resolves the exact window title qualified by the app's AUMID or canonical executable.
@@ -46,7 +48,7 @@ export type DesktopStorybookDriverManifest = {
   platformManifestDigest: string;
   portablePlanDigest: string;
   renderer: 'fabric' | 'paper';
-  schemaVersion: 3;
+  schemaVersion: 3 | 4;
   /**
    * The scope domains and the values this target holds, which declared test `scope` selection reads. The driver's
    * CLI resolves them from the full desktop configuration, which a smoke control process does not have.
@@ -108,6 +110,7 @@ export function createDesktopStorybookDriverManifest({
             descriptor: agent.descriptor,
             readyPath: path.join(generated, `agent-ready.${platform}.json`),
             ...(agent.root === undefined ? {} : { root: agent.root }),
+            ...(agent.runner === undefined ? {} : { runner: Object.freeze({ ...agent.runner }) }),
             ...(agent.application === undefined ? {} : { application: Object.freeze({ ...agent.application }) }),
           }),
         }

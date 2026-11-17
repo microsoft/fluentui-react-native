@@ -60,7 +60,7 @@ describe('Desktop Storybook driver manifest', () => {
         windowTitle: 'Agentic Components Storybook',
       },
       nativeDriver,
-      schemaVersion: 3,
+      schemaVersion: 4,
       wdio: { timeoutMs: 12_345, tag: 'smoke', reporter: 'tap' },
     });
     expect(manifest.application.leaseNonce).not.toBe(manifest.bridgeNonce);
@@ -109,7 +109,7 @@ describe('Desktop Storybook driver manifest', () => {
     });
   });
 
-  test('removes stale readiness and leases, publishing secrets only through private storage', async () => {
+  test('removes stale readiness, publishing secrets only through private storage', async () => {
     const temporaryDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'storybook-driver-manifest-'));
     try {
       const config = makeDesktopStorybookConfig({
@@ -132,7 +132,7 @@ describe('Desktop Storybook driver manifest', () => {
         descriptor: 'agent.json',
         readyPath: path.join(storybookRoot, 'storybook-desktop.generated', 'agent-ready.windows.json'),
       });
-      // Stale files live in the temporary directory so the test cannot remove a live instance's lease or readiness record.
+      // Stale readiness lives in the temporary directory so the test cannot affect a live instance.
       const readyPath = path.join(temporaryDirectory, 'agent-ready.windows.json');
       const manifest = {
         ...created,
@@ -140,7 +140,6 @@ describe('Desktop Storybook driver manifest', () => {
         application: { ...created.application, leasePath: path.join(temporaryDirectory, '.private', 'application-lease.windows.json') },
       };
       fs.mkdirSync(path.dirname(manifest.application.leasePath), { recursive: true, mode: 0o700 });
-      fs.writeFileSync(manifest.application.leasePath, '{}');
       fs.writeFileSync(readyPath, '{}');
       const outputPath = path.join(temporaryDirectory, 'driver-manifest.json');
 
@@ -149,7 +148,7 @@ describe('Desktop Storybook driver manifest', () => {
       expect(fs.existsSync(manifest.application.leasePath)).toBe(false);
       expect(fs.existsSync(readyPath)).toBe(false);
       const serialized = fs.readFileSync(outputPath, 'utf8');
-      expect(JSON.parse(serialized)).toMatchObject({ schemaVersion: 3 });
+      expect(JSON.parse(serialized)).toMatchObject({ schemaVersion: 4 });
       expect(serialized).not.toContain('"leaseNonce"');
       expect(serialized).not.toContain('"bridgeNonce"');
       await expect(readDriverManifest(outputPath, undefined, createFixturePrivateStorage)).resolves.toMatchObject({

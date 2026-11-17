@@ -8,9 +8,9 @@ import type { DesktopEndpoint, DesktopRenderer, NativeDesktopApplicationDescript
 // which cannot resolve the `.js` specifiers inside the authoring index.
 import { resolveDesktopScopeDomains, resolveDesktopScopeValues } from '@fluentui-react-native/desktop-driver/authoring/input';
 import type { DesktopScopeDomains, DesktopScopeValues } from '@fluentui-react-native/desktop-driver/authoring/input';
+import type { DesktopInputLane } from '@fluentui-react-native/desktop-driver/authoring';
 import type { DesktopReporterMode } from '@fluentui-react-native/desktop-driver/cli/reporter';
 import type { DesktopIntegration } from './integration.ts';
-import { orderDesktopResourceContributions } from './resources.ts';
 import { captureDesktopApplicationIdentity } from './applicationOwnership.ts';
 
 export type DesktopCommand = {
@@ -50,6 +50,7 @@ export type DesktopTargetConfig = {
 
 export type DesktopTargetReference = { use: { config: string; target: string } };
 export type DesktopSpecs = readonly (string | readonly string[])[];
+export type DesktopSuiteAgent = { lanes: readonly DesktopInputLane[] };
 export type DesktopWdioSuite = {
   kind: 'wdio';
   framework: 'jasmine' | 'mocha' | 'cucumber';
@@ -63,6 +64,8 @@ export type DesktopWdioSuite = {
   /** Bounds the whole WDIO launcher run; by default it scales with timeoutMs, spec groups and retries. */
   suiteTimeoutMs?: number;
   optional?: boolean;
+  /** Explicitly exposes this suite to the supervisor's bounded workload catalog. */
+  agent?: DesktopSuiteAgent;
 };
 
 export type DesktopReportingConfig = {
@@ -78,7 +81,7 @@ export type DesktopConfig = {
   schemaVersion: 1;
   projectRoot?: string | URL;
   targets: Readonly<Record<string, DesktopTargetConfig | DesktopTargetReference>>;
-  suites?: Readonly<Record<string, DesktopWdioSuite | { kind: 'csf-wdio' }>>;
+  suites?: Readonly<Record<string, DesktopWdioSuite | { kind: 'csf-wdio'; agent?: DesktopSuiteAgent }>>;
   integration?: DesktopIntegration;
   reporting?: DesktopReportingConfig;
   /**
@@ -110,6 +113,21 @@ export type ResolvedDesktopConfig = {
 const configNames = ['desktop.config.mts', 'desktop.config.ts', 'desktop.config.mjs', 'desktop.config.js', 'desktop.config.cjs'];
 const endpoints = ['macos', 'windows', 'win32'] as const;
 const stages = ['prep', 'bundle', 'build', 'run'] as const;
+
+function validateSuiteAgent(value: unknown, id: string): void {
+  const agent = object(value, `${id}.agent`);
+  keys(agent, ['lanes'], `${id}.agent`);
+  if (
+    !/^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$/.test(id) ||
+    !Array.isArray(agent.lanes) ||
+    agent.lanes.length < 1 ||
+    agent.lanes.length > 2 ||
+    agent.lanes.some((lane) => lane !== 'accessible' && lane !== 'physical') ||
+    new Set(agent.lanes).size !== agent.lanes.length
+  ) {
+    throw new TypeError(`${id}: agent workloads require a bounded suite ID and unique accessible or physical lanes.`);
+  }
+}
 
 /** A structural, source-loadable entry point; config generation does not require a repository build. */
 export function defineDesktopConfig<T extends DesktopConfig>(config: T): T {
@@ -230,8 +248,9 @@ export function validateDesktopConfig(value: unknown): asserts value is DesktopC
     for (const [id, entry] of Object.entries(object(config.suites, 'suites'))) {
       const suite = object(entry, `suite ${id}`);
       oneOf(suite.kind, ['wdio', 'csf-wdio'], `${id}.kind`);
+      if (suite.agent !== undefined) validateSuiteAgent(suite.agent, id);
       if (suite.kind === 'csf-wdio') {
-        keys(suite, ['kind'], `suite ${id}`);
+        keys(suite, ['kind', 'agent'], `suite ${id}`);
         if (!config.integration) throw new TypeError('CSF suites require an explicitly imported integration.');
         continue;
       }
@@ -249,10 +268,14 @@ export function validateDesktopConfig(value: unknown): asserts value is DesktopC
           'timeoutMs',
           'suiteTimeoutMs',
           'optional',
+          'agent',
         ],
         `suite ${id}`,
       );
       oneOf(suite.framework, ['jasmine', 'mocha', 'cucumber'], `${id}.framework`);
+      if (suite.agent !== undefined && suite.framework !== 'jasmine') {
+        throw new TypeError(`${id}: agent workload lanes require the jasmine framework.`);
+      }
       if (Array.isArray(suite.specs)) validateSpecs(suite.specs);
       else {
         const specs = object(suite.specs, `${id}.specs`);
@@ -282,17 +305,15 @@ export function validateDesktopConfig(value: unknown): asserts value is DesktopC
   }
   if (config.integration !== undefined) {
     const integration = object(config.integration, 'integration');
-    keys(integration, ['name', 'validate', 'supportsAgent', 'createTarget', 'resources', 'run', 'configure'], 'integration');
+    keys(integration, ['name', 'validate', 'createTarget', 'contribute', 'configure'], 'integration');
     text(integration.name, 'integration.name');
     if (typeof integration.validate !== 'function') throw new TypeError('An integration must expose validate().');
-    if (integration.supportsAgent !== undefined && typeof integration.supportsAgent !== 'boolean')
-      throw new TypeError('integration.supportsAgent must be a boolean.');
     if (integration.createTarget !== undefined && typeof integration.createTarget !== 'function')
       throw new TypeError('integration.createTarget must be a function.');
     if (integration.configure !== undefined && typeof integration.configure !== 'function')
       throw new TypeError('integration.configure must be a function.');
-    if (integration.run !== undefined && typeof integration.run !== 'function') throw new TypeError('integration.run must be a function.');
-    if (integration.resources !== undefined) orderDesktopResourceContributions(integration.resources);
+    if (integration.contribute !== undefined && typeof integration.contribute !== 'function')
+      throw new TypeError('integration.contribute must be a function.');
     integration.validate();
   }
 }
@@ -368,7 +389,13 @@ export async function loadDesktopConfig(configPath?: string, cwd = process.cwd()
       Object.keys(entry.config.targets).map(async (id) => {
         const target = await resolve(entry.file, id, []);
         const registrationId = registeredTargetId(entry.file, id, target.endpoint);
-        return [id, Object.freeze({ ...target, id: registrationId, registrationId })];
+        const registered = Object.freeze({ ...target, id: registrationId, registrationId });
+        return [
+          id,
+          registered.endpoint === 'macos' && registered.host.kind === 'react-native-test-app'
+            ? selectDesktopRenderer(registered, registered.host.renderer ?? 'fabric')
+            : registered,
+        ];
       }),
     ),
   );

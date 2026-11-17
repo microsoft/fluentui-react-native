@@ -1,5 +1,6 @@
 /* eslint-disable @microsoft/sdl/no-insecure-url -- The protected service protocol is loopback HTTP, not remote HTTPS. */
 import { createServer } from 'node:http';
+import { createHash } from 'node:crypto';
 import type { AddressInfo } from 'node:net';
 
 import { createDesktopDriverClient } from '../client/DesktopDriverClient.js';
@@ -71,6 +72,74 @@ test('rejects missing or unverifiable discovery state without sending a credenti
     expect(fetchSpy).not.toHaveBeenCalled();
   } finally {
     fetchSpy.mockRestore();
+  }
+});
+
+test('registers the descriptor credential after identity verification and before authentication', async () => {
+  const authority = new DesktopAuthority();
+  const harness = await createDesktopDriverTestHarness({}, undefined, { authority });
+  const fetchSpy = jest.spyOn(globalThis, 'fetch');
+  try {
+    const record = descriptor(harness.server.url, authority);
+    const verify = jest.fn(async () => true);
+    const addSecret = jest.fn();
+    await readConnectionDescriptor(storageWith(JSON.stringify(record)), 'connection.json', verify, undefined, addSecret);
+    expect(addSecret).toHaveBeenCalledWith(record.grant);
+    expect(verify.mock.invocationCallOrder[0]).toBeLessThan(addSecret.mock.invocationCallOrder[0]);
+    expect(addSecret.mock.invocationCallOrder[0]).toBeLessThan(fetchSpy.mock.invocationCallOrder[0]);
+    fetchSpy.mockClear();
+    await expect(
+      readConnectionDescriptor(storageWith(JSON.stringify(record)), 'connection.json', verify, undefined, () => {
+        throw new Error('redaction unavailable');
+      }),
+    ).rejects.toThrow('redaction unavailable');
+    expect(fetchSpy).not.toHaveBeenCalled();
+  } finally {
+    fetchSpy.mockRestore();
+    await harness.close();
+  }
+});
+
+test('binds an exact driver record and incarnation before sending credentials, then checks the sole visible target', async () => {
+  const authority = new DesktopAuthority();
+  const harness = await createDesktopDriverTestHarness({}, undefined, { authority });
+  const fetchSpy = jest.spyOn(globalThis, 'fetch');
+  try {
+    const record = descriptor(harness.server.url, authority);
+    const contents = JSON.stringify(record);
+    const storage = storageWith(contents);
+    const verify = jest.fn(async () => true);
+    const binding = {
+      digest: createHash('sha256').update(contents).digest('hex'),
+      incarnation: authority.incarnation,
+      targetId: harness.target.id,
+      url: harness.server.url,
+    };
+    expect(await readConnectionDescriptor(storage, 'connection.json', verify, binding)).toEqual(record);
+    expect(storage.read).toHaveBeenCalledTimes(1);
+    fetchSpy.mockClear();
+    verify.mockClear();
+
+    await expect(readConnectionDescriptor(storage, 'connection.json', verify, { ...binding, digest: '0'.repeat(64) })).rejects.toThrow(
+      'supervisor binding',
+    );
+    await expect(
+      readConnectionDescriptor(storage, 'connection.json', verify, { ...binding, incarnation: `inc_${'0'.repeat(24)}` }),
+    ).rejects.toThrow('supervisor binding');
+    await expect(
+      readConnectionDescriptor(storage, 'connection.json', verify, { ...binding, url: 'http://127.0.0.1:4444' }),
+    ).rejects.toThrow('supervisor binding');
+    expect(verify).not.toHaveBeenCalled();
+    expect(fetchSpy).not.toHaveBeenCalled();
+
+    await expect(readConnectionDescriptor(storage, 'connection.json', verify, { ...binding, targetId: 'other' })).rejects.toThrow(
+      'target does not match',
+    );
+    expect(verify).toHaveBeenCalledTimes(1);
+    expect(fetchSpy).toHaveBeenCalledTimes(1);
+  } finally {
+    fetchSpy.mockRestore();
+    await harness.close();
   }
 });
 

@@ -76,6 +76,8 @@ export type DesktopNativeDriverOptions = {
 };
 
 export type DesktopSmokeOptions = {
+  /** Native smoke application retained by desktop-test's application owner in the supervised channel. */
+  native?: { kind: 'macos' } | ({ kind: 'windows' } & WindowsSmokeCommandOptions) | ({ kind: 'win32' } & Win32SmokeCommandOptions);
   /**
    * A complete app-owned smoke command. When set, the reusable server, Metro, traversal, and cleanup lifecycle is skipped.
    */
@@ -175,20 +177,6 @@ export type Win32SmokeCommandOptions = Win32HostCommandOptions & {
 };
 
 /**
- * Creates the shared Windows Fabric smoke lifecycle command.
- */
-export function createWindowsSmokeCommand({ configuration = 'Debug', windowTitle }: WindowsSmokeCommandOptions): DesktopCommand {
-  return {
-    command: 'pwsh',
-    args: ['-NoProfile', '-File', resolveConfigScript('smoke-windows.ps1')],
-    env: {
-      STORYBOOK_WINDOWS_CONFIGURATION: configuration,
-      STORYBOOK_WINDOWS_WINDOW_TITLE: windowTitle,
-    },
-  };
-}
-
-/**
  * Creates the shared Windows Fabric smoke lifecycle and its native Metro-port constraint.
  */
 export function createWindowsSmokeOptions({ configuration, metroPort = 8081, windowTitle }: WindowsSmokeOptions): DesktopSmokeOptions {
@@ -196,7 +184,7 @@ export function createWindowsSmokeOptions({ configuration, metroPort = 8081, win
     throw new RangeError(`Windows smoke Metro port must be an integer between 1 and 65535. Received "${metroPort}".`);
   }
   return {
-    command: createWindowsSmokeCommand({ configuration, windowTitle }),
+    native: { kind: 'windows', configuration: configuration ?? 'Debug', windowTitle },
     // eslint-disable-next-line @microsoft/sdl/no-insecure-url -- React Native Test App connects to loopback Metro
     metroUrl: `http://127.0.0.1:${metroPort}/status`,
   };
@@ -217,23 +205,18 @@ export function createWin32RunCommand({ component, windowTitle }: Win32HostComma
 }
 
 /**
- * Creates the shared Win32 bundle, native UX, and story traversal smoke lifecycle command.
+ * Creates the shared Win32 bundle, native UX, and story traversal smoke plan.
  */
-export function createWin32SmokeCommand({
+export function createWin32SmokeOptions({
   component,
   requiredStoryIds = [],
   testIDPrefix,
   windowTitle,
-}: Win32SmokeCommandOptions): DesktopCommand {
+}: Win32SmokeCommandOptions): DesktopSmokeOptions {
   return {
-    command: 'pwsh',
-    args: ['-NoProfile', '-File', resolveConfigScript('smoke-win32.ps1')],
-    env: {
-      STORYBOOK_TEST_ID_PREFIX: testIDPrefix,
-      STORYBOOK_WIN32_COMPONENT: component,
-      STORYBOOK_WIN32_REQUIRED_STORIES: requiredStoryIds.join(','),
-      STORYBOOK_WIN32_WINDOW_TITLE: windowTitle,
-    },
+    native: { kind: 'win32', component, requiredStoryIds: [...requiredStoryIds], testIDPrefix, windowTitle },
+    metro: false,
+    settleMs: 250,
   };
 }
 

@@ -67,6 +67,26 @@ describe('desktop service scope shutdown', () => {
     expect(stoppedRunner.stopOptions).toEqual([{ failed: false }]);
   });
 
+  test('does not retry or publish HTTP readiness when its ownership confirmation fails', async () => {
+    const scope = new DesktopServiceScope(new FakeRunner());
+    const records: DesktopResourceRecord[] = [];
+    scope.setResourceObserver((record) => records.push(record));
+    scope.start('service', command);
+    const fetcher = jest.fn(async () => new Response('ready'));
+    try {
+      await expect(
+        // eslint-disable-next-line @microsoft/sdl/no-insecure-url -- The readiness fetcher is a loopback fixture.
+        scope.ready('service', 'http://127.0.0.1:1234/status', 1000, fetcher, async () => {
+          throw new Error('Listener proof did not match.');
+        }),
+      ).rejects.toThrow('Listener proof did not match.');
+      expect(fetcher).toHaveBeenCalledTimes(1);
+      expect(records.some((record) => record.readiness === 'ready')).toBe(false);
+    } finally {
+      await scope.close();
+    }
+  });
+
   test('close settles work that waits for a stop request', async () => {
     const scope = new DesktopServiceScope(new FakeRunner());
     const waiting = scope.guard(scope.waitForStop());

@@ -14,6 +14,7 @@ owner_paths:
 | `desktop-test.platforms`            | [Platform setup](platforms.md)                                  | Preparing or building a platform-specific app                            |
 | `desktop-test.wdio-suites`          | [WDIO suites](wdio-suites.md)                                   | Configuring suites or native page adapters                               |
 | `desktop-test.lifecycle`            | [Lifecycle](lifecycle.md)                                       | Changing ownership, supervision, or cancellation                         |
+| `desktop-test.management`           | [Workload management](management.md)                            | Reviewing the supervisor management transport and scope decision         |
 | `desktop-test.reporting`            | [Reporting](reporting.md)                                       | Reading run results, artifacts, or CI output                             |
 | `desktop-test.contributing`         | [Contributing](contributing.md)                                 | Editing the harness or its tests                                         |
 | `desktop-test.current-status`       | [Current status](current-status.md)                             | Assessing lifecycle readiness, per-endpoint qualification, and open work |

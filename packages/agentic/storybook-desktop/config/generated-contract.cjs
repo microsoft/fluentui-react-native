@@ -1,6 +1,6 @@
 // Shared by the Node integration and Metro through the trusted parent handoff. Keep this contract independent of React.
 const path = require('node:path');
-const driverManifestVersion = 3;
+const driverManifestVersion = 4;
 const credentialsVersion = 1;
 const handoffVersion = 1;
 
@@ -95,6 +95,7 @@ const driverManifest = object({
       descriptor: text,
       readyPath: text,
       root: optional(text),
+      runner: optional(object({ allowPreempt: (value) => typeof value === 'boolean', descriptor: text })),
     }),
   ),
   application: object({ ...applicationFields, leasePath: text }),
@@ -109,7 +110,7 @@ const driverManifest = object({
   platformManifestDigest: text,
   portablePlanDigest: text,
   renderer: oneOf('fabric', 'paper'),
-  schemaVersion: oneOf(driverManifestVersion),
+  schemaVersion: oneOf(3, driverManifestVersion),
   scope: optional(object({ domains: record(array(text)), values: record(text) })),
   storyManifest,
   storybookPort: port,
@@ -151,6 +152,7 @@ function parseDriverManifest(value) {
   const parsed = parse(driverManifest, value, 'driver manifest');
   if (
     parsed.storyManifest.endpoint !== parsed.endpoint ||
+    (parsed.schemaVersion === 3 && parsed.agent?.runner !== undefined) ||
     parsed.storyManifest.platformManifestDigest !== parsed.platformManifestDigest ||
     parsed.storyManifest.portablePlanDigest !== parsed.portablePlanDigest ||
     !parsed.nativeDriver.endpoints.includes(parsed.endpoint) ||

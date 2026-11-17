@@ -1,6 +1,6 @@
 ---
 name: maintain-desktop-testing
-description: Change, review, or plan source changes to desktop-driver, desktop-test, storybook-desktop, or storybook-desktop-runtime, including native helpers. Applies package invariants, documentation, native and consumer validation, and changesets.
+description: Change, review, or plan desktop-driver, desktop-test, desktop-mcp, Storybook desktop packages, or native helpers. Applies package invariants, documentation, native and consumer validation, and changesets.
 license: MIT
 ---
 
@@ -10,11 +10,12 @@ license: MIT
 | --------------------------------------------- | ---------------------------------------------------------------------------- |
 | WebDriver service, clients, helpers           | [`desktop-driver`](../../../packages/agentic/desktop-driver/AGENTS.md)       |
 | App/suite config, lifecycle, WDIO, reporting  | [`desktop-test`](../../../packages/agentic/desktop-test/AGENTS.md)           |
+| MCP adapter and driver-only compatibility     | [`desktop-mcp`](../../../packages/agentic/desktop-mcp/AGENTS.md)             |
 | Storybook integration, CLI, extraction, tests | [`storybook-desktop`](../../../packages/agentic/storybook-desktop/AGENTS.md) |
 | On-device bridge, Metro, theme, chrome        | [`runtime`](../../../packages/agentic/storybook-desktop-runtime/AGENTS.md)   |
 
-Read the owning package's `AGENTS.md`, then its contributing reference from the package index. The runtime has no
-contributing reference; use its `AGENTS.md` validation section and its runtime contract reference instead.
+Read the owning package's `AGENTS.md`, then its contributing reference from the package index. The runtime and MCP
+adapter have no contributing reference; use their scoped validation sections and the relevant contract references.
 
 ## Mode first
 

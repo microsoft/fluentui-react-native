@@ -105,8 +105,17 @@ async function waitForNativeFixture({
 
 function nativeRunnerRecords(platform, root) {
   return platform === 'win32'
-    ? { agentDescriptor: `${path.basename(root)}-agent.json`, runnerDescriptor: `${path.basename(root)}-runner.json` }
-    : { privateRoot: path.join(root, 'private'), agentDescriptor: 'agent-connection.json', runnerDescriptor: 'runner-connection.json' };
+    ? {
+        agentDescriptor: `${path.basename(root)}-agent.json`,
+        runnerDescriptor: `${path.basename(root)}-runner.json`,
+        supervisorDescriptor: `${path.basename(root)}-supervisor.json`,
+      }
+    : {
+        privateRoot: path.join(root, 'private'),
+        agentDescriptor: 'agent-connection.json',
+        runnerDescriptor: 'runner-connection.json',
+        supervisorDescriptor: 'supervisor-connection.json',
+      };
 }
 
 async function removeNativeRunnerDescriptors(storage, descriptors, ownerPid) {
@@ -122,11 +131,12 @@ async function removeNativeRunnerDescriptors(storage, descriptors, ownerPid) {
       retained.push(name);
       continue;
     }
+    const pid = record?.management === undefined ? record?.service?.pid : record.management?.service?.pid;
     if (
       Number.isSafeInteger(ownerPid) &&
       ownerPid > 0 &&
       record?.version === 1 &&
-      record.service?.pid === ownerPid &&
+      pid === ownerPid &&
       (await storage.remove(name, contents))
     ) {
       removed.push(name);

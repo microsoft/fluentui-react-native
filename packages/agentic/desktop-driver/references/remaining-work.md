@@ -1070,8 +1070,9 @@ references expire. A render whose effects are unknown or partial now quarantines
 the target; protected args updates are refused pending governed settlement.
 Fake-host tests cover listing, filtering, paging,
 marker verification, out-of-band story changes, unknown stories, failed
-renders, and request-id replay. An imported integration serves `--agent` when
-it declares `supportsAgent`: Storybook's `driver --agent` protects the embedded
+renders, and request-id replay. At that stage an imported integration served
+`--agent` by declaring `supportsAgent` (the transitional API has since been
+replaced): Storybook's `driver --agent` protects the embedded
 driver, publishes the descriptor from the channel service, disables the
 channel's own MCP endpoint, and on macOS keeps the application lease current
 so agents attach without `storybook test`. On macOS Fabric, `desktop-test

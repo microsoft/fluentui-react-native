@@ -19,8 +19,8 @@ export type DesktopTestAttempt = {
  * every session confirmed the lane's `furn:inputMode`, so the driver refused input outside the lane; runs recorded before
  * the driver enforced a policy carry `false`. `masking` names host masks that also applied. Neither qualifies a lane.
  */
-export const desktopInputLaneSources = ['option', 'environment', 'driver'] as const;
-/** `driver` means the lane was read from the attached driver instance's manifest instead of being requested here. */
+export const desktopInputLaneSources = ['option', 'environment', 'driver', 'management'] as const;
+/** `driver` means the lane came from an attached driver's manifest; `management` means a declared workload selected it. */
 export type DesktopInputLaneSource = (typeof desktopInputLaneSources)[number];
 /** `host-masked`: this command started the host with the lane's masks. `verified-masked`: a pre-enforcement run checked them. */
 export type DesktopInputLaneMasking = 'host-masked' | 'verified-masked';
@@ -394,7 +394,13 @@ export function describeDesktopInputLane(lane: DesktopInputLaneReport): string {
 }
 
 function describeLaneSource(lane: DesktopInputLaneReport): string {
-  return lane.source === 'option' ? '--input' : lane.source === 'environment' ? 'DESKTOP_INPUT' : 'the driver instance';
+  return lane.source === 'option'
+    ? '--input'
+    : lane.source === 'environment'
+      ? 'DESKTOP_INPUT'
+      : lane.source === 'management'
+        ? 'workload management'
+        : 'the driver instance';
 }
 
 /** One line naming the lane and what each producer excluded before execution, or `undefined` when neither applies. */

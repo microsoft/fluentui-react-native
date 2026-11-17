@@ -12,7 +12,7 @@ type NativeRunnerResult = {
   captureSkipReason?: string;
 };
 
-for (const mode of ['handoff', 'operator-preempt', 'worker-crash', 'lost-response', 'capture']) {
+for (const mode of ['handoff', 'operator-preempt', 'worker-crash', 'lost-response', 'managed', 'capture']) {
   const nativeTest =
     nativeRunnerEnabled(process.platform, process.env) && (mode !== 'capture' || nativeRunnerCaptureEnabled(process.platform, process.env))
       ? test

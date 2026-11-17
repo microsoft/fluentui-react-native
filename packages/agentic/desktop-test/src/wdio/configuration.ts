@@ -114,7 +114,7 @@ export async function createDesktopWdioConfiguration(settings: DesktopWdioSettin
         browserName: 'furn-native-desktop',
         platformName: settings.endpoint === 'macos' ? 'macos' : 'windows',
         'furn:target': settings.targetId,
-        'furn:launchMode': settings.ownership === 'external' ? 'attach' : 'launch',
+        'furn:launchMode': settings.ownership === 'session' ? 'launch' : 'attach',
         'furn:clickMode': resolveDesktopClickMode(undefined, 'auto', selection?.lane),
         // A lane's session refuses input its lane never delivers; without one, every mechanism stays available.
         'furn:inputMode': selection?.lane ?? 'compatibility',

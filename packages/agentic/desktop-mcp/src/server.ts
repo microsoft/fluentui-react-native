@@ -1,5 +1,7 @@
 import { maxRequestIdLength, lookupOperation } from '@fluentui-react-native/desktop-driver/operations';
 import type { CaptureResult } from '@fluentui-react-native/desktop-driver/operations';
+import { desktopWorkloadInputSchema } from '@fluentui-react-native/desktop-test/control';
+import type { DesktopSupervisorConnector } from '@fluentui-react-native/desktop-test/supervisor-connection';
 import { McpServer, ResourceTemplate } from '@modelcontextprotocol/sdk/server/mcp.js';
 import type { RequestHandlerExtra } from '@modelcontextprotocol/sdk/shared/protocol.js';
 import { ErrorCode } from '@modelcontextprotocol/sdk/types.js';
@@ -9,6 +11,7 @@ import { z } from 'zod';
 import type { ConnectDesktopDriver } from './connection.js';
 import { AdapterError, DesktopController, isWebDriverError } from './controller.js';
 import { errorResult, jsonResult } from './results.js';
+import { WorkloadController } from './workloadController.js';
 
 export type DesktopDriverMcpServerOptions = {
   /** Returns a verified client and authority identity; called again after transport failure or authority invalidation. */
@@ -18,6 +21,15 @@ export type DesktopDriverMcpServerOptions = {
   /** The adapter version reported at initialization. */
   version: string;
 };
+
+export type DesktopMcpServerOptions =
+  | ({ mode: 'driver-only' } & DesktopDriverMcpServerOptions)
+  | {
+      mode: 'supervisor';
+      connector: DesktopSupervisorConnector;
+      progressIntervalMs?: number;
+      version: string;
+    };
 
 type Extra = RequestHandlerExtra<ServerRequest, ServerNotification>;
 
@@ -106,12 +118,34 @@ const storyInput = z
   });
 
 /** Creates the MCP server for one client connection. Close the server to end the session it opened. */
+export function createDesktopMcpServer(options: DesktopMcpServerOptions): McpServer {
+  if (options.mode === 'driver-only') return createDesktopDriverMcpServer(options);
+  return createServer(
+    {
+      connect: async () => (await options.connector.connect()).verifyDriver(),
+      progressIntervalMs: options.progressIntervalMs,
+      version: options.version,
+    },
+    options.connector,
+  );
+}
+
 export function createDesktopDriverMcpServer(options: DesktopDriverMcpServerOptions): McpServer {
+  return createServer(options);
+}
+
+function createServer(options: DesktopDriverMcpServerOptions, connector?: DesktopSupervisorConnector): McpServer {
   const controller = new DesktopController(options.connect);
+  const workloads = connector ? new WorkloadController(connector) : undefined;
   const progressIntervalMs = options.progressIntervalMs ?? defaultProgressIntervalMs;
   const server = new McpServer(
     { name: 'desktop-driver', title: 'Desktop Driver', version: options.version },
-    { capabilities: { resources: {}, tools: {} }, instructions },
+    {
+      capabilities: { resources: {}, tools: {} },
+      instructions: workloads
+        ? `${instructions} Use desktop_workload to list and run approved suites, reconcile admissions, and read bounded results.`
+        : instructions,
+    },
   );
 
   const tool =
@@ -243,6 +277,21 @@ export function createDesktopDriverMcpServer(options: DesktopDriverMcpServerOpti
     }),
   );
 
+  if (workloads) {
+    server.registerTool(
+      'desktop_workload',
+      {
+        annotations: { destructiveHint: true, idempotentHint: false, openWorldHint: false, readOnlyHint: false },
+        description:
+          'Lists approved workloads, runs one on an allowed lane, checks or cancels an owned run, and reads bounded results or text artifacts. ' +
+          'Run requires workload, lane, and a unique requestId. If admission is unknown, query status by that requestId; never resubmit.',
+        inputSchema: desktopWorkloadInputSchema,
+        title: 'Desktop workload',
+      },
+      tool(async (input, extra) => jsonResult(await workloads.request(input, extra.signal))),
+    );
+  }
+
   server.registerResource(
     'desktop-capture',
     new ResourceTemplate(artifactUriTemplate, { list: undefined }),
@@ -261,11 +310,16 @@ export function createDesktopDriverMcpServer(options: DesktopDriverMcpServerOpti
 
   server.server.onclose = () => {
     void controller.dispose();
+    void connector?.close().catch(() => {
+      console.error('desktop-mcp: workload cleanup is incomplete; the supervisor must drain or fence the host.');
+    });
   };
   const close = server.close.bind(server);
   server.close = async () => {
-    await close();
-    await controller.dispose();
+    const outcomes = await Promise.allSettled([connector?.close(), close(), controller.dispose()]);
+    if (outcomes.some((outcome) => outcome.status === 'rejected')) {
+      throw new Error('Desktop MCP cleanup is not confirmed.');
+    }
   };
   return server;
 }
@@ -306,7 +360,7 @@ function resourceError(error: unknown): ResourceReadError {
       typeof reason === 'string' ? { reason } : {},
     );
   }
-  console.error(`desktop-driver-mcp: ${error instanceof Error ? (error.stack ?? error.message) : String(error)}`);
+  console.error(`desktop-mcp: ${error instanceof Error ? (error.stack ?? error.message) : String(error)}`);
   return new ResourceReadError(ErrorCode.InternalError, 'The adapter failed unexpectedly.');
 }
 

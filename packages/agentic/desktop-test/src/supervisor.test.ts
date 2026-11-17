@@ -44,7 +44,7 @@ describe('desktop supervisor input lane', () => {
     fs.rmSync(artifactsRoot, { force: true, recursive: true });
   });
 
-  async function nativeServiceOptions(input?: DesktopInputLane) {
+  async function nativeServiceOptions(input?: DesktopInputLane, ownership?: 'session' | 'supervisor' | 'external') {
     const output = { write: () => true };
     const reporter = new DesktopRunReporter({ artifactsRoot, errorOutput: output, output, reporterMode: 'plain', summary: false });
     const target: ResolvedDesktopTarget = {
@@ -54,7 +54,7 @@ describe('desktop supervisor input lane', () => {
       instanceId: 'fixture-1',
       projectRoot: artifactsRoot,
       configPath: path.join(artifactsRoot, 'desktop.config.mts'),
-      host: { kind: 'installed' },
+      host: { kind: 'installed', ...(ownership ? { ownership } : {}) },
     };
     const supervisor = new DesktopSupervisor({
       target,
@@ -88,6 +88,55 @@ describe('desktop supervisor input lane', () => {
   test.each([['physical' as const], [undefined]])('leaves the native host unmasked for %s', async (input) => {
     const options = await nativeServiceOptions(input);
     expect(options).not.toHaveProperty('disabledInputFeatures');
+  });
+
+  test('retained supervisor-owned applications expose attach-only sessions', async () => {
+    const options = await nativeServiceOptions(undefined, 'supervisor');
+    expect(options.target.launchModes).toEqual(['attach']);
+  });
+
+  test('application launch authority requires a live claim for the matching target and instance', async () => {
+    const output = { write: () => true };
+    const target: ResolvedDesktopTarget = {
+      endpoint: 'macos',
+      id: 'fixture',
+      registrationId: 'fixture',
+      instanceId: 'fixture-1',
+      projectRoot: artifactsRoot,
+      configPath: path.join(artifactsRoot, 'desktop.config.mts'),
+      host: { kind: 'installed', ownership: 'supervisor' },
+    };
+    const createSupervisor = () => {
+      const reporter = new DesktopRunReporter({ artifactsRoot, output, errorOutput: output, summary: false });
+      return new DesktopSupervisor({
+        target,
+        reporter,
+        reportSession: { reporter, delegated: true, environment: {}, close: async () => 0 },
+        lockDirectory: path.join(artifactsRoot, 'locks'),
+        hostFactory: async () => {
+          throw new Error('The host must not be started.');
+        },
+      });
+    };
+    const unclaimed = createSupervisor();
+    try {
+      await unclaimed.open(false);
+      expect(() => unclaimed.assertWorkloadClaim()).toThrow('matching desktop workload claim');
+    } finally {
+      await unclaimed.close();
+    }
+    const claimed = createSupervisor();
+    try {
+      await claimed.open();
+      expect(() => claimed.assertWorkloadClaim(target)).not.toThrow();
+      expect(() => claimed.assertWorkloadClaim({ id: target.id, instanceId: 'another-instance' })).toThrow(
+        'matching desktop workload claim',
+      );
+      claimed.services.requestStop();
+      expect(() => claimed.assertWorkloadClaim()).toThrow('matching desktop workload claim');
+    } finally {
+      await claimed.close();
+    }
   });
 });
 

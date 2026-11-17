@@ -25,6 +25,10 @@ services:
       - metro
       - storybook-channel
       - desktop-driver
+  managed_supervisor:
+    command: yarn desktop-test --target <platform> serve --agent
+    discovery: private-supervisor-connection-descriptor
+    workload: stories
   instance:
     command: yarn storybook instance --<platform>
     policy: use-reported-ports-and-target-id
@@ -43,9 +47,11 @@ services:
 agent_commands:
   generate_manifest: yarn storybook manifest --<platform>
   start_driver: yarn storybook driver --<platform>
+  start_managed_driver: yarn desktop-test --target <platform> serve --agent
   inspect_instance: yarn storybook instance --<platform>
   list_stories: yarn desktop-driver stories list --url <driver-url> --target <target-id>
   run_story_tests: yarn storybook test --<platform> --test <test-name-glob>
+  run_protected_story_tests: yarn storybook test --<platform> --attach-agent
 
 lookup_order:
   - Generate the exact platform manifest; never guess ID slugging.
@@ -82,11 +88,18 @@ native:
     project_policy: generated
     generation_command: yarn storybook prep --windows
     helper_provider: windows-x64
+    smoke_factory: createWindowsSmokeOptions
+    smoke_owner: neutral-scope-with-retained-native-app-in-channel
+    metro_port: 8081
+    smoke_phases: stories-then-owned-channel-app-relaunch-then-authored-tests
   win32:
     host: prebuilt-rex
     build_policy: unsupported
     bundle_command: yarn storybook bundle --win32
     helper_provider: windows-x64
+    smoke_factory: createWin32SmokeOptions
+    smoke_owner: neutral-scope-with-retained-native-app-in-channel
+    smoke_checks: required-stories-native-chrome-traversal-host-liveness
 
 validation:
   javascript:

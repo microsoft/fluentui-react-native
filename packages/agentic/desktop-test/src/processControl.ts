@@ -10,8 +10,10 @@ export type DesktopServiceReady = {
   descriptor?: string;
 };
 export type DesktopServiceReadyRecord = DesktopServiceReady & { incarnation: string; processId: number };
+/** A Node HTTP listener that must receive the parent's readiness probe after binding its expected port. */
+export type DesktopOwnedListener = { service: string; port: number };
 type ChildControl = {
-  register(dispose: () => Promise<void>): () => void;
+  register(dispose: () => Promise<void>): Promise<() => void>;
   ready(readiness: DesktopServiceReady): Promise<void>;
   finish(): void;
 };
@@ -22,10 +24,10 @@ function childControl(): ChildControl | undefined {
   return (globalThis as typeof globalThis & { [controlKey]?: ChildControl })[controlKey];
 }
 
-/** Register before the first asynchronous acquisition; disposal must await startup and durable settlement. */
-export function registerDesktopProcessDisposal(dispose: () => Promise<void>): () => void {
+/** Await registration before acquisition; disposal must await startup and durable settlement. */
+export async function registerDesktopProcessDisposal(dispose: () => Promise<void>): Promise<() => void> {
   if (process.env[DESKTOP_PROCESS_CONTROL] && !childControl()) throw new Error('Owned process lifeline preload is missing.');
-  return childControl()?.register(dispose) ?? (() => undefined);
+  return (await childControl()?.register(dispose)) ?? (() => undefined);
 }
 
 export async function publishDesktopServiceReady(readiness: DesktopServiceReady): Promise<void> {
@@ -41,11 +43,15 @@ export function finishDesktopProcess(): void {
 export function createDesktopProcessControl(onFailure: (error: Error) => void) {
   const incarnation = randomUUID();
   const nonce = randomUUID();
+  const listenerProbe = randomUUID();
   const endpoint = createLocalSocketAddress('process', incarnation);
   const address = endpoint.address;
   const sockets = new Set<net.Socket>();
   const records = new Map<string, DesktopServiceReadyRecord>();
+  const probes = new Map<string, DesktopServiceReadyRecord>();
+  const listenerServices = new Set<string>();
   const changed = new Set<() => void>();
+  let expectedListener: DesktopOwnedListener | undefined;
   let stopping = false;
   let terminal: Error | undefined;
   let closePromise: Promise<void> | undefined;
@@ -60,6 +66,7 @@ export function createDesktopProcessControl(onFailure: (error: Error) => void) {
     let buffer = '';
     let processId: number | undefined;
     let disposed = false;
+    let disposalRegistered = false;
     let socketError: Error | undefined;
     let socketErrorWasUnexpected = false;
     // 'close' always follows 'error'; defer so producer loss (e.g. ECONNRESET on SIGKILL) keeps its specific diagnosis.
@@ -75,10 +82,16 @@ export function createDesktopProcessControl(onFailure: (error: Error) => void) {
       for (const [service, record] of records) {
         if (record.processId !== processId) continue;
         records.delete(service);
-        if (disposed && stopping) continue;
+        const listener = listenerServices.delete(service);
+        if (stopping && (disposed || (listener && !disposalRegistered))) continue;
         producerLost = true;
         fail(new Error(`Owned service "${service}" lost its readiness producer without settled disposal.`));
       }
+      if (disposalRegistered && !disposed && !producerLost) {
+        producerLost = true;
+        fail(new Error(`Owned process "${processId}" lost its disposal producer without settled disposal.`));
+      }
+      for (const [service, record] of probes) if (record.processId === processId) probes.delete(service);
       if (socketError && socketErrorWasUnexpected && !producerLost) fail(socketError);
       for (const notify of changed) notify();
     });
@@ -109,10 +122,48 @@ export function createDesktopProcessControl(onFailure: (error: Error) => void) {
               continue;
             }
             if (frame.type === 'disposal-failed') throw new Error(`Owned process disposal failed: ${String(frame.message)}`);
+            if (frame.type === 'disposal-registered') {
+              if (disposed || typeof frame.requestId !== 'string') throw new Error('Invalid owned process disposal registration.');
+              disposalRegistered = true;
+              socket.write(`${JSON.stringify({ type: 'acknowledged', requestId: frame.requestId })}\n`);
+              continue;
+            }
+            if (frame.type === 'listener-closed') {
+              const record = typeof frame.service === 'string' ? records.get(frame.service) : undefined;
+              if (!record || record.processId !== processId || !listenerServices.has(record.service))
+                throw new Error('Invalid owned listener closure.');
+              records.delete(record.service);
+              probes.delete(record.service);
+              listenerServices.delete(record.service);
+              if (!stopping) fail(new Error(`Owned service "${record.service}" closed its listener unexpectedly.`));
+              for (const notify of changed) notify();
+              continue;
+            }
             if (stopping) throw new Error('A stopping command cannot publish readiness.');
-            if (frame.type !== 'ready' || typeof frame.requestId !== 'string') throw new Error('Invalid service readiness frame.');
+            if (frame.type === 'listener-probe') {
+              const record = typeof frame.service === 'string' ? records.get(frame.service) : undefined;
+              if (
+                !record ||
+                record.processId !== processId ||
+                !listenerServices.has(record.service) ||
+                typeof frame.requestId !== 'string' ||
+                probes.has(record.service)
+              )
+                throw new Error('Invalid owned listener probe.');
+              probes.set(record.service, record);
+              socket.write(`${JSON.stringify({ type: 'acknowledged', requestId: frame.requestId })}\n`);
+              for (const notify of changed) notify();
+              continue;
+            }
+            if ((frame.type !== 'ready' && frame.type !== 'listener-bound') || typeof frame.requestId !== 'string')
+              throw new Error('Invalid service readiness frame.');
             validateReadiness(frame.readiness);
             if (records.has(frame.readiness.service)) throw new Error('Duplicate owned service readiness.');
+            if (frame.type === 'listener-bound') {
+              if (frame.readiness.service !== expectedListener?.service || frame.readiness.descriptor !== undefined)
+                throw new Error('Invalid owned listener readiness.');
+              listenerServices.add(frame.readiness.service);
+            }
             records.set(frame.readiness.service, { ...frame.readiness, incarnation, processId });
             socket.write(`${JSON.stringify({ type: 'acknowledged', requestId: frame.requestId })}\n`);
             for (const notify of changed) notify();
@@ -128,47 +179,66 @@ export function createDesktopProcessControl(onFailure: (error: Error) => void) {
   server.listen(address);
   const listening = once(server, 'listening').then(() => undefined);
   void listening.catch(() => undefined);
+  async function waitForRecord(
+    source: Map<string, DesktopServiceReadyRecord>,
+    expected: DesktopServiceReady,
+    timeoutMs = 120_000,
+    signal?: AbortSignal,
+  ): Promise<DesktopServiceReadyRecord> {
+    validateReadiness(expected);
+    if (!Number.isSafeInteger(timeoutMs) || timeoutMs <= 0) throw new TypeError('Invalid service readiness deadline.');
+    await listening;
+    return new Promise((resolve, reject) => {
+      const cleanup = () => {
+        clearTimeout(timer);
+        changed.delete(check);
+        signal?.removeEventListener('abort', check);
+      };
+      const check = () => {
+        const record = source.get(expected.service);
+        const error =
+          terminal ??
+          (signal?.aborted ? signal.reason : undefined) ??
+          (stopping ? new Error('Owned command stopped before readiness.') : undefined);
+        if (error !== undefined) {
+          cleanup();
+          reject(error);
+        } else if (record) {
+          cleanup();
+          if (record.descriptor !== expected.descriptor) reject(new Error('Owned service published a different descriptor.'));
+          else resolve(record);
+        }
+      };
+      const timer = setTimeout(() => {
+        cleanup();
+        reject(new Error(`Owned service "${expected.service}" did not publish correlated readiness within ${timeoutMs}ms.`));
+      }, timeoutMs);
+      changed.add(check);
+      signal?.addEventListener('abort', check, { once: true });
+      check();
+    });
+  }
   return {
     nonce,
-    environment(nodeOptions = '') {
+    listenerProbe,
+    environment(nodeOptions = '', listener?: DesktopOwnedListener) {
+      if (listener !== undefined) {
+        validateReadiness({ tier: 'service-ready', service: listener.service });
+        if (!Number.isSafeInteger(listener.port) || listener.port < 1 || listener.port > 65535)
+          throw new TypeError('An owned listener requires a valid TCP port.');
+      }
+      expectedListener = listener;
       return {
         [DESKTOP_PROCESS_CONTROL]: JSON.stringify({ schemaVersion: 1, address, nonce, incarnation }),
+        FURN_DESKTOP_OWNED_LISTENER: listener ? JSON.stringify({ ...listener, probe: listenerProbe }) : '',
         NODE_OPTIONS: `${nodeOptions} --import=${processLifelineUrl}`.trim(),
       };
     },
     async waitForReadiness(expected: DesktopServiceReady, timeoutMs = 120_000, signal?: AbortSignal): Promise<DesktopServiceReadyRecord> {
-      validateReadiness(expected);
-      if (!Number.isSafeInteger(timeoutMs) || timeoutMs <= 0) throw new TypeError('Invalid service readiness deadline.');
-      await listening;
-      return new Promise((resolve, reject) => {
-        const cleanup = () => {
-          clearTimeout(timer);
-          changed.delete(check);
-          signal?.removeEventListener('abort', check);
-        };
-        const check = () => {
-          const record = records.get(expected.service);
-          const error =
-            terminal ??
-            (signal?.aborted ? signal.reason : undefined) ??
-            (stopping ? new Error('Owned command stopped before readiness.') : undefined);
-          if (error !== undefined) {
-            cleanup();
-            reject(error);
-          } else if (record) {
-            cleanup();
-            if (record.descriptor !== expected.descriptor) reject(new Error('Owned service published a different descriptor.'));
-            else resolve(record);
-          }
-        };
-        const timer = setTimeout(() => {
-          cleanup();
-          reject(new Error(`Owned service "${expected.service}" did not publish correlated readiness within ${timeoutMs}ms.`));
-        }, timeoutMs);
-        changed.add(check);
-        signal?.addEventListener('abort', check, { once: true });
-        check();
-      });
+      return waitForRecord(records, expected, timeoutMs, signal);
+    },
+    async waitForListenerProbe(service: string, timeoutMs = 120_000, signal?: AbortSignal): Promise<DesktopServiceReadyRecord> {
+      return waitForRecord(probes, { tier: 'service-ready', service }, timeoutMs, signal);
     },
     stop() {
       stopping = true;

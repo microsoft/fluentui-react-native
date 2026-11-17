@@ -1,8 +1,35 @@
 import { spawn } from 'node:child_process';
 import path from 'node:path';
 
+import { createDesktopWdioConfiguration } from './configuration.js';
+import type { DesktopWdioSettings } from './configuration.js';
+
 describe('protected standalone WDIO runner', () => {
-  test.each(['handoff', 'worker-crash'] as const)(
+  test.each([
+    ['session', 'launch'],
+    ['supervisor', 'attach'],
+    ['external', 'attach'],
+  ] as const)('uses %s application ownership with %s capabilities', async (ownership, launchMode) => {
+    const settings: DesktopWdioSettings = {
+      // eslint-disable-next-line @microsoft/sdl/no-insecure-url -- The fixture uses a loopback driver address.
+      url: 'http://127.0.0.1:1234',
+      targetId: 'fixture',
+      endpoint: 'macos',
+      ownership,
+      specs: [],
+      framework: 'jasmine',
+      reporter: 'fixture',
+      rootDir: process.cwd(),
+      specFileRetries: 0,
+      bail: 1,
+      timeoutMs: 1000,
+      launchTimeoutMs: 1000,
+    };
+    const configuration = await createDesktopWdioConfiguration(settings);
+    expect(configuration.capabilities).toMatchObject([{ 'furn:launchMode': launchMode }]);
+  });
+
+  test.each(['handoff', 'worker-crash', 'managed', 'managed-drain-failure'] as const)(
     '%s drains scoped worker authority without persisting credentials',
     async (mode) => {
       const result = await new Promise<unknown>((resolve, reject) => {

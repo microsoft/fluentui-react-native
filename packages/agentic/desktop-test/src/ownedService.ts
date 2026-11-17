@@ -10,14 +10,29 @@ import { handleDesktopInterrupts } from './signals.js';
 /** Bridges a generated PowerShell service descriptor into the parent's resource/reporting scope. */
 export async function runOwnedDesktopService(descriptorPath: string): Promise<void> {
   const controller = new AbortController();
-  const unregister = registerDesktopProcessDisposal(async () => {
-    controller.abort();
-    await execution;
-  });
-  const execution = runService(descriptorPath, controller.signal);
+  const execution: { promise?: Promise<void> } = {};
+  let finished = false;
+  const finish = () => {
+    if (!finished) {
+      finished = true;
+      finishDesktopProcess();
+    }
+  };
+  let unregister: () => void;
   try {
-    await execution;
-    finishDesktopProcess();
+    unregister = await registerDesktopProcessDisposal(async () => {
+      controller.abort();
+      await execution.promise;
+      finish();
+    });
+  } catch (error) {
+    finish();
+    throw error;
+  }
+  execution.promise = runService(descriptorPath, controller.signal);
+  try {
+    await execution.promise;
+    finish();
   } finally {
     unregister();
   }

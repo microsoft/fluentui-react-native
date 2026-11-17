@@ -23,7 +23,7 @@ async function main() {
   const mode = process.argv[2];
   assert(nativeRunnerEnabled(process.platform, process.env), 'Native runner contracts require the supported host and explicit opt-ins.');
   assert(
-    ['handoff', 'operator-preempt', 'worker-crash', 'lost-response', 'capture', 'cleanup'].includes(mode),
+    ['handoff', 'operator-preempt', 'worker-crash', 'lost-response', 'managed', 'capture', 'cleanup'].includes(mode),
     'Unknown native runner scenario.',
   );
   if (mode === 'capture')
@@ -31,7 +31,7 @@ async function main() {
   const packageRoot = path.resolve(__dirname, '../..');
   const repositoryRoot = path.resolve(packageRoot, '../../..');
   const lib = (name) => pathToFileURL(path.join(packageRoot, 'lib', name)).href;
-  const mcpRoot = path.resolve(packageRoot, '../desktop-driver-mcp');
+  const mcpRoot = path.resolve(packageRoot, '../desktop-mcp');
   const mcpRequire = createRequire(path.join(mcpRoot, 'package.json'));
   const { DesktopSupervisor } = await import(lib('supervisor.js'));
   const { DesktopRunReporter } = await import(lib('reporting/collector.js'));
@@ -45,23 +45,26 @@ async function main() {
     const root = process.argv[3];
     const parent = path.join(repositoryRoot, 'artifacts', 'desktop', 'f11');
     assert.equal(path.dirname(root), parent, 'cleanup must name a parent-owned native case root');
-    assert(/^native-(handoff|operator-preempt|worker-crash|lost-response|capture)-/.test(path.basename(root)));
+    assert(/^native-(handoff|operator-preempt|worker-crash|lost-response|managed|capture)-/.test(path.basename(root)));
     const ownerPid = Number(process.argv[4]);
     assert(Number.isSafeInteger(ownerPid) && ownerPid > 0, 'cleanup requires the exited child PID');
-    const { privateRoot, agentDescriptor, runnerDescriptor } = nativeRunnerRecords(process.platform, root);
+    const { privateRoot, agentDescriptor, runnerDescriptor, supervisorDescriptor } = nativeRunnerRecords(process.platform, root);
     const artifact = await resolveNativeDesktopDriver({
       platform: process.platform === 'win32' ? 'windows' : 'macos',
       buildPolicy: 'never',
     });
     const storage =
       process.platform === 'win32' ? await createWindowsPrivateStorage({ artifact }) : await createMacOSPrivateStorage(privateRoot);
-    const result = await removeNativeRunnerDescriptors(storage, [agentDescriptor, runnerDescriptor], ownerPid);
+    const result = await removeNativeRunnerDescriptors(storage, [agentDescriptor, runnerDescriptor, supervisorDescriptor], ownerPid);
     process.stdout.write(JSON.stringify(result));
     if (result.retained.length) process.exitCode = 1;
     return;
   }
-  const { connectWithDescriptor } = await import(pathToFileURL(path.join(mcpRoot, 'lib/connection.js')).href);
-  const { createDesktopDriverMcpServer } = await import(pathToFileURL(path.join(mcpRoot, 'lib/server.js')).href);
+  const { connectWithDescriptor, connectSupervisorWithDescriptor } = await import(
+    pathToFileURL(path.join(mcpRoot, 'lib/connection.js')).href
+  );
+  const { createDesktopDriverMcpServer, createDesktopMcpServer } = await import(pathToFileURL(path.join(mcpRoot, 'lib/server.js')).href);
+  const { createManagedDesktopHostResource } = await import(lib('managedHost.js'));
   const { Client } = await import(pathToFileURL(mcpRequire.resolve('@modelcontextprotocol/sdk/client/index.js')).href);
   const { InMemoryTransport } = await import(pathToFileURL(mcpRequire.resolve('@modelcontextprotocol/sdk/inMemory.js')).href);
   const parent = path.join(repositoryRoot, 'artifacts', 'desktop', 'f11');
@@ -69,10 +72,15 @@ async function main() {
   const root = process.argv[3] ?? fs.mkdtempSync(path.join(parent, `native-${mode}-`));
   assert.equal(path.dirname(root), parent, 'native case artifacts must stay in the dedicated contract directory');
   assert(path.basename(root).startsWith(`native-${mode}-`), 'the parent must provide a case-specific artifact root');
+  const revision = spawnSync('git', ['rev-parse', 'HEAD'], { cwd: repositoryRoot, encoding: 'utf8' });
+  const worktree = spawnSync('git', ['status', '--porcelain', '--untracked-files=normal'], { cwd: repositoryRoot, encoding: 'utf8' });
+  assert.equal(revision.status, 0, 'native evidence requires a repository revision');
+  assert.equal(worktree.status, 0, 'native evidence requires a worktree status');
   const evidence = {
     mode,
     passed: false,
-    revision: spawnSync('git', ['rev-parse', 'HEAD'], { cwd: repositoryRoot, encoding: 'utf8' }).stdout.trim(),
+    revision: revision.stdout.trim(),
+    worktreeDirty: worktree.stdout.trim().length > 0,
     endpoint: process.platform === 'win32' ? 'win32' : 'macos',
     fixturePreserved: false,
     descriptorsRemoved: false,
@@ -85,7 +93,7 @@ async function main() {
   // Windows validates every storage ancestor; project scratch need not be owner-only. Use unique records in its
   // validated default store, not an ACL repair or a copy of the descriptors into artifacts.
   const windows = process.platform === 'win32';
-  const { privateRoot, agentDescriptor, runnerDescriptor } = nativeRunnerRecords(process.platform, root);
+  const { privateRoot, agentDescriptor, runnerDescriptor, supervisorDescriptor } = nativeRunnerRecords(process.platform, root);
   const locks = path.join(root, 'locks');
   const ready = path.join(root, 'fixture.ready');
   const fixturePlan = nativeRunnerFixture(
@@ -162,9 +170,10 @@ async function main() {
           fixture.exitCode === null &&
           fixture.signalCode === null &&
           (incarnation === undefined || (await probeApplication(incarnation)) === 'running');
+        const descriptors = [agentDescriptor, runnerDescriptor, supervisorDescriptor];
         evidence.descriptorsRemoved = storage
-          ? (await storage.read(agentDescriptor)) === undefined && (await storage.read(runnerDescriptor)) === undefined
-          : !fs.existsSync(path.join(privateRoot, agentDescriptor)) && !fs.existsSync(path.join(privateRoot, runnerDescriptor));
+          ? (await Promise.all(descriptors.map((name) => storage.read(name)))).every((value) => value === undefined)
+          : descriptors.every((name) => !fs.existsSync(path.join(privateRoot, name)));
       } catch (error) {
         failures.push(error);
       }
@@ -192,7 +201,16 @@ async function main() {
           const result = await report.finish();
           if (report === run) runFinished = true;
           assert.equal(result.terminal, true);
-          evidence[report === run ? 'run' : 'serviceRun'] = { id: result.runId, status: result.status, counts: result.counts };
+          if (report !== run || mode !== 'managed')
+            evidence[report === run ? 'run' : 'serviceRun'] = { id: result.runId, status: result.status, counts: result.counts };
+        } catch (error) {
+          failures.push(error);
+        }
+      }
+      if (mode === 'managed') {
+        try {
+          assertCredentialsConfined();
+          evidence.credentialsConfined = true;
         } catch (error) {
           failures.push(error);
         }
@@ -226,6 +244,10 @@ async function main() {
     }
     await service.start();
     evidence.descriptorPublished = true;
+    if (mode === 'managed') {
+      await executeManaged(signal);
+      return;
+    }
     const connection = await connectDesktopRunner({ descriptor: runnerDescriptor, root: privateRoot });
     server = createDesktopDriverMcpServer({
       connect: connectWithDescriptor({ descriptor: agentDescriptor, root: privateRoot }),
@@ -388,6 +410,161 @@ async function main() {
     }
     evidence.credentialsConfined = true;
   }
+
+  async function executeManaged(signal) {
+    const spec = path.join(packageRoot, 'fixtures', 'native-runner', 'spec.mjs');
+    process.env.FURN_NATIVE_HANDOFF_RUN_ROOT = root;
+    process.env.FURN_NATIVE_HANDOFF_JASMINE_MODULE = lib('jasmine/index.js');
+    process.env.FURN_NATIVE_HANDOFF_MODE = mode;
+    process.env.FURN_NATIVE_HANDOFF_STATUS_ID = fixturePlan.statusId;
+    process.env.FURN_NATIVE_HANDOFF_ACTIVATE_ID = fixturePlan.activateId;
+    const config = {
+      config: {
+        schemaVersion: 1,
+        targets: { [target.endpoint]: target },
+        suites: { fixture: { kind: 'wdio', framework: 'jasmine', specs: [spec], agent: { lanes: ['accessible'] } } },
+      },
+      projectRoot: packageRoot,
+      configPath: target.configPath,
+      targets: { [target.endpoint]: target },
+      reporting: { artifactsRoot: root },
+      testScopes: resolveDesktopScopeDomains(),
+    };
+    const manager = createManagedDesktopHostResource({
+      config,
+      target,
+      hostLane: 'accessible',
+      driver: { record: agentDescriptor, runnerRecord: runnerDescriptor, url: service.server.url },
+      root: privateRoot,
+      descriptor: supervisorDescriptor,
+      addSecret: (secret) => serviceReport.addSecret(secret),
+      onFailure: (error) => service.services.fail(error),
+    });
+    await service.services.contribute([manager.resource], { targetId: target.id, targetInstanceId: target.instanceId });
+    assert.equal(manager.descriptor, supervisorDescriptor);
+    server = createDesktopMcpServer({
+      mode: 'supervisor',
+      connector: connectSupervisorWithDescriptor({ descriptor: supervisorDescriptor, root: privateRoot }),
+      version: '0.0.0-native-contract',
+    });
+    const [clientTransport, serverTransport] = InMemoryTransport.createLinkedPair();
+    await server.connect(serverTransport);
+    client = new Client({ name: 'native-supervisor-contract', version: '1.0.0' });
+    await client.connect(clientTransport);
+    const call = async (name, args) => {
+      signal.throwIfAborted();
+      const reply = await client.callTool({ name, arguments: args }, undefined, { signal });
+      signal.throwIfAborted();
+      modelResults.push(reply);
+      return reply;
+    };
+    const parse = (reply) => JSON.parse(reply.content.find(({ type }) => type === 'text').text);
+    const request = async (name, args) => {
+      const reply = await call(name, args);
+      assert(!reply.isError, JSON.stringify(reply));
+      return parse(reply);
+    };
+    const status = (input) => request('desktop_workload', { action: 'status', ...input });
+    const settle = async (handle) => {
+      for (let attempt = 0; attempt < 120; attempt++) {
+        const value = await status({ handle, waitMs: 1000 });
+        if (value.run.phase === 'settled') return value;
+      }
+      throw new Error('The native managed workload did not settle.');
+    };
+    const catalog = await request('desktop_workload', { action: 'catalog' });
+    assert.deepEqual(catalog.catalog, [{ id: 'fixture', kind: 'wdio', lanes: ['accessible'] }]);
+    const opened = await request('desktop_session', { action: 'open', target: target.id });
+    const lease = service.server.sessions.get(opened.id).lease;
+    assert.equal(lease.processId, fixture.pid);
+    incarnation = { processId: lease.processId, processStartedAt: lease.processStartedAt };
+    assert.equal(await probeApplication(incarnation), 'running');
+    evidence.incarnation = incarnation;
+    assert.deepEqual(await request('desktop_session', { action: 'relinquish' }), { relinquished: true });
+
+    const input = { action: 'run', workload: 'fixture', lane: 'accessible', requestId: 'native-lost-admission' };
+    const fetcher = globalThis.fetch;
+    let deliveries = 0;
+    let lost;
+    let repeated;
+    try {
+      globalThis.fetch = async (url, init) => {
+        const response = await fetcher(url, init);
+        if (String(url).endsWith('/workloads') && init?.body && JSON.parse(String(init.body)).requestId === input.requestId) {
+          deliveries++;
+          await response.arrayBuffer();
+          throw new Error('Injected managed admission response loss.');
+        }
+        return response;
+      };
+      lost = await call('desktop_workload', input);
+      repeated = await call('desktop_workload', input);
+    } finally {
+      globalThis.fetch = fetcher;
+    }
+    assert(lost.isError);
+    assert.equal(parse(lost).reason, 'admission-unknown');
+    assert(repeated.isError);
+    assert.equal(parse(repeated).reason, 'admission-unknown');
+    assert.equal(deliveries, 1);
+    const reconciled = await status({ requestId: input.requestId });
+    const cancelledHandle = reconciled.run.handle;
+    await waitFor(path.join(root, 'worker.ready'), fixture, signal);
+    const cancelled = await request('desktop_workload', { action: 'cancel', handle: cancelledHandle });
+    assert.equal(cancelled.run.cancellation, 'requested');
+    const cancelledDone = await settle(cancelledHandle);
+    assert.equal(cancelledDone.run.cleanup, 'settled', JSON.stringify(cancelledDone));
+    assert.equal(cancelledDone.run.cancellation, 'requested');
+    assert.notEqual(cancelledDone.run.outcome, 'passed');
+    assert.equal(cancelledDone.availability, 'available');
+    evidence.managedCancellation = { outcome: cancelledDone.run.outcome, cleanup: cancelledDone.run.cleanup };
+    evidence.lostAdmissionReconciled = true;
+
+    for (const name of ['worker.ready', 'worker.continue', 'worker.session.json']) fs.rmSync(path.join(root, name), { force: true });
+    const accepted = await request('desktop_workload', {
+      action: 'run',
+      workload: 'fixture',
+      lane: 'accessible',
+      requestId: 'native-managed-success',
+    });
+    await waitFor(path.join(root, 'worker.ready'), fixture, signal);
+    const busy = await call('desktop_session', { action: 'open', target: target.id });
+    assert(busy.isError);
+    assert.equal(parse(busy).reason, 'target-busy');
+    fs.writeFileSync(path.join(root, 'worker.continue'), 'continue');
+    const done = await settle(accepted.run.handle);
+    assert.equal(done.run.outcome, 'passed', JSON.stringify(done));
+    assert.equal(done.run.cleanup, 'settled');
+    const results = await request('desktop_workload', { action: 'results', handle: accepted.run.handle, category: 'status' });
+    assert.equal(results.terminal, true);
+    assert.deepEqual(results.lane, { input: 'accessible', source: 'management', policyEnforced: true });
+    evidence.wdio = nativeRunnerExecution(results.counts, mode);
+    const worker = JSON.parse(fs.readFileSync(path.join(root, 'worker.session.json'), 'utf8'));
+    assert.throws(() => service.server.sessions.get(worker.sessionId), { code: 'invalid session id' });
+    const fresh = await request('desktop_session', { action: 'open', target: target.id });
+    const freshLease = service.server.sessions.get(fresh.id).lease;
+    assert.equal(freshLease.processId, incarnation.processId);
+    assert.equal(freshLease.processStartedAt, incarnation.processStartedAt);
+    await request('desktop_session', { action: 'close' });
+    assert(fs.existsSync(path.join(locks, 'interactive.lock')));
+    evidence.managedHandoff = true;
+
+    assertCredentialsConfined();
+  }
+
+  function assertCredentialsConfined() {
+    const credential = /(?:fdg1\.[0-9a-f]{32}\.[A-Za-z0-9_-]{43}|dm[gp]1\.[A-Za-z0-9_-]{43})/;
+    assert(!credential.test(JSON.stringify(modelResults)));
+    assert(!credential.test(output));
+    for (const directory of fs.readdirSync(root, { withFileTypes: true })) {
+      const report = path.join(root, directory.name);
+      if (!directory.isDirectory() || !fs.existsSync(path.join(report, 'run.json'))) continue;
+      for (const entry of fs.readdirSync(report, { recursive: true, withFileTypes: true })) {
+        if (entry.isFile()) assert(!credential.test(fs.readFileSync(path.join(entry.parentPath, entry.name), 'utf8')));
+      }
+    }
+  }
+
   const stop = new AbortController();
   const terminate = () => stop.abort(new Error('Native runner case interrupted.'));
   process.once('SIGTERM', terminate);

@@ -63,6 +63,7 @@ test('the canonical Storybook config resolves target commands and identity witho
       run: win32.run,
       windowTitle: win32.nativeDriver.application.windowTitle,
       fabricId: desktop.targets.macos.id,
+      selectedFabric: selectDesktopRenderer(desktop.targets.macos, 'fabric'),
       paper: selectDesktopRenderer(desktop.targets.macos, 'paper'),
     }));
   `,
@@ -78,5 +79,6 @@ test('the canonical Storybook config resolves target commands and identity witho
     paper: { endpoint: 'macos', host: { renderer: 'paper' } },
   });
   expect(value.target.id).toContain('win32');
+  expect(value.selectedFabric.id).toBe(value.fabricId);
   expect(value.paper.id).not.toBe(value.fabricId);
 });

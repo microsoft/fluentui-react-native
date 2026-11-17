@@ -93,6 +93,7 @@
     "lage": "patch:lage@npm%3A2.14.19#~/.yarn/patches/lage-npm-2.14.19-5dcab627c8.patch",
     "launch-editor@npm:^2.9.1": "2.14.2",
     "lodash": "^4.18.1",
+    "metro-file-map@npm:0.83.8": "patch:metro-file-map@npm%3A0.83.8#~/.yarn/patches/metro-file-map-npm-0.83.8-79c1dd6341.patch",
     "minimatch@npm:^10.2.2": "patch:minimatch@npm%3A10.2.6#~/.yarn/patches/minimatch-npm-10.2.6-fd0d1cf467.patch",
     "minimatch@npm:^9.0.5": "patch:minimatch@npm%3A9.0.9#~/.yarn/patches/minimatch-npm-9.0.9-3ee8f15008.patch",
     "moment@npm:^2.24.0": "2.31.0",

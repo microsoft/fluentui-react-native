@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto';
 import path from 'node:path';
 
 import { z } from 'zod';
@@ -20,11 +21,19 @@ const descriptorSchema = z.strictObject({
   service: identitySchema,
   grant: z.string().regex(/^fdg1\.[0-9a-f]{32}\.[A-Za-z0-9_-]{43}$/),
 });
+const bindingSchema = z.strictObject({
+  digest: z.string().regex(/^[0-9a-f]{64}$/),
+  incarnation: z.string().regex(/^inc_[0-9a-f]{24}$/),
+  targetId: z.string().min(1).max(200),
+  url: z.string().max(128).optional(),
+});
 
 export type DesktopServiceIdentity = Readonly<z.infer<typeof identitySchema>>;
 export type DesktopConnectionDescriptor = Readonly<Omit<z.infer<typeof descriptorSchema>, 'service'>> & {
   readonly service: DesktopServiceIdentity;
 };
+/** Exact driver record, service generation, sole visible target, and optional listener expected by a containing supervisor. */
+export type DesktopConnectionBinding = Readonly<z.infer<typeof bindingSchema>>;
 
 /**
  * Must verify the live listener owner, exact process start/executable, current OS user, and interactive session.
@@ -47,13 +56,26 @@ export async function readConnectionDescriptor(
   storage: PrivateStorage,
   name: string,
   verifyService: VerifyDesktopService,
+  binding?: DesktopConnectionBinding,
+  addSecret?: (secret: string) => void,
 ): Promise<DesktopConnectionDescriptor> {
+  const expected = binding === undefined ? undefined : bindingSchema.safeParse(binding);
+  if (expected && !expected.success) throw new TypeError('Invalid Desktop Driver connection binding.');
   const contents = await storage.read(name);
   if (contents === undefined) throw new Error('The Desktop Driver connection descriptor is absent.');
   const descriptor = parseDescriptor(contents);
+  if (
+    expected?.success &&
+    (createHash('sha256').update(contents, 'utf8').digest('hex') !== expected.data.digest ||
+      descriptor.service.incarnation !== expected.data.incarnation ||
+      (expected.data.url !== undefined && descriptor.url !== expected.data.url))
+  ) {
+    throw new Error('The Desktop Driver connection does not match its supervisor binding.');
+  }
   if (typeof verifyService !== 'function' || (await verifyService(descriptor.service, descriptor.url)) !== true) {
     throw new Error('The Desktop Driver service identity could not be verified.');
   }
+  addSecret?.(descriptor.grant);
   const status = await createDesktopDriverClient({
     grant: descriptor.grant,
     url: descriptor.url,
@@ -66,6 +88,17 @@ export async function readConnectionDescriptor(
     status.service.incarnation !== descriptor.service.incarnation
   ) {
     throw new Error('The Desktop Driver service incarnation changed.');
+  }
+  if (
+    expected?.success &&
+    (status.ready !== true ||
+      !Array.isArray(status.targets) ||
+      status.targets.length !== 1 ||
+      typeof status.targets[0] !== 'object' ||
+      status.targets[0] === null ||
+      status.targets[0].id !== expected.data.targetId)
+  ) {
+    throw new Error('The Desktop Driver target does not match its supervisor binding.');
   }
   return descriptor;
 }

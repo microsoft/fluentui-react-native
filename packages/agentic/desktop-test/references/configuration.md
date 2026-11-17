@@ -19,6 +19,11 @@ Targets select `macos`, `windows`, or `win32` endpoints and describe an
 application identity. A Windows installed target requires an exact title and
 an executable path, AUMID, exact native process identity, or verified owner lease; a title alone is not an
 identity. External ownership permits attach only and preserves the app.
+macOS React Native Test App targets default to Fabric and resolve to a
+renderer-specific identity; switching to Paper resolves a distinct identity.
+`resolveDesktopApplication` can verify an instance-specific built RN Test App
+with its `macosBundleIdentifier` option; the built product and renderer must
+match, and a conflicting configured bundle identifier is refused.
 
 `ownership: 'session'` (the default) keeps session-owned launch semantics.
 `ownership: 'supervisor'` opts into one supervisor-owned launch; successive
@@ -63,6 +68,14 @@ workspaces.
 The config schema rejects unknown fields, cycles, and unmatched spec patterns.
 Spec paths resolve against the suite project's root; target references and
 hooks resolve against their declaring config.
+
+Suites may opt into the supervisor workload catalog with
+`agent: { lanes: ['accessible', 'physical'] }`. The ID must be a bounded
+portable identifier, and generic WDIO workload lanes require Jasmine. The
+supervisor further restricts the declared lanes to its existing host input
+mask and attach-only runner; the catalog never accepts commands or paths from
+an agent. Opted-in Storybook CSF suites run their authored tests against the
+existing hosted driver, not the smoke build or launch lifecycle.
 
 ## Scope domains
 

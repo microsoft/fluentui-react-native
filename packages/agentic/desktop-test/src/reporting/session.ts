@@ -21,8 +21,9 @@ export type DesktopReportSession = {
 /** Delegated CLIs inherit the collector rather than opening a competing console or result directory. */
 export async function createDesktopReportSession(
   options: DesktopRunReporterOptions & { onFatal?: (error: Error) => void },
+  { independent = false }: { independent?: boolean } = {},
 ): Promise<DesktopReportSession> {
-  const encoded = process.env[DESKTOP_REPORT_CONTEXT];
+  const encoded = independent ? undefined : process.env[DESKTOP_REPORT_CONTEXT];
   const reporterMode =
     options.reporterMode ??
     (options.structured

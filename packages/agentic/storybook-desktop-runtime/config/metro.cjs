@@ -7,6 +7,9 @@ const { withStorybook } = require('@storybook/react-native/withStorybook');
 
 const safeAreaStub = path.resolve(__dirname, 'react-native-safe-area-context.cjs');
 const runtimeInstanceStub = path.resolve(__dirname, 'runtime-instance.cjs');
+// Attached story-test runs create and delete private workspaces here while Metro is serving; crawling one that vanishes
+// before it is watched crashes Metro's fallback watcher (ENOENT), which takes down a retained Storybook host.
+const transientRunnerWorkspaces = /[\\/]storybook-desktop\.generated[\\/]wdio(?:[\\/]|$)/;
 
 function resolvePlatformModule(moduleName, platform) {
   if (platform !== 'win32') {
@@ -58,6 +61,7 @@ function createDesktopStorybookMetroConfig({ configPath }) {
       unstable_allowRequireContext: true,
     },
   });
+  config.resolver.blockList = [...[config.resolver.blockList ?? []].flat(), transientRunnerWorkspaces];
   if (!projection.windows) {
     config.watchFolders = [...new Set([...(config.watchFolders || []), path.dirname(runtimeModulePath)])];
   }

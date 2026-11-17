@@ -11,6 +11,16 @@ Win32 is the prebuilt REX Paper host. Bundle before run; native app build is
 unsupported. Use `yarn storybook bundle --win32` and `yarn storybook smoke
 --win32 --mode stories` (or `stories-and-tests`).
 
+Configure smoke with `createWin32SmokeOptions`, including canonical component,
+exact window title, test-ID prefix, and required story IDs. The neutral scope
+owns the channel and native REX application; no Metro or shell coordinator is
+started. Required IDs must exist in the extracted manifest and channel index.
+The native driver verifies sidebar/addon headers, resize controls, and Actions
+panel, traverses stories fail-fast with the configured settle delay, and checks
+the exact retained host still has live windows. Traversal sessions close before
+authored tests. Native cleanup must settle before the protected attach lease
+is withdrawn; foreign records remain intact and fail cleanup.
+
 The production bundle embeds the Storybook instance it connects to: the
 channel port and instance id, plus the driver manifest's bridge nonce and
 digests when bundled with one. `smoke --win32` bundles with its own instance,

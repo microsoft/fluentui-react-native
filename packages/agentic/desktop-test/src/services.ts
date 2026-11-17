@@ -208,28 +208,31 @@ export class DesktopServiceScope {
     return Promise.race([tracked, this.failed]);
   }
 
-  async ready(id: string, url: string, timeoutMs = 120_000, fetcher = globalThis.fetch): Promise<void> {
+  async ready(id: string, url: string, timeoutMs = 120_000, fetcher = globalThis.fetch, confirm?: () => Promise<void>): Promise<void> {
     const timeout = AbortSignal.timeout(timeoutMs);
     const signal = AbortSignal.any([this.controller.signal, timeout]);
     await this.guard(
       (async () => {
         let lastError: unknown;
         while (!signal.aborted) {
+          let ok = false;
           try {
             const response = await fetcher(url, { signal: AbortSignal.any([signal, AbortSignal.timeout(2000)]), redirect: 'error' });
             await response.body?.cancel();
-            if (response.ok) {
-              const resource = this.resources.find((entry) => entry.key === id);
-              if (resource) {
-                resource.record.readiness = 'ready';
-                this.publish(resource);
-              }
-              this.reporter?.emit({ kind: 'service-ready', payload: { message: id } }, id, { service: id });
-              return;
-            }
-            lastError = new Error(`Readiness returned HTTP ${response.status}.`);
+            ok = response.ok;
+            if (!ok) lastError = new Error(`Readiness returned HTTP ${response.status}.`);
           } catch (error) {
             lastError = error;
+          }
+          if (ok) {
+            await confirm?.();
+            const resource = this.resources.find((entry) => entry.key === id);
+            if (resource) {
+              resource.record.readiness = 'ready';
+              this.publish(resource);
+            }
+            this.reporter?.emit({ kind: 'service-ready', payload: { message: id } }, id, { service: id });
+            return;
           }
           await new Promise<void>((resolve) => setTimeout(resolve, 100));
         }

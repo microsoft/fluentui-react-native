@@ -9,6 +9,7 @@ export {
   DesktopIncompleteError,
   DesktopReportedError,
   isDesktopIncompleteError,
+  redactDesktopSecrets,
   serializeReportError,
   validateDesktopEvent,
 } from './protocol.js';
