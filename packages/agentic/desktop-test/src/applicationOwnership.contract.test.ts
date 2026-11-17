@@ -218,7 +218,10 @@ nativeTest('supervisor launch is retained for attach-only sessions and closes ex
     await owner.start();
     const client = createDesktopDriverClient({ url: owner.server.url });
     expect(await client.status()).toMatchObject({ targets: [{ id: 'retained', launchModes: ['attach'] }] });
-    const capabilities = { alwaysMatch: { platformName: 'macos', 'furn:target': 'retained' } };
+    const capabilities = { alwaysMatch: { platformName: 'macos', 'furn:target': 'retained', 'furn:launchMode': 'attach' } };
+    await expect(client.newSession({ alwaysMatch: { ...capabilities.alwaysMatch, 'furn:launchMode': 'launch' } })).rejects.toMatchObject({
+      code: 'session not created',
+    });
     const first = await client.newSession(capabilities);
     lease = owner.server.sessions.get(first.id).lease;
     expect(lease).toMatchObject({ ownership: 'attached', launchKind: 'launch-services', containment: 'uncontained' });
@@ -278,26 +281,32 @@ nativeTest('read-only discovery sees newly launched applications and refuses new
     await expect(observer.inspectApplication({ ...target, host: observer })).rejects.toMatchObject({
       data: { reason: 'no-matching-application' },
     });
-    child = spawn(fixture.executable, [], { stdio: 'ignore' });
+    const firstReady = path.join(directory, 'discovery-first.ready');
+    child = spawn(fixture.executable, ['--ready-file', firstReady], { stdio: 'ignore' });
     await once(child, 'spawn');
     const childIdentity = await describeMacOSService({ artifact, pid: child.pid! });
     identity = captureDesktopApplicationIdentity(
       { id: 'first', ownership: 'attached', processId: child.pid!, processStartedAt: childIdentity.startedAt },
       'macos',
     );
+    await waitForFixtureFile(firstReady, child);
+    expect(fs.readFileSync(firstReady, 'utf8')).toBe(String(child.pid));
     first = nativeHost(desktopApplicationIdentityDescriptor(identity, application()));
     await first.attach({ ...target, host: first });
     await expect(observer.inspectApplication({ ...target, host: observer })).resolves.toMatchObject({
       processId: identity.processId,
       processStartedAt: identity.processStartedAt,
     });
-    duplicate = spawn(fixture.executable, [], { stdio: 'ignore' });
+    const duplicateReady = path.join(directory, 'discovery-duplicate.ready');
+    duplicate = spawn(fixture.executable, ['--ready-file', duplicateReady], { stdio: 'ignore' });
     await once(duplicate, 'spawn');
     const nativeIdentity = await describeMacOSService({ artifact, pid: duplicate.pid! });
     duplicateIdentity = captureDesktopApplicationIdentity(
       { id: 'duplicate', ownership: 'attached', processId: duplicate.pid!, processStartedAt: nativeIdentity.startedAt },
       'macos',
     );
+    await waitForFixtureFile(duplicateReady, duplicate);
+    expect(fs.readFileSync(duplicateReady, 'utf8')).toBe(String(duplicate.pid));
     second = nativeHost(desktopApplicationIdentityDescriptor(duplicateIdentity, application()));
     await second.attach({ ...target, host: second });
     await expect(observer.inspectApplication({ ...target, host: observer })).rejects.toMatchObject({
@@ -334,7 +343,8 @@ nativeTest('read-only discovery sees newly launched applications and refuses new
 });
 
 nativeTest('independent services exclude the exact external application and preserve it after both cleanups', async () => {
-  const child = spawn(fixture.executable, [], { stdio: 'ignore' });
+  const ready = path.join(directory, 'external.ready');
+  const child = spawn(fixture.executable, ['--ready-file', ready], { stdio: 'ignore' });
   let identity: DesktopApplicationIdentity | undefined;
   let first: Awaited<ReturnType<typeof supervisor>> | undefined;
   let second: Awaited<ReturnType<typeof supervisor>> | undefined;
@@ -347,6 +357,8 @@ nativeTest('independent services exclude the exact external application and pres
       { id: 'external', ownership: 'attached', processId: child.pid!, processStartedAt: nativeIdentity.startedAt },
       'macos',
     );
+    await waitForFixtureFile(ready, child);
+    expect(fs.readFileSync(ready, 'utf8')).toBe(String(child.pid));
     const descriptor = desktopApplicationIdentityDescriptor(identity, application());
     first = await supervisor('external-first', descriptor, 'external');
     second = await supervisor('external-second', descriptor, 'external');

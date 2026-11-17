@@ -164,7 +164,14 @@ for (const endpoint of endpoints) {
         try {
           await owner.start();
           const client = createDesktopDriverClient({ url: owner.server.url });
-          const capabilities = { alwaysMatch: { platformName: 'windows', 'furn:target': targets.get(endpoint)!.id } };
+          const capabilities = {
+            alwaysMatch: { platformName: 'windows', 'furn:target': targets.get(endpoint)!.id, 'furn:launchMode': 'attach' },
+          };
+          if (iteration === 0) {
+            await expect(
+              client.newSession({ alwaysMatch: { ...capabilities.alwaysMatch, 'furn:launchMode': 'launch' } }),
+            ).rejects.toMatchObject({ code: 'session not created' });
+          }
           const first = await client.newSession(capabilities);
           const lease = owner.server.sessions.get(first.id).lease;
           const { schemaVersion: _schemaVersion, endpoint: _endpoint, ...captured } = captureDesktopApplicationIdentity(lease, endpoint);
