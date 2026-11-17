@@ -28,10 +28,17 @@ if ($configuration -eq 'Debug') {
     -SdkName 'Microsoft.VCLibs.Desktop' -FileName 'Microsoft.VCLibs.x64.Debug.14.00.Desktop.appx'
 }
 # Registration must fail rather than unregister or terminate another running application.
-Add-AppxPackage -Register $manifest -ForceUpdateFromAnyVersion
 $identity = ([xml](Get-Content -LiteralPath $manifest -Raw)).Package.Identity.Name
-$registered = @(Get-AppxPackage -Name $identity)
 $expectedLocation = [System.IO.Path]::GetDirectoryName($manifest)
+$existing = @(Get-AppxPackage -Name $identity)
+# Never replace a registration owned by another checkout; its owner must unregister it first.
+foreach ($package in $existing) {
+  if ($package.InstallLocation -ne $expectedLocation) {
+    throw "The Windows package '$identity' is registered from '$($package.InstallLocation)', not '$expectedLocation'; refusing to replace another checkout's registration."
+  }
+}
+Add-AppxPackage -Register $manifest -ForceUpdateFromAnyVersion
+$registered = @(Get-AppxPackage -Name $identity)
 if ($registered.Count -ne 1 -or $registered[0].InstallLocation -ne $expectedLocation) {
   throw "The Windows package is not registered from '$expectedLocation'; refusing to launch another checkout."
 }

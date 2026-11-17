@@ -85,6 +85,8 @@ type OwnedMacOSApplication = {
   application: NativeDesktopApplicationDescriptor & { windowTitle: string };
 };
 
+type OwnedWindowsSmokeOptions = Exclude<NonNullable<DesktopSmokeOptions['native']>, { kind: 'macos' }>;
+
 export type DesktopStorybookBuildDriverOptions = {
   force?: boolean;
 };
@@ -339,11 +341,9 @@ export class DesktopStorybookCli {
         throw new Error('A retained Storybook application requires the claimed neutral supervisor and its service scope.');
       }
       this.supervisor.assertWorkloadClaim(target);
-      if (platform !== 'macos') {
-        throw new Error(`Retained Storybook applications are not yet supported for ${platform}.`);
-      }
     }
-    const macApplication = retained ? this.ownedMacOSApplication(this.instance) : undefined;
+    const macApplication = retained && platform === 'macos' ? this.ownedMacOSApplication(this.instance) : undefined;
+    const windowsNative = retained && platform !== 'macos' ? this.ownedWindowsSmokeOptions(platform) : undefined;
     const wdio = resolveWdioOptions({ ...this.config.wdio, ...(options.input ? { input: options.input } : {}) });
     const agent = options.agent && {
       descriptor: options.agent.descriptor ?? defaultAgentDescriptor,
@@ -363,7 +363,6 @@ export class DesktopStorybookCli {
       throw unsupportedAction('server', platform);
     }
     const nativeDriver = await this.resolveDriver(platform);
-    const agentApplication = agent && platform !== 'macos' ? await this.resolveAgentApplication(platform) : undefined;
     const storybookPort = options.port ?? (await findAvailablePort(this.instance.storybookPort, this.isPortAvailable));
     const metroPort = await this.resolveDriverMetroPort(platform, storybookPort);
     const driverPort = await findAvailablePort(this.instance.driverPort, this.isPortAvailable, new Set([storybookPort, metroPort]));
@@ -373,6 +372,14 @@ export class DesktopStorybookCli {
       metroPort,
       storybookPort,
     };
+    let ownedApplication: NativeDesktopApplicationDescriptor | undefined;
+    if (windowsNative) ownedApplication = await this.buildOwnedWindowsApplication(platform, windowsNative, resolvedInstance);
+    const agentApplication =
+      agent && platform !== 'macos'
+        ? ownedApplication
+          ? this.retainedAgentApplication(platform, ownedApplication)
+          : await this.resolveAgentApplication(platform)
+        : undefined;
     const driverManifest = await this.writeDriverManifest(
       platform,
       resolvedInstance,
@@ -381,7 +388,6 @@ export class DesktopStorybookCli {
       wdio,
     );
     resolvedInstance.driverManifestPath = driverManifest.path;
-    let ownedApplication: NativeDesktopApplicationDescriptor | undefined;
     if (macApplication) {
       resolvedInstance.macosXcconfigPath = writeMacOSInstanceConfig(this.config.projectRoot, resolvedInstance);
       await this.executeAction('bundle', platform, resolvedInstance);
@@ -389,10 +395,14 @@ export class DesktopStorybookCli {
       ownedApplication = await this.resolveOwnedMacOSApplication(resolvedInstance, macApplication);
     }
     if (platform === 'macos') await this.startMacOSApplicationLease(driverManifest.path);
-    const metro = this.services.start('metro', {
-      ...this.prepareCommand(defaultMetroCommand(resolvedInstance), platform, resolvedInstance),
-      listener: { service: 'metro-listener', port: metroPort },
-    });
+    // The retained Win32 host loads its prebuilt bundle, as in native smoke, so it needs no Metro.
+    const metro =
+      windowsNative?.kind === 'win32'
+        ? undefined
+        : this.services.start('metro', {
+            ...this.prepareCommand(defaultMetroCommand(resolvedInstance), platform, resolvedInstance),
+            listener: { service: 'metro-listener', port: metroPort },
+          });
     const channel = this.services.start('storybook-channel', {
       ...this.prepareCommand(
         {
@@ -409,7 +419,7 @@ export class DesktopStorybookCli {
       listener: { service: 'storybook-channel-listener', port: storybookPort },
     });
     const [, channelListener] = await Promise.all([
-      this.waitForOwnedService('metro', 'metro-listener', loopbackUrl(metroPort, '/status'), metro),
+      metro && this.waitForOwnedService('metro', 'metro-listener', loopbackUrl(metroPort, '/status'), metro),
       this.waitForOwnedService('storybook-channel', 'storybook-channel-listener', loopbackUrl(storybookPort, '/index.json'), channel),
     ]);
     const agentManifest = driverManifest.manifest.agent;
@@ -419,7 +429,8 @@ export class DesktopStorybookCli {
       120_000,
     );
     assertSameReadinessProducer(channelListener, channelReady);
-    if (ownedApplication) {
+    // Windows and Win32 publish the retained app's lease inside the channel before it reports service readiness.
+    if (ownedApplication && platform === 'macos') {
       await this.waitForMacOSApplicationLease(driverManifest.path, {
         timeoutMs: 120_000,
         signal: this.services.controller.signal,
@@ -873,6 +884,97 @@ export class DesktopStorybookCli {
     return { ...resolved, bundleIdentifier: instance.bundleIdentifier };
   }
 
+  /** Bundles, builds, and registers the checkout's Windows app, or bundles the prebuilt Win32 host, then resolves its exact launch identity. */
+  private async buildOwnedWindowsApplication(
+    platform: Platforms,
+    native: OwnedWindowsSmokeOptions,
+    instance: ResolvedDesktopStorybookInstance,
+  ): Promise<NativeDesktopApplicationDescriptor> {
+    const target = this.workloadTarget(platform);
+    const windowTitle = native.windowTitle;
+    await this.executeAction('bundle', platform, instance);
+    if (native.kind === 'windows') {
+      await this.executeAction('prep', platform, instance);
+      const build = this.config.getCommandPlan('build', platform);
+      if (build === false) throw unsupportedAction('build', platform);
+      const configuration = native.configuration ?? 'Debug';
+      await this.executePlan(
+        (Array.isArray(build) ? build : [build]).map((command: DesktopCommand) =>
+          command.command === 'rnx-cli' && !command.args?.includes('--configuration')
+            ? { ...command, args: [...(command.args ?? []), '--configuration', configuration] }
+            : command,
+        ),
+        platform,
+        instance,
+      );
+      // The script refuses a package identity already registered from another checkout.
+      await this.executePlan(
+        {
+          command: 'pwsh',
+          args: [
+            '-NoProfile',
+            '-NonInteractive',
+            '-File',
+            path.join(this.config.resolvePackage('@fluentui-react-native/storybook-desktop').root, 'config', 'register-windows.ps1'),
+          ],
+          env: { STORYBOOK_WINDOWS_CONFIGURATION: configuration },
+        },
+        platform,
+        instance,
+      );
+    }
+    const resolved = await this.services.guard(
+      this.resolveDesktopApplication(
+        {
+          ...target,
+          host: {
+            ...target.host,
+            ...(native.kind === 'win32' ? { kind: 'rex', component: native.component } : {}),
+            windowTitle,
+            application: { ...target.host.application, windowTitle },
+          },
+        },
+        this.services.controller.signal,
+        native.kind === 'windows' ? { configuration: native.configuration ?? 'Debug' } : {},
+      ),
+    );
+    return native.kind === 'win32'
+      ? { ...resolved, arguments: [...(resolved.arguments ?? []), 'crashOnRedBox', 'debugBundlePath', 'index'] }
+      : resolved;
+  }
+
+  /** Validates that a retained Windows or Win32 driver can launch, rather than adopt, an exactly identified application. */
+  private ownedWindowsSmokeOptions(platform: Platforms): OwnedWindowsSmokeOptions {
+    const smoke = this.config.getPlatformOptions(platform).smoke;
+    const native = smoke ? smoke.native : undefined;
+    if (!native || native.kind === 'macos' || native.kind !== platform) {
+      throw new Error(`A retained ${platform} Storybook application requires the platform's native smoke options.`);
+    }
+    const configured: NativeDesktopApplicationDescriptor | undefined = this.requireNativeDriverOptions(platform).application;
+    if (configured?.processIdentity || configured?.leasePath || configured?.leaseNonce) {
+      throw new Error(`A retained ${platform} Storybook application cannot adopt a configured process or lease.`);
+    }
+    if (configured?.windowTitle && configured.windowTitle !== native.windowTitle) {
+      throw new Error(`The configured ${platform} window title conflicts with the retained application's exact window title.`);
+    }
+    return native;
+  }
+
+  /** The attach identity of a retained app is the exact launched identity; a conflicting configured identity fails closed. */
+  private retainedAgentApplication(platform: Platforms, owned: NativeDesktopApplicationDescriptor): NativeDesktopApplicationDescriptor {
+    const { aumid, executablePath } = this.requireNativeDriverOptions(platform).application ?? {};
+    if (!owned.windowTitle || (platform === 'windows' ? !owned.aumid : !owned.executablePath)) {
+      throw new Error(`The retained ${platform} application did not resolve an exact attach identity.`);
+    }
+    if ((aumid && aumid !== owned.aumid) || (executablePath && path.resolve(executablePath) !== path.resolve(owned.executablePath ?? ''))) {
+      throw new Error(`The configured ${platform} application identity conflicts with the retained application.`);
+    }
+    return {
+      windowTitle: owned.windowTitle,
+      ...(platform === 'windows' ? { aumid: owned.aumid } : { executablePath: owned.executablePath }),
+    };
+  }
+
   private async runNativeSmokeLifecycle(
     platform: Platforms,
     smoke: DesktopSmokeOptions,
@@ -884,63 +986,15 @@ export class DesktopStorybookCli {
     const failures: unknown[] = [];
     try {
       const target = this.workloadTarget(platform);
-      const macApplication = native.kind === 'macos' ? this.ownedMacOSApplication(instance) : undefined;
-      const windowTitle = native.kind === 'macos' ? macApplication!.application.windowTitle : native.windowTitle;
-      await this.executeAction('bundle', platform, instance);
-      if (native.kind === 'macos') await this.executeAction('build', platform, instance);
-      if (native.kind === 'windows') {
-        await this.executeAction('prep', platform, instance);
-        const build = this.config.getCommandPlan('build', platform);
-        if (build === false) throw unsupportedAction('build', platform);
-        const configuration = native.configuration ?? 'Debug';
-        await this.executePlan(
-          (Array.isArray(build) ? build : [build]).map((command: DesktopCommand) =>
-            command.command === 'rnx-cli' && !command.args?.includes('--configuration')
-              ? { ...command, args: [...(command.args ?? []), '--configuration', configuration] }
-              : command,
-          ),
-          platform,
-          instance,
-        );
-        await this.executePlan(
-          {
-            command: 'pwsh',
-            args: [
-              '-NoProfile',
-              '-NonInteractive',
-              '-File',
-              path.join(this.config.resolvePackage('@fluentui-react-native/storybook-desktop').root, 'config', 'register-windows.ps1'),
-            ],
-            env: { STORYBOOK_WINDOWS_CONFIGURATION: configuration },
-          },
-          platform,
-          instance,
-        );
+      let application: NativeDesktopApplicationDescriptor;
+      if (native.kind === 'macos') {
+        const macApplication = this.ownedMacOSApplication(instance);
+        await this.executeAction('bundle', platform, instance);
+        await this.executeAction('build', platform, instance);
+        application = await this.resolveOwnedMacOSApplication(instance, macApplication);
+      } else {
+        application = await this.buildOwnedWindowsApplication(platform, native, instance);
       }
-      const resolvedApplication = macApplication
-        ? await this.resolveOwnedMacOSApplication(instance, macApplication)
-        : await this.services.guard(
-            this.resolveDesktopApplication(
-              {
-                ...target,
-                host: {
-                  ...target.host,
-                  ...(native.kind === 'win32' ? { kind: 'rex', component: native.component } : {}),
-                  windowTitle,
-                  application: { ...target.host.application, windowTitle },
-                },
-              },
-              this.services.controller.signal,
-              native.kind === 'windows' ? { configuration: native.configuration ?? 'Debug' } : {},
-            ),
-          );
-      const application =
-        native.kind === 'win32'
-          ? {
-              ...resolvedApplication,
-              arguments: [...(resolvedApplication.arguments ?? []), 'crashOnRedBox', 'debugBundlePath', 'index'],
-            }
-          : resolvedApplication;
       const configuredServer = this.config.getPlatformOptions(platform).server;
       const server = smoke.server ?? configuredServer;
       if (!server) throw new Error('Native smoke requires its owned Storybook channel.');

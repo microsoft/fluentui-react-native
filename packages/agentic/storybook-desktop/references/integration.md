@@ -78,7 +78,11 @@ requires the matching live supervisor claim, verifies the built product, and
 waits for its private application lease before reporting readiness. The bridge
 observes the channel before launch so an early initial render is not lost.
 The enclosing channel owns application settlement; uncertain settlement fences
-the claim. Windows and Win32 retained Storybook startup is not yet supported.
+the claim. On Windows and Win32 a retained driver first runs the native smoke build path (bundle;
+for Windows also prep, build, and package registration), resolves the exact launch identity, and
+uses it as the agent attach identity; a configured process, lease, or conflicting identity fails
+closed. The channel publishes the private Windows lease before service readiness. Retained Win32
+loads its prebuilt bundle without Metro.
 External applications remain borrowed and are never terminated by this path.
 
 Owned Node services inherit the neutral harness's per-command socket lifeline

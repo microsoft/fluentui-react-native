@@ -6,12 +6,17 @@ export async function expectCalloutPlacement(
 ): Promise<void> {
   await expect(await browser.$('~modern-callout-status')).toHaveText('Ready');
   const owner = await browser.getWindowHandle();
-  const original = platform === 'macos' ? await browser.getWindowRect() : undefined;
+  const original = platform === 'macos' || platform === 'windows' ? await browser.getWindowRect() : undefined;
   try {
     if (original) {
       // Placement flips to the opposite edge when the work area lacks room below the anchor, as it does for a low
       // owner window on a small runner display; the top of the screen leaves room for the preferred edge.
       await browser.setWindowRect(original.x, 0, original.width, original.height);
+    }
+    if (platform === 'windows') {
+      // A Windows popup keeps its screen position when the owner moves; the reposition command recomputes it.
+      await (await browser.$('~modern-callout-reposition')).click();
+      await expect(await browser.$('~modern-callout-operations')).toHaveText('reposition: confirmed');
     }
     const anchor = await browser.getElementRect(await (await browser.$('~modern-callout-anchor')).elementId);
     if (platform === 'macos') {

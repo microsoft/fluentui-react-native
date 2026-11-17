@@ -20,9 +20,9 @@ generation, launches a fresh one, and verifies the first manifest story before
 authored tests; Metro stays warm. An uncertain native close or changed private
 lease is a cleanup failure, never permission to signal an observed PID.
 PowerShell is limited to the package/framework registration leaf and must not
-unregister or terminate an existing application. Registration must verify this
-build's install location; a shared package identity must not silently launch
-another checkout.
+unregister or terminate an existing application. Registration must refuse a package identity already registered from
+another install location and verify this build's install location afterward; a
+shared package identity must not replace or silently launch another checkout.
 
 CI builds and diagnoses the native helper before app preparation, then pins
 resolution to the verified artifact. GitHub-hosted runners are not physical

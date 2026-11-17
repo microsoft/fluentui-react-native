@@ -114,7 +114,7 @@ Scope: the driver-owned channel factory and the run-owned extraction cache.
 - A protected runner holds one reservation across cases and gives each worker a distinct drain-confirmed grant.
 - macOS lease maintenance is host-owned; default macOS and Windows/Win32 native smoke retain their exact supervisor-launched applications in the channel child.
 - macOS smoke verifies the built instance bundle and renderer, and never stops another app merely because it shares a bundle identifier.
-- A claimed macOS driver can retain that built app across protected sessions; retained Storybook startup on Windows and Win32 currently fails closed.
+- A claimed macOS, Windows, or Win32 driver can retain its exact built app across protected sessions; Windows and Win32 retained startup awaits native qualification.
 - Non-agent smokes do not qualify protected workloads. Separate local macOS runs passed selected retained-app handoff and managed cases on Fabric and Paper.
 
 - Exact macOS primary-app cleanup does not prove that arbitrary uncontained descendants exited.

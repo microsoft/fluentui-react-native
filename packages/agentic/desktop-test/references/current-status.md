@@ -234,7 +234,7 @@ Generic and Storybook attach-only runners share the protected reservation.
 - Desktop-test and the standalone Storybook CLI share run ownership, typed hosted-driver readiness, and verified management publication.
 - The channel and driver child stay in place until relocation is justified and qualified.
 - The macOS application lease is maintained by a host-owned read-only resource; macOS and Windows smoke retain their exact launched applications in the channel child.
-- A claimed macOS Storybook supervisor can retain its verified built application across sessions. Retained Storybook startup on Windows and Win32 currently fails closed.
+- A claimed macOS, Windows, or Win32 Storybook supervisor can retain its verified built application across sessions. Windows and Win32 retained startup is implemented but not yet natively qualified.
 - Agent-served Storybook targets advertise attach-only sessions; owned smoke may launch and stop its exact application.
 - Metro and channel readiness require correlated owned-listener receipts in addition to their HTTP and driver readiness.
 - Protected story args are refused with `story-args-unsupported`, leaving the story unchanged and no value in an error or the journal.

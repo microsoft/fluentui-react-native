@@ -59,7 +59,9 @@ remove another lease. A changed record fails cleanup explicitly. Native
 application cleanup must settle before lease withdrawal. The leaf
 `config/application-lease.cjs` remains an adapter, not a lifecycle coordinator.
 `config/register-windows.ps1` only installs framework dependencies and registers
-the built package; never add service, application, or smoke supervision to it.
+the built package. It refuses before registering when the package identity is
+registered from another install location; never add service, application, or
+smoke supervision to it.
 
 The parent resolves the native helper independently and passes its artifact
 plus manifest, credential, and runtime-module hashes through inherited

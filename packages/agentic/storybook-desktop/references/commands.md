@@ -162,9 +162,11 @@ its lease on ambiguity or shutdown, and preserves foreign records. An attached
 `storybook test` waits for that host-owned lease; it never writes one.
 With `host.ownership: 'supervisor'`, a claimed macOS driver builds and retains
 its instance-specific application, then waits for the lease before readiness.
-Retained Storybook startup on Windows and Win32 currently fails closed.
+On Windows and Win32 it builds (Win32: bundles), registers, and launches the exact
+application before readiness; registration refuses a package identity registered from another
+checkout.
 The native lease-v1 reader retains its one-second start-time tolerance.
-Nothing maintains a Windows or Win32
+Without a retained app, nothing maintains a Windows or Win32
 lease, so on those platforms the agent attaches by the app's verified identity
 instead: a configured `nativeDriver.application` AUMID or executable path, or
 else the desktop target's registered package AUMID (RN Test App) or REX

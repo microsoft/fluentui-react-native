@@ -423,13 +423,89 @@ describe('DesktopStorybookCli', () => {
     }
   });
 
-  test.each(['windows', 'win32'] as const)('refuses retained %s Storybook before starting services', async (platform) => {
+  test.each(['windows', 'win32'] as const)('starts a claimed retained %s agent with its exact launched identity', async (platform) => {
     const f = retainedDriverFixture(platform);
+    if (platform === 'win32') {
+      const options = f.config.getPlatformOptions('win32');
+      const nativeDriver = options.nativeDriver || {};
+      jest.spyOn(f.config, 'getPlatformOptions').mockReturnValue({
+        ...options,
+        nativeDriver: {
+          ...nativeDriver,
+          application: { ...nativeDriver.application, windowTitle: 'Agentic Components Storybook (Win32)' },
+        },
+      });
+    }
     const owner = f.supervisor();
     try {
       await owner.open();
-      await expect(f.cli(owner).startDriver(platform, { agent: {} })).rejects.toThrow(`not yet supported for ${platform}`);
+      const ready = await f.cli(owner).startDriver(platform, { agent: { descriptor: 'agent.json' }, input: 'accessible' });
+      const channel = f.runner.background.find((command) => command.context?.service === 'storybook-channel')!;
+      const owned =
+        platform === 'windows'
+          ? { windowTitle: 'Agentic Components Storybook', aumid: 'Fixture!App' }
+          : {
+              windowTitle: 'Agentic Components Storybook (Win32)',
+              executablePath: 'C:\\Fixture\\ReactTest.exe',
+              arguments: ['crashOnRedBox', 'debugBundlePath', 'index'],
+            };
+      expect(ready).toMatchObject({ targetId: f.target.id, agentDescriptor: 'agent.json', serviceReady: { service: 'storybook-channel' } });
+      expect(JSON.parse(channel.env.STORYBOOK_OWNED_APPLICATION)).toEqual(owned);
+      const { arguments: _arguments, ...identity } = owned as typeof owned & { arguments?: string[] };
+      expect(JSON.parse(fs.readFileSync(channel.env.STORYBOOK_DRIVER_MANIFEST, 'utf8')).agent.application).toEqual(identity);
+      expect(f.options.resolveDesktopApplication).toHaveBeenCalledTimes(1);
+      expect(f.options.resolveDesktopApplication).toHaveBeenCalledWith(
+        expect.objectContaining({
+          host: expect.objectContaining(platform === 'win32' ? { kind: 'rex', component: 'AgenticStorybook' } : {}),
+        }),
+        expect.any(AbortSignal),
+        platform === 'windows' ? { configuration: 'Debug' } : {},
+      );
+      const foreground = f.runner.foreground.map(({ command, args }) => [command, ...(args ?? [])].join(' '));
+      expect(foreground.some((command) => command.includes('register-windows.ps1'))).toBe(platform === 'windows');
+      expect(f.runner.foreground.every(({ env }) => env.STORYBOOK_OWNED_APPLICATION === '')).toBe(true);
+      expect(f.runner.background.some((command) => command.context?.service === 'metro')).toBe(platform === 'windows');
+    } finally {
+      await owner.close();
+      expect(f.events).toContain('stop:storybook-channel');
+      fs.rmSync(f.root, { force: true, recursive: true });
+    }
+  });
+
+  test.each([
+    ['a configured lease', { leasePath: 'C:\\lease.json' }, 'cannot adopt a configured process or lease'],
+    ['a conflicting window title', { windowTitle: 'Other' }, 'conflicts with the retained application'],
+  ])('refuses a retained Windows agent with %s before any effects', async (_name, application, message) => {
+    const f = retainedDriverFixture('windows');
+    const nativeDriver = f.config.getPlatformOptions('windows').nativeDriver || {};
+    jest.spyOn(f.config, 'getPlatformOptions').mockReturnValue({
+      ...f.config.getPlatformOptions('windows'),
+      nativeDriver: { ...nativeDriver, application: { ...nativeDriver.application, ...application } },
+    });
+    const owner = f.supervisor();
+    try {
+      await owner.open();
+      await expect(f.cli(owner).startDriver('windows', { agent: {} })).rejects.toThrow(message);
       expect(f.runner.foreground).toEqual([]);
+      expect(f.runner.background).toEqual([]);
+      expect(f.options.resolveDesktopApplication).not.toHaveBeenCalled();
+    } finally {
+      await owner.close();
+      fs.rmSync(f.root, { force: true, recursive: true });
+    }
+  });
+
+  test('refuses a retained Windows agent whose configured AUMID differs from the built package', async () => {
+    const f = retainedDriverFixture('windows');
+    const nativeDriver = f.config.getPlatformOptions('windows').nativeDriver || {};
+    jest.spyOn(f.config, 'getPlatformOptions').mockReturnValue({
+      ...f.config.getPlatformOptions('windows'),
+      nativeDriver: { ...nativeDriver, application: { ...nativeDriver.application, aumid: 'Other!App' } },
+    });
+    const owner = f.supervisor();
+    try {
+      await owner.open();
+      await expect(f.cli(owner).startDriver('windows', { agent: {} })).rejects.toThrow('conflicts with the retained application');
       expect(f.runner.background).toEqual([]);
     } finally {
       await owner.close();
