@@ -70,8 +70,9 @@ when working on the package.
   can opt into supervisor-owned launch. External attach always preserves the
   app; supervisor-owned apps are retained between attach-only sessions and
   close with the owning service. Neutral exact identity helpers live at `/application-ownership`;
-  Storybook handoff and lifecycle takeover remain transitional, and retained
-  session launches remain unsupported (see [lifecycle](references/lifecycle.md)).
+  Storybook contributes to the same owner and supports protected runner handoff,
+  which still needs native qualification. Retained session-owned launches remain
+  unsupported (see [lifecycle](references/lifecycle.md)).
 - Every run records structured results, command output, and evidence in its
   artifact directory.
 - Native helpers are explicitly built or provisioned; normal test runs use

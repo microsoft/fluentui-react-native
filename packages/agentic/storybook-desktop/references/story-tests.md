@@ -168,6 +168,16 @@ readiness result, or native context.
 filters names. `test` operates against an already running app/driver; smoke
 owns the complete app lifecycle.
 
+For a protected `driver --agent`, use `test --attach-agent` after the active
+MCP session relinquishes its reservation. An operator can instead authorize
+`--allow-runner-preempt` when starting the driver and request `--preempt` on
+the test. The runner holds one reservation for the run, creates a distinct
+driver-only grant for each worker, and awaits session deletion and grant drain
+before reusing the target. Workers receive credentials through private process
+transport, never generated specs or capabilities. A failed drain fences
+further work. See [commands](commands.md) for descriptor selection and
+supervisor-managed workloads.
+
 ### Timing and lifecycle observations
 
 Part of #4435. The linked **Executable story results** `run.json` artifact

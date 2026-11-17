@@ -3,7 +3,26 @@ import { createDesktopDriverClient } from '../client/DesktopDriverClient.js';
 import type { DesktopDriverClient } from '../client/DesktopDriverClient.js';
 import { FakeDesktopHost } from '../hosts/fake/FakeDesktopHost.js';
 import { attachFailureEffect } from '../protocol/settlement.js';
+import type { DesktopStoryManifest } from '../storybook.js';
+import { FakeStoryOrchestrator } from '../testing/FakeStoryOrchestrator.js';
 import { createDesktopDriverServer } from './createDesktopDriverServer.js';
+
+const manifest: DesktopStoryManifest = {
+  endpoint: 'windows',
+  entries: [
+    {
+      id: 'fixture--default',
+      name: 'Default',
+      packageName: 'fixture',
+      sourcePath: 'fixture.stories.tsx',
+      tags: [],
+      title: 'Fixture',
+    },
+  ],
+  platformManifestDigest: 'platform-digest',
+  portablePlanDigest: 'portable-digest',
+  schemaVersion: 1,
+};
 
 function barrier() {
   let release!: () => void;
@@ -22,11 +41,24 @@ async function fixture(
     operator: DesktopDriverClient;
     url: string;
     capabilities: { alwaysMatch: Record<string, unknown> };
+    story?: FakeStoryOrchestrator;
   }) => Promise<void>,
+  options: { story?: boolean; allowLaunch?: boolean } = {},
 ): Promise<void> {
   const authority = new DesktopAuthority();
-  const host = new FakeDesktopHost({ features: { boundedObservation: true } });
-  const target = { endpoint: 'windows' as const, host, id: 'attached', platformName: 'windows' as const, launchModes: ['attach' as const] };
+  const host = new FakeDesktopHost({
+    features: { boundedObservation: true },
+    ...(options.story ? { storyRootTestId: 'story-root' } : {}),
+  });
+  const story = options.story ? new FakeStoryOrchestrator(manifest, host) : undefined;
+  const target = {
+    endpoint: 'windows' as const,
+    host,
+    id: 'attached',
+    platformName: 'windows' as const,
+    launchModes: options.allowLaunch ? (['attach', 'launch'] as const) : (['attach'] as const),
+    ...(story ? { storyOrchestrator: story, storyRootTestId: 'story-root' } : {}),
+  };
   const agent = authority.issue({ label: 'agent', targets: [target.id] });
   const runner = authority.issue({ label: 'wdio', targets: [target.id], scopes: ['driver-control', 'declared-workload'] });
   const operator = authority.issue({
@@ -47,6 +79,7 @@ async function fixture(
       operator: await runnerConnection(client(operator.token), server.url),
       url: server.url,
       capabilities: { alwaysMatch: { 'furn:target': target.id, 'furn:launchMode': 'attach' } },
+      story,
     });
   } finally {
     await server.close();
@@ -89,6 +122,88 @@ describe('attach-only runner handoff', () => {
       await expect(acquire(operator, url, 'preempt')).resolves.toBeDefined();
       await expect(session.getWindowHandles()).rejects.toMatchObject({ code: 'unauthorized' });
     });
+  });
+
+  test('a story-enabled attach-only target can be borrowed without sharing its previous session', async () => {
+    await fixture(
+      async ({ agent, capabilities, runner, url }) => {
+        const previous = await agent.newSession(capabilities);
+        await previous.selectStory('fixture--default');
+        await expect(acquire(runner, url)).rejects.toMatchObject({ data: { reason: 'target-busy' } });
+        await previous.delete();
+
+        const reservation = await acquire(runner, url);
+        const worker = await reservation.delegateConnection();
+        const session = await worker.newSession(capabilities);
+        await expect(session.selectStory('fixture--default')).resolves.toMatchObject({ storyId: 'fixture--default' });
+        await expect(worker.request('POST', '/furn/grants/runner', { target: 'attached' })).rejects.toMatchObject({
+          code: 'unauthorized',
+        });
+        await session.delete();
+        await reservation.revokeConnection();
+        const next = await agent.newSession(capabilities);
+        await next.delete();
+      },
+      { story: true },
+    );
+  });
+
+  test('story-enabled targets that permit launch cannot issue attach-only reservations', async () => {
+    await fixture(
+      async ({ authority, runner, url }) => {
+        const delegate = jest.spyOn(authority, 'delegateRunner');
+        await expect(acquire(runner, url)).rejects.toMatchObject({ code: 'unsupported operation' });
+        expect(delegate).not.toHaveBeenCalled();
+      },
+      { story: true, allowLaunch: true },
+    );
+  });
+
+  test('preemption waits for an interrupted story selection and quarantines an uncertain result', async () => {
+    await fixture(
+      async ({ agent, capabilities, newAgent, operator, story, url }) => {
+        if (!story) throw new Error('Expected the story orchestrator.');
+        const session = await agent.newSession(capabilities);
+        const entered = barrier();
+        const aborted = barrier();
+        const release = barrier();
+        story.selectStory = async (_request, context) => {
+          if (!context?.signal) throw new Error('Expected the story cancellation signal.');
+          entered.release();
+          if (!context.signal.aborted) {
+            await new Promise<void>((resolve) => context.signal.addEventListener('abort', () => resolve(), { once: true }));
+          }
+          aborted.release();
+          await release.pending;
+          throw new Error('Injected unknown story settlement.');
+        };
+        const selection = session.selectStory('fixture--default').then(
+          () => undefined,
+          (error: unknown) => error,
+        );
+        try {
+          await entered.pending;
+          let completed = false;
+          const handoff = acquire(operator, url, 'preempt').then((value) => {
+            completed = true;
+            return value;
+          });
+          await aborted.pending;
+          expect(completed).toBe(false);
+          const contender = await newAgent();
+          await expect(contender.newSession(capabilities)).rejects.toMatchObject({ data: { reason: 'target-busy' } });
+          release.release();
+          const reservation = await handoff;
+          expect(await selection).toMatchObject({ data: { mutation: { quarantined: true } } });
+          const worker = await reservation.delegateConnection();
+          await expect(worker.newSession(capabilities)).rejects.toMatchObject({ data: { reason: 'target-quarantined' } });
+        } finally {
+          release.release();
+          await selection;
+        }
+      },
+      { story: true },
+    );
   });
 
   test.each(['descriptor', 'workload'] as const)(

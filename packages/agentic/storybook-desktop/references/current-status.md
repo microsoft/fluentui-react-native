@@ -11,7 +11,7 @@ This document records the status of Storybook desktop qualification: Windows Fab
 Done means the stated implementation exists and is covered by deterministic tests; it does not mean every native endpoint is qualified.
 Parent issue: [#4435](https://github.com/microsoft/fluentui-react-native/issues/4435).
 See the [integration guide](integration.md) and the [reference index](README.md).
-Harness, driver and MCP evidence lives in `@fluentui-react-native/desktop-test/references/current-status.md`, `@fluentui-react-native/desktop-driver/references/current-status.md` and `@fluentui-react-native/desktop-driver-mcp/references/current-status.md`.
+Harness, driver and MCP evidence lives in `@fluentui-react-native/desktop-test/references/current-status.md`, `@fluentui-react-native/desktop-driver/references/current-status.md` and `@fluentui-react-native/desktop-mcp/references/current-status.md`.
 
 ## Status overview
 
@@ -27,6 +27,8 @@ Console-session (non-RDP), 200% and mixed DPI, and negative-origin cases are not
 - **Story selection and refresh reduction:** Qualified (macOS Fabric and macOS Paper, bounded cohort). Windows Fabric and Win32 Paper are not run. See [Story selection and refresh reduction](#story-selection-and-refresh-reduction). Tracking: [#4449](https://github.com/microsoft/fluentui-react-native/issues/4449).
 
 - **Lifecycle parity:** Qualified (macOS Fabric and macOS Paper, observed). JS initialization and HMR counts are not observed. See [Lifecycle parity](#lifecycle-parity). Tracking: [#4449](https://github.com/microsoft/fluentui-react-native/issues/4449).
+
+- **Hosted resources and protected runners:** Implemented with portable coverage; native endpoint qualification is not run for the combined implementation. See [Hosted resources and protected runners](#hosted-resources-and-protected-runners). Tracking: [#4449](https://github.com/microsoft/fluentui-react-native/issues/4449), [#4450](https://github.com/microsoft/fluentui-react-native/issues/4450).
 
 - **Visual flash claims:** Deferred. No flash-reduction claim is made. See [Visual flash claims](#visual-flash-claims). Tracking: [#4449](https://github.com/microsoft/fluentui-react-native/issues/4449).
 
@@ -102,6 +104,21 @@ Scope: the driver-owned channel factory and the run-owned extraction cache.
 ### Open work
 
 - [#4449](https://github.com/microsoft/fluentui-react-native/issues/4449): an independent JS-initialization counter, if needed.
+
+## Hosted resources and protected runners
+
+### Behavior and limits
+
+- Storybook and desktop-test share a neutral owner for hosted-driver acquisition, readiness and management publication.
+- Metro and channel readiness require correlated owned-listener receipts; the driver remains in the channel child.
+- A protected runner holds one reservation across cases and gives each worker a distinct drain-confirmed grant.
+- macOS lease maintenance is host-owned; Windows smoke retains its supervisor-launched application in the channel child.
+- Portable contracts cover these paths, but the combined implementation is not yet qualified on macOS Fabric, macOS Paper, Windows Fabric or Win32 Paper.
+
+### Open work
+
+- [#4449](https://github.com/microsoft/fluentui-react-native/issues/4449): qualify Storybook handoff, retained launches and lease maintenance on each native endpoint.
+- [#4450](https://github.com/microsoft/fluentui-react-native/issues/4450): qualify managed Storybook workloads through the real supervisor descriptor.
 
 ## Visual flash claims
 

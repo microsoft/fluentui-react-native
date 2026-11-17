@@ -111,7 +111,7 @@ async function open(client: Client, harness: DesktopDriverTestHarness): Promise<
   return json(opened).id as string;
 }
 
-describe('desktop-driver-mcp', () => {
+describe('desktop-mcp driver-only mode', () => {
   test('relinquish fences admission immediately and waits for terminal deletion before issuing a fresh child', async () => {
     const harness = await createDesktopDriverTestHarness({ features });
     const controller = new DesktopController(async () => testConnection(harness));
@@ -361,9 +361,7 @@ describe('desktop-driver-mcp', () => {
         }
         await controller.dispose();
         expect(controller.session).toBe(session.id);
-        expect(errors).toHaveBeenCalledWith(
-          'desktop-driver-mcp: session cleanup is incomplete; the service must drain or expire the session.',
-        );
+        expect(errors).toHaveBeenCalledWith('desktop-mcp: session cleanup is incomplete; the service must drain or expire the session.');
         await controller.dispose();
         expect(controller.session).toBeUndefined();
         expect(revocations).toBe(2);
@@ -386,7 +384,7 @@ describe('desktop-driver-mcp', () => {
       const result = await call(client, 'desktop_session');
       expect(result.isError).toBe(true);
       expect(JSON.stringify(result)).not.toContain(sensitive);
-      expect(errors).toHaveBeenCalledWith('desktop-driver-mcp: connecting failed; verify private discovery and the service identity.');
+      expect(errors).toHaveBeenCalledWith('desktop-mcp: connecting failed; verify private discovery and the service identity.');
       expect(JSON.stringify(errors.mock.calls)).not.toContain(sensitive);
     } finally {
       await client.close();
@@ -697,7 +695,7 @@ describe('desktop-driver-mcp', () => {
       unavailable = true;
       const refused = await call(client, 'desktop_session');
       expect(JSON.stringify(json(refused))).not.toContain('/private/path');
-      expect(errors).toHaveBeenCalledWith('desktop-driver-mcp: connecting failed; verify private discovery and the service identity.');
+      expect(errors).toHaveBeenCalledWith('desktop-mcp: connecting failed; verify private discovery and the service identity.');
       expect(JSON.stringify(errors.mock.calls)).not.toContain('/private/path');
 
       unavailable = false;

@@ -91,6 +91,11 @@ export class DesktopSupervisor {
     return this.serverValue?.agentDescriptor;
   }
 
+  /** The attach-only runner descriptor, when this service can lend the target to a separate workload. */
+  get runnerDescriptor(): string | undefined {
+    return this.serverValue?.runnerDescriptor;
+  }
+
   async open(interactive = true): Promise<void> {
     if (this.closePromise) throw new Error('Desktop supervisor is closing.');
     if (this.opened) return;
@@ -348,6 +353,8 @@ export class DesktopSupervisor {
     try {
       await worker.stop({ failed: failure !== undefined || code !== 0 });
     } catch (error) {
+      this.ownershipUncertain = true;
+      this.reporter.fail(error, 'cleanup', 'worker');
       throw new AggregateError(failure === undefined ? [error] : [failure, error], 'Desktop worker and cleanup failed.');
     } finally {
       this.workers.delete(worker);
@@ -385,21 +392,6 @@ export class DesktopSupervisor {
       if (failures.length) throw new AggregateError(failures, 'Desktop supervisor cleanup failed.');
     })());
   }
-}
-
-export async function claimDesktopWorkload(
-  runId: string,
-  directory?: string,
-  processIdentity?: DesktopWorkloadProcessIdentity,
-): Promise<() => void> {
-  const claim = createDesktopWorkloadClaim({
-    runId,
-    targetId: 'unregistered',
-    targetInstanceId: 'unregistered',
-    directory,
-    processIdentity: processIdentity ?? (await describeDesktopWorkloadOwner()),
-  });
-  return () => claim.release();
 }
 
 function orderServices<T extends { id: string; dependsOn?: readonly string[] }>(services: readonly T[]): readonly T[] {

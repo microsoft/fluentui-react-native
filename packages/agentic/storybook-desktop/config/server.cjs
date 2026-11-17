@@ -134,6 +134,11 @@ async function startDesktopStorybookServer({
         typeof agent.descriptor !== 'string' ||
         typeof agent.readyPath !== 'string' ||
         (agent.root !== undefined && typeof agent.root !== 'string') ||
+        (agent.runner !== undefined &&
+          (typeof agent.runner !== 'object' ||
+            agent.runner === null ||
+            typeof agent.runner.descriptor !== 'string' ||
+            typeof agent.runner.allowPreempt !== 'boolean')) ||
         (agent.application !== undefined &&
           (typeof agent.application !== 'object' ||
             agent.application === null ||
@@ -210,7 +215,11 @@ async function startDesktopStorybookServer({
           ...(maskedFeatures ? { disabledInputFeatures: maskedFeatures } : {}),
           ...(agent
             ? {
-                agent: { descriptor: agent.descriptor, ...(agent.root === undefined ? {} : { root: agent.root }) },
+                agent: {
+                  descriptor: agent.descriptor,
+                  ...(agent.root === undefined ? {} : { root: agent.root }),
+                  ...(agent.runner === undefined ? {} : { runner: agent.runner }),
+                },
                 addSecret: (secret) => report.reporter.addSecret(secret),
               }
             : {}),

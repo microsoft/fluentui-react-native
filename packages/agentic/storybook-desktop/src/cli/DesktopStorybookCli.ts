@@ -1,5 +1,3 @@
-import { spawn } from 'node:child_process';
-import { randomUUID } from 'node:crypto';
 import fs from 'node:fs';
 import { createServer } from 'node:net';
 import path from 'node:path';
@@ -10,7 +8,9 @@ import {
   resolveDesktopTestScope,
 } from '@fluentui-react-native/desktop-test';
 import { selectDesktopRenderer } from '@fluentui-react-native/desktop-test/config';
-import type { ResolvedDesktopTarget } from '@fluentui-react-native/desktop-test';
+import { connectDesktopRunner, defaultRunnerDescriptor } from '@fluentui-react-native/desktop-test/runner-connection';
+import type { DesktopHostedDriverReady, ResolvedDesktopConfig, ResolvedDesktopTarget } from '@fluentui-react-native/desktop-test';
+import type { DesktopRunnerConnection } from '@fluentui-react-native/desktop-test/runner-connection';
 import { runDesktopOperation, type DesktopOperation, type DesktopReportWriter } from '@fluentui-react-native/desktop-test/reporting';
 import { resolveDesktopScopeDomains } from '@fluentui-react-native/desktop-driver/authoring';
 import { formatDesktopReporterValue } from '@fluentui-react-native/desktop-driver/cli/reporter';
@@ -59,6 +59,7 @@ import {
   readDriverManifest,
   type CreateStorybookPrivateStorage,
 } from '../driver/generatedManifest.js';
+import { createStorybookMacOSApplicationLeaseResource, waitForStorybookMacOSApplicationLease } from '../driver/applicationLease.js';
 import { NodeDesktopCommandRunner, STORYBOOK_VERBOSE } from './commandRunner.js';
 import type { DesktopCommandRunner, PreparedDesktopCommand, RunningDesktopCommand } from './commandRunner.js';
 import { formatDesktopStorybookSmokeTestSummary, runDesktopStorybookSmokeTests } from './smokeTests.js';
@@ -67,6 +68,7 @@ import { decideWdioSelection, describeWdioExclusions, listWdioSelection } from '
 import type { WdioSelectionContext } from '../testing/selection.js';
 import { resolveWdioOptions, type DesktopStorybookWdioOptions } from '../config/wdio.js';
 import { connectStoryTraversal } from './storyTraversal.js';
+import { preparePhysicalWindow } from './physicalWindow.js';
 
 type ResolvedDesktopStorybookInstance = DesktopStorybookInstance & {
   driverManifestPath?: string;
@@ -99,8 +101,8 @@ export type DesktopStorybookCliOptions = {
   createPrivateStorage?: CreateStorybookPrivateStorage;
   /** Resolves a Windows or Win32 desktop target's verified application identity for `driver --agent`. */
   resolveDesktopApplication?: typeof resolveDesktopApplication;
-  writeMacOSApplicationLease?: typeof writeMacOSApplicationLease;
-  maintainMacOSApplicationLease?: typeof maintainMacOSApplicationLease;
+  createMacOSApplicationLeaseResource?: typeof createStorybookMacOSApplicationLeaseResource;
+  waitForMacOSApplicationLease?: typeof waitForStorybookMacOSApplicationLease;
   reporter?: DesktopReportWriter;
   reporterMode?: ResolvedDesktopReporterMode;
   services?: DesktopServiceScope;
@@ -117,13 +119,28 @@ export type DesktopStorybookDriverOptions = DesktopStorybookServerOptions & {
   input?: 'accessible' | 'physical';
   /**
    * Protects the driver with a grant authority and publishes one agent's connection descriptor, which the Desktop
-   * Driver MCP adapter reads. WDIO `storybook test` cannot connect to an agent-served driver.
+   * Driver MCP adapter reads. An attach-only runner is published separately for protected story tests.
    */
   agent?: {
     /** The descriptor record name. Defaults to `agent-connection.json`. */
     descriptor?: string;
     /** The private storage root. Defaults to the platform location. */
     root?: string;
+    /** Runner publication settings. Preemption is disabled unless explicitly authorized. */
+    runner?: false | { descriptor?: string; allowPreempt?: boolean };
+  };
+};
+
+export type DesktopStorybookDriverReady = DesktopHostedDriverReady & {
+  integration: {
+    name: 'storybook';
+    details: {
+      services: readonly string[];
+      instanceId: string;
+      storybookPort: number;
+      metroPort: number;
+      driverPort: number;
+    };
   };
 };
 
@@ -132,6 +149,17 @@ export type DesktopStorybookTestOptions = Omit<DesktopStorybookWdioOptions, 'rep
   testReporter?: DesktopStorybookWdioOptions['reporter'];
   url?: string;
   target?: string;
+  attachAgent?: boolean;
+  descriptor?: string;
+  root?: string;
+  preempt?: boolean;
+};
+
+export type ManagedDesktopStorybookTestOptions = {
+  connection: DesktopRunnerConnection;
+  input: 'accessible' | 'physical';
+  storyId?: string;
+  addSecret(secret: string): void;
 };
 
 export class DesktopStorybookCli {
@@ -153,8 +181,8 @@ export class DesktopStorybookCli {
   private readonly createPrivateStorage: CreateStorybookPrivateStorage;
   private readonly driverHandoffs = new Map<string, string>();
   private readonly resolveDesktopApplication: typeof resolveDesktopApplication;
-  private readonly writeMacOSApplicationLease: typeof writeMacOSApplicationLease;
-  private readonly maintainMacOSApplicationLease: typeof maintainMacOSApplicationLease;
+  private readonly createMacOSApplicationLeaseResource: typeof createStorybookMacOSApplicationLeaseResource;
+  private readonly waitForMacOSApplicationLease: typeof waitForStorybookMacOSApplicationLease;
   private readonly reporter?: DesktopReportWriter;
   private readonly reporterMode?: ResolvedDesktopReporterMode;
   private readonly structuredOutput: Pick<NodeJS.WriteStream, 'write'>;
@@ -199,8 +227,8 @@ export class DesktopStorybookCli {
     this.resolveNativeDriver = options.resolveNativeDriver ?? resolveNativeDesktopDriver;
     this.createPrivateStorage = options.createPrivateStorage ?? createStorybookPrivateStorage;
     this.resolveDesktopApplication = options.resolveDesktopApplication ?? resolveDesktopApplication;
-    this.writeMacOSApplicationLease = options.writeMacOSApplicationLease ?? writeMacOSApplicationLease;
-    this.maintainMacOSApplicationLease = options.maintainMacOSApplicationLease ?? maintainMacOSApplicationLease;
+    this.createMacOSApplicationLeaseResource = options.createMacOSApplicationLeaseResource ?? createStorybookMacOSApplicationLeaseResource;
+    this.waitForMacOSApplicationLease = options.waitForMacOSApplicationLease ?? waitForStorybookMacOSApplicationLease;
   }
 
   async server(platform: Platforms, options: DesktopStorybookServerOptions = {}): Promise<void> {
@@ -249,6 +277,45 @@ export class DesktopStorybookCli {
   }
 
   async driver(platform: Platforms, options: DesktopStorybookDriverOptions = {}): Promise<void> {
+    const failures: unknown[] = [];
+    try {
+      const ready = await this.startDriver(platform, options);
+      const { details } = ready.integration;
+      if (this.reporterMode === 'json' || this.reporterMode === 'ndjson') {
+        this.writeStructured({
+          type: 'ready',
+          url: ready.url,
+          targetId: ready.targetId,
+          endpoint: platform,
+          renderer: this.renderer(platform),
+          runId: this.reporter?.runId,
+          ...(ready.agentDescriptor ? { agentDescriptor: ready.agentDescriptor } : {}),
+          ...(ready.runnerDescriptor ? { runnerDescriptor: ready.runnerDescriptor } : {}),
+          integration: ready.integration,
+        });
+      } else {
+        this.output.write(
+          `Storybook instance ${details.instanceId}: channel=${details.storybookPort}, metro=${details.metroPort}, driver=${details.driverPort}` +
+            `${ready.agentDescriptor ? `, agent=${ready.agentDescriptor}` : ''}` +
+            `${ready.runnerDescriptor ? `, runner=${ready.runnerDescriptor}` : ''}\n`,
+        );
+      }
+      this.onReady?.();
+      await this.services.guard(this.services.waitForStop());
+    } catch (error) {
+      failures.push(error);
+    }
+    try {
+      if (this.ownsServices) await this.services.close();
+    } catch (error) {
+      failures.push(error);
+    }
+    if (failures.length === 1) throw failures[0];
+    if (failures.length > 1) throw new AggregateError(failures, 'Storybook driver execution and cleanup failed.');
+  }
+
+  /** Starts the hosted services in the supplied scope without presenting readiness or waiting for shutdown. */
+  async startDriver(platform: Platforms, options: DesktopStorybookDriverOptions = {}): Promise<DesktopStorybookDriverReady> {
     validateServerOptions(options);
     validateDriverHost(options.host);
     const wdio = resolveWdioOptions({ ...this.config.wdio, ...(options.input ? { input: options.input } : {}) });
@@ -256,6 +323,14 @@ export class DesktopStorybookCli {
       descriptor: options.agent.descriptor ?? defaultAgentDescriptor,
       // The channel service runs in another working directory.
       ...(options.agent.root === undefined ? {} : { root: path.resolve(options.agent.root) }),
+      ...(options.agent.runner === false
+        ? {}
+        : {
+            runner: {
+              descriptor: options.agent.runner?.descriptor ?? defaultRunnerDescriptor,
+              allowPreempt: options.agent.runner?.allowPreempt ?? false,
+            },
+          }),
     };
     const command = this.config.getPlatformOptions(platform).server;
     if (command === false || command === undefined) {
@@ -280,78 +355,48 @@ export class DesktopStorybookCli {
       wdio,
     );
     resolvedInstance.driverManifestPath = driverManifest.path;
-    this.services.start('metro', this.prepareCommand(defaultMetroCommand(resolvedInstance), platform, resolvedInstance));
-    const failures: unknown[] = [];
-    try {
-      this.services.start(
-        'storybook-channel',
-        this.prepareCommand(
-          {
-            ...command,
-            env: {
-              ...command.env,
-              ...(options.host ? { STORYBOOK_WS_HOST: options.host } : {}),
-            },
+    if (platform === 'macos') await this.startMacOSApplicationLease(driverManifest.path);
+    const metro = this.services.start('metro', {
+      ...this.prepareCommand(defaultMetroCommand(resolvedInstance), platform, resolvedInstance),
+      listener: { service: 'metro-listener', port: metroPort },
+    });
+    const channel = this.services.start('storybook-channel', {
+      ...this.prepareCommand(
+        {
+          ...command,
+          env: {
+            ...command.env,
+            ...(options.host ? { STORYBOOK_WS_HOST: options.host } : {}),
           },
-          platform,
-          resolvedInstance,
-        ),
-      );
-      await Promise.all([
-        this.services.ready('metro', loopbackUrl(metroPort, '/status'), 120_000, this.fetch),
-        this.services.ready('storybook-channel', loopbackUrl(storybookPort, '/index.json'), 120_000, this.fetch),
-      ]);
-      const agentManifest = driverManifest.manifest.agent;
-      if (agentManifest) {
-        await this.services.readyProcess(
-          'storybook-channel',
-          { tier: 'service-ready', service: 'storybook-channel', descriptor: agentManifest.descriptor },
-          120_000,
-        );
-      }
-      if (this.reporterMode === 'json' || this.reporterMode === 'ndjson') {
-        this.writeStructured({
-          type: 'ready',
-          ...(agentManifest ? { agentDescriptor: agentManifest.descriptor } : {}),
-          services: ['metro', 'storybook-channel'],
-          instanceId: resolvedInstance.id,
-          endpoint: platform,
-          renderer: this.renderer(platform),
-          storybookPort,
-          metroPort,
-          driverPort,
-          targetId: this.targetId(platform),
-          runId: this.reporter?.runId,
-        });
-      } else {
-        this.output.write(
-          `Storybook instance ${resolvedInstance.id}: channel=${storybookPort}, metro=${metroPort}, driver=${driverPort}` +
-            `${agentManifest ? `, agent=${agentManifest.descriptor}` : ''}\n`,
-        );
-      }
-      this.onReady?.();
-      // No WDIO run writes the lease an agent's attach session verifies, so the driver keeps it current.
-      await this.services.guard(
-        agentManifest && platform === 'macos'
-          ? this.maintainMacOSApplicationLease(driverManifest.path, this.services.controller.signal, {
-              onWarning: (message) => this.warn(message),
-            })
-          : this.services.waitForStop(),
-      );
-    } catch (error) {
-      failures.push(error);
-    }
-    try {
-      if (this.ownsServices) await this.services.close();
-    } catch (error) {
-      failures.push(error);
-    }
-    if (failures.length === 1) {
-      throw failures[0];
-    }
-    if (failures.length > 1) {
-      throw new AggregateError(failures, 'Storybook driver execution and cleanup failed.');
-    }
+        },
+        platform,
+        resolvedInstance,
+      ),
+      listener: { service: 'storybook-channel-listener', port: storybookPort },
+    });
+    const [, channelListener] = await Promise.all([
+      this.waitForOwnedService('metro', 'metro-listener', loopbackUrl(metroPort, '/status'), metro),
+      this.waitForOwnedService('storybook-channel', 'storybook-channel-listener', loopbackUrl(storybookPort, '/index.json'), channel),
+    ]);
+    const agentManifest = driverManifest.manifest.agent;
+    const channelReady = await this.services.readyProcess(
+      'storybook-channel',
+      { tier: 'service-ready', service: 'storybook-channel', ...(agentManifest ? { descriptor: agentManifest.descriptor } : {}) },
+      120_000,
+    );
+    assertSameReadinessProducer(channelListener, channelReady);
+    return {
+      targetId: this.targetId(platform),
+      url: loopbackUrl(driverPort),
+      ...(agentManifest ? { agentDescriptor: agentManifest.descriptor } : {}),
+      ...(agentManifest?.runner ? { runnerDescriptor: agentManifest.runner.descriptor } : {}),
+      ...(agentManifest?.root ? { root: agentManifest.root } : {}),
+      serviceReady: channelReady,
+      integration: {
+        name: 'storybook',
+        details: { services: ['metro', 'storybook-channel'], instanceId: resolvedInstance.id, storybookPort, metroPort, driverPort },
+      },
+    };
   }
 
   async manifest(platform: Platforms, outputPath?: string): Promise<string> {
@@ -367,6 +412,27 @@ export class DesktopStorybookCli {
   }
 
   async test(platform: Platforms, options: DesktopStorybookTestOptions = {}): Promise<void> {
+    await this.testInternal(platform, options);
+  }
+
+  /** Runs a trusted declared suite against the host's verified runner without claiming or starting another driver. */
+  async testManaged(platform: Platforms, options: ManagedDesktopStorybookTestOptions): Promise<void> {
+    await this.testInternal(
+      platform,
+      { attachAgent: true, input: options.input, ...(options.storyId ? { story: options.storyId } : {}) },
+      options,
+    );
+  }
+
+  private async testInternal(
+    platform: Platforms,
+    options: DesktopStorybookTestOptions,
+    managed?: ManagedDesktopStorybookTestOptions,
+  ): Promise<void> {
+    if (!options.attachAgent && (options.descriptor !== undefined || options.root !== undefined || options.preempt)) {
+      throw new TypeError('--descriptor, --root and --preempt require --attach-agent.');
+    }
+    if (options.list && options.attachAgent) throw new TypeError('--list does not attach to an agent.');
     const overrides: DesktopStorybookWdioOptions = {
       ...(options.clickMode === undefined ? {} : { clickMode: options.clickMode }),
       ...(options.input === undefined ? {} : { input: options.input }),
@@ -386,6 +452,9 @@ export class DesktopStorybookCli {
         ? resolveWdioOptions({ ...initialSettings, input: connection.input })
         : initialSettings;
     const manifest = await this.createStoryManifest(this.config, platform);
+    if (managed?.storyId && !manifest.entries.some((entry) => entry.id === managed.storyId && entry.wdio)) {
+      throw new Error('The requested exact story ID is not an executable story in the current manifest.');
+    }
     const scope = this.scopeContext(platform);
     const selection = decideWdioSelection(manifest, settings, { platform, scope });
     if (selection.stories.length === 0) {
@@ -398,14 +467,34 @@ export class DesktopStorybookCli {
       return;
     }
     const activeConnection = connection ?? this.testConnection(platform, options);
+    if (managed && managed.connection.url !== activeConnection.url) {
+      throw new Error('The hosted Storybook driver no longer matches the verified workload connection.');
+    }
     if (platform === 'macos' && !options.url) {
-      await this.writeMacOSApplicationLease(desktopStorybookDriverManifestPath(this.config.projectRoot, 'macos'), settings.timeoutMs);
+      await this.waitForMacOSApplicationLease(desktopStorybookDriverManifestPath(this.config.projectRoot, 'macos'), {
+        timeoutMs: settings.timeoutMs,
+        signal: this.services.controller.signal,
+        createStorage: this.createPrivateStorage,
+      });
     }
     const summarize = (operation: DesktopOperation, wdio: readonly WdioStoryTestResult[]) =>
       operation.summarize(formatDesktopStorybookSmokeTestSummary({ tests: [], wdio }));
     await this.operation('Story tests', async (operation) => {
       try {
-        if (platform === 'macos' && settings.input === 'physical') {
+        if (activeConnection.runner && !this.reporter) throw new Error('Protected story tests require a report collector.');
+        const runner = managed
+          ? { connection: managed.connection, addSecret: managed.addSecret }
+          : activeConnection.runner
+            ? {
+                connection: await connectDesktopRunner({
+                  ...activeConnection.runner,
+                  expect: { targetId: activeConnection.targetId, url: activeConnection.url },
+                  addSecret: (secret) => this.reporter!.addSecret(secret),
+                }),
+                preempt: options.preempt,
+              }
+            : undefined;
+        if (platform === 'macos' && settings.input === 'physical' && !runner) {
           const preparation = await this.connectStoryTraversal({
             url: activeConnection.url,
             targetId: activeConnection.targetId,
@@ -419,7 +508,8 @@ export class DesktopStorybookCli {
         const results = await runWdioStoryTests(
           {
             ...settings,
-            ...activeConnection,
+            targetId: activeConnection.targetId,
+            url: activeConnection.url,
             config: this.config,
             manifest,
             platform,
@@ -428,6 +518,13 @@ export class DesktopStorybookCli {
             report: this.reporter,
             signal: this.services.controller.signal,
             input: settings.input,
+            ...(runner ? { runner } : {}),
+            ...(runner && platform === 'macos' && settings.input === 'physical'
+              ? {
+                  prepareSession: (session) =>
+                    preparePhysicalWindow(session, AbortSignal.any([this.services.controller.signal, AbortSignal.timeout(10_000)])),
+                }
+              : {}),
           },
           this.runner,
         );
@@ -470,12 +567,23 @@ export class DesktopStorybookCli {
   private testConnection(
     platform: Platforms,
     options: DesktopStorybookTestOptions,
-  ): { input?: 'accessible' | 'physical'; targetId: string; url: string } {
+  ): {
+    input?: 'accessible' | 'physical';
+    targetId: string;
+    url: string;
+    runner?: { descriptor: string; root?: string };
+  } {
     if (options.url || options.target) {
       if (!options.url || !options.target) {
         throw new Error('Pass --url and --target together, or omit both to use the running Storybook driver instance.');
       }
-      return { targetId: options.target, url: options.url };
+      return {
+        targetId: options.target,
+        url: options.url,
+        ...(options.attachAgent
+          ? { runner: { descriptor: options.descriptor ?? defaultRunnerDescriptor, ...(options.root ? { root: options.root } : {}) } }
+          : {}),
+      };
     }
     const manifestPath = desktopStorybookDriverManifestPath(this.config.projectRoot, platform);
     if (!fs.existsSync(manifestPath)) {
@@ -501,14 +609,24 @@ export class DesktopStorybookCli {
     ) {
       throw new Error(`Invalid Storybook driver instance at ${manifestPath}; restart storybook driver --${platform}.`);
     }
-    if ('agent' in manifest && manifest.agent !== undefined) {
-      // Every route of an agent-served driver requires a grant, and WDIO holds none.
+    if (manifest.agent && !options.attachAgent) {
+      throw new Error(`The Storybook driver instance at ${manifestPath} serves an agent; pass --attach-agent to run storybook test.`);
+    }
+    if (options.attachAgent && !manifest.agent?.runner) {
       throw new Error(
-        `The Storybook driver instance at ${manifestPath} serves an agent; restart storybook driver --${platform} without --agent to run storybook test.`,
+        `The Storybook driver instance at ${manifestPath} has no runner publication; restart storybook driver --${platform} --agent.`,
       );
     }
     const input = driverManifestInput(manifest);
-    return { targetId: manifest.targetId, url: loopbackUrl(manifest.driverPort), ...(input ? { input } : {}) };
+    const root = options.root ?? manifest.agent?.root;
+    return {
+      targetId: manifest.targetId,
+      url: loopbackUrl(manifest.driverPort),
+      ...(input ? { input } : {}),
+      ...(options.attachAgent
+        ? { runner: { descriptor: options.descriptor ?? manifest.agent!.runner!.descriptor, ...(root ? { root } : {}) } }
+        : {}),
+    };
   }
 
   printInstance(platform: Platforms): void {
@@ -525,12 +643,12 @@ export class DesktopStorybookCli {
 
   /** Returns the registered claim identity, synthesizing a stable target for legacy Storybook configuration. */
   workloadTarget(platform: Platforms): ResolvedDesktopTarget {
-    const configured = this.config.getDesktopTarget(platform);
+    const configured = this.config.getDesktopTarget?.(platform);
     if (configured) {
       return platform === 'macos' ? selectDesktopRenderer(configured, this.renderer(platform)) : configured;
     }
 
-    const id = this.targetId(platform);
+    const id = this.config.appName ? this.targetId(platform) : `storybook-${this.instance.id}-${platform}`;
     const nativeDriver = this.config.getNativeDriverOptions(platform);
     return {
       endpoint: platform,
@@ -543,9 +661,9 @@ export class DesktopStorybookCli {
         kind: platform === 'win32' ? 'rex' : 'react-native-test-app',
         ownership: 'external',
         renderer: this.renderer(platform),
-        ...(nativeDriver !== false && nativeDriver.application ? { application: nativeDriver.application } : {}),
+        ...(nativeDriver && nativeDriver.application ? { application: nativeDriver.application } : {}),
       },
-      ...(nativeDriver === false
+      ...(!nativeDriver
         ? {}
         : {
             nativeDriver: {
@@ -554,6 +672,20 @@ export class DesktopStorybookCli {
               ...(nativeDriver.installRoot ? { installRoot: nativeDriver.installRoot } : {}),
             },
           }),
+    };
+  }
+
+  /** Legacy Storybook configuration has no declared managed suites; retain its real target identity with an empty catalog. */
+  managementConfig(platform: Platforms): ResolvedDesktopConfig {
+    if (this.config.desktop) return this.config.desktop;
+    const target = this.workloadTarget(platform);
+    return {
+      config: { schemaVersion: 1, targets: { [platform]: { host: target.host } }, suites: {} },
+      configPath: target.configPath,
+      projectRoot: target.projectRoot,
+      targets: { [platform]: target },
+      reporting: { artifactsRoot: path.join(target.projectRoot, 'artifacts', 'desktop') },
+      testScopes: resolveDesktopScopeDomains(),
     };
   }
 
@@ -720,12 +852,16 @@ export class DesktopStorybookCli {
           if (!index.entries.some((entry) => entry.id === id)) throw new Error(`The Win32 catalog is missing required story "${id}".`);
       }
       if (native.kind === 'windows' && smoke.metro !== false) {
-        this.services.start('metro', this.prepareCommand(smoke.metro ?? defaultMetroCommand(instance), platform, instance));
-        await this.services.ready(
+        const metro = this.services.start('metro', {
+          ...this.prepareCommand(smoke.metro ?? defaultMetroCommand(instance), platform, instance),
+          listener: { service: 'metro-listener', port: instance.metroPort },
+        });
+        await this.waitForOwnedService(
           'metro',
+          'metro-listener',
           smoke.metroUrl ?? loopbackUrl(instance.metroPort, '/status'),
+          metro,
           smoke.startupTimeoutMs,
-          this.fetch,
         );
       }
       const startPhase = async (phase: string) => {
@@ -754,6 +890,7 @@ export class DesktopStorybookCli {
                     label: `Storybook ${phase}`,
                     category: 'service',
                     context: { service: `storybook-${phase}` },
+                    listener: { service: 'storybook-channel-listener', port: instance.storybookPort },
                   });
                   void running.completed.then(
                     (code) => {
@@ -762,6 +899,15 @@ export class DesktopStorybookCli {
                     (error: unknown) => this.services.fail(error instanceof Error ? error : new Error(String(error))),
                   );
                   if (!running.waitForReadiness) throw new Error('Native smoke requires correlated channel readiness.');
+                  const listener = await running.waitForReadiness(
+                    { tier: 'service-ready', service: 'storybook-channel-listener' },
+                    smoke.startupTimeoutMs ?? 120_000,
+                    this.services.controller.signal,
+                  );
+                  await this.waitForUrl(new URL('/index.json', serverUrl).href, running, smoke.startupTimeoutMs, {
+                    headers: this.listenerProbeHeaders(running),
+                  });
+                  await this.confirmListenerProbe(running, 'storybook-channel-listener', listener, smoke.startupTimeoutMs);
                   const ready = await running.waitForReadiness(
                     { tier: 'service-ready', service: 'storybook-channel' },
                     smoke.startupTimeoutMs ?? 120_000,
@@ -769,6 +915,7 @@ export class DesktopStorybookCli {
                   );
                   if (ready.service !== 'storybook-channel' || ready.descriptor !== undefined)
                     throw new Error('Native smoke received mismatched channel readiness.');
+                  assertSameReadinessProducer(listener, ready);
                   return ready;
                 },
                 dispose: close,
@@ -876,19 +1023,20 @@ export class DesktopStorybookCli {
   ): Promise<void> {
     const failures: unknown[] = [];
     let primaryFailure: unknown;
+    let applicationStartAttempted = false;
     const serverUrl = smoke.serverUrl ?? loopbackUrl(instance.storybookPort);
     const metroUrl = smoke.metroUrl ?? loopbackUrl(instance.metroPort, '/status');
 
     try {
+      if (platform === 'macos' && instance.driverManifestPath) await this.startMacOSApplicationLease(instance.driverManifestPath);
       const configuredServer = this.config.getPlatformOptions(platform).server;
       const server = smoke.server === false ? undefined : (smoke.server ?? (configuredServer === false ? undefined : configuredServer));
       const metro = smoke.metro === false ? undefined : (smoke.metro ?? defaultMetroCommand(instance));
       const readiness: Promise<void>[] = [];
 
       if (server) {
-        const runningServer = this.services.start(
-          'storybook-channel',
-          this.prepareCommand(
+        const runningServer = this.services.start('storybook-channel', {
+          ...this.prepareCommand(
             {
               ...server,
               env: {
@@ -899,26 +1047,54 @@ export class DesktopStorybookCli {
             platform,
             instance,
           ),
+          listener: { service: 'storybook-channel-listener', port: instance.storybookPort },
+        });
+        readiness.push(
+          (async () => {
+            const listener = await this.waitForOwnedService(
+              'storybook-channel',
+              'storybook-channel-listener',
+              new URL('/index.json', serverUrl).href,
+              runningServer,
+              smoke.startupTimeoutMs,
+            );
+            if (mode === 'stories-and-tests') {
+              const ready = await this.services.readyProcess(
+                'storybook-channel',
+                { tier: 'service-ready', service: 'storybook-channel' },
+                smoke.startupTimeoutMs,
+              );
+              assertSameReadinessProducer(listener, ready);
+            }
+            if (mode === 'stories-and-tests')
+              await this.waitForUrl(loopbackUrl(instance.driverPort, '/status'), runningServer, smoke.startupTimeoutMs);
+          })(),
         );
-        readiness.push(this.waitForUrl(new URL('/index.json', serverUrl).href, runningServer, smoke.startupTimeoutMs));
-        if (mode === 'stories-and-tests') {
-          readiness.push(this.waitForUrl(loopbackUrl(instance.driverPort, '/status'), runningServer, smoke.startupTimeoutMs));
-        }
       } else if (mode === 'stories-and-tests') {
         throw new Error('The stories-and-tests smoke mode requires the Storybook server and embedded Desktop Driver.');
       }
       if (metro) {
-        const runningMetro = this.services.start('metro', this.prepareCommand(metro, platform, instance));
-        readiness.push(this.waitForUrl(metroUrl, runningMetro, smoke.startupTimeoutMs));
+        const runningMetro = this.services.start('metro', {
+          ...this.prepareCommand(metro, platform, instance),
+          listener: { service: 'metro-listener', port: instance.metroPort },
+        });
+        readiness.push(
+          this.waitForOwnedService('metro', 'metro-listener', metroUrl, runningMetro, smoke.startupTimeoutMs).then(() => undefined),
+        );
       }
 
       await this.services.guard(Promise.all(readiness));
+      applicationStartAttempted = true;
       await this.executeAction('run', platform, instance);
       if (mode === 'stories-and-tests' && platform === 'macos') {
         if (!instance.driverManifestPath) {
           throw new Error('The macOS authored-test lifecycle did not create a Desktop Driver manifest.');
         }
-        await this.writeMacOSApplicationLease(instance.driverManifestPath, smoke.startupTimeoutMs ?? 120_000);
+        await this.waitForMacOSApplicationLease(instance.driverManifestPath, {
+          timeoutMs: smoke.startupTimeoutMs ?? 120_000,
+          signal: this.services.controller.signal,
+          createStorage: this.createPrivateStorage,
+        });
       }
       const traversal = instance.driverManifestPath
         ? await this.connectStoryTraversal({
@@ -976,10 +1152,12 @@ export class DesktopStorybookCli {
     } catch (error) {
       primaryFailure = error;
     } finally {
-      try {
-        await this.executePlan(smoke.stop!, platform, instance, true);
-      } catch (error) {
-        failures.push(error);
+      if (applicationStartAttempted) {
+        try {
+          await this.executePlan(smoke.stop!, platform, instance, true);
+        } catch (error) {
+          failures.push(error);
+        }
       }
       try {
         if (this.ownsServices) await this.services.close();
@@ -1094,6 +1272,25 @@ export class DesktopStorybookCli {
     const handoff = await writeDesktopStorybookDriverManifest(driverManifest, outputPath, this.createPrivateStorage);
     this.driverHandoffs.set(outputPath, handoff);
     return { manifest: driverManifest, path: outputPath };
+  }
+
+  private async startMacOSApplicationLease(manifestPath: string): Promise<void> {
+    const handoff = this.driverHandoffs.get(manifestPath);
+    if (!handoff) throw new Error('The Storybook macOS lease requires its trusted driver manifest handoff.');
+    const target = this.workloadTarget('macos');
+    await this.services.contribute(
+      [
+        this.createMacOSApplicationLeaseResource({
+          manifestPath,
+          handoff,
+          createStorage: this.createPrivateStorage,
+          addSecret: (secret) => this.reporter?.addSecret(secret),
+          onFailure: (error) => this.services.fail(error),
+          onWarning: (message) => this.warn(message),
+        }),
+      ],
+      { targetId: target.id, targetInstanceId: target.instanceId },
+    );
   }
 
   private warn(message: string): void {
@@ -1281,18 +1478,19 @@ export class DesktopStorybookCli {
     throw new Error(`Timed out after ${timeoutMs} ms waiting for Storybook story "${storyId}" to render.`, { cause: lastError });
   }
 
-  private async waitForUrl(url: string, process: RunningDesktopCommand, timeoutMs = 120_000): Promise<void> {
+  private async waitForUrl(url: string, process: RunningDesktopCommand, timeoutMs = 120_000, init?: RequestInit): Promise<void> {
     const deadline = Date.now() + timeoutMs;
     let lastError: unknown;
 
     while (Date.now() < deadline) {
       const state = await Promise.race([
         process.completed.then((exitCode) => ({ exitCode })),
-        this.fetchWithTimeout(url, undefined, Math.min(5000, Math.max(1, deadline - Date.now())))
+        this.fetchWithTimeout(url, init, Math.min(5000, Math.max(1, deadline - Date.now())))
           .then((response) => {
             if (!response.ok) {
               throw new Error(`${url} returned ${response.status}.`);
             }
+
             return { ready: true as const };
           })
           .catch((error: unknown) => ({ error })),
@@ -1308,6 +1506,35 @@ export class DesktopStorybookCli {
     }
 
     throw new Error(`Timed out waiting for ${url}: ${(lastError as Error)?.message ?? 'not ready'}`);
+  }
+
+  private listenerProbeHeaders(process: RunningDesktopCommand): Record<string, string> {
+    if (!process.listenerProbe) throw new Error('Owned HTTP readiness requires a correlated listener probe.');
+    return { 'x-furn-desktop-listener-probe': process.listenerProbe };
+  }
+
+  private async confirmListenerProbe(
+    process: RunningDesktopCommand,
+    service: string,
+    listener: { processId: number; incarnation: string },
+    timeoutMs = 120_000,
+  ): Promise<void> {
+    if (!process.waitForListenerProbe) throw new Error('Owned HTTP readiness requires a correlated listener probe.');
+    const probed = await process.waitForListenerProbe(service, timeoutMs, this.services.controller.signal);
+    assertSameReadinessProducer(listener, probed);
+  }
+
+  private async waitForOwnedService(id: string, service: string, url: string, process: RunningDesktopCommand, timeoutMs = 120_000) {
+    const headers = this.listenerProbeHeaders(process);
+    const listener = await this.services.readyProcess(id, { tier: 'service-ready', service }, timeoutMs);
+    await this.services.ready(
+      id,
+      url,
+      timeoutMs,
+      (input, init) => this.fetch(input, { ...init, headers }),
+      () => this.confirmListenerProbe(process, service, listener, timeoutMs),
+    );
+    return listener;
   }
 
   private async getJson(url: URL, init?: RequestInit, timeoutMs?: number): Promise<Record<string, unknown>> {
@@ -1384,6 +1611,15 @@ export class DesktopStorybookCli {
   }
 }
 
+function assertSameReadinessProducer(
+  listener: { processId: number; incarnation: string },
+  service: { processId: number; incarnation: string },
+): void {
+  if (listener.processId !== service.processId || listener.incarnation !== service.incarnation) {
+    throw new Error('The Storybook channel listener and driver were published by different processes.');
+  }
+}
+
 function reportOutput(
   reporter: DesktopReportWriter | undefined,
   level: 'info' | 'warning',
@@ -1446,220 +1682,6 @@ function writeMacOSInstanceConfig(projectRoot: string, instance: DesktopStoryboo
     fs.writeFileSync(xcconfigPath, content);
   }
   return xcconfigPath;
-}
-
-export type MacOSRunningApplication = {
-  executablePath: string;
-  processId: number;
-  processStartedAt: number;
-};
-
-export async function writeMacOSApplicationLease(manifestPath: string, timeoutMs = 120_000): Promise<void> {
-  if (process.platform !== 'darwin') {
-    throw new Error('A macOS application lease can only be written on macOS.');
-  }
-  const application = await readMacOSLeaseApplication(manifestPath);
-  const runningApplication = await waitForMacOSApplication(application.bundleIdentifier, timeoutMs);
-  writeMacOSApplicationLeaseFile(application, runningApplication);
-}
-
-export type MaintainMacOSApplicationLeaseOptions = {
-  intervalMs?: number;
-  /** Replaces the AppKit query; tests supply it. */
-  queryApplications?: (bundleIdentifier: string) => Promise<MacOSRunningApplication[]>;
-  /** Receives each distinct query failure once, such as more than one running instance. */
-  onWarning?: (message: string) => void;
-  /** Trusted OS storage adapter override for controlled fixtures. */
-  createPrivateStorage?: CreateStorybookPrivateStorage;
-};
-
-/**
- * Keeps the manifest's application lease naming the one running instance, rewriting it whenever that process changes
- * or the lease disappears. A failed or ambiguous query leaves the lease unchanged. Runs until the signal aborts and then
- * rejects with its reason.
- */
-export async function maintainMacOSApplicationLease(
-  manifestPath: string,
-  signal: AbortSignal,
-  { intervalMs = 2000, queryApplications, onWarning, createPrivateStorage }: MaintainMacOSApplicationLeaseOptions = {},
-): Promise<never> {
-  if (!queryApplications && process.platform !== 'darwin') {
-    throw new Error('A macOS application lease can only be written on macOS.');
-  }
-  const query = queryApplications ?? queryMacOSApplications;
-  const application = await readMacOSLeaseApplication(manifestPath, createPrivateStorage);
-  let leased: string | undefined;
-  let warned: string | undefined;
-  for (;;) {
-    signal.throwIfAborted();
-    try {
-      const applications = await query(application.bundleIdentifier);
-      if (applications.length > 1) {
-        throw new Error(`More than one running application has bundle identifier "${application.bundleIdentifier}".`);
-      }
-      const [running] = applications;
-      if (running) {
-        const identity = `${running.processId}:${running.processStartedAt}`;
-        if (identity !== leased || !fs.existsSync(application.leasePath)) {
-          writeMacOSApplicationLeaseFile(application, running);
-          leased = identity;
-        }
-      }
-      warned = undefined;
-    } catch (error) {
-      const message = errorMessage(error);
-      if (message !== warned) onWarning?.(message);
-      warned = message;
-    }
-    await delay(intervalMs, signal);
-  }
-}
-
-async function readMacOSLeaseApplication(
-  manifestPath: string,
-  createStorage?: CreateStorybookPrivateStorage,
-): Promise<{ bundleIdentifier: string; leaseNonce: string; leasePath: string }> {
-  const manifest = await readDriverManifest(manifestPath, undefined, createStorage);
-  const application = manifest.application;
-  if (!application?.bundleIdentifier || !application.leaseNonce || !application.leasePath) {
-    throw new Error(`The Desktop Driver manifest at "${manifestPath}" does not contain a complete macOS application descriptor.`);
-  }
-  return { bundleIdentifier: application.bundleIdentifier, leaseNonce: application.leaseNonce, leasePath: application.leasePath };
-}
-
-export function writeMacOSApplicationLeaseFile(
-  application: { bundleIdentifier: string; leaseNonce: string; leasePath: string },
-  runningApplication: MacOSRunningApplication,
-): void {
-  validateMacOSRunningApplication(runningApplication);
-  const processStartedAt = new Date(runningApplication.processStartedAt * 1000);
-  const temporaryPath = `${application.leasePath}.${randomUUID()}.tmp`;
-  fs.mkdirSync(path.dirname(application.leasePath), { mode: 0o700, recursive: true });
-  try {
-    fs.writeFileSync(
-      temporaryPath,
-      `${JSON.stringify(
-        {
-          bundleIdentifier: application.bundleIdentifier,
-          endpoint: 'macos',
-          executablePath: runningApplication.executablePath,
-          nonce: application.leaseNonce,
-          processId: runningApplication.processId,
-          processStartedAt: processStartedAt.toISOString(),
-          schemaVersion: 1,
-        },
-        null,
-        2,
-      )}\n`,
-      { flag: 'wx', mode: 0o600 },
-    );
-    fs.renameSync(temporaryPath, application.leasePath);
-    fs.chmodSync(application.leasePath, 0o600);
-  } finally {
-    fs.rmSync(temporaryPath, { force: true });
-  }
-}
-
-async function waitForMacOSApplication(bundleIdentifier: string, timeoutMs: number): Promise<MacOSRunningApplication> {
-  const deadline = Date.now() + timeoutMs;
-  let lastError: unknown;
-  do {
-    let output: string;
-    try {
-      output = await queryMacOSApplicationsOutput(bundleIdentifier);
-    } catch (error) {
-      lastError = error;
-      await delay(250);
-      continue;
-    }
-    const applications = parseMacOSRunningApplications(output, bundleIdentifier);
-    if (applications.length === 1) {
-      return applications[0];
-    }
-    await delay(250);
-  } while (Date.now() < deadline);
-  throw new Error(`Timed out waiting for the macOS application "${bundleIdentifier}"${lastError ? `: ${errorMessage(lastError)}` : '.'}`);
-}
-
-async function queryMacOSApplications(bundleIdentifier: string): Promise<MacOSRunningApplication[]> {
-  return parseMacOSRunningApplications(await queryMacOSApplicationsOutput(bundleIdentifier), bundleIdentifier);
-}
-
-function queryMacOSApplicationsOutput(bundleIdentifier: string): Promise<string> {
-  return runProcess('/usr/bin/osascript', [
-    '-l',
-    'JavaScript',
-    '-e',
-    [
-      "ObjC.import('AppKit');",
-      'function run(argv) {',
-      '  const applications = $.NSRunningApplication.runningApplicationsWithBundleIdentifier(argv[0]);',
-      '  const result = [];',
-      '  for (let index = 0; index < applications.count; index += 1) {',
-      '    const application = applications.objectAtIndex(index);',
-      '    const executableURL = application.executableURL;',
-      '    const launchDate = application.launchDate;',
-      '    result.push({',
-      '      executablePath: executableURL ? ObjC.unwrap(executableURL.path) : null,',
-      '      processId: Number(application.processIdentifier),',
-      '      processStartedAt: launchDate ? Number(launchDate.timeIntervalSince1970) : null,',
-      '    });',
-      '  }',
-      '  return JSON.stringify(result);',
-      '}',
-    ].join('\n'),
-    bundleIdentifier,
-  ]);
-}
-
-export function parseMacOSRunningApplications(output: string, bundleIdentifier: string): MacOSRunningApplication[] {
-  const value: unknown = JSON.parse(output);
-  if (!Array.isArray(value)) {
-    throw new Error(`The macOS application query for "${bundleIdentifier}" returned a non-array result.`);
-  }
-  if (value.length > 1) {
-    throw new Error(`More than one running application has bundle identifier "${bundleIdentifier}".`);
-  }
-  return value.map((entry) => {
-    if (!entry || typeof entry !== 'object') {
-      throw new Error(`The macOS application query for "${bundleIdentifier}" returned an invalid application record.`);
-    }
-    const application = entry as Partial<MacOSRunningApplication>;
-    validateMacOSRunningApplication(application);
-    return application as MacOSRunningApplication;
-  });
-}
-
-function validateMacOSRunningApplication(application: Partial<MacOSRunningApplication>): void {
-  if (typeof application.executablePath !== 'string' || !application.executablePath) {
-    throw new Error('The running macOS application does not expose an executable path.');
-  }
-  if (!Number.isInteger(application.processId) || (application.processId ?? 0) <= 0) {
-    throw new Error('The running macOS application does not expose a valid process identifier.');
-  }
-  if (!Number.isFinite(application.processStartedAt) || (application.processStartedAt ?? 0) <= 0) {
-    throw new Error(`Could not determine the start time for macOS process ${String(application.processId ?? 'unknown')}.`);
-  }
-}
-
-function runProcess(command: string, args: readonly string[]): Promise<string> {
-  return new Promise((resolve, reject) => {
-    const child = spawn(command, [...args], {
-      stdio: ['ignore', 'pipe', 'pipe'],
-    });
-    const stdout: Buffer[] = [];
-    const stderr: Buffer[] = [];
-    child.stdout.on('data', (chunk: Buffer) => stdout.push(chunk));
-    child.stderr.on('data', (chunk: Buffer) => stderr.push(chunk));
-    child.once('error', reject);
-    child.once('close', (code) => {
-      if (code === 0) {
-        resolve(Buffer.concat(stdout).toString('utf8'));
-      } else {
-        reject(new Error(Buffer.concat(stderr).toString('utf8') || `${command} exited with code ${String(code)}.`));
-      }
-    });
-  });
 }
 
 async function findAvailablePort(

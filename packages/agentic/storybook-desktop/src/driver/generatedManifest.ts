@@ -134,9 +134,8 @@ export async function publishDriverManifest(
   try {
     await storage.publish(runtimeModule, runtimeContents);
     const previousLease = await storage.read(leaseName);
-    if (previousLease !== undefined && !(await storage.remove(leaseName, previousLease))) {
-      throw new Error('Desktop Storybook application lease changed during publication.');
-    }
+    if (previousLease !== undefined)
+      throw new Error('Desktop Storybook application lease is already owned; the existing record was preserved.');
     if (manifest.agent) fs.rmSync(manifest.agent.readyPath, { force: true });
     // No secret is present here; privateStorage owns credential and runtime-module publication.
     const pending = `${outputPath}.${id}.pending`;

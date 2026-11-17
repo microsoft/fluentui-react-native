@@ -419,8 +419,8 @@ async function route(context: RouteContext, sessions: SessionManager, targets: T
       }
       const target = visibleTargets(context, targets).find(({ id }) => id === request.target);
       if (!target) throw new WebDriverError('session not created', 'No registered target matches the runner request.');
-      if (target.storyOrchestrator || target.launchModes?.length !== 1 || target.launchModes[0] !== 'attach') {
-        throw new WebDriverError('unsupported operation', 'Runner handoff requires a generic attach-only target.');
+      if (target.launchModes?.length !== 1 || target.launchModes[0] !== 'attach') {
+        throw new WebDriverError('unsupported operation', 'Runner handoff requires an attach-only target.');
       }
       let child: ReturnType<DesktopAuthority['delegateRunner']> | undefined;
       try {

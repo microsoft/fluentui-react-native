@@ -9,7 +9,7 @@ owner_paths:
 
 This document states what the neutral desktop workload host does today, what it deliberately refuses, and the latest native result per endpoint.
 Done means the stated implementation exists and is covered by deterministic tests; it does not mean every native endpoint is qualified.
-The package is the intended neutral workload host; the existing Storybook lifecycle takeover is transitional.
+The package is the neutral workload host; Storybook contributes its domain resources to the same owner.
 No new coordinator package, daemon, dynamic plugin loader, or package rename is required.
 Parent issue: [#4435](https://github.com/microsoft/fluentui-react-native/issues/4435).
 See [lifecycle](lifecycle.md), [commands](commands.md), [native qualification](native-qualification.md), and `@fluentui-react-native/desktop-driver/references/current-status.md` for the native and driver boundaries.
@@ -18,7 +18,7 @@ See [lifecycle](lifecycle.md), [commands](commands.md), [native qualification](n
 
 Configuration, service composition, reporting, cleanup fencing and generic handoff are implemented.
 macOS application ownership and Windows/Win32 application ownership are implemented and qualified on the endpoints named below.
-Storybook lifecycle relocation, management transport, repeated-run reliability and required native CI remain open.
+The neutral Storybook execution seam has portable coverage; native qualification of the new paths, repeated-run reliability and required native CI remain open.
 Native results are per endpoint and tied to the revision that produced them.
 
 - **App/suite configuration and standalone use:** Done. Storybook is optional and the runtime boundary rejects React, React Native and Storybook dependencies. See [Configuration and standalone use](#configuration-and-standalone-use).
@@ -39,15 +39,15 @@ Native results are per endpoint and tied to the revision that produced them.
 
 - **Generated manifest provenance:** Qualified (Windows Fabric and Win32 Paper hosted smokes); the macOS consumer smokes were blocked by Accessibility and are not qualified. See [Generated manifest provenance](#generated-manifest-provenance). Tracking: [#4441](https://github.com/microsoft/fluentui-react-native/issues/4441); landed in [#4490](https://github.com/microsoft/fluentui-react-native/pull/4490).
 
-- **MCP/WDIO handoff:** Qualified for the generic attach-only phase on macOS AppKit and Windows/Win32 fixtures. Storybook handoff is Deferred. See [MCP/WDIO handoff](#mcpwdio-handoff). Tracking: [#4449](https://github.com/microsoft/fluentui-react-native/issues/4449); landed in [#4491](https://github.com/microsoft/fluentui-react-native/pull/4491).
+- **MCP/WDIO handoff:** Qualified for the earlier generic attach-only phase on macOS AppKit and Windows/Win32 fixtures. Storybook handoff and retained launches have portable coverage but need native qualification. See [MCP/WDIO handoff](#mcpwdio-handoff). Tracking: [#4449](https://github.com/microsoft/fluentui-react-native/issues/4449); generic phase landed in [#4491](https://github.com/microsoft/fluentui-react-native/pull/4491).
 
-- **Storybook resource contributions:** In progress. The integration keeps its CLI lifecycle. See [Storybook resource contributions](#storybook-resource-contributions). Tracking: [#4449](https://github.com/microsoft/fluentui-react-native/issues/4449).
+- **Storybook resource contributions:** Implemented with shared ownership and readiness; native qualification remains open. See [Storybook resource contributions](#storybook-resource-contributions). Tracking: [#4449](https://github.com/microsoft/fluentui-react-native/issues/4449).
 
 - **Cross-service and multi-target claims:** In progress. Exact macOS and Windows exclusion is qualified; broader lifecycle qualification is open. See [Cross-service and multi-target claims](#cross-service-and-multi-target-claims).
 
-- **Persisted run, status and artifact queries:** Done. No management transport. See [Run queries and management](#run-queries-and-management). Tracking: [#4450](https://github.com/microsoft/fluentui-react-native/issues/4450).
+- **Persisted run, status and artifact queries:** Done. The verified management transport exposes bounded queries for connection-owned runs. See [Run queries and management](#run-queries-and-management). Tracking: [#4450](https://github.com/microsoft/fluentui-react-native/issues/4450).
 
-- **Workload management API:** Deferred. See [Run queries and management](#run-queries-and-management). Tracking: [#4450](https://github.com/microsoft/fluentui-react-native/issues/4450).
+- **Workload management API:** Implemented for opted-in generic WDIO and hosted Storybook CSF suites; native qualification is open. See [Run queries and management](#run-queries-and-management). Tracking: [#4450](https://github.com/microsoft/fluentui-react-native/issues/4450).
 
 - **Automatic service reuse and per-user daemon:** Deferred. See [Service reuse](#service-reuse).
 
@@ -184,13 +184,13 @@ Opt-in supervisor launch with neutral exact attach, causal ownership and applica
 ### Open work
 
 - [#4441](https://github.com/microsoft/fluentui-react-native/issues/4441): descendants, interrupted publication on Windows, supervisor-death survivors and live failed-cleanup fault injection.
-- [#4449](https://github.com/microsoft/fluentui-react-native/issues/4449): Storybook lifecycle and lease relocation.
+- [#4449](https://github.com/microsoft/fluentui-react-native/issues/4449): native qualification of the host-owned Storybook lease maintainer and remaining lifecycle migration.
 
 ## Generated manifest provenance
 
 ### Behavior and limits
 
-- Generated driver manifests are strict version 3 and carry no secrets.
+- Generated driver manifests emit strict version 4, accept version 3 for compatibility, and carry no secrets.
 - Credentials use independent bridge and application attachment nonces.
 - The owner-private runtime module holds only bridge data.
 - The parent's handoff pins manifest, credential and runtime hashes and the resolved helper, and the channel child re-verifies the executable before spawning a helper.
@@ -200,13 +200,13 @@ Opt-in supervisor launch with neutral exact attach, causal ownership and applica
 
 ### Open work
 
-- [#4449](https://github.com/microsoft/fluentui-react-native/issues/4449): Storybook lease relocation.
+- [#4449](https://github.com/microsoft/fluentui-react-native/issues/4449): native qualification of the host-owned lease maintainer and version 4 manifest.
 - [#4349](https://github.com/microsoft/fluentui-react-native/issues/4349): consistent helper build policy in required CI.
 - [#4441](https://github.com/microsoft/fluentui-react-native/issues/4441): macOS manifest-path consumer smokes were blocked by Accessibility at the time; macOS requalification is tracked here.
 
 ## MCP/WDIO handoff
 
-Generic attach-only phase.
+Generic and Storybook attach-only runners share the protected reservation.
 
 ### Behavior and limits
 
@@ -218,21 +218,24 @@ Generic attach-only phase.
 - Live and draining grant capacity is reusable beyond 4096 connections; settled history never evicts pending or failed cleanup proof.
 - Broker credentials are scrubbed before user hook import; WDIO receives each worker token through its per-worker `runnerEnv`, not launcher `process.env`.
 - The worker's Node bootstrap and preload window stays trusted.
-- Storybook handoff, retained launches, cross-connection resume and automatic replay are not part of this phase.
+- Storybook workers receive distinct grants while their runner holds one reservation across cases.
+- Supervisor-owned applications remain retained across attached sessions; external applications are never promoted to owned.
+- Cross-connection resume and automatic replay remain unsupported.
 
 ### Open work
 
-- [#4449](https://github.com/microsoft/fluentui-react-native/issues/4449): Storybook handoff and preview lifecycle.
+- [#4449](https://github.com/microsoft/fluentui-react-native/issues/4449): native Storybook handoff, preview lifecycle and retained-launch qualification.
 - [#4349](https://github.com/microsoft/fluentui-react-native/issues/4349): the unchanged `boundedCommand` SIGKILL/SIGTERM assertion that blocks macOS portable aggregate acceptance.
 
 ## Storybook resource contributions
 
 ### Behavior and limits
 
-- The current integration substitutes its own CLI lifecycle.
+- Desktop-test and the standalone Storybook CLI share run ownership, typed hosted-driver readiness, and verified management publication.
 - The channel and driver child stay in place until relocation is justified and qualified.
-- Channel lifecycle placement and application lease ownership have not moved.
-- Storybook targets are always attach-only and advertise only `attach`; the supervisor never launches or terminates a Storybook app.
+- The macOS application lease is maintained by a host-owned read-only resource; Windows smoke uses a retained application owner in its channel child.
+- Agent-served Storybook targets advertise attach-only sessions; owned smoke may launch and stop its exact application.
+- Metro and channel readiness require correlated owned-listener receipts in addition to their HTTP and driver readiness.
 - Protected story args are refused with `story-args-unsupported`, leaving the story unchanged and no value in an error or the journal.
 - The non-agent smoke orchestrator intentionally uses the legacy transport.
 - An ambiguous mutation is never retried.
@@ -241,7 +244,7 @@ Generic attach-only phase.
 
 ### Open work
 
-- [#4449](https://github.com/microsoft/fluentui-react-native/issues/4449): lifecycle takeover and lease relocation after the handoff and preview lifecycle work.
+- [#4449](https://github.com/microsoft/fluentui-react-native/issues/4449): qualify the combined handoff, lease and smoke lifecycle on each native endpoint.
 - [#4441](https://github.com/microsoft/fluentui-react-native/issues/4441): launch-capable discovery comparison, quarantine recovery, and live failed-cleanup retention per endpoint.
 - [#4348](https://github.com/microsoft/fluentui-react-native/issues/4348): Windows and Win32 capture qualification.
 
@@ -262,13 +265,14 @@ Generic attach-only phase.
 ### Behavior and limits
 
 - A harness-local read service and client expose atomic snapshots, terminal evidence, scoped expiring grants, bounded pages and allowlisted opaque artifact IDs.
-- There is no management transport.
-- Future management selects only declared workload IDs, never commands, paths or environment.
-- Lifecycle and handoff gates still apply to any management API.
+- A separately verified supervisor transport exposes only opted-in workload IDs and allowed lanes, never commands, paths or environment.
+- Per-connection principals can run and cancel their own workloads; cancellation does not stop the host and failed drain fences admission.
+- Hosted Storybook CSF work borrows the active driver; it does not perform the smoke build or launch lifecycle.
+- Native supervisor-mode qualification has not been run on the combined implementation.
 
 ### Open work
 
-- [#4450](https://github.com/microsoft/fluentui-react-native/issues/4450): management facet and transport.
+- [#4450](https://github.com/microsoft/fluentui-react-native/issues/4450): native supervisor-mode qualification, fault injection and credential evidence.
 
 ## Service reuse
 

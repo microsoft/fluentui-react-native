@@ -133,6 +133,23 @@ describe('native runner selection', () => {
     expect(contents).toBe(replacement);
   });
 
+  test('supervisor descriptor cleanup verifies the management owner rather than an unrelated root identity', async () => {
+    const owned = JSON.stringify({ version: 1, management: { service: { pid: 123 } } });
+    const foreign = JSON.stringify({ version: 1, service: { pid: 123 }, management: { service: { pid: 456 } } });
+    const records = new Map([
+      ['owned-supervisor.json', owned],
+      ['foreign-supervisor.json', foreign],
+    ]);
+    const storage = {
+      read: async (name: string) => records.get(name),
+      remove: async (name: string, contents: string) => records.get(name) === contents && records.delete(name),
+    };
+    await expect(removeNativeRunnerDescriptors(storage, [...records.keys()], 123)).resolves.toEqual({
+      removed: ['owned-supervisor.json'],
+      retained: ['foreign-supervisor.json'],
+    });
+  });
+
   test('ownership alone cannot qualify a native consumer when accessibility input was not disabled', () => {
     const ownershipOnly = { executed: 1, passed: 1, skipped: 1, failed: 0 };
     expect(() => nativeRunnerExecution(ownershipOnly, 'handoff')).toThrow(/both ownership and accessibility input/);

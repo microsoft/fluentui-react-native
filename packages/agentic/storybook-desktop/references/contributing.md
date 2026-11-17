@@ -27,8 +27,8 @@ and release its driver session before authored test sessions start.
 ## Generated manifest trust
 
 `config/generated-contract.cjs` is the dependency-free source of the strict
-driver-manifest version 3, private-credential version 1, and parent-handoff
-version 1 schemas. Unknown generated fields fail, and authored plans and case
+driver-manifest version 4 (with version 3 read compatibility), private-credential
+version 1, and parent-handoff version 1 schemas. Unknown generated fields fail, and authored plans and case
 options remain validated by their owning desktop-driver validators. Extracted
 case options retain their separately validated `inputSource` metadata.
 
@@ -76,10 +76,25 @@ into public generated output. macOS keeps its existing private-module path.
 Windows namespace identities and path comparisons normalize drive letters,
 separators, and casing; manifest and credential byte digests remain the
 independent trust binding.
+macOS driver and manifest-backed smoke contribute desktop-test's read-only
+lease maintainer using the verified helper, pinned manifest and private nonce.
+The resource settles after the channel and never adopts an existing lease.
+Attached tests wait for its publication without writing or owning the record.
 The command factory must forward `createPrivateStorage` as well as native
 helper adapters. Portable CLI tests inject storage instead of accidentally
 depending on their host; production credential publication remains unsupported
 on hosts other than macOS and Windows.
+
+Metro and channel commands request correlated owned-listener receipts from
+desktop-test's process lifeline. The receipt requires the bound listener to
+receive the actual HTTP readiness probe, and the channel and driver-ready
+receipts must identify the same process.
+Do not replace this with a port precheck or allow a listener observed by PID
+alone to authorize adoption or cleanup.
+The hosted-driver acquisition returns this receipt without presenting
+readiness or waiting for shutdown. Both CLI entry points let the neutral
+supervisor publish management first and emit canonical identity fields with
+Storybook-specific details nested under `integration`.
 
 Do not launch a native channel by copying only a generated manifest or by
 inventing a handoff from its fields. Use the owning CLI lifecycle. The explicit

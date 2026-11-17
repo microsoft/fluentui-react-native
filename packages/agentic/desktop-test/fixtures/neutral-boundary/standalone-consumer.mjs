@@ -3,6 +3,7 @@ import { DesktopAuthority } from '@fluentui-react-native/desktop-driver/authorit
 import { resolveNativeDesktopDriver, verifyNativeDriverArtifact } from '@fluentui-react-native/desktop-driver/native';
 import { describeOperations } from '@fluentui-react-native/desktop-driver/operations';
 import { connectWithDescriptor } from '@fluentui-react-native/desktop-driver-mcp';
+import { createDesktopMcpServer } from '@fluentui-react-native/desktop-mcp';
 import { defineDesktopConfig } from '@fluentui-react-native/desktop-test/config';
 import { startDesktopService, startNativeDesktopService } from '@fluentui-react-native/desktop-test/driver-service';
 
@@ -12,6 +13,9 @@ const catalog = describeOperations({ accessibilityActions: false, boundedObserva
 const entries = {
   '.': await import('@fluentui-react-native/desktop-test'),
   './config': await import('@fluentui-react-native/desktop-test/config'),
+  './control': await import('@fluentui-react-native/desktop-test/control'),
+  './supervisor-connection': await import('@fluentui-react-native/desktop-test/supervisor-connection'),
+  './managed-host': await import('@fluentui-react-native/desktop-test/managed-host'),
   './reporting': await import('@fluentui-react-native/desktop-test/reporting'),
   './reporting/run-queries': await import('@fluentui-react-native/desktop-test/reporting/run-queries'),
   './commands': await import('@fluentui-react-native/desktop-test/commands'),
@@ -20,6 +24,7 @@ const entries = {
   './resources': await import('@fluentui-react-native/desktop-test/resources'),
   './ownership': await import('@fluentui-react-native/desktop-test/ownership'),
   './application-ownership': await import('@fluentui-react-native/desktop-test/application-ownership'),
+  './macos-application-inspection': await import('@fluentui-react-native/desktop-test/macos-application-inspection'),
   './jasmine': await import('@fluentui-react-native/desktop-test/jasmine'),
   './wdio': await import('@fluentui-react-native/desktop-test/wdio'),
 };
@@ -35,7 +40,8 @@ if (
   typeof defineDesktopConfig !== 'function' ||
   typeof startDesktopService !== 'function' ||
   typeof startNativeDesktopService !== 'function' ||
-  typeof connectWithDescriptor !== 'function'
+  typeof connectWithDescriptor !== 'function' ||
+  typeof createDesktopMcpServer !== 'function'
 ) {
   throw new Error('Standalone desktop consumer did not load its declared package APIs.');
 }

@@ -57,7 +57,9 @@ async function main() {
   const { DesktopRunReporter } = await import(lib('reporting/collector.js'));
   const { NodeDesktopCommandRunner } = await import(lib('commands.js'));
   const { DesktopServiceScope, DesktopStopRequested } = await import(lib('services.js'));
-  const { loadDesktopConfig, defineDesktopConfig, resolveDesktopSpecs, resolveDesktopTestScope } = await import(lib('config.js'));
+  const { loadDesktopConfig, defineDesktopConfig, resolveDesktopSpecs, resolveDesktopTestScope, selectDesktopRenderer } = await import(
+    lib('config.js')
+  );
   const root = fs.realpathSync.native(fs.mkdtempSync(path.join(process.cwd(), '.desktop-harness-contract-')));
   process.env.FURN_DESKTOP_DRIVER_CACHE_ROOT = path.join(root, 'helper-cache');
   const out = capture();
@@ -74,7 +76,10 @@ async function main() {
       assert.equal(typeof source.defineDesktopConfig, 'function', 'config must be source-loadable');
       const app = {
         schemaVersion: 1,
-        targets: { win32: { host: { kind: 'installed', application: { executablePath: 'app.exe', windowTitle: 'Fixture' } } } },
+        targets: {
+          win32: { host: { kind: 'installed', application: { executablePath: 'app.exe', windowTitle: 'Fixture' } } },
+          macos: { host: { kind: 'react-native-test-app' } },
+        },
       };
       assert.throws(() => defineDesktopConfig({ ...app, unrecognized: true }), /Unknown/);
       assert.throws(
@@ -131,6 +136,13 @@ async function main() {
       assert.equal(referred.targets.alias.instanceId, referred.targets.aliasTwo.instanceId);
       assert.equal(referred.targets.alias.host.application.executablePath, path.join(root, 'app', 'app.exe'));
       assert.equal(referred.reporting.artifactsRoot, path.join(root, 'suite', 'reports'));
+      const fabric = direct.targets.macos;
+      const paper = selectDesktopRenderer(fabric, 'paper');
+      assert.equal(fabric.host.renderer, 'fabric');
+      assert.equal(selectDesktopRenderer(fabric, 'fabric').id, fabric.id);
+      assert.notEqual(paper.id, fabric.id);
+      assert.equal(selectDesktopRenderer(paper, 'fabric').id, fabric.id);
+      assert.equal(selectDesktopRenderer(paper, 'paper').instanceId, paper.instanceId);
       fs.writeFileSync(
         path.join(root, 'cycle.mjs'),
         'export default {schemaVersion:1, targets:{win32:{use:{config:"cycle.mjs",target:"win32"}}}}',
@@ -1491,7 +1503,7 @@ async function main() {
       delegatedClaim.release();
     } else if (mode === 'agent') {
       const { DesktopSupervisor } = await import(lib('supervisor.js'));
-      const { FakeDesktopHost } = await import('@fluentui-react-native/desktop-driver/testing');
+      const { FakeDesktopHost, FakeStoryOrchestrator } = await import('@fluentui-react-native/desktop-driver/testing');
       const { createDesktopDriverClient } = await import('@fluentui-react-native/desktop-driver/client');
       const target = {
         endpoint: 'win32',
@@ -1590,8 +1602,18 @@ async function main() {
       await failedCleanup.start();
       await assert.rejects(failedCleanup.close(), /cleanup failed/);
       assert(fs.existsSync(path.join(failedCleanupLocks, 'interactive.lock')), 'uncertain cleanup must retain the workload claim');
-      const { claimDesktopWorkload } = await import(lib('supervisor.js'));
-      await assert.rejects(claimDesktopWorkload('replacement', failedCleanupLocks, fixtureProcessIdentity), /Another desktop workload/);
+      const { createDesktopWorkloadClaim } = await import(lib('ownership.js'));
+      assert.throws(
+        () =>
+          createDesktopWorkloadClaim({
+            runId: 'replacement',
+            targetId: target.id,
+            targetInstanceId: target.instanceId,
+            directory: failedCleanupLocks,
+            processIdentity: fixtureProcessIdentity,
+          }),
+        /Another desktop workload/,
+      );
 
       // The Storybook channel child's composition: one service, protected and published from the process that listens.
       const { startDesktopService } = await import(lib('driverService.js'));
@@ -1638,6 +1660,45 @@ async function main() {
       }
       await service.close();
       assert.deepEqual(steps, ['publish', 'withdraw', 'dispose'], 'withdraw the descriptor before closing the listener');
+
+      /** @type {import('@fluentui-react-native/desktop-driver/storybook').DesktopStoryManifest} */
+      const storyManifest = {
+        endpoint: 'win32',
+        entries: [],
+        platformManifestDigest: 'platform-digest',
+        portablePlanDigest: 'portable-digest',
+        schemaVersion: 1,
+      };
+      for (const runner of [undefined, false, {}]) {
+        const storyHost = new FakeDesktopHost({ endpoint: 'win32', storyRootTestId: 'story-root' });
+        const storyPublished = [];
+        const storyWithdrawn = [];
+        const storyService = await startDesktopService(storyHost, {
+          target: { ...serviceTarget, launchModes: ['attach'] },
+          recovery: memoryRecovery(),
+          createTarget: async () => ({
+            storyOrchestrator: new FakeStoryOrchestrator(storyManifest, storyHost),
+            storyRootTestId: 'story-root',
+          }),
+          agent: {
+            ...(runner === undefined ? {} : { runner }),
+            publish: async ({ descriptor }) => {
+              storyPublished.push(descriptor);
+              return async () => void storyWithdrawn.push(descriptor);
+            },
+          },
+        });
+        try {
+          assert.deepEqual(
+            storyPublished,
+            runner && typeof runner === 'object' ? ['agent-connection.json', 'runner-connection.json'] : ['agent-connection.json'],
+          );
+          assert.equal(storyService.runnerDescriptor, runner && typeof runner === 'object' ? 'runner-connection.json' : undefined);
+        } finally {
+          await storyService.close();
+        }
+        assert.deepEqual(storyWithdrawn, [...storyPublished].reverse(), 'withdraw runner before the agent descriptor');
+      }
 
       const failedSteps = [];
       await assert.rejects(
@@ -1850,17 +1911,28 @@ async function main() {
         configPath,
         [
           "import fs from 'node:fs';",
+          "import path from 'node:path';",
           'export default {',
           '  schemaVersion: 1,',
           "  targets: { win32: { host: { kind: 'installed', application: { executablePath: 'not-launched.exe' } } } },",
           '  integration: {',
           "    name: 'fixture',",
           '    validate() {},',
-          '    contribute() {',
-          "      return process.env.FIXTURE_CONTRIBUTES_DRIVER === '1' ? { driver: { kind: 'hosted' }, workload: async ({ action, agent, reporterMode }) => {",
-          '        fs.writeFileSync(process.env.FIXTURE_MARKER, JSON.stringify({ action, agent: agent ?? null, reporterMode }));',
-          "      } } : { workload: async ({ action, agent, reporterMode }) => {",
-          '        fs.writeFileSync(process.env.FIXTURE_MARKER, JSON.stringify({ action, agent: agent ?? null, reporterMode }));',
+          '    contribute({ action }) {',
+          "      if (action === 'serve' && process.env.FIXTURE_CONTRIBUTES_DRIVER === '1') return {",
+          "        driver: { kind: 'hosted', acquire: async ({ agent, target, supervisor }) => {",
+          '          fs.writeFileSync(process.env.FIXTURE_MARKER, JSON.stringify({ action, agent: agent ?? null }));',
+          '          setImmediate(() => supervisor.services.requestStop());',
+          "          const descriptor = agent?.descriptor ?? 'agent-connection.json';",
+          "          return { targetId: target.id, url: 'http://127.0.0.1:1234',",
+          '            ...(agent ? { agentDescriptor: descriptor } : {}),',
+          '            ...(agent?.root ? { root: path.resolve(agent.root) } : {}),',
+          "            serviceReady: { tier: 'service-ready', service: 'fixture', incarnation: 'fixture', processId: process.pid,",
+          '              ...(agent ? { descriptor } : {}) } };',
+          '        } },',
+          '      };',
+          '      return { workload: async ({ action, agent }) => {',
+          '        fs.writeFileSync(process.env.FIXTURE_MARKER, JSON.stringify({ action, agent: agent ?? null }));',
           '      } };',
           '    },',
           '  },',
@@ -1883,7 +1955,16 @@ async function main() {
         try {
           await runner.run({
             command: process.execPath,
-            args: [path.join(packageRoot, 'config', 'cli.cjs'), '--config', configPath, '--target', 'win32', ...args],
+            args: [
+              '--import',
+              pathToFileURL(path.join(packageRoot, 'fixtures', 'cli-interrupt', 'mock-management-loader.mjs')).href,
+              path.join(packageRoot, 'config', 'cli.cjs'),
+              '--config',
+              configPath,
+              '--target',
+              'win32',
+              ...args,
+            ],
             cwd: root,
             env: {
               HOME: root,
@@ -1906,7 +1987,6 @@ async function main() {
           .filter((entry) => entry.isFile() && entry.name.endsWith('.log'))
           .map((entry) => fs.readFileSync(path.join(entry.parentPath, entry.name), 'utf8'));
       const privateRoot = path.join(root, 'private');
-      // serve writes no final output, so only serve receives the output format for the integration's readiness record.
       const served = await invoke(true, [
         '--reporter',
         'ndjson',
@@ -1921,9 +2001,8 @@ async function main() {
       assert.deepEqual(served.marker, {
         action: 'serve',
         agent: { descriptor: 'storybook.json', root: privateRoot },
-        reporterMode: 'ndjson',
       });
-      assert.deepEqual((await invoke(true, ['serve'])).marker, { action: 'serve', agent: null, reporterMode: 'ndjson' });
+      assert.deepEqual((await invoke(true, ['serve'])).marker, { action: 'serve', agent: null });
       assert.deepEqual((await invoke(true, ['--reporter', 'ndjson', 'prep'])).marker, { action: 'prep', agent: null });
       const refused = await invoke(false, ['serve', '--agent']);
       assert(refused.failure, 'an integration that does not serve agents must refuse --agent');
@@ -1956,6 +2035,8 @@ async function main() {
         const child = spawnSync(
           process.execPath,
           [
+            '--import',
+            pathToFileURL(path.join(packageRoot, 'fixtures', 'cli-interrupt', 'mock-management-loader.mjs')).href,
             path.join(interruptPackageRoot, 'config', 'cli.cjs'),
             '--config',
             path.join(interruptPackageRoot, 'fixtures', 'cli-interrupt', 'desktop.config.mjs'),
@@ -2000,6 +2081,7 @@ async function main() {
         assert.equal(child.status, failed ? 1 : 0, `${scenario}: ${child.stderr}\n${child.stdout}`);
         const readiness = JSON.parse(child.stdout.trim());
         assert.equal(readiness.type, 'ready');
+        if (interruptPackageRoot === packageRoot) assert.equal(readiness.supervisorDescriptor, 'supervisor-connection.json');
         const reports = path.join(directory, 'reports', readiness.runId);
         const result = JSON.parse(fs.readFileSync(path.join(reports, 'run.json'), 'utf8'));
         assert.equal(result.terminal, true, `${scenario}: ${JSON.stringify(result)}`);

@@ -1,0 +1,67 @@
+{
+  "name": "@fluentui-react-native/desktop-mcp",
+  "version": "0.1.0",
+  "description": "Verified MCP client for Desktop Driver and supervised desktop workloads",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "packages/agentic/desktop-mcp"
+  },
+  "bin": "./config/cli.cjs",
+  "files": [
+    "AGENTS.md",
+    "README.md",
+    "config/",
+    "jest.config.cjs",
+    "lib/",
+    "package.json",
+    "references/",
+    "src/",
+    "!src/**/*.test.ts",
+    "!lib/**/*.test.*",
+    "tsconfig.json"
+  ],
+  "type": "module",
+  "main": "lib/index.js",
+  "module": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "import": "./lib/index.js",
+      "default": "./src/index.ts"
+    },
+    "./cli": {
+      "types": "./lib/cli.d.ts",
+      "import": "./lib/cli.js",
+      "default": "./src/cli.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "tsc -b",
+    "clean": "fluentui-scripts clean",
+    "format": "fluentui-scripts format",
+    "lint": "fluentui-scripts lint",
+    "test": "fluentui-scripts jest"
+  },
+  "dependencies": {
+    "@fluentui-react-native/desktop-driver": "workspace:*",
+    "@fluentui-react-native/desktop-test": "workspace:*",
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "commander": "^14.0.2",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@fluentui-react-native/scripts": "workspace:*",
+    "js-tiktoken": "1.0.21"
+  },
+  "furn": {
+    "jestPlatform": "react"
+  },
+  "rnx-kit": {
+    "kitType": "library",
+    "extends": "@fluentui-react-native/scripts/kit-config"
+  }
+}

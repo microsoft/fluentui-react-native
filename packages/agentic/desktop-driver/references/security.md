@@ -124,8 +124,8 @@ in its command queue authenticates again immediately before dispatch.
   isolated connection retaining the caller's scopes; it requires
   `declared-workload` as well as `driver-control`.
   `POST /furn/grants/runner` accepts only `{ target, handoff?: "busy" | "preempt" }`
-  from such an isolated workload connection. The target must be generic and
-  advertise attach-only launch modes. The default is bounded `target-busy`;
+  from such an isolated workload connection. The target must advertise
+  attach-only launch modes, including when it has story orchestration. The default is bounded `target-busy`;
   `preempt` also requires `operator-recovery` and cannot revoke the acquiring
   connection or one of its ancestors. Shared descriptor roots and connections
   retaining workload/recovery authority return `target-busy` with an explicit
@@ -134,13 +134,15 @@ in its command queue authenticates again immediately before dispatch.
   after cancellation, native settlement, opening-lease cleanup, and deletion
   are confirmed does it issue and return a driver-only, target-scoped attach-only
   child. Busy or failed handoff attempts issue no runner grant.
+  An interrupted story selection must settle; an uncertain result quarantines
+  the target and blocks the next session.
   Ordinary descendants inherit that restriction and share the reservation.
   The reservation excludes MCP even between workers and is released only after
   terminal subtree drain. Failed drains retain the fence and retryable proof.
   This is not a session transfer: old references, cursors, proofs, request-id
   outcomes and session-qualified artifact links are invalid in the fresh
-  session. Storybook and supervisor-retained launched-app handoff are not
-  implemented here.
+  session. Storybook CSF worker handoff requires its consumer integration;
+  this driver reservation does not implement that integration.
 - A grant's session that receives no request for `idleSessionTimeoutMs`
   (ten minutes by default; 0 disables) closes as `DELETE` would: input is
   released, a launched application is closed, and an attached application is
@@ -177,6 +179,10 @@ It must verify the actual listener owner, exact live process start/executable,
 OS user, and current interactive session **before any credential is sent**.
 Missing, false, or unavailable verification fails closed. An authenticated
 status request then checks the service incarnation under a 15-second deadline.
+When a containing supervisor supplies an exact record digest, incarnation,
+target, and optional listener binding, the reader checks the record,
+incarnation, and listener before sending the grant and requires the
+authenticated status to expose exactly that target.
 The library supplies a [Windows verifier](#windows-private-storage-and-service-verifier)
 and a [macOS verifier](#macos-service-verifier). A callback that
 unconditionally returns true is not a production verifier. Filesystem ownership

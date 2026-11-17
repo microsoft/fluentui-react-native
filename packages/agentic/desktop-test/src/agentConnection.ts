@@ -19,7 +19,7 @@ export type DesktopAgentConnectionOptions = {
   descriptor?: string;
   /** The private storage root, which the adapter reads with `--root`. Defaults to the platform location. */
   root?: string;
-  /** Generic attach-only services also publish a separate workload connection; Storybook handoff is not supported. */
+  /** Attach-only services can publish a separate workload connection; story-enabled targets require explicit opt-in. */
   runner?: false | { descriptor?: string; allowPreempt?: boolean };
   /** Replaces native publication; tests supply it. Returns the descriptor's removal. */
   publish?: PublishDesktopAgentConnection;

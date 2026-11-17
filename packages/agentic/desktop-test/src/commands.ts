@@ -11,7 +11,7 @@ import type { DesktopReportWriter, ReportOutput } from './reporting/collector.js
 import type { EventContext } from './reporting/protocol.js';
 import { DESKTOP_REPORT_CONTEXT, DESKTOP_REPORT_SCOPE, requestReportStop } from './reporting/transport.js';
 import { createDesktopProcessControl } from './processControl.js';
-import type { DesktopServiceReady, DesktopServiceReadyRecord } from './processControl.js';
+import type { DesktopOwnedListener, DesktopServiceReady, DesktopServiceReadyRecord } from './processControl.js';
 
 export type PreparedDesktopCommand = DesktopCommand & {
   args: readonly string[];
@@ -20,12 +20,17 @@ export type PreparedDesktopCommand = DesktopCommand & {
   label?: string;
   category?: 'service' | 'worker' | 'phase';
   context?: EventContext;
+  /** Require a Node descendant to bind this HTTP listener and receive its readiness probe. */
+  listener?: DesktopOwnedListener;
 };
 export type RunningDesktopCommand = {
   completed: Promise<number>;
   logPath?: string;
   readonly failure?: unknown;
+  /** Request header value that correlates an HTTP readiness probe with the owned listener. */
+  listenerProbe?: string;
   waitForReadiness?(expected: DesktopServiceReady, timeoutMs?: number, signal?: AbortSignal): Promise<DesktopServiceReadyRecord>;
+  waitForListenerProbe?(service: string, timeoutMs?: number, signal?: AbortSignal): Promise<DesktopServiceReadyRecord>;
   stop(options?: { failed?: boolean }): Promise<void>;
 };
 /** Cancellation for one command: an abort stops its process tree and reports the command failed. */
@@ -115,15 +120,24 @@ export class NodeDesktopCommandRunner implements DesktopCommandRunner {
     emit({ kind: 'scope-start', payload: { label, category: command.category ?? 'service' } }, id, command.context);
     emit({ kind: 'artifact', payload: { path: relativeLog, description: label } }, id, command.context);
     let failed: unknown;
+    const controlFailureStop: { stop?: () => void } = {};
+    let rejectControlFailure: (error: Error) => void = () => undefined;
+    const controlFailure = new Promise<never>((_resolve, reject) => {
+      rejectControlFailure = reject;
+    });
+    void controlFailure.catch(() => undefined);
     // Only services publish readiness or cooperate in disposal; one-shot phases and workers need no control channel.
     const processControl =
       command.category === undefined || command.category === 'service'
         ? createDesktopProcessControl((error) => {
             failed ??= error;
             reporter.fail(error, 'infrastructure', id);
+            rejectControlFailure(error);
+            controlFailureStop.stop?.();
           })
         : undefined;
     if (processControl) reporter.addSecret(processControl.nonce);
+    if (processControl && command.listener) reporter.addSecret(processControl.listenerProbe);
     const environment = { ...process.env, ...command.env, ...this.options.environment };
     const spawnCommand = needsWindowsCommandShim(command.command) ? spawn : spawnNative;
     const child = (() => {
@@ -132,7 +146,7 @@ export class NodeDesktopCommandRunner implements DesktopCommandRunner {
           cwd: command.cwd,
           env: {
             ...environment,
-            ...(processControl ? processControl.environment(environment.NODE_OPTIONS) : {}),
+            ...(processControl ? processControl.environment(environment.NODE_OPTIONS, command.listener) : {}),
             [DESKTOP_REPORT_SCOPE]: id,
           },
           detached: process.platform !== 'win32',
@@ -168,6 +182,9 @@ export class NodeDesktopCommandRunner implements DesktopCommandRunner {
     const treeRunning = () => child.pid !== undefined && (process.platform === 'win32' ? !exited : !closed || drainExpired);
     const stopTree = () =>
       (treeStopPromise ??= treeRunning() ? stopProcessTree(child.pid!, settledCompletion, timeoutMs) : Promise.resolve());
+    controlFailureStop.stop = () => {
+      void stopTree().catch(() => undefined);
+    };
     const capture = (stream: 'stdout' | 'stderr') => {
       const decoder = new StringDecoder('utf8');
       let buffered = '';
@@ -252,6 +269,8 @@ export class NodeDesktopCommandRunner implements DesktopCommandRunner {
       (code) => code,
       () => 1,
     );
+    const observedCompletion = processControl ? Promise.race([completion, controlFailure]) : completion;
+    void observedCompletion.catch(() => undefined);
     // Owners observe completed; this branch only makes unexpected failures visible immediately.
     void completion.then(
       (code) => {
@@ -263,17 +282,29 @@ export class NodeDesktopCommandRunner implements DesktopCommandRunner {
       void running.stop({ failed: true }).catch(() => undefined);
     };
     const running: RunningDesktopCommand = {
-      completed: completion,
+      completed: observedCompletion,
       logPath,
+      ...(processControl && command.listener ? { listenerProbe: processControl.listenerProbe } : {}),
       ...(processControl
         ? {
             waitForReadiness: (expected: DesktopServiceReady, readinessTimeoutMs?: number, readinessSignal?: AbortSignal) =>
               Promise.race([
                 processControl.waitForReadiness(expected, readinessTimeoutMs, readinessSignal),
-                completion.then(() => {
+                observedCompletion.then(() => {
                   throw failed ?? exitFailure ?? new Error('Owned command exited before service readiness.');
                 }),
               ]),
+            ...(command.listener
+              ? {
+                  waitForListenerProbe: (service: string, readinessTimeoutMs?: number, readinessSignal?: AbortSignal) =>
+                    Promise.race([
+                      processControl.waitForListenerProbe(service, readinessTimeoutMs, readinessSignal),
+                      observedCompletion.then(() => {
+                        throw failed ?? exitFailure ?? new Error('Owned command exited before listener probe confirmation.');
+                      }),
+                    ]),
+                }
+              : {}),
           }
         : {}),
       get failure() {
@@ -375,6 +406,8 @@ function validatePreparedCommand(command: PreparedDesktopCommand): void {
     throw new TypeError(
       `Command "${commandLabel(command)}" has a missing or NUL-containing command, argument, directory, or environment value.`,
     );
+  if (command.listener && command.category !== undefined && command.category !== 'service')
+    throw new TypeError('Owned listener readiness requires a service command.');
 }
 
 function describeFailure(error: unknown): string | undefined {

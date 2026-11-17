@@ -37,7 +37,7 @@ component story -- type-only --> desktop-driver/authoring
 
 storybook-desktop
   |- generates static story manifests and plan digests
-  |- currently owns the channel/MCP server, Metro, and app lifecycle through a transitional CLI takeover
+  |- contributes Metro, channel and app lifecycle resources to desktop-test
   |- implements StoryOrchestrator
   `- embeds the Desktop Driver listener and registers a native target
 
@@ -68,13 +68,12 @@ listener on separate loopback ports in the same **channel child process**,
 not the top-level CLI supervisor. The channel's MCP endpoint is disabled in
 agent mode. Metro is another child. Process co-location is not package ownership.
 
-The approved direction strengthens `desktop-test` as the application-neutral
-workload host. Storybook contributes domain resources/context; desktop-driver
-remains the native/session authority; desktop-driver-mcp remains a client.
-Future lifecycle/test-run schemas belong to the harness. Keep existing package
-names and the channel child now; do not introduce an empty coordinator package,
-daemon, or arbitrary plugin loader. The current CLI takeover and child service
-composition are transitional, not a finished resource-provider contract.
+`desktop-test` is the application-neutral workload host and owns management
+schemas. Storybook contributes domain resources/context; desktop-driver remains
+the native/session authority; desktop-mcp remains a client. The deprecated
+desktop-driver-mcp package forwards driver-only use. The channel child remains
+separate from the supervisor; both Storybook and desktop-test CLI entry points
+publish hosted management through the neutral owner.
 
 ## Request lifecycle
 

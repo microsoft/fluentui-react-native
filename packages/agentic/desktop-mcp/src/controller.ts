@@ -244,7 +244,7 @@ export class DesktopController {
         }
       });
       this.#pending = cleanup.catch(() => {
-        console.error('desktop-driver-mcp: session cleanup is incomplete; the service must drain or expire the session.');
+        console.error('desktop-mcp: session cleanup is incomplete; the service must drain or expire the session.');
       });
       let timer: ReturnType<typeof setTimeout> | undefined;
       try {
@@ -252,7 +252,7 @@ export class DesktopController {
           this.#pending,
           new Promise<void>((resolve) => {
             timer = setTimeout(() => {
-              console.error('desktop-driver-mcp: session cleanup is still pending; the service must drain or expire the session.');
+              console.error('desktop-mcp: session cleanup is still pending; the service must drain or expire the session.');
               resolve();
             }, deleteTimeoutMs);
             timer.unref();
@@ -272,7 +272,7 @@ export class DesktopController {
       connection = await this.#connect();
     } catch {
       // Discovery failures can contain descriptor credentials; neither protocol output nor diagnostics may echo them.
-      console.error('desktop-driver-mcp: connecting failed; verify private discovery and the service identity.');
+      console.error('desktop-mcp: connecting failed; verify private discovery and the service identity.');
       throw new AdapterError('service-unavailable', 'The Desktop Driver service is not available. Ask the operator to start it.');
     }
     const binding = this.#binding;

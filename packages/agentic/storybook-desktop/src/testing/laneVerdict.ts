@@ -4,7 +4,7 @@ import { describeDesktopUnsupported } from '@fluentui-react-native/desktop-test/
 export type WdioCaseOutcome = {
   storyId: string;
   testName?: string;
-  status: 'passed' | 'failed' | 'skipped' | 'unsupported';
+  status: 'passed' | 'failed' | 'skipped' | 'unsupported' | 'cancelled';
   gap?: 'unsupported' | 'quarantine';
 };
 
@@ -23,13 +23,14 @@ export function hasExecutedWdioCase(results: readonly Pick<WdioCaseOutcome, 'sta
 type CountedResult = { status: string; gap?: WdioCaseOutcome['gap'] };
 
 // Static plans report several kinds of failure, such as `timed-out`, so a failure is anything that is not one of these.
-const notFailures = new Set(['passed', 'skipped', 'unsupported']);
+const notFailures = new Set(['passed', 'skipped', 'unsupported', 'cancelled']);
 
 /** Counts for a summary line. The unsupported breakdown appears only when something is unsupported. */
 export function describeWdioCounts(results: readonly CountedResult[]): string {
   const count = (status: string) => results.filter((result) => result.status === status).length;
   const failed = results.filter(({ status }) => !notFailures.has(status)).length;
   const parts = [`${count('passed')} passed`, `${failed} failed`, `${count('skipped')} skipped`];
+  if (count('cancelled')) parts.push(`${count('cancelled')} cancelled`);
   const unsupported = results.filter(({ status }) => status === 'unsupported');
   if (unsupported.length) {
     parts.push(
@@ -62,6 +63,7 @@ export function assessWdioCohort(options: {
     : [];
   const reasons: string[] = [];
   if (results.length !== selected) reasons.push(`${selected - results.length} of ${selected} selected tests did not finish`);
+  if (results.some(({ status }) => status === 'cancelled')) reasons.push('selected tests were cancelled');
   if (undeclared.length) {
     const names = undeclared.slice(0, 5).map(({ storyId, testName }) => (testName === undefined ? storyId : `${storyId} / ${testName}`));
     const more = undeclared.length > names.length ? `, and ${undeclared.length - names.length} more` : '';

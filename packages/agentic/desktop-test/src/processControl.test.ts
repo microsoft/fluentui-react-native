@@ -4,6 +4,7 @@ import path from 'node:path';
 import { spawn } from 'node:child_process';
 import type { ChildProcess } from 'node:child_process';
 import { once } from 'node:events';
+import http from 'node:http';
 import net from 'node:net';
 import { pathToFileURL } from 'node:url';
 import { createDesktopProcessControl } from './processControl.js';
@@ -19,7 +20,28 @@ const parentFixture = path.resolve(__dirname, '../fixtures/process-control/paren
 // --import requires a file URL for absolute Windows paths.
 const preload = pathToFileURL(path.resolve(__dirname, '../config/process-lifeline.mjs')).href;
 const quiet = { write: () => true };
+// eslint-disable-next-line @microsoft/sdl/no-insecure-url -- These fixtures listen only on loopback.
+const loopback = 'http://127.0.0.1';
+// eslint-disable-next-line @microsoft/sdl/no-insecure-url -- This fixture tests a separate loopback address.
+const loopbackIPv6 = 'http://[::1]';
 jest.setTimeout(45_000);
+
+async function requestListener(url: string, probe?: string): Promise<void> {
+  const deadline = Date.now() + 5000;
+  let failure: unknown;
+  do {
+    try {
+      const response = await fetch(url, probe ? { headers: { 'x-furn-desktop-listener-probe': probe } } : {});
+      await response.body?.cancel();
+      if (response.ok) return;
+      failure = new Error(`Listener returned ${response.status}.`);
+    } catch (error) {
+      failure = error;
+    }
+    await new Promise((resolve) => setTimeout(resolve, 20));
+  } while (Date.now() < deadline);
+  throw failure;
+}
 
 describe('owned process lifelines', () => {
   let root: string;
@@ -59,6 +81,158 @@ describe('owned process lifelines', () => {
       await running.stop();
       expect(fs.existsSync(marker)).toBe(false);
       expect(await running.completed).toBe(0);
+    } finally {
+      await runner.close();
+    }
+  });
+
+  test('confirms that the owned listener receives the HTTP readiness probe', async () => {
+    const portHolder = net.createServer();
+    await new Promise<void>((resolve) => portHolder.listen(0, '127.0.0.1', resolve));
+    const port = (portHolder.address() as net.AddressInfo).port;
+    await new Promise<void>((resolve, reject) => portHolder.close((error) => (error ? reject(error) : resolve())));
+    const runner = new NodeDesktopCommandRunner({ logDirectory: root, output: quiet, errorOutput: quiet });
+    const running = runner.start({
+      command: process.execPath,
+      args: [fixture, 'listener', String(port)],
+      cwd: root,
+      env: {},
+      listener: { service: 'owned-listener', port },
+    });
+    try {
+      const ready = await running.waitForReadiness!({ tier: 'service-ready', service: 'owned-listener' }, 5000);
+      await requestListener(`${loopback}:${port}/status`);
+      await expect(running.waitForListenerProbe!('owned-listener', 200)).rejects.toThrow('correlated readiness');
+      expect(running.listenerProbe).toBeDefined();
+      await requestListener(`${loopback}:${port}/status`, running.listenerProbe);
+      expect(await running.waitForListenerProbe!('owned-listener', 5000)).toEqual(ready);
+      expect(ready.processId).toBeGreaterThan(0);
+      await running.stop();
+    } finally {
+      await runner.close();
+    }
+  });
+
+  test('never adopts a foreign listener when an owned child cannot bind', async () => {
+    const foreign = http.createServer((_request, response) => response.end('foreign'));
+    await new Promise<void>((resolve) => foreign.listen(0, '127.0.0.1', resolve));
+    const port = (foreign.address() as net.AddressInfo).port;
+    const runner = new NodeDesktopCommandRunner({ logDirectory: root, output: quiet, errorOutput: quiet });
+    const running = runner.start({
+      command: process.execPath,
+      args: [fixture, 'listener', String(port)],
+      cwd: root,
+      env: {},
+      listener: { service: 'owned-listener', port },
+    });
+    try {
+      await requestListener(`${loopback}:${port}/status`, running.listenerProbe);
+      await expect(running.waitForReadiness!({ tier: 'service-ready', service: 'owned-listener' }, 500)).rejects.toThrow(
+        'correlated readiness',
+      );
+      await running.stop();
+      expect(foreign.listening).toBe(true);
+    } finally {
+      await runner.close();
+      await new Promise<void>((resolve, reject) => foreign.close((error) => (error ? reject(error) : resolve())));
+    }
+  });
+
+  test('ignores a temporary TCP port-availability probe before the real HTTP listener', async () => {
+    const holder = net.createServer();
+    await new Promise<void>((resolve) => holder.listen(0, '127.0.0.1', resolve));
+    const port = (holder.address() as net.AddressInfo).port;
+    await new Promise<void>((resolve, reject) => holder.close((error) => (error ? reject(error) : resolve())));
+    const runner = new NodeDesktopCommandRunner({ logDirectory: root, output: quiet, errorOutput: quiet });
+    const running = runner.start({
+      command: process.execPath,
+      args: [fixture, 'listener-preflight', String(port)],
+      cwd: root,
+      env: {},
+      listener: { service: 'owned-listener', port },
+    });
+    try {
+      const ready = await running.waitForReadiness!({ tier: 'service-ready', service: 'owned-listener' }, 5000);
+      await requestListener(`${loopback}:${port}/status`, running.listenerProbe);
+      expect(await running.waitForListenerProbe!('owned-listener', 5000)).toEqual(ready);
+      await running.stop();
+    } finally {
+      await runner.close();
+    }
+  });
+
+  test('does not adopt a foreign HTTP listener when an owned child binds the same port on another address', async () => {
+    const foreign = http.createServer((_request, response) => response.end('foreign'));
+    await new Promise<void>((resolve) => foreign.listen(0, '127.0.0.1', resolve));
+    const port = (foreign.address() as net.AddressInfo).port;
+    const runner = new NodeDesktopCommandRunner({ logDirectory: root, output: quiet, errorOutput: quiet });
+    const running = runner.start({
+      command: process.execPath,
+      args: [fixture, 'listener-ipv6', String(port)],
+      cwd: root,
+      env: {},
+      listener: { service: 'owned-listener', port },
+    });
+    try {
+      await requestListener(`${loopbackIPv6}:${port}/status`);
+      await running.waitForReadiness!({ tier: 'service-ready', service: 'owned-listener' }, 5000);
+      await requestListener(`${loopback}:${port}/status`, running.listenerProbe);
+      await expect(running.waitForListenerProbe!('owned-listener', 500)).rejects.toThrow('correlated readiness');
+      await running.stop();
+      expect(foreign.listening).toBe(true);
+    } finally {
+      await runner.close();
+      await new Promise<void>((resolve, reject) => foreign.close((error) => (error ? reject(error) : resolve())));
+    }
+  });
+
+  test('fails a service if its confirmed listener closes while the child remains alive', async () => {
+    const portHolder = net.createServer();
+    await new Promise<void>((resolve) => portHolder.listen(0, '127.0.0.1', resolve));
+    const port = (portHolder.address() as net.AddressInfo).port;
+    await new Promise<void>((resolve, reject) => portHolder.close((error) => (error ? reject(error) : resolve())));
+    const runner = new NodeDesktopCommandRunner({ logDirectory: root, output: quiet, errorOutput: quiet });
+    const running = runner.start({
+      command: process.execPath,
+      args: [fixture, 'listener-close', String(port)],
+      cwd: root,
+      env: {},
+      listener: { service: 'owned-listener', port },
+    });
+    try {
+      await running.waitForReadiness!({ tier: 'service-ready', service: 'owned-listener' }, 5000);
+      await requestListener(`${loopback}:${port}/status`, running.listenerProbe);
+      await running.waitForListenerProbe!('owned-listener', 5000);
+      await expect(running.completed).rejects.toThrow('closed its listener unexpectedly');
+      await expect(running.stop()).rejects.toThrow('closed its listener unexpectedly');
+    } finally {
+      await runner.close();
+    }
+  });
+
+  test.each([
+    ['listener-exit-on-stop', false],
+    ['listener-with-descriptor', true],
+  ] as const)('settles an exited HTTP listener without weakening descriptor cleanup (%s)', async (mode, descriptor) => {
+    const holder = net.createServer();
+    await new Promise<void>((resolve) => holder.listen(0, '127.0.0.1', resolve));
+    const port = (holder.address() as net.AddressInfo).port;
+    await new Promise<void>((resolve, reject) => holder.close((error) => (error ? reject(error) : resolve())));
+    const runner = new NodeDesktopCommandRunner({ logDirectory: root, output: quiet, errorOutput: quiet });
+    const running = runner.start({
+      command: process.execPath,
+      args: [fixture, mode, String(port)],
+      cwd: root,
+      env: {},
+      listener: { service: 'owned-listener', port },
+    });
+    try {
+      await running.waitForReadiness!({ tier: 'service-ready', service: 'owned-listener' }, 5000);
+      if (descriptor) await running.waitForReadiness!({ tier: 'service-ready', service: 'descriptor', descriptor: 'fixture.json' }, 5000);
+      await requestListener(`${loopback}:${port}/status`, running.listenerProbe);
+      await running.waitForListenerProbe!('owned-listener', 5000);
+      if (descriptor) await expect(running.stop()).rejects.toThrow('lost its readiness producer without settled disposal');
+      else await expect(running.stop()).resolves.toBeUndefined();
     } finally {
       await runner.close();
     }

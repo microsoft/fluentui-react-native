@@ -1,4 +1,7 @@
-export { connectWithDescriptor } from './connection.js';
-export type { ConnectDesktopDriver, DescriptorConnectionOptions, DesktopDriverConnection } from './connection.js';
-export { createDesktopDriverMcpServer } from './server.js';
-export type { DesktopDriverMcpServerOptions } from './server.js';
+export { connectWithDescriptor, createDesktopDriverMcpServer } from '@fluentui-react-native/desktop-mcp';
+export type {
+  ConnectDesktopDriver,
+  DescriptorConnectionOptions,
+  DesktopDriverConnection,
+  DesktopDriverMcpServerOptions,
+} from '@fluentui-react-native/desktop-mcp';

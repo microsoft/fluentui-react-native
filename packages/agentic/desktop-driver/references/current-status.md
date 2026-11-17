@@ -50,7 +50,7 @@ Failure-path, descendant, reliability and release-matrix qualification remain op
 
 ### Open work
 
-- [#4450](https://github.com/microsoft/fluentui-react-native/issues/4450): management facet and transport.
+- [#4450](https://github.com/microsoft/fluentui-react-native/issues/4450): native qualification of the harness-owned management facet and transport.
 
 ## Sessions and input
 
@@ -111,7 +111,7 @@ Failure-path, descendant, reliability and release-matrix qualification remain op
 - Failed cleanup stays fenced and retryable; unknown runner input is rejected before any grant or reservation.
 - Settled drains restore the 4096 live and draining grant capacity; only the last 4096 settled cleanup proofs are retained, never pending or failed proof.
 - Shared descriptor or workload holders must relinquish; they are not preempted as a subtree.
-- Storybook integration, retained launches and cross-connection resume or replay are not implemented by handoff ([#4491](https://github.com/microsoft/fluentui-react-native/pull/4491)).
+- Storybook integration and retained launches use the attach-only handoff; their native qualification is separate from the generic phase in [#4491](https://github.com/microsoft/fluentui-react-native/pull/4491). Cross-connection resume and replay remain unsupported.
 - Descriptor-path native requalification has not been run for the attenuation work.
 
 ### Open work
@@ -292,7 +292,7 @@ Live requalification is tracked in [#4441](https://github.com/microsoft/fluentui
 ## Measurements
 
 Measured on macOS Fabric Storybook at `41fc7473f`, 2720 x 1988-pixel window (1360 x 994 points, 2x), via `yarn storybook driver --macos --agent` and an MCP SDK stdio client over three marker-confirmed stories (button, checkbox, menu).
-Token counts use `o200k_base`, include every returned text block and the result envelope (about 150 tokens for observation and delta payloads), and exclude MCP discovery (see `@fluentui-react-native/desktop-driver-mcp/references/current-status.md`).
+Token counts use `o200k_base`, include every returned text block and the result envelope (about 150 tokens for observation and delta payloads), and exclude MCP discovery (see `@fluentui-react-native/desktop-mcp/references/current-status.md`).
 All observations were complete. Windows and Paper need their own rows; do not extrapolate.
 
 | Result                         | Measured text tokens  | Scope and notes                                        |

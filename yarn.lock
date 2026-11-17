@@ -3311,11 +3311,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/desktop-driver-mcp@workspace:packages/agentic/desktop-driver-mcp"
   dependencies:
-    "@fluentui-react-native/desktop-driver": "workspace:*"
+    "@fluentui-react-native/desktop-mcp": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
-    "@modelcontextprotocol/sdk": "npm:^1.32.2"
-    commander: "npm:^14.0.2"
-    zod: "npm:^4.6.7"
   bin:
     desktop-driver-mcp: ./config/cli.cjs
   languageName: unknown
@@ -3331,6 +3328,22 @@ __metadata:
     zod: "npm:^4.6.7"
   bin:
     desktop-driver: ./config/cli.cjs
+  languageName: unknown
+  linkType: soft
+
+"@fluentui-react-native/desktop-mcp@workspace:*, @fluentui-react-native/desktop-mcp@workspace:packages/agentic/desktop-mcp":
+  version: 0.0.0-use.local
+  resolution: "@fluentui-react-native/desktop-mcp@workspace:packages/agentic/desktop-mcp"
+  dependencies:
+    "@fluentui-react-native/desktop-driver": "workspace:*"
+    "@fluentui-react-native/desktop-test": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@modelcontextprotocol/sdk": "npm:^1.32.2"
+    commander: "npm:^14.0.2"
+    js-tiktoken: "npm:1.0.21"
+    zod: "npm:^4.6.7"
+  bin:
+    desktop-mcp: ./config/cli.cjs
   languageName: unknown
   linkType: soft
 
@@ -3351,6 +3364,7 @@ __metadata:
     expect-webdriverio: "catalog:"
     import-meta-resolve: "npm:4.2.0"
     webdriverio: "catalog:"
+    zod: "npm:^4.6.7"
   bin:
     desktop-test: ./config/cli.cjs
   languageName: unknown
@@ -16439,6 +16453,15 @@ __metadata:
   version: 6.2.13
   resolution: "jose@npm:6.2.13"
   checksum: 10c0/a7a175057fd42e129200026320d535deba5c869e764bdb130d4aecb7cc2a22c07eab2bf9fc848188b45b89d95f8e0ba4ce01a8259a4fa45c84bec34f66f2918e
+  languageName: node
+  linkType: hard
+
+"js-tiktoken@npm:1.0.21":
+  version: 1.0.21
+  resolution: "js-tiktoken@npm:1.0.21"
+  dependencies:
+    base64-js: "npm:^1.5.1"
+  checksum: 10c0/49a0b1e8915d271b84b5c2217fcab37de3124cfbba7e9901d3d9afb1acdd931f0ff7025ed94587dd1b59ae5c04cc19949c2869823854ee7f2f3f81678db276f3
   languageName: node
   linkType: hard
 

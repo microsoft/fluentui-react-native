@@ -34,6 +34,19 @@ describe('ArtifactManager', () => {
     expect(fs.existsSync(path.join(manager.root, ...artifact.path.split('/')))).toBe(true);
   });
 
+  test('redacts known credentials in text and structured evidence, including JSON-escaped values', () => {
+    const secret = 'fixture"credential';
+    const manager = new ArtifactManager(temporaryDirectory, { redact: (text) => text.replaceAll(secret, '[REDACTED]') });
+    const source = manager.writeSource('story', 'source', `<value>${secret}</value>`);
+    const tree = manager.writeTree('story', 'tree', { value: secret, nested: [secret] });
+    const events = manager.writeWindowEvents('story', 'events', [{ message: secret }]);
+    const metadata = manager.writeMetadata('run', { error: secret });
+    for (const artifact of [source, tree, events]) {
+      expect(fs.readFileSync(path.join(temporaryDirectory, ...artifact.path.split('/')), 'utf8')).not.toContain('credential');
+    }
+    expect(JSON.parse(fs.readFileSync(metadata, 'utf8'))).toEqual({ error: '[REDACTED]' });
+  });
+
   test('refuses a link that leads out of the root before it creates anything outside', () => {
     const root = path.join(temporaryDirectory, 'root');
     const outside = path.join(temporaryDirectory, 'outside');

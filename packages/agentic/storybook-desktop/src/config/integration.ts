@@ -33,21 +33,59 @@ export function storybook(options: DesktopStorybookConfigOptions = {}): Storyboo
     },
     contribute({ config, target, action }) {
       return {
-        ...(action === 'serve' ? { driver: { kind: 'hosted' as const } } : {}),
-        workload: async ({ supervisor, agent, input, reporterMode, onReady }) => {
-          const { DesktopStorybookCli } = await import('@fluentui-react-native/storybook-desktop/cli');
-          const api = new DesktopStorybookCli(this.configure(config.projectRoot, config), {
-            paper: target.endpoint === 'macos' && target.host.renderer === 'paper',
-            reporter: supervisor.reporter,
-            runner: supervisor.runner,
-            services: supervisor.services,
-            ...(action === 'serve' ? { reporterMode } : {}),
-            ...(onReady ? { onReady } : {}),
-          });
-          if (action === 'serve') await api.driver(target.endpoint, agent ? { agent } : {});
-          else if (action === 'test') await api.smoke(target.endpoint, { mode: 'stories-and-tests', ...(input ? { input } : {}) });
-          else await api[action](target.endpoint);
-        },
+        ...(action === 'serve'
+          ? {
+              driver: {
+                kind: 'hosted' as const,
+                acquire: async ({ supervisor, agent, input }) => {
+                  const { DesktopStorybookCli } = await import('@fluentui-react-native/storybook-desktop/cli');
+                  const api = new DesktopStorybookCli(this.configure(config.projectRoot, config), {
+                    paper: target.endpoint === 'macos' && target.host.renderer === 'paper',
+                    reporter: supervisor.reporter,
+                    runner: supervisor.runner,
+                    services: supervisor.services,
+                  });
+                  return api.startDriver(target.endpoint, { ...(agent ? { agent } : {}), ...(input ? { input } : {}) });
+                },
+              },
+              managedWorkload: async ({ supervisor, connection, input, storyId, addSecret }) => {
+                const { DesktopStorybookCli } = await import('@fluentui-react-native/storybook-desktop/cli');
+                const api = new DesktopStorybookCli(this.configure(config.projectRoot, config), {
+                  paper: target.endpoint === 'macos' && target.host.renderer === 'paper',
+                  reporter: supervisor.reporter,
+                  runner: supervisor.runner,
+                  services: supervisor.services,
+                });
+                await api.testManaged(target.endpoint, { connection, input, storyId, addSecret });
+              },
+            }
+          : {
+              workload: async ({ supervisor, input }) => {
+                const { DesktopStorybookCli } = await import('@fluentui-react-native/storybook-desktop/cli');
+                const api = new DesktopStorybookCli(this.configure(config.projectRoot, config), {
+                  paper: target.endpoint === 'macos' && target.host.renderer === 'paper',
+                  reporter: supervisor.reporter,
+                  runner: supervisor.runner,
+                  services: supervisor.services,
+                });
+                if (action === 'test') await api.smoke(target.endpoint, { mode: 'stories-and-tests', ...(input ? { input } : {}) });
+                else await api[action](target.endpoint);
+              },
+            }),
+        ...(action === 'test'
+          ? {
+              attachedWorkload: async ({ supervisor, input, descriptor, root, preempt }) => {
+                const { DesktopStorybookCli } = await import('@fluentui-react-native/storybook-desktop/cli');
+                const api = new DesktopStorybookCli(this.configure(config.projectRoot, config), {
+                  paper: target.endpoint === 'macos' && target.host.renderer === 'paper',
+                  reporter: supervisor.reporter,
+                  runner: supervisor.runner,
+                  services: supervisor.services,
+                });
+                await api.test(target.endpoint, { attachAgent: true, input, descriptor, root, preempt });
+              },
+            }
+          : {}),
       };
     },
   };

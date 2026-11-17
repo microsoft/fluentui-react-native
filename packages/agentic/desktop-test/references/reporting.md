@@ -175,8 +175,9 @@ holds every selected test to its declared outcome. `run.json` carries the lane a
 `{ input, source, masking?, policyEnforced }`:
 
 - `input`: `accessible` or `physical`.
-- `source`: `option` for `--input`, `environment` for `DESKTOP_INPUT`, or `driver`
-  when the lane was read from the driver instance a `test` attached to.
+- `source`: `option` for `--input`, `environment` for `DESKTOP_INPUT`, `driver`
+  when the lane came from an attached driver, or `management` for a declared
+  supervisor workload.
 - `masking` (accessible only): `host-masked` when this command started the host
   with keyboard, physical click, and wheel disabled, or `verified-masked` when it
   attached to a host and verified that mask before running anything.

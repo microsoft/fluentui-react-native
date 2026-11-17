@@ -14,7 +14,7 @@ results sized by explicit budgets. Twelve exist today: the reads `observe`,
 `observeDelta`, `observePage`, `find`, `check`, `capture`, `artifact`,
 `stories`, and `journal`, and `act`, `sequence`, and `story`, which change the
 application.
-`@fluentui-react-native/desktop-driver-mcp` exposes them to MCP clients as six
+`@fluentui-react-native/desktop-mcp` exposes them to MCP clients as six
 tools. Controller lifecycle is open work in
 the [implementation plan](remaining-work.md).
 

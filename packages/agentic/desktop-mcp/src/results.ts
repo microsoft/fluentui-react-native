@@ -31,7 +31,7 @@ export function errorResult(error: unknown): CallToolResult {
       ...pick(data, ['reason', 'nativeCode', 'requestId', 'mutation']),
     };
   } else {
-    console.error(`desktop-driver-mcp: ${error instanceof Error ? (error.stack ?? error.message) : String(error)}`);
+    console.error(`desktop-mcp: ${error instanceof Error ? (error.stack ?? error.message) : String(error)}`);
     failure = { error: 'adapter', message: 'The adapter failed unexpectedly.', reason: 'internal' };
   }
   return { content: [{ text: JSON.stringify(failure), type: 'text' }], isError: true };

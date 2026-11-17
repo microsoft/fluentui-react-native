@@ -1,7 +1,134 @@
 import path from 'node:path';
+import { setTimeout as delay } from 'node:timers/promises';
+
+import { createDesktopMacOSApplicationLeaseResource } from '@fluentui-react-native/desktop-test/application-ownership';
+import { createDesktopMacOSApplicationInspector } from '@fluentui-react-native/desktop-test/macos-application-inspection';
+import type { DesktopResourceContribution, DesktopResourcePlan } from '@fluentui-react-native/desktop-test/resources';
 
 import { createStorybookPrivateStorage, driverManifestDigest, readDriverManifest } from './generatedManifest.js';
 import type { CreateStorybookPrivateStorage } from './generatedManifest.js';
+
+export type StorybookMacOSApplicationLeaseOptions = {
+  manifestPath: string;
+  handoff: string;
+  createStorage?: CreateStorybookPrivateStorage;
+  openInspector?: typeof createDesktopMacOSApplicationInspector;
+  addSecret(secret: string): void;
+  onFailure(error: Error): void;
+  onWarning?(message: string): void;
+  intervalMs?: number;
+};
+
+/** Binds the neutral, read-only lease maintainer to the independently pinned Storybook manifest. */
+export function createStorybookMacOSApplicationLeaseResource(options: StorybookMacOSApplicationLeaseOptions): DesktopResourceContribution {
+  if (!options.handoff) throw new Error('Desktop Storybook application leases require the trusted parent handoff.');
+  const createStorage = options.createStorage ?? createStorybookPrivateStorage;
+  const openInspector = options.openInspector ?? createDesktopMacOSApplicationInspector;
+  return {
+    id: 'macos-application-lease',
+    ownership: 'owned',
+    prepare: (context) => {
+      let inner: DesktopResourcePlan | undefined;
+      return {
+        identity: `storybook-macos-application-lease:${context.targetId}`,
+        async acquire(signal) {
+          const manifest = await readDriverManifest(options.manifestPath, options.handoff, createStorage);
+          signal.throwIfAborted();
+          const { application } = manifest;
+          if (
+            manifest.endpoint !== 'macos' ||
+            manifest.targetId !== context.targetId ||
+            !application.bundleIdentifier ||
+            !application.windowTitle
+          ) {
+            throw new Error('The Storybook application lease does not match the hosted macOS target.');
+          }
+          const selector = {
+            bundleIdentifier: application.bundleIdentifier,
+            windowTitle: application.windowTitle,
+            ...(application.executablePath ? { executablePath: application.executablePath } : {}),
+          };
+          inner = createDesktopMacOSApplicationLeaseResource({
+            selector,
+            record: path.basename(application.leasePath),
+            nonce: application.leaseNonce,
+            openStorage: () => createStorage(path.dirname(application.leasePath), manifest.nativeDriver),
+            openInspector: (value) =>
+              openInspector({
+                artifact: manifest.nativeDriver,
+                targetId: manifest.targetId,
+                selector: value,
+                onFailure: options.onFailure,
+              }),
+            addSecret: options.addSecret,
+            onFailure: options.onFailure,
+            onWarning: options.onWarning,
+            intervalMs: options.intervalMs,
+          }).prepare(context);
+          await inner.acquire(signal);
+        },
+        async dispose() {
+          await inner?.dispose();
+        },
+      };
+    },
+  };
+}
+
+/** Waits for the host's lease without writing, adopting, or taking ownership of the application. */
+export async function waitForStorybookMacOSApplicationLease(
+  manifestPath: string,
+  options: { timeoutMs: number; signal?: AbortSignal; createStorage?: CreateStorybookPrivateStorage },
+): Promise<void> {
+  if (!Number.isSafeInteger(options.timeoutMs) || options.timeoutMs <= 0 || options.timeoutMs > 2_147_483_647) {
+    throw new RangeError('The macOS application lease timeout must be a positive integer.');
+  }
+  const createStorage = options.createStorage ?? createStorybookPrivateStorage;
+  const manifest = await readDriverManifest(manifestPath, undefined, createStorage);
+  if (manifest.endpoint !== 'macos' || !manifest.application.bundleIdentifier || !manifest.application.windowTitle) {
+    throw new Error('The Storybook macOS application lease descriptor is incomplete.');
+  }
+  const storage = await createStorage(path.dirname(manifest.application.leasePath), manifest.nativeDriver);
+  const timeout = AbortSignal.timeout(options.timeoutMs);
+  const signal = options.signal ? AbortSignal.any([options.signal, timeout]) : timeout;
+  while (!signal.aborted) {
+    const contents = await storage.read(path.basename(manifest.application.leasePath));
+    if (signal.aborted) break;
+    if (contents !== undefined) {
+      let lease: unknown;
+      try {
+        lease = JSON.parse(contents);
+      } catch {
+        throw new Error('The Storybook macOS application lease is invalid.');
+      }
+      if (
+        !lease ||
+        typeof lease !== 'object' ||
+        Array.isArray(lease) ||
+        !('schemaVersion' in lease) ||
+        lease.schemaVersion !== 1 ||
+        !('endpoint' in lease) ||
+        lease.endpoint !== 'macos' ||
+        !('nonce' in lease) ||
+        lease.nonce !== manifest.application.leaseNonce ||
+        !('bundleIdentifier' in lease) ||
+        lease.bundleIdentifier !== manifest.application.bundleIdentifier ||
+        !('windowTitle' in lease) ||
+        lease.windowTitle !== manifest.application.windowTitle
+      ) {
+        throw new Error('The Storybook macOS application lease does not match the current host.');
+      }
+      return;
+    }
+    try {
+      await delay(100, undefined, { signal });
+    } catch {
+      break;
+    }
+  }
+  if (options.signal?.aborted) throw options.signal.reason;
+  throw new Error(`Timed out waiting for the Storybook macOS application lease after ${options.timeoutMs}ms.`);
+}
 
 type WindowsApplication = {
   aumid?: string;

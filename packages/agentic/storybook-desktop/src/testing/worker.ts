@@ -5,10 +5,14 @@ import { test } from 'node:test';
 import { attachDesktopWebdriver, type DesktopWebdriverAttachment } from '@fluentui-react-native/desktop-driver/wdio';
 import { expect } from 'expect-webdriverio';
 import type { DesktopEndpoint } from '@fluentui-react-native/desktop-driver';
-import { createDesktopReportSession, DESKTOP_REPORT_CONTEXT } from '@fluentui-react-native/desktop-test/reporting';
+import { createDesktopReportSession, DESKTOP_REPORT_CONTEXT, redactDesktopSecrets } from '@fluentui-react-native/desktop-test/reporting';
+import { runnerWorkerTokenEnvironment } from '@fluentui-react-native/desktop-test/runner-connection';
 
 import type { WdioStoryTest } from './types.js';
 import { formatDesktopStorybookError, writeDesktopStorybookFailure } from '../../config/diagnostics.cjs';
+
+const workerGrant = process.env[runnerWorkerTokenEnvironment];
+delete process.env[runnerWorkerTokenEnvironment];
 
 export type WdioWorkerOptions = {
   attachment: DesktopWebdriverAttachment;
@@ -26,6 +30,8 @@ export function registerWdioStoryTest(options: WdioWorkerOptions, callback: Wdio
     const report = process.env[DESKTOP_REPORT_CONTEXT]
       ? await createDesktopReportSession({ artifactsRoot: path.dirname(options.resultPath), kind: 'lifecycle' })
       : undefined;
+    if (workerGrant) report?.reporter.addSecret(workerGrant);
+    const redact = (text: string) => report?.reporter.redact(text) ?? redactDesktopSecrets(text, workerGrant ? [workerGrant] : []);
     const controller = new AbortController();
     const signal = AbortSignal.any([context.signal, controller.signal]);
     report?.onStop?.(() => controller.abort(new Error('Owned story worker stop requested.')));
@@ -40,7 +46,7 @@ export function registerWdioStoryTest(options: WdioWorkerOptions, callback: Wdio
     });
     const recordFailure = (error: unknown) => {
       failure = error;
-      const diagnostic = report?.reporter.redact(formatDesktopStorybookError(error)) ?? formatDesktopStorybookError(error);
+      const diagnostic = redact(formatDesktopStorybookError(error));
       try {
         fs.writeFileSync(
           options.resultPath,
@@ -49,8 +55,11 @@ export function registerWdioStoryTest(options: WdioWorkerOptions, callback: Wdio
         );
         recorded = true;
       } catch (writeError) {
-        writeDesktopStorybookFailure(`wdio "${name}"`, error);
-        throw new AggregateError([error, writeError], 'Could not persist the worker failure diagnostic.');
+        writeDesktopStorybookFailure(`wdio "${name}"`, diagnostic);
+        throw new AggregateError(
+          workerGrant ? [redactedError(error, redact), redactedError(writeError, redact)] : [error, writeError],
+          'Could not persist the worker failure diagnostic.',
+        );
       }
     };
     context.after(async () => {
@@ -61,7 +70,8 @@ export function registerWdioStoryTest(options: WdioWorkerOptions, callback: Wdio
       }
     });
     try {
-      const desktop = await attachDesktopWebdriver(options.attachment);
+      if (workerGrant && options.attachment.grant) throw new Error('A story worker cannot accept multiple driver grants.');
+      const desktop = await attachDesktopWebdriver(workerGrant ? { ...options.attachment, grant: workerGrant } : options.attachment);
       if (!['macos', 'windows', 'win32'].includes(options.platform) || desktop.session.capabilities['furn:endpoint'] !== options.platform) {
         throw new Error('The wdio worker platform does not match the attached desktop endpoint.');
       }
@@ -90,13 +100,22 @@ export function registerWdioStoryTest(options: WdioWorkerOptions, callback: Wdio
       signal.throwIfAborted();
       fs.writeFileSync(
         options.resultPath,
-        JSON.stringify({ ...(skipReason ? { status: 'skipped', skipReason } : { status: 'passed' }), timings: timings() }),
+        JSON.stringify({
+          ...(skipReason ? { status: 'skipped', skipReason: redact(skipReason) } : { status: 'passed' }),
+          timings: timings(),
+        }),
         { mode: 0o600 },
       );
       recorded = true;
     } catch (error) {
       recordFailure(error);
-      throw error;
+      throw workerGrant ? redactedError(error, redact) : error;
     }
   });
+}
+
+function redactedError(error: unknown, redact: (text: string) => string): Error {
+  const safe = new Error(redact(formatDesktopStorybookError(error)));
+  if (error instanceof Error) safe.name = error.name;
+  return safe;
 }

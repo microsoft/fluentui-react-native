@@ -22,7 +22,7 @@ export default defineDesktopConfig({
     win32: { host: { kind: 'rex', renderer: 'paper', ...win32Host }, commands: { run: createWin32RunCommand(win32Host) } },
   },
   reporting: { artifactsRoot: './artifacts/desktop' },
-  suites: { stories: { kind: 'csf-wdio' } },
+  suites: { stories: { kind: 'csf-wdio', agent: { lanes: ['accessible', 'physical'] } } },
   integration: storybook({
     storyPackages: [
       [

@@ -7,7 +7,8 @@ import type {
   DesktopTarget,
   NativeDesktopApplicationDescriptor,
 } from '@fluentui-react-native/desktop-driver';
-import type { DesktopApplicationResource, DesktopResourceRecord } from './resources.js';
+import type { PrivateStorage } from '@fluentui-react-native/desktop-driver/authority';
+import type { DesktopApplicationResource, DesktopResourceContribution, DesktopResourceRecord } from './resources.js';
 
 export type DesktopApplicationIdentity = Readonly<{
   schemaVersion: 1;
@@ -60,6 +61,249 @@ export function desktopApplicationIdentityDescriptor(
   return Object.freeze({
     ...application,
     processIdentity: Object.freeze(processIdentity),
+  });
+}
+
+export type DesktopMacOSApplicationSelector = Readonly<{
+  bundleIdentifier: string;
+  windowTitle: string;
+  executablePath?: string;
+}>;
+
+export type DesktopMacOSApplicationObservation = Readonly<{
+  processId: number;
+  processStartedAt: string;
+  executablePath: string;
+}>;
+
+/** Read-only inspection never acquires an application lease or control of a window. */
+export type DesktopMacOSApplicationInspector = {
+  inspect(signal: AbortSignal): Promise<DesktopMacOSApplicationObservation | undefined>;
+  close(): Promise<void>;
+};
+
+export type DesktopMacOSApplicationLeaseOptions = {
+  selector: DesktopMacOSApplicationSelector;
+  record: string;
+  nonce: string;
+  openStorage(signal: AbortSignal): Promise<PrivateStorage>;
+  openInspector(selector: DesktopMacOSApplicationSelector, signal: AbortSignal): Promise<DesktopMacOSApplicationInspector>;
+  addSecret(secret: string): void;
+  onFailure(error: Error): void;
+  onWarning?(message: string): void;
+  intervalMs?: number;
+};
+
+/**
+ * Contributes a read-only macOS lease maintainer to a host. Publication uses only a verified observation and never
+ * adopts or removes another owner's record. Ambiguity withdraws this owner's lease rather than guessing an application.
+ */
+export function createDesktopMacOSApplicationLeaseResource(options: DesktopMacOSApplicationLeaseOptions): DesktopResourceContribution {
+  const selector = macOSApplicationSelector(options.selector);
+  const intervalMs = options.intervalMs ?? 2000;
+  if (
+    typeof options.record !== 'string' ||
+    !/^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$/.test(options.record) ||
+    options.record.endsWith('.') ||
+    /^(?:con|prn|aux|nul|com[0-9]|lpt[0-9])$/i.test(options.record.split('.')[0]) ||
+    !boundedText(options.nonce, 512) ||
+    !Number.isSafeInteger(intervalMs) ||
+    intervalMs < 10 ||
+    intervalMs > 60_000 ||
+    typeof options.openStorage !== 'function' ||
+    typeof options.openInspector !== 'function' ||
+    typeof options.addSecret !== 'function' ||
+    typeof options.onFailure !== 'function' ||
+    (options.onWarning !== undefined && typeof options.onWarning !== 'function')
+  ) {
+    throw new TypeError('Invalid macOS application lease options.');
+  }
+  const { record, nonce } = options;
+  return {
+    id: 'macos-application-lease',
+    ownership: 'owned',
+    prepare: () => {
+      const stopping = new AbortController();
+      let storage: PrivateStorage | undefined;
+      let inspector: DesktopMacOSApplicationInspector | undefined;
+      let published: string | undefined;
+      let uncertainPublication = false;
+      let maintenance: Promise<void> | undefined;
+      let closing: Promise<void> | undefined;
+      let acquired = false;
+      let warned = false;
+      let ownershipConflict = false;
+
+      const withdraw = async () => {
+        if (published === undefined || !storage) return;
+        const previous = published;
+        if (!(await storage.remove(record, previous)) && (await storage.read(record)) !== undefined) {
+          ownershipConflict = true;
+          throw new Error('The macOS application lease changed during withdrawal.');
+        }
+        published = undefined;
+      };
+
+      const refresh = async (signal: AbortSignal) => {
+        let observation: DesktopMacOSApplicationObservation | undefined;
+        try {
+          observation = await inspector!.inspect(signal);
+          if (observation !== undefined) validateMacOSApplicationObservation(observation);
+        } catch {
+          if (signal.aborted) return;
+          await withdraw();
+          if (!warned) options.onWarning?.('The macOS application identity is unavailable or ambiguous; its lease was withdrawn.');
+          warned = true;
+          return;
+        }
+        if (signal.aborted) return;
+        if (!observation) {
+          await withdraw();
+          warned = false;
+          return;
+        }
+        warned = false;
+        const contents = JSON.stringify({
+          schemaVersion: 1,
+          endpoint: 'macos',
+          nonce,
+          bundleIdentifier: selector.bundleIdentifier,
+          windowTitle: selector.windowTitle,
+          ...observation,
+        });
+        const current = await storage!.read(record);
+        if (signal.aborted) return;
+        if (published !== undefined) {
+          if (current === published && current === contents) return;
+          if (current !== undefined && current !== published) {
+            ownershipConflict = true;
+            throw new Error('The macOS application lease was replaced by another owner.');
+          }
+          if (current === published) {
+            const removed = await storage!.remove(record, published);
+            published = undefined;
+            if (!removed) throw new Error('The macOS application lease changed during replacement.');
+          } else {
+            published = undefined;
+          }
+        } else if (current !== undefined) {
+          throw new Error('The macOS application lease is already owned.');
+        }
+        if (signal.aborted) return;
+        try {
+          await storage!.publish(record, contents);
+          published = contents;
+        } catch {
+          // A failed private publication may have taken effect; it cannot safely be adopted or removed.
+          uncertainPublication = true;
+          throw new Error('The macOS application lease publication did not settle.');
+        }
+      };
+
+      return {
+        identity: `macos-application-lease:${record}`,
+        async acquire(signal) {
+          if (acquired || closing) throw new Error('The macOS application lease resource cannot be acquired twice.');
+          acquired = true;
+          options.addSecret(nonce);
+          signal.throwIfAborted();
+          storage = await options.openStorage(signal);
+          signal.throwIfAborted();
+          if (closing) throw new Error('The macOS application lease resource is closing.');
+          inspector = await options.openInspector(selector, signal);
+          if (closing || signal.aborted) {
+            await inspector.close();
+            inspector = undefined;
+            signal.throwIfAborted();
+            throw new Error('The macOS application lease resource is closing.');
+          }
+          if (typeof inspector?.inspect !== 'function' || typeof inspector.close !== 'function') {
+            throw new TypeError('The macOS application lease requires a read-only inspector.');
+          }
+          const lifetime = AbortSignal.any([signal, stopping.signal]);
+          maintenance = (async () => {
+            while (!lifetime.aborted) {
+              await refresh(lifetime);
+              await waitForLeaseRefresh(intervalMs, lifetime);
+            }
+          })().catch(() => {
+            options.onFailure(new Error('The macOS application lease maintainer failed.'));
+          });
+        },
+        dispose() {
+          return (closing ??= (async () => {
+            stopping.abort();
+            const failures: Error[] = [];
+            try {
+              await maintenance;
+            } catch {
+              failures.push(new Error('The macOS application lease maintainer did not settle.'));
+            }
+            try {
+              await withdraw();
+            } catch {
+              failures.push(new Error('The macOS application lease withdrawal did not settle.'));
+            }
+            try {
+              await inspector?.close();
+            } catch {
+              failures.push(new Error('The macOS application inspector did not settle.'));
+            }
+            if (uncertainPublication) failures.push(new Error('The macOS application lease publication remains unconfirmed.'));
+            if (ownershipConflict) failures.push(new Error('The macOS application lease ownership changed.'));
+            if (failures.length) throw new AggregateError(failures, 'macOS application lease cleanup did not settle.');
+          })());
+        },
+      };
+    },
+  };
+}
+
+function macOSApplicationSelector(value: DesktopMacOSApplicationSelector): DesktopMacOSApplicationSelector {
+  if (
+    !value ||
+    typeof value !== 'object' ||
+    Array.isArray(value) ||
+    Object.keys(value).some((key) => !['bundleIdentifier', 'windowTitle', 'executablePath'].includes(key)) ||
+    !boundedText(value.bundleIdentifier, 4096) ||
+    !boundedText(value.windowTitle, 4096) ||
+    (value.executablePath !== undefined && (!boundedText(value.executablePath, 4096) || !path.posix.isAbsolute(value.executablePath)))
+  ) {
+    throw new TypeError('A macOS application selector requires a bundle identifier, exact window title, and optional absolute executable.');
+  }
+  return Object.freeze({ ...value });
+}
+
+function validateMacOSApplicationObservation(observation: DesktopMacOSApplicationObservation): void {
+  if (
+    !observation ||
+    typeof observation !== 'object' ||
+    Array.isArray(observation) ||
+    Object.keys(observation).some((key) => !['processId', 'processStartedAt', 'executablePath'].includes(key)) ||
+    !boundedText(observation.executablePath, 4096) ||
+    !path.posix.isAbsolute(observation.executablePath)
+  ) {
+    throw new TypeError('Invalid macOS application observation.');
+  }
+  captureDesktopApplicationIdentity({ id: 'inspection', ownership: 'attached', ...observation }, 'macos');
+}
+
+function boundedText(value: unknown, maximum: number): value is string {
+  return typeof value === 'string' && value.length > 0 && value.length <= maximum && !/\p{Cc}/u.test(value);
+}
+
+function waitForLeaseRefresh(milliseconds: number, signal: AbortSignal): Promise<void> {
+  if (signal.aborted) return Promise.resolve();
+  return new Promise((resolve) => {
+    const finish = () => {
+      clearTimeout(timer);
+      signal.removeEventListener('abort', finish);
+      resolve();
+    };
+    const timer = setTimeout(finish, milliseconds);
+    timer.unref();
+    signal.addEventListener('abort', finish, { once: true });
+    if (signal.aborted) finish();
   });
 }
 

@@ -61,7 +61,11 @@ owned by `@fluentui-react-native/storybook-desktop-runtime`.
 The neutral `DesktopSupervisor` owns the workload claim, report session,
 cancellation, resources, and cleanup. An imported integration implements a
 side-effect-free `contribute()` plan for the selected action, then runs its
-workload inside that scope. Storybook keeps its channel child (which hosts both
+workload inside that scope. For `serve`, it contributes a hosted-driver
+acquisition that returns a typed correlated receipt and public Storybook
+details; the supervisor verifies and publishes management before emitting
+readiness. Standalone `storybook driver` uses the same acquisition path.
+Storybook keeps its channel child (which hosts both
 channel and driver listeners) and Metro child; both are registered with the
 supervisor's resource scope. The Storybook CLI remains a reusable command
 surface, not an alternate lifecycle owner. Keep the runtime Node-free. Do not

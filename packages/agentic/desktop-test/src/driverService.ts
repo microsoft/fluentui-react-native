@@ -103,12 +103,9 @@ export async function startDesktopService(
         signal: options.signal,
         guard: options.guard,
       });
-      if (
-        options.agent.runner !== false &&
-        !target.storyOrchestrator &&
-        target.launchModes?.length === 1 &&
-        target.launchModes[0] === 'attach'
-      ) {
+      // Story hosts opt in until their integration supplies a per-instance runner descriptor.
+      const runnerEnabled = options.agent.runner !== false && (!target.storyOrchestrator || options.agent.runner !== undefined);
+      if (runnerEnabled && target.launchModes?.length === 1 && target.launchModes[0] === 'attach') {
         runnerPublication = await publishDesktopAgent({
           authority: authority!,
           connection: options.agent,
@@ -121,7 +118,7 @@ export async function startDesktopService(
           guard: options.guard,
         });
       } else if (options.agent.runner && !runnerPublication) {
-        throw new Error('Runner descriptors require a generic attach-only target.');
+        throw new Error('Runner descriptors require an attach-only target.');
       }
     }
   } catch (error) {

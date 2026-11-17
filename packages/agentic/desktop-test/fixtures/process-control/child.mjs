@@ -1,5 +1,7 @@
 import fs from 'node:fs';
 import { spawn } from 'node:child_process';
+import http from 'node:http';
+import net from 'node:net';
 
 const [mode, marker, preload] = process.argv.slice(2);
 const control = globalThis[Symbol.for('furn.desktop.process-control')];
@@ -27,6 +29,33 @@ if (mode === 'late') {
 } else if (mode === 'borrowed') {
   fs.writeFileSync(marker, String(process.pid));
   setInterval(() => undefined, 60_000);
+} else if (
+  mode === 'listener' ||
+  mode === 'listener-close' ||
+  mode === 'listener-ipv6' ||
+  mode === 'listener-preflight' ||
+  mode === 'listener-exit-on-stop' ||
+  mode === 'listener-with-descriptor'
+) {
+  const server = http.createServer((_request, response) => response.end('ready'));
+  const keepAlive = setInterval(() => undefined, 60_000);
+  server.on('error', () => undefined);
+  const host = mode === 'listener-ipv6' ? '::1' : '127.0.0.1';
+  const start = () =>
+    server.listen({ port: Number(marker), host, ...(mode === 'listener-ipv6' ? { ipv6Only: true } : {}) }, () => {
+      if (mode === 'listener-close') setTimeout(() => server.close(), 500);
+      if (mode === 'listener-with-descriptor')
+        void control.ready({ tier: 'service-ready', service: 'descriptor', descriptor: 'fixture.json' });
+    });
+  if (mode === 'listener-preflight') {
+    const probe = net.createServer();
+    probe.listen(Number(marker), host, () => probe.close(start));
+  } else start();
+  process.once('SIGTERM', () => {
+    if (mode === 'listener-exit-on-stop' || mode === 'listener-with-descriptor') process.exit(0);
+    if (server.listening) server.close();
+    clearInterval(keepAlive);
+  });
 } else if (mode === 'reported-slow') {
   const { createDesktopReportSession } = await import('../../lib/reporting/index.js');
   const report = await createDesktopReportSession({ artifactsRoot: '.', kind: 'lifecycle' });

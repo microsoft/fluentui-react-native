@@ -1,6 +1,6 @@
 ---
 id: desktop-test.management
-kind: design-decision
+kind: instruction-reference
 owner_paths:
   - packages/agentic/desktop-test
 ---
@@ -33,6 +33,14 @@ publishing the root descriptor. It withdraws the exact descriptor before
 fencing new admissions, cancelling or draining accepted work, and closing
 listeners. It never removes a replacement descriptor written by another
 incarnation.
+
+An integration contributes a hosted-driver acquisition that returns its
+correlated service receipt, URL, target and descriptor names. The neutral
+supervisor then contributes `createManagedDesktopHostResource` after the
+matching protected driver. It independently binds publication to the live
+URL, target and incarnation, then withdraws management before the driver's
+owned resources are disposed. Storybook's channel child remains the driver
+host for both CLI entry points.
 
 The existing driver-only descriptor remains supported by the legacy
 `desktop-driver-mcp` compatibility executable and by an explicit driver-only
@@ -74,11 +82,11 @@ connection. Each MCP connection receives a distinct attenuated principal;
 one connection cannot inspect or cancel another connection's run. A principal
 may receive only these scopes:
 
-| Scope | Authority |
-| --- | --- |
-| `workload-read` | Read bounded status, results, and allowlisted text artifacts for runs visible to that principal. |
-| `workload-run` | Start a declared catalog entry on an allowed input lane. |
-| `workload-cancel-own` | Cancel only a run admitted by that principal. |
+| Scope                 | Authority                                                                                        |
+| --------------------- | ------------------------------------------------------------------------------------------------ |
+| `workload-read`       | Read bounded status, results, and allowlisted text artifacts for runs visible to that principal. |
+| `workload-run`        | Start a declared catalog entry on an allowed input lane.                                         |
+| `workload-cancel-own` | Cancel only a run admitted by that principal.                                                    |
 
 Operator recovery, host start/stop, arbitrary command execution, and
 preemption are not management operations. Driver-control authority remains
@@ -88,8 +96,10 @@ The supervisor constructs a finite catalog from trusted, statically loaded
 configuration. Each entry has a stable bounded ID, a declared suite kind, and
 an explicit set of allowed input lanes. WDIO and Storybook CSF suites opt in
 through trusted configuration. The active host's input mask and capabilities
-further restrict the lanes exposed. The client can select only a catalog ID
-and lane; it cannot supply a config or module path, suite name outside the
+further restrict the lanes exposed. Generic WDIO requires a physically masked
+host for an accessible run. Storybook can also run an accessible lane on an
+unmasked host using its verified session input policy. The client can select
+only a catalog ID, lane, and optional exact CSF story ID; it cannot supply a config or module path, suite name outside the
 catalog, executable, arguments, working directory, environment, URL, or
 dynamic schema.
 
@@ -129,6 +139,11 @@ ambiguous admission. Explicit principal disposal fences its new admissions,
 cancels its active run, and waits for settlement. A new supervisor incarnation
 does not resume prior runs or replay work.
 
+Ambiguous connection acquisitions are permanently fenced by ID on disposal,
+including after a successful retry. If the bounded abandoned-ID capacity is
+exhausted, the listener rejects new connections until the supervisor restarts;
+existing connections and cleanup remain available.
+
 ## Bounds and agent efficiency
 
 - Catalog size, request bodies, status pages, result pages, artifact reads,
@@ -144,6 +159,10 @@ does not resume prior runs or replay work.
 - New credentials are registered with report and query redactors before any
   request or capability uses them. Credentials never enter capabilities,
   generated settings, arguments, logs, artifacts, or model-visible output.
+  Redaction retains at most 4096 distinct secrets per supervisor incarnation;
+  when full, status reports `capacity` and new connections and runs fail with
+  that code, while existing reads and cleanup remain available. Restarting the
+  supervisor resets the limit.
 
 ## Alternatives considered
 
@@ -169,11 +188,11 @@ retained only as the compatibility path for driver-only clients.
 
 ## Client package migration
 
-The new management-capable adapter will be published as
-`@fluentui-react-native/desktop-mcp`, with the `desktop-mcp` executable. The
-existing `@fluentui-react-native/desktop-driver-mcp` package will remain as a
-small deprecated forwarding shim with its existing executable name and
-driver-only behavior. It will not silently gain workload authority.
+The management-capable adapter is `@fluentui-react-native/desktop-mcp`, with
+the `desktop-mcp` executable. The existing
+`@fluentui-react-native/desktop-driver-mcp` package is a deprecated forwarding
+shim with its existing executable name and driver-only behavior. It does not
+silently gain workload authority.
 
 The existing package has reached 0.1.4, first published on 2026-11-05 and last
 updated on 2026-11-16. The short pre-1.0 publication history supports a
@@ -184,16 +203,16 @@ fixed at startup; driver-only use remains explicit and independently bounded.
 
 ## Acceptance evidence
 
-| Property | Required evidence |
-| --- | --- |
-| Descriptor binding | Tampering, replacement, stale incarnation, and mismatched target tests fail closed before credentials are sent. |
-| Scope isolation | Two management principals cannot read or cancel each other's runs; each can cancel its own. |
-| No replay | Lost admission response followed by status reconciliation returns one run and never dispatches a second. |
-| Truthful cancellation | Before-dispatch cancel, in-flight cancel, completed failure, late completion, and failed drain preserve distinct outcomes. |
-| Bounded interaction | Catalog, status, result, artifact, wait, and retention limits are enforced; discovery is measured in bytes and tokens. |
-| Credential confinement | Automated scans find no management or driver credentials in logs, capabilities, generated files, artifacts, or MCP output. |
-| Compatibility | Driver-only descriptor use continues through `desktop-driver-mcp` and explicit `desktop-mcp --driver-only`; invalid management discovery does not downgrade. |
-| Ownership | Management runs borrow the host; cancellation does not stop it; unresolved cleanup keeps its claim fenced. |
+| Property               | Required evidence                                                                                                                                            |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Descriptor binding     | Tampering, replacement, stale incarnation, and mismatched target tests fail closed before credentials are sent.                                              |
+| Scope isolation        | Two management principals cannot read or cancel each other's runs; each can cancel its own.                                                                  |
+| No replay              | Lost admission response followed by status reconciliation returns one run and never dispatches a second.                                                     |
+| Truthful cancellation  | Before-dispatch cancel, in-flight cancel, completed failure, late completion, and failed drain preserve distinct outcomes.                                   |
+| Bounded interaction    | Catalog, status, result, artifact, wait, and retention limits are enforced; discovery is measured in bytes and tokens.                                       |
+| Credential confinement | Automated scans find no management or driver credentials in logs, capabilities, generated files, artifacts, or MCP output.                                   |
+| Compatibility          | Driver-only descriptor use continues through `desktop-driver-mcp` and explicit `desktop-mcp --driver-only`; invalid management discovery does not downgrade. |
+| Ownership              | Management runs borrow the host; cancellation does not stop it; unresolved cleanup keeps its claim fenced.                                                   |
 
 ## References
 

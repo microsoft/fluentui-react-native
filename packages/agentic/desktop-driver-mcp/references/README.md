@@ -5,10 +5,10 @@ owner_paths:
   - packages/agentic/desktop-driver-mcp
 ---
 
-# Desktop Driver MCP references
+# Compatibility references
 
-| ID                                  | Document                              | Read when                                                                                         |
-| ----------------------------------- | ------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| `desktop-driver-mcp.connection`     | [Connection and setup](connection.md) | Publishing a descriptor, registering the server, or diagnosing connect                            |
-| `desktop-driver-mcp.tools`          | [Tools](tools.md)                     | Calling or changing tools, results, errors, resources, or progress                                |
-| `desktop-driver-mcp.current-status` | [Current status](current-status.md)   | Checking implemented lifetime safeguards, per-endpoint qualification, and measured discovery cost |
+| ID                                  | Document                            | Read when                                  |
+| ----------------------------------- | ----------------------------------- | ------------------------------------------ |
+| `desktop-driver-mcp.connection`     | [Connection](connection.md)         | Migrating a driver-only connection         |
+| `desktop-driver-mcp.tools`          | [Tools](tools.md)                   | Finding the forwarded driver tools         |
+| `desktop-driver-mcp.current-status` | [Current status](current-status.md) | Finding qualification and migration status |

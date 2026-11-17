@@ -16,10 +16,11 @@ workspace's declared script.
 | `prep`, `bundle`, `build`, `run`     | Run the selected target adapter stage                |
 | `test --suite <name> --list`         | Resolve groups without launching a target            |
 | `test --suite <name>`                | Run the selected WDIO suite                          |
-| `test --suite <name> --attach-agent` | Reuse a generic external-app agent service           |
+| `test --suite <name> --attach-agent` | Reuse an attach-only protected agent service         |
 | `test --suite <name> --input <lane>` | Run one input lane (`accessible` or `physical`)      |
 | `serve --reporter json`              | Start the real driver listener and required services |
-| `serve --agent`                      | Also require grants and publish an agent descriptor  |
+| `serve --agent`                      | Publish protected agent and supervisor descriptors   |
+| `serve --agent --input <lane>`       | Set the managed host's input lane and physical mask  |
 
 Global reporter options are `--reporter auto|plain|github-actions|json|ndjson`
 and `--json` (an alias for `--reporter json`). Mode precedence is CLI flag,
@@ -41,8 +42,11 @@ results and logs remain under the returned artifact paths.
 `serve` reports the actual URL and target after readiness, then waits for an
 owned stop. Long-lived JSON mode emits only that readiness document; a `serve`
 that fails before readiness writes the bounded summary instead. For a
-target served by an imported integration, `run` receives the output format,
-writes its own readiness document, and calls `onReady` once it has.
+target served by an imported integration, its hosted-driver resource returns
+correlated readiness to the supervisor. The supervisor emits the canonical
+URL, target, instance, endpoint, renderer, run and descriptor fields after
+management is published. Public integration details appear only under
+`integration`, so they cannot replace those identity fields.
 Clients create sessions explicitly.
 
 Stop any command with Ctrl+C, SIGTERM, or SIGHUP. The first interrupt stops the
@@ -65,7 +69,7 @@ the platform's private storage root unless `--descriptor <name>` or
 `agentDescriptor` name, and the grant never appears in output or artifacts.
 Stopping `serve` removes the descriptor before revoking and draining the grant.
 Ordinary unauthenticated WDIO clients cannot connect to a service started with
-`--agent`. Generic external-app targets additionally publish a separate
+`--agent`. Eligible attach-only generic and Storybook targets publish a separate
 `runner-connection.json` for `test --attach-agent`. Runner reuse takes no second
 claim or listener; it defaults to busy and requires explicit relinquish or
 operator-authorized preemption. `serve --runner-descriptor <name>` selects its
@@ -74,13 +78,28 @@ record; `serve --allow-runner-preempt` opts into preemption authority. On
 See [attached runner handoff](wdio-suites.md#reuse-an-attached-agent-service)
 for the drain barrier and unsupported phases. A target served by an imported
 integration accepts `serve --agent` only when its `contribute()` plan declares
-a hosted driver. The integration workload receives the descriptor and private
-storage root inside the neutral supervisor scope; the plan cannot replace that
+a hosted driver with an `acquire()` function. The resource receives the
+descriptor and private storage root inside the neutral supervisor scope; the plan cannot replace that
 scope's claim, cancellation, reporting, or cleanup. Storybook publishes its
 connection from the channel child through this path; other integrations reject
 it. Targets with `host.ownership: "external"` accept only attach sessions;
 `"supervisor"` launches once and retains the exact application incarnation for
 attach-only sessions.
+
+For generic and hosted Storybook targets, `serve --agent` also publishes the
+`supervisor-connection.json` management root after verifying the driver and
+management listeners. `--supervisor-descriptor <name>` selects a different
+record in the same private root; structured readiness includes its
+`supervisorDescriptor` name. Only suites explicitly opted into the workload
+catalog are offered, and only when their lane is supported by the host and a
+protected attach-only runner is available. `serve --input accessible` starts the native
+host with physical input masked; `serve --input physical` (the default) leaves
+it unmasked. Generic WDIO accessible runs require the masked host; Storybook
+can also use an accessible session on an unmasked host. The `DESKTOP_INPUT` test fallback does not silently change a
+long-lived host's input policy. Managed execution and its report borrow the
+host; cancellation never stops it. `desktop-mcp` connects to this root and exposes
+the bounded workload tool; `desktop-mcp --driver-only` and the legacy
+`desktop-driver-mcp` executable use only the driver descriptor.
 
 For macOS RN Test App projects, run bundle before `prep`; CocoaPods embeds only
 resources present during pod installation. Changing the renderer requires

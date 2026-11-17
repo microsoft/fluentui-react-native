@@ -7,7 +7,12 @@ const packageRoot = path.resolve(__dirname, '..');
 const repoRoot = path.resolve(packageRoot, '../../..');
 const fixtureRoot = path.join(packageRoot, 'fixtures/neutral-boundary');
 const loaderPath = path.join(fixtureRoot, 'loader.mjs');
-const neutralPackages = ['packages/agentic/desktop-driver', 'packages/agentic/desktop-test', 'packages/agentic/desktop-driver-mcp'];
+const neutralPackages = [
+  'packages/agentic/desktop-driver',
+  'packages/agentic/desktop-test',
+  'packages/agentic/desktop-driver-mcp',
+  'packages/agentic/desktop-mcp',
+];
 
 type PackageManifest = {
   dependencies?: Record<string, string>;

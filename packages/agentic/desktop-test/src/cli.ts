@@ -18,15 +18,23 @@ import { defaultAgentDescriptor } from './agentConnection.js';
 import type { DesktopAgentConnectionOptions } from './agentConnection.js';
 import { loadDesktopConfig, resolveDesktopSpecs, selectDesktopRenderer } from './config.js';
 import type { DesktopStage } from './config.js';
+import { acquireHostedDesktopDriver, desktopHostReady, formatDesktopHostReady, publishDesktopHostManagement } from './hostedDriver.js';
 import { createDesktopInputLane, desktopInputEnvironment, requestedDesktopInputLane } from './reporting/lane.js';
-import { createDesktopReportSession } from './reporting/session.js';
+import { createDesktopRunContext } from './runContext.js';
 import { DesktopStopRequested } from './services.js';
-import { handleDesktopInterrupts } from './signals.js';
-import { DesktopSupervisor } from './supervisor.js';
+import { defaultSupervisorDescriptor } from './supervisorConnection.js';
 import { assertDesktopSuiteSupportsInput, runDesktopWdioSuite } from './wdio/run.js';
 import { connectDesktopRunner, defaultRunnerDescriptor } from './wdio/runnerConnection.js';
 
-type AgentFlags = { agent?: boolean; descriptor?: string; root?: string; runnerDescriptor?: string; allowRunnerPreempt?: boolean };
+type AgentFlags = {
+  agent?: boolean;
+  descriptor?: string;
+  supervisorDescriptor?: string;
+  root?: string;
+  runnerDescriptor?: string;
+  allowRunnerPreempt?: boolean;
+  input?: string;
+};
 type TestFlags = {
   suite: string;
   list?: boolean;
@@ -36,6 +44,16 @@ type TestFlags = {
   root?: string;
   preempt?: boolean;
 };
+type DesktopCliOptions = {
+  config?: string;
+  target: string;
+  reporter?: string;
+  json?: boolean;
+  events?: 'milestones' | 'progress' | 'all';
+  paper?: boolean;
+  verbose?: boolean;
+};
+type DesktopCliAction = DesktopStage | 'build-driver' | 'serve' | 'test';
 
 export async function runDesktopTestCli(argv = process.argv): Promise<void> {
   tolerateClosedDesktopStdout();
@@ -61,15 +79,17 @@ export async function runDesktopTestCli(argv = process.argv): Promise<void> {
     .command('serve')
     .option('--agent', 'require a grant on every route and publish one agent connection descriptor')
     .option('--descriptor <name>', `agent connection descriptor record name (default ${defaultAgentDescriptor})`)
+    .option('--supervisor-descriptor <name>', `workload supervisor descriptor record (default ${defaultSupervisorDescriptor})`)
     .option('--root <path>', 'private storage root for the agent descriptor; defaults to the platform location')
     .option('--runner-descriptor <name>', `attach-only runner descriptor record (default ${defaultRunnerDescriptor})`)
     .option('--allow-runner-preempt', 'explicitly grant the attach-only runner operator authority to preempt an existing controller')
+    .addOption(new Option('--input <lane>', 'apply the host input mask for managed workloads').choices([...desktopInputLanes]))
     .action((options: AgentFlags) => execute('serve', undefined, options));
   program
     .command('test')
     .requiredOption('--suite <name>', 'configured suite')
     .option('--list', 'resolve exact spec groups without launching')
-    .option('--attach-agent', 'reuse an external or retained generic agent service without a second workload claim')
+    .option('--attach-agent', 'reuse a protected attach-only service without a second workload claim')
     .option('--descriptor <name>', `existing runner descriptor (default ${defaultRunnerDescriptor}); requires --attach-agent`)
     .option('--root <path>', 'existing descriptor private storage root; requires --attach-agent')
     .option('--preempt', 'request operator-authorized preemption instead of the default busy result; requires --attach-agent')
@@ -82,6 +102,16 @@ export async function runDesktopTestCli(argv = process.argv): Promise<void> {
     .action((options: TestFlags) => execute('test', options));
   let reporterMode: ResolvedDesktopReporterMode = 'plain';
   let reporterResolutionError: unknown;
+  const execute = (action: DesktopCliAction, test?: TestFlags, agentFlags?: AgentFlags) =>
+    executeDesktopTestAction({
+      action,
+      test,
+      agentFlags,
+      options: program.opts<DesktopCliOptions>(),
+      onReporterMode: (mode) => {
+        reporterMode = mode;
+      },
+    });
   try {
     reporterMode = resolveDesktopReporterModeFromArgv(argv, { environment: process.env.DESKTOP_REPORTER });
   } catch (error) {
@@ -105,125 +135,131 @@ export async function runDesktopTestCli(argv = process.argv): Promise<void> {
     process.exitCode = 1;
     return;
   }
+}
 
-  async function execute(
-    action: DesktopStage | 'build-driver' | 'serve' | 'test',
-    test?: TestFlags,
-    agentFlags: AgentFlags = {},
-  ): Promise<void> {
-    const options = program.opts<{
-      config?: string;
-      target: string;
-      reporter?: string;
-      json?: boolean;
-      events?: 'milestones' | 'progress' | 'all';
-      paper?: boolean;
-      verbose?: boolean;
-    }>();
-    let config: Awaited<ReturnType<typeof loadDesktopConfig>>;
-    try {
-      config = await loadDesktopConfig(options.config);
-    } catch (error) {
-      throw Object.assign(error instanceof Error ? error : new Error(String(error)), { code: 'config' });
-    }
-    reporterMode = resolveDesktopReporterMode({
-      flag: options.json ? 'json' : options.reporter,
-      environment: process.env.DESKTOP_REPORTER,
-      configured: config.reporting.reporter ?? config.reporting.console,
+/** Executes a resolved CLI action independently of Commander parsing and presentation of parse errors. */
+export async function executeDesktopTestAction({
+  action,
+  test,
+  agentFlags = {},
+  options,
+  onReporterMode,
+}: {
+  action: DesktopCliAction;
+  test?: TestFlags;
+  agentFlags?: AgentFlags;
+  options: DesktopCliOptions;
+  onReporterMode?(mode: ResolvedDesktopReporterMode): void;
+}): Promise<void> {
+  let config: Awaited<ReturnType<typeof loadDesktopConfig>>;
+  try {
+    config = await loadDesktopConfig(options.config);
+  } catch (error) {
+    throw Object.assign(error instanceof Error ? error : new Error(String(error)), { code: 'config' });
+  }
+  const reporterMode = resolveDesktopReporterMode({
+    flag: options.json ? 'json' : options.reporter,
+    environment: process.env.DESKTOP_REPORTER,
+    configured: config.reporting.reporter ?? config.reporting.console,
+  });
+  onReporterMode?.(reporterMode);
+  const requestedEventLevel = options.events ?? (process.env.DESKTOP_EVENTS || undefined) ?? config.reporting.events;
+  if (requestedEventLevel && reporterMode !== 'ndjson')
+    throw Object.assign(new TypeError('--events requires --reporter ndjson.'), { code: 'config' });
+  const eventLevel = resolveDesktopEventLevel({
+    flag: options.events,
+    environment: process.env.DESKTOP_EVENTS,
+    configured: config.reporting.events,
+  });
+  let target = config.targets[options.target];
+  if (!target) throw Object.assign(new Error(`Unknown target "${options.target}".`), { code: 'unknown-target' });
+  if (options.paper) target = selectDesktopRenderer(target, 'paper');
+  const suite = test ? config.config.suites?.[test.suite] : undefined;
+  if (test && !suite) throw Object.assign(new Error(`Unknown suite "${test.suite}".`), { code: 'config' });
+  if (test && !test.attachAgent && (test.descriptor !== undefined || test.root !== undefined || test.preempt)) {
+    throw Object.assign(new TypeError('--descriptor, --root and --preempt require --attach-agent.'), { code: 'config' });
+  }
+  if (
+    test?.attachAgent &&
+    ((suite?.kind === 'wdio' &&
+      ((target.host.ownership !== 'external' && target.host.ownership !== 'supervisor') || config.config.integration)) ||
+      (suite?.kind === 'csf-wdio' && !config.config.integration))
+  ) {
+    throw Object.assign(new TypeError('--attach-agent requires a supported attached suite and an attach-only service.'), {
+      code: 'config',
     });
-    const requestedEventLevel = options.events ?? (process.env.DESKTOP_EVENTS || undefined) ?? config.reporting.events;
-    if (requestedEventLevel && reporterMode !== 'ndjson')
-      throw Object.assign(new TypeError('--events requires --reporter ndjson.'), { code: 'config' });
-    const eventLevel = resolveDesktopEventLevel({
-      flag: options.events,
-      environment: process.env.DESKTOP_EVENTS,
-      configured: config.reporting.events,
+  }
+  if (test?.list && test.input !== undefined) {
+    throw Object.assign(new TypeError('--list resolves spec files, which do not depend on the input lane; omit --input.'), {
+      code: 'config',
     });
-    let target = config.targets[options.target];
-    if (!target) throw Object.assign(new Error(`Unknown target "${options.target}".`), { code: 'unknown-target' });
-    if (options.paper) target = selectDesktopRenderer(target, 'paper');
-    const suite = test ? config.config.suites?.[test.suite] : undefined;
-    if (test && !suite) throw Object.assign(new Error(`Unknown suite "${test.suite}".`), { code: 'config' });
-    if (test && !test.attachAgent && (test.descriptor !== undefined || test.root !== undefined || test.preempt)) {
-      throw Object.assign(new TypeError('--descriptor, --root and --preempt require --attach-agent.'), { code: 'config' });
+  }
+  if (suite?.kind === 'wdio') {
+    const specs = resolveDesktopSpecs(suite, target.endpoint, config.projectRoot);
+    if (test?.list) {
+      process.stdout.write(
+        formatDesktopReporterValue(
+          reporterMode,
+          { endpoint: target.endpoint, specs },
+          reporterMode === 'plain' || reporterMode === 'github-actions',
+        ),
+      );
+      return;
     }
-    if (
-      test?.attachAgent &&
-      (suite?.kind !== 'wdio' ||
-        (target.host.ownership !== 'external' && target.host.ownership !== 'supervisor') ||
-        config.config.integration)
-    ) {
-      throw Object.assign(new TypeError('--attach-agent requires a generic WDIO suite and an external or retained target.'), {
-        code: 'config',
-      });
-    }
-    if (test?.list && test.input !== undefined) {
-      throw Object.assign(new TypeError('--list resolves spec files, which do not depend on the input lane; omit --input.'), {
-        code: 'config',
-      });
-    }
-    if (suite?.kind === 'wdio') {
-      const specs = resolveDesktopSpecs(suite, target.endpoint, config.projectRoot);
-      if (test?.list) {
-        process.stdout.write(
-          formatDesktopReporterValue(
-            reporterMode,
-            { endpoint: target.endpoint, specs },
-            reporterMode === 'plain' || reporterMode === 'github-actions',
-          ),
-        );
-        return;
+  } else if (test?.list) throw Object.assign(new Error('--list currently requires a standalone WDIO suite.'), { code: 'config' });
+  // The test environment fallback never selects a long-lived host's input policy implicitly.
+  const requestedLane = test
+    ? requestedDesktopInputLane({ flag: test.input, environment: process.env[desktopInputEnvironment] })
+    : action === 'serve' && agentFlags.input !== undefined
+      ? requestedDesktopInputLane({ flag: agentFlags.input })
+      : undefined;
+  const input = requestedLane?.input;
+  if (suite?.kind === 'wdio') assertDesktopSuiteSupportsInput(test!.suite, suite, input);
+  if (
+    !agentFlags.agent &&
+    (agentFlags.descriptor !== undefined ||
+      agentFlags.supervisorDescriptor !== undefined ||
+      agentFlags.root !== undefined ||
+      agentFlags.runnerDescriptor !== undefined ||
+      agentFlags.allowRunnerPreempt)
+  )
+    throw Object.assign(new TypeError('Descriptor and runner publication options require --agent.'), { code: 'config' });
+  const agent: DesktopAgentConnectionOptions | undefined = agentFlags.agent
+    ? {
+        ...(agentFlags.descriptor === undefined ? {} : { descriptor: agentFlags.descriptor }),
+        ...(agentFlags.root === undefined ? {} : { root: agentFlags.root }),
+        ...(agentFlags.runnerDescriptor === undefined && !agentFlags.allowRunnerPreempt
+          ? {}
+          : { runner: { descriptor: agentFlags.runnerDescriptor, allowPreempt: agentFlags.allowRunnerPreempt } }),
       }
-    } else if (test?.list) throw Object.assign(new Error('--list currently requires a standalone WDIO suite.'), { code: 'config' });
-    // Only `test` has a lane. The environment stands in for the flag, but never for `--list`, which returned above.
-    const requestedLane = test
-      ? requestedDesktopInputLane({ flag: test.input, environment: process.env[desktopInputEnvironment] })
+    : undefined;
+  const integrationPlan =
+    action !== 'build-driver' && suite?.kind !== 'wdio'
+      ? config.config.integration?.contribute?.({
+          config,
+          target,
+          action,
+          ...(test?.suite ? { suite: test.suite } : {}),
+          ...(input ? { input } : {}),
+          ...(agent ? { agent } : {}),
+        })
       : undefined;
-    const input = requestedLane?.input;
-    if (suite?.kind === 'wdio') assertDesktopSuiteSupportsInput(test!.suite, suite, input);
-    if (
-      !agentFlags.agent &&
-      (agentFlags.descriptor !== undefined ||
-        agentFlags.root !== undefined ||
-        agentFlags.runnerDescriptor !== undefined ||
-        agentFlags.allowRunnerPreempt)
-    )
-      throw Object.assign(new TypeError('Descriptor and runner publication options require --agent.'), { code: 'config' });
-    const agent: DesktopAgentConnectionOptions | undefined = agentFlags.agent
-      ? {
-          ...(agentFlags.descriptor === undefined ? {} : { descriptor: agentFlags.descriptor }),
-          ...(agentFlags.root === undefined ? {} : { root: agentFlags.root }),
-          ...(agentFlags.runnerDescriptor === undefined && !agentFlags.allowRunnerPreempt
-            ? {}
-            : { runner: { descriptor: agentFlags.runnerDescriptor, allowPreempt: agentFlags.allowRunnerPreempt } }),
-        }
-      : undefined;
-    const integrationPlan =
-      action !== 'build-driver' && suite?.kind !== 'wdio'
-        ? config.config.integration?.contribute?.({
-            config,
-            target,
-            action,
-            ...(test?.suite ? { suite: test.suite } : {}),
-            ...(input ? { input } : {}),
-            ...(agent ? { agent } : {}),
-          })
-        : undefined;
-    if (
-      agentFlags.agent &&
-      config.config.integration &&
-      action === 'serve' &&
-      integrationPlan?.driver?.kind !== 'hosted'
-    ) {
-      throw Object.assign(new TypeError(`serve --agent requires integration "${config.config.integration.name}" to contribute a hosted driver.`), {
-        code: 'config',
-      });
-    }
-    let ready = false;
-    const markReady = () => {
-      ready = true;
-    };
-    const session = await createDesktopReportSession({
+  if (
+    config.config.integration &&
+    action === 'serve' &&
+    (integrationPlan?.driver?.kind !== 'hosted' || typeof integrationPlan.driver.acquire !== 'function')
+  ) {
+    throw Object.assign(new TypeError(`serve requires integration "${config.config.integration.name}" to contribute a hosted driver.`), {
+      code: 'config',
+    });
+  }
+  let ready = false;
+  const markReady = () => {
+    ready = true;
+  };
+  const execution = await createDesktopRunContext({
+    target,
+    reporting: {
       ...config.reporting,
       kind: action === 'test' ? 'tests' : 'lifecycle',
       optional: suite?.kind === 'wdio' && suite.optional,
@@ -236,34 +272,26 @@ export async function runDesktopTestCli(argv = process.argv): Promise<void> {
       eventLevel,
       suppressFinalOutput: action === 'serve' ? () => ready : false,
       verbose: options.verbose,
-      onFatal: (error) => owner.services.fail(error),
-    });
-    const { reporter } = session;
-    const owner = new DesktopSupervisor({
-      target,
-      reporter,
-      reportSession: session,
+    },
+    independent: false,
+    claim: !test?.attachAgent && ['test', 'serve', 'run'].includes(action),
+    interrupts: true,
+    strictCleanup: false,
+    supervisor: {
       integration: config.config.integration,
       ...(integrationPlan ? { integrationPlan } : {}),
       ...(agent ? { agent } : {}),
       ...(input ? { input } : {}),
-    });
-    session.onStop?.(() => owner.services.requestStop());
-    const releaseInterrupts = handleDesktopInterrupts({
-      stop: () => owner.services.requestStop(),
-      terminate: (signal) => {
-        reporter.emit({
-          kind: 'diagnostic',
-          payload: {
-            level: 'warning',
-            message: `Received ${signal} during shutdown; force-stopping owned commands. Interrupt again to exit without cleanup.`,
-          },
-        });
-        owner.terminate();
-      },
-    });
-    let failure: unknown;
-    try {
+    },
+  });
+  const { reporter, supervisor: owner } = execution;
+  let failure: unknown;
+  try {
+    if (!test?.attachAgent && !integrationPlan?.workload && !integrationPlan?.driver && (action === 'test' || action === 'serve')) {
+      await owner.open(!execution.delegated);
+      await owner.start();
+    }
+    await execution.run(undefined, async () => {
       if (action === 'build-driver') {
         const artifact = await buildNativeDesktopDriver({
           platform: target.endpoint,
@@ -275,11 +303,43 @@ export async function runDesktopTestCli(argv = process.argv): Promise<void> {
           payload: { level: 'info', message: `Verified helper ${artifact.artifactId} at ${artifact.executablePath}` },
         });
       } else if (test?.attachAgent && suite?.kind === 'wdio') {
-        await owner.open(false);
-        const connection = await connectDesktopRunner({ descriptor: test.descriptor, root: test.root });
+        const connection = await connectDesktopRunner({
+          descriptor: test.descriptor,
+          root: test.root,
+          addSecret: (secret) => reporter.addSecret(secret),
+        });
         await runDesktopWdioSuite(owner, config, test.suite, input, { connection, preempt: test.preempt });
+      } else if (test?.attachAgent && suite?.kind === 'csf-wdio') {
+        if (!integrationPlan?.attachedWorkload) throw new Error('The imported integration does not support attached story suites.');
+        await owner.services.guard(
+          integrationPlan.attachedWorkload({
+            workload: test.suite,
+            supervisor: owner,
+            input,
+            descriptor: test.descriptor,
+            root: test.root,
+            preempt: test.preempt,
+          }),
+        );
+      } else if (action === 'serve' && integrationPlan?.driver) {
+        await owner.startConfiguredServices();
+        const readiness = await acquireHostedDesktopDriver({
+          supervisor: owner,
+          request: {
+            config,
+            target,
+            action,
+            ...(input ? { input } : {}),
+            ...(agent ? { agent } : {}),
+          },
+          driver: integrationPlan.driver,
+          supervisorDescriptor: agentFlags.supervisorDescriptor,
+          managedWorkload: integrationPlan.managedWorkload,
+        });
+        process.stdout.write(formatDesktopHostReady(reporterMode, readiness));
+        markReady();
+        await owner.services.waitForStop();
       } else if (integrationPlan?.workload) {
-        await owner.open(['test', 'serve', 'run'].includes(action));
         await owner.startResources();
         if (action === 'test' || action === 'serve') await owner.startConfiguredServices();
         owner.services.controller.signal.throwIfAborted();
@@ -290,64 +350,71 @@ export async function runDesktopTestCli(argv = process.argv): Promise<void> {
               target,
               supervisor: owner,
               action,
-              ...(action === 'serve' ? { reporterMode } : {}),
               ...(test?.suite ? { suite: test.suite } : {}),
               ...(input ? { input } : {}),
               ...(agent ? { agent } : {}),
-              ...(action === 'serve' ? { onReady: markReady } : {}),
             }),
           ),
         );
         await run;
       } else if (action !== 'test' && action !== 'serve') {
-        await owner.open(action === 'run');
         for (const command of desktopStageCommands(target, action)) {
           await owner.services.guard(
             owner.runner.run(owner.prepare(command, `${action} ${target.endpoint}`), { signal: owner.services.controller.signal }),
           );
         }
       } else {
-        await owner.start();
         if (action === 'serve') {
-          if (reporterMode === 'json' || reporterMode === 'ndjson')
-            process.stdout.write(
-              formatDesktopReporterValue(reporterMode, {
+          let supervisorDescriptor: string | undefined;
+          if (agentFlags.agent) {
+            const driverDescriptor = owner.agentDescriptor;
+            if (!driverDescriptor) throw new Error('The protected desktop service did not publish its agent descriptor.');
+            supervisorDescriptor = await publishDesktopHostManagement({
+              supervisor: owner,
+              config,
+              target,
+              input,
+              driver: {
+                record: driverDescriptor,
                 url: owner.server.url,
-                targetId: target.id,
-                runId: reporter.runId,
-                ...(owner.agentDescriptor ? { agentDescriptor: owner.agentDescriptor } : {}),
+                ...(owner.runnerDescriptor ? { runnerRecord: owner.runnerDescriptor } : {}),
+              },
+              root: agentFlags.root,
+              descriptor: agentFlags.supervisorDescriptor,
+            });
+          }
+          process.stdout.write(
+            formatDesktopHostReady(
+              reporterMode,
+              desktopHostReady({
+                supervisor: owner,
+                url: owner.server.url,
+                agentDescriptor: owner.agentDescriptor,
+                runnerDescriptor: owner.runnerDescriptor,
+                supervisorDescriptor,
               }),
-            );
+            ),
+          );
           markReady();
           await owner.services.waitForStop();
         } else if (suite?.kind === 'wdio') await runDesktopWdioSuite(owner, config, test!.suite, input);
         else throw new Error('The imported integration does not implement this suite.');
       }
-    } catch (error) {
-      if (!(error instanceof DesktopStopRequested)) {
-        failure = error;
-        reporter.fail(error);
-      } else if (action !== 'serve') {
-        // An interrupted one-shot action did not finish: leave its scope open so the run reports incomplete, not passed.
-        reporter.emit(
-          { kind: 'scope-start', payload: { label: `${action} ${target.endpoint} (interrupted)`, category: 'phase' } },
-          `interrupted-${randomUUID()}`,
-        );
-      }
-    } finally {
-      try {
-        await owner.close();
-      } catch (error) {
-        reporter.fail(error, 'cleanup');
-        failure = failure === undefined ? error : new AggregateError([failure, error], 'Desktop execution and cleanup failed.');
-      }
+    });
+  } catch (error) {
+    if (!(error instanceof DesktopStopRequested)) {
+      failure = error;
+      reporter.fail(error);
+    } else if (action !== 'serve') {
+      // An interrupted one-shot action did not finish: leave its scope open so the run reports incomplete, not passed.
+      reporter.emit(
+        { kind: 'scope-start', payload: { label: `${action} ${target.endpoint} (interrupted)`, category: 'phase' } },
+        `interrupted-${randomUUID()}`,
+      );
     }
-    try {
-      process.exitCode = await session.close(failure);
-    } finally {
-      releaseInterrupts();
-    }
-    if (session.delegated && action !== 'serve' && (reporterMode === 'json' || reporterMode === 'ndjson')) {
+  } finally {
+    process.exitCode = await execution.finish(failure);
+    if (execution.delegated && action !== 'serve' && (reporterMode === 'json' || reporterMode === 'ndjson')) {
       process.stdout.write(
         formatDesktopReporterValue(reporterMode, { runId: reporter.runId, delegated: true, exitCode: process.exitCode }),
       );

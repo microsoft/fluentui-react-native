@@ -38,6 +38,7 @@ paths. The console format is described in
 | `instance --<platform>`                       | Inspect the active instance's ports and target      |
 | `test --<platform> --list`                    | Discover authored executable story-test IDs         |
 | `test --<platform> --test <glob>`             | Run matching isolated story callbacks               |
+| `test --<platform> --attach-agent`            | Borrow a protected driver through its runner record |
 | `test --<platform> --input accessible`        | Select accessible and `both` descriptor cases       |
 | `test --<platform> --list --input physical`   | Preview a lane's selection and exclusions           |
 | `driver --<platform> --input accessible`      | Start a driver that masks physical input            |
@@ -76,7 +77,9 @@ Smoke runs derive an instance identity from the canonical consumer-project
 root. The identity coordinates app bundle identity, Storybook/driver ports,
 Metro, generated runtime identity, and exact process cleanup. Windows RN Test
 App retains its required Metro port 8081; do not run concurrent Metro-backed
-Windows smokes.
+Windows smokes. Metro and channel readiness require proof that an owned child
+bound the expected listener and received the HTTP readiness probe; a foreign
+listener is never adopted.
 
 Both native smoke modes use a trusted driver manifest and authenticated driver
 traversal. Windows refuses an occupied fixed Metro port before any build,
@@ -121,6 +124,10 @@ CLI stops its work through the scope signal but never closes that scope, which
 stays with the supervisor that created it. A `DesktopStorybookCli` that creates
 its own scope closes it when the command ends. Stage commands receive the scope
 signal, so a stop or interrupt ends a running stage instead of waiting for it.
+The low-level `DesktopStorybookCli.driver()` API hosts the driver only; it does
+not publish management. A programmatically created command requires an
+injected neutral supervisor for `driver --agent`, rather than silently
+starting a protected driver without the management root.
 
 JSON mode emits one compact command result, or one readiness record for the
 long-running `driver` and `server` commands. Their readiness records are
@@ -135,11 +142,21 @@ descriptor for the Desktop Driver MCP adapter: `agent-connection.json` under
 the platform's private storage root unless `--descriptor <name>` or
 `--root <path>` say otherwise. Readiness waits for that publication and adds
 `agentDescriptor`; stopping removes the descriptor before revoking the grant.
-`desktop-test --target <name> serve --agent` routes here for a Storybook
-target. Agent mode disables the channel's unauthenticated MCP endpoint, so
+Both `desktop-test --target <name> serve --agent` and standalone
+`storybook driver --agent` publish the verified supervisor management root
+after the driver and runner are ready. `--supervisor-descriptor <name>` selects
+its private record. Legacy Storybook configuration has an empty managed
+workload catalog until suites are declared in `desktop.config`.
+Structured driver readiness has supervisor-owned identity fields and a nested
+`integration` object with Storybook instance and port details.
+Agent mode disables the channel's unauthenticated MCP endpoint, so
 agents select stories through the adapter's `desktop_story`. On macOS the
-command keeps the application lease naming the one running app instance, so
-agents attach without `storybook test`. Nothing maintains a Windows or Win32
+driver and manifest-backed smoke own a read-only application lease maintainer
+through desktop-test. It tracks the verified app across relaunch, withdraws
+its lease on ambiguity or shutdown, and preserves foreign records. An attached
+`storybook test` waits for that host-owned lease; it never writes one.
+The native lease-v1 reader retains its one-second start-time tolerance.
+Nothing maintains a Windows or Win32
 lease, so on those platforms the agent attaches by the app's verified identity
 instead: a configured `nativeDriver.application` AUMID or executable path, or
 else the desktop target's registered package AUMID (RN Test App) or REX
@@ -148,9 +165,15 @@ the command fails before starting services when it cannot verify an identity.
 A platform whose smoke options declare a fixed Metro URL, such as
 `createWindowsSmokeOptions` for the RN Test App Windows Debug host, which always
 loads from port 8081, gets Metro on that port; the command fails when the port
-is in use rather than serving a bundle the app never reads. `storybook test` refuses an
-agent-served instance because WDIO holds no grant, and the fake driver
-(`STORYBOOK_NATIVE_DRIVER_FAKE=1`) refuses agent mode. NDJSON
+is in use rather than serving a bundle the app never reads. Use
+`storybook test --attach-agent` for an agent-served instance; an ordinary
+unprotected test refuses that instance. Runner reuse defaults to busy:
+relinquish the MCP session first, or start the driver with
+`--allow-runner-preempt` and explicitly request `test --attach-agent --preempt`.
+`--descriptor` and `--root` select the private runner record. The runner holds
+one reservation across cases and gives each worker a distinct grant; failed
+drain fences the reservation. The fake driver (`STORYBOOK_NATIVE_DRIVER_FAKE=1`)
+refuses agent mode. NDJSON
 streams bounded report events and finishes one-shot runs with a summary.
 Structured modes keep normal stderr empty.
 

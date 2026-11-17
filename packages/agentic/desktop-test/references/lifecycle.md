@@ -26,6 +26,12 @@ the CLI waits at most 60 seconds for the workload before it closes the scope
 anyway. The boundary is one neutral `desktop-test` workload host with optional
 Storybook contributions, not a driver or MCP orchestrator.
 
+Desktop-test, the Storybook CLI, and managed workloads execute through the same
+run context. It owns the report and worker scope, keeps interrupt handling
+installed through cleanup for CLI runs, and claims the desktop only for an
+owned host. Attached and delegated runs borrow the host without acquiring or
+releasing its claim; managed cancellation stops only the independent run.
+
 Windows/Win32 Storybook smoke contributes a composite channel/application
 resource per phase. The child uses the neutral supervisor-lifetime native
 application wrapper with its service's own helper, sharing the retained lease
@@ -43,8 +49,11 @@ Process-backed services may use `readyProcess(id, expected)` with an explicit
 `service-ready` service and optional descriptor expectation. The runner must
 provide correlated readiness; a missing waiter or mismatched receipt fails
 closed. The recorded receipt retains its service-ready tier, incarnation, and
-producer PID. HTTP readiness remains available for services without process
-readiness publication.
+producer PID. Metro and Storybook channel readiness additionally require an
+owned Node process to bind the expected listener and receive the HTTP readiness probe;
+the channel and driver-ready receipts must name the same process. Losing an
+owned listener fails the service. HTTP readiness alone never adopts an
+unrelated listener.
 
 Process-backed contributions return the authenticated
 `DesktopServiceReadyRecord` from `/process-control`, not a readiness expectation
@@ -140,9 +149,9 @@ comes from desktop-driver's OS process-identity probe, not the Node.js clock.
 Schema 2 records remain readable but inspect as `unknown` without probing their
 incompatible wall-clock timestamp. A schema 3 record without a verified native
 identity also remains `unknown`; it never becomes a guessed live or reused PID.
-`claimDesktopWorkload` is asynchronous so it can resolve that identity before
-publication. Low-level/custom callers may supply a trusted identity or leave it
-unverified. A missing prebuilt helper permits an unverified claim; verification
+The supervisor resolves that identity before publication. Low-level/custom
+callers may supply a trusted identity or leave it unverified. A missing prebuilt
+helper permits an unverified claim; verification
 or permission errors are not silently downgraded. Reporting-session inheritance
 is separate from explicit workload-claim delegation.
 
@@ -166,9 +175,22 @@ The `/application-ownership` leaf provides `captureDesktopApplicationIdentity`
 and `desktopApplicationIdentityDescriptor`. On macOS they require the native
 six-fractional-digit OS timestamp and select an exact external incarnation
 without a Storybook lease or transferred ownership. Do not construct that
-identity from `Date`, LaunchServices dates, a title, or a bundle ID. Existing
-Storybook attach-lease code is deliberately unchanged pending its integration
-migration.
+identity from `Date`, LaunchServices dates, a title, or a bundle ID.
+
+The same entry provides a host-owned macOS lease-maintenance contribution. A
+trusted read-only inspector must identify a unique application using a lease-free
+bundle/window selector, a native microsecond PID/start identity, and its verified
+executable. The `/macos-application-inspection` leaf supplies that inspector
+using the verified helper. The contribution registers the lease nonce for
+redaction, publishes only through owner-validated private storage, withdraws its
+own exact record on ambiguity or shutdown, and never overwrites another owner.
+An uncertain publication keeps cleanup fenced. Lease replacement can briefly
+make the record unavailable; it never replaces a foreign record. The existing
+lease-v1 native reader still allows a one-second start-time tolerance, so this
+is not an exact-match guarantee at attachment. Storybook's macOS driver and
+manifest-backed smoke use this contribution; a
+test attaching to that driver waits for its lease rather than writing one.
+A foreign or uncertain lease is preserved and prevents clean host settlement.
 
 On Windows/Win32 they require all seven native fractional creation-time digits,
 canonical executable, session, and the captured AUMID when packaged. The
@@ -266,8 +288,12 @@ never clears uncertain native or Storybook mutations.
 Keep reporting runs distinct from physical workload claims, resource ownership,
 application ownership, grants, native sessions, input locks, and context epochs.
 Integrations contribute through the public
-`@fluentui-react-native/desktop-test/resources` and `/ownership` subpaths rather
-than taking over CLI output and supervision. Management/run API schemas belong here.
+`@fluentui-react-native/desktop-test/resources` and `/ownership` subpaths.
+Desktop-test and the standalone Storybook CLI use the shared run context and
+the same hosted-driver acquisition and management-publication path. A hosted
+driver returns a correlated service receipt; its owned child resources remain
+in the supervisor scope and management is withdrawn before they are disposed.
+Management/run API schemas belong here.
 Attached-app MCP/WDIO handoff can be developed independently of supervisor-owned
 native launch, but both must wait for session drain and preserve external apps.
 
@@ -279,8 +305,9 @@ WDIO owns each worker session. Worker completion, crash, cancellation, and
 parent cleanup all await terminal grant drain before releasing the reservation.
 Old sessions and their references/cursors/proofs/artifact links are never
 transferred. A cleanup failure is not permission to start a new controller.
-This does not retain a session-launched application or migrate Storybook's
-transitional lifecycle.
+Storybook CSF runners use this reservation and supervisor-owned apps retain
+their launch across attached sessions. Session-owned app launches are not
+retained; native qualification is tracked per endpoint and renderer.
 
 Configured target aliases receive distinct registered IDs while retaining the
 same physical `instanceId` when they resolve to the same application identity.

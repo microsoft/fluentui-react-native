@@ -8,13 +8,15 @@ import type { ArtifactDirectory } from './segments.js';
 
 export class ArtifactManager {
   readonly root: string;
+  private readonly redact: (text: string) => string;
 
-  constructor(root: string) {
+  constructor(root: string, options: { redact?: (text: string) => string } = {}) {
     if (!root) {
       throw new TypeError('ArtifactManager requires a non-empty root path.');
     }
     fs.mkdirSync(root, { recursive: true });
     this.root = fs.realpathSync.native(root);
+    this.redact = options.redact ?? ((text) => text);
   }
 
   writeScreenshot(directory: ArtifactDirectory, name: string, base64: string): DesktopArtifact {
@@ -22,27 +24,31 @@ export class ArtifactManager {
   }
 
   writeSource(directory: ArtifactDirectory, name: string, source: string): DesktopArtifact {
-    return this.write(directory, name, 'xml', source, 'source');
+    return this.write(directory, name, 'xml', this.redact(source), 'source');
   }
 
   writeTree(directory: ArtifactDirectory, name: string, tree: unknown): DesktopArtifact {
-    return this.write(directory, name, 'json', `${JSON.stringify(tree, null, 2)}\n`, 'tree');
+    return this.write(directory, name, 'json', this.serialize(tree), 'tree');
   }
 
   writeWindowEvents(directory: ArtifactDirectory, name: string, log: unknown): DesktopArtifact {
-    return this.write(directory, name, 'json', `${JSON.stringify(log, null, 2)}\n`, 'window-events');
+    return this.write(directory, name, 'json', this.serialize(log), 'window-events');
   }
 
   writeRunResult(result: DesktopStoryRunResult): string {
     const outputPath = this.resolvePath(['run.json']);
-    writeAtomic(outputPath, `${JSON.stringify(result, null, 2)}\n`);
+    writeAtomic(outputPath, this.serialize(result));
     return outputPath;
   }
 
   writeMetadata(name: string, value: unknown): string {
     const outputPath = this.resolvePath([`${sanitizeArtifactSegment(name)}.json`]);
-    writeAtomic(outputPath, `${JSON.stringify(value, null, 2)}\n`);
+    writeAtomic(outputPath, this.serialize(value));
     return outputPath;
+  }
+
+  private serialize(value: unknown): string {
+    return `${JSON.stringify(value, (_key, item: unknown) => (typeof item === 'string' ? this.redact(item) : item), 2)}\n`;
   }
 
   private write(

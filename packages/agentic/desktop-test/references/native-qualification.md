@@ -5,6 +5,7 @@ owner_paths:
   - packages/agentic/desktop-test
   - packages/agentic/desktop-driver
   - packages/agentic/desktop-driver-mcp
+  - packages/agentic/desktop-mcp
   - packages/agentic/storybook-desktop
 ---
 
@@ -357,7 +358,7 @@ owns the target, fresh sessions/resources, worker-crash drain, credential
 confinement, and preservation of the fixture's exact PID through service
 shutdown. Only the test that spawned the fixture terminates it afterward.
 Operator preemption and loss of a real HTTP 200 runner-grant response are
-separate modes alongside handoff and worker crash. Every mode verifies
+separate modes alongside handoff and worker crash. These driver-only modes verify
 attach-only refusal, busy/exclusive admission, deletion before reuse, stale
 references/cursors, terminal reports, credential confinement, descriptor
 withdrawal, claim release, and preservation of the same external process
@@ -368,6 +369,13 @@ the client's typed transport failure and exact injected cause, not an unwrapped
 top-level message. The portable runner contract uses the same fault routine
 against its real HTTP service and verifies reservation fencing and subsequent
 worker drain without a native helper.
+
+The managed mode additionally publishes and verifies the real supervisor
+descriptor, reconciles a deliberately lost admission response without
+resubmission, cancels and drains that run, and completes a second accessible
+WDIO workload through the supervisor MCP tool. It records cancellation outcome
+separately from cleanup and checks credential confinement after report
+finalization. It is not a Storybook or renderer qualification.
 
 Each subprocess has a 120-second internal `AbortSignal.timeout` case budget
 followed by at most 30 seconds of shutdown, below the parent's 180-second
@@ -420,16 +428,19 @@ Project artifact ancestry is not repaired or trusted for private storage.
 The `setup-desktop-driver` action's `run-native-runner-contract: 'true'`
 explicitly provisions the fixture and selects this consumer after helper
 diagnosis. Both accessible Windows and Win32 Storybook PR jobs enable it.
-Their selection guard requires all four core modes to execute and pass and
-checks the three non-crash evidence records for two executed/passed inner
+Their selection guard requires all five core modes to execute and pass and
+checks the four non-crash evidence records for two executed/passed inner
 WDIO specs, zero skips and successful accessibility input. Neither an
 all-skipped consumer nor a silently skipped inner input spec makes this check
-green. Hosted capture remains an explicit skipped test.
+green. It also checks the managed admission, cancellation, and credential
+evidence. Hosted capture remains an explicit skipped test.
 
 Retain `artifacts/desktop/f11/native-*/evidence.json` and the run reports. Do not
 copy the private descriptor directory into shared artifacts. Record source
 revision, fixture revision, helper identity, selected/executed cases, native
 permission failures, cleanup, and skipped/not-run scenarios separately.
+`worktreeDirty: true` identifies provisional evidence that is not attributable
+to the recorded `revision` alone.
 Absent the explicit opt-ins, the tests are skipped, not qualified. The plain
 fixture does not qualify React Native Windows Fabric/Win32 Paper rendering,
 Storybook handoff, retained launches, physical input, cross-connection resume,

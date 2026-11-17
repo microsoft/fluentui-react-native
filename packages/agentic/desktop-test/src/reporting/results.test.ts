@@ -131,6 +131,9 @@ describe('input lane and exclusion reporting', () => {
     expect(describeDesktopSelection({ lane: { input: 'accessible', source: 'driver', policyEnforced: true } })).toBe(
       'input accessible (policy-enforced) from the driver instance',
     );
+    expect(describeDesktopSelection({ lane: { input: 'physical', source: 'management', policyEnforced: true } })).toBe(
+      'input physical pilot (policy-enforced) from workload management',
+    );
     // A report written before enforcement still reads as what it was.
     expect(
       describeDesktopSelection({ lane: { input: 'accessible', source: 'driver', masking: 'verified-masked', policyEnforced: false } }),
