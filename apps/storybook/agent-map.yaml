@@ -82,11 +82,18 @@ native:
     project_policy: generated
     generation_command: yarn storybook prep --windows
     helper_provider: windows-x64
+    smoke_factory: createWindowsSmokeOptions
+    smoke_owner: neutral-scope-with-retained-native-app-in-channel
+    metro_port: 8081
+    smoke_phases: stories-then-owned-channel-app-relaunch-then-authored-tests
   win32:
     host: prebuilt-rex
     build_policy: unsupported
     bundle_command: yarn storybook bundle --win32
     helper_provider: windows-x64
+    smoke_factory: createWin32SmokeOptions
+    smoke_owner: neutral-scope-with-retained-native-app-in-channel
+    smoke_checks: required-stories-native-chrome-traversal-host-liveness
 
 validation:
   javascript:

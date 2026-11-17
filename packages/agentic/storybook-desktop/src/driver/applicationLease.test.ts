@@ -82,7 +82,9 @@ describe.each(['windows', 'win32'] as const)('%s smoke application lease', (endp
       createStorage,
     );
     expect(remove).toHaveBeenCalledWith(path.basename(leasePath), firstRecord);
-    await updateWindowsApplicationLease(manifestPath, handoff, { operation: 'remove', digest: first! }, createStorage);
+    await expect(
+      updateWindowsApplicationLease(manifestPath, handoff, { operation: 'remove', digest: first! }, createStorage),
+    ).rejects.toThrow('foreign record was preserved');
     expect(JSON.parse(fs.readFileSync(leasePath, 'utf8')).processId).toBe(456);
     await updateWindowsApplicationLease(manifestPath, handoff, { operation: 'remove', digest: second! }, createStorage);
     expect(fs.existsSync(leasePath)).toBe(false);

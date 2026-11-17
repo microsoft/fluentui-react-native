@@ -64,6 +64,7 @@ export function desktopApplicationIdentityDescriptor(
 }
 
 export type DesktopApplicationHostOptions = {
+  signal?: AbortSignal;
   target: Omit<DesktopTarget, 'host'>;
   lifetime: 'session' | 'supervisor' | 'external';
   resourcePrefix: string;
@@ -255,8 +256,9 @@ export async function createDesktopApplicationHost(host: DesktopHost, options: D
   });
   if (options.lifetime === 'supervisor') {
     try {
-      await host.probe();
-      retained = await track(acquire({ ...options.target, host }, true));
+      options.signal?.throwIfAborted();
+      await host.probe(options.signal);
+      retained = await track(acquire({ ...options.target, host }, true, options.signal));
       captureDesktopApplicationIdentity(retained, options.target.endpoint);
     } catch (error) {
       try {

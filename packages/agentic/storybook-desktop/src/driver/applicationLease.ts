@@ -15,7 +15,7 @@ type LeaseUpdate =
   | { operation: 'publish'; application: WindowsApplication; previousDigest?: string }
   | { operation: 'remove'; digest: string };
 
-/** Smoke scripts supply OS-observed identity, never credentials or private-storage paths. */
+/** The native smoke owner supplies exact identity, never credentials or private-storage paths. */
 export async function updateWindowsApplicationLease(
   manifestPath: string,
   handoff: string,
@@ -54,7 +54,11 @@ export async function updateWindowsApplicationLease(
   const name = path.basename(manifest.application.leasePath);
   const previous = await storage.read(name);
   if (update.operation === 'remove') {
-    if (previous !== undefined && driverManifestDigest(previous) === digest) await storage.remove(name, previous);
+    if (previous !== undefined) {
+      if (driverManifestDigest(previous) !== digest || !(await storage.remove(name, previous))) {
+        throw new Error('Desktop Storybook application lease changed during cleanup; the foreign record was preserved.');
+      }
+    }
     return undefined;
   }
   if (previous === undefined ? digest !== undefined : driverManifestDigest(previous) !== digest) {

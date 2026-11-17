@@ -193,10 +193,13 @@ async function startDesktopStorybookServer({
           ],
         });
       } else {
+        const smokeApplication = process.env.STORYBOOK_SMOKE_APPLICATION ? JSON.parse(process.env.STORYBOOK_SMOKE_APPLICATION) : undefined;
+        if (smokeApplication && (agent || driverManifest.endpoint === 'macos'))
+          throw new Error('Owned native smoke applications require a non-agent Windows endpoint.');
         driver = await startNativeDesktopService({
           signal: controller.signal,
           // Windows agents verify the app's AUMID or executable; nothing maintains a lease there.
-          application: agent?.application ?? driverManifest.application,
+          application: smokeApplication ?? agent?.application ?? driverManifest.application,
           artifact: driverManifest.nativeDriver,
           endpoint: driverManifest.endpoint,
           host,
@@ -212,6 +215,25 @@ async function startDesktopStorybookServer({
               }
             : {}),
           target,
+          ...(smokeApplication
+            ? {
+                prepareHost: async (targetHost) => {
+                  const { prepareSmokeApplicationHost } = await import('../lib/driver/smokeApplication.js');
+                  return prepareSmokeApplicationHost(targetHost, {
+                    target,
+                    manifestPath: driverManifestPath,
+                    handoff: process.env.STORYBOOK_DRIVER_HANDOFF,
+                    windowTitle: driverManifest.application.windowTitle,
+                    signal: controller.signal,
+                    onResource: (resource) =>
+                      report.reporter.emit({
+                        kind: 'diagnostic',
+                        payload: { level: 'info', message: `Native smoke application resource: ${JSON.stringify(resource)}` },
+                      }),
+                  });
+                },
+              }
+            : {}),
           createTarget: async (targetHost, recovery) => ({
             storyOrchestrator: createChannelOrchestrator({
               channelServer: server,

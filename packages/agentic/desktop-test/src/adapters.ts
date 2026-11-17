@@ -7,6 +7,8 @@ import type { NativeDesktopApplicationDescriptor } from '@fluentui-react-native/
 import type { DesktopCommand, DesktopStage, ResolvedDesktopTarget } from './config.js';
 
 export type ResolveDesktopApplicationOptions = {
+  /** Built Windows package configuration, when resolving an RN Test App launch. */
+  configuration?: 'Debug' | 'Release';
   /**
    * Resolves only the identity an attach session verifies. REX then needs neither a bundle nor launch arguments, so a
    * service can start before the app it will attach to is bundled.
@@ -79,7 +81,15 @@ export async function resolveDesktopApplication(
       }
       application = { windowTitle, ...configured };
       if (!application.aumid && !application.executablePath && !application.leasePath && !application.processIdentity) {
-        const manifestPath = path.join(target.projectRoot, 'windows', 'ReactApp.Package', 'bin', 'x64', 'Debug', 'AppxManifest.xml');
+        const manifestPath = path.join(
+          target.projectRoot,
+          'windows',
+          'ReactApp.Package',
+          'bin',
+          'x64',
+          options.configuration ?? 'Debug',
+          'AppxManifest.xml',
+        );
         if (!fs.existsSync(manifestPath))
           throw new Error(
             `Built Windows manifest missing at ${manifestPath}; build/register the app or configure its verified application identity.`,

@@ -60,6 +60,44 @@ test('initial bridge absence can be retried, but uncertain or relaunch-required 
   }
 });
 
+test('native smoke polls absent accessibility IDs but not transport/window failures, and detects an exited app', async () => {
+  const calls: unknown[] = [];
+  let failure = 'no such element';
+  const fetch: typeof globalThis.fetch = async (input, init) => {
+    const url = input.toString();
+    if (url.endsWith('/session')) return new Response(JSON.stringify({ value: { sessionId: 'native', capabilities: {} } }));
+    if (url.endsWith('/element')) {
+      calls.push(JSON.parse(String(init?.body)));
+      const error = failure;
+      failure = '';
+      return error
+        ? new Response(JSON.stringify({ value: { error, message: error } }), { status: 404 })
+        : new Response(JSON.stringify({ value: { 'element-6066-11e4-a52e-4f735466cecf': 'native-element' } }));
+    }
+    return new Response(JSON.stringify({ value: [] }));
+  };
+  const traversal = await connectStoryTraversal({
+    url: 'https://driver',
+    targetId: 'target',
+    platform: 'win32',
+    signal: new AbortController().signal,
+    fetch,
+  });
+  try {
+    await traversal.assertNativeUi(['fixture-win32-sidebar-header'], 2000);
+    expect(calls).toEqual([
+      { using: 'accessibility id', value: 'fixture-win32-sidebar-header' },
+      { using: 'accessibility id', value: 'fixture-win32-sidebar-header' },
+    ]);
+    failure = 'no such window';
+    await expect(traversal.assertNativeUi(['missing-window'], 2000)).rejects.toMatchObject({ code: 'no such window' });
+    expect(calls).toHaveLength(3);
+    await expect(traversal.assertRunning()).rejects.toThrow('no live windows');
+  } finally {
+    await traversal.close();
+  }
+});
+
 function windowSetup(
   options: {
     platform?: 'macos' | 'windows' | 'win32';

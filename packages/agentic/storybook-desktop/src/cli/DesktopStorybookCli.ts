@@ -604,6 +604,14 @@ export class DesktopStorybookCli {
     if (smoke === false) {
       throw unsupportedAction('smoke', platform);
     }
+    if (smoke?.native) {
+      if (smoke.native.kind !== platform || smoke.command || smoke.stop) {
+        throw new Error('Native smoke requires a matching endpoint and cannot delegate lifecycle commands.');
+      }
+      const instance = await this.resolveSmokeInstance(platform, smoke, 'stories-and-tests', options.input);
+      await this.runNativeSmokeLifecycle(platform, smoke, instance, mode, options.input);
+      return;
+    }
     if (smoke?.command) {
       const instance = await this.resolveSmokeInstance(platform, smoke, mode, options.input);
       await this.executePlan(
@@ -636,6 +644,227 @@ export class DesktopStorybookCli {
       throw unsupportedAction(action, platform);
     }
     await this.executePlan(plan, platform, instance);
+  }
+
+  private async runNativeSmokeLifecycle(
+    platform: Platforms,
+    smoke: DesktopSmokeOptions,
+    instance: ResolvedDesktopStorybookInstance,
+    mode: DesktopSmokeMode,
+    input?: 'accessible' | 'physical',
+  ): Promise<void> {
+    const native = smoke.native!;
+    const failures: unknown[] = [];
+    try {
+      await this.executeAction('bundle', platform, instance);
+      if (native.kind === 'windows') {
+        await this.executeAction('prep', platform, instance);
+        const build = this.config.getCommandPlan('build', platform);
+        if (build === false) throw unsupportedAction('build', platform);
+        const configuration = native.configuration ?? 'Debug';
+        await this.executePlan(
+          (Array.isArray(build) ? build : [build]).map((command: DesktopCommand) =>
+            command.command === 'rnx-cli' && !command.args?.includes('--configuration')
+              ? { ...command, args: [...(command.args ?? []), '--configuration', configuration] }
+              : command,
+          ),
+          platform,
+          instance,
+        );
+        await this.executePlan(
+          {
+            command: 'pwsh',
+            args: [
+              '-NoProfile',
+              '-NonInteractive',
+              '-File',
+              path.join(this.config.resolvePackage('@fluentui-react-native/storybook-desktop').root, 'config', 'register-windows.ps1'),
+            ],
+            env: { STORYBOOK_WINDOWS_CONFIGURATION: configuration },
+          },
+          platform,
+          instance,
+        );
+      }
+      const target = this.workloadTarget(platform);
+      const resolvedApplication = await this.services.guard(
+        this.resolveDesktopApplication(
+          {
+            ...target,
+            host: {
+              ...target.host,
+              ...(native.kind === 'win32' ? { kind: 'rex', component: native.component } : {}),
+              windowTitle: native.windowTitle,
+              application: { ...target.host.application, windowTitle: native.windowTitle },
+            },
+          },
+          this.services.controller.signal,
+          native.kind === 'windows' ? { configuration: native.configuration ?? 'Debug' } : {},
+        ),
+      );
+      const application =
+        native.kind === 'win32'
+          ? {
+              ...resolvedApplication,
+              arguments: [...(resolvedApplication.arguments ?? []), 'crashOnRedBox', 'debugBundlePath', 'index'],
+            }
+          : resolvedApplication;
+      const configuredServer = this.config.getPlatformOptions(platform).server;
+      const server = smoke.server ?? configuredServer;
+      if (!server) throw new Error('Native smoke requires its owned Storybook channel.');
+      const serverUrl = smoke.serverUrl ?? loopbackUrl(instance.storybookPort);
+      const index = await this.createStoryManifest(this.config, platform);
+      if (!index.entries.length) throw new Error('Native smoke selected no stories.');
+      if (native.kind === 'win32') {
+        for (const id of native.requiredStoryIds ?? [])
+          if (!index.entries.some((entry) => entry.id === id)) throw new Error(`The Win32 catalog is missing required story "${id}".`);
+      }
+      if (native.kind === 'windows' && smoke.metro !== false) {
+        this.services.start('metro', this.prepareCommand(smoke.metro ?? defaultMetroCommand(instance), platform, instance));
+        await this.services.ready(
+          'metro',
+          smoke.metroUrl ?? loopbackUrl(instance.metroPort, '/status'),
+          smoke.startupTimeoutMs,
+          this.fetch,
+        );
+      }
+      const startPhase = async (phase: string) => {
+        let running: RunningDesktopCommand | undefined;
+        let stopping = false;
+        let closing: Promise<void> | undefined;
+        const close = () =>
+          (closing ??= (async () => {
+            stopping = true;
+            await running?.stop();
+          })());
+        await this.services.contribute(
+          [
+            {
+              id: `storybook-${phase}`,
+              ownership: 'owned',
+              prepare: () => ({
+                identity: `storybook-smoke:${instance.id}:${phase}`,
+                acquire: async () => {
+                  running = this.runner.start({
+                    ...this.prepareCommand(
+                      { ...server, env: { ...server.env, STORYBOOK_SMOKE_APPLICATION: JSON.stringify(application) } },
+                      platform,
+                      instance,
+                    ),
+                    label: `Storybook ${phase}`,
+                    category: 'service',
+                    context: { service: `storybook-${phase}` },
+                  });
+                  void running.completed.then(
+                    (code) => {
+                      if (!stopping) this.services.fail(new Error(`Required Storybook ${phase} exited with code ${code}.`));
+                    },
+                    (error: unknown) => this.services.fail(error instanceof Error ? error : new Error(String(error))),
+                  );
+                  if (!running.waitForReadiness) throw new Error('Native smoke requires correlated channel readiness.');
+                  const ready = await running.waitForReadiness(
+                    { tier: 'service-ready', service: 'storybook-channel' },
+                    smoke.startupTimeoutMs ?? 120_000,
+                    this.services.controller.signal,
+                  );
+                  if (ready.service !== 'storybook-channel' || ready.descriptor !== undefined)
+                    throw new Error('Native smoke received mismatched channel readiness.');
+                  return ready;
+                },
+                dispose: close,
+              }),
+            },
+          ],
+          { targetId: target.id, targetInstanceId: target.instanceId },
+        );
+        return close;
+      };
+      const traverse = async (work: (traversal: Awaited<ReturnType<typeof connectStoryTraversal>>) => Promise<void>) => {
+        const traversal = await this.connectStoryTraversal({
+          url: loopbackUrl(instance.driverPort),
+          platform,
+          targetId: this.targetId(platform),
+          fetch: this.fetch,
+          signal: this.services.controller.signal,
+          input,
+        });
+        let failure: unknown;
+        try {
+          await this.services.guard(work(traversal));
+        } catch (error) {
+          failure = error;
+        }
+        try {
+          await traversal.close();
+        } catch (cleanup) {
+          if (failure !== undefined) throw new AggregateError([failure, cleanup], 'Smoke traversal and session cleanup failed.');
+          throw cleanup;
+        }
+        if (failure !== undefined) throw failure;
+      };
+      const stopStories = await startPhase('stories');
+      await traverse(async (traversal) => {
+        if (native.kind === 'win32') {
+          await this.operation('Verify Win32 native chrome', () =>
+            traversal.assertNativeUi(
+              ['sidebar-header', 'sidebar-resize', 'addons-panel-header', 'addons-resize', 'addon-storybook-actions-panel'].map(
+                (suffix) => `${native.testIDPrefix}-win32-${suffix}`,
+              ),
+              30_000,
+            ),
+          );
+        }
+        await this.operation('Render stories', (operation) =>
+          this.renderEveryStory(
+            operation,
+            serverUrl,
+            smoke.settleMs ?? 0,
+            smoke.initialRenderTimeoutMs ?? smoke.startupTimeoutMs,
+            traversal.select,
+            native.kind === 'win32' ? native.requiredStoryIds : undefined,
+            native.kind === 'win32',
+          ),
+        );
+        await traversal.assertRunning();
+      });
+      if (mode === 'stories-and-tests') {
+        if (native.kind === 'windows') {
+          await stopStories();
+          await startPhase('tests');
+          await traverse((traversal) =>
+            traversal.select(index.entries[0].id, smoke.initialRenderTimeoutMs ?? smoke.startupTimeoutMs ?? 300_000),
+          );
+        }
+        await this.services.guard(
+          this.runSmokeTests({
+            config: this.config,
+            commandRunner: this.runner,
+            errorOutput: this.errorOutput,
+            driverUrl: loopbackUrl(instance.driverPort),
+            manifest: index,
+            platform,
+            scope: this.scopeContext(platform),
+            targetId: this.targetId(platform),
+            report: this.reporter,
+            signal: this.services.controller.signal,
+            input,
+          }),
+        );
+        await traverse((traversal) => traversal.assertRunning());
+      }
+    } catch (error) {
+      failures.push(error);
+    } finally {
+      if (this.ownsServices) {
+        try {
+          await this.services.close();
+        } catch (cleanup) {
+          failures.push(cleanup);
+        }
+      }
+    }
+    if (failures.length === 1) throw failures[0];
+    if (failures.length) throw new AggregateError(failures, 'Native smoke execution and cleanup failed.');
   }
 
   private async runSmokeLifecycle(
@@ -801,6 +1030,12 @@ export class DesktopStorybookCli {
     const metroPort = smoke.metroUrl
       ? portFromUrl(smoke.metroUrl)
       : await findAvailablePort(this.instance.metroPort, this.isPortAvailable, new Set([storybookPort]));
+    if (smoke.native) {
+      for (const port of [...(smoke.serverUrl ? [storybookPort] : []), ...(smoke.metro !== false && smoke.metroUrl ? [metroPort] : [])]) {
+        if (!(await this.isPortAvailable(port))) throw new Error(`Native smoke port ${port} is already in use; no ownership was taken.`);
+      }
+      if (storybookPort === metroPort) throw new Error('Storybook and Metro must use distinct ports.');
+    }
     const driverPort = await findAvailablePort(this.instance.driverPort, this.isPortAvailable, new Set([storybookPort, metroPort]));
     const resolvedInstance: ResolvedDesktopStorybookInstance = {
       ...this.instance,
@@ -945,6 +1180,8 @@ export class DesktopStorybookCli {
     settleMs: number,
     initialRenderTimeoutMs = 300_000,
     select = (storyId: string, timeoutMs: number) => this.selectStory(serverUrl, storyId, timeoutMs),
+    requiredStoryIds: readonly string[] = [],
+    failFast = false,
   ): Promise<void> {
     const storyIndex = await this.getJson(new URL('/index.json', serverUrl));
     const entries = Object.values((storyIndex.entries ?? {}) as Record<string, { id?: string; type?: string }>).filter(
@@ -953,6 +1190,8 @@ export class DesktopStorybookCli {
     if (entries.length === 0) {
       throw new Error('The Storybook index did not contain any stories.');
     }
+    for (const id of requiredStoryIds)
+      if (!entries.some((entry) => entry.id === id)) throw new Error(`The Storybook index is missing required story "${id}".`);
 
     const failures: Error[] = [];
     for (const { id } of entries)
@@ -983,6 +1222,7 @@ export class DesktopStorybookCli {
         );
         this.reporter?.emit({ kind: 'scope-end', payload: { status: 'passed' } }, testId);
       } catch (error) {
+        this.services.controller.signal.throwIfAborted();
         this.reporter?.emit(
           {
             kind: 'test-result',
@@ -1002,7 +1242,7 @@ export class DesktopStorybookCli {
         writeDesktopStorybookFailure(`navigation "${id}"`, error, this.errorOutput);
         failures.push(new Error(`Story "${id}" failed to render: ${errorMessage(error)}`, { cause: error }));
         consecutiveFailures += 1;
-        if (entryIndex === 0 || consecutiveFailures >= 3) {
+        if (failFast || entryIndex === 0 || consecutiveFailures >= 3) {
           break;
         }
       }

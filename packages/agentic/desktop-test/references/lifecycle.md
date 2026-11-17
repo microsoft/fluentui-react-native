@@ -18,14 +18,23 @@ A launched application's lifetime defaults to session-owned. Native targets may
 opt into `ownership: 'supervisor'`: the supervisor launches once before service
 publication, lends attached leases to sessions, and closes the original exact
 incarnation only at supervisor disposal. Attached applications always have an
-external owner. Storybook still takes over the CLI lifecycle,
-with channel and embedded driver listeners in a child process. This exception is
-transitional, not a fully migrated resource graph. An integration's `run` borrows
+external owner. Storybook contributes a typed plan and workload, with channel
+and embedded driver listeners in an owned child process. Its workload borrows
 the supervisor's service scope: it observes the scope signal and must never close
 the scope, which the CLI closes after the run settles. Once a stop is requested,
-the CLI waits at most 60 seconds for the run before it closes the scope anyway. The intended boundary is one
-neutral `desktop-test` workload host with optional Storybook contributions, not
-a driver or MCP orchestrator.
+the CLI waits at most 60 seconds for the workload before it closes the scope
+anyway. The boundary is one neutral `desktop-test` workload host with optional
+Storybook contributions, not a driver or MCP orchestrator.
+
+Windows/Win32 Storybook smoke contributes a composite channel/application
+resource per phase. The child uses the neutral supervisor-lifetime native
+application wrapper with its service's own helper, sharing the retained lease
+with attached sessions. Its application records are report diagnostics; the
+parent claim tracks the composite service resource. Do not treat these child
+records as independently recoverable applications in bounded reconciliation.
+Failure of the child's settled-disposal handshake fences the enclosing claim.
+Windows retires the story generation before launching the authored-test
+generation, retaining Metro throughout.
 
 Services report readiness and failures through the shared run lifecycle.
 Required-service failure aborts dependent work. Listener/descriptor-ready does

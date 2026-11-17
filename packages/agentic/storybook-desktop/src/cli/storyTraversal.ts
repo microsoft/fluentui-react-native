@@ -51,6 +51,25 @@ export async function connectStoryTraversal(options: {
   }
   return {
     close,
+    assertNativeUi: async (testIds: readonly string[], timeoutMs: number) => {
+      for (const testId of testIds) {
+        const signal = AbortSignal.any([options.signal, AbortSignal.timeout(timeoutMs)]);
+        while (true) {
+          signal.throwIfAborted();
+          try {
+            await session.command('POST', '/element', { using: 'accessibility id', value: testId }, signal);
+            break;
+          } catch (error) {
+            if (!error || typeof error !== 'object' || !('code' in error) || error.code !== 'no such element') throw error;
+            await delay(250, undefined, { signal });
+          }
+        }
+      }
+    },
+    assertRunning: async () => {
+      const windows = await session.command<string[]>('GET', '/window/handles', undefined, options.signal);
+      if (!windows.length) throw new Error('The native smoke application has no live windows.');
+    },
     select: async (storyId: string, timeoutMs: number) => {
       const signal = AbortSignal.any([options.signal, AbortSignal.timeout(timeoutMs)]);
       do {

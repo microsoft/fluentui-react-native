@@ -9,7 +9,7 @@ import type { ResolvedDesktopConfig, ResolvedDesktopTarget } from '@fluentui-rea
 import { selectDesktopRenderer } from '@fluentui-react-native/desktop-test/config';
 import type { DesktopReportWriter } from '@fluentui-react-native/desktop-test/reporting';
 
-import { STORYBOOK_SMOKE_MODE } from '../config/commands';
+import { createWindowsSmokeOptions, createWin32SmokeOptions, STORYBOOK_SMOKE_MODE } from '../config/commands';
 import { DesktopStorybookConfig, makeDesktopStorybookConfig } from '../config/makeDesktopStorybookConfig';
 import { FURN_STORYBOOK_BUNDLE_IDENTIFIER, FURN_STORYBOOK_INSTANCE_ID } from '../config/instance';
 import { FURN_STORYBOOK_PLATFORM } from '../config/platforms';
@@ -74,7 +74,12 @@ const nativeDriverTestOptions = {
   buildNativeDriver: async () => nativeDriverArtifact,
   resolveNativeDriver: async ({ platform }: { platform: string }) => nativeDriverFor(platform),
   writeMacOSApplicationLease: async () => undefined,
-  connectStoryTraversal: async () => ({ select: async () => undefined, close: async () => null }),
+  connectStoryTraversal: async () => ({
+    select: async () => undefined,
+    close: async () => null,
+    assertNativeUi: async () => undefined,
+    assertRunning: async () => undefined,
+  }),
 };
 function nativeDriverFor(platform: string): NativeDriverArtifact {
   return platform === 'macos'
@@ -275,6 +280,252 @@ function makeConfig(platformOptions = {}) {
 }
 
 describe('DesktopStorybookCli', () => {
+  function nativeSmokeFixture(platform: 'windows' | 'win32') {
+    const events: string[] = [];
+    const runner = new RecordingRunner();
+    const start = runner.start.bind(runner);
+    runner.start = jest.fn((command) => {
+      const service = command.context?.service ?? 'unknown';
+      events.push(`start:${service}`);
+      const running = start(command);
+      return {
+        ...running,
+        stop: async () => {
+          events.push(`stop:${service}`);
+          await running.stop();
+        },
+      };
+    });
+    const native =
+      platform === 'windows'
+        ? createWindowsSmokeOptions({ windowTitle: 'Agentic Components Storybook' })
+        : createWin32SmokeOptions({
+            component: 'AgenticStorybook',
+            windowTitle: 'Agentic Components Storybook (Win32)',
+            testIDPrefix: 'fixture',
+            requiredStoryIds: ['second--story'],
+          });
+    const fetch = jest.fn(
+      async () =>
+        new Response(
+          JSON.stringify({
+            entries: {
+              first: { id: 'first--story', type: 'story' },
+              second: { id: 'second--story', type: 'story' },
+            },
+          }),
+        ),
+    );
+    const tests = jest.fn(async () => {
+      events.push('tests');
+      return {
+        endpoint: platform,
+        platformName: 'windows' as const,
+        finishedAt: '2026-11-16T08:00:01.000Z',
+        startedAt: '2026-11-16T08:00:00.000Z',
+        manifest: { platform: 'digest', portable: 'portable' },
+        runId: 'native-smoke',
+        schemaVersion: 1 as const,
+        status: 'passed' as const,
+        targetId: `agenticstorybook-${platform}`,
+        tests: [],
+      };
+    });
+    const ui = jest.fn(async () => {
+      events.push('ui');
+    });
+    const running = jest.fn(async () => {
+      events.push('running');
+    });
+    const config = makeConfig({ [platform]: { smoke: { ...native, settleMs: 0 }, build: { command: 'build-native' } } });
+    const options = {
+      ...nativeDriverTestOptions,
+      runner,
+      fetch,
+      output: { write: () => true },
+      errorOutput: { write: () => true },
+      isPortAvailable: async () => true,
+      createStoryManifest: async () => ({
+        endpoint: platform,
+        entries: ['first--story', 'second--story'].map((id) => ({
+          id,
+          name: id,
+          title: 'Fixture',
+          packageName: 'fixture',
+          sourcePath: 'fixture.stories.tsx',
+          tags: [],
+        })),
+        platformManifestDigest: 'digest',
+        portablePlanDigest: 'portable',
+        schemaVersion: 1 as const,
+      }),
+      resolveDesktopApplication: jest.fn(async () => ({
+        windowTitle: native.native!.windowTitle,
+        ...(platform === 'windows' ? { aumid: 'Fixture!App' } : { executablePath: 'C:\\Fixture\\ReactTest.exe' }),
+      })),
+      runSmokeTests: tests,
+      connectStoryTraversal: async () => {
+        events.push('attach');
+        return {
+          select: async (id: string) => {
+            events.push(`select:${id}`);
+          },
+          close: async () => {
+            events.push('detach');
+            return null;
+          },
+          assertNativeUi: ui,
+          assertRunning: running,
+        };
+      },
+    };
+    return { events, runner, options, config, tests, ui, fetch };
+  }
+
+  test.each(['windows', 'win32'] as const)('owns %s smoke phases and releases traversal before tests', async (platform) => {
+    const f = nativeSmokeFixture(platform);
+    await new DesktopStorybookCli(f.config, f.options).smoke(platform, { mode: 'stories-and-tests' });
+    expect(f.events).toEqual(
+      platform === 'windows'
+        ? [
+            'start:metro',
+            'start:storybook-stories',
+            'attach',
+            'select:first--story',
+            'select:second--story',
+            'running',
+            'detach',
+            'stop:storybook-stories',
+            'start:storybook-tests',
+            'attach',
+            'select:first--story',
+            'detach',
+            'tests',
+            'attach',
+            'running',
+            'detach',
+            'stop:storybook-tests',
+            'stop:metro',
+          ]
+        : [
+            'start:storybook-stories',
+            'attach',
+            'ui',
+            'select:first--story',
+            'select:second--story',
+            'running',
+            'detach',
+            'tests',
+            'attach',
+            'running',
+            'detach',
+            'stop:storybook-stories',
+          ],
+    );
+    expect(f.runner.foreground.some((command) => command.args.some((arg) => /smoke-(windows|win32)\.ps1$/.test(arg)))).toBe(false);
+    const phases = f.runner.background.filter((command) => command.env.STORYBOOK_SMOKE_APPLICATION);
+    expect(phases).toHaveLength(platform === 'windows' ? 2 : 1);
+    expect(phases.every((command) => command.env.STORYBOOK_DRIVER_HANDOFF && command.env.STORYBOOK_DRIVER_MANIFEST)).toBe(true);
+    if (platform === 'win32') {
+      expect(f.ui).toHaveBeenCalledWith(
+        ['sidebar-header', 'sidebar-resize', 'addons-panel-header', 'addons-resize', 'addon-storybook-actions-panel'].map(
+          (suffix) => `fixture-win32-${suffix}`,
+        ),
+        30_000,
+      );
+      expect(JSON.parse(phases[0].env.STORYBOOK_SMOKE_APPLICATION).arguments).toContain('crashOnRedBox');
+      expect(f.runner.foreground.some((command) => command.command === 'pwsh')).toBe(false);
+    }
+  });
+
+  test('refuses occupied Windows Metro before any build, registration, service, or native-helper effect', async () => {
+    const f = nativeSmokeFixture('windows');
+    const resolveNativeDriver = jest.fn(nativeDriverTestOptions.resolveNativeDriver);
+    const cli = new DesktopStorybookCli(f.config, {
+      ...f.options,
+      resolveNativeDriver,
+      isPortAvailable: async (port) => port !== 8081,
+    });
+    await expect(cli.smoke('windows')).rejects.toThrow('8081 is already in use');
+    expect(f.runner.foreground).toHaveLength(0);
+    expect(f.runner.background).toHaveLength(0);
+    expect(resolveNativeDriver).not.toHaveBeenCalled();
+  });
+
+  test('fails closed on a missing Win32 required runtime story and still drains the owned service', async () => {
+    const f = nativeSmokeFixture('win32');
+    f.fetch.mockImplementation(
+      async () =>
+        new Response(
+          JSON.stringify({
+            entries: { first: { id: 'first--story', type: 'story' } },
+          }),
+        ),
+    );
+    await expect(new DesktopStorybookCli(f.config, f.options).smoke('win32', { mode: 'stories-and-tests' })).rejects.toThrow(
+      'missing required story',
+    );
+    expect(f.tests).not.toHaveBeenCalled();
+    expect(f.events.slice(-2)).toEqual(['detach', 'stop:storybook-stories']);
+  });
+
+  test('reports native UI failure and cleanup failure together and never runs authored tests', async () => {
+    const f = nativeSmokeFixture('win32');
+    f.ui.mockRejectedValueOnce(new Error('missing native addon'));
+    const start = f.runner.start;
+    f.runner.start = (command) => ({
+      ...start(command),
+      stop: async () => {
+        throw new Error('native cleanup uncertain');
+      },
+    });
+    await expect(new DesktopStorybookCli(f.config, f.options).smoke('win32', { mode: 'stories-and-tests' })).rejects.toMatchObject({
+      errors: [expect.objectContaining({ message: 'missing native addon' }), expect.any(AggregateError)],
+    });
+    expect(f.tests).not.toHaveBeenCalled();
+  });
+
+  test('does not continue into authored tests after Windows phase cleanup fails', async () => {
+    const f = nativeSmokeFixture('windows');
+    const start = f.runner.start;
+    f.runner.start = (command) => {
+      const running = start(command);
+      return command.context?.service === 'storybook-stories'
+        ? {
+            ...running,
+            stop: async () => {
+              throw new Error('application settlement unknown');
+            },
+          }
+        : running;
+    };
+    await expect(new DesktopStorybookCli(f.config, f.options).smoke('windows', { mode: 'stories-and-tests' })).rejects.toBeInstanceOf(
+      AggregateError,
+    );
+    expect(f.events).not.toContain('start:storybook-tests');
+    expect(f.tests).not.toHaveBeenCalled();
+  });
+
+  test('cancellation during native traversal drains its session and retained application service', async () => {
+    const f = nativeSmokeFixture('win32');
+    const scope = new DesktopServiceScope(f.runner);
+    const cli = new DesktopStorybookCli(f.config, {
+      ...f.options,
+      services: scope,
+      connectStoryTraversal: async () => ({
+        ...(await f.options.connectStoryTraversal()),
+        select: async () => {
+          scope.requestStop();
+          scope.controller.signal.throwIfAborted();
+        },
+      }),
+    });
+    await expect(scope.guard(cli.smoke('win32', { mode: 'stories-and-tests' }))).rejects.toThrow('stop requested');
+    await scope.close();
+    expect(f.events.slice(-2)).toEqual(['detach', 'stop:storybook-stories']);
+    expect(f.tests).not.toHaveBeenCalled();
+  });
+
   test('resolves a stable real workload target for legacy Storybook configuration', () => {
     const cli = new DesktopStorybookCli(makeConfig());
     const target = cli.workloadTarget('macos');
@@ -547,6 +798,8 @@ describe('DesktopStorybookCli', () => {
         const connectStoryTraversal = jest.fn(async () => {
           order.push('window');
           return {
+            assertNativeUi: async () => undefined,
+            assertRunning: async () => undefined,
             select: async () => undefined,
             close: async () => {
               order.push('closed');
@@ -1251,6 +1504,8 @@ describe('DesktopStorybookCli', () => {
         fetch: async () => new Response(JSON.stringify({ entries: { first: { id: 'first--story', type: 'story' } } })),
         runSmokeTests,
         connectStoryTraversal: async () => ({
+          assertNativeUi: async () => undefined,
+          assertRunning: async () => undefined,
           select: async () => {
             throw navigationFailure;
           },
@@ -1334,6 +1589,8 @@ describe('DesktopStorybookCli', () => {
           connectStoryTraversal: async (options) => {
             expect(options.input).toBe(effectiveInput);
             return {
+              assertNativeUi: async () => undefined,
+              assertRunning: async () => undefined,
               select: async (id) => {
                 events.push(`select:${id}`);
               },

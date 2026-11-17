@@ -62,10 +62,15 @@ for focused smoke cases.
 `test` runs callbacks against an already running app and driver; `smoke` owns
 the complete app lifecycle. The generic smoke path needs a platform stop
 command, except macOS, whose bundle-ID stop is supplied. Prefer the shared
-`createWindowsSmokeOptions`, `createWin32SmokeCommand`, and
+`createWindowsSmokeOptions`, `createWin32SmokeOptions`, and
 `createWin32RunCommand` factories instead of copying app lifecycle scripts.
-The Windows Fabric smoke restarts its exact owned app after traversal before
-running authored tests against the warm Metro bundle.
+The smoke factories return typed native plans, not coordinator commands.
+The neutral scope owns Metro and each channel/app generation; the channel uses
+desktop-test's retained native application owner so sessions borrow the same
+helper's exact lease. The Windows Fabric smoke drains its first generation
+after traversal, then starts a new channel/app generation before authored
+tests against the warm Metro bundle. It selects the first manifest story and
+waits for authenticated native readiness before callbacks.
 
 Smoke runs derive an instance identity from the canonical consumer-project
 root. The identity coordinates app bundle identity, Storybook/driver ports,
@@ -73,9 +78,15 @@ Metro, generated runtime identity, and exact process cleanup. Windows RN Test
 App retains its required Metro port 8081; do not run concurrent Metro-backed
 Windows smokes.
 
-Windows and Win32 PowerShell smoke owners wait up to 75 seconds for each service
-bridge to exit, allowing its 60-second cooperative shutdown budget to complete.
-Nonzero exits and expired deadlines remain cleanup failures.
+Both native smoke modes use a trusted driver manifest and authenticated driver
+traversal. Windows refuses an occupied fixed Metro port before any build,
+registration, or launch. PowerShell performs only Windows framework/package
+registration; it neither starts services nor owns smoke cleanup. Win32 uses
+the native REX launch descriptor with crash-on-redbox, verifies required IDs in
+both catalogs and native desktop chrome through accessibility, and checks its
+owned host remains alive. Failed native settlement retains the protected lease.
+Foreign lease records are preserved and reported as cleanup failures. No
+port-observed PID authorizes application ownership or cleanup.
 
 Storybook test and stories-and-tests smoke commands accept
 `--input accessible|physical`. The lane filters `desktopIt` cases by their

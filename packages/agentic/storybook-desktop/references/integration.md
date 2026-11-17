@@ -116,15 +116,15 @@ transport diagnostics or journals.
 Without an agent manifest the upstream channel is **legacy unprotected mode**,
 including its HTTP mutation handlers, WebSocket relay and MCP endpoint. It is
 not an authority boundary. Channel-only `smoke --mode stories` retains this
-legacy path. Manifest-backed traversal (`stories-and-tests`, and the Windows/
-Win32 control script when a driver manifest is supplied) opens one driver
+legacy path on macOS. Windows/Win32 native smoke always uses manifest-backed
+traversal, including `stories` mode. Manifest-backed traversal opens one driver
 session, selects each story through it, and deletes that session before authored
 tests acquire their own. It never falls back to upstream selection after a
 driver failure. Only pre-dispatch `bridge-unavailable` can be retried;
 uncertain navigation and `relaunch-required` fail without replay. The first
 story's retry budget covers a cold development bundle
 (`STORYBOOK_SMOKE_INITIAL_RENDER_TIMEOUT_MS`, default 300 s); later stories
-use 30 s. The Windows smoke relaunches the app between its `stories` and
+use 15 s. The Windows smoke relaunches the app between its `stories` and
 `tests` phases, so the `tests` phase first selects the first manifest story
 with the same budget and waits for authenticated readiness before authored
 tests navigate. A relaunched runtime that has said hello but not yet sent its
@@ -132,6 +132,22 @@ initial `storyRendered` reports `bridge-unavailable`, not `relaunch-required`,
 so this wait keeps retrying. A reloaded runtime whose new socket authenticates
 before the old socket closes retires the old bridge in the same way. Authored-test
 navigation itself does not wait for the bridge.
+
+Windows/Win32 factories contribute native smoke settings rather than shell
+coordinators. The borrowed neutral scope registers Metro and phase-scoped
+channel resources before acquisition and drains them in reverse order. Each
+channel uses desktop-test's supervisor-lifetime application wrapper with the
+same native helper used by attached sessions: independent launch/attach
+controllers would compete for its application lock. The exact native identity
+is reported before protected application-lease publication. Cleanup closes
+the retained native lease before withdrawing its digest-receipted private
+record, and refuses changed records. Windows restarts the owned channel/app
+generation between phases, without restarting Metro. A failed phase disposal
+prevents relaunch and authored tests and leaves the parent claim fenced.
+Application resource diagnostics live in the inherited report; the parent
+claim records the enclosing channel resource, not a separately recoverable
+application. Bounded automatic native application reconciliation therefore
+does not reclaim this composite resource after an unacknowledged crash.
 
 Epoch/cancellation-aware providers reject stale preview mutations without
 invalidating chrome or live secondary windows. Interrupted navigation still

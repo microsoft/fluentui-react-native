@@ -1,6 +1,6 @@
 import path from 'node:path';
 
-import { createWindowsSmokeCommand, createWindowsSmokeOptions, createWin32RunCommand, createWin32SmokeCommand } from './commands';
+import { createWindowsSmokeOptions, createWin32RunCommand, createWin32SmokeOptions } from './commands';
 import { makeDesktopStorybookConfig } from './makeDesktopStorybookConfig';
 import type { Platforms } from './platforms';
 
@@ -180,26 +180,11 @@ describe('DesktopStorybookConfig', () => {
     });
   });
 
-  test('creates package-owned Windows and Win32 smoke commands', () => {
+  test('creates typed Windows and Win32 smoke plans without lifecycle commands', () => {
     const configDirectory = path.resolve(__dirname, '../../config');
 
-    expect(createWindowsSmokeCommand({ windowTitle: 'Consumer Storybook' })).toEqual({
-      command: 'pwsh',
-      args: ['-NoProfile', '-File', path.join(configDirectory, 'smoke-windows.ps1')],
-      env: {
-        STORYBOOK_WINDOWS_CONFIGURATION: 'Debug',
-        STORYBOOK_WINDOWS_WINDOW_TITLE: 'Consumer Storybook',
-      },
-    });
     expect(createWindowsSmokeOptions({ windowTitle: 'Consumer Storybook' })).toEqual({
-      command: {
-        command: 'pwsh',
-        args: ['-NoProfile', '-File', path.join(configDirectory, 'smoke-windows.ps1')],
-        env: {
-          STORYBOOK_WINDOWS_CONFIGURATION: 'Debug',
-          STORYBOOK_WINDOWS_WINDOW_TITLE: 'Consumer Storybook',
-        },
-      },
+      native: { kind: 'windows', configuration: 'Debug', windowTitle: 'Consumer Storybook' },
       // eslint-disable-next-line @microsoft/sdl/no-insecure-url -- React Native Test App uses loopback Metro
       metroUrl: 'http://127.0.0.1:8081/status',
     });
@@ -212,21 +197,22 @@ describe('DesktopStorybookConfig', () => {
       },
     });
     expect(
-      createWin32SmokeCommand({
+      createWin32SmokeOptions({
         component: 'ConsumerStorybook',
         requiredStoryIds: ['first--story', 'second--story'],
         testIDPrefix: 'consumer-storybook',
         windowTitle: 'Consumer Storybook (Win32)',
       }),
     ).toEqual({
-      command: 'pwsh',
-      args: ['-NoProfile', '-File', path.join(configDirectory, 'smoke-win32.ps1')],
-      env: {
-        STORYBOOK_TEST_ID_PREFIX: 'consumer-storybook',
-        STORYBOOK_WIN32_COMPONENT: 'ConsumerStorybook',
-        STORYBOOK_WIN32_REQUIRED_STORIES: 'first--story,second--story',
-        STORYBOOK_WIN32_WINDOW_TITLE: 'Consumer Storybook (Win32)',
+      native: {
+        kind: 'win32',
+        component: 'ConsumerStorybook',
+        requiredStoryIds: ['first--story', 'second--story'],
+        testIDPrefix: 'consumer-storybook',
+        windowTitle: 'Consumer Storybook (Win32)',
       },
+      metro: false,
+      settleMs: 250,
     });
   });
 
