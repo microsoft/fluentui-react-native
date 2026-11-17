@@ -446,7 +446,7 @@ export class DesktopStorybookCli {
       serviceReady: channelReady,
       integration: {
         name: 'storybook',
-        details: { services: ['metro', 'storybook-channel'], instanceId: resolvedInstance.id, storybookPort, metroPort, driverPort },
+        details: { services: metro ? ['metro', 'storybook-channel'] : ['storybook-channel'], instanceId: resolvedInstance.id, storybookPort, metroPort, driverPort },
       },
     };
   }

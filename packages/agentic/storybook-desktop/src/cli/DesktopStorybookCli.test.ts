@@ -450,6 +450,7 @@ describe('DesktopStorybookCli', () => {
               arguments: ['crashOnRedBox', 'debugBundlePath', 'index'],
             };
       expect(ready).toMatchObject({ targetId: f.target.id, agentDescriptor: 'agent.json', serviceReady: { service: 'storybook-channel' } });
+      expect(ready.integration.details.services).toEqual(platform === 'windows' ? ['metro', 'storybook-channel'] : ['storybook-channel']);
       expect(JSON.parse(channel.env.STORYBOOK_OWNED_APPLICATION)).toEqual(owned);
       const { arguments: _arguments, ...identity } = owned as typeof owned & { arguments?: string[] };
       expect(JSON.parse(fs.readFileSync(channel.env.STORYBOOK_DRIVER_MANIFEST, 'utf8')).agent.application).toEqual(identity);
