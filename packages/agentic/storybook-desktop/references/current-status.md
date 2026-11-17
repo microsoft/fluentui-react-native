@@ -28,11 +28,11 @@ Console-session (non-RDP), 200% and mixed DPI, and negative-origin cases are not
 
 - **Lifecycle parity:** Qualified (macOS Fabric and macOS Paper, observed). JS initialization and HMR counts are not observed. See [Lifecycle parity](#lifecycle-parity). Tracking: [#4449](https://github.com/microsoft/fluentui-react-native/issues/4449).
 
-- **Hosted resources and protected runners:** Implemented with portable coverage; native endpoint qualification is not run for the combined implementation. See [Hosted resources and protected runners](#hosted-resources-and-protected-runners). Tracking: [#4449](https://github.com/microsoft/fluentui-react-native/issues/4449), [#4450](https://github.com/microsoft/fluentui-react-native/issues/4450).
+- **Hosted resources and protected runners:** Implemented with portable coverage and partial non-agent native smoke evidence; protected Storybook handoff remains unqualified. See [Hosted resources and protected runners](#hosted-resources-and-protected-runners). Tracking: [#4449](https://github.com/microsoft/fluentui-react-native/issues/4449), [#4450](https://github.com/microsoft/fluentui-react-native/issues/4450).
 
 - **Visual flash claims:** Deferred. No flash-reduction claim is made. See [Visual flash claims](#visual-flash-claims). Tracking: [#4449](https://github.com/microsoft/fluentui-react-native/issues/4449).
 
-- **Native qualification:** Qualified (macOS Fabric and macOS Paper direct selection; Windows Fabric and Win32 Paper limited to the connected-session fencing and secondary-window cases). Windows refresh-reduction, console and display-scale lanes are not run. See [Native qualification](#native-qualification). Tracking: [#4441](https://github.com/microsoft/fluentui-react-native/issues/4441), [#4451](https://github.com/microsoft/fluentui-react-native/issues/4451).
+- **Native qualification:** Partial per endpoint; non-agent smoke does not qualify protected Storybook workloads. Windows refresh-reduction, console and display-scale lanes are not run. See [Native qualification](#native-qualification). Tracking: [#4441](https://github.com/microsoft/fluentui-react-native/issues/4441), [#4451](https://github.com/microsoft/fluentui-react-native/issues/4451).
 
 ## Preview fencing and context loss
 
@@ -112,8 +112,11 @@ Scope: the driver-owned channel factory and the run-owned extraction cache.
 - Storybook and desktop-test share a neutral owner for hosted-driver acquisition, readiness and management publication.
 - Metro and channel readiness require correlated owned-listener receipts; the driver remains in the channel child.
 - A protected runner holds one reservation across cases and gives each worker a distinct drain-confirmed grant.
-- macOS lease maintenance is host-owned; Windows smoke retains its supervisor-launched application in the channel child.
-- Portable contracts cover these paths, but the combined implementation is not yet qualified on macOS Fabric, macOS Paper, Windows Fabric or Win32 Paper.
+- macOS lease maintenance is host-owned; default macOS and Windows/Win32 native smoke retain their exact supervisor-launched applications in the channel child.
+- macOS smoke verifies the built instance bundle and renderer, and never stops another app merely because it shares a bundle identifier.
+- Non-agent macOS Fabric and Paper candidate smokes and Win32 Paper smoke have native evidence; they do not qualify protected app-backed handoff or managed Storybook workloads.
+
+- Exact macOS primary-app cleanup does not prove that arbitrary uncontained descendants exited.
 
 ### Open work
 
@@ -139,6 +142,8 @@ Full per-run evidence (commands, counts, run ids, artifact locators, cleanup out
 
 ### macOS Fabric
 
+- **Owned non-agent smoke:** a candidate worktree based on `474941a38` passed 223 navigations and 37 accessible callbacks, and 223 navigations and 120 physical callbacks; each lane had three declared unsupported cases. The accessible run preceded the final identity guard; the physical run included it. Evidence: [#4510](https://github.com/microsoft/fluentui-react-native/pull/4510).
+
 - **Direct selection, accessible lane:** full-index run rendered 223 stories and passed five callbacks (228 passes, no failures or unsupported results) at candidate `06446c276`. Evidence: [#4496](https://github.com/microsoft/fluentui-react-native/pull/4496).
 
 - **Direct selection, physical lane:** 223 stories plus 15 callbacks passed (238 passes) at `06446c276`; sparse regression evidence, not the full physical suite. Evidence: [#4496](https://github.com/microsoft/fluentui-react-native/pull/4496).
@@ -146,6 +151,8 @@ Full per-run evidence (commands, counts, run ids, artifact locators, cleanup out
 - **Review corrections:** not requalified natively; earlier qualification is historical for `06446c276`.
 
 ### macOS Paper
+
+- **Owned non-agent smoke:** a candidate worktree based on `474941a38` passed 223 navigations and 36 accessible callbacks, and 223 navigations and 120 physical callbacks; each lane had three declared unsupported cases. Both runs preceded the final identity guard; a later guarded render-only run passed 223 navigations. Evidence: [#4510](https://github.com/microsoft/fluentui-react-native/pull/4510).
 
 - **Direct selection, accessible lane:** 223 stories plus five callbacks passed (228 passes) at `06446c276`. Evidence: [#4496](https://github.com/microsoft/fluentui-react-native/pull/4496).
 
@@ -155,6 +162,8 @@ Full per-run evidence (commands, counts, run ids, artifact locators, cleanup out
 
 ### Windows Fabric
 
+- **Hosted non-agent smoke:** at `474941a38`, 250 of 251 selected checks passed and a modern Callout placement assertion failed; eight groups were not run. The cause is unproven. Evidence: [#4510](https://github.com/microsoft/fluentui-react-native/pull/4510).
+
 - **Secondary window:** at `6c626602c` the modern Callout physical-pointer click passed (`focus: confirmed`) and semantic activation was refused before dispatch with effect none and no fallback. Evidence: [#4498](https://github.com/microsoft/fluentui-react-native/pull/4498).
 
 - **Environment:** Windows 11 Enterprise build 26300 x64, remote RDP session (not console), one 1728 x 1084 monitor at 96 DPI.
@@ -162,6 +171,8 @@ Full per-run evidence (commands, counts, run ids, artifact locators, cleanup out
 - **Not run:** 200%, mixed DPI and negative-origin layouts. Refresh-reduction measurements not run.
 
 ### Win32 Paper
+
+- **Non-agent smoke:** a local render-only run passed 188 stories at `41c604371`; hosted accessible smoke passed 233 checks and physical smoke passed 288 with one quarantined unsupported case at `474941a38`. Evidence: [#4510](https://github.com/microsoft/fluentui-react-native/pull/4510).
 
 - **Fresh-preview fencing:** passed for injected provider-context loss at baseline `505a2187b` (REX 0.81.1). Evidence: [#4498](https://github.com/microsoft/fluentui-react-native/pull/4498).
 
@@ -172,6 +183,9 @@ Full per-run evidence (commands, counts, run ids, artifact locators, cleanup out
 ### Hosted CI and portable evidence
 
 - Portable Storybook integration, driver and root checks passed for the refresh-reduction work; JavaScript tests are not native qualification.
+
+- Hosted macOS Fabric and Paper smokes passed at `474941a38` before the ownership-safe macOS smoke change; they do not qualify that later candidate. Evidence: [#4510](https://github.com/microsoft/fluentui-react-native/pull/4510).
+
 - The cache-cleared `yarn lage buildci` aggregate failed on timing-sensitive driver tests (`boundedCommand`, `privateStorage`) on the candidate and on base `aadc2f359`, so it is not hosted-CI parity; tracked in [#4349](https://github.com/microsoft/fluentui-react-native/issues/4349).
 
 ## Measurements

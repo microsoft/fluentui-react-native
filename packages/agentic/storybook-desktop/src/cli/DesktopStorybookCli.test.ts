@@ -162,7 +162,7 @@ function makeConfig(platformOptions = {}) {
 }
 
 describe('DesktopStorybookCli', () => {
-  function nativeSmokeFixture(platform: 'windows' | 'win32') {
+  function nativeSmokeFixture(platform: 'macos' | 'windows' | 'win32') {
     const events: string[] = [];
     const runner = new RecordingRunner();
     const start = runner.start.bind(runner);
@@ -179,14 +179,16 @@ describe('DesktopStorybookCli', () => {
       };
     });
     const native =
-      platform === 'windows'
-        ? createWindowsSmokeOptions({ windowTitle: 'Agentic Components Storybook' })
-        : createWin32SmokeOptions({
-            component: 'AgenticStorybook',
-            windowTitle: 'Agentic Components Storybook (Win32)',
-            testIDPrefix: 'fixture',
-            requiredStoryIds: ['second--story'],
-          });
+      platform === 'macos'
+        ? { native: { kind: 'macos' as const } }
+        : platform === 'windows'
+          ? createWindowsSmokeOptions({ windowTitle: 'Agentic Components Storybook' })
+          : createWin32SmokeOptions({
+              component: 'AgenticStorybook',
+              windowTitle: 'Agentic Components Storybook (Win32)',
+              testIDPrefix: 'fixture',
+              requiredStoryIds: ['second--story'],
+            });
     const fetch = jest.fn(
       async () =>
         new Response(
@@ -202,7 +204,7 @@ describe('DesktopStorybookCli', () => {
       events.push('tests');
       return {
         endpoint: platform,
-        platformName: 'windows' as const,
+        platformName: platform === 'macos' ? ('macos' as const) : ('windows' as const),
         finishedAt: '2026-11-16T08:00:01.000Z',
         startedAt: '2026-11-16T08:00:00.000Z',
         manifest: { platform: 'digest', portable: 'portable' },
@@ -222,6 +224,22 @@ describe('DesktopStorybookCli', () => {
     const config = makeConfig({ [platform]: { smoke: { ...native, settleMs: 0 }, build: { command: 'build-native' } } });
     const options = {
       ...nativeDriverTestOptions,
+      createMacOSApplicationLeaseResource: ({ manifestPath }: { manifestPath: string }) => ({
+        id: 'macos-application-lease',
+        ownership: 'owned' as const,
+        prepare: () => ({
+          identity: `fixture-lease:${manifestPath}`,
+          acquire: async () => {
+            events.push('lease-ready');
+          },
+          dispose: async () => {
+            events.push('lease-withdrawn');
+          },
+        }),
+      }),
+      waitForMacOSApplicationLease: async () => {
+        events.push('lease-observed');
+      },
       runner,
       fetch,
       output: { write: () => true },
@@ -242,8 +260,10 @@ describe('DesktopStorybookCli', () => {
         schemaVersion: 1 as const,
       }),
       resolveDesktopApplication: jest.fn(async () => ({
-        windowTitle: native.native!.windowTitle,
-        ...(platform === 'windows' ? { aumid: 'Fixture!App' } : { executablePath: 'C:\\Fixture\\ReactTest.exe' }),
+        windowTitle: platform === 'win32' ? 'Agentic Components Storybook (Win32)' : 'Agentic Components Storybook',
+        ...(platform === 'windows'
+          ? { aumid: 'Fixture!App' }
+          : { executablePath: platform === 'macos' ? '/Fixture/Host.app/Contents/MacOS/Host' : 'C:\\Fixture\\ReactTest.exe' }),
       })),
       runSmokeTests: tests,
       connectStoryTraversal: async () => {
@@ -264,50 +284,88 @@ describe('DesktopStorybookCli', () => {
     return { events, runner, options, config, tests, ui, fetch };
   }
 
-  test.each(['windows', 'win32'] as const)('owns %s smoke phases and releases traversal before tests', async (platform) => {
+  test.each(['macos', 'windows', 'win32'] as const)('owns %s smoke phases and releases traversal before tests', async (platform) => {
     const f = nativeSmokeFixture(platform);
-    await new DesktopStorybookCli(f.config, f.options).smoke(platform, { mode: 'stories-and-tests' });
+    const cli = new DesktopStorybookCli(f.config, f.options);
+    await cli.smoke(platform, { mode: 'stories-and-tests' });
     expect(f.events).toEqual(
-      platform === 'windows'
+      platform === 'macos'
         ? [
+            'lease-ready',
             'start:metro',
             'start:storybook-stories',
+            'lease-observed',
             'attach',
             'select:first--story',
             'select:second--story',
             'running',
             'detach',
-            'stop:storybook-stories',
-            'start:storybook-tests',
-            'attach',
-            'select:first--story',
-            'detach',
             'tests',
             'attach',
             'running',
             'detach',
-            'stop:storybook-tests',
+            'stop:storybook-stories',
             'stop:metro',
+            'lease-withdrawn',
           ]
-        : [
-            'start:storybook-stories',
-            'attach',
-            'ui',
-            'select:first--story',
-            'select:second--story',
-            'running',
-            'detach',
-            'tests',
-            'attach',
-            'running',
-            'detach',
-            'stop:storybook-stories',
-          ],
+        : platform === 'windows'
+          ? [
+              'start:metro',
+              'start:storybook-stories',
+              'attach',
+              'select:first--story',
+              'select:second--story',
+              'running',
+              'detach',
+              'stop:storybook-stories',
+              'start:storybook-tests',
+              'attach',
+              'select:first--story',
+              'detach',
+              'tests',
+              'attach',
+              'running',
+              'detach',
+              'stop:storybook-tests',
+              'stop:metro',
+            ]
+          : [
+              'start:storybook-stories',
+              'attach',
+              'ui',
+              'select:first--story',
+              'select:second--story',
+              'running',
+              'detach',
+              'tests',
+              'attach',
+              'running',
+              'detach',
+              'stop:storybook-stories',
+            ],
     );
     expect(f.runner.foreground.some((command) => command.args.some((arg) => /smoke-(windows|win32)\.ps1$/.test(arg)))).toBe(false);
     const phases = f.runner.background.filter((command) => command.env.STORYBOOK_SMOKE_APPLICATION);
     expect(phases).toHaveLength(platform === 'windows' ? 2 : 1);
     expect(phases.every((command) => command.env.STORYBOOK_DRIVER_HANDOFF && command.env.STORYBOOK_DRIVER_MANIFEST)).toBe(true);
+    if (platform === 'macos') {
+      expect(JSON.parse(phases[0].env.STORYBOOK_SMOKE_APPLICATION)).toEqual({
+        bundleIdentifier: cli.instance.bundleIdentifier,
+        executablePath: '/Fixture/Host.app/Contents/MacOS/Host',
+        windowTitle: 'Agentic Components Storybook',
+      });
+      expect(f.options.resolveDesktopApplication).toHaveBeenCalledWith(
+        expect.objectContaining({
+          host: expect.objectContaining({
+            application: expect.objectContaining({ bundleIdentifier: undefined, executablePath: undefined }),
+          }),
+        }),
+        expect.any(AbortSignal),
+        { macosBundleIdentifier: cli.instance.bundleIdentifier },
+      );
+      expect(f.runner.foreground.map((command) => command.command)).toContain('build-native');
+      expect(f.runner.foreground.map((command) => command.command)).not.toContain('osascript');
+    }
     if (platform === 'win32') {
       expect(f.ui).toHaveBeenCalledWith(
         ['sidebar-header', 'sidebar-resize', 'addons-panel-header', 'addons-resize', 'addon-storybook-actions-panel'].map(
@@ -318,6 +376,113 @@ describe('DesktopStorybookCli', () => {
       expect(JSON.parse(phases[0].env.STORYBOOK_SMOKE_APPLICATION).arguments).toContain('crashOnRedBox');
       expect(f.runner.foreground.some((command) => command.command === 'pwsh')).toBe(false);
     }
+  });
+
+  test('uses the native driver and exact application owner for render-only macOS smoke', async () => {
+    const f = nativeSmokeFixture('macos');
+    await new DesktopStorybookCli(f.config, f.options).smoke('macos', { mode: 'stories' });
+    expect(f.tests).not.toHaveBeenCalled();
+    expect(f.runner.background.some((command) => command.env.STORYBOOK_SMOKE_APPLICATION && command.env.STORYBOOK_DRIVER_HANDOFF)).toBe(
+      true,
+    );
+    expect(f.events).toContain('lease-observed');
+    expect(f.events.at(-1)).toBe('lease-withdrawn');
+  });
+
+  test.each([
+    [false, 'accessible'],
+    [true, 'physical'],
+  ] as const)('preserves the macOS renderer and input lane for native smoke (paper=%s, input=%s)', async (paper, input) => {
+    const f = nativeSmokeFixture('macos');
+    const connectStoryTraversal = jest.fn(f.options.connectStoryTraversal);
+    await new DesktopStorybookCli(f.config, { ...f.options, connectStoryTraversal, paper }).smoke('macos', {
+      input,
+      mode: 'stories-and-tests',
+    });
+    expect(f.options.resolveDesktopApplication).toHaveBeenCalledWith(
+      expect.objectContaining({ host: expect.objectContaining({ renderer: paper ? 'paper' : 'fabric' }) }),
+      expect.any(AbortSignal),
+      expect.anything(),
+    );
+    expect(connectStoryTraversal).toHaveBeenCalledWith(expect.objectContaining({ input }));
+    expect(f.tests).toHaveBeenCalledWith(expect.objectContaining({ input }));
+  });
+
+  test('does not start macOS services or run a stop command when building the app fails', async () => {
+    const f = nativeSmokeFixture('macos');
+    f.runner.failCommand = 'build-native';
+    await expect(new DesktopStorybookCli(f.config, f.options).smoke('macos')).rejects.toThrow('build-native failed');
+    expect(f.runner.background).toHaveLength(0);
+    expect(f.runner.foreground.map((command) => command.command)).not.toContain('osascript');
+    expect(f.events).toEqual([]);
+  });
+
+  test('refuses macOS native smoke without an exact built executable before starting services', async () => {
+    const f = nativeSmokeFixture('macos');
+    f.options.resolveDesktopApplication.mockResolvedValueOnce({ windowTitle: 'Agentic Components Storybook', executablePath: '' });
+    await expect(new DesktopStorybookCli(f.config, f.options).smoke('macos')).rejects.toThrow('exact built application executable');
+    expect(f.runner.background).toHaveLength(0);
+    expect(f.events).toEqual([]);
+  });
+
+  test('refuses a conflicting configured macOS bundle before building or starting services', async () => {
+    const f = nativeSmokeFixture('macos');
+    const config = makeConfig({
+      macos: {
+        build: { command: 'build-native' },
+        nativeDriver: { application: { bundleIdentifier: 'com.example.foreign' } },
+        smoke: { native: { kind: 'macos' }, settleMs: 0 },
+      },
+    });
+    await expect(new DesktopStorybookCli(config, f.options).smoke('macos')).rejects.toThrow(
+      'configured macOS bundle identifier conflicts with the instance-specific built product',
+    );
+    expect(f.runner.foreground).toHaveLength(0);
+    expect(f.runner.background).toHaveLength(0);
+    expect(f.events).toEqual([]);
+  });
+
+  test('refuses a configured macOS application that is not the verified built product', async () => {
+    const f = nativeSmokeFixture('macos');
+    const config = makeConfig({
+      macos: {
+        build: { command: 'build-native' },
+        nativeDriver: { application: { executablePath: __filename, windowTitle: 'Agentic Components Storybook' } },
+        smoke: { native: { kind: 'macos' }, settleMs: 0 },
+      },
+    });
+    f.options.resolveDesktopApplication.mockResolvedValueOnce({
+      executablePath: path.join(__dirname, 'DesktopStorybookCli.ts'),
+      windowTitle: 'Agentic Components Storybook',
+    });
+    await expect(new DesktopStorybookCli(config, f.options).smoke('macos')).rejects.toThrow(
+      'configured macOS application does not match the verified built product',
+    );
+    expect(f.runner.background).toHaveLength(0);
+    expect(f.events).toEqual([]);
+  });
+
+  test('records an unsettled macOS channel as a cleanup failure while withdrawing the read-only lease', async () => {
+    const f = nativeSmokeFixture('macos');
+    const start = f.runner.start;
+    f.runner.start = (command) => {
+      const running = start(command);
+      return command.context?.service === 'storybook-stories'
+        ? {
+            ...running,
+            stop: async () => {
+              throw new Error('application settlement unknown');
+            },
+          }
+        : running;
+    };
+    const scope = new DesktopServiceScope(f.runner);
+    const resources: { id: string; disposal: string }[] = [];
+    scope.setResourceObserver((resource) => resources.push(resource));
+    await new DesktopStorybookCli(f.config, { ...f.options, services: scope }).smoke('macos', { mode: 'stories' });
+    await expect(scope.close()).rejects.toThrow('Owned desktop services did not shut down cleanly');
+    expect(resources.filter(({ id }) => id.endsWith(':storybook-stories')).at(-1)).toMatchObject({ disposal: 'failed' });
+    expect(f.events).toContain('lease-withdrawn');
   });
 
   test('refuses occupied Windows Metro before any build, registration, service, or native-helper effect', async () => {

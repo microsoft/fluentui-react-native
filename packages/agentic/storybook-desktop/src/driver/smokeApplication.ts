@@ -39,16 +39,18 @@ export async function prepareSmokeApplicationHost(
       },
     });
     if (!application?.processId || !application.processStartedAt) throw new Error('Native smoke launch has no exact identity.');
-    digest = await updateLease(options.manifestPath, options.handoff, {
-      operation: 'publish',
-      application: {
-        processId: application.processId,
-        processStartedAt: application.processStartedAt,
-        windowTitle: options.windowTitle,
-        ...(options.target.endpoint === 'windows' ? { aumid: application.aumid } : { executablePath: application.executablePath }),
-      },
-    });
-    if (!digest) throw new Error('Native smoke application lease publication returned no receipt.');
+    if (options.target.endpoint !== 'macos') {
+      digest = await updateLease(options.manifestPath, options.handoff, {
+        operation: 'publish',
+        application: {
+          processId: application.processId,
+          processStartedAt: application.processStartedAt,
+          windowTitle: options.windowTitle,
+          ...(options.target.endpoint === 'windows' ? { aumid: application.aumid } : { executablePath: application.executablePath }),
+        },
+      });
+      if (!digest) throw new Error('Native smoke application lease publication returned no receipt.');
+    }
     options.signal.throwIfAborted();
     return new Proxy(owned, {
       get(target, key) {

@@ -18,7 +18,7 @@ Native and Storybook limitations are tracked in `@fluentui-react-native/desktop-
 
 The adapter's driver tools, connection lifetime, grants, relinquish, and bounded workload tool have portable coverage.
 Native qualification through the real descriptor path is partial and per endpoint.
-The new supervisor mode has not yet been qualified on a native endpoint.
+Generic AppKit and Win32 fixtures exercised supervisor-mode management; protected Storybook app workloads remain unqualified.
 
 - **Tools and shared schemas:** Done. Six tools over shared driver schemas. See [Tools and discovery](#tools-and-discovery).
 
@@ -32,7 +32,7 @@ The new supervisor mode has not yet been qualified on a native endpoint.
 
 - **Cross-connection resume:** Unsupported. See [Cross-connection resume](#cross-connection-resume).
 
-- **Workload and test orchestration tools:** Implemented for opted-in generic WDIO and hosted Storybook CSF suites; native qualification remains open. See [Workload and test orchestration tools](#workload-and-test-orchestration-tools). Tracked by [#4450](https://github.com/microsoft/fluentui-react-native/issues/4450).
+- **Workload and test orchestration tools:** Implemented for opted-in generic WDIO and hosted Storybook CSF suites; generic native fixtures passed, but protected Storybook workloads remain unqualified. See [Workload and test orchestration tools](#workload-and-test-orchestration-tools). Tracked by [#4450](https://github.com/microsoft/fluentui-react-native/issues/4450).
 
 - **General MCP-client qualification:** In progress. SDK stdio evidence only. See [MCP client qualification](#mcp-client-qualification). Tracked by [#4441](https://github.com/microsoft/fluentui-react-native/issues/4441).
 
@@ -145,9 +145,11 @@ The new supervisor mode has not yet been qualified on a native endpoint.
 
 - The deprecated `desktop-driver-mcp` executable remains a driver-only forwarding shim.
 
+- A native fixture exercised supervisor discovery, admission, lost-response reconciliation, cancellation, handoff and credential confinement through the MCP SDK; it did not use a React Native renderer.
+
 ### Open work
 
-- [#4450](https://github.com/microsoft/fluentui-react-native/issues/4450): native supervisor-mode and protected Storybook workload qualification.
+- [#4450](https://github.com/microsoft/fluentui-react-native/issues/4450): protected Storybook workload and remaining native supervisor-mode qualification.
 
 ## MCP client qualification
 
@@ -165,7 +167,11 @@ The new supervisor mode has not yet been qualified on a native endpoint.
 Results are per endpoint and tied to the revision that produced them.
 Skipped or not-run checks are not passes.
 Full per-run evidence (commands, counts, run ids, artifact locators, cleanup outcome) lives in the linked pull request or issue.
-The new supervisor mode and forwarding shim are **not run** on macOS Fabric, macOS Paper, Windows Fabric, or Win32 Paper.
+The new supervisor mode and forwarding shim have not qualified app-backed Storybook workloads on macOS Fabric, macOS Paper, Windows Fabric, or Win32 Paper.
+
+- **Generic supervisor-managed fixtures:** AppKit and Win32 fixtures passed the managed scenario at `41c604371`; the SDK used an in-memory MCP transport, and these results do not qualify a React Native renderer. Evidence: [#4510](https://github.com/microsoft/fluentui-react-native/pull/4510).
+
+- **App-less macOS discovery:** real stdio clients verified the supervisor catalog, driver-only mode and forwarding shim at `5991ca42f` and `474941a38`; no application session or Storybook workload ran. Evidence: [#4510](https://github.com/microsoft/fluentui-react-native/pull/4510).
 
 ### macOS Fabric
 

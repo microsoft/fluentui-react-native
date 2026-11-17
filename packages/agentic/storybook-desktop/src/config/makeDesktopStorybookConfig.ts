@@ -306,7 +306,7 @@ export class DesktopStorybookConfig {
       bundle: configured.bundle !== undefined ? configured.bundle : defaultBundlePlan(this, platform),
       run: configured.run !== undefined ? configured.run : defaultNativePlan(platform, 'run', nativeProject),
       build: configured.build !== undefined ? configured.build : defaultNativePlan(platform, 'build', nativeProject),
-      smoke: configured.smoke !== undefined ? configured.smoke : defaultSmokeOptions(this, platform),
+      smoke: configured.smoke !== undefined ? configured.smoke : defaultSmokeOptions(platform, target, configured.run !== undefined),
     });
   }
 
@@ -522,16 +522,15 @@ function defaultNativeApplication(config: DesktopStorybookConfig, platform: Plat
   };
 }
 
-function defaultSmokeOptions(config: DesktopStorybookConfig, platform: Platforms): DesktopSmokeOptions | undefined {
-  if (platform !== 'macos') {
+function defaultSmokeOptions(
+  platform: Platforms,
+  target: ResolvedDesktopTarget | undefined,
+  hasCustomRun: boolean,
+): DesktopSmokeOptions | undefined {
+  if (platform !== 'macos' || hasCustomRun || (target && target.host.kind !== 'react-native-test-app')) {
     return undefined;
   }
-  return {
-    stop: {
-      command: 'osascript',
-      args: [path.join(config.resolvePackage('@fluentui-react-native/storybook-desktop').root, 'config', 'stop-macos-app.applescript')],
-    },
-  };
+  return { native: { kind: 'macos' } };
 }
 
 function normalizeConfig(config: DesktopStorybookConfigOptions, projectRoot: string): DesktopStorybookConfigOptions {

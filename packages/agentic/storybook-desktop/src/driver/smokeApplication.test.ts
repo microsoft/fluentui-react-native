@@ -2,18 +2,18 @@ import type { ApplicationLease, DesktopHost } from '@fluentui-react-native/deskt
 import { prepareSmokeApplicationHost } from './smokeApplication';
 import type { updateWindowsApplicationLease } from './applicationLease';
 
-function fixture(endpoint: 'windows' | 'win32') {
+function fixture(endpoint: 'macos' | 'windows' | 'win32') {
   const events: string[] = [];
   const application: ApplicationLease = {
     id: 'native-lease',
     ownership: 'launched',
     processId: 123,
-    processStartedAt: '2026-11-16T08:00:00.1234567Z',
-    executablePath: 'C:\\Fixture\\Host.exe',
-    interactiveSession: 'windows-session:1',
+    processStartedAt: endpoint === 'macos' ? '2026-11-16T08:00:00.123456Z' : '2026-11-16T08:00:00.1234567Z',
+    executablePath: endpoint === 'macos' ? '/Fixture/Host.app/Contents/MacOS/Host' : 'C:\\Fixture\\Host.exe',
+    ...(endpoint === 'macos' ? {} : { interactiveSession: 'windows-session:1' }),
     ...(endpoint === 'windows' ? { aumid: 'Fixture!App' } : {}),
-    launchKind: endpoint === 'windows' ? 'packaged-activation' : 'direct-child',
-    containment: endpoint === 'windows' ? 'uncontained' : 'job-object',
+    launchKind: endpoint === 'windows' ? 'packaged-activation' : endpoint === 'macos' ? 'launch-services' : 'direct-child',
+    containment: endpoint === 'win32' ? 'job-object' : 'uncontained',
   };
   const native = {
     endpoint,
@@ -37,7 +37,12 @@ function fixture(endpoint: 'windows' | 'win32') {
     },
   );
   const options = {
-    target: { endpoint, id: 'fixture', platformName: 'windows' as const, launchModes: ['attach' as const] },
+    target: {
+      endpoint,
+      id: 'fixture',
+      platformName: endpoint === 'macos' ? ('macos' as const) : ('windows' as const),
+      launchModes: ['attach' as const],
+    },
     manifestPath: 'manifest.json',
     handoff: 'trusted-handoff',
     windowTitle: 'Fixture',
@@ -72,6 +77,19 @@ test.each(['windows', 'win32'] as const)(
     expect(f.options.onResource).toHaveBeenLastCalledWith(expect.objectContaining({ disposal: 'settled' }));
   },
 );
+
+test('retains the macOS application without publishing a competing Windows lease', async () => {
+  const f = fixture('macos');
+  const host = await prepareSmokeApplicationHost(f.host, f.options);
+  const lease = await host.attach({ ...f.options.target, host });
+  await host.closeApplication(lease);
+  expect(f.native.closeApplication).not.toHaveBeenCalled();
+  await host.dispose();
+  expect(f.events).toEqual(['launch', 'close', 'dispose']);
+  expect(f.native.closeApplication).toHaveBeenCalledWith(f.application, undefined);
+  expect(f.updateLease).not.toHaveBeenCalled();
+  expect(f.options.onResource).toHaveBeenLastCalledWith(expect.objectContaining({ disposal: 'settled' }));
+});
 
 test('preserves the protected lease and reports uncertain native cleanup', async () => {
   const f = fixture('windows');

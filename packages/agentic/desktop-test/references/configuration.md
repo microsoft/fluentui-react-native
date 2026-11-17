@@ -21,6 +21,9 @@ an executable path, AUMID, exact native process identity, or verified owner leas
 identity. External ownership permits attach only and preserves the app.
 macOS React Native Test App targets default to Fabric and resolve to a
 renderer-specific identity; switching to Paper resolves a distinct identity.
+`resolveDesktopApplication` can verify an instance-specific built RN Test App
+with its `macosBundleIdentifier` option; the built product and renderer must
+match, and a conflicting configured bundle identifier is refused.
 
 `ownership: 'session'` (the default) keeps session-owned launch semantics.
 `ownership: 'supervisor'` opts into one supervisor-owned launch; successive

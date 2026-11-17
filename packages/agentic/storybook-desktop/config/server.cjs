@@ -199,8 +199,7 @@ async function startDesktopStorybookServer({
         });
       } else {
         const smokeApplication = process.env.STORYBOOK_SMOKE_APPLICATION ? JSON.parse(process.env.STORYBOOK_SMOKE_APPLICATION) : undefined;
-        if (smokeApplication && (agent || driverManifest.endpoint === 'macos'))
-          throw new Error('Owned native smoke applications require a non-agent Windows endpoint.');
+        if (smokeApplication && agent) throw new Error('Owned native smoke applications require a non-agent endpoint.');
         driver = await startNativeDesktopService({
           signal: controller.signal,
           // Windows agents verify the app's AUMID or executable; nothing maintains a lease there.

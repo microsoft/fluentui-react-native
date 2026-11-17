@@ -9,6 +9,8 @@ import type { DesktopCommand, DesktopStage, ResolvedDesktopTarget } from './conf
 export type ResolveDesktopApplicationOptions = {
   /** Built Windows package configuration, when resolving an RN Test App launch. */
   configuration?: 'Debug' | 'Release';
+  /** Expected bundle identifier of a generated macOS RN Test App build variant. */
+  macosBundleIdentifier?: string;
   /**
    * Resolves only the identity an attach session verifies. REX then needs neither a bundle nor launch arguments, so a
    * service can start before the app it will attach to is bundled.
@@ -22,6 +24,15 @@ export async function resolveDesktopApplication(
   options: ResolveDesktopApplicationOptions = {},
 ): Promise<NativeDesktopApplicationDescriptor> {
   const configured = target.host.application ?? {};
+  if (
+    options.macosBundleIdentifier !== undefined &&
+    (target.endpoint !== 'macos' ||
+      target.host.kind !== 'react-native-test-app' ||
+      !/^[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)+$/.test(options.macosBundleIdentifier) ||
+      (configured.bundleIdentifier !== undefined && configured.bundleIdentifier !== options.macosBundleIdentifier))
+  ) {
+    throw new TypeError('The macOS build variant requires a valid, matching RN Test App bundle identifier.');
+  }
   let application: NativeDesktopApplicationDescriptor;
   if (target.host.kind === 'installed') {
     application = { ...configured };
@@ -63,11 +74,15 @@ export async function resolveDesktopApplication(
     const windowTitle = component?.displayName ?? app.displayName ?? app.name;
     if (!windowTitle) throw new Error('RN Test App manifest does not define its display identity.');
     if (target.endpoint === 'macos') {
-      const bundleIdentifier = app.macos?.bundleIdentifier ?? 'com.microsoft.ReactTestApp';
+      const bundleIdentifier = options.macosBundleIdentifier ?? app.macos?.bundleIdentifier ?? 'com.microsoft.ReactTestApp';
       application =
         configured.bundleIdentifier || configured.executablePath || configured.leasePath || configured.processIdentity
           ? { bundleIdentifier, windowTitle, ...configured }
-          : { executablePath: await resolveBuiltMacosApplication(target, app, bundleIdentifier, signal), windowTitle, ...configured };
+          : {
+              ...configured,
+              executablePath: await resolveBuiltMacosApplication(target, app, bundleIdentifier, signal),
+              windowTitle: configured.windowTitle ?? windowTitle,
+            };
     } else {
       const propertiesPath = path.join(target.projectRoot, 'windows', 'ExperimentalFeatures.props');
       const properties = fs.readFileSync(propertiesPath, 'utf8');

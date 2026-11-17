@@ -119,9 +119,9 @@ transport diagnostics or journals.
 
 Without an agent manifest the upstream channel is **legacy unprotected mode**,
 including its HTTP mutation handlers, WebSocket relay and MCP endpoint. It is
-not an authority boundary. Channel-only `smoke --mode stories` retains this
-legacy path on macOS. Windows/Win32 native smoke always uses manifest-backed
-traversal, including `stories` mode. Manifest-backed traversal opens one driver
+not an authority boundary. Default macOS, Windows and Win32 native smoke uses
+manifest-backed traversal, including `stories` mode; a custom channel-only
+smoke remains legacy. Manifest-backed traversal opens one driver
 session, selects each story through it, and deletes that session before authored
 tests acquire their own. It never falls back to upstream selection after a
 driver failure. Only pre-dispatch `bridge-unavailable` can be retried;
@@ -137,8 +137,8 @@ so this wait keeps retrying. A reloaded runtime whose new socket authenticates
 before the old socket closes retires the old bridge in the same way. Authored-test
 navigation itself does not wait for the bridge.
 
-Windows/Win32 factories contribute native smoke settings rather than shell
-coordinators. The borrowed neutral scope registers Metro and phase-scoped
+Native smoke contributes settings rather than shell coordinators. The borrowed
+neutral scope registers Metro and phase-scoped
 channel resources before acquisition and drains them in reverse order. Each
 channel uses desktop-test's supervisor-lifetime application wrapper with the
 same native helper used by attached sessions: independent launch/attach
@@ -148,6 +148,11 @@ the retained native lease before withdrawing its digest-receipted private
 record, and refuses changed records. Windows restarts the owned channel/app
 generation between phases, without restarting Metro. A failed phase disposal
 prevents relaunch and authored tests and leaves the parent claim fenced.
+macOS validates the built product's instance bundle identifier and renderer,
+retains the exact application in the channel, and attempts its cleanup before
+withdrawing the separate read-only attach lease. A failed cleanup fences the
+claim; the read-only lease is not proof of settlement. Its native launch is
+uncontained; other same-bundle processes are never termination targets.
 Application resource diagnostics live in the inherited report; the parent
 claim records the enclosing channel resource, not a separately recoverable
 application. Bounded automatic native application reconciliation therefore

@@ -102,11 +102,17 @@ describe('DesktopStorybookConfig', () => {
     });
     expect(config.getCommandPlan('build', 'win32')).toBe(false);
     expect(config.getSmokeOptions('macos')).toEqual({
-      stop: {
-        command: 'osascript',
-        args: [path.resolve(storybookRoot, '../../packages/agentic/storybook-desktop/config/stop-macos-app.applescript')],
-      },
+      native: { kind: 'macos' },
     });
+  });
+
+  test('requires an explicit smoke lifecycle when the macOS run command is customized', () => {
+    const config = makeDesktopStorybookConfig({
+      projectRoot: storybookRoot,
+      platformOptions: { macos: { run: { command: 'custom-run' } } },
+    });
+
+    expect(config.getSmokeOptions('macos')).toBeUndefined();
   });
 
   test('preserves explicit platform command overrides', () => {

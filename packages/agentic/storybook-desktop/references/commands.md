@@ -61,14 +61,19 @@ match no tests fail. Use `STORYBOOK_SMOKE_STORY` and `STORYBOOK_SMOKE_TAG`
 for focused smoke cases.
 
 `test` runs callbacks against an already running app and driver; `smoke` owns
-the complete app lifecycle. The generic smoke path needs a platform stop
-command, except macOS, whose bundle-ID stop is supplied. Prefer the shared
+the complete app lifecycle. Default macOS RN Test App smoke builds the
+instance-specific product and retains its exact native application lease in the
+channel; it never stops other processes with the same bundle identifier. A
+custom macOS run command or non-RN Test App target must explicitly configure
+its own smoke lifecycle and safe stop command. Prefer the shared
 `createWindowsSmokeOptions`, `createWin32SmokeOptions`, and
 `createWin32RunCommand` factories instead of copying app lifecycle scripts.
 The smoke factories return typed native plans, not coordinator commands.
 The neutral scope owns Metro and each channel/app generation; the channel uses
 desktop-test's retained native application owner so sessions borrow the same
-helper's exact lease. The Windows Fabric smoke drains its first generation
+helper's exact lease. On macOS, cleanup attempts the app and channel before
+withdrawing the separately maintained read-only attach lease; an unsettled
+channel keeps the workload claim fenced. The Windows Fabric smoke drains its first generation
 after traversal, then starts a new channel/app generation before authored
 tests against the warm Metro bundle. It selects the first manifest story and
 waits for authenticated native readiness before callbacks.
@@ -81,8 +86,8 @@ Windows smokes. Metro and channel readiness require proof that an owned child
 bound the expected listener and received the HTTP readiness probe; a foreign
 listener is never adopted.
 
-Both native smoke modes use a trusted driver manifest and authenticated driver
-traversal. Windows refuses an occupied fixed Metro port before any build,
+All native smoke modes, including macOS render-only smoke, use a trusted driver
+manifest and authenticated driver traversal. Windows refuses an occupied fixed Metro port before any build,
 registration, or launch. PowerShell performs only Windows framework/package
 registration; it neither starts services nor owns smoke cleanup. Win32 uses
 the native REX launch descriptor with crash-on-redbox, verifies required IDs in

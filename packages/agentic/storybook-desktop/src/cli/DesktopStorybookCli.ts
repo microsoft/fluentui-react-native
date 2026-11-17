@@ -788,7 +788,30 @@ export class DesktopStorybookCli {
     const native = smoke.native!;
     const failures: unknown[] = [];
     try {
+      const target = this.workloadTarget(platform);
+      const macApplication: NativeDesktopApplicationDescriptor | undefined =
+        native.kind === 'macos' ? this.requireNativeDriverOptions(platform).application : undefined;
+      if (
+        native.kind === 'macos' &&
+        (target.host.kind !== 'react-native-test-app' ||
+          !macApplication?.windowTitle ||
+          macApplication.processIdentity ||
+          macApplication.leasePath ||
+          macApplication.leaseNonce)
+      ) {
+        throw new Error('Native macOS smoke requires a launchable RN Test App target with an exact window title.');
+      }
+      if (
+        native.kind === 'macos' &&
+        macApplication?.bundleIdentifier &&
+        macApplication.bundleIdentifier !== this.config.macosBundleIdentifier &&
+        macApplication.bundleIdentifier !== instance.bundleIdentifier
+      ) {
+        throw new Error('The configured macOS bundle identifier conflicts with the instance-specific built product.');
+      }
+      const windowTitle = native.kind === 'macos' ? macApplication!.windowTitle! : native.windowTitle;
       await this.executeAction('bundle', platform, instance);
+      if (native.kind === 'macos') await this.executeAction('build', platform, instance);
       if (native.kind === 'windows') {
         await this.executeAction('prep', platform, instance);
         const build = this.config.getCommandPlan('build', platform);
@@ -818,7 +841,6 @@ export class DesktopStorybookCli {
           instance,
         );
       }
-      const target = this.workloadTarget(platform);
       const resolvedApplication = await this.services.guard(
         this.resolveDesktopApplication(
           {
@@ -826,12 +848,19 @@ export class DesktopStorybookCli {
             host: {
               ...target.host,
               ...(native.kind === 'win32' ? { kind: 'rex', component: native.component } : {}),
-              windowTitle: native.windowTitle,
-              application: { ...target.host.application, windowTitle: native.windowTitle },
+              windowTitle,
+              application:
+                native.kind === 'macos'
+                  ? { ...macApplication, bundleIdentifier: undefined, executablePath: undefined, windowTitle }
+                  : { ...target.host.application, windowTitle },
             },
           },
           this.services.controller.signal,
-          native.kind === 'windows' ? { configuration: native.configuration ?? 'Debug' } : {},
+          native.kind === 'windows'
+            ? { configuration: native.configuration ?? 'Debug' }
+            : native.kind === 'macos'
+              ? { macosBundleIdentifier: instance.bundleIdentifier }
+              : {},
         ),
       );
       const application =
@@ -840,7 +869,20 @@ export class DesktopStorybookCli {
               ...resolvedApplication,
               arguments: [...(resolvedApplication.arguments ?? []), 'crashOnRedBox', 'debugBundlePath', 'index'],
             }
-          : resolvedApplication;
+          : native.kind === 'macos'
+            ? { ...resolvedApplication, bundleIdentifier: instance.bundleIdentifier }
+            : resolvedApplication;
+      if (native.kind === 'macos' && (!application.executablePath || !path.isAbsolute(application.executablePath))) {
+        throw new Error('Native macOS smoke requires the exact built application executable.');
+      }
+      if (native.kind === 'macos' && macApplication?.executablePath) {
+        const configured = fs.realpathSync.native(macApplication.executablePath);
+        const executable = fs.realpathSync.native(application.executablePath!);
+        const bundle = path.dirname(path.dirname(path.dirname(executable)));
+        if (configured !== executable && configured !== bundle) {
+          throw new Error('The configured macOS application does not match the verified built product.');
+        }
+      }
       const configuredServer = this.config.getPlatformOptions(platform).server;
       const server = smoke.server ?? configuredServer;
       if (!server) throw new Error('Native smoke requires its owned Storybook channel.');
@@ -851,7 +893,11 @@ export class DesktopStorybookCli {
         for (const id of native.requiredStoryIds ?? [])
           if (!index.entries.some((entry) => entry.id === id)) throw new Error(`The Win32 catalog is missing required story "${id}".`);
       }
-      if (native.kind === 'windows' && smoke.metro !== false) {
+      if (native.kind === 'macos') {
+        if (!instance.driverManifestPath) throw new Error('Native macOS smoke requires its Desktop Driver manifest.');
+        await this.startMacOSApplicationLease(instance.driverManifestPath);
+      }
+      if (native.kind !== 'win32' && smoke.metro !== false) {
         const metro = this.services.start('metro', {
           ...this.prepareCommand(smoke.metro ?? defaultMetroCommand(instance), platform, instance),
           listener: { service: 'metro-listener', port: instance.metroPort },
@@ -950,6 +996,13 @@ export class DesktopStorybookCli {
         if (failure !== undefined) throw failure;
       };
       const stopStories = await startPhase('stories');
+      if (native.kind === 'macos') {
+        await this.waitForMacOSApplicationLease(instance.driverManifestPath!, {
+          timeoutMs: smoke.startupTimeoutMs ?? 120_000,
+          signal: this.services.controller.signal,
+          createStorage: this.createPrivateStorage,
+        });
+      }
       await traverse(async (traversal) => {
         if (native.kind === 'win32') {
           await this.operation('Verify Win32 native chrome', () =>

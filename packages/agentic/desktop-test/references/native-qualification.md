@@ -241,8 +241,10 @@ yarn storybook prep --macos --paper
 yarn storybook smoke --macos --paper --mode stories-and-tests
 ```
 
-`smoke` traverses the declared stories and, in `stories-and-tests` mode, runs
-the selected static and authored callbacks. It does not expose a `--test`
+`smoke` builds and launches the exact instance-specific app through the native
+owner, traverses the declared stories and, in `stories-and-tests` mode, runs
+the selected static and authored callbacks. The app is uncontained; only its
+verified primary process is owned. It does not expose a `--test`
 filter. `STORYBOOK_SMOKE_STORY` and `STORYBOOK_SMOKE_TAG` can request focused
 coverage, but always read the terminal `run.json` counts and work selection:
 the provisional run recorded below supplied a story environment selector yet
@@ -280,7 +282,8 @@ supervisor path at a time; do not start `storybook driver --agent` and
    `yarn storybook run --macos --paper` for Paper. Use the same renderer
    selection as the driver. Keep the driver service running. Confirm the app
    connects to the instance from the driver's readiness record before opening
-   an MCP session.
+   an MCP session. Launch Services may reuse an existing app: a bundle
+   identifier alone does not establish ownership or authorize termination.
 3. Connect `desktop-driver-mcp` using its default
    `agent-connection.json` descriptor. Confirm the adapter verified the native
    service identity before any grant is used. Use a real MCP client and the

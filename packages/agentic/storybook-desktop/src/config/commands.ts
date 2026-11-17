@@ -77,7 +77,7 @@ export type DesktopNativeDriverOptions = {
 
 export type DesktopSmokeOptions = {
   /** Native smoke application retained by desktop-test's application owner in the supervised channel. */
-  native?: ({ kind: 'windows' } & WindowsSmokeCommandOptions) | ({ kind: 'win32' } & Win32SmokeCommandOptions);
+  native?: { kind: 'macos' } | ({ kind: 'windows' } & WindowsSmokeCommandOptions) | ({ kind: 'win32' } & Win32SmokeCommandOptions);
   /**
    * A complete app-owned smoke command. When set, the reusable server, Metro, traversal, and cleanup lifecycle is skipped.
    */

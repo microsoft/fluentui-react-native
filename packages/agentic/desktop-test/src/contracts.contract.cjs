@@ -215,6 +215,16 @@ async function main() {
         host: { kind: 'react-native-test-app', renderer, application },
       });
       const leasePath = path.join(root, 'lease.json');
+      await assert.rejects(
+        resolveDesktopApplication(target('paper', { bundleIdentifier: 'com.example.Other' }), undefined, {
+          macosBundleIdentifier: 'com.example.Expected',
+        }),
+        /valid, matching RN Test App bundle identifier/,
+      );
+      await assert.rejects(
+        resolveDesktopApplication(target('paper'), undefined, { macosBundleIdentifier: '../invalid' }),
+        /valid, matching RN Test App bundle identifier/,
+      );
       assert.deepEqual(
         { ...(await resolveDesktopApplication(target('paper', { leasePath }))) },
         { bundleIdentifier: 'com.microsoft.ReactTestApp', windowTitle: 'Fixture Window', leasePath },
@@ -259,6 +269,19 @@ async function main() {
         await assert.rejects(resolveDesktopApplication(target('paper')), /does not declare RCTNewArchEnabled/);
         writeInfo({ identifier: 'com.example.Other' });
         await assert.rejects(resolveDesktopApplication(target('paper')), /expected bundle identifier com\.microsoft\.ReactTestApp/);
+        assert.equal(
+          (
+            await resolveDesktopApplication(target('paper', { executablePath: undefined }), undefined, {
+              macosBundleIdentifier: 'com.example.Other',
+            })
+          ).executablePath,
+          path.join(contents, 'MacOS', 'ReactTestApp'),
+          'a generated bundle variant still resolves the exact built product',
+        );
+        await assert.rejects(
+          resolveDesktopApplication(target('paper'), undefined, { macosBundleIdentifier: 'com.example.Expected' }),
+          /expected bundle identifier com\.example\.Expected/,
+        );
         writeInfo();
         fs.rmSync(embedded);
         await assert.rejects(resolveDesktopApplication(target('paper')), /does not embed index\.macos\.jsbundle.*bundle, then prep/);
