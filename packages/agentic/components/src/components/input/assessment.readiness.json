@@ -1,0 +1,217 @@
+{
+  "schemaVersion": 1,
+  "reviewedDigest": "f028ed949916961c55d81b08262f49b57d7e3dd79b63dd2182919b5e864ee9e6",
+  "reviewKind": "agent-reviewed",
+  "reviewInputs": ["packages/agentic/components/src/common/renderWithTheme.tsx"],
+  "requirements": {
+    "INP-001": {
+      "checks": [
+        {
+          "id": "input-defaults",
+          "description": "Default outline/medium/enabled/writable/no error/empty uncontrolled value; two variants and three sizes; supported View props remain on structural root.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "input-lifted-props",
+          "description": "Editor slot name/hint/testID override lifted root values; root accessibility state merges over slot then owned disabled/readOnly/invalid win; structural root stays inaccessible.",
+          "source": "spec/accessibility.md",
+          "evidence": "unit",
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Input INP-001 INP-005 merges root and editor accessibility state without overriding owned semantics"
+            }
+          ]
+        },
+        {
+          "id": "input-ref-separation",
+          "description": "Internal focus target composes editor ref, not structural root ref, and all clear on unmount.",
+          "source": "spec/interaction.md#focus-target-lifetime",
+          "evidence": "unit",
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Input composes the focus target with the inner text ref without redirecting the structural ref"
+            }
+          ]
+        },
+        {
+          "id": "input-public-types",
+          "description": "Native root props/ref, textInput and three icon replacement slots compile without multiline/search/combobox APIs.",
+          "source": "SPEC.md",
+          "evidence": "type",
+          "tests": []
+        }
+      ]
+    },
+    "INP-002": {
+      "checks": [
+        {
+          "id": "input-uncontrolled",
+          "description": "defaultValue seeds once, edits including empty persist through changed defaultValue and notify once.",
+          "source": "spec/interaction.md#value",
+          "evidence": "unit",
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Input INP-002 retains internally owned edits across defaultValue changes and reports each edit once"
+            }
+          ]
+        },
+        {
+          "id": "input-controlled",
+          "description": "Controlled empty string overrides default; edit only proposes value, owner rerender changes display without callback.",
+          "source": "spec/interaction.md#value",
+          "evidence": "unit",
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Input INP-002 leaves controlled text unchanged until the owner writes back, including an empty string"
+            }
+          ]
+        },
+        {
+          "id": "input-blocked-edits",
+          "description": "Disabled and readOnly each refuse internal edits while preserving current value; native editing/IME/clipboard obey platform TextInput.",
+          "source": "SPEC.md",
+          "evidence": "native",
+          "tests": []
+        }
+      ]
+    },
+    "INP-003": {
+      "checks": [
+        {
+          "id": "input-state-precedence",
+          "description": "Pairwise overlapping disabled/error/readOnly/focused/pressed/hovered/rest resolves exactly one boundary state; disable clears tracked focus/hover/press and reenable does not resurrect stale state.",
+          "source": "spec/interaction.md#state-model",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "input-handler-composition",
+          "description": "Root and slot focus/blur/hover/press handlers all run alongside tracking; hover area remains editor rather than spacing/icons.",
+          "source": "spec/interaction.md#pointer",
+          "evidence": "unit",
+          "tests": []
+        }
+      ]
+    },
+    "INP-004": {
+      "checks": [
+        {
+          "id": "input-anatomy",
+          "description": "Root/contents/icon-text stack order places iconStart before editor, trailing group after; neither/first/both icons render, end2 alone is omitted and warns; underline exists only for underline variant.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "input-slot-replacements",
+          "description": "Custom editor and icon components retain props/ref and component sizing without introducing interactive icon actions.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        }
+      ]
+    },
+    "INP-005": {
+      "checks": [
+        {
+          "id": "input-a11y",
+          "description": "Editor is accessible textbox with disabled/readOnly/invalid owned values; readOnly is editable=false but not disabled and remains focusable; all wrappers/icons are inaccessible.",
+          "source": "spec/accessibility.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "input-native-editing",
+          "description": "Native caret movement, selection, IME, clipboard and Tab pass through with no custom key interception; disabled skips Tab and readOnly remains readable/copyable.",
+          "source": "spec/interaction.md#keyboard",
+          "evidence": "native",
+          "tests": [],
+          "qualification": "keyboard"
+        },
+        {
+          "id": "input-screen-reader",
+          "description": "UIA/AX announces editor name/value, disabled/readOnly/invalid and referenced error reason once; placeholder is not treated as a stable name.",
+          "source": "spec/accessibility.md",
+          "evidence": "manual",
+          "tests": [],
+          "qualification": "screen-reader"
+        }
+      ]
+    },
+    "INP-006": {
+      "checks": [
+        {
+          "id": "input-token-matrix",
+          "description": "All variant/size/state combinations match radius, minHeight from lineHeight plus external margins, zero editor padding/intrinsic linebox, gaps, padding, 16/20/24 icons and state-specific stroke/text/placeholder tokens.",
+          "source": "spec/tokens.yaml",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "input-style-last",
+          "description": "Caller root style follows token styles, no native editor lineHeight is forced and underline owns exactly one base thin stroke.",
+          "source": "spec/tokens.yaml",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "input-native-target",
+          "description": "External spacing/icon-area click requests pointer focus on eligible actual editor without stretching its intrinsic Text; disabled ignores, readOnly accepts and slot focusable override applies.",
+          "source": "spec/interaction.md#pointer",
+          "evidence": "native",
+          "tests": []
+        },
+        {
+          "id": "input-scaled-geometry",
+          "description": "Review caret/glyph alignment, icon centering, scaling and constrained field dimensions on all renderers.",
+          "source": "SPEC.md#platform-behavior",
+          "evidence": "visual",
+          "tests": []
+        }
+      ]
+    },
+    "INP-007": {
+      "checks": [
+        {
+          "id": "input-focus-variant",
+          "description": "Keyboard-visible outline uses persistent dual ring with softened base boundary; underline adds one focus-color inset above existing edge; no competing native editor ring.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "input-focus-precedence",
+          "description": "Error/readOnly boundary stays authoritative beneath additive indicator; disabled suppresses both; pointer modality hides indicator without moving focus or resizing field.",
+          "source": "spec/interaction.md#keyboard",
+          "evidence": "native",
+          "tests": []
+        },
+        {
+          "id": "input-focus-lifetime",
+          "description": "Native-confirmed self-focus respects slot/root eligibility, invalidates pending requests on detach/disable and follows nearest scene modality without local tracker.",
+          "source": "spec/interaction.md#focus-target-lifetime",
+          "evidence": "native",
+          "tests": []
+        },
+        {
+          "id": "input-focus-visual-qualification",
+          "description": "Review ring exclusivity, clipping and contrast for both variants across normal/high-contrast themes and text/display scaling on all desktop targets.",
+          "source": "SPEC.md",
+          "evidence": "visual",
+          "tests": []
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "Contract explicitly says high-contrast, scaling and theme visual qualification is not recorded.",
+    "Win32 native editor can report UIA IsEnabled=true despite editable=false and focusable=false; do not infer native enabled projection from unit disabled props.",
+    "Synthetic edits/ref objects do not prove native editing, focus confirmation, IME or pointer target geometry."
+  ]
+}

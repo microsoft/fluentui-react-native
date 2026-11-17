@@ -48,6 +48,10 @@ macOS defaults to Fabric. `--paper` selects Paper for a macOS command; rerun
 `prep` after switching because the project and Pods are shared. The endpoint
 and target remain `macos`. `--paper` is invalid for Windows and Win32.
 
+The canonical `run.json` retains the resolved endpoint and renderer in `context`,
+using the same renderer selection as the Storybook driver. An older report
+without that context does not establish renderer qualification.
+
 `prep` ensures the native helper before native dependency/project generation.
 `bundle` extracts the selected catalog and routes to the RN bundler.
 `build` compiles without launch; `run` builds and launches. `build-driver`

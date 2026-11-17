@@ -1,0 +1,244 @@
+{
+  "schemaVersion": 1,
+  "reviewedDigest": "14de809bcf1fa0537d93d02aeaa2d46f69041ac9fb6d37566b1e47dd03763647",
+  "reviewKind": "agent-reviewed",
+  "reviewInputs": ["packages/agentic/components/src/common/renderWithTheme.tsx"],
+  "requirements": {
+    "MNB-001": {
+      "checks": [
+        {
+          "id": "menu-button-public-props",
+          "description": "Compiled types accept the forwarded Button props and native ref, require children and reject selected/shape/iconPosition/selectedIcon.",
+          "source": "SPEC.md",
+          "evidence": "type",
+          "tests": []
+        },
+        {
+          "id": "menu-button-default-values",
+          "description": "Omitted appearance, size and disabled resolve to secondary, medium and false.",
+          "source": "SPEC.md#props-and-defaults",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "menu-button-root-forwarding",
+          "description": "Forwarded root props and ref reach the one actual trigger Pressable and caller style is final.",
+          "source": "SPEC.md#public-contract",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "menu-button-missing-content-warning",
+          "description": "Neither label nor icon warns and section-header composition warns.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "MenuButton warns for a missing label and icon and for section-header rows"
+            }
+          ]
+        },
+        {
+          "id": "menu-button-icon-name",
+          "description": "Icon-only requires action-category accessible name; plain content fallback and explicit naming precedence remain Button-compatible.",
+          "source": "spec/accessibility.md",
+          "evidence": "unit",
+          "tests": []
+        }
+      ]
+    },
+    "MNB-002": {
+      "checks": [
+        {
+          "id": "menu-button-metrics",
+          "description": "All four appearances/three sizes and label-only/icon-only/both/empty combinations use rounded content-layout radius/padding/gap; leading icon then label then private down chevron at 16/20/20 in trigger foreground.",
+          "source": "spec/tokens.yaml",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "menu-button-expanded-chrome",
+          "description": "Presented menu changes root background from rest while expanded state is true.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "MenuButton draws the pressed chrome while the menu is presented"
+            }
+          ]
+        },
+        {
+          "id": "menu-button-static-chevron",
+          "description": "Open never rotates/hides chevron; disabled wins expanded/pressed/hover colors and exact pressed foreground/background apply while presented.",
+          "source": "spec/tokens.yaml",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "menu-button-native-visual",
+          "description": "Review Button-matched metrics, chevron alignment and focus rings for all appearance/size/state combinations on desktop targets.",
+          "source": "spec/tokens.yaml",
+          "evidence": "visual",
+          "tests": []
+        }
+      ]
+    },
+    "MNB-003": {
+      "checks": [
+        {
+          "id": "menu-button-presence",
+          "description": "Controlled/uncontrolled Menu latch, trigger-open close without reopen, action/dismiss reasons and caller changes without callbacks; disabled never opens and disabling closes family.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "menu-button-disabled",
+          "description": "Disabled defaultOpen and opening Down key do not present menu or notify.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "MenuButton never opens while disabled"
+            }
+          ]
+        },
+        {
+          "id": "menu-button-family",
+          "description": "Below/start menu placement, native flip/clamp, inherited disabled focus defaults, wrapping navigation/typeahead, two submenu levels, hover delays and leaf-action dismissal match Menu.",
+          "source": "SPEC.md",
+          "evidence": "native",
+          "tests": []
+        },
+        {
+          "id": "menu-button-nesting-warning",
+          "description": "Nested MenuButton inside Menu warns without silently introducing another root popup family.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        }
+      ]
+    },
+    "MNB-004": {
+      "checks": [
+        {
+          "id": "menu-button-entry",
+          "description": "Physical Enter/Space/Down open to first, Up to last, pointer opens surface without highlighted row; readiness and native outcomes confirm focus.",
+          "source": "spec/interaction.md#closed",
+          "evidence": "native",
+          "tests": []
+        },
+        {
+          "id": "menu-button-opening-key-repeat",
+          "description": "Opening Enter/Space key is not repeated into newly opened menu and never invokes first action accidentally.",
+          "source": "SPEC.md",
+          "evidence": "native",
+          "tests": [],
+          "qualification": "keyboard"
+        }
+      ]
+    },
+    "MNB-005": {
+      "checks": [
+        {
+          "id": "menu-button-return",
+          "description": "Activation/root Escape/Shift+Tab return live eligible trigger; outside pointer respects another focused control; second trigger pointer closes old family and opens new.",
+          "source": "spec/interaction.md#open",
+          "evidence": "native",
+          "tests": []
+        },
+        {
+          "id": "menu-button-tab-continuation",
+          "description": "Tab from any popup closes family and focuses next owner-window view; Win32 approved R1 returns trigger instead.",
+          "source": "SPEC.md#platform-behavior",
+          "evidence": "native",
+          "tests": [],
+          "qualification": "keyboard"
+        }
+      ]
+    },
+    "MNB-006": {
+      "checks": [
+        {
+          "id": "menu-button-base-semantics",
+          "description": "Closed actual root is button with menu hint, collapsed state, no checked state, root ref and no menu surface.",
+          "source": "spec/accessibility.md",
+          "evidence": "unit",
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "MenuButton renders one button Pressable with the menu hint, expanded state, and a decorative chevron"
+            }
+          ]
+        },
+        {
+          "id": "menu-button-name-precedence",
+          "description": "String/numeric content and plain content children supply native name; explicit native/ARIA labels/references suppress fallback including empty label; rich content needs explicit naming; updates track caller content.",
+          "source": "spec/accessibility.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "menu-button-actual-state",
+          "description": "Actual not requested presence drives expanded, caller hint overrides default, selected/checked never appears and chevron remains decorative.",
+          "source": "spec/accessibility.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "menu-button-expand-collapse",
+          "applicability": {
+            "macos-fabric": {
+              "status": "not-applicable",
+              "source": "spec/accessibility.md#qualification",
+              "reason": "The contract assigns ExpandCollapse projection to Windows; macOS trigger semantics are qualified separately."
+            },
+            "macos-paper": {
+              "status": "not-applicable",
+              "source": "spec/accessibility.md#qualification",
+              "reason": "The contract assigns ExpandCollapse projection to Windows; macOS trigger semantics are qualified separately."
+            }
+          },
+          "description": "Actual Windows ExpandCollapse route projects expanded and operates opening/closing independently from pointer dispatch.",
+          "source": "spec/accessibility.md#qualification",
+          "evidence": "native",
+          "tests": []
+        },
+        {
+          "id": "menu-button-screen-reader",
+          "description": "Narrator/VoiceOver qualifies trigger name/role/expanded, menu name, entry/return and Tab continuation on each renderer.",
+          "source": "spec/accessibility.md#qualification",
+          "evidence": "manual",
+          "tests": [],
+          "qualification": "screen-reader"
+        }
+      ]
+    },
+    "MNB-007": {
+      "checks": [
+        {
+          "id": "menu-button-hosts",
+          "description": "Use modern Callout/FocusZone on macOS Paper/Fabric and Windows Fabric, Win32 adapters on Office; unsupported hosts throw.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "menu-button-release-endpoints",
+          "description": "Qualify real menu behavior and native continuation on all four endpoints before public export, recording Win32 R1 distinctly.",
+          "source": "SPEC.md",
+          "evidence": "native",
+          "tests": []
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "The linked base-semantics test does not assert decorative chevron despite its name; chevron semantics remain in a separate unlinked check.",
+    "Existing mocked requestFocus assertions are not linked as native entry or Tab-continuation proof.",
+    "Win32 Tab continuation is explicitly R1 return-to-trigger; native and screen-reader records remain unlinked."
+  ]
+}

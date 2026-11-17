@@ -17,6 +17,7 @@ Read the [user guide](README.md), then select the narrowest topic in the [refere
 | Styles, tokens, theme caching, or state precedence                      | [Styles and tokens](references/styles-and-tokens.md)                                         |
 | Render functions and assembly                                           | [Rendering and assembly](references/rendering.md)                                            |
 | Tests, stories, or native `wdio` story tests                            | [Tests and stories](references/tests-and-stories.md)                                         |
+| Readiness assessment, acceptance mappings, or evidence gaps             | [Component assessment](references/assessments/README.md#skill-led-workflow)                  |
 | Shared helpers, dependencies, or cross-component extraction             | [Source boundaries](references/source-boundaries.md)                                         |
 | Commands, source ownership, or open work                                | [Contributing](references/contributing.md) or [remaining work](references/remaining-work.md) |
 
@@ -26,6 +27,9 @@ skill, and reviews use the `review-component` skill. Focus work starts with the 
 (`focus.common`), then `focus.windows-win32` or `focus.macos`; V1 Win32 is the behavioral baseline for both Windows
 endpoints. Native views, codegen, or registration use the `implement-native-component` skill. Storybook application,
 Metro, bundle, or CocoaPods work follows `apps/storybook/AGENTS.md`.
+
+Readiness assessments use the `assess-agentic-component` skill after implementation validation or on explicit request.
+The skill reviews contract and assertion meaning; shared tools and CI supply evidence rather than replace that review.
 
 ## Invariants
 

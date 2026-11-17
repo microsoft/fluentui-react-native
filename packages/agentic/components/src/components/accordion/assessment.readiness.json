@@ -1,0 +1,191 @@
+{
+  "schemaVersion": 1,
+  "reviewedDigest": "f0aa9b0b62fa0249a60f62260fc43a498abf669b845741f1064bdb1799a12c38",
+  "reviewKind": "agent-reviewed",
+  "reviewInputs": ["packages/agentic/components/src/common/renderWithTheme.tsx"],
+  "requirements": {
+    "ACC-001": {
+      "checks": [
+        {
+          "id": "accordion-defaults",
+          "description": "Default to chevronStart, small, collapsed; defaultExpanded initializes either boolean and subsequent presses toggle with one requested value.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "accordion-controlled",
+          "description": "Controlled true/false override defaultExpanded; repeated presses request the inverse without local mutation and track a new supplied value.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Accordion ACC-001 ignores defaultExpanded while controlled and requests the inverse of each supplied value"
+            }
+          ]
+        },
+        {
+          "id": "accordion-native-activation",
+          "description": "Pointer, touch, Enter and Space request expansion once and preserve consumer handlers on Windows, Win32 and macOS.",
+          "source": "spec/interaction.md",
+          "evidence": "native",
+          "tests": [],
+          "qualification": "keyboard"
+        }
+      ]
+    },
+    "ACC-002": {
+      "checks": [
+        {
+          "id": "accordion-default-slots",
+          "description": "Required root contains header then always-mounted body; title defaults to Section title, leading icon to selected-circle, body to placeholder; null optional slots disappear.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "accordion-order",
+          "description": "chevronStart orders chevron, leading icon, title; chevronEnd orders leading icon, title, chevron.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Accordion places the chevron at the leading or trailing edge according to layout"
+            }
+          ]
+        },
+        {
+          "id": "accordion-custom-slots",
+          "description": "Custom title and body components retain props and supplied children.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Accordion renders custom title and body slots"
+            }
+          ]
+        },
+        {
+          "id": "accordion-types-ref",
+          "description": "Public slot shapes, small-only size, both layouts and ordinary root View ref compile without exposing private focus options as props.",
+          "source": "SPEC.md",
+          "evidence": "type",
+          "tests": []
+        }
+      ]
+    },
+    "ACC-003": {
+      "checks": [
+        {
+          "id": "accordion-state-colors",
+          "description": "Header background and title foreground resolve rest, hover and pressed with pressed winning simultaneous hover.",
+          "source": "spec/tokens.yaml",
+          "evidence": "unit",
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Accordion renders hover and pressed header feedback with the resolved foreground color"
+            }
+          ]
+        },
+        {
+          "id": "accordion-token-geometry",
+          "description": "Small header radius/gap/padding, title/body typography, 16px icons and collapsed height/opacity/overflow/padding match bindings; expansion restores body and rotates chevron 90 degrees in both layouts.",
+          "source": "spec/tokens.yaml",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "accordion-style-last",
+          "description": "Caller root width overrides structural width.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Accordion applies user root styles after the component styles"
+            }
+          ]
+        },
+        {
+          "id": "accordion-focus-policy",
+          "description": "Windows/macOS request system ring; Win32 custom ring stays mounted, is keyboard-modality/focus gated, preserves radius and never intercepts input; overrides and nested themes respect shared policy.",
+          "source": "SPEC.md#focus-visuals",
+          "evidence": "native",
+          "tests": []
+        },
+        {
+          "id": "accordion-visual",
+          "description": "Review both chevron layouts, expansion clipping, token typography and native/custom ring appearance on each renderer.",
+          "source": "SPEC.md",
+          "evidence": "visual",
+          "tests": []
+        }
+      ]
+    },
+    "ACC-004": {
+      "checks": [
+        {
+          "id": "accordion-body-a11y",
+          "description": "Body ID and controls relationship stay stable; collapsed descendants are hidden but mounted and expansion restores access.",
+          "source": "spec/accessibility.md",
+          "evidence": "unit",
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Accordion ACC-004 retains the body identity and hides descendants only while collapsed"
+            }
+          ]
+        },
+        {
+          "id": "accordion-header-name",
+          "description": "Only header is a button; explicit label overrides title, null title warns without label, caller accessibility state merges with expanded; both icons remain decorative.",
+          "source": "spec/accessibility.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "accordion-focus-lifetime",
+          "description": "Header self-focus differs from descendant focus; interactive refs compose without redirecting structural ref; detach invalidates pending requests.",
+          "source": "spec/interaction.md#focus-target-lifetime",
+          "evidence": "native",
+          "tests": []
+        },
+        {
+          "id": "accordion-screen-reader",
+          "description": "UIA/AX announces header name, expanded state, body relationship and expanded content without decorative icons or collapsed descendants.",
+          "source": "spec/accessibility.md",
+          "evidence": "manual",
+          "tests": [],
+          "qualification": "screen-reader"
+        }
+      ]
+    },
+    "ACC-005": {
+      "checks": [
+        {
+          "id": "accordion-independent",
+          "description": "Two instances expand independently unless parent controls grouping; arbitrary body content retains its own focus and layout.",
+          "source": "spec/usage.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "accordion-no-motion-navigation",
+          "description": "Expansion and rotation are immediate with no animation/reduced-motion branch, sibling arrows, roving focus or automatic body focus transfer.",
+          "source": "spec/interaction.md",
+          "evidence": "native",
+          "tests": []
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "Unit presses are synthetic and do not establish native dispatch, keyboard timing, focus or screen-reader conformance.",
+    "Native, visual and assistive-technology observations are deliberately unlinked; no reviewed execution records were available in this review.",
+    "The accepted chevronEnd right-to-down rotation differs from the upstream down-to-up sequence; assess the local contract, not the upstream illustration."
+  ]
+}

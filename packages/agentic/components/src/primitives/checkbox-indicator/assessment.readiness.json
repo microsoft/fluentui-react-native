@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "reviewedDigest": "f64dd51acad137accb310c481d1e8cddc6bb6a913d30a898162194e488fdad54",
+  "reviewKind": "agent-reviewed",
+  "reviewInputs": ["packages/agentic/components/src/common/renderWithTheme.tsx"],
+  "requirements": {
+    "LOCAL-001": {
+      "checks": [
+        {
+          "id": "checkbox-indicator-unstyled",
+          "description": "Indicator is decorative and unstyled, with no theme, product tokens, interaction or checkbox state ownership.",
+          "source": "CONTRACT.md",
+          "evidence": "unit",
+          "tests": []
+        }
+      ]
+    },
+    "LOCAL-002": {
+      "checks": [
+        {
+          "id": "checkbox-indicator-states",
+          "description": "Checked renders check, indeterminate renders dash, unchecked renders neither; root remains inaccessible.",
+          "source": "CONTRACT.md",
+          "evidence": "unit",
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "CheckboxIndicator renders checked and indeterminate glyphs as decorative content"
+            }
+          ]
+        },
+        {
+          "id": "checkbox-indicator-sources",
+          "description": "Checked and indeterminate source overrides are independent and only active source receives iconColor and iconSize.",
+          "source": "CONTRACT.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "checkbox-indicator-ref",
+          "description": "Ordinary native View ref prop receives the root.",
+          "source": "CONTRACT.md",
+          "evidence": "unit",
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "CheckboxIndicator forwards its ref prop to the native root"
+            }
+          ]
+        },
+        {
+          "id": "checkbox-indicator-forwarding",
+          "description": "Unowned native/accessibility/test props forward without allowing consumer overrides to make owned decorative root semantic.",
+          "source": "CONTRACT.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "checkbox-indicator-types",
+          "description": "Compiled SlotProp accepts status/color/size and rejects caller children.",
+          "source": "CONTRACT.md",
+          "evidence": "type",
+          "tests": [
+            {
+              "kind": "type",
+              "name": "packages/agentic/components/src/primitives/checkbox-indicator/checkbox-indicator.types.test.ts"
+            }
+          ]
+        },
+        {
+          "id": "checkbox-indicator-native",
+          "description": "Native owner announces checkbox status once while indicator glyphs remain decorative in every state.",
+          "source": "CONTRACT.md",
+          "evidence": "manual",
+          "tests": [],
+          "qualification": "screen-reader"
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "Source overrides and color/size forwarding lack linked assertion coverage; state smoke does not prove those clauses.",
+    "Type fixture is included by the owning tsconfig, but this mapping is not a compiler or native execution result.",
+    "No native decorative-tree observation is linked."
+  ]
+}

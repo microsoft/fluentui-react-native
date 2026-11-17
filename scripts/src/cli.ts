@@ -8,6 +8,7 @@ import { JestCommand } from './tasks/jest.ts';
 import { CheckPublishingCommand } from './tasks/checkPublishingTask.ts';
 import { CheckAgentInstructionsCommand } from './tasks/checkAgentInstructionsTask.ts';
 import { CheckPackageContentsCommand } from './tasks/checkPackageContentsTask.ts';
+import { AssessControlCommand } from './tasks/assessControlTask.ts';
 
 const cli = new Cli({
   binaryLabel: 'fluentui-scripts CLI',
@@ -22,6 +23,7 @@ cli.register(JestCommand);
 cli.register(CheckPublishingCommand);
 cli.register(CheckAgentInstructionsCommand);
 cli.register(CheckPackageContentsCommand);
+cli.register(AssessControlCommand);
 
 cli.register(Builtins.DefinitionsCommand);
 cli.register(Builtins.HelpCommand);

@@ -4,6 +4,9 @@ import path from 'node:path';
 const config = {
   npmClient: 'yarn',
   pipeline: {
+    'assess-components': {
+      cache: false,
+    },
     // ── Per-package tasks ──────────────────────────────────────────────────
     bundle: {
       inputs: ['**/*', '!node_modules/**/*', '!dist/**/*', '!lib/**/*', '!lib-commonjs/**/*'],

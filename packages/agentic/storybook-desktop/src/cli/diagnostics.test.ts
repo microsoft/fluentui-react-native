@@ -7,6 +7,68 @@ import { formatDesktopStorybookError, writeDesktopStorybookFailure } from '../..
 import { normalizeLegacyTestReporter } from './createDesktopStorybookCommand';
 
 describe('pipeline failure diagnostics', () => {
+  test.each([
+    { platform: 'macos', configuredRenderer: 'fabric', paper: false, renderer: 'fabric' },
+    { platform: 'macos', configuredRenderer: 'fabric', paper: true, renderer: 'paper' },
+    { platform: 'macos', configuredRenderer: 'paper', paper: false, renderer: 'paper' },
+    { platform: 'windows', configuredRenderer: 'fabric', paper: false, renderer: 'fabric' },
+    { platform: 'win32', configuredRenderer: 'fabric', paper: false, renderer: 'paper' },
+  ])(
+    'persists resolved $platform/$renderer context in the canonical CLI report',
+    async ({ platform, configuredRenderer, paper, renderer }) => {
+      const root = fs.mkdtempSync(path.join(os.tmpdir(), 'storybook-cli-target-context-'));
+      const configPath = path.join(root, 'storybook.config.mjs');
+      fs.writeFileSync(
+        configPath,
+        `import path from 'node:path';
+       import fs from 'node:fs';
+       import { fileURLToPath } from 'node:url';
+       const projectRoot = path.dirname(fileURLToPath(import.meta.url));
+       const renderer = fs.readFileSync(path.join(projectRoot, 'renderer.txt'), 'utf8');
+       export default {
+         projectRoot,
+         getStorybookConfig: () => ({}),
+         getPlatformOptions: () => ({}),
+         getStoryPackages: () => [],
+         getDesktopTarget: () => ({ host: { renderer } }),
+         getCommandPlan: () => ({ command: process.execPath, args: ['-e', ''] }),
+         getSmokeOptions: () => false,
+         getNativeDriverOptions: () => undefined,
+         resolvePackage: () => projectRoot,
+       };`,
+      );
+      fs.writeFileSync(path.join(root, 'renderer.txt'), configuredRenderer);
+      try {
+        const response = await new Promise<{ code: number | null; output: string }>((resolve, reject) => {
+          const child = spawn(
+            process.execPath,
+            [
+              path.resolve(__dirname, '../../config/cli.cjs'),
+              '--config',
+              configPath,
+              'bundle',
+              `--${platform}`,
+              ...(paper ? ['--paper'] : []),
+            ],
+            { cwd: root, env: { ...process.env, DESKTOP_REPORT_CONTEXT: '', DESKTOP_REPORTER: 'json' }, stdio: ['ignore', 'pipe', 'pipe'] },
+          );
+          const output: Buffer[] = [];
+          child.stdout.on('data', (chunk: Buffer) => output.push(chunk));
+          child.stderr.on('data', (chunk: Buffer) => output.push(chunk));
+          child.once('error', reject);
+          child.once('close', (code) => resolve({ code, output: Buffer.concat(output).toString('utf8') }));
+        });
+        if (response.code !== 0) throw new Error(response.output);
+        const runs = path.join(root, 'artifacts', 'desktop');
+        const result = JSON.parse(fs.readFileSync(path.join(runs, fs.readdirSync(runs)[0], 'run.json'), 'utf8'));
+        expect(result).toMatchObject({ terminal: true, status: 'passed', context: { endpoint: platform, renderer } });
+      } finally {
+        fs.rmSync(root, { recursive: true, force: true });
+      }
+    },
+    30_000,
+  );
+
   test.each(['spec', 'tap', 'dot'])('normalizes the legacy test reporter alias: %s', (reporter) => {
     expect(normalizeLegacyTestReporter(['node', 'storybook', 'test', '--reporter', reporter])).toEqual({
       argv: ['node', 'storybook', 'test', '--test-reporter', reporter],
