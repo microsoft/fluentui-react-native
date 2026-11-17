@@ -350,7 +350,7 @@ Hosted physical-input and capture skips do not qualify those paths.
 
 - **Manifest provenance (hosted run 43156299266):** accessible 255 selected, executed and passed; evidence in [#4490](https://github.com/microsoft/fluentui-react-native/pull/4490).
 
-- **Latest hosted Storybook smoke:** 250 of 251 selected checks passed at `474941a38`; a Callout placement assertion failed and eight groups were not run. Cause is unproven. Evidence: [#4510](https://github.com/microsoft/fluentui-react-native/pull/4510).
+- **Latest hosted Storybook smoke:** at `0a369ebe5`, 255 of 255 selected checks passed with no groups skipped, after the Callout placement story began repositioning on owner layout changes; at `474941a38` a placement assertion had failed and eight groups were not run. Evidence: [#4510](https://github.com/microsoft/fluentui-react-native/pull/4510).
 
 ### Win32 Paper
 
