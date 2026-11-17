@@ -18,7 +18,7 @@ Native and Storybook limitations are tracked in `@fluentui-react-native/desktop-
 
 The adapter's driver tools, connection lifetime, grants, relinquish, and bounded workload tool have portable coverage.
 Native qualification through the real descriptor path is partial and per endpoint.
-Generic AppKit and Win32 fixtures exercised supervisor-mode management; selected protected Storybook workloads also passed on macOS Fabric and Paper.
+Generic AppKit and Win32 fixtures exercised supervisor-mode management; selected protected Storybook workloads also passed on macOS Fabric, macOS Paper and Win32 Paper.
 
 - **Tools and shared schemas:** Done. Six tools over shared driver schemas. See [Tools and discovery](#tools-and-discovery).
 
@@ -32,7 +32,7 @@ Generic AppKit and Win32 fixtures exercised supervisor-mode management; selected
 
 - **Cross-connection resume:** Unsupported. See [Cross-connection resume](#cross-connection-resume).
 
-- **Workload and test orchestration tools:** Implemented for opted-in generic WDIO and hosted Storybook CSF suites; generic native fixtures and selected macOS Storybook workloads passed, while Windows/Win32 and broader native qualification remain open. See [Workload and test orchestration tools](#workload-and-test-orchestration-tools). Tracked by [#4450](https://github.com/microsoft/fluentui-react-native/issues/4450).
+- **Workload and test orchestration tools:** Implemented for opted-in generic WDIO and hosted Storybook CSF suites; generic native fixtures and selected macOS and Win32 Paper Storybook workloads passed, while Windows Fabric and broader native qualification remain open. See [Workload and test orchestration tools](#workload-and-test-orchestration-tools). Tracked by [#4450](https://github.com/microsoft/fluentui-react-native/issues/4450).
 
 - **General MCP-client qualification:** In progress. SDK stdio evidence only. See [MCP client qualification](#mcp-client-qualification). Tracked by [#4441](https://github.com/microsoft/fluentui-react-native/issues/4441).
 
@@ -167,8 +167,8 @@ Generic AppKit and Win32 fixtures exercised supervisor-mode management; selected
 Results are per endpoint and tied to the revision that produced them.
 Skipped or not-run checks are not passes.
 Full per-run evidence (commands, counts, run ids, artifact locators, cleanup outcome) lives in the linked pull request or issue.
-The new supervisor mode passed selected app-backed Storybook workloads on macOS Fabric and Paper.
-Windows and Win32 workloads and app-backed forwarding-shim qualification remain open.
+The new supervisor mode passed selected app-backed Storybook workloads on macOS Fabric, macOS Paper and Win32 Paper.
+Windows Fabric workloads and app-backed forwarding-shim qualification remain open.
 
 - **Generic supervisor-managed fixtures:** AppKit and Win32 fixtures passed the managed scenario at `41c604371`; the SDK used an in-memory MCP transport, and these results do not qualify a React Native renderer. Evidence: [#4510](https://github.com/microsoft/fluentui-react-native/pull/4510).
 
@@ -199,6 +199,8 @@ Windows and Win32 workloads and app-backed forwarding-shim qualification remain 
 - **Descriptor lifecycle:** same-port replacement, revocation, dispose during open, failed delete, ambiguous create, quarantine and recovery, protected args, cancellation replay and idle-channel lifetime passed with the real descriptor at `1f5333e25` plus the follow-up fixes `8458bde48` and `a6b89e924`. Evidence: [#4463](https://github.com/microsoft/fluentui-react-native/pull/4463).
 
 ### Win32 Paper
+
+- **Retained Storybook handoff and workload:** at `d04c064da`, over a real stdio MCP client and the protected descriptor, status advertised attach-only launch; MCP open, marker-verified selection and observe passed; the attached runner was refused `target-busy` until relinquish, then the accessible Button case passed 1/1; MCP reopened, the catalog listed the accessible `stories` lane, and a managed workload passed 1/1 with cleanup settled. The same REX incarnation was retained throughout and closed only when the supervisor stopped. Direct MCP physical input and lifecycle faults were not run. Evidence: [#4510](https://github.com/microsoft/fluentui-react-native/pull/4510).
 
 - **Physical MCP click:** six physical-pointer checkbox clicks, each state-checked, with 23 calls and zero errors at `505a2187b`. Evidence: [#4498](https://github.com/microsoft/fluentui-react-native/pull/4498).
 
