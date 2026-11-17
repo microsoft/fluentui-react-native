@@ -18,7 +18,7 @@ See [lifecycle](lifecycle.md), [commands](commands.md), [native qualification](n
 
 Configuration, service composition, reporting, cleanup fencing and generic handoff are implemented.
 macOS application ownership and Windows/Win32 application ownership are implemented and qualified on the endpoints named below.
-The neutral Storybook execution seam has portable coverage and selected native protected-handoff evidence on macOS Fabric, macOS Paper, Windows Fabric and Win32 Paper. Win32's post-readiness-gate rerun, repeated-run reliability and required native CI remain open.
+The neutral Storybook execution seam has portable coverage and selected native protected-handoff evidence on macOS Fabric, macOS Paper, Windows Fabric and Win32 Paper. Repeated-run reliability and required native CI remain open.
 Native results are per endpoint and tied to the revision that produced them.
 
 - **App/suite configuration and standalone use:** Done. Storybook is optional and the runtime boundary rejects React, React Native and Storybook dependencies. See [Configuration and standalone use](#configuration-and-standalone-use).
@@ -234,7 +234,7 @@ Generic and Storybook attach-only runners share the protected reservation.
 - Desktop-test and the standalone Storybook CLI share run ownership, typed hosted-driver readiness, and verified management publication.
 - The channel and driver child stay in place until relocation is justified and qualified.
 - The macOS application lease is maintained by a host-owned read-only resource; macOS and Windows smoke retain their exact launched applications in the channel child.
-- A claimed macOS, Windows, or Win32 Storybook supervisor can retain its verified built application across sessions. Selected native handoffs passed on all four endpoints; Win32 Paper has not been rerun after the authenticated initial-render readiness gate.
+- A claimed macOS, Windows, or Win32 Storybook supervisor can retain its verified built application across sessions. Selected native handoffs passed on all four endpoints after the authenticated initial-render readiness gate.
 - Agent-served Storybook targets advertise attach-only sessions; owned smoke may launch and stop its exact application.
 - Metro and channel readiness require correlated owned-listener receipts in addition to their HTTP and driver readiness.
 - Protected story args are refused with `story-args-unsupported`, leaving the story unchanged and no value in an error or the journal.
@@ -269,7 +269,7 @@ Generic and Storybook attach-only runners share the protected reservation.
 - A separately verified supervisor transport exposes only opted-in workload IDs and allowed lanes, never commands, paths or environment.
 - Per-connection principals can run and cancel their own workloads; cancellation does not stop the host and failed drain fences admission.
 - Hosted Storybook CSF work borrows the active driver; it does not perform the smoke build or launch lifecycle.
-- Generic AppKit and Win32 fixtures exercised supervisor-mode management, including lost-response reconciliation and cancellation. Selected protected Storybook workloads also passed on macOS Fabric, macOS Paper and Win32 Paper; Windows Fabric remains unqualified.
+- Generic AppKit and Win32 fixtures exercised supervisor-mode management, including lost-response reconciliation and cancellation. Selected protected Storybook workloads also passed on macOS Fabric, macOS Paper, Windows Fabric and Win32 Paper.
 
 ### Open work
 
@@ -356,7 +356,7 @@ Hosted physical-input and capture skips do not qualify those paths.
 
 ### Win32 Paper
 
-- **Retained Storybook handoff and workload:** at `d04c064da`, one supervisor-retained REX incarnation stayed exact across MCP select, a refused attached runner, relinquish, the attached accessible Button case (1/1), MCP reopen and a managed workload (1/1, cleanup settled); console Ctrl+C then wrote a terminal `passed` report and released the app, lease, descriptors and claim. Not rerun after the `a52302ebe` initial-render readiness gate. Evidence: [#4510](https://github.com/microsoft/fluentui-react-native/pull/4510).
+- **Retained Storybook handoff and workload:** at `0a121ba85` (integrated source `a52302ebe`, later changes documentation-only), one supervisor-retained REX incarnation (PID 43864) stayed exact across marker-verified MCP selection on the first call and observation, refused attached execution while MCP held the session, relinquish, an attached accessible case (1/1) and full accessible suite (45/45), MCP reopen and a managed workload (1/1, cleanup settled). Console Ctrl+C wrote a terminal `passed` lifecycle report and released the app, services, descriptors and claim. Physical input and capture were not run; an earlier run at `d04c064da` predates the readiness gate. Evidence: [#4510](https://github.com/microsoft/fluentui-react-native/pull/4510).
 
 - **Application ownership (prebuilt REX 0.81.1):** the same 11-case consumer suite and 6 provider cases passed at `da89fe9bc` with job-object drain reconciled; the hosted selection ran 0 of the 11 consumer cases; evidence in [#4494](https://github.com/microsoft/fluentui-react-native/pull/4494).
 
