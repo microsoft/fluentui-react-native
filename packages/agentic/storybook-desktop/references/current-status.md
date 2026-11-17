@@ -144,7 +144,7 @@ Full per-run evidence (commands, counts, run ids, artifact locators, cleanup out
 
 ### macOS Fabric
 
-- **Protected handoff:** at `69fd4a850`, an accessible Button case and a physical Checkbox case each passed once attached and once managed. MCP-to-runner-to-MCP handoff retained the same app; the exact primary app, descriptors and claim settled. The helper was ad-hoc signed; broader fault and stable-signing qualification remain open. Evidence: [#4510](https://github.com/microsoft/fluentui-react-native/pull/4510).
+- **Protected handoff:** at `8bbc3741d` (integrated source `a52302ebe`, later changes documentation-only), an accessible Button case and a physical Checkbox case each passed once attached and once managed. First story selection succeeded without retries after readiness; MCP-to-runner-to-MCP handoff retained the same app, and the exact primary app, descriptors and claim settled. The helper was ad-hoc signed; broader fault and stable-signing qualification remain open. Evidence: [#4510](https://github.com/microsoft/fluentui-react-native/pull/4510).
 
 - **Owned non-agent smoke:** a candidate worktree based on `474941a38` passed 223 navigations and 37 accessible callbacks, and 223 navigations and 120 physical callbacks; each lane had three declared unsupported cases. The accessible run preceded the final identity guard; the physical run included it. Evidence: [#4510](https://github.com/microsoft/fluentui-react-native/pull/4510).
 
@@ -156,7 +156,7 @@ Full per-run evidence (commands, counts, run ids, artifact locators, cleanup out
 
 ### macOS Paper
 
-- **Protected handoff:** at `69fd4a850`, an accessible Button case and a physical Checkbox case each passed once attached and once managed. MCP-to-runner-to-MCP handoff retained the same app; the exact primary app, descriptors and claim settled. The helper was ad-hoc signed; an earlier launch could not capture an exact start time and was manually reconciled after its app exited, with cause unknown. Evidence: [#4510](https://github.com/microsoft/fluentui-react-native/pull/4510).
+- **Protected handoff:** at `8bbc3741d` (integrated source `a52302ebe`, later changes documentation-only), an accessible Button case and a physical Checkbox case each passed once attached and once managed. First story selection succeeded without retries after readiness; MCP-to-runner-to-MCP handoff retained the same app, and the exact primary app, descriptors and claim settled. The helper was ad-hoc signed; an earlier launch could not capture an exact start time and was manually reconciled after its app exited, with cause unknown. Evidence: [#4510](https://github.com/microsoft/fluentui-react-native/pull/4510).
 
 - **Owned non-agent smoke:** a candidate worktree based on `474941a38` passed 223 navigations and 36 accessible callbacks, and 223 navigations and 120 physical callbacks; each lane had three declared unsupported cases. Both runs preceded the final identity guard; a later guarded render-only run passed 223 navigations. Evidence: [#4510](https://github.com/microsoft/fluentui-react-native/pull/4510).
 

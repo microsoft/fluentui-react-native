@@ -176,7 +176,7 @@ App-backed forwarding-shim qualification remains open.
 
 ### macOS Fabric
 
-- **Retained Storybook handoff and workloads:** at `69fd4a850`, one accessible Button case and one physical Checkbox case each passed attached and managed, with the same app retained across MCP handoff and exact primary-app cleanup settled. The helper was ad-hoc signed; these cases do not qualify direct MCP physical clicks or lifecycle faults. Evidence: [#4510](https://github.com/microsoft/fluentui-react-native/pull/4510).
+- **Retained Storybook handoff and workloads:** at `8bbc3741d` (integrated source `a52302ebe`, later changes documentation-only), one accessible Button case and one physical Checkbox case each passed attached and managed, with the same app retained across MCP handoff and exact primary-app cleanup settled. First story selection succeeded without retries after readiness. The helper was ad-hoc signed; these cases do not qualify direct MCP physical clicks or lifecycle faults. Evidence: [#4510](https://github.com/microsoft/fluentui-react-native/pull/4510).
 
 - **Generic AppKit consumer (relinquish/handoff, operator preemption, worker crash, lost runner-grant response, target capture):** all five modes passed through the real descriptor, MCP SDK transport and WDIO/Jasmine at `5dbadb53b`, with stale-resource and credential-confinement checks passing. Evidence: [#4491](https://github.com/microsoft/fluentui-react-native/pull/4491).
 
@@ -184,7 +184,7 @@ App-backed forwarding-shim qualification remains open.
 
 ### macOS Paper
 
-- **Retained Storybook handoff and workloads:** at `69fd4a850`, one accessible Button case and one physical Checkbox case each passed attached and managed, with the same app retained across MCP handoff and exact primary-app cleanup settled. The helper was ad-hoc signed; these cases do not qualify direct MCP physical clicks or lifecycle faults. Evidence: [#4510](https://github.com/microsoft/fluentui-react-native/pull/4510).
+- **Retained Storybook handoff and workloads:** at `8bbc3741d` (integrated source `a52302ebe`, later changes documentation-only), one accessible Button case and one physical Checkbox case each passed attached and managed, with the same app retained across MCP handoff and exact primary-app cleanup settled. First story selection succeeded without retries after readiness. The helper was ad-hoc signed; these cases do not qualify direct MCP physical clicks or lifecycle faults. Evidence: [#4510](https://github.com/microsoft/fluentui-react-native/pull/4510).
 
 - **Storybook descriptor lifecycle and interaction:** 14 passed, 4 failed, 0 skipped at `141b88b4b` (keyboard clear and its dependent precondition, physical Checkbox click, unsupported semantic Checkbox activation); a separate input probe passed 4 and failed 1 (keyboard clear). Cleanup audit passed. Evidence: [#4493](https://github.com/microsoft/fluentui-react-native/pull/4493). No MCP-path rerun followed [#4500](https://github.com/microsoft/fluentui-react-native/pull/4500), so macOS acceptance for [#4441](https://github.com/microsoft/fluentui-react-native/issues/4441) is not met.
 
@@ -202,7 +202,7 @@ App-backed forwarding-shim qualification remains open.
 
 ### Win32 Paper
 
-- **Retained Storybook handoff and workload:** at `d04c064da`, over a real stdio MCP client and the protected descriptor, status advertised attach-only launch; MCP open, marker-verified selection and observe passed; the attached runner was refused `target-busy` until relinquish, then the accessible Button case passed 1/1; MCP reopened, the catalog listed the accessible `stories` lane, and a managed workload passed 1/1 with cleanup settled. The same REX incarnation was retained throughout and closed only when the supervisor stopped. Direct MCP physical input and lifecycle faults were not run. Evidence: [#4510](https://github.com/microsoft/fluentui-react-native/pull/4510).
+- **Retained Storybook handoff and workload:** at `d04c064da`, over a real stdio MCP client and the protected descriptor, status advertised attach-only launch; MCP open, marker-verified selection and observe passed; the attached runner was refused `target-busy` until relinquish, then the accessible Button case passed 1/1; MCP reopened, the catalog listed the accessible `stories` lane, and a managed workload passed 1/1 with cleanup settled. The same REX incarnation was retained throughout and closed only when the supervisor stopped. Not rerun after the `a52302ebe` initial-render readiness gate. Direct MCP physical input and lifecycle faults were not run. Evidence: [#4510](https://github.com/microsoft/fluentui-react-native/pull/4510).
 
 - **Physical MCP click:** six physical-pointer checkbox clicks, each state-checked, with 23 calls and zero errors at `505a2187b`. Evidence: [#4498](https://github.com/microsoft/fluentui-react-native/pull/4498).
 

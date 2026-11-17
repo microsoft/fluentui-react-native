@@ -18,7 +18,7 @@ See [lifecycle](lifecycle.md), [commands](commands.md), [native qualification](n
 
 Configuration, service composition, reporting, cleanup fencing and generic handoff are implemented.
 macOS application ownership and Windows/Win32 application ownership are implemented and qualified on the endpoints named below.
-The neutral Storybook execution seam has portable coverage and partial native smoke and protected-handoff evidence on macOS and Win32 Paper; Windows Fabric handoff, repeated-run reliability and required native CI remain open.
+The neutral Storybook execution seam has portable coverage and selected native protected-handoff evidence on macOS Fabric, macOS Paper, Windows Fabric and Win32 Paper. Win32's post-readiness-gate rerun, repeated-run reliability and required native CI remain open.
 Native results are per endpoint and tied to the revision that produced them.
 
 - **App/suite configuration and standalone use:** Done. Storybook is optional and the runtime boundary rejects React, React Native and Storybook dependencies. See [Configuration and standalone use](#configuration-and-standalone-use).
@@ -39,7 +39,7 @@ Native results are per endpoint and tied to the revision that produced them.
 
 - **Generated manifest provenance:** Qualified in hosted Windows/Win32 and macOS non-agent smokes; protected workload qualification remains open. See [Generated manifest provenance](#generated-manifest-provenance). Tracking: [#4441](https://github.com/microsoft/fluentui-react-native/issues/4441); landed in [#4490](https://github.com/microsoft/fluentui-react-native/pull/4490).
 
-- **MCP/WDIO handoff:** Qualified for the earlier generic attach-only phase on macOS AppKit and Windows/Win32 fixtures. Selected retained Storybook handoffs passed on macOS Fabric, macOS Paper and Win32 Paper; Windows Fabric and broader fault qualification remain open. See [MCP/WDIO handoff](#mcpwdio-handoff). Tracking: [#4449](https://github.com/microsoft/fluentui-react-native/issues/4449); generic phase landed in [#4491](https://github.com/microsoft/fluentui-react-native/pull/4491).
+- **MCP/WDIO handoff:** Qualified for the earlier generic attach-only phase on macOS AppKit and Windows/Win32 fixtures. Selected retained Storybook handoffs passed on all four endpoints; Win32's post-readiness-gate rerun and broader fault qualification remain open. See [MCP/WDIO handoff](#mcpwdio-handoff). Tracking: [#4449](https://github.com/microsoft/fluentui-react-native/issues/4449); generic phase landed in [#4491](https://github.com/microsoft/fluentui-react-native/pull/4491).
 
 - **Storybook resource contributions:** Implemented with shared ownership and readiness; native smoke and protected handoff have partial macOS evidence. See [Storybook resource contributions](#storybook-resource-contributions). Tracking: [#4449](https://github.com/microsoft/fluentui-react-native/issues/4449).
 
@@ -234,7 +234,7 @@ Generic and Storybook attach-only runners share the protected reservation.
 - Desktop-test and the standalone Storybook CLI share run ownership, typed hosted-driver readiness, and verified management publication.
 - The channel and driver child stay in place until relocation is justified and qualified.
 - The macOS application lease is maintained by a host-owned read-only resource; macOS and Windows smoke retain their exact launched applications in the channel child.
-- A claimed macOS, Windows, or Win32 Storybook supervisor can retain its verified built application across sessions. Win32 Paper retained startup passed a selected native handoff; Windows Fabric retained startup is implemented but not yet natively qualified.
+- A claimed macOS, Windows, or Win32 Storybook supervisor can retain its verified built application across sessions. Selected native handoffs passed on all four endpoints; Win32 Paper has not been rerun after the authenticated initial-render readiness gate.
 - Agent-served Storybook targets advertise attach-only sessions; owned smoke may launch and stop its exact application.
 - Metro and channel readiness require correlated owned-listener receipts in addition to their HTTP and driver readiness.
 - Protected story args are refused with `story-args-unsupported`, leaving the story unchanged and no value in an error or the journal.
@@ -310,7 +310,7 @@ Hosted physical-input and capture skips do not qualify those paths.
 
 - **Generic supervisor management:** the AppKit fixture passed handoff, preemption, worker crash, lost response and managed modes at `41c604371`; capture was skipped, and no React Native renderer was involved. Evidence: [#4510](https://github.com/microsoft/fluentui-react-native/pull/4510).
 
-- **Protected Storybook handoff:** at `69fd4a850`, an accessible Button case and a physical Checkbox case each passed once attached and once managed. MCP-to-runner-to-MCP handoff retained the same app; the exact primary app, descriptors and claim settled. The helper was ad-hoc signed; broader fault and stable-signing qualification remain open. Evidence: [#4510](https://github.com/microsoft/fluentui-react-native/pull/4510).
+- **Protected Storybook handoff:** at `8bbc3741d` (integrated source `a52302ebe`, later changes documentation-only), an accessible Button case and a physical Checkbox case each passed once attached and once managed. First story selection succeeded without retries after readiness; MCP-to-runner-to-MCP handoff retained the same app, and the exact primary app, descriptors and claim settled. The helper was ad-hoc signed; broader fault and stable-signing qualification remain open. Evidence: [#4510](https://github.com/microsoft/fluentui-react-native/pull/4510).
 
 - **Owned non-agent smoke:** a candidate worktree based on `474941a38` passed 223 navigations and 37 accessible callbacks, and 223 navigations and 120 physical callbacks, with three declared unsupported cases in each lane. The accessible run preceded the final identity guard; the physical run included it. Evidence: [#4510](https://github.com/microsoft/fluentui-react-native/pull/4510).
 
@@ -324,7 +324,7 @@ Hosted physical-input and capture skips do not qualify those paths.
 
 - **Application ownership:** same result as Fabric (9 checks passed, smoke 224/224 passed, 0 skipped) at `16558610f`; evidence in [#4492](https://github.com/microsoft/fluentui-react-native/pull/4492).
 
-- **Protected Storybook handoff:** at `69fd4a850`, an accessible Button case and a physical Checkbox case each passed once attached and once managed. MCP-to-runner-to-MCP handoff retained the same app; the exact primary app, descriptors and claim settled. The helper was ad-hoc signed; an earlier launch could not capture an exact start time and was manually reconciled after its app exited, with cause unknown. Evidence: [#4510](https://github.com/microsoft/fluentui-react-native/pull/4510).
+- **Protected Storybook handoff:** at `8bbc3741d` (integrated source `a52302ebe`, later changes documentation-only), an accessible Button case and a physical Checkbox case each passed once attached and once managed. First story selection succeeded without retries after readiness; MCP-to-runner-to-MCP handoff retained the same app, and the exact primary app, descriptors and claim settled. The helper was ad-hoc signed; an earlier launch could not capture an exact start time and was manually reconciled after its app exited, with cause unknown. Evidence: [#4510](https://github.com/microsoft/fluentui-react-native/pull/4510).
 
 - **Owned non-agent smoke:** a candidate worktree based on `474941a38` passed 223 navigations and 36 accessible callbacks, and 223 navigations and 120 physical callbacks, with three declared unsupported cases in each lane. Both runs preceded the final identity guard; a later guarded render-only run passed 223 navigations. Evidence: [#4510](https://github.com/microsoft/fluentui-react-native/pull/4510).
 
@@ -333,6 +333,8 @@ Hosted physical-input and capture skips do not qualify those paths.
 - **Earlier failures:** at `141b88b4b` smoke failed 2 of 225 and the descriptor run 4 of 18 (keyboard clear, obscured Checkbox click), fixed by [#4500](https://github.com/microsoft/fluentui-react-native/pull/4500); Paper semantic activation remains Unsupported by the provider, and Paper Menu observations hit the 100-node cap; original record in [#4493](https://github.com/microsoft/fluentui-react-native/pull/4493).
 
 ### Windows Fabric
+
+- **Retained Storybook handoff and workload:** at `a52302ebe`, one supervisor-retained ReactApp incarnation stayed exact across marker-verified MCP selection and observation, refused attached execution while MCP held the session, relinquish, an attached accessible case (1/1) and full accessible suite (40/40), MCP reopen and a managed workload (1/1, cleanup settled). Console Ctrl+C wrote a terminal `passed` lifecycle report and released the app, services, descriptors and claim. Physical input and capture were not run. Evidence: [#4510](https://github.com/microsoft/fluentui-react-native/pull/4510).
 
 - **Application ownership (packaged, `furn-81` build `bdeb0b291`):** the complete native consumer suite passed 11/11 and the provider cases 6/6 at `da89fe9bc` (native source `dbaf55893`), including recovery of a packaged survivor and the physical-input mutex; the hosted selection ran 0 of the 11 consumer cases because it has no endpoint opt-in; evidence in [#4494](https://github.com/microsoft/fluentui-react-native/pull/4494).
 
@@ -354,7 +356,7 @@ Hosted physical-input and capture skips do not qualify those paths.
 
 ### Win32 Paper
 
-- **Retained Storybook handoff and workload:** at `d04c064da`, one supervisor-retained REX incarnation stayed exact across MCP select, a refused attached runner, relinquish, the attached accessible Button case (1/1), MCP reopen and a managed workload (1/1, cleanup settled); console Ctrl+C then wrote a terminal `passed` report and released the app, lease, descriptors and claim. Evidence: [#4510](https://github.com/microsoft/fluentui-react-native/pull/4510).
+- **Retained Storybook handoff and workload:** at `d04c064da`, one supervisor-retained REX incarnation stayed exact across MCP select, a refused attached runner, relinquish, the attached accessible Button case (1/1), MCP reopen and a managed workload (1/1, cleanup settled); console Ctrl+C then wrote a terminal `passed` report and released the app, lease, descriptors and claim. Not rerun after the `a52302ebe` initial-render readiness gate. Evidence: [#4510](https://github.com/microsoft/fluentui-react-native/pull/4510).
 
 - **Application ownership (prebuilt REX 0.81.1):** the same 11-case consumer suite and 6 provider cases passed at `da89fe9bc` with job-object drain reconciled; the hosted selection ran 0 of the 11 consumer cases; evidence in [#4494](https://github.com/microsoft/fluentui-react-native/pull/4494).
 
