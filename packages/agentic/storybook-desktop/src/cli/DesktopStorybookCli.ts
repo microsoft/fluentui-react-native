@@ -373,20 +373,37 @@ export class DesktopStorybookCli {
       storybookPort,
     };
     let ownedApplication: NativeDesktopApplicationDescriptor | undefined;
-    if (windowsNative) ownedApplication = await this.buildOwnedWindowsApplication(platform, windowsNative, resolvedInstance);
-    const agentApplication =
-      agent && platform !== 'macos'
-        ? ownedApplication
-          ? this.retainedAgentApplication(platform, ownedApplication)
-          : await this.resolveAgentApplication(platform)
-        : undefined;
-    const driverManifest = await this.writeDriverManifest(
-      platform,
-      resolvedInstance,
-      nativeDriver,
-      agent && { ...agent, ...(agentApplication ? { application: agentApplication } : {}) },
-      wdio,
-    );
+    let driverManifest: { manifest: DesktopStorybookDriverManifest; path: string };
+    if (windowsNative) {
+      // The prebuilt bundle embeds this run's private bridge module, so publish it first, then bind the exact launched
+      // identity to the same bridge before the channel starts.
+      const provisional = await this.writeDriverManifest(platform, resolvedInstance, nativeDriver, agent, wdio);
+      const provisionalHandoff = this.driverHandoffs.get(provisional.path);
+      resolvedInstance.driverManifestPath = provisional.path;
+      ownedApplication = await this.buildOwnedWindowsApplication(platform, windowsNative, resolvedInstance);
+      const agentApplication = agent && this.retainedAgentApplication(platform, ownedApplication);
+      driverManifest = await this.writeDriverManifest(
+        platform,
+        resolvedInstance,
+        nativeDriver,
+        agent && { ...agent, ...(agentApplication ? { application: agentApplication } : {}) },
+        wdio,
+        provisional.manifest.bridgeNonce,
+      );
+      const expectedRuntime = runtimeModuleDigest(provisionalHandoff);
+      if (!expectedRuntime || expectedRuntime !== runtimeModuleDigest(this.driverHandoffs.get(driverManifest.path))) {
+        throw new Error(`The retained ${platform} bundle no longer matches the published Storybook bridge.`);
+      }
+    } else {
+      const agentApplication = agent && platform !== 'macos' ? await this.resolveAgentApplication(platform) : undefined;
+      driverManifest = await this.writeDriverManifest(
+        platform,
+        resolvedInstance,
+        nativeDriver,
+        agent && { ...agent, ...(agentApplication ? { application: agentApplication } : {}) },
+        wdio,
+      );
+    }
     resolvedInstance.driverManifestPath = driverManifest.path;
     if (macApplication) {
       resolvedInstance.macosXcconfigPath = writeMacOSInstanceConfig(this.config.projectRoot, resolvedInstance);
@@ -446,7 +463,13 @@ export class DesktopStorybookCli {
       serviceReady: channelReady,
       integration: {
         name: 'storybook',
-        details: { services: metro ? ['metro', 'storybook-channel'] : ['storybook-channel'], instanceId: resolvedInstance.id, storybookPort, metroPort, driverPort },
+        details: {
+          services: metro ? ['metro', 'storybook-channel'] : ['storybook-channel'],
+          instanceId: resolvedInstance.id,
+          storybookPort,
+          metroPort,
+          driverPort,
+        },
       },
     };
   }
@@ -1407,20 +1430,23 @@ export class DesktopStorybookCli {
     nativeDriver: NativeDriverArtifact,
     agent?: CreateDesktopStorybookDriverManifestOptions['agent'],
     wdio?: CreateDesktopStorybookDriverManifestOptions['wdio'],
+    bridgeNonce?: string,
   ): Promise<{ manifest: DesktopStorybookDriverManifest; path: string }> {
     const storyManifest = await this.createStoryManifest(this.config, platform);
     const outputPath = desktopStorybookDriverManifestPath(this.config.projectRoot, platform);
     const renderer = this.renderer(platform);
     const driverManifest = createDesktopStorybookDriverManifest({
       ...(agent ? { agent } : {}),
-      bridgeNonce: await readReusableBridgeNonce(
-        outputPath,
-        instance,
-        storyManifest.platformManifestDigest,
-        renderer,
-        nativeDriver,
-        this.createPrivateStorage,
-      ),
+      bridgeNonce:
+        bridgeNonce ??
+        (await readReusableBridgeNonce(
+          outputPath,
+          instance,
+          storyManifest.platformManifestDigest,
+          renderer,
+          nativeDriver,
+          this.createPrivateStorage,
+        )),
       config: this.config,
       instance,
       nativeDriver,
@@ -1796,6 +1822,12 @@ function reportOutput(
       return true;
     },
   };
+}
+
+function runtimeModuleDigest(handoff: string | undefined): string | undefined {
+  if (!handoff) return undefined;
+  const digest: unknown = (JSON.parse(handoff) as { runtimeModuleDigest?: unknown }).runtimeModuleDigest;
+  return typeof digest === 'string' ? digest : undefined;
 }
 
 async function readReusableBridgeNonce(

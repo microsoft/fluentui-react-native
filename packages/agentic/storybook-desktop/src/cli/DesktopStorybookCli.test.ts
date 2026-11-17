@@ -465,6 +465,10 @@ describe('DesktopStorybookCli', () => {
       const foreground = f.runner.foreground.map(({ command, args }) => [command, ...(args ?? [])].join(' '));
       expect(foreground.some((command) => command.includes('register-windows.ps1'))).toBe(platform === 'windows');
       expect(f.runner.foreground.every(({ env }) => env.STORYBOOK_OWNED_APPLICATION === '')).toBe(true);
+      const bundle = f.runner.foreground.find(({ args }) => args?.includes('bundle'))!;
+      const runtimeDigest = (handoff: string) => JSON.parse(handoff).runtimeModuleDigest;
+      expect(bundle.env.STORYBOOK_DRIVER_MANIFEST).toBe(channel.env.STORYBOOK_DRIVER_MANIFEST);
+      expect(runtimeDigest(bundle.env.STORYBOOK_DRIVER_HANDOFF)).toBe(runtimeDigest(channel.env.STORYBOOK_DRIVER_HANDOFF));
       expect(f.runner.background.some((command) => command.context?.service === 'metro')).toBe(platform === 'windows');
     } finally {
       await owner.close();
