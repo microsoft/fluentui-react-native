@@ -99,7 +99,14 @@ helper remains owned by that service and its existing stdio transport.
 command incarnation, and producer PID. The neutral resource scope validates
 and retains that receipt on the owned channel's resource generation before
 the CLI reports readiness. The generated `agent-ready.*.json` file
-is a compatibility breadcrumb only, never readiness authority. The receipt
+is a compatibility breadcrumb only, never readiness authority. For a
+supervisor-retained Windows or Win32 application, the channel writes that
+breadcrumb and publishes `service-ready` only after the retained app's
+authenticated runtime has said hello and rendered its initial story, bounded by
+`STORYBOOK_INITIAL_RENDER_TIMEOUT_MS` (default 300 s). A cold debug bundle can
+take tens of seconds after the window appears, and agents, runners and MCP do
+not retry `bridge-unavailable`. This wait only observes the bridge and dispatches
+nothing. Otherwise the receipt
 does not prove target acquisition, application readiness, or authenticated
 context/render readiness. Borrowed applications and external services are not
 enrolled in the lifeline or implicitly terminated. Missing/failed withdrawal

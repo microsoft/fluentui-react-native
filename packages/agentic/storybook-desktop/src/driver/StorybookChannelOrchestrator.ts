@@ -63,6 +63,7 @@ export class StorybookChannelOrchestrator implements StoryOrchestrator {
   private readonly recordedClients = new WeakSet<ChannelClient>();
   private readonly authenticatedClients = new WeakSet<ChannelClient>();
   private readonly recordings = new WeakMap<ChannelClient, Promise<void>>();
+  private readonly bridgeWaiters = new Set<() => void>();
   private readonly journal?: BridgeEpochJournal;
   private bridgeClient?: ChannelClient;
   private bridgeConnected = false;
@@ -104,6 +105,27 @@ export class StorybookChannelOrchestrator implements StoryOrchestrator {
   async getManifest(context?: StoryProviderContext): Promise<DesktopStoryManifest> {
     context?.signal.throwIfAborted();
     return this.driverManifest.storyManifest;
+  }
+
+  /**
+   * Resolves once an authenticated runtime has rendered its initial story and, when journaled, recorded its epoch.
+   * Observation only: nothing is dispatched to the runtime.
+   */
+  waitForInitialBridge(signal: AbortSignal): Promise<void> {
+    if (this.bridgeConnected) return Promise.resolve();
+    if (signal.aborted) return Promise.reject(signal.reason);
+    return new Promise((resolve, reject) => {
+      const abort = () => {
+        this.bridgeWaiters.delete(connected);
+        reject(signal.reason);
+      };
+      const connected = () => {
+        signal.removeEventListener('abort', abort);
+        resolve();
+      };
+      this.bridgeWaiters.add(connected);
+      signal.addEventListener('abort', abort, { once: true });
+    });
   }
 
   async getCurrentStory(context?: StoryProviderContext): Promise<StoryReadyResult | null> {
@@ -364,6 +386,9 @@ export class StorybookChannelOrchestrator implements StoryOrchestrator {
       return;
     this.bridgeConnected = true;
     this.needsRelaunch = false;
+    const waiters = [...this.bridgeWaiters];
+    this.bridgeWaiters.clear();
+    for (const waiter of waiters) waiter();
   }
 
   private correlatedPending(client: ChannelClient, payload: Record<string, unknown>): PendingSelection | undefined {

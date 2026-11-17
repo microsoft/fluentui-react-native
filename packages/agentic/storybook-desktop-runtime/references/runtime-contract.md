@@ -89,6 +89,14 @@ write-capable operation; config tests must use controlled fixture roots.
 Diagnostics should use the package's owning app scripts and inspect only the
 generated files they need.
 
+The resolver block list excludes `storybook-desktop.generated/wdio`, where
+story-test runners create and delete per-run workspaces, because a retained
+Metro outlives many runs. On Windows, without Watchman, Metro uses
+metro-file-map's `FallbackWatcher`. The repository patches
+`metro-file-map@0.83.8` (`.yarn/patches`) with upstream's guard, so a directory
+deleted before `fs.watch` attaches reports an ignorable error instead of
+crashing Metro. Remove the patch when the pinned Metro includes that guard.
+
 Driver-backed Metro does not generate a credential-bearing public file.
 The parent supplies `STORYBOOK_DRIVER_HANDOFF` and the canonical schema locator
 `STORYBOOK_GENERATED_CONTRACT`; the integration package owns these strict,

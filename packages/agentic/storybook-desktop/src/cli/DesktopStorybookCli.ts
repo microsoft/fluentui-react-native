@@ -344,6 +344,9 @@ export class DesktopStorybookCli {
     }
     const macApplication = retained && platform === 'macos' ? this.ownedMacOSApplication(this.instance) : undefined;
     const windowsNative = retained && platform !== 'macos' ? this.ownedWindowsSmokeOptions(platform) : undefined;
+    const smokeOptions = windowsNative ? this.config.getPlatformOptions(platform).smoke : undefined;
+    // The retained channel withholds readiness until the app's initial render, which a cold development bundle delays.
+    const initialRenderTimeoutMs = smokeOptions ? (smokeOptions.initialRenderTimeoutMs ?? smokeOptions.startupTimeoutMs ?? 300_000) : 0;
     const wdio = resolveWdioOptions({ ...this.config.wdio, ...(options.input ? { input: options.input } : {}) });
     const agent = options.agent && {
       descriptor: options.agent.descriptor ?? defaultAgentDescriptor,
@@ -427,6 +430,7 @@ export class DesktopStorybookCli {
           env: {
             ...command.env,
             ...(options.host ? { STORYBOOK_WS_HOST: options.host } : {}),
+            ...(initialRenderTimeoutMs ? { STORYBOOK_INITIAL_RENDER_TIMEOUT_MS: String(initialRenderTimeoutMs) } : {}),
           },
         },
         platform,
@@ -443,7 +447,7 @@ export class DesktopStorybookCli {
     const channelReady = await this.services.readyProcess(
       'storybook-channel',
       { tier: 'service-ready', service: 'storybook-channel', ...(agentManifest ? { descriptor: agentManifest.descriptor } : {}) },
-      120_000,
+      120_000 + initialRenderTimeoutMs,
     );
     assertSameReadinessProducer(channelListener, channelReady);
     // Windows and Win32 publish the retained app's lease inside the channel before it reports service readiness.

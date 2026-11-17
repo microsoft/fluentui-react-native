@@ -563,6 +563,25 @@ describe('StorybookChannelOrchestrator epochs and lifetime', () => {
     }
   });
 
+  test('the initial-bridge wait observes without dispatch until authentication, render and recording complete', async () => {
+    const { client, orchestrator } = setup();
+    let settled = false;
+    const waiting = orchestrator.waitForInitialBridge(new AbortController().signal).then(() => (settled = true));
+    client.hello();
+    await Promise.resolve();
+    expect(settled).toBe(false);
+    client.receive('storyRendered', request.storyId);
+    await waiting;
+    expect(client.sent.map(({ type }) => type)).toEqual(['furn:desktop:request-hello']);
+    await expect(orchestrator.waitForInitialBridge(AbortSignal.abort())).resolves.toBeUndefined();
+
+    const aborted = setup().orchestrator;
+    const controller = new AbortController();
+    const cancelled = aborted.waitForInitialBridge(controller.signal);
+    controller.abort(new Error('stopped'));
+    await expect(cancelled).rejects.toThrow('stopped');
+  });
+
   test('absent and hello-only bridges reject before dispatch with no effect', async () => {
     const { client, fetch, orchestrator } = setup();
     await expect(orchestrator.selectStory(request)).rejects.toMatchObject({

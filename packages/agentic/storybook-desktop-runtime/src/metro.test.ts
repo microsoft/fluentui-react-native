@@ -136,6 +136,16 @@ describe('controlled Metro generation fixtures', () => {
     expect(fs.readFileSync(generated, 'utf8')).toContain('"instanceId":"controlled-fixture","storybookPort":7123');
   });
 
+  test('excludes transient story-test runner workspaces from Metro crawling and watching', () => {
+    const config = createDesktopStorybookMetroConfig({ configPath: path.join(root, 'src') });
+    const blocked = (file: string) => [config.resolver.blockList].flat().some((pattern: RegExp) => pattern.test(file));
+    expect(blocked('D:\\app\\storybook-desktop.generated\\wdio\\run-xLiEF4')).toBe(true);
+    expect(blocked('D:/app/storybook-desktop.generated/wdio/run-xLiEF4/case.mjs')).toBe(true);
+    expect(blocked('/app/storybook-desktop.generated/wdio')).toBe(true);
+    expect(blocked('/app/storybook-desktop.generated/runtime-instance.js')).toBe(false);
+    expect(blocked('/app/storybook-desktop.generated/wdio-helpers.js')).toBe(false);
+  });
+
   test('uses the parent-published private bridge-only projection without copying it to public generated output', () => {
     const fixture = controlledManifest();
     const config = createDesktopStorybookMetroConfig({ configPath: path.join(root, 'src') });

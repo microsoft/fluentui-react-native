@@ -186,6 +186,7 @@ async function startDesktopStorybookServer({
         storyRootTestId: `${driverManifest.testIDPrefix}-story-root`,
         launchModes: ['attach'],
       };
+      let retainedOrchestrator;
       if (process.env.STORYBOOK_NATIVE_DRIVER_FAKE === '1') {
         const { createDesktopDriverServer } = await import('@fluentui-react-native/desktop-driver');
         const { createFakeStoryWindows, FakeDesktopHost, FakeStoryOrchestrator } =
@@ -226,7 +227,6 @@ async function startDesktopStorybookServer({
               }),
             },
           });
-        let retainedOrchestrator;
         driver = await startNativeDesktopService({
           signal: controller.signal,
           // Windows agents verify the app's AUMID or executable; nothing maintains a lease there.
@@ -277,6 +277,18 @@ async function startDesktopStorybookServer({
         });
       }
       controller.signal.throwIfAborted();
+      if (retainedOrchestrator) {
+        // A retained debug app may still be loading a cold Metro bundle; agents and runners must not observe readiness
+        // until its authenticated runtime has rendered, or every story operation fails as bridge-unavailable.
+        const timeoutMs = Number(process.env.STORYBOOK_INITIAL_RENDER_TIMEOUT_MS) || 300_000;
+        const timeout = AbortSignal.timeout(timeoutMs);
+        try {
+          await retainedOrchestrator.waitForInitialBridge(AbortSignal.any([controller.signal, timeout]));
+        } catch (error) {
+          if (!timeout.aborted || controller.signal.aborted) throw error;
+          throw new Error(`The retained Storybook application did not render its initial story within ${timeoutMs} ms.`);
+        }
+      }
       if (agent) {
         agentReadyPath = agent.readyPath;
         writeAgentReady(agentReadyPath, agent.descriptor);
