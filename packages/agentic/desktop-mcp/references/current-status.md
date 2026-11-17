@@ -18,7 +18,7 @@ Native and Storybook limitations are tracked in `@fluentui-react-native/desktop-
 
 The adapter's driver tools, connection lifetime, grants, relinquish, and bounded workload tool have portable coverage.
 Native qualification through the real descriptor path is partial and per endpoint.
-Generic AppKit and Win32 fixtures exercised supervisor-mode management; protected Storybook app workloads remain unqualified.
+Generic AppKit and Win32 fixtures exercised supervisor-mode management; selected protected Storybook workloads also passed on macOS Fabric and Paper.
 
 - **Tools and shared schemas:** Done. Six tools over shared driver schemas. See [Tools and discovery](#tools-and-discovery).
 
@@ -32,7 +32,7 @@ Generic AppKit and Win32 fixtures exercised supervisor-mode management; protecte
 
 - **Cross-connection resume:** Unsupported. See [Cross-connection resume](#cross-connection-resume).
 
-- **Workload and test orchestration tools:** Implemented for opted-in generic WDIO and hosted Storybook CSF suites; generic native fixtures passed, but protected Storybook workloads remain unqualified. See [Workload and test orchestration tools](#workload-and-test-orchestration-tools). Tracked by [#4450](https://github.com/microsoft/fluentui-react-native/issues/4450).
+- **Workload and test orchestration tools:** Implemented for opted-in generic WDIO and hosted Storybook CSF suites; generic native fixtures and selected macOS Storybook workloads passed, while Windows/Win32 and broader native qualification remain open. See [Workload and test orchestration tools](#workload-and-test-orchestration-tools). Tracked by [#4450](https://github.com/microsoft/fluentui-react-native/issues/4450).
 
 - **General MCP-client qualification:** In progress. SDK stdio evidence only. See [MCP client qualification](#mcp-client-qualification). Tracked by [#4441](https://github.com/microsoft/fluentui-react-native/issues/4441).
 
@@ -106,7 +106,7 @@ Generic AppKit and Win32 fixtures exercised supervisor-mode management; protecte
 - A fresh open expires old references, cursors, proofs and artifact links.
 - Authoritative rejection discards the cached child binding; after operator preemption and runner drain the same connection delegates a fresh child.
 - The generic attach-only runner integration is owned by `@fluentui-react-native/desktop-test/references/current-status.md`.
-- Handoff also supports retained supervisor-owned apps and Storybook CSF runners; neither has native qualification on the combined implementation.
+- Handoff also supports retained supervisor-owned apps and Storybook CSF runners; selected macOS Fabric and Paper cases passed on the combined implementation.
 
 ### Open work
 
@@ -167,7 +167,8 @@ Generic AppKit and Win32 fixtures exercised supervisor-mode management; protecte
 Results are per endpoint and tied to the revision that produced them.
 Skipped or not-run checks are not passes.
 Full per-run evidence (commands, counts, run ids, artifact locators, cleanup outcome) lives in the linked pull request or issue.
-The new supervisor mode and forwarding shim have not qualified app-backed Storybook workloads on macOS Fabric, macOS Paper, Windows Fabric, or Win32 Paper.
+The new supervisor mode passed selected app-backed Storybook workloads on macOS Fabric and Paper.
+Windows and Win32 workloads and app-backed forwarding-shim qualification remain open.
 
 - **Generic supervisor-managed fixtures:** AppKit and Win32 fixtures passed the managed scenario at `41c604371`; the SDK used an in-memory MCP transport, and these results do not qualify a React Native renderer. Evidence: [#4510](https://github.com/microsoft/fluentui-react-native/pull/4510).
 
@@ -175,11 +176,15 @@ The new supervisor mode and forwarding shim have not qualified app-backed Storyb
 
 ### macOS Fabric
 
+- **Retained Storybook handoff and workloads:** at `69fd4a850`, one accessible Button case and one physical Checkbox case each passed attached and managed, with the same app retained across MCP handoff and exact primary-app cleanup settled. The helper was ad-hoc signed; these cases do not qualify direct MCP physical clicks or lifecycle faults. Evidence: [#4510](https://github.com/microsoft/fluentui-react-native/pull/4510).
+
 - **Generic AppKit consumer (relinquish/handoff, operator preemption, worker crash, lost runner-grant response, target capture):** all five modes passed through the real descriptor, MCP SDK transport and WDIO/Jasmine at `5dbadb53b`, with stale-resource and credential-confinement checks passing. Evidence: [#4491](https://github.com/microsoft/fluentui-react-native/pull/4491).
 
 - **Storybook descriptor lifecycle and faults:** 10 passed, 1 failed, 0 skipped at `141b88b4b`; the failure is the physical Checkbox click (`element click intercepted`, effect none). Fault injection used public typed-client methods, not native cleanup or TCP failures. Evidence: [#4493](https://github.com/microsoft/fluentui-react-native/pull/4493). [#4500](https://github.com/microsoft/fluentui-react-native/pull/4500) fixed driver physical-input postconditions but records no MCP-path rerun.
 
 ### macOS Paper
+
+- **Retained Storybook handoff and workloads:** at `69fd4a850`, one accessible Button case and one physical Checkbox case each passed attached and managed, with the same app retained across MCP handoff and exact primary-app cleanup settled. The helper was ad-hoc signed; these cases do not qualify direct MCP physical clicks or lifecycle faults. Evidence: [#4510](https://github.com/microsoft/fluentui-react-native/pull/4510).
 
 - **Storybook descriptor lifecycle and interaction:** 14 passed, 4 failed, 0 skipped at `141b88b4b` (keyboard clear and its dependent precondition, physical Checkbox click, unsupported semantic Checkbox activation); a separate input probe passed 4 and failed 1 (keyboard clear). Cleanup audit passed. Evidence: [#4493](https://github.com/microsoft/fluentui-react-native/pull/4493). No MCP-path rerun followed [#4500](https://github.com/microsoft/fluentui-react-native/pull/4500), so macOS acceptance for [#4441](https://github.com/microsoft/fluentui-react-native/issues/4441) is not met.
 

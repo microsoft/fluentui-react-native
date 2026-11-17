@@ -28,7 +28,7 @@ Console-session (non-RDP), 200% and mixed DPI, and negative-origin cases are not
 
 - **Lifecycle parity:** Qualified (macOS Fabric and macOS Paper, observed). JS initialization and HMR counts are not observed. See [Lifecycle parity](#lifecycle-parity). Tracking: [#4449](https://github.com/microsoft/fluentui-react-native/issues/4449).
 
-- **Hosted resources and protected runners:** Implemented with portable coverage and partial native evidence; a macOS candidate passed selected protected handoffs, while Windows/Win32 and final-revision qualification remain open. See [Hosted resources and protected runners](#hosted-resources-and-protected-runners). Tracking: [#4449](https://github.com/microsoft/fluentui-react-native/issues/4449), [#4450](https://github.com/microsoft/fluentui-react-native/issues/4450).
+- **Hosted resources and protected runners:** Implemented with portable coverage and partial native evidence; selected protected handoffs passed on macOS Fabric and Paper, while Windows/Win32 and broader native qualification remain open. See [Hosted resources and protected runners](#hosted-resources-and-protected-runners). Tracking: [#4449](https://github.com/microsoft/fluentui-react-native/issues/4449), [#4450](https://github.com/microsoft/fluentui-react-native/issues/4450).
 
 - **Visual flash claims:** Deferred. No flash-reduction claim is made. See [Visual flash claims](#visual-flash-claims). Tracking: [#4449](https://github.com/microsoft/fluentui-react-native/issues/4449).
 
@@ -115,7 +115,7 @@ Scope: the driver-owned channel factory and the run-owned extraction cache.
 - macOS lease maintenance is host-owned; default macOS and Windows/Win32 native smoke retain their exact supervisor-launched applications in the channel child.
 - macOS smoke verifies the built instance bundle and renderer, and never stops another app merely because it shares a bundle identifier.
 - A claimed macOS driver can retain that built app across protected sessions; retained Storybook startup on Windows and Win32 currently fails closed.
-- Non-agent smokes do not qualify protected workloads. A separate local macOS candidate passed selected retained-app handoff and managed cases on Fabric and Paper.
+- Non-agent smokes do not qualify protected workloads. Separate local macOS runs passed selected retained-app handoff and managed cases on Fabric and Paper.
 
 - Exact macOS primary-app cleanup does not prove that arbitrary uncontained descendants exited.
 
@@ -143,7 +143,7 @@ Full per-run evidence (commands, counts, run ids, artifact locators, cleanup out
 
 ### macOS Fabric
 
-- **Protected handoff:** a local candidate based on `48ce62888` passed one attached and one managed accessible Button case, retaining the same app through MCP handoff and settling the app, descriptors and claim. The helper was ad-hoc signed; physical handoff and final-revision qualification were not run. Evidence: [#4510](https://github.com/microsoft/fluentui-react-native/pull/4510).
+- **Protected handoff:** at `69fd4a850`, an accessible Button case and a physical Checkbox case each passed once attached and once managed. MCP-to-runner-to-MCP handoff retained the same app; the exact primary app, descriptors and claim settled. The helper was ad-hoc signed; broader fault and stable-signing qualification remain open. Evidence: [#4510](https://github.com/microsoft/fluentui-react-native/pull/4510).
 
 - **Owned non-agent smoke:** a candidate worktree based on `474941a38` passed 223 navigations and 37 accessible callbacks, and 223 navigations and 120 physical callbacks; each lane had three declared unsupported cases. The accessible run preceded the final identity guard; the physical run included it. Evidence: [#4510](https://github.com/microsoft/fluentui-react-native/pull/4510).
 
@@ -155,7 +155,7 @@ Full per-run evidence (commands, counts, run ids, artifact locators, cleanup out
 
 ### macOS Paper
 
-- **Protected handoff:** the same local candidate passed one attached and one managed accessible Button case with settled app, descriptors and claim. The helper was ad-hoc signed; physical handoff and final-revision qualification were not run. An earlier launch could not capture an exact start time and was manually reconciled after its app exited; the cause remains unknown. Evidence: [#4510](https://github.com/microsoft/fluentui-react-native/pull/4510).
+- **Protected handoff:** at `69fd4a850`, an accessible Button case and a physical Checkbox case each passed once attached and once managed. MCP-to-runner-to-MCP handoff retained the same app; the exact primary app, descriptors and claim settled. The helper was ad-hoc signed; an earlier launch could not capture an exact start time and was manually reconciled after its app exited, with cause unknown. Evidence: [#4510](https://github.com/microsoft/fluentui-react-native/pull/4510).
 
 - **Owned non-agent smoke:** a candidate worktree based on `474941a38` passed 223 navigations and 36 accessible callbacks, and 223 navigations and 120 physical callbacks; each lane had three declared unsupported cases. Both runs preceded the final identity guard; a later guarded render-only run passed 223 navigations. Evidence: [#4510](https://github.com/microsoft/fluentui-react-native/pull/4510).
 
