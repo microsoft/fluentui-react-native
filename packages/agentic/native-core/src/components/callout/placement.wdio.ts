@@ -11,11 +11,11 @@ export async function expectCalloutPlacement(
     if (original) {
       // Placement flips to the opposite edge when the work area lacks room below the anchor, as it does for a low
       // owner window on a small runner display; the top of the screen leaves room for the preferred edge.
-      await browser.setWindowRect(original.x, 0, original.width, original.height);
+      // A Windows popup keeps its screen position when the owner moves, so the owner also narrows; the story
+      // repositions its presentation after the resulting layout change.
+      await browser.setWindowRect(original.x, 0, platform === 'windows' ? original.width - 20 : original.width, original.height);
     }
     if (platform === 'windows') {
-      // A Windows popup keeps its screen position when the owner moves; the reposition command recomputes it.
-      await (await browser.$('~modern-callout-reposition')).click();
       await expect(await browser.$('~modern-callout-operations')).toHaveText('reposition: confirmed');
     }
     const anchor = await browser.getElementRect(await (await browser.$('~modern-callout-anchor')).elementId);

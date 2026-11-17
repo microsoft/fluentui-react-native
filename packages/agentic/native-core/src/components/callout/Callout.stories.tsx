@@ -1,6 +1,7 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import * as React from 'react';
 import { Pressable, Text, View, StyleSheet } from 'react-native';
+import type { LayoutChangeEvent, LayoutRectangle } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { useFocusablePressable } from '@fluentui-react-native/framework-base';
 import type { PointerFocusMode } from '@fluentui-react-native/framework-base';
@@ -59,8 +60,18 @@ function Example({ anchorKind, exercise }: ExampleProps) {
     const closed = await api.close(presentation);
     setOperations(`${focused.status}/${positioned.status}/${closed.status}`);
   };
+  const frame = React.useRef<LayoutRectangle>(undefined);
+  const onLayout = ({ nativeEvent: { layout } }: LayoutChangeEvent) => {
+    const previous = frame.current;
+    frame.current = layout;
+    if (!previous || !handle.current?.getPresentation()) return;
+    // A native popup does not track its owner's layout; the owner repositions an open presentation after it changes.
+    if (previous.x !== layout.x || previous.y !== layout.y || previous.width !== layout.width || previous.height !== layout.height) {
+      void operation('reposition');
+    }
+  };
   return (
-    <View style={styles.story}>
+    <View style={styles.story} onLayout={onLayout}>
       <View accessible accessibilityRole="text" accessibilityLabel={status} testID="modern-callout-status">
         <Text accessible={false}>{status}</Text>
       </View>
