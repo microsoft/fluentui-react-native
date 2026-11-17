@@ -1,6 +1,6 @@
 ---
 name: furn-desktop-testing
-description: Configure, run, or troubleshoot native desktop tests with Fluent UI React Native desktop-test, desktop-driver, and optional storybook-desktop. Covers app targets, suites, helpers, permissions, WDIO, story callbacks, reports, and CI. Not for package implementation changes or application build-toolchain development.
+description: Configure, run, or troubleshoot FURN desktop tests and agent-controlled workloads using desktop-test, desktop-driver, desktop-mcp, and optional storybook-desktop. Covers app targets, suites, verified discovery, runner handoff, helpers, permissions, WDIO, story callbacks, reports, and CI. Not for package implementation or application build-toolchain development.
 license: MIT
 ---
 

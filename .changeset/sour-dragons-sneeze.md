@@ -11,4 +11,7 @@ repository discovery adapters and metadata. Enforce package-contained public
 resources and allowlisted package documentation, and update component guidance
 to the canonical sources and skill names.
 
+Include Desktop MCP supervisor/workload guidance and retain desktop-driver-mcp
+only as an explicit driver-only compatibility choice.
+
 
