@@ -92,18 +92,18 @@ extension SelfTestRunner {
     refuse("a key press when activation leaves an unrelated foreground", "key", key)
     foreground = nil
     refuse("a key press with unreadable foreground", "key", key)
-    check(activations == 1, "an unreadable foreground does not trigger activation")
+    check(activations == 2, "each command attempts activation at most once if no leased foreground can be proven")
 
     do {
       foreground = foreignPID
       bringsLeaseForward = true
       let before = recorder.posted.count
       try perform("key", [key])
-      check(activations == 2 && input.depressedKeyCount == 1, "an exactly leased foreground is verified again after activation")
+      check(activations == 3 && input.depressedKeyCount == 1, "an exactly leased foreground is verified again after activation")
       foreground = foreignPID
       try perform("key", [["type": "keyUp", "value": "b"], ["type": "keyUp", "value": "a"]])
       check(
-        Array(recorder.posted.dropFirst(before)) == [.keyDown, .keyUp] && !input.hasDepressedInput && activations == 2,
+        Array(recorder.posted.dropFirst(before)) == [.keyDown, .keyUp] && !input.hasDepressedInput && activations == 3,
         "focus loss does not block release of the owned key, and an unowned keyUp posts nothing"
       )
 
@@ -114,7 +114,7 @@ extension SelfTestRunner {
         check(false, "focus loss between key presses is refused without reactivating")
       } catch let error as HelperError {
         check(
-          error.code == ErrorCode.notInteractable && error.effect == .partial && activations == 2
+          error.code == ErrorCode.notInteractable && error.effect == .partial && activations == 3
             && Array(recorder.posted.dropFirst(beforeFocusSwitch)) == [.keyDown, .keyUp] && !input.hasDepressedInput,
           "focus loss between key presses refuses the second press and unwinds the first"
         )
@@ -145,7 +145,7 @@ extension SelfTestRunner {
       } catch let error as CancelledError {
         check(
           error.effect == .noEffect && Array(recorder.posted.dropFirst(beforeCancellation)) == [.keyUp]
-            && !input.hasDepressedInput && activations == 2,
+            && !input.hasDepressedInput && activations == 3,
           "cancelled actions unwind an owned key without checking or changing foreground"
         )
       }
@@ -160,7 +160,7 @@ extension SelfTestRunner {
       let beforeRelease = recorder.posted.count
       _ = try driver.execute(command: "releaseActions", params: [:], token: CancellationToken())
       check(
-        Array(recorder.posted.dropFirst(beforeRelease)) == [.keyUp, .leftMouseUp] && !input.hasDepressedInput && activations == 2,
+        Array(recorder.posted.dropFirst(beforeRelease)) == [.keyUp, .leftMouseUp] && !input.hasDepressedInput && activations == 3,
         "releaseActions unwinds its ledger despite focus and pointer ownership changes"
       )
       try PhysicalInputLock(baseName: lockName).withLock(token: CancellationToken(), timeoutMilliseconds: 0) {

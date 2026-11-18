@@ -21,7 +21,7 @@ struct ActionTargetOwnership {
     let foreground = try focusedApplication()
     try token.throwIfCancelled()
     if owns(foreground) { return }
-    if allowActivation, foreground != nil, try activatePrimary(token) {
+    if allowActivation, try activatePrimary(token) {
       try token.throwIfCancelled()
       let activated = try focusedApplication()
       try token.throwIfCancelled()

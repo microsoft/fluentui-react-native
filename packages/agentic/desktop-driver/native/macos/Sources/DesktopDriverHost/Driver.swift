@@ -674,7 +674,7 @@ final class Driver {
     }
     let ownership = actionTargetOwnership ?? ActionTargetOwnership(
       windowOwner: accessibility.actionWindowOwner,
-      focusedApplication: focusedApplicationPID,
+      focusedApplication: applications.inputForegroundPID,
       leaseStarts: applications.inputLeaseStarts,
       observe: ApplicationIncarnation.observeExact,
       activatePrimary: { token in

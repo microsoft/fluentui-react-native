@@ -24,7 +24,7 @@
       "targetOwnership": {
         "pointerDownDragAndScroll": "window-of-exact-live-application-lease",
         "keyDown": "foreground-with-exact-live-application-lease",
-        "activation": "at-most-once-before-first-key-press-when-foreground-is-known",
+        "activation": "at-most-once-before-first-key-press-without-proven-leased-foreground",
         "missingTargetErrorCode": "element-not-interactable",
         "releaseRequiresTargetOwnership": false,
         "unownedReleasePostsInput": false

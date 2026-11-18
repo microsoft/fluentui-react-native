@@ -142,10 +142,10 @@ physical-input lock. New button presses, drag events and scrolls need an
 Accessibility hit in a window or sheet whose PID and kernel start time match
 a live lease. Scroll checks the destination before moving and checks the
 acknowledged pointer position again before posting. Bare pointer placement
-does not require a hit. Each new key press needs the system-wide keyboard
-foreground to match a live exact lease. If the first press finds a known
-unowned foreground, the helper may activate its verified primary window once
-and rechecks the foreground before posting. A later focus change never
+does not require a hit. Each new key press needs exactly one live leased
+application to report `AXFrontmost`. If no leased foreground can be proven
+for the first press, the helper may activate its verified primary window
+once and rechecks the foreground before posting. A later focus change never
 triggers another activation within that command.
 
 An unowned or unproven target returns `element-not-interactable` with effect

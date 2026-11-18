@@ -407,9 +407,9 @@ returns `move-target-out-of-bounds` before posting that action's input.
 Raw `performActions` button presses, drags and scrolls require a hit inside a
 window or sheet of an exactly leased process. No hit or unverifiable ownership
 is a refusal, unlike the permissive no-hit path on Windows. Raw key presses
-verify the exact keyboard foreground before each press; only the first press
-can activate the verified primary window and then recheck focus. An unknown
-foreground does not trigger activation. Releases and cancellation still unwind
+verify that exactly one live leased application reports `AXFrontmost` before
+each press. Only the first press can activate the verified primary window and
+then recheck focus. Releases and cancellation still unwind
 input that the helper owns even when focus changes. See the [native action
 rules](../PROTOCOL.md#action-values).
 
