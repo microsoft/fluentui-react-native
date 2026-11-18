@@ -21,7 +21,7 @@ import {
   readProviderQuarantine,
 } from '../protocol/settlement.js';
 import type { MutationEffect } from '../protocol/settlement.js';
-import { withCommandTimeout, withDeadline } from '../protocol/timeouts.js';
+import { defaultAppLaunchTimeoutMs, withCommandTimeout, withDeadline } from '../protocol/timeouts.js';
 import type { DesktopClickMode, DesktopTimeouts, WebDriverTimeouts } from '../protocol/types.js';
 import type { StoryReadyResult } from '../storybook.js';
 import { applicationOf, defaultStorageDeadlineMs } from './settlementJournal.js';
@@ -450,7 +450,7 @@ export class SessionManager {
           leasePromise = launchMode === 'attach' ? target.host.attach(target, signal) : target.host.launch(target, signal);
           return leasePromise;
         },
-        target.launchTimeoutMs ?? 120_000,
+        target.launchTimeoutMs ?? defaultAppLaunchTimeoutMs,
         `${launchMode === 'attach' ? 'Attaching to' : 'Launching'} target "${target.id}"`,
         { signal },
       );
@@ -477,7 +477,7 @@ export class SessionManager {
         createdAt: new Date().toISOString(),
         currentWindowId: windows[0].id,
         desktopTimeouts: {
-          appLaunch: target.launchTimeoutMs ?? 120_000,
+          appLaunch: target.launchTimeoutMs ?? defaultAppLaunchTimeoutMs,
           nativeCommand: 10_000,
           stableLayout: 1_000,
           storyRender: 30_000,

@@ -124,6 +124,14 @@ exits, including on assertion failures, timeouts, or crashes. WebdriverIO's
 sets `waitforInterval` (100 ms) and `waitforTimeout` (5 s) explicitly; without
 an interval, `waitUntil` and `waitFor*` stop after their first unsatisfied poll.
 
+`connectDesktopWebdriver` and `attachDesktopWebdriver` disable automatic
+transport retries: a request that failed may already have launched the app or
+changed its state. Failed mutations keep the driver's `error.data.mutation`
+report when the service returns one; a transport failure without a report
+does not prove that the operation was rejected. If a target has a custom
+launch deadline, pass it as `launchTimeoutMs` to `connectDesktopWebdriver`
+so the transport allows time for the service to report its outcome.
+
 Storybook's preferred top-level `wdio` export is an array of `desktopIt` cases,
 which declare the input and platforms they need. Its older functions and named
 function collections use the same pattern with Node's built-in test runner.

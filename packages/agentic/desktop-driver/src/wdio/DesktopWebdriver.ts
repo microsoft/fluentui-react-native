@@ -10,6 +10,8 @@ import type { DesktopStoryExpectation } from '../authoring/storyTests.js';
 import type { DesktopHostFeatures } from '../host/types.js';
 import { ArtifactManager } from '../artifacts/ArtifactManager.js';
 import { createDesktopDriverClient, DesktopElementClient, DesktopSessionClient } from '../client/DesktopDriverClient.js';
+import { dispositionForEffect, parseMutationEffect } from '../protocol/settlement.js';
+import { defaultAppLaunchTimeoutMs } from '../protocol/timeouts.js';
 import type { DesktopClickMode, DesktopPlatformName } from '../protocol/types.js';
 import { assertDesktopExpectation, runDesktopStoryTests } from '../runner/StoryTestRunner.js';
 import type { DesktopStoryTestSelection } from '../runner/StoryTestRunner.js';
@@ -55,6 +57,8 @@ export type DesktopWebdriverOptions = {
   /** The input the session may deliver. A strict mode pins the click mode. Defaults to `compatibility`. */
   inputMode?: DesktopInputMode;
   launchMode?: 'attach' | 'launch';
+  /** Match the registered target's launch deadline if it differs from the service default. */
+  launchTimeoutMs?: number;
   logLevel?: 'debug' | 'error' | 'info' | 'silent' | 'trace' | 'warn';
   platformName: DesktopPlatformName;
   targetId: string;
@@ -183,6 +187,7 @@ export async function connectDesktopWebdriver(options: DesktopWebdriverOptions):
   );
   const browser = await remote({
     ...connectionOptions(options.url),
+    ...desktopTransportOptions(options.launchTimeoutMs),
     ...(options.grant === undefined ? {} : desktopWebdriverGrantOptions(options.grant)),
     capabilities,
     logLevel: options.logLevel ?? 'silent',
@@ -203,10 +208,42 @@ export async function attachDesktopWebdriver(options: DesktopWebdriverAttachment
     options: {
       logLevel: 'silent',
       ...attachedWaitDefaults,
+      ...desktopTransportOptions(),
       ...(options.grant === undefined ? {} : desktopWebdriverGrantOptions(options.grant)),
     },
   });
   return installDesktopWebdriverCommands(browser, options.url, { grant: options.grant });
+}
+
+function desktopTransportOptions(
+  launchTimeoutMs = defaultAppLaunchTimeoutMs,
+): Pick<Parameters<typeof remote>[0], 'connectionRetryCount' | 'connectionRetryTimeout' | 'transformResponse'> {
+  const maxTimerMs = 2_147_483_647;
+  if (!Number.isSafeInteger(launchTimeoutMs) || launchTimeoutMs < 1 || launchTimeoutMs > maxTimerMs) {
+    throw new TypeError('Desktop WebDriver launchTimeoutMs must be a positive bounded integer.');
+  }
+  return {
+    connectionRetryCount: 0,
+    connectionRetryTimeout: Math.min(launchTimeoutMs + 15_000, maxTimerMs),
+    transformResponse(response) {
+      if (response.statusCode < 400 || !isRecord(response.body)) return response;
+      const { value } = response.body;
+      if (!isRecord(value) || typeof value.error !== 'string' || typeof value.message !== 'string' || !isRecord(value.data)) {
+        return response;
+      }
+      const { mutation } = value.data;
+      if (!isRecord(mutation)) return response;
+      const effect = parseMutationEffect(mutation.effect);
+      if (!effect || typeof mutation.quarantined !== 'boolean') return response;
+      // WDIO's default error conversion discards data and can append request arguments to the message.
+      const report = { disposition: dispositionForEffect(effect), effect, quarantined: mutation.quarantined };
+      throw Object.assign(new Error(value.message), { name: value.error, data: { mutation: report } });
+    },
+  };
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
 
 /** Transport-only configuration for a WDIO-managed session. The token stays out of serialized WDIO options. */
