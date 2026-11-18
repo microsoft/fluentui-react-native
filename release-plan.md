@@ -687,20 +687,20 @@ commit SHA, and a note.
 | R0-3 (P1-2) retry options                                      | `6fb97096e` | WebdriverIO 12/12 passed; candidate Q6 smoke not run. |
 | R0-5 (P1-4) Node validation                                    |             |                                                       |
 | R0-6 (P1-5) Node recovery                                      |             |                                                       |
-| R0-9 (P2-10) `boundedCommand` readiness                        | `2aab0b03e` | Awaiting Windows Q3 on the fix.                       |
+| R0-9 (P2-10) `boundedCommand` readiness                        | `2aab0b03e` | Windows pre-candidate Q3 passed 30/30 at `419e1c05b`. |
 | R1-DRV-3 (P2-6) and R1-DRV-7 (P3-DRV-10), before W-R1-3 starts |             |                                                       |
 
 | Item                                  | Status      | Commit      | Notes                                                                                                                               |
 | ------------------------------------- | ----------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------- |
 | Phase 0 setup and draft PR            | done        | `302ce30bb` | Draft #4515 open; Windows kickoff in the workflow mailbox.                                                                          |
-| R0-1 desktop-test minor and migration | not started |             |                                                                                                                                     |
-| R0-2 changelog text                   | not started |             |                                                                                                                                     |
+| R0-1 desktop-test minor and migration | done        | `960e9b90b` | `yarn changeset status` resolves 0.4.0; generated changelog and pins will be checked in the candidate preview.                      |
+| R0-2 changelog text                   | done        | `6b53b1686` | Package-specific source entries are split; candidate changelog preview pending.                                                     |
 | R0-3 P1-2 WebdriverIO retries         | done        | `6fb97096e` | Fake-host launch and connected/attached click contracts passed on macOS and Windows. Native Storybook smoke awaits a candidate SHA. |
 | R0-5 P1-4 Node and Swift              | not started |             |                                                                                                                                     |
 | R0-6 P1-5 Node and Swift              | not started |             |                                                                                                                                     |
 | R0-7 P1-6                             | not started |             |                                                                                                                                     |
 | R0-8 P1-7                             | not started |             |                                                                                                                                     |
-| R0-9 P2-10 boundedCommand             | done        | `2aab0b03e` | macOS pre-candidate Q3 passed 30/30. Windows Q3 on the fix is pending.                                                              |
+| R0-9 P2-10 boundedCommand             | done        | `2aab0b03e` | macOS and Windows pre-candidate Q3 each passed 30/30. Windows evidence is recorded at `00d522188`.                                  |
 | R1-PKG-1 to R1-PKG-6                  | not started |             |                                                                                                                                     |
 | R1-DRV-1 to R1-DRV-8                  | not started |             |                                                                                                                                     |
 | R1-MAC-1                              | not started |             |                                                                                                                                     |
