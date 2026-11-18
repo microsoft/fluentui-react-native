@@ -21,6 +21,7 @@
 #include "authoritytests.h"
 #include "observationtests.h"
 #include "automation.h"
+#include "capture.h"
 #include "common.h"
 #include "driver.h"
 #include "events.h"
@@ -4176,6 +4177,7 @@ int RunSelfTest() {
   TestFraming();
   TestJson();
   TestGeometry();
+  RunCaptureRecoverySelfTests(&Check);
   TestInputLedger();
   TestReleaseLedger();
   TestPhysicalInputLock();

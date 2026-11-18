@@ -221,6 +221,9 @@ and letters while Caps Lock is on are injected as Unicode packets. Element
 Windows and Win32 share implementation but retain distinct endpoint and
 renderer capabilities. Minimized-window capture remains unsupported rather
 than changing app state through an implicit restore.
+After a Direct3D device removal or reset, the helper closes the frame pool,
+recreates the device, and retries capture once. A second failure is reported
+as `capture-failed`.
 
 Window activation treats a foreground window owned by the target window as
 already active, as macOS does for application activation. Reactivating the

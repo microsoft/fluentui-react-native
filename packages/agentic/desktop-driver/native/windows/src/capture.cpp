@@ -31,6 +31,56 @@ using winrt::Windows::Graphics::DirectX::Direct3D11::IDirect3DDevice;
 
 constexpr unsigned int kFrameTimeoutMs = 4000;
 
+bool IsDeviceLoss(HRESULT error) {
+  return error == DXGI_ERROR_DEVICE_REMOVED || error == DXGI_ERROR_DEVICE_RESET;
+}
+
+void CheckCaptureHresult(std::string_view operation, HRESULT result) {
+  if (IsDeviceLoss(result)) winrt::throw_hresult(result);
+  CheckHresult(kErrorCaptureFailed, operation, result);
+}
+
+template <typename Capture, typename DeviceStatus, typename Reset>
+RawFrame CaptureWithDeviceRecovery(const CancellationToken& token, Capture&& capture, DeviceStatus&& deviceStatus,
+                                   Reset&& reset) {
+  for (int attempt = 0;; ++attempt) {
+    token.ThrowIfCancelled();
+    try {
+      return capture();
+    } catch (const winrt::hresult_error& error) {
+      if (!IsDeviceLoss(error.code()) && !IsDeviceLoss(deviceStatus())) {
+        FailHresult(kErrorCaptureFailed, "Capturing the window", error.code());
+      }
+      reset();
+      if (attempt != 0) FailHresult(kErrorCaptureFailed, "Capturing the window after device recovery", error.code());
+    } catch (const HelperError& error) {
+      if (error.code() != kErrorCaptureFailed || !IsDeviceLoss(deviceStatus())) throw;
+      reset();
+      if (attempt != 0) throw;
+    }
+  }
+}
+
+struct CaptureSessionResources {
+  Direct3D11CaptureFramePool framePool{nullptr};
+  GraphicsCaptureSession session{nullptr};
+  winrt::event_token frameToken{};
+
+  ~CaptureSessionResources() {
+    if (frameToken) framePool.FrameArrived(frameToken);
+    // Close may itself report a device failure. Release both objects without
+    // replacing the HRESULT from the failed capture.
+    try {
+      if (session) session.Close();
+    } catch (const winrt::hresult_error&) {
+    }
+    try {
+      if (framePool) framePool.Close();
+    } catch (const winrt::hresult_error&) {
+    }
+  }
+};
+
 }  // namespace
 
 POINT ResolveCaptureOrigin(HWND window, UINT capturedWidth, UINT capturedHeight) {
@@ -58,10 +108,21 @@ struct CaptureEngine::Impl {
   IDirect3DDevice runtimeDevice{nullptr};
   winrt::com_ptr<IWICImagingFactory> imaging;
 
+  void ResetDevice() {
+    runtimeDevice = nullptr;
+    context = nullptr;
+    device = nullptr;
+  }
+
+  HRESULT DeviceStatus() const { return device ? device->GetDeviceRemovedReason() : S_OK; }
+
   void EnsureDevice() {
     if (device && runtimeDevice) {
+      const HRESULT status = DeviceStatus();
+      if (IsDeviceLoss(status)) winrt::throw_hresult(status);
       return;
     }
+    ResetDevice();
     const D3D_FEATURE_LEVEL levels[] = {D3D_FEATURE_LEVEL_11_1, D3D_FEATURE_LEVEL_11_0, D3D_FEATURE_LEVEL_10_1,
                                         D3D_FEATURE_LEVEL_10_0};
     HRESULT result = D3D11CreateDevice(nullptr, D3D_DRIVER_TYPE_HARDWARE, nullptr, D3D11_CREATE_DEVICE_BGRA_SUPPORT,
@@ -73,14 +134,13 @@ struct CaptureEngine::Impl {
       result = D3D11CreateDevice(nullptr, D3D_DRIVER_TYPE_WARP, nullptr, D3D11_CREATE_DEVICE_BGRA_SUPPORT, levels,
                                  ARRAYSIZE(levels), D3D11_SDK_VERSION, device.put(), nullptr, context.put());
     }
-    CheckHresult(kErrorCaptureFailed, "Creating the Direct3D 11 capture device", result);
+    CheckCaptureHresult("Creating the Direct3D 11 capture device", result);
 
     winrt::com_ptr<IDXGIDevice> dxgiDevice;
-    CheckHresult(kErrorCaptureFailed, "Reading the DXGI capture device",
-                 device->QueryInterface(IID_PPV_ARGS(dxgiDevice.put())));
+    CheckCaptureHresult("Reading the DXGI capture device", device->QueryInterface(IID_PPV_ARGS(dxgiDevice.put())));
     winrt::com_ptr<::IInspectable> inspectable;
-    CheckHresult(kErrorCaptureFailed, "Wrapping the Direct3D device for Windows Graphics Capture",
-                 CreateDirect3D11DeviceFromDXGIDevice(dxgiDevice.get(), inspectable.put()));
+    CheckCaptureHresult("Wrapping the Direct3D device for Windows Graphics Capture",
+                        CreateDirect3D11DeviceFromDXGIDevice(dxgiDevice.get(), inspectable.put()));
     runtimeDevice = inspectable.as<IDirect3DDevice>();
   }
 
@@ -116,6 +176,12 @@ RawFrame CaptureEngine::CaptureWindow(HWND window, const CancellationToken& toke
   if (!Available()) {
     Fail(kErrorUnsupported, "Windows Graphics Capture is unavailable on this system.");
   }
+  return CaptureWithDeviceRecovery(
+      token, [&]() { return CaptureWindowAttempt(window, token); },
+      [&]() { return impl_->DeviceStatus(); }, [&]() { impl_->ResetDevice(); });
+}
+
+RawFrame CaptureEngine::CaptureWindowAttempt(HWND window, const CancellationToken& token) {
   impl_->EnsureDevice();
   token.ThrowIfCancelled();
 
@@ -125,7 +191,7 @@ RawFrame CaptureEngine::CaptureWindow(HWND window, const CancellationToken& toke
     winrt::check_hresult(
         interop->CreateForWindow(window, winrt::guid_of<GraphicsCaptureItem>(), winrt::put_abi(item)));
   } catch (const winrt::hresult_error& error) {
-    FailHresult(kErrorCaptureFailed, "Creating the window capture item", error.code());
+    CheckCaptureHresult("Creating the window capture item", error.code());
   }
   if (!item) {
     Fail(kErrorCaptureFailed, "Windows Graphics Capture did not provide a capture item for the window.");
@@ -142,9 +208,8 @@ RawFrame CaptureEngine::CaptureWindow(HWND window, const CancellationToken& toke
   }
   const HANDLE readyHandle = ready->get();
 
-  Direct3D11CaptureFramePool framePool{nullptr};
-  GraphicsCaptureSession session{nullptr};
-  winrt::event_token frameToken{};
+  CaptureSessionResources resources;
+  auto& [framePool, session, frameToken] = resources;
   try {
     framePool = Direct3D11CaptureFramePool::CreateFreeThreaded(
         impl_->runtimeDevice, DirectXPixelFormat::B8G8R8A8UIntNormalized, 2, size);
@@ -167,14 +232,11 @@ RawFrame CaptureEngine::CaptureWindow(HWND window, const CancellationToken& toke
     }
     session.StartCapture();
   } catch (const winrt::hresult_error& error) {
-    if (framePool) {
-      framePool.Close();
-    }
-    FailHresult(kErrorCaptureFailed, "Starting the window capture session", error.code());
+    CheckCaptureHresult("Starting the window capture session", error.code());
   }
 
   RawFrame result;
-  try {
+  {
     Direct3D11CaptureFrame frame{nullptr};
     const Deadline deadline(kFrameTimeoutMs);
     while (!frame) {
@@ -194,8 +256,7 @@ RawFrame CaptureEngine::CaptureWindow(HWND window, const CancellationToken& toke
 
     const auto access = frame.Surface().as<::Windows::Graphics::DirectX::Direct3D11::IDirect3DDxgiInterfaceAccess>();
     winrt::com_ptr<ID3D11Texture2D> texture;
-    CheckHresult(kErrorCaptureFailed, "Reading the captured Direct3D texture",
-                 access->GetInterface(IID_PPV_ARGS(texture.put())));
+    CheckCaptureHresult("Reading the captured Direct3D texture", access->GetInterface(IID_PPV_ARGS(texture.put())));
 
     D3D11_TEXTURE2D_DESC description{};
     texture->GetDesc(&description);
@@ -205,17 +266,17 @@ RawFrame CaptureEngine::CaptureWindow(HWND window, const CancellationToken& toke
     staging.CPUAccessFlags = D3D11_CPU_ACCESS_READ;
     staging.MiscFlags = 0;
     winrt::com_ptr<ID3D11Texture2D> readback;
-    CheckHresult(kErrorCaptureFailed, "Creating the capture readback texture",
-                 impl_->device->CreateTexture2D(&staging, nullptr, readback.put()));
+    CheckCaptureHresult("Creating the capture readback texture",
+                        impl_->device->CreateTexture2D(&staging, nullptr, readback.put()));
     impl_->context->CopyResource(readback.get(), texture.get());
 
-    D3D11_MAPPED_SUBRESOURCE mapped{};
-    CheckHresult(kErrorCaptureFailed, "Mapping the capture readback texture",
-                 impl_->context->Map(readback.get(), 0, D3D11_MAP_READ, 0, &mapped));
     result.width = description.Width;
     result.height = description.Height;
     result.stride = result.width * 4;
     result.pixels.resize(static_cast<std::size_t>(result.stride) * result.height);
+    D3D11_MAPPED_SUBRESOURCE mapped{};
+    CheckCaptureHresult("Mapping the capture readback texture",
+                        impl_->context->Map(readback.get(), 0, D3D11_MAP_READ, 0, &mapped));
     const auto* source = static_cast<const std::uint8_t*>(mapped.pData);
     for (UINT row = 0; row < result.height; row += 1) {
       std::copy_n(source + static_cast<std::size_t>(row) * mapped.RowPitch, result.stride,
@@ -223,29 +284,51 @@ RawFrame CaptureEngine::CaptureWindow(HWND window, const CancellationToken& toke
     }
     impl_->context->Unmap(readback.get(), 0);
     frame.Close();
-  } catch (...) {
-    if (frameToken) {
-      framePool.FrameArrived(frameToken);
-    }
-    if (session) {
-      session.Close();
-    }
-    if (framePool) {
-      framePool.Close();
-    }
-    throw;
   }
-
-  if (frameToken) {
-    framePool.FrameArrived(frameToken);
-  }
-  session.Close();
-  framePool.Close();
 
   result.origin = ResolveCaptureOrigin(window, result.width, result.height);
   const UINT dpi = GetDpiForWindow(window);
   result.scaleFactor = static_cast<double>(dpi == 0 ? kDefaultDpi : dpi) / static_cast<double>(kDefaultDpi);
   return result;
+}
+
+void RunCaptureRecoverySelfTests(void (*check)(bool, const std::string&)) {
+  const CancellationToken token;
+  for (const HRESULT failure : {DXGI_ERROR_DEVICE_REMOVED, DXGI_ERROR_DEVICE_RESET}) {
+    int captures = 0;
+    int resets = 0;
+    const auto frame = CaptureWithDeviceRecovery(
+        token, [&]() {
+          if (++captures == 1) CheckCaptureHresult("Reading a test frame", failure);
+          RawFrame result;
+          result.width = 42;
+          return result;
+        },
+        []() { return S_OK; }, [&]() { ++resets; });
+    check(frame.width == 42 && captures == 2 && resets == 1, "capture retries once after device loss");
+  }
+
+  int captures = 0;
+  bool failed = false;
+  try {
+    CaptureWithDeviceRecovery(
+        token, [&]() -> RawFrame { ++captures; winrt::throw_hresult(DXGI_ERROR_DEVICE_REMOVED); },
+        []() { return S_OK; }, []() {});
+  } catch (const HelperError& error) {
+    failed = error.code() == kErrorCaptureFailed;
+  }
+  check(failed && captures == 2, "repeated device loss stops after one retry with capture-failed");
+
+  captures = 0;
+  failed = false;
+  try {
+    CaptureWithDeviceRecovery(
+        token, [&]() -> RawFrame { ++captures; Fail(kErrorCaptureFailed, "Test frame was not delivered."); },
+        []() { return S_OK; }, []() {});
+  } catch (const HelperError& error) {
+    failed = error.code() == kErrorCaptureFailed;
+  }
+  check(failed && captures == 1, "a capture failure without device loss is not retried");
 }
 
 EncodedImage CaptureEngine::Encode(const RawFrame& frame, const RECT& cropInFrame) {
