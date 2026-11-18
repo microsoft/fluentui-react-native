@@ -114,6 +114,23 @@ application descriptors may include an existing absolute `workingDirectory`
 for unpackaged process launch; packaged activation rejects that override.
 These fields are trusted supervisor configuration, not WebDriver capabilities.
 
+### Action values
+
+Before dispatching `performActions`, Node requires `x`, `y`, `deltaX`, and
+`deltaY` where applicable to be finite numbers in the inclusive range
+`-2147483648` to `2147483647`. Fractional values are retained.
+
+For direct requests, macOS independently validates coordinates against that
+range and requires finite wheel deltas before moving the pointer. To create a
+Quartz wheel event it negates the deltas, rounds to the nearest integer (ties
+away from zero), and clamps to the signed 32-bit range before conversion.
+Pointer buttons must be integers from 0 to 4. Pause and pointer-move durations,
+if present, must be non-negative integers and are capped at 30,000 milliseconds
+before conversion. Invalid values return `invalid-params`. The action-value
+rules are recorded in [protocol.json](protocol.json); FDR1 remains at 1.0.
+
+### Application leases
+
 A `launch` or `attach` result is the application lease `{ id, ownership,
 processId, processStartedAt }`. The Windows provider adds `containment`, which
 states how far its ownership reaches: `job-object` for an unpackaged launch it

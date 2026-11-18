@@ -10,6 +10,20 @@
     "jsonType": 1,
     "binaryType": 2
   },
+  "performActions": {
+    "nodeFields": ["x", "y", "deltaX", "deltaY"],
+    "nodeNumberRange": { "type": "number", "minimum": -2147483648, "maximum": 2147483647 },
+    "macos": {
+      "coordinates": { "$ref": "#/performActions/nodeNumberRange" },
+      "wheelConversion": {
+        "input": "finite-number",
+        "operation": "negate-round-clamp",
+        "output": { "type": "integer", "minimum": -2147483648, "maximum": 2147483647 }
+      },
+      "button": { "type": "integer", "minimum": 0, "maximum": 4 },
+      "duration": { "type": "integer", "minimum": 0, "capMilliseconds": 30000 }
+    }
+  },
   "windowsApplicationOwnership": {
     "processIdentity": {
       "type": "object",

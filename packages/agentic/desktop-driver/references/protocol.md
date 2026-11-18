@@ -145,7 +145,10 @@ and Storybook chrome references.
 
 Pointer and wheel actions may use WebDriver element origins. The server resolves
 the public UUID, validates generation and liveness, and passes only the native
-element ID to the host.
+element ID to the host. Action coordinates (`x`, `y`) and wheel deltas (`deltaX`,
+`deltaY`) must be finite numbers from `-2147483648` through `2147483647`, inclusive.
+Fractions within the range are accepted. Invalid values return `invalid argument`
+before the action sequence is dispatched.
 
 Portable lookup strategies:
 

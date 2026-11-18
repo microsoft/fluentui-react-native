@@ -129,9 +129,8 @@ function parseAction(
     throw invalidArgument(`${path}.type is invalid for a wheel input source.`);
   }
   validateCoordinates(action, path);
-  if (typeof action.deltaX !== 'number' || typeof action.deltaY !== 'number') {
-    throw invalidArgument(`${path}.deltaX and deltaY must be numbers.`);
-  }
+  validateActionNumber(action.deltaX, `${path}.deltaX`);
+  validateActionNumber(action.deltaY, `${path}.deltaY`);
   validateDuration(action.duration, path);
   validateOrigin(action.origin, path);
   return action as WebDriverAction;
@@ -143,8 +142,13 @@ export function isSingleWebDriverKeyValue(value: string): boolean {
 }
 
 function validateCoordinates(action: Record<string, unknown>, path: string): void {
-  if (typeof action.x !== 'number' || typeof action.y !== 'number') {
-    throw invalidArgument(`${path}.x and y must be numbers.`);
+  validateActionNumber(action.x, `${path}.x`);
+  validateActionNumber(action.y, `${path}.y`);
+}
+
+function validateActionNumber(value: unknown, path: string): void {
+  if (typeof value !== 'number' || !Number.isFinite(value) || value < -2_147_483_648 || value > 2_147_483_647) {
+    throw invalidArgument(`${path} must be a finite number from -2147483648 to 2147483647.`);
   }
 }
 

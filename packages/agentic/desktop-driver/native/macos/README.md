@@ -389,7 +389,9 @@ responsible process and an unlocked interactive Aqua session. Missing authority
 returns `input-unavailable`; the provider never substitutes unrelated
 accessibility activation and reports physical success. A positive wheel
 `deltaX` scrolls right and a positive `deltaY` scrolls down, as on Windows. Quartz
-scrolls left and up for positive values, so both deltas are negated.
+scrolls left and up for positive values, so both deltas are negated, then
+rounded and clamped to signed 32-bit values before conversion. See the
+[action value rules](../PROTOCOL.md#action-values) for direct helper requests.
 
 After posting a pointer-move sequence, the helper allows about 200 ms of
 bounded position reads for the OS to acknowledge its destination. It never
@@ -673,7 +675,8 @@ FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY="<identity>" \
   yarn test --runInBand
 ```
 
-The Swift self-test covers framing, JSON, input ledger and lock recovery,
+The Swift self-test covers framing, JSON, action value conversion without
+posting input, input ledger and lock recovery,
 capture scaling, snapshot normalization, AX diagnostics, CoreGraphics fallback
 classification, custom AX action name parsing, permission and login-session diagnostics, hello identity, and
 bounded observation: request validation, each truncation reason, a randomized

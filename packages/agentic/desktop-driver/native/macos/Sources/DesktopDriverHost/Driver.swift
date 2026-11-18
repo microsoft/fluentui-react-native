@@ -673,7 +673,7 @@ final class Driver {
         let type = optionalString(action, "type") ?? ""
         let sourceType = optionalString(source, "type") ?? "none"
         if type == "pause" {
-          pause = max(pause, actionDuration(action))
+          pause = max(pause, try parseActionDuration(action))
           continue
         }
         switch sourceType {
@@ -692,13 +692,13 @@ final class Driver {
           if type == "pointerMove" {
             try input.movePointer(
               to: try resolveActionPoint(action, token: token),
-              durationMilliseconds: actionDuration(action),
+              durationMilliseconds: try parseActionDuration(action),
               token: token
             )
           } else if type == "pointerDown" {
-            try input.pointerDown(actionButton(action), token: token)
+            try input.pointerDown(parseActionButton(action), token: token)
           } else if type == "pointerUp" {
-            try input.pointerUp(actionButton(action), token: token)
+            try input.pointerUp(parseActionButton(action), token: token)
           } else if type == "pointerCancel" {
             input.pointerCancel()
           } else {
@@ -708,12 +708,10 @@ final class Driver {
           guard type == "scroll" else {
             try fail(ErrorCode.invalidParams, "Wheel input sources support only scroll and pause.")
           }
+          let deltaX = try requireActionNumber(action, "deltaX")
+          let deltaY = try requireActionNumber(action, "deltaY")
           try input.movePointer(to: resolveActionPoint(action, token: token), durationMilliseconds: 0, token: token)
-          try input.wheel(
-            deltaX: number(action, "deltaX"),
-            deltaY: number(action, "deltaY"),
-            token: token
-          )
+          try input.wheel(deltaX: deltaX, deltaY: deltaY, token: token)
         case "none":
           try fail(ErrorCode.invalidParams, "None input sources support only pause.")
         default:
@@ -727,8 +725,12 @@ final class Driver {
   }
 
   private func resolveActionPoint(_ action: JSONObject, token: CancellationToken) throws -> CGPoint {
-    let x = CGFloat(number(action, "x"))
-    let y = CGFloat(number(action, "y"))
+    let x = try requireActionNumber(action, "x")
+    let y = try requireActionNumber(action, "y")
+    let coordinateRange = Double(Int32.min)...Double(Int32.max)
+    guard coordinateRange.contains(x), coordinateRange.contains(y) else {
+      try fail(ErrorCode.invalidParams, "Action coordinates must be within the signed 32-bit range.")
+    }
     if let origin = action["origin"] as? JSONObject {
       let elementID = try requireString(origin, "elementId")
       let window = try windowForElement(elementID)
@@ -750,14 +752,6 @@ final class Driver {
     let window = try applications.requireWindow(primaryWindowID)
     let frame = try window.currentFrame()
     return CGPoint(x: frame.minX + x, y: frame.minY + y)
-  }
-
-  private func actionDuration(_ action: JSONObject) -> Int {
-    max(0, min(30_000, integer(action, "duration")))
-  }
-
-  private func actionButton(_ action: JSONObject) -> Int {
-    integer(action, "button")
   }
 
   private func captureResult(_ image: EncodedImage) throws -> CommandResult {

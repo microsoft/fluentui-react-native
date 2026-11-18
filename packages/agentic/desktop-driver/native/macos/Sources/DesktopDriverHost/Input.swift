@@ -173,13 +173,16 @@ final class InputController {
   func wheel(deltaX: Double, deltaY: Double, token: CancellationToken) throws {
     try requireInteractiveInput()
     try token.throwIfCancelled()
+    guard deltaX.isFinite, deltaY.isFinite else {
+      try fail(ErrorCode.invalidParams, "Wheel deltas must be finite numbers.")
+    }
     guard let event = CGEvent(
       scrollWheelEvent2Source: source,
       units: .pixel,
       wheelCount: 2,
       // Quartz scrolls up and left with positive values, while the protocol scrolls down and right with positive deltas.
-      wheel1: Int32(clamping: Int((-deltaY).rounded())),
-      wheel2: Int32(clamping: Int((-deltaX).rounded())),
+      wheel1: quartzWheelDelta(deltaY),
+      wheel2: quartzWheelDelta(deltaX),
       wheel3: 0
     ) else {
       try fail(ErrorCode.inputFailed, "Creating the macOS wheel event failed.")
@@ -420,6 +423,34 @@ final class InputController {
     }
     return .unicode(value)
   }
+}
+
+private func quartzWheelDelta(_ delta: Double) -> Int32 {
+  Int32(max(Double(Int32.min), min(Double(Int32.max), (-delta).rounded())))
+}
+
+func requireActionNumber(_ action: JSONObject, _ key: String) throws -> Double {
+  guard let number = action[key] as? NSNumber, !isBoolean(number), number.doubleValue.isFinite else {
+    try fail(ErrorCode.invalidParams, "The action parameter \"\(key)\" must be a finite number.")
+  }
+  return number.doubleValue
+}
+
+func parseActionDuration(_ action: JSONObject) throws -> Int {
+  guard action["duration"] != nil else { return 0 }
+  let value = try requireActionNumber(action, "duration")
+  guard value >= 0, value == value.rounded(.towardZero) else {
+    try fail(ErrorCode.invalidParams, "Action duration must be a non-negative integer.")
+  }
+  return Int(min(30_000, value))
+}
+
+func parseActionButton(_ action: JSONObject) throws -> Int {
+  let value = try requireActionNumber(action, "button")
+  guard (0...4).contains(value), value == value.rounded(.towardZero) else {
+    try fail(ErrorCode.invalidParams, "Pointer buttons must be integers between 0 and 4.")
+  }
+  return Int(value)
 }
 
 func isSingleWebDriverKey(_ value: String) -> Bool {
