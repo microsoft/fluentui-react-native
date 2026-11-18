@@ -4171,6 +4171,8 @@ void TestDriverObservation() {
 int RunSelfTest() {
   failures = 0;
   checks = 0;
+  constexpr UINT silentErrors = SEM_FAILCRITICALERRORS | SEM_NOGPFAULTERRORBOX | SEM_NOOPENFILEERRORBOX;
+  Check((GetErrorMode() & silentErrors) == silentErrors, "startup disables blocking system error dialogs");
   TestFraming();
   TestJson();
   TestGeometry();

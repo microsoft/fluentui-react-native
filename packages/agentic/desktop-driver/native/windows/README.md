@@ -67,6 +67,10 @@ and invokes the checked-in project with:
 No CMake, NuGet restore, .NET runtime, or Windows App SDK is required by the
 helper.
 
+The helper restricts implicit dependency and default runtime DLL lookup to
+System32. Startup disables system error dialogs so a failed helper cannot
+remain alive waiting for a dialog to be dismissed.
+
 ## Application identity
 
 Launch requires:

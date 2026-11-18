@@ -155,6 +155,11 @@ int PrintUsage() {
 }  // namespace
 
 int wmain(int argc, wchar_t** argv) {
+  SetErrorMode(SEM_FAILCRITICALERRORS | SEM_NOGPFAULTERRORBOX | SEM_NOOPENFILEERRORBOX);
+  if (SetDefaultDllDirectories(LOAD_LIBRARY_SEARCH_SYSTEM32) == FALSE) {
+    std::cerr << "furn-desktop-driver-host: could not restrict default DLL search to System32.\n";
+    return 1;
+  }
   try {
     winrt::init_apartment(winrt::apartment_type::multi_threaded);
     SetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2);
