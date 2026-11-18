@@ -94,6 +94,10 @@ final class WindowRecord {
     }
     return lastKnownFrame ?? .zero
   }
+
+  func readActionOriginFrame(readFrame: (AXUIElement) throws -> CGRect? = axReadableFrame) throws -> CGRect? {
+    try readFrame(element)
+  }
 }
 
 private final class LaunchResultBox: @unchecked Sendable {

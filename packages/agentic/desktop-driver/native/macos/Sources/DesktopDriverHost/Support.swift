@@ -16,6 +16,7 @@ enum ErrorCode {
   static let invalidParams = "invalid-params"
   static let noSuchWindow = "no-such-window"
   static let noSuchElement = "no-such-element"
+  static let moveTargetOutOfBounds = "move-target-out-of-bounds"
   static let notInteractable = "element-not-interactable"
   static let automationFailed = "automation-failed"
   static let inputUnavailable = "input-unavailable"
@@ -643,6 +644,26 @@ func axReadableFrame(_ element: AXUIElement) throws -> CGRect? {
     return nil
   }
   return CGRect(origin: position, size: size)
+}
+
+func requireActionOriginFrame(_ origin: String, read: () throws -> CGRect?) throws -> CGRect {
+  let frame: CGRect?
+  do {
+    frame = try read()
+  } catch let error as HelperError
+    where error.code == ErrorCode.automationFailed || error.code == ErrorCode.noSuchWindow
+  {
+    try fail(ErrorCode.moveTargetOutOfBounds, "The \(origin) action origin has no readable bounds.", data: error.data)
+  }
+  guard let frame,
+    frame.origin.x.isFinite, frame.origin.y.isFinite,
+    frame.size.width.isFinite, frame.size.height.isFinite,
+    frame.size.width > 0, frame.size.height > 0,
+    frame.maxX.isFinite, frame.maxY.isFinite
+  else {
+    try fail(ErrorCode.moveTargetOutOfBounds, "The \(origin) action origin has no readable bounds with positive area.")
+  }
+  return frame
 }
 
 /// Whether an element is visible given the geometry that could be read: unsupported without geometry, never false.

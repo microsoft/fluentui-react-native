@@ -74,6 +74,17 @@ describe('NativeDesktopHost error translation', () => {
     },
   );
 
+  test('returns the W3C HTTP 500 error for a refused action origin without losing its settlement', () => {
+    const translated = translateNativeError(
+      attachFailureEffect(new NativeDriverError('move-target-out-of-bounds', 'No readable action origin.'), 'none'),
+    );
+    const error = toWebDriverError(translated);
+
+    expect(error.status).toBe(500);
+    expect(error.toJSON()).toMatchObject({ error: 'move target out of bounds', message: 'No readable action origin.' });
+    expect(dispositionOfFailure(translated)).toBe('rejected');
+  });
+
   test('keeps the reason a provider gives an automation failure, so a caller can tell a target that stopped responding', () => {
     const translated = translateNativeError(
       new NativeDriverError('automation-failed', 'native failure', { axError: { name: 'cannotComplete' }, reason: 'target-non-response' }),

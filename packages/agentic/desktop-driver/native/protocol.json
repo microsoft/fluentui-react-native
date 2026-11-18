@@ -13,6 +13,12 @@
   "performActions": {
     "nodeFields": ["x", "y", "deltaX", "deltaY"],
     "nodeNumberRange": { "type": "number", "minimum": -2147483648, "maximum": 2147483647 },
+    "originGeometry": {
+      "origins": ["element", "viewport"],
+      "requiresLivePositiveArea": true,
+      "nativeErrorCode": "move-target-out-of-bounds",
+      "webDriverErrorCode": "move target out of bounds"
+    },
     "macos": {
       "coordinates": { "$ref": "#/performActions/nodeNumberRange" },
       "wheelConversion": {

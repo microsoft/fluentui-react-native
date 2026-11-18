@@ -398,6 +398,11 @@ scrolls left and up for positive values, so both deltas are negated, then
 rounded and clamped to signed 32-bit values before conversion. See the
 [action value rules](../PROTOCOL.md#action-values) for direct helper requests.
 
+Element and viewport origins in pointer moves and scrolls require fresh,
+readable Accessibility geometry with positive area. The helper does not use a
+zero snapshot rectangle or the window's last-known frame for placement; it
+returns `move-target-out-of-bounds` before posting that action's input.
+
 After posting a pointer-move sequence, the helper allows about 200 ms of
 bounded position reads for the OS to acknowledge its destination. It never
 reposts the move to force acknowledgment. An unreadable or unsettled pointer

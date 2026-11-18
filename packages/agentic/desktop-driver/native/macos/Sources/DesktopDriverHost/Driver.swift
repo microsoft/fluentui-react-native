@@ -9,6 +9,11 @@ struct CommandResult {
   var binaryMetadata: JSONObject?
 }
 
+struct ActionOriginFrames {
+  let element: (String, CancellationToken) throws -> CGRect?
+  let viewport: () throws -> CGRect?
+}
+
 final class Driver {
   // Commands whose failure or cancellation can leave the target changed. Lifecycle commands are not tracked.
   private static let trackedMutations: Set<String> = [
@@ -26,19 +31,21 @@ final class Driver {
   private let input: InputController
   private let capture = CaptureEngine()
   private let inputLock: PhysicalInputLock
+  private let actionOriginFrames: ActionOriginFrames?
   private var persistentInputLock = false
   // Commands execute serially on the worker thread, so one current journal entry is sufficient.
   private var journalEntry: Int?
 
-  /// `input` and `inputLock` are replaceable so self-tests drive the real command paths without posting events or
-  /// holding the machine's input lock.
+  /// Input and origin readers are replaceable so self-tests do not depend on live UI or post events.
   init(
     effects: EffectLedger = EffectLedger(),
     input: InputController? = nil,
-    inputLock: PhysicalInputLock = .shared
+    inputLock: PhysicalInputLock = .shared,
+    actionOriginFrames: ActionOriginFrames? = nil
   ) {
     self.effects = effects
     self.inputLock = inputLock
+    self.actionOriginFrames = actionOriginFrames
     accessibility = AccessibilityEngine(effects: effects)
     self.input = input ?? InputController(effects: effects)
   }
@@ -733,24 +740,24 @@ final class Driver {
     }
     if let origin = action["origin"] as? JSONObject {
       let elementID = try requireString(origin, "elementId")
-      let window = try windowForElement(elementID)
-      let snapshot = try accessibility.snapshot(elementID: elementID, window: window, token: token)
-      return CGPoint(x: snapshot.screenRect.midX + x, y: snapshot.screenRect.midY + y)
+      let frame = try requireActionOriginFrame("element") {
+        if let actionOriginFrames {
+          return try actionOriginFrames.element(elementID, token)
+        }
+        return try accessibility.readActionOriginFrame(elementID: elementID, window: windowForElement(elementID), token: token)
+      }
+      return CGPoint(x: frame.midX + x, y: frame.midY + y)
     }
     if action["origin"] as? String == "pointer" {
       return CGPoint(x: input.pointer.x + x, y: input.pointer.y + y)
     }
-    guard
-      let lease = applications.primaryLease(),
-      let primaryWindowID = lease.primaryWindowID
-    else {
-      try fail(
-        ErrorCode.invalidParams,
-        "The helper does not hold an application window to resolve viewport coordinates against."
-      )
+    let frame = try requireActionOriginFrame("viewport") {
+      if let actionOriginFrames {
+        return try actionOriginFrames.viewport()
+      }
+      guard let primaryWindowID = applications.primaryLease()?.primaryWindowID else { return nil }
+      return try applications.requireWindow(primaryWindowID).readActionOriginFrame()
     }
-    let window = try applications.requireWindow(primaryWindowID)
-    let frame = try window.currentFrame()
     return CGPoint(x: frame.minX + x, y: frame.minY + y)
   }
 

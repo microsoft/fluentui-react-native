@@ -149,6 +149,9 @@ element ID to the host. Action coordinates (`x`, `y`) and wheel deltas (`deltaX`
 `deltaY`) must be finite numbers from `-2147483648` through `2147483647`, inclusive.
 Fractions within the range are accepted. Invalid values return `invalid argument`
 before the action sequence is dispatched.
+If the native provider cannot resolve a pointer move or scroll against live
+element or viewport geometry with positive area, the driver returns
+`move target out of bounds` rather than guessing a destination.
 
 Portable lookup strategies:
 

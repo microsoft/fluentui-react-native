@@ -129,6 +129,14 @@ if present, must be non-negative integers and are capped at 30,000 milliseconds
 before conversion. Invalid values return `invalid-params`. The action-value
 rules are recorded in [protocol.json](protocol.json); FDR1 remains at 1.0.
 
+Pointer moves and scrolls that use an element or viewport origin require fresh
+bounds with finite coordinates and positive width and height. macOS does not
+use a snapshot's zero rectangle or a window's last-known frame to place the
+pointer. Unreadable or invalid origin geometry returns `move-target-out-of-bounds`
+before the action posts any event. Node translates this code from either
+provider to WebDriver `move target out of bounds`. The ordinary mutation
+settlement rules still apply if a preceding action already posted input.
+
 ### Application leases
 
 A `launch` or `attach` result is the application lease `{ id, ownership,

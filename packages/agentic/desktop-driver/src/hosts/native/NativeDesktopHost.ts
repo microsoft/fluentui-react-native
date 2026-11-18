@@ -782,6 +782,7 @@ const nativeWebDriverErrorCodes: Readonly<Record<string, WebDriverErrorCode>> = 
   'element-not-interactable': 'element not interactable',
   'invalid-params': 'invalid argument',
   'invalid-request': 'invalid argument',
+  'move-target-out-of-bounds': 'move target out of bounds',
   'no-such-element': 'no such element',
   'no-such-window': 'no such window',
 };

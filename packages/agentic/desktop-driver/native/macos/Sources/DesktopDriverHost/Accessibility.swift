@@ -202,13 +202,24 @@ final class AccessibilityEngine {
     token: CancellationToken
   ) throws -> ElementSnapshot {
     try requireAccessibility("Refreshing an accessibility element")
+    let record = try requireLiveRecord(elementID: elementID, window: window, token: token)
+    return try readSnapshot(record: record, window: window)
+  }
+
+  func readActionOriginFrame(elementID: String, window: WindowRecord, token: CancellationToken) throws -> CGRect? {
+    try requireAccessibility("Reading the action element geometry")
+    let record = try requireLiveRecord(elementID: elementID, window: window, token: token)
+    return try axReadableFrame(record.element)
+  }
+
+  private func requireLiveRecord(elementID: String, window: WindowRecord, token: CancellationToken) throws -> ElementRecord {
     try token.throwIfCancelled()
     let record = try requireRecord(elementID)
     guard record.windowID == window.id, record.processID == window.processID else {
       try fail(ErrorCode.staleElement, "Element \"\(elementID)\" no longer belongs to its tracked window.")
     }
     try validateLive(record)
-    return try readSnapshot(record: record, window: window)
+    return record
   }
 
   func activeElement(
