@@ -9,10 +9,13 @@ enum AbandonPolicy {
 struct InputLockOwner: Codable {
   let pid: Int32
   let processStartedAt: String
+  let recoveryID: String?
 }
 
 final class PhysicalInputLock: @unchecked Sendable {
-  static let shared = PhysicalInputLock()
+  static let shared = PhysicalInputLock(
+    recoveryID: ProcessInfo.processInfo.environment["FURN_INTERNAL_DESKTOP_DRIVER_INPUT_LOCK_OWNER"]
+  )
 
   private let stateLock = NSLock()
   private var depth = 0
@@ -20,6 +23,7 @@ final class PhysicalInputLock: @unchecked Sendable {
   private let lockDirectory: URL
   private let lockURL: URL
   private let ownerURL: URL
+  private let recoveryID: String?
 
   private enum OwnerState {
     case missing
@@ -27,11 +31,16 @@ final class PhysicalInputLock: @unchecked Sendable {
     case invalid
   }
 
-  init(baseName: String = "furn-desktop-driver-physical-input-v1-\(getuid())") {
-    lockDirectory = URL(fileURLWithPath: NSHomeDirectory(), isDirectory: true)
+  init(
+    baseName: String = "furn-desktop-driver-physical-input-v1-\(getuid())",
+    directory: URL? = nil,
+    recoveryID: String? = nil
+  ) {
+    lockDirectory = directory ?? URL(fileURLWithPath: NSHomeDirectory(), isDirectory: true)
       .appendingPathComponent("Library/Caches/com.microsoft.fluentui-react-native.desktop-driver", isDirectory: true)
     lockURL = lockDirectory.appendingPathComponent(baseName + ".lock", isDirectory: false)
     ownerURL = lockDirectory.appendingPathComponent(baseName + ".owner.json", isDirectory: false)
+    self.recoveryID = recoveryID
   }
 
   func withLock<T>(
@@ -76,9 +85,13 @@ final class PhysicalInputLock: @unchecked Sendable {
         }
         try token.throwIfCancelled()
         if DispatchTime.now() >= deadline {
+          var holder = "Another desktop driver helper"
+          if case let .valid(owner) = readOwner() {
+            holder += " (recorded PID \(owner.pid))"
+          }
           try fail(
             ErrorCode.inputBusy,
-            "Another desktop driver helper held physical input for longer than \(timeoutMilliseconds) ms. Wait for that session to finish, or run the helper with --release-input if it is gone."
+            "\(holder) held physical input for longer than \(timeoutMilliseconds) ms. Wait for that session to finish, or run the helper with --release-input if it is gone."
           )
         }
         try token.wait(milliseconds: 50)
@@ -86,20 +99,16 @@ final class PhysicalInputLock: @unchecked Sendable {
 
       switch readOwner() {
       case let .valid(owner):
-        let ownerStart = parseDate(owner.processStartedAt)
-        let actualStart = processStartTime(owner.pid)
-        let sameIdentity = ownerStart != nil && actualStart != nil
-          && abs(ownerStart!.timeIntervalSince(actualStart!)) <= 0.01
-        if processIsAlive(owner.pid) && sameIdentity {
+        guard ownerState(owner) == .exited else {
           try fail(
             ErrorCode.inputBusy,
-            "The physical input owner record still names a live desktop driver helper. Wait for it to finish before retrying."
+            "The physical input owner record names PID \(owner.pid), which is live or cannot be verified as exited. Wait for it to finish before running the helper with --release-input."
           )
         }
         if policy == .fail {
           try fail(
             ErrorCode.inputBusy,
-            "A previous desktop driver helper terminated while holding physical input, so keys or buttons may still be depressed. Run the helper with --release-input to recover, then retry the command."
+            "Desktop driver helper PID \(owner.pid) terminated while holding physical input, so keys or buttons may still be depressed. Run the helper with --release-input to recover, then retry the command."
           )
         }
         writeDiagnostic("furn-desktop-driver-host: adopting physical input abandoned by a terminated helper.")
@@ -107,7 +116,7 @@ final class PhysicalInputLock: @unchecked Sendable {
         if policy == .fail {
           try fail(
             ErrorCode.inputBusy,
-            "The physical input owner record is invalid, so prior input cleanup cannot be proven. Run the helper with --release-input to recover, then retry the command."
+            "The physical input owner record is invalid, so prior input cleanup cannot be proven. Use --release-input with a known ledger, or --release-input --sweep after confirming no live owner."
           )
         }
         writeDiagnostic("furn-desktop-driver-host: adopting an invalid physical input owner record for recovery.")
@@ -147,14 +156,45 @@ final class PhysicalInputLock: @unchecked Sendable {
     close(fd)
   }
 
-  private func readOwner() -> OwnerState {
-    guard FileManager.default.fileExists(atPath: ownerURL.path) else {
-      return .missing
+  func recoverAbandonedOwner() throws {
+    // A masked supervisor supplies an empty tag. With no tag, an operator can recover a proven-dead owner.
+    guard recoveryID != "" else { return }
+    let fd = open(lockURL.path, O_RDWR | O_CLOEXEC | O_NOFOLLOW)
+    guard fd >= 0 else {
+      if errno == ENOENT { return }
+      try fail(ErrorCode.inputBusy, "Opening the physical input lock for recovery failed with errno \(errno).")
     }
-    guard let data = try? Data(contentsOf: ownerURL), !data.isEmpty, data.count <= 4096 else {
+    defer { close(fd) }
+    guard flock(fd, LOCK_EX | LOCK_NB) == 0 else {
+      if errno == EWOULDBLOCK || errno == EAGAIN { return }
+      try fail(ErrorCode.inputBusy, "Checking the physical input lock for recovery failed with errno \(errno).")
+    }
+    // Observe and remove under the same kernel lock. Never overwrite another session's recovery fence.
+    guard case let .valid(owner) = readOwner(),
+      recoveryID == nil || recoveryID == owner.recoveryID,
+      ownerState(owner) == .exited
+    else { return }
+    try FileManager.default.removeItem(at: ownerURL)
+  }
+
+  private func ownerState(_ owner: InputLockOwner) -> ApplicationIncarnation.State {
+    guard let start = parseDate(owner.processStartedAt) else { return .unknown }
+    return ApplicationIncarnation.classify(recorded: start, observed: ApplicationIncarnation.observe(owner.pid))
+  }
+
+  private func readOwner() -> OwnerState {
+    let fd = open(ownerURL.path, O_RDONLY | O_CLOEXEC | O_NOFOLLOW | O_NONBLOCK)
+    guard fd >= 0 else {
+      return errno == ENOENT ? .missing : .invalid
+    }
+    let handle = FileHandle(fileDescriptor: fd, closeOnDealloc: true)
+    var status = stat()
+    guard fstat(fd, &status) == 0, (status.st_mode & S_IFMT) == S_IFREG,
+      let data = try? handle.read(upToCount: 4097), !data.isEmpty, data.count <= 4096
+    else {
       return .invalid
     }
-    guard let owner = try? JSONDecoder().decode(InputLockOwner.self, from: data) else {
+    guard let owner = try? JSONDecoder().decode(InputLockOwner.self, from: data), owner.pid > 0 else {
       return .invalid
     }
     return .valid(owner)
@@ -164,7 +204,7 @@ final class PhysicalInputLock: @unchecked Sendable {
     guard let start = processStartTime(getpid()) else {
       try fail(ErrorCode.inputBusy, "The helper could not read its process start time for physical input ownership.")
     }
-    let owner = InputLockOwner(pid: getpid(), processStartedAt: formatDate(start))
+    let owner = InputLockOwner(pid: getpid(), processStartedAt: formatDate(start), recoveryID: recoveryID)
     do {
       let data = try JSONEncoder().encode(owner)
       try data.write(to: ownerURL, options: [.atomic])
@@ -175,7 +215,7 @@ final class PhysicalInputLock: @unchecked Sendable {
   }
 
   func installDeadOwnerForSelfTest() throws {
-    let owner = InputLockOwner(pid: Int32.max, processStartedAt: "1970-01-01T00:00:00.000Z")
+    let owner = InputLockOwner(pid: Int32.max, processStartedAt: "1970-01-01T00:00:00.000Z", recoveryID: recoveryID)
     try JSONEncoder().encode(owner).write(to: ownerURL, options: [.atomic])
   }
 

@@ -256,10 +256,19 @@ final class InputController {
     pointerCancel()
   }
 
-  func releaseExact(_ ledger: ReleaseLedger) throws -> (keys: Int, buttons: Int) {
+  func recoverInput(_ ledger: ReleaseLedger, lock: PhysicalInputLock, token: CancellationToken) throws -> (keys: Int, buttons: Int) {
     if ledger.keys.isEmpty && ledger.buttons.isEmpty {
+      if physicalInputAvailable() && environment.session().inputUnavailableReason == nil {
+        try lock.recoverAbandonedOwner()
+      }
       return (0, 0)
     }
+    return try lock.withLock(token: token, timeoutMilliseconds: 5_000, policy: .adopt) {
+      try releaseExact(ledger)
+    }
+  }
+
+  private func releaseExact(_ ledger: ReleaseLedger) throws -> (keys: Int, buttons: Int) {
     try requirePhysicalInput()
     syncPointer()
     for key in ledger.keys.reversed() {

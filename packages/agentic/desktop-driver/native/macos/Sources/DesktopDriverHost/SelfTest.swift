@@ -21,6 +21,7 @@ final class SelfTestRunner {
     testInputLedger()
     testInputModifiers()
     testInputLock()
+    testEmptyInputRecovery()
     testCaptureScale()
     testSnapshotShape()
     testAXIdentity()

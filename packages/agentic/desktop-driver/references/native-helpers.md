@@ -266,10 +266,12 @@ Helper stderr is forwarded one line at a time. Bytes are decoded as UTF-8
 across reads, each line is limited to 4096 characters, and at most 1 MiB is
 forwarded over the life of the helper.
 
-If the helper dies while input may be depressed, Node invokes the same verified
-binary in restricted `--release-input` mode with only the recorded keys and
-buttons, bounded to 5 seconds and 16 KiB of output. The adapter retains its
-mirrored action, typing, and click candidates after an uncertain command or a
+After an unexpected exit from a verified helper, Node invokes the same
+binary in restricted `--release-input` mode with the recorded keys and
+buttons, even when both lists are empty. Recovery gets a five-second deadline,
+a 500 ms termination grace, and at most 16 KiB of retained output per stream.
+An empty ledger only probes the input lock without waiting or posting events.
+The adapter retains its mirrored action, typing, and click candidates after an uncertain command or a
 failed release until recovery succeeds. This mirror does not include keyboard
 clear's synthetic shortcut keys, and Windows recovery cannot always reconstruct
 the exact injected keyboard stroke. Recovery after helper exit therefore does

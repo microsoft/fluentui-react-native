@@ -217,6 +217,11 @@ The input lock lives beneath
 `~/Library/Caches/com.microsoft.fluentui-react-native.desktop-driver`, so
 helpers started through different Aqua bootstrap namespaces still serialize
 physical input. Restricted `--release-input` accepts only the Node-owned ledger.
+On an unexpected exit, the supervisor invokes it even with an empty ledger.
+An empty recovery never posts input or waits on another process's lock. With
+input available and unmasked, it removes only a matching record whose owner is
+proven exited. If an `input-busy` error names a live owner PID, wait for that
+helper to finish before attempting recovery.
 `--sweep` is an operator recovery diagnostic, not normal cleanup.
 Exact application leases hold a separate owner-only `flock` beneath that root's
 `applications` directory. It excludes other helpers for the same PID and

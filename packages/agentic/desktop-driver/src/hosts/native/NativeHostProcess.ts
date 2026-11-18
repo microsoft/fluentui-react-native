@@ -22,6 +22,7 @@ export type NativeHostProcessOptions = {
   artifact: NativeDriverArtifact;
   /** How long a cancelled command may take to settle before the helper is killed. Defaults to 2000. */
   cancellationTimeoutMs?: number;
+  inputLockOwner?: string;
   onStderr?: (message: string) => void;
   recoverInput?: () => Promise<void>;
   /** Cancels startup: the helper is killed and `start` rejects with an `AbortError`. */
@@ -81,8 +82,13 @@ export function resolveCancellationTimeoutMs(value: number | undefined, fallback
  * terminal reaches Node, which cancels and disposes in order, instead of killing the helper mid-command. Lifetime
  * stays with Node: the helper ends on stdin EOF, and it is never unref'd.
  */
-export function nativeHelperSpawnOptions(): SpawnOptionsWithoutStdio {
-  return { detached: process.platform !== 'win32', stdio: ['pipe', 'pipe', 'pipe'], windowsHide: true };
+export function nativeHelperSpawnOptions(inputLockOwner?: string): SpawnOptionsWithoutStdio {
+  return {
+    detached: process.platform !== 'win32',
+    ...(inputLockOwner === undefined ? {} : { env: { ...process.env, FURN_INTERNAL_DESKTOP_DRIVER_INPUT_LOCK_OWNER: inputLockOwner } }),
+    stdio: ['pipe', 'pipe', 'pipe'],
+    windowsHide: true,
+  };
 }
 
 export class NativeHostProcess extends EventEmitter<{
@@ -130,7 +136,11 @@ export class NativeHostProcess extends EventEmitter<{
       this.rejectStarted = reject;
     });
 
-    const child = spawn(options.artifact.executablePath, ['--stdio'], nativeHelperSpawnOptions()) as ChildProcessWithoutNullStreams;
+    const child = spawn(
+      options.artifact.executablePath,
+      ['--stdio'],
+      nativeHelperSpawnOptions(options.inputLockOwner),
+    ) as ChildProcessWithoutNullStreams;
     this.child = child;
     this.closed = new Promise<void>((resolve) => {
       let graceTimer: NodeJS.Timeout | undefined;
@@ -512,7 +522,7 @@ export class NativeHostProcess extends EventEmitter<{
   }
 
   /**
-   * The one terminal path: kill the helper, wait for it, recover input it may have left pressed, then reject every
+   * The one terminal path: kill the helper, wait for it, recover abandoned input ownership, then reject every
    * pending request once. Every failure joins the first one, and after an acknowledged disposal there is nothing
    * left to fail. Resolves to the failure the pending requests were given.
    */

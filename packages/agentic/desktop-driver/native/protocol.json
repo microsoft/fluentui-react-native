@@ -24,6 +24,18 @@
       "duration": { "type": "integer", "minimum": 0, "capMilliseconds": 30000 }
     }
   },
+  "inputRecovery": {
+    "mode": "--release-input",
+    "ledgerFields": ["keys", "buttons"],
+    "resultFields": ["releasedKeys", "releasedButtons"],
+    "emptyLedger": {
+      "postsInput": false,
+      "lockWaitMilliseconds": 0,
+      "whenUnavailableOrHeld": "success-with-zero-counts",
+      "macosOwnerRecord": "require-exited-owner-and-match-supervisor-tag-when-supplied",
+      "windowsMutex": "release-if-acquired"
+    }
+  },
   "windowsApplicationOwnership": {
     "processIdentity": {
       "type": "object",

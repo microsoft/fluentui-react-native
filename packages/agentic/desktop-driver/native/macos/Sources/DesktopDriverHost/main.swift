@@ -60,13 +60,7 @@ private func releaseInput(sweep: Bool) -> Int32 {
       )
     }
     let ledger = try parseReleaseLedger(parseJSON(data))
-    let counts = try PhysicalInputLock.shared.withLock(
-      token: token,
-      timeoutMilliseconds: 5_000,
-      policy: .adopt
-    ) {
-      try input.releaseExact(ledger)
-    }
+    let counts = try input.recoverInput(ledger, lock: .shared, token: token)
     print(#"{"releasedKeys":\#(counts.keys),"releasedButtons":\#(counts.buttons)}"#)
     return 0
   } catch let error as HelperError {

@@ -770,10 +770,25 @@ Both providers also implement:
 --release-input --sweep
 ```
 
-`--self-test` runs provider-local checks without opening FDR1. Normal
-`--release-input` reads a bounded JSON ledger from stdin and releases exactly
-the keys/buttons mirrored by Node. `--sweep` is an operator diagnostic for a
-desktop left in an uncertain state; it is not part of normal session cleanup.
+`--self-test` runs provider-local checks without opening FDR1. After an
+unexpected exit of a verified helper, Node runs the same
+binary with `--release-input`, even when the ledger is empty. The mode reads a
+bounded `{"keys":[],"buttons":[]}` JSON ledger from stdin and reports the
+counts it released. A nonempty ledger releases exactly the listed keys and
+buttons under the physical input lock. An empty ledger posts no input, tries
+the lock at most once without waiting, and returns success with zero counts
+if physical input is unavailable or another process holds the lock.
+
+On macOS, the supervisor scopes empty recovery to the exited helper using an
+internal per-helper tag in the process environment; the ledger shape is
+unchanged. A full input mask suppresses this lock probe. The recovery process
+removes a matching record only under the lock and only when its owner is
+proven exited. Live, unverified, or unrelated records remain in place. A
+standalone operator invocation without the tag can clear a proven-dead record.
+On Windows, the kernel identifies the abandoned mutex; a zero-timeout probe
+releases it if acquired. See [protocol.json](protocol.json) for the mode
+invariants. `--sweep` is an operator diagnostic for a desktop left in an
+uncertain state; it is not part of normal session cleanup.
 
 The macOS provider additionally implements:
 
