@@ -682,41 +682,41 @@ commit SHA, and a note.
 
 **Shared changes the Windows lane must verify:** post the SHAs here when pushed.
 
-| Change                                                         | SHA         | Windows verified                                      |
-| -------------------------------------------------------------- | ----------- | ----------------------------------------------------- |
-| R0-3 (P1-2) retry options                                      | `6fb97096e` | WebdriverIO 12/12 passed; candidate Q6 smoke not run. |
-| R0-5 (P1-4) Node validation                                    | `22423f29d` | Windows pre-candidate verification in progress.       |
-| R0-6 (P1-5) Node recovery                                      | `9130fe983` | Windows pre-candidate verification in progress.       |
-| R0-9 (P2-10) `boundedCommand` readiness                        | `2aab0b03e` | Windows pre-candidate Q3 passed 30/30 at `419e1c05b`. |
-| R1-DRV-3 (P2-6) and R1-DRV-7 (P3-DRV-10), before W-R1-3 starts | `f17cb7689` | Cache files are ready for W-R1-3.                     |
+| Change                                                         | SHA         | Windows verified                                                                                                              |
+| -------------------------------------------------------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| R0-3 (P1-2) retry options                                      | `6fb97096e` | WebdriverIO 12/12 passed; candidate Q6 smoke not run.                                                                         |
+| R0-5 (P1-4) Node validation                                    | `22423f29d` | Windows parser and loopback W3C refusal checks passed at `9130fe983`; candidate Q7 pending.                                   |
+| R0-6 (P1-5) Node recovery                                      | `9130fe983` | Windows lifecycle checks and native physical mutex fixture (5/5 ownership tests) passed; candidate helper-exit check pending. |
+| R0-9 (P2-10) `boundedCommand` readiness                        | `2aab0b03e` | Windows pre-candidate Q3 passed 30/30 at `419e1c05b`.                                                                         |
+| R1-DRV-3 (P2-6) and R1-DRV-7 (P3-DRV-10), before W-R1-3 starts | `f17cb7689` | W-R1-3 landed at `a966c71a5`; all 15 cache tests passed on Windows.                                                           |
 
-| Item                                  | Status      | Commit      | Notes                                                                                                                               |
-| ------------------------------------- | ----------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| Phase 0 setup and draft PR            | done        | `302ce30bb` | Draft #4515 open; Windows kickoff in the workflow mailbox.                                                                          |
-| R0-1 desktop-test minor and migration | done        | `960e9b90b` | `yarn changeset status` resolves 0.4.0; generated changelog and pins will be checked in the candidate preview.                      |
-| R0-2 changelog text                   | done        | `6b53b1686` | Package-specific source entries are split; candidate changelog preview pending.                                                     |
-| R0-3 P1-2 WebdriverIO retries         | done        | `6fb97096e` | Fake-host launch and connected/attached click contracts passed on macOS and Windows. Native Storybook smoke awaits a candidate SHA. |
-| R0-5 P1-4 Node and Swift              | done        | `22423f29d` | macOS helper self-test passed 491/491. Windows verification is separate.                                                            |
-| R0-6 P1-5 Node and Swift              | done        | `9130fe983` | macOS helper self-test passed 502/502; Node lifecycle tests and pre-candidate buildci passed.                                       |
-| R0-7 P1-6                             | in progress |             | macOS implementation and shared error mapping.                                                                                      |
-| R0-8 P1-7                             | not started |             |                                                                                                                                     |
-| R0-9 P2-10 boundedCommand             | done        | `2aab0b03e` | macOS and Windows pre-candidate Q3 each passed 30/30. Windows evidence is recorded at `00d522188`.                                  |
-| R1-PKG-1 to R1-PKG-6                  | not started |             |                                                                                                                                     |
-| R1-DRV-3 and R1-DRV-7                 | done        | `f17cb7689` | Focused cache and signing tests and full portable desktop-driver suite passed. Stable signing not run.                              |
-| Other R1-DRV items                    | not started |             |                                                                                                                                     |
-| R1-MAC-1                              | not started |             |                                                                                                                                     |
-| R1-TST-1, R1-TST-2                    | not started |             |                                                                                                                                     |
-| R1-MCP-1 to R1-MCP-4                  | not started |             |                                                                                                                                     |
-| Documentation pass (macOS-owned)      | not started |             |                                                                                                                                     |
-| Version preview (section 7)           | not started |             |                                                                                                                                     |
-| Q1 to Q3                              | not run     |             |                                                                                                                                     |
-| Q4 macOS helper                       | not run     |             |                                                                                                                                     |
-| Q5 macOS packed install               | not run     |             |                                                                                                                                     |
-| Q6 macOS Fabric                       | not run     |             |                                                                                                                                     |
-| Q6 macOS Paper                        | not run     |             |                                                                                                                                     |
-| Q7 macOS targeted checks              | not run     |             |                                                                                                                                     |
-| Q8 macOS handoff                      | not run     |             |                                                                                                                                     |
-| Q9 macOS MCP pass                     | not run     |             |                                                                                                                                     |
-| Q10 hosted checks                     | not run     |             |                                                                                                                                     |
-| Follow-up issues filed                | not started |             |                                                                                                                                     |
-| Q11 #4509 and npm smoke (macOS)       | not run     |             |                                                                                                                                     |
+| Item                                  | Status      | Commit      | Notes                                                                                                                                                             |
+| ------------------------------------- | ----------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Phase 0 setup and draft PR            | done        | `302ce30bb` | Draft #4515 open; Windows kickoff in the workflow mailbox.                                                                                                        |
+| R0-1 desktop-test minor and migration | done        | `960e9b90b` | `yarn changeset status` resolves 0.4.0; generated changelog and pins will be checked in the candidate preview.                                                    |
+| R0-2 changelog text                   | done        | `6b53b1686` | Package-specific source entries are split; candidate changelog preview pending.                                                                                   |
+| R0-3 P1-2 WebdriverIO retries         | done        | `6fb97096e` | Fake-host launch and connected/attached click contracts passed on macOS and Windows. Native Storybook smoke awaits a candidate SHA.                               |
+| R0-5 P1-4 Node and Swift              | done        | `22423f29d` | macOS helper self-test passed 491/491. Windows verification is separate.                                                                                          |
+| R0-6 P1-5 Node and Swift              | done        | `9130fe983` | macOS helper self-test passed 502/502; Node lifecycle tests and pre-candidate buildci passed.                                                                     |
+| R0-7 P1-6                             | done        | `545c3f99c` | macOS fresh-geometry checks and shared W3C mapping. Signed native suite passed; physical AppKit mutex case passed (1 selected, 12 skipped) with verified cleanup. |
+| R0-8 P1-7                             | not started |             |                                                                                                                                                                   |
+| R0-9 P2-10 boundedCommand             | done        | `2aab0b03e` | macOS and Windows pre-candidate Q3 each passed 30/30. Windows evidence is recorded at `00d522188`.                                                                |
+| R1-PKG-1 to R1-PKG-6                  | not started |             |                                                                                                                                                                   |
+| R1-DRV-3 and R1-DRV-7                 | done        | `f17cb7689` | Focused cache and signing tests and full portable desktop-driver suite passed. Stable signing not run.                                                            |
+| Other R1-DRV items                    | not started |             |                                                                                                                                                                   |
+| R1-MAC-1                              | not started |             |                                                                                                                                                                   |
+| R1-TST-1, R1-TST-2                    | not started |             |                                                                                                                                                                   |
+| R1-MCP-1 to R1-MCP-4                  | not started |             |                                                                                                                                                                   |
+| Documentation pass (macOS-owned)      | not started |             |                                                                                                                                                                   |
+| Version preview (section 7)           | not started |             |                                                                                                                                                                   |
+| Q1 to Q3                              | not run     |             |                                                                                                                                                                   |
+| Q4 macOS helper                       | not run     |             |                                                                                                                                                                   |
+| Q5 macOS packed install               | not run     |             |                                                                                                                                                                   |
+| Q6 macOS Fabric                       | not run     |             |                                                                                                                                                                   |
+| Q6 macOS Paper                        | not run     |             |                                                                                                                                                                   |
+| Q7 macOS targeted checks              | not run     |             |                                                                                                                                                                   |
+| Q8 macOS handoff                      | not run     |             |                                                                                                                                                                   |
+| Q9 macOS MCP pass                     | not run     |             |                                                                                                                                                                   |
+| Q10 hosted checks                     | not run     |             |                                                                                                                                                                   |
+| Follow-up issues filed                | not started |             |                                                                                                                                                                   |
+| Q11 #4509 and npm smoke (macOS)       | not run     |             |                                                                                                                                                                   |
