@@ -685,10 +685,10 @@ commit SHA, and a note.
 | Change                                                         | SHA         | Windows verified                                      |
 | -------------------------------------------------------------- | ----------- | ----------------------------------------------------- |
 | R0-3 (P1-2) retry options                                      | `6fb97096e` | WebdriverIO 12/12 passed; candidate Q6 smoke not run. |
-| R0-5 (P1-4) Node validation                                    |             |                                                       |
-| R0-6 (P1-5) Node recovery                                      |             |                                                       |
+| R0-5 (P1-4) Node validation                                    | `22423f29d` | Windows pre-candidate verification in progress.       |
+| R0-6 (P1-5) Node recovery                                      | `9130fe983` | Windows pre-candidate verification in progress.       |
 | R0-9 (P2-10) `boundedCommand` readiness                        | `2aab0b03e` | Windows pre-candidate Q3 passed 30/30 at `419e1c05b`. |
-| R1-DRV-3 (P2-6) and R1-DRV-7 (P3-DRV-10), before W-R1-3 starts |             |                                                       |
+| R1-DRV-3 (P2-6) and R1-DRV-7 (P3-DRV-10), before W-R1-3 starts | `f17cb7689` | Cache files are ready for W-R1-3.                     |
 
 | Item                                  | Status      | Commit      | Notes                                                                                                                               |
 | ------------------------------------- | ----------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------- |
@@ -696,13 +696,14 @@ commit SHA, and a note.
 | R0-1 desktop-test minor and migration | done        | `960e9b90b` | `yarn changeset status` resolves 0.4.0; generated changelog and pins will be checked in the candidate preview.                      |
 | R0-2 changelog text                   | done        | `6b53b1686` | Package-specific source entries are split; candidate changelog preview pending.                                                     |
 | R0-3 P1-2 WebdriverIO retries         | done        | `6fb97096e` | Fake-host launch and connected/attached click contracts passed on macOS and Windows. Native Storybook smoke awaits a candidate SHA. |
-| R0-5 P1-4 Node and Swift              | not started |             |                                                                                                                                     |
-| R0-6 P1-5 Node and Swift              | not started |             |                                                                                                                                     |
-| R0-7 P1-6                             | not started |             |                                                                                                                                     |
+| R0-5 P1-4 Node and Swift              | done        | `22423f29d` | macOS helper self-test passed 491/491. Windows verification is separate.                                                            |
+| R0-6 P1-5 Node and Swift              | done        | `9130fe983` | macOS helper self-test passed 502/502; Node lifecycle tests and pre-candidate buildci passed.                                       |
+| R0-7 P1-6                             | in progress |             | macOS implementation and shared error mapping.                                                                                      |
 | R0-8 P1-7                             | not started |             |                                                                                                                                     |
 | R0-9 P2-10 boundedCommand             | done        | `2aab0b03e` | macOS and Windows pre-candidate Q3 each passed 30/30. Windows evidence is recorded at `00d522188`.                                  |
 | R1-PKG-1 to R1-PKG-6                  | not started |             |                                                                                                                                     |
-| R1-DRV-1 to R1-DRV-8                  | not started |             |                                                                                                                                     |
+| R1-DRV-3 and R1-DRV-7                 | done        | `f17cb7689` | Focused cache and signing tests and full portable desktop-driver suite passed. Stable signing not run.                              |
+| Other R1-DRV items                    | not started |             |                                                                                                                                     |
 | R1-MAC-1                              | not started |             |                                                                                                                                     |
 | R1-TST-1, R1-TST-2                    | not started |             |                                                                                                                                     |
 | R1-MCP-1 to R1-MCP-4                  | not started |             |                                                                                                                                     |
