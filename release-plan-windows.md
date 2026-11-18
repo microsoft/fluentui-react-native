@@ -535,6 +535,9 @@ the commit SHA, and a note. For deferred items, give the tracking issue.
 
 **Candidate SHA qualified:** none yet.
 
+**Windows R0:** All three fixes are implemented; both helper build commands and the native self-test passed.
+Shared Node verification and Windows Fabric/Win32 Paper application qualification are separate gates.
+
 **Windows toolchain:** Windows 11 Enterprise build 26300, AMD64; Visual Studio Enterprise 2026
 18.11.12402.416 (Desktop development with C++, MSVC 14.51.36231), Windows SDK 10.0.26100.0,
 Windows App Runtime 1.8 X64 8000.994.2142.0 registered. Node 26.13.0, Yarn 4.18.0.
@@ -544,8 +547,8 @@ The current session is active RDP, not a verified console session for physical q
 | --------------------------------------------- | ----------- | ----------- | --------------------------------------------------------------------------------------------------------- |
 | Setup and toolchain recorded                  | done        | `302ce30bb` | Branch sync, immutable install (peer warnings), and root build passed.                                    |
 | W-R0-1 P1-3 `HasWindowContent` initialization | done        | `31b960364` | Windows and Win32 helper builds and doctor passed; masked self-test passed 850/850. Candidate Q7 not run. |
-| W-R0-2 P1-4 value clamping                    | done        | `406f67d1c` | Both helper builds passed; masked self-test passed 858/858. W3C validation not run (shared SHA pending).  |
-| W-R0-3 P1-5 empty-ledger recovery             | not started |             |                                                                                                           |
+| W-R0-2 P1-4 value clamping                    | done        | `352f0a75c` | Both helper builds passed; masked self-test passed 858/858. W3C validation not run (shared SHA pending).  |
+| W-R0-3 P1-5 empty-ledger recovery             | done        | `f4cefbdd2` | Both helper builds passed; masked self-test passed 862/862. Candidate helper-kill check not run.          |
 | W-AUDIT-1 P1-6 pointer origin audit           | not started |             |                                                                                                           |
 | W-VERIFY R0-3 (P1-2)                          | not started |             |                                                                                                           |
 | W-VERIFY R0-5 (P1-4)                          | not started |             |                                                                                                           |
@@ -559,7 +562,7 @@ The current session is active RDP, not a verified console session for physical q
 | W-R1-6 P2-26 contention message               | not started |             |                                                                                                           |
 | Documentation (section 5)                     | not started |             |                                                                                                           |
 | Changesets (section 6)                        | not started |             |                                                                                                           |
-| Q1 to Q3                                      | not run     |             |                                                                                                           |
+| Q1 to Q3                                      | in progress | `352f0a75c` | Driver Q1 passed: format, lint, build and 1,262 tests; 100 skipped. Q2 and Q3 not run here.               |
 | Q4 Windows helper and contracts               | not run     |             |                                                                                                           |
 | Q4 Win32 helper and contracts                 | not run     |             |                                                                                                           |
 | Q5 packed install                             | not run     |             |                                                                                                           |
