@@ -18,7 +18,22 @@ jest.mock('./macos/buildMacOSDriver', () => ({
   verifyMacOSDriver: jest.fn(),
 }));
 
-const cacheTest = process.platform === 'win32' ? test.skip : test;
+jest.mock('./boundedCommand', () => {
+  const actual = jest.requireActual<typeof import('./boundedCommand')>('./boundedCommand');
+  const { basename } = jest.requireActual<typeof import('node:path')>('node:path');
+  return {
+    ...actual,
+    runBoundedCommand: (...[executable, args, options]: Parameters<typeof actual.runBoundedCommand>) => {
+      // Windows cannot execute the test fixture's POSIX shebang; invoke only this fixture through Node directly.
+      if (process.platform === 'win32' && basename(executable) === 'furn-desktop-driver-host' && args[0] === '--handshake') {
+        return actual.runBoundedCommand(process.execPath, [executable, ...args], options);
+      }
+      return actual.runBoundedCommand(executable, args, options);
+    },
+  };
+});
+
+const windowsTest = process.platform === 'win32' ? test : test.skip;
 
 const verifyMock = verifyMacOSDriver as jest.MockedFunction<typeof verifyMacOSDriver>;
 
@@ -89,7 +104,7 @@ afterEach(() => {
 });
 
 describe('native artifact cache verification', () => {
-  cacheTest('keeps a selection whose handshake fails transiently and bounds the reported stderr', async () => {
+  test('keeps a selection whose handshake fails transiently and bounds the reported stderr', async () => {
     const built = await buildNativeDesktopDriver(options());
 
     setHelperFailing(true);
@@ -108,7 +123,7 @@ describe('native artifact cache verification', () => {
     await expect(resolveOnly()).resolves.toMatchObject({ artifactId: built.artifactId, origin: 'cache' });
   });
 
-  cacheTest('keeps a selection when verification fails with a transient system error', async () => {
+  test('keeps a selection when verification fails with a transient system error', async () => {
     const built = await buildNativeDesktopDriver(options());
 
     verifyMock.mockRejectedValueOnce(Object.assign(new Error('too many open files'), { code: 'EMFILE' }));
@@ -118,7 +133,7 @@ describe('native artifact cache verification', () => {
     await expect(resolveOnly()).resolves.toMatchObject({ artifactId: built.artifactId, origin: 'cache' });
   });
 
-  cacheTest('keeps a selection when resolution is aborted', async () => {
+  test('keeps a selection when resolution is aborted', async () => {
     await buildNativeDesktopDriver(options());
     const controller = new AbortController();
     controller.abort();
@@ -128,7 +143,7 @@ describe('native artifact cache verification', () => {
     await expect(resolveOnly()).resolves.toMatchObject({ origin: 'cache' });
   });
 
-  cacheTest('quarantines a selection whose helper fails its integrity check', async () => {
+  test('quarantines a selection whose helper fails its integrity check', async () => {
     const built = await buildNativeDesktopDriver(options());
     fs.writeFileSync(built.executablePath, 'corrupt');
 
@@ -136,7 +151,7 @@ describe('native artifact cache verification', () => {
     expect(fs.readdirSync(path.join(cacheRoot, 'v1', 'trash'))).not.toHaveLength(0);
   });
 
-  cacheTest('quarantines a selection whose signature verification reports a mismatch', async () => {
+  test('quarantines a selection whose signature verification reports a mismatch', async () => {
     await buildNativeDesktopDriver(options());
 
     verifyMock.mockRejectedValueOnce(new NativeDriverError('signature-mismatch', 'signature changed'));
@@ -146,7 +161,7 @@ describe('native artifact cache verification', () => {
 });
 
 describe('native artifact publication collisions', () => {
-  cacheTest('keeps an existing artifact that cannot be verified right now and cleans up the new publication', async () => {
+  test('keeps an existing artifact that cannot be verified right now and cleans up the new publication', async () => {
     const built = await buildNativeDesktopDriver(options());
 
     verifyMock.mockRejectedValueOnce(Object.assign(new Error('too many open files'), { code: 'EMFILE' }));
@@ -158,7 +173,7 @@ describe('native artifact publication collisions', () => {
     await expect(resolveOnly()).resolves.toMatchObject({ artifactId: built.artifactId, origin: 'cache' });
   });
 
-  cacheTest('replaces an existing artifact only when it fails an integrity check', async () => {
+  test('replaces an existing artifact only when it fails an integrity check', async () => {
     const built = await buildNativeDesktopDriver(options());
 
     verifyMock.mockRejectedValueOnce(new NativeDriverError('signature-mismatch', 'signature changed'));
@@ -171,12 +186,76 @@ describe('native artifact publication collisions', () => {
     expect(fs.readdirSync(path.join(cacheRoot, 'v1', 'staging'))).toEqual([]);
   });
 
-  cacheTest('drops the new publication when the existing artifact still verifies', async () => {
+  test('drops the new publication when the existing artifact still verifies', async () => {
     const built = await buildNativeDesktopDriver(options());
 
     await expect(buildNativeDesktopDriver({ ...options(), force: true })).resolves.toMatchObject({ artifactId: built.artifactId });
     expect(exists('trash')).toBe(false);
     expect(fs.readdirSync(path.join(cacheRoot, 'v1', 'staging'))).toEqual([]);
+  });
+});
+
+describe('Windows native cache rename retries', () => {
+  function failPublicationRenames(code: string, failures: number) {
+    const error = Object.assign(new Error(`Publication rename failed: ${code}`), { code });
+    const rename = fs.renameSync;
+    const attempts = jest.fn();
+    jest.spyOn(fs, 'renameSync').mockImplementation((from, to) => {
+      if (typeof from === 'string' && path.basename(from).startsWith('publish-')) {
+        attempts();
+        if (attempts.mock.calls.length <= failures) throw error;
+      }
+      rename(from, to);
+    });
+    return { attempts, error };
+  }
+
+  windowsTest('publishes a verified helper after a transient sharing violation', async () => {
+    const { attempts } = failPublicationRenames('EPERM', 1);
+    const artifact = await buildNativeDesktopDriver(options());
+
+    expect(attempts).toHaveBeenCalledTimes(2);
+    await expect(resolveOnly()).resolves.toMatchObject({ artifactId: artifact.artifactId, origin: 'cache' });
+  });
+
+  windowsTest('preserves a hard publication error without retrying', async () => {
+    const { attempts, error } = failPublicationRenames('EXDEV', 1);
+    await expect(buildNativeDesktopDriver(options())).rejects.toBe(error);
+
+    expect(attempts).toHaveBeenCalledTimes(1);
+    expect(exists('selections')).toBe(false);
+    expect(fs.readdirSync(path.join(cacheRoot, 'v1', 'staging'))).toEqual([]);
+  });
+
+  windowsTest('quarantines an invalid selection after a transient sharing violation', async () => {
+    const built = await buildNativeDesktopDriver(options());
+    fs.writeFileSync(built.executablePath, 'corrupt');
+    const rename = fs.renameSync;
+    const attempts = jest.fn();
+    jest.spyOn(fs, 'renameSync').mockImplementation((from, to) => {
+      if (typeof from === 'string' && path.dirname(path.dirname(from)) === path.join(cacheRoot, 'v1', 'selections')) {
+        attempts();
+        if (attempts.mock.calls.length === 1) throw Object.assign(new Error('Sharing violation'), { code: 'EACCES' });
+      }
+      rename(from, to);
+    });
+
+    await expect(resolveOnly()).rejects.toMatchObject({ code: 'no-verified-prebuilt' });
+    expect(attempts).toHaveBeenCalledTimes(2);
+    const trash = path.join(cacheRoot, 'v1', 'trash');
+    expect(fs.readdirSync(trash)).toHaveLength(1);
+    expect(fs.readdirSync(path.join(trash, fs.readdirSync(trash)[0]))).toContain('error.json');
+  });
+
+  windowsTest('bounds sharing retries without disturbing an existing verified artifact', async () => {
+    const existing = await buildNativeDesktopDriver(options());
+    const { attempts, error } = failPublicationRenames('EBUSY', Infinity);
+    await expect(buildNativeDesktopDriver({ ...options(), force: true })).rejects.toBe(error);
+
+    expect(attempts).toHaveBeenCalledTimes(11);
+    expect(exists('trash')).toBe(false);
+    expect(fs.readdirSync(path.join(cacheRoot, 'v1', 'staging'))).toEqual([]);
+    await expect(resolveOnly()).resolves.toMatchObject({ artifactId: existing.artifactId, origin: 'cache' });
   });
 });
 
@@ -188,7 +267,7 @@ describe('native driver cache root configuration', () => {
     });
   });
 
-  cacheTest('uses platform defaults when the cache root and build policy environment variables are empty', async () => {
+  test('uses platform defaults when the cache root and build policy environment variables are empty', async () => {
     jest.spyOn(os, 'homedir').mockReturnValue(cacheRoot);
     jest.replaceProperty(process, 'env', {
       ...process.env,
