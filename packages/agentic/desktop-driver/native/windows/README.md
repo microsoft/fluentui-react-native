@@ -370,6 +370,10 @@ an abandoned mutex can warn one waiting helper, but is not a persistent
 recovery barrier. A `SendInput` call that injects fewer events than requested
 fails as `input-failed` and names UIPI, a secure desktop, or blocked input.
 
+The helper rejects wheel deltas and DPI-scaled pointer or window coordinates
+outside the native integer range as `invalid-params`, rather than wrapping them.
+In-range durations still use the 30-second ceiling per action.
+
 `click` mode `auto` falls back to accessibility activation when physical input
 is unavailable, and an explicit `physical` request reports `input-unavailable`.
 Element `sendKeys` and the keyboard `clear` (the fallback, or a `keyboard`

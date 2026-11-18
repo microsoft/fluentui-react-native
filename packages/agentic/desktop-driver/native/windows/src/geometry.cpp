@@ -2,10 +2,17 @@
 
 #include <algorithm>
 #include <cmath>
+#include <limits>
 
 #include "common.h"
 
 namespace furn {
+namespace {
+
+constexpr double kMinPixel = static_cast<double>(std::numeric_limits<long>::min());
+constexpr double kMaxPixel = static_cast<double>(std::numeric_limits<long>::max());
+
+}  // namespace
 
 double DipsFromPhysical(double physical, UINT dpi) {
   const UINT effective = dpi == 0 ? kDefaultDpi : dpi;
@@ -18,10 +25,18 @@ double PhysicalFromDips(double dips, UINT dpi) {
 }
 
 long RoundToPixel(double value) {
-  if (!std::isfinite(value)) {
+  if (std::isnan(value)) {
     return 0;
   }
-  return static_cast<long>(std::llround(value));
+  return static_cast<long>(std::round(std::clamp(value, kMinPixel, kMaxPixel)));
+}
+
+long CheckedPixel(double value) {
+  const double rounded = std::round(value);
+  if (!std::isfinite(rounded) || rounded < kMinPixel || rounded > kMaxPixel) {
+    Fail(kErrorInvalidParams, "The requested native coordinate or delta is out of range.");
+  }
+  return static_cast<long>(rounded);
 }
 
 RectD PhysicalRectToClientDips(const RECT& physical, const WindowMetrics& metrics) {
@@ -35,8 +50,8 @@ RectD PhysicalRectToClientDips(const RECT& physical, const WindowMetrics& metric
 
 POINT ClientDipsToPhysicalPoint(double x, double y, const WindowMetrics& metrics) {
   POINT point{};
-  point.x = metrics.clientOrigin.x + RoundToPixel(PhysicalFromDips(x, metrics.dpi));
-  point.y = metrics.clientOrigin.y + RoundToPixel(PhysicalFromDips(y, metrics.dpi));
+  point.x = CheckedPixel(metrics.clientOrigin.x + std::round(PhysicalFromDips(x, metrics.dpi)));
+  point.y = CheckedPixel(metrics.clientOrigin.y + std::round(PhysicalFromDips(y, metrics.dpi)));
   return point;
 }
 
@@ -45,8 +60,8 @@ RECT ClientDipsToPhysicalRect(const RectD& rect, const WindowMetrics& metrics) {
   RECT result{};
   result.left = origin.x;
   result.top = origin.y;
-  result.right = origin.x + RoundToPixel(PhysicalFromDips(rect.width, metrics.dpi));
-  result.bottom = origin.y + RoundToPixel(PhysicalFromDips(rect.height, metrics.dpi));
+  result.right = CheckedPixel(origin.x + std::round(PhysicalFromDips(rect.width, metrics.dpi)));
+  result.bottom = CheckedPixel(origin.y + std::round(PhysicalFromDips(rect.height, metrics.dpi)));
   return result;
 }
 

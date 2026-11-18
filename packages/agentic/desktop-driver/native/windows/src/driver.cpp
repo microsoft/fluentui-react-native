@@ -79,7 +79,11 @@ int ActionButton(const json::Value& action) {
   if (button == nullptr || !button->IsNumber()) {
     return 0;
   }
-  return static_cast<int>(button->AsInteger(0));
+  const double value = button->AsNumber();
+  if (!(value >= 0 && value <= 4 && std::floor(value) == value)) {
+    Fail(kErrorInvalidParams, "An action button must be an integer between 0 and 4.");
+  }
+  return static_cast<int>(value);
 }
 
 unsigned int ActionDuration(const json::Value& action) {
@@ -87,8 +91,11 @@ unsigned int ActionDuration(const json::Value& action) {
   if (duration == nullptr || !duration->IsNumber()) {
     return 0;
   }
-  const std::int64_t value = duration->AsInteger(0);
-  return value <= 0 ? 0u : static_cast<unsigned int>(std::min<std::int64_t>(value, 30000));
+  const double value = duration->AsNumber();
+  if (!(value >= 0 && value <= MAXDWORD)) {
+    Fail(kErrorInvalidParams, "The action duration is out of range.");
+  }
+  return static_cast<unsigned int>(std::round(std::min(value, 30000.0)));
 }
 
 // Journals only the identifiers that correlate a command with window events,
@@ -368,21 +375,17 @@ POINT Driver::ResolveActionPoint(const json::Value& action, const CancellationTo
     }
     const ElementSnapshot snapshot = RequireLiveElement(elementId, token);
     const ElementRecord& record = automation_.RequireRecord(elementId);
-    const WindowMetrics metrics = MeasureWindow(record.window);
-    POINT point{};
-    point.x = (snapshot.physicalRect.left + snapshot.physicalRect.right) / 2 +
-              RoundToPixel(PhysicalFromDips(x, metrics.dpi));
-    point.y = (snapshot.physicalRect.top + snapshot.physicalRect.bottom) / 2 +
-              RoundToPixel(PhysicalFromDips(y, metrics.dpi));
-    return point;
+    WindowMetrics metrics = MeasureWindow(record.window);
+    metrics.clientOrigin.x = static_cast<long>((static_cast<std::int64_t>(snapshot.physicalRect.left) +
+                                                snapshot.physicalRect.right) / 2);
+    metrics.clientOrigin.y = static_cast<long>((static_cast<std::int64_t>(snapshot.physicalRect.top) +
+                                                snapshot.physicalRect.bottom) / 2);
+    return ClientDipsToPhysicalPoint(x, y, metrics);
   }
   const HWND window = ReferenceWindow();
-  const WindowMetrics metrics = MeasureWindow(window);
+  WindowMetrics metrics = MeasureWindow(window);
   if (origin != nullptr && origin->IsString() && origin->AsString() == "pointer") {
-    POINT point = input_.pointer();
-    point.x += RoundToPixel(PhysicalFromDips(x, metrics.dpi));
-    point.y += RoundToPixel(PhysicalFromDips(y, metrics.dpi));
-    return point;
+    metrics.clientOrigin = input_.pointer();
   }
   return ClientDipsToPhysicalPoint(x, y, metrics);
 }
@@ -449,10 +452,13 @@ void Driver::PerformActions(const json::Value& actions, const CancellationToken&
         if (type != "scroll") {
           Fail(kErrorInvalidParams, "Wheel input sources support only scroll and pause.");
         }
+        const long deltaX = CheckedPixel(action.NumberField("deltaX", 0.0));
+        // A positive Windows vertical delta scrolls up, opposite to WebDriver.
+        const long deltaY = CheckedPixel(-action.NumberField("deltaY", 0.0));
         const POINT scrollPoint = ResolveActionPoint(action, token);
         RequirePointerOverLeasedApplication(scrollPoint);
         input_.MovePointer(scrollPoint, 0, token);
-        input_.Wheel(action.NumberField("deltaX", 0.0), action.NumberField("deltaY", 0.0), token);
+        input_.Wheel(deltaX, deltaY, token);
         continue;
       }
       if (sourceType != "none") {
@@ -699,6 +705,11 @@ CommandResult Driver::ExecuteCommand(const std::string& command, const json::Val
     if (rect == nullptr || !rect->IsObject()) {
       Fail(kErrorInvalidParams, "The setWindowRect request is missing its rectangle.");
     }
+    // Validate supplied dimensions before a restore can mutate the window.
+    WindowMetrics metrics = MeasureWindow(window);
+    for (const char* key : {"x", "y", "width", "height"}) {
+      CheckedPixel(PhysicalFromDips(rect->NumberField(key, 0), metrics.dpi));
+    }
     // Every change below is posted to the window's thread, so a window that
     // stops answering leaves the effect unknown instead of blocking the helper.
     RequireWindowResponds(window, token);
@@ -710,28 +721,34 @@ CommandResult Driver::ExecuteCommand(const std::string& command, const json::Val
       }
       RecordSettled(S_OK);
     }
-    WindowMetrics metrics = MeasureWindow(window);
+    metrics = MeasureWindow(window);
     const RectD current = ClientRectInScreenDips(metrics);
-    RECT target{};
-    target.left = RoundToPixel(PhysicalFromDips(rect->NumberField("x", current.x), metrics.dpi));
-    target.top = RoundToPixel(PhysicalFromDips(rect->NumberField("y", current.y), metrics.dpi));
-    target.right = target.left + RoundToPixel(PhysicalFromDips(rect->NumberField("width", current.width), metrics.dpi));
-    target.bottom =
-        target.top + RoundToPixel(PhysicalFromDips(rect->NumberField("height", current.height), metrics.dpi));
+    WindowMetrics screenMetrics = metrics;
+    screenMetrics.clientOrigin = {};
+    const RECT target = ClientDipsToPhysicalRect(
+        {rect->NumberField("x", current.x), rect->NumberField("y", current.y),
+         rect->NumberField("width", current.width), rect->NumberField("height", current.height)},
+        screenMetrics);
     const DWORD style = static_cast<DWORD>(GetWindowLongPtrW(window, GWL_STYLE));
     const DWORD exStyle = static_cast<DWORD>(GetWindowLongPtrW(window, GWL_EXSTYLE));
-    RECT frame = target;
-    if (AdjustWindowRectExForDpi(&frame, style, GetMenu(window) != nullptr ? TRUE : FALSE, exStyle, metrics.dpi) ==
+    RECT insets{};
+    if (AdjustWindowRectExForDpi(&insets, style, GetMenu(window) != nullptr ? TRUE : FALSE, exStyle, metrics.dpi) ==
         FALSE) {
       FailLastError(kErrorInvalidParams, "Computing the window frame for the requested client size", GetLastError());
     }
+    RECT frame{CheckedPixel(static_cast<double>(target.left) + insets.left),
+               CheckedPixel(static_cast<double>(target.top) + insets.top),
+               CheckedPixel(static_cast<double>(target.right) + insets.right),
+               CheckedPixel(static_cast<double>(target.bottom) + insets.bottom)};
     // DWM frames, custom title bars, and per-window minimums make the computed
     // frame an estimate, so converge on the requested client area by measuring.
     for (int attempt = 0; attempt < 4; attempt += 1) {
       token.ThrowIfCancelled();
       RECT before{};
       if (GetWindowRect(window, &before) == FALSE || EqualRect(&before, &frame) == FALSE) {
-        if (SetWindowPos(window, nullptr, frame.left, frame.top, frame.right - frame.left, frame.bottom - frame.top,
+        if (SetWindowPos(window, nullptr, frame.left, frame.top,
+                         CheckedPixel(static_cast<double>(frame.right) - frame.left),
+                         CheckedPixel(static_cast<double>(frame.bottom) - frame.top),
                          SWP_NOZORDER | SWP_NOACTIVATE | SWP_ASYNCWINDOWPOS) == FALSE) {
           FailLastError(kErrorInvalidParams, "Moving the window", GetLastError());
         }
@@ -740,15 +757,16 @@ CommandResult Driver::ExecuteCommand(const std::string& command, const json::Val
         RecordSettled(S_OK);
       }
       metrics = MeasureWindow(window);
-      const long deltaX = target.left - metrics.clientOrigin.x;
-      const long deltaY = target.top - metrics.clientOrigin.y;
-      const long deltaWidth = (target.right - target.left) - metrics.clientSize.cx;
-      const long deltaHeight = (target.bottom - target.top) - metrics.clientSize.cy;
+      const double deltaX = static_cast<double>(target.left) - metrics.clientOrigin.x;
+      const double deltaY = static_cast<double>(target.top) - metrics.clientOrigin.y;
+      const double deltaWidth = static_cast<double>(target.right) - target.left - metrics.clientSize.cx;
+      const double deltaHeight = static_cast<double>(target.bottom) - target.top - metrics.clientSize.cy;
       if (deltaX == 0 && deltaY == 0 && deltaWidth == 0 && deltaHeight == 0) {
         break;
       }
-      const RECT adjusted{frame.left + deltaX, frame.top + deltaY, frame.right + deltaX + deltaWidth,
-                          frame.bottom + deltaY + deltaHeight};
+      const RECT adjusted{CheckedPixel(frame.left + deltaX), CheckedPixel(frame.top + deltaY),
+                          CheckedPixel(frame.right + deltaX + deltaWidth),
+                          CheckedPixel(frame.bottom + deltaY + deltaHeight)};
       if (adjusted.left == frame.left && adjusted.top == frame.top && adjusted.right == frame.right &&
           adjusted.bottom == frame.bottom) {
         break;

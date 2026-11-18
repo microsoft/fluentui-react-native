@@ -133,6 +133,9 @@ void TestJson() {
     rejected = std::string(error.code()) == kErrorInvalidRequest;
   }
   Check(rejected, "malformed json is rejected");
+  Check(json::Value::Number(1e300).AsInteger(-1) == -1 &&
+            json::Value::Number(-1e300).AsInteger(-1) == -1,
+        "integer access refuses numbers outside its representable range");
 }
 
 void TestGeometry() {
@@ -158,6 +161,8 @@ void TestGeometry() {
                                                  metrics);
   Check(center.x == (physical.left + physical.right) / 2, "center maps back to physical x");
   Check(center.y == (physical.top + physical.bottom) / 2, "center maps back to physical y");
+  Check(RoundToPixel(1e300) == LONG_MAX && RoundToPixel(-1e300) == LONG_MIN,
+        "pixel rounding saturates before conversion");
 
   const RectD windowRect = ClientRectInScreenDips(metrics);
   Check(std::fabs(windowRect.x - 200.0) < 0.001 && std::fabs(windowRect.width - 800.0) < 0.001,
@@ -2222,7 +2227,7 @@ void TestInputReevaluation() {
         "a locked session refuses a button press");
   Check(FailureCode([&]() { input.MovePointer(POINT{5, 5}, 0, token); }) == kErrorInputUnavailable,
         "a locked session refuses pointer movement");
-  Check(FailureCode([&]() { input.Wheel(0.0, 120.0, token); }) == kErrorInputUnavailable,
+  Check(FailureCode([&]() { input.Wheel(0, -120, token); }) == kErrorInputUnavailable,
         "a locked session refuses wheel input");
   Check(FailureCode([&]() { input.PressChord({VK_CONTROL, 'A'}, token); }) == kErrorInputUnavailable,
         "a locked session refuses a chord");
@@ -2352,7 +2357,7 @@ void TestInputSendFailures() {
                 kErrorInputFailed &&
             Contains(message, "0x80070005"),
         "a send that Windows rejects with an error reports that error");
-  Check(failureOf(&AcceptFirstInputOnly, [&token](InputController& input) { input.Wheel(120.0, 120.0, token); },
+  Check(failureOf(&AcceptFirstInputOnly, [&token](InputController& input) { input.Wheel(120, -120, token); },
                   message) == kErrorInputFailed &&
             Contains(message, "accepted 1 of 2"),
         "a partly accepted batch reports how much of it Windows accepted");
@@ -3393,6 +3398,22 @@ void TestDriverMutationEffects() {
     Check(effectOf(command, params, token, &code) == "none" && code != "none" && code != "cancelled",
           std::string("a rejected ") + command + " reports no effect");
   }
+  std::string rangeCode;
+  for (const char* list : {
+           R"([{"type":"wheel","actions":[{"type":"scroll","deltaY":1e300}]}])",
+           R"([{"type":"wheel","actions":[{"type":"scroll","deltaY":-1e300}]}])",
+           R"([{"type":"pointer","actions":[{"type":"pointerMove","x":1e300,"y":0}]}])",
+           R"([{"type":"pointer","actions":[{"type":"pointerUp","button":1e300}]}])",
+           R"([{"type":"none","actions":[{"type":"pause","duration":1e300}]}])",
+       }) {
+    Check(effectOf("performActions", actions(list), token, &rangeCode) == "none" &&
+              rangeCode == kErrorInvalidParams && recordedInputs.empty(),
+          "the helper refuses an out-of-range action number before input dispatch");
+  }
+  json::Value oversizedRect = knownWindow;
+  oversizedRect.Set("rect", json::Value::Parse(R"({"width":1e300})"));
+  Check(effectOf("setWindowRect", oversizedRect, token, &rangeCode) == "none" && rangeCode == kErrorInvalidParams,
+        "the helper refuses an out-of-range window size before changing the window");
   // Another helper that crashed while holding physical input leaves the lock
   // abandoned, which refuses the next physical command before it starts.
   std::thread abandoner([]() {

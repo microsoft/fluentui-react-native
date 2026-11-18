@@ -146,15 +146,13 @@ ReleaseLedger ParseReleaseLedger(const json::Value& document) {
 }
 
 POINT NormalizeToVirtualDesktop(POINT screenPoint, RECT virtualDesktop) {
-  const double width = static_cast<double>(virtualDesktop.right - virtualDesktop.left);
-  const double height = static_cast<double>(virtualDesktop.bottom - virtualDesktop.top);
+  const double width = static_cast<double>(virtualDesktop.right) - virtualDesktop.left;
+  const double height = static_cast<double>(virtualDesktop.bottom) - virtualDesktop.top;
   POINT normalized{};
-  normalized.x = RoundToPixel((static_cast<double>(screenPoint.x - virtualDesktop.left) * 65535.0) /
-                              std::max(1.0, width - 1.0));
-  normalized.y = RoundToPixel((static_cast<double>(screenPoint.y - virtualDesktop.top) * 65535.0) /
-                              std::max(1.0, height - 1.0));
-  normalized.x = std::clamp<long>(normalized.x, 0, 65535);
-  normalized.y = std::clamp<long>(normalized.y, 0, 65535);
+  normalized.x = RoundToPixel(std::clamp((static_cast<double>(screenPoint.x) - virtualDesktop.left) * 65535.0 /
+                                            std::max(1.0, width - 1.0), 0.0, 65535.0));
+  normalized.y = RoundToPixel(std::clamp((static_cast<double>(screenPoint.y) - virtualDesktop.top) * 65535.0 /
+                                            std::max(1.0, height - 1.0), 0.0, 65535.0));
   return normalized;
 }
 
@@ -314,8 +312,8 @@ void InputController::MovePointer(POINT target, unsigned int durationMs, const C
     token.ThrowIfCancelled();
     const double progress = static_cast<double>(step) / static_cast<double>(steps);
     POINT position{};
-    position.x = start.x + RoundToPixel(static_cast<double>(target.x - start.x) * progress);
-    position.y = start.y + RoundToPixel(static_cast<double>(target.y - start.y) * progress);
+    position.x = RoundToPixel(start.x + std::round((static_cast<double>(target.x) - start.x) * progress));
+    position.y = RoundToPixel(start.y + std::round((static_cast<double>(target.y) - start.y) * progress));
     std::vector<INPUT> inputs{MakeAbsoluteMouseInput(position, MOUSEEVENTF_MOVE, 0)};
     Send(inputs, false);
     pointer_ = position;
@@ -329,7 +327,8 @@ void InputController::MovePointer(POINT target, unsigned int durationMs, const C
   const Deadline deadline(100);
   for (;;) {
     POINT observed{};
-    if (GetCursorPos(&observed) != FALSE && std::abs(observed.x - target.x) <= 2 && std::abs(observed.y - target.y) <= 2) {
+    if (GetCursorPos(&observed) != FALSE && std::abs(static_cast<double>(observed.x) - target.x) <= 2 &&
+        std::abs(static_cast<double>(observed.y) - target.y) <= 2) {
       return;
     }
     if (deadline.Expired()) {
@@ -423,19 +422,15 @@ void InputController::ClickAt(POINT target, const CancellationToken& token) {
   pointer_ = target;
 }
 
-void InputController::Wheel(double deltaX, double deltaY, const CancellationToken& token) {
+void InputController::Wheel(long nativeDeltaX, long nativeDeltaY, const CancellationToken& token) {
   RequirePhysicalInput();
   token.ThrowIfCancelled();
   std::vector<INPUT> inputs;
-  if (deltaY != 0.0) {
-    // WebDriver scrolls down with a positive delta; Windows scrolls up with a
-    // positive wheel value.
-    inputs.push_back(MakeAbsoluteMouseInput(pointer_, MOUSEEVENTF_WHEEL,
-                                            static_cast<DWORD>(static_cast<int>(-RoundToPixel(deltaY)))));
+  if (nativeDeltaY != 0) {
+    inputs.push_back(MakeAbsoluteMouseInput(pointer_, MOUSEEVENTF_WHEEL, static_cast<DWORD>(nativeDeltaY)));
   }
-  if (deltaX != 0.0) {
-    inputs.push_back(MakeAbsoluteMouseInput(pointer_, MOUSEEVENTF_HWHEEL,
-                                            static_cast<DWORD>(static_cast<int>(RoundToPixel(deltaX)))));
+  if (nativeDeltaX != 0) {
+    inputs.push_back(MakeAbsoluteMouseInput(pointer_, MOUSEEVENTF_HWHEEL, static_cast<DWORD>(nativeDeltaX)));
   }
   Send(inputs);
 }

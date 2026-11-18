@@ -75,7 +75,7 @@ class InputController {
   void PointerUp(int button, const CancellationToken& token);
   void PointerCancel();
   void ClickAt(POINT target, const CancellationToken& token);
-  void Wheel(double deltaX, double deltaY, const CancellationToken& token);
+  void Wheel(long nativeDeltaX, long nativeDeltaY, const CancellationToken& token);
 
   void KeyDown(std::wstring_view value, const CancellationToken& token);
   void KeyUp(std::wstring_view value, const CancellationToken& token);
