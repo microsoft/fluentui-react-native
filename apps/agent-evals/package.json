@@ -1,0 +1,38 @@
+{
+  "name": "@fluentui-react-native/agent-evals",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Opt-in controlled Copilot CLI evaluations of portable FURN skills",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "tsc -b",
+    "eval": "node src/cli.ts",
+    "format": "fluentui-scripts format",
+    "lint": "fluentui-scripts lint",
+    "test": "node --test src/*.test.ts"
+  },
+  "dependencies": {
+    "@fluentui-react-native/desktop-mcp": "workspace:*",
+    "@fluentui-react-native/desktop-test": "workspace:*",
+    "@fluentui-react-native/skills": "workspace:*",
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "@rnx-kit/agent-evals": "0.1.1",
+    "cross-spawn": "7.0.6",
+    "promptfoo": "0.125.1",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@fluentui-react-native/scripts": "workspace:*",
+    "@types/cross-spawn": "6.0.6"
+  },
+  "engines": {
+    "node": ">=24.11"
+  },
+  "furn": {
+    "packageType": "tooling"
+  },
+  "rnx-kit": {
+    "extends": "@fluentui-react-native/scripts/kit-config"
+  }
+}

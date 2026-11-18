@@ -26,7 +26,8 @@ jobs:
       - name: Set up toolchain
         uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@1c99dd2947a77097bf937701e3dcc90aa109d17e # 5.4.15
         with:
-          node-version: 22
+          # The opt-in eval workspace's non-model tests use the published Node >=24.11 auditor.
+          node-version: 24
 
       - name: Install dependencies
         run: yarn

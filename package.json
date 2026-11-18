@@ -15,6 +15,7 @@
     "scripts"
   ],
   "scripts": {
+    "agent-evals": "yarn workspace @fluentui-react-native/agent-evals eval",
     "build": "lage root-build",
     "build:clean": "yarn root-build --clean && yarn build",
     "bundle-size": "yarn workspace @fluentui-react-native/bundle-size measure",
