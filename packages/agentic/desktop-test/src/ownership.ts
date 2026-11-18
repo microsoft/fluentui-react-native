@@ -328,7 +328,7 @@ export async function recoverWindowsDesktopWorkloadClaim(options: {
         } = captureDesktopApplicationIdentity({ ...application, id: application.leaseId, ownership: 'launched' }, options.endpoint);
         applications.push({ resource, identity });
       } else if (
-        resource.id !== 'webdriver' ||
+        resource.id !== `${record.owner.runId}:webdriver` ||
         resource.identity !== `driver-service:${options.targetId}:${options.targetInstanceId}` ||
         resource.serviceReady !== undefined
       ) {
