@@ -544,7 +544,7 @@ The current session is active RDP, not a verified console session for physical q
 | --------------------------------------------- | ----------- | ----------- | --------------------------------------------------------------------------------------------------------- |
 | Setup and toolchain recorded                  | done        | `302ce30bb` | Branch sync, immutable install (peer warnings), and root build passed.                                    |
 | W-R0-1 P1-3 `HasWindowContent` initialization | done        | `31b960364` | Windows and Win32 helper builds and doctor passed; masked self-test passed 850/850. Candidate Q7 not run. |
-| W-R0-2 P1-4 value clamping                    | not started |             |                                                                                                           |
+| W-R0-2 P1-4 value clamping                    | done        | `406f67d1c` | Both helper builds passed; masked self-test passed 858/858. W3C validation not run (shared SHA pending).  |
 | W-R0-3 P1-5 empty-ledger recovery             | not started |             |                                                                                                           |
 | W-AUDIT-1 P1-6 pointer origin audit           | not started |             |                                                                                                           |
 | W-VERIFY R0-3 (P1-2)                          | not started |             |                                                                                                           |
