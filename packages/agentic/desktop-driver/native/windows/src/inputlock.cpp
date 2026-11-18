@@ -36,6 +36,17 @@ const wchar_t* PhysicalInputMutexName() noexcept {
   return inputMutexName.c_str();
 }
 
+void RecoverPhysicalInputMutexIfIdle() noexcept {
+  const HANDLE handle = OpenMutexW(SYNCHRONIZE | MUTEX_MODIFY_STATE, FALSE, PhysicalInputMutexName());
+  if (handle == nullptr) return;
+
+  const DWORD result = WaitForSingleObject(handle, 0);
+  if (result == WAIT_ABANDONED || result == WAIT_OBJECT_0) {
+    ReleaseMutex(handle);
+  }
+  CloseHandle(handle);
+}
+
 void SetPhysicalInputMutexNameForTesting(std::wstring name) {
   const std::lock_guard<std::mutex> guard(stateMutex);
   if (name.empty() || ownerDepth != 0) {

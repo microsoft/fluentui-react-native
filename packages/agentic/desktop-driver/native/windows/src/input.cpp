@@ -5,6 +5,7 @@
 #include <exception>
 
 #include "geometry.h"
+#include "inputlock.h"
 #include "settlement.h"
 
 namespace furn {
@@ -595,6 +596,9 @@ void InputController::PressChord(const std::vector<WORD>& virtualKeys, const Can
 ReleaseCounts InputController::ReleaseExact(const ReleaseLedger& ledger) {
   ReleaseCounts counts;
   if (ledger.empty()) {
+    if (PhysicalInputAvailable()) {
+      RecoverPhysicalInputMutexIfIdle();
+    }
     return counts;
   }
   RequirePhysicalInput();

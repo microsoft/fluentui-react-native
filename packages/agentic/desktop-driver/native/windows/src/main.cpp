@@ -70,8 +70,8 @@ int ReleaseInputFromLedger() {
     const furn::ReleaseLedger ledger = furn::ParseReleaseLedger(furn::json::Value::Parse(document));
     furn::InputController input;
     const furn::CancellationToken idle;
-    // Recovery owns physical input for the whole release chain and adopts a
-    // mutex abandoned by the helper it is recovering from.
+    // Nonempty recovery holds the mutex for the whole release chain. An empty
+    // ledger takes only a nonblocking recovery probe inside ReleaseExact.
     const furn::PhysicalInputScope scope = ledger.empty()
                                                ? furn::PhysicalInputScope()
                                                : furn::PhysicalInputScope(idle, furn::kPhysicalInputCleanupWaitMs,

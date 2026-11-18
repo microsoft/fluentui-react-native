@@ -532,10 +532,29 @@ void TestPhysicalInputLock() {
   const CancellationToken token;
   Check(acquireElsewhere(500) == "acquired", "an idle physical input mutex is available");
 
+  const auto releaseEmpty = [](SessionLock lock) {
+    InputController input;
+    input.UseTestSender(&RecordInput);
+    input.UseTestEnvironment([lock]() {
+      InputEnvironment environment = InteractiveEnvironmentForTesting();
+      environment.lock = lock;
+      return environment;
+    });
+    const ReleaseCounts counts = input.ReleaseExact({});
+    return counts.keys == 0 && counts.buttons == 0;
+  };
+  recordedInputs.clear();
   {
     const PhysicalInputScope outer(token, 1000);
     Check(outer.owns() && !outer.nested(), "the first scope owns the physical input mutex");
     Check(acquireElsewhere(200) == kErrorInputBusy, "a busy physical input mutex reports input-busy");
+    bool emptyReleaseSucceeded = false;
+    const ULONGLONG started = GetTickCount64();
+    std::thread recovery([&]() { emptyReleaseSucceeded = releaseEmpty(SessionLock::Unlocked); });
+    recovery.join();
+    Check(emptyReleaseSucceeded && GetTickCount64() - started < 1000 &&
+              acquireElsewhere(200) == kErrorInputBusy,
+          "empty recovery returns promptly without taking the mutex from a live owner");
     {
       const PhysicalInputScope inner(token, 1000);
       Check(inner.owns() && inner.nested(), "a nested scope reuses the owned mutex");
@@ -572,27 +591,29 @@ void TestPhysicalInputLock() {
 
   // A thread that exits while owning the mutex abandons it, which is exactly
   // what a helper crash looks like to the next owner.
-  std::thread abandoner([]() {
+  const auto abandonMutex = []() {
     const HANDLE handle = CreateMutexW(nullptr, FALSE, PhysicalInputMutexName());
     if (handle != nullptr) {
       WaitForSingleObject(handle, 1000);
       CloseHandle(handle);
     }
-  });
-  abandoner.join();
+  };
+  std::thread(abandonMutex).join();
   Check(acquireElsewhere(500) == kErrorInputBusy, "an abandoned mutex reports input-busy");
   Check(acquireElsewhere(500) == "acquired", "the reported abandonment leaves the mutex usable");
 
-  std::thread secondAbandoner([]() {
-    const HANDLE handle = CreateMutexW(nullptr, FALSE, PhysicalInputMutexName());
-    if (handle != nullptr) {
-      WaitForSingleObject(handle, 1000);
-      CloseHandle(handle);
-    }
-  });
-  secondAbandoner.join();
+  std::thread(abandonMutex).join();
   Check(acquireElsewhere(500, AbandonPolicy::Adopt) == "acquired", "recovery adopts an abandoned mutex");
   Check(acquireElsewhere(500) == "acquired", "adoption releases the mutex when recovery finishes");
+
+  std::thread(abandonMutex).join();
+  Check(releaseEmpty(SessionLock::Unlocked) && acquireElsewhere(500) == "acquired",
+        "empty recovery clears abandonment before the next fail-policy acquire");
+
+  std::thread(abandonMutex).join();
+  Check(releaseEmpty(SessionLock::Locked) && acquireElsewhere(500) == kErrorInputBusy,
+        "empty recovery is a successful no-op when physical input is unavailable");
+  Check(recordedInputs.empty(), "empty-ledger recovery never injects input");
 }
 
 // Manual-reset event that outlives the stalled worker which waits on it.

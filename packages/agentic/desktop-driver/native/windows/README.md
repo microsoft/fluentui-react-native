@@ -367,7 +367,10 @@ If cleanup fails, the helper retains the unreleased input and lock for a later
 retry; a failed physical mutation reports effect `unknown`, and `dispose`
 refuses to acknowledge while input remains down. If the worker exits first,
 an abandoned mutex can warn one waiting helper, but is not a persistent
-recovery barrier. A `SendInput` call that injects fewer events than requested
+recovery barrier. With an empty ledger, `--release-input` tries the existing
+mutex with no wait, releases it if acquired (including after abandonment),
+and reports zero released keys and buttons. A live holder or unavailable
+physical input is a successful no-op. A `SendInput` call that injects fewer events than requested
 fails as `input-failed` and names UIPI, a secure desktop, or blocked input.
 
 The helper rejects wheel deltas and DPI-scaled pointer or window coordinates
