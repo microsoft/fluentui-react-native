@@ -303,6 +303,25 @@ final class AccessibilityEngine {
     return false
   }
 
+  func actionWindowOwner(at point: CGPoint, token: CancellationToken) throws -> pid_t? {
+    guard Float(point.x).isFinite, Float(point.y).isFinite, let hit = try hitElement(at: point) else { return nil }
+    var hitPID: pid_t = 0
+    guard AXUIElementGetPid(hit, &hitPID) == .success, hitPID > 0 else { return nil }
+    var cursor: AXUIElement? = hit
+    for _ in 0..<Self.maximumAncestorDepth {
+      try token.throwIfCancelled()
+      guard let element = cursor else { return nil }
+      var owner: pid_t = 0
+      guard AXUIElementGetPid(element, &owner) == .success, owner == hitPID else { return nil }
+      let role = axString(try copyAXAttribute(element, kAXRoleAttribute))
+      if role == kAXWindowRole || role == kAXSheetRole {
+        return owner
+      }
+      cursor = try parent(of: element)
+    }
+    return nil
+  }
+
   func setFocus(_ elementID: String) throws {
     let record = try requireRecord(elementID)
     try validateLive(record)

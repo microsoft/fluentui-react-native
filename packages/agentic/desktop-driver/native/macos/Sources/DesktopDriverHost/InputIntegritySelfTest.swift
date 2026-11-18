@@ -296,7 +296,10 @@ extension SelfTestRunner {
     let effects = EffectLedger()
     let lock = PhysicalInputLock(baseName: "furn-desktop-driver-self-test-\(UUID().uuidString)")
     defer { lock.cleanupSelfTestFiles() }
-    let driver = Driver(effects: effects, input: InputController(effects: effects, environment: recorder.environment), inputLock: lock)
+    let driver = Driver(
+      effects: effects, input: InputController(effects: effects, environment: recorder.environment), inputLock: lock,
+      actionTargetOwnership: .selfTestLease
+    )
     let token = CancellationToken()
 
     do {

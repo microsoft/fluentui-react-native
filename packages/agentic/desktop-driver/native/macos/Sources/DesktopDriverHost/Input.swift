@@ -1,6 +1,8 @@
 import ApplicationServices
 import Foundation
 
+private let webDriverReleaseKey = "\u{E000}"
+
 enum KeyStroke: Equatable {
   case keyCode(CGKeyCode)
   case unicode(String)
@@ -96,7 +98,18 @@ final class InputController {
     }
   }
 
-  func movePointer(to target: CGPoint, durationMilliseconds: Int, token: CancellationToken) throws {
+  func requireCurrentPointer() throws -> CGPoint {
+    guard let position = environment.pointerLocation(), position.x.isFinite, position.y.isFinite else {
+      try fail(ErrorCode.inputFailed, "macOS did not report a readable current pointer position.")
+    }
+    pointer = position
+    pointerInitialized = true
+    return position
+  }
+
+  func movePointer(
+    to target: CGPoint, durationMilliseconds: Int, token: CancellationToken, guardDrag: ((CGPoint) throws -> Void)? = nil
+  ) throws {
     try requireInteractiveInput()
     if !pointerInitialized {
       syncPointer()
@@ -112,6 +125,10 @@ final class InputController {
         y: start.y + (target.y - start.y) * progress
       )
       // Moving with a button held is a drag the application can act on; a bare move only places the pointer.
+      if !pressedButtons.isEmpty {
+        try guardDrag?(position)
+        try token.throwIfCancelled()
+      }
       try postMouse(type: moveEventType(), point: position, button: pressedButtons.last ?? 0, counted: !pressedButtons.isEmpty)
       pointer = position
       if step < steps {
@@ -133,12 +150,16 @@ final class InputController {
     try fail(ErrorCode.inputFailed, "macOS did not move the pointer to the requested native element coordinate.")
   }
 
-  func pointerDown(_ button: Int, token: CancellationToken) throws {
+  func pointerDown(_ button: Int, token: CancellationToken, guardTarget: ((CGPoint) throws -> Void)? = nil) throws {
     try requireInteractiveInput()
     try token.throwIfCancelled()
     _ = try mouseButton(button)
     if pressedButtons.contains(button) {
       return
+    }
+    if let guardTarget {
+      try guardTarget(requireCurrentPointer())
+      try token.throwIfCancelled()
     }
     try postMouse(type: mouseEventType(button: button, down: true), point: pointer, button: button)
     pressedButtons.append(button)
@@ -170,7 +191,10 @@ final class InputController {
     try pointerUp(0, token: token)
   }
 
-  func wheel(deltaX: Double, deltaY: Double, token: CancellationToken) throws {
+  func wheel(
+    deltaX: Double, deltaY: Double, at point: CGPoint? = nil, token: CancellationToken,
+    guardTarget: ((CGPoint) throws -> Void)? = nil
+  ) throws {
     try requireInteractiveInput()
     try token.throwIfCancelled()
     guard deltaX.isFinite, deltaY.isFinite else {
@@ -187,21 +211,28 @@ final class InputController {
     ) else {
       try fail(ErrorCode.inputFailed, "Creating the macOS wheel event failed.")
     }
+    if let point {
+      event.location = point
+      try guardTarget?(point)
+      try token.throwIfCancelled()
+    }
     environment.post(event)
     effects.delivered()
   }
 
-  func keyDown(_ value: String, token: CancellationToken) throws {
-    try requireInteractiveInput()
+  func keyDown(_ value: String, token: CancellationToken, guardTarget: (() throws -> Void)? = nil) throws {
     try token.throwIfCancelled()
     guard isSingleWebDriverKey(value) else {
       try fail(ErrorCode.invalidParams, "A keyDown value must contain exactly one Unicode code point.")
     }
-    if value == "\u{E000}" {
+    if value == webDriverReleaseKey {
       releaseAll()
       return
     }
+    try requireInteractiveInput()
     let stroke = strokeForValue(value)
+    try guardTarget?()
+    try token.throwIfCancelled()
     try postKey(stroke, down: true)
     trackKeyDown(PressedKey(value: value, stroke: stroke), held: &pressedKeys)
   }
@@ -211,12 +242,13 @@ final class InputController {
     guard isSingleWebDriverKey(value) else {
       try fail(ErrorCode.invalidParams, "A keyUp value must contain exactly one Unicode code point.")
     }
-    if value == "\u{E000}" {
+    if value == webDriverReleaseKey {
       releaseAll()
       return
     }
-    try requirePhysicalInput()
     let stroke = strokeForValue(value)
+    guard pressedKeys.contains(where: { $0.stroke == stroke }) else { return }
+    try requirePhysicalInput()
     try postKey(stroke, down: false)
     trackKeyUp(stroke, held: &pressedKeys)
   }

@@ -40,6 +40,7 @@ final class SelfTestRunner {
     testHostLifecycle()
     testInputIntegrity()
     testActionOriginGeometry()
+    testActionTargetOwnership()
     testPhysicalInputReadiness()
     testApplicationTermination()
     testCaptureWindowSelection()

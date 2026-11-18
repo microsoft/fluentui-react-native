@@ -988,6 +988,17 @@ final class ApplicationManager {
     leaseOrder.lazy.compactMap { self.leases[$0] }.first
   }
 
+  func inputLeaseStarts(processID: pid_t) -> [String] {
+    leases.values.compactMap { $0.processID == processID ? $0.exactStartedAt : nil }
+  }
+
+  func primaryWindowForInputActivation() throws -> WindowRecord? {
+    guard let lease = primaryLease(), let windowID = lease.primaryWindowID else { return nil }
+    let window = try requireWindow(windowID)
+    guard window.leaseID == lease.id, isRunning(lease) else { return nil }
+    return window
+  }
+
   func forgetWindow(_ windowID: String) {
     windowEvents.forget(windowID: windowID)
     guard let record = windows.removeValue(forKey: windowID) else {

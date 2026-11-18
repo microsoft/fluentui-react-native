@@ -488,21 +488,20 @@ func processIdentity(_ processID: pid_t) -> JSONObject {
 
 /// Reports the application that owns system-wide keyboard focus.
 func focusedApplicationIdentity() -> JSONObject? {
+  guard let pid = try? focusedApplicationPID() else { return nil }
+  return processIdentity(pid)
+}
+
+func focusedApplicationPID() throws -> pid_t? {
   // Never set a messaging timeout on the system-wide element: AXUIElementSetMessagingTimeout applies it to every
   // Accessibility request in this process.
   let systemWide = AXUIElementCreateSystemWide()
-  var value: CFTypeRef?
-  guard
-    AXUIElementCopyAttributeValue(systemWide, kAXFocusedApplicationAttribute as CFString, &value) == .success,
-    let application = axElement(value)
-  else {
-    return nil
-  }
+  guard let application = axElement(try copyAXAttribute(systemWide, kAXFocusedApplicationAttribute)) else { return nil }
   var processID: pid_t = 0
-  guard AXUIElementGetPid(application, &processID) == .success else {
+  guard AXUIElementGetPid(application, &processID) == .success, processID > 0 else {
     return nil
   }
-  return processIdentity(processID)
+  return processID
 }
 
 /// Describes the WindowServer window whose bounds match an Accessibility frame, including off-screen and non-standard

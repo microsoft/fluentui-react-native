@@ -70,6 +70,7 @@ Failure-path, descendant, reliability and release-matrix qualification remain op
 ### macOS physical input
 
 - Physical input verifies postconditions (pointer acknowledgment, keyboard clear and focus) and refuses when the target is obscured; it does not click covered content.
+- Raw `performActions` requires a live exact application lease for button presses, drags, scrolls and new key presses. Unverified window hits or foreground refuse before posting the action; owned input can still be released after focus changes.
 - The physical lane clamps its window to the visible frame (maximum 1024 x 768 with a one-point inset) and verifies the exact requested rectangle.
 - A genuinely overlapped 480 x 302 window refuses physical input safely.
 - A locked console blocks physical-input lanes; no unlock or privacy change is attempted.

@@ -32,20 +32,23 @@ final class Driver {
   private let capture = CaptureEngine()
   private let inputLock: PhysicalInputLock
   private let actionOriginFrames: ActionOriginFrames?
+  private let actionTargetOwnership: ActionTargetOwnership?
   private var persistentInputLock = false
   // Commands execute serially on the worker thread, so one current journal entry is sufficient.
   private var journalEntry: Int?
 
-  /// Input and origin readers are replaceable so self-tests do not depend on live UI or post events.
+  /// Input and action data sources are replaceable so self-tests do not depend on live UI or post events.
   init(
     effects: EffectLedger = EffectLedger(),
     input: InputController? = nil,
     inputLock: PhysicalInputLock = .shared,
-    actionOriginFrames: ActionOriginFrames? = nil
+    actionOriginFrames: ActionOriginFrames? = nil,
+    actionTargetOwnership: ActionTargetOwnership? = nil
   ) {
     self.effects = effects
     self.inputLock = inputLock
     self.actionOriginFrames = actionOriginFrames
+    self.actionTargetOwnership = actionTargetOwnership
     accessibility = AccessibilityEngine(effects: effects)
     self.input = input ?? InputController(effects: effects)
   }
@@ -669,6 +672,20 @@ final class Driver {
     let ticks = sources.reduce(0) { maximum, source in
       max(maximum, (source["actions"] as? [Any])?.count ?? 0)
     }
+    let ownership = actionTargetOwnership ?? ActionTargetOwnership(
+      windowOwner: accessibility.actionWindowOwner,
+      focusedApplication: focusedApplicationPID,
+      leaseStarts: applications.inputLeaseStarts,
+      observe: ApplicationIncarnation.observeExact,
+      activatePrimary: { token in
+        guard let window = try self.applications.primaryWindowForInputActivation() else { return false }
+        try token.throwIfCancelled()
+        try self.activate(window, token: token)
+        return true
+      }
+    )
+    var firstKeyPress = true
+    let guardPointer: (CGPoint) throws -> Void = { point in try ownership.requirePointerTarget(point, token: token) }
     for tick in 0..<ticks {
       try token.throwIfCancelled()
       var pause = 0
@@ -689,7 +706,10 @@ final class Driver {
             try fail(ErrorCode.invalidParams, "A key action value must contain exactly one Unicode code point.")
           }
           if type == "keyDown" {
-            try input.keyDown(value, token: token)
+            try input.keyDown(value, token: token) {
+              try ownership.requireKeyboardTarget(allowActivation: firstKeyPress, token: token)
+              firstKeyPress = false
+            }
           } else if type == "keyUp" {
             try input.keyUp(value, token: token)
           } else {
@@ -700,10 +720,12 @@ final class Driver {
             try input.movePointer(
               to: try resolveActionPoint(action, token: token),
               durationMilliseconds: try parseActionDuration(action),
-              token: token
+              token: token,
+              guardDrag: guardPointer
             )
           } else if type == "pointerDown" {
-            try input.pointerDown(parseActionButton(action), token: token)
+            let button = try parseActionButton(action)
+            try input.pointerDown(button, token: token, guardTarget: guardPointer)
           } else if type == "pointerUp" {
             try input.pointerUp(parseActionButton(action), token: token)
           } else if type == "pointerCancel" {
@@ -717,8 +739,11 @@ final class Driver {
           }
           let deltaX = try requireActionNumber(action, "deltaX")
           let deltaY = try requireActionNumber(action, "deltaY")
-          try input.movePointer(to: resolveActionPoint(action, token: token), durationMilliseconds: 0, token: token)
-          try input.wheel(deltaX: deltaX, deltaY: deltaY, token: token)
+          let point = try resolveActionPoint(action, token: token)
+          try guardPointer(point)
+          try input.movePointer(to: point, durationMilliseconds: 0, token: token, guardDrag: guardPointer)
+          let actual = try input.requireCurrentPointer()
+          try input.wheel(deltaX: deltaX, deltaY: deltaY, at: actual, token: token, guardTarget: guardPointer)
         case "none":
           try fail(ErrorCode.invalidParams, "None input sources support only pause.")
         default:
@@ -749,7 +774,8 @@ final class Driver {
       return CGPoint(x: frame.midX + x, y: frame.midY + y)
     }
     if action["origin"] as? String == "pointer" {
-      return CGPoint(x: input.pointer.x + x, y: input.pointer.y + y)
+      let pointer = try input.requireCurrentPointer()
+      return CGPoint(x: pointer.x + x, y: pointer.y + y)
     }
     let frame = try requireActionOriginFrame("viewport") {
       if let actionOriginFrames {

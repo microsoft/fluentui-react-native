@@ -152,6 +152,10 @@ before the action sequence is dispatched.
 If the native provider cannot resolve a pointer move or scroll against live
 element or viewport geometry with positive area, the driver returns
 `move target out of bounds` rather than guessing a destination.
+On macOS, raw button presses, drags, scrolls and key presses also require a
+verified live application lease for the destination or keyboard foreground.
+An unowned or unproven target returns `element not interactable`; cleanup can
+still release input the session already holds.
 
 Portable lookup strategies:
 

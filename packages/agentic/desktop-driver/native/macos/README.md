@@ -22,6 +22,7 @@ Accessibility.
 | `Host.swift`                           | FDR1 hello, request queue, framing, cancellation, and disposal              |
 | `Driver.swift`                         | Command dispatch, capability reporting, and physical-input scopes           |
 | `ApplicationActivation.swift`          | Foreground postcondition and one workspace fallback after AX activation     |
+| `ActionTargetOwnership.swift`          | Exact lease checks for raw pointer and keyboard action targets              |
 | `KeyboardClear.swift`                  | Keyboard focus, selection acknowledgment, and empty-value verification      |
 | `Application.swift`                    | Launch/attach leases, exact process/window identity, and ownership          |
 | `ApplicationTermination.swift`         | `terminateOwned`: quit, wait, kill, and verify the exit of an owned process |
@@ -402,6 +403,15 @@ Element and viewport origins in pointer moves and scrolls require fresh,
 readable Accessibility geometry with positive area. The helper does not use a
 zero snapshot rectangle or the window's last-known frame for placement; it
 returns `move-target-out-of-bounds` before posting that action's input.
+
+Raw `performActions` button presses, drags and scrolls require a hit inside a
+window or sheet of an exactly leased process. No hit or unverifiable ownership
+is a refusal, unlike the permissive no-hit path on Windows. Raw key presses
+verify the exact keyboard foreground before each press; only the first press
+can activate the verified primary window and then recheck focus. An unknown
+foreground does not trigger activation. Releases and cancellation still unwind
+input that the helper owns even when focus changes. See the [native action
+rules](../PROTOCOL.md#action-values).
 
 After posting a pointer-move sequence, the helper allows about 200 ms of
 bounded position reads for the OS to acknowledge its destination. It never

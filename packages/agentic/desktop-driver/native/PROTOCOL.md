@@ -137,6 +137,23 @@ before the action posts any event. Node translates this code from either
 provider to WebDriver `move target out of bounds`. The ordinary mutation
 settlement rules still apply if a preceding action already posted input.
 
+On macOS, raw `performActions` checks target ownership while holding the
+physical-input lock. New button presses, drag events and scrolls need an
+Accessibility hit in a window or sheet whose PID and kernel start time match
+a live lease. Scroll checks the destination before moving and checks the
+acknowledged pointer position again before posting. Bare pointer placement
+does not require a hit. Each new key press needs the system-wide keyboard
+foreground to match a live exact lease. If the first press finds a known
+unowned foreground, the helper may activate its verified primary window once
+and rechecks the foreground before posting. A later focus change never
+triggers another activation within that command.
+
+An unowned or unproven target returns `element-not-interactable` with effect
+`none` if no primary input was already posted. Permission and native query
+errors remain distinct. The guard does not prevent releasing already-held
+keys or buttons on explicit release, cancellation, failure or shutdown.
+Unmatched key-up or button-up actions do not post anything.
+
 ### Application leases
 
 A `launch` or `attach` result is the application lease `{ id, ownership,
