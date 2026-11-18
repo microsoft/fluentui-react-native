@@ -1662,6 +1662,56 @@ void TestFirstWindowListingWithToolPopup() {
         "the first windows command initializes UI Automation and admits the owned untitled popup");
 }
 
+json::Value StringFields(std::initializer_list<std::pair<const char*, std::string>> fields);
+
+void TestEmptyActionOrigins() {
+  WindowThread windows;
+  const HWND window = windows.Create(L"FurnSelfTestActionOrigins", L"Action origin fixture");
+  if (window == nullptr || windows.CreateChild(window, L"BUTTON", L"Action origin", 1, BS_PUSHBUTTON) == nullptr) {
+    Check(false, "the action-origin fixture creates a window and button");
+    return;
+  }
+  Driver driver;
+  const CancellationToken token;
+  auto lease = json::Value::Object();
+  lease.Set("lease", driver.AdoptWindowForTesting(window, L"Action origin fixture"));
+  const auto listed = driver.Execute("windows", lease, token).result;
+  const std::string windowId = listed.Items().empty() ? std::string{} : listed.Items().front().StringField("id");
+  const auto tree = driver.Execute("tree", StringFields({{"windowId", windowId}}), token).result;
+  const auto button = std::find_if(tree.Items().begin(), tree.Items().end(),
+                                   [](const json::Value& item) { return item.StringField("role") == "button"; });
+  if (button == tree.Items().end()) {
+    Check(false, "the action-origin fixture resolves the button");
+    return;
+  }
+
+  recordedInputs.clear();
+  driver.InputForTesting().UseTestSender(&RecordInput);
+  const auto refusesOrigin = [&](const json::Value& origin) {
+    auto action = StringFields({{"type", "pointerMove"}});
+    action.Set("origin", origin);
+    auto actions = json::Value::Array();
+    actions.Append(std::move(action));
+    auto source = StringFields({{"type", "pointer"}});
+    source.Set("actions", std::move(actions));
+    auto sources = json::Value::Array();
+    sources.Append(std::move(source));
+    auto params = json::Value::Object();
+    params.Set("actions", std::move(sources));
+    std::string code;
+    return FailureEffect([&]() { driver.Execute("performActions", params, token); }, &code) == "none" &&
+           code == kErrorMoveTargetOutOfBounds && recordedInputs.empty();
+  };
+  const HWND buttonWindow = GetDlgItem(window, 1);
+  const UINT resizeFlags = SWP_NOMOVE | SWP_NOZORDER | SWP_NOACTIVATE;
+  Check(buttonWindow != nullptr && SetWindowPos(buttonWindow, nullptr, 0, 0, 0, 0, resizeFlags) != FALSE &&
+            refusesOrigin(StringFields({{"elementId", button->StringField("id")}})),
+        "an element origin with empty bounds is refused before input");
+  Check(SetWindowPos(window, nullptr, 0, 0, 0, 0, resizeFlags) != FALSE &&
+            refusesOrigin(json::Value::String(std::string("viewport"))),
+        "a viewport with an empty client area is refused before input");
+}
+
 void TestClosingWindowListing() {
   WindowThread windows;
   const HWND primary = windows.Create(L"FurnSelfTestClosingListPrimary", L"Listing primary");
@@ -4140,6 +4190,7 @@ int RunSelfTest() {
   TestWindowEventHooks();
   TestRegisteredToolWindowLiveness();
   TestFirstWindowListingWithToolPopup();
+  TestEmptyActionOrigins();
   TestClosingWindowListing();
   TestDriverWindowEvents();
   TestInputEnvironment();

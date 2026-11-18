@@ -376,6 +376,9 @@ fails as `input-failed` and names UIPI, a secure desktop, or blocked input.
 The helper rejects wheel deltas and DPI-scaled pointer or window coordinates
 outside the native integer range as `invalid-params`, rather than wrapping them.
 In-range durations still use the 30-second ceiling per action.
+Missing or empty element bounds and viewport client areas are not pointer
+origins: the helper returns `move-target-out-of-bounds` without moving the
+pointer.
 
 `click` mode `auto` falls back to accessibility activation when physical input
 is unavailable, and an explicit `physical` request reports `input-unavailable`.

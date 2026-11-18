@@ -234,7 +234,7 @@ HWND Driver::ReferenceWindow() {
   if (lease != nullptr && lease->primaryWindow != nullptr && IsWindow(lease->primaryWindow) != FALSE) {
     return lease->primaryWindow;
   }
-  Fail(kErrorInvalidParams, "The helper does not hold an application window to resolve viewport coordinates against.");
+  Fail(kErrorMoveTargetOutOfBounds, "The action has no live application window to resolve its origin.");
 }
 
 InputVerdict Driver::ClickAvailability(const std::string& elementId) {
@@ -365,6 +365,14 @@ ElementSnapshot Driver::RequireLiveElement(const std::string& elementId, const C
 }
 
 POINT Driver::ResolveActionPoint(const json::Value& action, const CancellationToken& token) {
+  const auto measureActionWindow = [](HWND window) {
+    try {
+      return MeasureWindow(window);
+    } catch (const HelperError& error) {
+      if (error.code() != kErrorNoSuchWindow) throw;
+      Fail(kErrorMoveTargetOutOfBounds, "The action window geometry is unavailable.");
+    }
+  };
   const double x = action.NumberField("x", 0.0);
   const double y = action.NumberField("y", 0.0);
   const json::Value* origin = action.Find("origin");
@@ -373,9 +381,18 @@ POINT Driver::ResolveActionPoint(const json::Value& action, const CancellationTo
     if (elementId.empty()) {
       Fail(kErrorInvalidParams, "An action element origin is missing its element identifier.");
     }
-    const ElementSnapshot snapshot = RequireLiveElement(elementId, token);
+    ElementSnapshot snapshot;
+    try {
+      snapshot = RequireLiveElement(elementId, token);
+    } catch (const HelperError& error) {
+      if (error.code() != kErrorNoSuchWindow) throw;
+      Fail(kErrorMoveTargetOutOfBounds, "The action element's window geometry is unavailable.");
+    }
+    if (IsEmptyRect(snapshot.physicalRect)) {
+      Fail(kErrorMoveTargetOutOfBounds, "The action element has no readable bounds with positive area.");
+    }
     const ElementRecord& record = automation_.RequireRecord(elementId);
-    WindowMetrics metrics = MeasureWindow(record.window);
+    WindowMetrics metrics = measureActionWindow(record.window);
     metrics.clientOrigin.x = static_cast<long>((static_cast<std::int64_t>(snapshot.physicalRect.left) +
                                                 snapshot.physicalRect.right) / 2);
     metrics.clientOrigin.y = static_cast<long>((static_cast<std::int64_t>(snapshot.physicalRect.top) +
@@ -383,9 +400,11 @@ POINT Driver::ResolveActionPoint(const json::Value& action, const CancellationTo
     return ClientDipsToPhysicalPoint(x, y, metrics);
   }
   const HWND window = ReferenceWindow();
-  WindowMetrics metrics = MeasureWindow(window);
+  WindowMetrics metrics = measureActionWindow(window);
   if (origin != nullptr && origin->IsString() && origin->AsString() == "pointer") {
     metrics.clientOrigin = input_.pointer();
+  } else if (metrics.clientSize.cx <= 0 || metrics.clientSize.cy <= 0) {
+    Fail(kErrorMoveTargetOutOfBounds, "The action viewport has no client area.");
   }
   return ClientDipsToPhysicalPoint(x, y, metrics);
 }
