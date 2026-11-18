@@ -1616,6 +1616,26 @@ void TestRegisteredToolWindowLiveness() {
   applications.CloseApplication(leaseId, token);
 }
 
+void TestFirstWindowListingWithToolPopup() {
+  WindowThread windows;
+  const HWND primary = windows.Create(L"FurnSelfTestFirstListPrimary", L"First listing primary");
+  const HWND popup = windows.Create(L"FurnSelfTestFirstListPopup", L"", DefWindowProcW, primary);
+  if (primary == nullptr || popup == nullptr ||
+      windows.CreateChild(popup, L"BUTTON", L"Popup action", 1, BS_PUSHBUTTON) == nullptr) {
+    Check(false, "first window listing creates an owned untitled popup with content");
+    return;
+  }
+
+  Driver driver;
+  const CancellationToken token;
+  json::Value request = json::Value::Object();
+  request.Set("lease", driver.AdoptWindowForTesting(primary, L"First listing primary"));
+  const auto listed = driver.Execute("windows", request, token).result;
+  Check(listed.Items().size() == 2 && listed.Items().front().StringField("title") == "First listing primary" &&
+            listed.Items().back().StringField("title").empty() && !listed.Items().back().StringField("id").empty(),
+        "the first windows command initializes UI Automation and admits the owned untitled popup");
+}
+
 void TestClosingWindowListing() {
   WindowThread windows;
   const HWND primary = windows.Create(L"FurnSelfTestClosingListPrimary", L"Listing primary");
@@ -4077,6 +4097,7 @@ int RunSelfTest() {
   TestAttachedCloseKeepsQuarantine();
   TestWindowEventHooks();
   TestRegisteredToolWindowLiveness();
+  TestFirstWindowListingWithToolPopup();
   TestClosingWindowListing();
   TestDriverWindowEvents();
   TestInputEnvironment();

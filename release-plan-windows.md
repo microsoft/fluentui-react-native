@@ -540,34 +540,34 @@ the commit SHA, and a note. For deferred items, give the tracking issue.
 Windows App Runtime 1.8 X64 8000.994.2142.0 registered. Node 26.13.0, Yarn 4.18.0.
 The current session is active RDP, not a verified console session for physical qualification.
 
-| Item                                          | Status      | Commit      | Notes                                                                  |
-| --------------------------------------------- | ----------- | ----------- | ---------------------------------------------------------------------- |
-| Setup and toolchain recorded                  | done        | `302ce30bb` | Branch sync, immutable install (peer warnings), and root build passed. |
-| W-R0-1 P1-3 `HasWindowContent` initialization | not started |             |                                                                        |
-| W-R0-2 P1-4 value clamping                    | not started |             |                                                                        |
-| W-R0-3 P1-5 empty-ledger recovery             | not started |             |                                                                        |
-| W-AUDIT-1 P1-6 pointer origin audit           | not started |             |                                                                        |
-| W-VERIFY R0-3 (P1-2)                          | not started |             |                                                                        |
-| W-VERIFY R0-5 (P1-4)                          | not started |             |                                                                        |
-| W-VERIFY R0-6 (P1-5)                          | not started |             |                                                                        |
-| W-VERIFY R0-9 (P2-10)                         | not started |             |                                                                        |
-| W-R1-1 P2-23 crash recovery                   | not started |             |                                                                        |
-| W-R1-2 P3-TST-2, P3-TST-6                     | not started |             |                                                                        |
-| W-R1-3 P3-DRV-11 and `nativeCache` on win32   | not started |             |                                                                        |
-| W-R1-4 P3-WIN-5 hardening                     | not started |             |                                                                        |
-| W-R1-5 P2-18 capture device loss              | not started |             |                                                                        |
-| W-R1-6 P2-26 contention message               | not started |             |                                                                        |
-| Documentation (section 5)                     | not started |             |                                                                        |
-| Changesets (section 6)                        | not started |             |                                                                        |
-| Q1 to Q3                                      | not run     |             |                                                                        |
-| Q4 Windows helper and contracts               | not run     |             |                                                                        |
-| Q4 Win32 helper and contracts                 | not run     |             |                                                                        |
-| Q5 packed install                             | not run     |             |                                                                        |
-| Q6 Windows Fabric                             | not run     |             |                                                                        |
-| Q6 Win32 Paper                                | not run     |             |                                                                        |
-| Q7 Windows targeted checks                    | not run     |             |                                                                        |
-| Q7 Win32 targeted checks                      | not run     |             |                                                                        |
-| Q8 Win32 fixture handoff                      | not run     |             |                                                                        |
-| Q9 Windows MCP pass                           | not run     |             |                                                                        |
-| Q9 Win32 MCP pass                             | not run     |             |                                                                        |
-| Q11 npm smoke (Windows)                       | not run     |             |                                                                        |
+| Item                                          | Status      | Commit      | Notes                                                                                                     |
+| --------------------------------------------- | ----------- | ----------- | --------------------------------------------------------------------------------------------------------- |
+| Setup and toolchain recorded                  | done        | `302ce30bb` | Branch sync, immutable install (peer warnings), and root build passed.                                    |
+| W-R0-1 P1-3 `HasWindowContent` initialization | done        | `31b960364` | Windows and Win32 helper builds and doctor passed; masked self-test passed 850/850. Candidate Q7 not run. |
+| W-R0-2 P1-4 value clamping                    | not started |             |                                                                                                           |
+| W-R0-3 P1-5 empty-ledger recovery             | not started |             |                                                                                                           |
+| W-AUDIT-1 P1-6 pointer origin audit           | not started |             |                                                                                                           |
+| W-VERIFY R0-3 (P1-2)                          | not started |             |                                                                                                           |
+| W-VERIFY R0-5 (P1-4)                          | not started |             |                                                                                                           |
+| W-VERIFY R0-6 (P1-5)                          | not started |             |                                                                                                           |
+| W-VERIFY R0-9 (P2-10)                         | not started |             |                                                                                                           |
+| W-R1-1 P2-23 crash recovery                   | not started |             |                                                                                                           |
+| W-R1-2 P3-TST-2, P3-TST-6                     | not started |             |                                                                                                           |
+| W-R1-3 P3-DRV-11 and `nativeCache` on win32   | not started |             |                                                                                                           |
+| W-R1-4 P3-WIN-5 hardening                     | not started |             |                                                                                                           |
+| W-R1-5 P2-18 capture device loss              | not started |             |                                                                                                           |
+| W-R1-6 P2-26 contention message               | not started |             |                                                                                                           |
+| Documentation (section 5)                     | not started |             |                                                                                                           |
+| Changesets (section 6)                        | not started |             |                                                                                                           |
+| Q1 to Q3                                      | not run     |             |                                                                                                           |
+| Q4 Windows helper and contracts               | not run     |             |                                                                                                           |
+| Q4 Win32 helper and contracts                 | not run     |             |                                                                                                           |
+| Q5 packed install                             | not run     |             |                                                                                                           |
+| Q6 Windows Fabric                             | not run     |             |                                                                                                           |
+| Q6 Win32 Paper                                | not run     |             |                                                                                                           |
+| Q7 Windows targeted checks                    | not run     |             |                                                                                                           |
+| Q7 Win32 targeted checks                      | not run     |             |                                                                                                           |
+| Q8 Win32 fixture handoff                      | not run     |             |                                                                                                           |
+| Q9 Windows MCP pass                           | not run     |             |                                                                                                           |
+| Q9 Win32 MCP pass                             | not run     |             |                                                                                                           |
+| Q11 npm smoke (Windows)                       | not run     |             |                                                                                                           |

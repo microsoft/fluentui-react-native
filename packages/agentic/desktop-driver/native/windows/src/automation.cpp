@@ -476,6 +476,10 @@ void Automation::Initialize() {
 
 bool Automation::HasWindowContent(HWND window, DWORD processId, ULONGLONG expiresAt, const CancellationToken& token) {
   token.ThrowIfCancelled();
+  Initialize();
+  if (!automation_ || !contentWalker_) {
+    Fail(kErrorAutomationFailed, "The UI Automation content view is unavailable.");
+  }
   const ULONGLONG now = GetTickCount64();
   if (now >= expiresAt) return false;
   const DWORD timeoutMs = static_cast<DWORD>(std::min<ULONGLONG>(expiresAt - now, kProviderCallTimeoutMs));
