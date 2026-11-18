@@ -98,6 +98,9 @@ export function defaultNativeDriverCacheRoot(platform = process.platform): strin
  * pnpm store, so a conventional `node_modules/.cache` setting fails instead of writing under installed code.
  */
 export function resolveNativeDriverCacheRoot(configured: string | undefined, packageRoot: string): string {
+  if (configured === '') {
+    throw new NativeDriverError('invalid-configuration', 'The native driver cache root must not be empty.');
+  }
   const cacheRoot = path.resolve(configured ?? defaultNativeDriverCacheRoot());
   const packageRoots = [path.resolve(packageRoot), resolveExistingPrefix(packageRoot)];
   for (const candidate of [cacheRoot, resolveExistingPrefix(cacheRoot)]) {

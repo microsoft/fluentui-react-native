@@ -371,7 +371,10 @@ async function resolveBuildContext(options: NativeDriverBuildOptions): Promise<N
   if (!fs.existsSync(providerRoot)) {
     throw new NativeDriverError('build-source-missing', `Native driver source does not exist at "${providerRoot}".`);
   }
-  const cacheRoot = resolveNativeDriverCacheRoot(options.cacheRoot ?? process.env[FURN_DESKTOP_DRIVER_CACHE_ROOT], packageRoot);
+  const cacheRoot = resolveNativeDriverCacheRoot(
+    options.cacheRoot ?? (process.env[FURN_DESKTOP_DRIVER_CACHE_ROOT] || undefined),
+    packageRoot,
+  );
   const sourceDigest = sha256(
     canonicalJson({
       coordinatorVersion: buildCoordinatorVersion,
@@ -673,7 +676,7 @@ function resolveConfiguration(): NativeDriverConfiguration {
 }
 
 function resolveBuildPolicy(value?: NativeDriverBuildPolicy): NativeDriverBuildPolicy {
-  const configured = value ?? process.env[FURN_DESKTOP_DRIVER_BUILD_POLICY] ?? 'if-missing';
+  const configured = value ?? (process.env[FURN_DESKTOP_DRIVER_BUILD_POLICY] || 'if-missing');
   if (configured !== 'if-missing' && configured !== 'never') {
     throw new NativeDriverError('invalid-configuration', `Unsupported native driver build policy "${configured}".`);
   }

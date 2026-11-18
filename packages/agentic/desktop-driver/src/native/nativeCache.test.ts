@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 
+import { defaultNativeDriverCacheRoot } from './filesystem';
 import type { MacOSToolchain } from './macos/buildMacOSDriver';
 import { buildMacOSDriver, probeMacOSToolchain, verifyMacOSDriver } from './macos/buildMacOSDriver';
 import { buildNativeDesktopDriver, resolveNativeDesktopDriver } from './nativeDriver';
@@ -21,27 +22,19 @@ const cacheTest = process.platform === 'win32' ? test.skip : test;
 
 const verifyMock = verifyMacOSDriver as jest.MockedFunction<typeof verifyMacOSDriver>;
 
-function helperScript(buildId: string, sourceDigest: string): string {
-  const hello = {
-    architecture: 'arm64',
-    buildId,
-    features: [],
-    protocol: { major: 1, minor: 0 },
-    provider: 'macos',
-    sourceDigest,
-    type: 'hello',
-  };
-  return [
-    '#!/usr/bin/env node',
-    `if (require('node:fs').existsSync(${JSON.stringify(failureMarker())})) {`,
-    "  process.stderr.write('E'.repeat(20000) + 'CAUSE\\n');",
-    '  process.exitCode = 1;',
-    '} else {',
-    `  process.stdout.write(${JSON.stringify(JSON.stringify(hello))});`,
-    '}',
-    '',
-  ].join('\n');
-}
+const helperScript = [
+  '#!/usr/bin/env node',
+  "const fs = require('node:fs');",
+  "const { join } = require('node:path');",
+  "const { failureMarker, hello } = JSON.parse(fs.readFileSync(join(__dirname, 'handshake.json'), 'utf8'));",
+  'if (fs.existsSync(failureMarker)) {',
+  "  process.stderr.write('E'.repeat(20000) + 'CAUSE\\n');",
+  '  process.exitCode = 1;',
+  '} else {',
+  '  process.stdout.write(JSON.stringify(hello));',
+  '}',
+  '',
+].join('\n');
 
 let cacheRoot: string;
 
@@ -64,9 +57,25 @@ beforeEach(() => {
   verifyMock.mockResolvedValue({ mode: 'adhoc' });
   (buildMacOSDriver as jest.MockedFunction<typeof buildMacOSDriver>).mockImplementation(async ({ buildId, sourceDigest, stagingRoot }) => {
     const bundlePath = path.join(stagingRoot, 'output', 'FurnDesktopDriverHost.app');
-    const executablePath = path.join(bundlePath, 'Contents', 'MacOS', 'furn-desktop-driver-host');
-    fs.mkdirSync(path.dirname(executablePath), { recursive: true });
-    fs.writeFileSync(executablePath, helperScript(buildId, sourceDigest));
+    const executableDirectory = path.join(bundlePath, 'Contents', 'MacOS');
+    const executablePath = path.join(executableDirectory, 'furn-desktop-driver-host');
+    fs.mkdirSync(executableDirectory, { recursive: true });
+    fs.writeFileSync(
+      path.join(executableDirectory, 'handshake.json'),
+      JSON.stringify({
+        failureMarker: failureMarker(),
+        hello: {
+          architecture: 'arm64',
+          buildId,
+          features: [],
+          protocol: { major: 1, minor: 0 },
+          provider: 'macos',
+          sourceDigest,
+          type: 'hello',
+        },
+      }),
+    );
+    fs.writeFileSync(executablePath, helperScript);
     fs.chmodSync(executablePath, 0o755);
     const buildLogPath = path.join(stagingRoot, 'build.log');
     fs.writeFileSync(buildLogPath, 'built');
@@ -172,6 +181,28 @@ describe('native artifact publication collisions', () => {
 });
 
 describe('native driver cache root configuration', () => {
+  test('rejects an explicit empty root even when the environment supplies a path', async () => {
+    jest.replaceProperty(process, 'env', { ...process.env, FURN_DESKTOP_DRIVER_CACHE_ROOT: cacheRoot });
+    await expect(resolveNativeDesktopDriver({ ...options(), buildPolicy: 'never', cacheRoot: '' })).rejects.toMatchObject({
+      code: 'invalid-configuration',
+    });
+  });
+
+  cacheTest('uses platform defaults when the cache root and build policy environment variables are empty', async () => {
+    jest.spyOn(os, 'homedir').mockReturnValue(cacheRoot);
+    jest.replaceProperty(process, 'env', {
+      ...process.env,
+      FURN_DESKTOP_DRIVER_BUILD_POLICY: '',
+      FURN_DESKTOP_DRIVER_CACHE_ROOT: '',
+      FURN_DESKTOP_DRIVER_HELPER_PATH: '',
+      FURN_DESKTOP_DRIVER_INSTALL_ROOT: '',
+      LOCALAPPDATA: cacheRoot,
+    });
+    const artifact = await resolveNativeDesktopDriver({ macosSigningIdentity: '', platform: 'macos' });
+    expect(artifact.origin).toBe('built');
+    expect(path.relative(defaultNativeDriverCacheRoot(), artifact.artifactRoot).split(path.sep)[0]).toBe('v1');
+  });
+
   test('rejects a root beneath node_modules before creating anything', async () => {
     const root = path.join(cacheRoot, 'node_modules', '.cache', 'native');
 

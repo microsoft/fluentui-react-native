@@ -259,7 +259,7 @@ export async function verifyMacOSDriver(
   const adhoc = readCodeSignValue(details, 'Signature') === 'adhoc';
   const mode: NativeDriverSigning['mode'] = adhoc ? 'adhoc' : 'signed';
   if (mode === 'signed') {
-    if (!/^CodeDirectory .*\bflags=.*\bruntime\b/m.test(details)) {
+    if (!hasMacOSHardenedRuntime(details)) {
       throw new NativeDriverError('signature-mismatch', 'The signed macOS native driver does not enable Hardened Runtime.');
     }
     if (!readCodeSignValue(details, 'Timestamp')) {
@@ -340,10 +340,19 @@ export async function resolveMacOSSigningIdentity(
 }
 
 export function parseMacOSSigningIdentities(output: string): MacOSSigningIdentity[] {
-  return [...output.matchAll(/^\s*\d+\)\s+([0-9A-F]{40})\s+"([^"]+)"(?:\s+\([^)]*\))?$/gm)].map((match) => ({
-    hash: match[1],
-    name: match[2],
-  }));
+  return output.split('\n').flatMap((line) => {
+    const match = /^\d+\)[ \t]+([0-9A-F]{40})[ \t]+"([^"]+)"(?:[ \t]+\([^)]*\))?$/.exec(line.trim());
+    return match ? [{ hash: match[1], name: match[2] }] : [];
+  });
+}
+
+export function hasMacOSHardenedRuntime(output: string): boolean {
+  return output.split('\n').some((line) => {
+    const flagsIndex = line.indexOf(' flags=');
+    if (!line.startsWith('CodeDirectory ') || flagsIndex === -1) return false;
+    const flags = /^0x[0-9a-fA-F]+\(([\w,-]*)\)/.exec(line.slice(flagsIndex + ' flags='.length))?.[1];
+    return flags?.split(',').includes('runtime') ?? false;
+  });
 }
 
 async function extractSigningCertificateHash(bundlePath: string, signal?: AbortSignal): Promise<string> {

@@ -91,6 +91,8 @@ The macOS helper path may name either
 | Disabled input features | `FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES` | None                      |
 
 An explicit API or CLI option takes precedence over its environment variable.
+An empty environment value is treated as unset. An explicit empty `cacheRoot`
+is rejected rather than resolving to the current working directory.
 WebDriver capabilities cannot set any of these values.
 
 Default stores:
