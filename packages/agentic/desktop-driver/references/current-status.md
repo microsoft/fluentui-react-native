@@ -251,6 +251,10 @@ Live requalification is tracked in [#4441](https://github.com/microsoft/fluentui
 
 ### Windows Fabric
 
+- **Desktop package preview checks:** the shared Windows/Win32 helper built for both endpoints and passed 869/869 native self-test checks with physical input masked at [`f3bf1767c`](https://github.com/microsoft/fluentui-react-native/commit/f3bf1767c). These cover first window listing, input ranges and origin geometry, empty-ledger recovery, startup hardening and injected Direct3D device loss. Release candidate app, physical-input and live device-loss checks were not run.
+
+- **Windows and Win32 preview limitations ([#4441](https://github.com/microsoft/fluentui-react-native/issues/4441)):** a UI Automation `E_FAIL` pattern query can fall through to a different pattern; a renamed or moved executable can fail without a stable identity reason; a process creation failure may report settlement as `exited`; action durations still cap at 30 seconds; diagnostic byte truncation can split UTF-8; and XML page source can report unsupported enabled/visible states as `false`.
+
 - **Observation and story MCP path:** M3 real-app observation recorded at `600235c35`.
 
 - **Connected-console physical smokes at `fec94cec4`:** Checkbox and Callout physical-input Storybook smokes passed 203/203 with zero failures, skips or retries; the real MCP descriptor path passed physical checkbox clicks with hash-verified PNGs ([#4469](https://github.com/microsoft/fluentui-react-native/pull/4469)).
@@ -266,6 +270,8 @@ Live requalification is tracked in [#4441](https://github.com/microsoft/fluentui
 - **Still required:** 200% and mixed DPI, negative-origin and minimized windows, live lock, RDP and elevation transitions, popups other than Callout, capture cancellation, kernel PID recycling, arbitrary descendants, and a console rerun of the interactive wheel, keyboard and capture contracts ([#4441](https://github.com/microsoft/fluentui-react-native/issues/4441), [#4348](https://github.com/microsoft/fluentui-react-native/issues/4348)).
 
 ### Win32 Paper
+
+- **Desktop package preview checks:** the same [Windows provider checks and limitations](#windows-fabric) apply. Release candidate REX app, physical-input and live device-loss checks were not run.
 
 - **Agent path and native fixture:** M3 and agent path recorded; native fixture physical input and capture at 100% and 150%.
 

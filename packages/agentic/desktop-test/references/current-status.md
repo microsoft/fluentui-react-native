@@ -334,6 +334,8 @@ Hosted physical-input and capture skips do not qualify those paths.
 
 ### Windows Fabric
 
+- **Desktop package preview checks:** exact supervisor listener claim replay, sharing-violation retry and semantic Ctrl+Break handling passed in the portable Windows ownership suite at [`c26c4bce6`](https://github.com/microsoft/fluentui-react-native/commit/c26c4bce6). Actual crash recovery and physical Ctrl+Break on the release candidate were not run. Contention errors do not yet include a verified owner summary ([#4451](https://github.com/microsoft/fluentui-react-native/issues/4451)); see the [shared Windows helper limitations](../../desktop-driver/references/current-status.md#windows-fabric).
+
 - **Retained Storybook handoff and workload:** at `a52302ebe`, one supervisor-retained ReactApp incarnation stayed exact across marker-verified MCP selection and observation, refused attached execution while MCP held the session, relinquish, an attached accessible case (1/1) and full accessible suite (40/40), MCP reopen and a managed workload (1/1, cleanup settled). Console Ctrl+C wrote a terminal `passed` lifecycle report and released the app, services, descriptors and claim. Physical input and capture were not run. Evidence: [#4510](https://github.com/microsoft/fluentui-react-native/pull/4510).
 
 - **Application ownership (packaged, `furn-81` build `bdeb0b291`):** the complete native consumer suite passed 11/11 and the provider cases 6/6 at `da89fe9bc` (native source `dbaf55893`), including recovery of a packaged survivor and the physical-input mutex; the hosted selection ran 0 of the 11 consumer cases because it has no endpoint opt-in; evidence in [#4494](https://github.com/microsoft/fluentui-react-native/pull/4494).
@@ -355,6 +357,8 @@ Hosted physical-input and capture skips do not qualify those paths.
 - **Latest hosted Storybook smoke:** at `0a369ebe5`, 255 of 255 selected checks passed with no groups skipped, after the Callout placement story began repositioning on owner layout changes; at `474941a38` a placement assertion had failed and eight groups were not run. Evidence: [#4510](https://github.com/microsoft/fluentui-react-native/pull/4510).
 
 ### Win32 Paper
+
+- **Desktop package preview checks:** the same [Windows workload checks and limitations](#windows-fabric) apply to Win32. Actual candidate crash recovery and physical Ctrl+Break were not run.
 
 - **Retained Storybook handoff and workload:** at `0a121ba85` (integrated source `a52302ebe`, later changes documentation-only), one supervisor-retained REX incarnation (PID 43864) stayed exact across marker-verified MCP selection on the first call and observation, refused attached execution while MCP held the session, relinquish, an attached accessible case (1/1) and full accessible suite (45/45), MCP reopen and a managed workload (1/1, cleanup settled). Console Ctrl+C wrote a terminal `passed` lifecycle report and released the app, services, descriptors and claim. Physical input and capture were not run; an earlier run at `d04c064da` predates the readiness gate. Evidence: [#4510](https://github.com/microsoft/fluentui-react-native/pull/4510).
 

@@ -216,7 +216,8 @@ with one unmodified key, such as `s` on a US layout, as that virtual key, as a
 user's press would. Applications then observe its key and code, so key-based
 handlers such as type-ahead match it. Other characters, dead-key characters,
 and letters while Caps Lock is on are injected as Unicode packets. Element
-`sendKeys` text always uses Unicode packets.
+`sendKeys` uses Unicode packets for ordinary text and virtual keys for WebDriver
+special keys and line feeds (Return).
 
 Windows and Win32 share implementation but retain distinct endpoint and
 renderer capabilities. Minimized-window capture remains unsupported rather
@@ -519,11 +520,10 @@ effect is `unknown` and the refusal says it was cancelled before it settled.
 Accessibility click tries `Invoke`, `Toggle`, `SelectionItem`, then
 `ExpandCollapse`. On Win32 controls `Invoke` is posted: the provider accepts
 the call and the application applies the effect afterwards, so callers poll for
-the visible result. Only a pattern the element does not implement moves on to
-the next one, and only an element without any of them is unsupported; a pattern
-query that fails otherwise fails as `automation-failed`, and one for an element
-that went away as `stale-element`. Named accessibility actions and a `semantic`
-clear classify their pattern queries the same way.
+the visible result. An unimplemented pattern or a query returning `E_FAIL`
+moves on to the next pattern. A different query failure is `automation-failed`,
+or `stale-element` if the element went away. Named accessibility actions and a
+`semantic` clear classify their pattern queries the same way.
 
 Legacy-only activation is refused before dispatch as `unsupported-operation`
 with `data.reason: activation-unsupported` and effect `none`, even when the
@@ -576,7 +576,7 @@ point they are dispatched:
 
 - each UI Automation pattern action and value write (`Invoke`, `Toggle`,
   `Select`, `AddToSelection`, `RemoveFromSelection`, `ScrollIntoView`,
-  `Expand`/`Collapse`, `DoDefaultAction`, `SetValue`), bracketed by
+  `Expand`/`Collapse`, `SetValue`), bracketed by
   `RecordDispatching()` and `RecordSettled()`;
 - each window restore and move that `setWindowRect` posts, bracketed the same
   way, so a window that stops answering before the change lands leaves the
