@@ -316,6 +316,8 @@ chain reaches the verified primary window. Known tooltip and IME helper
 classes stay excluded. Initial admission requires a bounded UIA content-view
 probe to verify the exact native root handle/process and find an exact-process
 content child; tooltip content and unreadable content do not qualify. The
+first listing that needs a content probe initializes UI Automation itself;
+failure to initialize reports `automation-failed`. The
 helper rechecks ownership, process, visibility, bounds, and the
 primary/candidate fingerprints after the provider read before registering the
 opaque window identity.
