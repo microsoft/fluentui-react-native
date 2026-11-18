@@ -682,39 +682,39 @@ commit SHA, and a note.
 
 **Shared changes the Windows lane must verify:** post the SHAs here when pushed.
 
-| Change                                                         | SHA | Windows verified |
-| -------------------------------------------------------------- | --- | ---------------- |
-| R0-3 (P1-2) retry options                                      |     |                  |
-| R0-5 (P1-4) Node validation                                    |     |                  |
-| R0-6 (P1-5) Node recovery                                      |     |                  |
-| R1-DRV-3 (P2-6) and R1-DRV-7 (P3-DRV-10), before W-R1-3 starts |     |                  |
+| Change                                                         | SHA         | Windows verified |
+| -------------------------------------------------------------- | ----------- | ---------------- |
+| R0-3 (P1-2) retry options                                      | `6fb97096e` | pending          |
+| R0-5 (P1-4) Node validation                                    |             |                  |
+| R0-6 (P1-5) Node recovery                                      |             |                  |
+| R1-DRV-3 (P2-6) and R1-DRV-7 (P3-DRV-10), before W-R1-3 starts |             |                  |
 
-| Item                                  | Status      | Commit | Notes |
-| ------------------------------------- | ----------- | ------ | ----- |
-| Phase 0 setup and draft PR            | not started |        |       |
-| R0-1 desktop-test minor and migration | not started |        |       |
-| R0-2 changelog text                   | not started |        |       |
-| R0-3 P1-2 WebdriverIO retries         | not started |        |       |
-| R0-5 P1-4 Node and Swift              | not started |        |       |
-| R0-6 P1-5 Node and Swift              | not started |        |       |
-| R0-7 P1-6                             | not started |        |       |
-| R0-8 P1-7                             | not started |        |       |
-| R0-9 P2-10 boundedCommand             | not started |        |       |
-| R1-PKG-1 to R1-PKG-6                  | not started |        |       |
-| R1-DRV-1 to R1-DRV-8                  | not started |        |       |
-| R1-MAC-1                              | not started |        |       |
-| R1-TST-1, R1-TST-2                    | not started |        |       |
-| R1-MCP-1 to R1-MCP-4                  | not started |        |       |
-| Documentation pass (macOS-owned)      | not started |        |       |
-| Version preview (section 7)           | not started |        |       |
-| Q1 to Q3                              | not run     |        |       |
-| Q4 macOS helper                       | not run     |        |       |
-| Q5 macOS packed install               | not run     |        |       |
-| Q6 macOS Fabric                       | not run     |        |       |
-| Q6 macOS Paper                        | not run     |        |       |
-| Q7 macOS targeted checks              | not run     |        |       |
-| Q8 macOS handoff                      | not run     |        |       |
-| Q9 macOS MCP pass                     | not run     |        |       |
-| Q10 hosted checks                     | not run     |        |       |
-| Follow-up issues filed                | not started |        |       |
-| Q11 #4509 and npm smoke (macOS)       | not run     |        |       |
+| Item                                  | Status      | Commit      | Notes                                                                                         |
+| ------------------------------------- | ----------- | ----------- | --------------------------------------------------------------------------------------------- |
+| Phase 0 setup and draft PR            | done        | `302ce30bb` | Draft #4515 open; Windows kickoff in the workflow mailbox.                                    |
+| R0-1 desktop-test minor and migration | not started |             |                                                                                               |
+| R0-2 changelog text                   | not started |             |                                                                                               |
+| R0-3 P1-2 WebdriverIO retries         | done        | `6fb97096e` | Fake-host launch and connected/attached click contracts passed. Windows verification pending. |
+| R0-5 P1-4 Node and Swift              | not started |             |                                                                                               |
+| R0-6 P1-5 Node and Swift              | not started |             |                                                                                               |
+| R0-7 P1-6                             | not started |             |                                                                                               |
+| R0-8 P1-7                             | not started |             |                                                                                               |
+| R0-9 P2-10 boundedCommand             | not started |             |                                                                                               |
+| R1-PKG-1 to R1-PKG-6                  | not started |             |                                                                                               |
+| R1-DRV-1 to R1-DRV-8                  | not started |             |                                                                                               |
+| R1-MAC-1                              | not started |             |                                                                                               |
+| R1-TST-1, R1-TST-2                    | not started |             |                                                                                               |
+| R1-MCP-1 to R1-MCP-4                  | not started |             |                                                                                               |
+| Documentation pass (macOS-owned)      | not started |             |                                                                                               |
+| Version preview (section 7)           | not started |             |                                                                                               |
+| Q1 to Q3                              | not run     |             |                                                                                               |
+| Q4 macOS helper                       | not run     |             |                                                                                               |
+| Q5 macOS packed install               | not run     |             |                                                                                               |
+| Q6 macOS Fabric                       | not run     |             |                                                                                               |
+| Q6 macOS Paper                        | not run     |             |                                                                                               |
+| Q7 macOS targeted checks              | not run     |             |                                                                                               |
+| Q8 macOS handoff                      | not run     |             |                                                                                               |
+| Q9 macOS MCP pass                     | not run     |             |                                                                                               |
+| Q10 hosted checks                     | not run     |             |                                                                                               |
+| Follow-up issues filed                | not started |             |                                                                                               |
+| Q11 #4509 and npm smoke (macOS)       | not run     |             |                                                                                               |
