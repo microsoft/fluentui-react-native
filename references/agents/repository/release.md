@@ -25,5 +25,6 @@ automatically after the source changes land; make corrections in the changesets.
 
 The PR publish dry run runs `yarn smoke:desktop-tarballs _packed` when there
 are tarballs. It installs new desktop tarballs together in a fresh consumer,
-imports their public entry points, and checks their CLI help. This does not
-replace target-OS builds or native tests.
+imports their public library entry points, resolves the managed service
+bootstrap without starting it, and checks CLI help. This does not replace
+target-OS builds or native tests.

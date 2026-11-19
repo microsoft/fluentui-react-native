@@ -9,13 +9,13 @@ type PackageManifest = { name: string; version: string; exports?: object; bin?: 
 type PackedPackage = { filename: string; pkg: PackageManifest };
 type PackageLock = { packages: Record<string, { version?: string; resolved?: string }> };
 
-function run(command: string, args: string[], cwd: string, label: string, timeout = 60_000): string {
+function run(command: string, args: string[], cwd: string, label: string, timeout = 60_000) {
   const { NODE_OPTIONS: _nodeOptions, NODE_PATH: _nodePath, ...env } = process.env;
   const result = spawn.sync(command, args, { cwd, env, encoding: 'utf8', timeout });
   if (result.error || result.status !== 0) {
     throw new Error(`${label}: ${result.error?.message ?? (result.stderr.trim() || `exit ${result.status ?? result.signal}`)}`);
   }
-  return result.stdout;
+  return result;
 }
 
 function packedPackages(directory: string): Map<string, PackedPackage> {
@@ -29,7 +29,8 @@ function packedPackages(directory: string): Map<string, PackedPackage> {
     if (!name) continue;
 
     const filename = path.resolve(entry.parentPath, entry.name);
-    const pkg = JSON.parse(run('tar', ['-xO', '-f', filename, 'package/package.json'], directory, `Read ${entry.name}`)) as PackageManifest;
+    const manifest = run('tar', ['-xO', '-f', filename, 'package/package.json'], directory, `Read ${entry.name}`).stdout;
+    const pkg = JSON.parse(manifest) as PackageManifest;
     if (pkg.name !== name || entry.name !== `${name.slice(1).replace('/', '-')}-${pkg.version}.tgz` || packages.has(name)) {
       throw new Error(`Unexpected or duplicate desktop package: ${entry.name}`);
     }
@@ -43,13 +44,15 @@ const importCheck = `
   import { realpathSync } from 'node:fs';
   import { relative, isAbsolute, sep } from 'node:path';
   import { fileURLToPath } from 'node:url';
-  const [specifier, directory] = process.argv.slice(1);
+  const [specifier, directory, mode] = process.argv.slice(1);
   const resolved = realpathSync(fileURLToPath(import.meta.resolve(specifier)));
   const file = relative(realpathSync(directory), resolved);
   if (isAbsolute(file) || file === '..' || file.startsWith('..' + sep)) {
     throw new Error('Export resolved outside its installed package: ' + specifier);
   }
-  await import(specifier, resolved.endsWith('.json') ? { with: { type: 'json' } } : {});
+  if (mode === 'import') {
+    await import(specifier, resolved.endsWith('.json') ? { with: { type: 'json' } } : {});
+  }
 `;
 
 function verifyPackage(name: string, { filename, pkg }: PackedPackage, consumer: string, lock: PackageLock) {
@@ -67,17 +70,30 @@ function verifyPackage(name: string, { filename, pkg }: PackedPackage, consumer:
 
   const directory = path.join(consumer, key);
   const exports = Object.keys(pkg.exports ?? {}).filter((subpath) => subpath.startsWith('.'));
-  for (const subpath of new Set(['.', ...exports])) {
+  const imports = new Set(['.', ...exports]);
+  const serviceBootstrap = name === '@fluentui-react-native/desktop-test' && imports.has('./service');
+  for (const subpath of imports) {
     if (subpath.includes('*')) throw new Error(`${name} has a new export pattern; add explicit smoke coverage for it.`);
     const specifier = name + subpath.slice(1);
-    run(process.execPath, ['--input-type=module', '--eval', importCheck, '--', specifier, directory], consumer, `Import ${specifier}`);
+    // This export is the managed service launcher, not a library entry. Importing it would start a service.
+    const resolveOnly = serviceBootstrap && subpath === './service';
+    run(
+      process.execPath,
+      ['--input-type=module', '--eval', importCheck, '--', specifier, directory, resolveOnly ? 'resolve' : 'import'],
+      consumer,
+      `${resolveOnly ? 'Resolve' : 'Import'} ${specifier}`,
+    );
   }
   const bins = typeof pkg.bin === 'string' ? [pkg.bin] : Object.values(pkg.bin ?? {});
   for (const bin of bins) {
     const help = run(process.execPath, [path.join(directory, bin), '--help'], consumer, `${name} ${bin} --help`);
-    if (!/\busage:/i.test(help)) throw new Error(`${name} ${bin} --help did not print usage.`);
+    if (!/\busage:/i.test(help.stdout) && !/\busage:/i.test(help.stderr)) {
+      throw new Error(`${name} ${bin} --help did not print usage.`);
+    }
   }
-  console.log(`Verified ${name}@${pkg.version}: ${new Set(['.', ...exports]).size} imports, ${bins.length} CLI help checks.`);
+  console.log(
+    `Verified ${name}@${pkg.version}: ${imports.size - Number(serviceBootstrap)} imports, ${bins.length} CLI help checks${serviceBootstrap ? ', service bootstrap resolved' : ''}.`,
+  );
 }
 
 const [directory = '_packed'] = process.argv.slice(2);
