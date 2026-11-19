@@ -1,5 +1,5 @@
 import { spawn } from 'node:child_process';
-import type { ChildProcessWithoutNullStreams, SpawnOptionsWithoutStdio } from 'node:child_process';
+import type { ChildProcess, SpawnOptionsWithoutStdio } from 'node:child_process';
 import { randomUUID } from 'node:crypto';
 import { EventEmitter } from 'node:events';
 
@@ -98,7 +98,7 @@ export class NativeHostProcess extends EventEmitter<{
   readonly artifact: NativeDriverArtifact;
 
   private readonly cancellationTimeoutMs: number;
-  private readonly child: ChildProcessWithoutNullStreams;
+  private readonly child: ChildProcess;
   private readonly closed: Promise<void>;
   private readonly decoder = new NativeFrameDecoder();
   private readonly pending = new Map<string, PendingRequest>();
@@ -107,6 +107,7 @@ export class NativeHostProcess extends EventEmitter<{
   private readonly started: Promise<NativeHostProcess>;
   private readonly stderrLines: StderrLineDecoder;
   private activated = false;
+  private spawnFailed = false;
   private disposeAcknowledged = false;
   private disposeController?: AbortController;
   private disposePromise?: Promise<void>;
@@ -136,11 +137,11 @@ export class NativeHostProcess extends EventEmitter<{
       this.rejectStarted = reject;
     });
 
-    const child = spawn(
-      options.artifact.executablePath,
-      ['--stdio'],
-      nativeHelperSpawnOptions(options.inputLockOwner),
-    ) as ChildProcessWithoutNullStreams;
+    const child = spawn(options.artifact.executablePath, ['--stdio'], nativeHelperSpawnOptions(options.inputLockOwner));
+    child.on('error', (error) => {
+      if (child.pid === undefined && (!child.stdin || !child.stdout || !child.stderr)) this.spawnFailed = true;
+      void this.fail(error);
+    });
     this.child = child;
     this.closed = new Promise<void>((resolve) => {
       let graceTimer: NodeJS.Timeout | undefined;
@@ -165,12 +166,14 @@ export class NativeHostProcess extends EventEmitter<{
     this.decoder.on('json', (message) => this.onJson(message));
     this.decoder.on('binary', (frame) => this.onBinary(frame));
     this.decoder.on('error', (error) => void this.fail(error));
-    child.stdout.on('data', (chunk: Buffer) => this.onStdout(chunk));
-    child.stdout.on('error', (error) => void this.fail(error));
-    child.stderr.on('data', (chunk: Buffer) => this.stderrLines.write(chunk));
-    child.stderr.on('error', (error) => void this.fail(error));
-    child.stdin.on('error', (error) => void this.fail(error));
-    child.on('error', (error) => void this.fail(error));
+    child.stdout?.on('data', (chunk: Buffer) => this.onStdout(chunk)).on('error', (error) => void this.fail(error));
+    child.stderr?.on('data', (chunk: Buffer) => this.stderrLines.write(chunk)).on('error', (error) => void this.fail(error));
+    child.stdin?.on('error', (error) => void this.fail(error));
+    child.once('spawn', () => {
+      if (!child.stdin || !child.stdout || !child.stderr) {
+        void this.fail(new NativeDriverError('missing-stdio', 'Native driver helper did not provide its protocol pipes.'));
+      }
+    });
 
     const startupTimeoutMs = options.startupTimeoutMs ?? 10_000;
     const timeout = setTimeout(
@@ -491,16 +494,17 @@ export class NativeHostProcess extends EventEmitter<{
   }
 
   private async writeFrame(frame: Buffer): Promise<void> {
-    if (this.child.stdin.destroyed || !this.child.stdin.writable) {
+    const { stdin } = this.child;
+    if (!stdin || stdin.destroyed || !stdin.writable) {
       throw new NativeDriverError('host-closed', 'Native driver helper input is closed.');
     }
-    if (this.child.stdin.write(frame)) {
+    if (stdin.write(frame)) {
       return;
     }
     await new Promise<void>((resolve, reject) => {
       const cleanup = () => {
-        this.child.stdin.off('drain', onDrain);
-        this.child.stdin.off('error', onError);
+        stdin.off('drain', onDrain);
+        stdin.off('error', onError);
         this.child.off('close', onClose);
       };
       const onDrain = () => {
@@ -515,8 +519,8 @@ export class NativeHostProcess extends EventEmitter<{
         cleanup();
         reject(new NativeDriverError('host-closed', 'Native driver helper closed while writing a request.'));
       };
-      this.child.stdin.once('drain', onDrain);
-      this.child.stdin.once('error', onError);
+      stdin.once('drain', onDrain);
+      stdin.once('error', onError);
       this.child.once('close', onClose);
     });
   }
@@ -576,6 +580,10 @@ export class NativeHostProcess extends EventEmitter<{
 
   /** Stops the helper if it still runs, escalating to SIGKILL, and waits a bounded time for its stdio to close. */
   private async reap(): Promise<void> {
+    if (this.spawnFailed) {
+      this.releasePipes();
+      return;
+    }
     if (this.isRunning()) {
       this.child.kill();
       if (!(await settlesWithin(this.closed, killGraceMs))) {
@@ -594,9 +602,9 @@ export class NativeHostProcess extends EventEmitter<{
   }
 
   private releasePipes(): void {
-    this.child.stdout.destroy();
-    this.child.stderr.destroy();
-    this.child.stdin.destroy();
+    this.child.stdout?.destroy();
+    this.child.stderr?.destroy();
+    this.child.stdin?.destroy();
   }
 }
 

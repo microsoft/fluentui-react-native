@@ -510,7 +510,6 @@ export class NativeDesktopHost implements DesktopHost {
     const keys = [...this.potentialKeys];
     const buttons = [...this.potentialButtons];
     return new Promise((resolve, reject) => {
-      const child = spawn(this.artifact.executablePath, ['--release-input'], nativeHelperSpawnOptions(inputLockOwner));
       const stdout = new BoundedOutput(maximumRecoveryOutputBytes);
       const stderr = new BoundedOutput(maximumRecoveryOutputBytes);
       let settled = false;
@@ -520,9 +519,9 @@ export class NativeDesktopHost implements DesktopHost {
       let killTimer: NodeJS.Timeout | undefined;
       let closeTimer: NodeJS.Timeout | undefined;
       const releasePipes = () => {
-        child.stdout.destroy();
-        child.stderr.destroy();
-        child.stdin.destroy();
+        child.stdout?.destroy();
+        child.stderr?.destroy();
+        child.stdin?.destroy();
       };
       const finish = (error?: Error) => {
         if (settled) {
@@ -540,6 +539,9 @@ export class NativeDesktopHost implements DesktopHost {
           resolve();
         }
       };
+      const child = spawn(this.artifact.executablePath, ['--release-input'], nativeHelperSpawnOptions(inputLockOwner));
+      const onError = (error: Error) => finish(timeoutError ?? error);
+      child.on('error', onError);
       const timeout = setTimeout(() => {
         timeoutError = new NativeDriverError('input-recovery-timeout', 'Native input recovery did not complete within 5 seconds.');
         child.kill('SIGTERM');
@@ -550,13 +552,19 @@ export class NativeDesktopHost implements DesktopHost {
           }
         }, recoveryGraceMs);
       }, 5000);
-      child.stdout.on('data', (chunk: Buffer) => stdout.push(chunk));
-      child.stderr.on('data', (chunk: Buffer) => stderr.push(chunk));
-      child.once('error', (error) => finish(timeoutError ?? error));
-      child.stdin.once('error', (error) => {
+      child.stdout?.on('data', (chunk: Buffer) => stdout.push(chunk));
+      child.stderr?.on('data', (chunk: Buffer) => stderr.push(chunk));
+      child.stdin?.once('error', (error) => {
         stdinError = error;
       });
+      child.once('spawn', () => {
+        if (!child.stdin || !child.stdout || !child.stderr) {
+          child.kill();
+          finish(new NativeDriverError('input-recovery-failed', 'Native input recovery did not provide its protocol pipes.'));
+        }
+      });
       child.once('exit', () => {
+        if (settled) return;
         exited = true;
         clearTimeout(timeout);
         clearTimeout(killTimer);
@@ -587,7 +595,7 @@ export class NativeDesktopHost implements DesktopHost {
           finish(new NativeDriverError('input-recovery-failed', error instanceof Error ? error.message : String(error)));
         }
       });
-      child.stdin.end(JSON.stringify({ buttons, keys }));
+      child.stdin?.end(JSON.stringify({ buttons, keys }));
     });
   }
 

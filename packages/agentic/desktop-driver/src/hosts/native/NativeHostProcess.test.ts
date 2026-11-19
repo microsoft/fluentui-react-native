@@ -599,6 +599,21 @@ describe('NativeHostProcess failure paths', () => {
   });
 
   describe('spawning', () => {
+    test('rejects startup without recovery when descriptor exhaustion prevents spawning the helper', async () => {
+      const { ChildProcess } = jest.requireActual<typeof import('node:child_process')>('node:child_process');
+      const child = new ChildProcess();
+      const kill = jest.spyOn(child, 'kill');
+      const recoverInput = jest.fn();
+      mockSpawn.mockReturnValueOnce(child);
+      const failure = Object.assign(new Error('Cannot create child pipes.'), { code: 'EMFILE' });
+      const starting = NativeHostProcess.start({ artifact, recoverInput });
+      queueMicrotask(() => child.emit('error', failure));
+
+      await expect(starting).rejects.toBe(failure);
+      expect(kill).not.toHaveBeenCalled();
+      expect(recoverInput).not.toHaveBeenCalled();
+    });
+
     test.each([
       ['darwin', true],
       ['linux', true],

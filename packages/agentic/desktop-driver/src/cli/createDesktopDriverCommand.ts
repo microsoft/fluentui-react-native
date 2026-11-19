@@ -521,24 +521,27 @@ async function runNativePermissionProbe(artifact: NativeDriverArtifact, options:
     const stdout: Buffer[] = [];
     const stderr: Buffer[] = [];
     const args = options.prompt ? ['--permissions', '--prompt'] : ['--permissions'];
-    const child = spawn(artifact.executablePath, args, {
-      stdio: ['ignore', 'pipe', 'pipe'],
-      windowsHide: true,
-    });
-    const timeout = setTimeout(() => {
-      child.kill();
-      settleReject(cliError('permission-probe-timeout', 'The native helper did not complete its permission diagnostic within 30 seconds.'));
-    }, 30_000);
-
     const settleReject = (error: Error) => {
       if (settled) {
         return;
       }
       settled = true;
       clearTimeout(timeout);
+      child.stdout?.destroy();
+      child.stderr?.destroy();
       reject(error);
     };
-    child.stdout.on('data', (chunk: Buffer) => {
+    const child = spawn(artifact.executablePath, args, {
+      stdio: ['ignore', 'pipe', 'pipe'],
+      windowsHide: true,
+    });
+    child.on('error', settleReject);
+    const timeout = setTimeout(() => {
+      child.kill();
+      settleReject(cliError('permission-probe-timeout', 'The native helper did not complete its permission diagnostic within 30 seconds.'));
+    }, 30_000);
+
+    child.stdout?.on('data', (chunk: Buffer) => {
       outputBytes += chunk.length;
       if (outputBytes > maximumOutputBytes) {
         child.kill();
@@ -547,7 +550,7 @@ async function runNativePermissionProbe(artifact: NativeDriverArtifact, options:
       }
       stdout.push(chunk);
     });
-    child.stderr.on('data', (chunk: Buffer) => {
+    child.stderr?.on('data', (chunk: Buffer) => {
       errorBytes += chunk.length;
       if (errorBytes > maximumOutputBytes) {
         child.kill();
@@ -556,7 +559,12 @@ async function runNativePermissionProbe(artifact: NativeDriverArtifact, options:
       }
       stderr.push(chunk);
     });
-    child.once('error', (error) => settleReject(error));
+    child.once('spawn', () => {
+      if (!child.stdout || !child.stderr) {
+        child.kill();
+        settleReject(cliError('permission-probe-failed', 'The native helper did not provide its output pipes.'));
+      }
+    });
     child.once('close', (code) => {
       if (settled) {
         return;

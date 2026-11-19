@@ -432,6 +432,21 @@ describe('NativeDesktopHost input recovery', () => {
     expect(recovery.message.length).toBe(16 * 1024);
   });
 
+  test('preserves the original helper failure when descriptor exhaustion prevents recovery', async () => {
+    scriptNativeHelperSession(mockSpawn, (_, __, control) => control.exit(1));
+    const { ChildProcess } = jest.requireActual<typeof import('node:child_process')>('node:child_process');
+    const recoveryError = Object.assign(new Error('Cannot create recovery pipes.'), { code: 'EMFILE' });
+    mockSpawn.mockImplementationOnce(() => {
+      const child = new ChildProcess();
+      queueMicrotask(() => child.emit('error', recoveryError));
+      return child;
+    });
+
+    await expect(macHost().performActions(pressKeyA)).rejects.toMatchObject({
+      errors: [expect.objectContaining({ code: 'host-exited' }), recoveryError],
+    });
+  });
+
   test('does not wait on a grandchild that holds the recovery process’s pipes', async () => {
     jest.useFakeTimers(realIo);
     scriptNativeHelperSession(mockSpawn, (_, __, control) => control.exit(1), [], {});

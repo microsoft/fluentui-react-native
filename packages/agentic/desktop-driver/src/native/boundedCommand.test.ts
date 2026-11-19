@@ -1,4 +1,4 @@
-import { spawn } from 'node:child_process';
+import { ChildProcess, spawn } from 'node:child_process';
 import { once } from 'node:events';
 import fs from 'node:fs';
 import os from 'node:os';
@@ -109,6 +109,16 @@ describe('bounded child process runner', () => {
     await expect(
       runBoundedCommand(path.join(os.tmpdir(), 'furn-missing-command'), [], { maxOutputBytes: 1_000, timeoutMs: 1_000 }),
     ).rejects.toMatchObject({ code: 'ENOENT' });
+  });
+
+  test('preserves a spawn error when descriptor exhaustion leaves no output pipes', async () => {
+    const child = new ChildProcess();
+    jest.mocked(spawn).mockReturnValueOnce(child);
+    const failure = Object.assign(new Error('Cannot create child pipes.'), { code: 'EMFILE' });
+    const pending = runBoundedCommand(node, [], { maxOutputBytes: 1_000, timeoutMs: 1_000 });
+    queueMicrotask(() => child.emit('error', failure));
+
+    await expect(pending).rejects.toBe(failure);
   });
 });
 

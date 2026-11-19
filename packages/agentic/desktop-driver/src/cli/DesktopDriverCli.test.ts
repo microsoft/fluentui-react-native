@@ -1,4 +1,4 @@
-import { spawn } from 'node:child_process';
+import { ChildProcess, spawn } from 'node:child_process';
 import fs from 'node:fs';
 import { createServer } from 'node:net';
 import os from 'node:os';
@@ -10,6 +10,11 @@ import type { DesktopStoryManifest } from '../storybook.js';
 import { createDesktopDriverCommand, runDesktopDriverCli } from './createDesktopDriverCommand';
 
 jest.setTimeout(30_000);
+
+jest.mock('node:child_process', () => {
+  const actual = jest.requireActual<typeof import('node:child_process')>('node:child_process');
+  return { ...actual, spawn: jest.fn(actual.spawn) };
+});
 
 describe('desktop-driver CLI', () => {
   afterEach(() => {
@@ -312,6 +317,24 @@ describe('desktop-driver CLI', () => {
       ready: true,
       result: { executablePath: artifact.executablePath },
     });
+  });
+
+  test('reports a permission probe spawn failure without requiring its stdio pipes', async () => {
+    const output: string[] = [];
+    jest.mocked(spawn).mockImplementationOnce(() => {
+      const child = new ChildProcess();
+      queueMicrotask(() => child.emit('error', Object.assign(new Error('Cannot create permission probe pipes.'), { code: 'EMFILE' })));
+      return child;
+    });
+    const program = createDesktopDriverCommand({
+      resolveDriver: jest.fn(async () => createNativeArtifact()),
+      stdout: { write: (value) => (output.push(String(value)), true) },
+    });
+
+    await program.parseAsync(['node', 'test', 'doctor', '--platform', 'macos', '--permissions']);
+
+    expect(JSON.parse(output.join(''))).toMatchObject({ ready: false, error: { code: 'EMFILE' } });
+    expect(process.exitCode).toBe(1);
   });
 
   test('passes the explicit doctor prompt flag only to macOS permission diagnostics', async () => {

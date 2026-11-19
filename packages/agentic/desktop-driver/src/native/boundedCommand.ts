@@ -38,12 +38,8 @@ export async function runBoundedCommand(
 ): Promise<BoundedCommandResult> {
   throwIfAborted(signal);
   return new Promise((resolve, reject) => {
-    const child = spawn(command, [...args], { stdio: ['ignore', 'pipe', 'pipe'], windowsHide: true });
     const stdout = new TailBuffer(maxOutputBytes);
     const stderr = new TailBuffer(maxOutputBytes);
-    child.stdout.on('data', (chunk: Buffer) => stdout.push(chunk));
-    child.stderr.on('data', (chunk: Buffer) => stderr.push(chunk));
-
     const timers: NodeJS.Timeout[] = [];
     let settled = false;
     let aborted = false;
@@ -62,8 +58,8 @@ export async function runBoundedCommand(
         clearTimeout(timer);
       }
       signal?.removeEventListener('abort', onAbort);
-      child.stdout.destroy();
-      child.stderr.destroy();
+      child.stdout?.destroy();
+      child.stderr?.destroy();
       outcome();
     };
     const complete = () =>
@@ -96,8 +92,19 @@ export async function runBoundedCommand(
       terminate();
     }
 
-    child.once('error', (error) => finish(() => reject(error)));
+    const child = spawn(command, [...args], { stdio: ['ignore', 'pipe', 'pipe'], windowsHide: true });
+    const onError = (error: Error) => finish(() => reject(error));
+    child.on('error', onError);
+    child.stdout?.on('data', (chunk: Buffer) => stdout.push(chunk));
+    child.stderr?.on('data', (chunk: Buffer) => stderr.push(chunk));
+    child.once('spawn', () => {
+      if (!child.stdout || !child.stderr) {
+        child.kill();
+        onError(new NativeDriverError('missing-stdio', 'The child process did not provide its output pipes.'));
+      }
+    });
     child.once('exit', (exitCode, exitSignal) => {
+      if (settled) return;
       exited = true;
       code = exitCode;
       terminationSignal = exitSignal;
