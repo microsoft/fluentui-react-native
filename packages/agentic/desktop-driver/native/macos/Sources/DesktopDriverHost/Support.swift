@@ -121,6 +121,10 @@ func fail(_ code: String, _ message: String, data: JSONObject? = nil) throws -> 
   throw HelperError(code: code, message: message, data: data)
 }
 
+func intervalNanoseconds(from start: UInt64, to end: UInt64) -> UInt64 {
+  end >= start ? end - start : 0
+}
+
 final class CancellationToken: @unchecked Sendable {
   private let lock = NSLock()
   private var cancelled = false
@@ -147,12 +151,10 @@ final class CancellationToken: @unchecked Sendable {
   }
 
   func wait(milliseconds: Int) throws {
-    let deadline = DispatchTime.now() + .milliseconds(max(0, milliseconds))
+    let deadline = (DispatchTime.now() + .milliseconds(max(0, milliseconds))).uptimeNanoseconds
     repeat {
       try throwIfCancelled()
-      let remaining = deadline.uptimeNanoseconds > DispatchTime.now().uptimeNanoseconds
-        ? deadline.uptimeNanoseconds - DispatchTime.now().uptimeNanoseconds
-        : 0
+      let remaining = intervalNanoseconds(from: DispatchTime.now().uptimeNanoseconds, to: deadline)
       if remaining == 0 {
         break
       }

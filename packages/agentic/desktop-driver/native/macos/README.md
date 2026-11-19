@@ -336,7 +336,8 @@ outcome, and window or element identifiers on the same monotonic clock. It
 never records text, values, or native handles. Activation annotates its entry
 with the method used, elapsed time, and the previously focused application.
 The `windowEvents` command returns both logs with `ageMs` values for
-`furn/window-events` and failure evidence. Both are diagnostics only.
+`furn/window-events` and failure evidence. Entries newer than the diagnostic
+clock sample report zero age. Both logs are diagnostics only.
 
 Descriptor reads set a messaging timeout on the notification's own element.
 Never set one on the system-wide element: `AXUIElementSetMessagingTimeout`

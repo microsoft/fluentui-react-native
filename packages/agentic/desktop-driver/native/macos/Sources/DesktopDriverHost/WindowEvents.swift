@@ -181,11 +181,12 @@ final class WindowEventMonitor: @unchecked Sendable {
     guard let last else {
       return false
     }
-    return DispatchTime.now().uptimeNanoseconds - last < quietMilliseconds * 1_000_000
+    return intervalNanoseconds(from: last, to: DispatchTime.now().uptimeNanoseconds) / 1_000_000 < quietMilliseconds
   }
 
-  func diagnostic(processID: pid_t, limit: Int = WindowEventMonitor.diagnosticEventLimit) -> JSONObject {
-    let now = DispatchTime.now().uptimeNanoseconds
+  func diagnostic(
+    processID: pid_t, limit: Int = WindowEventMonitor.diagnosticEventLimit, now: UInt64 = DispatchTime.now().uptimeNanoseconds
+  ) -> JSONObject {
     lock.lock()
     let observing = observers[processID] != nil
     let failures = registrationFailures[processID] ?? []
@@ -196,7 +197,7 @@ final class WindowEventMonitor: @unchecked Sendable {
     var result: JSONObject = [
       "events": recent.map { event in
         var value: JSONObject = [
-          "ageMs": Int((now - event.uptimeNanoseconds) / 1_000_000),
+          "ageMs": Int(intervalNanoseconds(from: event.uptimeNanoseconds, to: now) / 1_000_000),
           "element": "ax:\(event.elementHash)",
           "notification": event.notification,
           "sequence": event.sequence,
@@ -415,7 +416,9 @@ final class CommandJournal: @unchecked Sendable {
     guard let index = entries.lastIndex(where: { $0.sequence == sequence }) else {
       return
     }
-    entries[index].durationMilliseconds = Int((DispatchTime.now().uptimeNanoseconds - entries[index].startedNanoseconds) / 1_000_000)
+    entries[index].durationMilliseconds = Int(
+      intervalNanoseconds(from: entries[index].startedNanoseconds, to: DispatchTime.now().uptimeNanoseconds) / 1_000_000
+    )
     entries[index].outcome = outcome
     entries[index].detail.merge(detail) { _, new in new }
   }
@@ -430,13 +433,12 @@ final class CommandJournal: @unchecked Sendable {
     entries[index].detail.merge(detail) { _, new in new }
   }
 
-  func diagnostic(limit: Int = 64) -> [JSONObject] {
-    let now = DispatchTime.now().uptimeNanoseconds
+  func diagnostic(limit: Int = 64, now: UInt64 = DispatchTime.now().uptimeNanoseconds) -> [JSONObject] {
     lock.lock()
     defer { lock.unlock() }
     return entries.suffix(limit).map { entry in
       var value: JSONObject = [
-        "ageMs": Int((now - entry.startedNanoseconds) / 1_000_000),
+        "ageMs": Int(intervalNanoseconds(from: entry.startedNanoseconds, to: now) / 1_000_000),
         "command": entry.command,
         "outcome": entry.outcome,
         "sequence": entry.sequence,
