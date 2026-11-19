@@ -23,9 +23,10 @@ original caller `onAccessibilityAction` exactly once without synthesizing a
 press. Custom and disabled actions are still forwarded. A standalone `activate`
 event is not an additional toggle path.
 
-The [shared action foundation](../../../../../../framework-base/references/accessibility.md)
-defines the action contract, and its
-[transport evidence](../../../../../../../references/agents/accessibility/action-transport-evidence.md)
+The shared action foundation in
+`@fluentui-react-native/framework-base/references/accessibility.md`
+defines the action contract, and
+`@fluentui-react-native/skills/references/shared/accessibility/action-transport-evidence.md`
 records RNW 0.81.35, Win32 0.81.8, and RNmacOS 0.81.9 source evidence.
 macOS Fabric custom actions emit the declared name verbatim and ignore the
 display label; this does not establish default AXPress support. Native

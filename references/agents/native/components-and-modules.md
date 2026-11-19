@@ -45,6 +45,6 @@ Run `pod install` from the owning app or its `ios`/`macos` directory after depen
 - React Native Windows Fabric views: [Windows Fabric native components](windows-fabric.md).
 - Apple native code: follow [Apple native authoring and Office integration](apple-office.md) (R-APPLE-001 through
   R-APPLE-007) for every iOS or macOS change, plus native-core's [macOS Swift interoperability](../../../packages/agentic/native-core/references/architecture.md#macos-swift-interoperability) notes.
-- Focus targets and native focus visuals: [common focus authoring](../focus/common.md) and its platform files.
+- Focus targets and native focus visuals: [common focus authoring](../../../packages/agentic/skills/references/shared/focus/common.md) and its platform files.
 - Accessibility actions: the [framework-base accessibility reference](../../../packages/framework-base/references/accessibility.md)
   define the transport contract and its native qualification requirements.

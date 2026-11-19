@@ -26,9 +26,9 @@ for app identity, discovery, and diagnostics use the app's
    `yarn lage buildci` (R-VALID-003).
 
 For test configuration, helper provisioning, test runs, smoke reports, or CI
-lanes, use `desktop-testing`. For package source changes, use
+lanes, use `furn-desktop-testing`. For package source changes, use
 `maintain-desktop-testing`. Component API and assertion work stays with
-`agentic-component-authoring`.
+`furn-component-authoring`.
 
 The Storybook desktop CLI supports shared `--reporter` modes; see its
 [command reference](../../../packages/agentic/storybook-desktop/references/commands.md)

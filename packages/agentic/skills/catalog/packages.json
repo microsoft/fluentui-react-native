@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "version_policy": "Capabilities and documentation paths are validated against source package manifests. Provenance records inspected versions; consumers verify their installed versions.",
+  "packages": [
+    {
+      "name": "@fluentui-react-native/components",
+      "purpose": "Styled Fluent components and unstyled primitives; modern component authoring patterns and contracts.",
+      "entry_points": [".", "./primitives"],
+      "integration_targets": ["ios", "android", "macos", "windows", "win32"],
+      "reference_paths": [
+        "references/README.md",
+        "references/contract-sources/composite-evidence.md",
+        "references/contract-sources/flex-x3.md",
+        "references/contract-sources/fluent-v9.md",
+        "references/contract-sources/html-css.md",
+        "references/contract-sources/local-foundation.md",
+        "references/contract-sources/visual-reference.md",
+        "references/contracts.md",
+        "references/higher-order-components.md",
+        "references/primitives.md",
+        "references/rendering.md",
+        "references/state-and-accessibility.md",
+        "references/styles-and-tokens.md",
+        "references/tests-and-stories.md",
+        "references/types-and-slots.md"
+      ]
+    },
+    {
+      "name": "@fluentui-react-native/design",
+      "purpose": "Themes, tokens, appearance, styling, and optional color utilities.",
+      "entry_points": [".", "./theming", "./themes", "./styling", "./color-lib"],
+      "integration_targets": ["ios", "android", "macos", "windows", "win32"],
+      "reference_paths": ["references/styling.md", "references/theming.md", "references/tokens.md"]
+    },
+    {
+      "name": "@fluentui-react-native/framework-base",
+      "purpose": "Component patterns, slots, JSX runtime, interaction, accessibility, and focus foundations.",
+      "entry_points": [".", "./jsx-runtime"],
+      "integration_targets": ["ios", "android", "macos", "windows", "win32"],
+      "reference_paths": ["references/accessibility.md", "references/component-patterns.md"]
+    },
+    {
+      "name": "@fluentui-react-native/native-core",
+      "purpose": "Opt-in native components and services. Verify endpoint capabilities and host registration before use.",
+      "entry_points": [".", "./macos", "./windows", "./win32"],
+      "integration_targets": ["macos", "windows", "win32"],
+      "reference_paths": ["references/modern-components.md"]
+    },
+    {
+      "name": "@fluentui-react-native/desktop-test",
+      "purpose": "Application-neutral supervision, app and suite configuration, WDIO integration, and reporting. Supervisor and hosted-driver integration APIs are for lockstep first-party packages.",
+      "entry_points": [".", "./config", "./wdio", "./reporting"],
+      "integration_targets": ["macos", "windows", "win32"],
+      "reference_paths": [
+        "references/commands.md",
+        "references/configuration.md",
+        "references/lifecycle.md",
+        "references/management.md",
+        "references/platforms.md",
+        "references/reporting.md",
+        "references/wdio-suites.md"
+      ]
+    },
+    {
+      "name": "@fluentui-react-native/desktop-driver",
+      "purpose": "Desktop WebDriver, native helpers, typed clients, and bounded agent operations.",
+      "entry_points": [".", "./client", "./agent", "./operations", "./authority", "./native"],
+      "integration_targets": ["macos", "windows", "win32"],
+      "reference_paths": ["references/native-helpers.md"]
+    },
+    {
+      "name": "@fluentui-react-native/desktop-mcp",
+      "purpose": "Verified MCP stdio adapter for an existing supervisor and its trusted workload catalog, with explicit driver-only mode. The adapter does not build helpers, start services, or own the host. Published 0.1.0 cannot start with its published dependencies.",
+      "entry_points": [".", "./cli"],
+      "integration_targets": ["macos", "windows", "win32"],
+      "reference_paths": ["references/connection.md", "references/tools.md"]
+    },
+    {
+      "name": "@fluentui-react-native/desktop-driver-mcp",
+      "purpose": "Deprecated driver-only compatibility wrapper. Prefer desktop-mcp for new integrations; this shim never provides supervisor workload authority.",
+      "entry_points": ["."],
+      "integration_targets": ["macos", "windows", "win32"],
+      "reference_paths": []
+    },
+    {
+      "name": "@fluentui-react-native/storybook-desktop",
+      "purpose": "Optional Storybook integration, extraction, lifecycle commands, and story test callbacks.",
+      "entry_points": [".", "./config", "./testing", "./cli"],
+      "integration_targets": ["macos", "windows", "win32"],
+      "reference_paths": ["references/commands.md", "references/integration.md", "references/story-tests.md"]
+    }
+  ]
+}

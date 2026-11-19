@@ -6,6 +6,7 @@ import { Command } from 'clipanion';
 import spawn from 'cross-spawn';
 import micromatch from 'micromatch';
 import { findGitRoot } from 'workspace-tools';
+import { writeSkillDistribution } from '../utils/skillDistribution.ts';
 
 const REGISTRY = 'references/agents/repository/package-guidance-packages.json';
 
@@ -87,7 +88,11 @@ export class CheckPackageContentsCommand extends Command {
       }
 
       let locations: Set<string>;
+      let generated: string[] = [];
       try {
+        if (manifest.name === '@fluentui-react-native/skills') {
+          generated = [...writeSkillDistribution(root).files.keys()];
+        }
         const result = spawn.sync('yarn', ['pack', '--dry-run', '--json'], {
           cwd: packageRoot,
           encoding: 'utf8',
@@ -114,6 +119,7 @@ export class CheckPackageContentsCommand extends Command {
         'AGENTS.md',
         'README.md',
         'references/README.md',
+        ...generated,
         ...expectedEntrypoints(manifest),
         ...listSourceFiles(root, packagePath).filter(
           (file) => /^(?:references|src|lib|config|native)\//.test(file) && !isExcludedByManifest(manifest, file),

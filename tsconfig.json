@@ -2,6 +2,9 @@
   "files": [],
   "references": [
     {
+      "path": "apps/agent-evals/tsconfig.json"
+    },
+    {
       "path": "apps/E2E/tsconfig.json"
     },
     {
@@ -42,6 +45,9 @@
     },
     {
       "path": "packages/agentic/native-core/tsconfig.json"
+    },
+    {
+      "path": "packages/agentic/skills/tsconfig.json"
     },
     {
       "path": "packages/agentic/storybook-desktop/tsconfig.json"

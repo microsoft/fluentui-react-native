@@ -18,9 +18,9 @@ add a package to the registry when it adopts this standard.
 - **R-PKGDOC-003:** The package that implements a behavior owns its guidance. Consumers retain app-specific configuration and link to the owner.
 - **R-PKGDOC-004:** Each package reference Markdown file has the standard frontmatter and a stable, globally unique ID. Its package index lists the ID, document, and a concrete "Read when" condition.
 - **R-PKGDOC-005:** Relative Markdown links in shipped package guidance resolve inside the same package. Cross-package references use the package name and package-relative path in code spans; repository rules use rule IDs.
-- **R-PKGDOC-006:** Project skills live in root `.github/skills/`. A skill is a concise router to package references and repository safeguards, not a second home for package knowledge. Delegated tasks receive required entry-point and reference paths explicitly.
+- **R-PKGDOC-006:** Repository-only workflows are authored in root `.github/skills/`. Public workflows and shared portable knowledge are authored and tracked in `@fluentui-react-native/skills`; root discovery adapters for those workflows are generated and checked in. Keep one authored authority. Skills route to package-owned API guidance rather than duplicating it. Delegated tasks receive required entry-point and reference paths explicitly.
 - **R-PKGDOC-007:** Changes to behavior, commands, configuration, outputs, or contracts update the owning reference in the same change, and update `AGENTS.md` or `README.md` when their entry-point information changes.
-- **R-PKGDOC-008:** Published packages include their `AGENTS.md`, `README.md`, reference index, every reference document, and local linked assets. Validate the actual Yarn pack inventory; build caches and generated artifacts must not ship.
+- **R-PKGDOC-008:** Published packages include their `AGENTS.md`, `README.md`, reference index, every reference document, and local linked assets. Validate the actual Yarn pack inventory; build caches and incidental generated artifacts must not ship. The skills package's declared, validated generated distribution is intentional published content.
 - **R-PKGDOC-009:** Governed packages have no `PLAN.md` or other plan files outside `references/`. Unfinished or explicitly deferred work lives in an indexed `<package>/references/remaining-work.md`. When work completes, move durable behavior into the owning reference and delete the item rather than marking it done; delete the file when no work remains.
 - **R-PKGDOC-010:** A package's `<package>/references/current-status.md` is a status overview followed by stable topic sections, not a dated log. It describes what is true now, keeps only the latest result for each native endpoint with a link to the pull request or issue that holds the full evidence, and links open work to its tracking issue instead of restating it. Per-run commands, counts, and artifact locators belong in the pull request or issue. Edit only the topic a change affects so concurrent changes merge cleanly.
 
@@ -37,15 +37,26 @@ Each package reference index uses frontmatter with `kind: index` and lists:
 | ID  | Document | Read when |
 | --- | -------- | --------- |
 
-Reference frontmatter follows the repository-wide three-key format. IDs use
-`<package-basename>.<topic>` and remain unchanged when a file moves.
+Reference frontmatter follows the repository-wide three-key format. New IDs use
+`<package-basename>.<topic>`. Existing IDs remain unchanged when a file moves;
+the registry's `preserved_reference_ids` maps each exceptional permanent ID to
+its exact canonical package file and is validated against that definition.
 
 ## Skills and package links
 
-Copilot CLI inherits skill directories from parent `.github/skills/` locations,
-not child package directories. Keep runnable skill entry points in the
-repository root. Skill descriptions must be valid YAML, name their task
-boundary, and remain within the checker word limit.
+Repository discovery entry points remain at the root. Public entries are thin
+generated adapters to the canonical package workflows, not copied workflow
+bodies. Skill descriptions must be valid YAML, name their task boundary, and
+remain within the checker word limit.
+
+The public suite's workflows, shared references, and catalog are tracked sources
+inside `@fluentui-react-native/skills`. Validate
+public links and realpaths against that package boundary. Its catalog
+explicitly allowlists external package documentation; it does not copy API
+manuals from other packages. Only discovery adapters and derived metadata
+are generated.
+Keep FURN-specific commands and release obligations in the source checkout's
+root/scoped instructions. Consumers follow their own host's rules.
 
 In package references, use relative links only within the same package. To
 point at another package, write its npm name and the path from its package

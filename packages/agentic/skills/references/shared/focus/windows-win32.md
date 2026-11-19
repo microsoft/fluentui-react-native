@@ -108,8 +108,11 @@ that Win32 native rings are unavailable.
   lifecycle. React layout units and Composition physical pixels differ; apply
   the validated point-scale conversion. Test clipping/hosting and recycling.
 
-RNW provides explicit focus hosting and native theme handling (C-FOCUS-014). See [Windows Fabric native components](../native/windows-fabric.md)
-for codegen, UI-thread, registration, native visual, and UIA requirements.
+RNW provides explicit focus hosting and native theme handling (C-FOCUS-014).
+For FURN native views also read
+`@fluentui-react-native/native-core/references/modern-components.md`;
+the target host owns codegen, UI-thread, registration, native visual, and UIA
+requirements.
 
 ## Collections, popups, and platform services
 

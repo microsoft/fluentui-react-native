@@ -5,14 +5,14 @@
   "task_mode": "toolchain",
   "prompt": "A macOS Storybook smoke run was switched from Fabric to Paper and now times out after the runtime hello, before the requested story becomes ready. Diagnose the renderer and readiness boundaries using the app's declared workflow. Do not patch generated identity, manifests, Pods, or other generated output.",
   "expected": {
-    "skills": ["desktop-testing"],
+    "skills": ["furn-desktop-testing"],
     "classification": {
       "implementation_model": "none",
       "public_compatibility": [],
       "native_platforms": ["macos"]
     },
     "required_reads": [
-      ".github/skills/desktop-testing/SKILL.md",
+      "packages/agentic/skills/skills/furn-desktop-testing/SKILL.md",
       "apps/storybook/AGENTS.md",
       "apps/storybook/agent-map.yaml",
       "packages/agentic/storybook-desktop/references/commands.md",

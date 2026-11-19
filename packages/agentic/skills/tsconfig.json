@@ -1,0 +1,8 @@
+{
+  "files": [],
+  "compilerOptions": {
+    "composite": true,
+    "tsBuildInfoFile": "node_modules/.cache/tsconfig.tsbuildinfo"
+  },
+  "references": [{ "path": "../../../scripts/tsconfig.json" }]
+}

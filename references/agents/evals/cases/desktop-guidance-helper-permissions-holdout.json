@@ -5,14 +5,14 @@
   "task_mode": "toolchain",
   "prompt": "A macOS desktop-test run reports that no verified native helper is available and Accessibility is unavailable. Give a read-only diagnostic sequence. Do not edit files, prompt for privacy approval, reset permissions, or change OS settings.",
   "expected": {
-    "skills": ["desktop-testing"],
+    "skills": ["furn-desktop-testing"],
     "classification": {
       "implementation_model": "none",
       "public_compatibility": [],
       "native_platforms": ["macos"]
     },
     "required_reads": [
-      ".github/skills/desktop-testing/SKILL.md",
+      "packages/agentic/skills/skills/furn-desktop-testing/SKILL.md",
       "packages/agentic/desktop-test/references/platforms.md",
       "packages/agentic/desktop-driver/references/native-helpers.md",
       "packages/agentic/desktop-driver/native/macos/README.md"

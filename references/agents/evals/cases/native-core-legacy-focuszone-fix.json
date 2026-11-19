@@ -13,8 +13,8 @@
     },
     "required_reads": [
       "references/agents/native/components-and-modules.md",
-      "references/agents/focus/common.md",
-      "references/agents/focus/macos.md"
+      "packages/agentic/skills/references/shared/focus/common.md",
+      "packages/agentic/skills/references/shared/focus/macos.md"
     ],
     "forbidden_actions": ["edit-files", "migrate-framework"]
   },

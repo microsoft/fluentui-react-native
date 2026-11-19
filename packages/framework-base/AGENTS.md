@@ -15,8 +15,8 @@ Read the [user guide](README.md), then select the narrowest topic in the [refere
 | Change merge or memoization utilities                              | [Immutable merge](references/immutable-merge.md), [memo cache](references/memo-cache.md), or [merge props](references/merge-props.md) |
 | Edit source, exports, types, tests, or compatibility               | [Contributing](references/contributing.md)                                                                                            |
 
-Focus-target and interaction abstractions also follow the repository's common focus authoring reference
-(`focus.common`) and its platform breakouts.
+Focus-target and interaction abstractions also follow `focus.common` and its
+platform breakouts, indexed in `@fluentui-react-native/skills/references/README.md`.
 
 ## Invariants
 

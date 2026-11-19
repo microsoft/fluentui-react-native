@@ -24,6 +24,9 @@ const config = {
       inputs: ['*', 'src/**/*'],
       outputs: [],
     },
+    '@fluentui-react-native/skills#lint': {
+      dependsOn: ['@fluentui-react-native/root#root-prebuild'],
+    },
     test: {
       // The unified build is a single root target, not a per-package `build`.
       // A bare 'build' would resolve to <thisPackage>#build,

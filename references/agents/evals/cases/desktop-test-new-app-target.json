@@ -5,7 +5,7 @@
   "task_mode": "plan",
   "prompt": "Plan adding a native macOS and Windows desktop-test target for a new React Native Test App with one standalone WDIO suite. Include configuration and first-run steps.",
   "expected": {
-    "skills": ["desktop-testing"],
+    "skills": ["furn-desktop-testing"],
     "classification": {
       "implementation_model": "none",
       "public_compatibility": [],

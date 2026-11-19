@@ -8,8 +8,10 @@ owner_paths:
 # Agent evaluation cases
 
 Portable, sanitized case fixtures for evaluating how agents route and follow this repository's instructions. They are
-inputs for a future evaluation framework, not instructions; agents performing ordinary work do not need to read them.
-No runner or scoring framework is selected yet.
+inputs for evaluations, not instructions; agents performing ordinary work do not need to read them.
+The opt-in [agent-evals workspace](../../../apps/agent-evals/README.md) starts controlled Copilot CLI trials with
+promptfoo and `@rnx-kit/agent-evals`. Its synthetic desktop development suite does not claim full coverage of these
+fixtures or native qualification. Ordinary repository tests do not invoke a model.
 
 ## Case fixtures
 
@@ -46,8 +48,10 @@ Execution evidence stays local and is not committed. A result record should cont
 - token and request usage where the client reports it, and elapsed time;
 - known confounders, such as personal instructions, caching, or tool restrictions.
 
-Do not record raw transcripts, credentials, private source bodies, or personal identifiers. Efficiency measurements are
-reported, not used as pass/fail gates.
+Do not commit raw transcripts, credentials, private source bodies, or personal identifiers. Controlled trials may
+retain raw events only in explicitly selected private storage outside the checkout for local auditing, with no
+automatic upload or sharing. Never deliberately record credentials. Efficiency measurements are reported, not used as
+pass/fail gates.
 
 `yarn check-agent-instructions` validates the fixtures: schema, unique IDs, existing skills and paths, and defined rule
 IDs.

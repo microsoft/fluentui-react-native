@@ -14,9 +14,10 @@ native focus adapter. Then load only the applicable platform detail:
 - [Windows and Win32](windows-win32.md)
 - [macOS](macos.md)
 
-These files define authoring and review obligations. Open native qualification gates are listed in the components
-[remaining work](../../../packages/agentic/components/references/remaining-work.md#desktop-focus-qualification). Keep
-each reviewed contract and source-specific divergences authoritative.
+These files define FURN-pattern authoring and review obligations, not universal
+React Native behavior. Keep the target's reviewed contract and source-specific
+divergences authoritative. Qualify the actual consumer host; another
+repository's qualification results do not establish its behavior.
 
 ## Behavioral authority and platform evidence
 
@@ -85,8 +86,9 @@ may need different visual intent. Keep that intent scoped to the request/owner.
   unsupported targets. Distinguish requested, confirmed, cancelled, not-mounted,
   not-focusable, and unsupported outcomes in the proposed adapter contract.
 
-Existing mechanisms: `packages\framework-base\src\component-patterns\slot.ts:14-76,118-142`,
-`render.ts:38-75`, and `useSlot.test.tsx:453-490`. The framework still supports
+Existing mechanisms live in
+`@fluentui-react-native/framework-base/references/component-patterns.md`.
+The framework still supports
 older React consumers; do not remove its compatibility behavior merely because
 agentic components use React 19.
 
@@ -164,8 +166,8 @@ Extend existing helpers before adding layers. General interaction/target
 contracts belong in Framework Base; modality and appearance remain in design;
 component-specific eligibility, layout, and selection remain in components.
 
-A future `native-lib` may provide opt-in native capabilities and shared native
-projections. It must depend downward on React Native/platform APIs, never on
+Opt-in native capabilities and shared native projections must depend downward on
+React Native/platform APIs, never on
 design or components. Keep view-bound operations on native refs/generated
 commands. Use TurboModules for non-view services that actually need them.
 Do not add a process-global `focus(tag)` registry, arbitrary OS handle access,
@@ -189,5 +191,5 @@ or production dependencies on the desktop automation driver.
 - [React 19 refs and cleanup](https://react.dev/blog/2024/12/05/react-19)
 - [React imperative handles](https://react.dev/reference/react/useImperativeHandle)
 - [React Native 0.81 native commands](https://reactnative.dev/docs/0.81/the-new-architecture/fabric-component-native-commands)
-- [Types and slots](../../../packages/agentic/components/references/types-and-slots.md)
-- [State and accessibility](../../../packages/agentic/components/references/state-and-accessibility.md)
+- `@fluentui-react-native/components/references/types-and-slots.md`
+- `@fluentui-react-native/components/references/state-and-accessibility.md`

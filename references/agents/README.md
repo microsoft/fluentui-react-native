@@ -8,49 +8,56 @@ owner_paths:
 # Agent references
 
 Shared, tool-neutral knowledge for agents working in this repository. The root [AGENTS.md](../../AGENTS.md) and scoped
-`AGENTS.md` files route here, and skills in [`.github/skills`](../../.github/skills) own task workflows. Read only the
+`AGENTS.md` files route here. Repository workflows and generated discovery adapters
+live in [`.github/skills`](../../.github/skills); public sources and portable shared
+knowledge live in [the skills package](../../packages/agentic/skills/README.md). Read only the
 documents a task needs; links are navigation, not instructions to load everything they reach.
 
 ## Taxonomy
 
-| Area                              | Contents                                                                    |
-| --------------------------------- | --------------------------------------------------------------------------- |
-| [`repository/`](repository)       | Architecture, commands and validation, TypeScript, permissions, and release |
-| [`components/`](components)       | Classification, v0 and v1 recipes, and legacy test apps                     |
-| [`focus/`](focus)                 | Desktop focus behavior across component generations                         |
-| [`accessibility/`](accessibility) | Version-bound accessibility action evidence                                 |
-| [`native/`](native)               | Native components, modules, and platform guidance                           |
-| [`evals/`](evals/README.md)       | Portable evaluation case fixtures; not instructions                         |
+| Area                                                                              | Contents                                                                    |
+| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| [`repository/`](repository)                                                       | Architecture, commands and validation, TypeScript, permissions, and release |
+| [`components/`](components)                                                       | Classification, v0 and v1 recipes, and legacy test apps                     |
+| [`focus/`](../../packages/agentic/skills/references/shared/focus)                 | Desktop focus behavior across component generations                         |
+| [`accessibility/`](../../packages/agentic/skills/references/shared/accessibility) | Version-bound accessibility action evidence                                 |
+| [`portable/`](../../packages/agentic/skills/references/shared/portable)           | Consumer context and shared public workflow guidance                        |
+| [`native/`](native)                                                               | Native components, modules, and platform guidance                           |
+| [`evals/`](evals/README.md)                                                       | Portable evaluation case fixtures; not instructions                         |
 
 ## Document index
 
-| ID                                        | Document                                                                              | Read when                                                                       |
-| ----------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| `repository.architecture`                 | [Architecture](repository/architecture.md)                                            | Orienting in the monorepo or choosing where code belongs                        |
-| `repository.development`                  | [Commands and validation](repository/development.md)                                  | Building, testing, linting, validating, or adding a package                     |
-| `repository.typescript`                   | [TypeScript](repository/typescript.md)                                                | Changing compiler settings, platform types, or the JSX runtime                  |
-| `repository.permissions`                  | [Agent permissions](repository/permissions.md)                                        | Using `gh api`, Pod, process, loopback, or capture operations; changing policy  |
-| `repository.release`                      | [Changesets and release](repository/release.md)                                       | Changing a published package or release tooling                                 |
-| `repository.dependency-security`          | [Dependency security procedures](repository/dependency-security.md)                   | Remediating dependency advisories with the `fix-security-issues` skill          |
-| `repository.code-scanning`                | [Code scanning](repository/code-scanning.md)                                          | Writing regular expressions or generated code; fixing CodeQL alerts             |
-| `repository.package-guidance`             | [Package-owned guidance standard](repository/package-guidance.md)                     | Adding package instructions, references, skills, or documentation               |
-| `components.classification`               | [Classification and routing](components/classification.md)                            | Starting any component task                                                     |
-| `components.v0`                           | [v0 maintenance](components/v0.md)                                                    | Changing or reviewing `foundation-compose` components                           |
-| `components.v1`                           | [v1 maintenance](components/v1.md)                                                    | Changing or reviewing `compose` or `compressible` components                    |
-| `components.legacy-test-apps`             | [FluentTester and E2E](components/legacy-test-apps.md)                                | Changing v0 or v1 test pages or E2E specs                                       |
-| `focus.common`                            | [Common focus authoring](focus/common.md)                                             | Any focusable component, collection, popup, focus hook, or native focus adapter |
-| `focus.windows-win32`                     | [Windows and Win32 focus](focus/windows-win32.md)                                     | Focus work on React Native Windows or Win32                                     |
-| `focus.macos`                             | [macOS focus](focus/macos.md)                                                         | Focus work on macOS                                                             |
-| `focus.platform-evidence`                 | [Desktop focus platform evidence](focus/platform-evidence.md)                         | Checking or updating a version-bound focus observation (`C-FOCUS-*`)            |
-| `accessibility.action-transport-evidence` | [Accessibility action transport evidence](accessibility/action-transport-evidence.md) | Checking or updating toggle/select transport observations (`C-A11Y-*`)          |
-| `native.components-and-modules`           | [Native components and modules](native/components-and-modules.md)                     | Any native component, module, service, or native-backed wrapper                 |
-| `native.apple-office`                     | [Apple native authoring and Office integration](native/apple-office.md)               | Any iOS or macOS Swift, Objective-C, header, podspec, or bridge-manager change  |
-| `native.windows-fabric`                   | [Windows Fabric native components](native/windows-fabric.md)                          | React Native Windows Fabric views, codegen, registration, or UIA                |
+| ID                                        | Document                                                                                                                              | Read when                                                                       |
+| ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `repository.architecture`                 | [Architecture](repository/architecture.md)                                                                                            | Orienting in the monorepo or choosing where code belongs                        |
+| `repository.development`                  | [Commands and validation](repository/development.md)                                                                                  | Building, testing, linting, validating, or adding a package                     |
+| `repository.typescript`                   | [TypeScript](repository/typescript.md)                                                                                                | Changing compiler settings, platform types, or the JSX runtime                  |
+| `repository.permissions`                  | [Agent permissions](repository/permissions.md)                                                                                        | Using `gh api`, Pod, process, loopback, or capture operations; changing policy  |
+| `repository.release`                      | [Changesets and release](repository/release.md)                                                                                       | Changing a published package or release tooling                                 |
+| `repository.dependency-security`          | [Dependency security procedures](repository/dependency-security.md)                                                                   | Remediating dependency advisories with the `fix-security-issues` skill          |
+| `repository.code-scanning`                | [Code scanning](repository/code-scanning.md)                                                                                          | Writing regular expressions or generated code; fixing CodeQL alerts             |
+| `repository.package-guidance`             | [Package-owned guidance standard](repository/package-guidance.md)                                                                     | Adding package instructions, references, skills, or documentation               |
+| `components.classification`               | [Classification and routing](components/classification.md)                                                                            | Starting any component task                                                     |
+| `components.v0`                           | [v0 maintenance](components/v0.md)                                                                                                    | Changing or reviewing `foundation-compose` components                           |
+| `components.v1`                           | [v1 maintenance](components/v1.md)                                                                                                    | Changing or reviewing `compose` or `compressible` components                    |
+| `components.legacy-test-apps`             | [FluentTester and E2E](components/legacy-test-apps.md)                                                                                | Changing v0 or v1 test pages or E2E specs                                       |
+| `focus.common`                            | [Common focus authoring](../../packages/agentic/skills/references/shared/focus/common.md)                                             | Any focusable component, collection, popup, focus hook, or native focus adapter |
+| `focus.windows-win32`                     | [Windows and Win32 focus](../../packages/agentic/skills/references/shared/focus/windows-win32.md)                                     | Focus work on React Native Windows or Win32                                     |
+| `focus.macos`                             | [macOS focus](../../packages/agentic/skills/references/shared/focus/macos.md)                                                         | Focus work on macOS                                                             |
+| `focus.platform-evidence`                 | [Desktop focus platform evidence](../../packages/agentic/skills/references/shared/focus/platform-evidence.md)                         | Checking or updating a version-bound focus observation (`C-FOCUS-*`)            |
+| `accessibility.action-transport-evidence` | [Accessibility action transport evidence](../../packages/agentic/skills/references/shared/accessibility/action-transport-evidence.md) | Checking or updating toggle/select transport observations (`C-A11Y-*`)          |
+| `portable.context`                        | [Portable consumer context](../../packages/agentic/skills/references/shared/portable/context.md)                                      | Using a public FURN workflow or resolving installed package references          |
+| `portable.accessibility`                  | [Portable accessibility guidance](../../packages/agentic/skills/references/shared/portable/accessibility.md)                          | Authoring component semantics or qualifying native accessibility actions        |
+| `native.components-and-modules`           | [Native components and modules](native/components-and-modules.md)                                                                     | Any native component, module, service, or native-backed wrapper                 |
+| `native.apple-office`                     | [Apple native authoring and Office integration](native/apple-office.md)                                                               | Any iOS or macOS Swift, Objective-C, header, podspec, or bridge-manager change  |
+| `native.windows-fabric`                   | [Windows Fabric native components](native/windows-fabric.md)                                                                          | React Native Windows Fabric views, codegen, registration, or UIA                |
 
 ## Placement and extension
 
 - Put guidance here when more than one skill, reviewer, scoped `AGENTS.md`, or evaluation uses it, or when it is general
-  repository knowledge. Keep guidance in a skill when only that workflow uses it.
+  repository-only knowledge. Public shared knowledge is authored inside the
+  skills package; repository workflows link to it. Keep workflow-only guidance
+  with that workflow.
 - Keep product contracts (`SPEC.md`, `spec/`, `CONTRACT.md`), protocols, token maps, and package documentation with
   their packages, and link to them. Packages listed in the
   [guided package registry](repository/package-guidance-packages.json) own their guidance in their `AGENTS.md` and
@@ -99,7 +106,7 @@ Do not add other keys. Load conditions belong in this index and in routers, not 
 
 ## Routing conventions
 
-- State a prerequisite explicitly: "Read [common focus authoring](focus/common.md) first", a sentence such as "Focus
+- State a prerequisite explicitly: "Read [common focus authoring](../../packages/agentic/skills/references/shared/focus/common.md) first", a sentence such as "Focus
   work starts with" followed by the linked document, or a `Read first` section. Prerequisites must not form cycles, and
   a chain may be at most three reads deep.
 - Compatibility references are terminal. Link to the replacement document, never to a compatibility path.

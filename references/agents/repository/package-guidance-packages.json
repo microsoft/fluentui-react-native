@@ -8,8 +8,18 @@
     "packages/agentic/desktop-mcp",
     "packages/agentic/desktop-test",
     "packages/agentic/native-core",
+    "packages/agentic/skills",
     "packages/agentic/storybook-desktop",
     "packages/agentic/storybook-desktop-runtime",
     "packages/framework-base"
-  ]
+  ],
+  "preserved_reference_ids": {
+    "portable.context": "packages/agentic/skills/references/shared/portable/context.md",
+    "portable.accessibility": "packages/agentic/skills/references/shared/portable/accessibility.md",
+    "accessibility.action-transport-evidence": "packages/agentic/skills/references/shared/accessibility/action-transport-evidence.md",
+    "focus.common": "packages/agentic/skills/references/shared/focus/common.md",
+    "focus.windows-win32": "packages/agentic/skills/references/shared/focus/windows-win32.md",
+    "focus.macos": "packages/agentic/skills/references/shared/focus/macos.md",
+    "focus.platform-evidence": "packages/agentic/skills/references/shared/focus/platform-evidence.md"
+  }
 }

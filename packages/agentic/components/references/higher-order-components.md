@@ -15,7 +15,7 @@ components without a Flex catalog entry remain in this directory and use the
 validator-backed `local-foundation` contract source.
 
 Draft and review a source-backed React Native contract through the
-`agentic-component-contract-authoring` skill before implementation (R-AGENTIC-001); [contracts](contracts.md)
+`furn-component-contract-authoring` skill before implementation (R-AGENTIC-001); [contracts](contracts.md)
 defines the provenance it records. Select only the adapters represented by the evidence,
 resolve authority per requirement, and use the pinned
 `flex-components:<name>` reference only when a `flex-skill` source applies.

@@ -32,11 +32,11 @@ ownership and qualification rules (R-NATIVE-001 through R-NATIVE-003).
      [native layout](../../../packages/agentic/native-core/references/architecture.md#native-layout-and-host-policy) and
      [Swift interoperability](../../../packages/agentic/native-core/references/architecture.md#macos-swift-interoperability)
      notes for native-core work;
-   - focus targets or native focus visuals: [common focus authoring](../../../references/agents/focus/common.md) and its
+   - focus targets or native focus visuals: [common focus authoring](../../../packages/agentic/skills/references/shared/focus/common.md) and its
      platform file;
    - accessibility actions:
      [framework-base accessibility reference](../../../packages/framework-base/references/accessibility.md);
-   - the JavaScript wrapper: the [agentic skill](../agentic-component-authoring/SKILL.md),
+   - the JavaScript wrapper: the [agentic skill](../../../packages/agentic/skills/skills/furn-component-authoring/SKILL.md),
      [v0 recipe](../../../references/agents/components/v0.md), or [v1 recipe](../../../references/agents/components/v1.md).
 4. Implement with the TypeScript specification, codegen configuration, native props, events, commands, and registration
    kept consistent. Preserve public APIs and registration names (R-NATIVE-002) and keep fork imports in platform files

@@ -17,6 +17,7 @@ export type CheckResult = {
 const REFERENCES_DIR = 'references/agents';
 const EVAL_CASES_DIR = `${REFERENCES_DIR}/evals/cases`;
 const SKILLS_DIR = '.github/skills';
+const PUBLIC_SKILLS_DIR = 'packages/agentic/skills/skills';
 const PACKAGE_GUIDANCE = `${REFERENCES_DIR}/repository/package-guidance-packages.json`;
 const ALWAYS_ON = ['AGENTS.md', 'CLAUDE.md', '.github/copilot-instructions.md'];
 
@@ -29,7 +30,8 @@ const MAX_SKILL_DESCRIPTION_WORDS = 60;
 const MAX_PREREQUISITE_DEPTH = 3;
 const PREREQUISITE_SENTENCE = /\b(?:read|load)\b[^.]*\bfirst\b|\bstarts? with\b/i;
 const ROUTING_COLUMNS = new Set(['skill', 'workflow']);
-const SKILL_LINK = /(?:^|\/)\.github\/skills\/([^/]+)\/SKILL\.md$/;
+const SKILL_LINK = /(?:^|\/)(?:\.github\/skills|packages\/agentic\/skills\/skills)\/([^/]+)\/SKILL\.md$/;
+const PUBLIC_SKILL_FILE = /^packages\/agentic\/skills\/skills\/[^/]+\/SKILL\.md$/;
 const SKIP_DIRS = new Set(['node_modules', 'lib', 'lib-commonjs', 'dist', '.git', 'Pods', 'build', 'DerivedData']);
 const REPO_PATH_PREFIXES = ['.github/', 'apps/', 'packages/', 'references/', 'scripts/', 'docs/'];
 
@@ -73,7 +75,7 @@ export function listFiles(root: string): string[] {
   }
 }
 
-function extractPackageSpecifiers(markdown: string): { packageName: string; packagePath?: string; line: number }[] {
+export function extractPackageSpecifiers(markdown: string): { packageName: string; packagePath?: string; line: number }[] {
   const paths: { packageName: string; packagePath?: string; line: number }[] = [];
   let fenced = false;
   markdown.split('\n').forEach((line, index) => {
@@ -385,6 +387,7 @@ function isInstructionSurface(file: string, packages: GuidedPackage[]): boolean 
     file === 'CLAUDE.md' ||
     file === '.github/copilot-instructions.md' ||
     (file.startsWith(`${SKILLS_DIR}/`) && file.endsWith('.md')) ||
+    (file.startsWith(`${PUBLIC_SKILLS_DIR}/`) && file.endsWith('.md')) ||
     (file.startsWith(`${REFERENCES_DIR}/`) && file.endsWith('.md')) ||
     packages.some(({ path: packagePath }) => file.startsWith(`${packagePath}/references/`) && file.endsWith('.md'))
   );
@@ -424,9 +427,14 @@ export function checkAgentInstructions(root: string): CheckResult {
   const files = listFiles(root);
   const read = (file: string) => readFileSync(path.join(root, file), 'utf8');
   let packages: GuidedPackage[] = [];
+  const preservedReferenceIds = new Map<string, string>();
   if (files.includes(PACKAGE_GUIDANCE)) {
     try {
-      const registry = JSON.parse(read(PACKAGE_GUIDANCE)) as { schema_version?: number; packages?: unknown };
+      const registry = JSON.parse(read(PACKAGE_GUIDANCE)) as {
+        schema_version?: number;
+        packages?: unknown;
+        preserved_reference_ids?: unknown;
+      };
       if (
         registry.schema_version !== 1 ||
         !Array.isArray(registry.packages) ||
@@ -450,6 +458,26 @@ export function checkAgentInstructions(root: string): CheckResult {
         const paths = packages.map(({ path: packagePath }) => packagePath);
         if (new Set(paths).size !== paths.length) {
           issues.push({ file: PACKAGE_GUIDANCE, message: 'guided package paths must be unique' });
+        }
+        if (registry.preserved_reference_ids !== undefined) {
+          const value = registry.preserved_reference_ids;
+          if (typeof value !== 'object' || value === null || Array.isArray(value)) {
+            issues.push({
+              file: PACKAGE_GUIDANCE,
+              message: 'preserved_reference_ids must map permanent IDs to canonical package reference files',
+            });
+          } else {
+            for (const [id, file] of Object.entries(value)) {
+              if (
+                !ID_PATTERN.test(id) ||
+                typeof file !== 'string' ||
+                !files.includes(file) ||
+                !packages.some((pkg) => file.startsWith(`${pkg.path}/references/`))
+              ) {
+                issues.push({ file: PACKAGE_GUIDANCE, message: `invalid preserved reference mapping: ${id}` });
+              } else preservedReferenceIds.set(id, file);
+            }
+          }
         }
       }
     } catch (error) {
@@ -483,7 +511,12 @@ export function checkAgentInstructions(root: string): CheckResult {
       issues.push({ file, line: 2, message: `invalid id "${parsed.id}"` });
     }
     const ownerPackage = packageForFile(file, packages);
-    if (ownerPackage && file.startsWith(`${ownerPackage.path}/references/`) && !parsed.id.startsWith(`${ownerPackage.name}.`)) {
+    if (
+      ownerPackage &&
+      file.startsWith(`${ownerPackage.path}/references/`) &&
+      !parsed.id.startsWith(`${ownerPackage.name}.`) &&
+      preservedReferenceIds.get(parsed.id) !== file
+    ) {
       issues.push({ file, line: 2, message: `package reference ID must start with "${ownerPackage.name}."` });
     }
     const previous = ids.get(parsed.id);
@@ -499,6 +532,11 @@ export function checkAgentInstructions(root: string): CheckResult {
         issues.push({ file, message: `owner path does not exist: ${owner}` });
       }
     }
+  }
+
+  for (const [id, file] of preservedReferenceIds) {
+    if (frontmatter.get(file)?.id !== id)
+      issues.push({ file: PACKAGE_GUIDANCE, message: `preserved reference ID ${id} is not defined by ${file}` });
   }
 
   // Index completeness.
@@ -565,9 +603,12 @@ export function checkAgentInstructions(root: string): CheckResult {
     }
   }
   for (const file of files.filter(
-    (candidate) => (candidate === 'SKILL.md' || candidate.endsWith('/SKILL.md')) && !candidate.startsWith(`${SKILLS_DIR}/`),
+    (candidate) =>
+      (candidate === 'SKILL.md' || candidate.endsWith('/SKILL.md')) &&
+      !candidate.startsWith(`${SKILLS_DIR}/`) &&
+      !PUBLIC_SKILL_FILE.test(candidate),
   )) {
-    issues.push({ file, message: 'project skills must be located under the root .github/skills directory' });
+    issues.push({ file, message: 'authored skills belong in root .github/skills or the registered public skills package' });
   }
 
   // Agent maps describe app-local source paths; other values are policy or commands. Paths are checked against the
@@ -628,8 +669,8 @@ export function checkAgentInstructions(root: string): CheckResult {
 
   // Skills.
   const skillNames = new Map<string, string>();
-  for (const file of surfaces.filter((f) => /^\.github\/skills\/[^/]+\/SKILL\.md$/.test(f))) {
-    const dir = file.split('/')[2];
+  for (const file of surfaces.filter((f) => /^\.github\/skills\/[^/]+\/SKILL\.md$/.test(f) || PUBLIC_SKILL_FILE.test(f))) {
+    const dir = path.posix.basename(path.posix.dirname(file));
     const fields = parseSkillFrontmatter(read(file));
     if (!fields) {
       issues.push({ file, line: 1, message: 'missing skill frontmatter' });
@@ -645,10 +686,17 @@ export function checkAgentInstructions(root: string): CheckResult {
         issues.push({ file, message: 'skill name and description values containing colon-space must be quoted YAML scalars' });
       }
     }
-    if (skillNames.has(fields.name)) {
+    const adapter = file.startsWith(`${SKILLS_DIR}/`) && files.includes(`${PUBLIC_SKILLS_DIR}/${dir}/SKILL.md`);
+    if (!adapter && skillNames.has(fields.name)) {
       issues.push({ file, message: `duplicate skill name "${fields.name}"` });
     }
-    skillNames.set(fields.name, file);
+    if (!adapter) skillNames.set(fields.name, file);
+    if (PUBLIC_SKILL_FILE.test(file)) {
+      if (!files.includes(`${SKILLS_DIR}/${dir}/SKILL.md`))
+        issues.push({ file, message: 'public skill is missing its root discovery adapter' });
+      if (!packages.some((pkg) => pkg.path === 'packages/agentic/skills'))
+        issues.push({ file, message: 'public skills package must be registered' });
+    }
     const words = (fields.description ?? '').split(/\s+/).filter(Boolean).length;
     if (words === 0) {
       issues.push({ file, message: 'skill description is empty' });
@@ -664,6 +712,7 @@ export function checkAgentInstructions(root: string): CheckResult {
       const owner = target && packageForFile(target, packages);
       if (!owner) continue;
       const allowed =
+        PUBLIC_SKILL_FILE.test(target) ||
         target === `${owner.path}/AGENTS.md` ||
         target === `${owner.path}/README.md` ||
         (target.startsWith(`${owner.path}/references/`) &&

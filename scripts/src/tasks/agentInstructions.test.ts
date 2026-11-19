@@ -211,6 +211,68 @@ describe('checkAgentInstructions', () => {
     );
   });
 
+  it('preserves moved reference IDs only at their explicitly registered canonical files', () => {
+    const registry = {
+      schema_version: 1,
+      packages: ['packages/demo'],
+      preserved_reference_ids: { 'legacy.guide': 'packages/demo/references/guide.md' },
+    };
+    const files = {
+      ...GUIDED_PACKAGE,
+      'references/agents/repository/package-guidance-packages.json': JSON.stringify(registry),
+      'packages/demo/references/guide.md': reference('legacy.guide', 'instruction-reference', '# Guide\n'),
+      'packages/demo/references/README.md': reference(
+        'demo.index',
+        'index',
+        '# References\n\n| ID | Document | Read when |\n| --- | --- | --- |\n| `legacy.guide` | [Guide](guide.md) | Configuring it |\n',
+      ),
+    };
+    assert.deepEqual(messages(files), []);
+    assertIssue(
+      { ...files, 'packages/demo/references/guide.md': reference('legacy.renamed', 'instruction-reference', '# Guide\n') },
+      /preserved reference ID legacy\.guide is not defined/,
+    );
+    assertIssue(
+      {
+        ...files,
+        'references/agents/repository/package-guidance-packages.json': JSON.stringify({
+          ...registry,
+          preserved_reference_ids: { 'legacy.guide': 'missing.md' },
+        }),
+      },
+      /invalid preserved reference mapping/,
+    );
+  });
+
+  it('treats a public workflow as the source and its root discovery adapter as the same skill', () => {
+    const owner = 'packages/agentic/skills';
+    const canonical = `${owner}/skills/furn-demo/SKILL.md`;
+    const adapter = '.github/skills/furn-demo/SKILL.md';
+    const header = '---\nname: furn-demo\ndescription: Use for FURN demo work.\n---\n';
+    const files = {
+      ...GUIDED_PACKAGE,
+      'AGENTS.md': `${ROOT}| FURN demo | [furn-demo](${canonical}) |\n`,
+      'references/agents/repository/package-guidance-packages.json': JSON.stringify({
+        schema_version: 1,
+        packages: ['packages/demo', owner],
+      }),
+      [`${owner}/package.json`]: JSON.stringify({ name: '@fluentui-react-native/skills' }),
+      [`${owner}/AGENTS.md`]: '# Skills\n\nSee [references](references/README.md).\n',
+      [`${owner}/README.md`]: '# Skills\n\nSee [instructions](AGENTS.md).\n',
+      [`${owner}/references/README.md`]: reference(
+        'skills.index',
+        'index',
+        '# Index\n\n| ID | Document | Read when |\n| --- | --- | --- |\n',
+        owner,
+      ),
+      [canonical]: `${header}\n# Canonical task\n`,
+      [adapter]: `${header}\nRead [the source](../../../${canonical}) first.\n`,
+    };
+    assert.deepEqual(messages(files), []);
+    assertIssue({ ...files, [adapter]: undefined }, /missing its root discovery adapter/);
+    assertIssue({ ...files, 'packages/other/skills/demo/SKILL.md': header }, /authored skills belong/);
+  });
+
   it('rejects package guidance links that escape the package, including sibling dependencies', () => {
     assertIssue(
       {
