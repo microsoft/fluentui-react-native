@@ -255,7 +255,7 @@ function addNativeBuildCommand(
   const command = program.command('build-driver').description('Build the native desktop helper for the selected platform.');
   addNativePlatformOptions(command)
     .addOption(new Option('--architecture <architecture>', 'native architecture').choices(['arm64', 'x64']))
-    .addOption(new Option('--configuration <configuration>', 'native build configuration').choices(['debug', 'release']).default('release'))
+    .addOption(nativeConfigurationOption())
     .option('--cache-root <path>', 'native helper cache root')
     .option('--force', 'build and publish a new immutable selection even when a compatible artifact exists')
     .option('--macos-signing-identity <identity>', 'macOS code-signing certificate name or SHA-1 hash')
@@ -273,8 +273,13 @@ function addNativeResolveCommand(
   const command = program.command('resolve-driver').description('Resolve and verify a native desktop helper.');
   addNativePlatformOptions(command)
     .addOption(new Option('--architecture <architecture>', 'native architecture').choices(['arm64', 'x64']))
-    .addOption(new Option('--configuration <configuration>', 'native build configuration').choices(['debug', 'release']).default('release'))
-    .addOption(new Option('--build-policy <policy>', 'source build policy').choices(['if-missing', 'never']).default('if-missing'))
+    .addOption(nativeConfigurationOption())
+    .addOption(
+      new Option('--build-policy <policy>', 'source build policy (FURN_DESKTOP_DRIVER_BUILD_POLICY; default: if-missing)').choices([
+        'if-missing',
+        'never',
+      ]),
+    )
     .option('--cache-root <path>', 'native helper cache root')
     .option('--helper-path <path>', 'exact prebuilt helper executable')
     .option('--install-root <path>', 'managed native helper install root')
@@ -294,7 +299,7 @@ function addNativeDoctorCommand(
   const command = program.command('doctor').description('Report the selected native helper or an actionable readiness failure.');
   addNativePlatformOptions(command)
     .addOption(new Option('--architecture <architecture>', 'native architecture').choices(['arm64', 'x64']))
-    .addOption(new Option('--configuration <configuration>', 'native build configuration').choices(['debug', 'release']).default('release'))
+    .addOption(nativeConfigurationOption())
     .option('--cache-root <path>', 'native helper cache root')
     .option('--helper-path <path>', 'exact prebuilt helper executable')
     .option('--install-root <path>', 'managed native helper install root')
@@ -369,7 +374,7 @@ type NativePlatformFlags = {
 type NativeBuildFlags = NativePlatformFlags & {
   architecture?: NativeDriverArchitecture;
   cacheRoot?: string;
-  configuration: NativeDriverConfiguration;
+  configuration?: NativeDriverConfiguration;
   force?: boolean;
   macosSigningIdentity?: string;
 };
@@ -384,6 +389,13 @@ type NativeDoctorFlags = NativeResolveFlags & {
   permissions?: boolean;
   prompt?: boolean;
 };
+
+function nativeConfigurationOption(): Option {
+  return new Option(
+    '--configuration <configuration>',
+    'native build configuration (FURN_DESKTOP_DRIVER_CONFIGURATION; default: release)',
+  ).choices(['debug', 'release']);
+}
 
 function addNativePlatformOptions<T extends Command>(command: T): T {
   return command.requiredOption('--platform <platform>', 'native endpoint', (value: string) =>

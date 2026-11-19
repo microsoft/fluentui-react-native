@@ -70,7 +70,7 @@ describe('desktop-driver CLI', () => {
       architecture: undefined,
       buildPolicy: 'never',
       cacheRoot: undefined,
-      configuration: 'release',
+      configuration: undefined,
       force: undefined,
       helperPath: 'driver.exe',
       installRoot: undefined,
@@ -79,6 +79,38 @@ describe('desktop-driver CLI', () => {
     });
     expect(JSON.parse(output[0])).toMatchObject({ artifactId: 'artifact-id', origin: 'built' });
     expect(JSON.parse(output[1])).toMatchObject({ artifactId: 'artifact-id', origin: 'cache' });
+  });
+
+  test('leaves native environment options unset unless an explicit CLI flag overrides them', async () => {
+    const env = jest.replaceProperty(process, 'env', {
+      ...process.env,
+      FURN_DESKTOP_DRIVER_CONFIGURATION: 'debug',
+      FURN_DESKTOP_DRIVER_BUILD_POLICY: 'never',
+    });
+    const artifact = createNativeArtifact();
+    const buildDriver = jest.fn(async () => artifact);
+    const resolveDriver = jest.fn(async () => artifact);
+    const run = (command: string, ...args: string[]) =>
+      createDesktopDriverCommand({ buildDriver, resolveDriver, stdout: { write: () => true } }).parseAsync([
+        'node',
+        'test',
+        command,
+        '--platform',
+        'macos',
+        ...args,
+      ]);
+    try {
+      await run('build-driver');
+      expect(buildDriver).toHaveBeenLastCalledWith(expect.objectContaining({ configuration: undefined }));
+      await run('resolve-driver');
+      expect(resolveDriver).toHaveBeenLastCalledWith(expect.objectContaining({ configuration: undefined, buildPolicy: undefined }));
+      await run('resolve-driver', '--configuration', 'release', '--build-policy', 'if-missing');
+      expect(resolveDriver).toHaveBeenLastCalledWith(expect.objectContaining({ configuration: 'release', buildPolicy: 'if-missing' }));
+      await run('doctor');
+      expect(resolveDriver).toHaveBeenLastCalledWith(expect.objectContaining({ configuration: undefined, buildPolicy: 'never' }));
+    } finally {
+      env.restore();
+    }
   });
 
   test('supports compact JSON and NDJSON result modes without changing the default output', async () => {
@@ -263,7 +295,7 @@ describe('desktop-driver CLI', () => {
       architecture: undefined,
       buildPolicy: 'never',
       cacheRoot: undefined,
-      configuration: 'release',
+      configuration: undefined,
       force: undefined,
       helperPath: undefined,
       installRoot: undefined,
@@ -383,7 +415,7 @@ describe('desktop-driver CLI', () => {
       architecture: undefined,
       buildPolicy: 'never',
       cacheRoot: 'native-cache',
-      configuration: 'release',
+      configuration: undefined,
       force: undefined,
       helperPath: undefined,
       installRoot: undefined,
