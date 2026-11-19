@@ -67,8 +67,11 @@ try {
 }
 ```
 
-Shutdown stops accepting requests, drains session creation, deletes sessions,
-releases input, disposes hosts, and reports cleanup failures.
+Shutdown stops accepting work, drains admitted operations, deletes sessions,
+releases owned input, disposes hosts, and reports cleanup failures. Idle
+connections close immediately; connections still open after a 500 ms grace
+are closed without delaying session cleanup. The listener applies 15-second
+header and request timeouts; those limits do not bound native execution.
 
 ## Register targets
 

@@ -1,8 +1,10 @@
+import { once } from 'node:events';
 import * as http from 'node:http';
-import { Server as NetServer } from 'node:net';
+import { createConnection, Server as NetServer } from 'node:net';
 import type { AddressInfo } from 'node:net';
 
 import { FakeDesktopHost } from '../hosts/fake/FakeDesktopHost.js';
+import { createDesktopDriverClient } from '../client/DesktopDriverClient.js';
 import { createDesktopDriverTestHarness } from '../testing/protocolHarness.js';
 import type { DesktopDriverTestHarness } from '../testing/protocolHarness.js';
 import { createDesktopDriverServer } from './createDesktopDriverServer.js';
@@ -113,6 +115,75 @@ describe('Desktop Driver listener', () => {
 
     await expect(createDesktopDriverServer({ targets: [] })).rejects.toThrow(/did not bind to a loopback address/);
     expect(address).toHaveBeenCalled();
+  });
+
+  test.each(['idle keep-alive', 'incomplete request body'])('releases session input and shuts down with an %s socket', async (kind) => {
+    const harness = await createDesktopDriverTestHarness();
+    const socket = createConnection({ host: '127.0.0.1', port: harness.server.port });
+    const closed = new Promise<void>((resolve) => socket.once('close', () => resolve()));
+    try {
+      await once(socket, 'connect');
+      const request = `Host: 127.0.0.1:${harness.server.port}\r\nConnection: keep-alive\r\n`;
+      if (kind === 'idle keep-alive') {
+        const reply = once(socket, 'data');
+        socket.write(`GET /status HTTP/1.1\r\n${request}\r\n`);
+        expect(String((await reply)[0])).toMatch(/^HTTP\/1\.1 200/);
+      } else {
+        const reply = once(socket, 'data');
+        socket.write(`POST /session HTTP/1.1\r\n${request}Expect: 100-continue\r\nContent-Length: 15\r\n\r\n{`);
+        expect(String((await reply)[0])).toMatch(/^HTTP\/1\.1 100/);
+      }
+      const client = createDesktopDriverClient({ url: harness.server.url });
+      const session = await client.newSession({ alwaysMatch: { 'furn:target': harness.target.id } });
+      await session.performActions([{ type: 'key', id: 'key', actions: [{ type: 'keyDown', value: 'a' }] }]);
+      expect(socket.destroyed).toBe(false);
+      const release = harness.host.releaseActions.bind(harness.host);
+      const releases: boolean[] = [];
+      jest.spyOn(harness.host, 'releaseActions').mockImplementation((signal) => {
+        releases.push(socket.destroyed);
+        return release(signal);
+      });
+
+      await harness.close();
+      await closed;
+
+      expect(releases).toHaveLength(1);
+      if (kind === 'incomplete request body') expect(releases).toEqual([false]);
+      expect(harness.host.actions.map(({ type }) => type)).toEqual(
+        expect.arrayContaining(['release-actions', 'close-application', 'dispose']),
+      );
+    } finally {
+      socket.destroy();
+      await harness.close();
+    }
+  });
+
+  test('aborts an admitted status probe and waits for it to settle before disposing the host', async () => {
+    const harness = await createDesktopDriverTestHarness();
+    const { promise: probing, resolve: started } = Promise.withResolvers<void>();
+    const { promise: cancelled, resolve: aborted } = Promise.withResolvers<void>();
+    const { promise: settleProbe, resolve: settle } = Promise.withResolvers<void>();
+    jest.spyOn(harness.host, 'probe').mockImplementation(async (signal) => {
+      signal?.addEventListener('abort', () => aborted(), { once: true });
+      started();
+      await settleProbe;
+      throw new Error('Probe cancelled.');
+    });
+    const dispose = jest.spyOn(harness.host, 'dispose');
+    const status = rawRequest(harness, '/status', { Host: `127.0.0.1:${harness.server.port}` }).catch(() => undefined);
+    try {
+      await probing;
+      const closing = harness.close();
+      await cancelled;
+      expect(dispose).not.toHaveBeenCalled();
+      settle();
+      await closing;
+      expect(dispose).toHaveBeenCalledTimes(1);
+      await status;
+    } finally {
+      settle();
+      await harness.close();
+    }
   });
 });
 

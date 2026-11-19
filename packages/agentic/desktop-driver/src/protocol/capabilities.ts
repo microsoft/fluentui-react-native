@@ -63,6 +63,7 @@ export function getCapabilityCandidates(capabilities: NewSessionCapabilities): R
 export async function matchCapabilities(
   capabilities: NewSessionCapabilities,
   targets: readonly DesktopTarget[],
+  signal?: AbortSignal,
 ): Promise<MatchedCapabilities> {
   const candidates = getCapabilityCandidates(capabilities);
   for (const requested of candidates) {
@@ -92,7 +93,9 @@ export async function matchCapabilities(
 
       let host: DesktopHostInfo;
       try {
-        host = await withCommandTimeout((signal) => target.host.probe(signal), 10_000, `Probing target "${target.id}"`);
+        host = await withCommandTimeout((probeSignal) => target.host.probe(probeSignal), 10_000, `Probing target "${target.id}"`, {
+          signal,
+        });
       } catch (error) {
         const webdriverError = toWebDriverError(error);
         throw new WebDriverError('session not created', webdriverError.message, webdriverError.data);

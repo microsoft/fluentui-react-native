@@ -119,7 +119,12 @@ type RequestSettings = {
   authority?: DesktopAuthority;
   contentPolicy: ContentPolicy;
   maxBodyBytes: number;
+  shutdown: AbortSignal;
+  activeRoutes: Set<Promise<unknown>>;
 };
+
+const requestTimeoutMs = 15_000;
+const connectionCloseGraceMs = 500;
 
 export async function createDesktopDriverServer(options: DesktopDriverServerOptions = {}): Promise<DesktopDriverServer> {
   const { contentPolicy, host, maxBodyBytes, port: requestedPort } = resolveStartupOptions(options);
@@ -141,16 +146,23 @@ export async function createDesktopDriverServer(options: DesktopDriverServerOpti
   // A target registered after startup is read as it arrives. A read that fails is retried, and fails closed, when a
   // session is created or `/status` is read.
   targets.onRegister(({ id }) => void sessions.loadTarget(id).catch(() => undefined));
-  let closing = false;
+  const shutdown = new AbortController();
+  const activeRoutes = new Set<Promise<unknown>>();
   let listenerClosePromise: Promise<void> | undefined;
   let cleanupQueue: Promise<void> = Promise.resolve();
-  const httpServer = createServer((request, response) => {
-    if (closing) {
-      const error = new WebDriverError('unknown error', 'Desktop Driver is shutting down.');
-      writeJson(response, error.status, { value: error.toJSON() });
+  const httpServer = createServer({ headersTimeout: requestTimeoutMs, requestTimeout: requestTimeoutMs }, (request, response) => {
+    if (shutdown.signal.aborted) {
+      const error = shutdownError();
+      writeJson(response, error.status, { value: error.toJSON() }, { Connection: 'close' });
       return;
     }
-    void handleRequest(request, response, sessions, targets, { authority: options.authority, contentPolicy, maxBodyBytes });
+    void handleRequest(request, response, sessions, targets, {
+      authority: options.authority,
+      contentPolicy,
+      maxBodyBytes,
+      shutdown: shutdown.signal,
+      activeRoutes,
+    });
   });
   // `listen` drops its own error listener once it succeeds. A later accept failure, such as descriptor exhaustion, must
   // not become an uncaught exception that takes down the supervisor; the listener keeps accepting connections.
@@ -168,10 +180,15 @@ export async function createDesktopDriverServer(options: DesktopDriverServerOpti
     // eslint-disable-next-line @microsoft/sdl/no-insecure-url -- WebDriver is an intentionally loopback-only local protocol.
     url: `http://${formatHost(host)}:${port}`,
     close() {
-      closing = true;
-      stopDrainingRevokedGrants?.();
-      sessions.beginClose();
-      const attempt = cleanupQueue.then(runCleanup, runCleanup);
+      if (!listenerClosePromise) {
+        stopDrainingRevokedGrants?.();
+        sessions.beginClose();
+        shutdown.abort();
+        listenerClosePromise = closeServer(httpServer);
+        void listenerClosePromise.catch(() => undefined);
+      }
+      const stopped = listenerClosePromise;
+      const attempt = cleanupQueue.then(() => runCleanup(stopped));
       cleanupQueue = attempt.then(
         () => undefined,
         () => undefined,
@@ -186,27 +203,32 @@ export async function createDesktopDriverServer(options: DesktopDriverServerOpti
     },
   };
 
-  async function runCleanup(): Promise<void> {
-    let sessionError: unknown;
-    listenerClosePromise ??= httpServer.listening ? closeServer(httpServer) : Promise.resolve();
-    await listenerClosePromise;
+  async function runCleanup(stopped: Promise<void>): Promise<void> {
+    const errors: unknown[] = [];
     await sessions.waitForCreates();
     try {
       await sessions.deleteAll();
     } catch (error) {
-      sessionError = error;
+      errors.push(error);
     }
+    // Transport closure is independent of draining work already admitted to the driver.
+    await Promise.allSettled(activeRoutes);
     const hosts = new Set(targets.list().map(({ host: targetHost }) => targetHost));
-    const results = await Promise.allSettled(
-      [...hosts].map((targetHost) => withCommandTimeout((signal) => targetHost.dispose(signal), 10_000, 'Disposing a desktop host')),
-    );
-    const hostErrors = results
-      .filter((result): result is PromiseRejectedResult => result.status === 'rejected')
-      .map(({ reason }) => reason);
-    if (sessionError || hostErrors.length > 0) {
-      throw new AggregateError([...(sessionError ? [sessionError] : []), ...hostErrors], 'Desktop Driver cleanup failed.');
+    const results = await Promise.allSettled([
+      stopped,
+      ...[...hosts].map((targetHost) => withCommandTimeout((signal) => targetHost.dispose(signal), 10_000, 'Disposing a desktop host')),
+    ]);
+    for (const result of results) {
+      if (result.status === 'rejected') errors.push(result.reason);
+    }
+    if (errors.length > 0) {
+      throw new AggregateError(errors, 'Desktop Driver cleanup failed.');
     }
   }
+}
+
+function shutdownError(): WebDriverError {
+  return new WebDriverError('unknown error', 'Desktop Driver is shutting down.');
 }
 
 async function handleRequest(
@@ -217,6 +239,8 @@ async function handleRequest(
   settings: RequestSettings,
 ): Promise<void> {
   const disconnected = new AbortController();
+  const signal = AbortSignal.any([disconnected.signal, settings.shutdown]);
+  const shutdownHeaders = () => (settings.shutdown.aborted ? { Connection: 'close' } : undefined);
   response.once('close', () => {
     if (!response.writableFinished) {
       disconnected.abort();
@@ -241,10 +265,11 @@ async function handleRequest(
     const body =
       method === 'GET' || method === 'DELETE' ? undefined : await readJsonBody(request, requestBodyLimit(segments, settings.maxBodyBytes));
     const operation = () => {
+      if (settings.shutdown.aborted) throw shutdownError();
       // Session requests may wait in a queue after their initial authentication. Revalidate before allowing
       // a queued request to run under a grant that has since been revoked.
       authenticateRequest(request, settings.authority);
-      return route(
+      const pending = route(
         {
           authority: settings.authority,
           body,
@@ -252,17 +277,28 @@ async function handleRequest(
           grant,
           method,
           segments,
-          signal: disconnected.signal,
+          signal,
         },
         sessions,
         targets,
       );
+      settings.activeRoutes.add(pending);
+      const remove = () => {
+        settings.activeRoutes.delete(pending);
+      };
+      void pending.then(remove, remove);
+      return pending;
     };
     const value = sessionId ? await sessions.runCommand(sessionId, operation) : await operation();
-    writeJson(response, 200, { value });
+    writeJson(response, 200, { value }, shutdownHeaders());
   } catch (error) {
     const webdriverError = toWebDriverError(error);
-    writeJson(response, webdriverError.status, { value: webdriverError.toJSON() }, errorHeaders(webdriverError));
+    writeJson(
+      response,
+      webdriverError.status,
+      { value: webdriverError.toJSON() },
+      { ...errorHeaders(webdriverError), ...shutdownHeaders() },
+    );
   }
 }
 
@@ -473,7 +509,7 @@ async function route(context: RouteContext, sessions: SessionManager, targets: T
   }
 
   if (method === 'GET' && segments.length === 1 && segments[0] === 'status') {
-    const targetInfo = await Promise.all(
+    const probes = await Promise.allSettled(
       visibleTargets(context, targets).map(async (target) => {
         // A target registered after startup may not have its journal read yet; an unread journal is not "no quarantine".
         await sessions.loadTarget(target.id).catch(() => {
@@ -486,11 +522,17 @@ async function route(context: RouteContext, sessions: SessionManager, targets: T
           launchModes: target.launchModes ?? ['launch', 'attach'],
           platformName: target.platformName,
           renderer: target.renderer,
-          host: await withCommandTimeout((signal) => target.host.probe(signal), 10_000, `Probing target "${target.id}"`),
+          host: await withCommandTimeout((signal) => target.host.probe(signal), 10_000, `Probing target "${target.id}"`, {
+            signal: context.signal,
+          }),
           ...(quarantine ? { quarantine: sessions.describeQuarantine(quarantine) } : {}),
         };
       }),
     );
+    const targetInfo = probes.map((probe) => {
+      if (probe.status === 'rejected') throw probe.reason;
+      return probe.value;
+    });
     return {
       message: 'Desktop Driver is ready.',
       ready: true,
@@ -506,7 +548,7 @@ async function route(context: RouteContext, sessions: SessionManager, targets: T
       throw invalidArgument('New Session requires "capabilities".');
     }
     // A target outside the grant matches as if it were not registered, so a grant cannot discover what it may not use.
-    const matched = await matchCapabilities(request.capabilities, visibleTargets(context, targets));
+    const matched = await matchCapabilities(request.capabilities, visibleTargets(context, targets), context.signal);
     if (context.grant?.runner && matched.launchMode !== 'attach') {
       throw new WebDriverError('session not created', 'Runner grants permit attached sessions only.');
     }
@@ -1278,6 +1320,7 @@ async function readJsonBody(request: IncomingMessage, maxBytes: number): Promise
 }
 
 function writeJson(response: ServerResponse, status: number, body: WebDriverResponse, headers?: Record<string, string>): void {
+  if (response.destroyed) return;
   const json = JSON.stringify(body);
   response.writeHead(status, {
     'Cache-Control': 'no-cache',
@@ -1369,7 +1412,13 @@ function listen(server: Server, host: string, port: number): Promise<number> {
 
 function closeServer(server: Server): Promise<void> {
   return new Promise((resolve, reject) => {
-    server.close((error) => (error ? reject(error) : resolve()));
+    const forceClose = setTimeout(() => server.closeAllConnections(), connectionCloseGraceMs);
+    server.close((error) => {
+      clearTimeout(forceClose);
+      if (error) reject(error);
+      else resolve();
+    });
+    server.closeIdleConnections();
   });
 }
 
