@@ -19,7 +19,7 @@ function fixture(t) {
   fs.mkdirSync(path.join(packed, '01'), { recursive: true });
 
   return {
-    pack(extra = {}) {
+    pack(extra = {}, includeTestOutput = false) {
       fs.writeFileSync(
         path.join(pkg, 'package.json'),
         JSON.stringify({
@@ -38,6 +38,10 @@ function fixture(t) {
         "if (process.argv[2] !== '--help') process.exit(1); console.error('Usage: desktop-test');\n",
       );
       fs.writeFileSync(path.join(pkg, 'service.cjs'), "throw new Error('The service bootstrap is not a library');\n");
+      if (includeTestOutput) {
+        fs.mkdirSync(path.join(pkg, 'lib'));
+        fs.writeFileSync(path.join(pkg, 'lib', 'runner.contract.d.cts.map'), '{}');
+      }
       const archive = path.join(packed, '01', 'fluentui-react-native-desktop-test-0.4.0.tgz');
       const result = spawnSync('tar', ['-czf', archive, 'package'], { cwd: staging, encoding: 'utf8' });
       assert.equal(result.status, 0, result.stderr);
@@ -62,4 +66,12 @@ test('fails when an exported entry point is missing from the installed tarball',
   const result = input.smoke();
   assert.equal(result.status, 1, result.stdout);
   assert.match(result.stderr, /Import @fluentui-react-native\/desktop-test\/supervisor-connection/);
+});
+
+test('rejects emitted contract-test declaration maps in a desktop tarball', (t) => {
+  const input = fixture(t);
+  input.pack({}, true);
+  const result = input.smoke();
+  assert.equal(result.status, 1, result.stdout);
+  assert.match(result.stderr, /ships test artifact package\/lib\/runner\.contract\.d\.cts\.map/);
 });

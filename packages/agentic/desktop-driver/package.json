@@ -29,7 +29,7 @@
     "references/",
     "src/",
     "!{lib,src}/**/*.test.*",
-    "!{lib,src}/**/*.contract.cjs*",
+    "!{lib,src}/**/*.contract.*",
     "!{lib,src}/native/windows/{win32FixtureSupport,fakeAuthorityHelper}.*",
     "!{lib,src}/testing/scriptedNativeHelper.*"
   ],

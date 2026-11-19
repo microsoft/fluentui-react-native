@@ -18,7 +18,7 @@
     "references/",
     "src/",
     "!{lib,src}/**/*.test.*",
-    "!{lib,src}/**/*.contract.cjs*"
+    "!{lib,src}/**/*.contract.*"
   ],
   "type": "module",
   "main": "lib/index.js",

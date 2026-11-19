@@ -34,6 +34,9 @@ function packedPackages(directory: string): Map<string, PackedPackage> {
     if (pkg.name !== name || entry.name !== `${name.slice(1).replace('/', '-')}-${pkg.version}.tgz` || packages.has(name)) {
       throw new Error(`Unexpected or duplicate desktop package: ${entry.name}`);
     }
+    const inventory = run('tar', ['-tf', filename], directory, `List ${entry.name}`).stdout;
+    const testArtifact = inventory.split(/\r?\n/).find((file) => /\.(?:test|contract)\./.test(path.posix.basename(file)));
+    if (testArtifact) throw new Error(`${entry.name} ships test artifact ${testArtifact}.`);
     packages.set(name, { filename, pkg });
   }
   return packages;
