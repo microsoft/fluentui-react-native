@@ -9,11 +9,22 @@ It uses
 `@fluentui-react-native/desktop-driver`; Storybook support is an optional
 integration in `@fluentui-react-native/storybook-desktop`.
 
-**Work in progress:** [current status](references/current-status.md) separates
+**Preview:** This is a 0.x, ESM-only package. Supported endpoints are macOS,
+Windows Fabric, and Win32 Paper. [Current status](references/current-status.md) separates
 implemented capabilities from incomplete ownership/recovery guarantees and
 links the latest per-endpoint qualification results.
 
 ## Quick start
+
+For standalone WDIO suites, install the runner and the selected framework in
+the suite workspace so the harness can resolve them. For Jasmine:
+
+```sh
+npm install --save-dev @wdio/cli @wdio/local-runner @wdio/jasmine-framework
+```
+
+Keep the WDIO packages on the same major version. Stages that do not run a
+WDIO suite do not require these packages.
 
 Add a `desktop.config.mts` in the app workspace:
 

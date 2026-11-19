@@ -12,7 +12,7 @@ evidence management, native-helper source and build tooling, and deterministic
 fake hosts for contract tests. It does not depend on Storybook, React, or React
 Native.
 
-**Work in progress:** see [current status](references/current-status.md) for
+**Preview:** This is a 0.x, ESM-only package. See [current status](references/current-status.md) for
 implemented capabilities, incomplete lifecycle guarantees, the latest
 per-endpoint qualification results, and measured token/latency results.
 

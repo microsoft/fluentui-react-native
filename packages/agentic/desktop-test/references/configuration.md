@@ -65,6 +65,22 @@ and attempts, and at least five minutes. Install WDIO CLI, local runner, and the
 the suite workspace; the harness does not install test frameworks into app
 workspaces.
 
+### First-party integration entry points
+
+`./control` and `./supervisor-connection` handle supervisor discovery and
+control, `./managed-host` defines the hosted-driver integration contract, and
+`./runner-connection` connects an attached runner to its reservation. These
+are shipped ESM entry points for lockstep first-party integrations such as
+Storybook Desktop and Desktop MCP. They are not stable extension APIs for
+independently versioned consumers.
+
+The root `createDesktopRunContext` opens a supervised reporting context.
+`acquireHostedDesktopDriver` and `publishDesktopHostManagement` compose the
+driver and management service under that owner. `desktopHostReady` and
+`formatDesktopHostReady` build and format its ready receipt. These are also
+first-party integration surfaces; use `defineDesktopConfig` for application
+and suite configuration.
+
 The config schema rejects unknown fields, cycles, and unmatched spec patterns.
 Spec paths resolve against the suite project's root; target references and
 hooks resolve against their declaring config.
