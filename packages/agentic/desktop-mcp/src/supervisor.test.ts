@@ -1,13 +1,17 @@
+import { spawn } from 'node:child_process';
+import { once } from 'node:events';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+import { createInterface } from 'node:readline';
+import { pathToFileURL } from 'node:url';
 
 import { DesktopAuthority, publishConnectionDescriptor } from '@fluentui-react-native/desktop-driver/authority';
 import type { DesktopServiceIdentity, PrivateStorage } from '@fluentui-react-native/desktop-driver/authority';
 import { createDesktopDriverTestHarness } from '@fluentui-react-native/desktop-driver/testing';
-import { DesktopWorkloadService } from '@fluentui-react-native/desktop-test/control';
+import { DesktopWorkloadError, DesktopWorkloadService } from '@fluentui-react-native/desktop-test/control';
 import { DesktopRunReporter } from '@fluentui-react-native/desktop-test/reporting';
-import { createDesktopSupervisorConnector, publishDesktopSupervisor } from '@fluentui-react-native/desktop-test/supervisor-connection';
+import { publishDesktopSupervisor } from '@fluentui-react-native/desktop-test/supervisor-connection';
 import type { DesktopSupervisorConnector } from '@fluentui-react-native/desktop-test/supervisor-connection';
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { InMemoryTransport } from '@modelcontextprotocol/sdk/inMemory.js';
@@ -15,6 +19,7 @@ import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js';
 import { getEncoding } from 'js-tiktoken';
 
+import { trackSupervisorRestart } from './connection.js';
 import { createDesktopMcpServer } from './server.js';
 
 class MemoryStorage implements PrivateStorage {
@@ -118,17 +123,20 @@ async function fixture() {
     },
   });
   const verifyService = async () => true;
-  const publication = await publishDesktopSupervisor({
-    service,
-    storage,
-    identity,
-    verifyService,
-    driver: { record: 'agent-connection.json', incarnation: authority.incarnation, targetId: driver.target.id },
-  });
+  const publish = (service: DesktopWorkloadService) =>
+    publishDesktopSupervisor({
+      service,
+      storage,
+      identity,
+      verifyService,
+      driver: { record: 'agent-connection.json', incarnation: authority.incarnation, targetId: driver.target.id },
+    });
+  let publication = await publish(service);
   const clients: Client[] = [];
   return {
     driver,
     grant: grant.token,
+    service,
     storage,
     get executions() {
       return executions;
@@ -137,10 +145,21 @@ async function fixture() {
       runWork = work;
     },
     async client() {
-      const connector = createDesktopSupervisorConnector({ storage, verifyService });
+      const connector = trackSupervisorRestart({ storage, verifyService });
       const client = await clientFor(createDesktopMcpServer({ mode: 'supervisor', connector, version: 'test' }));
       clients.push(client);
       return client;
+    },
+    async restart() {
+      await publication.close();
+      publication = await publish(
+        new DesktopWorkloadService({
+          catalog: [],
+          prepare: async () => {
+            throw new Error('Replacement has no workloads.');
+          },
+        }),
+      );
     },
     async close() {
       await Promise.all(clients.map((client) => client.close().catch(() => undefined)));
@@ -150,6 +169,19 @@ async function fixture() {
     },
   };
 }
+
+// Reuse the local supervisor with the real stdio server in an owned Node child. Fixture records travel over IPC.
+const stdioFixture = `
+  const records = new Map(await new Promise((resolve) => process.once('message', resolve)));
+  process.disconnect();
+  const { serveDesktopMcpStdio } = await import(process.argv[1]);
+  const { createDesktopMcpServer } = await import(process.argv[2]);
+  const { createDesktopSupervisorConnector } = await import('@fluentui-react-native/desktop-test/supervisor-connection');
+  const storage = { read: async (name) => records.get(name) };
+  await serveDesktopMcpStdio(createDesktopMcpServer({
+    mode: 'supervisor', connector: createDesktopSupervisorConnector({ storage, verifyService: async () => true }), version: 'test',
+  }));
+`;
 
 describe('desktop-mcp supervisor mode', () => {
   test.each([
@@ -189,6 +221,7 @@ describe('desktop-mcp supervisor mode', () => {
       const driver = await call(client, {}, 'desktop_session');
       expect(json(workload)).toMatchObject({ reason: 'service-unavailable' });
       expect(json(driver)).toMatchObject({ reason: 'service-unavailable' });
+      expect(errors).toHaveBeenCalledWith('desktop-mcp: workload connection failed; verify private discovery and the service identity.');
       expect(JSON.stringify([workload, driver, errors.mock.calls])).not.toContain('private-descriptor-secret');
       expect((await client.listTools()).tools.some(({ name }) => name === 'desktop_workload')).toBe(true);
     } finally {
@@ -196,6 +229,147 @@ describe('desktop-mcp supervisor mode', () => {
       errors.mockRestore();
     }
   });
+
+  test('preserves capacity when supervisor principal acquisition is refused', async () => {
+    const errors = jest.spyOn(console, 'error').mockImplementation(() => undefined);
+    const connector = { ...unavailable, connect: async () => Promise.reject(new DesktopWorkloadError('capacity')) };
+    const client = await clientFor(createDesktopMcpServer({ mode: 'supervisor', connector, version: 'test' }));
+    try {
+      expect(json(await call(client, { action: 'catalog' }))).toMatchObject({ reason: 'capacity' });
+      expect(json(await call(client, {}, 'desktop_session'))).toMatchObject({ reason: 'capacity' });
+    } finally {
+      await client.close();
+      errors.mockRestore();
+    }
+  });
+
+  test.each(['busy', 'conflict', 'stale-cursor', 'capacity'] as const)('preserves a supervisor workload %s response', async (code) => {
+    const host = await fixture();
+    const client = await host.client();
+    const fetch = globalThis.fetch;
+    const spy = jest
+      .spyOn(globalThis, 'fetch')
+      .mockImplementation((input, init) =>
+        String(input).endsWith('/workloads')
+          ? Promise.resolve(Response.json({ error: { code } }, { status: code === 'capacity' ? 429 : 409 }))
+          : fetch(input, init),
+      );
+    try {
+      expect(json(await call(client, { action: 'catalog' }))).toMatchObject({ reason: code });
+    } finally {
+      spy.mockRestore();
+      await host.close();
+    }
+  });
+
+  test.each(['desktop_workload', 'desktop_session'])(
+    'reports supervisor replacement first through %s without replaying work',
+    async (tool) => {
+      const host = await fixture();
+      const client = await host.client();
+      const errors = jest.spyOn(console, 'error').mockImplementation(() => undefined);
+      const input = { action: 'run', workload: 'suite', lane: 'accessible', requestId: 'original' };
+      try {
+        expect((await call(client, input)).isError).not.toBe(true);
+        expect(json(await call(client, { action: 'status', requestId: 'original', waitMs: 1000 }))).toHaveProperty('run');
+        await host.restart();
+        const calls = jest.spyOn(globalThis, 'fetch');
+        try {
+          expect(json(await call(client, { action: 'status' }, tool))).toMatchObject({ reason: 'supervisor-restarted' });
+          expect(json(await call(client, input))).toMatchObject({ reason: 'supervisor-restarted' });
+          expect(json(await call(client, { action: 'status', requestId: 'original' }))).toMatchObject({ reason: 'supervisor-restarted' });
+          expect(json(await call(client, {}, 'desktop_session'))).toMatchObject({ reason: 'supervisor-restarted' });
+          expect(calls).not.toHaveBeenCalled();
+          expect(host.executions).toBe(1);
+        } finally {
+          calls.mockRestore();
+        }
+      } finally {
+        await host.close();
+        errors.mockRestore();
+      }
+    },
+  );
+
+  test.each(
+    process.platform === 'win32'
+      ? (['stdin end', 'failed cleanup'] as const)
+      : (['stdin end', 'failed cleanup', 'SIGTERM', 'SIGHUP'] as const),
+  )(
+    'stdio %s disposes its principal before exiting',
+    async (trigger) => {
+      const host = await fixture();
+      const entered = deferred();
+      const release = deferred();
+      const dispose = host.service.dispose.bind(host.service);
+      const deletion = jest.spyOn(host.service, 'dispose').mockImplementationOnce(async (token) => {
+        entered.resolve();
+        await release.promise;
+        if (trigger === 'failed cleanup') throw new Error('test cleanup failure');
+        await dispose(token);
+      });
+      const lib = path.resolve(__dirname, '../lib');
+      const child = spawn(
+        process.execPath,
+        [
+          '--input-type=module',
+          '-e',
+          stdioFixture,
+          pathToFileURL(path.join(lib, 'stdio.js')).href,
+          pathToFileURL(path.join(lib, 'server.js')).href,
+        ],
+        { cwd: path.resolve(__dirname, '..'), stdio: ['pipe', 'pipe', 'pipe', 'ipc'] },
+      );
+      const closed = once(child, 'close');
+      void closed.catch(() => undefined);
+      const stdout = createInterface({ input: child.stdout! });
+      const stderr: string[] = [];
+      child.stderr!.setEncoding('utf8').on('data', (text: string) => stderr.push(text));
+      const signal = AbortSignal.timeout(10_000);
+      const deadline = once(signal, 'abort').then(() => {
+        throw signal.reason;
+      });
+      void deadline.catch(() => undefined);
+      const exchange = async (id: number, method: string, params: object) => {
+        const answer = once(stdout, 'line', { signal });
+        child.stdin!.write(`${JSON.stringify({ jsonrpc: '2.0', id, method, params })}\n`);
+        const [line] = (await answer) as [string];
+        return JSON.parse(line) as { id: number; result: { isError?: boolean } };
+      };
+      try {
+        child.send([...host.storage.records]);
+        expect(
+          await exchange(1, 'initialize', { protocolVersion: '2024-11-05', capabilities: {}, clientInfo: { name: 'test', version: '1' } }),
+        ).toMatchObject({ id: 1, result: { capabilities: expect.any(Object) } });
+        const catalog = await exchange(2, 'tools/call', { name: 'desktop_workload', arguments: { action: 'catalog' } });
+        expect(catalog.id).toBe(2);
+        expect(catalog.result.isError).not.toBe(true);
+        if (trigger === 'SIGTERM' || trigger === 'SIGHUP') child.kill(trigger);
+        else child.stdin!.end();
+        // The service only disposes this principal after receiving DELETE /connection.
+        await Promise.race([
+          entered.promise,
+          closed.then(() => {
+            throw new Error('Adapter exited before principal deletion.');
+          }),
+          deadline,
+        ]);
+        expect(child.exitCode).toBeNull();
+        release.resolve();
+        await expect(Promise.race([closed, deadline])).resolves.toEqual([trigger === 'failed cleanup' ? 1 : 0, null]);
+        expect(deletion).toHaveBeenCalledTimes(1);
+        expect(stderr.join('').includes('cleanup is incomplete')).toBe(trigger === 'failed cleanup');
+      } finally {
+        release.resolve();
+        if (child.exitCode === null && child.signalCode === null) child.kill();
+        await closed.catch(() => undefined);
+        stdout.close();
+        deletion.mockRestore();
+        await host.close();
+      }
+    },
+    15_000,
+  );
 
   test('reconciles a lost run response without resubmitting and confines credentials', async () => {
     const host = await fixture();

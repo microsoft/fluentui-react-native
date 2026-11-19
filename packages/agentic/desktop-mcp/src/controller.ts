@@ -243,24 +243,20 @@ export class DesktopController {
           this.#binding = undefined;
         }
       });
-      this.#pending = cleanup.catch(() => {
-        console.error('desktop-mcp: session cleanup is incomplete; the service must drain or expire the session.');
-      });
+      this.#pending = cleanup.catch(() => undefined);
       let timer: ReturnType<typeof setTimeout> | undefined;
       try {
         await Promise.race([
-          this.#pending,
-          new Promise<void>((resolve) => {
-            timer = setTimeout(() => {
-              console.error('desktop-mcp: session cleanup is still pending; the service must drain or expire the session.');
-              resolve();
-            }, deleteTimeoutMs);
-            timer.unref();
+          cleanup,
+          new Promise<void>((_resolve, reject) => {
+            timer = setTimeout(() => reject(new Error('Desktop MCP session cleanup is still pending.')), deleteTimeoutMs);
           }),
         ]);
+      } catch {
+        this.#disposing = undefined;
+        throw new Error('Desktop MCP session cleanup is not confirmed.');
       } finally {
         if (timer) clearTimeout(timer);
-        if (this.#binding) this.#disposing = undefined;
       }
     })());
   }
@@ -270,9 +266,10 @@ export class DesktopController {
     let connection: DesktopDriverConnection;
     try {
       connection = await this.#connect();
-    } catch {
+    } catch (error) {
       // Discovery failures can contain descriptor credentials; neither protocol output nor diagnostics may echo them.
       console.error('desktop-mcp: connecting failed; verify private discovery and the service identity.');
+      if (error instanceof AdapterError) throw error;
       throw new AdapterError('service-unavailable', 'The Desktop Driver service is not available. Ask the operator to start it.');
     }
     const binding = this.#binding;

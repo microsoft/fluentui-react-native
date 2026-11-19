@@ -7,11 +7,11 @@ jest.mock('./connection.js', () => ({
   connectWithDescriptor: jest.fn(() => jest.fn()),
 }));
 jest.mock('./server.js', () => ({
-  createDesktopMcpServer: jest.fn(() => ({ connect: jest.fn(), close: jest.fn() })),
+  createDesktopMcpServer: jest.fn(() => ({ connect: jest.fn(), close: jest.fn(), server: {} })),
 }));
 
 describe('desktop MCP CLI modes', () => {
-  const signals = ['SIGINT', 'SIGTERM'] as const;
+  const signals = ['SIGINT', 'SIGTERM', 'SIGHUP'] as const;
   const original = new Map<string, Set<NodeJS.SignalsListener>>();
   let stdin: Set<NodeJS.SignalsListener>;
 

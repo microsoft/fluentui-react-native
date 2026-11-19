@@ -149,9 +149,10 @@ A tool failure is an `isError` result with one JSON text block:
 | `mutation`  | For an action, whether it was applied, rejected, or indeterminate, and whether it quarantined the target. |
 
 The adapter's own reasons are `no-session`, `session-open`,
-`session-uncertain`, `connection-closed`, `controller-draining`, `drain-incomplete`, `service-unavailable`, `cancelled`,
-`admission-unknown`, and `internal`; workload failures also use bounded
-management reasons such as `busy`, `capacity`, and `unavailable`. A malformed call is
+`session-uncertain`, `connection-closed`, `controller-draining`, `drain-incomplete`, `service-unavailable`,
+`supervisor-restarted`, `cancelled`, `admission-unknown`, and `internal`.
+Management failures distinguish `busy`, `conflict`, `stale-cursor`, `capacity`, and `unavailable`.
+For `supervisor-restarted`, restart the adapter; do not replay unresolved work. A malformed call is
 refused with the schema's validation message.
 
 A failed resource read is a JSON-RPC error: `-32602` with a `data.reason` of

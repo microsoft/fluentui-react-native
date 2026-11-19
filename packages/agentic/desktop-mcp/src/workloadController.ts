@@ -9,6 +9,12 @@ const maxAdmissions = 128;
 const unavailable = 'The desktop supervisor is unavailable. Verify its private descriptor and both services.';
 const ambiguous = 'Workload admission may have succeeded. Query status with the same requestId; do not submit the run again.';
 
+export function supervisorConnectionError(error: unknown): AdapterError {
+  return error instanceof DesktopWorkloadError && error.code === 'capacity'
+    ? new AdapterError(error.code, error.message)
+    : new AdapterError('service-unavailable', unavailable);
+}
+
 /** Keeps one connection's admitted and ambiguous request IDs; neither is ever resubmitted. */
 export class WorkloadController {
   private readonly admissions = new Set<string>();
@@ -22,8 +28,9 @@ export class WorkloadController {
     let connection;
     try {
       connection = await this.connector.connect();
-    } catch {
-      throw new AdapterError('service-unavailable', unavailable);
+    } catch (error) {
+      console.error('desktop-mcp: workload connection failed; verify private discovery and the service identity.');
+      throw supervisorConnectionError(error);
     }
 
     const requestId = input.action === 'run' ? input.requestId : undefined;
@@ -44,6 +51,9 @@ export class WorkloadController {
         this.admissions.delete(requestId);
       }
       if (error instanceof DesktopWorkloadError) throw new AdapterError(error.code, error.message);
+      if (error instanceof DesktopWorkloadTransportError && error.code === 'unavailable') {
+        throw new AdapterError('service-unavailable', unavailable);
+      }
       if (requestId) throw new AdapterError('admission-unknown', ambiguous);
       throw new AdapterError('service-unavailable', unavailable);
     }

@@ -1,8 +1,8 @@
-import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { Command } from 'commander';
 
 import { connectSupervisorWithDescriptor, connectWithDescriptor } from './connection.js';
 import { createDesktopMcpServer } from './server.js';
+import { serveDesktopMcpStdio } from './stdio.js';
 
 export type DesktopMcpCliOptions = {
   argv?: readonly string[];
@@ -39,13 +39,5 @@ async function run({ argv = process.argv, version }: DesktopMcpCliOptions, legac
   const server = driverOnly
     ? createDesktopMcpServer({ mode: 'driver-only', connect: connectWithDescriptor(discovery), version })
     : createDesktopMcpServer({ mode: 'supervisor', connector: connectSupervisorWithDescriptor(discovery), version });
-  await server.connect(new StdioServerTransport());
-  const close = () => {
-    void server.close().catch(() => {
-      console.error('desktop-mcp: cleanup is incomplete; the supervisor must drain or fence the host.');
-    });
-  };
-  process.stdin.once('end', close);
-  process.once('SIGINT', close);
-  process.once('SIGTERM', close);
+  await serveDesktopMcpStdio(server);
 }
