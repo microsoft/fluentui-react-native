@@ -378,34 +378,45 @@ describe('Desktop Driver agent operations', () => {
 
   describe('the caller leaving', () => {
     test('abandons a walk when the caller disconnects, journals it as cancelled, and keeps the session usable', async () => {
-      await withFixture(
-        { observation: { readDelayMs: 150 }, windows: treeWindows({ depth: 2, fanout: 5 }) },
-        async ({ harness, session }) => {
-          let walking!: () => void;
-          const walkStarted = new Promise<void>((resolve) => {
-            walking = resolve;
+      await withFixture({ windows: treeWindows({ depth: 2, fanout: 2 }) }, async ({ harness, session }) => {
+        const { promise: walkStarted, resolve: markWalking } = Promise.withResolvers<void>();
+        let walkAborted = false;
+        // Only the abandoned walk waits for cancellation; the follow-up search uses the normal fake host.
+        jest.spyOn(harness.host, 'observe').mockImplementationOnce(async (_request, signal) => {
+          if (!signal) throw new Error('Expected the walk to receive a cancellation signal.');
+          signal.throwIfAborted();
+          const cancelled = new Promise<never>((_resolve, reject) => {
+            signal.addEventListener(
+              'abort',
+              () => {
+                walkAborted = true;
+                reject(signal.reason);
+              },
+              { once: true },
+            );
           });
-          const observe = harness.host.observe.bind(harness.host);
-          harness.host.observe = (request, signal) => {
-            walking();
-            return observe(request, signal);
-          };
+          markWalking();
+          return cancelled;
+        });
 
-          const caller = new AbortController();
-          const disconnected = session.observe({ view: 'all' }, { requestId: 'walk', signal: caller.signal });
-          await walkStarted;
+        const caller = new AbortController();
+        const disconnected = session.observe({ view: 'all' }, { requestId: 'walk', signal: caller.signal });
+        try {
+          await Promise.race([walkStarted, disconnected]);
           caller.abort();
           await expect(disconnected).rejects.toThrow();
+        } finally {
+          caller.abort();
+        }
 
-          // The journal read queues behind the abandoned walk, which would take over four seconds if it ran to the end.
-          const left = Date.now();
-          const { entries } = (await session.journal()).result;
-          expect(Date.now() - left).toBeLessThan(1500);
-          expect(entries).toMatchObject([{ error: { reason: 'cancelled' }, operation: 'observe', outcome: 'error', requestId: 'walk' }]);
+        const { entries } = (await session.journal()).result;
+        expect(walkAborted).toBe(true);
+        expect(entries).toMatchObject([{ error: { reason: 'cancelled' }, operation: 'observe', outcome: 'error', requestId: 'walk' }]);
 
-          await expect(session.find({ automationId: 'auto-n.0.0' })).resolves.toMatchObject({ result: { outcome: 'unique' } });
-        },
-      );
+        await expect(session.find({ automationId: 'auto-n.0.0' })).resolves.toMatchObject({
+          result: { complete: true, outcome: 'unique' },
+        });
+      });
     });
   });
 
