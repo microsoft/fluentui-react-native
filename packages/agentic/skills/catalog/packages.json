@@ -48,8 +48,8 @@
     },
     {
       "name": "@fluentui-react-native/desktop-test",
-      "purpose": "Application-neutral supervision, trusted workload management, app/suite lifecycle, WDIO integration, and reporting.",
-      "entry_points": [".", "./config", "./control", "./supervisor-connection", "./managed-host", "./wdio", "./reporting"],
+      "purpose": "Application-neutral supervision, app and suite configuration, WDIO integration, and reporting. Supervisor and hosted-driver integration APIs are for lockstep first-party packages.",
+      "entry_points": [".", "./config", "./wdio", "./reporting"],
       "integration_targets": ["macos", "windows", "win32"],
       "reference_paths": [
         "references/commands.md",
@@ -70,7 +70,7 @@
     },
     {
       "name": "@fluentui-react-native/desktop-mcp",
-      "purpose": "Verified MCP client for an existing supervisor and its trusted workload catalog; explicit driver-only mode is available. The adapter does not start or own the host.",
+      "purpose": "Verified MCP stdio adapter for an existing supervisor and its trusted workload catalog, with explicit driver-only mode. The adapter does not build helpers, start services, or own the host. Published 0.1.0 cannot start with its published dependencies.",
       "entry_points": [".", "./cli"],
       "integration_targets": ["macos", "windows", "win32"],
       "reference_paths": ["references/connection.md", "references/tools.md"]
