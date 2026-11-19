@@ -15,7 +15,7 @@ import type {
   DesktopStoryStep,
   DesktopStoryTest,
 } from '../authoring/storyTests.js';
-import { validateDesktopExpectation } from '../authoring/storyTests.js';
+import { validateDesktopExpectation, validateDesktopStoryTests } from '../authoring/storyTests.js';
 import { desktopInputModeAllows, desktopInputModes } from '../authoring/input.js';
 import type { DesktopInputMechanism } from '../authoring/input.js';
 import { compareDesktopCodePoints } from '../authoring/order.js';
@@ -142,12 +142,13 @@ export function selectDesktopStoryTests(
   const selected = manifest.entries
     .filter((entry) => !selection.story || matchesPattern(entry.id, selection.story))
     .filter((entry) => !selection.tag || entry.tags.includes(selection.tag))
-    .flatMap((entry) =>
-      (entry.tests?.tests ?? [])
-        .filter((test) => !test.platforms || test.platforms.includes(endpoint))
+    .flatMap((entry) => {
+      if (entry.tests === undefined) return [];
+      return validateDesktopStoryTests(entry.tests, `Story "${entry.id}" desktopDriver`)
+        .tests.filter((test) => !test.platforms || test.platforms.includes(endpoint))
         .filter((test) => !selection.test || matchesPattern(test.id, selection.test))
-        .map((test) => ({ entry, test })),
-    )
+        .map((test) => ({ entry, test }));
+    })
     .sort((left, right) => compareDesktopCodePoints(`${left.entry.id}/${left.test.id}`, `${right.entry.id}/${right.test.id}`));
 
   const shardCount = selection.shardCount;
@@ -198,7 +199,7 @@ async function runTest({
     await withAbort(session.selectStory(item.entry.id, runId), signal);
     for (const [index, step] of item.test.steps.entries()) {
       throwIfAborted(signal);
-      const result = await runStep(session, step, index, artifacts, testDirectory, authoredNames, signal);
+      const result = await runStep(session, item.entry.id, step, index, artifacts, testDirectory, authoredNames, signal);
       steps.push(result);
       testArtifacts.push(...result.artifacts);
       if (result.status === 'failed') {
@@ -253,6 +254,7 @@ type InternalStepResult = DesktopStoryStepResult & {
 
 async function runStep(
   session: DesktopSessionClient,
+  storyId: string,
   step: DesktopStoryStep,
   index: number,
   artifacts: ArtifactManager | undefined,
@@ -267,7 +269,7 @@ async function runStep(
     if ('expect' in step) {
       await withAbort(assertDesktopExpectation(session, step.expect), signal);
     } else {
-      await withAbort(performAction(session, step, artifacts, testDirectory, authoredNames, stepArtifacts, signal), signal);
+      await withAbort(performAction(session, storyId, step, artifacts, testDirectory, authoredNames, stepArtifacts, signal), signal);
     }
     throwIfAborted(signal);
     return { artifacts: stepArtifacts, durationMs: Date.now() - started, index, status: 'passed' };
@@ -285,6 +287,7 @@ async function runStep(
 
 async function performAction(
   session: DesktopSessionClient,
+  storyId: string,
   step: Exclude<DesktopStoryStep, { expect: DesktopStoryExpectation }>,
   artifacts: ArtifactManager | undefined,
   testDirectory: ArtifactDirectory,
@@ -343,7 +346,7 @@ async function performAction(
       return;
     }
     case 'setArgs':
-      await session.updateStoryArgs(requireCurrentStory(await session.getCurrentStory()), step.args);
+      await session.updateStoryArgs(storyId, step.args);
       return;
     case 'source': {
       const source = await session.getPageSource();
@@ -359,6 +362,8 @@ async function performAction(
     case 'wait':
       await waitFor(session, step, signal);
       return;
+    default:
+      throw new TypeError('Unsupported desktop story action.');
   }
 }
 
@@ -628,13 +633,6 @@ function keySequences(keys: readonly string[]): WebDriverActionSequence[] {
 
 function toElementReference(element: DesktopElementClient): { [webElementIdentifier]: string } {
   return { [webElementIdentifier]: element.id };
-}
-
-function requireCurrentStory(story: { storyId: string } | null): string {
-  if (!story) {
-    throw new Error('Storybook did not report a current story.');
-  }
-  return story.storyId;
 }
 
 function assertEqual(actual: unknown, expected: unknown, label: string): void {

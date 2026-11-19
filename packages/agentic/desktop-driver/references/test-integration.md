@@ -96,6 +96,9 @@ For Storybook targets, the connection registers:
 The runner resets the preview for each test, filters and shards a stable
 `storyId/testId` ordering, checks required capabilities, and classifies
 assertion, timeout, cancellation, skip, and infrastructure outcomes.
+Selected story plans are validated before navigation; an empty test or an
+unknown action fails validation. Argument updates target the story selected
+by the test, not a different story that happens to be current.
 Selectors used to read a value or perform an action must resolve to exactly one
 element. `count` and `exists` expectations intentionally allow multiple matches;
 narrow other selectors rather than relying on the first match.
