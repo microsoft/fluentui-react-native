@@ -48,6 +48,7 @@ class PhysicalInputScope {
 };
 
 const wchar_t* PhysicalInputMutexName() noexcept;
+void RecoverPhysicalInputMutexIfIdle() noexcept;
 void SetPhysicalInputMutexNameForTesting(std::wstring name);
 
 }  // namespace furn

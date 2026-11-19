@@ -21,6 +21,7 @@
 #include "authoritytests.h"
 #include "observationtests.h"
 #include "automation.h"
+#include "capture.h"
 #include "common.h"
 #include "driver.h"
 #include "events.h"
@@ -133,6 +134,9 @@ void TestJson() {
     rejected = std::string(error.code()) == kErrorInvalidRequest;
   }
   Check(rejected, "malformed json is rejected");
+  Check(json::Value::Number(1e300).AsInteger(-1) == -1 &&
+            json::Value::Number(-1e300).AsInteger(-1) == -1,
+        "integer access refuses numbers outside its representable range");
 }
 
 void TestGeometry() {
@@ -158,6 +162,8 @@ void TestGeometry() {
                                                  metrics);
   Check(center.x == (physical.left + physical.right) / 2, "center maps back to physical x");
   Check(center.y == (physical.top + physical.bottom) / 2, "center maps back to physical y");
+  Check(RoundToPixel(1e300) == LONG_MAX && RoundToPixel(-1e300) == LONG_MIN,
+        "pixel rounding saturates before conversion");
 
   const RectD windowRect = ClientRectInScreenDips(metrics);
   Check(std::fabs(windowRect.x - 200.0) < 0.001 && std::fabs(windowRect.width - 800.0) < 0.001,
@@ -527,10 +533,29 @@ void TestPhysicalInputLock() {
   const CancellationToken token;
   Check(acquireElsewhere(500) == "acquired", "an idle physical input mutex is available");
 
+  const auto releaseEmpty = [](SessionLock lock) {
+    InputController input;
+    input.UseTestSender(&RecordInput);
+    input.UseTestEnvironment([lock]() {
+      InputEnvironment environment = InteractiveEnvironmentForTesting();
+      environment.lock = lock;
+      return environment;
+    });
+    const ReleaseCounts counts = input.ReleaseExact({});
+    return counts.keys == 0 && counts.buttons == 0;
+  };
+  recordedInputs.clear();
   {
     const PhysicalInputScope outer(token, 1000);
     Check(outer.owns() && !outer.nested(), "the first scope owns the physical input mutex");
     Check(acquireElsewhere(200) == kErrorInputBusy, "a busy physical input mutex reports input-busy");
+    bool emptyReleaseSucceeded = false;
+    const ULONGLONG started = GetTickCount64();
+    std::thread recovery([&]() { emptyReleaseSucceeded = releaseEmpty(SessionLock::Unlocked); });
+    recovery.join();
+    Check(emptyReleaseSucceeded && GetTickCount64() - started < 1000 &&
+              acquireElsewhere(200) == kErrorInputBusy,
+          "empty recovery returns promptly without taking the mutex from a live owner");
     {
       const PhysicalInputScope inner(token, 1000);
       Check(inner.owns() && inner.nested(), "a nested scope reuses the owned mutex");
@@ -567,27 +592,29 @@ void TestPhysicalInputLock() {
 
   // A thread that exits while owning the mutex abandons it, which is exactly
   // what a helper crash looks like to the next owner.
-  std::thread abandoner([]() {
+  const auto abandonMutex = []() {
     const HANDLE handle = CreateMutexW(nullptr, FALSE, PhysicalInputMutexName());
     if (handle != nullptr) {
       WaitForSingleObject(handle, 1000);
       CloseHandle(handle);
     }
-  });
-  abandoner.join();
+  };
+  std::thread(abandonMutex).join();
   Check(acquireElsewhere(500) == kErrorInputBusy, "an abandoned mutex reports input-busy");
   Check(acquireElsewhere(500) == "acquired", "the reported abandonment leaves the mutex usable");
 
-  std::thread secondAbandoner([]() {
-    const HANDLE handle = CreateMutexW(nullptr, FALSE, PhysicalInputMutexName());
-    if (handle != nullptr) {
-      WaitForSingleObject(handle, 1000);
-      CloseHandle(handle);
-    }
-  });
-  secondAbandoner.join();
+  std::thread(abandonMutex).join();
   Check(acquireElsewhere(500, AbandonPolicy::Adopt) == "acquired", "recovery adopts an abandoned mutex");
   Check(acquireElsewhere(500) == "acquired", "adoption releases the mutex when recovery finishes");
+
+  std::thread(abandonMutex).join();
+  Check(releaseEmpty(SessionLock::Unlocked) && acquireElsewhere(500) == "acquired",
+        "empty recovery clears abandonment before the next fail-policy acquire");
+
+  std::thread(abandonMutex).join();
+  Check(releaseEmpty(SessionLock::Locked) && acquireElsewhere(500) == kErrorInputBusy,
+        "empty recovery is a successful no-op when physical input is unavailable");
+  Check(recordedInputs.empty(), "empty-ledger recovery never injects input");
 }
 
 // Manual-reset event that outlives the stalled worker which waits on it.
@@ -1616,6 +1643,76 @@ void TestRegisteredToolWindowLiveness() {
   applications.CloseApplication(leaseId, token);
 }
 
+void TestFirstWindowListingWithToolPopup() {
+  WindowThread windows;
+  const HWND primary = windows.Create(L"FurnSelfTestFirstListPrimary", L"First listing primary");
+  const HWND popup = windows.Create(L"FurnSelfTestFirstListPopup", L"", DefWindowProcW, primary);
+  if (primary == nullptr || popup == nullptr ||
+      windows.CreateChild(popup, L"BUTTON", L"Popup action", 1, BS_PUSHBUTTON) == nullptr) {
+    Check(false, "first window listing creates an owned untitled popup with content");
+    return;
+  }
+
+  Driver driver;
+  const CancellationToken token;
+  json::Value request = json::Value::Object();
+  request.Set("lease", driver.AdoptWindowForTesting(primary, L"First listing primary"));
+  const auto listed = driver.Execute("windows", request, token).result;
+  Check(listed.Items().size() == 2 && listed.Items().front().StringField("title") == "First listing primary" &&
+            listed.Items().back().StringField("title").empty() && !listed.Items().back().StringField("id").empty(),
+        "the first windows command initializes UI Automation and admits the owned untitled popup");
+}
+
+json::Value StringFields(std::initializer_list<std::pair<const char*, std::string>> fields);
+
+void TestEmptyActionOrigins() {
+  WindowThread windows;
+  const HWND window = windows.Create(L"FurnSelfTestActionOrigins", L"Action origin fixture");
+  if (window == nullptr || windows.CreateChild(window, L"BUTTON", L"Action origin", 1, BS_PUSHBUTTON) == nullptr) {
+    Check(false, "the action-origin fixture creates a window and button");
+    return;
+  }
+  Driver driver;
+  const CancellationToken token;
+  auto lease = json::Value::Object();
+  lease.Set("lease", driver.AdoptWindowForTesting(window, L"Action origin fixture"));
+  const auto listed = driver.Execute("windows", lease, token).result;
+  const std::string windowId = listed.Items().empty() ? std::string{} : listed.Items().front().StringField("id");
+  const auto tree = driver.Execute("tree", StringFields({{"windowId", windowId}}), token).result;
+  const auto button = std::find_if(tree.Items().begin(), tree.Items().end(),
+                                   [](const json::Value& item) { return item.StringField("role") == "button"; });
+  if (button == tree.Items().end()) {
+    Check(false, "the action-origin fixture resolves the button");
+    return;
+  }
+
+  recordedInputs.clear();
+  driver.InputForTesting().UseTestSender(&RecordInput);
+  const auto refusesOrigin = [&](const json::Value& origin) {
+    auto action = StringFields({{"type", "pointerMove"}});
+    action.Set("origin", origin);
+    auto actions = json::Value::Array();
+    actions.Append(std::move(action));
+    auto source = StringFields({{"type", "pointer"}});
+    source.Set("actions", std::move(actions));
+    auto sources = json::Value::Array();
+    sources.Append(std::move(source));
+    auto params = json::Value::Object();
+    params.Set("actions", std::move(sources));
+    std::string code;
+    return FailureEffect([&]() { driver.Execute("performActions", params, token); }, &code) == "none" &&
+           code == kErrorMoveTargetOutOfBounds && recordedInputs.empty();
+  };
+  const HWND buttonWindow = GetDlgItem(window, 1);
+  const UINT resizeFlags = SWP_NOMOVE | SWP_NOZORDER | SWP_NOACTIVATE;
+  Check(buttonWindow != nullptr && SetWindowPos(buttonWindow, nullptr, 0, 0, 0, 0, resizeFlags) != FALSE &&
+            refusesOrigin(StringFields({{"elementId", button->StringField("id")}})),
+        "an element origin with empty bounds is refused before input");
+  Check(SetWindowPos(window, nullptr, 0, 0, 0, 0, resizeFlags) != FALSE &&
+            refusesOrigin(json::Value::String(std::string("viewport"))),
+        "a viewport with an empty client area is refused before input");
+}
+
 void TestClosingWindowListing() {
   WindowThread windows;
   const HWND primary = windows.Create(L"FurnSelfTestClosingListPrimary", L"Listing primary");
@@ -2202,7 +2299,7 @@ void TestInputReevaluation() {
         "a locked session refuses a button press");
   Check(FailureCode([&]() { input.MovePointer(POINT{5, 5}, 0, token); }) == kErrorInputUnavailable,
         "a locked session refuses pointer movement");
-  Check(FailureCode([&]() { input.Wheel(0.0, 120.0, token); }) == kErrorInputUnavailable,
+  Check(FailureCode([&]() { input.Wheel(0, -120, token); }) == kErrorInputUnavailable,
         "a locked session refuses wheel input");
   Check(FailureCode([&]() { input.PressChord({VK_CONTROL, 'A'}, token); }) == kErrorInputUnavailable,
         "a locked session refuses a chord");
@@ -2332,7 +2429,7 @@ void TestInputSendFailures() {
                 kErrorInputFailed &&
             Contains(message, "0x80070005"),
         "a send that Windows rejects with an error reports that error");
-  Check(failureOf(&AcceptFirstInputOnly, [&token](InputController& input) { input.Wheel(120.0, 120.0, token); },
+  Check(failureOf(&AcceptFirstInputOnly, [&token](InputController& input) { input.Wheel(120, -120, token); },
                   message) == kErrorInputFailed &&
             Contains(message, "accepted 1 of 2"),
         "a partly accepted batch reports how much of it Windows accepted");
@@ -3373,6 +3470,22 @@ void TestDriverMutationEffects() {
     Check(effectOf(command, params, token, &code) == "none" && code != "none" && code != "cancelled",
           std::string("a rejected ") + command + " reports no effect");
   }
+  std::string rangeCode;
+  for (const char* list : {
+           R"([{"type":"wheel","actions":[{"type":"scroll","deltaY":1e300}]}])",
+           R"([{"type":"wheel","actions":[{"type":"scroll","deltaY":-1e300}]}])",
+           R"([{"type":"pointer","actions":[{"type":"pointerMove","x":1e300,"y":0}]}])",
+           R"([{"type":"pointer","actions":[{"type":"pointerUp","button":1e300}]}])",
+           R"([{"type":"none","actions":[{"type":"pause","duration":1e300}]}])",
+       }) {
+    Check(effectOf("performActions", actions(list), token, &rangeCode) == "none" &&
+              rangeCode == kErrorInvalidParams && recordedInputs.empty(),
+          "the helper refuses an out-of-range action number before input dispatch");
+  }
+  json::Value oversizedRect = knownWindow;
+  oversizedRect.Set("rect", json::Value::Parse(R"({"width":1e300})"));
+  Check(effectOf("setWindowRect", oversizedRect, token, &rangeCode) == "none" && rangeCode == kErrorInvalidParams,
+        "the helper refuses an out-of-range window size before changing the window");
   // Another helper that crashed while holding physical input leaves the lock
   // abandoned, which refuses the next physical command before it starts.
   std::thread abandoner([]() {
@@ -4059,9 +4172,12 @@ void TestDriverObservation() {
 int RunSelfTest() {
   failures = 0;
   checks = 0;
+  constexpr UINT silentErrors = SEM_FAILCRITICALERRORS | SEM_NOGPFAULTERRORBOX | SEM_NOOPENFILEERRORBOX;
+  Check((GetErrorMode() & silentErrors) == silentErrors, "startup disables blocking system error dialogs");
   TestFraming();
   TestJson();
   TestGeometry();
+  RunCaptureRecoverySelfTests(&Check);
   TestInputLedger();
   TestReleaseLedger();
   TestPhysicalInputLock();
@@ -4077,6 +4193,8 @@ int RunSelfTest() {
   TestAttachedCloseKeepsQuarantine();
   TestWindowEventHooks();
   TestRegisteredToolWindowLiveness();
+  TestFirstWindowListingWithToolPopup();
+  TestEmptyActionOrigins();
   TestClosingWindowListing();
   TestDriverWindowEvents();
   TestInputEnvironment();

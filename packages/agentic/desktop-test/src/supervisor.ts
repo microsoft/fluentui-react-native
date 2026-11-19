@@ -253,6 +253,7 @@ export class DesktopSupervisor {
             target: options.target,
             lifetime: this.target.host.ownership ?? 'session',
             resourcePrefix: `${this.reporter.runId}:${this.target.instanceId}`,
+            signal: options.signal,
             onResource: (resource) => {
               try {
                 this.workloadClaim?.updateResource(resource);

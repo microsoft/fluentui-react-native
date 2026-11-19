@@ -1,7 +1,7 @@
 import { spawn } from 'node:child_process';
 import path from 'node:path';
 
-function runContract(mode: 'protected' | 'legacy'): Promise<{ output: string; diagnostics: string }> {
+function runContract(mode: 'protected' | 'legacy' | 'lanes'): Promise<{ output: string; diagnostics: string }> {
   return new Promise((resolve, reject) => {
     const child = spawn(process.execPath, [path.join(__dirname, 'wdioRunner.contract.cjs'), mode], {
       stdio: ['ignore', 'pipe', 'pipe'],
@@ -34,7 +34,6 @@ test('executes isolated inline code and releases sessions after assertion failur
     !diagnostics.includes('wdio "fixture-button--fail" during execution') ||
     !diagnostics.includes('wdio "fixture-button--navigation-failure" during navigation') ||
     !diagnostics.includes('Storybook context did not settle.') ||
-    !diagnostics.includes('wdio "fixture-button--lane / accessible only" during input policy verification') ||
     diagnostics.includes('Navigation refused before dispatch') ||
     output.includes('[storybook] OK wdio "fixture-button--exit-zero"')
   ) {
@@ -62,6 +61,34 @@ test('executes isolated inline code and releases sessions after assertion failur
       status: 'passed',
     },
     smokeFailureLogged: true,
+    platforms: Object.fromEntries(
+      ['macos', 'windows', 'win32'].map((platform) => [
+        platform,
+        [
+          { testName: 'mutates state', status: 'passed' },
+          { testName: 'starts fresh', status: 'passed' },
+        ],
+      ]),
+    ),
+    namedFailureResults: [
+      { testName: 'a b', status: 'failed' },
+      { testName: 'a-b', status: 'failed' },
+      { testName: 'recovers', status: 'passed' },
+    ],
+    namedTimeout: [
+      { testName: 'times out', status: 'failed' },
+      { testName: 'runs afterward', status: 'passed' },
+    ],
+    generatedFiles: [],
+    attachedOnly: true,
+  });
+}, 120_000);
+
+test('enforces input lanes and records delivered input in inline workers', async () => {
+  const { output, diagnostics } = await runContract('lanes');
+  expect(diagnostics).toContain('wdio "fixture-button--lane / accessible only" during input policy verification');
+  const result: Record<string, unknown> = JSON.parse(output.split('\nWDIO_RESULT ')[1]);
+  expect(result).toMatchObject({
     button: [
       { testName: 'exposes enabled button semantics', status: 'passed' },
       { testName: 'supports native pointer activation', status: 'passed' },
@@ -134,24 +161,6 @@ test('executes isolated inline code and releases sessions after assertion failur
         },
       ],
     },
-    platforms: Object.fromEntries(
-      ['macos', 'windows', 'win32'].map((platform) => [
-        platform,
-        [
-          { testName: 'mutates state', status: 'passed' },
-          { testName: 'starts fresh', status: 'passed' },
-        ],
-      ]),
-    ),
-    namedFailureResults: [
-      { testName: 'a b', status: 'failed' },
-      { testName: 'a-b', status: 'failed' },
-      { testName: 'recovers', status: 'passed' },
-    ],
-    namedTimeout: [
-      { testName: 'times out', status: 'failed' },
-      { testName: 'runs afterward', status: 'passed' },
-    ],
     generatedFiles: [],
     attachedOnly: true,
   });

@@ -72,8 +72,8 @@ Cleanup drains worker reporting and stdio, closes sessions, releases owned
 input, and stops exact owned process trees. Services and resources are disposed
 together in reverse acquisition order. An externally owned app is preserved.
 
-Cancellation reaches running commands. Stage commands and WDIO suites receive
-the scope signal; when it aborts, the command's process tree is stopped and the
+Cancellation reaches running commands and supervisor-owned native application
+startup. Stage commands and WDIO suites receive the scope signal; when it aborts, the command's process tree is stopped and the
 command reports failed with "Stopped before it finished.", never passed. Services
 are stopped by close, in the same reverse order. On macOS and Linux each command
 leads its own process group, and stopping it signals the whole group, including
@@ -135,6 +135,21 @@ records are replaced atomically. If a crash leaves a lock, inspect its recorded 
 that process and its resources have stopped before removing that exact lock.
 There is no general automatic stale-lock recovery. The bounded Windows native
 application reconciliation described below is the only startup exception.
+
+For manual recovery:
+
+1. Stop new runs. Read the claim and note its run, target, owner PID and native
+   start time, and all owned resources and unresolved effects.
+2. Verify that the recorded owner incarnation and every owned resource have
+   exited, and that no recorded service listener remains. A matching PID alone
+   is not proof of identity. If any resource or effect is uncertain, keep the claim.
+3. If a third interrupt left a private connection descriptor behind, inspect it
+   in the configured private store without logging its credential. Remove only
+   the unchanged descriptor for the verified exited service. Re-read the claim
+   before removing it and stop if it changed.
+
+Removing a stale claim is not permission to clear durable mutation quarantine
+or to stop an application that the run did not own.
 
 The supervisor registers each owned resource before acquisition starts. If
 cancellation wins while acquisition is in flight, shutdown waits for that work;
@@ -247,7 +262,10 @@ and per-incarnation control are acquired for exact cleanup. Each successful
 application settlement is durably recorded before proceeding, so a failed later
 cleanup does not replay settled resources. Only then may the old claim be removed.
 
-The recognized in-owner WebDriver listener dies with that exact Node owner.
+The recognized in-owner WebDriver listener dies with that exact Node owner. It
+has the matching run-scoped `webdriver` resource ID and service identity, with
+no separate process receipt. Windows retries transient sharing failures when
+removing the claim and rechecks that it has not changed.
 Unknown services, process-backed service receipts, pending/unleased launches,
 mixed resource graphs, and effects other than matching recorded resource
 disposal remain fenced **before** any application cleanup is dispatched.

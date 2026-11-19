@@ -49,16 +49,18 @@ management is published. Public integration details appear only under
 `integration`, so they cannot replace those identity fields.
 Clients create sessions explicitly.
 
-Stop any command with Ctrl+C, SIGTERM, or SIGHUP. The first interrupt stops the
+Stop any command with Ctrl+C, Ctrl+Break on Windows, SIGTERM, or SIGHUP. The first interrupt stops the
 running stage or suite and every owned service, and the command exits once
 cleanup completes, including a `serve` whose target is served by an imported
 integration. A clean `serve` stop writes a terminal `passed` lifecycle report,
-releases its settled claim, and exits 0; an interrupted one-shot is terminal
-`incomplete` and exits 1. A child/service failure or failed cleanup remains
+releases its settled claim, and exits 0. An interrupted one-shot exits 1; a
+stopped WDIO suite can be recorded as `failed` when its workers disconnect.
+A child/service failure or failed cleanup remains
 `failed` (exit 1), and unsettled cleanup retains a fenced claim.
-A second interrupt force-kills owned process trees; a third exits
-at once and may leave the workload claim behind. See
-[lifecycle](lifecycle.md#lifecycle-and-ownership).
+A second interrupt force-kills owned process trees that the command can reach;
+it does not force-stop a managed run in another supervisor. A third exits at
+once and may leave the workload claim and private connection descriptors
+behind. See the [manual recovery steps](lifecycle.md#lifecycle-and-ownership).
 
 `serve --agent` makes the service require a grant on every route, issues one
 grant for the target, and publishes it with the service URL and the helper's

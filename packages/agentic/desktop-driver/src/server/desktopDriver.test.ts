@@ -371,26 +371,69 @@ describe('Desktop Driver W3C remote end', () => {
   });
 
   test('serializes release behind a timed-out native action and drains the host operation', async () => {
-    const harness = await createDesktopDriverTestHarness({ actionDelayMs: 50 });
+    const harness = await createDesktopDriverTestHarness();
+    const { promise: actionAborted, resolve: markAborted } = Promise.withResolvers<boolean>();
+    const { promise: settlementAllowed, resolve: allowSettlement } = Promise.withResolvers<void>();
     try {
       const client = createDesktopDriverClient({ url: harness.server.url });
       const session = await client.newSession({
         alwaysMatch: { platformName: 'windows', 'furn:target': harness.target.id },
       });
 
-      harness.server.sessions.get(session.id).desktopTimeouts.nativeCommand = 10;
-      const performing = session.performActions([{ id: 'key', type: 'key', actions: [{ type: 'keyDown', value: 'A' }] }]);
-      await waitUntil(() => harness.host.actions.some(({ type }) => type === 'actions-start'));
-      const releasing = session.releaseActions();
+      const { desktopTimeouts, lease } = harness.server.sessions.get(session.id);
+      const originalDeadline = desktopTimeouts.nativeCommand;
+      const performActions = harness.host.performActions.bind(harness.host);
+      const releaseActions = harness.host.releaseActions.bind(harness.host);
+      let actionSettled = false;
+      const releaseOrder: boolean[] = [];
+      harness.host.injectFault('performActions', { mode: 'hang', effect: 'none' });
+      jest.spyOn(harness.host, 'performActions').mockImplementationOnce(async (actions, signal) => {
+        // The driver has captured the short deadline for this action. Cleanup uses the normal budget.
+        desktopTimeouts.nativeCommand = originalDeadline;
+        if (!signal) throw new Error('Expected the driver to supply an action signal.');
+        try {
+          await performActions(actions, signal);
+        } catch (error) {
+          markAborted(signal.aborted);
+          await settlementAllowed;
+          actionSettled = true;
+          throw error;
+        }
+      });
+      const release = jest.spyOn(harness.host, 'releaseActions').mockImplementation((signal) => {
+        releaseOrder.push(actionSettled);
+        return releaseActions(signal);
+      });
 
-      await expect(performing).rejects.toMatchObject({ code: 'timeout' });
-      await expect(releasing).resolves.toBeNull();
-      const started = harness.host.actions.findIndex(({ type }) => type === 'actions-start');
-      const released = harness.host.actions.findIndex(({ type }) => type === 'release-actions');
-      expect(harness.host.actions.some(({ type }) => type === 'actions')).toBe(false);
-      expect(released).toBeGreaterThan(started);
-      await session.delete();
+      desktopTimeouts.nativeCommand = 10;
+      try {
+        const performing = session.performActions([{ id: 'key', type: 'key', actions: [{ type: 'keyDown', value: 'A' }] }]);
+        await expect(Promise.race([actionAborted, performing])).resolves.toBe(true);
+
+        const { promise: releaseQueued, resolve: markQueued } = Promise.withResolvers<void>();
+        const runCommand = harness.server.sessions.runCommand.bind(harness.server.sessions);
+        jest.spyOn(harness.server.sessions, 'runCommand').mockImplementationOnce((id, operation) => {
+          const result = runCommand(id, operation);
+          markQueued();
+          return result;
+        });
+        const releasing = session.releaseActions();
+        await Promise.race([releaseQueued, releasing]);
+        expect(release).not.toHaveBeenCalled();
+
+        allowSettlement();
+        await expect(performing).rejects.toMatchObject({ code: 'timeout', message: 'Performing input actions exceeded 10ms.' });
+        await expect(releasing).resolves.toBeNull();
+        expect(releaseOrder).toEqual([true, true]);
+        expect(harness.host.actions.some(({ type }) => type === 'actions')).toBe(false);
+        await expect(session.delete()).resolves.toBeNull();
+        expect(releaseOrder).toEqual([true, true, true]);
+        expect(harness.host.actions.at(-1)).toEqual({ type: 'close-application', lease: lease.id, ownership: 'launched' });
+      } finally {
+        desktopTimeouts.nativeCommand = originalDeadline;
+      }
     } finally {
+      allowSettlement();
       await harness.close();
     }
   });

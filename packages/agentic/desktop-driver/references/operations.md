@@ -123,8 +123,10 @@ ancestors:
 ```
 
 - Everything after the reference is optional and appears in this order.
-- Quoted strings are JSON string literals. Invisible, bidirectional, and
-  Unicode tag characters are escaped as visible `\uXXXX`. A string cut to
+- Quoted strings are JSON string literals. The renderer makes selected control
+  and bidirectional characters and Unicode tags visible with escapes. It is not
+  a complete filter for invisible Unicode; for example, variation selectors,
+  soft hyphens, and zero-width joiners can remain. A string cut to
   `maxStringLength` ends in `…` inside its quotes.
 - `#<automationId>` is bare when it is a simple token and quoted otherwise.
 - Flags are positive only: `disabled`, `?enabled` (the provider cannot say),
@@ -167,8 +169,9 @@ for any element, once, instead of per node. `counts` gives `visited`,
 
 `observeDelta` takes a fresh sample and compares it with a retained base named
 by `since`. The base and fresh sample must match in application and preview
-epoch, window or element scope, view, shown facts, format, and native walk
-limits. Page-size limits may differ. A missing or mismatched base returns
+epoch, window or element scope, view, shown facts, format, and the walk limits
+`maxDepth`, `maxStringLength`, and `maxVisited`. The walk deadline and page-size
+limits may differ. A missing or mismatched base returns
 `mode: "fresh"` with a new snapshot and a reset reason; it never presents a
 new sample as a continuation of an old one.
 
@@ -321,8 +324,11 @@ listed; if the application replaced it in between, the provider refuses with
 
 Each primary step runs as a settled mutation, so a failure reports what it did
 in `data.mutation`: `rejected` with effect `none` when nothing was dispatched,
-or a disposition such as `indeterminate` that quarantines the target. Typed
-text never enters the journal, a mutation description, or an error.
+or `indeterminate` if the change was partial or its outcome is unknown. A click
+can also be `indeterminate` when activation settled but a subsequent hit test
+refused the click; that result does not itself quarantine the target.
+Read `data.mutation.quarantined` rather than inferring it from the disposition.
+Typed text never enters the journal, a mutation description, or an error.
 
 ### Retrying safely
 
@@ -366,7 +372,7 @@ returns its `ref` and `sample`, which `act` accepts.
 | `timed-out`    | `waitMs` ran out; `last` is the final attempt's status                  |
 
 Each predicate reports its own status and, when it failed, the `actual` value,
-clipped to 120 characters with invisible characters made visible. A `find`
+clipped to 120 characters with the [outline's text escaping](#the-outline). A `find`
 check also reports the search outcome and counts. A check never calls an
 incomplete search an absence: `matches: "none"` over an unreadable subtree is
 `inconclusive`.
@@ -453,7 +459,7 @@ page. `matched` counts the stories the filter matches and `total` the catalog.
 `limit` entry; when the page reaches the end, `complete` is `true` and
 `truncation` is empty. Stories skipped by `offset` do not count. Ids are
 clipped to 256 characters, titles and names to 200, and tags to 16 of 64, with
-invisible characters made visible. An entry whose text was cut lists those
+the [outline's text escaping](#the-outline). An entry whose text was cut lists those
 fields in `clipped`; a clipped `id` is not one `story` accepts. Any other target
 reports both operations as unavailable with `stories-unsupported`.
 
@@ -530,8 +536,9 @@ operation layer keeps provider memory proportional to what the session holds:
 ## Errors
 
 Every failure is a W3C WebDriver error whose `data` names the `operation`,
-`requestId`, and `schemaVersion`, so it correlates with the journal. `message`
-is bounded to 300 characters with invisible characters made visible, and
+`requestId`, and `schemaVersion`, so it correlates with the journal. Provider
+and unexpected failures use fixed messages, including in sequence results.
+Operation-authored messages are bounded and apply the [outline's text escaping](#the-outline).
 `stacktrace` is empty. Callers branch on `data.reason`, never the message.
 Provider data is reduced to an allowlist: `reason`, `nativeCode`, and a
 rebuilt `mutation` report.

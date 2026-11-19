@@ -114,13 +114,15 @@ desktop-mcp [--driver-only] [--descriptor <name>] [--root <path>]
 | `--descriptor <name>` | Private record name. Defaults to `supervisor-connection.json`, or `agent-connection.json` in driver-only mode.                        |
 | `--root <path>`       | The private storage root, when the supervisor published somewhere other than the platform default. It must be absolute and canonical. |
 
-The adapter speaks MCP over stdio until the client closes stdin, then stops
-admissions and attempts to revoke and drain its driver child, including late
+The adapter speaks MCP over stdio. Stdin EOF, `SIGINT`, `SIGTERM`, or `SIGHUP`
+(where supported) stops admissions and starts one cleanup. The adapter
+attempts to revoke and drain its driver child, including late
 or ambiguous acquisitions. Driver cleanup waits at most ten seconds; an
 unresolved attempt continues while the process lives and reports to stderr.
 In supervisor mode, connection disposal also cancels and waits for that
-principal's workload cleanup. Failed or unreachable cleanup is reported, not
-treated as successful. The supervisor must drain or fence an unsettled host.
+principal's workload cleanup. Failed, pending, or unreachable cleanup is
+reported on stderr and exits nonzero. The supervisor must drain or fence an
+unsettled host. A forced kill cannot run this cleanup.
 `--help` and `--version` write to stderr so stdout carries only protocol.
 
 The adapter imports helper resolution from the driver's `/native` entry and
@@ -138,14 +140,20 @@ grant leaves the adapter. The service then confirms its incarnation.
 The adapter connects on the first tool call, not at startup, so it can start
 before the service. When the service cannot be reached, a tool returns the
 fixed reason `service-unavailable`; stderr reports a fixed diagnostic without
-echoing discovery errors, which may contain paths or credentials.
+echoing discovery errors, which may contain paths or credentials. If the
+supervisor refuses a new principal because it is full, the reason is `capacity`.
 
 In supervisor mode the connection retains its private principal and
 connection ID across retries. Concurrent opens share one acquisition. If
 connection-creation responses are lost, retries use that same ID; disposal
 can revoke the uncertain acquisition and prevents a late open from
-recreating it. A changed supervisor descriptor is refused rather than
-resuming its runs under a new incarnation. A lost run admission is reconciled
+recreating it. After `serve` restarts, restart the MCP adapter. On a
+failed call, if the private descriptor names a different supervisor
+incarnation, the adapter reports `supervisor-restarted` instead of rebinding.
+While the descriptor is gone or unreadable, it can only report
+`service-unavailable`. Restarting the adapter does not recover old handles,
+sessions, or unresolved runs, and it does not replay an operation.
+A lost run admission is reconciled in the original connection
 with `desktop_workload` status by request ID; the adapter will not submit that
 ID again.
 

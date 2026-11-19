@@ -44,7 +44,8 @@ Failure-path, descendant, reliability and release-matrix qualification remain op
 ### Behavior and limits
 
 - The W3C service and the typed and WDIO clients accept registered targets only.
-- Browser-inapplicable native commands are explicitly unsupported.
+- Browser-inapplicable commands are either explicitly unsupported or have no route. New Session ignores the `timeouts` capability; use Set Timeouts after connecting.
+- The compatibility `./agent` API does not bound provider work. Use [agent operations](operations.md) for budgeted inspection.
 - The driver has no Storybook, React or React Native dependency; package-boundary tests reject forbidden imports and dependencies.
 - The optional story provider is injected.
 
@@ -69,7 +70,8 @@ Failure-path, descendant, reliability and release-matrix qualification remain op
 
 ### macOS physical input
 
-- Physical input verifies postconditions (pointer acknowledgment, keyboard clear and focus) and refuses when the target is obscured; it does not click covered content.
+- Physical element clicks verify the hit and pointer acknowledgment before pressing. Keyboard clear verifies focus and the resulting value.
+- Raw `performActions` requires a live exact application lease for button presses, drags, scrolls and new key presses. Unverified window hits or foreground refuse before posting the action; owned input can still be released after focus changes.
 - The physical lane clamps its window to the visible frame (maximum 1024 x 768 with a one-point inset) and verifies the exact requested rectangle.
 - A genuinely overlapped 480 x 302 window refuses physical input safely.
 - A locked console blocks physical-input lanes; no unlock or privacy change is attempted.
@@ -82,6 +84,8 @@ Failure-path, descendant, reliability and release-matrix qualification remain op
 - Primary exit is not descendant containment.
 - Strict clear requires an explicit mechanism: invalid mechanisms and missing elements are refused with no effect.
 - Doctor `ready` describes artifact availability, not permission readiness.
+- Unreadable geometry can appear as zero in legacy rectangles or use a cached window frame. XML page source can report unsupported enabled/visible states as `false`; bounded `observe` carries unsupported states and can omit unavailable geometry.
+- A known destroyed window ID is retired, but a missed destruction notification can allow recovery by exact title to bind a replacement window in the same live lease. `closeWindow` does not independently confirm destruction.
 - Hosted macOS physical input runs in an advisory CI lane ([#4500](https://github.com/microsoft/fluentui-react-native/pull/4500)); hosted skips are not passes.
 
 ### Windows secondary windows and activation
@@ -251,6 +255,10 @@ Live requalification is tracked in [#4441](https://github.com/microsoft/fluentui
 
 ### Windows Fabric
 
+- **Desktop package preview checks:** the shared Windows/Win32 helper built for both endpoints and passed 869/869 native self-test checks with physical input masked at [`f3bf1767c`](https://github.com/microsoft/fluentui-react-native/commit/f3bf1767c). These cover first window listing, input ranges and origin geometry, empty-ledger recovery, startup hardening and injected Direct3D device loss. Release candidate app, physical-input and live device-loss checks were not run.
+
+- **Windows and Win32 preview limitations ([#4441](https://github.com/microsoft/fluentui-react-native/issues/4441)):** a UI Automation `E_FAIL` pattern query can fall through to a different pattern; a renamed or moved executable can fail without a stable identity reason; a process creation failure may report settlement as `exited`; action durations still cap at 30 seconds; diagnostic byte truncation can split UTF-8; and XML page source can report unsupported enabled/visible states as `false`.
+
 - **Observation and story MCP path:** M3 real-app observation recorded at `600235c35`.
 
 - **Connected-console physical smokes at `fec94cec4`:** Checkbox and Callout physical-input Storybook smokes passed 203/203 with zero failures, skips or retries; the real MCP descriptor path passed physical checkbox clicks with hash-verified PNGs ([#4469](https://github.com/microsoft/fluentui-react-native/pull/4469)).
@@ -266,6 +274,8 @@ Live requalification is tracked in [#4441](https://github.com/microsoft/fluentui
 - **Still required:** 200% and mixed DPI, negative-origin and minimized windows, live lock, RDP and elevation transitions, popups other than Callout, capture cancellation, kernel PID recycling, arbitrary descendants, and a console rerun of the interactive wheel, keyboard and capture contracts ([#4441](https://github.com/microsoft/fluentui-react-native/issues/4441), [#4348](https://github.com/microsoft/fluentui-react-native/issues/4348)).
 
 ### Win32 Paper
+
+- **Desktop package preview checks:** the same [Windows provider checks and limitations](#windows-fabric) apply. Release candidate REX app, physical-input and live device-loss checks were not run.
 
 - **Agent path and native fixture:** M3 and agent path recorded; native fixture physical input and capture at 100% and 150%.
 

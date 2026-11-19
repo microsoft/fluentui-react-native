@@ -8,6 +8,7 @@ import {
   atomicWriteJson,
   canonicalJson,
   compareOrdinal,
+  delay,
   listFiles,
   readJsonFile,
   resolveNativeDriverCacheRoot,
@@ -178,11 +179,18 @@ export async function buildNativeDesktopDriver(options: NativeDriverBuildOptions
         atomicWriteJson(path.join(publicationRoot, 'artifact.json'), manifest);
         fs.mkdirSync(path.dirname(artifactRoot), { recursive: true });
         try {
-          fs.renameSync(publicationRoot, artifactRoot);
+          await renameCacheEntry(publicationRoot, artifactRoot, options.signal);
         } catch (error) {
+          throwIfAborted(options.signal);
           const code = (error as NodeJS.ErrnoException).code;
           if (code !== 'EEXIST' && code !== 'ENOTEMPTY') {
-            throw error;
+            // Windows can report EPERM for an occupied directory as well as a sharing violation.
+            if (process.platform !== 'win32' || code !== 'EPERM') throw error;
+            try {
+              assertManagedPath(context.cacheRoot, artifactRoot, 'directory');
+            } catch {
+              throw error;
+            }
           }
           await resolvePublishCollision(context, artifactRoot, publicationRoot, options.signal);
         }
@@ -225,6 +233,23 @@ function removeStagingDirectory(directory: string): void {
   }
 }
 
+async function renameCacheEntry(source: string, destination: string, signal?: AbortSignal): Promise<void> {
+  for (let retries = 0; ; retries++) {
+    throwIfAborted(signal);
+    try {
+      fs.renameSync(source, destination);
+      return;
+    } catch (error) {
+      const code = (error as NodeJS.ErrnoException | undefined)?.code;
+      if (process.platform !== 'win32' || retries === 10 || (code !== 'EPERM' && code !== 'EACCES' && code !== 'EBUSY')) {
+        throw error;
+      }
+    }
+    // Windows antivirus and indexers may briefly deny delete sharing.
+    await delay(25);
+  }
+}
+
 /**
  * Another build published the same artifact first. A published artifact that still verifies is kept and the new copy is
  * dropped. Only one that fails an integrity check is quarantined and replaced. A transient failure while verifying it
@@ -244,8 +269,8 @@ async function resolvePublishCollision(
     if (!isIntegrityFailure(collisionError)) {
       throw collisionError;
     }
-    quarantinePublishedArtifact(context.cacheRoot, artifactRoot, collisionError);
-    fs.renameSync(publicationRoot, artifactRoot);
+    await quarantinePublishedArtifact(context.cacheRoot, artifactRoot, collisionError, signal);
+    await renameCacheEntry(publicationRoot, artifactRoot, signal);
   }
 }
 
@@ -295,12 +320,12 @@ function preserveBuildDiagnostics(context: NativeBuildContext, stagingRoot: stri
   });
 }
 
-function quarantinePublishedArtifact(cacheRoot: string, artifactRoot: string, error: unknown): void {
+async function quarantinePublishedArtifact(cacheRoot: string, artifactRoot: string, error: unknown, signal?: AbortSignal): Promise<void> {
   const trashRoot = path.join(cacheRoot, 'v1', 'trash');
   fs.mkdirSync(trashRoot, { recursive: true });
   assertManagedPath(cacheRoot, trashRoot, 'directory');
   const quarantinePath = path.join(trashRoot, `${Date.now()}-${randomUUID()}-${path.basename(artifactRoot)}`);
-  fs.renameSync(artifactRoot, quarantinePath);
+  await renameCacheEntry(artifactRoot, quarantinePath, signal);
   atomicWriteJson(`${quarantinePath}.error.json`, {
     artifactRoot,
     message: error instanceof Error ? error.message : String(error),
@@ -371,7 +396,10 @@ async function resolveBuildContext(options: NativeDriverBuildOptions): Promise<N
   if (!fs.existsSync(providerRoot)) {
     throw new NativeDriverError('build-source-missing', `Native driver source does not exist at "${providerRoot}".`);
   }
-  const cacheRoot = resolveNativeDriverCacheRoot(options.cacheRoot ?? process.env[FURN_DESKTOP_DRIVER_CACHE_ROOT], packageRoot);
+  const cacheRoot = resolveNativeDriverCacheRoot(
+    options.cacheRoot ?? (process.env[FURN_DESKTOP_DRIVER_CACHE_ROOT] || undefined),
+    packageRoot,
+  );
   const sourceDigest = sha256(
     canonicalJson({
       coordinatorVersion: buildCoordinatorVersion,
@@ -443,13 +471,19 @@ async function resolveCachedArtifact(
       if (origin === 'install-root' || !isIntegrityFailure(error)) {
         throw error;
       }
-      quarantineCachedSelection(context.cacheRoot, selectionRoot, selectionPath, error);
+      await quarantineCachedSelection(context.cacheRoot, selectionRoot, selectionPath, error, signal);
     }
   }
   return undefined;
 }
 
-function quarantineCachedSelection(cacheRoot: string, selectionRoot: string, selectionPath: string, error: unknown): void {
+async function quarantineCachedSelection(
+  cacheRoot: string,
+  selectionRoot: string,
+  selectionPath: string,
+  error: unknown,
+  signal?: AbortSignal,
+): Promise<void> {
   try {
     assertManagedPath(selectionRoot, selectionPath, 'file');
   } catch (pathError) {
@@ -465,7 +499,7 @@ function quarantineCachedSelection(cacheRoot: string, selectionRoot: string, sel
   fs.mkdirSync(quarantineRoot, { recursive: true });
   assertManagedPath(trashRoot, quarantineRoot, 'directory');
   try {
-    fs.renameSync(selectionPath, path.join(quarantineRoot, path.basename(selectionPath)));
+    await renameCacheEntry(selectionPath, path.join(quarantineRoot, path.basename(selectionPath)), signal);
   } catch (renameError) {
     if ((renameError as NodeJS.ErrnoException).code !== 'ENOENT') {
       throw renameError;
@@ -673,7 +707,7 @@ function resolveConfiguration(): NativeDriverConfiguration {
 }
 
 function resolveBuildPolicy(value?: NativeDriverBuildPolicy): NativeDriverBuildPolicy {
-  const configured = value ?? process.env[FURN_DESKTOP_DRIVER_BUILD_POLICY] ?? 'if-missing';
+  const configured = value ?? (process.env[FURN_DESKTOP_DRIVER_BUILD_POLICY] || 'if-missing');
   if (configured !== 'if-missing' && configured !== 'never') {
     throw new NativeDriverError('invalid-configuration', `Unsupported native driver build policy "${configured}".`);
   }

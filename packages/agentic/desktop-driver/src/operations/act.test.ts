@@ -1,6 +1,5 @@
 import type { NativeElementSnapshot } from '../host/types';
-import { HostStaleError, HostWebDriverError } from '../protocol/errors';
-import type { WebDriverError } from '../protocol/errors';
+import { HostStaleError, HostWebDriverError, WebDriverError } from '../protocol/errors';
 import { buildSample, supportedFact, unsupportedFact } from '../testing/observationSample';
 import { stubRuntime } from '../testing/operationRuntime';
 import type { StubRuntime, StubRuntimeOptions } from '../testing/operationRuntime';
@@ -89,7 +88,7 @@ describe('act', () => {
       const runtime = stub({
         host: {
           click: async () => {
-            throw new HostWebDriverError('element not interactable', 'Window "Payroll Q3" element 0x1A2B refused the press', {
+            throw new WebDriverError('element not interactable', 'Window "Payroll Q3" element 0x1A2B refused the press', {
               nativeCode: 'automation-failed',
               reason: 'ax-refused',
             });

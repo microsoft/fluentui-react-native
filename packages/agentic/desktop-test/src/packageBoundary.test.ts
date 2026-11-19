@@ -59,6 +59,18 @@ describe('application-neutral desktop package boundaries', () => {
     expect(declaredForbiddenPackages(manifest)).toEqual([]);
   });
 
+  test.each(neutralPackages)('%s reports unsupported Node.js before loading its CLI', (relativePackage) => {
+    const entry = path.join(repoRoot, relativePackage, 'config', 'cli.cjs');
+    const result = spawnSync(
+      process.execPath,
+      ['--eval', "Object.defineProperty(process.versions, 'node', { value: '25.0.0' }); require(process.argv[1]);", entry],
+      { encoding: 'utf8' },
+    );
+    expect(result.status).toBe(1);
+    expect(result.stderr).toMatch(/requires Node\.js .+; found 25\.0\.0\./);
+    expect(result.stdout).toBe('');
+  });
+
   test('detects prohibited package dependencies in the negative manifest fixture', () => {
     const manifest = JSON.parse(readFileSync(path.join(fixtureRoot, 'negative-dependencies/manifest.json'), 'utf8')) as PackageManifest;
     expect(declaredForbiddenPackages(manifest)).toEqual(['@storybook/react', 'react', 'react-native']);

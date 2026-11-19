@@ -2,12 +2,58 @@ import { spawn } from 'node:child_process';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+import { setTimeout as delay } from 'node:timers/promises';
 
 import { DesktopAuthority } from '../authority/grants.js';
+import { FakeDesktopHost } from '../hosts/fake/FakeDesktopHost.js';
+import { HostWebDriverError } from '../protocol/errors.js';
+import { attachFailureEffect } from '../protocol/settlement.js';
+import { createDesktopDriverServer } from '../server/createDesktopDriverServer.js';
 import type { DesktopStoryManifest } from '../storybook.js';
 import { createDesktopDriverStoryHarness, createDesktopDriverTestHarness } from '../testing/protocolHarness.js';
 
 describe('sanctioned WebdriverIO API', () => {
+  test.each(['connected', 'attached'])(
+    'does not replay a rejected click from a %s browser',
+    async (scenario) => {
+      const harness = await createDesktopDriverTestHarness();
+      const click = jest
+        .spyOn(harness.host, 'click')
+        .mockRejectedValue(attachFailureEffect(new HostWebDriverError('timeout', 'Click timed out.'), 'none'));
+      try {
+        const response = await runContract(harness.server.url, harness.target.id, os.tmpdir(), 'transport.contract.cjs', undefined, {
+          scenario,
+        });
+        expect(click).toHaveBeenCalledTimes(1);
+        expect(response).toEqual({
+          name: 'timeout',
+          message: 'Click timed out.',
+          data: { mutation: { disposition: 'rejected', effect: 'none', quarantined: false } },
+        });
+      } finally {
+        await harness.close();
+      }
+    },
+    60_000,
+  );
+
+  test('does not reopen a session after the launch deadline', async () => {
+    const host = new FakeDesktopHost();
+    const launch = jest.spyOn(host, 'launch').mockImplementation(async (_target, signal) => {
+      await delay(60_000, undefined, { signal });
+      throw new Error('Expected the server to cancel the launch.');
+    });
+    const target = { endpoint: 'windows', host, id: 'timeout-test', launchTimeoutMs: 25, platformName: 'windows' } as const;
+    const server = await createDesktopDriverServer({ targets: [target] });
+    try {
+      const response = await runContract(server.url, target.id, os.tmpdir(), 'transport.contract.cjs', undefined, { scenario: 'launch' });
+      expect(launch).toHaveBeenCalledTimes(1);
+      expect(response.message).toMatch(/Launching target "timeout-test" exceeded 25ms/);
+    } finally {
+      await server.close();
+    }
+  }, 60_000);
+
   test.each([
     [true, false],
     [false, false],

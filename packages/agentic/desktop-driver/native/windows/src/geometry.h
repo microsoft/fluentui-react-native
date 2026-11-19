@@ -27,6 +27,7 @@ constexpr UINT kDefaultDpi = 96;
 double DipsFromPhysical(double physical, UINT dpi);
 double PhysicalFromDips(double dips, UINT dpi);
 long RoundToPixel(double value);
+long CheckedPixel(double value);
 
 RectD PhysicalRectToClientDips(const RECT& physical, const WindowMetrics& metrics);
 POINT ClientDipsToPhysicalPoint(double x, double y, const WindowMetrics& metrics);

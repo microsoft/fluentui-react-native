@@ -16,69 +16,74 @@ import type { StoredDriverManifest } from './generatedManifest.js';
 jest.setTimeout(30_000);
 
 describe('desktop Storybook server integration', () => {
-  test.each(['resume', 'stop'] as const)('does not acquire the channel while disposal registration is pending (%s)', async (mode) => {
-    const [storybookPort, driverPort] = await Promise.all([getAvailablePort(), getAvailablePort()]);
-    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'storybook-disposal-gate-'));
-    const manifestPath = path.join(root, 'driver-manifest.json');
-    const marker = path.join(root, 'registered');
-    const release = path.join(root, 'release');
-    const stopped = path.join(root, 'stopped');
-    const projectRoot = path.resolve(__dirname, '../../../../../apps/storybook');
-    fs.writeFileSync(manifestPath, JSON.stringify(createIntegrationManifest(root, storybookPort, driverPort)));
-    const sink = { write: () => true };
-    const reporter = new DesktopRunReporter({ artifactsRoot: root, kind: 'lifecycle', output: sink, errorOutput: sink, summary: false });
-    const transport = await startReportTransport(reporter);
-    const runner = new NodeDesktopCommandRunner({ reporter, environment: transport.environment });
-    const child = runner.start({
-      command: process.execPath,
-      args: [
-        '--import',
-        pathToFileURL(path.resolve(__dirname, 'fixtures/pauseDisposalRegistration.mjs')).href,
-        path.resolve(__dirname, '../../config/server-runner.cjs'),
-      ],
-      cwd: projectRoot,
-      env: {
-        FURN_TEST_REGISTRATION_MARKER: marker,
-        FURN_TEST_REGISTRATION_RELEASE: release,
-        FURN_TEST_REGISTRATION_STOPPED: stopped,
-        STORYBOOK_CONFIG_PATH: path.join(projectRoot, 'src'),
-        STORYBOOK_DRIVER_MANIFEST: manifestPath,
-        STORYBOOK_NATIVE_DRIVER_FAKE: '1',
-        STORYBOOK_PROJECT_ROOT: projectRoot,
-        STORYBOOK_WS_PORT: String(storybookPort),
-      },
-      listener: { service: 'storybook-channel-listener', port: storybookPort },
-    });
-    try {
-      await waitForMarker(marker, 'disposal registration');
-      await expect(child.waitForReadiness!({ tier: 'service-ready', service: 'storybook-channel-listener' }, 1000)).rejects.toThrow(
-        'correlated readiness',
-      );
-      if (mode === 'stop') {
-        const stopping = child.stop();
-        void stopping.catch(() => undefined);
-        await waitForMarker(stopped, 'disposal during registration');
-        fs.writeFileSync(release, 'continue');
-        await expect(stopping).resolves.toBeUndefined();
-        await expect(fetch(loopbackUrl(storybookPort, '/index.json'))).rejects.toThrow();
-      } else {
-        fs.writeFileSync(release, 'continue');
-        const listener = await child.waitForReadiness!({ tier: 'service-ready', service: 'storybook-channel-listener' }, 20_000);
-        const channel = await child.waitForReadiness!({ tier: 'service-ready', service: 'storybook-channel' }, 20_000);
-        expect(channel.processId).toBe(listener.processId);
-      }
-    } finally {
-      fs.writeFileSync(release, 'continue');
+  test.each(['resume', 'stop'] as const)(
+    'does not acquire the channel while disposal registration is pending (%s)',
+    async (mode) => {
+      const [storybookPort, driverPort] = await Promise.all([getAvailablePort(), getAvailablePort()]);
+      const root = fs.mkdtempSync(path.join(os.tmpdir(), 'storybook-disposal-gate-'));
+      const manifestPath = path.join(root, 'driver-manifest.json');
+      const marker = path.join(root, 'registered');
+      const release = path.join(root, 'release');
+      const stopped = path.join(root, 'stopped');
+      const projectRoot = path.resolve(__dirname, '../../../../../apps/storybook');
+      fs.writeFileSync(manifestPath, JSON.stringify(createIntegrationManifest(root, storybookPort, driverPort)));
+      const sink = { write: () => true };
+      const reporter = new DesktopRunReporter({ artifactsRoot: root, kind: 'lifecycle', output: sink, errorOutput: sink, summary: false });
+      const transport = await startReportTransport(reporter);
+      const runner = new NodeDesktopCommandRunner({ reporter, environment: transport.environment });
+      const child = runner.start({
+        command: process.execPath,
+        args: [
+          '--import',
+          pathToFileURL(path.resolve(__dirname, 'fixtures/pauseDisposalRegistration.mjs')).href,
+          path.resolve(__dirname, '../../config/server-runner.cjs'),
+        ],
+        cwd: projectRoot,
+        env: {
+          FURN_TEST_REGISTRATION_MARKER: marker,
+          FURN_TEST_REGISTRATION_RELEASE: release,
+          FURN_TEST_REGISTRATION_STOPPED: stopped,
+          STORYBOOK_CONFIG_PATH: path.join(projectRoot, 'src'),
+          STORYBOOK_DRIVER_MANIFEST: manifestPath,
+          STORYBOOK_NATIVE_DRIVER_FAKE: '1',
+          STORYBOOK_PROJECT_ROOT: projectRoot,
+          STORYBOOK_WS_PORT: String(storybookPort),
+        },
+        listener: { service: 'storybook-channel-listener', port: storybookPort },
+      });
       try {
-        await child.stop();
-        await runner.close();
-        await transport.close();
-        await reporter.finish();
+        // Allow for cold imports in the child process on a busy runner.
+        await waitForMarker(marker, 'disposal registration', 60_000);
+        await expect(child.waitForReadiness!({ tier: 'service-ready', service: 'storybook-channel-listener' }, 1000)).rejects.toThrow(
+          'correlated readiness',
+        );
+        if (mode === 'stop') {
+          const stopping = child.stop();
+          void stopping.catch(() => undefined);
+          await waitForMarker(stopped, 'disposal during registration');
+          fs.writeFileSync(release, 'continue');
+          await expect(stopping).resolves.toBeUndefined();
+          await expect(fetch(loopbackUrl(storybookPort, '/index.json'))).rejects.toThrow();
+        } else {
+          fs.writeFileSync(release, 'continue');
+          const listener = await child.waitForReadiness!({ tier: 'service-ready', service: 'storybook-channel-listener' }, 20_000);
+          const channel = await child.waitForReadiness!({ tier: 'service-ready', service: 'storybook-channel' }, 20_000);
+          expect(channel.processId).toBe(listener.processId);
+        }
       } finally {
-        fs.rmSync(root, { force: true, recursive: true });
+        fs.writeFileSync(release, 'continue');
+        try {
+          await child.stop();
+          await runner.close();
+          await transport.close();
+          await reporter.finish();
+        } finally {
+          fs.rmSync(root, { force: true, recursive: true });
+        }
       }
-    }
-  });
+    },
+    120_000,
+  );
 
   test.each(['helper-path-and-hash', 'unknown-field', 'helper-bytes'])(
     'the actual channel process rejects %s before spawning a helper or listening',
@@ -544,8 +549,8 @@ function getAvailablePort(): Promise<number> {
   });
 }
 
-async function waitForMarker(filename: string, label: string): Promise<void> {
-  const until = Date.now() + 20_000;
+async function waitForMarker(filename: string, label: string, timeoutMs = 20_000): Promise<void> {
+  const until = Date.now() + timeoutMs;
   while (!fs.existsSync(filename)) {
     if (Date.now() >= until) throw new Error(`Timed out waiting for ${label}.`);
     await new Promise((resolve) => setTimeout(resolve, 20));

@@ -202,13 +202,24 @@ final class AccessibilityEngine {
     token: CancellationToken
   ) throws -> ElementSnapshot {
     try requireAccessibility("Refreshing an accessibility element")
+    let record = try requireLiveRecord(elementID: elementID, window: window, token: token)
+    return try readSnapshot(record: record, window: window)
+  }
+
+  func readActionOriginFrame(elementID: String, window: WindowRecord, token: CancellationToken) throws -> CGRect? {
+    try requireAccessibility("Reading the action element geometry")
+    let record = try requireLiveRecord(elementID: elementID, window: window, token: token)
+    return try axReadableFrame(record.element)
+  }
+
+  private func requireLiveRecord(elementID: String, window: WindowRecord, token: CancellationToken) throws -> ElementRecord {
     try token.throwIfCancelled()
     let record = try requireRecord(elementID)
     guard record.windowID == window.id, record.processID == window.processID else {
       try fail(ErrorCode.staleElement, "Element \"\(elementID)\" no longer belongs to its tracked window.")
     }
     try validateLive(record)
-    return try readSnapshot(record: record, window: window)
+    return record
   }
 
   func activeElement(
@@ -290,6 +301,25 @@ final class AccessibilityEngine {
       cursor = try parent(of: current)
     }
     return false
+  }
+
+  func actionWindowOwner(at point: CGPoint, token: CancellationToken) throws -> pid_t? {
+    guard Float(point.x).isFinite, Float(point.y).isFinite, let hit = try hitElement(at: point) else { return nil }
+    var hitPID: pid_t = 0
+    guard AXUIElementGetPid(hit, &hitPID) == .success, hitPID > 0 else { return nil }
+    var cursor: AXUIElement? = hit
+    for _ in 0..<Self.maximumAncestorDepth {
+      try token.throwIfCancelled()
+      guard let element = cursor else { return nil }
+      var owner: pid_t = 0
+      guard AXUIElementGetPid(element, &owner) == .success, owner == hitPID else { return nil }
+      let role = axString(try copyAXAttribute(element, kAXRoleAttribute))
+      if role == kAXWindowRole || role == kAXSheetRole {
+        return owner
+      }
+      cursor = try parent(of: element)
+    }
+    return nil
   }
 
   func setFocus(_ elementID: String) throws {

@@ -103,13 +103,11 @@ programmatic and shell clients reuse the same implementation. MCP does not
 inherently save tokens: measure its tool-definition overhead as well as its
 results.
 
-Use a separate, optional **desktop-driver-mcp** package and the official
-TypeScript MCP SDK. This keeps MCP dependencies and protocol releases outside
-the driver/native/WDIO dependency path. Choose an age-policy-compliant SDK
-version during implementation; use strict Zod schemas, inferred types, and
-JSON Schema conversion rather than a bespoke schema language or hand-written
-MCP server. A transitive dependency is not a substitute for declaring the
-owning package's direct dependency.
+The optional **desktop-mcp** package uses the official TypeScript MCP SDK.
+This keeps MCP dependencies and protocol releases outside the driver/native/WDIO
+dependency path. **desktop-driver-mcp** is a deprecated driver-only compatibility
+shim. Use strict Zod schemas, inferred types, and JSON Schema conversion; declare
+direct dependencies in the owning package.
 
 ```text
 MCP stdio adapter       CLI adapter       typed agent client       WDIO
@@ -159,16 +157,16 @@ overrepresent failure-time UI.
 
 Source review corrects or qualifies several assumptions:
 
-| Finding                                                                                                                                                                                                  | Consequence                                                                                     |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| The [agent API](../src/agent/DesktopAgent.ts) already forwards `launchMode`; the CLI omits it.                                                                                                           | Fix CLI policy/connection handling without inventing a missing programmatic option.             |
-| Agent description fetches a full tree before projection; programmatic scope defaults to the current-window tree, while CLI scope defaults to story.                                                      | Add a distinct bounded observation contract with explicit window/application/context scope.     |
-| Agent lookup uses first-match selection and eagerly requests `selected`, which native controls may not support.                                                                                          | Strict ambiguity and supported-state results must be tested with realistic fake-host states.    |
-| Generic installed targets and optional renderer metadata already exist. Windows can attach using exact executable/AUMID and title identity.                                                              | Extend existing application-neutral seams; do not require a Storybook lease file for every app. |
-| The [timeout wrapper](../src/protocol/timeouts.ts) can return before aborted work settles. Windows [bounded UIA calls](../native/windows/src/automation.cpp) can leave a worker running after a timeout. | Qualify cancellation and uncertain side effects before expanding persistent agent mutations.    |
-| Both providers collect before agent-side projection; retained element records are unsuitable for unlimited repeated observations.                                                                        | Budget native work and retained identities, not just output bytes.                              |
-| Existing semantic activation already uses several AX actions/UIA patterns.                                                                                                                               | Add explicit discovery and selection, not a duplicate implementation of all activation.         |
-| The desktop-test `--json` option prints the complete run result and still writes human progress to stderr; storybook-desktop has no structured mode.                                                     | Add bounded reporter modes shared by all three CLIs (section 5).                                |
+| Finding                                                                                                                                                                                                                                                                    | Consequence                                                                                       |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| The [agent API](../src/agent/DesktopAgent.ts) already forwards `launchMode`; the CLI omits it.                                                                                                                                                                             | Fix CLI policy/connection handling without inventing a missing programmatic option.               |
+| Agent description fetches a full tree before projection; programmatic scope defaults to the current-window tree, while CLI scope defaults to story.                                                                                                                        | Add a distinct bounded observation contract with explicit window/application/context scope.       |
+| Agent lookup uses first-match selection and eagerly requests `selected`, which native controls may not support.                                                                                                                                                            | Strict ambiguity and supported-state results must be tested with realistic fake-host states.      |
+| Generic installed targets and optional renderer metadata already exist. Windows can attach using exact executable/AUMID and title identity.                                                                                                                                | Extend existing application-neutral seams; do not require a Storybook lease file for every app.   |
+| The [timeout wrapper](../src/protocol/timeouts.ts) waits for the host promise to settle after aborting it. Windows [bounded UIA calls](../native/windows/src/automation.cpp) can leave a provider worker running after a timeout; the helper fences an unsettled mutation. | Qualify native settlement and uncertain side effects before expanding persistent agent mutations. |
+| Both providers collect before agent-side projection; retained element records are unsuitable for unlimited repeated observations.                                                                                                                                          | Budget native work and retained identities, not just output bytes.                                |
+| Existing semantic activation already uses several AX actions/UIA patterns.                                                                                                                                                                                                 | Add explicit discovery and selection, not a duplicate implementation of all activation.           |
+| The desktop-test `--json` option prints the complete run result and still writes human progress to stderr; storybook-desktop has no structured mode.                                                                                                                       | Add bounded reporter modes shared by all three CLIs (section 5).                                  |
 
 These are source-inspected concerns, not newly reproduced native failures.
 Milestones below require matching-OS experiments, including late application
@@ -294,8 +292,9 @@ keep the target quarantined and explain the required operator intervention.
 ### Model-facing operation families
 
 Keep five core tool families and one optional story tool; do not generate a
-tool per story, control, or native pattern. `@fluentui-react-native/desktop-driver-mcp`
-implements all six over the [agent operations](operations.md). `desktop_story`
+tool per story, control, or native pattern. `@fluentui-react-native/desktop-mcp`
+implements all six over the [agent operations](operations.md); the deprecated
+`desktop-driver-mcp` shim forwards them in driver-only mode. `desktop_story`
 is always listed; a target without a story orchestrator reports its operations
 unavailable with `stories-unsupported`. Story args and story-scoped
 observation remain.
@@ -512,12 +511,12 @@ a terminal record with `cancelled` or `incomplete` status.
 
 ### Ownership and delegation
 
-| Owner              | Responsibility                                                                                                                                                                                                                                                                                                                                                          |
-| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| desktop-driver     | Lowest shared CLI primitives: mode resolution, compact framing, error records and codes, and compact projection of driver operation results, exported through an explicit subpath rather than a barrel.                                                                                                                                                                 |
-| desktop-test       | Separate `DesktopRunReporter` state reduction from presentation behind a renderer interface. Implement `plain`, `github-actions`, `json`, and `ndjson` renderers plus run-summary and record projections, using Zod schemas and generated JSON Schema.                                                                                                                  |
-| storybook-desktop  | Adopt the global option and renderers. Have commands (`manifest`, `instance`, `test`, `smoke`, `build-driver`) return typed results for the renderer instead of writing ad hoc prose or indented JSON. Rename the Node runner option to `--test-reporter`. For one deprecation cycle, accept `--reporter spec\|tap\|dot` with a warning; the value sets do not overlap. |
-| desktop-driver-mcp | Return structured tool results directly and never parse CLI output. When an operation reports progress, reuse the milestone record shape.                                                                                                                                                                                                                               |
+| Owner             | Responsibility                                                                                                                                                                                                                                                                                                                                                          |
+| ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| desktop-driver    | Lowest shared CLI primitives: mode resolution, compact framing, error records and codes, and compact projection of driver operation results, exported through an explicit subpath rather than a barrel.                                                                                                                                                                 |
+| desktop-test      | Separate `DesktopRunReporter` state reduction from presentation behind a renderer interface. Implement `plain`, `github-actions`, `json`, and `ndjson` renderers plus run-summary and record projections, using Zod schemas and generated JSON Schema.                                                                                                                  |
+| storybook-desktop | Adopt the global option and renderers. Have commands (`manifest`, `instance`, `test`, `smoke`, `build-driver`) return typed results for the renderer instead of writing ad hoc prose or indented JSON. Rename the Node runner option to `--test-reporter`. For one deprecation cycle, accept `--reporter spec\|tap\|dot` with a warning; the value sets do not overlap. |
+| desktop-mcp       | Return structured tool results directly and never parse CLI output. When an operation reports progress, reuse the milestone record shape.                                                                                                                                                                                                                               |
 
 Only the owning collector renders. Delegated producers keep emitting events and
 ignore the reporter mode for presentation, so nested CLIs never render twice.
@@ -570,13 +569,13 @@ Prove the architecture before PR with a small AppKit fixture and a plain native
 Win32 fixture without React Native. This establishes a bounded supported
 surface, not universal Electron, WebView, WinUI, WPF, or custom-canvas coverage.
 
-| Owner                                    | Planned responsibility                                                                                                                                              |
-| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| desktop-driver                           | Shared contracts/executors, sessions, observation/ref caches, clients, native capabilities, artifacts, foundational journal, CLI output primitives.                 |
-| desktop-driver-mcp, proposed new package | Official-SDK stdio adapter, discovery, progress/cancellation, bounded resources/images; no lifecycle authority.                                                     |
-| desktop-test                             | Trusted descriptors/grants, installed targets, ownership ledger, claims, lease production, stop/recovery, aggregate outcomes, reporter renderers and run summaries. |
-| storybook-desktop                        | Optional context/catalog adapter, readiness, serialized programmatic navigation, consumer CLI integration and reporter-mode adoption.                               |
-| storybook-desktop-runtime                | Change only if authenticated context freshness requires it; do not move native authority into the app.                                                              |
+| Owner                     | Planned responsibility                                                                                                                                              |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| desktop-driver            | Shared contracts/executors, sessions, observation/ref caches, clients, native capabilities, artifacts, foundational journal, CLI output primitives.                 |
+| desktop-mcp               | Official-SDK stdio adapter, discovery, progress/cancellation, and bounded resources/images; delegates workloads to the supervisor.                                  |
+| desktop-test              | Trusted descriptors/grants, installed targets, ownership ledger, claims, lease production, stop/recovery, aggregate outcomes, reporter renderers and run summaries. |
+| storybook-desktop         | Optional context/catalog adapter, readiness, serialized programmatic navigation, consumer CLI integration and reporter-mode adoption.                               |
+| storybook-desktop-runtime | Change only if authenticated context freshness requires it; do not move native authority into the app.                                                              |
 
 Source ownership follows [contributing](contributing.md),
 `@fluentui-react-native/desktop-test/references/contributing.md`, and
@@ -1035,13 +1034,13 @@ requests. Route CLI and programmatic operations through the same contract,
 and render CLI results through the MR reporter modes.
 Fix CLI attach handling without adding a separate CLI daemon.
 
-**Progress:** `@fluentui-react-native/desktop-driver-mcp` implements the five
-core tools over the operation routes, reusing the registered operation schemas,
-so the adapter cannot accept what the service rejects. It connects only through
-a verified private descriptor and never launches or builds anything; it holds
-one session per MCP connection and deletes it when the connection closes; it
-forgets the client and session when the service stops answering and reconnects
-on the next call. Captures link a session-scoped resource that the adapter
+**Progress:** `@fluentui-react-native/desktop-mcp` owns the driver tools and
+reuses the registered operation schemas. The `desktop-driver-mcp` shim
+forwards driver-only use. The adapter connects through a verified private
+descriptor and asks the harness to run workloads rather than launching or
+building applications itself. It drains its session on connection close
+and does not automatically rebind after supervisor replacement; restart the
+adapter to connect to the new supervisor. Captures link a session-scoped resource that the adapter
 reassembles from pages and checks against the SHA-256, with the `artifact`
 observe variant as the fallback for clients without resources. Progress ticks
 come from the adapter only, and cancellation aborts the HTTP call, which the

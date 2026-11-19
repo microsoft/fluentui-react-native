@@ -21,6 +21,7 @@ final class SelfTestRunner {
     testInputLedger()
     testInputModifiers()
     testInputLock()
+    testEmptyInputRecovery()
     testCaptureScale()
     testSnapshotShape()
     testAXIdentity()
@@ -38,6 +39,8 @@ final class SelfTestRunner {
     testHostQueuedCancellation()
     testHostLifecycle()
     testInputIntegrity()
+    testActionOriginGeometry()
+    testActionTargetOwnership()
     testPhysicalInputReadiness()
     testApplicationTermination()
     testCaptureWindowSelection()
@@ -603,6 +606,11 @@ final class SelfTestRunner {
       events.first?["descriptor"] is JSONObject && events.last?["descriptor"] == nil,
       "live window events carry an element descriptor while destroyed events do not"
     )
+    let concurrentEvents = monitor.diagnostic(processID: getpid(), now: 0)["events"] as? [JSONObject]
+    check(
+      concurrentEvents?.count == events.count && concurrentEvents?.allSatisfy { ($0["ageMs"] as? Int) == 0 } == true,
+      "window events recorded after the diagnostic clock sample have zero age"
+    )
     monitor.forget(windowID: "window-test")
     check(!monitor.isClosed(windowID: "window-test"), "forgetting a window clears its closed state")
 
@@ -655,6 +663,11 @@ final class SelfTestRunner {
     journal.annotate(second, detail: ["method": "accessibility"])
     journal.finish(second, outcome: ErrorCode.notInteractable)
     let entries = journal.diagnostic()
+    let concurrentEntries = journal.diagnostic(now: 0)
+    check(
+      concurrentEntries.count == 2 && concurrentEntries.allSatisfy { ($0["ageMs"] as? Int) == 0 },
+      "commands recorded after the diagnostic clock sample have zero age"
+    )
     check(
       entries.count == 2 && entries[0]["outcome"] as? String == "ok" && entries[0]["durationMs"] is Int
         && entries[1]["outcome"] as? String == ErrorCode.notInteractable,

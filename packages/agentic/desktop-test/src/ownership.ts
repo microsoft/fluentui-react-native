@@ -199,9 +199,13 @@ export function createDesktopWorkloadClaim(options: DesktopWorkloadClaimOptions)
       if (current.resources.some((resource) => resource.ownership === 'owned' && resource.disposal !== 'settled')) {
         throw new Error('Desktop claim has unsettled owned resources; refusing to release ownership.');
       }
-      if (fs.readFileSync(filename, 'utf8') !== contents)
-        throw new Error('Desktop claim ownership changed; refusing to remove another owner.');
-      fs.unlinkSync(filename);
+      retryWindowsSharingViolation(
+        () => fs.unlinkSync(filename),
+        () => {
+          if (fs.readFileSync(filename, 'utf8') !== contents)
+            throw new Error('Desktop claim ownership changed; refusing to remove another owner.');
+        },
+      );
     },
   };
 }
@@ -328,7 +332,7 @@ export async function recoverWindowsDesktopWorkloadClaim(options: {
         } = captureDesktopApplicationIdentity({ ...application, id: application.leaseId, ownership: 'launched' }, options.endpoint);
         applications.push({ resource, identity });
       } else if (
-        resource.id !== 'webdriver' ||
+        resource.id !== `${record.owner.runId}:webdriver` ||
         resource.identity !== `driver-service:${options.targetId}:${options.targetInstanceId}` ||
         resource.serviceReady !== undefined
       ) {
@@ -359,8 +363,7 @@ export async function recoverWindowsDesktopWorkloadClaim(options: {
       contents = next;
       file = fs.lstatSync(filename);
     }
-    unchanged();
-    fs.unlinkSync(filename);
+    retryWindowsSharingViolation(() => fs.unlinkSync(filename), unchanged);
     recoveredApplications = applications.length;
   } catch (error) {
     failures.push(error);
@@ -523,20 +526,25 @@ function replaceFileAtomically(filename: string, contents: string): void {
   const temporary = `${filename}.${randomUUID()}.tmp`;
   fs.writeFileSync(temporary, contents, { flag: 'wx', mode: 0o600 });
   try {
-    for (let retries = 0; ; retries++) {
-      try {
-        fs.renameSync(temporary, filename);
-        return;
-      } catch (error) {
-        const code = typeof error === 'object' && error !== null && 'code' in error ? error.code : undefined;
-        if (process.platform !== 'win32' || retries === 10 || (code !== 'EPERM' && code !== 'EACCES' && code !== 'EBUSY')) throw error;
-        // Windows readers can briefly deny delete sharing; the previous record stays intact while the rename is retried.
-        Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 25);
-      }
-    }
+    retryWindowsSharingViolation(() => fs.renameSync(temporary, filename));
   } catch (error) {
     fs.rmSync(temporary, { force: true });
     throw error;
+  }
+}
+
+function retryWindowsSharingViolation(action: () => void, verifyOwnership?: () => void): void {
+  for (let retries = 0; ; retries++) {
+    // Keep ownership proof immediately before every unlink, including after a retry delay.
+    verifyOwnership?.();
+    try {
+      action();
+      return;
+    } catch (error) {
+      const code = typeof error === 'object' && error !== null && 'code' in error ? error.code : undefined;
+      if (process.platform !== 'win32' || retries === 10 || (code !== 'EPERM' && code !== 'EACCES' && code !== 'EBUSY')) throw error;
+      Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 25);
+    }
   }
 }
 

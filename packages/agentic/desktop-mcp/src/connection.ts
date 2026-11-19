@@ -8,8 +8,15 @@ import {
 } from '@fluentui-react-native/desktop-driver/authority';
 import { createDesktopDriverClient } from '@fluentui-react-native/desktop-driver/client';
 import type { DesktopDriverClient } from '@fluentui-react-native/desktop-driver/client';
-import { createDesktopSupervisorConnector, DesktopWorkloadTransportError } from '@fluentui-react-native/desktop-test/supervisor-connection';
-import type { DesktopSupervisorConnector } from '@fluentui-react-native/desktop-test/supervisor-connection';
+import {
+  createDesktopSupervisorConnector,
+  defaultSupervisorDescriptor,
+  DesktopWorkloadTransportError,
+} from '@fluentui-react-native/desktop-test/supervisor-connection';
+import type {
+  DesktopSupervisorConnectionOptions,
+  DesktopSupervisorConnector,
+} from '@fluentui-react-native/desktop-test/supervisor-connection';
 
 export type DesktopDriverConnection = {
   client: DesktopDriverClient;
@@ -21,6 +28,11 @@ export type DesktopDriverConnection = {
 
 /** Revalidates private driver discovery and returns its verified authority, without launching anything. */
 export type ConnectDesktopDriver = () => Promise<DesktopDriverConnection>;
+
+export type RestartAwareSupervisorConnector = DesktopSupervisorConnector & {
+  /** Reports a changed private descriptor; never connects to or accepts authority from it. */
+  restartDetected?(): Promise<boolean>;
+};
 
 export type DescriptorConnectionOptions = {
   /** The record name the supervisor published the connection descriptor under, such as `agent-connection.json`. */
@@ -47,14 +59,14 @@ export function connectWithDescriptor(options: DescriptorConnectionOptions): Con
 }
 
 /** Lazily opens one supervisor connector, retaining its connection ID across ambiguous discovery retries. */
-export function connectSupervisorWithDescriptor(options: DescriptorConnectionOptions): DesktopSupervisorConnector {
-  let connector: Promise<DesktopSupervisorConnector> | undefined;
+export function connectSupervisorWithDescriptor(options: DescriptorConnectionOptions): RestartAwareSupervisorConnector {
+  let connector: Promise<RestartAwareSupervisorConnector> | undefined;
   let closing = false;
   return {
     async connect() {
       if (closing) throw new DesktopWorkloadTransportError('unavailable');
       connector ??= openPrivateDiscovery(options)
-        .then(({ storage, verify }) => createDesktopSupervisorConnector({ storage, descriptor: options.descriptor, verifyService: verify }))
+        .then(({ storage, verify }) => trackSupervisorRestart({ storage, descriptor: options.descriptor, verifyService: verify }))
         .catch((error: unknown) => {
           connector = undefined;
           throw error;
@@ -63,10 +75,49 @@ export function connectSupervisorWithDescriptor(options: DescriptorConnectionOpt
       if (closing) throw new DesktopWorkloadTransportError('unavailable');
       return current.connect();
     },
+    async restartDetected() {
+      const current = await connector?.catch(() => undefined);
+      return (await current?.restartDetected?.()) ?? false;
+    },
     async close() {
       closing = true;
       const current = await connector?.catch(() => undefined);
       await current?.close();
+    },
+  };
+}
+
+export function trackSupervisorRestart(options: DesktopSupervisorConnectionOptions): RestartAwareSupervisorConnector {
+  const connector = createDesktopSupervisorConnector(options);
+  let boundIncarnation: string | undefined;
+  return {
+    async connect() {
+      const connection = await connector.connect();
+      boundIncarnation ??= connection.incarnation;
+      return connection;
+    },
+    close: () => connector.close(),
+    async restartDetected() {
+      if (boundIncarnation === undefined) return false;
+      try {
+        const contents = await options.storage.read(options.descriptor ?? defaultSupervisorDescriptor);
+        if (contents === undefined || Buffer.byteLength(contents, 'utf8') > 16 * 1024) return false;
+        const record = JSON.parse(contents) as {
+          version?: unknown;
+          incarnation?: unknown;
+          management?: { service?: { incarnation?: unknown } };
+        };
+        // This is a diagnostic hint only. The shared connector retains and verifies the original binding.
+        return (
+          record?.version === 1 &&
+          typeof record.incarnation === 'string' &&
+          /^inc_[0-9a-f]{24}$/.test(record.incarnation) &&
+          record.management?.service?.incarnation === record.incarnation &&
+          record.incarnation !== boundIncarnation
+        );
+      } catch {
+        return false;
+      }
     },
   };
 }

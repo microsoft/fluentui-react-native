@@ -61,9 +61,16 @@ Limits:
 | Binary frame                  | 64 MiB            |
 | Binary correlation identifier | 1,024 UTF-8 bytes |
 
-Invalid magic, nonzero reserved bytes, unknown types, oversize frames,
-truncated identifiers, and invalid JSON fail the transport. Provider request
-parsers may impose tighter command-specific limits.
+Invalid magic, nonzero reserved bytes, unknown frame type bytes, oversize
+frames, and malformed JSON fail the transport. Provider request parsers may
+impose tighter command-specific limits.
+
+On helper stdin, both providers consume but ignore a binary frame with a valid
+header and complete payload. They do not parse it as an image. A JSON frame
+must decode to an object; objects whose `type` is not `request` or `cancel`
+are ignored rather than dispatched. This is not permission to send new frame
+types. On helper stdout, Node rejects malformed or unexpected JSON messages
+and validates binary correlation identifiers and their response declarations.
 
 ## JSON messages
 
@@ -109,10 +116,54 @@ only helper-private opaque IDs cross FDR1.
 The `launch` request includes `launchTimeoutMs` when explicitly configured on
 the registered target. Both native providers validate its positive bounded
 integer value, otherwise use their 90-second launch default, and honor the
-cancellation token while discovering the application/window. Windows
+cancellation token while discovering the application/window. On macOS, the
+timeout applies separately to the native application wait and unique-window
+discovery; it does not replace the server's overall deadline. Windows
 application descriptors may include an existing absolute `workingDirectory`
 for unpackaged process launch; packaged activation rejects that override.
 These fields are trusted supervisor configuration, not WebDriver capabilities.
+
+### Action values
+
+Before dispatching `performActions`, Node requires `x`, `y`, `deltaX`, and
+`deltaY` where applicable to be finite numbers in the inclusive range
+`-2147483648` to `2147483647`. Fractional values are retained.
+
+For direct requests, macOS independently validates coordinates against that
+range and requires finite wheel deltas before moving the pointer. To create a
+Quartz wheel event it negates the deltas, rounds to the nearest integer (ties
+away from zero), and clamps to the signed 32-bit range before conversion.
+Pointer buttons must be integers from 0 to 4. Pause and pointer-move durations,
+if present, must be non-negative integers and are capped at 30,000 milliseconds
+before conversion. Invalid values return `invalid-params`. The action-value
+rules are recorded in [protocol.json](protocol.json); FDR1 remains at 1.0.
+
+Pointer moves and scrolls that use an element or viewport origin require fresh
+bounds with finite coordinates and positive width and height. macOS does not
+use a snapshot's zero rectangle or a window's last-known frame to place the
+pointer. Unreadable or invalid origin geometry returns `move-target-out-of-bounds`
+before the action posts any event. Node translates this code from either
+provider to WebDriver `move target out of bounds`. The ordinary mutation
+settlement rules still apply if a preceding action already posted input.
+
+On macOS, raw `performActions` checks target ownership while holding the
+physical-input lock. New button presses, drag events and scrolls need an
+Accessibility hit in a window or sheet whose PID and kernel start time match
+a live lease. Scroll checks the destination before moving and checks the
+acknowledged pointer position again before posting. Bare pointer placement
+does not require a hit. Each new key press needs exactly one live leased
+application to report `AXFrontmost`. If no leased foreground can be proven
+for the first press, the helper may activate its verified primary window
+once and rechecks the foreground before posting. A later focus change never
+triggers another activation within that command.
+
+An unowned or unproven target returns `element-not-interactable` with effect
+`none` if no primary input was already posted. Permission and native query
+errors remain distinct. The guard does not prevent releasing already-held
+keys or buttons on explicit release, cancellation, failure or shutdown.
+Unmatched key-up or button-up actions do not post anything.
+
+### Application leases
 
 A `launch` or `attach` result is the application lease `{ id, ownership,
 processId, processStartedAt }`. The Windows provider adds `containment`, which
@@ -242,10 +293,19 @@ process, and proves exit before returning `exited`. A matching start with other
 identity mismatches, another controller, cancellation, or unconfirmed exit
 remains fenced. Attach/inspection still reject reused PIDs; only trusted
 recovery retires the absent recorded incarnation.
-Mismatch reasons include `identity-start-mismatch` (attach/inspection), `identity-session-mismatch`,
-`identity-executable-mismatch`, and `identity-aumid-mismatch`; ambiguous
-process/window candidates report `application-identity-ambiguous`, and
-unreadable candidates report `application-identity-unknown`.
+Windows application ownership failures may report these reasons in
+`response.error.data.reason`. They describe this boundary, not the set of
+reasons for every FDR1 error.
+
+| Reasons                                                                                                                                     | Meaning                                                                                                                                                |
+| ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `identity-start-mismatch`, `identity-session-mismatch`, `identity-executable-mismatch`, `identity-aumid-mismatch`, `identity-user-mismatch` | A verified process attribute differs from the required identity. Recovery treats an absent or reused PID as successful `exited`, not a start mismatch. |
+| `application-identity-invalid`, `application-identity-mismatch`, `application-identity-changed`                                             | An exact identity is malformed, conflicts with the configured descriptor, or changed during discovery.                                                 |
+| `application-identity-unknown`, `application-identity-ambiguous`                                                                            | The provider cannot read enough identity evidence or cannot resolve a unique process/window.                                                           |
+| `application-exited`, `no-matching-application`, `application-window-missing`                                                               | An inspected process exited, descriptor discovery found no matching application, or the exact process has no matching window, respectively.            |
+| `application-lock-busy`, `application-lock-unavailable`                                                                                     | Another controller holds the exact application lock, or that lock could not be opened or acquired for another reason.                                  |
+| `application-preexisting`                                                                                                                   | A launch found a preexisting application it cannot claim.                                                                                              |
+| `application-recovery-unsettled`                                                                                                            | Recovery could not end the recorded process or could not prove exit.                                                                                   |
 
 These additive Windows schemas are in [protocol.json](protocol.json) and retain
 FDR1 version 1.0.
@@ -753,10 +813,25 @@ Both providers also implement:
 --release-input --sweep
 ```
 
-`--self-test` runs provider-local checks without opening FDR1. Normal
-`--release-input` reads a bounded JSON ledger from stdin and releases exactly
-the keys/buttons mirrored by Node. `--sweep` is an operator diagnostic for a
-desktop left in an uncertain state; it is not part of normal session cleanup.
+`--self-test` runs provider-local checks without opening FDR1. After an
+unexpected exit of a verified helper, Node runs the same
+binary with `--release-input`, even when the ledger is empty. The mode reads a
+bounded `{"keys":[],"buttons":[]}` JSON ledger from stdin and reports the
+counts it released. A nonempty ledger releases exactly the listed keys and
+buttons under the physical input lock. An empty ledger posts no input, tries
+the lock at most once without waiting, and returns success with zero counts
+if physical input is unavailable or another process holds the lock.
+
+On macOS, the supervisor scopes empty recovery to the exited helper using an
+internal per-helper tag in the process environment; the ledger shape is
+unchanged. A full input mask suppresses this lock probe. The recovery process
+removes a matching record only under the lock and only when its owner is
+proven exited. Live, unverified, or unrelated records remain in place. A
+standalone operator invocation without the tag can clear a proven-dead record.
+On Windows, the kernel identifies the abandoned mutex; a zero-timeout probe
+releases it if acquired. See [protocol.json](protocol.json) for the mode
+invariants. `--sweep` is an operator diagnostic for a desktop left in an
+uncertain state; it is not part of normal session cleanup.
 
 The macOS provider additionally implements:
 

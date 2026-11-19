@@ -4,6 +4,7 @@
 #include <charconv>
 #include <cmath>
 #include <cstdio>
+#include <limits>
 
 #include "common.h"
 
@@ -397,7 +398,10 @@ std::int64_t Value::AsInteger(std::int64_t fallback) const noexcept {
   if (kind_ != Kind::Number || !std::isfinite(number_)) {
     return fallback;
   }
-  return static_cast<std::int64_t>(std::llround(number_));
+  constexpr double minimum = static_cast<double>(std::numeric_limits<std::int64_t>::min());
+  const double rounded = std::round(number_);
+  // INT64_MAX rounds up as a double, so use the exact exclusive upper bound.
+  return rounded >= minimum && rounded < -minimum ? static_cast<std::int64_t>(rounded) : fallback;
 }
 
 const std::string& Value::AsString() const noexcept {

@@ -138,7 +138,7 @@ function FocusTreatmentProbe(props: InputProps) {
   const state = useInput_unstable(props);
   useInputStyles_unstable(state);
   return (
-    <View>
+    <View style={styles.focusVariant}>
       {renderInput_unstable(state)}
       <StoryStatus testID={`${props.testID}-indicator`}>{String(state.focusVisible)}</StoryStatus>
     </View>
@@ -151,7 +151,7 @@ export const FocusTreatment: Story = {
     <View style={styles.story}>
       <Input accessibilityLabel="Focus treatment entry" testID="focus-field-entry" />
       {(['outline', 'underline'] as const).map((variant) => (
-        <View key={variant} style={styles.row}>
+        <View key={variant} style={[styles.row, styles.focusVariantRow]}>
           <FocusTreatmentProbe variant={variant} accessibilityLabel={variant} testID={`focus-field-${variant}`} />
           <FocusTreatmentProbe variant={variant} error accessibilityLabel={`${variant} error`} testID={`focus-field-${variant}-error`} />
           <FocusTreatmentProbe
@@ -278,6 +278,13 @@ export const Underline: Story = {
 };
 
 const styles = StyleSheet.create({
+  focusVariant: {
+    flex: 1,
+    minWidth: 0,
+  },
+  focusVariantRow: {
+    flexDirection: 'row',
+  },
   group: {
     alignItems: 'flex-start',
     gap: 8,

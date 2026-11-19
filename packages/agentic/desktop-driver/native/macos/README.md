@@ -22,6 +22,7 @@ Accessibility.
 | `Host.swift`                           | FDR1 hello, request queue, framing, cancellation, and disposal              |
 | `Driver.swift`                         | Command dispatch, capability reporting, and physical-input scopes           |
 | `ApplicationActivation.swift`          | Foreground postcondition and one workspace fallback after AX activation     |
+| `ActionTargetOwnership.swift`          | Exact lease checks for raw pointer and keyboard action targets              |
 | `KeyboardClear.swift`                  | Keyboard focus, selection acknowledgment, and empty-value verification      |
 | `Application.swift`                    | Launch/attach leases, exact process/window identity, and ownership          |
 | `ApplicationTermination.swift`         | `terminateOwned`: quit, wait, kill, and verify the exit of an owned process |
@@ -100,7 +101,8 @@ node native/macos/fixtures/build.cjs artifacts/desktop/application-fixture
 
 The command prints the verified bundle/executable identity and window title.
 The arm64 fixture pins its compiler and bundle minimum macOS version to 11.0,
-matching the helper instead of inheriting a newer machine deployment target.
+rather than inheriting the build machine's deployment target. The helper itself
+requires macOS 14 or later.
 The executable accepts `--title <exact-window-title>` and an optional
 `--ready-file <path>` containing its PID after window creation; its Increment button
 and counter have accessibility identifiers `ownership-fixture-increment` and
@@ -217,6 +219,11 @@ The input lock lives beneath
 `~/Library/Caches/com.microsoft.fluentui-react-native.desktop-driver`, so
 helpers started through different Aqua bootstrap namespaces still serialize
 physical input. Restricted `--release-input` accepts only the Node-owned ledger.
+On an unexpected exit, the supervisor invokes it even with an empty ledger.
+An empty recovery never posts input or waits on another process's lock. With
+input available and unmasked, it removes only a matching record whose owner is
+proven exited. If an `input-busy` error names a live owner PID, wait for that
+helper to finish before attempting recovery.
 `--sweep` is an operator recovery diagnostic, not normal cleanup.
 Exact application leases hold a separate owner-only `flock` beneath that root's
 `applications` directory. It excludes other helpers for the same PID and
@@ -261,15 +268,19 @@ timestamps allow only the bounded precision required by
 `NSRunningApplication.launchDate`. Zero or ambiguous application/window matches
 fail.
 
-Launch honors an explicitly configured `launchTimeoutMs`, or uses the native
-90-second default within the server's 120-second default deadline. A launch that
+Launch uses `launchTimeoutMs` for each native wait: LaunchServices completion
+or bare-executable registration, then unique-window discovery. Each wait
+defaults to 90 seconds; there is no single shared native launch budget. The
+server's overall launch deadline defaults to 120 seconds and cancels the helper
+request if reached. A launch that
 fails, times out, or is cancelled after the application started ends that
 application with the same quit, wait, kill, and verify sequence as `closeApplication`
 (`terminateOwned`), bounded to fit Node's cancellation deadline, instead of only
 asking it to quit. If LaunchServices completes after timeout or cancellation, the
 late completion ends only a new application causally owned by that request, never
-a preexisting app. When an application survives that cleanup, the `launch-failed`
-error carries its `processId`; a cancelled launch only writes a diagnostic. A bare executable is started with its standard
+a preexisting app. Failed or cancelled launches report settlement and captured
+process identity when known; see the [native protocol](../PROTOCOL.md#application-leases).
+A bare executable is started with its standard
 streams on `/dev/null`, so it never inherits the helper's FDR1 pipes, and the
 helper polls until Launch Services registers it instead of reading the
 registration once.
@@ -279,15 +290,19 @@ succeeded. The late-completion branch remains covered only by code review.
 
 Leases record whether the app was launched or attached. Session deletion
 preserves attached apps and closes only an exact process owned by the helper.
-`closeApplication` and `dispose` succeed only after the helper proves the exact
-process exited: they verify its incarnation (process id and start time), ask it to
+For launched applications, `closeApplication` and `dispose` succeed only after
+the helper proves the exact process exited: they verify its incarnation (process id and start time), ask it to
 quit, wait, send `SIGKILL` if it is still running, and verify again. A process
 whose identity cannot be matched is never signalled. When the exit is not proven, the
 command fails with `automation-failed` and the lease, its window ids, and its
 element records stay in place, so a retry can finish the close and a failed
 `dispose` leaves the helper running. Window and element records are forgotten only
 after the close succeeds, and a lease registered before its window resolved is
-rolled back if the resolution fails. A closed window id is never revived by title.
+rolled back if the resolution fails. A window marked destroyed by Accessibility
+is not revived by title. Without that notification, refresh may rebind a stale
+window ID to a uniquely titled replacement in the same live lease. A successful
+`closeWindow` means the close action was accepted, not that destruction was
+independently confirmed.
 Opaque helper IDs represent windows and AX elements; native references never
 cross the public WebDriver boundary.
 
@@ -330,7 +345,8 @@ outcome, and window or element identifiers on the same monotonic clock. It
 never records text, values, or native handles. Activation annotates its entry
 with the method used, elapsed time, and the previously focused application.
 The `windowEvents` command returns both logs with `ageMs` values for
-`furn/window-events` and failure evidence. Both are diagnostics only.
+`furn/window-events` and failure evidence. Entries newer than the diagnostic
+clock sample report zero age. Both logs are diagnostics only.
 
 Descriptor reads set a messaging timeout on the notification's own element.
 Never set one on the system-wide element: `AXUIElementSetMessagingTimeout`
@@ -354,9 +370,12 @@ list does not contain `AXEnabled`, matching how assistive technologies treat
 it. An element that lists `AXEnabled` without a readable value still reports
 an unsupported enabled state. Fabric views always publish the attribute.
 
-An Accessibility state the helper cannot read is never reported as a definite answer. `visible` is unsupported when
-an element's position and size cannot be read, and `observe` then omits `geometry` instead of reporting an empty
-rectangle. A tree walk fails with `automation-failed` rather than treating an element whose children cannot be read
+Snapshot state such as `visible` is unsupported when an element's position and
+size cannot be read, and bounded `observe` omits unreadable geometry. Legacy
+snapshot rectangles can be zero, and window rectangles may use cached or zero
+geometry. XML page source writes unsupported `enabled` or `visible` as
+`false`; it is not an authoritative state check. A tree walk fails with
+`automation-failed` rather than treating an element whose children cannot be read
 as a leaf, a hit test, focus, or clear against an unresponsive target fails as `target-non-response`, and a
 cancellation is checked at every element of a walk. Reads that tolerate a React Native Fabric remount, where an
 element briefly answers `failure` or `illegalArgument`, still treat those two errors as an absent value.
@@ -389,7 +408,23 @@ responsible process and an unlocked interactive Aqua session. Missing authority
 returns `input-unavailable`; the provider never substitutes unrelated
 accessibility activation and reports physical success. A positive wheel
 `deltaX` scrolls right and a positive `deltaY` scrolls down, as on Windows. Quartz
-scrolls left and up for positive values, so both deltas are negated.
+scrolls left and up for positive values, so both deltas are negated, then
+rounded and clamped to signed 32-bit values before conversion. See the
+[action value rules](../PROTOCOL.md#action-values) for direct helper requests.
+
+Element and viewport origins in pointer moves and scrolls require fresh,
+readable Accessibility geometry with positive area. The helper does not use a
+zero snapshot rectangle or the window's last-known frame for placement; it
+returns `move-target-out-of-bounds` before posting that action's input.
+
+Raw `performActions` button presses, drags and scrolls require a hit inside a
+window or sheet of an exactly leased process. No hit or unverifiable ownership
+is a refusal, unlike the permissive no-hit path on Windows. Raw key presses
+verify that exactly one live leased application reports `AXFrontmost` before
+each press. Only the first press can activate the verified primary window and
+then recheck focus. Releases and cancellation still unwind
+input that the helper owns even when focus changes. See the [native action
+rules](../PROTOCOL.md#action-values).
 
 After posting a pointer-move sequence, the helper allows about 200 ms of
 bounded position reads for the OS to acknowledge its destination. It never
@@ -571,15 +606,14 @@ pixel dimensions and `scaleFactor` separately from point geometry.
 
 Screen Recording permission is degradable. Without it, the helper does not
 advertise screenshot capabilities, while AX and input automation can continue
-when their own authority is present. Capture fails explicitly with `capture-failed`,
-and a `reason` of `no-process-window`, `uncorrelated-window-geometry`, or
-`ambiguous-window-geometry` where the window is the cause, when:
-
-- Screen Recording permission is absent, which is reported as a permission
-  problem from one guard and never as an operating-system limitation;
-- the target is minimized or off-screen;
-- ScreenCaptureKit has no window that correlates uniquely with the AX window;
-- crop geometry is empty or outside the capture.
+when their own authority is present. An attempted native capture without
+Screen Recording permission reports `capture-failed` with a permission
+diagnostic. Missing or uncorrelated ScreenCaptureKit windows also report
+`capture-failed` with `no-process-window`, `uncorrelated-window-geometry`, or
+`ambiguous-window-geometry`. A correlated minimized or off-screen window,
+or an element without a positive-area rectangle, reports
+`unsupported-operation`. If a positive-area element rectangle cannot be
+cropped to the resulting image, the helper reports `capture-failed`.
 
 The provider does not implicitly restore or move a window to make capture pass.
 
@@ -673,7 +707,8 @@ FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY="<identity>" \
   yarn test --runInBand
 ```
 
-The Swift self-test covers framing, JSON, input ledger and lock recovery,
+The Swift self-test covers framing, JSON, action value conversion without
+posting input, input ledger and lock recovery,
 capture scaling, snapshot normalization, AX diagnostics, CoreGraphics fallback
 classification, custom AX action name parsing, permission and login-session diagnostics, hello identity, and
 bounded observation: request validation, each truncation reason, a randomized

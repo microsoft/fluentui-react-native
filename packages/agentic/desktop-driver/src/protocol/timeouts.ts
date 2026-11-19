@@ -1,6 +1,8 @@
 import { WebDriverError } from './errors.js';
 import { attachFailureEffect, readFailureEffect } from './settlement.js';
 
+export const defaultAppLaunchTimeoutMs = 120_000;
+
 export type CommandTimeoutOptions = {
   /** Ends the command when the caller no longer needs it, such as a disconnected client. */
   signal?: AbortSignal;

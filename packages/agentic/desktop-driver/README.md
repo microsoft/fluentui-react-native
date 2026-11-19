@@ -12,7 +12,7 @@ evidence management, native-helper source and build tooling, and deterministic
 fake hosts for contract tests. It does not depend on Storybook, React, or React
 Native.
 
-**Work in progress:** see [current status](references/current-status.md) for
+**Preview:** This is a 0.x, ESM-only package. See [current status](references/current-status.md) for
 implemented capabilities, incomplete lifecycle guarantees, the latest
 per-endpoint qualification results, and measured token/latency results.
 
@@ -27,11 +27,11 @@ a new verified selection; finding fresh elements alone cannot restore readiness.
 
 ## Supported targets
 
-| Endpoint                    | Operating system  | Architecture            | Native implementation                                       |
-| --------------------------- | ----------------- | ----------------------- | ----------------------------------------------------------- |
-| React Native macOS Fabric   | macOS 14 or later | Apple Silicon (`arm64`) | Swift, AXUIElement, Quartz Event Services, ScreenCaptureKit |
-| React Native Windows Fabric | Windows 11        | `x64`                   | C++20, UI Automation, SendInput, Windows Graphics Capture   |
-| React Native Win32 Paper    | Windows 11        | `x64`                   | Same Windows helper and protocol                            |
+| Endpoint                            | Operating system  | Architecture            | Native implementation                                       |
+| ----------------------------------- | ----------------- | ----------------------- | ----------------------------------------------------------- |
+| React Native macOS Fabric and Paper | macOS 14 or later | Apple Silicon (`arm64`) | Swift, AXUIElement, Quartz Event Services, ScreenCaptureKit |
+| React Native Windows Fabric         | Windows 11        | `x64`                   | C++20, UI Automation, SendInput, Windows Graphics Capture   |
+| React Native Win32 Paper            | Windows 11        | `x64`                   | Same Windows helper and protocol                            |
 
 V1 permits one active WebDriver session per registered target in one service.
 Native helpers also exclude controlling the same exact application incarnation
@@ -41,7 +41,7 @@ target operating system. Installation never compiles or downloads a helper.
 
 ## Start here
 
-For a repository checkout, use Node 22.19 or later and Yarn 4:
+For a repository checkout, use Node.js `^22.19.0 || ^24.0.0 || >=26.0.0` and Yarn 4:
 
 ```sh
 yarn
@@ -155,7 +155,7 @@ The [reference index](references/README.md) describes each package-owned guide.
 | `/authoring`       | Serializable story plans, selectors, capabilities, result types, and case descriptors     |
 | `/wdio`            | WebdriverIO connection, custom commands, assertions, and story-plan runner                |
 | `/client`          | Low-level typed W3C client                                                                |
-| `/authority`       | Grants, private connection descriptors, and macOS owner-validated storage                 |
+| `/authority`       | Grants, descriptors, and macOS/Windows storage, service verification, and app probes      |
 | `/native`          | Native-helper build, resolution, and verification without loading the package root        |
 | `/server`          | Embeddable remote end, session manager, and target registry                               |
 | `/agent`           | JSON-safe API; `describe` and `agent describe` trim an unbounded whole-tree read          |

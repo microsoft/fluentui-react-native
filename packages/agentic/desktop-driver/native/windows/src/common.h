@@ -26,6 +26,7 @@ inline constexpr char kErrorInvalidParams[] = "invalid-params";
 inline constexpr char kErrorNoSuchWindow[] = "no-such-window";
 inline constexpr char kErrorNoSuchElement[] = "no-such-element";
 inline constexpr char kErrorNotInteractable[] = "element-not-interactable";
+inline constexpr char kErrorMoveTargetOutOfBounds[] = "move-target-out-of-bounds";
 inline constexpr char kErrorAutomationFailed[] = "automation-failed";
 inline constexpr char kErrorInputUnavailable[] = "input-unavailable";
 inline constexpr char kErrorInputBusy[] = "input-busy";

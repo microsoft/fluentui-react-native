@@ -28,6 +28,7 @@ const maxKeyDisplay = 32;
 const requestIdCharacters = /^[A-Za-z0-9._:-]+$/;
 const reasonToken = /^[a-z0-9]+(?:[ -][a-z0-9]+)*$/;
 const maxReasonLength = 48;
+const authoredErrors = new WeakSet<WebDriverError>();
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
@@ -55,7 +56,13 @@ export function operationError(
   message: string,
   extra: Record<string, unknown> = {},
 ): WebDriverError {
-  return new WebDriverError(code, boundedMessage(message), { ...extra, reason });
+  const error = new WebDriverError(code, boundedMessage(message), { ...extra, reason });
+  authoredErrors.add(error);
+  return error;
+}
+
+export function isAuthoredOperationError(error: unknown): error is WebDriverError {
+  return error instanceof WebDriverError && authoredErrors.has(error);
 }
 
 function displayKey(key: string): string {
@@ -155,14 +162,48 @@ function safeData(data: Record<string, unknown> | undefined): Record<string, unk
   return safe;
 }
 
+const providerFailureText: Partial<Record<WebDriverErrorCode, string>> = {
+  'element click intercepted': 'The provider reported that another element would receive the click.',
+  'element not interactable': 'The provider reported that the element cannot be interacted with.',
+  'invalid argument': 'The provider refused the request as invalid.',
+  'invalid session id': 'The desktop session is no longer available.',
+  'move target out of bounds': 'The provider could not resolve the input target.',
+  'no such element': 'The provider could not find the element.',
+  'no such window': 'The provider could not find the window.',
+  'stale element reference': 'The provider no longer tracks the element.',
+  timeout: 'The provider did not finish in time.',
+  'unable to capture screen': 'The provider could not capture an image.',
+  'unsupported operation': 'The provider does not support this operation.',
+};
+
+function failureMessage(error: unknown, converted: WebDriverError, data: Record<string, unknown>): string {
+  if (isAuthoredOperationError(error)) return boundedMessage(error.message);
+  switch (data.reason) {
+    case 'cancelled':
+      return 'The request was cancelled.';
+    case 'target-non-response':
+      return 'The application did not answer the provider.';
+    case 'bridge-unavailable':
+      return 'The Storybook bridge is not connected.';
+    case 'relaunch-required':
+      return 'Relaunch the application before selecting a story.';
+    default:
+      return (
+        (Object.hasOwn(providerFailureText, converted.code) ? providerFailureText[converted.code] : undefined) ??
+        'The desktop operation failed.'
+      );
+  }
+}
+
 /**
- * Turns any failure into the error an agent receives: a WebDriver error with a bounded, neutralized message and the
- * operation, request, and schema version in `data`. The stack trace is dropped; it names local paths and costs tokens.
+ * Shapes errors for agents. Only errors this layer explicitly authored keep their text; provider and runtime failures
+ * use fixed messages. A machine reason alone never authenticates the message.
  */
 export function operationFailure(error: unknown, context: { operation: string; requestId: string }): WebDriverError {
   const converted = toWebDriverError(error);
-  const failure = new WebDriverError(converted.code, boundedMessage(converted.message), {
-    ...safeData(converted.data),
+  const data = safeData(converted.data);
+  const failure = new WebDriverError(converted.code, failureMessage(error, converted, data), {
+    ...data,
     operation: safeToken(context.operation),
     requestId: context.requestId,
     schemaVersion: operationSchemaVersion,

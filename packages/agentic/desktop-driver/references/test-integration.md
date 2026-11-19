@@ -96,6 +96,9 @@ For Storybook targets, the connection registers:
 The runner resets the preview for each test, filters and shards a stable
 `storyId/testId` ordering, checks required capabilities, and classifies
 assertion, timeout, cancellation, skip, and infrastructure outcomes.
+Selected story plans are validated before navigation; an empty test or an
+unknown action fails validation. Argument updates target the story selected
+by the test, not a different story that happens to be current.
 Selectors used to read a value or perform an action must resolve to exactly one
 element. `count` and `exists` expectations intentionally allow multiple matches;
 narrow other selectors rather than relying on the first match.
@@ -123,6 +126,14 @@ exits, including on assertion failures, timeouts, or crashes. WebdriverIO's
 `attach()` does not apply the defaults `remote()` uses, so the attached browser
 sets `waitforInterval` (100 ms) and `waitforTimeout` (5 s) explicitly; without
 an interval, `waitUntil` and `waitFor*` stop after their first unsatisfied poll.
+
+`connectDesktopWebdriver` and `attachDesktopWebdriver` disable automatic
+transport retries: a request that failed may already have launched the app or
+changed its state. Failed mutations keep the driver's `error.data.mutation`
+report when the service returns one; a transport failure without a report
+does not prove that the operation was rejected. If a target has a custom
+launch deadline, pass it as `launchTimeoutMs` to `connectDesktopWebdriver`
+so the transport allows time for the service to report its outcome.
 
 Storybook's preferred top-level `wdio` export is an array of `desktopIt` cases,
 which declare the input and platforms they need. Its older functions and named
@@ -252,7 +263,8 @@ desktop-driver stories run \
 
 Selectors can filter by story glob, test glob, tag, and deterministic shard.
 A glob matches `*` as any run of characters and every other character
-literally, in linear time. Shards are cut from the selection ordered by Unicode
+literally. Worst-case matching time is proportional to the product of the
+value and pattern lengths. Shards are cut from the selection ordered by Unicode
 code point of `<story>/<test>`, so every machine and locale builds the same
 shards. The CLI emits JSON and exits nonzero when the run status is not
 `passed`.
@@ -326,6 +338,12 @@ including through a symbolic link, before it creates a directory. Failure
 evidence is best effort and never replaces the original test error. Trees and
 screenshots may contain sensitive application information; apply the retention
 and access policy described in [Security](security.md).
+
+Programmatic callers can pass `new ArtifactManager(root, { redact })` to
+`runDesktopStoryTests({ artifacts, ... })`. The callback transforms source XML
+and string values in JSON evidence or reports; it does not redact screenshots
+or JSON keys. `DesktopWebdriverRunOptions` and the CLI expose only the artifact
+root, not a redaction callback.
 
 ## Fake-host contract tests
 

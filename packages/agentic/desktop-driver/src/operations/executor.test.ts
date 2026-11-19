@@ -76,19 +76,21 @@ describe('executeOperation', () => {
       expect(error.toJSON().stacktrace).toBe('');
     });
 
-    test('shows a provider failure as a bounded message with only the data an agent can act on', async () => {
+    test('reports a provider failure with fixed text and retains its machine reason', async () => {
       const runtime = stub({
         observe: () => {
           throw new WebDriverError('unknown error', `${'The window titled Payroll '.repeat(40)}\u202E`, {
             leaked: 'Confidential Report',
             nativeCode: 'unsupported-operation',
+            reason: 'target-non-response',
           });
         },
       });
       const error = await failureOf(executeOperation(runtime.runtime, 'observe', {}));
-      expect(error.message.length).toBeLessThanOrEqual(301);
-      expect(error.message).not.toContain('\u202E');
-      expect(Object.keys(error.data).sort()).toEqual(['nativeCode', 'operation', 'requestId', 'schemaVersion']);
+      expect(error.message).toBe('The application did not answer the provider.');
+      expect(Object.keys(error.data).sort()).toEqual(['nativeCode', 'operation', 'reason', 'requestId', 'schemaVersion']);
+      expect(error.data.reason).toBe('target-non-response');
+      expect(JSON.stringify(error.toJSON())).not.toMatch(/Payroll|Confidential Report/);
     });
 
     test('rejects an operation that does not exist, naming it safely and without recording it', async () => {

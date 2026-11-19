@@ -10,7 +10,7 @@ const { createFixtureStoredManifest } = require('../driver/fixtures/storedManife
 
 async function main() {
   const mode = process.argv[2] ?? 'all';
-  assert.ok(['all', 'protected', 'legacy'].includes(mode), 'Unknown inline WDIO contract mode.');
+  assert.ok(['all', 'protected', 'legacy', 'lanes'].includes(mode), 'Unknown inline WDIO contract mode.');
   const packageRoot = path.resolve(__dirname, '..', '..');
   const projectRoot = path.resolve(packageRoot, '..', '..', '..', 'apps', 'storybook');
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'furn-inline-wdio-'));
@@ -178,11 +178,12 @@ async function main() {
       targetId: harness.target.id,
       url: harness.server.url,
       story: `fixture-button--${story}`,
-      timeoutMs: 2000,
+      // Only the intentional timeout cases need a shorter budget than ordinary workers.
+      ...(['timeout', 'spin', 'named-timeout'].includes(story) ? { timeoutMs: 2000 } : {}),
       ...overrides,
     });
   try {
-    if (mode !== 'legacy') {
+    if (mode === 'all' || mode === 'protected') {
       const authority = new DesktopAuthority();
       const protectedHost = new FakeDesktopHost({ storyRootTestId: 'story-root' });
       /** @type {import('@fluentui-react-native/desktop-driver').DesktopTarget} */
@@ -245,7 +246,6 @@ async function main() {
             targetId: protectedTarget.id,
             url: protectedServer.url,
             story: 'fixture-button--protected',
-            timeoutMs: 2000,
             report: protectedReport,
             runner: { connection: protectedConnection, addSecret: (secret) => secrets.push(secret) },
           },
@@ -280,7 +280,6 @@ async function main() {
           targetId: protectedTarget.id,
           url: protectedServer.url,
           story,
-          timeoutMs: 2000,
           report: leakReport,
           errorOutput: { write: (text) => diagnostics.push(String(text)) },
           runner: { connection: protectedConnection, addSecret: (secret) => secrets.push(secret) },
@@ -323,7 +322,6 @@ async function main() {
               targetId: protectedTarget.id,
               url: protectedServer.url,
               story: 'fixture-button--timeout',
-              timeoutMs: 2000,
               report: cancelReport,
               signal: controller.signal,
               runner: { connection: protectedConnection },
@@ -368,7 +366,6 @@ async function main() {
                 url: protectedServer.url,
                 story: 'fixture-button--protected',
                 test: 'first',
-                timeoutMs: 2000,
                 report: fencedReport,
                 runner: { connection: protectedConnection },
               },
@@ -410,297 +407,77 @@ async function main() {
       return;
     }
 
-    const platforms = {};
-    for (const platform of ['macos', 'windows', 'win32']) {
-      const platformManifest = await createDesktopStoryManifest({ projectRoot, getStoryPackages: () => [storyPackage] }, platform);
-      const platformHarness = await createDesktopDriverStoryHarness(platformManifest);
+    let legacyResult;
+    if (mode !== 'lanes') {
+      const platforms = {};
+      for (const platform of ['macos', 'windows', 'win32']) {
+        const platformManifest = await createDesktopStoryManifest({ projectRoot, getStoryPackages: () => [storyPackage] }, platform);
+        const platformHarness = await createDesktopDriverStoryHarness(platformManifest);
+        try {
+          const results = await runWdioStoryTests({
+            config,
+            manifest: platformManifest,
+            platform,
+            targetId: platformHarness.target.id,
+            url: platformHarness.server.url,
+            story: 'fixture-button--named',
+          });
+          platforms[platform] = results.map(({ testName, status }) => ({ testName, status }));
+        } finally {
+          await platformHarness.close();
+        }
+      }
+      let namedFailureResults;
       try {
-        const results = await runWdioStoryTests({
-          config,
-          manifest: platformManifest,
-          platform,
-          targetId: platformHarness.target.id,
-          url: platformHarness.server.url,
-          story: 'fixture-button--named',
-          timeoutMs: 2000,
-        });
-        platforms[platform] = results.map(({ testName, status }) => ({ testName, status }));
-      } finally {
-        await platformHarness.close();
-      }
-    }
-    let namedFailureResults;
-    try {
-      await run('named-failures');
-      throw new Error('Expected named failures.');
-    } catch (error) {
-      if (
-        !(error instanceof Error) ||
-        !(error instanceof WdioStoryTestRunError) ||
-        !('results' in error) ||
-        !Array.isArray(error.results)
-      ) {
-        throw error;
-      }
-      namedFailureResults = error.results;
-    }
-    if (namedFailureResults.map(({ status }) => status).join(',') !== 'failed,failed,passed') {
-      throw new Error('Named test failure prevented independent cases from running.');
-    }
-    const evidencePaths = namedFailureResults.flatMap(({ artifacts }) => (artifacts ?? []).map(({ path }) => path));
-    // Each failure captures a screenshot, page source, and tree.
-    if (evidencePaths.length !== 6 || new Set(evidencePaths).size !== 6) {
-      throw new Error('Named failure evidence collided.');
-    }
-    const filtered = await run('named', { test: '*fresh' });
-    if (filtered.length !== 1 || filtered[0].testName !== 'starts fresh') throw new Error('Named test filtering failed.');
-    const extractionCache = new WdioExtractionCache();
-    await run('named', { test: '*fresh', extractionCache });
-    const extractedReport = JSON.parse(fs.readFileSync(path.join(root, 'artifacts/windows/wdio/run.json'), 'utf8'));
-    assert.equal(extractedReport.diagnostics.sourceExtractions, 1);
-    await run('pass', { extractionCache });
-    const reusedReport = JSON.parse(fs.readFileSync(path.join(root, 'artifacts/windows/wdio/run.json'), 'utf8'));
-    assert.equal(reusedReport.diagnostics.sourceExtractions, 0);
-    assert.equal(reusedReport.diagnostics.sourceCacheHits, 1);
-    const selectionsBeforeMismatch = selections.length;
-    await assert.rejects(
-      run('pass', {
-        extractionCache,
-        manifest: {
-          ...manifest,
-          entries: manifest.entries.map((entry) =>
-            entry.id === 'fixture-button--pass' ? { ...entry, wdio: { ...entry.wdio, digest: 'stale' } } : entry,
-          ),
-        },
-      }),
-      /Executable test source changed/,
-    );
-    assert.equal(selections.length, selectionsBeforeMismatch);
-    let namedTimeout;
-    try {
-      await run('named-timeout');
-      throw new Error('Expected named timeout.');
-    } catch (error) {
-      if (!(error instanceof Error) || !(error instanceof WdioStoryTestRunError) || !('results' in error) || !Array.isArray(error.results))
-        throw error;
-      if (error.results.map(({ status }) => status).join(',') !== 'failed,passed') {
-        throw new Error(`Named timeout recovery failed: ${JSON.stringify(error.results)}`, { cause: error });
-      }
-      namedTimeout = error.results.map(({ testName, status }) => ({ testName, status }));
-    }
-    const passed = await run('pass');
-    assert.ok(passed[0].diagnostics.lifecycle.contextGeneration >= 1);
-    assert.equal(Object.hasOwn(passed[0].diagnostics.lifecycle, 'mountGeneration'), false);
-    assert.equal(passed[0].diagnostics.lifecycle.jsInitializations, 'not-observed');
-    for (const phase of [
-      'sessionAttachMs',
-      'manifestMs',
-      'policyMs',
-      'navigationMs',
-      'workerStartupMs',
-      'workerBodyMs',
-      'workerMs',
-      'receiptsMs',
-      'cleanupMs',
-    ]) {
-      assert.equal(typeof passed[0].diagnostics.phases[phase], 'number', `Missing phase ${phase}`);
-      assert.ok(passed[0].diagnostics.phases[phase] >= 0);
-    }
-    let skipped;
-    try {
-      await run('skip');
-      throw new Error('An all-skipped required cohort must not pass.');
-    } catch (error) {
-      if (
-        !(error instanceof Error) ||
-        !(error instanceof WdioStoryTestRunError) ||
-        !('results' in error) ||
-        !Array.isArray(error.results) ||
-        error.results[0]?.status !== 'skipped'
-      )
-        throw error;
-      skipped = error.results;
-    }
-    const skipReport = new DesktopRunReporter({ artifactsRoot: path.join(root, 'reports'), optional: true, summary: false });
-    await run('skip', { optional: true, report: skipReport });
-    const skipResult = await skipReport.finish();
-    if (skipResult.status !== 'skipped' || skipResult.work.some(({ status }) => status !== 'skipped')) {
-      throw new Error('A skipped callback was reported as passed selected work.');
-    }
-    const failures = [];
-    for (const story of ['fail', 'timeout', 'spin', 'crash', 'exit-zero', 'stale', 'navigation-failure']) {
-      let rejected = false;
-      try {
-        await run(
-          story === 'stale' ? 'pass' : story,
-          story === 'stale' ? { manifest: { ...manifest, platformManifestDigest: 'stale' } } : { reporter: 'dot' },
-        );
+        await run('named-failures');
+        throw new Error('Expected named failures.');
       } catch (error) {
-        rejected = true;
-        if (!(error instanceof Error) || !error.message.includes('Executable wdio stories failed')) throw error;
-        failures.push(story);
+        if (
+          !(error instanceof Error) ||
+          !(error instanceof WdioStoryTestRunError) ||
+          !('results' in error) ||
+          !Array.isArray(error.results)
+        ) {
+          throw error;
+        }
+        namedFailureResults = error.results;
       }
-      if (!rejected) throw new Error(`Expected ${story} to fail.`);
-      const report = JSON.parse(fs.readFileSync(path.join(root, 'artifacts/windows/wdio/run.json'), 'utf8'));
-      if (report.tests[0].status !== 'failed') throw new Error(`${story} was not persisted as failed.`);
-      if (story === 'navigation-failure') {
-        assert.ok(report.tests[0].diagnostics.phases.navigationMs >= 0, 'Failed navigation retains its attempted duration.');
-        assert.equal(Object.hasOwn(report.tests[0].diagnostics.phases, 'workerMs'), false, 'An unstarted phase has no duration.');
+      if (namedFailureResults.map(({ status }) => status).join(',') !== 'failed,failed,passed') {
+        throw new Error('Named test failure prevented independent cases from running.');
       }
-      if (story === 'fail' && !report.tests[0].error.includes('intentional inline assertion')) {
-        throw new Error('Compact reporter lost the worker assertion diagnostic.');
+      const evidencePaths = namedFailureResults.flatMap(({ artifacts }) => (artifacts ?? []).map(({ path }) => path));
+      // Each failure captures a screenshot, page source, and tree.
+      if (evidencePaths.length !== 6 || new Set(evidencePaths).size !== 6) {
+        throw new Error('Named failure evidence collided.');
       }
-    }
-    const repeated = await run('pass');
-    await selectStory({ requestId: 'wrong-page', runId: 'wrong-page', storyId: 'fixture-button--fail' });
-    selections.length = 0;
-    const grouped = await run('*', { tag: 'grouped' });
-    const groupedSelections = [...selections];
-    fs.writeFileSync(
-      path.join(root, 'package.json'),
-      JSON.stringify({ name: 'inline-fixture', exports: { './package.json': './package.json' } }),
-    );
-    fs.mkdirSync(path.join(root, 'node_modules/@fluentui-react-native'), { recursive: true });
-    fs.symlinkSync(
-      packageRoot,
-      path.join(root, 'node_modules/@fluentui-react-native/storybook-desktop'),
-      process.platform === 'win32' ? 'junction' : 'dir',
-    );
-    const smokeManifestPath = path.join(root, 'driver-manifest.json');
-    fs.writeFileSync(
-      smokeManifestPath,
-      JSON.stringify({
-        ...createFixtureStoredManifest(root, manifest),
-        endpoint: 'windows',
-        driverPort: Number(new URL(harness.server.url).port),
-        targetId: harness.target.id,
-        storyManifest: manifest,
-        wdio: { tag: 'grouped', reporter: 'tap', timeoutMs: 2000 },
-      }),
-    );
-    await selectStory({ requestId: 'smoke-wrong-page', runId: 'smoke-wrong-page', storyId: 'fixture-button--fail' });
-    selections.length = 0;
-    const control = await runSmokeControl(packageRoot, root, smokeManifestPath);
-    if (control.code !== 0) throw new Error(control.stderr || control.stdout || `Smoke control exited with ${control.code}.`);
-    const reportRoot = path.join(root, 'artifacts', 'desktop');
-    const runDirectory = fs.readdirSync(reportRoot)[0];
-    const smokeReport = JSON.parse(fs.readFileSync(path.join(reportRoot, runDirectory, 'evidence/windows/static/run.json'), 'utf8'));
-    const smoke = {
-      plans: smokeReport.tests.map(({ storyId }) => storyId),
-      callbacks: smokeReport.wdio.map(({ storyId }) => storyId),
-      selections: [...selections],
-      status: smokeReport.status,
-    };
-    const failureManifest = JSON.parse(fs.readFileSync(smokeManifestPath, 'utf8'));
-    failureManifest.wdio = { story: 'fixture-button--fail', reporter: 'dot', timeoutMs: 2000 };
-    fs.writeFileSync(smokeManifestPath, JSON.stringify(failureManifest));
-    const failedControl = await runSmokeControl(packageRoot, root, smokeManifestPath);
-    const smokeFailureLogged =
-      failedControl.code === 1 &&
-      failedControl.stderr.includes('[storybook] FAIL smoke') &&
-      failedControl.stderr.includes('fixture-button--fail') &&
-      failedControl.stderr.includes('intentional inline assertion');
-    if (!smokeFailureLogged) throw new Error(`Smoke control lost the callback failure: ${failedControl.stderr}`);
-    const buttonConfig = makeDesktopStorybookConfig({ projectRoot, storyPackages: ['@fluentui-react-native/components'] });
-    const buttonManifest = await createDesktopStoryManifest(buttonConfig, 'windows');
-    const buttonWindows = createFakeStoryWindows(buttonManifest);
-    buttonWindows[0] = {
-      ...buttonWindows[0],
-      elements: [
-        ...buttonWindows[0].elements,
-        {
-          id: 'wdio-button',
-          automationId: 'agentic-storybook-button',
-          name: 'Button',
-          role: 'button',
-          scope: 'preview',
-          parentId: 'story-root',
-          windowId: buttonWindows[0].id,
-          rect: { x: 10, y: 10, width: 120, height: 40 },
-        },
-      ],
-    };
-    const buttonHarness = await createDesktopDriverStoryHarness(buttonManifest, { windows: buttonWindows });
-    let button;
-    try {
-      button = await runWdioStoryTests({
-        config: { projectRoot: root, resolvePackage: (name) => buttonConfig.resolvePackage(name) },
-        manifest: buttonManifest,
-        platform: 'windows',
-        targetId: buttonHarness.target.id,
-        url: buttonHarness.server.url,
-        story: 'components-button--default',
-        timeoutMs: 5000,
-      });
-    } finally {
-      await buttonHarness.close();
-    }
-    const restrictedButtonHarness = await createDesktopDriverStoryHarness(buttonManifest, {
-      windows: buttonWindows,
-      features: { physicalClick: false },
-    });
-    let restrictedButton;
-    try {
-      restrictedButton = await runWdioStoryTests({
-        config: { projectRoot: root, resolvePackage: (name) => buttonConfig.resolvePackage(name) },
-        manifest: buttonManifest,
-        platform: 'windows',
-        targetId: restrictedButtonHarness.target.id,
-        url: restrictedButtonHarness.server.url,
-        story: 'components-button--default',
-        timeoutMs: 5000,
-      });
-    } finally {
-      await restrictedButtonHarness.close();
-    }
-    const laneResults = (results) => results.map(({ testName, status }) => ({ testName, status }));
-    // The driver enforces the lane's policy itself, so an accessible lane holds on a driver with physical input enabled.
-    const unmaskedLane = laneResults(await run('lane', { input: 'accessible' }));
-    // A driver that does not confirm the policy fails closed: it could neither hold the lane nor attribute its input.
-    const unconfirmedProxy = await createUnconfirmingProxy(harness.server.url);
-    const unconfirmedReport = new DesktopRunReporter({
-      artifactsRoot: path.join(root, 'lane-reports'),
-      lane: { input: 'accessible', source: 'option', policyEnforced: true },
-      summary: false,
-    });
-    let unconfirmedLane;
-    try {
-      // eslint-disable-next-line @microsoft/sdl/no-insecure-url -- rejected request targets use loopback only
-      for (const requestTarget of ['http://127.0.0.1:1/session', '//127.0.0.1:1/session']) {
-        const status = await new Promise((resolve, reject) => {
-          const request = http.request(
-            { hostname: '127.0.0.1', port: new URL(unconfirmedProxy.url).port, path: requestTarget },
-            (response) => {
-              response.resume();
-              resolve(response.statusCode);
-            },
-          );
-          request.once('error', reject);
-          request.end();
-        });
-        assert.equal(status, 400);
-      }
-      await run('lane', { input: 'accessible', report: unconfirmedReport, url: unconfirmedProxy.url });
-      throw new Error('An accessible lane must not run against a driver that does not confirm its input policy.');
-    } catch (error) {
-      if (!(error instanceof Error) || !(error instanceof WdioStoryTestRunError) || !('results' in error) || !Array.isArray(error.results))
-        throw error;
-      unconfirmedLane = { results: laneResults(error.results), message: error.message };
-    } finally {
-      await unconfirmedProxy.close();
-    }
-    const unconfirmedLaneResult = await unconfirmedReport.finish();
-    // Receipts hold every declared case to what it says, in compatibility mode as in a lane, and the report keeps them.
-    const receiptResults = async (input) => {
-      const report = new DesktopRunReporter({
-        artifactsRoot: path.join(root, 'receipt-reports'),
-        ...(input ? { lane: { input, source: 'option', policyEnforced: true } } : {}),
-        summary: false,
-      });
-      let results;
+      const filtered = await run('named', { test: '*fresh' });
+      if (filtered.length !== 1 || filtered[0].testName !== 'starts fresh') throw new Error('Named test filtering failed.');
+      const extractionCache = new WdioExtractionCache();
+      await run('named', { test: '*fresh', extractionCache });
+      const extractedReport = JSON.parse(fs.readFileSync(path.join(root, 'artifacts/windows/wdio/run.json'), 'utf8'));
+      assert.equal(extractedReport.diagnostics.sourceExtractions, 1);
+      await run('pass', { extractionCache });
+      const reusedReport = JSON.parse(fs.readFileSync(path.join(root, 'artifacts/windows/wdio/run.json'), 'utf8'));
+      assert.equal(reusedReport.diagnostics.sourceExtractions, 0);
+      assert.equal(reusedReport.diagnostics.sourceCacheHits, 1);
+      const selectionsBeforeMismatch = selections.length;
+      await assert.rejects(
+        run('pass', {
+          extractionCache,
+          manifest: {
+            ...manifest,
+            entries: manifest.entries.map((entry) =>
+              entry.id === 'fixture-button--pass' ? { ...entry, wdio: { ...entry.wdio, digest: 'stale' } } : entry,
+            ),
+          },
+        }),
+        /Executable test source changed/,
+      );
+      assert.equal(selections.length, selectionsBeforeMismatch);
+      let namedTimeout;
       try {
-        await run('receipts', { report, ...(input ? { input } : {}) });
-        throw new Error('Expected undeclared input to fail.');
+        await run('named-timeout');
+        throw new Error('Expected named timeout.');
       } catch (error) {
         if (
           !(error instanceof Error) ||
@@ -709,68 +486,308 @@ async function main() {
           !Array.isArray(error.results)
         )
           throw error;
-        results = error.results;
+        if (error.results.map(({ status }) => status).join(',') !== 'failed,passed') {
+          throw new Error(`Named timeout recovery failed: ${JSON.stringify(error.results)}`, { cause: error });
+        }
+        namedTimeout = error.results.map(({ testName, status }) => ({ testName, status }));
       }
-      const reported = await report.finish();
-      return results.map(({ testName, status, input: delivered, error }) => {
-        assert.deepEqual(reported.tests.find(({ title }) => title.endsWith(` / ${testName}`))?.attempts[0].input, delivered);
-        return { testName, status, input: delivered, ...(error ? { error } : {}) };
-      });
-    };
-    const receipts = { compatibility: await receiptResults(), accessible: await receiptResults('accessible') };
-    const maskedHarness = await createDesktopDriverStoryHarness(manifest, {
-      features: { keyboard: false, physicalClick: false, wheel: false },
-    });
-    let accessibleLane;
-    try {
-      accessibleLane = laneResults(
-        await run('lane', { input: 'accessible', targetId: maskedHarness.target.id, url: maskedHarness.server.url }),
+      const passed = await run('pass');
+      assert.ok(passed[0].diagnostics.lifecycle.contextGeneration >= 1);
+      assert.equal(Object.hasOwn(passed[0].diagnostics.lifecycle, 'mountGeneration'), false);
+      assert.equal(passed[0].diagnostics.lifecycle.jsInitializations, 'not-observed');
+      for (const phase of [
+        'sessionAttachMs',
+        'manifestMs',
+        'policyMs',
+        'navigationMs',
+        'workerStartupMs',
+        'workerBodyMs',
+        'workerMs',
+        'receiptsMs',
+        'cleanupMs',
+      ]) {
+        assert.equal(typeof passed[0].diagnostics.phases[phase], 'number', `Missing phase ${phase}`);
+        assert.ok(passed[0].diagnostics.phases[phase] >= 0);
+      }
+      let skipped;
+      try {
+        await run('skip');
+        throw new Error('An all-skipped required cohort must not pass.');
+      } catch (error) {
+        if (
+          !(error instanceof Error) ||
+          !(error instanceof WdioStoryTestRunError) ||
+          !('results' in error) ||
+          !Array.isArray(error.results) ||
+          error.results[0]?.status !== 'skipped'
+        )
+          throw error;
+        skipped = error.results;
+      }
+      const skipReport = new DesktopRunReporter({ artifactsRoot: path.join(root, 'reports'), optional: true, summary: false });
+      await run('skip', { optional: true, report: skipReport });
+      const skipResult = await skipReport.finish();
+      if (skipResult.status !== 'skipped' || skipResult.work.some(({ status }) => status !== 'skipped')) {
+        throw new Error('A skipped callback was reported as passed selected work.');
+      }
+      const failures = [];
+      for (const story of ['fail', 'timeout', 'spin', 'crash', 'exit-zero', 'stale', 'navigation-failure']) {
+        let rejected = false;
+        try {
+          await run(
+            story === 'stale' ? 'pass' : story,
+            story === 'stale' ? { manifest: { ...manifest, platformManifestDigest: 'stale' } } : { reporter: 'dot' },
+          );
+        } catch (error) {
+          rejected = true;
+          if (!(error instanceof Error) || !error.message.includes('Executable wdio stories failed')) throw error;
+          failures.push(story);
+        }
+        if (!rejected) throw new Error(`Expected ${story} to fail.`);
+        const report = JSON.parse(fs.readFileSync(path.join(root, 'artifacts/windows/wdio/run.json'), 'utf8'));
+        if (report.tests[0].status !== 'failed') throw new Error(`${story} was not persisted as failed.`);
+        if (story === 'navigation-failure') {
+          assert.ok(report.tests[0].diagnostics.phases.navigationMs >= 0, 'Failed navigation retains its attempted duration.');
+          assert.equal(Object.hasOwn(report.tests[0].diagnostics.phases, 'workerMs'), false, 'An unstarted phase has no duration.');
+        }
+        if (story === 'fail' && !report.tests[0].error.includes('intentional inline assertion')) {
+          throw new Error('Compact reporter lost the worker assertion diagnostic.');
+        }
+      }
+      const repeated = await run('pass');
+      await selectStory({ requestId: 'wrong-page', runId: 'wrong-page', storyId: 'fixture-button--fail' });
+      selections.length = 0;
+      const grouped = await run('*', { tag: 'grouped' });
+      const groupedSelections = [...selections];
+      fs.writeFileSync(
+        path.join(root, 'package.json'),
+        JSON.stringify({ name: 'inline-fixture', exports: { './package.json': './package.json' } }),
       );
-    } finally {
-      await maskedHarness.close();
+      fs.mkdirSync(path.join(root, 'node_modules/@fluentui-react-native'), { recursive: true });
+      fs.symlinkSync(
+        packageRoot,
+        path.join(root, 'node_modules/@fluentui-react-native/storybook-desktop'),
+        process.platform === 'win32' ? 'junction' : 'dir',
+      );
+      const smokeManifestPath = path.join(root, 'driver-manifest.json');
+      fs.writeFileSync(
+        smokeManifestPath,
+        JSON.stringify({
+          ...createFixtureStoredManifest(root, manifest),
+          endpoint: 'windows',
+          driverPort: Number(new URL(harness.server.url).port),
+          targetId: harness.target.id,
+          storyManifest: manifest,
+          wdio: { tag: 'grouped', reporter: 'tap' },
+        }),
+      );
+      await selectStory({ requestId: 'smoke-wrong-page', runId: 'smoke-wrong-page', storyId: 'fixture-button--fail' });
+      selections.length = 0;
+      const control = await runSmokeControl(packageRoot, root, smokeManifestPath);
+      if (control.code !== 0) throw new Error(control.stderr || control.stdout || `Smoke control exited with ${control.code}.`);
+      const reportRoot = path.join(root, 'artifacts', 'desktop');
+      const runDirectory = fs.readdirSync(reportRoot)[0];
+      const smokeReport = JSON.parse(fs.readFileSync(path.join(reportRoot, runDirectory, 'evidence/windows/static/run.json'), 'utf8'));
+      const smoke = {
+        plans: smokeReport.tests.map(({ storyId }) => storyId),
+        callbacks: smokeReport.wdio.map(({ storyId }) => storyId),
+        selections: [...selections],
+        status: smokeReport.status,
+      };
+      const failureManifest = JSON.parse(fs.readFileSync(smokeManifestPath, 'utf8'));
+      failureManifest.wdio = { story: 'fixture-button--fail', reporter: 'dot' };
+      fs.writeFileSync(smokeManifestPath, JSON.stringify(failureManifest));
+      const failedControl = await runSmokeControl(packageRoot, root, smokeManifestPath);
+      const smokeFailureLogged =
+        failedControl.code === 1 &&
+        failedControl.stderr.includes('[storybook] FAIL smoke') &&
+        failedControl.stderr.includes('fixture-button--fail') &&
+        failedControl.stderr.includes('intentional inline assertion');
+      if (!smokeFailureLogged) throw new Error(`Smoke control lost the callback failure: ${failedControl.stderr}`);
+      legacyResult = {
+        passed: passed.map(({ storyId }) => storyId),
+        skipped: skipped.filter(({ status }) => status === 'skipped').map(({ storyId }) => storyId),
+        repeated: repeated.map(({ storyId }) => storyId),
+        grouped: grouped.map(({ storyId }) => storyId),
+        groupedSelections,
+        smoke,
+        smokeFailureLogged,
+        platforms,
+        namedFailureResults: namedFailureResults.map(({ testName, status }) => ({ testName, status })),
+        namedTimeout,
+        failures,
+      };
     }
-    const physicalLane = laneResults(await run('lane', { input: 'physical' }));
-    // Without a lane a declared physical case must not pin physical click: a host that masks it reports the case unsupported
-    // rather than failing to create the session, as the skip it replaces did not fail.
-    const unmaskedPhysicalHarness = await createDesktopDriverStoryHarness(manifest, { features: { physicalClick: false } });
-    let compatibilityLane;
-    try {
-      compatibilityLane = laneResults(
-        await run('lane', { targetId: unmaskedPhysicalHarness.target.id, url: unmaskedPhysicalHarness.server.url }),
-      );
-    } finally {
-      await unmaskedPhysicalHarness.close();
+
+    let laneResult;
+    if (mode !== 'legacy') {
+      const buttonConfig = makeDesktopStorybookConfig({ projectRoot, storyPackages: ['@fluentui-react-native/components'] });
+      const buttonManifest = await createDesktopStoryManifest(buttonConfig, 'windows');
+      const buttonWindows = createFakeStoryWindows(buttonManifest);
+      buttonWindows[0] = {
+        ...buttonWindows[0],
+        elements: [
+          ...buttonWindows[0].elements,
+          {
+            id: 'wdio-button',
+            automationId: 'agentic-storybook-button',
+            name: 'Button',
+            role: 'button',
+            scope: 'preview',
+            parentId: 'story-root',
+            windowId: buttonWindows[0].id,
+            rect: { x: 10, y: 10, width: 120, height: 40 },
+          },
+        ],
+      };
+      const buttonHarness = await createDesktopDriverStoryHarness(buttonManifest, { windows: buttonWindows });
+      let button;
+      try {
+        button = await runWdioStoryTests({
+          config: { projectRoot: root, resolvePackage: (name) => buttonConfig.resolvePackage(name) },
+          manifest: buttonManifest,
+          platform: 'windows',
+          targetId: buttonHarness.target.id,
+          url: buttonHarness.server.url,
+          story: 'components-button--default',
+        });
+      } finally {
+        await buttonHarness.close();
+      }
+      const restrictedButtonHarness = await createDesktopDriverStoryHarness(buttonManifest, {
+        windows: buttonWindows,
+        features: { physicalClick: false },
+      });
+      let restrictedButton;
+      try {
+        restrictedButton = await runWdioStoryTests({
+          config: { projectRoot: root, resolvePackage: (name) => buttonConfig.resolvePackage(name) },
+          manifest: buttonManifest,
+          platform: 'windows',
+          targetId: restrictedButtonHarness.target.id,
+          url: restrictedButtonHarness.server.url,
+          story: 'components-button--default',
+        });
+      } finally {
+        await restrictedButtonHarness.close();
+      }
+      const laneResults = (results) => results.map(({ testName, status }) => ({ testName, status }));
+      // The driver enforces the lane's policy itself, so an accessible lane holds on a driver with physical input enabled.
+      const unmaskedLane = laneResults(await run('lane', { input: 'accessible' }));
+      // A driver that does not confirm the policy fails closed: it could neither hold the lane nor attribute its input.
+      const unconfirmedProxy = await createUnconfirmingProxy(harness.server.url);
+      const unconfirmedReport = new DesktopRunReporter({
+        artifactsRoot: path.join(root, 'lane-reports'),
+        lane: { input: 'accessible', source: 'option', policyEnforced: true },
+        summary: false,
+      });
+      let unconfirmedLane;
+      try {
+        // eslint-disable-next-line @microsoft/sdl/no-insecure-url -- rejected request targets use loopback only
+        for (const requestTarget of ['http://127.0.0.1:1/session', '//127.0.0.1:1/session']) {
+          const status = await new Promise((resolve, reject) => {
+            const request = http.request(
+              { hostname: '127.0.0.1', port: new URL(unconfirmedProxy.url).port, path: requestTarget },
+              (response) => {
+                response.resume();
+                resolve(response.statusCode);
+              },
+            );
+            request.once('error', reject);
+            request.end();
+          });
+          assert.equal(status, 400);
+        }
+        await run('lane', { input: 'accessible', report: unconfirmedReport, url: unconfirmedProxy.url });
+        throw new Error('An accessible lane must not run against a driver that does not confirm its input policy.');
+      } catch (error) {
+        if (
+          !(error instanceof Error) ||
+          !(error instanceof WdioStoryTestRunError) ||
+          !('results' in error) ||
+          !Array.isArray(error.results)
+        )
+          throw error;
+        unconfirmedLane = { results: laneResults(error.results), message: error.message };
+      } finally {
+        await unconfirmedProxy.close();
+      }
+      const unconfirmedLaneResult = await unconfirmedReport.finish();
+      // Receipts hold every declared case to what it says, in compatibility mode as in a lane, and the report keeps them.
+      const receiptResults = async (input) => {
+        const report = new DesktopRunReporter({
+          artifactsRoot: path.join(root, 'receipt-reports'),
+          ...(input ? { lane: { input, source: 'option', policyEnforced: true } } : {}),
+          summary: false,
+        });
+        let results;
+        try {
+          await run('receipts', { report, ...(input ? { input } : {}) });
+          throw new Error('Expected undeclared input to fail.');
+        } catch (error) {
+          if (
+            !(error instanceof Error) ||
+            !(error instanceof WdioStoryTestRunError) ||
+            !('results' in error) ||
+            !Array.isArray(error.results)
+          )
+            throw error;
+          results = error.results;
+        }
+        const reported = await report.finish();
+        return results.map(({ testName, status, input: delivered, error }) => {
+          assert.deepEqual(reported.tests.find(({ title }) => title.endsWith(` / ${testName}`))?.attempts[0].input, delivered);
+          return { testName, status, input: delivered, ...(error ? { error } : {}) };
+        });
+      };
+      const receipts = { compatibility: await receiptResults(), accessible: await receiptResults('accessible') };
+      const maskedHarness = await createDesktopDriverStoryHarness(manifest, {
+        features: { keyboard: false, physicalClick: false, wheel: false },
+      });
+      let accessibleLane;
+      try {
+        accessibleLane = laneResults(
+          await run('lane', { input: 'accessible', targetId: maskedHarness.target.id, url: maskedHarness.server.url }),
+        );
+      } finally {
+        await maskedHarness.close();
+      }
+      const physicalLane = laneResults(await run('lane', { input: 'physical' }));
+      // Without a lane a declared physical case must not pin physical click: a host that masks it reports the case unsupported
+      // rather than failing to create the session, as the skip it replaces did not fail.
+      const unmaskedPhysicalHarness = await createDesktopDriverStoryHarness(manifest, { features: { physicalClick: false } });
+      let compatibilityLane;
+      try {
+        compatibilityLane = laneResults(
+          await run('lane', { targetId: unmaskedPhysicalHarness.target.id, url: unmaskedPhysicalHarness.server.url }),
+        );
+      } finally {
+        await unmaskedPhysicalHarness.close();
+      }
+      laneResult = {
+        button: button.map(({ testName, status }) => ({ testName, status })),
+        restrictedButton: restrictedButton.map(({ testName, status }) => ({ testName, status })),
+        lane: {
+          accessible: accessibleLane,
+          physical: physicalLane,
+          compatibility: compatibilityLane,
+          unmasked: unmaskedLane,
+          unconfirmed: {
+            ...unconfirmedLane,
+            status: unconfirmedLaneResult.status,
+            failed: unconfirmedLaneResult.counts.failed,
+            excluded: unconfirmedLaneResult.selection?.excluded,
+            reported: unconfirmedLaneResult.failures.map(({ error }) => error.message),
+          },
+        },
+        receipts,
+      };
     }
     process.stdout.write(
       '\nWDIO_RESULT ' +
         JSON.stringify({
-          passed: passed.map(({ storyId }) => storyId),
-          skipped: skipped.filter(({ status }) => status === 'skipped').map(({ storyId }) => storyId),
-          repeated: repeated.map(({ storyId }) => storyId),
-          grouped: grouped.map(({ storyId }) => storyId),
-          groupedSelections,
-          smoke,
-          smokeFailureLogged,
-          button: button.map(({ testName, status }) => ({ testName, status })),
-          restrictedButton: restrictedButton.map(({ testName, status }) => ({ testName, status })),
-          lane: {
-            accessible: accessibleLane,
-            physical: physicalLane,
-            compatibility: compatibilityLane,
-            unmasked: unmaskedLane,
-            unconfirmed: {
-              ...unconfirmedLane,
-              status: unconfirmedLaneResult.status,
-              failed: unconfirmedLaneResult.counts.failed,
-              excluded: unconfirmedLaneResult.selection?.excluded,
-              reported: unconfirmedLaneResult.failures.map(({ error }) => error.message),
-            },
-          },
-          receipts,
-          platforms,
-          namedFailureResults: namedFailureResults.map(({ testName, status }) => ({ testName, status })),
-          namedTimeout,
-          failures,
+          ...legacyResult,
+          ...laneResult,
           attachedOnly: harness.host.actions
             .filter(({ type }) => type === 'close-application')
             .every(({ ownership }) => ownership === 'attached'),

@@ -1,6 +1,8 @@
 import ApplicationServices
 import Foundation
 
+private let webDriverReleaseKey = "\u{E000}"
+
 enum KeyStroke: Equatable {
   case keyCode(CGKeyCode)
   case unicode(String)
@@ -96,7 +98,18 @@ final class InputController {
     }
   }
 
-  func movePointer(to target: CGPoint, durationMilliseconds: Int, token: CancellationToken) throws {
+  func requireCurrentPointer() throws -> CGPoint {
+    guard let position = environment.pointerLocation(), position.x.isFinite, position.y.isFinite else {
+      try fail(ErrorCode.inputFailed, "macOS did not report a readable current pointer position.")
+    }
+    pointer = position
+    pointerInitialized = true
+    return position
+  }
+
+  func movePointer(
+    to target: CGPoint, durationMilliseconds: Int, token: CancellationToken, guardDrag: ((CGPoint) throws -> Void)? = nil
+  ) throws {
     try requireInteractiveInput()
     if !pointerInitialized {
       syncPointer()
@@ -112,6 +125,10 @@ final class InputController {
         y: start.y + (target.y - start.y) * progress
       )
       // Moving with a button held is a drag the application can act on; a bare move only places the pointer.
+      if !pressedButtons.isEmpty {
+        try guardDrag?(position)
+        try token.throwIfCancelled()
+      }
       try postMouse(type: moveEventType(), point: position, button: pressedButtons.last ?? 0, counted: !pressedButtons.isEmpty)
       pointer = position
       if step < steps {
@@ -133,12 +150,16 @@ final class InputController {
     try fail(ErrorCode.inputFailed, "macOS did not move the pointer to the requested native element coordinate.")
   }
 
-  func pointerDown(_ button: Int, token: CancellationToken) throws {
+  func pointerDown(_ button: Int, token: CancellationToken, guardTarget: ((CGPoint) throws -> Void)? = nil) throws {
     try requireInteractiveInput()
     try token.throwIfCancelled()
     _ = try mouseButton(button)
     if pressedButtons.contains(button) {
       return
+    }
+    if let guardTarget {
+      try guardTarget(requireCurrentPointer())
+      try token.throwIfCancelled()
     }
     try postMouse(type: mouseEventType(button: button, down: true), point: pointer, button: button)
     pressedButtons.append(button)
@@ -170,35 +191,48 @@ final class InputController {
     try pointerUp(0, token: token)
   }
 
-  func wheel(deltaX: Double, deltaY: Double, token: CancellationToken) throws {
+  func wheel(
+    deltaX: Double, deltaY: Double, at point: CGPoint? = nil, token: CancellationToken,
+    guardTarget: ((CGPoint) throws -> Void)? = nil
+  ) throws {
     try requireInteractiveInput()
     try token.throwIfCancelled()
+    guard deltaX.isFinite, deltaY.isFinite else {
+      try fail(ErrorCode.invalidParams, "Wheel deltas must be finite numbers.")
+    }
     guard let event = CGEvent(
       scrollWheelEvent2Source: source,
       units: .pixel,
       wheelCount: 2,
       // Quartz scrolls up and left with positive values, while the protocol scrolls down and right with positive deltas.
-      wheel1: Int32(clamping: Int((-deltaY).rounded())),
-      wheel2: Int32(clamping: Int((-deltaX).rounded())),
+      wheel1: quartzWheelDelta(deltaY),
+      wheel2: quartzWheelDelta(deltaX),
       wheel3: 0
     ) else {
       try fail(ErrorCode.inputFailed, "Creating the macOS wheel event failed.")
+    }
+    if let point {
+      event.location = point
+      try guardTarget?(point)
+      try token.throwIfCancelled()
     }
     environment.post(event)
     effects.delivered()
   }
 
-  func keyDown(_ value: String, token: CancellationToken) throws {
-    try requireInteractiveInput()
+  func keyDown(_ value: String, token: CancellationToken, guardTarget: (() throws -> Void)? = nil) throws {
     try token.throwIfCancelled()
     guard isSingleWebDriverKey(value) else {
       try fail(ErrorCode.invalidParams, "A keyDown value must contain exactly one Unicode code point.")
     }
-    if value == "\u{E000}" {
+    if value == webDriverReleaseKey {
       releaseAll()
       return
     }
+    try requireInteractiveInput()
     let stroke = strokeForValue(value)
+    try guardTarget?()
+    try token.throwIfCancelled()
     try postKey(stroke, down: true)
     trackKeyDown(PressedKey(value: value, stroke: stroke), held: &pressedKeys)
   }
@@ -208,12 +242,13 @@ final class InputController {
     guard isSingleWebDriverKey(value) else {
       try fail(ErrorCode.invalidParams, "A keyUp value must contain exactly one Unicode code point.")
     }
-    if value == "\u{E000}" {
+    if value == webDriverReleaseKey {
       releaseAll()
       return
     }
-    try requirePhysicalInput()
     let stroke = strokeForValue(value)
+    guard pressedKeys.contains(where: { $0.stroke == stroke }) else { return }
+    try requirePhysicalInput()
     try postKey(stroke, down: false)
     trackKeyUp(stroke, held: &pressedKeys)
   }
@@ -253,10 +288,19 @@ final class InputController {
     pointerCancel()
   }
 
-  func releaseExact(_ ledger: ReleaseLedger) throws -> (keys: Int, buttons: Int) {
+  func recoverInput(_ ledger: ReleaseLedger, lock: PhysicalInputLock, token: CancellationToken) throws -> (keys: Int, buttons: Int) {
     if ledger.keys.isEmpty && ledger.buttons.isEmpty {
+      if physicalInputAvailable() && environment.session().inputUnavailableReason == nil {
+        try lock.recoverAbandonedOwner()
+      }
       return (0, 0)
     }
+    return try lock.withLock(token: token, timeoutMilliseconds: 5_000, policy: .adopt) {
+      try releaseExact(ledger)
+    }
+  }
+
+  private func releaseExact(_ ledger: ReleaseLedger) throws -> (keys: Int, buttons: Int) {
     try requirePhysicalInput()
     syncPointer()
     for key in ledger.keys.reversed() {
@@ -420,6 +464,34 @@ final class InputController {
     }
     return .unicode(value)
   }
+}
+
+private func quartzWheelDelta(_ delta: Double) -> Int32 {
+  Int32(max(Double(Int32.min), min(Double(Int32.max), (-delta).rounded())))
+}
+
+func requireActionNumber(_ action: JSONObject, _ key: String) throws -> Double {
+  guard let number = action[key] as? NSNumber, !isBoolean(number), number.doubleValue.isFinite else {
+    try fail(ErrorCode.invalidParams, "The action parameter \"\(key)\" must be a finite number.")
+  }
+  return number.doubleValue
+}
+
+func parseActionDuration(_ action: JSONObject) throws -> Int {
+  guard action["duration"] != nil else { return 0 }
+  let value = try requireActionNumber(action, "duration")
+  guard value >= 0, value == value.rounded(.towardZero) else {
+    try fail(ErrorCode.invalidParams, "Action duration must be a non-negative integer.")
+  }
+  return Int(min(30_000, value))
+}
+
+func parseActionButton(_ action: JSONObject) throws -> Int {
+  let value = try requireActionNumber(action, "button")
+  guard (0...4).contains(value), value == value.rounded(.towardZero) else {
+    try fail(ErrorCode.invalidParams, "Pointer buttons must be integers between 0 and 4.")
+  }
+  return Int(value)
 }
 
 func isSingleWebDriverKey(_ value: String) -> Bool {

@@ -1,10 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-import { NativeDesktopHost } from '@fluentui-react-native/desktop-driver';
-import { createDesktopApplicationHost } from '../../lib/applicationOwnership.js';
-import { createDesktopWorkloadClaim, describeDesktopWorkloadOwner } from '../../lib/ownership.js';
-
 function waitForRetirement(timeoutMilliseconds) {
   Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, timeoutMilliseconds);
   process.stderr.write('The native crash-owner retirement deadline expired.\n');
@@ -13,6 +9,12 @@ function waitForRetirement(timeoutMilliseconds) {
 
 const [configurationFile, phase] = process.argv.slice(2);
 if (configurationFile === '--retirement-probe') waitForRetirement(25);
+const [{ NativeDesktopHost }, { createDesktopApplicationHost }, { createDesktopWorkloadClaim, describeDesktopWorkloadOwner }] =
+  await Promise.all([
+    import('@fluentui-react-native/desktop-driver'),
+    import('../../lib/applicationOwnership.js'),
+    import('../../lib/ownership.js'),
+  ]);
 const { artifact, application, directory } = JSON.parse(fs.readFileSync(configurationFile, 'utf8'));
 if (phase !== 'pending' && phase !== 'acquired') throw new Error('Unknown publication interruption phase.');
 const processIdentity = await describeDesktopWorkloadOwner({ helperPath: artifact.executablePath });

@@ -77,6 +77,22 @@ mask and attach-only runner; the catalog never accepts commands or paths from
 an agent. Opted-in Storybook CSF suites run their authored tests against the
 existing hosted driver, not the smoke build or launch lifecycle.
 
+### First-party integration entry points
+
+`./control` and `./supervisor-connection` handle supervisor discovery and
+control, `./managed-host` defines the hosted-driver integration contract, and
+`./runner-connection` connects an attached runner to its reservation. These
+are shipped ESM entry points for lockstep first-party integrations such as
+Storybook Desktop and Desktop MCP. They are not stable extension APIs for
+independently versioned consumers.
+
+The root `createDesktopRunContext` opens a supervised reporting context.
+`acquireHostedDesktopDriver` and `publishDesktopHostManagement` compose the
+driver and management service under that owner. `desktopHostReady` and
+`formatDesktopHostReady` build and format its ready receipt. These are also
+first-party integration surfaces; use `defineDesktopConfig` for application
+and suite configuration.
+
 ## Scope domains
 
 A test can declare `scope` values so it runs only on some targets, such as one

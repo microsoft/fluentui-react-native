@@ -15,7 +15,7 @@ their own build, installation, identity, and lifecycle policy.
 
 All environments need:
 
-- Node.js 22.19 or later;
+- Node.js `^22.19.0 || ^24.0.0 || >=26.0.0`;
 - a package manager capable of installing the package and its WebdriverIO
   dependency;
 - a real, logged-in desktop session for native input and window automation.
@@ -38,9 +38,8 @@ External consumers install the package as a development dependency:
 yarn add --dev @fluentui-react-native/desktop-driver
 ```
 
-The package is not published from this development branch yet. Until its first
-release, repository consumers declare it with `workspace:*`. From the
-monorepo, run its binary with:
+The package is published to npm. Consumers in this monorepo declare it with
+`workspace:*` and can run its binary with:
 
 ```sh
 yarn workspace @fluentui-react-native/desktop-driver exec desktop-driver --help
@@ -49,7 +48,7 @@ yarn workspace @fluentui-react-native/desktop-driver exec desktop-driver --help
 The shorter `desktop-driver` commands in this documentation assume a consumer
 where the package binary is already available.
 
-The package contains JavaScript output, documentation, and `native/**` source.
+The package contains JavaScript output, documentation, and the sources needed to build both native helpers.
 It contains no native binary and has no install or postinstall build.
 
 ## Native toolchains

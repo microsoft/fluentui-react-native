@@ -14,6 +14,7 @@ import { parseNativeObservation } from '../protocol/observation';
 import { createDesktopDriverServer } from '../server/createDesktopDriverServer';
 import type { NativeDriverArtifact, NativeHostJsonMessage } from './types';
 import {
+  hasMacOSHardenedRuntime,
   hashMacOSDriverSources,
   macOSCertificateExtractionArguments,
   macOSDriverSourceFiles,
@@ -93,15 +94,11 @@ describe('native driver build and resolution', () => {
     const root = fs.mkdtempSync(path.join(os.tmpdir(), 'furn-native-caller-'));
     try {
       const anchor = path.resolve(__dirname, '../../lib/native/packageRoot.cjs');
-      const child = spawnSync(
-        process.execPath,
-        ['-e', `process.stdout.write(require(${JSON.stringify(anchor)}).nativeDriverPackageRoot)`],
-        {
-          cwd: root,
-          encoding: 'utf8',
-          timeout: 10_000,
-        },
-      );
+      const child = spawnSync(process.execPath, ['-e', 'process.stdout.write(require(process.argv[1]).nativeDriverPackageRoot)', anchor], {
+        cwd: root,
+        encoding: 'utf8',
+        timeout: 10_000,
+      });
       expect(child.status).toBe(0);
       expect(child.stdout).toBe(path.resolve(__dirname, '../..'));
       expect(fs.existsSync(path.join(child.stdout, 'native', 'protocol.json'))).toBe(true);
@@ -353,6 +350,20 @@ describe('native driver build and resolution', () => {
         name: 'FURN Desktop Driver Development',
       },
     ]);
+  });
+
+  test('recognizes Hardened Runtime only in the CodeDirectory flags field', () => {
+    expect(hasMacOSHardenedRuntime('CodeDirectory v=20500 flags=0x10001(host,runtime) hashes=18\r\n')).toBe(true);
+    expect(hasMacOSHardenedRuntime('CodeDirectory v=20500 flags=0x2(adhoc) description=runtime\n')).toBe(false);
+    expect(hasMacOSHardenedRuntime('CodeDirectory v=20500 flags=0x1(host)\nAuthority=runtime\n')).toBe(false);
+  });
+
+  test('ignores malformed signing output with long whitespace and flag fields', () => {
+    const whitespace = ' '.repeat(50_000);
+    const started = performance.now();
+    expect(parseMacOSSigningIdentities(`${whitespace}\n1) ${'A'.repeat(40)} "Example"${whitespace}no suffix`)).toEqual([]);
+    expect(hasMacOSHardenedRuntime(`CodeDirectory ${'flag=0x1(host) '.repeat(10_000)}runtime`)).toBe(false);
+    expect(performance.now() - started).toBeLessThan(2_000);
   });
 
   windowsTest('builds, reuses, resolves, and handshakes with the Windows helper', async () => {

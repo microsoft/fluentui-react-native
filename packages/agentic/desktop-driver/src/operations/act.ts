@@ -1,10 +1,10 @@
 import { z } from 'zod';
 
 import type { NativeElementSnapshot } from '../host/types.js';
-import { toWebDriverError, WebDriverError } from '../protocol/errors.js';
-import type { WebDriverErrorCode } from '../protocol/errors.js';
+import { toWebDriverError } from '../protocol/errors.js';
+import type { WebDriverError, WebDriverErrorCode } from '../protocol/errors.js';
 import { attachFailureEffect, attachMutationReport, readFailureEffect, readMutationReport } from '../protocol/settlement.js';
-import { operationError } from './envelope.js';
+import { isAuthoredOperationError, operationError } from './envelope.js';
 import { maxActionNameLength, maxTypedTextLength } from './limits.js';
 import { requireBoundedObservation } from './policy.js';
 import { matchesFingerprint } from './proofs.js';
@@ -411,38 +411,19 @@ async function performNamedAction(runtime: OperationRuntime, entry: ReferenceEnt
   );
 }
 
-/** What an agent may be told of a provider's failure. Provider messages quote titles and element ids, so only the code speaks. */
-const providerFailureText: Partial<Record<WebDriverErrorCode, string>> = {
-  'element click intercepted': 'The provider reported that another element would receive the click.',
-  'element not interactable': 'The provider reported that the element cannot be interacted with.',
-  'invalid argument': 'The provider refused the action as invalid.',
-  timeout: 'The provider did not finish the action in time.',
-  'unsupported operation': 'The provider does not support this action on this element.',
-};
-const providerFailureFallback = 'The provider failed to carry out the action.';
-
-/** A provider's failure in fixed words for its code, keeping only the machine reason and native code it gave. */
-function providerFailure(error: unknown): WebDriverError {
-  const { code, data } = toWebDriverError(error);
-  return new WebDriverError(code, providerFailureText[code] ?? providerFailureFallback, {
-    ...(typeof data?.reason === 'string' ? { reason: data.reason } : {}),
-    ...(typeof data?.nativeCode === 'string' ? { nativeCode: data.nativeCode } : {}),
-  });
-}
-
-const isAuthored = (error: unknown): error is WebDriverError => error instanceof WebDriverError && typeof error.data?.reason === 'string';
-
 /**
- * The failure an agent reads for one that happened while acting on `entry`. What this layer authored carries a reason
- * and stays as written. What a provider said is replaced by fixed words for its code, and a provider that no longer has
- * the element or window drops it, as it does for a read. The settled outcome of the failed change rides along.
+ * Retires references whose element or window a provider no longer has, retaining the settled effect for the
+ * operation envelope. Only operation-authored failures skip provider interpretation.
  */
 function readableFailure(runtime: OperationRuntime, entry: ReferenceEntry, error: unknown): unknown {
-  if (isAuthored(error)) {
+  if (isAuthoredOperationError(error)) {
     return error;
   }
   const interpreted = interpretFailure(runtime, { windowId: entry.windowId, within: entry.reference }, error);
-  const failure = attachFailureEffect(isAuthored(interpreted) ? interpreted : providerFailure(interpreted), readFailureEffect(error));
+  const failure = attachFailureEffect(
+    isAuthoredOperationError(interpreted) ? interpreted : toWebDriverError(interpreted),
+    readFailureEffect(error),
+  );
   const report = readMutationReport(error);
   return report ? attachMutationReport(failure, report) : failure;
 }

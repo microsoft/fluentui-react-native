@@ -1,8 +1,16 @@
+import { ChildProcess, spawn } from 'node:child_process';
+import { once } from 'node:events';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+import { createInterface } from 'node:readline';
 
 import { clipDiagnostic, runBoundedCommand, runBuildCommand } from './boundedCommand';
+
+jest.mock('node:child_process', () => {
+  const actual = jest.requireActual<typeof import('node:child_process')>('node:child_process');
+  return { ...actual, spawn: jest.fn(actual.spawn) };
+});
 
 const node = process.execPath;
 
@@ -18,20 +26,47 @@ describe('bounded child process runner', () => {
     expect(result.stdout.endsWith('END')).toBe(true);
   });
 
-  test('terminates a process that ignores the termination request once the deadline passes', async () => {
-    const startedAt = Date.now();
-    const result = await runBoundedCommand(node, ['-e', "process.on('SIGTERM', () => {}); setInterval(() => {}, 1000);"], {
-      killGraceMs: 200,
-      maxOutputBytes: 1_000,
-      timeoutMs: 300,
-    });
+  test('terminates a process that stays alive past its deadline', async () => {
+    const script = [
+      "process.on('SIGTERM', () => process.stdout.write('term\\n'));",
+      "process.stdout.write('ready\\n');",
+      'setInterval(() => {}, 1_000);',
+    ].join('\n');
+    const timeoutMs = 300;
+    const killGraceMs = 200;
+    // Keep real process/pipe I/O, but do not advance the runner's timers until the child is ready.
+    jest.useFakeTimers({ doNotFake: ['nextTick', 'setImmediate', 'queueMicrotask'] });
+    jest.mocked(spawn).mockClear();
+    const result = runBoundedCommand(node, ['-e', script], { killGraceMs, maxOutputBytes: 1_000, timeoutMs });
+    const child = jest.mocked(spawn).mock.results.at(-1)?.value;
+    // Handle a spawn error even if we are still waiting for the fixture's first line.
+    void result.catch(() => undefined);
+    try {
+      if (!child?.stdout) throw new Error('Expected the child stdout pipe.');
+      const output = createInterface({ input: child.stdout });
+      const signal = AbortSignal.timeout(10_000);
+      await expect(once(output, 'line', { signal })).resolves.toEqual(['ready']);
 
-    expect(result.timedOut).toBe(true);
-    if (process.platform !== 'win32') {
-      expect(result.terminationSignal).toBe('SIGKILL');
+      if (process.platform !== 'win32') {
+        const terminated = once(output, 'line', { signal });
+        jest.advanceTimersByTime(timeoutMs);
+        await expect(terminated).resolves.toEqual(['term']);
+      }
+
+      const exited = once(child, 'exit', { signal });
+      jest.advanceTimersByTime(process.platform === 'win32' ? timeoutMs : killGraceMs);
+      await exited;
+      const outcome = await result;
+      expect(outcome).toMatchObject({ timedOut: true });
+      if (process.platform !== 'win32') {
+        expect(outcome.terminationSignal).toBe('SIGKILL');
+      }
+    } finally {
+      jest.useRealTimers();
+      if (child?.exitCode === null && child.signalCode === null) child.kill('SIGKILL');
+      await result.catch(() => undefined);
     }
-    expect(Date.now() - startedAt).toBeLessThan(10_000);
-  });
+  }, 20_000);
 
   test('kills the process and rejects with an abort error when aborted', async () => {
     const controller = new AbortController();
@@ -74,6 +109,16 @@ describe('bounded child process runner', () => {
     await expect(
       runBoundedCommand(path.join(os.tmpdir(), 'furn-missing-command'), [], { maxOutputBytes: 1_000, timeoutMs: 1_000 }),
     ).rejects.toMatchObject({ code: 'ENOENT' });
+  });
+
+  test('preserves a spawn error when descriptor exhaustion leaves no output pipes', async () => {
+    const child = new ChildProcess();
+    jest.mocked(spawn).mockReturnValueOnce(child);
+    const failure = Object.assign(new Error('Cannot create child pipes.'), { code: 'EMFILE' });
+    const pending = runBoundedCommand(node, [], { maxOutputBytes: 1_000, timeoutMs: 1_000 });
+    queueMicrotask(() => child.emit('error', failure));
+
+    await expect(pending).rejects.toBe(failure);
   });
 });
 

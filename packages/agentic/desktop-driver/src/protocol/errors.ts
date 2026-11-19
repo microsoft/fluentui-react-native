@@ -8,6 +8,7 @@ const errorStatuses = {
   'invalid selector': 400,
   'invalid session id': 404,
   'javascript error': 500,
+  'move target out of bounds': 500,
   'no such element': 404,
   'no such window': 404,
   'session not created': 500,

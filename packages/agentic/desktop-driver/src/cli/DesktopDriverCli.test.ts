@@ -1,4 +1,4 @@
-import { spawn } from 'node:child_process';
+import { ChildProcess, spawn } from 'node:child_process';
 import fs from 'node:fs';
 import { createServer } from 'node:net';
 import os from 'node:os';
@@ -10,6 +10,11 @@ import type { DesktopStoryManifest } from '../storybook.js';
 import { createDesktopDriverCommand, runDesktopDriverCli } from './createDesktopDriverCommand';
 
 jest.setTimeout(30_000);
+
+jest.mock('node:child_process', () => {
+  const actual = jest.requireActual<typeof import('node:child_process')>('node:child_process');
+  return { ...actual, spawn: jest.fn(actual.spawn) };
+});
 
 describe('desktop-driver CLI', () => {
   afterEach(() => {
@@ -70,7 +75,7 @@ describe('desktop-driver CLI', () => {
       architecture: undefined,
       buildPolicy: 'never',
       cacheRoot: undefined,
-      configuration: 'release',
+      configuration: undefined,
       force: undefined,
       helperPath: 'driver.exe',
       installRoot: undefined,
@@ -79,6 +84,38 @@ describe('desktop-driver CLI', () => {
     });
     expect(JSON.parse(output[0])).toMatchObject({ artifactId: 'artifact-id', origin: 'built' });
     expect(JSON.parse(output[1])).toMatchObject({ artifactId: 'artifact-id', origin: 'cache' });
+  });
+
+  test('leaves native environment options unset unless an explicit CLI flag overrides them', async () => {
+    const env = jest.replaceProperty(process, 'env', {
+      ...process.env,
+      FURN_DESKTOP_DRIVER_CONFIGURATION: 'debug',
+      FURN_DESKTOP_DRIVER_BUILD_POLICY: 'never',
+    });
+    const artifact = createNativeArtifact();
+    const buildDriver = jest.fn(async () => artifact);
+    const resolveDriver = jest.fn(async () => artifact);
+    const run = (command: string, ...args: string[]) =>
+      createDesktopDriverCommand({ buildDriver, resolveDriver, stdout: { write: () => true } }).parseAsync([
+        'node',
+        'test',
+        command,
+        '--platform',
+        'macos',
+        ...args,
+      ]);
+    try {
+      await run('build-driver');
+      expect(buildDriver).toHaveBeenLastCalledWith(expect.objectContaining({ configuration: undefined }));
+      await run('resolve-driver');
+      expect(resolveDriver).toHaveBeenLastCalledWith(expect.objectContaining({ configuration: undefined, buildPolicy: undefined }));
+      await run('resolve-driver', '--configuration', 'release', '--build-policy', 'if-missing');
+      expect(resolveDriver).toHaveBeenLastCalledWith(expect.objectContaining({ configuration: 'release', buildPolicy: 'if-missing' }));
+      await run('doctor');
+      expect(resolveDriver).toHaveBeenLastCalledWith(expect.objectContaining({ configuration: undefined, buildPolicy: 'never' }));
+    } finally {
+      env.restore();
+    }
   });
 
   test('supports compact JSON and NDJSON result modes without changing the default output', async () => {
@@ -263,7 +300,7 @@ describe('desktop-driver CLI', () => {
       architecture: undefined,
       buildPolicy: 'never',
       cacheRoot: undefined,
-      configuration: 'release',
+      configuration: undefined,
       force: undefined,
       helperPath: undefined,
       installRoot: undefined,
@@ -280,6 +317,24 @@ describe('desktop-driver CLI', () => {
       ready: true,
       result: { executablePath: artifact.executablePath },
     });
+  });
+
+  test('reports a permission probe spawn failure without requiring its stdio pipes', async () => {
+    const output: string[] = [];
+    jest.mocked(spawn).mockImplementationOnce(() => {
+      const child = new ChildProcess();
+      queueMicrotask(() => child.emit('error', Object.assign(new Error('Cannot create permission probe pipes.'), { code: 'EMFILE' })));
+      return child;
+    });
+    const program = createDesktopDriverCommand({
+      resolveDriver: jest.fn(async () => createNativeArtifact()),
+      stdout: { write: (value) => (output.push(String(value)), true) },
+    });
+
+    await program.parseAsync(['node', 'test', 'doctor', '--platform', 'macos', '--permissions']);
+
+    expect(JSON.parse(output.join(''))).toMatchObject({ ready: false, error: { code: 'EMFILE' } });
+    expect(process.exitCode).toBe(1);
   });
 
   test('passes the explicit doctor prompt flag only to macOS permission diagnostics', async () => {
@@ -383,7 +438,7 @@ describe('desktop-driver CLI', () => {
       architecture: undefined,
       buildPolicy: 'never',
       cacheRoot: 'native-cache',
-      configuration: 'release',
+      configuration: undefined,
       force: undefined,
       helperPath: undefined,
       installRoot: undefined,

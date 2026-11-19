@@ -9,6 +9,7 @@ owner_paths:
 
 This document covers the state of the MCP adapter and its measured discovery and interaction costs.
 The adapter is a thin client, not a supervisor.
+This is an ESM-only 0.x preview, not production qualification.
 Done means the stated implementation exists and is covered by deterministic tests; it does not mean every native endpoint is qualified.
 Parent issue: [desktop driver improvements (#4435)](https://github.com/microsoft/fluentui-react-native/issues/4435).
 See [connection](connection.md) and [tools](tools.md) for exact behavior.
@@ -90,6 +91,7 @@ Generic AppKit and Win32 fixtures exercised supervisor-mode management; selected
 - Connection disposal revokes and drains the child, including unknown session ids.
 - A failed delete or disconnect keeps known-session responsibility; the bounded dispose wait leaves late cleanup attached.
 - Cleanup against an unreachable service cannot be guaranteed, so service drain and expiry remain necessary.
+- In supervisor mode, a descriptor naming a different incarnation requires restarting the adapter. Nothing is replayed.
 - Fake-host tests validate portable controller semantics, not native ownership, signing, TCC, Windows ACLs, DPI or process containment.
 
 ### Open work

@@ -17,3 +17,14 @@ changesets for changed public packages and rejects private-package and major bum
 
 GitHub Actions opens version-bump pull requests automatically; `yarn changeset:version` applies version bumps.
 Publishing runs in Azure Pipelines through `.ado/azure-pipelines.publish.yml`.
+
+Do not introduce a public package that needs unreleased workspace dependency
+changes at the versions it will publish with. Release those dependencies first
+or publish their bumps together with the new package. Version PRs regenerate
+automatically after the source changes land; make corrections in the changesets.
+
+The PR publish dry run runs `yarn smoke:desktop-tarballs _packed` when there
+are tarballs. It installs new desktop tarballs together in a fresh consumer,
+imports their public library entry points, resolves the managed service
+bootstrap without starting it, and checks CLI help. This does not replace
+target-OS builds or native tests.

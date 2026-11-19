@@ -67,6 +67,10 @@ and invokes the checked-in project with:
 No CMake, NuGet restore, .NET runtime, or Windows App SDK is required by the
 helper.
 
+The helper restricts implicit dependency and default runtime DLL lookup to
+System32. Startup disables system error dialogs so a failed helper cannot
+remain alive waiting for a dialog to be dismissed.
+
 ## Application identity
 
 Launch requires:
@@ -212,11 +216,15 @@ with one unmodified key, such as `s` on a US layout, as that virtual key, as a
 user's press would. Applications then observe its key and code, so key-based
 handlers such as type-ahead match it. Other characters, dead-key characters,
 and letters while Caps Lock is on are injected as Unicode packets. Element
-`sendKeys` text always uses Unicode packets.
+`sendKeys` uses Unicode packets for ordinary text and virtual keys for WebDriver
+special keys and line feeds (Return).
 
 Windows and Win32 share implementation but retain distinct endpoint and
 renderer capabilities. Minimized-window capture remains unsupported rather
 than changing app state through an implicit restore.
+After a Direct3D device removal or reset, the helper closes the frame pool,
+recreates the device, and retries capture once. A second failure is reported
+as `capture-failed`.
 
 Window activation treats a foreground window owned by the target window as
 already active, as macOS does for application activation. Reactivating the
@@ -316,6 +324,8 @@ chain reaches the verified primary window. Known tooltip and IME helper
 classes stay excluded. Initial admission requires a bounded UIA content-view
 probe to verify the exact native root handle/process and find an exact-process
 content child; tooltip content and unreadable content do not qualify. The
+first listing that needs a content probe initializes UI Automation itself;
+failure to initialize reports `automation-failed`. The
 helper rechecks ownership, process, visibility, bounds, and the
 primary/candidate fingerprints after the provider read before registering the
 opaque window identity.
@@ -365,8 +375,18 @@ If cleanup fails, the helper retains the unreleased input and lock for a later
 retry; a failed physical mutation reports effect `unknown`, and `dispose`
 refuses to acknowledge while input remains down. If the worker exits first,
 an abandoned mutex can warn one waiting helper, but is not a persistent
-recovery barrier. A `SendInput` call that injects fewer events than requested
+recovery barrier. With an empty ledger, `--release-input` tries the existing
+mutex with no wait, releases it if acquired (including after abandonment),
+and reports zero released keys and buttons. A live holder or unavailable
+physical input is a successful no-op. A `SendInput` call that injects fewer events than requested
 fails as `input-failed` and names UIPI, a secure desktop, or blocked input.
+
+The helper rejects wheel deltas and DPI-scaled pointer or window coordinates
+outside the native integer range as `invalid-params`, rather than wrapping them.
+In-range durations still use the 30-second ceiling per action.
+Missing or empty element bounds and viewport client areas are not pointer
+origins: the helper returns `move-target-out-of-bounds` without moving the
+pointer.
 
 `click` mode `auto` falls back to accessibility activation when physical input
 is unavailable, and an explicit `physical` request reports `input-unavailable`.
@@ -500,11 +520,10 @@ effect is `unknown` and the refusal says it was cancelled before it settled.
 Accessibility click tries `Invoke`, `Toggle`, `SelectionItem`, then
 `ExpandCollapse`. On Win32 controls `Invoke` is posted: the provider accepts
 the call and the application applies the effect afterwards, so callers poll for
-the visible result. Only a pattern the element does not implement moves on to
-the next one, and only an element without any of them is unsupported; a pattern
-query that fails otherwise fails as `automation-failed`, and one for an element
-that went away as `stale-element`. Named accessibility actions and a `semantic`
-clear classify their pattern queries the same way.
+the visible result. An unimplemented pattern or a query returning `E_FAIL`
+moves on to the next pattern. A different query failure is `automation-failed`,
+or `stale-element` if the element went away. Named accessibility actions and a
+`semantic` clear classify their pattern queries the same way.
 
 Legacy-only activation is refused before dispatch as `unsupported-operation`
 with `data.reason: activation-unsupported` and effect `none`, even when the
@@ -557,7 +576,7 @@ point they are dispatched:
 
 - each UI Automation pattern action and value write (`Invoke`, `Toggle`,
   `Select`, `AddToSelection`, `RemoveFromSelection`, `ScrollIntoView`,
-  `Expand`/`Collapse`, `DoDefaultAction`, `SetValue`), bracketed by
+  `Expand`/`Collapse`, `SetValue`), bracketed by
   `RecordDispatching()` and `RecordSettled()`;
 - each window restore and move that `setWindowRect` posts, bracketed the same
   way, so a window that stops answering before the change lands leaves the

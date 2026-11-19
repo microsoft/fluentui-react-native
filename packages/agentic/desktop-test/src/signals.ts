@@ -7,8 +7,6 @@ export type DesktopInterruptHandlers = {
   terminate(signal: NodeJS.Signals): void;
 };
 
-const interruptSignals = ['SIGINT', 'SIGTERM', 'SIGHUP'] as const;
-
 /**
  * Keeps interrupt handlers installed until the returned function is called, which must happen only after cleanup
  * completes: a signal that arrives during cleanup must not fall back to Node's default and kill the process mid-disposal.
@@ -16,6 +14,8 @@ const interruptSignals = ['SIGINT', 'SIGTERM', 'SIGHUP'] as const;
  * next run to inspect.
  */
 export function handleDesktopInterrupts(handlers: DesktopInterruptHandlers): () => void {
+  const interruptSignals: NodeJS.Signals[] = ['SIGINT', 'SIGTERM', 'SIGHUP'];
+  if (process.platform === 'win32') interruptSignals.push('SIGBREAK');
   let received = 0;
   const listener = (signal: NodeJS.Signals) => {
     received++;

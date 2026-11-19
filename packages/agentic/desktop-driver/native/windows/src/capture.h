@@ -41,10 +41,12 @@ class CaptureEngine {
   EncodedImage Encode(const RawFrame& frame, const RECT& cropInFrame);
 
  private:
+  RawFrame CaptureWindowAttempt(HWND window, const CancellationToken& token);
   struct Impl;
   std::unique_ptr<Impl> impl_;
 };
 
 POINT ResolveCaptureOrigin(HWND window, UINT capturedWidth, UINT capturedHeight);
+void RunCaptureRecoverySelfTests(void (*check)(bool, const std::string&));
 
 }  // namespace furn

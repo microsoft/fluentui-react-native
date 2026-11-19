@@ -9,6 +9,11 @@ struct CommandResult {
   var binaryMetadata: JSONObject?
 }
 
+struct ActionOriginFrames {
+  let element: (String, CancellationToken) throws -> CGRect?
+  let viewport: () throws -> CGRect?
+}
+
 final class Driver {
   // Commands whose failure or cancellation can leave the target changed. Lifecycle commands are not tracked.
   private static let trackedMutations: Set<String> = [
@@ -26,19 +31,24 @@ final class Driver {
   private let input: InputController
   private let capture = CaptureEngine()
   private let inputLock: PhysicalInputLock
+  private let actionOriginFrames: ActionOriginFrames?
+  private let actionTargetOwnership: ActionTargetOwnership?
   private var persistentInputLock = false
   // Commands execute serially on the worker thread, so one current journal entry is sufficient.
   private var journalEntry: Int?
 
-  /// `input` and `inputLock` are replaceable so self-tests drive the real command paths without posting events or
-  /// holding the machine's input lock.
+  /// Input and action data sources are replaceable so self-tests do not depend on live UI or post events.
   init(
     effects: EffectLedger = EffectLedger(),
     input: InputController? = nil,
-    inputLock: PhysicalInputLock = .shared
+    inputLock: PhysicalInputLock = .shared,
+    actionOriginFrames: ActionOriginFrames? = nil,
+    actionTargetOwnership: ActionTargetOwnership? = nil
   ) {
     self.effects = effects
     self.inputLock = inputLock
+    self.actionOriginFrames = actionOriginFrames
+    self.actionTargetOwnership = actionTargetOwnership
     accessibility = AccessibilityEngine(effects: effects)
     self.input = input ?? InputController(effects: effects)
   }
@@ -662,6 +672,20 @@ final class Driver {
     let ticks = sources.reduce(0) { maximum, source in
       max(maximum, (source["actions"] as? [Any])?.count ?? 0)
     }
+    let ownership = actionTargetOwnership ?? ActionTargetOwnership(
+      windowOwner: accessibility.actionWindowOwner,
+      focusedApplication: applications.inputForegroundPID,
+      leaseStarts: applications.inputLeaseStarts,
+      observe: ApplicationIncarnation.observeExact,
+      activatePrimary: { token in
+        guard let window = try self.applications.primaryWindowForInputActivation() else { return false }
+        try token.throwIfCancelled()
+        try self.activate(window, token: token)
+        return true
+      }
+    )
+    var firstKeyPress = true
+    let guardPointer: (CGPoint) throws -> Void = { point in try ownership.requirePointerTarget(point, token: token) }
     for tick in 0..<ticks {
       try token.throwIfCancelled()
       var pause = 0
@@ -673,7 +697,7 @@ final class Driver {
         let type = optionalString(action, "type") ?? ""
         let sourceType = optionalString(source, "type") ?? "none"
         if type == "pause" {
-          pause = max(pause, actionDuration(action))
+          pause = max(pause, try parseActionDuration(action))
           continue
         }
         switch sourceType {
@@ -682,7 +706,10 @@ final class Driver {
             try fail(ErrorCode.invalidParams, "A key action value must contain exactly one Unicode code point.")
           }
           if type == "keyDown" {
-            try input.keyDown(value, token: token)
+            try input.keyDown(value, token: token) {
+              try ownership.requireKeyboardTarget(allowActivation: firstKeyPress, token: token)
+              firstKeyPress = false
+            }
           } else if type == "keyUp" {
             try input.keyUp(value, token: token)
           } else {
@@ -692,13 +719,15 @@ final class Driver {
           if type == "pointerMove" {
             try input.movePointer(
               to: try resolveActionPoint(action, token: token),
-              durationMilliseconds: actionDuration(action),
-              token: token
+              durationMilliseconds: try parseActionDuration(action),
+              token: token,
+              guardDrag: guardPointer
             )
           } else if type == "pointerDown" {
-            try input.pointerDown(actionButton(action), token: token)
+            let button = try parseActionButton(action)
+            try input.pointerDown(button, token: token, guardTarget: guardPointer)
           } else if type == "pointerUp" {
-            try input.pointerUp(actionButton(action), token: token)
+            try input.pointerUp(parseActionButton(action), token: token)
           } else if type == "pointerCancel" {
             input.pointerCancel()
           } else {
@@ -708,12 +737,13 @@ final class Driver {
           guard type == "scroll" else {
             try fail(ErrorCode.invalidParams, "Wheel input sources support only scroll and pause.")
           }
-          try input.movePointer(to: resolveActionPoint(action, token: token), durationMilliseconds: 0, token: token)
-          try input.wheel(
-            deltaX: number(action, "deltaX"),
-            deltaY: number(action, "deltaY"),
-            token: token
-          )
+          let deltaX = try requireActionNumber(action, "deltaX")
+          let deltaY = try requireActionNumber(action, "deltaY")
+          let point = try resolveActionPoint(action, token: token)
+          try guardPointer(point)
+          try input.movePointer(to: point, durationMilliseconds: 0, token: token, guardDrag: guardPointer)
+          let actual = try input.requireCurrentPointer()
+          try input.wheel(deltaX: deltaX, deltaY: deltaY, at: actual, token: token, guardTarget: guardPointer)
         case "none":
           try fail(ErrorCode.invalidParams, "None input sources support only pause.")
         default:
@@ -727,37 +757,34 @@ final class Driver {
   }
 
   private func resolveActionPoint(_ action: JSONObject, token: CancellationToken) throws -> CGPoint {
-    let x = CGFloat(number(action, "x"))
-    let y = CGFloat(number(action, "y"))
+    let x = try requireActionNumber(action, "x")
+    let y = try requireActionNumber(action, "y")
+    let coordinateRange = Double(Int32.min)...Double(Int32.max)
+    guard coordinateRange.contains(x), coordinateRange.contains(y) else {
+      try fail(ErrorCode.invalidParams, "Action coordinates must be within the signed 32-bit range.")
+    }
     if let origin = action["origin"] as? JSONObject {
       let elementID = try requireString(origin, "elementId")
-      let window = try windowForElement(elementID)
-      let snapshot = try accessibility.snapshot(elementID: elementID, window: window, token: token)
-      return CGPoint(x: snapshot.screenRect.midX + x, y: snapshot.screenRect.midY + y)
+      let frame = try requireActionOriginFrame("element") {
+        if let actionOriginFrames {
+          return try actionOriginFrames.element(elementID, token)
+        }
+        return try accessibility.readActionOriginFrame(elementID: elementID, window: windowForElement(elementID), token: token)
+      }
+      return CGPoint(x: frame.midX + x, y: frame.midY + y)
     }
     if action["origin"] as? String == "pointer" {
-      return CGPoint(x: input.pointer.x + x, y: input.pointer.y + y)
+      let pointer = try input.requireCurrentPointer()
+      return CGPoint(x: pointer.x + x, y: pointer.y + y)
     }
-    guard
-      let lease = applications.primaryLease(),
-      let primaryWindowID = lease.primaryWindowID
-    else {
-      try fail(
-        ErrorCode.invalidParams,
-        "The helper does not hold an application window to resolve viewport coordinates against."
-      )
+    let frame = try requireActionOriginFrame("viewport") {
+      if let actionOriginFrames {
+        return try actionOriginFrames.viewport()
+      }
+      guard let primaryWindowID = applications.primaryLease()?.primaryWindowID else { return nil }
+      return try applications.requireWindow(primaryWindowID).readActionOriginFrame()
     }
-    let window = try applications.requireWindow(primaryWindowID)
-    let frame = try window.currentFrame()
     return CGPoint(x: frame.minX + x, y: frame.minY + y)
-  }
-
-  private func actionDuration(_ action: JSONObject) -> Int {
-    max(0, min(30_000, integer(action, "duration")))
-  }
-
-  private func actionButton(_ action: JSONObject) -> Int {
-    integer(action, "button")
   }
 
   private func captureResult(_ image: EncodedImage) throws -> CommandResult {

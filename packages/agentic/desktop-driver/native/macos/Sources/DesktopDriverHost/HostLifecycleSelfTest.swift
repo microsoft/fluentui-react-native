@@ -23,7 +23,9 @@ private final class HostHarness: @unchecked Sendable {
     signal(SIGPIPE, SIG_IGN)
     let effects = EffectLedger()
     input = InputController(effects: effects, environment: recorder.environment)
-    host = Host(driver: Driver(effects: effects, input: input, inputLock: PhysicalInputLock(baseName: lockName)))
+    host = Host(driver: Driver(
+      effects: effects, input: input, inputLock: PhysicalInputLock(baseName: lockName), actionTargetOwnership: .selfTestLease
+    ))
     writer = FrameWriter(toHost.fileHandleForWriting)
     host.beforeExecuteForTesting = { [self] id, _ in
       state.lock()

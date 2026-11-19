@@ -88,6 +88,7 @@ final class InputRecorder: @unchecked Sendable {
 
 extension SelfTestRunner {
   func testInputIntegrity() {
+    testActionValueBounds()
     let target = CGPoint(x: 120, y: 80)
 
     // A move that only places the pointer is idempotent and must not count.
@@ -288,5 +289,59 @@ extension SelfTestRunner {
         && InputRecorder.activeSession.inputUnavailableReason == nil,
       "an unreadable login session blocks physical input while an active one does not"
     )
+  }
+
+  private func testActionValueBounds() {
+    let recorder = InputRecorder()
+    let effects = EffectLedger()
+    let lock = PhysicalInputLock(baseName: "furn-desktop-driver-self-test-\(UUID().uuidString)")
+    defer { lock.cleanupSelfTestFiles() }
+    let driver = Driver(
+      effects: effects, input: InputController(effects: effects, environment: recorder.environment), inputLock: lock,
+      actionTargetOwnership: .selfTestLease
+    )
+    let token = CancellationToken()
+
+    do {
+      let raw = """
+        {"actions":[{"type":"wheel","actions":[{"type":"scroll","origin":"pointer","x":0,"y":0,"deltaX":-1e300,"deltaY":1e300}]}]}
+        """
+      let params = try requireObject(parseJSON(Data(raw.utf8)), "Expected a wheel request object.")
+      _ = try driver.execute(command: "performActions", params: params, token: token)
+      let deltas = recorder.scrollDeltas
+      check(
+        deltas.count == 1 && deltas.first?.vertical == Int64(Int32.min) && deltas.first?.horizontal == Int64(Int32.max),
+        "finite wheel deltas larger than Int saturate after sign conversion"
+      )
+      let duration = try parseActionDuration(["duration": 1e300])
+      check(duration == 30_000, "large finite action durations are capped before integer conversion")
+    } catch {
+      check(false, "oversize action values convert without trapping: \(error)")
+    }
+
+    let invalidActions: [(String, JSONObject)] = [
+      ("wheel", ["type": "scroll", "origin": "pointer", "x": 0, "y": 0, "deltaX": true, "deltaY": 0]),
+      ("pointer", ["type": "pointerMove", "origin": "pointer", "x": 1e300, "y": 0]),
+      ("pointer", ["type": "pointerDown", "button": 1e300]),
+      ("none", ["type": "pause", "duration": 0.5]),
+    ]
+    let postsBefore = recorder.posted.count
+    for (source, action) in invalidActions {
+      do {
+        _ = try driver.execute(
+          command: "performActions",
+          params: ["actions": [["type": source, "actions": [action]]]],
+          token: token
+        )
+        check(false, "malformed \(source) action was accepted")
+      } catch let error as HelperError {
+        check(
+          error.code == ErrorCode.invalidParams && error.effect == .noEffect && recorder.posted.count == postsBefore,
+          "malformed \(source) action fails before posting input"
+        )
+      } catch {
+        check(false, "malformed \(source) action returns a helper error: \(error)")
+      }
+    }
   }
 }

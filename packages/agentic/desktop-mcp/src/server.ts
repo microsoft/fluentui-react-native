@@ -1,17 +1,16 @@
 import { maxRequestIdLength, lookupOperation } from '@fluentui-react-native/desktop-driver/operations';
 import type { CaptureResult } from '@fluentui-react-native/desktop-driver/operations';
 import { desktopWorkloadInputSchema } from '@fluentui-react-native/desktop-test/control';
-import type { DesktopSupervisorConnector } from '@fluentui-react-native/desktop-test/supervisor-connection';
 import { McpServer, ResourceTemplate } from '@modelcontextprotocol/sdk/server/mcp.js';
 import type { RequestHandlerExtra } from '@modelcontextprotocol/sdk/shared/protocol.js';
 import { ErrorCode } from '@modelcontextprotocol/sdk/types.js';
 import type { CallToolResult, ServerNotification, ServerRequest } from '@modelcontextprotocol/sdk/types.js';
 import { z } from 'zod';
 
-import type { ConnectDesktopDriver } from './connection.js';
+import type { ConnectDesktopDriver, RestartAwareSupervisorConnector } from './connection.js';
 import { AdapterError, DesktopController, isWebDriverError } from './controller.js';
 import { errorResult, jsonResult } from './results.js';
-import { WorkloadController } from './workloadController.js';
+import { supervisorConnectionError, WorkloadController } from './workloadController.js';
 
 export type DesktopDriverMcpServerOptions = {
   /** Returns a verified client and authority identity; called again after transport failure or authority invalidation. */
@@ -26,7 +25,7 @@ export type DesktopMcpServerOptions =
   | ({ mode: 'driver-only' } & DesktopDriverMcpServerOptions)
   | {
       mode: 'supervisor';
-      connector: DesktopSupervisorConnector;
+      connector: RestartAwareSupervisorConnector;
       progressIntervalMs?: number;
       version: string;
     };
@@ -122,7 +121,13 @@ export function createDesktopMcpServer(options: DesktopMcpServerOptions): McpSer
   if (options.mode === 'driver-only') return createDesktopDriverMcpServer(options);
   return createServer(
     {
-      connect: async () => (await options.connector.connect()).verifyDriver(),
+      connect: async () => {
+        try {
+          return await (await options.connector.connect()).verifyDriver();
+        } catch (error) {
+          throw supervisorConnectionError(error);
+        }
+      },
       progressIntervalMs: options.progressIntervalMs,
       version: options.version,
     },
@@ -134,7 +139,7 @@ export function createDesktopDriverMcpServer(options: DesktopDriverMcpServerOpti
   return createServer(options);
 }
 
-function createServer(options: DesktopDriverMcpServerOptions, connector?: DesktopSupervisorConnector): McpServer {
+function createServer(options: DesktopDriverMcpServerOptions, connector?: RestartAwareSupervisorConnector): McpServer {
   const controller = new DesktopController(options.connect);
   const workloads = connector ? new WorkloadController(connector) : undefined;
   const progressIntervalMs = options.progressIntervalMs ?? defaultProgressIntervalMs;
@@ -148,13 +153,31 @@ function createServer(options: DesktopDriverMcpServerOptions, connector?: Deskto
     },
   );
 
+  let restarted = false;
+  const restartError = () =>
+    new AdapterError(
+      'supervisor-restarted',
+      'The private descriptor names a new supervisor. Restart the MCP adapter; do not replay unresolved work.',
+    );
+  const classifyFailure = async (error: unknown) => {
+    if (
+      error instanceof AdapterError &&
+      error.reason === 'service-unavailable' &&
+      (await connector?.restartDetected?.().catch(() => false))
+    ) {
+      restarted = true;
+      return restartError();
+    }
+    return error;
+  };
   const tool =
     <Args>(work: (args: Args, extra: Extra) => Promise<CallToolResult>) =>
     async (args: Args, extra: Extra): Promise<CallToolResult> => {
       try {
+        if (restarted) throw restartError();
         return await withProgress(extra, progressIntervalMs, () => work(args, extra));
       } catch (error) {
-        return errorResult(error);
+        return errorResult(await classifyFailure(error));
       }
     };
 
@@ -300,25 +323,30 @@ function createServer(options: DesktopDriverMcpServerOptions, connector?: Deskto
       const session = single(variables.session);
       const artifact = single(variables.artifact);
       try {
+        if (restarted) throw restartError();
         const { data, mimeType } = await controller.readArtifact(session, artifact, extra.signal);
         return { contents: [{ blob: data.toString('base64'), mimeType, uri: uri.href }] };
       } catch (error) {
-        throw resourceError(error);
+        throw resourceError(await classifyFailure(error));
       }
     },
   );
 
-  server.server.onclose = () => {
-    void controller.dispose();
-    void connector?.close().catch(() => {
-      console.error('desktop-mcp: workload cleanup is incomplete; the supervisor must drain or fence the host.');
-    });
-  };
+  let closing: Promise<void> | undefined;
   const close = server.close.bind(server);
-  server.close = async () => {
-    const outcomes = await Promise.allSettled([connector?.close(), close(), controller.dispose()]);
-    if (outcomes.some((outcome) => outcome.status === 'rejected')) {
-      throw new Error('Desktop MCP cleanup is not confirmed.');
+  server.close = () =>
+    (closing ??= Promise.resolve().then(async () => {
+      const outcomes = await Promise.allSettled([controller.dispose(), connector?.close(), close()]);
+      if (outcomes.some((outcome) => outcome.status === 'rejected')) {
+        closing = undefined;
+        throw new Error('Desktop MCP cleanup is not confirmed.');
+      }
+    }));
+  server.server.onclose = () => {
+    if (!closing) {
+      void server.close().catch(() => {
+        console.error('desktop-mcp: cleanup is incomplete; the supervisor must drain or fence the host.');
+      });
     }
   };
   return server;

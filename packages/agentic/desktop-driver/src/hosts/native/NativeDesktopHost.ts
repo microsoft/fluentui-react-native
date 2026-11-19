@@ -1,4 +1,5 @@
 import { spawn } from 'node:child_process';
+import { randomUUID } from 'node:crypto';
 import path from 'node:path';
 
 import type {
@@ -58,9 +59,11 @@ export type NativeDisabledInputFeature = 'keyboard' | 'physicalClick' | 'wheel';
 export const FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES = 'FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES';
 
 const defaultCancellationTimeoutMs: Readonly<Record<NativeDriverProvider, number>> = { macos: 2000, windows: 10_000 };
+const nativeInputFeatures: readonly NativeDisabledInputFeature[] = ['keyboard', 'physicalClick', 'wheel'];
 
 /** The most stderr text or output kept from the input recovery process. */
 const maximumRecoveryOutputBytes = 16 * 1024;
+const recoveryGraceMs = 500;
 
 function requireApplicationIdentity(value: unknown, endpoint: DesktopEndpoint): NativeApplicationIdentity {
   const result = value as Partial<NativeApplicationIdentity> | null;
@@ -476,11 +479,18 @@ export class NativeDesktopHost implements DesktopHost {
       return Promise.reject(attachFailureEffect(new NativeDriverError('host-closed', 'Native driver helper is closed.'), 'none'));
     }
     if (!this.processPromise) {
+      const inputLockOwner =
+        this.artifact.provider === 'macos'
+          ? this.disabledInputFeatures.size === nativeInputFeatures.length
+            ? ''
+            : randomUUID()
+          : undefined;
       this.processPromise = NativeHostProcess.start({
         artifact: this.artifact,
         cancellationTimeoutMs: this.cancellationTimeoutMs,
+        inputLockOwner,
         onStderr: this.onStderr,
-        recoverInput: () => this.recoverInput(),
+        recoverInput: () => this.recoverInput(inputLockOwner),
         signal: this.lifetime.signal,
       }).then((process) => {
         process.on('event', (message) => this.onEvent(message));
@@ -496,55 +506,81 @@ export class NativeDesktopHost implements DesktopHost {
     return waitForStartup(this.processPromise, signal);
   }
 
-  private recoverInput(): Promise<void> {
+  private recoverInput(inputLockOwner: string | undefined): Promise<void> {
     const keys = [...this.potentialKeys];
     const buttons = [...this.potentialButtons];
-    if (keys.length === 0 && buttons.length === 0) {
-      return Promise.resolve();
-    }
     return new Promise((resolve, reject) => {
-      const child = spawn(this.artifact.executablePath, ['--release-input'], nativeHelperSpawnOptions());
       const stdout = new BoundedOutput(maximumRecoveryOutputBytes);
       const stderr = new BoundedOutput(maximumRecoveryOutputBytes);
       let settled = false;
+      let exited = false;
       let stdinError: Error | undefined;
       let timeoutError: NativeDriverError | undefined;
-      const timeout = setTimeout(() => {
-        timeoutError = new NativeDriverError('input-recovery-timeout', 'Native input recovery did not complete within 5 seconds.');
-        child.kill();
-      }, 5000);
-      child.stdout.on('data', (chunk: Buffer) => stdout.push(chunk));
-      child.stderr.on('data', (chunk: Buffer) => stderr.push(chunk));
-      child.once('error', (error) => {
-        if (!settled) {
-          settled = true;
-          clearTimeout(timeout);
-          reject(error);
-        }
-      });
-      child.stdin.once('error', (error) => {
-        stdinError = error;
-      });
-      child.once('exit', () => {
-        // A grandchild that inherited the pipes would hold `close` back indefinitely.
-        setTimeout(() => {
-          child.stdout.destroy();
-          child.stderr.destroy();
-          child.stdin.destroy();
-        }, 500).unref();
-      });
-      child.once('close', (code) => {
+      let killTimer: NodeJS.Timeout | undefined;
+      let closeTimer: NodeJS.Timeout | undefined;
+      const releasePipes = () => {
+        child.stdout?.destroy();
+        child.stderr?.destroy();
+        child.stdin?.destroy();
+      };
+      const finish = (error?: Error) => {
         if (settled) {
           return;
         }
         settled = true;
         clearTimeout(timeout);
+        clearTimeout(killTimer);
+        clearTimeout(closeTimer);
+        releasePipes();
+        if (error) {
+          reject(error);
+        } else {
+          this.clearInputLedger();
+          resolve();
+        }
+      };
+      const child = spawn(this.artifact.executablePath, ['--release-input'], nativeHelperSpawnOptions(inputLockOwner));
+      const onError = (error: Error) => finish(timeoutError ?? error);
+      child.on('error', onError);
+      const timeout = setTimeout(() => {
+        timeoutError = new NativeDriverError('input-recovery-timeout', 'Native input recovery did not complete within 5 seconds.');
+        child.kill('SIGTERM');
+        killTimer = setTimeout(() => {
+          if (!exited) {
+            child.kill('SIGKILL');
+            finish(timeoutError);
+          }
+        }, recoveryGraceMs);
+      }, 5000);
+      child.stdout?.on('data', (chunk: Buffer) => stdout.push(chunk));
+      child.stderr?.on('data', (chunk: Buffer) => stderr.push(chunk));
+      child.stdin?.once('error', (error) => {
+        stdinError = error;
+      });
+      child.once('spawn', () => {
+        if (!child.stdin || !child.stdout || !child.stderr) {
+          child.kill();
+          finish(new NativeDriverError('input-recovery-failed', 'Native input recovery did not provide its protocol pipes.'));
+        }
+      });
+      child.once('exit', () => {
+        if (settled) return;
+        exited = true;
+        clearTimeout(timeout);
+        clearTimeout(killTimer);
+        // A grandchild that inherited the pipes would hold `close` back indefinitely.
+        closeTimer = setTimeout(releasePipes, recoveryGraceMs);
+      });
+      child.once('close', (code) => {
+        if (settled) {
+          return;
+        }
         if (timeoutError) {
-          reject(timeoutError);
+          finish(timeoutError);
           return;
         }
         if (code !== 0) {
-          reject(
+          finish(
             new NativeDriverError(
               'input-recovery-failed',
               stderr.text() || stdinError?.message || `Native input recovery exited with code ${String(code)}.`,
@@ -554,13 +590,12 @@ export class NativeDesktopHost implements DesktopHost {
         }
         try {
           JSON.parse(stdout.text());
-          this.clearInputLedger();
-          resolve();
+          finish();
         } catch (error) {
-          reject(new NativeDriverError('input-recovery-failed', error instanceof Error ? error.message : String(error)));
+          finish(new NativeDriverError('input-recovery-failed', error instanceof Error ? error.message : String(error)));
         }
       });
-      child.stdin.end(JSON.stringify({ buttons, keys }));
+      child.stdin?.end(JSON.stringify({ buttons, keys }));
     });
   }
 
@@ -665,10 +700,9 @@ export function resolveDisabledInputFeatures(configured?: readonly NativeDisable
       .map((value) => value.trim())
       .filter(Boolean) ?? []),
   ];
-  const allowed = new Set<NativeDisabledInputFeature>(['keyboard', 'physicalClick', 'wheel']);
   const resolved = new Set<NativeDisabledInputFeature>();
   for (const value of values) {
-    if (!allowed.has(value as NativeDisabledInputFeature)) {
+    if (!nativeInputFeatures.includes(value as NativeDisabledInputFeature)) {
       throw new TypeError(`Unsupported disabled native input feature "${value}".`);
     }
     resolved.add(value as NativeDisabledInputFeature);
@@ -756,6 +790,7 @@ const nativeWebDriverErrorCodes: Readonly<Record<string, WebDriverErrorCode>> = 
   'element-not-interactable': 'element not interactable',
   'invalid-params': 'invalid argument',
   'invalid-request': 'invalid argument',
+  'move-target-out-of-bounds': 'move target out of bounds',
   'no-such-element': 'no such element',
   'no-such-window': 'no such window',
 };

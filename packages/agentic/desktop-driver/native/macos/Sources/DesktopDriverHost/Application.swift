@@ -94,6 +94,10 @@ final class WindowRecord {
     }
     return lastKnownFrame ?? .zero
   }
+
+  func readActionOriginFrame(readFrame: (AXUIElement) throws -> CGRect? = axReadableFrame) throws -> CGRect? {
+    try readFrame(element)
+  }
 }
 
 private final class LaunchResultBox: @unchecked Sendable {
@@ -982,6 +986,34 @@ final class ApplicationManager {
 
   func primaryLease() -> ApplicationLeaseRecord? {
     leaseOrder.lazy.compactMap { self.leases[$0] }.first
+  }
+
+  func inputLeaseStarts(processID: pid_t) -> [String] {
+    leases.values.compactMap { $0.processID == processID ? $0.exactStartedAt : nil }
+  }
+
+  func inputForegroundPID() throws -> pid_t? {
+    // The system-wide AXFocusedApplication query can fail even in a trusted, active session.
+    // Read each live lease's own AXFrontmost attribute instead of using AppKit's cached foreground state.
+    var checked: Set<pid_t> = []
+    var foreground: pid_t?
+    for id in leaseOrder {
+      guard let lease = leases[id], !checked.contains(lease.processID), isRunning(lease) else { continue }
+      checked.insert(lease.processID)
+      let application = AXUIElementCreateApplication(lease.processID)
+      if axNumber(try copyAXAttribute(application, kAXFrontmostAttribute))?.boolValue == true {
+        guard foreground == nil else { return nil }
+        foreground = lease.processID
+      }
+    }
+    return foreground
+  }
+
+  func primaryWindowForInputActivation() throws -> WindowRecord? {
+    guard let lease = primaryLease(), let windowID = lease.primaryWindowID else { return nil }
+    let window = try requireWindow(windowID)
+    guard window.leaseID == lease.id, isRunning(lease) else { return nil }
+    return window
   }
 
   func forgetWindow(_ windowID: String) {

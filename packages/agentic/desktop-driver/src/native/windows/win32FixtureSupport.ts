@@ -50,7 +50,7 @@ export function fixtureExecutable(): Promise<string> {
 
 async function buildFixture(): Promise<string> {
   const toolchain = await probeWindowsToolchain();
-  const cacheRoot = resolveNativeDriverCacheRoot(process.env[FURN_DESKTOP_DRIVER_CACHE_ROOT], nativeDriverPackageRoot);
+  const cacheRoot = resolveNativeDriverCacheRoot(process.env[FURN_DESKTOP_DRIVER_CACHE_ROOT] || undefined, nativeDriverPackageRoot);
   const digest = sha256(`${hashTree(fixtureRoot)}:${toolchain.fingerprint}`).slice(0, 20);
   const publishedRoot = path.join(cacheRoot, 'v1', 'fixtures', 'win32', digest);
   const executable = path.join(publishedRoot, 'furn-win32-fixture.exe');

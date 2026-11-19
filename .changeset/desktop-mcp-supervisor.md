@@ -1,6 +1,5 @@
 ---
 "@fluentui-react-native/desktop-mcp": patch
-"@fluentui-react-native/desktop-driver-mcp": patch
 ---
 
-Add the supervisor-aware desktop MCP adapter and retain the driver-only compatibility executable.
+Connect to a desktop-test supervisor for driver tools and declared workloads. Version 0.1.0 depended on a desktop-test version that did not export the supervisor connection API. Upgrade to 0.1.1 along with desktop-test 0.4.0 and desktop-driver 0.5.4.

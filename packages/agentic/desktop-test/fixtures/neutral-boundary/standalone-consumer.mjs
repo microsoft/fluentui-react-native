@@ -16,6 +16,7 @@ const entries = {
   './control': await import('@fluentui-react-native/desktop-test/control'),
   './supervisor-connection': await import('@fluentui-react-native/desktop-test/supervisor-connection'),
   './managed-host': await import('@fluentui-react-native/desktop-test/managed-host'),
+  './runner-connection': await import('@fluentui-react-native/desktop-test/runner-connection'),
   './reporting': await import('@fluentui-react-native/desktop-test/reporting'),
   './reporting/run-queries': await import('@fluentui-react-native/desktop-test/reporting/run-queries'),
   './commands': await import('@fluentui-react-native/desktop-test/commands'),

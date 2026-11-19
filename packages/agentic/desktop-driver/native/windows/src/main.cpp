@@ -70,8 +70,8 @@ int ReleaseInputFromLedger() {
     const furn::ReleaseLedger ledger = furn::ParseReleaseLedger(furn::json::Value::Parse(document));
     furn::InputController input;
     const furn::CancellationToken idle;
-    // Recovery owns physical input for the whole release chain and adopts a
-    // mutex abandoned by the helper it is recovering from.
+    // Nonempty recovery holds the mutex for the whole release chain. An empty
+    // ledger takes only a nonblocking recovery probe inside ReleaseExact.
     const furn::PhysicalInputScope scope = ledger.empty()
                                                ? furn::PhysicalInputScope()
                                                : furn::PhysicalInputScope(idle, furn::kPhysicalInputCleanupWaitMs,
@@ -155,6 +155,11 @@ int PrintUsage() {
 }  // namespace
 
 int wmain(int argc, wchar_t** argv) {
+  SetErrorMode(SEM_FAILCRITICALERRORS | SEM_NOGPFAULTERRORBOX | SEM_NOOPENFILEERRORBOX);
+  if (SetDefaultDllDirectories(LOAD_LIBRARY_SEARCH_SYSTEM32) == FALSE) {
+    std::cerr << "furn-desktop-driver-host: could not restrict default DLL search to System32.\n";
+    return 1;
+  }
   try {
     winrt::init_apartment(winrt::apartment_type::multi_threaded);
     SetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2);

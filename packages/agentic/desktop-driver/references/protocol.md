@@ -48,6 +48,8 @@ Capability matching implements W3C `alwaysMatch` and ordered `firstMatch`,
 rejects duplicate merge keys, rejects an unknown or mistyped `furn:` capability with
 `invalid argument` (a misspelled name never selects a default), and returns
 `session not created` when no registered target can satisfy a candidate.
+New Session accepts the `timeouts` capability name but does not apply its
+value; set timeouts after creating the session.
 
 `furn:inputMode` is fixed for the session and returned in its capabilities.
 `accessible` permits accessibility clicks, named accessibility actions, and
@@ -106,14 +108,15 @@ does not change the selected window, native focus, input state, or preview
 generation. Like `furn/tree`, it returns a full compact tree rather than a
 budgeted agent observation; use agent operations for bounded observations.
 
-Navigation, history, cookies, frames, shadow roots, prompts, printing,
-arbitrary JavaScript execution, browser CSS values, and new-window creation
-return `unsupported operation`.
+Navigation, history, cookies, frames, prompts, printing, arbitrary JavaScript
+execution, and new-window creation return `unsupported operation`. An element
+shadow-root lookup does too; routes that address a shadow root by its own ID
+and element CSS-value routes are not implemented and return `unknown command`.
 
 ## Timeouts
 
-Standard implicit, page-load, and script timeout values are accepted by the
-session contract. A request is validated as a whole before any value is
+The Set Timeouts command accepts standard implicit, page-load, and script
+values. A request is validated as a whole before any value is
 applied: each value must be a safe integer of at least zero, and `script` may
 also be `null`. A request with any invalid value changes nothing. An implicit-wait element search stops when the session is
 deleted rather than running to its deadline. Native and Storybook operations
@@ -145,7 +148,17 @@ and Storybook chrome references.
 
 Pointer and wheel actions may use WebDriver element origins. The server resolves
 the public UUID, validates generation and liveness, and passes only the native
-element ID to the host.
+element ID to the host. Action coordinates (`x`, `y`) and wheel deltas (`deltaX`,
+`deltaY`) must be finite numbers from `-2147483648` through `2147483647`, inclusive.
+Fractions within the range are accepted. Invalid values return `invalid argument`
+before the action sequence is dispatched.
+If the native provider cannot resolve a pointer move or scroll against live
+element or viewport geometry with positive area, the driver returns
+`move target out of bounds` rather than guessing a destination.
+On macOS, raw button presses, drags, scrolls and key presses also require a
+verified live application lease for the destination or keyboard foreground.
+An unowned or unproven target returns `element not interactable`; cleanup can
+still release input the session already holds.
 
 Portable lookup strategies:
 
@@ -212,10 +225,11 @@ not echo the header.
 An intercepted click names the occluding element's role, name, and ID; an
 external occluder names its owning application and process ID.
 
-`unauthorized` is HTTP 401 on every route of a protected service, with a
-constant message, an empty stack trace, `WWW-Authenticate: Bearer`, and a closed
-connection. It never says whether a grant was missing, malformed, revoked, or
-wrong. A `session not created` for a target that already has a session carries
+`unauthorized` is HTTP 401, with an empty stack trace, `WWW-Authenticate: Bearer`,
+and `Connection: close`. Authentication failures use one fixed message that
+does not distinguish a missing, malformed, revoked, or wrong grant. A caller
+with a valid grant that lacks authority for a particular operation may get
+a different message naming the requirement. A `session not created` for a target that already has a session carries
 `data.reason: 'target-busy'`, and a protected service adds
 `data.holder: { label, since }`. A quarantined target carries
 `data.reason: 'target-quarantined'` and `data.quarantine` with its `id`,

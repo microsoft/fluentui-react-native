@@ -359,9 +359,8 @@ describe('desktop-mcp driver-only mode', () => {
         if (failure === 'drain-failure') {
           jest.spyOn(harness.server.sessions, 'deleteOwnedBy').mockRejectedValueOnce(new Error('injected drain failure'));
         }
-        await controller.dispose();
+        await expect(controller.dispose()).rejects.toThrow('Desktop MCP session cleanup is not confirmed.');
         expect(controller.session).toBe(session.id);
-        expect(errors).toHaveBeenCalledWith('desktop-mcp: session cleanup is incomplete; the service must drain or expire the session.');
         await controller.dispose();
         expect(controller.session).toBeUndefined();
         expect(revocations).toBe(2);

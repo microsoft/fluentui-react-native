@@ -57,10 +57,10 @@ function macHost(options: { cancellationTimeoutMs?: number } = {}) {
   return new NativeDesktopHost({ application: { windowTitle: 'Test App' }, artifact: macArtifact, endpoint: 'macos', ...options });
 }
 
-type ReleaseInputOptions = { code?: number; hold?: boolean; stderr?: string; stdout?: string };
+type ReleaseInputOptions = { code?: number; hang?: boolean; hold?: boolean; stderr?: string; stdout?: string };
 
 /** Scripts the next `--release-input` process: it reads the pressed inputs from stdin, answers, and exits. */
-function scriptReleaseInput(options: ReleaseInputOptions = {}): { input: () => string } {
+function scriptReleaseInput(options: ReleaseInputOptions = {}) {
   const code = options.code ?? 0;
   const child = Object.assign(new EventEmitter(), {
     kill: jest.fn(),
@@ -81,6 +81,9 @@ function scriptReleaseInput(options: ReleaseInputOptions = {}): { input: () => s
   }
   child.stdin.on('data', (chunk: Buffer) => chunks.push(chunk));
   child.stdin.once('end', () => {
+    if (options.hang) {
+      return;
+    }
     setImmediate(() => {
       exited = true;
       child.emit('exit', code, null);
@@ -94,7 +97,7 @@ function scriptReleaseInput(options: ReleaseInputOptions = {}): { input: () => s
     });
   });
   mockSpawn.mockImplementationOnce(() => child);
-  return { input: () => Buffer.concat(chunks).toString('utf8') };
+  return { input: () => Buffer.concat(chunks).toString('utf8'), kill: child.kill };
 }
 
 describe('NativeDesktopHost cancellationTimeoutMs', () => {
@@ -118,6 +121,7 @@ describe('NativeDesktopHost cancellationTimeoutMs', () => {
   ])('kills a helper that ignores cancel after the %s deadline', async (_, artifact, greeting, cancellationTimeoutMs, expectedMs) => {
     jest.useFakeTimers(realIo);
     const { control, received } = scriptNativeHelperSession(mockSpawn, () => undefined, [], { greeting });
+    scriptReleaseInput();
     const host = new NativeDesktopHost({
       application: { windowTitle: 'Test App' },
       artifact,
@@ -224,6 +228,7 @@ describe('NativeDesktopHost lifecycle', () => {
 });
 
 describe('NativeDesktopHost input recovery', () => {
+  const ownerVariable = 'FURN_INTERNAL_DESKTOP_DRIVER_INPUT_LOCK_OWNER';
   const pressKeyA = [{ actions: [{ type: 'keyDown' as const, value: 'a' }], id: 'keys', type: 'key' as const }];
   const pressButton = [{ actions: [{ button: 0, type: 'pointerDown' as const }], id: 'pointer', type: 'pointer' as const }];
 
@@ -240,6 +245,42 @@ describe('NativeDesktopHost input recovery', () => {
     jest.useRealTimers();
   });
 
+  function expectReleaseSpawn(owner: string | undefined) {
+    const [executable, args, { env, detached, stdio, windowsHide }] = mockSpawn.mock.calls[1];
+    expect([executable, args]).toEqual(['driver', ['--release-input']]);
+    expect({ detached, stdio, windowsHide }).toEqual(nativeHelperSpawnOptions());
+    expect(env?.[ownerVariable]).toBe(owner);
+  }
+
+  test.each([
+    ['macOS', macArtifact, undefined, ''],
+    ['masked macOS', macArtifact, undefined, 'keyboard,physicalClick,wheel'],
+    ['Windows', windowsArtifact, windowsGreeting, ''],
+  ] as const)('runs empty-ledger recovery after an unexpected %s exit', async (_, artifact, greeting, mask) => {
+    process.env[FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES] = mask;
+    scriptNativeHelperSession(mockSpawn, (_, __, control) => control.exit(null, 'SIGKILL'), [], { greeting });
+    const release = scriptReleaseInput({ stdout: '{"releasedKeys":0,"releasedButtons":0}' });
+    const host = new NativeDesktopHost({
+      application: { windowTitle: 'Test App' },
+      artifact,
+      endpoint: artifact.provider === 'macos' ? 'macos' : 'windows',
+    });
+
+    await expect(host.probe()).rejects.toMatchObject({ code: 'host-exited' });
+
+    expect(JSON.parse(release.input())).toEqual({ buttons: [], keys: [] });
+    const owner = mockSpawn.mock.calls[0][2].env?.[ownerVariable];
+    if (artifact.provider === 'windows') {
+      expect(owner).toBeUndefined();
+    } else if (mask) {
+      expect(owner).toBe('');
+    } else {
+      expect(owner).toEqual(expect.stringMatching(/^[a-f0-9-]{36}$/));
+    }
+    expect(mockSpawn).toHaveBeenCalledTimes(2);
+    expectReleaseSpawn(owner);
+  });
+
   test('releases pressed input in its own process group before the failing command is rejected', async () => {
     scriptNativeHelperSession(mockSpawn, (_, __, control) => control.exit(1), [], {});
     const release = scriptReleaseInput();
@@ -249,7 +290,8 @@ describe('NativeDesktopHost input recovery', () => {
     await host.performActions(pressKeyA).catch(() => order.push('reject'));
 
     expect(JSON.parse(release.input())).toEqual({ buttons: [], keys: ['a'] });
-    expect(mockSpawn).toHaveBeenNthCalledWith(2, 'driver', ['--release-input'], nativeHelperSpawnOptions());
+    const owner = mockSpawn.mock.calls[0][2].env[ownerVariable];
+    expectReleaseSpawn(owner);
     expect(order).toEqual(['reject']);
   });
 
@@ -325,6 +367,7 @@ describe('NativeDesktopHost input recovery', () => {
         send({ id: message.id, result: {}, type: 'response' });
       }
     });
+    const release = scriptReleaseInput();
     const host = macHost();
 
     await expect(host.performActions(pressKeyA)).rejects.toThrow('cleanup failed');
@@ -332,10 +375,10 @@ describe('NativeDesktopHost input recovery', () => {
     await expect(host.releaseActions()).resolves.toBeUndefined();
     await expect(host.probe()).rejects.toMatchObject({ code: 'host-exited' });
 
-    expect(mockSpawn).toHaveBeenCalledTimes(1);
+    expect(JSON.parse(release.input())).toEqual({ buttons: [], keys: [] });
   });
 
-  test('does not recover input from a command rejected before dispatch', async () => {
+  test('does not include a press rejected before dispatch in the recovery ledger', async () => {
     scriptNativeHelperSession(mockSpawn, (message, send, control) => {
       if (message.command === 'probe') {
         control.exit(1);
@@ -343,12 +386,13 @@ describe('NativeDesktopHost input recovery', () => {
         send({ error: { code: 'invalid-params', effect: 'none', message: 'refused' }, id: message.id, type: 'response' });
       }
     });
+    const release = scriptReleaseInput();
     const host = macHost();
 
     await expect(host.performActions(pressKeyA)).rejects.toThrow('refused');
     await expect(host.probe()).rejects.toMatchObject({ code: 'host-exited' });
 
-    expect(mockSpawn).toHaveBeenCalledTimes(1);
+    expect(JSON.parse(release.input())).toEqual({ buttons: [], keys: [] });
   });
 
   test('retains previously held input when a later command is rejected before dispatch', async () => {
@@ -388,6 +432,21 @@ describe('NativeDesktopHost input recovery', () => {
     expect(recovery.message.length).toBe(16 * 1024);
   });
 
+  test('preserves the original helper failure when descriptor exhaustion prevents recovery', async () => {
+    scriptNativeHelperSession(mockSpawn, (_, __, control) => control.exit(1));
+    const { ChildProcess } = jest.requireActual<typeof import('node:child_process')>('node:child_process');
+    const recoveryError = Object.assign(new Error('Cannot create recovery pipes.'), { code: 'EMFILE' });
+    mockSpawn.mockImplementationOnce(() => {
+      const child = new ChildProcess();
+      queueMicrotask(() => child.emit('error', recoveryError));
+      return child;
+    });
+
+    await expect(macHost().performActions(pressKeyA)).rejects.toMatchObject({
+      errors: [expect.objectContaining({ code: 'host-exited' }), recoveryError],
+    });
+  });
+
   test('does not wait on a grandchild that holds the recovery process’s pipes', async () => {
     jest.useFakeTimers(realIo);
     scriptNativeHelperSession(mockSpawn, (_, __, control) => control.exit(1), [], {});
@@ -411,5 +470,29 @@ describe('NativeDesktopHost input recovery', () => {
     await performing;
 
     expect(settled).toBe(true);
+  });
+
+  test('bounds empty recovery even when the release helper ignores SIGTERM and keeps its pipes open', async () => {
+    jest.useFakeTimers(realIo);
+    const { control } = scriptNativeHelperSession(mockSpawn, (_, __, helper) => helper.exit(1), [], { pipeHold: 'held' });
+    const release = scriptReleaseInput({ hang: true });
+    const probing = macHost()
+      .probe()
+      .catch((error: unknown) => error);
+
+    await settleIo();
+    control.closePipes();
+    await settleIo();
+    expect(JSON.parse(release.input())).toEqual({ buttons: [], keys: [] });
+
+    await jest.advanceTimersByTimeAsync(4999);
+    expect(release.kill).not.toHaveBeenCalled();
+    await jest.advanceTimersByTimeAsync(1);
+    expect(release.kill.mock.calls).toEqual([['SIGTERM']]);
+    await jest.advanceTimersByTimeAsync(500);
+    expect(release.kill.mock.calls).toEqual([['SIGTERM'], ['SIGKILL']]);
+    expect(await probing).toMatchObject({
+      errors: [expect.objectContaining({ code: 'host-exited' }), expect.objectContaining({ code: 'input-recovery-timeout' })],
+    });
   });
 });

@@ -2,14 +2,18 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 import type { ApplicationLease } from '@fluentui-react-native/desktop-driver';
+import { FakeDesktopHost } from '@fluentui-react-native/desktop-driver/testing';
 
 import { captureDesktopApplicationIdentity, desktopApplicationIdentityDescriptor } from './applicationOwnership';
 import { createDesktopWorkloadClaim, recoverWindowsDesktopWorkloadClaim } from './ownership';
-import type { DesktopWorkloadOwnerIdentity } from './ownership';
+import type { DesktopWorkloadOwnerIdentity, DesktopWorkloadOwnershipRecord } from './ownership';
 import type { DesktopResourceRecord } from './resources';
 import { defineDesktopConfig } from './config';
 import type { ResolvedDesktopTarget } from './config';
 import { resolveDesktopApplication } from './adapters';
+import { DesktopRunReporter } from './reporting/collector';
+import { handleDesktopInterrupts } from './signals';
+import { DesktopSupervisor } from './supervisor';
 
 const exact = {
   processId: 456,
@@ -25,6 +29,7 @@ const owner = {
   executablePath: process.execPath,
   interactiveSession: 'windows-session:2',
 };
+const windowsTest = process.platform === 'win32' ? test : test.skip;
 
 describe('Windows exact identity and survivor recovery', () => {
   let directory: string;
@@ -66,6 +71,68 @@ describe('Windows exact identity and survivor recovery', () => {
     for (const resource of extra) claim.updateResource(resource);
     return claim;
   }
+
+  windowsTest.each(['release', 'recovery'] as const)('retries an interactive claim sharing violation during %s', async (operation) => {
+    const claim = operation === 'release' ? createDesktopWorkloadClaim({ ...options(), runId: 'running' }) : survivor();
+    const unlink = fs.unlinkSync;
+    const busy = Object.assign(new Error('sharing violation'), { code: 'EBUSY' });
+    const spy = jest
+      .spyOn(fs, 'unlinkSync')
+      .mockImplementationOnce(() => {
+        throw busy;
+      })
+      .mockImplementationOnce(() => {
+        throw busy;
+      })
+      .mockImplementation(unlink);
+    if (operation === 'release') {
+      claim.release();
+    } else {
+      await expect(
+        recoverWindowsDesktopWorkloadClaim({
+          ...options(),
+          probeOwner: async () => ({ state: 'exited' }),
+          recoverApplication: async () => undefined,
+        }),
+      ).resolves.toEqual({ state: 'recovered', applications: 1 });
+    }
+    expect(spy.mock.calls).toEqual([[filename()], [filename()], [filename()]]);
+    expect(fs.existsSync(filename())).toBe(false);
+  });
+
+  windowsTest('does not retry unrelated unlink errors', () => {
+    const claim = createDesktopWorkloadClaim({ ...options(), runId: 'running' });
+    const missing = Object.assign(new Error('file disappeared'), { code: 'ENOENT' });
+    const spy = jest.spyOn(fs, 'unlinkSync').mockImplementationOnce(() => {
+      throw missing;
+    });
+    expect(() => claim.release()).toThrow(missing);
+    expect(spy.mock.calls).toEqual([[filename()]]);
+  });
+
+  windowsTest('does not unlink a replacement claim after a sharing violation', () => {
+    const claim = createDesktopWorkloadClaim({ ...options(), runId: 'running' });
+    const spy = jest.spyOn(fs, 'unlinkSync').mockImplementationOnce(() => {
+      fs.writeFileSync(filename(), 'replacement');
+      throw Object.assign(new Error('sharing violation'), { code: 'EBUSY' });
+    });
+    expect(() => claim.release()).toThrow(/ownership changed/);
+    expect(spy.mock.calls).toEqual([[filename()]]);
+    expect(fs.readFileSync(filename(), 'utf8')).toBe('replacement');
+  });
+
+  windowsTest('routes Ctrl+Break through the graceful interrupt handler', () => {
+    const stop = jest.fn();
+    const terminate = jest.fn();
+    const remove = handleDesktopInterrupts({ stop, terminate });
+    try {
+      process.emit('SIGBREAK', 'SIGBREAK');
+      expect(stop).toHaveBeenCalledWith('SIGBREAK');
+      expect(terminate).not.toHaveBeenCalled();
+    } finally {
+      remove();
+    }
+  });
 
   test.each(['windows', 'win32'] as const)('captures %s identity without rounding away native start/session evidence', (endpoint) => {
     const lease = { ...exact, id: 'native', ownership: 'launched', containment: 'uncontained' } as ApplicationLease;
@@ -436,24 +503,61 @@ describe('Windows exact identity and survivor recovery', () => {
     expect(recoverApplication.mock.calls.map(([identity]) => identity.processId)).toEqual([456, 457, 457]);
   });
 
-  test('the exited owner proves its in-process WebDriver listener ended, not an arbitrary owned service', async () => {
-    survivor([
-      {
-        id: 'webdriver',
-        identity: 'driver-service:packaged:package-instance',
-        generation: 1,
-        ownership: 'owned',
-        readiness: 'ready',
-        disposal: 'pending',
+  test.each(['recorded run', 'another run'])('recovers a real supervisor listener only for the recorded run (%s)', async (run) => {
+    const target = options();
+    const silent = { write: () => true };
+    const reporter = new DesktopRunReporter({ artifactsRoot: directory, output: silent, errorOutput: silent, summary: false });
+    const supervisor = new DesktopSupervisor({
+      target: {
+        endpoint: target.endpoint,
+        id: target.targetId,
+        registrationId: target.targetId,
+        instanceId: target.targetInstanceId,
+        projectRoot: directory,
+        configPath: path.join(directory, 'desktop.config.mts'),
+        host: { kind: 'installed' },
       },
-    ]);
-    await expect(
-      recoverWindowsDesktopWorkloadClaim({
-        ...options(),
-        probeOwner: async () => ({ state: 'exited' }),
-        recoverApplication: async () => undefined,
-      }),
-    ).resolves.toEqual({ state: 'recovered', applications: 1 });
+      reporter,
+      lockDirectory: directory,
+      processIdentity: owner,
+      hostFactory: async () => new FakeDesktopHost(),
+      recovery: {
+        storage: {
+          read: async () => undefined,
+          publish: async () => undefined,
+          remove: async () => undefined,
+        },
+      },
+    });
+    let record: DesktopWorkloadOwnershipRecord;
+    try {
+      await supervisor.start();
+      record = JSON.parse(fs.readFileSync(filename(), 'utf8')) as DesktopWorkloadOwnershipRecord;
+      expect(record.resources).toEqual([
+        expect.objectContaining({ id: `${reporter.runId}:webdriver`, identity: 'driver-service:packaged:package-instance' }),
+      ]);
+    } finally {
+      await supervisor.close();
+    }
+
+    // Replay the exact active claim after the fixture server has really closed.
+    const crashedRecord = run === 'recorded run' ? record : { ...record, owner: { ...record.owner, runId: 'another-run' } };
+    const contents = JSON.stringify(crashedRecord);
+    fs.writeFileSync(filename(), contents, { flag: 'wx' });
+    const recoverApplication = jest.fn(async () => undefined);
+    const recovery = recoverWindowsDesktopWorkloadClaim({
+      ...target,
+      probeOwner: async () => ({ state: 'exited' }),
+      recoverApplication,
+    });
+    if (run === 'recorded run') {
+      await expect(recovery).resolves.toEqual({ state: 'recovered', applications: 0 });
+      expect(fs.existsSync(filename())).toBe(false);
+    } else {
+      await expect(recovery).rejects.toThrow('An owned desktop resource cannot be proven exited');
+      expect(fs.readFileSync(filename(), 'utf8')).toBe(contents);
+    }
+    expect(recoverApplication).not.toHaveBeenCalled();
   });
 
   test('a failed exact recovery preserves the original process identity and claim', async () => {

@@ -86,6 +86,7 @@ describe('runDesktopStoryTests', () => {
       const session = await client.newSession({
         alwaysMatch: { platformName: 'windows', 'furn:target': harness.target.id },
       });
+      const getCurrentStory = jest.spyOn(session, 'getCurrentStory').mockResolvedValue(null);
       const result = await runDesktopStoryTests({
         artifacts: new ArtifactManager(temporaryDirectory),
         endpoint: 'windows',
@@ -106,6 +107,7 @@ describe('runDesktopStoryTests', () => {
         ],
       });
       expect(result.tests[0].artifacts.map(({ kind }) => kind)).toEqual(['screenshot', 'source']);
+      expect(getCurrentStory).not.toHaveBeenCalled();
       expect(harness.storyOrchestrator?.argUpdates).toEqual([{ args: { disabled: false }, storyId: 'components-button--default' }]);
       expect(JSON.parse(fs.readFileSync(path.join(temporaryDirectory, 'run.json'), 'utf8'))).toMatchObject({
         runId: 'run',
@@ -654,38 +656,38 @@ describe('desktop story run classification', () => {
     }
   });
 
-  test('fails a test that reuses an authored artifact name or one reserved for failure evidence', async () => {
+  test.each([
+    [[], 'steps must be a non-empty array'],
+    [[{ action: 'made-up-action' }], 'action'],
+    [
+      [
+        { action: 'screenshot', name: 'Shot' },
+        { action: 'screenshot', name: 'shot' },
+      ],
+      'repeats the screenshot name',
+    ],
+    [[{ action: 'source', name: 'failure-source' }], 'belong to failure evidence'],
+  ] as const)('rejects invalid authored steps %j before selecting a story', async (steps, message) => {
     const manifest = makeManifest({
       version: 1,
-      tests: [
-        {
-          id: 'duplicate',
-          steps: [
-            { action: 'screenshot', name: 'Shot' },
-            { action: 'screenshot', name: 'shot' },
-          ],
-        },
-        { id: 'reserved', steps: [{ action: 'source', name: 'failure-source' }] },
-      ],
+      tests: [{ id: 'invalid-test', steps: steps as DesktopStoryTests['tests'][number]['steps'] }],
     });
     const harness = await createDesktopDriverStoryHarness(manifest);
-    const temporaryDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'desktop-driver-names-'));
     try {
       const session = await openSession(harness);
-      const result = await runDesktopStoryTests({
-        artifacts: new ArtifactManager(temporaryDirectory),
-        endpoint: 'windows',
-        manifest,
-        platformName: 'windows',
-        session,
-        targetId: harness.target.id,
-      });
-
-      expect(result.tests[0]).toMatchObject({ status: 'failed', error: expect.stringContaining('more than one step') });
-      expect(result.tests[1]).toMatchObject({ status: 'failed', error: expect.stringContaining('reserved for failure evidence') });
+      const select = jest.spyOn(session, 'selectStory');
+      await expect(
+        runDesktopStoryTests({
+          endpoint: 'windows',
+          manifest,
+          platformName: 'windows',
+          session,
+          targetId: harness.target.id,
+        }),
+      ).rejects.toThrow(message);
+      expect(select).not.toHaveBeenCalled();
     } finally {
       await harness.close();
-      fs.rmSync(temporaryDirectory, { force: true, recursive: true });
     }
   });
 

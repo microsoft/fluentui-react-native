@@ -8,7 +8,52 @@
     "magic": "FDR1",
     "headerBytes": 12,
     "jsonType": 1,
-    "binaryType": 2
+    "binaryType": 2,
+    "helperStdin": {
+      "dispatchedJsonTypes": ["request", "cancel"],
+      "ignoresOtherJsonObjects": true,
+      "ignoresBinaryPayloads": true
+    }
+  },
+  "performActions": {
+    "nodeFields": ["x", "y", "deltaX", "deltaY"],
+    "nodeNumberRange": { "type": "number", "minimum": -2147483648, "maximum": 2147483647 },
+    "originGeometry": {
+      "origins": ["element", "viewport"],
+      "requiresLivePositiveArea": true,
+      "nativeErrorCode": "move-target-out-of-bounds",
+      "webDriverErrorCode": "move target out of bounds"
+    },
+    "macos": {
+      "coordinates": { "$ref": "#/performActions/nodeNumberRange" },
+      "targetOwnership": {
+        "pointerDownDragAndScroll": "window-of-exact-live-application-lease",
+        "keyDown": "foreground-with-exact-live-application-lease",
+        "activation": "at-most-once-before-first-key-press-without-proven-leased-foreground",
+        "missingTargetErrorCode": "element-not-interactable",
+        "releaseRequiresTargetOwnership": false,
+        "unownedReleasePostsInput": false
+      },
+      "wheelConversion": {
+        "input": "finite-number",
+        "operation": "negate-round-clamp",
+        "output": { "type": "integer", "minimum": -2147483648, "maximum": 2147483647 }
+      },
+      "button": { "type": "integer", "minimum": 0, "maximum": 4 },
+      "duration": { "type": "integer", "minimum": 0, "capMilliseconds": 30000 }
+    }
+  },
+  "inputRecovery": {
+    "mode": "--release-input",
+    "ledgerFields": ["keys", "buttons"],
+    "resultFields": ["releasedKeys", "releasedButtons"],
+    "emptyLedger": {
+      "postsInput": false,
+      "lockWaitMilliseconds": 0,
+      "whenUnavailableOrHeld": "success-with-zero-counts",
+      "macosOwnerRecord": "require-exited-owner-and-match-supervisor-tag-when-supplied",
+      "windowsMutex": "release-if-acquired"
+    }
   },
   "windowsApplicationOwnership": {
     "processIdentity": {
@@ -53,6 +98,28 @@
       "holdsApplicationControlLockForCleanup": true
     },
     "applicationControl": "session-local-nonwaiting-semaphore-pid-and-native-start",
+    "ownershipFailureReasons": {
+      "location": "response.error.data.reason",
+      "values": [
+        "identity-start-mismatch",
+        "identity-session-mismatch",
+        "identity-executable-mismatch",
+        "identity-aumid-mismatch",
+        "identity-user-mismatch",
+        "application-identity-invalid",
+        "application-identity-mismatch",
+        "application-identity-changed",
+        "application-identity-unknown",
+        "application-identity-ambiguous",
+        "application-exited",
+        "no-matching-application",
+        "application-window-missing",
+        "application-lock-busy",
+        "application-lock-unavailable",
+        "application-preexisting",
+        "application-recovery-unsettled"
+      ]
+    },
     "launchKind": ["direct-child", "packaged-activation"],
     "containment": ["job-object", "uncontained", "external"],
     "applicationSettlement": ["not-started", "exited", "unknown"],
