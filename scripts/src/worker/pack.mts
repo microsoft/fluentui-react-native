@@ -1,12 +1,16 @@
 import type { WorkerRunnerFunction } from 'lage';
 
-import { $, fs } from 'zx';
+import spawn from 'cross-spawn';
+import { once } from 'node:events';
+import fs from 'node:fs/promises';
 import path from 'node:path';
 import { type PGraphNodeMap, PGraph } from 'p-graph';
 import { findGitRoot, getPackageDependencies, getPackageInfos } from 'workspace-tools';
 
+import { yarnVerb } from '../utils/runScript.ts';
+
 /**
- * Lage worker that runs `yarn npm pack` for each public package,
+ * Lage worker that runs `yarn pack` for each public package,
  * organizing the resulting .tgz files into dependency-ordered layers.
  *
  * The output directory is passed via `target.options.outputDir` in lage.config.js.
@@ -14,7 +18,11 @@ import { findGitRoot, getPackageDependencies, getPackageInfos } from 'workspace-
  * unique and easy to correlate back to the package.
  */
 export const run: WorkerRunnerFunction = async ({ target }) => {
-  const pkg = await fs.readJson(path.join(target.cwd, 'package.json'));
+  const pkg = JSON.parse(await fs.readFile(path.join(target.cwd, 'package.json'), 'utf8')) as {
+    name: string;
+    version: string;
+    private?: boolean;
+  };
 
   if (pkg.private) {
     return;
@@ -27,11 +35,13 @@ export const run: WorkerRunnerFunction = async ({ target }) => {
 
   // Resolve relative to cwd (lage runs from repo root, so this resolves correctly)
   const packRoot = path.resolve(outputDir);
-  fs.mkdirpSync(packRoot);
+  await fs.mkdir(packRoot, { recursive: true });
 
   // Skip if this version is already published
-  const result = await $`npm view ${pkg.name}@${pkg.version} version`.nothrow().quiet();
-  if (result.exitCode === 0) {
+  const packageVersion = `${pkg.name}@${pkg.version}`;
+  const lookup = spawn('npm', ['view', packageVersion, 'version'], { cwd: process.cwd(), stdio: 'ignore' });
+  const result = await once(lookup, 'close').catch(() => undefined);
+  if (result?.[0] === 0) {
     console.log(`Skipping ${pkg.name}@${pkg.version} — already published`);
     return;
   }
@@ -47,14 +57,18 @@ export const run: WorkerRunnerFunction = async ({ target }) => {
   // Convert packageLayer from 0- to 1-indexed and pad with leading zeros based on the total
   const layerNum = String(packageLayer + 1).padStart(String(packageLayers.length).length, '0');
   const layerDir = path.join(packRoot, layerNum);
-  fs.mkdirpSync(layerDir);
+  await fs.mkdir(layerDir, { recursive: true });
 
   // Build a safe filename: @fluentui-react-native/button@1.0.0 -> fluentui-react-native-button-1.0.0.tgz
-  const safeName = (pkg.name as string).replace(/@/g, '').replace(/\//g, '-');
+  const safeName = pkg.name.replace(/@/g, '').replace(/\//g, '-');
   const tgzFilename = `${safeName}-${pkg.version}.tgz`;
   const outPath = path.join(layerDir, tgzFilename);
 
-  await $({ cwd: target.cwd, verbose: true })`yarn pack --out ${outPath}`;
+  const pack = spawn(yarnVerb, ['pack', '--out', outPath], { cwd: target.cwd, stdio: 'inherit' });
+  const [code, signal] = await once(pack, 'close');
+  if (code !== 0) {
+    throw new Error(`yarn pack failed for ${packageVersion} (${code === null ? `signal ${signal}` : `exit ${code}`}).`);
+  }
 };
 
 // This will be calculated once per worker
