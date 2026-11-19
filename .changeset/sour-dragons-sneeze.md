@@ -14,5 +14,3 @@ to the canonical sources and skill names.
 Include Desktop MCP supervisor/workload guidance and retain desktop-driver-mcp
 only as an explicit driver-only compatibility choice. Document compatible
 adapter setup, drain and restart behavior, and untrusted workload output.
-
-
