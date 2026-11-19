@@ -8,6 +8,7 @@ import { NativeDesktopHost, NativeDriverError } from '@fluentui-react-native/des
 import type { NativeDriverArtifact } from '@fluentui-react-native/desktop-driver';
 import { describeWindowsService } from '@fluentui-react-native/desktop-driver/authority';
 import { resolveNativeDesktopDriver } from '@fluentui-react-native/desktop-driver/native';
+import { FakeDesktopHost } from '@fluentui-react-native/desktop-driver/testing';
 import type { ResolvedDesktopTarget } from './config.js';
 import { startNativeDesktopService } from './driverService.js';
 import { DesktopRunReporter } from './reporting/collector.js';
@@ -44,7 +45,7 @@ describe('desktop supervisor input lane', () => {
     fs.rmSync(artifactsRoot, { force: true, recursive: true });
   });
 
-  async function nativeServiceOptions(input?: DesktopInputLane, ownership?: 'session' | 'supervisor' | 'external') {
+  function createNativeSupervisor(input?: DesktopInputLane, ownership?: 'session' | 'supervisor' | 'external') {
     const output = { write: () => true };
     const reporter = new DesktopRunReporter({ artifactsRoot, errorOutput: output, output, reporterMode: 'plain', summary: false });
     const target: ResolvedDesktopTarget = {
@@ -56,7 +57,7 @@ describe('desktop supervisor input lane', () => {
       configPath: path.join(artifactsRoot, 'desktop.config.mts'),
       host: { kind: 'installed', ...(ownership ? { ownership } : {}) },
     };
-    const supervisor = new DesktopSupervisor({
+    return new DesktopSupervisor({
       target,
       reporter,
       reportSession: { reporter, delegated: true, environment: {}, close: async () => 0 },
@@ -71,6 +72,10 @@ describe('desktop supervisor input lane', () => {
       },
       ...(input ? { input } : {}),
     });
+  }
+
+  async function nativeServiceOptions(input?: DesktopInputLane, ownership?: 'session' | 'supervisor' | 'external') {
+    const supervisor = createNativeSupervisor(input, ownership);
     try {
       await supervisor.start();
     } finally {
@@ -93,6 +98,31 @@ describe('desktop supervisor input lane', () => {
   test('retained supervisor-owned applications expose attach-only sessions', async () => {
     const options = await nativeServiceOptions(undefined, 'supervisor');
     expect(options.target.launchModes).toEqual(['attach']);
+  });
+
+  test('stopping the scope cancels a retained native launch', async () => {
+    const supervisor = createNativeSupervisor(undefined, 'supervisor');
+    const host = new FakeDesktopHost({ endpoint: 'macos' });
+    const launch = jest.spyOn(host, 'launch').mockImplementation(async (_target, signal) => {
+      supervisor.services.requestStop();
+      signal?.throwIfAborted();
+      throw new Error('The launch did not receive cancellation.');
+    });
+    const storage = {
+      read: async () => undefined,
+      publish: async () => undefined,
+      remove: async () => false,
+    };
+    startNative.mockImplementationOnce(async ({ prepareHost }) => {
+      await prepareHost!(host, { storage });
+      throw new Error('A stopped launch must not start a service.');
+    });
+    try {
+      await expect(supervisor.start()).rejects.toThrow('Owned desktop service stop requested');
+      expect(launch).toHaveBeenCalledWith(expect.objectContaining({ id: 'fixture' }), supervisor.services.controller.signal);
+    } finally {
+      await supervisor.close();
+    }
   });
 
   test('application launch authority requires a live claim for the matching target and instance', async () => {

@@ -124,6 +124,9 @@ describe('redactDesktopSecrets', () => {
     ['leaseNonce: n-1', 'leaseNonce: [REDACTED]'],
     ['{"bridgeNonce":"n-2"}', '{"bridgeNonce":"[REDACTED]"}'],
     ['"authorization" : "Bearer"', '"authorization" : "[REDACTED]"'],
+    ['Authorization: Bearer mock-token; next', 'Authorization: [REDACTED]; next'],
+    ['{"authorization":"Basic dGVzdA==","other":1}', '{"authorization":"[REDACTED]","other":1}'],
+    ['proxy-authorization=negotiate\tmock-ticket', 'proxy-authorization=[REDACTED]'],
     ['access-token = t; next', 'access-token = [REDACTED]; next'],
     ['ACCESS_TOKEN:t', 'ACCESS_TOKEN:[REDACTED]'],
   ])('redacts the value assigned in %s', (input, expected) => {

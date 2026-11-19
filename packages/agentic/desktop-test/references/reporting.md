@@ -22,7 +22,8 @@ names contain `nonce`, `token`, `password`, `secret`, or `authorization`, when
 the value is at least 8 characters long. Shorter values such as `true` or `0`
 are flags, not credentials, and redacting them would rewrite machine-readable
 output. Register a shorter credential explicitly with the reporter's
-`addSecret`.
+`addSecret`. Authorization assignments with token-based schemes such as
+`Bearer` or `Basic` redact both the scheme and its credential.
 
 Command output goes to these logs, not to the console; see
 [console output](#console-output) for what the console shows and when. Upload

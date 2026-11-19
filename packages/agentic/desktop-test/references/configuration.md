@@ -65,6 +65,18 @@ and attempts, and at least five minutes. Install WDIO CLI, local runner, and the
 the suite workspace; the harness does not install test frameworks into app
 workspaces.
 
+The config schema rejects unknown fields, cycles, and unmatched spec patterns.
+Spec paths resolve against the suite project's root; target references and
+hooks resolve against their declaring config.
+
+Suites may opt into the supervisor workload catalog with
+`agent: { lanes: ['accessible', 'physical'] }`. The ID must be a bounded
+portable identifier, and generic WDIO workload lanes require Jasmine. The
+supervisor further restricts the declared lanes to its existing host input
+mask and attach-only runner; the catalog never accepts commands or paths from
+an agent. Opted-in Storybook CSF suites run their authored tests against the
+existing hosted driver, not the smoke build or launch lifecycle.
+
 ### First-party integration entry points
 
 `./control` and `./supervisor-connection` handle supervisor discovery and
@@ -80,18 +92,6 @@ driver and management service under that owner. `desktopHostReady` and
 `formatDesktopHostReady` build and format its ready receipt. These are also
 first-party integration surfaces; use `defineDesktopConfig` for application
 and suite configuration.
-
-The config schema rejects unknown fields, cycles, and unmatched spec patterns.
-Spec paths resolve against the suite project's root; target references and
-hooks resolve against their declaring config.
-
-Suites may opt into the supervisor workload catalog with
-`agent: { lanes: ['accessible', 'physical'] }`. The ID must be a bounded
-portable identifier, and generic WDIO workload lanes require Jasmine. The
-supervisor further restricts the declared lanes to its existing host input
-mask and attach-only runner; the catalog never accepts commands or paths from
-an agent. Opted-in Storybook CSF suites run their authored tests against the
-existing hosted driver, not the smoke build or launch lifecycle.
 
 ## Scope domains
 

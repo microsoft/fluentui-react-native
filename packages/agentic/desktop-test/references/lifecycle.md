@@ -72,8 +72,8 @@ Cleanup drains worker reporting and stdio, closes sessions, releases owned
 input, and stops exact owned process trees. Services and resources are disposed
 together in reverse acquisition order. An externally owned app is preserved.
 
-Cancellation reaches running commands. Stage commands and WDIO suites receive
-the scope signal; when it aborts, the command's process tree is stopped and the
+Cancellation reaches running commands and supervisor-owned native application
+startup. Stage commands and WDIO suites receive the scope signal; when it aborts, the command's process tree is stopped and the
 command reports failed with "Stopped before it finished.", never passed. Services
 are stopped by close, in the same reverse order. On macOS and Linux each command
 leads its own process group, and stopping it signals the whole group, including
