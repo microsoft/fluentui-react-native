@@ -31,10 +31,17 @@ the pinned dependency changes. Installed-package paths are relative to that pack
   MenuItem focuses on hover as an owner-specific exception. Sources:
   `packages/utils/interactive-hooks/src/useOnPressWithFocus.ts:14-29`; RNmacOS `RCTViewComponentView.mm:1769-1779`;
   `packages/components/Menu/src/MenuItem/useMenuItem.ts:68-120`. Version: RNmacOS 0.81.9. Observed: 2026-09-14.
-- **C-FOCUS-004:** V1 key helpers prefer key-down on macOS through `validKeysDown` and `validKeysUp`, while RNmacOS
-  native handling also exposes `keyDownEvents` and `keyUpEvents`. RNmacOS Pressability activates Return and Space on
-  key-down, and key-up supplies `onPressOut`. Sources: `packages/utils/interactive-hooks/src/useKeyProps.ts:8-95,114-126`;
-  RNmacOS `RCTViewComponentView.mm:1807-1861`. Version: RNmacOS 0.81.9. Observed: 2026-09-14.
+- **C-FOCUS-004:** V1 key helpers prefer key-down on macOS. On RNmacOS 0.78 and later they declare handled keys through
+  `keyDownEvents` and `keyUpEvents`, the same path as Win32; only RNmacOS 0.73 and 0.74 still get the legacy
+  `validKeysDown` and `validKeysUp`. The installed native View emits every key event to JS and blocks `super` handling
+  only for a matching `keyDownEvents` or `keyUpEvents` entry. In the Fabric matcher, a modifier that the entry omits
+  matches any value, so `{ key: 'Enter' }` also matches Shift+Enter natively; Paper and the JS View matcher treat an
+  omitted modifier as false. RNmacOS Pressability activates Return and Space on key-down, and key-up supplies
+  `onPressOut`. Sources: `packages/utils/interactive-hooks/src/useKeyProps.ts:8-93,111-123`; RNmacOS
+  `RCTViewComponentView.mm:1807-1861`;
+  `ReactCommon/react/renderer/components/view/platform/macos/react/renderer/components/view/KeyEvent.h:105-111`;
+  `React/Views/RCTHandledKey.m:104-130`; `Libraries/Components/View/View.js:48-92`;
+  `Libraries/Pressability/Pressability.js:596-634`. Version: RNmacOS 0.81.9. Observed: 2026-10-15.
 - **C-FOCUS-005:** The macOS FocusZone translates key events, recalculates the key-view loop, and falls back to
   mounted descendant order when AppKit collapses a Fabric-backed zone to one key-loop entry. Its Fabric wrapper does
   not become another first-responder stop; it forwards focus to its content view. Sources:

@@ -252,10 +252,13 @@ export interface ViewAdditionsMacOS {
   onMouseEnter?: IMouseEventHandler;
   onMouseLeave?: IMouseEventHandler;
   onPreferredScrollerStyleDidChange?: (event: NativeSyntheticEvent<object>) => void;
+  /** @deprecated Only react-native-macos < 0.78 supports this prop. Use `keyDownEvents` and `keyUpEvents`. */
   passthroughAllKeyEvents?: boolean;
   tooltip?: string;
   // macOS `validKeysDown`/`validKeysUp` are arrays of key names (e.g. "Enter", " "), not key events.
+  /** @deprecated Only react-native-macos < 0.78 supports this prop. Use `keyDownEvents`. */
   validKeysDown?: string[];
+  /** @deprecated Only react-native-macos < 0.78 supports this prop. Use `keyUpEvents`. */
   validKeysUp?: string[];
 }
 
