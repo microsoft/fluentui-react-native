@@ -16,6 +16,8 @@ links the latest per-endpoint qualification results.
 
 ## Quick start
 
+Use Node.js `^22.19.0 || ^24.0.0 || >=26.0.0`.
+
 For standalone WDIO suites, install the runner and the selected framework in
 the suite workspace so the harness can resolve them. For Jasmine:
 

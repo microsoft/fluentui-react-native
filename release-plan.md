@@ -67,8 +67,8 @@ and list the known limitations that remain.
      deferred items into follow-up issues (section 8).
    - Mark the PR ready, get review, and merge it once all required checks pass.
    - Merging publishes nothing new. The package versions don't change until #4509 merges.
-6. **Phase 5, regenerate and merge #4509.**
-   - The changesets bot regenerates #4509 after the fix PR merges. Check its versions against section 1, check every
+6. **Phase 5, verify the automatically regenerated #4509.**
+   - The changesets bot regenerates #4509 after the fix PR merges; do not edit or recreate it. Check its versions against section 1, check every
      desktop changelog entry against section 7, and confirm the packed-tarball install smoke (R1-PKG-2) passed on it.
    - Then merge #4509. Until then, **do not merge #4509**. Add a PR comment that links this plan's outcome.
 7. **Phase 6, after publishing.** Run the npm smoke (Q11) on macOS and Windows, deprecate `desktop-mcp@0.1.0`, and
@@ -295,8 +295,8 @@ release. If one grows beyond about half a day, stop, document it as a known limi
     step after "Pack packages" that runs when `has-tarballs` is true.
   - The step installs the packed tarballs of the Node-only desktop packages (`desktop-driver`, `desktop-test`,
     `desktop-mcp`, `desktop-driver-mcp`) in an empty temporary directory, together with the registry versions of
-    every dependency that isn't packed. It then imports every `exports` subpath with `import()` and runs each `bin`
-    with `--help`.
+    every dependency that isn't packed. It then imports every library `exports` subpath, resolves the managed
+    service launcher without running it, and runs each `bin` with `--help`.
   - Implement it as a checked-in script (for example under `scripts/src/tasks/`) that reads the subpaths from each
     packed `package.json` at run time. Don't generate `node -e` strings from values (R-SCAN-002). Skip React Native
     packages, which can't be imported in Node.
@@ -379,7 +379,7 @@ release. If one grows beyond about half a day, stop, document it as a known limi
 - **R1-TST-2. Redact the credential after an auth scheme (P3-TST-14).** `src/reporting/protocol.ts:298-304` removes
   "Bearer" and keeps the token. Fix it and the expectation in `protocol.test.ts:126`.
 
-### desktop-mcp (macOS lane)
+### desktop-mcp (Windows lane for this R1 batch)
 
 - **R1-MCP-1. Report capacity and exits accurately (P2-29, P3-MCP-1).**
   - Map `capacity` to its own reason in `WorkloadController` instead of `service-unavailable`, and add mapping tests
@@ -481,17 +481,17 @@ Before Phase 4 removes the plan files, file one follow-up issue per package unde
 in each, link the evidence, and link the existing tracking issue where one applies. Any R1 item that ran out of time
 moves here.
 
-| Deferred items                                                                                                                                                                                                         | Tracking                                     |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
-| Native fidelity and fail-closed reporting: P2-17 (`sendKeys` modifiers and NULL key), P2-19, P2-21, P2-22, P3-MAC-1 to P3-MAC-10, P3-WIN-1 to P3-WIN-4 and P3-WIN-6, the native test gaps                              | #4441                                        |
-| Capture: P2-18 (if not done in W-R1-5), P3-DRV-23                                                                                                                                                                      | #4348                                        |
-| Production hardening: P2-7 (stale build lock), P3-DRV-12, P3-DRV-13, P3-DRV-16, P3-DRV-17, signing and notarization                                                                                                    | #4345                                        |
-| CI and flakes: required native CI, the flake budget, any remaining macOS slowness after R1-DRV-8                                                                                                                       | #4349                                        |
-| Support matrix and consumer shape: P2-1 (a `node`/`require` export condition), P2-26 automatic reclaim, P3-PKG-3 (optional peer dependencies), P3-PKG-4 (`webdriverio` as an optional dependency), Node version matrix | #4451                                        |
-| desktop-driver protocol and operations: P2-9, P2-11, P2-12, P2-16, P3-DRV-1 to P3-DRV-8, P3-DRV-14, P3-DRV-15, P3-DRV-18 to P3-DRV-22, P3-DRV-24 to P3-DRV-32                                                          | New `desktop-driver` follow-up               |
-| desktop-test lifecycle and reporting: P2-25, P2-27, P3-TST-1, P3-TST-3 to P3-TST-5, P3-TST-7 to P3-TST-13, P3-TST-15 to P3-TST-20                                                                                      | New `desktop-test` follow-up                 |
-| desktop-mcp: P2-28 automatic rebinding, P2-29 idle leases and per-tool principals, P2-30 stripping (if not done)                                                                                                       | New `desktop-mcp` follow-up                  |
-| Release process: no new public package publishes ahead of its dependencies' unreleased changes (P0-1)                                                                                                                  | `release.md` now, enforcement in a follow-up |
+| Deferred items                                                                                                                                                                                                                                    | Tracking                                     |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
+| Native fidelity and fail-closed reporting: P2-17 (`sendKeys` modifiers and NULL key), P2-19, P2-21, P2-22, P3-MAC-1 to P3-MAC-10, P3-WIN-1 to P3-WIN-4 and P3-WIN-6, the native test gaps                                                         | #4441                                        |
+| Capture: P2-18 (if not done in W-R1-5), P3-DRV-23                                                                                                                                                                                                 | #4348                                        |
+| Production hardening: P2-7 (stale build lock), P3-DRV-12, P3-DRV-13, P3-DRV-16, P3-DRV-17, signing and notarization                                                                                                                               | #4345                                        |
+| CI and flakes: required native CI, the flake budget, any remaining macOS slowness after R1-DRV-8                                                                                                                                                  | #4349                                        |
+| Support matrix and consumer shape: P2-1 (a `node`/`require` export condition), P2-26 contention diagnostics and automatic reclaim, P3-PKG-3 (optional peer dependencies), P3-PKG-4 (`webdriverio` as an optional dependency), Node version matrix | #4451                                        |
+| desktop-driver protocol and operations: P2-9, P2-11, P2-12, P2-16, P3-DRV-1 to P3-DRV-8, P3-DRV-14, P3-DRV-15, P3-DRV-18 to P3-DRV-22, P3-DRV-24 to P3-DRV-32                                                                                     | New `desktop-driver` follow-up               |
+| desktop-test lifecycle and reporting: P2-25, P2-27, P3-TST-1, P3-TST-3 to P3-TST-5, P3-TST-7 to P3-TST-13, P3-TST-15 to P3-TST-20                                                                                                                 | New `desktop-test` follow-up                 |
+| desktop-mcp: P2-28 automatic rebinding, P2-29 idle leases and per-tool principals, P2-30 stripping (if not done)                                                                                                                                  | New `desktop-mcp` follow-up                  |
+| Release process: no new public package publishes ahead of its dependencies' unreleased changes (P0-1)                                                                                                                                             | `release.md` now, enforcement in a follow-up |
 
 The known-limitations list in each `current-status.md` must name every deferred item that a consumer can hit.
 
@@ -699,14 +699,16 @@ commit SHA, and a note.
 | R0-5 P1-4 Node and Swift              | done        | `22423f29d` | macOS helper self-test passed 491/491. Windows verification is separate.                                                                                          |
 | R0-6 P1-5 Node and Swift              | done        | `9130fe983` | macOS helper self-test passed 502/502; Node lifecycle tests and pre-candidate buildci passed.                                                                     |
 | R0-7 P1-6                             | done        | `545c3f99c` | macOS fresh-geometry checks and shared W3C mapping. Signed native suite passed; physical AppKit mutex case passed (1 selected, 12 skipped) with verified cleanup. |
-| R0-8 P1-7                             | not started |             |                                                                                                                                                                   |
+| R0-8 P1-7                             | done        | `b8dafc50a` | macOS signed physical fixture and 526/526 self-checks passed. Hosted macOS physical Storybook timed out before test execution.                                    |
 | R0-9 P2-10 boundedCommand             | done        | `2aab0b03e` | macOS and Windows pre-candidate Q3 each passed 30/30. Windows evidence is recorded at `00d522188`.                                                                |
-| R1-PKG-1 to R1-PKG-6                  | not started |             |                                                                                                                                                                   |
+| R1-PKG-1, 3, 4, 5, 6                  | done        | `5240d619f` | Node range, tarball inventory, author, first-party entries and WDIO prerequisites. Desktop-test boundary tests passed 13/13.                                      |
+| R1-PKG-2 packed-install gate          | done        | `da9bdc841` | Implemented at `1eb3f9814`; macOS preview verified 40 imports, service launcher resolution, four CLI help checks and a helper source build. Candidate Q5 pending. |
 | R1-DRV-3 and R1-DRV-7                 | done        | `f17cb7689` | Focused cache and signing tests and full portable desktop-driver suite passed. Stable signing not run.                                                            |
-| Other R1-DRV items                    | not started |             |                                                                                                                                                                   |
+| R1-DRV-1 and R1-DRV-2                 | done        | `b3a53a665` | Bounded listener shutdown at `1cd698fe1`; native CLI reads env defaults unless explicitly overridden.                                                             |
+| Other R1-DRV items                    | in progress |             | macOS agent validating the remaining scoped commits.                                                                                                              |
 | R1-MAC-1                              | not started |             |                                                                                                                                                                   |
-| R1-TST-1, R1-TST-2                    | not started |             |                                                                                                                                                                   |
-| R1-MCP-1 to R1-MCP-4                  | not started |             |                                                                                                                                                                   |
+| R1-TST-1, R1-TST-2                    | done        | `732110b06` | Retained startup cancellation and auth credential redaction; 603 portable desktop-test tests passed.                                                              |
+| R1-MCP-1 to R1-MCP-4                  | done        | `d0db23b93` | Behavior at `2464459fe`; 53 MCP package tests passed on Windows. Docs landed; workload result stripping deferred to R2.                                           |
 | Documentation pass (macOS-owned)      | not started |             |                                                                                                                                                                   |
 | Version preview (section 7)           | not started |             |                                                                                                                                                                   |
 | Q1 to Q3                              | not run     |             |                                                                                                                                                                   |

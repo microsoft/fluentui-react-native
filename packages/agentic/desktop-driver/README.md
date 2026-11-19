@@ -41,7 +41,7 @@ target operating system. Installation never compiles or downloads a helper.
 
 ## Start here
 
-For a repository checkout, use Node 22.19 or later and Yarn 4:
+For a repository checkout, use Node.js `^22.19.0 || ^24.0.0 || >=26.0.0` and Yarn 4:
 
 ```sh
 yarn
