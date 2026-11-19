@@ -145,8 +145,10 @@ pools. The Jest worker setting accepts integers 1–8; CI defaults to 1
 and local runs keep Jest's own default unless explicitly configured.
 Compare worker settings on the same runner and revision before raising either cap.
 CI uploads `JS_PR_Jest_<run>_<attempt>` with per-invocation settings and
-per-file timings/outcomes, including partial results when the upload step can
-run. The artifact does not contain test output or error bodies.
+per-file timings/outcomes, plus navigation, worker, and cleanup durations
+from the inline WDIO contracts. Completed records survive a failed test
+when the upload step can run. The artifact does not contain test output or
+error bodies.
 
 ## Validation discipline
 

@@ -1,4 +1,5 @@
 const assert = require('node:assert/strict');
+const { randomUUID } = require('node:crypto');
 const fs = require('node:fs');
 const http = require('node:http');
 const os = require('node:os');
@@ -14,6 +15,19 @@ process.once('disconnect', () => controller.abort(new Error('WDIO contract owner
 async function main() {
   const mode = process.argv[2];
   assert.ok(['protected', 'named', 'settlement', 'smoke', 'lanes'].includes(mode), 'Unknown inline WDIO contract mode.');
+  const timingDirectory = process.env.FURN_JEST_TIMINGS_DIR;
+  const timingFile = timingDirectory && path.join(timingDirectory, `wdio-${randomUUID()}.ndjson`);
+  if (timingDirectory) fs.mkdirSync(timingDirectory, { recursive: true });
+  const recordPhases = (cases) => {
+    if (!timingFile) return;
+    for (const { status, diagnostics } of cases) {
+      const { navigationMs, workerStartupMs, workerBodyMs, workerMs, cleanupMs } = diagnostics?.phases ?? {};
+      fs.appendFileSync(
+        timingFile,
+        `${JSON.stringify({ kind: 'wdio-case', mode, status, navigationMs, workerStartupMs, workerBodyMs, workerMs, cleanupMs })}\n`,
+      );
+    }
+  };
   const packageRoot = path.resolve(__dirname, '..', '..');
   const projectRoot = path.resolve(packageRoot, '..', '..', '..', 'apps', 'storybook');
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'furn-inline-wdio-'));
@@ -40,15 +54,25 @@ async function main() {
     import('@fluentui-react-native/desktop-driver/server'),
     import('@fluentui-react-native/desktop-test/commands'),
   ]);
-  const runStories = (options, runner) =>
-    runWdioStoryTests(
-      {
-        timeoutMs: testBudget(30_000),
-        ...options,
-        signal: options.signal ? AbortSignal.any([options.signal, controller.signal]) : controller.signal,
-      },
-      runner,
-    );
+  const runStories = async (options, runner) => {
+    let cases = [];
+    try {
+      cases = await runWdioStoryTests(
+        {
+          timeoutMs: testBudget(30_000),
+          ...options,
+          signal: options.signal ? AbortSignal.any([options.signal, controller.signal]) : controller.signal,
+        },
+        runner,
+      );
+      return cases;
+    } catch (error) {
+      if (error instanceof WdioStoryTestRunError) cases = error.results;
+      throw error;
+    } finally {
+      recordPhases(cases);
+    }
+  };
   fs.writeFileSync(
     path.join(root, 'fixture.stories.ts'),
     `
