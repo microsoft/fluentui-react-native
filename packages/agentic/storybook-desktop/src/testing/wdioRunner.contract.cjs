@@ -67,7 +67,9 @@ async function main() {
       );
       return cases;
     } catch (error) {
-      if (error instanceof WdioStoryTestRunError) cases = error.results;
+      if (error instanceof Error && error instanceof WdioStoryTestRunError && 'results' in error && Array.isArray(error.results)) {
+        cases = error.results;
+      }
       throw error;
     } finally {
       recordPhases(cases);
