@@ -721,6 +721,10 @@ jobs:
             echo "has-tarballs=false" >> $GITHUB_OUTPUT
           fi
 
+      - name: Clean-install desktop tarballs
+        if: steps.check.outputs.has-tarballs == 'true'
+        run: yarn smoke:desktop-tarballs _packed
+
       - name: Upload packed tarballs
         if: steps.check.outputs.has-tarballs == 'true'
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2

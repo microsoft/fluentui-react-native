@@ -30,6 +30,7 @@
     "check-agent-instructions": "node ./scripts/src/cli.ts check-agent-instructions",
     "check-package-contents": "node ./scripts/src/cli.ts check-package-contents",
     "check-publishing": "node ./scripts/src/cli.ts check-publishing",
+    "smoke:desktop-tarballs": "node ./scripts/src/tasks/smokeDesktopTarballs.mts",
     "lint-fix": "cross-env FURN_FIX_MODE=true lage lint",
     "root-build": "tsc -b",
     "root-prebuild": "lage prebuild",
