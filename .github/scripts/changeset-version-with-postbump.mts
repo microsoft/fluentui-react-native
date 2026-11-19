@@ -1,5 +1,7 @@
 #!/usr/bin/env node
-import { $, cd, echo, fs } from 'zx';
+import fs from 'node:fs';
+
+import { runYarn } from '../../scripts/src/utils/runScript.ts';
 
 /**
  * Changeset version bump with post-bump hook
@@ -19,34 +21,40 @@ function bumpPatch(version: string): string {
   return `${major}.${minor}.${patch + 1}`;
 }
 
-echo('📦 Running changeset version...');
-await $`yarn changeset version`;
+async function runStep(command: string, ...args: string[]): Promise<void> {
+  const code = await runYarn(command, ...args);
+  if (code !== 0) {
+    console.error(`yarn ${[command, ...args].join(' ')} failed (exit ${code}).`);
+    process.exit(code > 0 ? code : 1);
+  }
+}
+
+console.log('📦 Running changeset version...');
+await runStep('changeset', 'version');
 
 // Changesets doesn't bump or update the dependency-profiles package, so we need to do that manually
-echo('\n🔄 Updating dependency-profiles...');
+console.log('\n🔄 Updating dependency-profiles...');
 if (fs.existsSync(DEPENDENCY_PROFILES_DIR)) {
   const profileIndexPath = `${DEPENDENCY_PROFILES_DIR}/src/index.js`;
   const profileBefore = fs.readFileSync(profileIndexPath, 'utf-8');
 
-  cd(DEPENDENCY_PROFILES_DIR);
-  await $`yarn update-profile`;
-  cd('../..');
+  await runStep('workspace', '@fluentui-react-native/dependency-profiles', 'update-profile');
 
   const profileAfter = fs.readFileSync(profileIndexPath, 'utf-8');
   if (profileAfter !== profileBefore) {
     const pkgPath = `${DEPENDENCY_PROFILES_DIR}/package.json`;
-    const pkg = fs.readJsonSync(pkgPath);
+    const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf-8')) as { version: string };
     pkg.version = bumpPatch(pkg.version);
-    fs.writeJsonSync(pkgPath, pkg, { spaces: 2 });
-    echo(`✅ dependency-profiles updated and bumped to ${pkg.version}`);
+    fs.writeFileSync(pkgPath, `${JSON.stringify(pkg, null, 2)}\n`);
+    console.log(`✅ dependency-profiles updated and bumped to ${pkg.version}`);
   } else {
-    echo('✅ dependency-profiles updated (no version change needed)');
+    console.log('✅ dependency-profiles updated (no version change needed)');
   }
 } else {
-  echo('⚠️  dependency-profiles not found, skipping');
+  console.log('⚠️  dependency-profiles not found, skipping');
 }
 
-echo('\n🔒 Updating yarn.lock...');
-await $`yarn install --mode update-lockfile`;
+console.log('\n🔒 Updating yarn.lock...');
+await runStep('install', '--mode', 'update-lockfile');
 
-echo('\n✅ Version bump complete!');
+console.log('\n✅ Version bump complete!');
