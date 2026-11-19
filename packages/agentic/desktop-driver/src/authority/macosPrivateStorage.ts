@@ -153,35 +153,63 @@ async function validateRoot(root: string, uid: number): Promise<Stats> {
 }
 
 async function validateAncestors(directory: string, uid: number): Promise<void> {
+  const ancestors: { filename: string; identity: Stats }[] = [];
   for (let current = directory; ; current = path.dirname(current)) {
     try {
-      const info = await lstat(current);
-      const rootOwnedSticky = info.uid === 0 && (info.mode & 0o1000) !== 0;
-      if (!info.isDirectory() || (info.uid !== uid && info.uid !== 0) || ((info.mode & 0o022) !== 0 && !rootOwnedSticky)) {
-        throw unsafeStorage();
-      }
-      await rejectACL(current, true);
+      ancestors.push({ filename: current, identity: await validateAncestor(current, uid) });
     } catch {
       throw unsafeStorage(current);
     }
     if (current === path.dirname(current)) break;
   }
+  await checkACLs(
+    ancestors.map(({ filename }) => filename),
+    true,
+  );
+  for (const { filename, identity } of ancestors) {
+    try {
+      if (!sameFile(identity, await validateAncestor(filename, uid))) throw unsafeStorage();
+    } catch {
+      throw unsafeStorage(filename);
+    }
+  }
 }
 
-async function rejectACL(filename: string, allowDenyEntries = false): Promise<void> {
-  // Node's stat mode does not reveal macOS ACL grants. Never infer privacy from 0700/0600 alone.
-  const { stdout } = await execFileAsync('/bin/ls', ['-lde', filename], {
-    env: { ...process.env, LC_ALL: 'C' },
-    maxBuffer: 16 * 1024,
-    timeout: 5_000,
-  });
-  const [metadata, ...entries] = stdout.trimEnd().split('\n');
-  if (
-    !/^[d-][rwxStTs-]{9}[+@]?\s/.test(metadata) ||
-    entries.some((entry) => !allowDenyEntries || !/^\s*\d+: (user|group):\S+ deny [a-z_,]+$/.test(entry))
-  ) {
+async function validateAncestor(filename: string, uid: number): Promise<Stats> {
+  const info = await lstat(filename);
+  const rootOwnedSticky = info.uid === 0 && (info.mode & 0o1000) !== 0;
+  if (!info.isDirectory() || (info.uid !== uid && info.uid !== 0) || ((info.mode & 0o022) !== 0 && !rootOwnedSticky)) {
     throw unsafeStorage();
   }
+  return info;
+}
+
+function rejectACL(filename: string): Promise<void> {
+  return checkACLs([filename], false);
+}
+
+async function checkACLs(filenames: readonly string[], allowDenyEntries: boolean): Promise<void> {
+  // Node's stat mode does not reveal macOS ACL grants. Never infer privacy from 0700/0600 alone.
+  // -d lists the named paths only, -f preserves argument order, and -w prints exact filenames.
+  const { stdout } = await execFileAsync('/bin/ls', ['-ldefw', '--', ...filenames], {
+    env: { ...process.env, LC_ALL: 'C' },
+    maxBuffer: 16 * 1024 * filenames.length,
+    timeout: 5_000,
+  }).catch(() => {
+    throw unsafeStorage(allowDenyEntries ? filenames[0] : undefined);
+  });
+  const invalid = (index: number) => unsafeStorage(allowDenyEntries ? (filenames[index] ?? filenames[0]) : undefined);
+  let index = -1;
+  if (!stdout.endsWith('\n')) throw invalid(0);
+  for (const line of stdout.slice(0, -1).split('\n')) {
+    if (/^[d-][rwxStTs-]{9}[+@]?\s/.test(line)) {
+      index++;
+      if (index >= filenames.length || !line.endsWith(` ${filenames[index]}`)) throw invalid(index);
+    } else if (index < 0 || !allowDenyEntries || !/^\s*\d+: (user|group):\S+ deny [a-z_,]+$/.test(line)) {
+      throw invalid(index);
+    }
+  }
+  if (index + 1 !== filenames.length) throw invalid(index + 1);
 }
 
 function validateFile(info: Stats, uid: number): void {

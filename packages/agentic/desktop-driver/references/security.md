@@ -192,7 +192,8 @@ alone is not logon-session isolation or live process verification.
 requiring a 0700 root and 0600 regular records owned by the current UID. It
 validates ancestors, rejects symlinks and hardlinked records, checks actual
 macOS ACLs rather than mode bits alone, and revalidates the root identity on
-each operation. Ancestor deny-only ACLs and root-owned sticky temporary
+each operation. The ancestor ACL check lists all ancestors in one process
+and rechecks each directory identity afterward. Ancestor deny-only ACLs and root-owned sticky temporary
 directories are allowed; an ancestor ACL that grants access fails closed.
 Existing permissions are never repaired. Publication is atomic and
 non-overwriting; cleanup compares the validated record's exact contents and

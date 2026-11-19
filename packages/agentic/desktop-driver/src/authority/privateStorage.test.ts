@@ -1,10 +1,19 @@
-import { execFileSync } from 'node:child_process';
+import { execFile, execFileSync } from 'node:child_process';
 import { chmod, link, lstat, mkdir, mkdtemp, readFile, readdir, realpath, rename, rm, symlink, utimes, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
+import { promisify } from 'node:util';
 
 import { createMacOSPrivateStorage } from './macosPrivateStorage.js';
 import { assertPrivateRecordName, privateRecordMaxBytes } from './privateStorage.js';
+
+jest.mock('node:child_process', () => {
+  const actual = jest.requireActual<typeof import('node:child_process')>('node:child_process');
+  const { promisify } = jest.requireActual<typeof import('node:util')>('node:util');
+  const execFile = jest.fn(actual.execFile);
+  Object.defineProperty(execFile, promisify.custom, { value: jest.fn(promisify(actual.execFile)) });
+  return { ...actual, execFile };
+});
 
 describe('private record names', () => {
   test('accepts portable names', () => {
@@ -114,6 +123,25 @@ macosDescribe('owner-validated macOS private storage', () => {
     expect(await readdir(real)).toEqual([]);
   });
 
+  test('checks all ancestor ACLs together without changing the deny-only policy', async () => {
+    const intermediate = path.join(parent, 'nested parent');
+    await mkdir(intermediate, { mode: 0o700 });
+    execFileSync('/bin/chmod', ['+a', 'everyone deny delete', intermediate]);
+    root = path.join(intermediate, 'state');
+    const ls = jest.mocked(promisify(execFile));
+    ls.mockClear();
+
+    try {
+      await createMacOSPrivateStorage(root);
+
+      expect(ls).toHaveBeenCalledTimes(2);
+      expect(ls.mock.calls[0][1]).toEqual(expect.arrayContaining([intermediate, parent, '/']));
+      expect(ls.mock.calls[1][1]).toContain(root);
+    } finally {
+      execFileSync('/bin/chmod', ['-N', intermediate]);
+    }
+  });
+
   test.each(['symlink', 'hardlink', 'permissions', 'directory', 'oversized', 'invalid-utf8'] as const)(
     'rejects an unsafe record (%s) without removing it',
     async (kind) => {
@@ -144,6 +172,9 @@ macosDescribe('owner-validated macOS private storage', () => {
   });
 
   test('rechecks root and ancestor ACLs even when their POSIX modes remain 0700', async () => {
+    const intermediate = path.join(parent, 'nested space \u00e9');
+    await mkdir(intermediate, { mode: 0o700 });
+    root = path.join(intermediate, 'state');
     const storage = await createMacOSPrivateStorage(root);
     execFileSync('/bin/chmod', ['+a', 'everyone allow search', root]);
     expect((await lstat(root)).mode & 0o777).toBe(0o700);
@@ -151,7 +182,7 @@ macosDescribe('owner-validated macOS private storage', () => {
     execFileSync('/bin/chmod', ['-N', root]);
     execFileSync('/bin/chmod', ['+a', 'everyone allow add_file', parent]);
     expect((await lstat(parent)).mode & 0o777).toBe(0o700);
-    await expect(storage.publish('record', 'content')).rejects.toThrow();
+    await expect(storage.publish('record', 'content')).rejects.toThrow(`Check ancestor "${parent}"`);
   });
 });
 
