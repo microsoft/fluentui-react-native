@@ -117,6 +117,37 @@ settles (R-VALID-004):
 - Do not call `jest` directly (R-VALID-001): it would run platform-suffixed test files under the package's base
   platform instead of their own.
 
+## Reliable JavaScript tests
+
+- Assert observable state, not elapsed time. Await the render or event that
+  changes state. In race tests, signal when the operation reaches the point of
+  interest and hold it with a deferred promise. Release the gate in `finally`
+  and await settlement, even if an assertion fails.
+- Use fake timers for clock-driven unit behavior. Keep real timers around
+  real sockets and child processes; use their readiness/exit events rather than
+  sleeps. If testing an actual deadline, scope the short budget to that operation
+  and restore it before teardown. Preserve the underlying cleanup error.
+- Keep subprocess contracts focused. Use an owned watchdog that requests
+  cancellation and waits for cleanup before the outer Jest deadline. Budget
+  startup, execution, and teardown separately; never use Jest's deadline
+  as the mechanism that stops a child process.
+- Use `testBudget(ms)` from `@fluentui-react-native/scripts/test-budget`
+  for explicit test or fixture watchdog budgets that need CI headroom.
+  `FURN_TEST_TIMEOUT_SCALE` accepts integers 1–3, defaults to 1, and also
+  scales the shared Jest default. It must not scale production, protocol, or
+  deliberately short fault-injection deadlines. Jest's `--testTimeout` only
+  overrides the default, not an explicit test or hook budget.
+
+The GitHub JS PR job starts with two concurrent Lage tasks and one Jest
+worker per package (`FURN_JEST_MAX_WORKERS=1`), with a timeout scale of 2.
+This lets Lage provide cross-package parallelism without multiplying worker
+pools. The Jest worker setting accepts integers 1–8; CI defaults to 1
+and local runs keep Jest's own default unless explicitly configured.
+Compare worker settings on the same runner and revision before raising either cap.
+CI uploads `JS_PR_Jest_<run>_<attempt>` with per-invocation settings and
+per-file timings/outcomes, including partial results when the upload step can
+run. The artifact does not contain test output or error bodies.
+
 ## Validation discipline
 
 - During iteration, run the focused tests for the code you changed (R-VALID-004), and run package lint or build early

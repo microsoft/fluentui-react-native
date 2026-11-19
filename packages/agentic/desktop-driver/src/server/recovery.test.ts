@@ -21,8 +21,23 @@ class MemoryStorage implements PrivateStorage {
   /** Loses every record right after it is published, as an operator cleanup would. */
   dropAfterPublish = false;
   failRead = false;
-  /** Holds every storage write until it resolves. */
-  gate: Promise<void> | undefined;
+  private writeGate?: () => Promise<void>;
+
+  blockWrites() {
+    const entered = Promise.withResolvers<void>();
+    const released = Promise.withResolvers<void>();
+    this.writeGate = () => {
+      entered.resolve();
+      return released.promise;
+    };
+    return {
+      entered: entered.promise,
+      release: () => {
+        this.writeGate = undefined;
+        released.resolve();
+      },
+    };
+  }
 
   async read(name: string): Promise<string | undefined> {
     if (this.failRead) {
@@ -32,7 +47,7 @@ class MemoryStorage implements PrivateStorage {
   }
 
   async publish(name: string, contents: string): Promise<void> {
-    await this.gate;
+    await this.writeGate?.();
     if (this.failPublish) {
       throw new Error('Storage is unavailable.');
     }
@@ -49,7 +64,7 @@ class MemoryStorage implements PrivateStorage {
   }
 
   async remove(name: string, expectedContents: string): Promise<boolean> {
-    await this.gate;
+    await this.writeGate?.();
     if (this.failRemove) {
       throw new Error('Storage is unavailable.');
     }
@@ -86,6 +101,14 @@ async function startService(
   const harness = await createDesktopDriverTestHarness(hostOptions, undefined, {
     recovery: { storage, ...(probe ? { probeApplication: probe } : {}) },
   });
+  const close = harness.close;
+  harness.close = async () => {
+    try {
+      await close();
+    } catch (error) {
+      throw new Error(`Settlement fixture cleanup failed:\n${cleanupDetails(error)}`, { cause: error });
+    }
+  };
   services.push(harness);
   const client = createDesktopDriverClient({ url: harness.server.url });
   return {
@@ -105,16 +128,36 @@ async function startService(
 const services: DesktopDriverTestHarness[] = [];
 
 afterEach(async () => {
-  await Promise.all(services.splice(0).map((harness) => harness.close().catch(() => undefined)));
+  const results = await Promise.allSettled(services.splice(0).map((harness) => harness.close()));
+  const failed = results.flatMap((result) => (result.status === 'rejected' ? [cleanupDetails(result.reason)] : []));
+  if (failed.length) throw new Error(failed.join('\n'));
 });
+
+function cleanupDetails(error: unknown): string {
+  if (error instanceof AggregateError) return [error.message, ...error.errors.map(cleanupDetails)].join('\n');
+  if (error instanceof Error) return error.message;
+  return String(error);
+}
+
+async function withShortCommandDeadline<T>(service: Service, sessionId: string, command: () => Promise<T>): Promise<T> {
+  const timeouts = service.harness.server.sessions.get(sessionId).desktopTimeouts;
+  const normalBudget = timeouts.nativeCommand;
+  timeouts.nativeCommand = 10;
+  try {
+    return await command();
+  } finally {
+    timeouts.nativeCommand = normalBudget;
+  }
+}
 
 /** Leaves the service's target quarantined by a click that applied but never answered. */
 async function quarantineByLostClick(service: Service): Promise<void> {
   const session = await service.open();
   const element = await session.findElement('accessibility id', 'button-primary');
   service.harness.host.injectFault('click', { mode: 'lost-response' });
-  service.harness.server.sessions.get(session.id).desktopTimeouts.nativeCommand = 10;
-  await expect(element.click()).rejects.toMatchObject({ data: { mutation: { quarantined: true } } });
+  await expect(withShortCommandDeadline(service, session.id, () => element.click())).rejects.toMatchObject({
+    data: { mutation: { quarantined: true } },
+  });
 }
 
 const quarantinedOnOpen = { code: 'session not created', data: { reason: 'target-quarantined' } };
@@ -152,13 +195,29 @@ describe('Desktop Driver settlement journal', () => {
     const service = await startService(storage);
     const session = await service.open();
     const element = await session.findElement('accessibility id', 'button-primary');
-    service.harness.host.injectFault('click', { mode: 'hang' });
-    const clicking = element.click().catch(() => undefined);
-    await waitUntil(() => service.harness.host.actions.some(({ type }) => type === 'fault'));
-    // What storage holds at this moment is what a service that stopped now would leave behind.
-    const leftBehind = storage.copy();
-    service.harness.server.sessions.get(session.id).commandAbortController.abort();
-    await clicking;
+    const { host, server } = service.harness;
+    const dispatch = host.click.bind(host);
+    const started = Promise.withResolvers<void>();
+    host.injectFault('click', { mode: 'hang' });
+    jest.spyOn(host, 'click').mockImplementationOnce((...args) => {
+      started.resolve();
+      return dispatch(...args);
+    });
+    const clicking = expect(element.click()).rejects.toMatchObject({ data: { mutation: { quarantined: true } } });
+    let leftBehind: MemoryStorage;
+    try {
+      await Promise.race([
+        started.promise,
+        clicking.then(() => {
+          throw new Error('Click settled before dispatch.');
+        }),
+      ]);
+      // Copy the records at dispatch, before the simulated service stop can settle the mutation.
+      leftBehind = storage.copy();
+    } finally {
+      server.sessions.get(session.id).commandAbortController.abort();
+      await clicking;
+    }
 
     const restarted = await startService(leftBehind);
     await expect(restarted.open()).rejects.toMatchObject({
@@ -277,19 +336,34 @@ describe('Desktop Driver settlement journal', () => {
     const record = service.harness.server.sessions.getQuarantine(service.harness.target.id)!;
     const sessions = service.harness.server.sessions;
     const release = new AbortController();
-    service.harness.host.injectFault('releaseActions', { mode: 'hang' });
+    const { host } = service.harness;
+    const started = Promise.withResolvers<void>();
+    host.injectFault('releaseActions', { mode: 'hang' });
     const releasing = sessions
-      .runMutation(sessions.get(record.sessionId!), 'Releasing input', () => service.harness.host.releaseActions(release.signal), {
-        recovery: true,
-      })
+      .runMutation(
+        sessions.get(record.sessionId!),
+        'Releasing input',
+        () => {
+          started.resolve();
+          return host.releaseActions(release.signal);
+        },
+        { recovery: true },
+      )
       .catch(() => undefined);
-    await waitUntil(() => service.harness.host.actions.filter(({ type }) => type === 'fault').length === 2);
-
-    await expect(
-      service.harness.server.recoverTarget(service.harness.target.id, { evidence: 'operator', quarantineId: record.id }),
-    ).rejects.toThrow(/mutation in flight/);
-    release.abort();
-    await releasing;
+    try {
+      await Promise.race([
+        started.promise,
+        releasing.then(() => {
+          throw new Error('Release settled before dispatch.');
+        }),
+      ]);
+      await expect(
+        service.harness.server.recoverTarget(service.harness.target.id, { evidence: 'operator', quarantineId: record.id }),
+      ).rejects.toThrow(/mutation in flight/);
+    } finally {
+      release.abort();
+      await releasing;
+    }
     await expect(
       service.harness.server.recoverTarget(service.harness.target.id, { evidence: 'operator', quarantineId: record.id }),
     ).resolves.toBeDefined();
@@ -304,26 +378,39 @@ describe('Desktop Driver settlement journal', () => {
     const record = sessions.getQuarantine(targetId)!;
     const session = sessions.get(record.sessionId!);
     const release = () => sessions.runMutation(session, 'Releasing input', async () => undefined, { recovery: true });
-    let open!: () => void;
-
-    storage.gate = new Promise((resolve) => (open = resolve));
+    const recordingGate = storage.blockWrites();
     const recording = release();
-    await expect(service.harness.server.recoverTarget(targetId, { evidence: 'operator', quarantineId: record.id })).rejects.toThrow(
-      /mutation in flight/,
-    );
-    open();
-    await recording;
+    try {
+      await Promise.race([
+        recordingGate.entered,
+        recording.then(() => {
+          throw new Error('Mutation settled before recording.');
+        }),
+      ]);
+      await expect(service.harness.server.recoverTarget(targetId, { evidence: 'operator', quarantineId: record.id })).rejects.toThrow(
+        /mutation in flight/,
+      );
+    } finally {
+      recordingGate.release();
+      await recording;
+    }
 
-    storage.gate = new Promise((resolve) => (open = resolve));
+    const recoveryGate = storage.blockWrites();
     const recovering = service.harness.server.recoverTarget(targetId, { evidence: 'operator', quarantineId: record.id });
-    // Let recovery reach its storage write.
-    await new Promise((resolve) => setTimeout(resolve, 0));
-    await expect(release()).rejects.toMatchObject({ data: { reason: 'target-quarantined' } });
-    open();
-    await expect(recovering).resolves.toBeDefined();
+    try {
+      await Promise.race([
+        recoveryGate.entered,
+        recovering.then(() => {
+          throw new Error('Recovery settled before writing.');
+        }),
+      ]);
+      await expect(release()).rejects.toMatchObject({ data: { reason: 'target-quarantined' } });
+    } finally {
+      recoveryGate.release();
+      await expect(recovering).resolves.toBeDefined();
+    }
     expect(storage.records.size).toBe(0);
 
-    storage.gate = undefined;
     await expect(release()).resolves.toBeUndefined();
     expect(storage.records.size).toBe(0);
   });
@@ -418,9 +505,7 @@ describe('Desktop Driver settlement journal', () => {
     const session = await service.open();
     storage.failPublish = true;
     service.harness.host.injectFault('releaseActions', { mode: 'lost-response' });
-    service.harness.server.sessions.get(session.id).desktopTimeouts.nativeCommand = 10;
-
-    await expect(session.delete()).rejects.toMatchObject({ code: 'timeout' });
+    await expect(withShortCommandDeadline(service, session.id, () => session.delete())).rejects.toMatchObject({ code: 'timeout' });
 
     expect(service.harness.server.sessions.getQuarantine(service.harness.target.id)).toMatchObject({
       effect: 'unknown',
@@ -436,22 +521,26 @@ describe('Desktop Driver settlement journal', () => {
     const element = await session.findElement('accessibility id', 'button-primary');
     service.harness.host.injectFault('click', { mode: 'lost-response' });
     const { sessions } = service.harness.server;
-    sessions.get(session.id).desktopTimeouts.nativeCommand = 10;
-    await expect(element.click()).rejects.toMatchObject({ data: { mutation: { quarantined: true } } });
+    await expect(withShortCommandDeadline(service, session.id, () => element.click())).rejects.toMatchObject({
+      data: { mutation: { quarantined: true } },
+    });
     const targetId = service.harness.target.id;
     const record = sessions.getQuarantine(targetId)!;
-    let open!: () => void;
-    storage.gate = new Promise((resolve) => (open = resolve));
+    const gate = storage.blockWrites();
     const recovering = service.harness.server.recoverTarget(targetId, { evidence: 'operator', quarantineId: record.id });
-    // Let recovery reach its storage write.
-    await new Promise((resolve) => setTimeout(resolve, 0));
-
-    await expect(session.delete()).rejects.toMatchObject({ data: { reason: 'target-quarantined' } });
-
-    expect(service.harness.host.actions.some(({ type }) => type === 'close-application')).toBe(false);
-    open();
-    await recovering;
-    storage.gate = undefined;
+    try {
+      await Promise.race([
+        gate.entered,
+        recovering.then(() => {
+          throw new Error('Recovery settled before writing.');
+        }),
+      ]);
+      await expect(session.delete()).rejects.toMatchObject({ data: { reason: 'target-quarantined' } });
+      expect(service.harness.host.actions.some(({ type }) => type === 'close-application')).toBe(false);
+    } finally {
+      gate.release();
+      await recovering;
+    }
     await sessions.deleteAll();
     expect(service.harness.host.actions).toContainEqual(expect.objectContaining({ type: 'close-application' }));
   });
@@ -491,8 +580,18 @@ describe('Desktop Driver settlement journal', () => {
     const journal = new SettlementJournal(storage, { storageDeadlineMs: 20 });
     const pending = { command: 'Clicking', sessionId: 'session', targetId: 'target' };
 
-    await expect(journal.load('target')).rejects.toMatchObject({ code: 'timeout' });
-    await expect(journal.beginMutation(pending)).rejects.toMatchObject({ code: 'timeout' });
+    jest.useFakeTimers();
+    try {
+      const loading = expect(journal.load('target')).rejects.toMatchObject({ code: 'timeout' });
+      await jest.advanceTimersByTimeAsync(20);
+      await loading;
+      const beginning = expect(journal.beginMutation(pending)).rejects.toMatchObject({ code: 'timeout' });
+      // Publication times out, then read-back has its own deadline.
+      await jest.runAllTimersAsync();
+      await beginning;
+    } finally {
+      jest.useRealTimers();
+    }
     expect(journal.hasMutation('target')).toBe(false);
   });
 
@@ -556,13 +655,3 @@ describe('Desktop Driver settlement journal', () => {
     expect(new SessionManager().describeQuarantine(record)).toEqual(record);
   });
 });
-
-async function waitUntil(predicate: () => boolean): Promise<void> {
-  for (let attempt = 0; attempt < 100; attempt += 1) {
-    if (predicate()) {
-      return;
-    }
-    await new Promise((resolve) => setTimeout(resolve, 5));
-  }
-  throw new Error('Timed out waiting for the test condition.');
-}

@@ -10,10 +10,11 @@ import { createDesktopDriverClient } from '@fluentui-react-native/desktop-driver
 import { NodeDesktopCommandRunner } from '@fluentui-react-native/desktop-test/commands';
 import { deadline } from '@fluentui-react-native/desktop-test/commands';
 import { DesktopRunReporter, startReportTransport } from '@fluentui-react-native/desktop-test/reporting';
+import { testBudget } from '@fluentui-react-native/scripts/test-budget';
 
 import type { StoredDriverManifest } from './generatedManifest.js';
 
-jest.setTimeout(30_000);
+jest.setTimeout(testBudget(30_000));
 
 describe('desktop Storybook server integration', () => {
   test.each(['resume', 'stop'] as const)(
@@ -53,7 +54,7 @@ describe('desktop Storybook server integration', () => {
       });
       try {
         // Allow for cold imports in the child process on a busy runner.
-        await waitForMarker(marker, 'disposal registration', 60_000);
+        await waitForMarker(marker, 'disposal registration', testBudget(60_000));
         await expect(child.waitForReadiness!({ tier: 'service-ready', service: 'storybook-channel-listener' }, 1000)).rejects.toThrow(
           'correlated readiness',
         );
@@ -66,8 +67,11 @@ describe('desktop Storybook server integration', () => {
           await expect(fetch(loopbackUrl(storybookPort, '/index.json'))).rejects.toThrow();
         } else {
           fs.writeFileSync(release, 'continue');
-          const listener = await child.waitForReadiness!({ tier: 'service-ready', service: 'storybook-channel-listener' }, 20_000);
-          const channel = await child.waitForReadiness!({ tier: 'service-ready', service: 'storybook-channel' }, 20_000);
+          const listener = await child.waitForReadiness!(
+            { tier: 'service-ready', service: 'storybook-channel-listener' },
+            testBudget(20_000),
+          );
+          const channel = await child.waitForReadiness!({ tier: 'service-ready', service: 'storybook-channel' }, testBudget(20_000));
           expect(channel.processId).toBe(listener.processId);
         }
       } finally {
@@ -82,7 +86,7 @@ describe('desktop Storybook server integration', () => {
         }
       }
     },
-    120_000,
+    testBudget(120_000),
   );
 
   test.each(['helper-path-and-hash', 'unknown-field', 'helper-bytes'])(
