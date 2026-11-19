@@ -156,11 +156,15 @@ path whose parent exists. Each Windows adapter throws on a host that is not
 Windows.
 
 Consumers call
-`readConnectionDescriptor(storage, name, verifyService)`. The required trusted
+`readConnectionDescriptor(storage, name, verifyService, binding?, addSecret?)`. The required trusted
 verifier must establish the live listener's process identity, ownership, and
 interactive session before this function transmits the grant. The function
-then checks the authenticated service incarnation. There is no permissive
-default verifier, automatic lookup, or Node-only filesystem fallback. See
+then checks the authenticated service incarnation. An optional supervisor
+`binding` pins the descriptor digest and incarnation (and the URL if supplied)
+before authentication, and requires the authenticated status to report the
+expected sole target and readiness. `addSecret` can register the grant with
+the caller's redactor after verification and before the status request.
+There is no permissive default verifier, automatic lookup, or Node-only filesystem fallback. See
 [private discovery](security.md#private-discovery) and the
 [Windows storage and verifier](security.md#windows-private-storage-and-service-verifier)
 for the boundary and the remaining native/supervisor integration.
@@ -290,8 +294,11 @@ try {
 }
 ```
 
-Use `./agent` for bounded inspection and evidence operations. It deliberately
-does not expose native handles, arbitrary commands, or unrestricted paths.
+`./agent` is a compatibility API for inspection and evidence. `describe` trims
+the returned projection after fetching the whole tree; its limits do not bound
+the native walk. Compatibility `find` and `check` also lack the provider work
+and result budgets of `furn/ops`. The API does not expose native handles,
+arbitrary commands, or unrestricted paths.
 
 Agents that drive a session through the service use the versioned operations
 under `furn/ops` (`session.observe()`, `session.find()`, `session.journal()`);
@@ -332,9 +339,12 @@ const client = createDesktopDriverClient({ grant: agent.token, url: service.url 
 - `/status` lists only the grant's targets and reports
   `service.incarnation`, which changes whenever the service restarts.
 - `authority.revoke(grant.id)` invalidates the grant and its descendants
-  immediately. Await `authority.revokeAndDrain(grant.id)` to confirm their
-  sessions and in-flight acquisitions have settled and closed; failed drains
-  remain observable and retryable.
+  immediately. While the service is running, await
+  `authority.revokeAndDrain(grant.id)` to confirm their sessions and in-flight
+  acquisitions have settled and closed; failed drains remain observable and
+  retryable. Once `close()` starts it unsubscribes its revocation listener and
+  owns the final drain. Await `close()` rather than using a later revocation as
+  proof of shutdown cleanup.
 - Scopes default to `driver-control`; `declared-workload` and
   `operator-recovery` do not imply driver access or add HTTP management routes.
   `authority.delegate(parent.id, request)` rejects target/scope expansion.

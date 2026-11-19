@@ -8,7 +8,12 @@
     "magic": "FDR1",
     "headerBytes": 12,
     "jsonType": 1,
-    "binaryType": 2
+    "binaryType": 2,
+    "helperStdin": {
+      "dispatchedJsonTypes": ["request", "cancel"],
+      "ignoresOtherJsonObjects": true,
+      "ignoresBinaryPayloads": true
+    }
   },
   "performActions": {
     "nodeFields": ["x", "y", "deltaX", "deltaY"],
@@ -93,6 +98,28 @@
       "holdsApplicationControlLockForCleanup": true
     },
     "applicationControl": "session-local-nonwaiting-semaphore-pid-and-native-start",
+    "ownershipFailureReasons": {
+      "location": "response.error.data.reason",
+      "values": [
+        "identity-start-mismatch",
+        "identity-session-mismatch",
+        "identity-executable-mismatch",
+        "identity-aumid-mismatch",
+        "identity-user-mismatch",
+        "application-identity-invalid",
+        "application-identity-mismatch",
+        "application-identity-changed",
+        "application-identity-unknown",
+        "application-identity-ambiguous",
+        "application-exited",
+        "no-matching-application",
+        "application-window-missing",
+        "application-lock-busy",
+        "application-lock-unavailable",
+        "application-preexisting",
+        "application-recovery-unsettled"
+      ]
+    },
     "launchKind": ["direct-child", "packaged-activation"],
     "containment": ["job-object", "uncontained", "external"],
     "applicationSettlement": ["not-started", "exited", "unknown"],

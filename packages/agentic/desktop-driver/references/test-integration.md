@@ -263,7 +263,8 @@ desktop-driver stories run \
 
 Selectors can filter by story glob, test glob, tag, and deterministic shard.
 A glob matches `*` as any run of characters and every other character
-literally, in linear time. Shards are cut from the selection ordered by Unicode
+literally. Worst-case matching time is proportional to the product of the
+value and pattern lengths. Shards are cut from the selection ordered by Unicode
 code point of `<story>/<test>`, so every machine and locale builds the same
 shards. The CLI emits JSON and exits nonzero when the run status is not
 `passed`.
@@ -337,6 +338,12 @@ including through a symbolic link, before it creates a directory. Failure
 evidence is best effort and never replaces the original test error. Trees and
 screenshots may contain sensitive application information; apply the retention
 and access policy described in [Security](security.md).
+
+Programmatic callers can pass `new ArtifactManager(root, { redact })` to
+`runDesktopStoryTests({ artifacts, ... })`. The callback transforms source XML
+and string values in JSON evidence or reports; it does not redact screenshots
+or JSON keys. `DesktopWebdriverRunOptions` and the CLI expose only the artifact
+root, not a redaction callback.
 
 ## Fake-host contract tests
 

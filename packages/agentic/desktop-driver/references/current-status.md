@@ -44,7 +44,8 @@ Failure-path, descendant, reliability and release-matrix qualification remain op
 ### Behavior and limits
 
 - The W3C service and the typed and WDIO clients accept registered targets only.
-- Browser-inapplicable native commands are explicitly unsupported.
+- Browser-inapplicable commands are either explicitly unsupported or have no route. New Session ignores the `timeouts` capability; use Set Timeouts after connecting.
+- The compatibility `./agent` API does not bound provider work. Use [agent operations](operations.md) for budgeted inspection.
 - The driver has no Storybook, React or React Native dependency; package-boundary tests reject forbidden imports and dependencies.
 - The optional story provider is injected.
 
@@ -69,7 +70,7 @@ Failure-path, descendant, reliability and release-matrix qualification remain op
 
 ### macOS physical input
 
-- Physical input verifies postconditions (pointer acknowledgment, keyboard clear and focus) and refuses when the target is obscured; it does not click covered content.
+- Physical element clicks verify the hit and pointer acknowledgment before pressing. Keyboard clear verifies focus and the resulting value.
 - Raw `performActions` requires a live exact application lease for button presses, drags, scrolls and new key presses. Unverified window hits or foreground refuse before posting the action; owned input can still be released after focus changes.
 - The physical lane clamps its window to the visible frame (maximum 1024 x 768 with a one-point inset) and verifies the exact requested rectangle.
 - A genuinely overlapped 480 x 302 window refuses physical input safely.
@@ -83,6 +84,8 @@ Failure-path, descendant, reliability and release-matrix qualification remain op
 - Primary exit is not descendant containment.
 - Strict clear requires an explicit mechanism: invalid mechanisms and missing elements are refused with no effect.
 - Doctor `ready` describes artifact availability, not permission readiness.
+- Unreadable geometry can appear as zero in legacy rectangles or use a cached window frame. XML page source can report unsupported enabled/visible states as `false`; bounded `observe` carries unsupported states and can omit unavailable geometry.
+- A known destroyed window ID is retired, but a missed destruction notification can allow recovery by exact title to bind a replacement window in the same live lease. `closeWindow` does not independently confirm destruction.
 - Hosted macOS physical input runs in an advisory CI lane ([#4500](https://github.com/microsoft/fluentui-react-native/pull/4500)); hosted skips are not passes.
 
 ### Windows secondary windows and activation

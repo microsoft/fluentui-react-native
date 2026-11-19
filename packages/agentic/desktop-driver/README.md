@@ -27,11 +27,11 @@ a new verified selection; finding fresh elements alone cannot restore readiness.
 
 ## Supported targets
 
-| Endpoint                    | Operating system  | Architecture            | Native implementation                                       |
-| --------------------------- | ----------------- | ----------------------- | ----------------------------------------------------------- |
-| React Native macOS Fabric   | macOS 14 or later | Apple Silicon (`arm64`) | Swift, AXUIElement, Quartz Event Services, ScreenCaptureKit |
-| React Native Windows Fabric | Windows 11        | `x64`                   | C++20, UI Automation, SendInput, Windows Graphics Capture   |
-| React Native Win32 Paper    | Windows 11        | `x64`                   | Same Windows helper and protocol                            |
+| Endpoint                            | Operating system  | Architecture            | Native implementation                                       |
+| ----------------------------------- | ----------------- | ----------------------- | ----------------------------------------------------------- |
+| React Native macOS Fabric and Paper | macOS 14 or later | Apple Silicon (`arm64`) | Swift, AXUIElement, Quartz Event Services, ScreenCaptureKit |
+| React Native Windows Fabric         | Windows 11        | `x64`                   | C++20, UI Automation, SendInput, Windows Graphics Capture   |
+| React Native Win32 Paper            | Windows 11        | `x64`                   | Same Windows helper and protocol                            |
 
 V1 permits one active WebDriver session per registered target in one service.
 Native helpers also exclude controlling the same exact application incarnation
@@ -155,7 +155,7 @@ The [reference index](references/README.md) describes each package-owned guide.
 | `/authoring`       | Serializable story plans, selectors, capabilities, result types, and case descriptors     |
 | `/wdio`            | WebdriverIO connection, custom commands, assertions, and story-plan runner                |
 | `/client`          | Low-level typed W3C client                                                                |
-| `/authority`       | Grants, private connection descriptors, and macOS owner-validated storage                 |
+| `/authority`       | Grants, descriptors, and macOS/Windows storage, service verification, and app probes      |
 | `/native`          | Native-helper build, resolution, and verification without loading the package root        |
 | `/server`          | Embeddable remote end, session manager, and target registry                               |
 | `/agent`           | JSON-safe API; `describe` and `agent describe` trim an unbounded whole-tree read          |

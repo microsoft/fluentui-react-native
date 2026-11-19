@@ -93,6 +93,8 @@ The macOS helper path may name either
 An explicit API or CLI option takes precedence over its environment variable.
 An empty environment value is treated as unset. An explicit empty `cacheRoot`
 is rejected rather than resolving to the current working directory.
+`doctor` always resolves a prebuilt helper without building, regardless of the
+environment build policy.
 WebDriver capabilities cannot set any of these values.
 
 Default stores:
@@ -152,9 +154,12 @@ not set this policy.
   builds, keyed by fixture source and toolchain. Resolution never selects them,
   and they are not published.
 - Builds publish through same-volume staging and atomic rename.
-- Cross-process directory locks prevent duplicate publication. A lock is stale
-  when its heartbeat stops; waiters reclaim it, and keep waiting for up to 60
-  minutes while the heartbeat is fresh.
+- Cross-process directory locks prevent duplicate publication. Once the
+  heartbeat is stale, a waiter may reclaim a lock with no readable owner
+  record, or one whose record names this host and a positive PID that no longer
+  exists. A readable record for another host, a live PID, or an invalid owner
+  remains held rather than being reclaimed by age alone. A fresh heartbeat
+  extends the wait, up to 60 minutes overall.
 - Failed build logs are copied to immutable diagnostics before staging cleanup.
 - A cache selection or artifact collision is quarantined under `trash` only
   when it fails an integrity check. A transient verification failure keeps it
@@ -202,11 +207,12 @@ define a downloader.
 `NativeHostProcess` starts the verified executable with `--stdio`. Requests,
 responses, binary payloads, events, cancellation, and cancellation
 acknowledgements are correlated. Node checks the shape of every decoded helper
-message before routing it. Malformed or unexpected output, such as a corrupt
-frame, a response of the wrong shape, an answer sent twice, or a binary payload
-identifier reused while the first is still pending, fails the transport. After
-the first malformed frame the decoder drops its buffer and ignores later
-output.
+message before routing it. A corrupt frame, an incorrectly shaped response, a
+second response while the same request is still pending (for example, waiting
+for its binary payload), or a reused pending binary identifier fails the
+transport. A well-formed response for a request that is no longer pending is
+ignored. After the first malformed frame the decoder drops its buffer and
+ignores later output.
 
 ### Shutdown and cancellation
 
@@ -240,8 +246,9 @@ is created and are never clamped.
 
 A helper that does not settle in time is stopped with SIGTERM, then SIGKILL
 after 2 seconds if it is still running, and every pending request is rejected.
-On Windows, stopping the helper also ends the application under test, which is
-why its default deadline is longer. Set the option on `NativeDesktopHost`, or
+On Windows, stopping the helper also ends applications it launched inside its
+Job Object, but does not end attached or uncontained packaged applications by
+virtue of helper exit. Set the option on `NativeDesktopHost`, or
 on the desktop-test service options that are passed to it.
 
 `dispose` asks the helper to shut down and waits for it to acknowledge and
@@ -270,8 +277,9 @@ forwarded over the life of the helper.
 
 After an unexpected exit from a verified helper, Node invokes the same
 binary in restricted `--release-input` mode with the recorded keys and
-buttons, even when both lists are empty. Recovery gets a five-second deadline,
-a 500 ms termination grace, and at most 16 KiB of retained output per stream.
+buttons, even when both lists are empty. Node sends SIGTERM at five seconds
+and escalates to SIGKILL after 500 ms if the recovery process still runs.
+It retains at most 16 KiB per output stream and bounds pipe closure separately.
 An empty ledger only probes the input lock without waiting or posting events.
 The adapter retains its mirrored action, typing, and click candidates after an uncertain command or a
 failed release until recovery succeeds. This mirror does not include keyboard

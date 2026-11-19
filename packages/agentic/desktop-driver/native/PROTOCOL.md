@@ -61,9 +61,16 @@ Limits:
 | Binary frame                  | 64 MiB            |
 | Binary correlation identifier | 1,024 UTF-8 bytes |
 
-Invalid magic, nonzero reserved bytes, unknown types, oversize frames,
-truncated identifiers, and invalid JSON fail the transport. Provider request
-parsers may impose tighter command-specific limits.
+Invalid magic, nonzero reserved bytes, unknown frame type bytes, oversize
+frames, and malformed JSON fail the transport. Provider request parsers may
+impose tighter command-specific limits.
+
+On helper stdin, both providers consume but ignore a binary frame with a valid
+header and complete payload. They do not parse it as an image. A JSON frame
+must decode to an object; objects whose `type` is not `request` or `cancel`
+are ignored rather than dispatched. This is not permission to send new frame
+types. On helper stdout, Node rejects malformed or unexpected JSON messages
+and validates binary correlation identifiers and their response declarations.
 
 ## JSON messages
 
@@ -109,7 +116,9 @@ only helper-private opaque IDs cross FDR1.
 The `launch` request includes `launchTimeoutMs` when explicitly configured on
 the registered target. Both native providers validate its positive bounded
 integer value, otherwise use their 90-second launch default, and honor the
-cancellation token while discovering the application/window. Windows
+cancellation token while discovering the application/window. On macOS, the
+timeout applies separately to the native application wait and unique-window
+discovery; it does not replace the server's overall deadline. Windows
 application descriptors may include an existing absolute `workingDirectory`
 for unpackaged process launch; packaged activation rejects that override.
 These fields are trusted supervisor configuration, not WebDriver capabilities.
@@ -284,10 +293,19 @@ process, and proves exit before returning `exited`. A matching start with other
 identity mismatches, another controller, cancellation, or unconfirmed exit
 remains fenced. Attach/inspection still reject reused PIDs; only trusted
 recovery retires the absent recorded incarnation.
-Mismatch reasons include `identity-start-mismatch` (attach/inspection), `identity-session-mismatch`,
-`identity-executable-mismatch`, and `identity-aumid-mismatch`; ambiguous
-process/window candidates report `application-identity-ambiguous`, and
-unreadable candidates report `application-identity-unknown`.
+Windows application ownership failures may report these reasons in
+`response.error.data.reason`. They describe this boundary, not the set of
+reasons for every FDR1 error.
+
+| Reasons                                                                                                                                     | Meaning                                                                                                                                                |
+| ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `identity-start-mismatch`, `identity-session-mismatch`, `identity-executable-mismatch`, `identity-aumid-mismatch`, `identity-user-mismatch` | A verified process attribute differs from the required identity. Recovery treats an absent or reused PID as successful `exited`, not a start mismatch. |
+| `application-identity-invalid`, `application-identity-mismatch`, `application-identity-changed`                                             | An exact identity is malformed, conflicts with the configured descriptor, or changed during discovery.                                                 |
+| `application-identity-unknown`, `application-identity-ambiguous`                                                                            | The provider cannot read enough identity evidence or cannot resolve a unique process/window.                                                           |
+| `application-exited`, `no-matching-application`, `application-window-missing`                                                               | An inspected process exited, descriptor discovery found no matching application, or the exact process has no matching window, respectively.            |
+| `application-lock-busy`, `application-lock-unavailable`                                                                                     | Another controller holds the exact application lock, or that lock could not be opened or acquired for another reason.                                  |
+| `application-preexisting`                                                                                                                   | A launch found a preexisting application it cannot claim.                                                                                              |
+| `application-recovery-unsettled`                                                                                                            | Recovery could not end the recorded process or could not prove exit.                                                                                   |
 
 These additive Windows schemas are in [protocol.json](protocol.json) and retain
 FDR1 version 1.0.
