@@ -1,5 +1,5 @@
 import type { NativeElementSnapshot } from '../host/types';
-import type { WebDriverError } from '../protocol/errors';
+import { WebDriverError } from '../protocol/errors';
 import { buildSample, supportedFact, unsupportedFact } from '../testing/observationSample';
 import { stubRuntime } from '../testing/operationRuntime';
 import type { StubRuntimeOptions } from '../testing/operationRuntime';
@@ -69,6 +69,25 @@ describe('sequence preflight', () => {
     expect(failure.data).toMatchObject({ reason: 'content-denied' });
     expect(clicks).toEqual([]);
     expect(runtime.observed).toHaveLength(0);
+  });
+
+  test('reports a closing observation failure without returning provider text', async () => {
+    const { runtime } = stub({
+      observe: () => {
+        throw new WebDriverError('timeout', 'The Quarterly Report window did not answer.');
+      },
+    });
+    const result = await executeOperation(runtime.runtime, 'sequence', {
+      input: {
+        steps: [{ check: { ref: 'elem1', expect: { present: false } } }],
+        observe: {},
+      },
+    });
+
+    expect(result.result).toMatchObject({
+      observationError: { code: 'timeout', message: 'The provider did not finish in time.' },
+    });
+    expect(JSON.stringify(result.result)).not.toContain('Quarterly Report');
   });
 
   test('refuses a clear the session cannot perform before an earlier step acts', async () => {

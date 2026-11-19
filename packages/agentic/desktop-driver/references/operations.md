@@ -530,9 +530,10 @@ operation layer keeps provider memory proportional to what the session holds:
 ## Errors
 
 Every failure is a W3C WebDriver error whose `data` names the `operation`,
-`requestId`, and `schemaVersion`, so it correlates with the journal. `message`
-is bounded to 300 characters with invisible characters made visible, and
-`stacktrace` is empty. Callers branch on `data.reason`, never the message.
+`requestId`, and `schemaVersion`, so it correlates with the journal. Provider
+and unexpected failures use fixed messages, including in sequence results.
+Operation-authored messages are bounded with invisible characters made
+visible, and `stacktrace` is empty. Callers branch on `data.reason`, never the message.
 Provider data is reduced to an allowlist: `reason`, `nativeCode`, and a
 rebuilt `mutation` report.
 

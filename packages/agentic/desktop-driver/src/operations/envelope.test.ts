@@ -185,10 +185,9 @@ describe('operationFailure', () => {
     });
   });
 
-  test('bounds and neutralizes the message', () => {
+  test('replaces an untrusted message rather than returning a clipped prefix', () => {
     const failure = operationFailure(new Error(`Window "${'w'.repeat(500)}\u202E" failed`), context);
-    expect(failure.message.length).toBeLessThanOrEqual(301);
-    expect(failure.message).not.toContain('\u202E');
+    expect(failure.message).toBe('The desktop operation failed.');
   });
 
   test('keeps the effect the failure recorded, so settlement still reads it', () => {

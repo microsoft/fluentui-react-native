@@ -1,8 +1,8 @@
 import { randomInt } from 'node:crypto';
 
 import type { NativeElementScope } from '../host/types.js';
-import { WebDriverError } from '../protocol/errors.js';
-import type { WebDriverErrorCode } from '../protocol/errors.js';
+import type { WebDriverError, WebDriverErrorCode } from '../protocol/errors.js';
+import { operationError } from './envelope.js';
 import { referenceCapacity, requireCapacity } from './limits.js';
 
 /**
@@ -256,14 +256,16 @@ const failureErrors: Record<ReferenceFailure, { code: WebDriverErrorCode; detail
 export function referenceFailureError(failure: ReferenceFailure, reference: string): WebDriverError {
   const { code, detail } = failureErrors[failure];
   const subject = failure === 'malformed' ? 'The reference' : `Reference "${printable(reference)}"`;
-  return new WebDriverError(code, `${subject} ${detail}.`, { reason: `ref-${failure}` });
+  return operationError(code, `ref-${failure}`, `${subject} ${detail}.`);
 }
 
 /** The error for a reference whose element the provider no longer tracks. */
 export function staleReferenceError(reference: string): WebDriverError {
-  return new WebDriverError('stale element reference', `Reference "${printable(reference)}" is no longer attached to the application.`, {
-    reason: 'ref-stale',
-  });
+  return operationError(
+    'stale element reference',
+    'ref-stale',
+    `Reference "${printable(reference)}" is no longer attached to the application.`,
+  );
 }
 
 function printable(reference: string): string {
