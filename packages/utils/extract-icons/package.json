@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/extract-icons",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Generate React Native TSX modules for selected Fluent System Icons",
   "license": "MIT",
   "repository": {

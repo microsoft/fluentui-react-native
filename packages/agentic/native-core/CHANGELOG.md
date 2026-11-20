@@ -1,5 +1,14 @@
 # @fluentui-react-native/native-core
 
+## 0.2.4
+
+### Patch Changes
+
+- 25b6af6: Run the Windows Callout placement test with its owner window at the top of the work area.
+- Updated dependencies [6fbd937]
+  - @fluentui-react-native/framework-base@0.9.2
+  - @fluentui-react-native/interactive-hooks@0.28.14
+
 ## 0.2.3
 
 ### Patch Changes

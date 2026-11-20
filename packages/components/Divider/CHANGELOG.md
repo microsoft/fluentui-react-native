@@ -1,5 +1,16 @@
 # Change Log - @fluentui-react-native/divider
 
+## 0.8.20
+
+### Patch Changes
+
+- Updated dependencies [6fbd937]
+  - @fluentui-react-native/framework-base@0.9.2
+  - @fluentui-react-native/design@0.6.2
+  - @fluentui-react-native/icon@0.22.20
+  - @fluentui-react-native/text@0.25.20
+  - @fluentui-react-native/framework@0.17.13
+
 ## 0.8.19
 
 ### Patch Changes

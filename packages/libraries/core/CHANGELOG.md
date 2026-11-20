@@ -1,5 +1,27 @@
 # Change Log - @fluentui/react-native
 
+## 0.44.17
+
+### Patch Changes
+
+- Updated dependencies [1352fe0]
+  - @fluentui-react-native/button@0.40.20
+  - @fluentui-react-native/callout@0.29.12
+  - @fluentui-react-native/focus-zone@0.23.12
+  - @fluentui-react-native/menu-button@0.15.18
+  - @fluentui-react-native/checkbox@0.24.20
+  - @fluentui-react-native/contextual-menu@0.25.24
+  - @fluentui-react-native/link@0.24.20
+  - @fluentui-react-native/persona@0.18.14
+  - @fluentui-react-native/persona-coin@0.17.14
+  - @fluentui-react-native/radio-group@0.22.23
+  - @fluentui-react-native/separator@0.19.19
+  - @fluentui-react-native/tablist@0.8.23
+  - @fluentui-react-native/text@0.25.20
+  - @fluentui-react-native/interactive-hooks@0.28.14
+  - @fluentui-react-native/focus-trap-zone@0.14.8
+  - @fluentui-react-native/pressable@0.13.14
+
 ## 0.44.16
 
 ### Patch Changes

@@ -1,5 +1,13 @@
 # Change Log - @fluentui-react-native/android-theme
 
+## 0.26.19
+
+### Patch Changes
+
+- Updated dependencies [6fbd937]
+  - @fluentui-react-native/framework-base@0.9.2
+  - @fluentui-react-native/design@0.6.2
+
 ## 0.26.18
 
 ### Patch Changes

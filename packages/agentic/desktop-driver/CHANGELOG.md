@@ -1,5 +1,35 @@
 # @fluentui-react-native/desktop-driver
 
+## 0.5.4
+
+### Patch Changes
+
+- ff7d60a: Make JavaScript test fixtures more reliable under CI load and document deterministic test authoring. No runtime API or behavior changes.
+- 25b6af6: Reject non-finite and out-of-range WebDriver pointer and wheel values before dispatch. Safely convert action values in the macOS helper so oversized wheel deltas cannot crash it.
+- 25b6af6: Refuse pointer moves and scrolls whose macOS element or viewport origin lacks usable live geometry. Map this refusal from both native providers to the WebDriver `move target out of bounds` error.
+- 25b6af6: Check ancestor ACLs in one macOS process per private-storage validation while still rejecting unsafe ancestors and rechecking their identities.
+- 25b6af6: Close idle or incomplete HTTP connections without letting them delay desktop session cleanup or input release.
+- 25b6af6: Honor native driver configuration and build-policy environment variables when CLI flags are omitted. `doctor` still only looks for an existing helper.
+- 25b6af6: Recover abandoned physical input locks after an unexpected helper exit even when no pressed keys or buttons were recorded. Empty-ledger recovery never posts input or waits for a live lock holder.
+- 25b6af6: Report native helper startup and input recovery failures cleanly when descriptor exhaustion prevents creating child process pipes.
+- 25b6af6: On macOS, refuse raw physical actions when the pointer or keyboard target cannot be proven to belong to a live leased application. Keep cancellation and release available for input the helper already owns.
+- 25b6af6: Avoid unsigned clock subtraction traps in macOS helper waits and event diagnostics.
+- 25b6af6: Declare the supported Node.js releases, report unsupported runtimes before starting the CLI, and omit test fixtures from the npm package. Native helper build sources are still included.
+- 25b6af6: Replace provider error messages in agent operations with fixed text. Keep machine-readable reasons and mutation settlement without returning displayed application text.
+- 25b6af6: Validate static story plans before execution, and send argument updates only to the story selected by the test.
+- 25b6af6: Correct the desktop driver documentation for transport, ownership, client limits, and native capture without changing helper behavior.
+- 25b6af6: Treat empty native-driver environment settings as unset, and reject an explicitly empty cache path rather than writing to the working directory. Read Hardened Runtime from the CodeDirectory flags field when verifying signed macOS helpers.
+- 25b6af6: Disable automatic WebdriverIO request retries for connected and attached desktop sessions so a failed launch or input operation is not replayed. Keep the driver's mutation outcome on command errors.
+- 2fa16dd: Add verified supervisor workload authority, story-enabled attach-only reservations, and host-owned macOS application lease maintenance.
+- 25b6af6: Exclude emitted contract-test declarations and their maps from the npm package.
+- 47a1be8: Organize the driver status reference around supported capabilities, known limitations, and the latest qualification result for each native endpoint.
+- 25b6af6: Fix a Windows and Win32 helper crash when the first window listing encounters an open popup. Reject wheel deltas and
+  pointer coordinates that cannot be represented in native input events instead of wrapping or injecting them.
+  Recover an abandoned physical-input lock even when there are no recorded keys or buttons to release.
+  Restrict the Windows helper's default DLL search to System32 and suppress blocking system error dialogs.
+  Retry a window capture once with a fresh Direct3D device after device removal or reset.
+  Retry brief Windows file-sharing errors when publishing or quarantining native helper cache entries.
+
 ## 0.5.3
 
 ### Patch Changes

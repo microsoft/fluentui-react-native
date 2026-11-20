@@ -1,5 +1,54 @@
 # @fluentui-react-native/desktop-test
 
+## 0.4.0
+
+### Minor Changes
+
+- 25b6af6: Move hosted driver readiness, retained application ownership, and attached or managed workloads into the desktop supervisor.
+  
+  **Migrating from 0.3.x:**
+  
+  - `claimDesktopWorkload` is no longer a root export. Use the supervisor-managed lifecycle instead of taking a separate workload claim.
+  - Replace `DesktopIntegration.run`, `resources`, and `supportsAgent` with `contribute(request)`. Return a plan with the applicable `resources`, `driver`, `workload`, `managedWorkload`, and `attachedWorkload` entries. Old integration fields are rejected, and an integration used for `serve` must contribute a hosted driver.
+  - When constructing a supervisor directly, supply contributions through `DesktopSupervisorOptions.integrationPlan.resources`, not `integration.resources`.
+  - Await `registerDesktopProcessDisposal` before acquiring the resource. It now returns `Promise<() => void>`.
+  - `DesktopSupervisor.runner` is typed as `DesktopCommandRunner`. Check for `close` and `terminate` before calling them on a custom runner.
+
+### Patch Changes
+
+- 25b6af6: Document MCP setup and safe use of workload results. Treat diagnostic text and allowed artifacts as untrusted output
+  that may include application text, stack traces, and absolute paths.
+- 25b6af6: Cancel supervisor-owned native application startup when the workload stops, and redact credentials after token-based authorization schemes in reports and command logs.
+- 25b6af6: Declare the supported Node.js releases, report unsupported runtimes before starting the CLI, and omit test fixtures from the npm package. Document first-party integration entry points and standalone WebdriverIO prerequisites.
+- 25b6af6: Use the neutral supervisor for exact native application ownership, retained lifetimes, protected attach leases, cancellation, and cleanup reporting. The status reference separates capability limits from the latest result for each endpoint.
+- 2fa16dd: Fence registered process owners that disappear during startup before their resources settle.
+- 25b6af6: Exclude emitted contract-test declarations and their maps from the npm package.
+- 25b6af6: On Windows and Win32, recognize the exited supervisor's own WebDriver listener during workload recovery. Claims for
+  unverified owners or resources remain fenced.
+  
+  Retry transient sharing violations when releasing the workload claim, and treat Ctrl+Break as a graceful interrupt.
+- Updated dependencies [ff7d60a]
+- Updated dependencies [25b6af6]
+- Updated dependencies [25b6af6]
+- Updated dependencies [25b6af6]
+- Updated dependencies [25b6af6]
+- Updated dependencies [25b6af6]
+- Updated dependencies [25b6af6]
+- Updated dependencies [25b6af6]
+- Updated dependencies [25b6af6]
+- Updated dependencies [25b6af6]
+- Updated dependencies [25b6af6]
+- Updated dependencies [25b6af6]
+- Updated dependencies [25b6af6]
+- Updated dependencies [25b6af6]
+- Updated dependencies [25b6af6]
+- Updated dependencies [25b6af6]
+- Updated dependencies [2fa16dd]
+- Updated dependencies [25b6af6]
+- Updated dependencies [47a1be8]
+- Updated dependencies [25b6af6]
+  - @fluentui-react-native/desktop-driver@0.5.4
+
 ## 0.3.0
 
 ### Minor Changes

@@ -1,5 +1,11 @@
 # Change Log - @fluentui-react-native/theming-utils
 
+## 0.27.19
+
+### Patch Changes
+
+- @fluentui-react-native/design@0.6.2
+
 ## 0.27.18
 
 ### Patch Changes

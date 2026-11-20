@@ -1,5 +1,18 @@
 # @fluentui-react-native/storybook-desktop-runtime
 
+## 0.3.9
+
+### Patch Changes
+
+- ff7d60a: Make JavaScript test fixtures more reliable under CI load and document deterministic test authoring. No runtime API or behavior changes.
+- 2fa16dd: Publish retained Windows and Win32 Storybook readiness only after the application's authenticated runtime renders its
+  initial story, exclude transient story-test runner workspaces from Metro, and make the Avatar activity-ring toggle test
+  self-driving so it no longer depends on story argument updates.
+- Updated dependencies [25b6af6]
+  - @fluentui-react-native/native-core@0.2.4
+  - @fluentui-react-native/design@0.6.2
+  - @fluentui-react-native/default-theme@0.28.2
+
 ## 0.3.8
 
 ### Patch Changes

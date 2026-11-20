@@ -1,5 +1,25 @@
 # Change Log - @fluentui-react-native/button
 
+## 0.40.20
+
+### Patch Changes
+
+- 1352fe0: Preserve Win32 Enter and Space activation when Button has a consumer onKeyDown handler.
+- Updated dependencies [6fbd937]
+  - @fluentui-react-native/framework-base@0.9.2
+  - @fluentui-react-native/design@0.6.2
+  - @fluentui-react-native/icon@0.22.20
+  - @fluentui-react-native/text@0.25.20
+  - @uifabricshared/foundation-composable@0.15.8
+  - @uifabricshared/foundation-compose@1.16.19
+  - @uifabricshared/foundation-settings@0.16.14
+  - @fluentui-react-native/experimental-activity-indicator@0.11.19
+  - @fluentui-react-native/experimental-shadow@0.7.19
+  - @fluentui-react-native/framework@0.17.13
+  - @fluentui-react-native/use-styling@0.16.8
+  - @fluentui-react-native/interactive-hooks@0.28.14
+  - @fluentui-react-native/pressable@0.13.14
+
 ## 0.40.19
 
 ### Patch Changes
