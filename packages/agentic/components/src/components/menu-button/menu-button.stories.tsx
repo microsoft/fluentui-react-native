@@ -223,6 +223,15 @@ export const Variants: Story = {
 
 export const FluentChevronPreview: Story = {
   render: () => <SvgChevronScene />,
+  wdio: [
+    desktopIt('MNB-002 renders the Fluent SVG pilot buttons with their native names', async ({ browser, expect }) => {
+      for (const size of ['small', 'medium', 'large']) {
+        const trigger = await browser.$(`~menu-button-svg-${size}`);
+        await expect(trigger).toBeDisplayed();
+        expect(await trigger.getProperty('name')).toBe(size);
+      }
+    }),
+  ],
 };
 
 export const AccessibleNames: Story = {
