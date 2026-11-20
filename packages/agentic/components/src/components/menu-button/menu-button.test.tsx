@@ -1,21 +1,15 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import { processColor, StyleSheet } from 'react-native';
 import type { View } from 'react-native';
 import { fireEvent, screen } from '@testing-library/react-native';
 import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
 import { FlexThemeReference, ThemeProvider } from '@fluentui-react-native/design';
 
 import { render } from '../../common/renderWithTheme';
-import { semanticIconSources } from '../../common/iconSources';
 import { MenuItem } from '../menu-item/menu-item';
 import { MenuButton } from './menu-button';
 import type { MenuButtonProps } from './menu-button.types';
-import { svgChevronAssets } from './chevronAssets.svg';
-import { createMenuButtonTokenDefinition } from './menu-button.styles';
-import { renderMenuButton_unstable } from './renderMenuButton';
-import { useMenuButtonWithTokens } from './useMenuButton';
-import { useMenuButtonStyles_unstable } from './useMenuButtonStyles';
 
 type ReactTestInstance = ReturnType<typeof screen.getByTestId>;
 
@@ -52,14 +46,6 @@ function backgroundColor(node: ReactTestInstance): unknown {
   return styles.reduce<unknown>((color, style) => style?.backgroundColor ?? color, undefined);
 }
 
-const svgTokens = createMenuButtonTokenDefinition(svgChevronAssets);
-
-function SvgScene(props: MenuButtonProps) {
-  const state = useMenuButtonWithTokens(props, svgTokens);
-  useMenuButtonStyles_unstable(state);
-  return renderMenuButton_unstable(state);
-}
-
 describe('MenuButton', () => {
   beforeEach(() => dispatchCommand.mockClear());
 
@@ -71,15 +57,9 @@ describe('MenuButton', () => {
     });
     const component = await render(
       <ThemeProvider theme={theme}>
-        <SvgScene size="small" content="Small" testID="svg-small">
-          <MenuItem content="Action" />
-        </SvgScene>
-        <SvgScene size="medium" content="Medium" testID="svg-medium">
-          <MenuItem content="Action" />
-        </SvgScene>
-        <SvgScene size="large" content="Large" testID="svg-large">
-          <MenuItem content="Action" />
-        </SvgScene>
+        <Scene size="small" content="Small" testID="svg-small" />
+        <Scene size="medium" content="Medium" testID="svg-medium" />
+        <Scene size="large" content="Large" testID="svg-large" />
       </ThemeProvider>,
     );
     const nodes = ['svg-small', 'svg-medium', 'svg-large'].map((testID) => component.getByTestId(testID));
@@ -87,14 +67,14 @@ describe('MenuButton', () => {
     expect(paths[0].props.d).not.toBe(paths[1].props.d);
     expect(paths[2].props.d).toBe(paths[0].props.d);
     const frames = nodes.map((node) => node.queryAll((child) => child.type === 'RNSVGSvgView')[0]);
-    expect(frames.map(({ props }) => [Number(props.bbWidth), Number(props.bbHeight), props.accessible])).toEqual([
-      [16, 16, false],
-      [20, 20, false],
-      [20, 20, false],
+    expect(frames.map(({ props }) => [Number(props.bbWidth), Number(props.bbHeight), props.accessible, props.pointerEvents])).toEqual([
+      [16, 16, false, 'none'],
+      [20, 20, false, 'none'],
+      [20, 20, false, 'none'],
     ]);
   });
 
-  it('composes Button theme chrome with MenuButton chevron tokens and leaves the glyph in place', async () => {
+  it('composes Button theme chrome with the SVG chevron tint and dimensions', async () => {
     const theme = new FlexThemeReference({
       componentTokens: {
         'furn.button': { root: { 'when.visualState.pressed': { backgroundColor: '#112233' } } },
@@ -108,9 +88,10 @@ describe('MenuButton', () => {
     );
     const trigger = screen.getByTestId('trigger');
     expect(backgroundColor(trigger)).toBe('#112233');
-    const glyph = screen.getByText(String.fromCodePoint(semanticIconSources.chevronDown.codepoint), { includeHiddenElements: true });
-    expect(StyleSheet.flatten(glyph.props.style)).toMatchObject({ color: '#556677' });
-    expect(StyleSheet.flatten(glyph.parent?.props.style)).toMatchObject({ width: 22, height: 23 });
+    const [frame] = trigger.queryAll((child) => child.type === 'RNSVGSvgView');
+    expect([Number(frame.props.bbWidth), Number(frame.props.bbHeight)]).toEqual([22, 23]);
+    const [group] = frame.queryAll((child) => child.type === 'RNSVGGroup');
+    expect(group.props.fill).toEqual({ payload: processColor('#556677'), type: 0 });
   });
 
   it.each((['small', 'medium', 'large'] as const).flatMap((size) => [false, true].map((iconOnly) => ({ size, iconOnly }))))(

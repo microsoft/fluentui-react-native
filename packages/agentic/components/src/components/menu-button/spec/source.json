@@ -3,7 +3,7 @@
   "component": "menu-button",
   "lifecycle": "implemented",
   "conformance": "reviewed",
-  "reviewedAt": "2026-10-19",
+  "reviewedAt": "2026-11-20",
   "sources": [
     {
       "id": "flex-component",
@@ -76,10 +76,6 @@
     },
     {
       "id": "menu-button-pointer-entry",
-      "status": "accepted"
-    },
-    {
-      "id": "menu-button-chevron-glyph",
       "status": "accepted"
     },
     {

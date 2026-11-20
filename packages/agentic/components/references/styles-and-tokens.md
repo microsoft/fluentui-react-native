@@ -56,8 +56,8 @@ For private icon slots, `fluent-icon: ChevronDown16Regular` references a sized F
 scans every binding branch and extracts one private TSX leaf per referenced asset into the directory configured
 under `furn.tokenAssets` in the package manifest. Commit generated modules and their provenance manifest; run
 `yarn check:token-icons` to detect stale output without writing it. Each component imports its own leaves, never a
-catalog barrel or a path read from JSON. The `FluentChevronPreview` MenuButton story exercises the same SVG assets
-on macOS, Windows Fabric, and Win32 Paper. The normal component retains the font glyph during the pilot.
+catalog barrel or a path read from JSON. MenuButton uses the size-specific Fluent SVG chevron on all supported
+renderers; its Variants story exercises the production trigger.
 
 `when.<field>.<value>` is a literal selector key. Nest only later axes inside a branch. Matching rules combine by
 property; the higher differing axis wins within the same layer. Provide a component-owned combined `visualState` for

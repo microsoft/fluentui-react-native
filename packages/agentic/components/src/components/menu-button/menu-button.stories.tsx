@@ -15,7 +15,6 @@ import { MenuItem } from '../menu-item/menu-item';
 import type { MenuItemProps } from '../menu-item/menu-item.types';
 import type { MenuOpenChangeData } from '../menu/menu.types';
 import { MenuButton } from './menu-button';
-import { SvgChevronScene } from './svgChevron.story-helpers';
 
 type SceneProps = { appearance?: ButtonAppearance; size?: ButtonSize; disabled?: boolean };
 
@@ -77,7 +76,13 @@ function VariantsScene() {
       {sizes.map((size) => (
         <View key={size} style={styles.toolbar}>
           {appearances.map((appearance) => (
-            <MenuButton key={appearance} appearance={appearance} size={size} content={`${appearance} ${size}`}>
+            <MenuButton
+              key={appearance}
+              appearance={appearance}
+              size={size}
+              content={`${appearance} ${size}`}
+              testID={`menu-button-${appearance}-${size}`}
+            >
               <MenuItem content="Action" secondaryContent={null} icon={null} />
             </MenuButton>
           ))}
@@ -103,7 +108,7 @@ const meta: Meta<SceneProps> = {
     docs: {
       description: {
         component:
-          'MenuButton is a Button-styled trigger with a down chevron that opens a menu of actions below it. Tab leaves the menu past the trigger.',
+          'MenuButton is a Button-styled trigger with a Fluent SVG down chevron that opens a menu of actions below it. Tab leaves the menu past the trigger.',
       },
     },
   },
@@ -216,22 +221,18 @@ export const Default: Story = {
 
 export const Variants: Story = {
   render: () => <VariantsScene />,
-  parameters: {
-    docs: { description: { story: 'Every appearance and size, with a label and with only a leading icon.' } },
-  },
-};
-
-export const FluentChevronPreview: Story = {
-  render: () => <SvgChevronScene />,
   wdio: [
-    desktopIt('MNB-002 renders the Fluent SVG pilot buttons with their native names', async ({ browser, expect }) => {
+    desktopIt('MNB-002 renders the native trigger at every chevron size', async ({ browser, expect }) => {
       for (const size of ['small', 'medium', 'large']) {
-        const trigger = await browser.$(`~menu-button-svg-${size}`);
+        const trigger = await browser.$(`~menu-button-primary-${size}`);
         await expect(trigger).toBeDisplayed();
-        expect(await trigger.getProperty('name')).toBe(size);
+        expect(await trigger.getProperty('name')).toBe(`primary ${size}`);
       }
     }),
   ],
+  parameters: {
+    docs: { description: { story: 'Every appearance and size, with a label and with only a leading icon.' } },
+  },
 };
 
 export const AccessibleNames: Story = {

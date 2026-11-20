@@ -28,10 +28,6 @@ type TriggerInstance = React.ComponentRef<typeof View>;
  * native popup family, which opens below the trigger and continues Tab past it.
  */
 export function useMenuButton_unstable(props: MenuButtonProps): MenuButtonState {
-  return useMenuButtonWithTokens(props, menuButtonTokenDefinition);
-}
-
-export function useMenuButtonWithTokens(props: MenuButtonProps, definition: typeof menuButtonTokenDefinition): MenuButtonState {
   const {
     accessibilityHint,
     accessibilityState,
@@ -158,7 +154,7 @@ export function useMenuButtonWithTokens(props: MenuButtonProps, definition: type
     ...button,
     iconOnly: false,
     visualState: getButtonVisualState(disabled, button.pressed || controller.presented, button.hovered),
-    menuButtonTokens: getComponentTokens(button.themeState, definition),
+    menuButtonTokens: getComponentTokens(button.themeState, menuButtonTokenDefinition),
     chevron,
     triggerRef,
     open: controller.presented,
