@@ -23,6 +23,12 @@ import type { ResolvedDesktopReporterMode } from '@fluentui-react-native/desktop
 
 import { writeDesktopStorybookFailure, type DesktopStorybookErrorOutput } from '../../config/diagnostics.cjs';
 import {
+  DEFAULT_STORYBOOK_STARTUP_TIMEOUT_MS,
+  DEFAULT_STORYBOOK_INITIAL_RENDER_TIMEOUT_MS,
+  DEFAULT_STORYBOOK_STORY_RENDER_TIMEOUT_MS,
+  STORYBOOK_NATIVE_UI_TIMEOUT_MS,
+} from '../../config/timeouts.cjs';
+import {
   buildNativeDesktopDriver,
   resolveNativeDesktopDriver,
   type NativeDesktopApplicationDescriptor,
@@ -86,6 +92,18 @@ type OwnedMacOSApplication = {
 };
 
 type OwnedWindowsSmokeOptions = Exclude<NonNullable<DesktopSmokeOptions['native']>, { kind: 'macos' }>;
+
+function retainedStartupTimeouts(smoke: DesktopSmokeOptions | undefined, server: DesktopCommand) {
+  const configuredRenderTimeout = Number(
+    server.env?.STORYBOOK_INITIAL_RENDER_TIMEOUT_MS ?? process.env.STORYBOOK_INITIAL_RENDER_TIMEOUT_MS,
+  );
+  return {
+    startupTimeoutMs: smoke?.startupTimeoutMs ?? DEFAULT_STORYBOOK_STARTUP_TIMEOUT_MS,
+    initialRenderTimeoutMs:
+      smoke?.initialRenderTimeoutMs ??
+      (configuredRenderTimeout || (smoke?.startupTimeoutMs ?? DEFAULT_STORYBOOK_INITIAL_RENDER_TIMEOUT_MS)),
+  };
+}
 
 export type DesktopStorybookBuildDriverOptions = {
   force?: boolean;
@@ -272,7 +290,7 @@ export class DesktopStorybookCli {
           platform,
         ),
       );
-      await this.services.ready('storybook-channel', loopbackUrl(port, '/index.json'), 120_000, this.fetch);
+      await this.services.ready('storybook-channel', loopbackUrl(port, '/index.json'), DEFAULT_STORYBOOK_STARTUP_TIMEOUT_MS, this.fetch);
       if (this.reporterMode === 'json' || this.reporterMode === 'ndjson') {
         this.writeStructured({ type: 'ready', host, port, runId: this.reporter?.runId });
       } else {
@@ -344,9 +362,6 @@ export class DesktopStorybookCli {
     }
     const macApplication = retained && platform === 'macos' ? this.ownedMacOSApplication(this.instance) : undefined;
     const windowsNative = retained && platform !== 'macos' ? this.ownedWindowsSmokeOptions(platform) : undefined;
-    const smokeOptions = windowsNative ? this.config.getPlatformOptions(platform).smoke : undefined;
-    // The retained channel withholds readiness until the app's initial render, which a cold development bundle delays.
-    const initialRenderTimeoutMs = smokeOptions ? (smokeOptions.initialRenderTimeoutMs ?? smokeOptions.startupTimeoutMs ?? 300_000) : 0;
     const wdio = resolveWdioOptions({ ...this.config.wdio, ...(options.input ? { input: options.input } : {}) });
     const agent = options.agent && {
       descriptor: options.agent.descriptor ?? defaultAgentDescriptor,
@@ -365,6 +380,10 @@ export class DesktopStorybookCli {
     if (command === false || command === undefined) {
       throw unsupportedAction('server', platform);
     }
+    const timeouts =
+      macApplication || windowsNative
+        ? retainedStartupTimeouts(this.config.getPlatformOptions(platform).smoke || undefined, command)
+        : undefined;
     const nativeDriver = await this.resolveDriver(platform);
     const storybookPort = options.port ?? (await findAvailablePort(this.instance.storybookPort, this.isPortAvailable));
     const metroPort = await this.resolveDriverMetroPort(platform, storybookPort);
@@ -430,7 +449,7 @@ export class DesktopStorybookCli {
           env: {
             ...command.env,
             ...(options.host ? { STORYBOOK_WS_HOST: options.host } : {}),
-            ...(initialRenderTimeoutMs ? { STORYBOOK_INITIAL_RENDER_TIMEOUT_MS: String(initialRenderTimeoutMs) } : {}),
+            ...(timeouts ? { STORYBOOK_INITIAL_RENDER_TIMEOUT_MS: String(timeouts.initialRenderTimeoutMs) } : {}),
           },
         },
         platform,
@@ -440,20 +459,26 @@ export class DesktopStorybookCli {
       listener: { service: 'storybook-channel-listener', port: storybookPort },
     });
     const [, channelListener] = await Promise.all([
-      metro && this.waitForOwnedService('metro', 'metro-listener', loopbackUrl(metroPort, '/status'), metro),
-      this.waitForOwnedService('storybook-channel', 'storybook-channel-listener', loopbackUrl(storybookPort, '/index.json'), channel),
+      metro && this.waitForOwnedService('metro', 'metro-listener', loopbackUrl(metroPort, '/status'), metro, timeouts?.startupTimeoutMs),
+      this.waitForOwnedService(
+        'storybook-channel',
+        'storybook-channel-listener',
+        loopbackUrl(storybookPort, '/index.json'),
+        channel,
+        timeouts?.startupTimeoutMs,
+      ),
     ]);
     const agentManifest = driverManifest.manifest.agent;
     const channelReady = await this.services.readyProcess(
       'storybook-channel',
       { tier: 'service-ready', service: 'storybook-channel', ...(agentManifest ? { descriptor: agentManifest.descriptor } : {}) },
-      120_000 + initialRenderTimeoutMs,
+      timeouts ? timeouts.startupTimeoutMs + timeouts.initialRenderTimeoutMs : DEFAULT_STORYBOOK_STARTUP_TIMEOUT_MS,
     );
     assertSameReadinessProducer(channelListener, channelReady);
     // Windows and Win32 publish the retained app's lease inside the channel before it reports service readiness.
     if (ownedApplication && platform === 'macos') {
       await this.waitForMacOSApplicationLease(driverManifest.path, {
-        timeoutMs: 120_000,
+        timeoutMs: DEFAULT_STORYBOOK_STARTUP_TIMEOUT_MS,
         signal: this.services.controller.signal,
         createStorage: this.createPrivateStorage,
       });
@@ -1025,6 +1050,7 @@ export class DesktopStorybookCli {
       const configuredServer = this.config.getPlatformOptions(platform).server;
       const server = smoke.server ?? configuredServer;
       if (!server) throw new Error('Native smoke requires its owned Storybook channel.');
+      const { startupTimeoutMs, initialRenderTimeoutMs } = retainedStartupTimeouts(smoke, server);
       const serverUrl = smoke.serverUrl ?? loopbackUrl(instance.storybookPort);
       const index = await this.createStoryManifest(this.config, platform);
       if (!index.entries.length) throw new Error('Native smoke selected no stories.');
@@ -1046,7 +1072,7 @@ export class DesktopStorybookCli {
           'metro-listener',
           smoke.metroUrl ?? loopbackUrl(instance.metroPort, '/status'),
           metro,
-          smoke.startupTimeoutMs,
+          startupTimeoutMs,
         );
       }
       const startPhase = async (phase: string) => {
@@ -1067,7 +1093,12 @@ export class DesktopStorybookCli {
                 identity: `storybook-smoke:${instance.id}:${phase}`,
                 acquire: async () => {
                   running = this.runner.start({
-                    ...this.prepareCommand(server, platform, instance, application),
+                    ...this.prepareCommand(
+                      { ...server, env: { ...server.env, STORYBOOK_INITIAL_RENDER_TIMEOUT_MS: String(initialRenderTimeoutMs) } },
+                      platform,
+                      instance,
+                      application,
+                    ),
                     label: `Storybook ${phase}`,
                     category: 'service',
                     context: { service: `storybook-${phase}` },
@@ -1082,16 +1113,17 @@ export class DesktopStorybookCli {
                   if (!running.waitForReadiness) throw new Error('Native smoke requires correlated channel readiness.');
                   const listener = await running.waitForReadiness(
                     { tier: 'service-ready', service: 'storybook-channel-listener' },
-                    smoke.startupTimeoutMs ?? 120_000,
+                    startupTimeoutMs,
                     this.services.controller.signal,
                   );
-                  await this.waitForUrl(new URL('/index.json', serverUrl).href, running, smoke.startupTimeoutMs, {
+                  await this.waitForUrl(new URL('/index.json', serverUrl).href, running, startupTimeoutMs, {
                     headers: this.listenerProbeHeaders(running),
                   });
-                  await this.confirmListenerProbe(running, 'storybook-channel-listener', listener, smoke.startupTimeoutMs);
+                  await this.confirmListenerProbe(running, 'storybook-channel-listener', listener, startupTimeoutMs);
+                  // Retained launch and cold bundling precede the channel's authenticated initial-render receipt.
                   const ready = await running.waitForReadiness(
                     { tier: 'service-ready', service: 'storybook-channel' },
-                    smoke.startupTimeoutMs ?? 120_000,
+                    startupTimeoutMs + initialRenderTimeoutMs,
                     this.services.controller.signal,
                   );
                   if (ready.service !== 'storybook-channel' || ready.descriptor !== undefined)
@@ -1133,7 +1165,7 @@ export class DesktopStorybookCli {
       const stopStories = await startPhase('stories');
       if (native.kind === 'macos') {
         await this.waitForMacOSApplicationLease(instance.driverManifestPath!, {
-          timeoutMs: smoke.startupTimeoutMs ?? 120_000,
+          timeoutMs: smoke.startupTimeoutMs ?? DEFAULT_STORYBOOK_STARTUP_TIMEOUT_MS,
           signal: this.services.controller.signal,
           createStorage: this.createPrivateStorage,
         });
@@ -1145,7 +1177,7 @@ export class DesktopStorybookCli {
               ['sidebar-header', 'sidebar-resize', 'addons-panel-header', 'addons-resize', 'addon-storybook-actions-panel'].map(
                 (suffix) => `${native.testIDPrefix}-win32-${suffix}`,
               ),
-              30_000,
+              STORYBOOK_NATIVE_UI_TIMEOUT_MS,
             ),
           );
         }
@@ -1167,7 +1199,10 @@ export class DesktopStorybookCli {
           await stopStories();
           await startPhase('tests');
           await traverse((traversal) =>
-            traversal.select(index.entries[0].id, smoke.initialRenderTimeoutMs ?? smoke.startupTimeoutMs ?? 300_000),
+            traversal.select(
+              index.entries[0].id,
+              smoke.initialRenderTimeoutMs ?? smoke.startupTimeoutMs ?? DEFAULT_STORYBOOK_INITIAL_RENDER_TIMEOUT_MS,
+            ),
           );
         }
         await this.services.guard(
@@ -1279,7 +1314,7 @@ export class DesktopStorybookCli {
           throw new Error('The macOS authored-test lifecycle did not create a Desktop Driver manifest.');
         }
         await this.waitForMacOSApplicationLease(instance.driverManifestPath, {
-          timeoutMs: smoke.startupTimeoutMs ?? 120_000,
+          timeoutMs: smoke.startupTimeoutMs ?? DEFAULT_STORYBOOK_STARTUP_TIMEOUT_MS,
           signal: this.services.controller.signal,
           createStorage: this.createPrivateStorage,
         });
@@ -1566,7 +1601,7 @@ export class DesktopStorybookCli {
     operation: DesktopOperation,
     serverUrl: string,
     settleMs: number,
-    initialRenderTimeoutMs = 300_000,
+    initialRenderTimeoutMs = DEFAULT_STORYBOOK_INITIAL_RENDER_TIMEOUT_MS,
     select = (storyId: string, timeoutMs: number) => this.selectStory(serverUrl, storyId, timeoutMs),
     requiredStoryIds: readonly string[] = [],
     failFast = false,
@@ -1594,7 +1629,7 @@ export class DesktopStorybookCli {
       this.reporter?.emit({ kind: 'scope-start', payload: { label: `Render ${id}`, category: 'worker' } }, testId, { story: id }, testId);
       this.reporter?.emit({ kind: 'test-start', payload: { testId, title: `Render ${id}`, attempt: 0 } }, testId, { story: id });
       try {
-        await select(id!, entryIndex === 0 ? initialRenderTimeoutMs : 15_000);
+        await select(id!, entryIndex === 0 ? initialRenderTimeoutMs : DEFAULT_STORYBOOK_STORY_RENDER_TIMEOUT_MS);
         consecutiveFailures = 0;
         if (settleMs > 0) {
           await delay(settleMs);
@@ -1669,7 +1704,12 @@ export class DesktopStorybookCli {
     throw new Error(`Timed out after ${timeoutMs} ms waiting for Storybook story "${storyId}" to render.`, { cause: lastError });
   }
 
-  private async waitForUrl(url: string, process: RunningDesktopCommand, timeoutMs = 120_000, init?: RequestInit): Promise<void> {
+  private async waitForUrl(
+    url: string,
+    process: RunningDesktopCommand,
+    timeoutMs = DEFAULT_STORYBOOK_STARTUP_TIMEOUT_MS,
+    init?: RequestInit,
+  ): Promise<void> {
     const deadline = Date.now() + timeoutMs;
     let lastError: unknown;
 
@@ -1708,14 +1748,20 @@ export class DesktopStorybookCli {
     process: RunningDesktopCommand,
     service: string,
     listener: { processId: number; incarnation: string },
-    timeoutMs = 120_000,
+    timeoutMs = DEFAULT_STORYBOOK_STARTUP_TIMEOUT_MS,
   ): Promise<void> {
     if (!process.waitForListenerProbe) throw new Error('Owned HTTP readiness requires a correlated listener probe.');
     const probed = await process.waitForListenerProbe(service, timeoutMs, this.services.controller.signal);
     assertSameReadinessProducer(listener, probed);
   }
 
-  private async waitForOwnedService(id: string, service: string, url: string, process: RunningDesktopCommand, timeoutMs = 120_000) {
+  private async waitForOwnedService(
+    id: string,
+    service: string,
+    url: string,
+    process: RunningDesktopCommand,
+    timeoutMs = DEFAULT_STORYBOOK_STARTUP_TIMEOUT_MS,
+  ) {
     const headers = this.listenerProbeHeaders(process);
     const listener = await this.services.readyProcess(id, { tier: 'service-ready', service }, timeoutMs);
     await this.services.ready(

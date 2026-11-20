@@ -126,6 +126,12 @@ Keep story callbacks statically extractable and authentication checks
 fail-closed. Update references when commands, supported config, outputs, or
 readiness contracts change.
 
+Shared lifecycle timeout values live in [`config/timeouts.cjs`](../config/timeouts.cjs),
+with TypeScript declarations in `config/timeouts.d.cts`. The CLI, channel and
+tests import those production values rather than duplicating numeric defaults.
+Keep overrides local to a test, or name fixture constants when several tests
+share them.
+
 Authenticated bridge epochs are recorded by `BridgeEpochJournal` in the
 service factory's private endpoint/target namespace, separately from settlement
 and quarantine. The record binds renderer and epoch to a native-verified PID

@@ -3,13 +3,15 @@ const path = require('node:path');
 const { pathToFileURL } = require('node:url');
 const { writeDesktopStorybookFailure } = require('./diagnostics.cjs');
 const { parseDriverManifest } = require('./generated-contract.cjs');
+const { DEFAULT_STORYBOOK_INITIAL_RENDER_TIMEOUT_MS } = require('./timeouts.cjs');
 
 const host = process.env.STORYBOOK_WS_HOST || '127.0.0.1';
 const port = Number(process.env.STORYBOOK_WS_PORT) || 7007;
 const smokeMode = process.env.STORYBOOK_SMOKE_MODE || 'stories';
 const smokePhase = parseSmokePhase(process.argv.slice(2));
 // The runtime connects only after Metro serves a cold development bundle, so the first story gets a startup budget.
-const initialRenderMilliseconds = Number(process.env.STORYBOOK_SMOKE_INITIAL_RENDER_TIMEOUT_MS) || 300_000;
+const initialRenderMilliseconds =
+  Number(process.env.STORYBOOK_SMOKE_INITIAL_RENDER_TIMEOUT_MS) || DEFAULT_STORYBOOK_INITIAL_RENDER_TIMEOUT_MS;
 const controller = new AbortController();
 let report;
 let runner;

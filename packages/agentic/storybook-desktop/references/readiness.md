@@ -29,6 +29,16 @@ no open bridge after a close, still reports `relaunch-required`. Startup render
 readiness does not replace request-correlated readiness for each requested
 story.
 
+Retained native smoke and hosted drivers check listener startup separately
+(`startupTimeoutMs`, default 120 seconds). Correlated channel readiness allows
+that budget plus the initial-render budget (`initialRenderTimeoutMs`, then
+`STORYBOOK_INITIAL_RENDER_TIMEOUT_MS` from the server command or inherited
+environment, then an explicit `startupTimeoutMs`, otherwise 300 seconds).
+The CLI forwards the same render budget to the channel so it cannot cancel a
+healthy cold Metro bundle at the listener deadline. An HTTP-ready listener
+alone never qualifies the runtime; failed processes and cancellation still
+abort readiness immediately.
+
 Each socket receives a fresh connection epoch in a version-2 hello challenge.
 The hello must echo that epoch and the manifest identity. Ready/error events
 bind the epoch, request, run, and story; version-1 native markers additionally
