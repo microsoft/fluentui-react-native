@@ -802,6 +802,29 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/core@npm:^7.19.6":
+  version: 7.29.13
+  resolution: "@babel/core@npm:7.29.13"
+  dependencies:
+    "@babel/code-frame": "npm:^7.29.7"
+    "@babel/generator": "npm:^7.29.13"
+    "@babel/helper-compilation-targets": "npm:^7.29.13"
+    "@babel/helper-module-transforms": "npm:^7.29.13"
+    "@babel/helpers": "npm:^7.29.13"
+    "@babel/parser": "npm:^7.29.13"
+    "@babel/template": "npm:^7.29.7"
+    "@babel/traverse": "npm:^7.29.13"
+    "@babel/types": "npm:^7.29.11"
+    "@jridgewell/remapping": "npm:^2.3.5"
+    convert-source-map: "npm:^2.0.0"
+    debug: "npm:^4.1.0"
+    gensync: "npm:^1.0.0-beta.2"
+    json5: "npm:^2.2.3"
+    semver: "npm:^6.3.1"
+  checksum: 10c0/7c9d372d63c0d30c35b78c70e373eeed9eee2c4b7cfe40f43daf5298f85e1cde8760c410a9a330148162911ae292acb17b5edddc33dd7b681e798949cec23ae1
+  languageName: node
+  linkType: hard
+
 "@babel/generator@npm:^7.29.1, @babel/generator@npm:^7.29.7, @babel/generator@npm:^7.7.2":
   version: 7.29.7
   resolution: "@babel/generator@npm:7.29.7"
@@ -812,6 +835,19 @@ __metadata:
     "@jridgewell/trace-mapping": "npm:^0.3.28"
     jsesc: "npm:^3.0.2"
   checksum: 10c0/9bf72b01b5bd0ea5b1288a0e37dbd360bff2f2b1ce73342c0d40fb3db2ec3dc004ada5ffa925c5e12939a416eed59e600d562b8ecd938ce0d27dfd0eb6c6c2b7
+  languageName: node
+  linkType: hard
+
+"@babel/generator@npm:^7.29.13, @babel/generator@npm:^7.29.14":
+  version: 7.29.14
+  resolution: "@babel/generator@npm:7.29.14"
+  dependencies:
+    "@babel/parser": "npm:^7.29.14"
+    "@babel/types": "npm:^7.29.14"
+    "@jridgewell/gen-mapping": "npm:^0.3.12"
+    "@jridgewell/trace-mapping": "npm:^0.3.28"
+    jsesc: "npm:^3.0.2"
+  checksum: 10c0/39db746c47e0b80290b727e64025dd0ee9060f346271b5ca75ba07485df05f704a74358910bbe8e9f6e2a8fca62ac98f886640d2c84e7740af5fec42fbe0b71a
   languageName: node
   linkType: hard
 
@@ -834,6 +870,19 @@ __metadata:
     lru-cache: "npm:^5.1.1"
     semver: "npm:^6.3.1"
   checksum: 10c0/4c15fd4c69a0a7047799a28a88460c19cede0a0ee8af994ea169114986f4af48b92c7393a4a3fee0456c11a656eece3448a6ed06354453d6c27cccf17195453b
+  languageName: node
+  linkType: hard
+
+"@babel/helper-compilation-targets@npm:^7.29.13":
+  version: 7.29.13
+  resolution: "@babel/helper-compilation-targets@npm:7.29.13"
+  dependencies:
+    "@babel/compat-data": "npm:^7.29.7"
+    "@babel/helper-validator-option": "npm:^7.29.7"
+    browserslist: "npm:^4.24.0"
+    lru-cache: "npm:^5.1.1"
+    semver: "npm:^6.3.1"
+  checksum: 10c0/e134fb9379f3375bd57c042bf26d9eb1cfae0bb89df498e8cd7e62ca7212a924e09c01be2b25040e7a2fbc9725cf81d692415c50afb568816e8ea4db554c94f7
   languageName: node
   linkType: hard
 
@@ -931,6 +980,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/helper-module-transforms@npm:^7.29.13":
+  version: 7.29.14
+  resolution: "@babel/helper-module-transforms@npm:7.29.14"
+  dependencies:
+    "@babel/helper-module-imports": "npm:^7.29.7"
+    "@babel/helper-validator-identifier": "npm:^7.29.7"
+    "@babel/traverse": "npm:^7.29.14"
+  peerDependencies:
+    "@babel/core": ^7.0.0
+  checksum: 10c0/5ca8b9c36d5b9656196c758df1dc10148086b232f3df43d932a66d84f46faf93da7096667903c1f652539759789dc1ef5fbff0569baeabb110dce27faa988250
+  languageName: node
+  linkType: hard
+
 "@babel/helper-optimise-call-expression@npm:^7.27.1":
   version: 7.27.1
   resolution: "@babel/helper-optimise-call-expression@npm:7.27.1"
@@ -983,6 +1045,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/helper-string-parser@npm:^7.29.14":
+  version: 7.29.14
+  resolution: "@babel/helper-string-parser@npm:7.29.14"
+  checksum: 10c0/7e296ef8457872da9f9306ef29a67470505bca7f21728ff4fede08746eac2bb122a3a3be39135d337a9c56985bae24e4c2dd8f13896afe64a32e9251363ed7bd
+  languageName: node
+  linkType: hard
+
 "@babel/helper-string-parser@npm:^7.29.7":
   version: 7.29.7
   resolution: "@babel/helper-string-parser@npm:7.29.7"
@@ -1015,6 +1084,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/helpers@npm:^7.29.13":
+  version: 7.29.14
+  resolution: "@babel/helpers@npm:7.29.14"
+  dependencies:
+    "@babel/template": "npm:^7.29.7"
+    "@babel/types": "npm:^7.29.14"
+  checksum: 10c0/143ca284d6a0361f31a15ae3ba48088298a3c95e871925e92258e2b8480a07e753b7c97953d618b3526fefaecde85c3e72b8c1b00cfe48cf4b5bd8310c83bfde
+  languageName: node
+  linkType: hard
+
 "@babel/helpers@npm:^7.29.7":
   version: 7.29.7
   resolution: "@babel/helpers@npm:7.29.7"
@@ -1033,6 +1112,17 @@ __metadata:
   bin:
     parser: ./bin/babel-parser.js
   checksum: 10c0/171b16eb4527cdbbb72cb98710f91acb22356e2c40196ba3b7a1b84efa8c55d0b0992f399c8c675c3e17f67fd133676c5c4118e5f20db243f427c8b29b0c3f40
+  languageName: node
+  linkType: hard
+
+"@babel/parser@npm:^7.29.13, @babel/parser@npm:^7.29.14":
+  version: 7.29.14
+  resolution: "@babel/parser@npm:7.29.14"
+  dependencies:
+    "@babel/types": "npm:^7.29.14"
+  bin:
+    parser: ./bin/babel-parser.js
+  checksum: 10c0/5d76040cb386915a5086c864b5966a08bada9fa6074fa2b16cce42ed78ecae309003d3362fef88a96b9a40afc9761604502db93f7cea9db59af077d1ff2109f4
   languageName: node
   linkType: hard
 
@@ -2370,6 +2460,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/traverse@npm:^7.29.13, @babel/traverse@npm:^7.29.14":
+  version: 7.29.14
+  resolution: "@babel/traverse@npm:7.29.14"
+  dependencies:
+    "@babel/code-frame": "npm:^7.29.7"
+    "@babel/generator": "npm:^7.29.14"
+    "@babel/helper-globals": "npm:^7.29.7"
+    "@babel/parser": "npm:^7.29.14"
+    "@babel/template": "npm:^7.29.7"
+    "@babel/types": "npm:^7.29.14"
+    debug: "npm:^4.3.1"
+  checksum: 10c0/f8d393411c7f03d1e5437620affa67857450b84501850414240a05c558894e59800f89310f810ec2711f7ed63fc03ef71d81eef9a3669f64d626c6d1be4c98f7
+  languageName: node
+  linkType: hard
+
 "@babel/types@npm:^7.0.0, @babel/types@npm:^7.20.7, @babel/types@npm:^7.21.3, @babel/types@npm:^7.24.7, @babel/types@npm:^7.27.1, @babel/types@npm:^7.27.3, @babel/types@npm:^7.28.2, @babel/types@npm:^7.28.5, @babel/types@npm:^7.28.6, @babel/types@npm:^7.29.0, @babel/types@npm:^7.29.7, @babel/types@npm:^7.29.8, @babel/types@npm:^7.3.3, @babel/types@npm:^7.4.4":
   version: 7.29.8
   resolution: "@babel/types@npm:7.29.8"
@@ -2377,6 +2482,16 @@ __metadata:
     "@babel/helper-string-parser": "npm:^7.29.7"
     "@babel/helper-validator-identifier": "npm:^7.29.7"
   checksum: 10c0/be7c279f0abf2a086c633e21b49c7ca80275d05283cc5a268b67a708c9914bd0c944f1422b3eb3cb37682a2af5d560abf520ccf9b01b53ecbfe6b71fbc3fdde6
+  languageName: node
+  linkType: hard
+
+"@babel/types@npm:^7.20.0, @babel/types@npm:^7.29.11, @babel/types@npm:^7.29.14":
+  version: 7.29.14
+  resolution: "@babel/types@npm:7.29.14"
+  dependencies:
+    "@babel/helper-string-parser": "npm:^7.29.14"
+    "@babel/helper-validator-identifier": "npm:^7.29.7"
+  checksum: 10c0/40df9841cec707821b711b10c786be8ce52781e159be2ef8be41b546a6cf06021e99bd49b85fde1fd0313560df921335d44df5c442374c07785a4cdf6c2b3932
   languageName: node
   linkType: hard
 
@@ -4763,6 +4878,34 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@fluentui-react-native/extract-icons@workspace:packages/utils/extract-icons":
+  version: 0.0.0-use.local
+  resolution: "@fluentui-react-native/extract-icons@workspace:packages/utils/extract-icons"
+  dependencies:
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui/react-native-icons": "npm:2.0.347"
+    "@fluentui/svg-icons": "npm:1.1.345"
+    "@svgr/core": "npm:6.5.1"
+    "@svgr/plugin-jsx": "npm:6.5.1"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
+    react-native-svg: "npm:^15.12.1"
+  peerDependencies:
+    react: ">=18.2.0 <20.0.0"
+    react-native: ">=0.73.0"
+    react-native-svg: ">=12.5.0"
+  peerDependenciesMeta:
+    react:
+      optional: true
+    react-native:
+      optional: true
+    react-native-svg:
+      optional: true
+  bin:
+    extract-icons: ./lib/cli.js
+  languageName: unknown
+  linkType: soft
+
 "@fluentui-react-native/focus-trap-zone@workspace:*, @fluentui-react-native/focus-trap-zone@workspace:packages/components/FocusTrapZone":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/focus-trap-zone@workspace:packages/components/FocusTrapZone"
@@ -6076,7 +6219,7 @@ __metadata:
     "@fluentui-react-native/vibrancy-view": "workspace:*"
     "@fluentui-react-native/win32-theme": "workspace:*"
     "@fluentui/react-native": "workspace:*"
-    "@fluentui/react-native-icons": "npm:^2.0.322"
+    "@fluentui/react-native-icons": "npm:^2.0.347"
     "@fortawesome/fontawesome-svg-core": "npm:^6.2.0"
     "@fortawesome/free-solid-svg-icons": "npm:^6.2.0"
     "@fortawesome/react-native-fontawesome": "npm:^0.3.0"
@@ -6721,16 +6864,24 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui/react-native-icons@npm:^2.0.322":
-  version: 2.0.345
-  resolution: "@fluentui/react-native-icons@npm:2.0.345"
-  dependencies:
-    tslib: "npm:^2.1.0"
+"@fluentui/react-native-icons@npm:2.0.347, @fluentui/react-native-icons@npm:^2.0.347":
+  version: 2.0.347
+  resolution: "@fluentui/react-native-icons@npm:2.0.347"
   peerDependencies:
+    "@fluentui/svg-icons": ^1.1.0
+    "@svgr/core": ^6.5.1 || ^7.0.0 || ^8.0.0
+    "@svgr/plugin-jsx": ^6.5.1 || ^7.0.0 || ^8.0.0
     react: ">=18.2.0 <20.0.0"
     react-native: ">=0.73.0"
     react-native-svg: ">=12.5.0"
-  checksum: 10c0/4cb541f47736f00167f2b2689f474ccb595138a584323b265d7f8c471c6383ec2474a4dbf509eb431bd86190055f2103cef0ddbc93a8b6e38b2d059ac34a01cd
+  peerDependenciesMeta:
+    "@fluentui/svg-icons":
+      optional: true
+    "@svgr/core":
+      optional: true
+    "@svgr/plugin-jsx":
+      optional: true
+  checksum: 10c0/79882b99f7d6d5c603257b8db4dc29380531ea28f03320126c28fa82d3aa1f7b4f28d9aadbfb6a4e86e5e4559cfa27423f34a57e7958701f02b4702d37fccd03
   languageName: node
   linkType: hard
 
@@ -6787,6 +6938,13 @@ __metadata:
       optional: true
   languageName: unknown
   linkType: soft
+
+"@fluentui/svg-icons@npm:1.1.345":
+  version: 1.1.345
+  resolution: "@fluentui/svg-icons@npm:1.1.345"
+  checksum: 10c0/084bcb65ad826ce36769e633babdccb3685f97b67f26cd6d14928d87e2ff10b12bf270580be62f1280b153b41efd573488e411d77db816c77c6e532c68d41769
+  languageName: node
+  linkType: hard
 
 "@fortawesome/fontawesome-common-types@npm:6.7.2":
   version: 6.7.2
@@ -11773,7 +11931,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@svgr/babel-plugin-remove-jsx-attribute@npm:8.0.0":
+"@svgr/babel-plugin-add-jsx-attribute@npm:^6.5.1":
+  version: 6.5.1
+  resolution: "@svgr/babel-plugin-add-jsx-attribute@npm:6.5.1"
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: 10c0/a13ed0797189d5497890530449029bec388310e260a96459e304e2729e7a2cf4d20d34f882d9a77ccce73dd3d36065afbb6987258fdff618d7d57955065a8ad4
+  languageName: node
+  linkType: hard
+
+"@svgr/babel-plugin-remove-jsx-attribute@npm:*, @svgr/babel-plugin-remove-jsx-attribute@npm:8.0.0":
   version: 8.0.0
   resolution: "@svgr/babel-plugin-remove-jsx-attribute@npm:8.0.0"
   peerDependencies:
@@ -11782,7 +11949,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@svgr/babel-plugin-remove-jsx-empty-expression@npm:8.0.0":
+"@svgr/babel-plugin-remove-jsx-empty-expression@npm:*, @svgr/babel-plugin-remove-jsx-empty-expression@npm:8.0.0":
   version: 8.0.0
   resolution: "@svgr/babel-plugin-remove-jsx-empty-expression@npm:8.0.0"
   peerDependencies:
@@ -11800,12 +11967,30 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@svgr/babel-plugin-replace-jsx-attribute-value@npm:^6.5.1":
+  version: 6.5.1
+  resolution: "@svgr/babel-plugin-replace-jsx-attribute-value@npm:6.5.1"
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: 10c0/318786787c9a217c33a7340c8856436858e1fffa5a6df635fedc6b9a371f3afea080ea074b9e3cfbbd9dd962ead924fde8bc9855a394c38dd60e391883a58c81
+  languageName: node
+  linkType: hard
+
 "@svgr/babel-plugin-svg-dynamic-title@npm:8.0.0":
   version: 8.0.0
   resolution: "@svgr/babel-plugin-svg-dynamic-title@npm:8.0.0"
   peerDependencies:
     "@babel/core": ^7.0.0-0
   checksum: 10c0/80e0a7fcf902f984c705051ca5c82ea6050ccbb70b651a8fea6d0eb5809e4dac274b49ea6be2d87f1eb9dfc0e2d6cdfffe1669ec2117f44b67a60a07d4c0b8b8
+  languageName: node
+  linkType: hard
+
+"@svgr/babel-plugin-svg-dynamic-title@npm:^6.5.1":
+  version: 6.5.1
+  resolution: "@svgr/babel-plugin-svg-dynamic-title@npm:6.5.1"
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: 10c0/16ef228c793b909fec47dd7dc05c1c3c2d77a824f42055df37e141e0534081b1bc4aec6dcc51be50c221df9f262f59270fc1c379923bfd4f5db302abafabfd8d
   languageName: node
   linkType: hard
 
@@ -11818,6 +12003,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@svgr/babel-plugin-svg-em-dimensions@npm:^6.5.1":
+  version: 6.5.1
+  resolution: "@svgr/babel-plugin-svg-em-dimensions@npm:6.5.1"
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: 10c0/dfdd5cbe6ae543505eaa0da69df0735b7407294c4b0504b3e74c0e7e371f1acb914eb99fd21ff39ef5bd626b3474f064a4cccc50f41b7c556ee834f9a6d6610a
+  languageName: node
+  linkType: hard
+
 "@svgr/babel-plugin-transform-react-native-svg@npm:8.1.0":
   version: 8.1.0
   resolution: "@svgr/babel-plugin-transform-react-native-svg@npm:8.1.0"
@@ -11827,12 +12021,30 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@svgr/babel-plugin-transform-react-native-svg@npm:^6.5.1":
+  version: 6.5.1
+  resolution: "@svgr/babel-plugin-transform-react-native-svg@npm:6.5.1"
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: 10c0/332fbf3bbc19d938b744440dbab9c8acd8f7a2ed6bf9c4e23f40e3f2c25615a60b3bf00902a4f1f6c20b5f382a1547b3acc6f2b2d70d80e532b5d45945f1b979
+  languageName: node
+  linkType: hard
+
 "@svgr/babel-plugin-transform-svg-component@npm:8.0.0":
   version: 8.0.0
   resolution: "@svgr/babel-plugin-transform-svg-component@npm:8.0.0"
   peerDependencies:
     "@babel/core": ^7.0.0-0
   checksum: 10c0/4ac00bb99a3db4ef05e4362f116a3c608ee365a2d26cf7318d8d41a4a5b30a02c80455cce0e62c65b60ed815b5d632bedabac2ccd4b56f998fadef5286e3ded4
+  languageName: node
+  linkType: hard
+
+"@svgr/babel-plugin-transform-svg-component@npm:^6.5.1":
+  version: 6.5.1
+  resolution: "@svgr/babel-plugin-transform-svg-component@npm:6.5.1"
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: 10c0/8d9e1c7c62abce23837e53cdacc6d09bc1f1f2b0ad7322105001c097995e9aa8dca4fa41acf39148af69f342e40081c438106949fb083e997ca497cb0448f27d
   languageName: node
   linkType: hard
 
@@ -11851,6 +12063,37 @@ __metadata:
   peerDependencies:
     "@babel/core": ^7.0.0-0
   checksum: 10c0/49367d3ad0831f79b1056871b91766246f449d4d1168623af5e283fbaefce4a01d77ab00de6b045b55e956f9aae27895823198493cd232d88d3435ea4517ffc5
+  languageName: node
+  linkType: hard
+
+"@svgr/babel-preset@npm:^6.5.1":
+  version: 6.5.1
+  resolution: "@svgr/babel-preset@npm:6.5.1"
+  dependencies:
+    "@svgr/babel-plugin-add-jsx-attribute": "npm:^6.5.1"
+    "@svgr/babel-plugin-remove-jsx-attribute": "npm:*"
+    "@svgr/babel-plugin-remove-jsx-empty-expression": "npm:*"
+    "@svgr/babel-plugin-replace-jsx-attribute-value": "npm:^6.5.1"
+    "@svgr/babel-plugin-svg-dynamic-title": "npm:^6.5.1"
+    "@svgr/babel-plugin-svg-em-dimensions": "npm:^6.5.1"
+    "@svgr/babel-plugin-transform-react-native-svg": "npm:^6.5.1"
+    "@svgr/babel-plugin-transform-svg-component": "npm:^6.5.1"
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: 10c0/8e8d7a0049279152f9ac308fbfd4ce74063d8a376154718cba6309bae4316318804a32201c75c5839c629f8e1e5d641a87822764000998161d0fc1de24b0374a
+  languageName: node
+  linkType: hard
+
+"@svgr/core@npm:6.5.1":
+  version: 6.5.1
+  resolution: "@svgr/core@npm:6.5.1"
+  dependencies:
+    "@babel/core": "npm:^7.19.6"
+    "@svgr/babel-preset": "npm:^6.5.1"
+    "@svgr/plugin-jsx": "npm:^6.5.1"
+    camelcase: "npm:^6.2.0"
+    cosmiconfig: "npm:^7.0.1"
+  checksum: 10c0/60cce11e13391171132115dcc8da592d23e51f155ebadf9b819bd1836b8c13d40aa5c30a03a7d429f65e70a71c50669b2e10c94e4922de4e58bc898275f46c05
   languageName: node
   linkType: hard
 
@@ -11877,6 +12120,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@svgr/hast-util-to-babel-ast@npm:^6.5.1":
+  version: 6.5.1
+  resolution: "@svgr/hast-util-to-babel-ast@npm:6.5.1"
+  dependencies:
+    "@babel/types": "npm:^7.20.0"
+    entities: "npm:^4.4.0"
+  checksum: 10c0/18fa37b36581ba1678f5cc5a05ce0411e08df4db267f3cd900af7ffdf5bd90522f3a46465f315cd5d7345264949479133930aafdd27ce05c474e63756196256f
+  languageName: node
+  linkType: hard
+
 "@svgr/plugin-jsx@npm:*, @svgr/plugin-jsx@npm:^8.1.0":
   version: 8.1.0
   resolution: "@svgr/plugin-jsx@npm:8.1.0"
@@ -11888,6 +12141,20 @@ __metadata:
   peerDependencies:
     "@svgr/core": "*"
   checksum: 10c0/07b4d9e00de795540bf70556fa2cc258774d01e97a12a26234c6fdf42b309beb7c10f31ee24d1a71137239347b1547b8bb5587d3a6de10669f95dcfe99cddc56
+  languageName: node
+  linkType: hard
+
+"@svgr/plugin-jsx@npm:6.5.1, @svgr/plugin-jsx@npm:^6.5.1":
+  version: 6.5.1
+  resolution: "@svgr/plugin-jsx@npm:6.5.1"
+  dependencies:
+    "@babel/core": "npm:^7.19.6"
+    "@svgr/babel-preset": "npm:^6.5.1"
+    "@svgr/hast-util-to-babel-ast": "npm:^6.5.1"
+    svg-parser: "npm:^2.0.4"
+  peerDependencies:
+    "@svgr/core": ^6.0.0
+  checksum: 10c0/365da6e43ceeff6b49258fa2fbb3c880210300e4a85ba74831e92d2dc9c53e6ab8dda422dc33fb6a339803227cf8d9a0024ce769401c46fd87209abe36d5ae43
   languageName: node
   linkType: hard
 
@@ -12251,6 +12518,13 @@ __metadata:
   version: 2.4.4
   resolution: "@types/normalize-package-data@npm:2.4.4"
   checksum: 10c0/aef7bb9b015883d6f4119c423dd28c4bdc17b0e8a0ccf112c78b4fe0e91fbc4af7c6204b04bba0e199a57d2f3fbbd5b4a14bf8739bf9d2a39b2a0aad545e0f86
+  languageName: node
+  linkType: hard
+
+"@types/parse-json@npm:^4.0.0":
+  version: 4.0.2
+  resolution: "@types/parse-json@npm:4.0.2"
+  checksum: 10c0/b1b863ac34a2c2172fbe0807a1ec4d5cb684e48d422d15ec95980b81475fac4fdb3768a8b13eef39130203a7c04340fc167bae057c7ebcafd7dec9fe6c36aeb1
   languageName: node
   linkType: hard
 
@@ -15021,6 +15295,19 @@ __metadata:
     object-assign: "npm:^4"
     vary: "npm:^1"
   checksum: 10c0/ab2bc57b8af8ef8476682a59647f7c55c1a7d406b559ac06119aa1c5f70b96d35036864d197b24cf86e228e4547231088f1f94ca05061dbb14d89cc0bc9d4cab
+  languageName: node
+  linkType: hard
+
+"cosmiconfig@npm:^7.0.1":
+  version: 7.1.0
+  resolution: "cosmiconfig@npm:7.1.0"
+  dependencies:
+    "@types/parse-json": "npm:^4.0.0"
+    import-fresh: "npm:^3.2.1"
+    parse-json: "npm:^5.0.0"
+    path-type: "npm:^4.0.0"
+    yaml: "npm:^1.10.0"
+  checksum: 10c0/b923ff6af581638128e5f074a5450ba12c0300b71302398ea38dbeabd33bbcaa0245ca9adbedfcf284a07da50f99ede5658c80bb3e39e2ce770a99d28a21ef03
   languageName: node
   linkType: hard
 
@@ -18042,6 +18329,16 @@ __metadata:
   version: 3.0.6
   resolution: "immediate@npm:3.0.6"
   checksum: 10c0/f8ba7ede69bee9260241ad078d2d535848745ff5f6995c7c7cb41cfdc9ccc213f66e10fa5afb881f90298b24a3f7344b637b592beb4f54e582770cdce3f1f039
+  languageName: node
+  linkType: hard
+
+"import-fresh@npm:^3.2.1":
+  version: 3.3.1
+  resolution: "import-fresh@npm:3.3.1"
+  dependencies:
+    parent-module: "npm:^1.0.0"
+    resolve-from: "npm:^4.0.0"
+  checksum: 10c0/bf8cc494872fef783249709385ae883b447e3eb09db0ebd15dcead7d9afe7224dad7bd7591c6b73b0b19b3c0f9640eb8ee884f01cfaf2887ab995b0b36a0cbec
   languageName: node
   linkType: hard
 
@@ -22351,7 +22648,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"parse-json@npm:^5.2.0":
+"parse-json@npm:^5.0.0, parse-json@npm:^5.2.0":
   version: 5.2.0
   resolution: "parse-json@npm:5.2.0"
   dependencies:
@@ -25730,7 +26027,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:^2.0.1, tslib@npm:^2.0.3, tslib@npm:^2.1.0, tslib@npm:^2.4.0":
+"tslib@npm:^2.0.1, tslib@npm:^2.0.3, tslib@npm:^2.4.0":
   version: 2.7.0
   resolution: "tslib@npm:2.7.0"
   checksum: 10c0/469e1d5bf1af585742128827000711efa61010b699cb040ab1800bcd3ccdd37f63ec30642c9e07c4439c1db6e46345582614275daca3e0f4abae29b0083f04a6
@@ -26947,6 +27244,13 @@ __metadata:
   version: 5.0.0
   resolution: "yallist@npm:5.0.0"
   checksum: 10c0/a499c81ce6d4a1d260d4ea0f6d49ab4da09681e32c3f0472dee16667ed69d01dae63a3b81745a24bd78476ec4fcf856114cb4896ace738e01da34b2c42235416
+  languageName: node
+  linkType: hard
+
+"yaml@npm:1.10.3":
+  version: 1.10.3
+  resolution: "yaml@npm:1.10.3"
+  checksum: 10c0/c309ff85a0a569a981d71ab9cf0fef68672a16b9cdf40639d1c3b30034f6cd16ee428602bd6d64ecf006f8c8bee499023cac236538f79898aa99fb5db529a2ed
   languageName: node
   linkType: hard
 

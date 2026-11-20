@@ -263,6 +263,9 @@
       "path": "packages/utils/adapters/tsconfig.json"
     },
     {
+      "path": "packages/utils/extract-icons/tsconfig.json"
+    },
+    {
       "path": "packages/utils/interactive-hooks/tsconfig.json"
     },
     {
