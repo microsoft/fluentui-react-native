@@ -6,9 +6,13 @@ import { fireEvent, screen } from '@testing-library/react-native';
 import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
 import { FlexThemeReference, ThemeProvider } from '@fluentui-react-native/design';
 
+import { ChevronDown16Regular } from '../../common/generated/fluent-icons/ChevronDown16Regular.generated';
+import { ChevronDown20Regular } from '../../common/generated/fluent-icons/ChevronDown20Regular.generated';
 import { render } from '../../common/renderWithTheme';
+import { Icon } from '../../primitives/icon/icon';
 import { MenuItem } from '../menu-item/menu-item';
 import { MenuButton } from './menu-button';
+import { chevronAssets } from './menu-button.assets';
 import type { MenuButtonProps } from './menu-button.types';
 
 type ReactTestInstance = ReturnType<typeof screen.getByTestId>;
@@ -48,6 +52,15 @@ function backgroundColor(node: ReactTestInstance): unknown {
 
 describe('MenuButton', () => {
   beforeEach(() => dispatchCommand.mockClear());
+
+  it.each([
+    ['ChevronDown16Regular', ChevronDown16Regular],
+    ['ChevronDown20Regular', ChevronDown20Regular],
+  ] as const)('renders %s without an extra SVG adapter component layer', (asset, Svg) => {
+    const element = <Icon svgSource={chevronAssets[asset]()} color="#556677" />;
+    expect(element.type).toBe(Svg);
+    expect(element.props).toMatchObject({ primaryFill: '#556677', pointerEvents: 'none' });
+  });
 
   it('selects sized SVG artwork and lets the theme choose a registered asset independently of dimensions', async () => {
     const theme = new FlexThemeReference({
