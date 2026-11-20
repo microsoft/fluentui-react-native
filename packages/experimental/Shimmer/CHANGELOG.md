@@ -1,5 +1,15 @@
 # Change Log - @fluentui-react-native/experimental-shimmer
 
+## 0.15.14
+
+### Patch Changes
+
+- Updated dependencies [6fbd937]
+  - @fluentui-react-native/framework-base@0.9.2
+  - @fluentui-react-native/design@0.6.2
+  - @fluentui-react-native/framework@0.17.13
+  - @fluentui-react-native/use-styling@0.16.8
+
 ## 0.15.13
 
 ### Patch Changes

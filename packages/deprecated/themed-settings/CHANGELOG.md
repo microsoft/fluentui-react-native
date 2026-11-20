@@ -1,5 +1,13 @@
 # Change Log - @uifabricshared/themed-settings
 
+## 0.13.14
+
+### Patch Changes
+
+- Updated dependencies [6fbd937]
+  - @fluentui-react-native/framework-base@0.9.2
+  - @uifabricshared/foundation-settings@0.16.14
+
 ## 0.13.13
 
 ### Patch Changes

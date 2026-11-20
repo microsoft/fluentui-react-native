@@ -1,5 +1,21 @@
 # @fluentui-react-native/desktop-driver-mcp
 
+## 0.1.5
+
+### Patch Changes
+
+- 56db7f1: Move the deprecated desktop-driver-mcp compatibility package to packages/shims
+  and add explicit deprecation metadata and migration instructions. Use
+  @fluentui-react-native/desktop-mcp instead; desktop-mcp --driver-only preserves
+  the existing executable's driver-only behavior and discovery.
+- 25b6af6: Keep the existing executable as a driver-only compatibility shim for `desktop-mcp --driver-only`. The package status reference describes the compatibility mode and migration path.
+- 25b6af6: Declare the supported Node.js releases and report unsupported runtimes before starting the driver-only compatibility executable.
+- Updated dependencies [25b6af6]
+- Updated dependencies [25b6af6]
+- Updated dependencies [25b6af6]
+- Updated dependencies [2fa16dd]
+  - @fluentui-react-native/desktop-mcp@0.1.1
+
 ## 0.1.4
 
 ### Patch Changes

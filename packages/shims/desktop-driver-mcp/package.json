@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/desktop-driver-mcp",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Deprecated driver-only compatibility wrapper for Desktop MCP",
   "license": "MIT",
   "repository": {

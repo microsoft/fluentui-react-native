@@ -1,5 +1,30 @@
 # @fluentui-react-native/components
 
+## 0.8.4
+
+### Patch Changes
+
+- ff7d60a: Make JavaScript test fixtures more reliable under CI load and document deterministic test authoring. No runtime API or behavior changes.
+- 25b6af6: Keep the Input focus-treatment Storybook example within the Windows preview so the entry field can receive a physical click before testing keyboard focus.
+- 2fa16dd: Publish retained Windows and Win32 Storybook readiness only after the application's authenticated runtime renders its
+  initial story, exclude transient story-test runner workspaces from Metro, and make the Avatar activity-ring toggle test
+  self-driving so it no longer depends on story argument updates.
+- 6fbd937: Publish the four furn-prefixed workflows and shared portable knowledge as
+  canonical sources inside the skills package, with a reviewed dependency
+  catalog, provenance, and explicit project-local installation. Generate only
+  repository discovery adapters and metadata. Enforce package-contained public
+  resources and allowlisted package documentation, and update component guidance
+  to the canonical sources and skill names.
+  
+  Include Desktop MCP supervisor/workload guidance and retain desktop-driver-mcp
+  only as an explicit driver-only compatibility choice. Document compatible
+  adapter setup, drain and restart behavior, and untrusted workload output.
+- Updated dependencies [25b6af6]
+- Updated dependencies [6fbd937]
+  - @fluentui-react-native/native-core@0.2.4
+  - @fluentui-react-native/framework-base@0.9.2
+  - @fluentui-react-native/design@0.6.2
+
 ## 0.8.3
 
 ### Patch Changes

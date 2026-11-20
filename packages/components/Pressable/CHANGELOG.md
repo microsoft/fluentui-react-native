@@ -1,5 +1,13 @@
 # Change Log - @fluentui-react-native/pressable
 
+## 0.13.14
+
+### Patch Changes
+
+- @uifabricshared/foundation-composable@0.15.8
+  - @uifabricshared/foundation-settings@0.16.14
+  - @fluentui-react-native/interactive-hooks@0.28.14
+
 ## 0.13.13
 
 ### Patch Changes

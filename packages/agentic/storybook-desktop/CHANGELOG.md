@@ -1,5 +1,53 @@
 # @fluentui-react-native/storybook-desktop
 
+## 0.4.7
+
+### Patch Changes
+
+- ff7d60a: Make JavaScript test fixtures more reliable under CI load and document deterministic test authoring. No runtime API or behavior changes.
+- 2fa16dd: Make protected and legacy worker contracts independently bounded for more reliable CI validation.
+- 2fa16dd: Run Windows Fabric and Win32 Paper smoke through the shared supervisor instead of PowerShell coordinators. Keep fixed Windows Metro, relaunch readiness before authored tests, and Win32 required-story and native chrome checks.
+- 2fa16dd: Run default macOS Storybook smoke with a verified built application and retained native ownership instead of stopping every process sharing its bundle identifier. Keep the supervisor claim for the retained application.
+- ca6d26f: Align retained native smoke and hosted-driver readiness deadlines with the channel's initial-render budget, allowing cold CI Metro bundles to finish without weakening authenticated readiness.
+- 2fa16dd: Publish retained Windows and Win32 Storybook readiness only after the application's authenticated runtime renders its
+  initial story, exclude transient story-test runner workspaces from Metro, and make the Avatar activity-ring toggle test
+  self-driving so it no longer depends on story argument updates.
+- 2fa16dd: Support supervisor-retained Storybook drivers on Windows and Win32, refuse Windows package registration owned by another checkout, and present the Windows Callout placement test from an owner window at the top of the work area.
+- 25b6af6: Organize the Storybook desktop status reference by integration capability and link to the latest qualification for each endpoint and renderer.
+- 2fa16dd: Add protected Storybook runner handoff and managed workloads, correlate owned service listeners, and move macOS
+  application lease maintenance into a verified host-owned desktop-test resource. Publish management through the shared
+  supervisor for both Storybook and desktop-test CLI entry points.
+- Updated dependencies [ff7d60a]
+- Updated dependencies [25b6af6]
+- Updated dependencies [25b6af6]
+- Updated dependencies [25b6af6]
+- Updated dependencies [25b6af6]
+- Updated dependencies [25b6af6]
+- Updated dependencies [25b6af6]
+- Updated dependencies [25b6af6]
+- Updated dependencies [25b6af6]
+- Updated dependencies [25b6af6]
+- Updated dependencies [25b6af6]
+- Updated dependencies [25b6af6]
+- Updated dependencies [25b6af6]
+- Updated dependencies [25b6af6]
+- Updated dependencies [25b6af6]
+- Updated dependencies [25b6af6]
+- Updated dependencies [25b6af6]
+- Updated dependencies [25b6af6]
+- Updated dependencies [25b6af6]
+- Updated dependencies [25b6af6]
+- Updated dependencies [25b6af6]
+- Updated dependencies [2fa16dd]
+- Updated dependencies [25b6af6]
+- Updated dependencies [2fa16dd]
+- Updated dependencies [47a1be8]
+- Updated dependencies [25b6af6]
+- Updated dependencies [25b6af6]
+- Updated dependencies [25b6af6]
+  - @fluentui-react-native/desktop-driver@0.5.4
+  - @fluentui-react-native/desktop-test@0.4.0
+
 ## 0.4.6
 
 ### Patch Changes

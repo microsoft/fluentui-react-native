@@ -1,5 +1,14 @@
 # Change Log - @fluentui-react-native/experimental-checkbox
 
+## 0.18.20
+
+### Patch Changes
+
+- Updated dependencies [6fbd937]
+  - @fluentui-react-native/framework-base@0.9.2
+  - @fluentui-react-native/checkbox@0.24.20
+  - @fluentui-react-native/framework@0.17.13
+
 ## 0.18.19
 
 ### Patch Changes

@@ -1,5 +1,18 @@
 # Change Log - @fluentui-react-native/badge
 
+## 0.12.20
+
+### Patch Changes
+
+- Updated dependencies [6fbd937]
+  - @fluentui-react-native/framework-base@0.9.2
+  - @fluentui-react-native/design@0.6.2
+  - @fluentui-react-native/icon@0.22.20
+  - @fluentui-react-native/text@0.25.20
+  - @fluentui-react-native/experimental-shadow@0.7.19
+  - @fluentui-react-native/framework@0.17.13
+  - @fluentui-react-native/use-styling@0.16.8
+
 ## 0.12.19
 
 ### Patch Changes
