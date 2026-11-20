@@ -113,14 +113,14 @@ export type DesktopSmokeOptions = {
   metroUrl?: string;
 
   /**
-   * Maximum time to wait for the channel server and Metro.
+   * Maximum time to wait for the channel listener and Metro, excluding the retained app's initial render.
    * @default 120000
    */
   startupTimeoutMs?: number;
 
   /**
    * Maximum time to wait for the first story, including cold development bundling and runtime startup.
-   * Falls back to an explicitly configured startupTimeoutMs.
+   * Retained channels fall back to STORYBOOK_INITIAL_RENDER_TIMEOUT_MS, then an explicitly configured startupTimeoutMs.
    * @default 300000
    */
   initialRenderTimeoutMs?: number;

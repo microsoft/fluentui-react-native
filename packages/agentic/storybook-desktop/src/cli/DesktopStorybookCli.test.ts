@@ -5,6 +5,7 @@ import path from 'node:path';
 import type { DesktopStoryManifestEntry, NativeDriverArtifact } from '@fluentui-react-native/desktop-driver';
 import { validateDesktopCaseOptions } from '@fluentui-react-native/desktop-driver/authoring';
 import { DesktopServiceScope, DesktopSupervisor } from '@fluentui-react-native/desktop-test';
+import { deadline } from '@fluentui-react-native/desktop-test/commands';
 import type { ResolvedDesktopConfig, ResolvedDesktopTarget } from '@fluentui-react-native/desktop-test';
 import { selectDesktopRenderer } from '@fluentui-react-native/desktop-test/config';
 import { DesktopRunReporter } from '@fluentui-react-native/desktop-test/reporting';
@@ -364,6 +365,12 @@ describe('DesktopStorybookCli', () => {
         executablePath: '/Fixture/Host.app/Contents/MacOS/Host',
         windowTitle: 'Agentic Components Storybook',
       });
+      expect(channel.env.STORYBOOK_INITIAL_RENDER_TIMEOUT_MS).toBe('300000');
+      expect(f.runner.readiness).toHaveBeenCalledWith(
+        { tier: 'service-ready', service: 'storybook-channel', descriptor: 'agent.json' },
+        420_000,
+        expect.any(AbortSignal),
+      );
       expect(JSON.parse(fs.readFileSync(channel.env.STORYBOOK_DRIVER_MANIFEST, 'utf8')).agent.descriptor).toBe('agent.json');
       expect(f.options.resolveDesktopApplication).toHaveBeenCalledWith(
         expect.objectContaining({
@@ -452,6 +459,12 @@ describe('DesktopStorybookCli', () => {
       expect(ready).toMatchObject({ targetId: f.target.id, agentDescriptor: 'agent.json', serviceReady: { service: 'storybook-channel' } });
       expect(ready.integration.details.services).toEqual(platform === 'windows' ? ['metro', 'storybook-channel'] : ['storybook-channel']);
       expect(JSON.parse(channel.env.STORYBOOK_OWNED_APPLICATION)).toEqual(owned);
+      expect(channel.env.STORYBOOK_INITIAL_RENDER_TIMEOUT_MS).toBe('300000');
+      expect(f.runner.readiness).toHaveBeenCalledWith(
+        { tier: 'service-ready', service: 'storybook-channel', descriptor: 'agent.json' },
+        420_000,
+        expect.any(AbortSignal),
+      );
       const { arguments: _arguments, ...identity } = owned as typeof owned & { arguments?: string[] };
       expect(JSON.parse(fs.readFileSync(channel.env.STORYBOOK_DRIVER_MANIFEST, 'utf8')).agent.application).toEqual(identity);
       expect(f.options.resolveDesktopApplication).toHaveBeenCalledTimes(1);
@@ -605,6 +618,17 @@ describe('DesktopStorybookCli', () => {
     const phases = f.runner.background.filter((command) => command.env.STORYBOOK_OWNED_APPLICATION);
     expect(phases).toHaveLength(platform === 'windows' ? 2 : 1);
     expect(phases.every((command) => command.env.STORYBOOK_DRIVER_HANDOFF && command.env.STORYBOOK_DRIVER_MANIFEST)).toBe(true);
+    expect(phases.every((command) => command.env.STORYBOOK_INITIAL_RENDER_TIMEOUT_MS === '300000')).toBe(true);
+    expect(f.runner.readiness).toHaveBeenCalledWith(
+      { tier: 'service-ready', service: 'storybook-channel-listener' },
+      120_000,
+      expect.any(AbortSignal),
+    );
+    expect(f.runner.readiness).toHaveBeenCalledWith(
+      { tier: 'service-ready', service: 'storybook-channel' },
+      420_000,
+      expect.any(AbortSignal),
+    );
     if (platform === 'macos') {
       expect(JSON.parse(phases[0].env.STORYBOOK_OWNED_APPLICATION)).toEqual({
         bundleIdentifier: cli.instance.bundleIdentifier,
@@ -644,6 +668,81 @@ describe('DesktopStorybookCli', () => {
     );
     expect(f.events).toContain('lease-observed');
     expect(f.events.at(-1)).toBe('lease-withdrawn');
+  });
+
+  test.each([
+    ['explicit render budget', { startupTimeoutMs: 1_000, initialRenderTimeoutMs: 45_000 }, {}, 45_000],
+    ['channel environment override', { startupTimeoutMs: 1_000 }, { STORYBOOK_INITIAL_RENDER_TIMEOUT_MS: '65000' }, 65_000],
+    [
+      'explicit render budget over environment',
+      { startupTimeoutMs: 1_000, initialRenderTimeoutMs: 45_000 },
+      { STORYBOOK_INITIAL_RENDER_TIMEOUT_MS: '65000' },
+      45_000,
+    ],
+    ['legacy startup fallback', { startupTimeoutMs: 1_000 }, {}, 1_000],
+  ] as const)('aligns native smoke listener and channel deadlines: %s', async (_label, timeouts, env, renderMs) => {
+    const f = nativeSmokeFixture('macos');
+    const config = makeConfig({
+      macos: {
+        build: { command: 'build-native' },
+        smoke: { ...timeouts, native: { kind: 'macos' }, server: { command: 'channel-fixture', env } },
+      },
+    });
+    await new DesktopStorybookCli(config, f.options).smoke('macos', { mode: 'stories' });
+    expect(f.runner.background.find((command) => command.context?.service === 'storybook-stories')?.env).toMatchObject({
+      STORYBOOK_INITIAL_RENDER_TIMEOUT_MS: String(renderMs),
+    });
+    expect(f.runner.readiness).toHaveBeenCalledWith(
+      { tier: 'service-ready', service: 'storybook-channel-listener' },
+      1_000,
+      expect.any(AbortSignal),
+    );
+    expect(f.runner.readiness).toHaveBeenCalledWith(
+      { tier: 'service-ready', service: 'storybook-channel' },
+      1_000 + renderMs,
+      expect.any(AbortSignal),
+    );
+  });
+
+  test.each([false, true])('waits past listener startup for a cold render without becoming unbounded (expire=%s)', async (expire) => {
+    const f = nativeSmokeFixture('macos');
+    let releaseRender!: () => void;
+    let observingRender!: () => void;
+    const render = new Promise<void>((resolve) => (releaseRender = resolve));
+    const observing = new Promise<void>((resolve) => (observingRender = resolve));
+    const readiness = f.runner.readiness.getMockImplementation()!;
+    f.runner.readiness.mockImplementation(async (expected, timeoutMs?: number) => {
+      if (expected.service !== 'storybook-channel') return readiness(expected);
+      jest.useFakeTimers();
+      const waiting = deadline(
+        render.then(() => readiness(expected)),
+        timeoutMs!,
+        'Channel initial render',
+      );
+      observingRender();
+      return waiting;
+    });
+    const smoke = new DesktopStorybookCli(f.config, f.options).smoke('macos', { mode: 'stories' });
+    void smoke.catch(() => undefined);
+    try {
+      await observing;
+      await jest.advanceTimersByTimeAsync(120_001);
+      expect(f.events).not.toContain('attach');
+      expect(f.events).not.toContain('stop:storybook-stories');
+      if (expire) {
+        await jest.advanceTimersByTimeAsync(300_000);
+        await expect(smoke).rejects.toThrow('Channel initial render exceeded 420000ms');
+      } else {
+        releaseRender();
+        await smoke;
+        expect(f.events).toContain('select:first--story');
+      }
+      expect(f.events.slice(-3)).toEqual(['stop:storybook-stories', 'stop:metro', 'lease-withdrawn']);
+    } finally {
+      releaseRender();
+      await Promise.allSettled([smoke]);
+      jest.useRealTimers();
+    }
   });
 
   test.each([
