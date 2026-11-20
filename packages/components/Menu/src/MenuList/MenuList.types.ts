@@ -86,7 +86,7 @@ export interface MenuListState extends Omit<MenuListProps, 'checked' | 'onChecke
 
 export interface MenuListSlotProps {
   root: React.PropsWithRef<IViewProps> & { gap?: number };
-  focusZone?: FocusZoneProps; // macOS and win32 only
+  focusZone?: FocusZoneProps; // macOS, win32, and windows only
   scrollView?: ScrollViewProps;
 }
 
