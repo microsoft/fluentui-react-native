@@ -67,6 +67,10 @@ export default defineDesktopConfig({
       ],
     ],
     platformOptions: {
+      macos: {
+        // Native smoke builds an instance-specific bundle. Test that bundle rather than starting a second, cold Metro build at launch.
+        smoke: { native: { kind: 'macos' }, metro: false },
+      },
       windows: {
         smoke: createWindowsSmokeOptions({
           windowTitle: 'Agentic Components Storybook',
