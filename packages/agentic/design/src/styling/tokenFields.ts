@@ -24,11 +24,9 @@ export function colorToken(value: unknown): ColorValue {
   throw new TypeError('expected a React Native color');
 }
 
-export function enumToken<const T extends readonly (string | number)[]>(...values: T) {
+export function enumToken<const T extends readonly (string | number)[]>(values: T) {
   return (value: unknown): T[number] => {
     if ((typeof value === 'string' || typeof value === 'number') && values.includes(value)) return value;
     throw new TypeError(`expected ${values.join(', ')}`);
   };
 }
-
-export const iconTokenProps = { color: colorToken, width: numericToken, height: numericToken };

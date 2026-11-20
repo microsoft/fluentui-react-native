@@ -22,15 +22,12 @@ export type ResolvedFields<F extends TokenFields> = { readonly [K in keyof F]?: 
 type TokenValues<F extends TokenFields> = {
   readonly [K in keyof F]?: NonNullable<ReturnType<F[K]>> | TokenReference<NonNullable<ReturnType<F[K]>>>;
 };
-type TokenBranches<A extends TokenAxes, F extends TokenFields> = A extends readonly [
-  infer Head extends TokenAxes[number],
-  ...infer Tail extends TokenAxes,
-]
-  ? { readonly [P in `when.${Head[0]}.${Head[1][number]}`]?: TokenValues<F> & TokenBranches<Tail, F> } & TokenBranches<Tail, F>
-  : object;
+type TokenBranches<State extends object, F extends TokenFields> = {
+  readonly [K in keyof State & string as `when.${K}.${Extract<State[K], TokenMember>}`]?: TokenValues<F> & TokenBranches<Omit<State, K>, F>;
+};
 
-export type ComponentTokenPatch<A extends TokenAxes, D extends TokenSlotDomains> = {
-  readonly [S in keyof D]?: TokenValues<D[S]['style'] & D[S]['props']> & TokenBranches<A, D[S]['style'] & D[S]['props']>;
+export type ComponentTokenPatch<State extends object, D extends TokenSlotDomains> = {
+  readonly [S in keyof D]?: TokenValues<D[S]['style'] & D[S]['props']> & TokenBranches<State, D[S]['style'] & D[S]['props']>;
 };
 
 /** Components augment this registry with their qualified component IDs and patch types. */

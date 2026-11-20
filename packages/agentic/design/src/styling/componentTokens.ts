@@ -7,7 +7,6 @@ import type {
   TokenFields,
   TokenMember,
   TokenSlotDomains,
-  TokenState,
 } from './componentTokens.types';
 
 type Parser = TokenFields[string];
@@ -195,28 +194,43 @@ export type CompiledSlotTokens<State extends object, S extends TokenFields, P ex
   overrides?: Partial<State>,
 ) => ResolvedSlotTokens<S, P>;
 
-export type CompiledComponentTokens<A extends TokenAxes, D extends TokenSlotDomains> = {
-  readonly [K in keyof D]: CompiledSlotTokens<TokenState<A>, D[K]['style'], D[K]['props']>;
+export type CompiledComponentTokens<State extends object, D extends TokenSlotDomains> = {
+  readonly [K in keyof D]: CompiledSlotTokens<State, D[K]['style'], D[K]['props']>;
 };
 
-export type ComponentTokenDefinition<A extends TokenAxes, D extends TokenSlotDomains> = {
-  readonly resolve: (theme: ThemeState) => CompiledComponentTokens<A, D>;
+export type ComponentTokenDefinition<State extends object, D extends TokenSlotDomains> = {
+  readonly resolve: (theme: ThemeState) => CompiledComponentTokens<State, D>;
 };
+
+function readAxes(input: unknown, id: string): TokenAxes {
+  if (!Array.isArray(input)) invalid(id, 'expected ordered axes');
+  return input.map((axis, index) => {
+    const path = `${id}.axes[${index}]`;
+    if (!Array.isArray(axis) || axis.length !== 2) invalid(path, 'expected [field, members]');
+    const [field, members] = axis as unknown[];
+    if (typeof field !== 'string' || !Array.isArray(members)) invalid(path, 'expected a field name and member array');
+    const values = Array.from(members, (member: unknown) => {
+      if (typeof member !== 'string' && typeof member !== 'number' && typeof member !== 'boolean') {
+        invalid(path, 'expected string, number, or boolean members');
+      }
+      return member;
+    });
+    return [field, values] as const;
+  });
+}
 
 /** Validate a component definition, and compile its default selector paths once. */
-export function defineComponentTokens<const A extends TokenAxes, const D extends TokenSlotDomains>(definition: {
+export function defineComponentTokens<State extends object, const D extends TokenSlotDomains>(definition: {
   readonly id: `${string}.${string}`;
-  readonly axes: A;
   readonly slots: D;
   readonly schema: { schemaVersion: number; component: string; axes: unknown; bindings: unknown };
-}): ComponentTokenDefinition<A, D> {
-  const { id, axes, slots, schema } = definition;
+}): ComponentTokenDefinition<State, D> {
+  const { id, slots, schema } = definition;
   if (id.slice(id.lastIndexOf('.') + 1) !== schema.component) {
     invalid(id, 'component does not match the token schema');
   }
-  if (schema.schemaVersion !== 2 || JSON.stringify(axes) !== JSON.stringify(schema.axes)) {
-    invalid(id, 'expected schema version 2 and matching ordered axes');
-  }
+  if (schema.schemaVersion !== 2) invalid(id, 'expected schema version 2');
+  const axes = readAxes(schema.axes, id);
 
   const selectors = new Map<string, Condition>();
   const names = new Set<string>();
@@ -246,7 +260,7 @@ export function defineComponentTokens<const A extends TokenAxes, const D extends
 
   return {
     resolve(theme) {
-      const cached = theme.themeStyles[cacheKey] as CompiledComponentTokens<A, D> | undefined;
+      const cached = theme.themeStyles[cacheKey] as CompiledComponentTokens<State, D> | undefined;
       if (cached) return cached;
 
       const context: ComponentTokenContext = { tokens: theme.tokens, appearance: theme.appearance };
@@ -275,7 +289,7 @@ export function defineComponentTokens<const A extends TokenAxes, const D extends
           if (rules.some((rule) => rule.fields.some((field) => field.active))) used.add(visualAxis);
           const relevantAxes = [...used].sort((a, b) => a - b);
           const results = new Map<string, ResolvedSlotTokens<TokenFields, TokenFields>>();
-          const resolve = (state: TokenState<A>, overrides?: Partial<TokenState<A>>) => {
+          const resolve = (state: State, overrides?: Partial<State>) => {
             const values: TokenMember[] = [];
             const signature = relevantAxes
               .map((index) => {
@@ -308,7 +322,7 @@ export function defineComponentTokens<const A extends TokenAxes, const D extends
           };
           return [slot, resolve];
         }),
-      ) as CompiledComponentTokens<A, D>;
+      ) as CompiledComponentTokens<State, D>;
 
       theme.themeStyles[cacheKey] = Object.freeze(compiled);
       return compiled;
@@ -316,10 +330,10 @@ export function defineComponentTokens<const A extends TokenAxes, const D extends
   };
 }
 
-export function getComponentTokens<A extends TokenAxes, D extends TokenSlotDomains>(
+export function getComponentTokens<State extends object, D extends TokenSlotDomains>(
   theme: ThemeState,
-  definition: ComponentTokenDefinition<A, D>,
-): CompiledComponentTokens<A, D> {
+  definition: ComponentTokenDefinition<State, D>,
+): CompiledComponentTokens<State, D> {
   return definition.resolve(theme);
 }
 

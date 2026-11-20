@@ -1,29 +1,34 @@
 import type { TextStyle, ViewStyle } from 'react-native';
-import { defineComponentTokens, getGapStyleValue, resolveTokenStates } from '@fluentui-react-native/design/styling';
-import type { CompiledComponentTokens, ComponentTokenPatch, TokenState } from '@fluentui-react-native/design/styling';
-import { colorToken, dimensionToken, enumToken, iconTokenProps, numericToken, stringToken } from '../../common/tokenFields';
+import {
+  alignItemsToken,
+  alignSelfToken,
+  borderStyleToken,
+  colorToken,
+  defineComponentTokens,
+  dimensionToken,
+  flexDirectionToken,
+  fontWeightToken,
+  getGapStyleValue,
+  justifyContentToken,
+  numericToken,
+  resolveTokenStates,
+  stringToken,
+  textAlignToken,
+} from '@fluentui-react-native/design/styling';
+import type { CompiledComponentTokens, ComponentTokenPatch } from '@fluentui-react-native/design/styling';
 import type { IconElementProps } from '../../primitives/icon/icon.types';
-import type { ButtonState } from './button.types';
+import { iconTokenProps } from '../../common/iconTokenProps';
+import type { ButtonState, ButtonTokenState } from './button.types';
 import schema from './spec/tokens.json' with { type: 'json' };
-
-export const buttonSizeAxis = ['size', ['small', 'medium', 'large']] as const;
-const buttonTokenAxes = [
-  buttonSizeAxis,
-  ['shape', ['rounded', 'square', 'circle']],
-  ['iconOnly', [false, true]],
-  ['appearance', ['primary', 'secondary', 'outline', 'subtle']],
-  ['selected', [false, true]],
-  ['visualState', ['rest', 'hovered', 'pressed', 'disabled']],
-] as const;
 
 const buttonTokenDomains = {
   root: {
     style: {
-      alignItems: enumToken('flex-start', 'flex-end', 'center', 'stretch', 'baseline'),
-      alignSelf: enumToken('auto', 'flex-start', 'flex-end', 'center', 'stretch', 'baseline'),
-      borderStyle: enumToken('solid', 'dotted', 'dashed'),
-      flexDirection: enumToken('row', 'column', 'row-reverse', 'column-reverse'),
-      justifyContent: enumToken('flex-start', 'flex-end', 'center', 'space-between', 'space-around', 'space-evenly'),
+      alignItems: alignItemsToken,
+      alignSelf: alignSelfToken,
+      borderStyle: borderStyleToken,
+      flexDirection: flexDirectionToken,
+      justifyContent: justifyContentToken,
       borderWidth: numericToken,
       minHeight: dimensionToken,
       minWidth: dimensionToken,
@@ -39,42 +44,11 @@ const buttonTokenDomains = {
   content: {
     style: {
       flexShrink: numericToken,
-      textAlign: enumToken('auto', 'left', 'right', 'center', 'justify'),
+      textAlign: textAlignToken,
       fontFamily: stringToken,
       fontSize: numericToken,
       lineHeight: numericToken,
-      fontWeight: enumToken<TextStyle['fontWeight'][]>(
-        'normal',
-        'bold',
-        '100',
-        '200',
-        '300',
-        '400',
-        '500',
-        '600',
-        '700',
-        '800',
-        '900',
-        100,
-        200,
-        300,
-        400,
-        500,
-        600,
-        700,
-        800,
-        900,
-        'ultralight',
-        'thin',
-        'light',
-        'regular',
-        'medium',
-        'semibold',
-        'condensedBold',
-        'condensed',
-        'heavy',
-        'black',
-      ),
+      fontWeight: fontWeightToken,
       color: colorToken,
     },
     props: {},
@@ -82,20 +56,17 @@ const buttonTokenDomains = {
   icon: { style: {}, props: iconTokenProps },
 };
 
-type ButtonAxes = typeof buttonTokenAxes;
 type ButtonDomains = typeof buttonTokenDomains;
-type ButtonTokenState = TokenState<ButtonAxes>;
-export type ButtonTokens = CompiledComponentTokens<ButtonAxes, ButtonDomains>;
+export type ButtonTokens = CompiledComponentTokens<ButtonTokenState, ButtonDomains>;
 
 declare module '@fluentui-react-native/design' {
   interface ComponentTokenRegistry {
-    'furn.button': ComponentTokenPatch<ButtonAxes, ButtonDomains>;
+    'furn.button': ComponentTokenPatch<ButtonTokenState, ButtonDomains>;
   }
 }
 
-export const buttonTokenDefinition = defineComponentTokens({
+export const buttonTokenDefinition = defineComponentTokens<ButtonTokenState, ButtonDomains>({
   id: 'furn.button',
-  axes: buttonTokenAxes,
   slots: buttonTokenDomains,
   schema,
 });

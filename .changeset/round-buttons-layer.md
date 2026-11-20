@@ -5,3 +5,5 @@
 ---
 
 Add JSON component tokens and theme override layers for Button and MenuButton. Caller visual styles and slot props take precedence over component and theme defaults.
+
+Export reusable token validators and React Native style enum value lists from `@fluentui-react-native/design/styling` for custom components.

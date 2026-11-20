@@ -16,9 +16,13 @@ it('registers Button slot and selector types on the public theme layer', () => {
     // @ts-expect-error Icon dimensions must be numbers.
     'furn.button': { icon: { width: '30%' } },
   };
-  const wrongOrder: ComponentTokenLayer = {
-    // @ts-expect-error Size cannot appear inside a later visual-state branch.
-    'furn.button': { root: { 'when.visualState.pressed': { 'when.size.small': { borderWidth: 2 } } } },
+  const repeatedAxis: ComponentTokenLayer = {
+    // @ts-expect-error An axis cannot appear again inside its own branch.
+    'furn.button': { root: { 'when.size.small': { 'when.size.medium': { borderWidth: 2 } } } },
   };
-  expect([valid, wrongMember, wrongStyle, wrongOrder]).toHaveLength(4);
+  const wrongEnum: ComponentTokenLayer = {
+    // @ts-expect-error The shared borderStyle validator retains the React Native literal union.
+    'furn.button': { root: { borderStyle: 'double' } },
+  };
+  expect([valid, wrongMember, wrongStyle, repeatedAxis, wrongEnum]).toHaveLength(5);
 });

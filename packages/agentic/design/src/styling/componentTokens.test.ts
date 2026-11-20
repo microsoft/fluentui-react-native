@@ -2,6 +2,7 @@ import { getThemeState } from '../flex/themeState';
 import { FlexThemeReference } from '../flex/flexThemeReference';
 import { resolveThemeAppearance } from '../theming/appearance';
 import { defineComponentTokens, getComponentTokens, resolveTokenStates } from './componentTokens';
+import type { TokenState } from './componentTokens.types';
 
 const axes = [
   ['selected', [false, true]],
@@ -35,7 +36,7 @@ declare module './componentTokens.types' {
   }
 }
 
-const definition = defineComponentTokens({ id: 'test.example', axes, slots, schema });
+const definition = defineComponentTokens<TokenState<typeof axes>, typeof slots>({ id: 'test.example', slots, schema });
 const { resolved: light } = resolveThemeAppearance({ colorScheme: 'light' }, {});
 
 it('resolves all matching fields independently and only caches relevant state values', () => {
@@ -112,11 +113,14 @@ it('reports malformed selectors and unknown token paths instead of accepting an 
   expect(() =>
     defineComponentTokens({
       id: 'test.example',
-      axes,
       slots,
       schema: { ...schema, bindings: { root: { 'when.visualState.hovered': { 'when.selected.true': { color: 'invalid' } } } } },
     }),
   ).toThrow('test.example.root.when.visualState.hovered.when.selected.true');
   const source = new FlexThemeReference({ componentTokens: { 'test.example': { root: { color: 'tokens:color.missing.rest' } } } });
   expect(() => getComponentTokens(getThemeState(source, light), definition)).toThrow('unknown Flex token color.missing');
+});
+
+it.each([null, [['selected', [null]]], [['selected']], [[42, [true]]]])('rejects invalid schema axes: %j', (axes) => {
+  expect(() => defineComponentTokens({ id: 'test.example', slots, schema: { ...schema, axes } })).toThrow(/test\.example.*expected/);
 });

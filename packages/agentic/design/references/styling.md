@@ -40,13 +40,20 @@ objects; do not wrap them in another `StyleSheet.create` cache.
 
 ### Component tokens
 
-`defineComponentTokens` validates a component's slot domains and selector paths. `getComponentTokens` caches the compiled
-definition in `themeStyles`; `resolveTokenStates` reads the declared fields directly from component state and caches
-immutable slot results by relevant axis members. State objects and caller styles are never part of a shared cache key.
+`defineComponentTokens<State, typeof slots>({ id, schema, slots })` reads ordered axes from the schema and validates the
+slot domains and selector paths. Use your component's token state type for typed state inputs and patch selectors;
+selector order is validated against the schema at runtime. `getComponentTokens` caches the compiled definition in
+`themeStyles`; `resolveTokenStates` reads the declared fields directly from component state and caches immutable slot
+results by relevant axis members. State objects and caller styles are never part of a shared cache key.
 
 Bindings may contain native literals or `tokens:<group>.<name>` references. Colors require `.rest`, `.hover`, `.pressed`,
 or `.active`. `.active` follows the component's `visualState` (`hovered`/`pressed`, otherwise rest). Choosing the winning
 property across all theme layers does not read any losing interaction color getters.
+
+For slot domains, import `numericToken`, `stringToken`, `dimensionToken`, `colorToken`, or `enumToken` from
+`@fluentui-react-native/design/styling`. Bounded scalar React Native style enums have individual exports: for example,
+`BORDER_STYLE_VALUES` is the readonly tuple and `borderStyleToken` validates a value and returns the literal union.
+Use `enumToken(['quiet', 'loud'])` to validate custom values without extending the React Native style enums.
 
 ### Legacy state style factories
 
