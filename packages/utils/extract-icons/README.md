@@ -1,0 +1,48 @@
+# Extract Fluent System Icons for React Native
+
+Install `@fluentui-react-native/extract-icons` as a development dependency. It includes the SVG catalog and SVGR
+dependencies needed by `@fluentui/react-native-icons/codegen`.
+
+Generate one `.tsx` module by passing an output path and one or more SVG catalog names, without `.svg` extensions:
+
+```sh
+yarn extract-icons --output src/generated/icons.tsx access_time_20_regular add_24_filled
+```
+
+Relative `--output` paths are resolved from the working directory. The CLI creates parent directories and replaces
+existing output files. The generated module imports from `react-native-svg` and `@fluentui/react-native-icons/utils`;
+declare `react-native-svg` and `@fluentui/react-native-icons` as runtime dependencies of the app using the generated TSX.
+
+## Shared configuration
+
+```sh
+yarn extract-icons --config config/icons.json
+```
+
+Under the `extractIcons` key, specify either one `{ "output": "...", "icons": [...] }` object or an array of those
+objects. Other top-level keys are ignored.
+
+```json
+{
+  "extractIcons": [
+    {
+      "output": "../src/generated/common.tsx",
+      "icons": ["access_time_20_regular"]
+    },
+    {
+      "output": "../src/generated/actions.tsx",
+      "icons": ["add_24_filled"]
+    }
+  ]
+}
+```
+
+The config path is relative to the working directory; each relative `output` is relative to the config file.
+Use any local file Node can load with `require()`, including JSON, CommonJS, and synchronous ES modules, with
+either a named `extractIcons` export or a default object containing that key. TypeScript configs use Node's
+native type stripping, not a TypeScript compiler or `tsconfig.json`. Only load trusted configs: JavaScript and
+TypeScript configs execute when loaded.
+
+SVGR core and its JSX plugin use matching 6.5.1 versions because this SVGR core version declares its own JSX
+plugin dependency, letting the upstream generator find it under strict package linkers. The SVG catalog is pinned
+to `@fluentui/svg-icons@1.1.345` so generation uses the same source artwork across installs.

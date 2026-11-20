@@ -1,0 +1,66 @@
+{
+  "name": "@fluentui-react-native/extract-icons",
+  "version": "0.0.0",
+  "description": "Generate React Native TSX modules for selected Fluent System Icons",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "packages/utils/extract-icons"
+  },
+  "bin": "./lib/cli.js",
+  "files": [
+    "lib/cli.js"
+  ],
+  "type": "module",
+  "scripts": {
+    "build": "tsc -b",
+    "clean": "fluentui-scripts clean",
+    "format": "fluentui-scripts format",
+    "lint": "fluentui-scripts lint",
+    "test": "node --test lib/cli.test.js"
+  },
+  "dependencies": {
+    "@fluentui/react-native-icons": "2.0.347",
+    "@fluentui/svg-icons": "1.1.345",
+    "@svgr/core": "6.5.1",
+    "@svgr/plugin-jsx": "6.5.1"
+  },
+  "devDependencies": {
+    "@fluentui-react-native/scripts": "workspace:*",
+    "react": "19.1.4",
+    "react-native": "^0.81.6",
+    "react-native-svg": "^15.12.1"
+  },
+  "peerDependencies": {
+    "react": ">=18.2.0 <20.0.0",
+    "react-native": ">=0.73.0",
+    "react-native-svg": ">=12.5.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "react-native": {
+      "optional": true
+    },
+    "react-native-svg": {
+      "optional": true
+    }
+  },
+  "engines": {
+    "node": "^22.19.0 || ^24.0.0 || >=26.0.0"
+  },
+  "furn": {
+    "knip": {
+      "ignoreDependencies": [
+        "@svgr/core",
+        "@svgr/plugin-jsx"
+      ]
+    }
+  },
+  "rnx-kit": {
+    "kitType": "library",
+    "extends": "@fluentui-react-native/scripts/kit-config"
+  }
+}
