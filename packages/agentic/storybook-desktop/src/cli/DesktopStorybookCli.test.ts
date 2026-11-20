@@ -22,6 +22,14 @@ import * as wdioTests from '../testing/runWdioTests';
 import type { DesktopCommandRunner, PreparedDesktopCommand, RunningDesktopCommand } from './commandRunner';
 import { createDesktopStorybookCommand } from './createDesktopStorybookCommand';
 import { DesktopStorybookCli } from './DesktopStorybookCli';
+import {
+  DEFAULT_STORYBOOK_STARTUP_TIMEOUT_MS,
+  DEFAULT_STORYBOOK_INITIAL_RENDER_TIMEOUT_MS,
+  DEFAULT_STORYBOOK_STORY_RENDER_TIMEOUT_MS,
+  STORYBOOK_NATIVE_UI_TIMEOUT_MS,
+} from '../../config/timeouts.cjs';
+
+const defaultRetainedReadyTimeoutMs = DEFAULT_STORYBOOK_STARTUP_TIMEOUT_MS + DEFAULT_STORYBOOK_INITIAL_RENDER_TIMEOUT_MS;
 
 const appRoot = path.resolve(__dirname, '../../../../../apps/storybook');
 const linkedAppDirectories = ['node_modules', 'src'];
@@ -365,10 +373,10 @@ describe('DesktopStorybookCli', () => {
         executablePath: '/Fixture/Host.app/Contents/MacOS/Host',
         windowTitle: 'Agentic Components Storybook',
       });
-      expect(channel.env.STORYBOOK_INITIAL_RENDER_TIMEOUT_MS).toBe('300000');
+      expect(channel.env.STORYBOOK_INITIAL_RENDER_TIMEOUT_MS).toBe(String(DEFAULT_STORYBOOK_INITIAL_RENDER_TIMEOUT_MS));
       expect(f.runner.readiness).toHaveBeenCalledWith(
         { tier: 'service-ready', service: 'storybook-channel', descriptor: 'agent.json' },
-        420_000,
+        defaultRetainedReadyTimeoutMs,
         expect.any(AbortSignal),
       );
       expect(JSON.parse(fs.readFileSync(channel.env.STORYBOOK_DRIVER_MANIFEST, 'utf8')).agent.descriptor).toBe('agent.json');
@@ -459,10 +467,10 @@ describe('DesktopStorybookCli', () => {
       expect(ready).toMatchObject({ targetId: f.target.id, agentDescriptor: 'agent.json', serviceReady: { service: 'storybook-channel' } });
       expect(ready.integration.details.services).toEqual(platform === 'windows' ? ['metro', 'storybook-channel'] : ['storybook-channel']);
       expect(JSON.parse(channel.env.STORYBOOK_OWNED_APPLICATION)).toEqual(owned);
-      expect(channel.env.STORYBOOK_INITIAL_RENDER_TIMEOUT_MS).toBe('300000');
+      expect(channel.env.STORYBOOK_INITIAL_RENDER_TIMEOUT_MS).toBe(String(DEFAULT_STORYBOOK_INITIAL_RENDER_TIMEOUT_MS));
       expect(f.runner.readiness).toHaveBeenCalledWith(
         { tier: 'service-ready', service: 'storybook-channel', descriptor: 'agent.json' },
-        420_000,
+        defaultRetainedReadyTimeoutMs,
         expect.any(AbortSignal),
       );
       const { arguments: _arguments, ...identity } = owned as typeof owned & { arguments?: string[] };
@@ -618,15 +626,17 @@ describe('DesktopStorybookCli', () => {
     const phases = f.runner.background.filter((command) => command.env.STORYBOOK_OWNED_APPLICATION);
     expect(phases).toHaveLength(platform === 'windows' ? 2 : 1);
     expect(phases.every((command) => command.env.STORYBOOK_DRIVER_HANDOFF && command.env.STORYBOOK_DRIVER_MANIFEST)).toBe(true);
-    expect(phases.every((command) => command.env.STORYBOOK_INITIAL_RENDER_TIMEOUT_MS === '300000')).toBe(true);
+    expect(
+      phases.every((command) => command.env.STORYBOOK_INITIAL_RENDER_TIMEOUT_MS === String(DEFAULT_STORYBOOK_INITIAL_RENDER_TIMEOUT_MS)),
+    ).toBe(true);
     expect(f.runner.readiness).toHaveBeenCalledWith(
       { tier: 'service-ready', service: 'storybook-channel-listener' },
-      120_000,
+      DEFAULT_STORYBOOK_STARTUP_TIMEOUT_MS,
       expect.any(AbortSignal),
     );
     expect(f.runner.readiness).toHaveBeenCalledWith(
       { tier: 'service-ready', service: 'storybook-channel' },
-      420_000,
+      defaultRetainedReadyTimeoutMs,
       expect.any(AbortSignal),
     );
     if (platform === 'macos') {
@@ -652,7 +662,7 @@ describe('DesktopStorybookCli', () => {
         ['sidebar-header', 'sidebar-resize', 'addons-panel-header', 'addons-resize', 'addon-storybook-actions-panel'].map(
           (suffix) => `fixture-win32-${suffix}`,
         ),
-        30_000,
+        STORYBOOK_NATIVE_UI_TIMEOUT_MS,
       );
       expect(JSON.parse(phases[0].env.STORYBOOK_OWNED_APPLICATION).arguments).toContain('crashOnRedBox');
       expect(f.runner.foreground.some((command) => command.command === 'pwsh')).toBe(false);
@@ -670,16 +680,29 @@ describe('DesktopStorybookCli', () => {
     expect(f.events.at(-1)).toBe('lease-withdrawn');
   });
 
+  const fixtureStartupTimeoutMs = 1_000;
+  const fixtureInitialRenderTimeoutMs = 45_000;
+  const fixtureEnvironmentRenderTimeoutMs = 65_000;
   test.each([
-    ['explicit render budget', { startupTimeoutMs: 1_000, initialRenderTimeoutMs: 45_000 }, {}, 45_000],
-    ['channel environment override', { startupTimeoutMs: 1_000 }, { STORYBOOK_INITIAL_RENDER_TIMEOUT_MS: '65000' }, 65_000],
+    [
+      'explicit render budget',
+      { startupTimeoutMs: fixtureStartupTimeoutMs, initialRenderTimeoutMs: fixtureInitialRenderTimeoutMs },
+      {},
+      fixtureInitialRenderTimeoutMs,
+    ],
+    [
+      'channel environment override',
+      { startupTimeoutMs: fixtureStartupTimeoutMs },
+      { STORYBOOK_INITIAL_RENDER_TIMEOUT_MS: String(fixtureEnvironmentRenderTimeoutMs) },
+      fixtureEnvironmentRenderTimeoutMs,
+    ],
     [
       'explicit render budget over environment',
-      { startupTimeoutMs: 1_000, initialRenderTimeoutMs: 45_000 },
-      { STORYBOOK_INITIAL_RENDER_TIMEOUT_MS: '65000' },
-      45_000,
+      { startupTimeoutMs: fixtureStartupTimeoutMs, initialRenderTimeoutMs: fixtureInitialRenderTimeoutMs },
+      { STORYBOOK_INITIAL_RENDER_TIMEOUT_MS: String(fixtureEnvironmentRenderTimeoutMs) },
+      fixtureInitialRenderTimeoutMs,
     ],
-    ['legacy startup fallback', { startupTimeoutMs: 1_000 }, {}, 1_000],
+    ['legacy startup fallback', { startupTimeoutMs: fixtureStartupTimeoutMs }, {}, fixtureStartupTimeoutMs],
   ] as const)('aligns native smoke listener and channel deadlines: %s', async (_label, timeouts, env, renderMs) => {
     const f = nativeSmokeFixture('macos');
     const config = makeConfig({
@@ -694,12 +717,12 @@ describe('DesktopStorybookCli', () => {
     });
     expect(f.runner.readiness).toHaveBeenCalledWith(
       { tier: 'service-ready', service: 'storybook-channel-listener' },
-      1_000,
+      fixtureStartupTimeoutMs,
       expect.any(AbortSignal),
     );
     expect(f.runner.readiness).toHaveBeenCalledWith(
       { tier: 'service-ready', service: 'storybook-channel' },
-      1_000 + renderMs,
+      fixtureStartupTimeoutMs + renderMs,
       expect.any(AbortSignal),
     );
   });
@@ -726,12 +749,12 @@ describe('DesktopStorybookCli', () => {
     void smoke.catch(() => undefined);
     try {
       await observing;
-      await jest.advanceTimersByTimeAsync(120_001);
+      await jest.advanceTimersByTimeAsync(DEFAULT_STORYBOOK_STARTUP_TIMEOUT_MS + 1);
       expect(f.events).not.toContain('attach');
       expect(f.events).not.toContain('stop:storybook-stories');
       if (expire) {
-        await jest.advanceTimersByTimeAsync(300_000);
-        await expect(smoke).rejects.toThrow('Channel initial render exceeded 420000ms');
+        await jest.advanceTimersByTimeAsync(DEFAULT_STORYBOOK_INITIAL_RENDER_TIMEOUT_MS);
+        await expect(smoke).rejects.toThrow(`Channel initial render exceeded ${defaultRetainedReadyTimeoutMs}ms`);
       } else {
         releaseRender();
         await smoke;
@@ -1459,7 +1482,7 @@ describe('DesktopStorybookCli', () => {
       expect(maintained).toEqual([manifestPath]);
       expect(runner.readiness).toHaveBeenCalledWith(
         { tier: 'service-ready', service: 'storybook-channel', descriptor: 'custom.json' },
-        120_000,
+        DEFAULT_STORYBOOK_STARTUP_TIMEOUT_MS,
         expect.any(AbortSignal),
       );
       expect(fs.existsSync(readyPath)).toBe(false);
@@ -1899,17 +1922,19 @@ describe('DesktopStorybookCli', () => {
     }
   });
 
-  test.each([undefined, 150_000])(
+  test.each([undefined, DEFAULT_STORYBOOK_STARTUP_TIMEOUT_MS + 30_000])(
     'allows a cold development bundle to take longer than the service startup timeout (initialRenderTimeoutMs: %s)',
     async (initialRenderTimeoutMs) => {
       jest.useFakeTimers();
       try {
         const runner = new RecordingRunner();
-        const readyAt = Date.now() + 130_000;
+        const coldRenderDelayMs = DEFAULT_STORYBOOK_STARTUP_TIMEOUT_MS + 10_000;
+        const retryDelayMs = 1000;
+        const readyAt = Date.now() + coldRenderDelayMs;
         const output = { write: jest.fn() };
         const fetch: typeof globalThis.fetch = async (input) => {
           if (String(input).includes('select-story-sync')) {
-            await new Promise((resolve) => setTimeout(resolve, 1000));
+            await new Promise((resolve) => setTimeout(resolve, retryDelayMs));
             if (Date.now() < readyAt) {
               return new Response(JSON.stringify({ error: 'Storybook runtime is not connected yet.' }), { status: 408 });
             }
@@ -1925,7 +1950,7 @@ describe('DesktopStorybookCli', () => {
         );
 
         const result = cli.smoke('macos').catch((error: unknown) => error);
-        await jest.advanceTimersByTimeAsync(131_000);
+        await jest.advanceTimersByTimeAsync(coldRenderDelayMs + retryDelayMs);
         expect(await result).toBeUndefined();
         expect(output.write).toHaveBeenCalledWith('1 story rendered\n');
         expect(runner.stopped).toBe(2);
@@ -1935,11 +1960,16 @@ describe('DesktopStorybookCli', () => {
     },
   );
 
+  const shortNavigationTimeoutMs = 2000;
   test.each([
-    { smokeOptions: {}, firstRenders: false, timeoutMs: 300_000 },
-    { smokeOptions: { startupTimeoutMs: 2000 }, firstRenders: false, timeoutMs: 2000 },
-    { smokeOptions: { startupTimeoutMs: 10_000, initialRenderTimeoutMs: 2000 }, firstRenders: false, timeoutMs: 2000 },
-    { smokeOptions: { initialRenderTimeoutMs: 60_000 }, firstRenders: true, timeoutMs: 15_000 },
+    { smokeOptions: {}, firstRenders: false, timeoutMs: DEFAULT_STORYBOOK_INITIAL_RENDER_TIMEOUT_MS },
+    { smokeOptions: { startupTimeoutMs: shortNavigationTimeoutMs }, firstRenders: false, timeoutMs: shortNavigationTimeoutMs },
+    {
+      smokeOptions: { startupTimeoutMs: 10_000, initialRenderTimeoutMs: shortNavigationTimeoutMs },
+      firstRenders: false,
+      timeoutMs: shortNavigationTimeoutMs,
+    },
+    { smokeOptions: { initialRenderTimeoutMs: 60_000 }, firstRenders: true, timeoutMs: DEFAULT_STORYBOOK_STORY_RENDER_TIMEOUT_MS },
   ])('bounds navigation and preserves the cause (%j)', async ({ smokeOptions, firstRenders, timeoutMs }) => {
     jest.useFakeTimers();
     try {
@@ -2125,7 +2155,7 @@ describe('DesktopStorybookCli', () => {
       expect(fetch.mock.calls.some(([input]) => input.toString().includes('select-story-sync'))).toBe(false);
       expect(waitForMacOSApplicationLease).toHaveBeenCalledWith(
         path.join(storybookRoot, 'storybook-desktop.generated', 'driver-manifest.macos.json'),
-        { timeoutMs: 120_000, signal: expect.any(AbortSignal), createStorage: createFixturePrivateStorage },
+        { timeoutMs: DEFAULT_STORYBOOK_STARTUP_TIMEOUT_MS, signal: expect.any(AbortSignal), createStorage: createFixturePrivateStorage },
       );
       expect(runSmokeTests).toHaveBeenCalledWith({
         config: cli.config,

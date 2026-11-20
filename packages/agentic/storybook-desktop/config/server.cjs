@@ -2,6 +2,7 @@ const { createRequire } = require('node:module');
 const fs = require('node:fs');
 const path = require('node:path');
 const { createControlledChannelServer } = require('./controlled-channel.cjs');
+const { DEFAULT_STORYBOOK_INITIAL_RENDER_TIMEOUT_MS } = require('./timeouts.cjs');
 
 async function startDesktopStorybookServer({
   configPath,
@@ -280,7 +281,7 @@ async function startDesktopStorybookServer({
       if (retainedOrchestrator) {
         // A retained debug app may still be loading a cold Metro bundle; agents and runners must not observe readiness
         // until its authenticated runtime has rendered, or every story operation fails as bridge-unavailable.
-        const timeoutMs = Number(process.env.STORYBOOK_INITIAL_RENDER_TIMEOUT_MS) || 300_000;
+        const timeoutMs = Number(process.env.STORYBOOK_INITIAL_RENDER_TIMEOUT_MS) || DEFAULT_STORYBOOK_INITIAL_RENDER_TIMEOUT_MS;
         const timeout = AbortSignal.timeout(timeoutMs);
         try {
           await retainedOrchestrator.waitForInitialBridge(AbortSignal.any([controller.signal, timeout]));
