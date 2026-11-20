@@ -3,11 +3,15 @@
 Install `@fluentui-react-native/extract-icons` as a development dependency. It includes the SVG catalog and SVGR
 dependencies needed by `@fluentui/react-native-icons/codegen`.
 
-Generate one `.tsx` module by passing an output path and one or more SVG catalog names, without `.svg` extensions:
+Generate one `.tsx` module by passing an output path and one or more icon names:
 
 ```sh
-yarn extract-icons --output src/generated/icons.tsx access_time_20_regular add_24_filled
+yarn extract-icons --output src/generated/icons.tsx AccessTime20Regular add_24_filled
 ```
+
+Names can be case-sensitive component exports (`AccessTime20Regular` or `AccessTimeRegular`) or SVG catalog names
+without the `.svg` extension (`access_time_20_regular`). You can mix formats in the same list. All names for the same
+SVG select it once, and codegen emits its sized component and any resizable alias.
 
 Relative `--output` paths are resolved from the working directory. The CLI creates parent directories and replaces
 existing output files. The generated module imports from `react-native-svg` and `@fluentui/react-native-icons/utils`;
@@ -27,7 +31,7 @@ objects. Other top-level keys are ignored.
   "extractIcons": [
     {
       "output": "../src/generated/common.tsx",
-      "icons": ["access_time_20_regular"]
+      "icons": ["AccessTime20Regular"]
     },
     {
       "output": "../src/generated/actions.tsx",

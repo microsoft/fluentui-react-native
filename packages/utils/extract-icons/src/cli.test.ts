@@ -18,14 +18,15 @@ function fixture(t: TestContext) {
   };
 }
 
-test('writes the selected icons from the CLI outside the package root', (t) => {
+test('accepts and deduplicates component, alias, and catalog names for the same icon', (t) => {
   const { run, read } = fixture(t);
-  const result = run('-o', 'generated/icons.tsx', 'access_time_20_regular', 'access_time_20_regular');
+  const result = run('-o', 'generated/icons.tsx', 'AccessTime20Regular', 'access_time_20_regular', 'AccessTimeRegular', 'Fps12020Regular');
   assert.equal(result.status, 0, result.stderr);
   const source = read('generated/icons.tsx');
   assert.match(source, /from "@fluentui\/react-native-icons\/utils"/);
   assert.match(source, /export const AccessTimeRegular = /);
   assert.equal([...source.matchAll(/export const AccessTime20Regular = /g)].length, 1);
+  assert.match(source, /export const Fps12020Regular = /);
 });
 
 test('accepts a single JSON job alongside unrelated settings', (t) => {
@@ -43,7 +44,7 @@ test('loads a CommonJS config with multiple jobs relative to the config file', (
     join(cwd, 'config', 'shared.cjs'),
     `module.exports = {
       extractIcons: [
-        { output: '../generated/common.tsx', icons: ['access_time_20_regular'] },
+        { output: '../generated/common.tsx', icons: ['AccessTime20Regular'] },
         { output: 'actions.tsx', icons: ['add_24_filled'] },
       ],
     };`,
@@ -74,13 +75,13 @@ test('reports a missing icon before writing any file in the batch', (t) => {
     JSON.stringify({
       extractIcons: [
         { output: 'valid.tsx', icons: ['access_time_20_regular'] },
-        { output: 'invalid.tsx', icons: ['nonexistent_icon_24_regular'] },
+        { output: 'invalid.tsx', icons: ['NonexistentIcon24Regular'] },
       ],
     }),
   );
   const result = run('--config', 'shared.json');
   assert.equal(result.status, 1);
-  assert.match(result.stderr, /Cannot generate .*invalid\.tsx: .*nonexistent_icon_24_regular/);
+  assert.match(result.stderr, /Cannot generate .*invalid\.tsx: Unknown icon component "NonexistentIcon24Regular"/);
   assert.equal(existsSync(join(cwd, 'valid.tsx')), false);
   assert.equal(existsSync(join(cwd, 'invalid.tsx')), false);
 });
