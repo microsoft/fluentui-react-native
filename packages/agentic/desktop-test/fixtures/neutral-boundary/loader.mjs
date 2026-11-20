@@ -1,7 +1,7 @@
 const workspaceEntryPoints = new Map([
   ['@fluentui-react-native/desktop-driver', new URL('../../../desktop-driver/lib/index.js', import.meta.url).href],
   ['@fluentui-react-native/desktop-test', new URL('../../../desktop-test/lib/index.js', import.meta.url).href],
-  ['@fluentui-react-native/desktop-driver-mcp', new URL('../../../desktop-driver-mcp/lib/index.js', import.meta.url).href],
+  ['@fluentui-react-native/desktop-driver-mcp', new URL('../../../../shims/desktop-driver-mcp/lib/index.js', import.meta.url).href],
   ['@fluentui-react-native/desktop-mcp', new URL('../../../desktop-mcp/lib/index.js', import.meta.url).href],
 ]);
 

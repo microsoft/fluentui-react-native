@@ -2,7 +2,7 @@
 id: desktop-driver-mcp.index
 kind: index
 owner_paths:
-  - packages/agentic/desktop-driver-mcp
+  - packages/shims/desktop-driver-mcp
 ---
 
 # Compatibility references

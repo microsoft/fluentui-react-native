@@ -4142,9 +4142,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/desktop-driver-mcp@workspace:packages/agentic/desktop-driver-mcp":
+"@fluentui-react-native/desktop-driver-mcp@workspace:packages/shims/desktop-driver-mcp":
   version: 0.0.0-use.local
-  resolution: "@fluentui-react-native/desktop-driver-mcp@workspace:packages/agentic/desktop-driver-mcp"
+  resolution: "@fluentui-react-native/desktop-driver-mcp@workspace:packages/shims/desktop-driver-mcp"
   dependencies:
     "@fluentui-react-native/desktop-mcp": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"

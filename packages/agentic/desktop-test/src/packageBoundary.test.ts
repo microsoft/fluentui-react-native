@@ -10,7 +10,7 @@ const loaderPath = path.join(fixtureRoot, 'loader.mjs');
 const neutralPackages = [
   'packages/agentic/desktop-driver',
   'packages/agentic/desktop-test',
-  'packages/agentic/desktop-driver-mcp',
+  'packages/shims/desktop-driver-mcp',
   'packages/agentic/desktop-mcp',
 ];
 

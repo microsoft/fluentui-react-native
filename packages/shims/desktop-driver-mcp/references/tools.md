@@ -2,7 +2,7 @@
 id: desktop-driver-mcp.tools
 kind: instruction-reference
 owner_paths:
-  - packages/agentic/desktop-driver-mcp
+  - packages/shims/desktop-driver-mcp
 ---
 
 # Tools

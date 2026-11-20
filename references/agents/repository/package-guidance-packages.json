@@ -4,7 +4,7 @@
     "packages/agentic/components",
     "packages/agentic/design",
     "packages/agentic/desktop-driver",
-    "packages/agentic/desktop-driver-mcp",
+    "packages/shims/desktop-driver-mcp",
     "packages/agentic/desktop-mcp",
     "packages/agentic/desktop-test",
     "packages/agentic/native-core",
