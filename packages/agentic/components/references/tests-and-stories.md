@@ -50,6 +50,14 @@ Button coverage demonstrates:
 Use table-driven tests for complete finite axes. When fixing one state regression, add a focused assertion even if a
 snapshot also changes.
 
+Await `render`, `rerender`, and `fireEvent` and then assert the observable
+state. Drive native adapter readiness through the explicit fixture event,
+not a sleep. Keep representative themed render tests for accessibility and
+interaction wiring; test pure selection rules separately when it avoids
+repeating a costly popup render without reducing contract coverage.
+For slow repository integration fixtures, use the shared `testBudget(ms)` helper
+rather than increasing individual wall-clock limits ad hoc.
+
 ## Type tests and primitives
 
 Add committed `*.types.test.ts` coverage for compile-time slot acceptance, mutually exclusive props, and public type

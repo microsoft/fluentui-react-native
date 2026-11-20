@@ -3,6 +3,7 @@ import * as React from 'react';
 import { StyleSheet } from 'react-native';
 import type { View } from 'react-native';
 import { act, fireEvent, screen } from '@testing-library/react-native';
+import { testBudget } from '@fluentui-react-native/scripts/test-budget';
 
 import { render } from '../../common/renderWithTheme';
 import { ListboxItem } from '../listbox-item/listbox-item';
@@ -164,7 +165,7 @@ describe('Dropdown', () => {
       expect(onAccessibilityAction).toHaveBeenCalledTimes(1);
       expect(onOpenChange).not.toHaveBeenCalled();
     },
-    30_000,
+    testBudget(30_000),
   );
 
   it('renders an inaccessible root around a collapsed combobox trigger showing the placeholder', async () => {

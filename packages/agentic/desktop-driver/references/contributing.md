@@ -149,6 +149,13 @@ instructions.
 
 ## Validation order
 
+For fake-host recovery or session races, gate the actual dispatch, storage write,
+or settlement with deferred promises. Release the gate in `finally` and drain
+the operation before closing the harness. Test deadline math with fake timers
+as in `src/protocol/timeouts.test.ts`, and scope intentional short real deadlines
+so release and application cleanup keep their normal budgets. Include nested
+cleanup causes in failures.
+
 During iteration, run the smallest affected test. Before completing a package
 change:
 

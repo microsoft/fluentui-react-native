@@ -36,7 +36,20 @@ jobs:
         run: yarn test:agent-permissions
 
       - name: Build CI
-        run: yarn lage buildci
+        env:
+          FURN_JEST_MAX_WORKERS: '1'
+          FURN_TEST_TIMEOUT_SCALE: '2'
+          FURN_JEST_TIMINGS_DIR: ${{ runner.temp }}/js-pr-jest
+        run: yarn lage buildci --concurrency 2
+
+      - name: Upload JS test timings
+        if: ${{ always() }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: JS_PR_Jest_${{ github.run_id }}_${{ github.run_attempt }}
+          path: ${{ runner.temp }}/js-pr-jest
+          if-no-files-found: ignore
+          retention-days: 14
 
   bundle-size:
     name: Bundle Size PR

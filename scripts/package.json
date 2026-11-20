@@ -19,6 +19,7 @@
     },
     "./babel-config": "./configs/jest/babel.config.cjs",
     "./jest-config": "./configs/jest/jest.config.cjs",
+    "./test-budget": "./configs/jest/test-budget.cjs",
     "./kit-config": "./configs/rnx-kit/rnx-kit.config.cts",
     "./lint-config": "./configs/oxlint/oxlint.config.ts",
     "./package.json": "./package.json",
@@ -29,7 +30,7 @@
     "build": "tsc -b",
     "format": "node ./src/cli.ts format",
     "lint": "node ./src/cli.ts lint",
-    "test": "node --test src/tasks/agentInstructions.test.ts src/tasks/clean.test.mjs src/tasks/smokeDesktopTarballs.test.mjs src/utils/jestSelection.test.ts src/utils/runScript.test.ts src/utils/securityPatches.test.ts src/utils/skillDistribution.test.ts src/codegen/file.test.ts src/codegen/valuePool.test.ts"
+    "test": "node --test configs/jest/test-policy.test.cjs src/tasks/agentInstructions.test.ts src/tasks/clean.test.mjs src/tasks/smokeDesktopTarballs.test.mjs src/utils/jestSelection.test.ts src/utils/runScript.test.ts src/utils/securityPatches.test.ts src/utils/skillDistribution.test.ts src/codegen/file.test.ts src/codegen/valuePool.test.ts"
   },
   "dependencies": {
     "@babel/core": "catalog:",

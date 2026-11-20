@@ -1,5 +1,8 @@
 import { spawnSync } from 'node:child_process';
 import path from 'node:path';
+import { testBudget } from '@fluentui-react-native/scripts/test-budget';
+
+jest.setTimeout(testBudget(40_000));
 
 test('loads the source config through the CommonJS prebuild fallback without emitted JavaScript', () => {
   const projectRoot = path.resolve(__dirname, '../../../../../apps/storybook');
@@ -31,7 +34,7 @@ test('loads the source config through the CommonJS prebuild fallback without emi
   `,
       projectRoot,
     ],
-    { cwd: projectRoot, encoding: 'utf8', timeout: 30_000 },
+    { cwd: projectRoot, encoding: 'utf8', timeout: testBudget(30_000) },
   );
 
   if (result.status !== 0) {
@@ -68,7 +71,7 @@ test('the canonical Storybook config resolves target commands and identity witho
     }));
   `,
     ],
-    { cwd: projectRoot, encoding: 'utf8', timeout: 30_000 },
+    { cwd: projectRoot, encoding: 'utf8', timeout: testBudget(30_000) },
   );
   if (result.status !== 0) throw new Error(result.stderr || result.error?.message || `Canonical config exited with ${result.status}.`);
   const value = JSON.parse(result.stdout);

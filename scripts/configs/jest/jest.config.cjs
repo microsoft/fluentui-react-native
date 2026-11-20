@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 const { PLATFORM_ENV_VAR } = require('../../src/const.mts');
+const { testBudget, testWorkerLimit } = require('./test-budget.cjs');
 const projectManifestPath = path.resolve(process.cwd(), 'package.json');
 const foundProject = fs.existsSync(projectManifestPath);
 const projectManifest = foundProject ? require(projectManifestPath) : null;
@@ -62,4 +63,21 @@ function configureReactNativeJest(platform) {
   return config;
 }
 
-module.exports = platform === 'react' ? require('./jest.react.config.cjs') : configureReactNativeJest(platform);
+const config = platform === 'react' ? require('./jest.react.config.cjs') : configureReactNativeJest(platform);
+const maxWorkers = testWorkerLimit();
+module.exports = {
+  ...config,
+  testTimeout: testBudget(typeof config.testTimeout === 'number' ? config.testTimeout : 5_000),
+  ...(maxWorkers === undefined ? {} : { maxWorkers }),
+  ...(process.env.FURN_JEST_TIMINGS_DIR
+    ? {
+        reporters: [
+          'default',
+          [
+            require.resolve('./timing-reporter.cjs'),
+            { directory: process.env.FURN_JEST_TIMINGS_DIR, platform, workspace: projectManifest?.name ?? '' },
+          ],
+        ],
+      }
+    : {}),
+};

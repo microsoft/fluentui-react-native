@@ -35,5 +35,8 @@ authenticated bridge, Metro, theme, and platform chrome.
 Run `yarn format`, `yarn lint`, `yarn build`, and `yarn test`. Changes to
 runtime exports, platform selection, or Metro integration require validation
 through the consuming Storybook app and its affected native platform.
+For preview tests, await the render or input event that drives the generation
+change. Use the shared repository `testBudget(ms)` helper for cold-render
+budgets rather than adding sleeps.
 Add a patch changeset for this published package when its shipped guidance or
 behavior changes.

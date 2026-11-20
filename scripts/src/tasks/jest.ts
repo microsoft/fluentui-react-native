@@ -58,9 +58,6 @@ export class JestCommand extends Command {
       return;
     }
     const args = ['--passWithNoTests', '--runTestsByPath'];
-    if (process.env.TF_BUILD) {
-      args.push('--runInBand');
-    }
 
     const defaultPlatform = getBaseJestPlatform(context);
     const targetFiles = getJestTargetFiles(context, defaultPlatform);

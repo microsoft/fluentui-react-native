@@ -151,3 +151,11 @@ upstream reconnection.
 Run `yarn format`, `yarn lint`, `yarn build`, and `yarn test` from this
 package. Validate static manifests and the affected app's bundle/native smoke
 when changing runtime behavior.
+
+Keep inline WDIO contract modes focused on distinct behaviors (named cases,
+settlement, smoke, protection, and input lanes). Retain real workers for
+process-boundary assertions. Give contract children and their workers an
+owned cancellation/drain path; leave time for cleanup before Jest's outer
+deadline. Scale fixture-only startup and watchdog budgets with
+the shared repository `testBudget(ms)` helper,
+not the intentional worker timeout used to prove cancellation.

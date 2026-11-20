@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { fireEvent, render } from '@testing-library/react-native';
 import { theme } from '@storybook/react-native-theming';
+import { testBudget } from '@fluentui-react-native/scripts/test-budget';
 
 import { DesktopStorybookConfigProvider, useDesktopStorybookConfig } from './DesktopStorybookConfig';
 import { createDesktopStorybookPreview as createMacOSDesktopStorybookPreview } from './createDesktopStorybookPreview.macos';
@@ -79,19 +80,23 @@ function scene(requestId: string, selectionSequence: number) {
 }
 
 // Cold or contended CI workers can be slow to initialize the real ScrollView.
-test('resets the whole Win32 preview for a new test generation without resetting chrome preferences', async () => {
-  const screen = await render(scene('first', 1));
-  await fireEvent.press(screen.getByTestId('scroll-canvas'));
-  expect(screen.getByTestId('canvas-offset')).toHaveTextContent('99');
-  await fireEvent.press(screen.getByTestId('test-win32-hide-sidebar'));
-  expect(screen.getByTestId('test-win32-show-sidebar')).toBeOnTheScreen();
-  expect(screen.getByTestId('canvas-offset')).toHaveTextContent('99');
+test(
+  'resets the whole Win32 preview for a new test generation without resetting chrome preferences',
+  async () => {
+    const screen = await render(scene('first', 1));
+    await fireEvent.press(screen.getByTestId('scroll-canvas'));
+    expect(screen.getByTestId('canvas-offset')).toHaveTextContent('99');
+    await fireEvent.press(screen.getByTestId('test-win32-hide-sidebar'));
+    expect(screen.getByTestId('test-win32-show-sidebar')).toBeOnTheScreen();
+    expect(screen.getByTestId('canvas-offset')).toHaveTextContent('99');
 
-  await screen.rerender(scene('second', 2));
+    await screen.rerender(scene('second', 2));
 
-  expect(screen.getByTestId('canvas-offset')).toHaveTextContent('0');
-  expect(screen.getByTestId('test-win32-show-sidebar')).toBeOnTheScreen();
-}, 30_000);
+    expect(screen.getByTestId('canvas-offset')).toHaveTextContent('0');
+    expect(screen.getByTestId('test-win32-show-sidebar')).toBeOnTheScreen();
+  },
+  testBudget(30_000),
+);
 
 test.each<[string, React.ComponentType<{ children: React.ReactNode }>]>([
   ['Win32', Win32StoryViewport],

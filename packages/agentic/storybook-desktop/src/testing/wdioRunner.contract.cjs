@@ -1,5 +1,5 @@
 const assert = require('node:assert/strict');
-const { spawn } = require('node:child_process');
+const { randomUUID } = require('node:crypto');
 const fs = require('node:fs');
 const http = require('node:http');
 const os = require('node:os');
@@ -7,10 +7,27 @@ const path = require('node:path');
 const { pathToFileURL } = require('node:url');
 const { inspect } = require('node:util');
 const { createFixtureStoredManifest } = require('../driver/fixtures/storedManifest.cjs');
+const { testBudget } = require('@fluentui-react-native/scripts/test-budget');
+
+const controller = new AbortController();
+process.once('disconnect', () => controller.abort(new Error('WDIO contract owner disconnected.')));
 
 async function main() {
-  const mode = process.argv[2] ?? 'all';
-  assert.ok(['all', 'protected', 'legacy', 'lanes'].includes(mode), 'Unknown inline WDIO contract mode.');
+  const mode = process.argv[2];
+  assert.ok(['protected', 'named', 'settlement', 'smoke', 'lanes'].includes(mode), 'Unknown inline WDIO contract mode.');
+  const timingDirectory = process.env.FURN_JEST_TIMINGS_DIR;
+  const timingFile = timingDirectory && path.join(timingDirectory, `wdio-${randomUUID()}.ndjson`);
+  if (timingDirectory) fs.mkdirSync(timingDirectory, { recursive: true });
+  const recordPhases = (cases) => {
+    if (!timingFile) return;
+    for (const { status, diagnostics } of cases) {
+      const { navigationMs, workerStartupMs, workerBodyMs, workerMs, cleanupMs } = diagnostics?.phases ?? {};
+      fs.appendFileSync(
+        timingFile,
+        `${JSON.stringify({ kind: 'wdio-case', mode, status, navigationMs, workerStartupMs, workerBodyMs, workerMs, cleanupMs })}\n`,
+      );
+    }
+  };
   const packageRoot = path.resolve(__dirname, '..', '..');
   const projectRoot = path.resolve(packageRoot, '..', '..', '..', 'apps', 'storybook');
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'furn-inline-wdio-'));
@@ -37,6 +54,27 @@ async function main() {
     import('@fluentui-react-native/desktop-driver/server'),
     import('@fluentui-react-native/desktop-test/commands'),
   ]);
+  const runStories = async (options, runner) => {
+    let cases = [];
+    try {
+      cases = await runWdioStoryTests(
+        {
+          timeoutMs: testBudget(30_000),
+          ...options,
+          signal: options.signal ? AbortSignal.any([options.signal, controller.signal]) : controller.signal,
+        },
+        runner,
+      );
+      return cases;
+    } catch (error) {
+      if (error instanceof Error && error instanceof WdioStoryTestRunError && 'results' in error && Array.isArray(error.results)) {
+        cases = error.results;
+      }
+      throw error;
+    } finally {
+      recordPhases(cases);
+    }
+  };
   fs.writeFileSync(
     path.join(root, 'fixture.stories.ts'),
     `
@@ -171,7 +209,7 @@ async function main() {
     resolvePackage: (name) => ({ root: name === 'inline-fixture' ? root : packageRoot }),
   };
   const run = (story, overrides = {}) =>
-    runWdioStoryTests({
+    runStories({
       config,
       manifest,
       platform: 'windows',
@@ -183,7 +221,7 @@ async function main() {
       ...overrides,
     });
   try {
-    if (mode === 'all' || mode === 'protected') {
+    if (mode === 'protected') {
       const authority = new DesktopAuthority();
       const protectedHost = new FakeDesktopHost({ storyRootTestId: 'story-root' });
       /** @type {import('@fluentui-react-native/desktop-driver').DesktopTarget} */
@@ -238,7 +276,7 @@ async function main() {
         },
       };
       try {
-        const protectedResults = await runWdioStoryTests(
+        const protectedResults = await runStories(
           {
             config,
             manifest,
@@ -285,12 +323,12 @@ async function main() {
           runner: { connection: protectedConnection, addSecret: (secret) => secrets.push(secret) },
         });
         try {
-          await assert.rejects(runWdioStoryTests(protectedOptions('fixture-button--protected-failure'), leakRunner), (error) => {
+          await assert.rejects(runStories(protectedOptions('fixture-button--protected-failure'), leakRunner), (error) => {
             for (const secret of secrets) assert.ok(!inspect(error, { depth: null }).includes(secret));
             return error instanceof WdioStoryTestRunError;
           });
           assertNoSecrets(leakReport.root, secrets);
-          const skipped = await runWdioStoryTests({ ...protectedOptions('fixture-button--protected-skip'), optional: true }, leakRunner);
+          const skipped = await runStories({ ...protectedOptions('fixture-button--protected-skip'), optional: true }, leakRunner);
           assert.equal(skipped[0].skipReason, '[REDACTED]');
           await leakCommands.close();
           await leakReport.finish();
@@ -314,7 +352,7 @@ async function main() {
           },
         };
         try {
-          const running = runWdioStoryTests(
+          const running = runStories(
             {
               config,
               manifest,
@@ -328,7 +366,12 @@ async function main() {
             },
             cancelRunner,
           );
-          await started;
+          await Promise.race([
+            started,
+            running.then(() => {
+              throw new Error('Contract completed without starting the worker.');
+            }),
+          ]);
           controller.abort(cancellation);
           await assert.rejects(running, (error) => error === cancellation);
           await cancelCommands.close();
@@ -357,7 +400,7 @@ async function main() {
         };
         try {
           await assert.rejects(
-            runWdioStoryTests(
+            runStories(
               {
                 config,
                 manifest,
@@ -398,23 +441,24 @@ async function main() {
           await fencedCommands.close();
         }
       } finally {
-        await protectedServer.close();
+        try {
+          await commandRunner.close();
+        } finally {
+          await protectedServer.close();
+        }
       }
-    }
-
-    if (mode === 'protected') {
       process.stdout.write('\nWDIO_PROTECTED_OK\n');
       return;
     }
 
-    let legacyResult;
-    if (mode !== 'lanes') {
+    let result;
+    if (mode === 'named') {
       const platforms = {};
       for (const platform of ['macos', 'windows', 'win32']) {
         const platformManifest = await createDesktopStoryManifest({ projectRoot, getStoryPackages: () => [storyPackage] }, platform);
         const platformHarness = await createDesktopDriverStoryHarness(platformManifest);
         try {
-          const results = await runWdioStoryTests({
+          const results = await runStories({
             config,
             manifest: platformManifest,
             platform,
@@ -474,6 +518,13 @@ async function main() {
         /Executable test source changed/,
       );
       assert.equal(selections.length, selectionsBeforeMismatch);
+      result = {
+        platforms,
+        namedFailureResults: namedFailureResults.map(({ testName, status }) => ({ testName, status })),
+      };
+    }
+
+    if (mode === 'settlement') {
       let namedTimeout;
       try {
         await run('named-timeout');
@@ -553,8 +604,21 @@ async function main() {
         if (story === 'fail' && !report.tests[0].error.includes('intentional inline assertion')) {
           throw new Error('Compact reporter lost the worker assertion diagnostic.');
         }
+        if (story === 'timeout' || story === 'spin') {
+          assert.match(report.tests[0].error, /timeout|timed out|process deadline/i);
+        }
       }
       const repeated = await run('pass');
+      result = {
+        passed: passed.map(({ storyId }) => storyId),
+        skipped: skipped.filter(({ status }) => status === 'skipped').map(({ storyId }) => storyId),
+        repeated: repeated.map(({ storyId }) => storyId),
+        namedTimeout,
+        failures,
+      };
+    }
+
+    if (mode === 'smoke') {
       await selectStory({ requestId: 'wrong-page', runId: 'wrong-page', storyId: 'fixture-button--fail' });
       selections.length = 0;
       const grouped = await run('*', { tag: 'grouped' });
@@ -583,7 +647,7 @@ async function main() {
       );
       await selectStory({ requestId: 'smoke-wrong-page', runId: 'smoke-wrong-page', storyId: 'fixture-button--fail' });
       selections.length = 0;
-      const control = await runSmokeControl(packageRoot, root, smokeManifestPath);
+      const control = await runSmokeControl(NodeDesktopCommandRunner, packageRoot, root, smokeManifestPath);
       if (control.code !== 0) throw new Error(control.stderr || control.stdout || `Smoke control exited with ${control.code}.`);
       const reportRoot = path.join(root, 'artifacts', 'desktop');
       const runDirectory = fs.readdirSync(reportRoot)[0];
@@ -597,30 +661,23 @@ async function main() {
       const failureManifest = JSON.parse(fs.readFileSync(smokeManifestPath, 'utf8'));
       failureManifest.wdio = { story: 'fixture-button--fail', reporter: 'dot' };
       fs.writeFileSync(smokeManifestPath, JSON.stringify(failureManifest));
-      const failedControl = await runSmokeControl(packageRoot, root, smokeManifestPath);
+      const failedControl = await runSmokeControl(NodeDesktopCommandRunner, packageRoot, root, smokeManifestPath);
       const smokeFailureLogged =
         failedControl.code === 1 &&
         failedControl.stderr.includes('[storybook] FAIL smoke') &&
         failedControl.stderr.includes('fixture-button--fail') &&
         failedControl.stderr.includes('intentional inline assertion');
       if (!smokeFailureLogged) throw new Error(`Smoke control lost the callback failure: ${failedControl.stderr}`);
-      legacyResult = {
-        passed: passed.map(({ storyId }) => storyId),
-        skipped: skipped.filter(({ status }) => status === 'skipped').map(({ storyId }) => storyId),
-        repeated: repeated.map(({ storyId }) => storyId),
+      result = {
         grouped: grouped.map(({ storyId }) => storyId),
         groupedSelections,
         smoke,
         smokeFailureLogged,
-        platforms,
-        namedFailureResults: namedFailureResults.map(({ testName, status }) => ({ testName, status })),
-        namedTimeout,
-        failures,
       };
     }
 
     let laneResult;
-    if (mode !== 'legacy') {
+    if (mode === 'lanes') {
       const buttonConfig = makeDesktopStorybookConfig({ projectRoot, storyPackages: ['@fluentui-react-native/components'] });
       const buttonManifest = await createDesktopStoryManifest(buttonConfig, 'windows');
       const buttonWindows = createFakeStoryWindows(buttonManifest);
@@ -643,7 +700,7 @@ async function main() {
       const buttonHarness = await createDesktopDriverStoryHarness(buttonManifest, { windows: buttonWindows });
       let button;
       try {
-        button = await runWdioStoryTests({
+        button = await runStories({
           config: { projectRoot: root, resolvePackage: (name) => buttonConfig.resolvePackage(name) },
           manifest: buttonManifest,
           platform: 'windows',
@@ -660,7 +717,7 @@ async function main() {
       });
       let restrictedButton;
       try {
-        restrictedButton = await runWdioStoryTests({
+        restrictedButton = await runStories({
           config: { projectRoot: root, resolvePackage: (name) => buttonConfig.resolvePackage(name) },
           manifest: buttonManifest,
           platform: 'windows',
@@ -786,7 +843,7 @@ async function main() {
     process.stdout.write(
       '\nWDIO_RESULT ' +
         JSON.stringify({
-          ...legacyResult,
+          ...result,
           ...laneResult,
           attachedOnly: harness.host.actions
             .filter(({ type }) => type === 'close-application')
@@ -866,26 +923,38 @@ async function createUnconfirmingProxy(url) {
   };
 }
 
-/** @returns {Promise<{code: number | null, stdout: string, stderr: string}>} */
-function runSmokeControl(packageRoot, cwd, manifestPath) {
-  return new Promise((resolve, reject) => {
-    const child = spawn(process.execPath, [path.join(packageRoot, 'config/storybook-control.cjs'), '--phase', 'tests'], {
-      cwd,
-      env: { ...process.env, STORYBOOK_DRIVER_MANIFEST: manifestPath, STORYBOOK_SMOKE_MODE: 'stories-and-tests' },
-      stdio: ['ignore', 'pipe', 'pipe'],
-    });
-    const stdout = [];
-    const stderr = [];
-    child.stdout.on('data', (chunk) => stdout.push(chunk));
-    child.stderr.on('data', (chunk) => stderr.push(chunk));
-    child.once('error', reject);
-    child.once('close', (code) =>
-      resolve({ code, stdout: Buffer.concat(stdout).toString('utf8'), stderr: Buffer.concat(stderr).toString('utf8') }),
-    );
+async function runSmokeControl(NodeDesktopCommandRunner, packageRoot, cwd, manifestPath) {
+  const stdout = [];
+  const stderr = [];
+  const runner = new NodeDesktopCommandRunner({
+    logDirectory: path.join(cwd, 'control-commands'),
+    output: { write: (text) => stdout.push(text) },
+    errorOutput: { write: (text) => stderr.push(text) },
+    verbose: true,
+    shutdownTimeoutMs: testBudget(5_000),
   });
+  try {
+    const child = runner.start(
+      {
+        command: process.execPath,
+        args: [path.join(packageRoot, 'config/storybook-control.cjs'), '--phase', 'tests'],
+        cwd,
+        env: { STORYBOOK_DRIVER_MANIFEST: manifestPath, STORYBOOK_SMOKE_MODE: 'stories-and-tests' },
+      },
+      { signal: controller.signal },
+    );
+    const code = await child.completed;
+    return { code, stdout: stdout.join(''), stderr: stderr.join('') };
+  } finally {
+    await runner.close();
+  }
 }
 
-main().catch((error) => {
-  process.stderr.write(error.stack ?? error.message);
-  process.exitCode = 1;
-});
+main()
+  .catch((error) => {
+    process.stderr.write(inspect(error, { depth: 6 }) + '\n');
+    process.exitCode = 1;
+  })
+  .finally(() => {
+    if (process.connected) process.disconnect();
+  });
