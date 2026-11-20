@@ -13,6 +13,7 @@ import type { ThemeState } from '@fluentui-react-native/design';
 import type { Icon } from '../../primitives/icon/icon';
 import type { FocusVisualsSlots } from '../../common/useFocusVisuals';
 import type { Text } from '../text/text';
+import type { ButtonTokens, getButtonVisualState } from './button.styles';
 
 export type ButtonSlots = {
   /**
@@ -96,6 +97,10 @@ export type ButtonState = ComponentState<ButtonStateSlots & FocusVisualsSlots> &
   Required<ButtonStateProps> &
   Omit<ThemeState, 'appearance'> &
   PressableState & {
+    /** Effective interaction presentation; raw interaction fields remain available for behavior. */
+    visualState: ReturnType<typeof getButtonVisualState>;
+    themeState: ThemeState;
+    buttonTokens: ButtonTokens;
     /**
      * Whether the button is displaying only an icon without text. This is set automatically when the button
      * has an icon and no content.

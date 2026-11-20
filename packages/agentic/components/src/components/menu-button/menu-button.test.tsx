@@ -4,8 +4,10 @@ import { StyleSheet } from 'react-native';
 import type { View } from 'react-native';
 import { fireEvent, screen } from '@testing-library/react-native';
 import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
+import { FlexThemeReference, ThemeProvider } from '@fluentui-react-native/design';
 
 import { render } from '../../common/renderWithTheme';
+import { semanticIconSources } from '../../common/iconSources';
 import { MenuItem } from '../menu-item/menu-item';
 import { MenuButton } from './menu-button';
 import type { MenuButtonProps } from './menu-button.types';
@@ -47,6 +49,25 @@ function backgroundColor(node: ReactTestInstance): unknown {
 
 describe('MenuButton', () => {
   beforeEach(() => dispatchCommand.mockClear());
+
+  it('composes Button theme chrome with MenuButton chevron tokens and leaves the glyph in place', async () => {
+    const theme = new FlexThemeReference({
+      componentTokens: {
+        'furn.button': { root: { 'when.visualState.pressed': { backgroundColor: '#112233' } } },
+        'furn.menu-button': { chevron: { 'when.size.small': { width: 22, height: 23, color: '#556677' } } },
+      },
+    });
+    await render(
+      <ThemeProvider theme={theme}>
+        <Scene open size="small" />
+      </ThemeProvider>,
+    );
+    const trigger = screen.getByTestId('trigger');
+    expect(backgroundColor(trigger)).toBe('#112233');
+    const glyph = screen.getByText(String.fromCodePoint(semanticIconSources.chevronDown.codepoint), { includeHiddenElements: true });
+    expect(StyleSheet.flatten(glyph.props.style)).toMatchObject({ color: '#556677' });
+    expect(StyleSheet.flatten(glyph.parent?.props.style)).toMatchObject({ width: 22, height: 23 });
+  });
 
   it.each((['small', 'medium', 'large'] as const).flatMap((size) => [false, true].map((iconOnly) => ({ size, iconOnly }))))(
     'MNB-002 preserves rounded content-layout metrics at $size with iconOnly=$iconOnly',

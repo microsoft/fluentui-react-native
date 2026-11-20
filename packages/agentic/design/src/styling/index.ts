@@ -12,3 +12,6 @@ export type { ColorKey, ColorStyleDefinition, TextColorStyle, ViewColorStyle } f
 export { colorStyleDef, getThemedColorStyleFactory } from '../flex/styling/colorStyles';
 export { interactiveStatePriority } from './interactiveStatePriority';
 export { getNumericStyleValue } from './numericStyleValue';
+export { defineComponentTokens, getComponentTokens, resolveTokenStates } from './componentTokens';
+export type { CompiledComponentTokens, CompiledSlotTokens, ComponentTokenDefinition } from './componentTokens';
+export type { ComponentTokenPatch, ResolvedSlotTokens, TokenAxes, TokenSlotDomains, TokenState } from './componentTokens.types';

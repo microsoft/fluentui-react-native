@@ -15,8 +15,9 @@ const {
   repositoryRoot,
   sourcePathFor,
 } = require('./common.cjs');
+const { validateTokenCompanion } = require('./token-companion.cjs');
 
-const requiredCompanions = ['tokens.yaml', 'accessibility.md', 'interaction.md', 'usage.md', 'source.json'];
+const requiredCompanions = ['accessibility.md', 'interaction.md', 'usage.md', 'source.json'];
 const forbiddenCompanionPatterns = [
   [/<(?:button|div|span|label|textarea)\b/, 'HTML element'],
   [/:focus-visible|:where\(|::before|::after/i, 'CSS selector'],
@@ -517,7 +518,13 @@ function validateComponent(component, lock) {
   const source = validateSource(component, spec, lock);
   invariant(frontMatter.status === source.lifecycle, `${component}/SPEC.md status must match its source lifecycle.`);
   invariant(frontMatter.source === './spec/source.json', `${component}/SPEC.md must reference ./spec/source.json.`);
-  invariant(frontMatter.tokens === './spec/tokens.yaml', `${component}/SPEC.md must reference ./spec/tokens.yaml.`);
+  invariant(
+    frontMatter.tokens === './spec/tokens.yaml' || frontMatter.tokens === './spec/tokens.json',
+    `${component}/SPEC.md must reference ./spec/tokens.yaml or ./spec/tokens.json.`,
+  );
+  const tokenFile = path.basename(frontMatter.tokens);
+  const alternate = tokenFile === 'tokens.json' ? 'tokens.yaml' : 'tokens.json';
+  invariant(!fs.existsSync(path.join(componentRoot, 'spec', alternate)), `${component} must have only one token companion.`);
   invariant(frontMatter.accessibility === './spec/accessibility.md', `${component}/SPEC.md must reference ./spec/accessibility.md.`);
   invariant(frontMatter.interaction === './spec/interaction.md', `${component}/SPEC.md must reference ./spec/interaction.md.`);
   invariant(frontMatter.usage === './spec/usage.md', `${component}/SPEC.md must reference ./spec/usage.md.`);
@@ -530,7 +537,7 @@ function validateComponent(component, lock) {
     `${component}/SPEC.md is missing its divergences section.`,
   );
 
-  for (const companion of ['tokens.yaml', 'accessibility.md', 'interaction.md', 'usage.md']) {
+  for (const companion of [tokenFile, 'accessibility.md', 'interaction.md', 'usage.md']) {
     const companionPath = path.join(componentRoot, 'spec', companion);
     const content = fs.readFileSync(companionPath, 'utf8');
     for (const [pattern, label] of forbiddenCompanionPatterns) {
@@ -538,11 +545,15 @@ function validateComponent(component, lock) {
     }
   }
 
-  const tokens = fs.readFileSync(path.join(componentRoot, 'spec/tokens.yaml'), 'utf8');
-  invariant(/^schemaVersion:\s*1\s*$/m.test(tokens), `${component}/spec/tokens.yaml must use schemaVersion 1.`);
-  invariant(new RegExp(`^component:\\s*${component}\\s*$`, 'm').test(tokens), `${component}/spec/tokens.yaml has the wrong component.`);
-  invariant(/^implementation:\s*\S+\s*$/m.test(tokens), `${component}/spec/tokens.yaml must identify its implementation.`);
-  invariant(/^tokenGaps:\s*(?:\[\])?\s*$/m.test(tokens), `${component}/spec/tokens.yaml must declare tokenGaps.`);
+  const tokens = fs.readFileSync(path.join(componentRoot, 'spec', tokenFile), 'utf8');
+  if (tokenFile === 'tokens.json') {
+    validateTokenCompanion(tokens, component, `${component}/spec/${tokenFile}`);
+  } else {
+    invariant(/^schemaVersion:\s*1\s*$/m.test(tokens), `${component}/spec/tokens.yaml must use schemaVersion 1.`);
+    invariant(new RegExp(`^component:\\s*${component}\\s*$`, 'm').test(tokens), `${component}/spec/tokens.yaml has the wrong component.`);
+    invariant(/^implementation:\s*\S+\s*$/m.test(tokens), `${component}/spec/tokens.yaml must identify its implementation.`);
+    invariant(/^tokenGaps:\s*(?:\[\])?\s*$/m.test(tokens), `${component}/spec/tokens.yaml must declare tokenGaps.`);
+  }
   return source;
 }
 

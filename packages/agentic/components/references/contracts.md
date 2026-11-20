@@ -25,8 +25,12 @@ JSON provides unambiguous scalars, built-in Node parsing, deterministic atomic
 rewrites, and no additional parser dependency. Generator rewrites would also
 discard the main benefit of YAML comments. Keep this provenance in JSON.
 
-`spec/tokens.yaml` remains YAML because it is concise, human-authored token
-mapping data rather than a generated identity record.
+Existing `spec/tokens.yaml` companions document version 1 bindings. Components
+using the runtime token layer instead own a single `spec/tokens.json` companion
+with `schemaVersion: 2`, `component`, `implementation`, an ordered `axes` list,
+slot `bindings`, and `tokenGaps`. `SPEC.md` links the authoritative companion.
+The component imports JSON directly; the checker must not regenerate its values.
+See [Styles and tokens](styles-and-tokens.md) for selectors and resolution.
 
 ## Schema version 2
 

@@ -80,4 +80,5 @@ export type {
 } from './theming/modern';
 export type { ThemeStyleSheet } from './flex/useThemeState';
 export type { ThemeState } from './flex/themeState.types';
+export type { ComponentTokenContext, ComponentTokenLayer, ComponentTokenRegistry } from './styling/componentTokens.types';
 export { themedStyleSheetFactory, useThemeAppearance, useThemeState } from './flex/useThemeState';

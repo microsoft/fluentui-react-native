@@ -94,7 +94,7 @@
     },
     {
       "id": "MNB-002",
-      "evidence": ["useMenuButtonStyles.ts", "menu-button.styles.ts", "renderMenuButton.tsx", "menu-button.test.tsx"]
+      "evidence": ["spec/tokens.json", "useMenuButtonStyles.ts", "menu-button.styles.ts", "renderMenuButton.tsx", "menu-button.test.tsx"]
     },
     {
       "id": "MNB-003",

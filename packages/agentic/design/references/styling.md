@@ -38,6 +38,18 @@ objects; do not wrap them in another `StyleSheet.create` cache.
 
 ## State hierarchies
 
+### Component tokens
+
+`defineComponentTokens` validates a component's slot domains and selector paths. `getComponentTokens` caches the compiled
+definition in `themeStyles`; `resolveTokenStates` reads the declared fields directly from component state and caches
+immutable slot results by relevant axis members. State objects and caller styles are never part of a shared cache key.
+
+Bindings may contain native literals or `tokens:<group>.<name>` references. Colors require `.rest`, `.hover`, `.pressed`,
+or `.active`. `.active` follows the component's `visualState` (`hovered`/`pressed`, otherwise rest). Choosing the winning
+property across all theme layers does not read any losing interaction color getters.
+
+### Legacy state style factories
+
 A state style definition declares ordered hierarchy levels. Each level lists mutually exclusive states in precedence
 order, and a state can contain states from any later level. Later-level states can also appear at the base as
 fallbacks. `createStateLevelMap` rejects ambiguous hierarchies.

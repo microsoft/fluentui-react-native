@@ -8,6 +8,7 @@ import { render } from '../../common/renderWithTheme';
 import type { RenderResult } from '@testing-library/react-native';
 
 import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
+import { FlexThemeReference, ThemeProvider } from '@fluentui-react-native/design';
 
 import { Button } from './button';
 import type { ButtonAppearance } from './button.types';
@@ -25,6 +26,27 @@ function getRootStyle(component: RenderResult): ViewStyle {
 }
 
 describe('Button', () => {
+  it('lets theme base values override state-specific defaults and caller visuals override the theme', async () => {
+    const theme = new FlexThemeReference({
+      componentTokens: {
+        'furn.button': { root: { backgroundColor: '#112233' }, content: { color: '#334455' }, icon: { width: 30, height: 31 } },
+      },
+    });
+    const component = await render(
+      <ThemeProvider theme={theme}>
+        <Button
+          appearance="primary"
+          content={{ children: 'Save', style: { color: '#556677' } }}
+          icon={{ imageSource: { uri: 'save.png' }, testID: 'icon', width: 40 }}
+          style={{ minWidth: 75 }}
+        />
+      </ThemeProvider>,
+    );
+    expect(getRootStyle(component)).toMatchObject({ backgroundColor: '#112233', minWidth: 75 });
+    expect(StyleSheet.flatten(component.getByText('Save').props.style)).toMatchObject({ color: '#556677' });
+    expect(StyleSheet.flatten(component.getByTestId('icon').props.style)).toMatchObject({ width: 40, height: 31, tintColor: '#334455' });
+  });
+
   it('forwards its ref prop to the native root', async () => {
     const ref = React.createRef<React.ElementRef<typeof Pressable>>();
 

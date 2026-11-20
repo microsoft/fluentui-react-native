@@ -1,9 +1,9 @@
-import type { StyleProp, TextStyle, ViewStyle } from 'react-native';
-
-import { attachSlotProps } from '@fluentui-react-native/framework-base';
+import { StyleSheet } from 'react-native';
+import { resolveTokenStates } from '@fluentui-react-native/design/styling';
+import { attachSlotDefaults, attachSlotProps } from '@fluentui-react-native/framework-base';
 import { applyFocusRingStyles } from '../../common/applyFocusRingStyles';
 
-import { buttonStyles, getButtonColorStyles, getButtonContentStyle, getButtonIconSize, getButtonRootStyle } from './button.styles';
+import { resolveButtonChrome } from './button.styles';
 import type { ButtonState } from './button.types';
 
 /**
@@ -11,39 +11,26 @@ import type { ButtonState } from './button.types';
  * button slots.
  */
 export function useButtonStyles_unstable(state: ButtonState) {
-  const { size, userStyle } = state;
-  const colors = getButtonColorStyles(state);
-  const rootLayoutStyle = getButtonRootStyle(state);
-  const rootStyle: StyleProp<ViewStyle> = [buttonStyles.root, rootLayoutStyle, colors.background, userStyle];
-  const contentStyle: StyleProp<TextStyle> = [buttonStyles.content, getButtonContentStyle(state), colors.foreground];
-  const iconSize = getButtonIconSize(size);
-
-  applyFocusRingStyles(state.FocusRing, state, rootLayoutStyle.borderRadius);
-  attachSlotProps(state.root, { style: rootStyle });
-  if (state.icon) {
-    attachSlotProps(state.icon, {
-      accessible: false,
-      color: colors.foreground.color,
-      height: iconSize,
-      width: iconSize,
-    });
-  }
-  if (state.selectedIcon) {
-    attachSlotProps(state.selectedIcon, {
-      accessible: false,
-      color: colors.foreground.color,
-      height: iconSize,
-      width: iconSize,
-    });
-  }
-  if (state.content) {
-    attachSlotProps(state.content, {
-      style: contentStyle,
-    });
-  }
+  const chrome = resolveButtonChrome(state);
+  applyButtonChrome(state, chrome);
   if (state.contentHidden) {
-    attachSlotProps(state.contentHidden, {
-      style: [buttonStyles.content, getButtonContentStyle(state, true), colors.foreground],
+    const selected = resolveTokenStates(state.buttonTokens.content, state, { selected: true }).style;
+    attachSlotDefaults(state.contentHidden, {
+      style: [selected, { color: chrome.content.color }],
     });
+  }
+}
+
+/** Apply effective Button visuals to both Button and MenuButton triggers. */
+export function applyButtonChrome(state: ButtonState, { root, content, icon }: ReturnType<typeof resolveButtonChrome>) {
+  const style = [root, state.userStyle];
+  if (state.FocusRing) applyFocusRingStyles(state.FocusRing, state.themeState, StyleSheet.flatten(style).borderRadius);
+  attachSlotProps(state.root, { style });
+  if (state.content) attachSlotDefaults(state.content, { style: content });
+  for (const slot of [state.icon, state.selectedIcon]) {
+    if (slot) {
+      attachSlotDefaults(slot, { ...icon, color: icon.color ?? content.color });
+      attachSlotProps(slot, { accessible: false });
+    }
   }
 }

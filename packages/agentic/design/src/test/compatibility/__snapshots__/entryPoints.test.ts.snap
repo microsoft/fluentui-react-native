@@ -59,7 +59,9 @@ exports[`public entry points ./styling keeps its runtime export names 1`] = `
 [
   "colorStyleDef: function",
   "createStateLevelMap: function",
+  "defineComponentTokens: function",
   "getActiveState: function",
+  "getComponentTokens: function",
   "getGapStyleValue: function",
   "getNumericStyleValue: function",
   "getStateStyleFactory: function",
@@ -67,6 +69,7 @@ exports[`public entry points ./styling keeps its runtime export names 1`] = `
   "getThemedStateStyleFactory: function",
   "interactiveStatePriority: object",
   "pickActiveStyle: function",
+  "resolveTokenStates: function",
   "styleDefinitionToBranchedStyles: function",
 ]
 `;

@@ -3,7 +3,7 @@ name: menu-button
 platform: react-native (Windows, macOS)
 status: implemented
 source: ./spec/source.json
-tokens: ./spec/tokens.yaml
+tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
 interaction: ./spec/interaction.md
 usage: ./spec/usage.md
@@ -68,7 +68,9 @@ The chevron is private and cannot be replaced or hidden.
 - **MNB-002:** Use Button's content-layout metrics and rounded radius for
   every label and icon combination, append the private static down chevron in
   the trigger foreground at 16, 20, and 20 for small, medium, and large, and
-  draw the pressed chrome while the menu is presented.
+  draw the pressed chrome while the menu is presented, unless disabled.
+  Use the effective Button theme tokens for the trigger, with separate
+  MenuButton theme tokens for the chevron and caller trigger visuals last.
 - **MNB-003:** Present the children through Menu's presence, family,
   navigation, and dismissal (MNU-002 to MNU-011), placed below the trigger and
   start-aligned. Warn in development for section-header rows and for a
@@ -116,12 +118,12 @@ chevron does.
 The listed files exist for every requirement. macOS Fabric and Paper, Windows Fabric, and the Win32 adapters qualify the
 native behavior in the MenuButton stories.
 
-| Requirement | Evidence                                                                                          |
-| ----------- | ------------------------------------------------------------------------------------------------- |
-| MNB-001     | `menu-button.types.ts`, `useMenuButton.ts`, `menu-button.test.tsx`, `menu-button.types.test.ts`   |
-| MNB-002     | `useMenuButtonStyles.ts`, `menu-button.styles.ts`, `renderMenuButton.tsx`, `menu-button.test.tsx` |
-| MNB-003     | `useMenuButton.ts`, `renderMenuButton.tsx`, `menu-button.test.tsx`, `menu-button.stories.tsx`     |
-| MNB-004     | `useMenuButton.ts`, `menu-button.test.tsx`, `menu-button.stories.tsx`                             |
-| MNB-005     | `useMenuButton.ts`, `menu-button.test.tsx`, `menu-button.stories.tsx`                             |
-| MNB-006     | `useMenuButton.ts`, `menu-button.test.tsx`, `menu-button.stories.tsx`                             |
-| MNB-007     | `useMenuButton.ts`, `menu-button.test.tsx`, `menu-button.stories.tsx`                             |
+| Requirement | Evidence                                                                                                              |
+| ----------- | --------------------------------------------------------------------------------------------------------------------- |
+| MNB-001     | `menu-button.types.ts`, `useMenuButton.ts`, `menu-button.test.tsx`, `menu-button.types.test.ts`                       |
+| MNB-002     | `spec/tokens.json`, `useMenuButtonStyles.ts`, `menu-button.styles.ts`, `renderMenuButton.tsx`, `menu-button.test.tsx` |
+| MNB-003     | `useMenuButton.ts`, `renderMenuButton.tsx`, `menu-button.test.tsx`, `menu-button.stories.tsx`                         |
+| MNB-004     | `useMenuButton.ts`, `menu-button.test.tsx`, `menu-button.stories.tsx`                                                 |
+| MNB-005     | `useMenuButton.ts`, `menu-button.test.tsx`, `menu-button.stories.tsx`                                                 |
+| MNB-006     | `useMenuButton.ts`, `menu-button.test.tsx`, `menu-button.stories.tsx`                                                 |
+| MNB-007     | `useMenuButton.ts`, `menu-button.test.tsx`, `menu-button.stories.tsx`                                                 |
