@@ -4,7 +4,7 @@ kind: instruction-reference
 owner_paths:
   - packages/agentic/desktop-test
   - packages/agentic/desktop-driver
-  - packages/agentic/desktop-driver-mcp
+  - packages/shims/desktop-driver-mcp
   - packages/agentic/desktop-mcp
   - packages/agentic/storybook-desktop
 ---

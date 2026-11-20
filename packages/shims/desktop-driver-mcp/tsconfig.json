@@ -8,5 +8,5 @@
     "tsBuildInfoFile": "node_modules/.cache/tsconfig.tsbuildinfo"
   },
   "include": ["src"],
-  "references": [{ "path": "../desktop-mcp/tsconfig.json" }, { "path": "../../../scripts/tsconfig.json" }]
+  "references": [{ "path": "../../agentic/desktop-mcp/tsconfig.json" }, { "path": "../../../scripts/tsconfig.json" }]
 }

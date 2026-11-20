@@ -7,7 +7,7 @@ describe('desktop MCP executables', () => {
   test.each([
     ['supervisor', '../config/cli.cjs', [], true],
     ['explicit driver-only', '../config/cli.cjs', ['--driver-only'], false],
-    ['legacy shim', '../../desktop-driver-mcp/config/cli.cjs', [], false],
+    ['legacy shim', '../../../shims/desktop-driver-mcp/config/cli.cjs', [], false],
   ] as const)('%s advertises only its startup mode over stdio', async (_label, executable, args, workload) => {
     const transport = new StdioClientTransport({
       command: process.execPath,
