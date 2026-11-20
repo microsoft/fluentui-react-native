@@ -11,6 +11,11 @@ import { semanticIconSources } from '../../common/iconSources';
 import { MenuItem } from '../menu-item/menu-item';
 import { MenuButton } from './menu-button';
 import type { MenuButtonProps } from './menu-button.types';
+import { svgChevronAssets } from './chevronAssets.svg';
+import { createMenuButtonTokenDefinition } from './menu-button.styles';
+import { renderMenuButton_unstable } from './renderMenuButton';
+import { useMenuButtonWithTokens } from './useMenuButton';
+import { useMenuButtonStyles_unstable } from './useMenuButtonStyles';
 
 type ReactTestInstance = ReturnType<typeof screen.getByTestId>;
 
@@ -47,8 +52,47 @@ function backgroundColor(node: ReactTestInstance): unknown {
   return styles.reduce<unknown>((color, style) => style?.backgroundColor ?? color, undefined);
 }
 
+const svgTokens = createMenuButtonTokenDefinition(svgChevronAssets);
+
+function SvgScene(props: MenuButtonProps) {
+  const state = useMenuButtonWithTokens(props, svgTokens);
+  useMenuButtonStyles_unstable(state);
+  return renderMenuButton_unstable(state);
+}
+
 describe('MenuButton', () => {
   beforeEach(() => dispatchCommand.mockClear());
+
+  it('selects sized SVG artwork and lets the theme choose a registered asset independently of dimensions', async () => {
+    const theme = new FlexThemeReference({
+      componentTokens: {
+        'furn.menu-button': { chevron: { 'when.size.large': { source: 'fluent-icon: ChevronDown16Regular', color: '#556677' } } },
+      },
+    });
+    const component = await render(
+      <ThemeProvider theme={theme}>
+        <SvgScene size="small" content="Small" testID="svg-small">
+          <MenuItem content="Action" />
+        </SvgScene>
+        <SvgScene size="medium" content="Medium" testID="svg-medium">
+          <MenuItem content="Action" />
+        </SvgScene>
+        <SvgScene size="large" content="Large" testID="svg-large">
+          <MenuItem content="Action" />
+        </SvgScene>
+      </ThemeProvider>,
+    );
+    const nodes = ['svg-small', 'svg-medium', 'svg-large'].map((testID) => component.getByTestId(testID));
+    const paths = nodes.map((node) => node.queryAll((child) => child.type === 'RNSVGPath')[0]);
+    expect(paths[0].props.d).not.toBe(paths[1].props.d);
+    expect(paths[2].props.d).toBe(paths[0].props.d);
+    const frames = nodes.map((node) => node.queryAll((child) => child.type === 'RNSVGSvgView')[0]);
+    expect(frames.map(({ props }) => [Number(props.bbWidth), Number(props.bbHeight), props.accessible])).toEqual([
+      [16, 16, false],
+      [20, 20, false],
+      [20, 20, false],
+    ]);
+  });
 
   it('composes Button theme chrome with MenuButton chevron tokens and leaves the glyph in place', async () => {
     const theme = new FlexThemeReference({

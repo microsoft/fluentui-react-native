@@ -13,6 +13,7 @@
     "AGENTS.md",
     "CHANGELOG.md",
     "README.md",
+    "THIRD_PARTY_NOTICES.txt",
     "jest.config.cjs",
     "lib/",
     "package.json",
@@ -49,6 +50,9 @@
     "clean": "fluentui-scripts clean",
     "format": "fluentui-scripts format",
     "lint": "fluentui-scripts lint",
+    "prebuild": "node ./scripts/generate-token-icons.cjs",
+    "prepack": "node ./scripts/generate-token-icons.cjs --check",
+    "check:token-icons": "node ./scripts/generate-token-icons.cjs --check",
     "report:spec-source-drift": "node ./scripts/spec-contracts/report-spec-source-drift.cjs",
     "test": "node ./scripts/spec-contracts/check-spec-contracts.cjs && yarn test:stories && fluentui-scripts jest",
     "test:stories": "tsc -p tsconfig.stories.json",
@@ -57,11 +61,13 @@
   "dependencies": {
     "@fluentui-react-native/design": "workspace:*",
     "@fluentui-react-native/framework-base": "workspace:*",
-    "@fluentui-react-native/native-core": "workspace:*"
+    "@fluentui-react-native/native-core": "workspace:*",
+    "@fluentui/react-native-icons": "2.0.347"
   },
   "devDependencies": {
     "@babel/core": "catalog:",
     "@fluentui-react-native/desktop-driver": "workspace:*",
+    "@fluentui-react-native/extract-icons": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@fluentui-react-native/storybook-desktop": "workspace:*",
     "@office-iss/react-native-win32": "^0.81.0",
@@ -105,7 +111,12 @@
     }
   },
   "furn": {
-    "jestPlatform": "macos"
+    "jestPlatform": "macos",
+    "tokenAssets": {
+      "fluent-icon": {
+        "output": "src/common/generated/fluent-icons"
+      }
+    }
   },
   "rnx-kit": {
     "kitType": "library",

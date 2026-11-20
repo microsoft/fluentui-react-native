@@ -1,5 +1,6 @@
 import type { ThemeState } from '../flex/themeState.types';
 import type { FlexTokens } from '../flex/tokens.types';
+import type { AssetField } from './assetField';
 
 export type TokenMember = string | number | boolean;
 export type TokenAxes = readonly (readonly [field: string, members: readonly TokenMember[]])[];
@@ -15,12 +16,19 @@ type TokenReference<T> =
     }[NonColorGroup]
   | (FlexTokens['color'][keyof FlexTokens['color']]['rest'] extends T ? ColorReference : never);
 
-export type TokenFields = Readonly<Record<string, (value: unknown) => unknown>>;
+type ValueParser = (value: unknown) => unknown;
+export type TokenFields = Readonly<Record<string, ValueParser | AssetField<string, string, unknown>>>;
 export type TokenSlotDomains = Readonly<Record<string, { readonly style: TokenFields; readonly props: TokenFields }>>;
-export type ResolvedFields<F extends TokenFields> = { readonly [K in keyof F]?: ReturnType<F[K]> };
+type ResolvedField<F> = F extends AssetField<string, string, infer Result> ? Result : F extends ValueParser ? ReturnType<F> : never;
+export type ResolvedFields<F extends TokenFields> = { readonly [K in keyof F]?: ResolvedField<F[K]> };
+
+type AuthoredField<F> =
+  F extends AssetField<infer Protocol, infer Name, unknown>
+    ? `${Protocol}:${Name}` | `${Protocol}: ${Name}`
+    : NonNullable<ResolvedField<F>> | TokenReference<NonNullable<ResolvedField<F>>>;
 
 type TokenValues<F extends TokenFields> = {
-  readonly [K in keyof F]?: NonNullable<ReturnType<F[K]>> | TokenReference<NonNullable<ReturnType<F[K]>>>;
+  readonly [K in keyof F]?: AuthoredField<F[K]>;
 };
 type TokenBranches<State extends object, F extends TokenFields> = {
   readonly [K in keyof State & string as `when.${K}.${Extract<State[K], TokenMember>}`]?: TokenValues<F> & TokenBranches<Omit<State, K>, F>;

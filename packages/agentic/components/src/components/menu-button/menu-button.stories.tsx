@@ -15,6 +15,7 @@ import { MenuItem } from '../menu-item/menu-item';
 import type { MenuItemProps } from '../menu-item/menu-item.types';
 import type { MenuOpenChangeData } from '../menu/menu.types';
 import { MenuButton } from './menu-button';
+import { SvgChevronScene } from './svgChevron.story-helpers';
 
 type SceneProps = { appearance?: ButtonAppearance; size?: ButtonSize; disabled?: boolean };
 
@@ -218,6 +219,10 @@ export const Variants: Story = {
   parameters: {
     docs: { description: { story: 'Every appearance and size, with a label and with only a leading icon.' } },
   },
+};
+
+export const FluentChevronPreview: Story = {
+  render: () => <SvgChevronScene />,
 };
 
 export const AccessibleNames: Story = {

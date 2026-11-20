@@ -6,7 +6,6 @@ import { useSlot } from '@fluentui-react-native/framework-base';
 import { getComponentTokens } from '@fluentui-react-native/design/styling';
 
 import { composeHandlers } from '../../common/eventHandlers';
-import { semanticIconSources } from '../../common/iconSources';
 import { withTriggerExpandActions } from '../../common/triggerExpandActions';
 import { Icon } from '../../primitives/icon/icon';
 import type { ButtonProps } from '../button/button.types';
@@ -19,7 +18,6 @@ import type { MenuButtonProps, MenuButtonState } from './menu-button.types';
 import { menuButtonTokenDefinition } from './menu-button.styles';
 
 const defaultHint = 'Opens a menu';
-const chevronProps = { fontSource: semanticIconSources.chevronDown };
 const triggerKeys = [{ key: 'ArrowDown' }, { key: 'ArrowUp' }];
 const unmounted: FocusRequest = { status: 'not-mounted', cancel: () => undefined };
 
@@ -30,6 +28,10 @@ type TriggerInstance = React.ComponentRef<typeof View>;
  * native popup family, which opens below the trigger and continues Tab past it.
  */
 export function useMenuButton_unstable(props: MenuButtonProps): MenuButtonState {
+  return useMenuButtonWithTokens(props, menuButtonTokenDefinition);
+}
+
+export function useMenuButtonWithTokens(props: MenuButtonProps, definition: typeof menuButtonTokenDefinition): MenuButtonState {
   const {
     accessibilityHint,
     accessibilityState,
@@ -150,13 +152,13 @@ export function useMenuButton_unstable(props: MenuButtonProps): MenuButtonState 
     },
     [anchorRef, focusTargetRef],
   );
-  const chevron = useSlot(Icon, chevronProps);
+  const chevron = useSlot(Icon, {});
 
   return {
     ...button,
     iconOnly: false,
     visualState: getButtonVisualState(disabled, button.pressed || controller.presented, button.hovered),
-    menuButtonTokens: getComponentTokens(button.themeState, menuButtonTokenDefinition),
+    menuButtonTokens: getComponentTokens(button.themeState, definition),
     chevron,
     triggerRef,
     open: controller.presented,

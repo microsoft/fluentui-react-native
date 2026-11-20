@@ -14,7 +14,7 @@ type Condition = readonly [axis: number, member: TokenMember];
 type ColorMember = keyof InteractiveColor | 'active';
 type Reference = { group: keyof FlexTokens; name: string; member?: ColorMember };
 type Field = { key: string; output: 'style' | 'props'; parse: Parser; path: string };
-type Binding = Field & ({ reference: Reference } | { literal: unknown });
+type Binding = Field & ({ reference: Reference } | { literal: unknown } | { asset: () => unknown });
 type Rule = { conditions: readonly Condition[]; fields: readonly Binding[] };
 type Rules = ReadonlyMap<string, readonly Rule[]>;
 type ValueReader = (state: readonly TokenMember[]) => unknown;
@@ -81,6 +81,11 @@ function compileLayer(
   const layer = record(input, label);
   const slots = new Map<string, Rule[]>();
   const issues: string[] = [];
+  const assetProtocols = new Set(
+    Object.values(domains).flatMap(({ style, props }) =>
+      [...Object.values(style), ...Object.values(props)].flatMap((field) => (typeof field === 'function' ? [] : [field.protocol])),
+    ),
+  );
 
   function walk(node: unknown, path: string, domain: TokenSlotDomains[string], conditions: Condition[], rules: Rule[]) {
     const fields: Binding[] = [];
@@ -101,8 +106,21 @@ function compileLayer(
           }
           if (value !== undefined) {
             const field = { key, output, parse: domain[output][key], path: fieldPath } as const;
-            if (typeof value === 'string' && value.startsWith('tokens:')) {
+            const protocol = typeof value === 'string' ? value.slice(0, value.indexOf(':') + 1) : '';
+            if (typeof field.parse !== 'function') {
+              const prefix = `${field.parse.protocol}:`;
+              if (typeof value !== 'string' || protocol !== prefix) invalid(fieldPath, `expected a ${prefix} asset reference`);
+              const name = value.slice(prefix.length).replace(/^ /, '');
+              try {
+                fields.push({ ...field, asset: field.parse.prepare(name) });
+              } catch (error) {
+                if (!(error instanceof TypeError)) throw error;
+                invalid(fieldPath, error.message);
+              }
+            } else if (typeof value === 'string' && value.startsWith('tokens:')) {
               fields.push({ ...field, reference: parseReference(value, fieldPath, visualAxis) });
+            } else if (assetProtocols.has(protocol.slice(0, -1))) {
+              invalid(fieldPath, `unexpected ${protocol} reference`);
             } else {
               fields.push({
                 ...field,
@@ -159,6 +177,7 @@ function compileLayer(
 function normalize(binding: Field, value: unknown): unknown {
   if (value === null || value === undefined) invalid(binding.path, 'expected a token value');
   try {
+    if (typeof binding.parse !== 'function') invalid(binding.path, 'expected an asset reference');
     return binding.parse(value);
   } catch (error) {
     if (!(error instanceof TypeError)) throw error;
@@ -168,6 +187,16 @@ function normalize(binding: Field, value: unknown): unknown {
 
 function bindValue(binding: Binding, tokens: FlexTokens, visualAxis: number): ValueReader {
   if ('literal' in binding) return () => binding.literal;
+  if ('asset' in binding) {
+    return () => {
+      try {
+        return binding.asset();
+      } catch (error) {
+        if (!(error instanceof TypeError)) throw error;
+        return invalid(binding.path, error.message);
+      }
+    };
+  }
   const { group, name, member } = binding.reference;
   const path = binding.path;
   const token = ownValue(tokens[group], name, path);
@@ -337,10 +366,8 @@ export function getComponentTokens<State extends object, D extends TokenSlotDoma
   return definition.resolve(theme);
 }
 
-export function resolveTokenStates<State extends object, S extends TokenFields, P extends TokenFields>(
-  slot: CompiledSlotTokens<State, S, P>,
-  state: NoInfer<State>,
-  overrides?: Partial<NoInfer<State>>,
-): ResolvedSlotTokens<S, P> {
-  return slot(state, overrides);
+type SlotResolver = (state: never, overrides?: never) => unknown;
+
+export function resolveTokenStates<Slot extends SlotResolver>(slot: Slot, ...[state, overrides]: Parameters<Slot>): ReturnType<Slot> {
+  return slot(state, overrides) as ReturnType<Slot>;
 }

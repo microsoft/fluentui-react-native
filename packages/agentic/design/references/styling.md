@@ -55,6 +55,12 @@ For slot domains, import `numericToken`, `stringToken`, `dimensionToken`, `color
 `BORDER_STYLE_VALUES` is the readonly tuple and `borderStyleToken` validates a value and returns the literal union.
 Use `enumToken(['quiet', 'loud'])` to validate custom values without extending the React Native style enums.
 
+Use `assetField(protocol, registry, parse)` for token fields that refer to registered assets. Supply a local object
+of synchronous readers; an authored value is `protocol: Name` (one optional ASCII space after the colon). The
+resolver checks registry membership when compiling each branch and calls only the winning reader. This delays
+value resolution, not module loading; keep modules statically imported by the owning component. Typed theme
+patches can only reference names in that field's registry.
+
 ### Legacy state style factories
 
 A state style definition declares ordered hierarchy levels. Each level lists mutually exclusive states in precedence

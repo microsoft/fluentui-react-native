@@ -50,3 +50,7 @@ TypeScript configs execute when loaded.
 SVGR core and its JSX plugin use matching 6.5.1 versions because this SVGR core version declares its own JSX
 plugin dependency, letting the upstream generator find it under strict package linkers. The SVG catalog is pinned
 to `@fluentui/svg-icons@1.1.345` so generation uses the same source artwork across installs.
+
+Add `--manifest <file.json>` to record the generator and catalog versions and licenses, requested names, resolved
+SVG names and SHA-256 digests, and generated module digests. Output paths in the manifest are relative to its
+directory.

@@ -91,6 +91,7 @@ exports[`public entry points ./styling keeps its runtime export names 1`] = `
   "alignContentToken: function",
   "alignItemsToken: function",
   "alignSelfToken: function",
+  "assetField: function",
   "backfaceVisibilityToken: function",
   "borderCurveToken: function",
   "borderStyleToken: function",

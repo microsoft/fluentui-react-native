@@ -35,6 +35,7 @@ function validateTokenCompanion(text, component, file) {
 
   const axes = new Set();
   const selectors = new Map();
+  const fluentIcons = new Set();
   for (const [rank, axis] of schema.axes.entries()) {
     invariant(Array.isArray(axis) && axis.length === 2, `${file}: expected [field, members] axis.`);
     const [field, members] = axis;
@@ -69,7 +70,15 @@ function validateTokenCompanion(text, component, file) {
         walk(value, field, next);
       } else {
         invariant(value !== null, `${field}: null token values are not supported.`);
-        if (typeof value === 'string' && value.startsWith('tokens:')) {
+        if (typeof value === 'string' && value.startsWith('fluent-icon:')) {
+          const icon = value.slice('fluent-icon:'.length).replace(/^ /, '');
+          const stem = icon.replace(/(?:Regular|Filled|Light|Color|HighContrast)$/, '');
+          invariant(
+            /^[A-Z][A-Za-z0-9]*$/.test(icon) && stem !== icon && /[0-9]$/.test(stem),
+            `${field}: invalid sized Fluent icon export ${icon}.`,
+          );
+          fluentIcons.add(icon);
+        } else if (typeof value === 'string' && value.startsWith('tokens:')) {
           const parts = value.slice(7).split('.');
           const [group, name, member] = parts;
           invariant(
@@ -89,6 +98,7 @@ function validateTokenCompanion(text, component, file) {
     invariant(safe(slot), `${file}: invalid slot ${slot}.`);
     walk(node, `${file}:${slot}`, -1);
   }
+  return fluentIcons;
 }
 
 module.exports = { validateTokenCompanion };

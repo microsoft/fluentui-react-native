@@ -35,7 +35,7 @@
     "src/primitives/focus-zone/focus-zone.stories.tsx",
     "src/primitives/icon/icon.stories.tsx",
     "src/primitives/layout-stable-text/layout-stable-text.stories.tsx",
-    "src/**/*.story-helpers.tsx",
+    "src/**/*.story-helpers*.tsx",
     "src/**/*.wdio.ts"
   ],
   "exclude": [],

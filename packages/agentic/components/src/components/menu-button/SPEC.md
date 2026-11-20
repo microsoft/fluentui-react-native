@@ -101,17 +101,18 @@ Windows Fabric implement this continuation natively. The Win32 host cannot
 continue focus past the popup's owner, so Office Win32 uses the approved interim
 (R1): Tab closes the menu and returns focus to the trigger.
 
-The chevron uses the package's shared icon sources, as MenuItem's submenu
-chevron does.
+The chevron's size-specific artwork is selected by the component token
+companion. The pilot supplies Fluent SVG artwork for qualification and uses
+the existing shared down-chevron glyph on hosts not qualified for that artwork.
 
 ## Divergences from Flex
 
-| ID                          | Disposition | React Native contract                                                                                        | Follow-up                                             |
-| --------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------- |
-| `menu-button-haspopup`      | Accepted    | Expanded state plus a hint replace `menu` has-popup and controls, which have no typed property (D12).        | Adopt native relationships if the renderers add them. |
-| `menu-button-pointer-entry` | Accepted    | A pointer open follows Menu's native pointer entry (`menu-pointer-entry`) instead of focusing the first row. | None.                                                 |
-| `menu-button-chevron-glyph` | Accepted    | The chevron is the package's shared down-chevron glyph rather than the Fluent ChevronDown icon asset.        | Replace when the package adopts the Fluent icon font. |
-| `menu-button-motion`        | Deferred    | Menu presentation and trigger color changes are instant, which equals the reduced-motion behavior.           | Revisit when Flex motion is final.                    |
+| ID                          | Disposition | React Native contract                                                                                           | Follow-up                                             |
+| --------------------------- | ----------- | --------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
+| `menu-button-haspopup`      | Accepted    | Expanded state plus a hint replace `menu` has-popup and controls, which have no typed property (D12).           | Adopt native relationships if the renderers add them. |
+| `menu-button-pointer-entry` | Accepted    | A pointer open follows Menu's native pointer entry (`menu-pointer-entry`) instead of focusing the first row.    | None.                                                 |
+| `menu-button-chevron-glyph` | Accepted    | The pilot keeps the shared down-chevron glyph as the fallback for the size-specific Fluent ChevronDown artwork. | Enable SVG only on qualified hosts.                   |
+| `menu-button-motion`        | Deferred    | Menu presentation and trigger color changes are instant, which equals the reduced-motion behavior.              | Revisit when Flex motion is final.                    |
 
 ## Conformance
 

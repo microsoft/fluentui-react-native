@@ -2,6 +2,7 @@ import { getThemeState } from '../flex/themeState';
 import { FlexThemeReference } from '../flex/flexThemeReference';
 import { resolveThemeAppearance } from '../theming/appearance';
 import { defineComponentTokens, getComponentTokens, resolveTokenStates } from './componentTokens';
+import { assetField } from './assetField';
 import type { TokenState } from './componentTokens.types';
 
 const axes = [
@@ -123,4 +124,31 @@ it('reports malformed selectors and unknown token paths instead of accepting an 
 
 it.each([null, [['selected', [null]]], [['selected']], [[42, [true]]]])('rejects invalid schema axes: %j', (axes) => {
   expect(() => defineComponentTokens({ id: 'test.example', slots, schema: { ...schema, axes } })).toThrow(/test\.example.*expected/);
+});
+
+it('validates every asset reference but reads and memoizes only the winning asset', () => {
+  const normal = jest.fn(() => 'normal');
+  const selected = jest.fn(() => 'selected');
+  const fields = { root: { style: {}, props: { image: assetField('artwork', { normal, selected }, stringValue) } } };
+  const bindings = { root: { image: 'artwork: normal', 'when.selected.true': { image: 'artwork:selected' } } };
+  const definition = defineComponentTokens<{ selected: boolean }, typeof fields>({
+    id: 'test.example',
+    slots: fields,
+    schema: { ...schema, bindings },
+  });
+  const theme = getThemeState(new FlexThemeReference(), light);
+  const { root } = getComponentTokens(theme, definition);
+  expect(normal).not.toHaveBeenCalled();
+  expect(selected).not.toHaveBeenCalled();
+  expect(resolveTokenStates(root, { selected: true }).props.image).toBe('selected');
+  expect(resolveTokenStates(root, { selected: true }).props.image).toBe('selected');
+  expect(normal).not.toHaveBeenCalled();
+  expect(selected).toHaveBeenCalledTimes(1);
+  expect(() =>
+    defineComponentTokens({
+      id: 'test.example',
+      slots: fields,
+      schema: { ...schema, bindings: { root: { ...bindings.root, 'when.selected.false': { image: 'artwork: missing' } } } },
+    }),
+  ).toThrow('test.example.root.when.selected.false.image: Unknown artwork asset "missing"');
 });

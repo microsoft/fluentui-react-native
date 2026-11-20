@@ -3789,10 +3789,12 @@ __metadata:
     "@babel/core": "catalog:"
     "@fluentui-react-native/design": "workspace:*"
     "@fluentui-react-native/desktop-driver": "workspace:*"
+    "@fluentui-react-native/extract-icons": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/native-core": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/storybook-desktop": "workspace:*"
+    "@fluentui/react-native-icons": "npm:2.0.347"
     "@office-iss/react-native-win32": "npm:^0.81.0"
     "@react-native-community/cli": "npm:^20.0.0"
     "@react-native-community/cli-platform-android": "npm:^20.0.0"
@@ -4878,7 +4880,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/extract-icons@workspace:packages/utils/extract-icons":
+"@fluentui-react-native/extract-icons@workspace:*, @fluentui-react-native/extract-icons@workspace:packages/utils/extract-icons":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/extract-icons@workspace:packages/utils/extract-icons"
   dependencies:

@@ -1,7 +1,8 @@
 #!/usr/bin/env node
-import { mkdirSync, readdirSync, writeFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
-import { dirname, join, resolve } from 'node:path';
+import { dirname, join, relative, resolve, sep } from 'node:path';
 import { parseArgs } from 'node:util';
 
 const require = createRequire(import.meta.url);
@@ -13,7 +14,7 @@ const {
 const configKey = 'extractIcons';
 const usage = `Usage:
   extract-icons --output <file.tsx> <icon-name> [<icon-name> ...]
-  extract-icons --config <path>
+  extract-icons --config <path> [--manifest <file.json>]
 
 Use component names (AccessTime20Regular) or SVG catalog names (access_time_20_regular).
 The config module must expose an "${configKey}" key with one { output, icons } entry or an array of entries.`;
@@ -98,10 +99,21 @@ function indexComponentNames(svgDir: string): Map<string, string[]> {
   return index;
 }
 
-function generate(jobs: Job[]): void {
+function sha256(contents: string | Buffer): string {
+  return createHash('sha256').update(contents).digest('hex');
+}
+
+function packageIdentity(path: string) {
+  const { name, version, license }: { name: string; version: string; license: string } = require(path);
+  return { name, version, license };
+}
+
+function generate(jobs: Job[], manifest?: string): void {
   const outputs = new Map<string, string>();
+  const artifacts = [];
   // Resolve the CLI's dependency rather than asking upstream to resolve it from the caller's directory.
-  const svgDir = join(dirname(require.resolve('@fluentui/svg-icons/package.json')), 'icons');
+  const catalog = require.resolve('@fluentui/svg-icons/package.json');
+  const svgDir = join(dirname(catalog), 'icons');
   let componentNames: Map<string, string[]> | undefined;
   for (const { output, icons } of jobs) {
     if (outputs.has(output)) {
@@ -121,9 +133,36 @@ function generate(jobs: Job[]): void {
         }
         return matches[0];
       });
-      outputs.set(output, generateIconModule(names, { svgDir }));
+      const source = generateIconModule(names, { svgDir });
+      outputs.set(output, source);
+      if (manifest) {
+        artifacts.push({
+          output: relative(dirname(manifest), output).split(sep).join('/'),
+          requested: icons,
+          inputs: [...new Set(names)].sort().map((name) => {
+            const file = `${name}.svg`;
+            return { file, sha256: sha256(readFileSync(join(svgDir, file))) };
+          }),
+          sha256: sha256(source),
+        });
+      }
     } catch (error) {
       throw new Error(`Cannot generate ${output}: ${error instanceof Error ? error.message : String(error)}`, { cause: error });
+    }
+    if (manifest) {
+      outputs.set(
+        manifest,
+        `${JSON.stringify(
+          {
+            schemaVersion: 1,
+            catalog: packageIdentity(catalog),
+            generator: packageIdentity(resolve(dirname(require.resolve('@fluentui/react-native-icons/codegen')), '../../package.json')),
+            artifacts,
+          },
+          null,
+          2,
+        )}\n`,
+      );
     }
   }
   for (const [output, source] of outputs) {
@@ -138,6 +177,7 @@ function main(): void {
     options: {
       output: { type: 'string', short: 'o' },
       config: { type: 'string', short: 'c' },
+      manifest: { type: 'string' },
       help: { type: 'boolean', short: 'h' },
     },
   });
@@ -145,13 +185,17 @@ function main(): void {
     console.log(usage);
     return;
   }
+  if (values.manifest !== undefined && !values.manifest.endsWith('.json')) {
+    throw new Error('--manifest requires a path ending in .json.');
+  }
+  const manifest = values.manifest && resolve(values.manifest);
   if (values.config !== undefined) {
     if (values.output !== undefined || positionals.length) {
       throw new Error('--config cannot be combined with --output or icon names.');
     }
-    generate(loadConfig(values.config));
+    generate(loadConfig(values.config), manifest);
   } else {
-    generate([parseJob({ output: values.output, icons: positionals }, process.cwd(), 'Command line')]);
+    generate([parseJob({ output: values.output, icons: positionals }, process.cwd(), 'Command line')], manifest);
   }
 }
 
