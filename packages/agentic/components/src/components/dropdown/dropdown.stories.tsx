@@ -158,6 +158,23 @@ export const Default: Story = {
       expect(await trigger.getProperty('value')).toBe(platform === 'macos' && renderer === 'fabric' ? null : '');
     }),
     desktopIt(
+      'DRP-010 opens below and start-aligned with the trigger',
+      { platforms: ['windows', 'win32'], requires: ['physical-click'] },
+      async ({ browser, expect, platform }) => {
+        const trigger = await browser.$('~dropdown-trigger');
+        const anchor = await browser.getElementRect(await trigger.elementId);
+        await trigger.click();
+        const listbox = await browser.$('~dropdown-list');
+        await listbox.waitForDisplayed();
+        const popup = await browser.getElementRect(await listbox.elementId);
+        // Win32 ignores the native placement gap and places the list flush with the trigger.
+        const gap = platform === 'win32' ? 0 : 4;
+        expect(Math.abs(popup.x - anchor.x)).toBeLessThanOrEqual(1);
+        expect(Math.abs(popup.y - (anchor.y + anchor.height + gap))).toBeLessThanOrEqual(1);
+        expect(popup.width).toBeGreaterThanOrEqual(anchor.width - 1);
+      },
+    ),
+    desktopIt(
       'opens from the keyboard on the first option and commits with Enter',
       { requires: ['physical-click', 'keyboard', 'focus'] },
       async (context) => {
