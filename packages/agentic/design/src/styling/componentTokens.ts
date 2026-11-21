@@ -1,3 +1,4 @@
+import { Platform } from 'react-native';
 import type { ThemeState } from '../flex/themeState.types';
 import type { FlexTokens, InteractiveColor } from '../flex/tokens.types';
 import type {
@@ -8,6 +9,7 @@ import type {
   TokenMember,
   TokenSlotDomains,
 } from './componentTokens.types';
+import { tokenPlatforms } from './tokenPlatforms';
 
 type Parser = TokenFields[string];
 type Condition = readonly [axis: number, member: TokenMember];
@@ -259,7 +261,10 @@ export function defineComponentTokens<State extends object, const D extends Toke
     invalid(id, 'component does not match the token schema');
   }
   if (schema.schemaVersion !== 2) invalid(id, 'expected schema version 2');
-  const axes = readAxes(schema.axes, id);
+  const stateAxes = readAxes(schema.axes, id);
+  if (stateAxes.some(([field]) => field === 'platform')) invalid(id, 'platform is a reserved host axis; omit it from axes');
+  const platformAxis = stateAxes.length;
+  const axes: TokenAxes = [...stateAxes, ['platform', tokenPlatforms]];
 
   const selectors = new Map<string, Condition>();
   const names = new Set<string>();
@@ -323,6 +328,11 @@ export function defineComponentTokens<State extends object, const D extends Toke
             const signature = relevantAxes
               .map((index) => {
                 const [name, members] = axes[index];
+                if (index === platformAxis) {
+                  const host = Platform.OS;
+                  values[index] = host;
+                  return members.indexOf(host);
+                }
                 const path = `${id}.${slot} state.${name}`;
                 const value = overrides && Object.hasOwn(overrides, name) ? ownValue(overrides, name, path) : ownValue(state, name, path);
                 const member = members.findIndex((candidate) => candidate === value);

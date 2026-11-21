@@ -3,7 +3,7 @@ import { attachSlotDefaults, attachSlotProps } from '@fluentui-react-native/fram
 import { applyFocusRingStyles } from '../../common/applyFocusRingStyles';
 import { hiddenFromAccessibilityProps } from '../../common/accessibility';
 import { getPopoverChrome, getPopoverSurfaceStyle } from '../popover/popover.styles';
-import { dropdownStyles, getDropdownChevron } from './dropdown.styles';
+import { dropdownStyles, getDropdownTriggerTokens } from './dropdown.styles';
 import type { DropdownState } from './dropdown.types';
 
 export function useDropdownStyles_unstable(state: DropdownState) {
@@ -20,7 +20,10 @@ export function useDropdownStyles_unstable(state: DropdownState) {
     attachSlotDefaults(state.iconStart, resolved.icon);
     attachSlotProps(state.iconStart, hiddenFromAccessibilityProps);
   }
-  const { source, ...chevron } = getDropdownChevron(state);
+  const {
+    chevron: { source, ...chevron },
+    value,
+  } = getDropdownTriggerTokens(state);
   attachSlotProps(state.chevron, {
     ...hiddenFromAccessibilityProps,
     ...chevron,
@@ -28,7 +31,7 @@ export function useDropdownStyles_unstable(state: DropdownState) {
   });
   attachSlotProps(state.value, {
     accessible: false,
-    style: [resolved.textInput, state.showsPlaceholder && { color: resolved.placeholderTextColor }],
+    style: [resolved.textInput, value, state.showsPlaceholder && { color: resolved.placeholderTextColor }],
   });
   if (state.underline) {
     attachSlotProps(state.underline, { accessible: false, pointerEvents: 'none', style: resolved.underline });

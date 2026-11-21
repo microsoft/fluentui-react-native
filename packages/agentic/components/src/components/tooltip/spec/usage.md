@@ -6,7 +6,10 @@ Prefer the direct prop on a supported view-backed component:
 <Button content="Save draft" tooltip="Saves without publishing" onPress={saveDraft} />
 ```
 
-This requests the host's text tooltip without changing the control's accessible name or help.
+This requests the host's text tooltip without synthesizing an accessible name or description. MenuButton and
+ToggleButton accept the same prop on their Pressable. For Dropdown, prefer `trigger={{ tooltip: 'Choose a value' }}`
+to target the combobox rather than its outer View. Input and Card accept a tip on the structural root; neither
+copies it onto its inner focus target.
 Supply any required accessible description on the trigger. Use the compatibility wrapper when the trigger
 does not expose a typed `tooltip` but can forward it and the wrapper's accessibility props to the same native view:
 

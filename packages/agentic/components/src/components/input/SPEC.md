@@ -45,6 +45,9 @@ The root accepts the owned `ViewProps` surface. `accessibilityLabel`,
 text input is the accessible element. A caller `style` is applied to the root
 after the token-derived root styles.
 
+A desktop `tooltip` is forwarded to the structural root, not lifted to the editor. Use `accessibilityHint` for
+supplemental information on the focused text input.
+
 ### Slots and anatomy
 
 `textInput`, `iconStart`, `iconEnd1`, and `iconEnd2` are public slots and

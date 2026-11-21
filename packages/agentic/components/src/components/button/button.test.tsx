@@ -213,6 +213,28 @@ describe('Button', () => {
     expect(getRootStyle(component).backgroundColor).toBe('hotpink');
   });
 
+  it.each(['leadingIcon', 'trailingIcon'] as const)(
+    'compacts only the edge with a %s and preserves explicit caller padding',
+    async (slot) => {
+      const props = { content: 'Next', [slot]: { imageSource: { uri: 'next.png' } } };
+      const component = await renderButton(props);
+      const { spacing, strokeWidth } = defaultFlexTokens;
+      const horizontal = Number(spacing.componentBase250) - strokeWidth.thin;
+      const edge = slot === 'leadingIcon' ? 'paddingStart' : 'paddingEnd';
+      const oppositeEdge = slot === 'leadingIcon' ? 'paddingEnd' : 'paddingStart';
+
+      expect(getRootStyle(component)).toMatchObject({
+        paddingHorizontal: horizontal,
+        [edge]: horizontal - Number(spacing.componentBase100),
+      });
+      expect(getRootStyle(component)[oppositeEdge]).toBeUndefined();
+
+      await component.rerender(<Button {...props} style={{ paddingHorizontal: 24 }} />);
+      expect(getRootStyle(component).paddingHorizontal).toBe(24);
+      expect(getRootStyle(component)[edge]).toBeUndefined();
+    },
+  );
+
   it('uses native focus visuals without mounting custom rings', async () => {
     const component = await renderButton({ content: 'Focused' });
     const root = getRoot(component);

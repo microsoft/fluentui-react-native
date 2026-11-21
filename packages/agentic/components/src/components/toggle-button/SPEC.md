@@ -63,7 +63,8 @@ behavior or endpoint qualification is claimed.
 - `toggle-button-native-state`: expose the native button/checked and Toggle-action contract rather than a browser
   pressed attribute. Actual assistive announcement and invocation are release gates.
 - `native-system-focus-visuals`: retain native rings on Windows/macOS and root-modality-aware custom focus on Win32.
-  Icon-only naming is required; requiring a visible Tooltip is deferred separately from naming.
+  Icon-only naming is required. The optional `tooltip` string is forwarded to the same Pressable in both selection
+  states; it neither names the control nor guarantees keyboard presentation. See [TIP-007](../tooltip/SPEC.md#public-contract).
 
 ## Conformance
 

@@ -4,6 +4,7 @@ import { StyleSheet } from 'react-native';
 import type { View } from 'react-native';
 import { act, fireEvent, screen } from '@testing-library/react-native';
 import { testBudget } from '@fluentui-react-native/scripts/test-budget';
+import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
 
 import { render } from '../../common/renderWithTheme';
 import { ListboxItem } from '../listbox-item/listbox-item';
@@ -68,6 +69,19 @@ function Scene(props: Partial<DropdownProps>) {
 
 describe('Dropdown', () => {
   beforeEach(() => dispatchCommand.mockClear());
+
+  it.each([
+    ['small', defaultFlexTokens.lineHeight.functionalBodySmall],
+    ['medium', defaultFlexTokens.lineHeight.functionalBodyMedium],
+    ['large', defaultFlexTokens.lineHeight.functionalBodyLarge],
+  ] as const)('centers the %s trigger label in the token line box', async (size, lineHeight) => {
+    const component = await render(<Scene size={size} placeholder="Pick fruit" />);
+    const labelStyle = (label: string) => StyleSheet.flatten(screen.getByText(label, { includeHiddenElements: true }).props.style);
+    expect(labelStyle('Pick fruit').lineHeight).toBe(lineHeight);
+
+    await component.rerender(<Scene size={size} selectedOptions={['apple']} />);
+    expect(labelStyle('Apple').lineHeight).toBe(lineHeight);
+  });
 
   it.each([
     ['small', 16],

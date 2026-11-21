@@ -67,6 +67,10 @@ property; the higher differing axis wins within the same layer. Provide a compon
 exclusive presentation; Button's order is disabled, pressed, hovered, then rest. Independent booleans such as `selected`
 remain separate. Do not mutate raw interaction state.
 
+For a measured platform-specific visual adjustment, use a final `when.platform.<host>` selector; `platform` is
+reserved and is not listed in `axes` or passed as component state. MenuButton uses this to adjust only its macOS
+label. Keep cross-platform typography in ordinary bindings and renderer-specific behavior out of token selectors.
+
 Retrieve the cached definition with `getComponentTokens` using the original `ThemeState`, then pass the component state
 directly to `resolveTokenStates`. A slot's domain splits the resolved `style` from `props`. Non-style icon color and
 dimensions are presentation settings, not a basis for replacing caller sources or introducing a default icon.

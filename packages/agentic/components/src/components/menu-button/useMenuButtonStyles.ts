@@ -13,7 +13,12 @@ import type { MenuButtonState } from './menu-button.types';
 export function useMenuButtonStyles_unstable(state: MenuButtonState) {
   const chrome = resolveButtonChrome(state);
   const root = resolveTokenStates(state.menuButtonTokens.root, state).style;
-  applyButtonChrome(state, { ...chrome, root: { ...chrome.root, ...root } });
+  const content = resolveTokenStates(state.menuButtonTokens.content, state).style;
+  applyButtonChrome(
+    state,
+    { ...chrome, content: { ...chrome.content, ...content }, root: { ...chrome.root, ...root } },
+    { trailing: true },
+  );
   const { source, ...chevron } = resolveTokenStates(state.menuButtonTokens.chevron, state).props;
   attachSlotProps(state.chevron, { ...chevron, ...source, accessible: false, color: chevron.color ?? chrome.content.color });
   state.popupProps.surfaceStyle = getMenuThemeStyles(state.themeState).surface;

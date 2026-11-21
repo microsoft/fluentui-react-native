@@ -23,6 +23,9 @@ Card is a bounded React Native surface for related content. It owns surface styl
 
 Providing `onPress` or `selected` enables the pressable overlay. The resolved state derives interactive and selectable state, direction after the current window-width check, pressable hover/pressed/focused values, theme state, and user root style. A horizontal card becomes vertical below 480 React Native layout units. Surface state precedence is selection, then disabled, pressed, and hovered; user style is final.
 
+The desktop `tooltip` belongs to the root View even for an interactive card. Do not duplicate it on the overlay
+or treat it as the overlay's accessible name or description.
+
 ### Requirements
 
 - **CRD-001:** Resolve the documented variants and default values, derive interactivity from `onPress` or the presence of `selected`, and collapse horizontal direction below the implementation width threshold.

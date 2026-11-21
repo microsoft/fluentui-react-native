@@ -2,7 +2,7 @@
 
 Use Popover for supplementary, structured content anchored to a trigger:
 details, a short form, or a few related actions that a person can dismiss at
-any time. Use Tooltip for a single line of plain text, Dialog when the person
+any time. Use the trigger's native desktop `tooltip` prop for a short text tip, Dialog when the person
 must decide before continuing, and Menu for a list of commands.
 
 ```tsx

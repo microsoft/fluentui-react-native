@@ -1,3 +1,4 @@
+import { StyleSheet } from 'react-native';
 import type { StyleProp, ViewStyle } from 'react-native';
 
 import { attachSlotDefaults, attachSlotProps } from '@fluentui-react-native/framework-base';
@@ -7,9 +8,10 @@ import { inputStyles } from './input.styles';
 import type { InputState } from './input.types';
 
 export function useInputStyles_unstable(state: InputState) {
-  applyFocusRingStyles(state.FocusRing, state, state.rootStyle.borderRadius);
   const rootStyle: StyleProp<ViewStyle> = [inputStyles.root, state.rootStyle, state.userStyle];
-  const contentsStyle: StyleProp<ViewStyle> = [inputStyles.contents, state.contentsStyle];
+  const { borderRadius } = StyleSheet.flatten(rootStyle);
+  applyFocusRingStyles(state.FocusRing, state, borderRadius);
+  const contentsStyle: StyleProp<ViewStyle> = [inputStyles.contents, state.contentsStyle, state.variant === 'outline' && { borderRadius }];
   const iconTextStackStyle: StyleProp<ViewStyle> = [inputStyles.iconTextStack, state.iconTextStackStyle];
   const iconEndStyle: StyleProp<ViewStyle> = [inputStyles.iconEnd, state.iconEndStyle];
   const underlineStyle: StyleProp<ViewStyle> = [inputStyles.underline, state.underlineStyle];

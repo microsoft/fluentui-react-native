@@ -47,6 +47,9 @@ before, content, and the icon when positioned after.
 An icon-only button has a leading icon and no content. It requires an
 action-oriented accessible name.
 
+`tooltip?: string` requests a native desktop tip on the same Pressable
+([TIP-007](../tooltip/SPEC.md#public-contract)). It does not supply that name or synthesize accessible help.
+
 ### Requirements
 
 - **BTN-001:** Resolve documented defaults and preserve supported native root

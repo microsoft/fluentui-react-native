@@ -1,5 +1,12 @@
 import { StyleSheet } from 'react-native';
-import { assetField, defineComponentTokens, getComponentTokens, resolveTokenStates } from '@fluentui-react-native/design/styling';
+import type { TextStyle } from 'react-native';
+import {
+  assetField,
+  defineComponentTokens,
+  getComponentTokens,
+  numericToken,
+  resolveTokenStates,
+} from '@fluentui-react-native/design/styling';
 import type { ComponentTokenPatch, ResolvedSlotTokens } from '@fluentui-react-native/design/styling';
 import { iconTokenProps } from '../../common/iconTokenProps';
 import { dropdownChevronAssets, parseDropdownChevron } from './dropdown.assets';
@@ -37,6 +44,7 @@ export const dropdownStyles = StyleSheet.create({
 type DropdownAxes = Pick<DropdownState, 'size' | 'open' | 'focusVisible' | 'visualState'>;
 const slots = {
   chevron: { style: {}, props: { ...iconTokenProps, source: assetField('fluent-icon', dropdownChevronAssets, parseDropdownChevron) } },
+  value: { style: { lineHeight: numericToken }, props: {} },
 };
 type DropdownDomains = typeof slots;
 declare module '@fluentui-react-native/design' {
@@ -46,8 +54,13 @@ declare module '@fluentui-react-native/design' {
 }
 const dropdownTokenDefinition = defineComponentTokens<DropdownAxes, DropdownDomains>({ id: 'furn.dropdown', slots, schema });
 
-export function getDropdownChevron(
-  state: DropdownState,
-): ResolvedSlotTokens<DropdownDomains['chevron']['style'], DropdownDomains['chevron']['props']>['props'] {
-  return resolveTokenStates(getComponentTokens(state, dropdownTokenDefinition).chevron, state).props;
+export function getDropdownTriggerTokens(state: DropdownState): {
+  chevron: ResolvedSlotTokens<DropdownDomains['chevron']['style'], DropdownDomains['chevron']['props']>['props'];
+  value: TextStyle;
+} {
+  const { chevron, value } = getComponentTokens(state, dropdownTokenDefinition);
+  return {
+    chevron: resolveTokenStates(chevron, state).props,
+    value: resolveTokenStates(value, state).style,
+  };
 }

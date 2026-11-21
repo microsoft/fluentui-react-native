@@ -1,9 +1,10 @@
+import { Platform } from 'react-native';
 import { getThemeState } from '../flex/themeState';
 import { FlexThemeReference } from '../flex/flexThemeReference';
 import { resolveThemeAppearance } from '../theming/appearance';
 import { defineComponentTokens, getComponentTokens, resolveTokenStates } from './componentTokens';
 import { assetField } from './assetField';
-import type { TokenState } from './componentTokens.types';
+import type { ComponentTokenPatch, TokenState } from './componentTokens.types';
 
 const axes = [
   ['selected', [false, true]],
@@ -33,12 +34,63 @@ const schema = {
 
 declare module './componentTokens.types' {
   interface ComponentTokenRegistry {
-    'test.example': { root: { color?: string; 'when.visualState.hovered'?: { color: string } } };
+    'test.example': ComponentTokenPatch<TokenState<typeof axes>, typeof slots>;
   }
 }
 
 const definition = defineComponentTokens<TokenState<typeof axes>, typeof slots>({ id: 'test.example', slots, schema });
 const { resolved: light } = resolveThemeAppearance({ colorScheme: 'light' }, {});
+
+it('uses only the host for the final platform axis, including in theme patches and the slot cache', () => {
+  const def = defineComponentTokens<TokenState<typeof axes>, typeof slots>({
+    id: 'test.example',
+    slots,
+    schema: { ...schema, bindings: { root: { ...schema.bindings.root, 'when.platform.macos': { color: 'mac' } } } },
+  });
+  const theme = new FlexThemeReference({
+    componentTokens: {
+      'test.example': {
+        root: {
+          'when.visualState.hovered': { borderColor: 'theme', 'when.platform.win32': { borderColor: 'office' } },
+          'when.platform.windows': { color: 'windows' },
+        },
+      },
+    },
+  });
+  const { root } = getComponentTokens(getThemeState(theme, light), def);
+  const state = { selected: true, visualState: 'hovered' as const, platform: 'macos' };
+  const host = jest.replaceProperty(Platform, 'OS', 'macos');
+  try {
+    const mac = root(state);
+    expect(mac.style).toEqual({ color: 'mac', borderColor: 'theme' });
+    for (const [os, color, borderColor] of [
+      ['windows', 'windows', 'theme'],
+      ['win32', 'selected hover', 'office'],
+      ['other', 'selected hover', 'theme'],
+    ] as const) {
+      host.replaceValue(os as typeof Platform.OS);
+      expect(root(state, state).style).toEqual({ color, borderColor });
+    }
+    host.replaceValue('macos');
+    expect(root(state)).toBe(mac);
+  } finally {
+    host.restore();
+  }
+});
+
+it('rejects a redeclared platform axis, unknown hosts, and state selectors nested under platform', () => {
+  const define = (changes: { axes?: unknown; bindings?: unknown }) =>
+    defineComponentTokens({
+      id: 'test.example',
+      slots,
+      schema: { ...schema, ...changes },
+    });
+  expect(() => define({ axes: [...axes, ['platform', ['macos']]] })).toThrow('reserved host axis');
+  expect(() => define({ bindings: { root: { 'when.platform.maco': { color: 'invalid' } } } })).toThrow('when.platform.maco');
+  expect(() => define({ bindings: { root: { 'when.platform.macos': { 'when.selected.true': { color: 'invalid' } } } } })).toThrow(
+    'out-of-order',
+  );
+});
 
 it('resolves all matching fields independently and only caches relevant state values', () => {
   const root = getComponentTokens(getThemeState(new FlexThemeReference(), light), definition).root;

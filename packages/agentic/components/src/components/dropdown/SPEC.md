@@ -60,6 +60,9 @@ root to the trigger. A value in `trigger` wins over a lifted value, except
 that root accessibility state merges over trigger state; Dropdown then writes
 its own expanded and disabled values.
 
+`tooltip` is not lifted: use `trigger={{ tooltip: '...' }}` for a tip on the focusable combobox. A top-level
+`tooltip` targets the structural root instead. Set it on one anchor, not both.
+
 The `trigger` reason covers a trigger press, an opening key, and the expand or
 collapse accessibility action. The `dismiss` reason covers Escape, Tab,
 outside pointer input, and other native dismissals. The `select` reason marks

@@ -44,6 +44,9 @@ All other Button root props, including handlers, `accessibilityLabel`, and
 are not accepted. Caller-driven `open`
 changes never call `onOpenChange`.
 
+Button's direct `tooltip?: string` applies to the trigger, not the menu surface or its items. It does not replace
+the trigger name or its menu-opening accessibility hint.
+
 ### Slots and anatomy
 
 The trigger Pressable contains the optional leading icon, the optional label,
@@ -70,7 +73,7 @@ The chevron is private and cannot be replaced or hidden.
   chevron in the trigger foreground at 16, 20, and 20 for small, medium, and large, and
   draw the pressed chrome while the menu is presented, unless disabled.
   Use the effective Button theme tokens for the trigger, with separate
-  MenuButton theme tokens for the chevron and caller trigger visuals last.
+  MenuButton theme tokens for its chevron and macOS label offset, and caller trigger visuals last.
   The open trigger uses a distinct border in high contrast.
 - **MNB-003:** Present the children through Menu's presence, family,
   navigation, and dismissal (MNU-002 to MNU-011), placed below the trigger and

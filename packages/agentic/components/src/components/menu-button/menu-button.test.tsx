@@ -1,6 +1,6 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import * as React from 'react';
-import { processColor, StyleSheet } from 'react-native';
+import { Platform, processColor, StyleSheet } from 'react-native';
 import type { View } from 'react-native';
 import { fireEvent, screen } from '@testing-library/react-native';
 import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
@@ -133,6 +133,31 @@ describe('MenuButton', () => {
       expect(StyleSheet.flatten(icon.props.style)).toMatchObject({ height: size === 'small' ? 16 : 20, width: size === 'small' ? 16 : 20 });
     },
   );
+
+  it('compacts the chevron edge without changing the label edge', async () => {
+    await render(<Scene content="New" />);
+    const { spacing, strokeWidth } = defaultFlexTokens;
+    const horizontal = Number(spacing.componentBase250) - strokeWidth.thin;
+    const style = StyleSheet.flatten(screen.getByTestId('trigger').props.style);
+    expect(style).toMatchObject({ paddingHorizontal: horizontal, paddingEnd: horizontal - Number(spacing.componentBase100) });
+    expect(style.paddingStart).toBeUndefined();
+  });
+
+  it('centers the macOS label without overriding a caller offset', async () => {
+    const component = await render(<Scene content="New" />);
+    expect(StyleSheet.flatten(screen.getByText('New').props.style).top).toBe(Platform.OS === 'macos' ? -0.5 : undefined);
+
+    const theme = new FlexThemeReference({ componentTokens: { 'furn.menu-button': { content: { top: 1 } } } });
+    await component.rerender(
+      <ThemeProvider theme={theme}>
+        <Scene content="New" />
+      </ThemeProvider>,
+    );
+    expect(StyleSheet.flatten(screen.getByText('New').props.style).top).toBe(1);
+
+    await component.rerender(<Scene content={{ children: 'New', style: { top: 2 } }} />);
+    expect(StyleSheet.flatten(screen.getByText('New').props.style).top).toBe(2);
+  });
 
   it.each(['altKey', 'ctrlKey', 'metaKey', 'shiftKey'] as const)(
     'MNB-004 ignores modified opening keys with %s without presenting a menu',

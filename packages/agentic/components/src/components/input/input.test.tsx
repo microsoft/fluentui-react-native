@@ -152,6 +152,24 @@ describe('Input', () => {
     expect(ref.current).not.toBeNull();
   });
 
+  it.each([
+    ['small', defaultFlexTokens.borderRadius.base200],
+    ['medium', defaultFlexTokens.borderRadius.base300],
+    ['large', defaultFlexTokens.borderRadius.base400],
+  ] as const)('draws the %s outline at the same radius as its clipping view', async (size, borderRadius) => {
+    const component = await render(<Input size={size} />);
+    const root = component.getByTestId('input-root');
+
+    expect(flattenStyle(root.props.style).borderRadius).toBe(borderRadius);
+    expect(flattenStyle(getContents(component).props.style).borderRadius).toBe(borderRadius);
+
+    await component.rerender(<Input size={size} style={{ borderRadius: 3 }} />);
+    expect(flattenStyle(getContents(component).props.style).borderRadius).toBe(3);
+
+    await component.rerender(<Input size={size} variant="underline" />);
+    expect(flattenStyle(getContents(component).props.style).borderRadius).toBeUndefined();
+  });
+
   it('composes the focus target with the inner text ref without redirecting the structural ref', async () => {
     const rootRef = React.createRef<React.ComponentRef<typeof View>>();
     const textRef = React.createRef<React.ComponentRef<typeof TextInput>>();

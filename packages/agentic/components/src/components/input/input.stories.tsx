@@ -240,12 +240,27 @@ export const Overview: Story = {
 
 export const Icons: Story = {
   render: () => (
-    <StoryGroup label="Icons">
-      <Input placeholder="Leading icon" iconStart={sampleIcon} />
-      <Input placeholder="Trailing icons" iconEnd1={sampleIcon} iconEnd2={sampleIcon} />
-      <Input placeholder="SVG icon" iconStart={{ svgSource: SampleSvgIcon }} />
-    </StoryGroup>
+    <View style={styles.story}>
+      <StoryGroup label="Icons">
+        <Input placeholder="Leading icon" iconStart={sampleIcon} testID="input-leading-icon" />
+        <Input placeholder="Trailing icons" iconEnd1={sampleIcon} iconEnd2={sampleIcon} testID="input-trailing-icons" />
+        <Input placeholder="SVG icon" iconStart={{ svgSource: SampleSvgIcon }} testID="input-svg-icon" />
+      </StoryGroup>
+    </View>
   ),
+  wdio: [
+    desktopIt('keeps the icon examples inside the window', async ({ browser, expect, platform }) => {
+      const window = await browser.getWindowRect();
+      const left = platform === 'macos' ? 0 : window.x;
+      for (const id of ['input-leading-icon', 'input-trailing-icons', 'input-svg-icon']) {
+        const input = await browser.$(`~${id}`);
+        const { x, width } = await browser.getElementRect(await input.elementId);
+        expect(width).toBeGreaterThan(0);
+        expect(x).toBeGreaterThanOrEqual(left);
+        expect(x + width).toBeLessThanOrEqual(left + window.width);
+      }
+    }),
+  ],
   parameters: {
     docs: {
       description: {

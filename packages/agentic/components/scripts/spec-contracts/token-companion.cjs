@@ -39,6 +39,7 @@ function validateTokenCompanion(text, component, file) {
   for (const [rank, axis] of schema.axes.entries()) {
     invariant(Array.isArray(axis) && axis.length === 2, `${file}: expected [field, members] axis.`);
     const [field, members] = axis;
+    invariant(field !== 'platform', `${file}: platform is a reserved host axis; omit it from axes.`);
     invariant(
       typeof field === 'string' && safe(field) && field && !field.includes('.') && !axes.has(field),
       `${file}: invalid axis ${field}.`,
@@ -57,6 +58,10 @@ function validateTokenCompanion(text, component, file) {
       invariant(!selectors.has(selector), `${file}: ambiguous selector ${selector}.`);
       selectors.set(selector, rank);
     }
+  }
+
+  for (const host of ['android', 'ios', 'macos', 'win32', 'windows']) {
+    selectors.set(`when.platform.${host}`, axes.size);
   }
 
   function walk(node, path, rank) {

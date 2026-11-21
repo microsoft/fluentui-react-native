@@ -1,4 +1,4 @@
-import { assetField, colorToken, defineComponentTokens } from '@fluentui-react-native/design/styling';
+import { assetField, colorToken, defineComponentTokens, numericToken } from '@fluentui-react-native/design/styling';
 import type { CompiledComponentTokens, ComponentTokenPatch } from '@fluentui-react-native/design/styling';
 import { iconTokenProps } from '../../common/iconTokenProps';
 import type { ButtonSize } from '../button/button.types';
@@ -9,6 +9,7 @@ type MenuButtonTokenState = { size: ButtonSize; highContrast: boolean; open: boo
 
 const slots = {
   root: { style: { borderColor: colorToken }, props: {} },
+  content: { style: { top: numericToken }, props: {} },
   chevron: { style: {}, props: { ...iconTokenProps, source: assetField('fluent-icon', chevronAssets, parseChevronSource) } },
 };
 
