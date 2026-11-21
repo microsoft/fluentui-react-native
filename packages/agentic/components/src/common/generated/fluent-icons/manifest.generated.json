@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "catalog": {
+    "name": "@fluentui/svg-icons",
+    "version": "1.1.345",
+    "license": "MIT"
+  },
+  "generator": {
+    "name": "@fluentui/react-native-icons",
+    "version": "2.0.347",
+    "license": "MIT"
+  },
+  "artifacts": [
+    {
+      "output": "ChevronDown16Regular.generated.tsx",
+      "requested": [
+        "ChevronDown16Regular"
+      ],
+      "inputs": [
+        {
+          "file": "chevron_down_16_regular.svg",
+          "sha256": "33efa668d236d70a945c00cbbd3fda019994794a5b5a2e17f5e66aac19abd199"
+        }
+      ],
+      "sha256": "c7aff7a7838da808198591893c3c57d556ef20ed8ac213ce56526d2236b197f4"
+    },
+    {
+      "output": "ChevronDown20Regular.generated.tsx",
+      "requested": [
+        "ChevronDown20Regular"
+      ],
+      "inputs": [
+        {
+          "file": "chevron_down_20_regular.svg",
+          "sha256": "2584741754fe0e27641d7423ff96e675167119889fbc1e5129516973cbfb136a"
+        }
+      ],
+      "sha256": "84edeca38509494caf5be6ee1c5805231aa8273ed5d963a97ad08de4ac19f32d"
+    }
+  ]
+}

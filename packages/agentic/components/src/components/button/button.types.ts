@@ -13,6 +13,7 @@ import type { ThemeState } from '@fluentui-react-native/design';
 import type { Icon } from '../../primitives/icon/icon';
 import type { FocusVisualsSlots } from '../../common/useFocusVisuals';
 import type { Text } from '../text/text';
+import type { ButtonTokens } from './button.styles';
 
 export type ButtonSlots = {
   /**
@@ -88,19 +89,22 @@ export type ButtonExposedPressableProps = OwnedRootProps<PropsWithRefOf<typeof P
  */
 export type ButtonProps = ButtonStateProps & ComponentProps<ButtonSlots, ButtonExposedPressableProps>;
 
-/**
- * The button state, returned from the useButton hook
- */
+export type ButtonTokenState = Required<Pick<ButtonStateProps, 'size' | 'shape' | 'appearance' | 'selected'>> & {
+  /** Effective interaction presentation; raw interaction fields remain available for behavior. */
+  visualState: 'rest' | 'hovered' | 'pressed' | 'disabled';
+  /** Whether the button has an icon without a label. */
+  iconOnly: boolean;
+};
+
+/** The button state, returned from the useButton hook. */
 export type ButtonState = ComponentState<ButtonStateSlots & FocusVisualsSlots> &
   FocusTargetBinding &
   Required<ButtonStateProps> &
   Omit<ThemeState, 'appearance'> &
-  PressableState & {
-    /**
-     * Whether the button is displaying only an icon without text. This is set automatically when the button
-     * has an icon and no content.
-     */
-    iconOnly: boolean;
+  PressableState &
+  ButtonTokenState & {
+    themeState: ThemeState;
+    buttonTokens: ButtonTokens;
     /**
      * Whether selected-state semantics are enabled.
      */

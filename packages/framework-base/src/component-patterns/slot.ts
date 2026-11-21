@@ -149,3 +149,12 @@ export function prepareSlotProps<TProps>(slotInfo: SlotComponentStatics<TProps>,
 export function attachSlotProps<TProps>(slot: SlotComponentStatics<TProps>, props: TProps): void {
   slot[SLOT_PROPS_KEY] = assignProps((slot[SLOT_PROPS_KEY] ?? {}) as TProps, props);
 }
+
+/** Insert defaults before the slot's attached props and styles. */
+export function attachSlotDefaults<TProps>(slot: SlotComponentStatics<TProps>, defaults: Partial<NoInfer<TProps>>): void {
+  const existing = { ...slot[SLOT_PROPS_KEY] };
+  for (const key of Object.keys(existing) as (keyof TProps)[]) {
+    if (existing[key] === undefined) delete existing[key];
+  }
+  slot[SLOT_PROPS_KEY] = assignProps({ ...defaults }, existing);
+}

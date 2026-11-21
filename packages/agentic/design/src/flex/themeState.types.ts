@@ -1,5 +1,6 @@
 import type { ColorTone, NormalizedThemeAppearance } from '../types/appearance.types';
 import type { FlexTokenDescription, FlexTokens } from './tokens.types';
+import type { ComponentTokenLayer } from '../styling/componentTokens.types';
 
 /**
  * A complete Flex theme: a token description that replaces the package
@@ -18,6 +19,7 @@ export type FlexThemeDescription = {
    * resolves as for any other source.
    */
   readonly colorTone?: ColorTone;
+  readonly componentTokens?: ComponentTokenLayer | readonly ComponentTokenLayer[];
 };
 
 /**
@@ -47,4 +49,6 @@ export type ThemeState = {
    * applied separately.
    */
   readonly themeStyles: ThemeStyleRegistry;
+  /** Component-token layers in ascending precedence order. */
+  readonly componentTokens?: readonly ComponentTokenLayer[];
 };

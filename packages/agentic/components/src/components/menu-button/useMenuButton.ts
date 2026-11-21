@@ -3,20 +3,21 @@ import type { View } from 'react-native';
 
 import type { FocusIntent, FocusKeyboardEvent, FocusRequest, FocusTarget } from '@fluentui-react-native/framework-base';
 import { useSlot } from '@fluentui-react-native/framework-base';
+import { getComponentTokens } from '@fluentui-react-native/design/styling';
 
 import { composeHandlers } from '../../common/eventHandlers';
-import { semanticIconSources } from '../../common/iconSources';
 import { withTriggerExpandActions } from '../../common/triggerExpandActions';
 import { Icon } from '../../primitives/icon/icon';
 import type { ButtonProps } from '../button/button.types';
+import { getButtonVisualState } from '../button/button.styles';
 import { useButton_unstable } from '../button/useButton';
 import { MenuItemMenuContext } from '../menu-item/menuItemContext';
 import { useMenuController } from '../menu/menuFamily';
 import { useMenuChildrenWarning } from '../menu/useMenu';
 import type { MenuButtonProps, MenuButtonState } from './menu-button.types';
+import { menuButtonTokenDefinition } from './menu-button.styles';
 
 const defaultHint = 'Opens a menu';
-const chevronProps = { fontSource: semanticIconSources.chevronDown };
 const triggerKeys = [{ key: 'ArrowDown' }, { key: 'ArrowUp' }];
 const unmounted: FocusRequest = { status: 'not-mounted', cancel: () => undefined };
 
@@ -147,10 +148,13 @@ export function useMenuButton_unstable(props: MenuButtonProps): MenuButtonState 
     },
     [anchorRef, focusTargetRef],
   );
-  const chevron = useSlot(Icon, chevronProps);
+  const chevron = useSlot(Icon, {});
 
   return {
     ...button,
+    iconOnly: false,
+    visualState: getButtonVisualState(disabled, button.pressed || controller.presented, button.hovered),
+    menuButtonTokens: getComponentTokens(button.themeState, menuButtonTokenDefinition),
     chevron,
     triggerRef,
     open: controller.presented,

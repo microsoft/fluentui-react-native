@@ -3,7 +3,7 @@ name: menu-button
 platform: react-native (Windows, macOS)
 status: implemented
 source: ./spec/source.json
-tokens: ./spec/tokens.yaml
+tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
 interaction: ./spec/interaction.md
 usage: ./spec/usage.md
@@ -66,9 +66,11 @@ The chevron is private and cannot be replaced or hidden.
   when both label and icon are absent, and require an accessible name for an
   icon-only trigger.
 - **MNB-002:** Use Button's content-layout metrics and rounded radius for
-  every label and icon combination, append the private static down chevron in
-  the trigger foreground at 16, 20, and 20 for small, medium, and large, and
-  draw the pressed chrome while the menu is presented.
+  every label and icon combination, append the private static Fluent SVG down
+  chevron in the trigger foreground at 16, 20, and 20 for small, medium, and large, and
+  draw the pressed chrome while the menu is presented, unless disabled.
+  Use the effective Button theme tokens for the trigger, with separate
+  MenuButton theme tokens for the chevron and caller trigger visuals last.
 - **MNB-003:** Present the children through Menu's presence, family,
   navigation, and dismissal (MNU-002 to MNU-011), placed below the trigger and
   start-aligned. Warn in development for section-header rows and for a
@@ -99,8 +101,8 @@ Windows Fabric implement this continuation natively. The Win32 host cannot
 continue focus past the popup's owner, so Office Win32 uses the approved interim
 (R1): Tab closes the menu and returns focus to the trigger.
 
-The chevron uses the package's shared icon sources, as MenuItem's submenu
-chevron does.
+The component token companion selects the size-specific Fluent SVG chevron on
+every supported host. The chevron is decorative and does not receive pointer input.
 
 ## Divergences from Flex
 
@@ -108,7 +110,6 @@ chevron does.
 | --------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------- |
 | `menu-button-haspopup`      | Accepted    | Expanded state plus a hint replace `menu` has-popup and controls, which have no typed property (D12).        | Adopt native relationships if the renderers add them. |
 | `menu-button-pointer-entry` | Accepted    | A pointer open follows Menu's native pointer entry (`menu-pointer-entry`) instead of focusing the first row. | None.                                                 |
-| `menu-button-chevron-glyph` | Accepted    | The chevron is the package's shared down-chevron glyph rather than the Fluent ChevronDown icon asset.        | Replace when the package adopts the Fluent icon font. |
 | `menu-button-motion`        | Deferred    | Menu presentation and trigger color changes are instant, which equals the reduced-motion behavior.           | Revisit when Flex motion is final.                    |
 
 ## Conformance
@@ -116,12 +117,12 @@ chevron does.
 The listed files exist for every requirement. macOS Fabric and Paper, Windows Fabric, and the Win32 adapters qualify the
 native behavior in the MenuButton stories.
 
-| Requirement | Evidence                                                                                          |
-| ----------- | ------------------------------------------------------------------------------------------------- |
-| MNB-001     | `menu-button.types.ts`, `useMenuButton.ts`, `menu-button.test.tsx`, `menu-button.types.test.ts`   |
-| MNB-002     | `useMenuButtonStyles.ts`, `menu-button.styles.ts`, `renderMenuButton.tsx`, `menu-button.test.tsx` |
-| MNB-003     | `useMenuButton.ts`, `renderMenuButton.tsx`, `menu-button.test.tsx`, `menu-button.stories.tsx`     |
-| MNB-004     | `useMenuButton.ts`, `menu-button.test.tsx`, `menu-button.stories.tsx`                             |
-| MNB-005     | `useMenuButton.ts`, `menu-button.test.tsx`, `menu-button.stories.tsx`                             |
-| MNB-006     | `useMenuButton.ts`, `menu-button.test.tsx`, `menu-button.stories.tsx`                             |
-| MNB-007     | `useMenuButton.ts`, `menu-button.test.tsx`, `menu-button.stories.tsx`                             |
+| Requirement | Evidence                                                                                                              |
+| ----------- | --------------------------------------------------------------------------------------------------------------------- |
+| MNB-001     | `menu-button.types.ts`, `useMenuButton.ts`, `menu-button.test.tsx`, `menu-button.types.test.ts`                       |
+| MNB-002     | `spec/tokens.json`, `useMenuButtonStyles.ts`, `menu-button.styles.ts`, `renderMenuButton.tsx`, `menu-button.test.tsx` |
+| MNB-003     | `useMenuButton.ts`, `renderMenuButton.tsx`, `menu-button.test.tsx`, `menu-button.stories.tsx`                         |
+| MNB-004     | `useMenuButton.ts`, `menu-button.test.tsx`, `menu-button.stories.tsx`                                                 |
+| MNB-005     | `useMenuButton.ts`, `menu-button.test.tsx`, `menu-button.stories.tsx`                                                 |
+| MNB-006     | `useMenuButton.ts`, `menu-button.test.tsx`, `menu-button.stories.tsx`                                                 |
+| MNB-007     | `useMenuButton.ts`, `menu-button.test.tsx`, `menu-button.stories.tsx`                                                 |

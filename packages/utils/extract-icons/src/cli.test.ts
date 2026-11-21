@@ -37,6 +37,19 @@ test('accepts a single JSON job alongside unrelated settings', (t) => {
   assert.match(read('icons.tsx'), /export const Add24Filled = /);
 });
 
+test('records package identities and canonical SVG digests without staging paths', (t) => {
+  const { run, read } = fixture(t);
+  const result = run('-o', 'icons/ChevronDown16Regular.tsx', '--manifest', 'icons/manifest.json', 'ChevronDown16Regular');
+  assert.equal(result.status, 0, result.stderr);
+  const { artifacts, catalog, generator } = JSON.parse(read('icons/manifest.json'));
+  assert.equal(catalog.name, '@fluentui/svg-icons');
+  assert.equal(generator.name, '@fluentui/react-native-icons');
+  assert.equal(artifacts[0].output, 'ChevronDown16Regular.tsx');
+  assert.equal(artifacts[0].inputs[0].file, 'chevron_down_16_regular.svg');
+  assert.match(artifacts[0].inputs[0].sha256, /^[a-f0-9]{64}$/);
+  assert.match(artifacts[0].sha256, /^[a-f0-9]{64}$/);
+});
+
 test('loads a CommonJS config with multiple jobs relative to the config file', (t) => {
   const { cwd, run, read } = fixture(t);
   mkdirSync(join(cwd, 'config'));

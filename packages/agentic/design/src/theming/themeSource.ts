@@ -1,6 +1,7 @@
 import type { FlexTokens } from '../flex/tokens.types';
 import type { ResolvedThemeAppearance, ThemeAppearanceOptions, ThemeAppearanceSource } from '../types/appearance.types';
 import type { PartialTheme, Theme } from '../fluent/types/Theme.types';
+import type { ComponentTokenLayer } from '../styling/componentTokens.types';
 
 export type OnThemeChange = () => void;
 
@@ -9,6 +10,7 @@ export interface ThemeSourceBase {
   readonly appearanceOptions?: ThemeAppearanceOptions;
   readonly fallbackAppearance?: Partial<ResolvedThemeAppearance>;
   readonly appearanceSource?: ThemeAppearanceSource;
+  resolveComponentTokens?(appearance: ResolvedThemeAppearance): readonly ComponentTokenLayer[];
   addOnThemeChanged(listener: OnThemeChange): void;
   removeOnThemeChanged(listener: OnThemeChange): void;
 }

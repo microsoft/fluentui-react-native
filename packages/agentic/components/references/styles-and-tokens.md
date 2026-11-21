@@ -27,24 +27,59 @@ value.
   array of layers; the design token reference (`@fluentui-react-native/design/references/tokens.md`) describes shadow
   and motion values.
 - Prefer Flex tokens for every mapped semantic value.
-- Import named global tokens only when Flex has no equivalent, such as current Button icon dimensions or a true zero.
-- Record a genuine token gap in the component spec. Do not replace it with a nearby token or numeric literal.
+- Use typed JSON literals for fixed defaults such as Button's icon dimensions. In older TypeScript factories, use named
+  globals where appropriate. Record genuine semantic gaps; do not substitute unrelated tokens that currently match by value.
 - For compatibility with an existing V1 component, derive cross-platform mappings from its Win32, macOS, or Windows
   implementation. Do not use iOS as the canonical value unless the change explicitly targets iOS.
 - Consumers of the same theme source, revision, and resolved appearance share one `ThemeState`, and therefore token
   and style-cache identity. The design theming reference (`@fluentui-react-native/design/references/theming.md`)
   defines the cache keys and when a new state is created.
 
-## Build styles in layers
+## Component token companions (v2)
 
-Use four layers:
+Button and MenuButton import `spec/tokens.json` in their module-scoped `defineComponentTokens` calls. JSON is the only
+runtime source of ordered axes. Use the component's state type for typed resolution and theme patches; don't redeclare
+the axes in TypeScript. Reuse the named field validators from `@fluentui-react-native/design/styling`. Each slot contains
+flat React Native style keys and reviewed prop settings:
 
-1. A module-scoped `StyleSheet` for structural values that do not depend on theme, props, or state.
-2. Module-scoped state factories for theme-independent state selectors.
-3. Module-scoped themed factories for token-derived styles.
-4. Per-instance style arrays that select cached objects and place user styles last.
+```json
+{
+  "borderWidth": "tokens:strokeWidth.thin",
+  "when.size.medium": {
+    "paddingHorizontal": "tokens:spacing.componentBase250",
+    "when.iconOnly.true": { "paddingHorizontal": "tokens:spacing.componentBase150" }
+  }
+}
+```
 
-Never create a style factory inside a hook or render function.
+For private icon slots, `fluent-icon: ChevronDown16Regular` references a sized Fluent export. Component `prebuild`
+scans every binding branch and extracts one private TSX leaf per referenced asset into the directory configured
+under `furn.tokenAssets` in the package manifest. Commit generated modules and their provenance manifest; run
+`yarn check:token-icons` to detect stale output without writing it. Group all SVG adapters and asset registries for a
+component in its private `<component>.assets.tsx`, even when they serve unrelated slots. Import only the generated
+leaves the component needs, never a catalog barrel or a path read from JSON. Define hook-free SVG adapters with
+`directComponent` from framework-base and use its JSX runtime so the `Icon` primitive can inline the adapter without an
+extra React component layer. MenuButton uses the size-specific Fluent SVG chevron on all supported renderers; its
+Variants story exercises the production trigger.
+
+`when.<field>.<value>` is a literal selector key. Nest only later axes inside a branch. Matching rules combine by
+property; the higher differing axis wins within the same layer. Provide a component-owned combined `visualState` for
+exclusive presentation; Button's order is disabled, pressed, hovered, then rest. Independent booleans such as `selected`
+remain separate. Do not mutate raw interaction state.
+
+Retrieve the cached definition with `getComponentTokens` using the original `ThemeState`, then pass the component state
+directly to `resolveTokenStates`. A slot's domain splits the resolved `style` from `props`. Non-style icon color and
+dimensions are presentation settings, not a basis for replacing caller sources or introducing a default icon.
+
+Visual precedence is **component defaults, then theme layers, then caller visuals**. Even a base theme field overrides
+a state-specific default. A caller's slot visual props and styles win through `attachSlotDefaults`; component-owned
+handlers, refs, slot presence, and accessibility are not token overrides. Keep shared focus behavior and Menu popup
+styling outside MenuButton's chevron tokens.
+
+## Legacy state-style factories
+
+For components without a v2 companion, use module-scoped structural styles, state factories, and themed factories,
+then select cached styles and apply per-instance values. Never create a style factory inside a hook or render function.
 
 Reuse the design package's `@fluentui-react-native/design/styling` submodule. The design
 styling reference (`@fluentui-react-native/design/references/styling.md`) owns the factory and hierarchy semantics:
@@ -56,8 +91,7 @@ styling reference (`@fluentui-react-native/design/references/styling.md`) owns t
 - `getThemedColorStyleFactory` converts semantic
   color keys and delegates its hierarchy and caching to `getThemedStateStyleFactory`.
 
-These are the canonical Button mechanisms and cache plain resolved style objects in `state.themeStyles`. Do not wrap them
-in another `StyleSheet.create` cache. Use
+These factories cache plain resolved style objects in `state.themeStyles`. Do not wrap them in another `StyleSheet.create` cache. Use
 `themedStyleSheetFactory` only when a component genuinely
 needs a complete theme-only `StyleSheet.create` result that is not represented by a branched state definition.
 
@@ -66,15 +100,8 @@ and user styles must remain outside the cache so one component instance cannot l
 
 ## Declare state hierarchy and precedence
 
-Represent related axes as ordered hierarchy levels. Each level contains mutually exclusive states in priority order.
-Button colors use:
-
-```ts
-[['primary', 'secondary', 'outline', 'subtle'], ['selected'], ['disabled', 'pressed', 'hovered']];
-```
-
-This means appearance is the base branch, selected refines it, and interaction is the final refinement. Put interaction
-states in `disabled`, `pressed`, `hovered` order so the first active state has the required priority.
+In legacy factories, represent related axes as ordered hierarchy levels. Each level contains mutually exclusive states
+in priority order. Put exclusive interaction states in `disabled`, `pressed`, `hovered` order.
 
 Use `getThemedStateStyleFactory` for token-derived hierarchy definitions and `getStateStyleFactory` for
 theme-independent definitions. Use `getThemedColorStyleFactory` for semantic background, border, and foreground colors;
@@ -85,21 +112,11 @@ An interaction may intentionally switch semantic keys. Button Subtle is transpar
 pressed token values provide visible stroke feedback. Do not assume a token named `Transparent` will produce visible
 interaction states; verify the resolved colors' `hover` and `pressed` values.
 
-Build the state source from resolved state without hiding precedence in conditionals. Button pushes appearance, selected,
-disabled, pressed, and hovered values, then lets the declared hierarchy select the winner.
+Build the legacy factory's state source from resolved state; the declared hierarchy selects the winner.
 
 ## Group related layout axes
 
-Combine axes that produce one coherent style object. Button selects size, shape, and content layout from one root style
-hierarchy:
-
-```ts
-[
-  ['small', 'medium', 'large'],
-  ['rounded', 'square', 'circle'],
-  ['withContent', 'iconOnly'],
-];
-```
+Group axes that produce one coherent style object; size, shape, and content layout can refine the same slot.
 
 Use separate factories for independent concerns such as typography, focus, and content visibility. This keeps unrelated
 state branches from multiplying into one large definition.
@@ -115,7 +132,7 @@ token before assigning it to `ViewStyle['gap']`.
 
 ## Apply slot props in one stage
 
-`use<Component>Styles.ts` should export `use<Component>Styles_unstable`, select styles, and call `attachSlotProps`; it
+`use<Component>Styles.ts` should export `use<Component>Styles_unstable`, select styles, and apply slot props; it
 should not create factories. Export that hook directly from the package root under the same name.
 
 Compose root styles in this order:

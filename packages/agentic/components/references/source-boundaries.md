@@ -21,6 +21,8 @@ or [primitive](primitives.md) reference when a change crosses component boundari
 
 - Production source may depend only on React / React Native native components, `@fluentui-react-native/design`,
   `@fluentui-react-native/framework-base`, and native-core's public modern platform entrypoints.
+- Generated Fluent icon leaves may import `react-native-svg` and `@fluentui/react-native-icons/utils`. Do not import
+  the Fluent icons catalog from component code. The extractor and SVG catalog are build-time dependencies only.
 - Import native-core values only from platform-resolved files (for example `common/popupHost.macos.ts` importing
   `@fluentui-react-native/native-core/macos`). Shared files may use `import type` from `/macos`, whose types the
   `/windows` entrypoint exports identically. Never import its root, `/legacy`, or internals, and give hosts without a

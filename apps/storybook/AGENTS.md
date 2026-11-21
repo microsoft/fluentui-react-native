@@ -30,6 +30,8 @@ configuration, driver, and runtime behavior belongs to package-owned guidance:
   `prep` when switching renderer. Bundle before prep if Pods must embed the
   JavaScript bundle. Only `macos/Podfile` is hand-authored; Pods, lockfiles,
   workspaces, build products, and DerivedData are generated.
+- macOS native smoke uses the instance-specific bundle embedded in the app.
+  The interactive development commands still use Metro.
 - Windows project files and registrations are generated. Preserve the app's
   declared helper and identity setup.
 - Win32 uses the prebuilt REX Paper host. Bundle before run; native build is

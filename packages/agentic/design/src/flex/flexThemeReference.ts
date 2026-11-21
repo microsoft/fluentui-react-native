@@ -14,6 +14,12 @@ import type {
 } from '../types/appearance.types';
 import type { FlexThemeSource, OnThemeChange } from '../theming/themeSource';
 import type { PartialTheme, Theme } from '../fluent/types/Theme.types';
+import type { ComponentTokenLayer } from '../styling/componentTokens.types';
+
+function asLayers(input: ComponentTokenLayer | readonly ComponentTokenLayer[] | undefined): readonly ComponentTokenLayer[] {
+  if (!input) return [];
+  return Array.isArray(input) ? [...input] : [input as ComponentTokenLayer];
+}
 
 /**
  * Authored base tokens layered over the package defaults. Resolved
@@ -49,6 +55,8 @@ export interface FlexThemeReferenceOptions {
   fallbackAppearance?: Partial<ResolvedThemeAppearance>;
   appearanceSource?: ThemeAppearanceSource;
   legacyFallback?: LegacyThemeFallback;
+  /** Component visual overrides, applied after component defaults. */
+  componentTokens?: ComponentTokenLayer | readonly ComponentTokenLayer[];
 }
 
 export class FlexThemeReference implements FlexThemeSource {
@@ -61,6 +69,7 @@ export class FlexThemeReference implements FlexThemeSource {
   private readonly base?: FlexThemeInput | FlexThemeDescription | FlexThemeReference;
   private readonly legacyFallback?: LegacyThemeFallback;
   private recipes: FlexThemeRecipe[];
+  private componentTokens: readonly ComponentTokenLayer[];
   private readonly listeners = new Set<OnThemeChange>();
   private readonly descriptionsByAppearance = new Map<string, FlexTokenDescription>();
   private readonly tokensByAppearance = new Map<string, FlexTokens>();
@@ -78,6 +87,7 @@ export class FlexThemeReference implements FlexThemeSource {
     this.appearanceSource = options.appearanceSource ?? parent?.appearanceSource;
     this.legacyFallback = options.legacyFallback;
     this.recipes = recipes;
+    this.componentTokens = asLayers(options.componentTokens);
     this.parentRevision = parent?.revision;
   }
 
@@ -142,6 +152,22 @@ export class FlexThemeReference implements FlexThemeSource {
   public update(...recipes: FlexThemeRecipe[]): void {
     this.recipes = recipes;
     this.invalidate();
+  }
+
+  /** Replace this reference's component-token layers and invalidate descendants. */
+  public updateComponentTokens(componentTokens?: ComponentTokenLayer | readonly ComponentTokenLayer[]): void {
+    this.componentTokens = asLayers(componentTokens);
+    this.invalidate();
+  }
+
+  public resolveComponentTokens(): readonly ComponentTokenLayer[] {
+    const inherited =
+      this.base instanceof FlexThemeReference
+        ? this.base.resolveComponentTokens()
+        : isFlexThemeDescription(this.base)
+          ? asLayers(this.base.componentTokens)
+          : [];
+    return [...inherited, ...this.componentTokens];
   }
 
   // Parents supply authored descriptions, never appearance-bound resolved tokens.

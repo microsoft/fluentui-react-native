@@ -4,16 +4,20 @@
     "outDir": "lib",
     "rootDir": "src",
     "composite": true,
+    "resolveJsonModule": true,
     "tsBuildInfoFile": "node_modules/.cache/tsconfig.tsbuildinfo"
   },
-  "include": ["src"],
-  "exclude": ["**/*.stories.ts", "**/*.stories.tsx", "**/*.story-helpers.tsx", "**/*.wdio.ts"],
+  "include": ["src", "src/**/spec/tokens.json"],
+  "exclude": ["**/*.stories.ts", "**/*.stories.tsx", "**/*.story-helpers*.tsx", "**/*.wdio.ts"],
   "references": [
     {
       "path": "../design/tsconfig.json"
     },
     {
       "path": "../desktop-driver/tsconfig.json"
+    },
+    {
+      "path": "../../utils/extract-icons/tsconfig.json"
     },
     {
       "path": "../../framework-base/tsconfig.json"

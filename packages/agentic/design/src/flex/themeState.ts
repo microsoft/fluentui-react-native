@@ -53,6 +53,7 @@ export function getThemeState(source: ThemeSource, appearance: Readonly<Normaliz
       appearance,
       highContrast: appearance.contrast === 'highContrast',
       themeStyles: {},
+      componentTokens: source.resolveComponentTokens?.(appearance),
     };
   }
   return cache.themeState;

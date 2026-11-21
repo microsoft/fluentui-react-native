@@ -186,6 +186,9 @@ type ButtonState = ComponentState<ButtonSlots>;
 - `OptionalSlot` permits `null` and becomes `undefined` in resolved state.
 - Resolved native slots preserve their native ref type.
 
+Use `attachSlotDefaults` to fill missing attached props and prepend default styles without replacing caller values.
+Use `attachSlotProps` instead for component-owned behavior that must win over the slot's attached props.
+
 ### Slot hooks
 
 Both hooks accept the component type first, followed by either the previous raw

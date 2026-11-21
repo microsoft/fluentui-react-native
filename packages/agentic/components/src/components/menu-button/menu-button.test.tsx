@@ -1,13 +1,18 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import { processColor, StyleSheet } from 'react-native';
 import type { View } from 'react-native';
 import { fireEvent, screen } from '@testing-library/react-native';
 import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
+import { FlexThemeReference, ThemeProvider } from '@fluentui-react-native/design';
 
+import { ChevronDown16Regular } from '../../common/generated/fluent-icons/ChevronDown16Regular.generated';
+import { ChevronDown20Regular } from '../../common/generated/fluent-icons/ChevronDown20Regular.generated';
 import { render } from '../../common/renderWithTheme';
+import { Icon } from '../../primitives/icon/icon';
 import { MenuItem } from '../menu-item/menu-item';
 import { MenuButton } from './menu-button';
+import { chevronAssets } from './menu-button.assets';
 import type { MenuButtonProps } from './menu-button.types';
 
 type ReactTestInstance = ReturnType<typeof screen.getByTestId>;
@@ -47,6 +52,60 @@ function backgroundColor(node: ReactTestInstance): unknown {
 
 describe('MenuButton', () => {
   beforeEach(() => dispatchCommand.mockClear());
+
+  it.each([
+    ['ChevronDown16Regular', ChevronDown16Regular],
+    ['ChevronDown20Regular', ChevronDown20Regular],
+  ] as const)('renders %s without an extra SVG adapter component layer', (asset, Svg) => {
+    const element = <Icon svgSource={chevronAssets[asset]()} color="#556677" />;
+    expect(element.type).toBe(Svg);
+    expect(element.props).toMatchObject({ primaryFill: '#556677', pointerEvents: 'none' });
+  });
+
+  it('selects sized SVG artwork and lets the theme choose a registered asset independently of dimensions', async () => {
+    const theme = new FlexThemeReference({
+      componentTokens: {
+        'furn.menu-button': { chevron: { 'when.size.large': { source: 'fluent-icon: ChevronDown16Regular', color: '#556677' } } },
+      },
+    });
+    const component = await render(
+      <ThemeProvider theme={theme}>
+        <Scene size="small" content="Small" testID="svg-small" />
+        <Scene size="medium" content="Medium" testID="svg-medium" />
+        <Scene size="large" content="Large" testID="svg-large" />
+      </ThemeProvider>,
+    );
+    const nodes = ['svg-small', 'svg-medium', 'svg-large'].map((testID) => component.getByTestId(testID));
+    const paths = nodes.map((node) => node.queryAll((child) => child.type === 'RNSVGPath')[0]);
+    expect(paths[0].props.d).not.toBe(paths[1].props.d);
+    expect(paths[2].props.d).toBe(paths[0].props.d);
+    const frames = nodes.map((node) => node.queryAll((child) => child.type === 'RNSVGSvgView')[0]);
+    expect(frames.map(({ props }) => [Number(props.bbWidth), Number(props.bbHeight), props.accessible, props.pointerEvents])).toEqual([
+      [16, 16, false, 'none'],
+      [20, 20, false, 'none'],
+      [20, 20, false, 'none'],
+    ]);
+  });
+
+  it('composes Button theme chrome with the SVG chevron tint and dimensions', async () => {
+    const theme = new FlexThemeReference({
+      componentTokens: {
+        'furn.button': { root: { 'when.visualState.pressed': { backgroundColor: '#112233' } } },
+        'furn.menu-button': { chevron: { 'when.size.small': { width: 22, height: 23, color: '#556677' } } },
+      },
+    });
+    await render(
+      <ThemeProvider theme={theme}>
+        <Scene open size="small" />
+      </ThemeProvider>,
+    );
+    const trigger = screen.getByTestId('trigger');
+    expect(backgroundColor(trigger)).toBe('#112233');
+    const [frame] = trigger.queryAll((child) => child.type === 'RNSVGSvgView');
+    expect([Number(frame.props.bbWidth), Number(frame.props.bbHeight)]).toEqual([22, 23]);
+    const [group] = frame.queryAll((child) => child.type === 'RNSVGGroup');
+    expect(group.props.fill).toEqual({ payload: processColor('#556677'), type: 0 });
+  });
 
   it.each((['small', 'medium', 'large'] as const).flatMap((size) => [false, true].map((iconOnly) => ({ size, iconOnly }))))(
     'MNB-002 preserves rounded content-layout metrics at $size with iconOnly=$iconOnly',

@@ -3,7 +3,7 @@
   "component": "menu-button",
   "lifecycle": "implemented",
   "conformance": "reviewed",
-  "reviewedAt": "2026-10-19",
+  "reviewedAt": "2026-11-20",
   "sources": [
     {
       "id": "flex-component",
@@ -79,10 +79,6 @@
       "status": "accepted"
     },
     {
-      "id": "menu-button-chevron-glyph",
-      "status": "accepted"
-    },
-    {
       "id": "menu-button-motion",
       "status": "deferred"
     }
@@ -94,7 +90,7 @@
     },
     {
       "id": "MNB-002",
-      "evidence": ["useMenuButtonStyles.ts", "menu-button.styles.ts", "renderMenuButton.tsx", "menu-button.test.tsx"]
+      "evidence": ["spec/tokens.json", "useMenuButtonStyles.ts", "menu-button.styles.ts", "renderMenuButton.tsx", "menu-button.test.tsx"]
     },
     {
       "id": "MNB-003",

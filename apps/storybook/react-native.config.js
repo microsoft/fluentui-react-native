@@ -16,12 +16,5 @@ const project = (() => {
 })();
 
 module.exports = {
-  dependencies: {
-    'react-native-svg': {
-      platforms: {
-        windows: null,
-      },
-    },
-  },
   ...(project ? { project } : undefined),
 };

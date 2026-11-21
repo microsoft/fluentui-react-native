@@ -24,7 +24,7 @@ both models. Modern consumers read Flex tokens through `useThemeState`; legacy c
 | `FlexThemeReference` | `flex`   | One `FlexTokens` object per resolved appearance | `@fluentui-react-native/design`                                                                  |
 | `ThemeReference`     | `legacy` | One legacy `Theme` per resolved appearance      | `@fluentui-react-native/design/theming` or `@fluentui-react-native/design/theming/legacy-source` |
 
-`FlexThemeReference` accepts `base`, `appearance`, `fallbackAppearance`, `appearanceSource`, and `legacyFallback`
+`FlexThemeReference` accepts `base`, `appearance`, `fallbackAppearance`, `appearanceSource`, `legacyFallback`, and `componentTokens`
 options followed by recipes. It merges the design package's x3 default Flex token description for the resolved
 `colorTone`, then the base input, then recipes in declaration order, and resolves the result once per appearance. A base
 may be a function of the resolved appearance, which always has a concrete `colorTone`. A recipe receives the accumulated
@@ -53,6 +53,23 @@ const theme = new FlexThemeReference({
 ```
 
 `ThemeReference` keeps its constructor, one-argument recipes, `theme` accessor, `update`, `invalidate`, and listeners.
+
+For components using JSON token companions, modern themes can set `componentTokens` on the reference or base description.
+Use qualified component IDs as keys; component packages augment `ComponentTokenRegistry` with their slot and selector
+types. Each layer accepts patches or patch factories receiving the final Flex tokens and appearance.
+
+```ts
+const theme = new FlexThemeReference({
+  componentTokens: {
+    'furn.button': { root: { borderWidth: 2, 'when.visualState.pressed': { borderWidth: 3 } } },
+  },
+});
+```
+
+Defaults, base description, ancestor references, and current reference layer(s) apply in that order. Resolve selector
+specificity within each layer; a higher-precedence layer can override all states with a base field. Caller visuals apply
+after all theme layers. `updateComponentTokens` replaces just the current reference's layers and invalidates themed
+component caches; it does not change Flex recipes or legacy `Theme.components`.
 Recipes also receive the resolved appearance as an optional second argument, and `resolveTheme(appearance)` caches
 each appearance independently.
 

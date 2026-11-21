@@ -7,11 +7,13 @@ import {
   useOptionalSlot,
 } from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
+import { getComponentTokens } from '@fluentui-react-native/design/styling';
 import { Platform, Pressable } from 'react-native';
 import type { PressableProps } from 'react-native';
 import { useFocusVisuals } from '../../common/useFocusVisuals';
 import { Icon } from '../../primitives/icon/icon';
 import { Text } from '../text/text';
+import { buttonTokenDefinition, getButtonVisualState } from './button.styles';
 
 /**
  * Hook to create the state for a Button component. This is responsible for:
@@ -106,5 +108,8 @@ export function useButton_unstable(props: ButtonProps): ButtonState {
     ...pressableState,
     ...focusBinding,
     appearance: appearance ?? 'secondary',
+    visualState: getButtonVisualState(disabled, pressableState.pressed, pressableState.hovered),
+    themeState,
+    buttonTokens: getComponentTokens(themeState, buttonTokenDefinition),
   };
 }
