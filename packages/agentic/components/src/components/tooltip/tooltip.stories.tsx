@@ -20,6 +20,7 @@ function NativeTextScene({ content }: { content: string }) {
   const [revision, setRevision] = useState(0);
   const [presses, setPresses] = useState(0);
   const tip = [content, 'Updated draft help', ''][revision % 3];
+  const changeTip = () => setRevision((value) => value + 1);
   return (
     <View>
       <Input accessibilityLabel="Keyboard entry" testID="tooltip-entry" />
@@ -34,7 +35,7 @@ function NativeTextScene({ content }: { content: string }) {
           <Text>Save draft</Text>
         </Pressable>
       </Tooltip>
-      <Button content="Change tip" testID="direct-tip" tooltip={tip || undefined} onPress={() => setRevision((value) => value + 1)} />
+      <Button content="Change tip" testID="direct-tip" tooltip={tip || undefined} onPress={changeTip} onAccessibilityTap={changeTip} />
       <StoryStatus testID="tooltip-presses">{String(presses)}</StoryStatus>
     </View>
   );
