@@ -1,5 +1,24 @@
 # @fluentui-react-native/components
 
+## 0.9.0
+
+### Minor Changes
+
+- c64353f: Add typed asset references to component tokens and use size-specific Fluent SVG chevrons in MenuButton on macOS, Windows, and Win32. The extractor can emit a provenance manifest for generated icons.
+  
+  Render the MenuButton chevron adapters directly without an extra React component layer.
+- c64353f: Add JSON component tokens and theme override layers for Button and MenuButton. Caller visual styles and slot props take precedence over component and theme defaults.
+  
+  Export reusable token validators and React Native style enum value lists from `@fluentui-react-native/design/styling` for custom components.
+
+### Patch Changes
+
+- Updated dependencies [c64353f]
+- Updated dependencies [c64353f]
+  - @fluentui-react-native/design@0.7.0
+  - @fluentui-react-native/framework-base@0.10.0
+  - @fluentui-react-native/native-core@0.2.5
+
 ## 0.8.4
 
 ### Patch Changes

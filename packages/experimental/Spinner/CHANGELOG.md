@@ -1,5 +1,17 @@
 # Change Log - @fluentui-react-native/spinner
 
+## 0.10.21
+
+### Patch Changes
+
+- Updated dependencies [c64353f]
+- Updated dependencies [c64353f]
+  - @fluentui-react-native/design@0.7.0
+  - @fluentui-react-native/framework-base@0.10.0
+  - @fluentui-react-native/text@0.25.21
+  - @fluentui-react-native/framework@0.17.14
+  - @fluentui-react-native/use-styling@0.16.9
+
 ## 0.10.20
 
 ### Patch Changes

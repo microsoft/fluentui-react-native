@@ -1,5 +1,16 @@
 # Change Log - @fluentui-react-native/apple-theme
 
+## 0.29.20
+
+### Patch Changes
+
+- Updated dependencies [c64353f]
+- Updated dependencies [c64353f]
+  - @fluentui-react-native/design@0.7.0
+  - @fluentui-react-native/framework-base@0.10.0
+  - @fluentui-react-native/default-theme@0.28.3
+  - @fluentui-react-native/experimental-appearance-additions@0.8.15
+
 ## 0.29.19
 
 ### Patch Changes

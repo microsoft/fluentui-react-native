@@ -1,5 +1,16 @@
 # Change Log - @fluentui-react-native/separator
 
+## 0.19.20
+
+### Patch Changes
+
+- Updated dependencies [c64353f]
+- Updated dependencies [c64353f]
+  - @fluentui-react-native/design@0.7.0
+  - @fluentui-react-native/framework-base@0.10.0
+  - @fluentui-react-native/framework@0.17.14
+  - @fluentui-react-native/use-styling@0.16.9
+
 ## 0.19.19
 
 ### Patch Changes
