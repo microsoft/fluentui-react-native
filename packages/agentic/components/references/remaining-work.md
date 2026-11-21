@@ -11,6 +11,13 @@ Open work for the agentic component catalog. Completed work is removed rather th
 is documented in the owning reference, component contract, or the repository focus references (`focus.common`,
 `focus.windows-win32`, and `focus.macos`).
 
+## ToggleButton and the Button migration
+
+The [ToggleButton scaffold](../src/components/toggle-button/SPEC.md) is not exported. Reconcile its promoted source
+with the package lock, implement TGB-001 through TGB-005, and qualify actual native Toggle delivery, checked state
+and high-contrast selection on each desktop endpoint. Complete the [consumer migration](../src/components/toggle-button/spec/usage.md),
+including non-Subtle and square callers, before removing any selection or icon props from Button (TGB-006).
+
 ## Desktop focus qualification
 
 - **Issues:** [#4274](https://github.com/microsoft/fluentui-react-native/issues/4274); popup-family restoration in

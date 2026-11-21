@@ -147,9 +147,10 @@
       "tab",
       "tablist",
       "tag",
-      "text"
+      "text",
+      "toggle-button"
     ],
-    "adaptedDrafts": [],
+    "adaptedDrafts": ["toggle-button"],
     "implemented": [
       "accordion",
       "avatar",
@@ -228,7 +229,6 @@
       "split-button",
       "teaching-popover",
       "textarea",
-      "toggle-button",
       "toolbar",
       "tooltip"
     ],
@@ -808,6 +808,15 @@
       "marketplaceDrift": null,
       "originDrift": null,
       "candidateStatus": "not-applicable"
+    },
+    {
+      "component": "toggle-button",
+      "lifecycle": "contract-draft",
+      "conformance": "review-required",
+      "releaseDifferences": [],
+      "marketplaceDrift": null,
+      "originDrift": null,
+      "candidateStatus": "unchecked"
     }
   ]
 }
