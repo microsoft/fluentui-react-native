@@ -25,6 +25,12 @@ const AvatarSlot: SlotProp<typeof Avatar> = {
   initials: 'LM',
 };
 
+// @ts-expect-error Image, initials, and icon cannot be combined.
+const MixedAvatar: AvatarProps = { image: { source: { uri: 'avatar.png' } }, initials: 'LM' };
+
+// @ts-expect-error Avatar is an identity marker, not a focus target.
+const FocusableAvatar: AvatarProps = { focusable: true };
+
 describe('Avatar types', () => {
   it('accepts the supported public slot and prop combinations', () => {
     expect(ImageAvatarProps).toBeDefined();

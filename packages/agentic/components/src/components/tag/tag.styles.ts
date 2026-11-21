@@ -1,234 +1,85 @@
 import { StyleSheet } from 'react-native';
 import type { TextStyle, ViewStyle } from 'react-native';
-
-import type { FlexTokens } from '@fluentui-react-native/design';
-
 import {
+  colorToken,
+  defineComponentTokens,
+  dimensionToken,
+  fontWeightToken,
+  getComponentTokens,
   getGapStyleValue,
-  getThemedColorStyleFactory,
-  getThemedStateStyleFactory,
-  interactiveStatePriority,
+  numericToken,
+  resolveTokenStates,
+  stringToken,
 } from '@fluentui-react-native/design/styling';
-import type {
-  ColorStyleDefinition,
-  StateNames,
-  StyleDefinition,
-  TextColorStyle,
-  ViewColorStyle,
-} from '@fluentui-react-native/design/styling';
-import type { TagAppearance, TagSize, TagState } from './tag.types';
+import type { ComponentTokenPatch } from '@fluentui-react-native/design/styling';
+import { iconTokenProps } from '../../common/iconTokenProps';
+import type { IconElementProps } from '../../primitives/icon/icon.types';
+import type { TagState } from './tag.types';
+import schema from './spec/tokens.json' with { type: 'json' };
 
 export const tagStyles = StyleSheet.create({
-  root: {
-    alignItems: 'center',
-    alignSelf: 'flex-start',
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
-  content: {
-    flexShrink: 1,
-    textAlign: 'center',
-  },
-  icon: {
-    flexShrink: 0,
-  },
+  root: { alignItems: 'center', alignSelf: 'flex-start', flexDirection: 'row', justifyContent: 'center' },
+  content: { flexShrink: 1, textAlign: 'center' },
+  icon: { flexShrink: 0 },
 });
 
-const backgroundStateLevels = [['primary', 'secondary'], interactiveStatePriority] as const;
-type BackgroundStateLevels = typeof backgroundStateLevels;
-type BackgroundState = StateNames<BackgroundStateLevels>;
-
-const backgroundDefinition: ColorStyleDefinition<ViewColorStyle, BackgroundStateLevels> = {
-  primary: {
-    backgroundColor: 'backgroundBrandHeavy',
-    disabled: {
-      backgroundColor: 'backgroundNeutralHeavyDisabled',
+const slots = {
+  root: {
+    style: {
+      backgroundColor: colorToken,
+      borderRadius: dimensionToken,
+      gap: getGapStyleValue,
+      paddingHorizontal: dimensionToken,
+      paddingVertical: dimensionToken,
     },
+    props: {},
   },
-  secondary: {
-    backgroundColor: 'backgroundNeutralSubtle',
-    disabled: {
-      backgroundColor: 'backgroundNeutralSubtleDisabled',
+  content: {
+    style: {
+      color: colorToken,
+      fontFamily: stringToken,
+      fontSize: numericToken,
+      fontWeight: fontWeightToken,
+      lineHeight: numericToken,
+      paddingHorizontal: dimensionToken,
     },
+    props: {},
   },
+  leadingIcon: { style: {}, props: iconTokenProps },
+  dismissIcon: { style: {}, props: iconTokenProps },
+};
+type TagTokenState = Pick<TagState, 'appearance' | 'layout' | 'shape' | 'size'> & {
+  visualState: 'rest' | 'hovered' | 'pressed' | 'disabled';
 };
 
-const foregroundStateLevels = [['primary', 'secondary'], ['disabled']] as const;
-type ForegroundStateLevels = typeof foregroundStateLevels;
-
-const foregroundDefinition: ColorStyleDefinition<TextColorStyle, ForegroundStateLevels> = {
-  primary: {
-    color: 'foregroundNeutralOnloud',
-    disabled: {
-      color: 'foregroundNeutralDisabled',
-    },
-  },
-  secondary: {
-    color: 'foregroundNeutralPrimary',
-    disabled: {
-      color: 'foregroundNeutralDisabled',
-    },
-  },
-};
-
-const getThemedBackgroundStyle = getThemedColorStyleFactory<ViewColorStyle, BackgroundStateLevels>(
-  'Tag.background',
-  backgroundDefinition,
-  backgroundStateLevels,
-);
-const getThemedForegroundStyle = getThemedColorStyleFactory<TextColorStyle, ForegroundStateLevels>(
-  'Tag.foreground',
-  foregroundDefinition,
-  foregroundStateLevels,
-);
-
-function getBackgroundStateSource(state: TagState): BackgroundState[] {
-  const source: BackgroundState[] = [state.appearance];
-  if (state.disabled) {
-    source.push('disabled');
+declare module '@fluentui-react-native/design' {
+  interface ComponentTokenRegistry {
+    'furn.tag': ComponentTokenPatch<TagTokenState, typeof slots>;
   }
-  if (state.pressed) {
-    source.push('pressed');
-  }
-  if (state.hovered) {
-    source.push('hovered');
-  }
-  return source;
 }
 
-function getForegroundStateSource(state: TagState): (TagAppearance | 'disabled')[] {
-  const source: (TagAppearance | 'disabled')[] = [state.appearance];
-  if (state.disabled) {
-    source.push('disabled');
-  }
-  return source;
-}
+const definition = defineComponentTokens<TagTokenState, typeof slots>({ id: 'furn.tag', slots, schema });
 
-export function getTagBackgroundStyle(state: TagState): ViewColorStyle {
-  return getThemedBackgroundStyle(state, getBackgroundStateSource(state));
-}
+type IconChrome = Pick<IconElementProps, 'color' | 'height' | 'width'>;
 
-export function getTagForegroundStyle(state: TagState): TextColorStyle {
-  return getThemedForegroundStyle(state, getForegroundStateSource(state));
-}
-
-const rootStateLevels = [
-  ['small', 'medium'],
-  ['iconAndText', 'iconOnly'],
-  ['rounded', 'circular'],
-] as const;
-type RootStateLevels = typeof rootStateLevels;
-type RootState = StateNames<RootStateLevels>;
-
-function createRootStyleDefinition({ borderRadius, spacing }: FlexTokens): StyleDefinition<ViewStyle, RootStateLevels> {
-  return {
-    borderWidth: 0,
-    minHeight: 24,
-    minWidth: 24,
-    small: {
-      iconAndText: {
-        circular: {
-          borderRadius: borderRadius.circular,
-          gap: getGapStyleValue(spacing.componentBase50),
-          paddingHorizontal: spacing.componentBase200,
-          paddingVertical: spacing.componentBase100,
-        },
-        rounded: {
-          borderRadius: borderRadius.base200,
-          gap: getGapStyleValue(spacing.componentBase50),
-          paddingHorizontal: spacing.componentBase200,
-          paddingVertical: spacing.componentBase100,
-        },
-      },
-      iconOnly: {
-        circular: {
-          borderRadius: borderRadius.circular,
-          gap: 0,
-          paddingHorizontal: spacing.componentBase100,
-          paddingVertical: spacing.componentBase100,
-        },
-      },
-    },
-    medium: {
-      iconAndText: {
-        circular: {
-          borderRadius: borderRadius.circular,
-          gap: getGapStyleValue(spacing.componentBase50),
-          paddingHorizontal: spacing.componentBase250,
-          paddingVertical: spacing.componentBase150,
-        },
-        rounded: {
-          borderRadius: borderRadius.base300,
-          gap: getGapStyleValue(spacing.componentBase50),
-          paddingHorizontal: spacing.componentBase250,
-          paddingVertical: spacing.componentBase150,
-        },
-      },
-      iconOnly: {
-        circular: {
-          borderRadius: borderRadius.circular,
-          gap: getGapStyleValue(spacing.componentBase50),
-          paddingHorizontal: spacing.componentBase150,
-          paddingVertical: spacing.componentBase150,
-        },
-      },
-    },
+export function getTagChrome(state: TagState): {
+  root: ViewStyle;
+  content: TextStyle;
+  leadingIcon: IconChrome;
+  dismissIcon: IconChrome;
+} {
+  const tokens = getComponentTokens(state.themeState, definition);
+  const variant: TagTokenState = {
+    appearance: state.appearance,
+    layout: state.layout,
+    shape: state.shape,
+    size: state.size,
+    visualState: state.disabled ? 'disabled' : state.pressed ? 'pressed' : state.hovered ? 'hovered' : 'rest',
   };
-}
-
-const getThemedRootStyle = getThemedStateStyleFactory('Tag.root', createRootStyleDefinition, rootStateLevels);
-
-function getRootStyleSource(state: TagState): RootState[] {
-  return [state.size, state.iconOnly ? 'iconOnly' : 'iconAndText', state.iconOnly ? 'circular' : state.shape];
-}
-
-export function getTagRootStyle(state: TagState): ViewStyle {
-  return getThemedRootStyle(state, getRootStyleSource(state));
-}
-
-const contentStateLevels = [['small', 'medium'], ['disabled']] as const;
-
-function createContentStyleDefinition({
-  fontFamily,
-  fontSize,
-  fontWeight,
-  lineHeight,
-  spacing,
-}: FlexTokens): StyleDefinition<TextStyle, typeof contentStateLevels> {
   return {
-    fontFamily: fontFamily.functional,
-    small: {
-      fontSize: fontSize.functionalBodySmall,
-      fontWeight: fontWeight.functionalRegular,
-      lineHeight: lineHeight.functionalBodySmall,
-      paddingHorizontal: spacing.componentBase50,
-    },
-    medium: {
-      fontSize: fontSize.functionalBodyMedium,
-      fontWeight: fontWeight.functionalRegular,
-      lineHeight: lineHeight.functionalBodyMedium,
-      paddingHorizontal: spacing.componentBase50,
-    },
+    root: resolveTokenStates(tokens.root, variant).style,
+    content: resolveTokenStates(tokens.content, variant).style,
+    leadingIcon: resolveTokenStates(tokens.leadingIcon, variant).props,
+    dismissIcon: resolveTokenStates(tokens.dismissIcon, variant).props,
   };
-}
-
-const getThemedContentStyle = getThemedStateStyleFactory('Tag.content', createContentStyleDefinition, contentStateLevels);
-
-export function getTagContentStyle(state: TagState): TextStyle {
-  return getThemedContentStyle(state, [state.size]);
-}
-
-const iconSizes: Record<TagSize, { dismiss: number; leading: number }> = {
-  small: {
-    dismiss: 12,
-    leading: 16,
-  },
-  medium: {
-    dismiss: 16,
-    leading: 20,
-  },
-};
-
-export function getTagIconSize(size: TagSize): { dismiss: number; leading: number } {
-  return iconSizes[size];
 }

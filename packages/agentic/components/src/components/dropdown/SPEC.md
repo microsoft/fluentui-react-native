@@ -1,9 +1,9 @@
 ---
 name: dropdown
 platform: react-native (Windows, macOS)
-status: implemented
+status: contract-reviewed
 source: ./spec/source.json
-tokens: ./spec/tokens.yaml
+tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
 interaction: ./spec/interaction.md
 usage: ./spec/usage.md
@@ -39,7 +39,7 @@ MenuButton for actions.
 | `size`                                       | `'small' \| 'medium' \| 'large'`       | `medium`                             | Selects Input's metrics and typography, and sizes the leading icon and chevron 16, 20, and 24.        |
 | `disabled`                                   | `boolean`                              | `false`                              | Disables the trigger. A disabled Dropdown never presents its list, even while `open` is true.         |
 | `error`                                      | `boolean`                              | `false`                              | Selects Input's danger boundary and the primary chevron color.                                        |
-| `multiselect`                                | `boolean`                              | `false`                              | Selects multiple mode.                                                                                |
+| `selectionMode`                              | `'single' \| 'multiple'`               | `single`                             | Single mode commits and closes; multiple mode toggles options and stays open.                         |
 | `selectedOptions` / `defaultSelectedOptions` | `readonly string[]`                    | uncontrolled, `[]`                   | The selected option values.                                                                           |
 | `onSelectedOptionsChange`                    | `(selectedOptions, { value }) => void` | none                                 | Reports each user change and the option that caused it. Caller changes never call it.                 |
 | `placeholder`                                | `string`                               | `'Select an option'`                 | Shown when no selected value matches an option.                                                       |
@@ -158,7 +158,7 @@ focus zone are private.
 - **DRP-010:** Place the list below the trigger, start-aligned and offset by
   the token gap, and rely on native placement to flip, mirror for
   right-to-left layout, and clamp to the work area. Resolve the surface fill,
-  stroke, and radius from Popover's bindings with reduced padding. Make the
+  stroke, radius, and compensated padding from Popover's bindings. Make the
   surface at least as wide as the trigger and as wide as its widest option, cap
   the option area at a height of 320 with internal scrolling, keep the focused
   option scrolled into view, apply native elevation, and apply caller
@@ -208,21 +208,27 @@ legacy scrollers even while they are hidden. iOS and Android are unsupported.
 
 ## Divergences from Flex
 
-| ID                                | Disposition | React Native contract                                                                                                                                                     | Follow-up                                                 |
-| --------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
-| `dropdown-real-option-focus`      | Accepted    | Options take real native focus, and the trigger keeps its focused chrome while the list is presented, because the renderers have no active-descendant transport (D09).    | Revisit if the renderers add active-descendant support.   |
-| `dropdown-combobox-relationships` | Accepted    | Expanded state and value replace the has-popup, controls, and active-descendant relationships, which have no typed property; the list name defaults to the trigger label. | Adopt native relationships if the renderers add them.     |
-| `dropdown-list-roles`             | Accepted    | The list and options use the `list` and `listitem` roles with selection state, which UI Automation maps to the Selection and SelectionItem patterns.                      | Adopt listbox and option roles if the renderers add them. |
-| `dropdown-invalid-state`          | Accepted    | `error` changes only the visuals, because Pressable does not carry an invalid state on any renderer. Callers reference the error text from the hint.                      | Report invalid state when a renderer transports it.       |
-| `dropdown-tab-exit`               | Accepted    | Shift+Tab from the list focuses the trigger rather than the view before it, and on Win32 Tab also focuses the trigger (R1).                                               | Continue past the trigger when native-core supports it.   |
-| `dropdown-trigger-width`          | Accepted    | The trigger stretches to its container like Input rather than fitting its content; callers constrain the width with style.                                                | None.                                                     |
-| `dropdown-chevron-glyph`          | Accepted    | The chevron uses the package's shared down and up chevron glyphs rather than the Fluent ChevronDown and ChevronUp assets.                                                 | Replace when the package adopts the Fluent icon font.     |
-| `dropdown-native-elevation`       | Accepted    | The native popup window shadow provides elevation instead of drawing `shadow.low`, as for Popover.                                                                        | Revisit if native-core supports inset shadow geometry.    |
-| `dropdown-win32-gap`              | Accepted    | On Win32 the list sits flush against the trigger, because the Office host's popup ignores the requested gap.                                                              | Pass the gap through when the host honors it.             |
-| `dropdown-token-strip`            | Deferred    | Multiple mode shows comma-separated labels or the count summary; the optional tag-strip display is not offered.                                                           | Add with a reviewed Tag-based design.                     |
-| `dropdown-motion`                 | Deferred    | Presentation, chevron, and trigger changes are instant, which equals the reduced-motion behavior.                                                                         | Revisit when Flex motion is final.                        |
+| ID                                | Disposition    | React Native contract                                                                                                                                                  | Follow-up                                                                              |
+| --------------------------------- | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `dropdown-real-option-focus`      | Accepted       | Options take real native focus, and the trigger keeps its focused chrome while the list is presented, because the renderers have no active-descendant transport (D09). | Revisit if the renderers add active-descendant support.                                |
+| `dropdown-combobox-relationships` | Aligning       | Expanded state and value are present, but are not a programmatic trigger-to-list association. Retain real option focus instead of active descendant.                   | Release gate: verify the association in UIA and AX.                                    |
+| `dropdown-list-roles`             | Accepted       | The list and options use the `list` and `listitem` roles with selection state, which UI Automation maps to the Selection and SelectionItem patterns.                   | Adopt listbox and option roles if the renderers add them.                              |
+| `dropdown-invalid-state`          | Aligning       | `error` changes visuals, but the existing native Pressable path does not expose a verified invalid state or associated error text.                                     | Release gate: verify invalid state and discoverable error text, not a hint substitute. |
+| `dropdown-tab-exit`               | Aligning       | Continuation uses native-core: Tab goes past the trigger on macOS and Windows Fabric, Shift+Tab returns to it, and Win32 returns to it in both directions (R1).        | Qualify directional focus on each endpoint; Win32 forward continuation is unsupported. |
+| `dropdown-trigger-width`          | Deferred       | The trigger continues to stretch like Input.                                                                                                                           | Revisit fit-content versus stretch separately.                                         |
+| `dropdown-chevron-glyph`          | Resolved       | Private JSON bindings select Fluent ChevronDown and ChevronUp SVGs at each size.                                                                                       | Validate sizing and closed/open direction on the renderers.                            |
+| `dropdown-native-elevation`       | Accepted       | The native popup window shadow provides elevation instead of drawing `shadow.low`, as for Popover.                                                                     | Revisit if native-core supports inset shadow geometry.                                 |
+| `dropdown-win32-gap`              | Accepted       | On Win32 the list sits flush against the trigger, because the Office host's popup ignores the requested gap.                                                           | Pass the gap through when the host honors it.                                          |
+| `dropdown-token-strip`            | Not applicable | Multiple mode shows comma-separated labels or the count summary; removable tags belong to TagPicker.                                                                   | Keep out of Dropdown.                                                                  |
+| `dropdown-motion`                 | Deferred       | Presentation, chevron, and trigger changes are instant, which equals the reduced-motion behavior.                                                                      | Revisit when Flex motion is final.                                                     |
 
 ## Conformance
+
+DRP-001/005 migrate selection to a
+typed mode without changing the selected-options transport. DRP-002/003/010
+adopt Input, Fluent icon, and Popover bindings. DRP-009 and DRP-011 require
+desktop evidence for directional continuation, popup association, and
+invalid state with discoverable error text. JS state checks do not qualify those gates.
 
 The listed files exist for every requirement. macOS Fabric and Paper, Windows
 Fabric, and the Win32 adapters qualify the native behavior in the Dropdown

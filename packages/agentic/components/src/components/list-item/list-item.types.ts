@@ -32,7 +32,6 @@ export type ListItemSlots = {
 };
 
 export type ListItemStateSlots = ListItemSlots & {
-  selectionIndicator: OptionalSlot<typeof NativeText>;
   contentHidden: Slot<typeof NativeText>;
 };
 
@@ -52,26 +51,12 @@ export type ListItemExposedPressableProps = OwnedRootProps<PropsWithRefOf<typeof
 
 export type ListItemProps = ListItemStateProps & ComponentProps<ListItemSlots, ListItemExposedPressableProps>;
 
-export type ListItemMetrics = {
-  contentGap: number;
-  leadingContentMargin: number;
-  rootPaddingHorizontal: number;
-  rootPaddingVertical: number;
-  selectionIndicatorMargin: number;
-  selectionIndicatorSize: number;
-  trailingMargin: number;
-  trailingGap: number;
-  avatarSize: number;
-  iconSize: number;
-};
-
 export type ListItemState = ComponentState<ListItemStateSlots & FocusVisualsSlots> &
   FocusTargetBinding &
   Required<ListItemStateProps> &
   ThemeState &
   PressableState & {
-    metrics: ListItemMetrics;
+    chrome?: ReturnType<typeof import('./list-item.styles').resolveListItemChrome>;
     selectedFill: boolean;
-    selectionGlyph?: string;
     userStyle?: StyleProp<ViewStyle>;
   };

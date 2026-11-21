@@ -3,7 +3,7 @@ name: divider
 platform: react-native (Windows, macOS)
 status: implemented
 source: ./spec/source.json
-tokens: ./spec/tokens.yaml
+tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
 interaction: ./spec/interaction.md
 usage: ./spec/usage.md
@@ -26,12 +26,13 @@ stretches along its parent's primary axis and does not define its own extent.
 
 ### Props and defaults
 
-| Prop       | Type                     | Default                 | Contract                                                                    |
-| ---------- | ------------------------ | ----------------------- | --------------------------------------------------------------------------- |
-| `layout`   | `center \| start \| end` | `center`                | Positions the content between the two line segments.                        |
-| `vertical` | `boolean`                | `false`                 | Selects the axis the line and content lay out along.                        |
-| `label`    | slot for `Text`          | renders the text `Text` | The label content. `null` removes the label.                                |
-| `icon`     | slot for `Icon`          | absent                  | A leading icon inside the content container. `null` or omission removes it. |
+| Prop          | Type                     | Default                 | Contract                                                                    |
+| ------------- | ------------------------ | ----------------------- | --------------------------------------------------------------------------- |
+| `layout`      | `center \| start \| end` | `center`                | Positions the content between the two line segments.                        |
+| `vertical`    | `boolean`                | `false`                 | Selects the axis the line and content lay out along.                        |
+| `showContent` | `boolean`                | `true`                  | Hides both content slots without changing the supplied slot props.          |
+| `label`       | slot for `Text`          | renders the text `Text` | The label content. `null` removes the label.                                |
+| `icon`        | slot for `Icon`          | absent                  | A leading icon inside the content container. `null` or omission removes it. |
 
 The root accepts the owned `ViewProps` surface except `accessibilityRole` and
 `focusable`, which the component owns. A caller `style` is applied after the
@@ -47,25 +48,24 @@ The render order is the leading line, the content container when it is present,
 and the trailing line. Inside the content container the icon renders before the
 label.
 
-| Slot              | Rendered when                | Contract                                                                             |
-| ----------------- | ---------------------------- | ------------------------------------------------------------------------------------ |
-| `root`            | always                       | A `View` that carries separator semantics, axis direction, and cross-axis centering. |
-| Leading line      | always                       | A flexible line segment. It becomes a fixed stub for `layout="start"`.               |
-| Content container | `label` or `icon` is present | A non-accessible row holding the icon and label with internal gap and padding.       |
-| `icon`            | supplied and not `null`      | Sized and colored by the component and hidden from the accessibility tree.           |
-| `label`           | not `null`                   | Wraps and centers rather than truncating.                                            |
-| Trailing line     | always                       | A flexible line segment. It becomes a fixed stub for `layout="end"`.                 |
+| Slot              | Rendered when                            | Contract                                                                                    |
+| ----------------- | ---------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `root`            | always                                   | A `View` that carries separator semantics, axis direction, and cross-axis centering.        |
+| Leading line      | always                                   | A flexible line segment. With visible content it becomes a fixed stub for `layout="start"`. |
+| Content container | `showContent` and either slot is present | A non-accessible row holding the icon and label with internal gap and padding.              |
+| `icon`            | supplied and not `null`                  | Sized and colored by the component and hidden from the accessibility tree.                  |
+| `label`           | not `null`                               | Wraps and centers rather than truncating.                                                   |
+| Trailing line     | content visible                          | A flexible line segment. It becomes a fixed stub for `layout="end"`.                        |
 
-Setting both `label` and `icon` to `null` collapses the content container so
-the two line segments meet, producing a plain rule.
+Setting `showContent={false}`, or supplying `null` to both slots, produces one
+unbroken rule with no content stub or label-derived accessible name.
 
 ### Requirements
 
 - **DIV-001:** Resolve the documented defaults, render the label by default,
   and keep the supported native root props while owning role and focusability.
-- **DIV-002:** Render the documented order, collapse the content container only
-  when both `label` and `icon` are absent, and honor an `as` replacement for
-  either content slot.
+- **DIV-002:** Render the documented order, omit content when `showContent`
+  is false or both slots are absent, and honor an `as` replacement for either slot.
 - **DIV-003:** Give the leading line a fixed stub for `layout="start"` and the
   trailing line a fixed stub for `layout="end"`, and let both grow otherwise.
 - **DIV-004:** Switch the root direction, the line's measured axis, and the
@@ -93,14 +93,16 @@ still lay out horizontally; no rotation or vertical text mode is applied.
 
 ## Divergences from Flex
 
-| ID                                 | Disposition    | React Native contract                                                                                                                                                                                   | Follow-up                                                                                               |
-| ---------------------------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| `divider-orientation-semantics`    | Not applicable | React Native's separator role carries no orientation value, so a vertical Divider is announced the same way as a horizontal one. Flex requires an explicit orientation declaration.                     | None available at the platform level. Convey column grouping through the surrounding structure instead. |
-| `divider-content-visibility-model` | Accepted       | There is no single content-visibility switch. The content container collapses only when both `label` and `icon` resolve to absent, and `label` must be explicitly `null` because it renders by default. | None. The slot-level control matches the rest of the React Native component surface.                    |
-| `divider-size-axis`                | Deferred       | The React Native contract has no size axis. Flex's mobile surface exposes a size axis that varies the vertical space around the line.                                                                   | Requires a reviewed public API addition and a spacing token mapping.                                    |
-| `divider-line-thickness`           | Resolved       | The line is a filled rectangle whose measured axis is bound to `strokeWidth.thin`, matching the Flex thin-stroke contract.                                                                              | Implemented in `useDividerStyles.ts` and covered by orientation tests.                                  |
+| ID                                 | Disposition    | React Native contract                                                                                                      | Follow-up                                                              |
+| ---------------------------------- | -------------- | -------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `divider-orientation-semantics`    | Not applicable | The React Native separator props used here do not supply an orientation value. Do not rely on an orientation announcement. | Convey column grouping through the surrounding structure instead.      |
+| `divider-content-visibility-model` | Resolved       | `showContent` switches between the content divider and a bare line while retaining slot inputs.                            | Verify the toggle and separator name in unit tests.                    |
+| `divider-size-axis`                | Not applicable | Flex desktop has no size axis. The mobile-only variant is outside this desktop contract.                                   | None.                                                                  |
+| `divider-line-thickness`           | Resolved       | The line is a filled rectangle whose measured axis is bound to `strokeWidth.thin`, matching the Flex thin-stroke contract. | Implemented in `useDividerStyles.ts` and covered by orientation tests. |
 
 ## Conformance
+
+Native announcement of orientation is not part of this contract.
 
 | Requirement | Evidence                                                                         |
 | ----------- | -------------------------------------------------------------------------------- |

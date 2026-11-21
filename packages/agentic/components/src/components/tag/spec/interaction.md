@@ -7,9 +7,10 @@ the label, and the dismiss glyph. Pressing anywhere produces the same result;
 there is no sub-region that behaves differently, and the dismiss glyph is a
 visual affordance rather than a second control.
 
-A press calls `onPress` and nothing else. The tag does not change appearance
-permanently, does not mark itself dismissed, and does not unmount. Removing the
-tag is the caller's response to `onPress`.
+A press requests removal through `onDismiss` when supplied and `dismiss` is true.
+When `onDismiss` is omitted, the existing `onPress` route remains available.
+The two never run together. The tag does not mark itself dismissed or unmount;
+its owner removes it in response to the request and owns entry and exit.
 
 ## Pointer states
 
@@ -28,7 +29,7 @@ background and the foreground move to their disabled values.
 
 Tab moves focus to an enabled tag; a disabled tag is skipped because it is not
 focusable. Enter and Space activate the focused tag through the shared pressable
-behavior, producing the same `onPress` a pointer press produces.
+behavior, invoking the same handler as a pointer press.
 
 No other keys are bound. In particular, Delete and Backspace do not activate a
 tag, and there is no arrow-key movement between tags, because no tag group ships

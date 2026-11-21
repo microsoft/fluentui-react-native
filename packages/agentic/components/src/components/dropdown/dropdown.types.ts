@@ -1,5 +1,5 @@
 import type * as React from 'react';
-import type { ColorValue, Pressable, PressableProps, StyleProp, Text as NativeText, TextStyle, View, ViewStyle } from 'react-native';
+import type { Pressable, PressableProps, StyleProp, Text as NativeText, TextStyle, View, ViewStyle } from 'react-native';
 
 import type { ThemeState } from '@fluentui-react-native/design';
 import type {
@@ -19,6 +19,7 @@ import type { DropdownPopupProps } from './dropdownPopup';
 
 export type DropdownVariant = InputVariant;
 export type DropdownSize = InputSize;
+export type DropdownSelectionMode = 'single' | 'multiple';
 
 /**
  * Why requested presence changed: `trigger` for a trigger press, an opening key, or the expand or collapse action;
@@ -53,8 +54,8 @@ export type DropdownStateProps = {
   disabled?: boolean;
   /** Selects Input's danger boundary. */
   error?: boolean;
-  /** Selects multiple mode, where activation toggles options and keeps the list open. */
-  multiselect?: boolean;
+  /** Defaults to single. In multiple mode, activation toggles options and keeps the list open. */
+  selectionMode?: DropdownSelectionMode;
   /** The selected option values. When supplied, the caller owns the selection. */
   selectedOptions?: readonly string[];
   /** The starting selection while Dropdown owns it. Defaults to none. */
@@ -107,7 +108,7 @@ type DropdownStateSlots = DropdownSlots &
 
 export type DropdownState = ComponentState<DropdownStateSlots> &
   ThemeState &
-  Required<Pick<DropdownStateProps, 'variant' | 'size' | 'disabled' | 'error' | 'multiselect'>> & {
+  Required<Pick<DropdownStateProps, 'variant' | 'size' | 'disabled' | 'error' | 'selectionMode'>> & {
     /** Whether the list is presented. */
     open: boolean;
     visualState: InputVisualState;
@@ -121,7 +122,6 @@ export type DropdownState = ComponentState<DropdownStateSlots> &
     triggerRef: React.RefCallback<React.ComponentRef<typeof View>>;
     popupProps: DropdownPopupProps;
     resolved: InputResolvedStyles;
-    chevronColor: ColorValue;
     valueStyle?: StyleProp<TextStyle>;
     userStyle?: StyleProp<ViewStyle>;
   };

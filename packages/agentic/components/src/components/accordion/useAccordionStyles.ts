@@ -1,83 +1,39 @@
-import type { StyleProp, TextStyle, ViewStyle } from 'react-native';
-
-import { attachSlotProps } from '@fluentui-react-native/framework-base';
+import { attachSlotDefaults, attachSlotProps } from '@fluentui-react-native/framework-base';
+import { hiddenFromAccessibilityProps } from '../../common/accessibility';
 import { applyFocusRingStyles } from '../../common/applyFocusRingStyles';
 
-import {
-  accordionStyles,
-  getAccordionBodyForegroundStyle,
-  getAccordionBodyLayoutStyle,
-  getAccordionBodyTypographyStyle,
-  getAccordionChevronLayoutStyle,
-  getAccordionHeaderColorStyles,
-  getAccordionHeaderLayoutStyle,
-  getAccordionIconSize,
-  getAccordionTitleLayoutStyle,
-  getAccordionTitleTypographyStyle,
-} from './accordion.styles';
+import { accordionStyles, getAccordionChevronRotationStyle, getAccordionChrome } from './accordion.styles';
 import type { AccordionState } from './accordion.types';
 
 /**
  * Applies cached token styles and slot-level props to the Accordion state.
  */
 export function useAccordionStyles_unstable(state: AccordionState) {
-  const headerColors = getAccordionHeaderColorStyles(state);
-  const headerLayoutStyle = getAccordionHeaderLayoutStyle(state);
-  const rootStyle: StyleProp<ViewStyle> = [accordionStyles.root, state.userStyle];
-  const headerStyle: StyleProp<ViewStyle> = [accordionStyles.header, headerLayoutStyle, headerColors.background];
-  const titleStyle: StyleProp<TextStyle> = [
-    accordionStyles.title,
-    getAccordionTitleLayoutStyle(state),
-    getAccordionTitleTypographyStyle(state),
-    headerColors.foreground,
-  ];
-  const bodyStyle: StyleProp<ViewStyle> = [
-    accordionStyles.body,
-    getAccordionBodyLayoutStyle(state),
-    state.expanded
-      ? { opacity: 1, overflow: 'visible' }
-      : { height: 0, opacity: 0, overflow: 'hidden', paddingHorizontal: 0, paddingTop: 0 },
-  ];
-  const bodyContentStyle: StyleProp<ViewStyle> = [accordionStyles.bodyContent];
-  const bodyPlaceholderStyle: StyleProp<TextStyle> = [
-    accordionStyles.bodyPlaceholder,
-    getAccordionBodyTypographyStyle(state),
-    getAccordionBodyForegroundStyle(state),
-  ];
-  const chevronContainerStyle: StyleProp<ViewStyle> = [
-    accordionStyles.chevronContainer,
-    getAccordionChevronLayoutStyle(state),
-    { transform: [{ rotate: state.expanded ? '90deg' : '0deg' }] },
-  ];
-  const iconSize = getAccordionIconSize();
-
-  applyFocusRingStyles(state.FocusRing, state, headerLayoutStyle.borderRadius);
-  attachSlotProps(state.root, { style: rootStyle });
-  attachSlotProps(state.header, { style: headerStyle });
+  const chrome = getAccordionChrome(state);
+  applyFocusRingStyles(state.FocusRing, state, chrome.header.borderRadius);
+  attachSlotProps(state.root, { style: [accordionStyles.root, state.userStyle] });
+  attachSlotProps(state.header, { style: [accordionStyles.header, chrome.header] });
   if (state.title) {
-    attachSlotProps(state.title, { style: titleStyle });
+    attachSlotDefaults(state.title, { style: [accordionStyles.title, chrome.title] });
   }
   if (state.leadingIcon) {
-    attachSlotProps(state.leadingIcon, {
-      accessible: false,
-      color: headerColors.foreground.color,
-      height: iconSize,
-      width: iconSize,
-    });
+    attachSlotDefaults(state.leadingIcon, { ...chrome.icon, color: chrome.icon.color ?? chrome.title.color });
+    attachSlotProps(state.leadingIcon, hiddenFromAccessibilityProps);
   }
   if (state.bodyContent) {
-    attachSlotProps(state.bodyContent, { style: bodyContentStyle });
+    attachSlotDefaults(state.bodyContent, { style: accordionStyles.bodyContent });
   }
-  attachSlotProps(state.body, { style: bodyStyle });
-  attachSlotProps(state.chevronContainer, { style: chevronContainerStyle });
+  attachSlotProps(state.body, {
+    style: [accordionStyles.body, chrome.body, state.expanded ? accordionStyles.expandedBody : accordionStyles.collapsedBody],
+  });
+  attachSlotProps(state.chevronContainer, {
+    style: [accordionStyles.chevronContainer, chrome.chevronContainer, getAccordionChevronRotationStyle(state)],
+  });
   attachSlotProps(state.chevron, {
-    accessible: false,
-    color: headerColors.foreground.color,
-    height: iconSize,
-    width: iconSize,
+    ...hiddenFromAccessibilityProps,
+    ...chrome.icon,
+    color: chrome.icon.color ?? chrome.title.color,
   });
 
-  return {
-    bodyPlaceholderStyle,
-  };
+  return { bodyPlaceholderStyle: [accordionStyles.bodyPlaceholder, chrome.bodyPlaceholder] };
 }

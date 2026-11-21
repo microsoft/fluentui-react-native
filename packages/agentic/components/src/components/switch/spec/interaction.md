@@ -42,12 +42,10 @@ intercept input; native ring appearance remains renderer-owned.
 
 ## State transition
 
-Changing the checked value animates a single progress value from zero to one, or
-back, over 150 milliseconds with an ease-in-out curve. That one value drives all
-three visual changes together: the thumb slides across the track, the track
-background and border crossfade, and the thumb color crossfades. Because colors
-are interpolated, the transition runs on the JavaScript driver rather than the
-native driver.
+Changing the checked value slides the thumb between the track's logical start
+and end. The JavaScript transition uses the theme's functional duration and
+easing; track and thumb colors update immediately without a crossfade. Labels
+use separate logical inner and outer padding tokens instead of a container gap.
 
 The thumb travels exactly the track width minus the two track borders, the two
 inset offsets, and the thumb width, so it lands flush against the inside of the

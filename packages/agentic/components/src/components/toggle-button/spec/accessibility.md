@@ -8,6 +8,8 @@ custom actions, but the component owns its button role, disabled state and check
 Use the [shared accessibility resolver](../../../../../../framework-base/references/accessibility.md) to declare
 and match Toggle on the same renderer. Preserve caller action labels; do not equate discovery of an action with
 successful invocation. Require a working name, state, and focus treatment in light, dark and high contrast.
+macOS supplies the action name as its fallback label so Paper can publish it. Callers may provide a localized action
+label; it is separate from the name of the control itself.
 
 | Endpoint                      | Required evidence before Button migration                                                                                                                                                                                                              |
 | ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |

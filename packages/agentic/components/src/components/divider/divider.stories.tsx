@@ -28,10 +28,12 @@ const meta: Meta<typeof Divider> = {
   component: Divider,
   args: {
     layout: 'center',
+    showContent: true,
     vertical: false,
   },
   argTypes: {
     layout: { control: 'select', options: ['center', 'start', 'end'] satisfies DividerLayout[] },
+    showContent: { control: 'boolean' },
     vertical: { control: 'boolean' },
   },
   parameters: {
@@ -158,12 +160,13 @@ export const Icon: Story = {
     <StoryGroup label="Icon">
       <Divider icon={starIcon} label="With icon" />
       <Divider icon={starIcon} label={null} />
+      <Divider icon={starIcon} label="Hidden content" showContent={false} />
     </StoryGroup>
   ),
   parameters: {
     docs: {
       description: {
-        story: 'The icon slot is optional, defaults hidden, and shares the same 20px neutral styling as the label.',
+        story: 'The optional 20-unit icon shares the label’s neutral foreground. Use showContent to hide both without clearing the slots.',
       },
     },
   },

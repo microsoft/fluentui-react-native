@@ -21,8 +21,8 @@ label text resolved from the `label` slot. Shorthand children and a `children`
 entry in a props object are both read for this fallback, so a labeled Divider
 announces the section boundary it introduces without extra wiring.
 
-A Divider with `label={null}` and no `accessibilityLabel` has no name and
-announces only its role.
+A Divider with no visible label and no caller-provided name exposes only
+separator semantics; hiding the content does not leave a hidden fallback name.
 
 The icon and the label are marked `accessible={false}`, and the content
 container is as well, so the separator is announced once from the root rather

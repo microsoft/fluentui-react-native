@@ -55,7 +55,7 @@ export function useMenuButton_unstable(props: MenuButtonProps): MenuButtonState 
     if (inMenu) {
       console.warn('MenuButton: do not render a MenuButton inside a menu; use a MenuItem submenu.');
     }
-    if (buttonProps.content == null && buttonProps.icon == null) {
+    if (buttonProps.content == null && buttonProps.leadingIcon == null) {
       console.warn('MenuButton: supply a label, a leading icon, or both.');
     }
     React.Children.forEach(children, (child) => {
@@ -63,7 +63,7 @@ export function useMenuButton_unstable(props: MenuButtonProps): MenuButtonState 
         console.warn('MenuButton: its menu is a flat list of actions; do not compose section headers.');
       }
     });
-  }, [buttonProps.content, buttonProps.icon, children, inMenu]);
+  }, [buttonProps.content, buttonProps.leadingIcon, children, inMenu]);
   useMenuChildrenWarning('MenuButton', children);
 
   // The controller restores focus to the Button's own focus target, which exists only after the Button state below.

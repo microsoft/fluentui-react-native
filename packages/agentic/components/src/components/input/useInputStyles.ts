@@ -1,6 +1,6 @@
 import type { StyleProp, ViewStyle } from 'react-native';
 
-import { attachSlotProps } from '@fluentui-react-native/framework-base';
+import { attachSlotDefaults, attachSlotProps } from '@fluentui-react-native/framework-base';
 import { applyFocusRingStyles } from '../../common/applyFocusRingStyles';
 
 import { inputStyles } from './input.styles';
@@ -56,28 +56,10 @@ export function useInputStyles_unstable(state: InputState) {
       testID: 'input-underline-focus',
     });
   }
-  if (state.iconStart) {
-    attachSlotProps(state.iconStart, {
-      accessible: false,
-      color: state.iconColor,
-      height: state.iconSize,
-      width: state.iconSize,
-    });
-  }
-  if (state.iconEnd1) {
-    attachSlotProps(state.iconEnd1, {
-      accessible: false,
-      color: state.iconColor,
-      height: state.iconSize,
-      width: state.iconSize,
-    });
-  }
-  if (state.iconEnd2) {
-    attachSlotProps(state.iconEnd2, {
-      accessible: false,
-      color: state.iconColor,
-      height: state.iconSize,
-      width: state.iconSize,
-    });
+  for (const icon of [state.iconStart, state.iconEnd1, state.iconEnd2]) {
+    if (icon) {
+      attachSlotDefaults(icon, state.iconDefaults);
+      attachSlotProps(icon, { accessible: false });
+    }
   }
 }

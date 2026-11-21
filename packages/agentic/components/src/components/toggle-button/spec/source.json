@@ -1,106 +1,72 @@
 {
   "schemaVersion": 2,
   "component": "toggle-button",
-  "lifecycle": "contract-draft",
-  "conformance": "review-required",
-  "reviewedAt": null,
+  "lifecycle": "contract-reviewed",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-11-20",
   "sources": [
     {
       "id": "flex-component",
       "kind": "flex-skill",
       "authority": "normative",
       "skill": "flex-components:toggle-button",
-      "sourceLock": "flex-1.5.0-206c4996",
-      "sourceLockFingerprint": "a69997212ec1b89510c94176801bf5a146ed7e7d8c80cc7db40ac8f60cf9f119",
+      "sourceLock": "flex-1.7.0-9f1df394",
+      "sourceLockFingerprint": "33c7dbb4ff78525a4e0900811f5fa1994579ee8dd95b337de85d8f47133d148c",
       "availableSurfaces": ["shared", "web"],
-      "surfacesConsulted": ["web"],
+      "surfacesConsulted": ["shared", "web"],
       "sourceFiles": [
         {
           "role": "skill",
           "marketplacePath": "catalogs/flex/plugins/components/skills/toggle-button/SKILL.md",
-          "marketplaceBlobSha": "2a6659011d3e65300e0d79f308c17e8ffd19a4b5",
-          "marketplaceSha256": "c81e561485de4457c394231530e1638ea88dcb1b5c3f140920206c80da78aed0",
+          "marketplaceBlobSha": "61d628bcd3e6ae65140b11f0d86a165f2cd91c50",
+          "marketplaceSha256": "33613c9f93fa0e1832676c66497a83dcfdb2b69921de348d39818600b2c042e4",
           "originPath": "plugins/components/skills/toggle-button/SKILL.md",
-          "originBlobSha": "2a6659011d3e65300e0d79f308c17e8ffd19a4b5",
-          "originSha256": "c81e561485de4457c394231530e1638ea88dcb1b5c3f140920206c80da78aed0",
+          "originBlobSha": "61d628bcd3e6ae65140b11f0d86a165f2cd91c50",
+          "originSha256": "33613c9f93fa0e1832676c66497a83dcfdb2b69921de348d39818600b2c042e4",
           "contentDiffers": false
         },
         {
           "role": "usage",
           "marketplacePath": "catalogs/flex/plugins/components/skills/toggle-button/usage.md",
-          "marketplaceBlobSha": "d3208839e1fb6dd607a324f2fa0d8915b69f8d75",
-          "marketplaceSha256": "40b3132772ec33bf018dd381a39e2687d955a65f7225a5f8c8a15fde24d316f6",
+          "marketplaceBlobSha": "0446932a11d616edfa8c338fc484213b16e49d7e",
+          "marketplaceSha256": "539c27673c2ba224f2c5d16c50a134599b1f443f1390fc6ac95b6ee381ff1462",
           "originPath": "plugins/components/skills/toggle-button/usage.md",
-          "originBlobSha": "d3208839e1fb6dd607a324f2fa0d8915b69f8d75",
-          "originSha256": "40b3132772ec33bf018dd381a39e2687d955a65f7225a5f8c8a15fde24d316f6",
+          "originBlobSha": "0446932a11d616edfa8c338fc484213b16e49d7e",
+          "originSha256": "539c27673c2ba224f2c5d16c50a134599b1f443f1390fc6ac95b6ee381ff1462",
           "contentDiffers": false
         },
         {
           "role": "web:accessibility",
           "marketplacePath": "catalogs/flex/plugins/components/skills/toggle-button/web/accessibility.md",
-          "marketplaceBlobSha": "0a694389ad96b623de73c432b42347bfb557ea12",
-          "marketplaceSha256": "253c2468791971c8343e535c5ec5060183d98e3fa7823a9393062ceab2d0b683",
+          "marketplaceBlobSha": "589e6694422d3cca96116d0d7daf23dfb1245d7a",
+          "marketplaceSha256": "b8392f68e2fb7d06a95d3396af97dbb3ee7d057cff7acec783a05fd64fcb952a",
           "originPath": "plugins/components/skills/toggle-button/web/accessibility.md",
-          "originBlobSha": "0a694389ad96b623de73c432b42347bfb557ea12",
-          "originSha256": "253c2468791971c8343e535c5ec5060183d98e3fa7823a9393062ceab2d0b683",
+          "originBlobSha": "589e6694422d3cca96116d0d7daf23dfb1245d7a",
+          "originSha256": "b8392f68e2fb7d06a95d3396af97dbb3ee7d057cff7acec783a05fd64fcb952a",
           "contentDiffers": false
         },
         {
           "role": "web:interaction",
           "marketplacePath": "catalogs/flex/plugins/components/skills/toggle-button/web/interaction.md",
-          "marketplaceBlobSha": "6c68faebab37782f7045a65d7dcaaf9c3a01d671",
-          "marketplaceSha256": "34dba59ff9784c520ca7ee679bec924bea71e67da5b5678b2d1baaff8d045035",
+          "marketplaceBlobSha": "326538def9bc06ad3d1fd1f10f5f00c75ac8d82f",
+          "marketplaceSha256": "c04e9290ff15a41eb764842da5bc952a2b805b0788bea8fee96b2d1ca236a461",
           "originPath": "plugins/components/skills/toggle-button/web/interaction.md",
-          "originBlobSha": "6c68faebab37782f7045a65d7dcaaf9c3a01d671",
-          "originSha256": "34dba59ff9784c520ca7ee679bec924bea71e67da5b5678b2d1baaff8d045035",
+          "originBlobSha": "326538def9bc06ad3d1fd1f10f5f00c75ac8d82f",
+          "originSha256": "c04e9290ff15a41eb764842da5bc952a2b805b0788bea8fee96b2d1ca236a461",
           "contentDiffers": false
         },
         {
           "role": "web:tokens",
           "marketplacePath": "catalogs/flex/plugins/components/skills/toggle-button/web/tokens.yaml",
-          "marketplaceBlobSha": "762e79bfe6c63846c1356871fe83d390ce3d1713",
-          "marketplaceSha256": "b90437a4f46a07b5c6979e9fb57a0b9700511ecfef382b2a4d5ee70f34c73507",
+          "marketplaceBlobSha": "cd0c86e2ca2bad2d12eb654d2ace47ec8f1cc6fb",
+          "marketplaceSha256": "62be3c8be92e5fdf1828a39e9528a790e233da66a104d39e96f9b305c6d7b468",
           "originPath": "plugins/components/skills/toggle-button/web/tokens.yaml",
-          "originBlobSha": "762e79bfe6c63846c1356871fe83d390ce3d1713",
-          "originSha256": "b90437a4f46a07b5c6979e9fb57a0b9700511ecfef382b2a4d5ee70f34c73507",
+          "originBlobSha": "cd0c86e2ca2bad2d12eb654d2ace47ec8f1cc6fb",
+          "originSha256": "62be3c8be92e5fdf1828a39e9528a790e233da66a104d39e96f9b305c6d7b468",
           "contentDiffers": false
         }
       ],
       "releaseDifferences": []
-    },
-    {
-      "id": "flex-promoted",
-      "kind": "git-files",
-      "authority": "normative",
-      "repository": "agency-microsoft/.github-private",
-      "commit": "9f1df394126dd9ad2339b786ab7dcc090131533c",
-      "files": [
-        {
-          "role": "skill",
-          "path": "catalogs/flex/plugins/components/skills/toggle-button/SKILL.md",
-          "sha256": "33613c9f93fa0e1832676c66497a83dcfdb2b69921de348d39818600b2c042e4"
-        },
-        {
-          "role": "usage",
-          "path": "catalogs/flex/plugins/components/skills/toggle-button/usage.md",
-          "sha256": "539c27673c2ba224f2c5d16c50a134599b1f443f1390fc6ac95b6ee381ff1462"
-        },
-        {
-          "role": "web:accessibility",
-          "path": "catalogs/flex/plugins/components/skills/toggle-button/web/accessibility.md",
-          "sha256": "b8392f68e2fb7d06a95d3396af97dbb3ee7d057cff7acec783a05fd64fcb952a"
-        },
-        {
-          "role": "web:interaction",
-          "path": "catalogs/flex/plugins/components/skills/toggle-button/web/interaction.md",
-          "sha256": "c04e9290ff15a41eb764842da5bc952a2b805b0788bea8fee96b2d1ca236a461"
-        },
-        {
-          "role": "web:tokens",
-          "path": "catalogs/flex/plugins/components/skills/toggle-button/web/tokens.yaml",
-          "sha256": "62be3c8be92e5fdf1828a39e9528a790e233da66a104d39e96f9b305c6d7b468"
-        }
-      ]
     },
     {
       "id": "furn-button",
@@ -128,40 +94,49 @@
     }
   ],
   "divergences": [
-    { "id": "toggle-button-release-appearance", "status": "aligning" },
-    { "id": "toggle-button-native-state", "status": "accepted" },
-    { "id": "native-system-focus-visuals", "status": "accepted" }
+    {
+      "id": "toggle-button-release-appearance",
+      "status": "resolved"
+    },
+    {
+      "id": "toggle-button-native-state",
+      "status": "accepted"
+    },
+    {
+      "id": "native-system-focus-visuals",
+      "status": "accepted"
+    }
   ],
   "requirements": [
     {
       "id": "TGB-001",
-      "sources": ["flex-component", "flex-promoted", "furn-button"],
-      "evidence": ["toggle-button.types.ts"],
-      "plannedEvidence": ["toggle-button.test.tsx"]
+      "sources": ["flex-component", "furn-button"],
+      "evidence": ["toggle-button.types.ts", "toggle-button.test.tsx"]
     },
-    { "id": "TGB-002", "sources": ["flex-promoted", "furn-button"], "plannedEvidence": ["useToggleButton.ts", "toggle-button.test.tsx"] },
+    {
+      "id": "TGB-002",
+      "sources": ["flex-component", "furn-button"],
+      "evidence": ["useToggleButton.ts", "toggle-button.test.tsx"]
+    },
     {
       "id": "TGB-003",
-      "sources": ["flex-promoted", "furn-button"],
-      "evidence": ["toggle-button.types.ts"],
-      "plannedEvidence": ["renderToggleButton.tsx", "toggle-button.test.tsx"]
+      "sources": ["flex-component", "furn-button"],
+      "evidence": ["toggle-button.types.ts", "renderToggleButton.tsx", "toggle-button.test.tsx"]
     },
     {
       "id": "TGB-004",
-      "sources": ["flex-promoted"],
-      "evidence": ["spec/tokens.json", "toggle-button.styles.ts", "toggle-button.scaffold.test.ts"],
-      "plannedEvidence": ["useToggleButtonStyles.ts", "toggle-button.stories.tsx"]
+      "sources": ["flex-component"],
+      "evidence": ["spec/tokens.json", "toggle-button.styles.ts", "toggle-button.tokens.test.ts", "useToggleButtonStyles.ts"]
     },
     {
       "id": "TGB-005",
-      "sources": ["flex-promoted", "furn-button"],
-      "plannedEvidence": ["toggle-button.test.tsx", "toggle-button.wdio.ts"]
+      "sources": ["flex-component", "furn-button"],
+      "evidence": ["toggle-button.test.tsx", "toggle-button.stories.tsx"]
     },
     {
       "id": "TGB-006",
-      "sources": ["flex-component", "flex-promoted", "furn-button"],
-      "evidence": ["spec/usage.md"],
-      "plannedEvidence": ["toggle-button.stories.tsx"]
+      "sources": ["flex-component", "furn-button"],
+      "evidence": ["spec/usage.md", "toggle-button.stories.tsx"]
     }
   ]
 }

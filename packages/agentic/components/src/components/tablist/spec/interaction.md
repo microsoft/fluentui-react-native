@@ -17,6 +17,10 @@ Home and End work in both orientations. Navigation skips disabled Tabs and
 wraps only when `circularNavigation` is true. Unhandled keys and the inactive
 orientation axis are forwarded unchanged.
 
+`endContent` follows the tabs in visual order. Tab and Shift+Tab can reach an
+interactive end control independently, but arrows, Home, End, and tab
+selection do not include it.
+
 Enter and Space continue through the native Tab press behavior. TabList adds no
 second activation handler, preventing duplicate selection requests.
 

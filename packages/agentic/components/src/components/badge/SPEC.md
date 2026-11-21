@@ -3,7 +3,7 @@ name: badge
 platform: react-native (Windows, macOS)
 status: implemented
 source: ./spec/source.json
-tokens: ./spec/tokens.yaml
+tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
 interaction: ./spec/interaction.md
 usage: ./spec/usage.md
@@ -17,31 +17,31 @@ Badge is a non-interactive React Native indicator for a compact status, count, o
 
 ## Public contract
 
-`appearance` defaults to `tint`; `color` defaults to `brand`; `size` defaults to `medium`; `shape` defaults to `circular`; and `layout` defaults to `iconAndText`. Appearance accepts `tint` or `outline`; color accepts `brand`, `danger`, `success`, `warning`, or `informative`; size accepts `small` or `medium`; shape accepts `circular` or `rounded`.
+Status layouts `iconAndText` (default) and `iconOnly` use `tint` (default) or `outline`. `counter` and `dot` use only `filled`, inferred when omitted; status content and icon props are excluded for notifications. `color` defaults to `informative` and accepts `danger`, `success`, `warning`, or `informative`. `size` defaults to `medium` and accepts `small` or `medium`. `shape` defaults to `circular`; `rounded` is supported except on dots.
 
-`root` is required. In `iconAndText` layout, `content`, `leadingIcon`, and `trailingIcon` are optional slots. Content renders by default as “Badge” unless explicitly `null`. `leadingIconVisible` defaults to `true`, and the leading slot defaults to the selected-circle icon. `trailingIconVisible` defaults to `false`; enabling it renders only a supplied trailing slot. In `iconOnly` layout, `leadingIcon` is required by the public type, it is always visible, and text/trailing icon props are excluded.
+`root` is required. In `iconAndText`, `content` defaults to “Badge”, `leadingIconVisible` defaults to `true`, and `trailingIconVisible` defaults to `false`. Callers can replace the status-specific leading icon; it is always visible in `iconOnly`. Enabling the trailing icon renders only a supplied trailing slot. A `counter` requires caller-supplied `count` (number or preformatted string); it is at least 16/20 units wide and expands for longer labels. A `dot` has no content, measures 6/8 units, and has a contrast boundary.
 
-Rendering order is leading icon, content, then trailing icon, omitting unavailable slots. The root is non-focusable. Resolved state stores the variant values, slot-presence facts, visibility booleans, icon-only state, theme state, and user style. User root style follows structural, layout, appearance, and color styles.
+Status order is leading icon, content, then trailing icon. Tint paints a semantic soft fill over a neutral-nearer backing surface; Outline uses semantic stroke; Filled uses semantic loud fill and, for counts, on-loud text. The root is never focusable. Caller visuals follow the resolved token defaults.
 
 ### Requirements
 
-- **BDG-001:** Expose the documented finite variant axes, defaults, and discriminated `iconOnly` prop shape.
+- **BDG-001:** Expose the documented finite variant axes, defaults, and discriminated status/counter/dot layouts.
 - **BDG-002:** Render only visible slots in leading-icon, content, trailing-icon order, including slot defaults and icon-only exclusion.
 - **BDG-003:** Map appearance, color, size, shape, typography, and icon dimensions to the documented FURN bindings and apply user root style last.
-- **BDG-004:** Keep normal badges out of the accessibility tree, expose a labeled badge as an image, and warn when an icon-only badge has no accessible name.
+- **BDG-004:** Keep badges decorative by default, allow named standalone status badges, and keep notification meaning on the host rather than adding a redundant accessibility target.
 - **BDG-005:** Remain non-interactive and leave host placement, activation, and state meaning to the containing component.
 
 ## Platform behavior
 
-Badge uses a React Native `View` and is never focusable on Windows or macOS. A badge with `accessibilityLabel` or a referenced accessible label is exposed with image role; otherwise its default root and descendants are hidden from accessibility. Icon slots are always decorative.
-
-Windows maps an informative badge to a UI Automation image; macOS maps it to an AX image. Neither platform receives press, keyboard, hover, focus, or disabled behavior from this component. Positioning is normal React Native layout unless a parent supplies placement through its own layout or a user style.
+Badge uses a nonfocusable React Native `View`. A named status Badge requests image role; a notification Badge and all decorative descendants are hidden. Badge implements no press, keyboard, hover, focus, or disabled behavior. Placement belongs to the host.
 
 ## Divergences from Flex
 
-No material behavioral divergence was identified. The source evidence’s web accessibility concepts are adapted to React Native accessibility props and platform accessibility APIs.
+- `badge-host-owned-notification-accessibility` — **accepted.** Counter and Dot are always decorative in FURN. Their host supplies the accessible notification meaning rather than giving the visual marker its own accessible node.
 
 ## Conformance
+
+Unit and type evidence covers layout, defaults, and prop ownership. Native contrast, sizing and host notification announcements still require renderer evidence.
 
 | Requirement | Evidence                                                                    |
 | ----------- | --------------------------------------------------------------------------- |

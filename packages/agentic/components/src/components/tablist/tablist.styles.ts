@@ -1,38 +1,33 @@
-import { StyleSheet } from 'react-native';
 import type { ViewStyle } from 'react-native';
+import {
+  alignItemsToken,
+  alignSelfToken,
+  defineComponentTokens,
+  flexDirectionToken,
+  getComponentTokens,
+  getGapStyleValue,
+  resolveTokenStates,
+} from '@fluentui-react-native/design/styling';
+import type { ComponentTokenPatch } from '@fluentui-react-native/design/styling';
+import type { TabListState } from './tablist.types';
+import schema from './spec/tokens.json' with { type: 'json' };
 
-import type { ThemeState } from '@fluentui-react-native/design';
-import { getGapStyleValue } from '@fluentui-react-native/design/styling';
-
-export type TabListThemeStyles = {
-  root: ViewStyle;
+type TabListTokenState = Pick<TabListState, 'orientation'>;
+const domains = {
+  root: {
+    style: { alignItems: alignItemsToken, alignSelf: alignSelfToken, flexDirection: flexDirectionToken, gap: getGapStyleValue },
+    props: {},
+  },
 };
 
-const tabListThemeStylesKey = Symbol('TabList.themeStyles');
-
-export function getTabListThemeStyles(themeState: ThemeState): TabListThemeStyles {
-  const cachedStyles = themeState.themeStyles[tabListThemeStylesKey] as TabListThemeStyles | undefined;
-  if (cachedStyles) {
-    return cachedStyles;
+declare module '@fluentui-react-native/design' {
+  interface ComponentTokenRegistry {
+    'furn.tablist': ComponentTokenPatch<TabListTokenState, typeof domains>;
   }
-
-  const styles = StyleSheet.create<TabListThemeStyles>({
-    root: {
-      alignItems: 'flex-start',
-      alignSelf: 'flex-start',
-      gap: getGapStyleValue(themeState.tokens.spacing.componentBase100),
-    },
-  });
-
-  themeState.themeStyles[tabListThemeStylesKey] = styles;
-  return styles;
 }
 
-export const tabListStaticStyles = StyleSheet.create({
-  horizontal: {
-    flexDirection: 'row',
-  },
-  vertical: {
-    flexDirection: 'column',
-  },
-});
+const tabListTokens = defineComponentTokens<TabListTokenState, typeof domains>({ id: 'furn.tablist', slots: domains, schema });
+
+export function getTabListRootStyle(state: TabListState): ViewStyle {
+  return resolveTokenStates(getComponentTokens(state, tabListTokens).root, state).style;
+}

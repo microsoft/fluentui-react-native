@@ -1,247 +1,113 @@
-import { StyleSheet } from 'react-native';
 import type { TextStyle, ViewStyle } from 'react-native';
-
-import type { FlexTokens } from '@fluentui-react-native/design';
-
 import {
-  getNumericStyleValue,
-  getThemedColorStyleFactory,
-  getThemedStateStyleFactory,
-  interactiveStatePriority,
+  alignItemsToken,
+  alignSelfToken,
+  borderStyleToken,
+  colorToken,
+  defineComponentTokens,
+  dimensionToken,
+  flexDirectionToken,
+  fontWeightToken,
+  getComponentTokens,
+  getGapStyleValue,
+  justifyContentToken,
+  numericToken,
+  resolveTokenStates,
+  stringToken,
 } from '@fluentui-react-native/design/styling';
-import type { ColorStyleDefinition, StyleDefinition, TextColorStyle, ViewColorStyle } from '@fluentui-react-native/design/styling';
+import type { ComponentTokenPatch } from '@fluentui-react-native/design/styling';
 import type { RadioState } from './radio.types';
+import schema from './spec/tokens.json' with { type: 'json' };
 
-export const radioStyles = StyleSheet.create({
+type RadioTokenState = Pick<RadioState, 'selected'> & { visualState: 'rest' | 'hovered' | 'pressed' | 'disabled' };
+const textStyle = {
+  flexShrink: numericToken,
+  fontFamily: stringToken,
+  fontSize: numericToken,
+  fontWeight: fontWeightToken,
+  lineHeight: numericToken,
+  color: colorToken,
+};
+const domains = {
+  root: {
+    style: {
+      alignItems: alignItemsToken,
+      alignSelf: alignSelfToken,
+      flexDirection: flexDirectionToken,
+      flexShrink: numericToken,
+      justifyContent: justifyContentToken,
+      borderRadius: numericToken,
+      backgroundColor: colorToken,
+      gap: getGapStyleValue,
+    },
+    props: {},
+  },
   indicator: {
-    alignItems: 'center',
-    flexShrink: 0,
-    justifyContent: 'center',
+    style: {
+      alignItems: alignItemsToken,
+      flexShrink: numericToken,
+      justifyContent: justifyContentToken,
+      borderStyle: borderStyleToken,
+      borderWidth: numericToken,
+      borderRadius: numericToken,
+      height: dimensionToken,
+      width: dimensionToken,
+      margin: dimensionToken,
+      backgroundColor: colorToken,
+      borderColor: colorToken,
+    },
+    props: {},
   },
   dot: {
-    flexShrink: 0,
-  },
-  label: {
-    flexShrink: 1,
+    style: {
+      flexShrink: numericToken,
+      borderRadius: numericToken,
+      height: dimensionToken,
+      width: dimensionToken,
+      backgroundColor: colorToken,
+    },
+    props: {},
   },
   labelContainer: {
-    flexShrink: 1,
-    justifyContent: 'center',
-    minWidth: 0,
-  },
-  root: {
-    alignSelf: 'flex-start',
-    alignItems: 'center',
-    flexDirection: 'row',
-    flexShrink: 1,
-    justifyContent: 'flex-start',
-  },
-  secondaryText: {
-    flexShrink: 1,
-  },
-});
-
-const noStateLevels = [[]] as const;
-const selectionStateLevels = [['selected'], interactiveStatePriority] as const;
-type RadioColorState = 'selected' | 'disabled' | 'pressed' | 'hovered';
-
-const toDimensionValue = (value: unknown): number => Number(getNumericStyleValue(value));
-
-const getRadioRootLayoutStyle = getThemedStateStyleFactory(
-  'Radio.rootLayout',
-  ({ borderRadius, color, spacing }: FlexTokens): StyleDefinition<ViewStyle, typeof noStateLevels> => ({
-    backgroundColor: color.backgroundNeutralTransparent.rest,
-    borderRadius: borderRadius.base300,
-    gap: toDimensionValue(spacing.componentBase100),
-  }),
-  noStateLevels,
-);
-
-const getRadioIndicatorLayoutStyle = getThemedStateStyleFactory(
-  'Radio.indicatorLayout',
-  ({ color, spacing, strokeWidth }: FlexTokens): StyleDefinition<ViewStyle, typeof noStateLevels> => ({
-    backgroundColor: color.backgroundNeutralTransparent.rest,
-    borderRadius: 8,
-    borderStyle: 'solid',
-    borderWidth: strokeWidth.thin,
-    height: 16,
-    margin: toDimensionValue(spacing.componentBase200),
-    width: 16,
-  }),
-  noStateLevels,
-);
-
-const getRadioIndicatorDotLayoutStyle = getThemedStateStyleFactory(
-  'Radio.indicatorDotLayout',
-  (): StyleDefinition<ViewStyle, typeof noStateLevels> => ({
-    borderRadius: 5,
-    height: 10,
-    width: 10,
-  }),
-  noStateLevels,
-);
-
-const getRadioLabelContainerLayoutStyle = getThemedStateStyleFactory(
-  'Radio.labelContainerLayout',
-  ({ spacing }: FlexTokens): StyleDefinition<ViewStyle, typeof noStateLevels> => ({
-    gap: toDimensionValue(spacing.componentBase50),
-    paddingEnd: toDimensionValue(spacing.componentBase200),
-    paddingVertical: toDimensionValue(spacing.componentBase150),
-  }),
-  noStateLevels,
-);
-
-const getRadioLabelTypographyStyle = getThemedStateStyleFactory(
-  'Radio.labelTypography',
-  ({ fontFamily, fontSize, fontWeight, lineHeight }: FlexTokens): StyleDefinition<TextStyle, typeof noStateLevels> => ({
-    fontFamily: fontFamily.functional,
-    fontSize: fontSize.functionalBodyMedium,
-    fontWeight: fontWeight.functionalRegular,
-    lineHeight: lineHeight.functionalBodyMedium,
-  }),
-  noStateLevels,
-);
-
-const getRadioSecondaryTypographyStyle = getThemedStateStyleFactory(
-  'Radio.secondaryTypography',
-  ({ fontFamily, fontSize, fontWeight, lineHeight }: FlexTokens): StyleDefinition<TextStyle, typeof noStateLevels> => ({
-    fontFamily: fontFamily.functional,
-    fontSize: fontSize.functionalBodySmall,
-    fontWeight: fontWeight.functionalRegular,
-    lineHeight: lineHeight.functionalBodySmall,
-  }),
-  noStateLevels,
-);
-
-const indicatorBorderDefinition: ColorStyleDefinition<ViewColorStyle, typeof selectionStateLevels> = {
-  borderColor: 'strokeNeutralHeavy',
-  disabled: {
-    borderColor: 'strokeNeutralDisabled',
-  },
-  selected: {
-    borderColor: 'strokeBrandLoud',
-    disabled: {
-      borderColor: 'strokeNeutralDisabled',
+    style: {
+      flexShrink: numericToken,
+      justifyContent: justifyContentToken,
+      minWidth: dimensionToken,
+      paddingEnd: dimensionToken,
+      paddingVertical: dimensionToken,
+      gap: getGapStyleValue,
     },
+    props: {},
   },
+  label: { style: textStyle, props: {} },
+  secondaryText: { style: textStyle, props: {} },
 };
 
-const indicatorDotDefinition: ColorStyleDefinition<ViewColorStyle, typeof selectionStateLevels> = {
-  backgroundColor: 'foregroundBrandPrimary',
-  disabled: {
-    backgroundColor: 'foregroundNeutralDisabled',
-  },
-  selected: {
-    backgroundColor: 'foregroundBrandPrimary',
-    disabled: {
-      backgroundColor: 'foregroundNeutralDisabled',
-    },
-  },
-};
-
-const labelColorDefinition: ColorStyleDefinition<TextColorStyle, typeof selectionStateLevels> = {
-  color: 'foregroundNeutralSecondary',
-  disabled: {
-    color: 'foregroundNeutralDisabled',
-  },
-  selected: {
-    color: 'foregroundNeutralPrimary',
-    disabled: {
-      color: 'foregroundNeutralDisabled',
-    },
-  },
-};
-
-const secondaryTextColorDefinition: ColorStyleDefinition<TextColorStyle, typeof selectionStateLevels> = {
-  color: 'foregroundNeutralSecondary',
-  disabled: {
-    color: 'foregroundNeutralDisabled',
-  },
-  selected: {
-    color: 'foregroundNeutralSecondary',
-    disabled: {
-      color: 'foregroundNeutralDisabled',
-    },
-  },
-};
-
-const getRadioIndicatorBorderColor = getThemedColorStyleFactory<ViewColorStyle, typeof selectionStateLevels>(
-  'Radio.indicatorBorder',
-  indicatorBorderDefinition,
-  selectionStateLevels,
-);
-
-const getRadioIndicatorDotColor = getThemedColorStyleFactory<ViewColorStyle, typeof selectionStateLevels>(
-  'Radio.indicatorDot',
-  indicatorDotDefinition,
-  selectionStateLevels,
-);
-
-const getRadioLabelColor = getThemedColorStyleFactory<TextColorStyle, typeof selectionStateLevels>(
-  'Radio.labelColor',
-  labelColorDefinition,
-  selectionStateLevels,
-);
-
-const getRadioSecondaryTextColor = getThemedColorStyleFactory<TextColorStyle, typeof selectionStateLevels>(
-  'Radio.secondaryTextColor',
-  secondaryTextColorDefinition,
-  selectionStateLevels,
-);
-
-function getColorStateSource(state: RadioState): RadioColorState[] {
-  const source: RadioColorState[] = [];
-  if (state.selected) {
-    source.push('selected');
+declare module '@fluentui-react-native/design' {
+  interface ComponentTokenRegistry {
+    'furn.radio': ComponentTokenPatch<RadioTokenState, typeof domains>;
   }
-  if (state.disabled) {
-    source.push('disabled');
-  }
-  if (state.pressed) {
-    source.push('pressed');
-  }
-  if (state.hovered) {
-    source.push('hovered');
-  }
-  return source;
 }
 
-export function getRadioRootLayout(state: RadioState): ViewStyle {
-  return getRadioRootLayoutStyle(state, []);
-}
+const radioTokens = defineComponentTokens<RadioTokenState, typeof domains>({ id: 'furn.radio', slots: domains, schema });
 
-export function getRadioIndicatorLayout(state: RadioState): ViewStyle {
-  return getRadioIndicatorLayoutStyle(state, []);
-}
-
-export function getRadioIndicatorDotLayout(state: RadioState): ViewStyle {
-  return getRadioIndicatorDotLayoutStyle(state, []);
-}
-
-export function getRadioLabelContainerLayout(state: RadioState): ViewStyle {
-  return getRadioLabelContainerLayoutStyle(state, []);
-}
-
-export function getRadioLabelTypography(state: RadioState): TextStyle {
-  return getRadioLabelTypographyStyle(state, []);
-}
-
-export function getRadioSecondaryTypography(state: RadioState): TextStyle {
-  return getRadioSecondaryTypographyStyle(state, []);
-}
-
-export function getRadioIndicatorBorder(state: RadioState) {
-  return getRadioIndicatorBorderColor(state, getColorStateSource(state));
-}
-
-export function getRadioIndicatorDotColorStyle(state: RadioState) {
-  return getRadioIndicatorDotColor(state, getColorStateSource(state));
-}
-
-export function getRadioLabelColorStyle(state: RadioState) {
-  return getRadioLabelColor(state, getColorStateSource(state));
-}
-
-export function getRadioSecondaryTextColorStyle(state: RadioState) {
-  return getRadioSecondaryTextColor(state, getColorStateSource(state));
+export function resolveRadioChrome(state: RadioState): {
+  root: ViewStyle;
+  indicator: ViewStyle;
+  dot: ViewStyle;
+  labelContainer: ViewStyle;
+  label: TextStyle;
+  secondaryText: TextStyle;
+} {
+  const tokens = getComponentTokens(state, radioTokens);
+  const visualState = state.disabled ? 'disabled' : state.pressed ? 'pressed' : state.hovered ? 'hovered' : 'rest';
+  const selection = { ...state, visualState } satisfies RadioTokenState;
+  return {
+    root: resolveTokenStates(tokens.root, selection).style,
+    indicator: resolveTokenStates(tokens.indicator, selection).style,
+    dot: resolveTokenStates(tokens.dot, selection).style,
+    labelContainer: resolveTokenStates(tokens.labelContainer, selection).style,
+    label: resolveTokenStates(tokens.label, selection).style,
+    secondaryText: resolveTokenStates(tokens.secondaryText, selection).style,
+  };
 }

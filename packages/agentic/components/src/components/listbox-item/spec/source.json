@@ -3,17 +3,17 @@
   "component": "listbox-item",
   "lifecycle": "implemented",
   "conformance": "reviewed",
-  "reviewedAt": "2026-10-27",
+  "reviewedAt": "2026-11-20",
   "sources": [
     {
       "id": "flex-component",
       "kind": "flex-skill",
       "authority": "normative",
       "skill": "flex-components:listbox-item",
-      "sourceLock": "flex-1.5.0-206c4996",
-      "sourceLockFingerprint": "a69997212ec1b89510c94176801bf5a146ed7e7d8c80cc7db40ac8f60cf9f119",
+      "sourceLock": "flex-1.7.0-9f1df394",
+      "sourceLockFingerprint": "33c7dbb4ff78525a4e0900811f5fa1994579ee8dd95b337de85d8f47133d148c",
       "availableSurfaces": ["shared", "web"],
-      "surfacesConsulted": ["shared", "web"],
+      "surfacesConsulted": ["web"],
       "sourceFiles": [
         {
           "role": "skill",
@@ -28,41 +28,41 @@
         {
           "role": "usage",
           "marketplacePath": "catalogs/flex/plugins/components/skills/listbox-item/usage.md",
-          "marketplaceBlobSha": "ff11150b9050539cad1eaeec67ccf44240e93207",
-          "marketplaceSha256": "ecc3bf4742445f4a7211e7d29140791e367cf371c3e190b7fe26e4b190fe7d22",
+          "marketplaceBlobSha": "0cda444dd3357e1fa849121d1cdc8651cc33292b",
+          "marketplaceSha256": "481151e213cbb92a86ff0da1e750a1e2df37b9c4a7c4c96cf8a5c6908fc3a1be",
           "originPath": "plugins/components/skills/listbox-item/usage.md",
-          "originBlobSha": "ff11150b9050539cad1eaeec67ccf44240e93207",
-          "originSha256": "ecc3bf4742445f4a7211e7d29140791e367cf371c3e190b7fe26e4b190fe7d22",
+          "originBlobSha": "0cda444dd3357e1fa849121d1cdc8651cc33292b",
+          "originSha256": "481151e213cbb92a86ff0da1e750a1e2df37b9c4a7c4c96cf8a5c6908fc3a1be",
           "contentDiffers": false
         },
         {
           "role": "web:accessibility",
           "marketplacePath": "catalogs/flex/plugins/components/skills/listbox-item/web/accessibility.md",
-          "marketplaceBlobSha": "b6dba99deb73da8ae697e1f546765c47e78c9b00",
-          "marketplaceSha256": "93e23d8c5838b834790ec65016bcd948747df76f7b056add87f6dd0d42d2a5ff",
+          "marketplaceBlobSha": "79a6de96958754621d74fc0816192068445e1a9d",
+          "marketplaceSha256": "3b5d0df1ed01cc4556830dcdaff9a81b47c93658c4b7058614f2156c01028c75",
           "originPath": "plugins/components/skills/listbox-item/web/accessibility.md",
-          "originBlobSha": "b6dba99deb73da8ae697e1f546765c47e78c9b00",
-          "originSha256": "93e23d8c5838b834790ec65016bcd948747df76f7b056add87f6dd0d42d2a5ff",
+          "originBlobSha": "79a6de96958754621d74fc0816192068445e1a9d",
+          "originSha256": "3b5d0df1ed01cc4556830dcdaff9a81b47c93658c4b7058614f2156c01028c75",
           "contentDiffers": false
         },
         {
           "role": "web:interaction",
           "marketplacePath": "catalogs/flex/plugins/components/skills/listbox-item/web/interaction.md",
-          "marketplaceBlobSha": "10880c6a7a44223bf1a275d9182913617153c7c4",
-          "marketplaceSha256": "fbf6c6f159ad3d0321988bc6909cf3a0793432987a5234b9d72f01ef81e13659",
+          "marketplaceBlobSha": "3bd721117296805d63e23f634a3352525e2dedbf",
+          "marketplaceSha256": "bf0b23bdd7462146e29a3aee9c33480dcd601cf9678c409cfe061b979ef2c87b",
           "originPath": "plugins/components/skills/listbox-item/web/interaction.md",
-          "originBlobSha": "10880c6a7a44223bf1a275d9182913617153c7c4",
-          "originSha256": "fbf6c6f159ad3d0321988bc6909cf3a0793432987a5234b9d72f01ef81e13659",
+          "originBlobSha": "3bd721117296805d63e23f634a3352525e2dedbf",
+          "originSha256": "bf0b23bdd7462146e29a3aee9c33480dcd601cf9678c409cfe061b979ef2c87b",
           "contentDiffers": false
         },
         {
           "role": "web:tokens",
           "marketplacePath": "catalogs/flex/plugins/components/skills/listbox-item/web/tokens.yaml",
-          "marketplaceBlobSha": "674693aee2649be974bb4e6e468908695c7c581c",
-          "marketplaceSha256": "e825460747611b4a209369c5d646d9d5df5d88c344ecb0111edce153853824d5",
+          "marketplaceBlobSha": "60d3a609ab2df0bd5bc710303443dae135367895",
+          "marketplaceSha256": "d0e756171ed3f4b603b8c588535946232ef642023a0469182c2d001e8d71730a",
           "originPath": "plugins/components/skills/listbox-item/web/tokens.yaml",
-          "originBlobSha": "674693aee2649be974bb4e6e468908695c7c581c",
-          "originSha256": "e825460747611b4a209369c5d646d9d5df5d88c344ecb0111edce153853824d5",
+          "originBlobSha": "60d3a609ab2df0bd5bc710303443dae135367895",
+          "originSha256": "d0e756171ed3f4b603b8c588535946232ef642023a0469182c2d001e8d71730a",
           "contentDiffers": false
         }
       ],
@@ -118,7 +118,7 @@
     },
     {
       "id": "listbox-item-default-icon",
-      "status": "accepted"
+      "status": "resolved"
     },
     {
       "id": "listbox-item-native-focus-model",

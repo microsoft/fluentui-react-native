@@ -1,16 +1,7 @@
-import type { ThemeState } from '@fluentui-react-native/design';
-import type {
-  ComponentState,
-  FocusTargetBinding,
-  OptionalSlot,
-  PressableState,
-  PropsWithRefOf,
-  Slot,
-  SlotProp,
-} from '@fluentui-react-native/framework-base';
+import type { ComponentState, OptionalSlot, PropsWithRefOf, Slot, SlotProp } from '@fluentui-react-native/framework-base';
 import type { Pressable, PressableProps } from 'react-native';
-import type { FocusVisualsSlots } from '../../common/useFocusVisuals';
 import type { Icon } from '../../primitives/icon/icon';
+import type { ButtonState } from '../button/button.types';
 import type { Text } from '../text/text';
 import type { ToggleButtonTokens } from './toggle-button.styles';
 
@@ -60,15 +51,8 @@ type ContentLayout =
 
 export type ToggleButtonProps = ToggleButtonBaseProps & ContentLayout;
 
-export type ToggleButtonTokenState = { selected: boolean; visualState: 'rest' | 'hovered' | 'pressed' | 'disabled' };
+export type ToggleButtonTokenState = Pick<ButtonState, 'highContrast' | 'visualState'> & { selected: boolean };
 
-export type ToggleButtonState = ComponentState<ToggleButtonSlots & FocusVisualsSlots & { contentHidden: OptionalSlot<typeof Text> }> &
-  FocusTargetBinding &
-  PressableState &
+export type ToggleButtonState = ButtonState &
   ToggleButtonTokenState &
-  Required<Pick<ToggleButtonProps, 'disabled' | 'size' | 'shape'>> & {
-    iconOnly: boolean;
-    themeState: ThemeState;
-    toggleButtonTokens: ToggleButtonTokens;
-    userStyle?: PressableProps['style'];
-  };
+  ComponentState<{ contentHidden: OptionalSlot<typeof Text> }> & { toggleButtonTokens: ToggleButtonTokens };

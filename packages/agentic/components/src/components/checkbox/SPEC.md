@@ -3,7 +3,7 @@ name: checkbox
 platform: react-native (Windows, macOS)
 status: implemented
 source: ./spec/source.json
-tokens: ./spec/tokens.yaml
+tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
 interaction: ./spec/interaction.md
 usage: ./spec/usage.md
@@ -123,15 +123,20 @@ the next render, so reduced-motion settings need no separate branch.
 
 `native-system-focus-visuals` is an **accepted** [shared native adaptation](../../../references/higher-order-components.md#focus-visual-policy).
 
-| ID                                       | Disposition | React Native contract                                                                                                                                                                                                            | Follow-up                                                                                         |
-| ---------------------------------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| `checkbox-secondary-text-description`    | Accepted    | Secondary text is appended to the root accessibility hint rather than associated as a separate described-by target. React Native exposes no equivalent description relationship, and the hint is the platform-idiomatic channel. | None. Revisit only if React Native adds a description association.                                |
-| `checkbox-secondary-text-requires-label` | Accepted    | Secondary text renders only alongside a visible label, and a development warning fires otherwise. Flex treats the two visibility toggles as independent.                                                                         | None. The pairing keeps the label column from presenting supporting text with nothing to support. |
-| `checkbox-focus-visual-modality`         | Resolved    | Custom visibility follows keyboard modality from the scene root rather than a component-local pointer tracker. Native appearance remains renderer-owned.                                                                         | Preserve the shared hook and component modality matrix.                                           |
-| `checkbox-native-focus-ring`             | Accepted    | Native rings default to Windows/macOS; Win32 uses the root-modality-aware custom slot.                                                                                                                                           | Validate platform defaults and custom slot behavior under the shared focus policy.                |
-| `checkbox-owned-props-type-surface`      | Deferred    | The root type accepts role and checked or disabled state values that the implementation always overwrites.                                                                                                                       | Omit those owned keys from the exposed native-prop type in a separately reviewed API correction.  |
+| ID                                       | Disposition | React Native contract                                                                                                                                                                                                            | Follow-up                                                                          |
+| ---------------------------------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `checkbox-secondary-text-description`    | Accepted    | Secondary text is appended to the root accessibility hint rather than associated as a separate described-by target. React Native exposes no equivalent description relationship, and the hint is the platform-idiomatic channel. | None. Revisit only if React Native adds a description association.                 |
+| `checkbox-secondary-text-requires-label` | Resolved    | Secondary text renders only with a visible label, as Flex 1.7 specifies. An invalid combination warns in development.                                                                                                            | None.                                                                              |
+| `checkbox-focus-visual-modality`         | Resolved    | Custom visibility follows keyboard modality from the scene root rather than a component-local pointer tracker. Native appearance remains renderer-owned.                                                                         | Preserve the shared hook and component modality matrix.                            |
+| `checkbox-native-focus-ring`             | Accepted    | Native rings default to Windows/macOS; Win32 uses the root-modality-aware custom slot.                                                                                                                                           | Validate platform defaults and custom slot behavior under the shared focus policy. |
+| `checkbox-owned-props-type-surface`      | Resolved    | The public root excludes role and checked or disabled aliases and state fields owned by Checkbox.                                                                                                                                | Verify with type tests (CBX-001) and native role/checked evidence.                 |
 
 ## Conformance
+
+Flex 1.7 adopts neutral-heavy checked and mixed indicators with neutral-on-loud
+glyphs (CBX-005), including indicators delegated to rows. Verify default,
+disabled, hover and press colors and theme overrides; native focus and
+description evidence is independent of the token migration.
 
 | Requirement | Evidence                                                                                                  |
 | ----------- | --------------------------------------------------------------------------------------------------------- |

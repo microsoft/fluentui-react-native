@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-31T05:04:03.307Z",
-  "sourceLock": "flex-1.5.0-206c4996",
-  "sourceLockFingerprint": "a69997212ec1b89510c94176801bf5a146ed7e7d8c80cc7db40ac8f60cf9f119",
+  "generatedAt": "2026-11-21T07:23:34.361Z",
+  "sourceLock": "flex-1.7.0-9f1df394",
+  "sourceLockFingerprint": "33c7dbb4ff78525a4e0900811f5fa1994579ee8dd95b337de85d8f47133d148c",
   "baseline": {
-    "marketplaceIndexCommit": "206c4996205b027f4d806ac4ac7366f1f0ab0d5a",
-    "originCommit": "334d3b82a08b610b0002fe922ce9b4dac4db64f2"
+    "marketplaceIndexCommit": "9f1df394126dd9ad2339b786ab7dcc090131533c",
+    "originCommit": "34d42dee014daed6fe4cd4580bb9e7d526a4cf63"
   },
   "external": {
     "mode": "live",
     "status": "drift-detected",
-    "marketplaceHead": "eb8cf20cb1c6ce4fdc563ac1ebd34197cb347735",
-    "originHead": "dfdaeba2f79c2c2c33cdc074cf1e60f1c3a2929c"
+    "marketplaceHead": "0542e4c2f18c39670c7f05c973c1d20a999c601f",
+    "originHead": "3e54b26a30207168b9e2c07fad528d94c964d226"
   },
   "catalog": {
     "releaseEntries": [
@@ -23,58 +23,11 @@
       "button",
       "card",
       "checkbox",
+      "color-area",
+      "color-picker",
+      "color-slider",
       "combobox",
-      "destructive-button",
-      "dialog",
-      "divider",
-      "drawer",
-      "dropdown",
-      "field",
-      "info-label",
-      "input",
-      "interaction-tag",
-      "label",
-      "link",
-      "list",
-      "list-item",
-      "listbox-item",
-      "menu",
-      "menu-button",
-      "menu-item",
-      "message-bar",
-      "nav",
-      "nav-item",
-      "popover",
-      "progress-bar",
-      "radio",
-      "radio-group",
-      "scrollbar",
-      "search-box",
-      "select",
-      "simple-nav",
-      "skeleton",
-      "spinner",
-      "split-button",
-      "switch",
-      "tab",
-      "tablist",
-      "tag",
-      "teaching-popover",
-      "textarea",
-      "toggle-button",
-      "toolbar",
-      "tooltip"
-    ],
-    "candidateEntries": [
-      "accordion",
-      "avatar",
-      "avatar-group",
-      "badge",
-      "breadcrumb",
-      "button",
-      "card",
-      "checkbox",
-      "combobox",
+      "compound-button",
       "destructive-button",
       "dialog",
       "divider",
@@ -101,25 +54,108 @@
       "progress-bar",
       "radio",
       "radio-group",
+      "rating",
+      "rating-display",
+      "rating-item",
       "scrollbar",
       "search-box",
       "select",
       "simple-nav",
       "skeleton",
+      "slider",
+      "spin-button",
       "spinner",
       "split-button",
+      "swatch",
+      "swatch-picker",
       "switch",
       "tab",
       "tablist",
       "tag",
+      "tag-picker",
       "teaching-popover",
       "textarea",
       "toast",
       "toggle-button",
       "toolbar",
-      "tooltip"
+      "tooltip",
+      "tree",
+      "tree-item"
     ],
-    "added": ["persona", "presence-badge", "toast"],
+    "candidateEntries": [
+      "accordion",
+      "avatar",
+      "avatar-group",
+      "badge",
+      "breadcrumb",
+      "button",
+      "calendar",
+      "card",
+      "carousel",
+      "checkbox",
+      "color-area",
+      "color-picker",
+      "color-slider",
+      "combobox",
+      "components-index",
+      "compound-button",
+      "date-picker",
+      "destructive-button",
+      "dialog",
+      "divider",
+      "drawer",
+      "dropdown",
+      "field",
+      "info-label",
+      "input",
+      "interaction-tag",
+      "label",
+      "link",
+      "list",
+      "list-item",
+      "listbox-item",
+      "menu",
+      "menu-button",
+      "menu-item",
+      "message-bar",
+      "nav",
+      "nav-item",
+      "persona",
+      "popover",
+      "presence-badge",
+      "progress-bar",
+      "radio",
+      "radio-group",
+      "rating",
+      "rating-display",
+      "rating-item",
+      "scrollbar",
+      "search-box",
+      "select",
+      "simple-nav",
+      "skeleton",
+      "slider",
+      "spin-button",
+      "spinner",
+      "split-button",
+      "swatch",
+      "swatch-picker",
+      "switch",
+      "tab",
+      "tablist",
+      "tag",
+      "tag-picker",
+      "teaching-popover",
+      "textarea",
+      "time-picker",
+      "toast",
+      "toggle-button",
+      "toolbar",
+      "tooltip",
+      "tree",
+      "tree-item"
+    ],
+    "added": ["calendar", "carousel", "components-index", "date-picker", "time-picker"],
     "removed": []
   },
   "local": {
@@ -150,23 +186,18 @@
       "text",
       "toggle-button"
     ],
-    "adaptedDrafts": ["toggle-button"],
+    "adaptedDrafts": ["avatar", "dropdown", "menu", "menu-button", "popover", "toggle-button"],
     "implemented": [
       "accordion",
-      "avatar",
       "badge",
       "button",
       "card",
       "checkbox",
       "divider",
-      "dropdown",
       "input",
       "list-item",
       "listbox-item",
-      "menu",
-      "menu-button",
       "menu-item",
-      "popover",
       "progress-bar",
       "radio",
       "skeleton",
@@ -178,37 +209,63 @@
       "text"
     ],
     "implementationGap": [
+      "avatar",
       "avatar-group",
       "breadcrumb",
+      "color-area",
+      "color-picker",
+      "color-slider",
       "combobox",
+      "compound-button",
       "destructive-button",
       "dialog",
       "drawer",
+      "dropdown",
       "field",
       "info-label",
       "interaction-tag",
       "label",
       "link",
       "list",
+      "menu",
+      "menu-button",
       "message-bar",
       "nav",
       "nav-item",
+      "persona",
+      "popover",
+      "presence-badge",
       "radio-group",
+      "rating",
+      "rating-display",
+      "rating-item",
       "scrollbar",
       "search-box",
       "select",
       "simple-nav",
+      "slider",
+      "spin-button",
       "split-button",
+      "swatch",
+      "swatch-picker",
+      "tag-picker",
       "teaching-popover",
       "textarea",
+      "toast",
       "toggle-button",
       "toolbar",
-      "tooltip"
+      "tooltip",
+      "tree",
+      "tree-item"
     ],
     "noLocalContract": [
       "avatar-group",
       "breadcrumb",
+      "color-area",
+      "color-picker",
+      "color-slider",
       "combobox",
+      "compound-button",
       "destructive-button",
       "dialog",
       "drawer",
@@ -221,16 +278,29 @@
       "message-bar",
       "nav",
       "nav-item",
+      "persona",
+      "presence-badge",
       "radio-group",
+      "rating",
+      "rating-display",
+      "rating-item",
       "scrollbar",
       "search-box",
       "select",
       "simple-nav",
+      "slider",
+      "spin-button",
       "split-button",
+      "swatch",
+      "swatch-picker",
+      "tag-picker",
       "teaching-popover",
       "textarea",
+      "toast",
       "toolbar",
-      "tooltip"
+      "tooltip",
+      "tree",
+      "tree-item"
     ],
     "legacyMigration": [
       {
@@ -447,12 +517,29 @@
       "originDrift": {
         "added": [],
         "removed": [],
-        "modified": ["web/accessibility.md", "web/interaction.md", "web/tokens.yaml"]
+        "modified": []
+      },
+      "candidateStatus": "current"
+    },
+    {
+      "component": "avatar",
+      "lifecycle": "contract-reviewed",
+      "conformance": "reviewed",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": ["web/accessibility.md"]
       },
       "candidateStatus": "review-required"
     },
     {
-      "component": "avatar",
+      "component": "badge",
       "lifecycle": "implemented",
       "conformance": "reviewed",
       "releaseDifferences": [],
@@ -469,23 +556,6 @@
       "candidateStatus": "current"
     },
     {
-      "component": "badge",
-      "lifecycle": "implemented",
-      "conformance": "reviewed",
-      "releaseDifferences": [],
-      "marketplaceDrift": {
-        "added": [],
-        "removed": [],
-        "modified": []
-      },
-      "originDrift": {
-        "added": [],
-        "removed": [],
-        "modified": ["SKILL.md", "usage.md", "web/accessibility.md", "web/interaction.md", "web/tokens.yaml"]
-      },
-      "candidateStatus": "review-required"
-    },
-    {
       "component": "button",
       "lifecycle": "implemented",
       "conformance": "reviewed",
@@ -498,9 +568,9 @@
       "originDrift": {
         "added": [],
         "removed": [],
-        "modified": ["web/accessibility.md", "web/interaction.md", "web/tokens.yaml"]
+        "modified": []
       },
-      "candidateStatus": "review-required"
+      "candidateStatus": "current"
     },
     {
       "component": "card",
@@ -515,9 +585,9 @@
       "originDrift": {
         "added": [],
         "removed": [],
-        "modified": ["web/accessibility.md", "web/interaction.md"]
+        "modified": []
       },
-      "candidateStatus": "review-required"
+      "candidateStatus": "current"
     },
     {
       "component": "checkbox",
@@ -532,9 +602,9 @@
       "originDrift": {
         "added": [],
         "removed": [],
-        "modified": ["web/accessibility.md", "web/interaction.md"]
+        "modified": []
       },
-      "candidateStatus": "review-required"
+      "candidateStatus": "current"
     },
     {
       "component": "divider",
@@ -555,25 +625,9 @@
     },
     {
       "component": "dropdown",
-      "lifecycle": "implemented",
+      "lifecycle": "contract-reviewed",
       "conformance": "reviewed",
       "releaseDifferences": [],
-      "marketplaceDrift": null,
-      "originDrift": null,
-      "candidateStatus": "unchecked"
-    },
-    {
-      "component": "input",
-      "lifecycle": "implemented",
-      "conformance": "reviewed",
-      "releaseDifferences": [
-        {
-          "role": "web:interaction",
-          "status": "reviewed",
-          "resolution": "marketplace-authoring-input",
-          "note": "The pinned Marketplace payload is the exact Agency session input; the differing x3 blob remains recorded as release lineage."
-        }
-      ],
       "marketplaceDrift": {
         "added": [],
         "removed": [],
@@ -582,9 +636,26 @@
       "originDrift": {
         "added": [],
         "removed": [],
-        "modified": ["web/accessibility.md"]
+        "modified": []
       },
-      "candidateStatus": "review-required"
+      "candidateStatus": "current"
+    },
+    {
+      "component": "input",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "candidateStatus": "current"
     },
     {
       "component": "list-item",
@@ -599,9 +670,9 @@
       "originDrift": {
         "added": [],
         "removed": [],
-        "modified": ["web/accessibility.md", "web/interaction.md"]
+        "modified": []
       },
-      "candidateStatus": "review-required"
+      "candidateStatus": "current"
     },
     {
       "component": "listbox-item",
@@ -616,27 +687,43 @@
       "originDrift": {
         "added": [],
         "removed": [],
-        "modified": ["web/accessibility.md", "web/interaction.md"]
+        "modified": []
+      },
+      "candidateStatus": "current"
+    },
+    {
+      "component": "menu",
+      "lifecycle": "contract-reviewed",
+      "conformance": "reviewed",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": ["SKILL.md", "usage.md", "web/interaction.md"]
       },
       "candidateStatus": "review-required"
     },
     {
-      "component": "menu",
-      "lifecycle": "implemented",
-      "conformance": "reviewed",
-      "releaseDifferences": [],
-      "marketplaceDrift": null,
-      "originDrift": null,
-      "candidateStatus": "unchecked"
-    },
-    {
       "component": "menu-button",
-      "lifecycle": "implemented",
+      "lifecycle": "contract-reviewed",
       "conformance": "reviewed",
       "releaseDifferences": [],
-      "marketplaceDrift": null,
-      "originDrift": null,
-      "candidateStatus": "unchecked"
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "candidateStatus": "current"
     },
     {
       "component": "menu-item",
@@ -651,18 +738,26 @@
       "originDrift": {
         "added": [],
         "removed": [],
-        "modified": ["web/accessibility.md", "web/interaction.md"]
+        "modified": ["SKILL.md", "web/tokens.yaml"]
       },
       "candidateStatus": "review-required"
     },
     {
       "component": "popover",
-      "lifecycle": "implemented",
+      "lifecycle": "contract-reviewed",
       "conformance": "reviewed",
       "releaseDifferences": [],
-      "marketplaceDrift": null,
-      "originDrift": null,
-      "candidateStatus": "unchecked"
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "candidateStatus": "current"
     },
     {
       "component": "progress-bar",
@@ -677,7 +772,7 @@
       "originDrift": {
         "added": [],
         "removed": [],
-        "modified": ["web/tokens.yaml"]
+        "modified": ["SKILL.md", "usage.md", "web/accessibility.md", "web/interaction.md"]
       },
       "candidateStatus": "review-required"
     },
@@ -694,7 +789,7 @@
       "originDrift": {
         "added": [],
         "removed": [],
-        "modified": ["web/interaction.md"]
+        "modified": ["SKILL.md", "web/accessibility.md", "web/interaction.md"]
       },
       "candidateStatus": "review-required"
     },
@@ -711,9 +806,9 @@
       "originDrift": {
         "added": [],
         "removed": [],
-        "modified": []
+        "modified": ["SKILL.md", "usage.md", "web/accessibility.md", "web/interaction.md"]
       },
-      "candidateStatus": "current"
+      "candidateStatus": "review-required"
     },
     {
       "component": "spinner",
@@ -745,7 +840,7 @@
       "originDrift": {
         "added": [],
         "removed": [],
-        "modified": ["web/interaction.md", "web/tokens.yaml"]
+        "modified": ["SKILL.md", "usage.md", "web/accessibility.md", "web/interaction.md"]
       },
       "candidateStatus": "review-required"
     },
@@ -762,9 +857,9 @@
       "originDrift": {
         "added": [],
         "removed": [],
-        "modified": ["web/accessibility.md", "web/interaction.md", "web/tokens.yaml"]
+        "modified": []
       },
-      "candidateStatus": "review-required"
+      "candidateStatus": "current"
     },
     {
       "component": "tablist",
@@ -796,9 +891,9 @@
       "originDrift": {
         "added": [],
         "removed": [],
-        "modified": ["web/accessibility.md", "web/interaction.md"]
+        "modified": []
       },
-      "candidateStatus": "review-required"
+      "candidateStatus": "current"
     },
     {
       "component": "text",
@@ -811,12 +906,20 @@
     },
     {
       "component": "toggle-button",
-      "lifecycle": "contract-draft",
-      "conformance": "review-required",
+      "lifecycle": "contract-reviewed",
+      "conformance": "reviewed",
       "releaseDifferences": [],
-      "marketplaceDrift": null,
-      "originDrift": null,
-      "candidateStatus": "unchecked"
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "candidateStatus": "current"
     }
   ]
 }

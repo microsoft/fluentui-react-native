@@ -21,6 +21,7 @@ import type { Text } from '../text/text';
 
 export type ListboxItemSecondaryContentPosition = ItemSecondaryContentPosition;
 export type ListboxItemVariant = 'listItem' | 'sectionHeader';
+export type ListboxItemSelectionMode = 'none' | 'single' | 'multiple';
 
 export type ListboxItemSlots = {
   root: Slot<typeof Pressable>;
@@ -43,9 +44,8 @@ export type ListboxItemStateProps = {
   variant?: ListboxItemVariant;
   disabled?: boolean;
   secondaryContentPosition?: ListboxItemSecondaryContentPosition;
-  checkmark?: boolean;
   chevron?: boolean;
-  multiselect?: boolean;
+  selectionMode?: ListboxItemSelectionMode;
   loading?: boolean;
   /**
    * Whether the component renders as selected. Selection is externally driven: the caller or the surrounding group
@@ -69,4 +69,10 @@ export type ListboxItemState = ComponentState<ListboxItemStateSlots & FocusVisua
   ThemeState &
   PressableState & {
     userStyle?: StyleProp<ViewStyle>;
+    visualState: 'rest' | 'hovered' | 'pressed' | 'disabled';
+    isSelectedVisual: boolean;
+    contentStyle?: ViewStyle;
+    trailingStyle?: ViewStyle;
+    layoutGap?: number;
+    iconSize?: number;
   };

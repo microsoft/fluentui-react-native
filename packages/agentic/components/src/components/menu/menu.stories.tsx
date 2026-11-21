@@ -21,7 +21,7 @@ function rowProps(content: string, setFocus: (label: string) => void, props?: Me
   return {
     content,
     secondaryContent: null,
-    icon: null,
+    leadingIcon: null,
     testID: `menu-${content.toLowerCase()}`,
     onFocus: () => setFocus(content),
     ...props,

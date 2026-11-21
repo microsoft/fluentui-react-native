@@ -115,16 +115,18 @@ describe('MenuButton', () => {
           size={size}
           content={iconOnly ? null : 'New'}
           accessibilityLabel="New"
-          icon={{ imageSource: { uri: 'new.png' }, testID: 'leading-icon' }}
+          leadingIcon={{ imageSource: { uri: 'new.png' }, testID: 'leading-icon' }}
         />,
       );
-      const { borderRadius, spacing } = defaultFlexTokens;
+      const { borderRadius, spacing, strokeWidth } = defaultFlexTokens;
       expect(StyleSheet.flatten(screen.getByTestId('trigger').props.style)).toMatchObject({
         borderRadius: size === 'small' ? borderRadius.base200 : size === 'medium' ? borderRadius.base300 : borderRadius.base400,
         paddingHorizontal:
-          size === 'small' ? spacing.componentBase200 : size === 'medium' ? spacing.componentBase250 : spacing.componentBase300,
+          Number(size === 'small' ? spacing.componentBase200 : size === 'medium' ? spacing.componentBase250 : spacing.componentBase300) -
+          strokeWidth.thin,
         paddingVertical:
-          size === 'small' ? spacing.componentBase100 : size === 'medium' ? spacing.componentBase150 : spacing.componentBase200,
+          Number(size === 'small' ? spacing.componentBase100 : size === 'medium' ? spacing.componentBase150 : spacing.componentBase200) -
+          strokeWidth.thin,
       });
       const icon = screen.getByTestId('leading-icon');
       expect(icon.props.accessible).toBe(false);

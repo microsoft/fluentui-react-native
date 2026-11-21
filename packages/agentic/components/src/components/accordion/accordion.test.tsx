@@ -1,6 +1,6 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import * as React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { I18nManager, StyleSheet, Text, View } from 'react-native';
 import type { TextProps, TextStyle, ViewProps, ViewStyle } from 'react-native';
 
 import { fireEvent } from '@testing-library/react-native';
@@ -76,7 +76,7 @@ describe('Accordion', () => {
     expect(component.queryByTestId('accordion-leading-icon')).toBeNull();
     expect(getHeader(component).children).toHaveLength(1);
     expect(getHeader(component).props.accessibilityLabel).toBe('Details');
-    expect(component.getByTestId('accordion-chevron-icon').props.accessible).toBe(false);
+    expect(component.getByTestId('accordion-chevron-icon', { includeHiddenElements: true }).props.accessible).toBe(false);
   });
 
   it('renders a default header, default icon, and hidden body wiring', async () => {
@@ -87,9 +87,15 @@ describe('Accordion', () => {
     expect(header.props.accessibilityRole).toBe('button');
     expect(header.props.accessibilityState).toEqual({ expanded: false });
     expect(component.getByText('Section title')).toBeOnTheScreen();
-    expect(component.getByTestId('accordion-leading-icon').props.style).toMatchObject({ height: 16, width: 16 });
-    expect(component.getByTestId('accordion-chevron-icon').props.style).toMatchObject({ height: 16, width: 16 });
-    expect(StyleSheet.flatten(body.props.style)).toMatchObject({ height: 0, opacity: 0, overflow: 'hidden' });
+    expect(component.getByTestId('accordion-leading-icon', { includeHiddenElements: true }).props.style).toMatchObject({
+      height: 16,
+      width: 16,
+    });
+    expect(component.getByTestId('accordion-chevron-icon', { includeHiddenElements: true }).props.style).toMatchObject({
+      height: 16,
+      width: 16,
+    });
+    expect(StyleSheet.flatten(body.props.style)).toMatchObject({ display: 'none', height: 0, opacity: 0, overflow: 'hidden' });
     expect(body.props.id).toEqual(expect.any(String));
   });
 
@@ -105,6 +111,24 @@ describe('Accordion', () => {
     expect(StyleSheet.flatten(getBody(component).props.style)).toMatchObject({ opacity: 1, overflow: 'visible' });
     expect(StyleSheet.flatten(component.getByTestId('accordion-chevron').props.style).transform).toEqual([{ rotate: '90deg' }]);
     expect(component.getByText('Content placeholder')).toBeOnTheScreen();
+  });
+
+  it.each([
+    [false, 'chevronStart', '0deg', '90deg'],
+    [true, 'chevronStart', '180deg', '90deg'],
+    [false, 'chevronEnd', '90deg', '-90deg'],
+    [true, 'chevronEnd', '90deg', '-90deg'],
+  ] as const)('sets logical chevron rotation immediately (RTL %s, %s)', async (rtl, layout, closed, open) => {
+    const direction = jest.replaceProperty(I18nManager, 'isRTL', rtl);
+    try {
+      const component = await renderAccordion({ layout });
+      const rotation = () => StyleSheet.flatten(component.getByTestId('accordion-chevron').props.style).transform;
+      expect(rotation()).toEqual([{ rotate: closed }]);
+      await fireEvent.press(getHeader(component));
+      expect(rotation()).toEqual([{ rotate: open }]);
+    } finally {
+      direction.restore();
+    }
   });
 
   it('starts from defaultExpanded and still collapses on press', async () => {

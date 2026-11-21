@@ -20,7 +20,9 @@ changing a controlled selection.
 
 Arrow, Home, and End navigation moves native focus to the resolved enabled Tab.
 Tab and Shift+Tab use native traversal and encounter only the active Tab.
-When all Tabs or the complete list are disabled, no child is focusable.
+When all Tabs or the complete list are disabled, no Tab is focusable.
+Interactive `endContent` keeps its own accessible name, enabled state, and tab
+stop and is not counted in the Tabs' position or set size.
 
 ## Panels
 

@@ -1,92 +1,28 @@
-import type { StyleProp, TextStyle, ViewStyle } from 'react-native';
-
-import { attachSlotProps } from '@fluentui-react-native/framework-base';
+import { I18nManager } from 'react-native';
+import { attachSlotDefaults, attachSlotProps } from '@fluentui-react-native/framework-base';
 import { applyFocusRingStyles } from '../../common/applyFocusRingStyles';
-
-import {
-  getSwitchLabelStyle,
-  getSwitchLayoutStyle,
-  getSwitchRootBaseStyle,
-  getSwitchThumbBaseStyle,
-  getSwitchThumbColorStyle,
-  getSwitchThumbTranslateDistance,
-  getSwitchTrackBaseStyle,
-  getSwitchTrackColorStyle,
-  switchStyles,
-} from './switch.styles';
+import { resolveSwitchChrome } from './switch.styles';
 import type { SwitchState } from './switch.types';
 
-/**
- * Apply themed styles and state-dependent slot props to the Switch.
- */
 export function useSwitchStyles_unstable(state: SwitchState) {
-  const trackUncheckedColor = getSwitchTrackColorStyle(state, false);
-  const trackCheckedColor = getSwitchTrackColorStyle(state, true);
-  const thumbUncheckedColor = getSwitchThumbColorStyle(state, false);
-  const thumbCheckedColor = getSwitchThumbColorStyle(state, true);
-  const thumbTranslateDistance = getSwitchThumbTranslateDistance(state);
-
-  const rootBaseStyle = getSwitchRootBaseStyle(state);
-  const rootStyle: StyleProp<ViewStyle> = [switchStyles.root, rootBaseStyle, state.userStyle];
-  const layoutStyle: StyleProp<ViewStyle> = [switchStyles.container, getSwitchLayoutStyle(state.layout)];
-  const trackStyle: StyleProp<ViewStyle> = [
-    switchStyles.track,
-    getSwitchTrackBaseStyle(state),
-    {
-      backgroundColor: state.checkedProgress.interpolate({
-        inputRange: [0, 1],
-        outputRange: [trackUncheckedColor.backgroundColor, trackCheckedColor.backgroundColor],
-      }),
-      borderColor: state.checkedProgress.interpolate({
-        inputRange: [0, 1],
-        outputRange: [trackUncheckedColor.borderColor, trackCheckedColor.borderColor],
-      }),
-    },
-  ];
-  const thumbStyle: StyleProp<ViewStyle> = [
-    switchStyles.thumb,
-    getSwitchThumbBaseStyle(state),
-    {
-      backgroundColor: state.checkedProgress.interpolate({
-        inputRange: [0, 1],
-        outputRange: [thumbUncheckedColor.backgroundColor, thumbCheckedColor.backgroundColor],
-      }),
-      transform: [
-        {
-          translateX: state.checkedProgress.interpolate({
-            inputRange: [0, 1],
-            outputRange: [0, thumbTranslateDistance],
-          }),
-        },
-      ],
-    },
-  ];
-  const labelStyle: StyleProp<TextStyle> = [switchStyles.label, getSwitchLabelStyle(state)];
-
-  applyFocusRingStyles(state.FocusRing, state, rootBaseStyle.borderRadius);
-  attachSlotProps(state.layoutContainer, { style: layoutStyle });
-  attachSlotProps(state.root, { style: rootStyle });
-  attachSlotProps(state.track, { accessible: false, style: trackStyle });
-  attachSlotProps(state.thumb, { accessible: false, style: thumbStyle });
-
-  if (state.beforeLabel) {
-    attachSlotProps(state.beforeLabel, {
-      accessible: false,
-      style: labelStyle,
-    });
-  }
-
-  if (state.afterLabel) {
-    attachSlotProps(state.afterLabel, {
-      accessible: false,
-      style: labelStyle,
-    });
-  }
-
-  if (state.aboveLabel) {
-    attachSlotProps(state.aboveLabel, {
-      accessible: false,
-      style: labelStyle,
-    });
+  const chrome = resolveSwitchChrome(state);
+  const distance = Math.max(
+    0,
+    (chrome.track.width ?? 0) - 2 * ((chrome.track.borderWidth ?? 0) + (chrome.thumb.start ?? 0)) - (chrome.thumb.width ?? 0),
+  );
+  const translateX = state.checkedProgress.interpolate({ inputRange: [0, 1], outputRange: [0, I18nManager.isRTL ? -distance : distance] });
+  applyFocusRingStyles(state.FocusRing, state, chrome.root.borderRadius);
+  attachSlotProps(state.layoutContainer, { style: chrome.container });
+  attachSlotProps(state.root, { style: [chrome.root, state.userStyle] });
+  attachSlotDefaults(state.track, { style: chrome.track });
+  attachSlotProps(state.track, { accessible: false });
+  attachSlotDefaults(state.thumb, { style: [chrome.thumb, { transform: [{ translateX }] }] });
+  attachSlotProps(state.thumb, { accessible: false });
+  for (const slot of ['beforeLabel', 'afterLabel', 'aboveLabel'] as const) {
+    const label = state[slot];
+    if (label) {
+      attachSlotDefaults(label, { style: [chrome.label, chrome[slot]] });
+      attachSlotProps(label, { accessible: false });
+    }
   }
 }

@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import { CompoundItemLayout } from '../../primitives/compound-item-layout/compound-item-layout';
 import { LayoutStableText } from '../../primitives/layout-stable-text/layout-stable-text';
 import { Skeleton } from '../skeleton/skeleton';
-import { getListboxItemIconSize, listboxItemStyles } from './listbox-item.styles';
+import { listboxItemStyles } from './listbox-item.styles';
 import type { ListboxItemState } from './listbox-item.types';
 
 export function renderListboxItem_unstable(state: ListboxItemState) {
@@ -16,8 +16,8 @@ export function renderListboxItem_unstable(state: ListboxItemState) {
             style={[
               listboxItemStyles.loadingIcon,
               {
-                height: getListboxItemIconSize(),
-                width: getListboxItemIconSize(),
+                height: state.iconSize,
+                width: state.iconSize,
               },
             ]}
           />
@@ -45,12 +45,16 @@ export function renderListboxItem_unstable(state: ListboxItemState) {
   }
 
   const ActiveIcon = state.selected ? (state.selectedIcon ?? state.icon) : state.icon;
+  const hasTrailing = state.chevronIndicator || state.checkmarkIndicator || state.checkboxIndicator;
 
   return (
     <state.root ref={state.focusTargetRef}>
       {state.FocusRing && <state.FocusRing />}
       <CompoundItemLayout
-        contentStyle={state.secondaryContentPosition === 'under' ? listboxItemStyles.contentColumn : listboxItemStyles.contentRow}
+        contentStyle={[
+          state.secondaryContentPosition === 'under' ? listboxItemStyles.contentColumn : listboxItemStyles.contentRow,
+          state.contentStyle,
+        ]}
         leading={state.avatar ? <state.avatar /> : ActiveIcon ? <ActiveIcon /> : undefined}
         leadingStyle={state.secondaryContentPosition === 'under' ? listboxItemStyles.leadingUnder : undefined}
         primary={
@@ -64,15 +68,17 @@ export function renderListboxItem_unstable(state: ListboxItemState) {
         }
         secondary={state.secondaryContent ? <state.secondaryContent /> : undefined}
         secondaryPosition={state.secondaryContentPosition}
-        style={listboxItemStyles.leading}
+        style={[listboxItemStyles.leading, { gap: state.layoutGap }]}
         trailing={
-          <>
-            {state.chevronIndicator && <state.chevronIndicator />}
-            {state.checkmarkIndicator && <state.checkmarkIndicator />}
-            {state.checkboxIndicator && <state.checkboxIndicator />}
-          </>
+          hasTrailing ? (
+            <>
+              {state.chevronIndicator && <state.chevronIndicator />}
+              {state.checkmarkIndicator && <state.checkmarkIndicator />}
+              {state.checkboxIndicator && <state.checkboxIndicator />}
+            </>
+          ) : undefined
         }
-        trailingStyle={listboxItemStyles.trailing}
+        trailingStyle={[listboxItemStyles.trailing, state.trailingStyle]}
       />
     </state.root>
   );

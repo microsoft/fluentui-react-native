@@ -1,48 +1,60 @@
-import { StyleSheet } from 'react-native';
+import type { ColorValue, ViewStyle } from 'react-native';
+import type { ThemeState } from '@fluentui-react-native/design';
+import {
+  alignItemsToken,
+  colorToken,
+  defineComponentTokens,
+  getComponentTokens,
+  justifyContentToken,
+  numericToken,
+  resolveTokenStates,
+} from '@fluentui-react-native/design/styling';
+import type { ComponentTokenPatch } from '@fluentui-react-native/design/styling';
+import type { SpinnerSize } from './spinner.types';
+import schema from './spec/tokens.json' with { type: 'json' };
 
-import type { FlexTokens } from '@fluentui-react-native/design';
+type SpinnerTokenState = { size: SpinnerSize };
+const domains = {
+  root: { style: { alignItems: alignItemsToken, justifyContent: justifyContentToken, flexShrink: numericToken }, props: {} },
+  svg: { style: { flexShrink: numericToken }, props: { diameter: numericToken, strokeWidth: numericToken } },
+  track: { style: {}, props: { stroke: colorToken } },
+  indicator: { style: {}, props: { stroke: colorToken } },
+};
 
-import type { SpinnerSize, SpinnerState } from './spinner.types';
-
-export const spinnerStyles = StyleSheet.create({
-  root: {
-    alignItems: 'center',
-    flexShrink: 0,
-    justifyContent: 'center',
-  },
-  svg: {
-    flexShrink: 0,
-  },
-});
-
-const spinnerMetrics = {
-  'x-tiny': { diameter: 16, strokeWidth: 'thin' },
-  tiny: { diameter: 20, strokeWidth: 'thin' },
-  'x-small': { diameter: 24, strokeWidth: 'thin' },
-  small: { diameter: 28, strokeWidth: 'thick' },
-  medium: { diameter: 32, strokeWidth: 'thick' },
-  large: { diameter: 36, strokeWidth: 'thicker' },
-  'x-large': { diameter: 40, strokeWidth: 'thicker' },
-  huge: { diameter: 44, strokeWidth: 'thicker' },
-} as const satisfies Record<SpinnerSize, { diameter: number; strokeWidth: keyof FlexTokens['strokeWidth'] }>;
-
-export function getSpinnerMetrics(size: SpinnerSize, tokens: FlexTokens) {
-  const { diameter, strokeWidth: tokenName } = spinnerMetrics[size];
-  const strokeWidth = tokens.strokeWidth[tokenName] as number;
-  const center = diameter / 2;
-  const radius = center - strokeWidth / 2;
-
-  return {
-    center,
-    diameter,
-    radius,
-    strokeWidth,
-  };
+declare module '@fluentui-react-native/design' {
+  interface ComponentTokenRegistry {
+    'furn.spinner': ComponentTokenPatch<SpinnerTokenState, typeof domains>;
+  }
 }
 
-export function getSpinnerRootStyle(state: SpinnerState) {
+const spinnerTokens = defineComponentTokens<SpinnerTokenState, typeof domains>({ id: 'furn.spinner', slots: domains, schema });
+
+export function resolveSpinnerChrome(
+  theme: ThemeState,
+  size: SpinnerSize,
+): {
+  rootStyle: ViewStyle;
+  svgStyle: ViewStyle;
+  center: number;
+  diameter: number;
+  radius: number;
+  strokeWidth: number;
+  trackColor?: ColorValue;
+  indicatorColor?: ColorValue;
+} {
+  const tokens = getComponentTokens(theme, spinnerTokens);
+  const state = { size };
+  const svg = resolveTokenStates(tokens.svg, state);
+  const { diameter = 0, strokeWidth = 0 } = svg.props;
+  const center = diameter / 2;
   return {
-    height: state.diameter,
-    width: state.diameter,
+    rootStyle: { ...resolveTokenStates(tokens.root, state).style, height: diameter, width: diameter },
+    svgStyle: svg.style,
+    center,
+    diameter,
+    radius: Math.max(0, center - strokeWidth / 2),
+    strokeWidth,
+    trackColor: resolveTokenStates(tokens.track, state).props.stroke,
+    indicatorColor: resolveTokenStates(tokens.indicator, state).props.stroke,
   };
 }

@@ -27,6 +27,7 @@ type DividerStateSlots = DividerSlots & {
 
 export type DividerStateProps = {
   layout?: DividerLayout;
+  showContent?: boolean;
   vertical?: boolean;
 };
 

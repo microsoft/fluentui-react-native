@@ -3,7 +3,7 @@ name: menu-item
 platform: react-native (Windows, macOS)
 status: implemented
 source: ./spec/source.json
-tokens: ./spec/tokens.yaml
+tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
 interaction: ./spec/interaction.md
 usage: ./spec/usage.md
@@ -21,26 +21,30 @@ and menu dismissal.
 ## Public contract
 
 `menuStyle` defaults to `list-item`; `secondaryContentPosition` defaults to
-`right`; `disabled`, `disabledFocusable`, `loading`, `hasCheckmark`, `hasChevron`,
-`hasMultiselect`, and `selected` default to `false`. Missing `content`
+`right`; `disabled`, `disabledFocusable`, `loading`, and `selected` default to
+`false`, and `selectionMode` defaults to `none`. Missing `content`
 renders `"Menu item"` and omitted `secondaryContent` renders `"Secondary"`;
 `null` or an empty secondary string hides it. `loading` applies only to a
 section header. Caller style wins after the component's root styles.
 
 The public slots are `root`, `icon`, `selectedIcon`, `avatar`, `chevron`,
-`checkmark`, and `multiselectCheckbox`. Text is deliberately supplied through
+`checkmark`, `multiselectCheckbox`, and `trailingIcon`. Text is supplied through
 the `content` and `secondaryContent` properties. A list-item root renders
 optional `FocusRing` and CompoundItemLayout. Its leading visual is avatar or the
-selected replacement icon or icon. Its trailing order is chevron, checkmark,
-then the multiselect checkbox. List item labels and secondary text use
-state-only reservations to avoid a size change when selected. A section header
+selected replacement icon or icon. A typed `submenu` forces a chevron; otherwise
+the selection mode controls the checkmark or checkbox. An ordinary command can
+show a decorative 20-unit `trailingIcon` instead. The type disallows mixing
+these presentations. Row height follows content and padding. Labels reserve
+selected metrics where selection can change their weight. A section header
 is disabled and nonfocusable; when loading, its normal row content is replaced
 by skeletons.
 
-The caller owns `selected` and changes it from `onPress`. Checkmark creates a
-radio menu role and multiselect creates a checkbox menu role; either adds
+The caller owns `selected` and changes it from `onPress`. Single mode creates a
+radio menu role and multiple mode creates a checkbox menu role; either adds
 checked state. With neither, a selected list item exposes selected state.
-Multiselect takes visual precedence over selected fill and semibold text.
+Multiple mode keeps the row fill and weight unchanged; the decorative
+neutral checkbox changes state. Selected secondary text on other rows uses
+the primary foreground.
 Interactive indicator rows declare the native Toggle action; single-choice
 rows also declare Select and project selected state. Component-owned values
 take precedence over conflicting checked/selected ARIA aliases. Original
@@ -125,14 +129,18 @@ Windows and Win32 retain native `disabled` independently of `focusable`.
 - `menu-item-native-header-root` (**accepted**): A FURN section header uses a
   disabled Pressable with the `none` role rather than a platform-specific
   menu-group primitive.
-- `menu-item-multiselect-precedence` (**accepted**): Supplying both selection
-  indicators logs a development warning and resolves to the multiselect role
-  and visual path instead of rejecting the prop combination.
+- `menu-item-multiselect-precedence` (**resolved**): `selectionMode` replaces
+  the old independent flags. Only one selection presentation can be chosen.
 - `menu-item-disabled-focusable` (**accepted**): An opt-in disabled-command
   focus stop retains disabled semantics and refuses activation. The owning Menu
   chooses the per-platform default (MNI-007); standalone MenuItem defaults to false.
 
 ## Conformance
+
+MNI-001–005 update the public selection
+mode, trailing icon, intrinsic geometry, and JSON-backed row and indicator
+visuals. MNI-006/007 retain native disabled focus and actual submenu presence;
+the submenu association is gated separately under MNU-010.
 
 | Requirement | Evidence                                                                                            |
 | ----------- | --------------------------------------------------------------------------------------------------- |

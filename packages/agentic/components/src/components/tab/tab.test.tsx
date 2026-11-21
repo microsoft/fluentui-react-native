@@ -62,7 +62,7 @@ describe('Tab', () => {
         disabled,
       });
       const colors = defaultFlexTokens.color;
-      const foreground = selected ? 'foregroundNeutralOnloud' : 'foregroundNeutralPrimary';
+      const foreground = selected ? 'foregroundBrandPrimary' : 'foregroundNeutralPrimary';
       for (const interaction of ['rest', 'hover', 'pressed'] as const) {
         if (interaction === 'hover') {
           await fireEvent(getRoot(component), 'hoverIn', {});
@@ -341,11 +341,11 @@ describe('Tab', () => {
     const root = getRoot(component);
     const colors = defaultFlexTokens.color;
 
-    expect(getRootStyle(component).backgroundColor).toBe(colors.backgroundNeutralHeavy.rest);
+    expect(getRootStyle(component).backgroundColor).toBe(colors.backgroundBrandSoft.rest);
     await fireEvent(root, 'hoverIn', {});
-    expect(getRootStyle(component).backgroundColor).toBe(colors.backgroundNeutralHeavy.hover);
+    expect(getRootStyle(component).backgroundColor).toBe(colors.backgroundBrandSoft.hover);
     await fireEvent(root, 'pressIn', {});
-    expect(getRootStyle(component).backgroundColor).toBe(colors.backgroundNeutralHeavy.pressed);
+    expect(getRootStyle(component).backgroundColor).toBe(colors.backgroundBrandSoft.pressed);
     await fireEvent.press(root);
     expect(onHoverIn).toHaveBeenCalledTimes(1);
     expect(onPress).toHaveBeenCalledTimes(1);

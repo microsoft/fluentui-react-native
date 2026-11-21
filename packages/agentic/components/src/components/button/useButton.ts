@@ -1,14 +1,8 @@
 import type { ButtonProps, ButtonState } from './button.types';
-import {
-  resolveAccessibilityAction,
-  useAccessibilityLabelWarning,
-  useFocusablePressable,
-  useSlot,
-  useOptionalSlot,
-} from '@fluentui-react-native/framework-base';
+import { useAccessibilityLabelWarning, useFocusablePressable, useSlot, useOptionalSlot } from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
 import { getComponentTokens } from '@fluentui-react-native/design/styling';
-import { Platform, Pressable } from 'react-native';
+import { Pressable } from 'react-native';
 import type { PressableProps } from 'react-native';
 import { useFocusVisuals } from '../../common/useFocusVisuals';
 import { Icon } from '../../primitives/icon/icon';
@@ -18,7 +12,6 @@ import { buttonTokenDefinition, getButtonVisualState } from './button.styles';
 /**
  * Hook to create the state for a Button component. This is responsible for:
  * - resolving the prop states to their default values if unset
- * - resolving the externally driven or internally driven selected state
  * - setting up any accessibility for the component
  * - querying the theme state for the component
  * - initializing the component slots
@@ -29,20 +22,16 @@ export function useButton_unstable(props: ButtonProps): ButtonState {
     appearance,
     content: contentProp,
     disabled = false,
-    icon: iconProp,
-    iconPosition = 'before',
+    leadingIcon: leadingIconProp,
+    trailingIcon: trailingIconProp,
     ref: rootRef,
-    selected,
-    selectedIcon: selectedIconProp,
-    shape,
+    shape = 'rounded',
     size = 'medium',
     style: userStyle,
     ...rest
   } = props;
   const hasContent = contentProp !== undefined && contentProp !== null;
-  const hasIcon = iconProp !== undefined && iconProp !== null;
-  const hasSelectedIcon = selectedIconProp !== undefined && selectedIconProp !== null;
-  const iconOnly = !hasContent && (hasIcon || hasSelectedIcon);
+  const iconOnly = !hasContent && leadingIconProp != null;
   const contentChildren = contentProp && typeof contentProp === 'object' && 'children' in contentProp ? contentProp.children : contentProp;
   const contentLabel = typeof contentChildren === 'string' || typeof contentChildren === 'number' ? String(contentChildren) : undefined;
   const hasExplicitName =
@@ -50,9 +39,6 @@ export function useButton_unstable(props: ButtonProps): ButtonState {
     rest['aria-label'] !== undefined ||
     rest.accessibilityLabelledBy !== undefined ||
     rest['aria-labelledby'] !== undefined;
-
-  // A button renders selection but never changes it: a press is an action, so the caller owns the selected value.
-  const isToggleButton = selected !== undefined;
 
   useAccessibilityLabelWarning({
     accessibilityLabel: rest.accessibilityLabel ?? rest['aria-label'],
@@ -66,15 +52,10 @@ export function useButton_unstable(props: ButtonProps): ButtonState {
   const nativeProps: PressableProps = {
     ...rest,
     ...(!hasExplicitName && { accessibilityLabel: contentLabel }),
-    accessibilityActions: isToggleButton
-      ? resolveAccessibilityAction('toggle', Platform.OS, rest.accessibilityActions).accessibilityActions
-      : rest.accessibilityActions,
-    'aria-checked': isToggleButton ? selected : rest['aria-checked'],
     role: 'button',
     accessibilityState: {
       ...accessibilityState,
       disabled,
-      ...(isToggleButton && { checked: selected }),
     },
     accessible: rest.accessible ?? true,
     disabled,
@@ -84,25 +65,21 @@ export function useButton_unstable(props: ButtonProps): ButtonState {
   const { FocusRing, ...nativeFocusProps } = useFocusVisuals({ focused: pressableState.focused && !disabled });
 
   const root = useSlot(Pressable, { ...pressableProps, ...nativeFocusProps, ref: rootRef });
-  const icon = useOptionalSlot(Icon, iconProp);
-  const selectedIcon = useOptionalSlot(Icon, selectedIconProp);
+  const leadingIcon = useOptionalSlot(Icon, leadingIconProp);
+  const trailingIcon = useOptionalSlot(Icon, hasContent ? trailingIconProp : null);
   const content = useOptionalSlot(Text, contentProp);
-  const contentHidden = useOptionalSlot(Text, isToggleButton ? contentProp : null);
 
   return {
     FocusRing,
     root,
-    icon,
-    selectedIcon,
+    leadingIcon,
+    trailingIcon,
     content,
-    contentHidden,
     disabled,
     size,
-    shape: shape ?? (iconOnly ? 'circle' : 'rounded'),
-    iconPosition,
-    selected: selected ?? false,
+    shape,
     iconOnly,
-    isToggleButton,
+    fluentFallback: themeState.isFluentFallback === true,
     userStyle,
     ...themeState,
     ...pressableState,

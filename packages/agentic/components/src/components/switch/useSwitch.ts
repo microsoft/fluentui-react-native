@@ -14,6 +14,7 @@ import { useThemeState } from '@fluentui-react-native/design';
 import { useFocusVisuals } from '../../common/useFocusVisuals';
 
 import { Text } from '../text/text';
+import { getSwitchDuration } from './switch.styles';
 import type { SwitchProps, SwitchState } from './switch.types';
 
 /**
@@ -51,9 +52,11 @@ export function useSwitch_unstable(props: SwitchProps): SwitchState {
   const hasAboveLabel = layout === 'vertical' && aboveLabelProp !== null;
   const hasVisibleLabel = hasBeforeLabel || hasAfterLabel || hasAboveLabel;
   const themeState = useThemeState();
-  const reduceMotion = useReducedMotion() ?? false;
-  const checkedProgress = React.useRef(new Animated.Value(checked ? 1 : 0)).current;
-  const hasMounted = React.useRef(false);
+  const reduceMotion = useReducedMotion() !== false;
+  const duration = getSwitchDuration(themeState, { checked, layout, visualState: disabled ? 'disabled' : 'rest' });
+  const [x1, y1, x2, y2] = themeState.tokens.motion.easingFunctionalTransition;
+  const [checkedProgress] = React.useState(() => new Animated.Value(checked ? 1 : 0));
+  const previousChecked = React.useRef(checked);
   const explicitAccessibleName =
     accessibilityLabel !== undefined ||
     accessibilityLabelledBy !== undefined ||
@@ -69,24 +72,23 @@ export function useSwitch_unstable(props: SwitchProps): SwitchState {
   });
 
   React.useEffect(() => {
-    if (!hasMounted.current) {
+    const changed = previousChecked.current !== checked;
+    previousChecked.current = checked;
+    if (!changed || reduceMotion || duration <= 0) {
       checkedProgress.setValue(checked ? 1 : 0);
-      hasMounted.current = true;
-      return;
+      return undefined;
     }
 
-    if (reduceMotion) {
-      checkedProgress.setValue(checked ? 1 : 0);
-      return;
-    }
-
-    Animated.timing(checkedProgress, {
+    const animation = Animated.timing(checkedProgress, {
       toValue: checked ? 1 : 0,
-      duration: 150,
-      easing: Easing.inOut(Easing.ease),
+      duration,
+      easing: Easing.bezier(x1, y1, x2, y2),
       useNativeDriver: false,
-    }).start();
-  }, [checked, checkedProgress, reduceMotion]);
+      isInteraction: false,
+    });
+    animation.start();
+    return () => animation.stop();
+  }, [checked, checkedProgress, duration, reduceMotion, x1, x2, y1, y2]);
 
   const pressableNameProps =
     explicitAccessibleName || !hasVisibleLabel

@@ -11,7 +11,7 @@ const validProps: MenuButtonProps = {
   content: 'New',
   defaultOpen: false,
   disabled: false,
-  icon: { fontSource: { codepoint: 0x2b } },
+  leadingIcon: { fontSource: { codepoint: 0x2b } },
   menu: { accessibilityLabel: 'New', testID: 'menu' },
   onOpenChange: (open, { reason }) => [open, reason],
   ref: null as unknown as React.Ref<View>,

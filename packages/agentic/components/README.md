@@ -10,8 +10,8 @@ and accessibility behavior, and colocated tests and stories.
 | `@fluentui-react-native/components/primitives` | Unstyled building blocks: `CheckboxIndicator`, `CompoundItemLayout`, `FocusVisual`, `Icon`, `LayoutStableText` |
 
 Higher-order components: Accordion, Avatar, Badge, Button, Card, Checkbox, Divider, Dropdown, Input, ListItem,
-ListboxItem, Menu, MenuButton, MenuItem, Popover, ProgressBar, Radio, Skeleton, Spinner, Switch, Tab, TabList, Tag, and
-Text.
+ListboxItem, Menu, MenuButton, MenuItem, Popover, ProgressBar, Radio, Skeleton, Spinner, Switch, Tab, TabList, Tag,
+Text, and ToggleButton.
 
 ## Quick start
 

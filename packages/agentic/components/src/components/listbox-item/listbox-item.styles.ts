@@ -1,182 +1,97 @@
 import { StyleSheet } from 'react-native';
-import type { TextStyle, ViewStyle } from 'react-native';
 
+import {
+  colorToken,
+  defineComponentTokens,
+  getComponentTokens,
+  fontWeightToken,
+  numericToken,
+  resolveTokenStates,
+  stringToken,
+} from '@fluentui-react-native/design/styling';
+import type { ComponentTokenPatch, ResolvedSlotTokens } from '@fluentui-react-native/design/styling';
+import { iconTokenProps } from '../../common/iconTokenProps';
 import type { ListboxItemState } from './listbox-item.types';
+import schema from './spec/tokens.json' with { type: 'json' };
 
 export const listboxItemStyles = StyleSheet.create({
-  root: {
-    alignItems: 'center',
-    borderStyle: 'solid',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  leading: {
-    alignItems: 'center',
-    flex: 1,
-    flexDirection: 'row',
-    minWidth: 0,
-  },
-  leadingUnder: {
-    alignItems: 'flex-start',
-  },
-  contentRow: {
-    alignItems: 'center',
-    flex: 1,
-    flexDirection: 'row',
-    minWidth: 0,
-  },
-  contentColumn: {
-    flex: 1,
-    flexDirection: 'column',
-    minWidth: 0,
-  },
-  labelContainer: {
-    flex: 1,
-    minWidth: 0,
-    position: 'relative',
-  },
-  trailing: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    gap: 8,
-    marginLeft: 8,
-  },
-  loadingRow: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    gap: 8,
-    minHeight: 24,
-  },
-  loadingLabel: {
-    borderRadius: 4,
-  },
-  loadingIcon: {
-    borderRadius: 10,
-  },
-  checkboxBox: {
-    alignItems: 'center',
-    borderRadius: 3,
-    borderWidth: 1,
-    justifyContent: 'center',
-  },
+  root: { alignItems: 'center', flexDirection: 'row', justifyContent: 'space-between' },
+  leading: { alignItems: 'center', flex: 1, flexDirection: 'row', minWidth: 0 },
+  leadingUnder: { alignItems: 'flex-start' },
+  contentRow: { alignItems: 'center', flex: 1, flexDirection: 'row', minWidth: 0 },
+  contentColumn: { flex: 1, flexDirection: 'column', minWidth: 0 },
+  trailing: { alignItems: 'center', flexDirection: 'row' },
+  loadingRow: { alignItems: 'center', flexDirection: 'row', gap: 8, minHeight: 24 },
+  loadingLabel: { borderRadius: 4 },
+  loadingIcon: { borderRadius: 10 },
 });
 
-function getColor(state: ListboxItemState, key: 'primary' | 'secondary'): ViewStyle['backgroundColor'] {
-  const colors = state.tokens.color;
-  if (state.disabled) {
-    return colors.foregroundNeutralDisabled.rest;
+const typography = {
+  fontFamily: stringToken,
+  fontSize: numericToken,
+  fontWeight: fontWeightToken,
+  lineHeight: numericToken,
+  color: colorToken,
+};
+const icon = { style: {}, props: iconTokenProps };
+const slots = {
+  root: {
+    style: {
+      borderRadius: numericToken,
+      paddingHorizontal: numericToken,
+      paddingVertical: numericToken,
+      gap: numericToken,
+      backgroundColor: colorToken,
+    },
+    props: {},
+  },
+  content: { style: typography, props: { gap: numericToken } },
+  secondaryContent: { style: typography, props: {} },
+  icon,
+  checkmark: icon,
+  avatar: { style: { height: numericToken, width: numericToken, borderRadius: numericToken }, props: {} },
+  checkbox: {
+    style: {
+      backgroundColor: colorToken,
+      borderColor: colorToken,
+      borderRadius: numericToken,
+      borderWidth: numericToken,
+      height: numericToken,
+      width: numericToken,
+    },
+    props: { iconColor: colorToken, iconSize: numericToken },
+  },
+};
+type ListboxItemAxes = Pick<ListboxItemState, 'variant' | 'isSelectedVisual' | 'selected' | 'visualState' | 'secondaryContentPosition'>;
+type ListboxItemDomains = typeof slots;
+declare module '@fluentui-react-native/design' {
+  interface ComponentTokenRegistry {
+    'furn.listbox-item': ComponentTokenPatch<ListboxItemAxes, ListboxItemDomains>;
   }
-  if (state.pressed) {
-    return key === 'primary' ? colors.foregroundNeutralPrimary.pressed : colors.foregroundNeutralSecondary.pressed;
-  }
-  if (state.hovered) {
-    return key === 'primary' ? colors.foregroundNeutralPrimary.hover : colors.foregroundNeutralSecondary.hover;
-  }
-  if (key === 'secondary' && state.variant === 'listItem' && state.selected && !state.multiselect) {
-    return colors.foregroundNeutralPrimary.rest;
-  }
-  return key === 'primary' ? colors.foregroundNeutralPrimary.rest : colors.foregroundNeutralSecondary.rest;
 }
+const listboxItemTokenDefinition = defineComponentTokens<ListboxItemAxes, ListboxItemDomains>({ id: 'furn.listbox-item', slots, schema });
 
-function getLabelWeight(state: ListboxItemState): TextStyle['fontWeight'] {
-  return state.variant === 'sectionHeader' || (state.variant === 'listItem' && state.selected && !state.multiselect)
-    ? state.tokens.fontWeight.functionalSemibold
-    : state.tokens.fontWeight.functionalRegular;
-}
+type Chrome<K extends keyof ListboxItemDomains> = ResolvedSlotTokens<ListboxItemDomains[K]['style'], ListboxItemDomains[K]['props']>;
 
-export function getListboxItemRootStyle(state: ListboxItemState): ViewStyle {
-  const colors = state.tokens.color;
-  const selected = state.variant === 'listItem' && state.selected && !state.multiselect;
-  const backgroundColor = state.disabled
-    ? selected
-      ? colors.backgroundNeutralSubtleDisabled.rest
-      : colors.backgroundNeutralTransparent.rest
-    : state.pressed
-      ? selected
-        ? colors.backgroundNeutralSoft.pressed
-        : colors.backgroundNeutralTransparent.pressed
-      : state.hovered
-        ? selected
-          ? colors.backgroundNeutralSoft.hover
-          : colors.backgroundNeutralTransparent.hover
-        : selected
-          ? colors.backgroundNeutralSoft.rest
-          : colors.backgroundNeutralTransparent.rest;
-
+export function getListboxItemChrome(state: ListboxItemState): {
+  root: Chrome<'root'>['style'];
+  content: Chrome<'content'>;
+  secondary: Chrome<'secondaryContent'>['style'];
+  contentReserve: Chrome<'content'>['style'];
+  icon: Chrome<'icon'>['props'];
+  checkmark: Chrome<'checkmark'>['props'];
+  avatar: Chrome<'avatar'>['style'];
+  checkbox: Chrome<'checkbox'>;
+} {
+  const tokens = getComponentTokens(state, listboxItemTokenDefinition);
   return {
-    backgroundColor,
-    borderRadius: state.tokens.borderRadius.base300,
-    minHeight: 40,
-    paddingHorizontal: state.tokens.spacing.componentBase300,
-    paddingVertical: state.tokens.spacing.componentBase250,
+    root: resolveTokenStates(tokens.root, state).style,
+    content: resolveTokenStates(tokens.content, state),
+    contentReserve: resolveTokenStates(tokens.content, { ...state, isSelectedVisual: true }).style,
+    secondary: resolveTokenStates(tokens.secondaryContent, state).style,
+    icon: resolveTokenStates(tokens.icon, state).props,
+    checkmark: resolveTokenStates(tokens.checkmark, state).props,
+    avatar: resolveTokenStates(tokens.avatar, state).style,
+    checkbox: resolveTokenStates(tokens.checkbox, state),
   };
-}
-
-export function getListboxItemHeaderStyle(state: ListboxItemState): ViewStyle {
-  return {
-    backgroundColor: state.tokens.color.backgroundNeutralTransparent.rest,
-    borderRadius: state.tokens.borderRadius.base300,
-    minHeight: 40,
-    paddingHorizontal: state.tokens.spacing.componentBase300,
-    paddingVertical: state.tokens.spacing.componentBase250,
-  };
-}
-
-export function getListboxItemLabelTypographyStyle(state: ListboxItemState): TextStyle {
-  return {
-    fontFamily: state.tokens.fontFamily.functional,
-    fontSize: state.variant === 'sectionHeader' ? state.tokens.fontSize.functionalBodySmall : state.tokens.fontSize.functionalBodyMedium,
-    fontWeight: getLabelWeight(state),
-    lineHeight:
-      state.variant === 'sectionHeader' ? state.tokens.lineHeight.functionalBodySmall : state.tokens.lineHeight.functionalBodyMedium,
-  };
-}
-
-export function getListboxItemSecondaryTypographyStyle(state: ListboxItemState): TextStyle {
-  return {
-    fontFamily: state.tokens.fontFamily.functional,
-    fontSize: state.tokens.fontSize.functionalBodySmall,
-    fontWeight: state.tokens.fontWeight.functionalRegular,
-    lineHeight: state.tokens.lineHeight.functionalBodySmall,
-  };
-}
-
-export function getListboxItemLabelColorStyle(state: ListboxItemState): TextStyle {
-  return {
-    color: getColor(state, 'primary'),
-  };
-}
-
-export function getListboxItemSecondaryColorStyle(state: ListboxItemState): TextStyle {
-  return {
-    color: getColor(state, 'secondary'),
-  };
-}
-
-export function getListboxItemVisibleLabelStyle(state: ListboxItemState): TextStyle {
-  return state.variant === 'listItem' && !state.multiselect
-    ? {
-        bottom: 0,
-        left: 0,
-        position: 'absolute',
-        right: 0,
-        top: 0,
-      }
-    : {};
-}
-
-export function getListboxItemGhostLabelStyle(): TextStyle {
-  return { opacity: 0 };
-}
-
-export function getListboxItemIconSize(): number {
-  return 20;
-}
-
-export function getListboxItemCheckmarkSize(): number {
-  return 16;
-}
-
-export function getListboxItemAvatarSize(): number {
-  return 32;
 }

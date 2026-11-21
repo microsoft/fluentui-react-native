@@ -14,7 +14,7 @@ override selects the custom path and still requires focus. Disabled or
 noninteractive targets show no custom ring. The visual is decorative and cannot
 intercept input; native ring appearance remains renderer-owned.
 
-The chevron rotates immediately and the body visibility styles change immediately. There is no component-owned motion or reduced-motion branch.
+The leading chevron points inward when closed (right in LTR, left in RTL) and down when open. The trailing chevron points down when closed and up when open. Both orientation and panel visibility snap to the new values; timed motion is deferred.
 
 ## Focus target lifetime
 

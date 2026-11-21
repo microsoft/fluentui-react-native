@@ -253,18 +253,20 @@ describe('Avatar', () => {
     }
   });
 
-  it('prefers image over initials and initials over icon', async () => {
+  it('warns and still renders one mode when untyped input supplies multiple modes', async () => {
     const warn = jest.spyOn(console, 'warn').mockImplementation();
-    const component = await renderAvatar({
+    const untypedProps = {
       accessibilityLabel: 'Lydia',
       icon: { fontSource: { codepoint: 0x2605, fontFamily: 'Arial' }, testID: 'icon' },
       image: { source: { uri: 'avatar.png' }, testID: 'image' },
       initials: 'LM',
-    });
+    } as unknown as React.ComponentProps<typeof Avatar>;
+    const component = await renderAvatar(untypedProps);
 
     expect(component.getByTestId('image', { includeHiddenElements: true })).toBeDefined();
     expect(component.queryByTestId('icon')).toBeNull();
     expect(component.queryByText('LM')).toBeNull();
+    expect(warn).toHaveBeenCalledWith('Avatar: provide only one content mode at a time.');
     warn.mockRestore();
   });
 

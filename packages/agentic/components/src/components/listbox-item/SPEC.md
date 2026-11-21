@@ -3,7 +3,7 @@ name: listbox-item
 platform: react-native (Windows, macOS)
 status: implemented
 source: ./spec/source.json
-tokens: ./spec/tokens.yaml
+tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
 interaction: ./spec/interaction.md
 usage: ./spec/usage.md
@@ -20,11 +20,12 @@ return to the consumer.
 
 ## Public contract
 
-`variant` defaults to `listItem`; `disabled`, `loading`, `checkmark`,
-`chevron`, `multiselect`, and `selected` default to `false`; and
+`variant` defaults to `listItem`; `disabled`, `loading`, `chevron`, and `selected`
+default to `false`; `selectionMode` defaults to `none`; and
 `secondaryContentPosition` defaults to `right`. List-item `content` defaults
-to `"Listbox item"`, its icon and secondary content render by default, and the
-section-header form renders neither. Caller root style applies after component
+to `"Listbox item"`. Standalone secondary content renders by default, but
+icons are always opt-in. The section header renders neither. Row height follows
+content and padding. Caller root style applies after component
 styles.
 
 `root`, `content`, `secondaryContent`, `icon`, `selectedIcon`, and `avatar`
@@ -36,9 +37,9 @@ replaces the normal icon. The header instead renders its content or, when
 `loading`, skeleton placeholders.
 
 `selected` is an externally driven value. Pressing forwards `onPress` and
-does not change it. `multiselect` suppresses the row selected fill and
-semibold label reservation, while its internal indicator reflects `selected`.
-`checkmark` renders only when both it and `selected` are true.
+does not change it. Multiple mode suppresses the row selected fill and semibold
+label reservation; its decorative neutral checkbox reflects `selected`. Single
+mode renders a decorative checkmark only when selected.
 
 `value` is an optional string that identifies a list item as an option of an
 owning list (LBI-006). A standalone list item ignores it.
@@ -65,7 +66,7 @@ owning list (LBI-006). A standalone list item ignores it.
   `onAccessibilityAction` receives the event once. The list owns the option's
   selection: it supplies `selected`, shows the checkmark in single mode and the
   checkbox indicator in multiple mode, and ignores caller values for
-  `selected`, `checkmark`, and `multiselect`. Without `content`, a bound option
+  `selected` and `selectionMode`. Without `content`, a bound option
   shows its `accessibilityLabel` or else its value, and it renders the icon,
   selected icon, and secondary content only when they are supplied. It reports
   focus, hover, key, and press input to the list after the caller's handlers
@@ -131,9 +132,8 @@ navigation, selection, dismissal, and focus return.
   semantics using the supported React Native state instead of a web
   accessibility attribute. A bound option continues to use `selected`
   (LBI-006).
-- `listbox-item-default-icon` (**accepted**): FURN creates the normal and
-  selected icon slots by default; the pinned Flex reference requires an
-  explicit icon opt-in. A bound option requires the opt-in (LBI-006).
+- `listbox-item-default-icon` (**resolved**): Both standalone and bound
+  items now render only explicitly supplied icons.
 - `listbox-item-native-focus-model` (**accepted**): FURN gives each option a
   directly focusable Pressable root and local platform focus treatment instead
   of retaining focus at a parent selection controller.
@@ -142,6 +142,11 @@ navigation, selection, dismissal, and focus return.
   inaccessible Icon slots rather than browser control composition.
 
 ## Conformance
+
+LBI-001–004 move sizing and visuals
+to JSON, use intrinsic row height, and expose one selection mode. LBI-005/006
+retain the separately evidenced native button and selected-option routes;
+re-run that composite renderer evidence for the breaking refresh.
 
 ### October 27, 2026 representation review
 

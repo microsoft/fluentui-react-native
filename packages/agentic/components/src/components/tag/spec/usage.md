@@ -17,7 +17,7 @@ meaning without implying it can be dismissed.
 ```tsx
 import { Tag } from '@fluentui-react-native/agentic-components';
 
-<Tag content="Engineering" onPress={() => removeFilter('engineering')} />;
+<Tag content="Engineering" onDismiss={() => removeFilter('engineering')} />;
 ```
 
 `appearance` defaults to `secondary`, `size` to `medium`, `shape` to `rounded`,
@@ -27,17 +27,20 @@ pass a real label.
 
 ## Removal is yours
 
-Tag never removes itself. Drop it from your own data in the press handler, and
+Tag never removes itself. Drop it from your own data in `onDismiss`, and
 move focus somewhere sensible, because removing the tag destroys the focused
 element.
 
 ```tsx
 <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8 }}>
   {filters.map((filter) => (
-    <Tag key={filter.id} content={filter.name} onPress={() => setFilters(filters.filter((f) => f.id !== filter.id))} />
+    <Tag key={filter.id} content={filter.name} onDismiss={() => setFilters(filters.filter((f) => f.id !== filter.id))} />
   ))}
 </View>
 ```
+
+To migrate an existing dismissal, move the handler from `onPress` to `onDismiss`.
+Only `onDismiss` runs if both are provided; a disabled tag never requests removal.
 
 When a tag is not removable, set `dismiss={false}` so the glyph disappears and
 the tag stops advertising an action it will not perform. The tag is still a

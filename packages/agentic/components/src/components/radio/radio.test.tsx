@@ -100,7 +100,7 @@ describe('Radio', () => {
       width: 16,
     });
     expect(StyleSheet.flatten(getTestId(component, 'radio-dot').props.style)).toMatchObject({
-      backgroundColor: tokens.color.foregroundBrandPrimary.rest,
+      backgroundColor: tokens.color.foregroundNeutralPrimary.rest,
       height: 10,
       opacity: 0,
       width: 10,
@@ -117,9 +117,9 @@ describe('Radio', () => {
     const root = getRoot(component);
 
     expect(root.props.accessibilityState).toEqual({ checked: true, selected: true, disabled: false });
-    expect(StyleSheet.flatten(getTestId(component, 'radio-indicator').props.style).borderColor).toBe(tokens.strokeBrandLoud.rest);
+    expect(StyleSheet.flatten(getTestId(component, 'radio-indicator').props.style).borderColor).toBe(tokens.strokeNeutralHeavy.rest);
     expect(StyleSheet.flatten(getTestId(component, 'radio-dot').props.style)).toMatchObject({
-      backgroundColor: tokens.foregroundBrandPrimary.rest,
+      backgroundColor: tokens.foregroundNeutralPrimary.rest,
       opacity: 1,
     });
     expect(StyleSheet.flatten(getText(component, 'Choice').props.style).color).toBe(tokens.foregroundNeutralPrimary.rest);

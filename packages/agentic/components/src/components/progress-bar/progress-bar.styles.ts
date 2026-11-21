@@ -1,85 +1,111 @@
-import { StyleSheet } from 'react-native';
 import type { TextStyle, ViewStyle } from 'react-native';
-
 import type { ThemeState } from '@fluentui-react-native/design';
-import { getGapStyleValue } from '@fluentui-react-native/design/styling';
-import { cornerRadiusCircular, size160 } from '@fluentui-react-native/design/tokens/global';
+import {
+  alignItemsToken,
+  alignSelfToken,
+  colorToken,
+  defineComponentTokens,
+  dimensionToken,
+  flexDirectionToken,
+  getComponentTokens,
+  getGapStyleValue,
+  justifyContentToken,
+  numericToken,
+  overflowToken,
+  positionToken,
+  resolveTokenStates,
+  stringToken,
+} from '@fluentui-react-native/design/styling';
+import type { ComponentTokenPatch } from '@fluentui-react-native/design/styling';
+import { iconTokenProps } from '../../common/iconTokenProps';
+import type { IconElementProps } from '../../primitives/icon/icon.types';
+import type { ProgressBarStatus } from './progress-bar.types';
+import schema from './spec/tokens.json' with { type: 'json' };
 
-export type ProgressBarThemeStyles = {
-  header: ViewStyle;
-  indicator: ViewStyle;
-  label: TextStyle;
-  root: ViewStyle;
-  trailing: ViewStyle;
-  track: ViewStyle;
-  validationIcon: ViewStyle;
-  valueText: TextStyle;
+type ProgressBarTokenState = { status: ProgressBarStatus };
+const domains = {
+  root: { style: { alignSelf: alignSelfToken, flexShrink: numericToken, gap: getGapStyleValue }, props: {} },
+  header: {
+    style: {
+      alignItems: alignItemsToken,
+      flexDirection: flexDirectionToken,
+      gap: getGapStyleValue,
+      justifyContent: justifyContentToken,
+      minWidth: dimensionToken,
+    },
+    props: {},
+  },
+  trailing: {
+    style: { alignItems: alignItemsToken, flexDirection: flexDirectionToken, flexShrink: numericToken, gap: getGapStyleValue },
+    props: {},
+  },
+  label: {
+    style: {
+      color: colorToken,
+      flexGrow: numericToken,
+      flexShrink: numericToken,
+      fontFamily: stringToken,
+      fontSize: numericToken,
+      lineHeight: numericToken,
+      minWidth: dimensionToken,
+    },
+    props: {},
+  },
+  valueText: { style: { color: colorToken, fontFamily: stringToken, fontSize: numericToken, lineHeight: numericToken }, props: {} },
+  track: {
+    style: {
+      backgroundColor: colorToken,
+      borderRadius: numericToken,
+      height: dimensionToken,
+      overflow: overflowToken,
+      position: positionToken,
+    },
+    props: {},
+  },
+  indicator: {
+    style: {
+      backgroundColor: colorToken,
+      borderRadius: numericToken,
+      bottom: numericToken,
+      start: numericToken,
+      position: positionToken,
+      top: numericToken,
+    },
+    props: {},
+  },
+  validationIcon: { style: {}, props: iconTokenProps },
 };
 
-const progressBarThemeStylesKey = Symbol('ProgressBar.themeStyles');
-
-export function getProgressBarThemeStyles(themeState: ThemeState): ProgressBarThemeStyles {
-  const cachedStyles = themeState.themeStyles[progressBarThemeStylesKey] as ProgressBarThemeStyles | undefined;
-  if (cachedStyles) {
-    return cachedStyles;
+declare module '@fluentui-react-native/design' {
+  interface ComponentTokenRegistry {
+    'furn.progress-bar': ComponentTokenPatch<ProgressBarTokenState, typeof domains>;
   }
+}
 
-  const { color, fontFamily, fontSize, lineHeight, spacing } = themeState.tokens;
+const progressBarTokens = defineComponentTokens<ProgressBarTokenState, typeof domains>({ id: 'furn.progress-bar', slots: domains, schema });
 
-  const styles = StyleSheet.create<ProgressBarThemeStyles>({
-    header: {
-      alignItems: 'center',
-      flexDirection: 'row',
-      gap: getGapStyleValue(spacing.componentBase100),
-      justifyContent: 'space-between',
-      minWidth: 0,
-    },
-    indicator: {
-      backgroundColor: color.foregroundBrandPrimary.rest,
-      borderRadius: cornerRadiusCircular,
-      bottom: 0,
-      left: 0,
-      position: 'absolute',
-      top: 0,
-    },
-    label: {
-      color: color.foregroundNeutralPrimary.rest,
-      flexGrow: 1,
-      flexShrink: 1,
-      fontFamily: fontFamily.functional,
-      fontSize: fontSize.functionalBodyMedium,
-      lineHeight: lineHeight.functionalBodyMedium,
-      minWidth: 0,
-    },
-    root: {
-      alignSelf: 'stretch',
-      flexShrink: 1,
-    },
-    trailing: {
-      alignItems: 'center',
-      flexDirection: 'row',
-      flexShrink: 0,
-      gap: getGapStyleValue(spacing.componentBase100),
-    },
-    track: {
-      backgroundColor: color.backgroundNeutralSoft.rest,
-      borderRadius: cornerRadiusCircular,
-      height: spacing.componentBase100,
-      overflow: 'hidden',
-      position: 'relative',
-    },
-    validationIcon: {
-      height: size160,
-      width: size160,
-    },
-    valueText: {
-      color: color.foregroundNeutralSecondary.rest,
-      fontFamily: fontFamily.functional,
-      fontSize: fontSize.functionalBodySmall,
-      lineHeight: lineHeight.functionalBodySmall,
-    },
-  });
+export type ProgressBarThemeStyles = {
+  root: ViewStyle;
+  header: ViewStyle;
+  trailing: ViewStyle;
+  label: TextStyle;
+  valueText: TextStyle;
+  track: ViewStyle;
+  indicator: ViewStyle;
+  validationIcon: Pick<IconElementProps, 'color' | 'height' | 'width'>;
+};
 
-  themeState.themeStyles[progressBarThemeStylesKey] = styles;
-  return styles;
+export function getProgressBarThemeStyles(theme: ThemeState, status: ProgressBarStatus): ProgressBarThemeStyles {
+  const tokens = getComponentTokens(theme, progressBarTokens);
+  const state = { status };
+  return {
+    root: resolveTokenStates(tokens.root, state).style,
+    header: resolveTokenStates(tokens.header, state).style,
+    trailing: resolveTokenStates(tokens.trailing, state).style,
+    label: resolveTokenStates(tokens.label, state).style,
+    valueText: resolveTokenStates(tokens.valueText, state).style,
+    track: resolveTokenStates(tokens.track, state).style,
+    indicator: resolveTokenStates(tokens.indicator, state).style,
+    validationIcon: resolveTokenStates(tokens.validationIcon, state).props,
+  };
 }

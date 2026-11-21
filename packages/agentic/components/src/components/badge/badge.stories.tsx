@@ -24,13 +24,12 @@ const StoryGroup = ({ children, label }: StoryGroupProps) => (
 const badgeLeadingIcon = { fontSource: { codepoint: 0x2022, fontFamily: 'Arial' } } as const;
 const badgeTrailingIcon = { fontSource: { codepoint: 0x2713, fontFamily: 'Arial' } } as const;
 
-const appearances: readonly { label: string; value: BadgeAppearance }[] = [
+const appearances: readonly { label: string; value: Exclude<BadgeAppearance, 'filled'> }[] = [
   { label: 'Tint', value: 'tint' },
   { label: 'Outline', value: 'outline' },
 ];
 
 const colors: readonly { label: string; value: BadgeColor }[] = [
-  { label: 'Brand', value: 'brand' },
   { label: 'Danger', value: 'danger' },
   { label: 'Success', value: 'success' },
   { label: 'Warning', value: 'warning' },
@@ -57,10 +56,9 @@ const meta: Meta<typeof Badge> = {
   component: Badge,
   args: {
     appearance: 'tint',
-    color: 'brand',
+    color: 'informative',
     content: 'Badge',
     layout: 'iconAndText',
-    leadingIcon: badgeLeadingIcon,
     leadingIconVisible: true,
     shape: 'circular',
     size: 'medium',
@@ -82,7 +80,7 @@ const meta: Meta<typeof Badge> = {
     docs: {
       description: {
         component:
-          'Badge is a non-interactive indicator for counts, statuses, and categories. It uses tint or outline styling, semantic color tokens, and optional leading and trailing icons.',
+          'Badge is a non-interactive indicator. Tint and Outline communicate status; Filled counters and dots decorate notification hosts.',
       },
     },
   },
@@ -123,7 +121,7 @@ export const Overview: Story = {
       </StoryGroup>
       <StoryGroup label="Color">
         {colors.map(({ label, value }) => (
-          <Badge key={value} color={value} content={label} leadingIcon={badgeLeadingIcon} />
+          <Badge key={value} color={value} content={label} />
         ))}
       </StoryGroup>
       <StoryGroup label="Size">
@@ -134,6 +132,9 @@ export const Overview: Story = {
       <StoryGroup label="Layout">
         <Badge content="Icon and text" leadingIcon={badgeLeadingIcon} trailingIcon={badgeTrailingIcon} trailingIconVisible />
         <Badge accessibilityLabel="Verified" layout="iconOnly" leadingIcon={badgeLeadingIcon} />
+        <Badge layout="counter" count={3} />
+        <Badge layout="counter" count="99+" color="danger" />
+        <Badge layout="dot" color="success" />
       </StoryGroup>
     </View>
   ),
@@ -167,14 +168,14 @@ export const Color: Story = {
   render: () => (
     <StoryGroup label="Color">
       {colors.map(({ label, value }) => (
-        <Badge key={value} color={value} content={label} leadingIcon={badgeLeadingIcon} />
+        <Badge key={value} color={value} content={label} />
       ))}
     </StoryGroup>
   ),
   parameters: {
     docs: {
       description: {
-        story: 'Brand, Danger, Success, Warning, and Informative map to semantic Fluent color families.',
+        story: 'Danger, Success, Warning, and Informative use semantic colors and distinct default icons.',
       },
     },
   },

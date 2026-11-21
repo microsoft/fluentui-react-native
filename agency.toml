@@ -1,13 +1,13 @@
 [profiles.flex-authoring]
 
 [[profiles.flex-authoring.plugins.default]]
-plugin = "market:flex-components@curated#206c4996205b027f4d806ac4ac7366f1f0ab0d5a"
+plugin = "market:flex-components@curated#9f1df394126dd9ad2339b786ab7dcc090131533c"
 cache_policy = "no-refresh"
 
 [[profiles.flex-authoring.plugins.default]]
-plugin = "market:flex-system@curated#206c4996205b027f4d806ac4ac7366f1f0ab0d5a"
+plugin = "market:flex-system@curated#9f1df394126dd9ad2339b786ab7dcc090131533c"
 cache_policy = "no-refresh"
 
 [[profiles.flex-authoring.plugins.default]]
-plugin = "market:flex-tokens@curated#206c4996205b027f4d806ac4ac7366f1f0ab0d5a"
+plugin = "market:flex-tokens@curated#9f1df394126dd9ad2339b786ab7dcc090131533c"
 cache_policy = "no-refresh"

@@ -70,20 +70,20 @@ export const NativeIndicatorSemantics: Story = {
       };
       return (
         <View style={styles.story}>
-          <MenuItem content="Single choice off" hasCheckmark selected={false} testID="menu-item-native-single-off" />
-          <MenuItem content="Single choice on" hasCheckmark selected testID="menu-item-native-single-on" />
+          <MenuItem content="Single choice off" selectionMode="single" selected={false} testID="menu-item-native-single-off" />
+          <MenuItem content="Single choice on" selectionMode="single" selected testID="menu-item-native-single-on" />
           <MenuItem
             content="Multiple choice off"
-            hasMultiselect
+            selectionMode="multiple"
             selected={false}
             testID="menu-item-native-multi-off"
             onAccessibilityAction={recordAction}
             onPress={() => setPresses((value) => value + 1)}
           />
-          <MenuItem content="Multiple choice on" hasMultiselect selected testID="menu-item-native-multi-on" />
+          <MenuItem content="Multiple choice on" selectionMode="multiple" selected testID="menu-item-native-multi-on" />
           <MenuItem
             content="Disabled choice"
-            hasMultiselect
+            selectionMode="multiple"
             selected
             disabled
             testID="menu-item-native-disabled"
@@ -154,13 +154,14 @@ export const Overview: Story = {
     <View style={styles.story}>
       <StoryGroup label="Style">
         <MenuItem content="List item" />
+        <MenuItem content="Command with trailing icon" trailingIcon={{ fontSource: { codepoint: 0x2606 } }} />
         <MenuItem content="Section header" menuStyle="section-header" />
       </StoryGroup>
       <StoryGroup label="Selection">
         <MenuItem content="Not selected" />
         <MenuItem content="Selected" selected />
-        <MenuItem hasCheckmark content="Checked" selected />
-        <MenuItem content="Multi-select" hasMultiselect selected />
+        <MenuItem selectionMode="single" content="Checked" selected />
+        <MenuItem content="Multi-select" selectionMode="multiple" selected />
       </StoryGroup>
       <StoryGroup label="Secondary content">
         <MenuItem content="Right" secondaryContent="Meta" secondaryContentPosition="right" />
@@ -186,7 +187,7 @@ export const Selected: Story = {
 
 export const Checkmark: Story = {
   args: {
-    hasCheckmark: true,
+    selectionMode: 'single',
     content: 'Single select',
     selected: true,
   },
@@ -195,7 +196,7 @@ export const Checkmark: Story = {
 export const Multiselect: Story = {
   args: {
     content: 'Multi select',
-    hasMultiselect: true,
+    selectionMode: 'multiple',
     selected: true,
   },
 };
@@ -211,7 +212,7 @@ export const ExternallyDrivenSelection: Story = {
             <MenuItem
               key={option}
               content={option}
-              hasCheckmark
+              selectionMode="single"
               onPress={() => setChoice(option)}
               secondaryContent={null}
               selected={choice === option}

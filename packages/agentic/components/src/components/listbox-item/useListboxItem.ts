@@ -24,9 +24,6 @@ import type { ListboxItemProps, ListboxItemState } from './listbox-item.types';
 import type { ListboxItemOptionAction } from './listboxItemOptionContext';
 import { getListboxItemOptionLabel, ListboxItemOptionContext } from './listboxItemOptionContext';
 
-const defaultRegularIcon = { fontSource: semanticIconSources.unselectedCircle, testID: 'listbox-item-default-icon' } as const;
-const defaultFilledIcon = { fontSource: semanticIconSources.selectedCircle, testID: 'listbox-item-default-selected-icon' } as const;
-
 // Keys an owning list handles for its options; declaring them stops the native view from also handling them.
 const optionKeys = [{ key: 'Home' }, { key: 'End' }];
 
@@ -60,13 +57,12 @@ function useOptionActions(actions: readonly AccessibilityActionInfo[] | undefine
 export function useListboxItem_unstable(props: ListboxItemProps): ListboxItemState {
   const {
     avatar: avatarProp,
-    checkmark: checkmarkProp = false,
     chevron = false,
     content: contentProp,
     disabled = false,
     icon: iconProp,
     loading = false,
-    multiselect: multiselectProp = false,
+    selectionMode: selectionModeProp = 'none',
     ref: rootRef,
     secondaryContent: secondaryContentProp,
     secondaryContentPosition = 'right',
@@ -89,9 +85,10 @@ export function useListboxItem_unstable(props: ListboxItemProps): ListboxItemSta
   const bound = option !== undefined && isListItem && typeof value === 'string' ? { option, value } : undefined;
   const optionActions = useOptionActions(rest.accessibilityActions);
 
-  const multiselect = bound ? bound.option.multiselect : multiselectProp;
+  const selectionMode = bound?.option.selectionMode ?? selectionModeProp;
+  const multiselect = selectionMode === 'multiple';
   const selected = bound ? bound.option.isSelected(bound.value) : selectedProp;
-  const checkmark = bound ? !multiselect : checkmarkProp;
+  const checkmark = selectionMode === 'single';
   const label = bound
     ? getListboxItemOptionLabel({ content: contentProp, accessibilityLabel: rest.accessibilityLabel, value: bound.value })
     : undefined;
@@ -111,14 +108,8 @@ export function useListboxItem_unstable(props: ListboxItemProps): ListboxItemSta
   const themeState = useThemeState();
   const content = useSlot(NativeText, resolvedContentProp);
   const contentHidden = useOptionalSlot(Text, isListItem && !multiselect ? resolvedContentProp : null);
-  const iconSlotProp = iconProp === null ? null : iconProp;
-  const selectedIconSlotProp = selectedIconProp === null ? null : selectedIconProp;
-  // A bound option renders the icon, selected icon, and secondary content only when they are supplied.
-  const icon = useOptionalSlot(Icon, isListItem ? iconSlotProp : null, { defaultProps: defaultRegularIcon, renderByDefault: !bound });
-  const selectedIcon = useOptionalSlot(Icon, isListItem ? selectedIconSlotProp : null, {
-    defaultProps: defaultFilledIcon,
-    renderByDefault: !bound,
-  });
+  const icon = useOptionalSlot(Icon, isListItem ? iconProp : null);
+  const selectedIcon = useOptionalSlot(Icon, isListItem ? selectedIconProp : null);
   const avatar = useOptionalSlot(View, isListItem ? avatarProp : null);
   const secondaryContent = useOptionalSlot(
     Text,
@@ -233,7 +224,6 @@ export function useListboxItem_unstable(props: ListboxItemProps): ListboxItemSta
     focusTargetRef: targetRef,
     avatar,
     checkboxIndicator,
-    checkmark,
     checkmarkIndicator,
     chevron,
     chevronIndicator,
@@ -243,12 +233,14 @@ export function useListboxItem_unstable(props: ListboxItemProps): ListboxItemSta
     header,
     icon,
     loading,
-    multiselect,
+    selectionMode,
     root,
     secondaryContent,
     secondaryContentPosition,
     selected,
     selectedIcon,
+    isSelectedVisual: isListItem && selected && !multiselect,
+    visualState: disabled ? 'disabled' : pressableState.pressed ? 'pressed' : pressableState.hovered ? 'hovered' : 'rest',
     userStyle,
     variant,
   };

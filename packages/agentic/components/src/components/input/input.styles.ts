@@ -1,20 +1,23 @@
 import { StyleSheet } from 'react-native';
 import type { ColorValue, TextStyle, ViewStyle } from 'react-native';
 
-import type { FlexTokens } from '@fluentui-react-native/design';
 import type { ThemeState } from '@fluentui-react-native/design';
-import { getNumericStyleValue, getThemedStateStyleFactory } from '@fluentui-react-native/design/styling';
-import type { StyleDefinition } from '@fluentui-react-native/design/styling';
-import { cornerRadiusNone, size160, size200, size240 } from '@fluentui-react-native/design/tokens/global';
-
+import {
+  colorToken,
+  defineComponentTokens,
+  getComponentTokens,
+  numericToken,
+  resolveTokenStates,
+  stringToken,
+} from '@fluentui-react-native/design/styling';
+import type { ComponentTokenPatch } from '@fluentui-react-native/design/styling';
+import { iconTokenProps } from '../../common/iconTokenProps';
+import type { IconElementProps } from '../../primitives/icon/icon.types';
 import type { InputSize, InputVariant, InputVisualState } from './input.types';
+import schema from './spec/tokens.json' with { type: 'json' };
 
 export const inputStyles = StyleSheet.create({
-  root: {
-    alignSelf: 'stretch',
-    flexDirection: 'column',
-    overflow: 'hidden',
-  },
+  root: { alignSelf: 'stretch', flexDirection: 'column', overflow: 'hidden' },
   contents: {
     alignItems: 'center',
     backgroundColor: 'transparent',
@@ -23,307 +26,40 @@ export const inputStyles = StyleSheet.create({
     overflow: 'hidden',
     position: 'relative',
   },
-  iconTextStack: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    flexGrow: 1,
-    flexShrink: 1,
-    minWidth: 0,
-  },
-  iconEnd: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    flexShrink: 0,
-    minWidth: 0,
-  },
-  textInput: {
-    backgroundColor: 'transparent',
-    borderWidth: 0,
-    flexGrow: 1,
-    flexShrink: 1,
-    minWidth: 0,
-    padding: 0,
-  },
-  underline: {
-    left: 0,
-    position: 'absolute',
-    right: 0,
-    bottom: 0,
-  },
+  iconTextStack: { alignItems: 'center', flexDirection: 'row', flexGrow: 1, flexShrink: 1, minWidth: 0 },
+  iconEnd: { alignItems: 'center', flexDirection: 'row', flexShrink: 0, minWidth: 0 },
+  textInput: { backgroundColor: 'transparent', borderWidth: 0, flexGrow: 1, flexShrink: 1, minWidth: 0, padding: 0 },
+  underline: { left: 0, position: 'absolute', right: 0, bottom: 0 },
 });
 
-const rootStateLevels = [
-  ['outline', 'underline'],
-  ['small', 'medium', 'large'],
-] as const;
-const contentStateLevels = [
-  ['outline', 'underline'],
-  ['small', 'medium', 'large'],
-  ['disabled', 'error', 'readOnly', 'focused', 'pressed', 'hovered', 'rest'],
-] as const;
-const textStateLevels = [
-  ['small', 'medium', 'large'],
-  ['disabled', 'error', 'readOnly', 'focused', 'pressed', 'hovered', 'rest'],
-] as const;
-const visualStateLevels = [['disabled', 'error', 'readOnly', 'focused', 'pressed', 'hovered', 'rest']] as const;
-
-type RootStateLevels = typeof rootStateLevels;
-type ContentStateLevels = typeof contentStateLevels;
-type TextStateLevels = typeof textStateLevels;
-type VisualStateLevels = typeof visualStateLevels;
-
-const toNumber = (value: unknown): number => Number(getNumericStyleValue(value));
-
-function getMetrics(tokens: FlexTokens, size: InputSize) {
-  const { fontSize, lineHeight, spacing } = tokens;
-  const metrics = {
-    small: {
-      height: toNumber(lineHeight.functionalBodySmall) + toNumber(spacing.componentBase100) * 2,
-      horizontalPadding: toNumber(spacing.componentBase150),
-      iconSize: toNumber(size160),
-      textFontSize: toNumber(fontSize.functionalBodySmall),
-      verticalPadding: toNumber(spacing.componentBase100),
+type InputAxes = { size: InputSize; variant: InputVariant; visualState: InputVisualState };
+const slots = {
+  root: { style: { borderRadius: numericToken }, props: {} },
+  contents: {
+    style: {
+      minHeight: numericToken,
+      gap: numericToken,
+      borderWidth: numericToken,
+      borderColor: colorToken,
+      paddingTop: numericToken,
+      paddingBottom: numericToken,
     },
-    medium: {
-      height: toNumber(lineHeight.functionalBodyMedium) + toNumber(spacing.componentBase150) * 2,
-      horizontalPadding: toNumber(spacing.componentBase250),
-      iconSize: toNumber(size200),
-      textFontSize: toNumber(fontSize.functionalBodyMedium),
-      verticalPadding: toNumber(spacing.componentBase150),
-    },
-    large: {
-      height: toNumber(lineHeight.functionalBodyLarge) + toNumber(spacing.componentBase200) * 2,
-      horizontalPadding: toNumber(spacing.componentBase300),
-      iconSize: toNumber(size240),
-      textFontSize: toNumber(fontSize.functionalBodyLarge),
-      verticalPadding: toNumber(spacing.componentBase200),
-    },
-  } as const;
-
-  return metrics[size];
-}
-
-function createRootStyleDefinition(tokens: FlexTokens): StyleDefinition<ViewStyle, RootStateLevels> {
-  const { borderRadius } = tokens;
-  return {
-    outline: {
-      small: { borderRadius: toNumber(borderRadius.base200) },
-      medium: { borderRadius: toNumber(borderRadius.base300) },
-      large: { borderRadius: toNumber(borderRadius.base400) },
-    },
-    underline: {
-      small: { borderRadius: cornerRadiusNone },
-      medium: { borderRadius: cornerRadiusNone },
-      large: { borderRadius: cornerRadiusNone },
-    },
-  };
-}
-
-function createContentsLayoutDefinition(tokens: FlexTokens): StyleDefinition<ViewStyle, ContentStateLevels> {
-  const { spacing } = tokens;
-  const metrics = {
-    small: { height: getMetrics(tokens, 'small').height, gap: toNumber(spacing.componentBase250) },
-    medium: { height: getMetrics(tokens, 'medium').height, gap: toNumber(spacing.componentBase250) },
-    large: { height: getMetrics(tokens, 'large').height, gap: toNumber(spacing.componentBase250) },
-  } as const;
-
-  return {
-    outline: {
-      small: {
-        gap: metrics.small.gap,
-        minHeight: metrics.small.height,
-      },
-      medium: {
-        gap: metrics.medium.gap,
-        minHeight: metrics.medium.height,
-      },
-      large: {
-        gap: metrics.large.gap,
-        minHeight: metrics.large.height,
-      },
-    },
-    underline: {
-      small: {
-        gap: metrics.small.gap,
-        minHeight: metrics.small.height,
-      },
-      medium: {
-        gap: metrics.medium.gap,
-        minHeight: metrics.medium.height,
-      },
-      large: {
-        gap: metrics.large.gap,
-        minHeight: metrics.large.height,
-      },
-    },
-  };
-}
-
-function createContentsStrokeDefinition(tokens: FlexTokens): StyleDefinition<ViewStyle, ContentStateLevels> {
-  const { color, strokeWidth } = tokens;
-  const outlineBase = {
-    borderWidth: toNumber(strokeWidth.thin),
-  };
-  const underlineBase = {
-    borderWidth: 0,
-  };
-  const outlineStates = {
-    disabled: { borderColor: color.strokeNeutralDisabled.rest },
-    error: { borderColor: color.strokeDangerLoud.rest },
-    focused: { borderColor: color.strokeNeutralSubtle.rest },
-    hovered: { borderColor: color.strokeNeutralLoud.hover },
-    pressed: { borderColor: color.strokeNeutralLoud.pressed },
-    readOnly: { borderColor: color.strokeNeutralDisabled.rest },
-    rest: { borderColor: color.strokeNeutralLoud.rest },
-  } satisfies Record<InputVisualState, ViewStyle>;
-  const underlineStates = {
-    disabled: { borderBottomColor: color.strokeNeutralDisabled.rest },
-    error: { borderBottomColor: color.strokeDangerLoud.rest },
-    focused: { borderBottomColor: color.strokeFocusOuter.rest },
-    hovered: { borderBottomColor: color.strokeNeutralLoud.hover },
-    pressed: { borderBottomColor: color.strokeNeutralLoud.pressed },
-    readOnly: { borderBottomColor: color.strokeNeutralDisabled.rest },
-    rest: { borderBottomColor: color.strokeNeutralLoud.rest },
-  } satisfies Record<InputVisualState, ViewStyle>;
-
-  function createSizeBranch(base: ViewStyle, states: Record<InputVisualState, ViewStyle>) {
-    return {
-      disabled: { ...base, ...states.disabled },
-      error: { ...base, ...states.error },
-      focused: { ...base, ...states.focused },
-      hovered: { ...base, ...states.hovered },
-      pressed: { ...base, ...states.pressed },
-      readOnly: { ...base, ...states.readOnly },
-      rest: { ...base, ...states.rest },
-    };
+    props: {},
+  },
+  iconTextStack: { style: { gap: numericToken, paddingStart: numericToken, paddingEnd: numericToken }, props: {} },
+  iconEnd: { style: { gap: numericToken, paddingEnd: numericToken }, props: {} },
+  textInput: { style: { fontFamily: stringToken, fontSize: numericToken, color: colorToken }, props: { placeholderTextColor: colorToken } },
+  underline: { style: { borderBottomWidth: numericToken, borderBottomColor: colorToken }, props: {} },
+  underlineFocus: { style: { borderBottomWidth: numericToken, borderBottomColor: colorToken }, props: {} },
+  icon: { style: {}, props: iconTokenProps },
+};
+type InputDomains = typeof slots;
+declare module '@fluentui-react-native/design' {
+  interface ComponentTokenRegistry {
+    'furn.input': ComponentTokenPatch<InputAxes, InputDomains>;
   }
-
-  return {
-    outline: {
-      small: createSizeBranch(outlineBase, outlineStates),
-      medium: createSizeBranch(outlineBase, outlineStates),
-      large: createSizeBranch(outlineBase, outlineStates),
-    },
-    underline: {
-      small: createSizeBranch(underlineBase, underlineStates),
-      medium: createSizeBranch(underlineBase, underlineStates),
-      large: createSizeBranch(underlineBase, underlineStates),
-    },
-  };
 }
-
-function createIconTextStackDefinition(tokens: FlexTokens): StyleDefinition<ViewStyle, typeof textStateLevels> {
-  const { spacing } = tokens;
-  return {
-    small: {
-      gap: toNumber(spacing.componentBase250),
-      paddingHorizontal: toNumber(spacing.componentBase150),
-    },
-    medium: {
-      gap: toNumber(spacing.componentBase250),
-      paddingHorizontal: toNumber(spacing.componentBase250),
-    },
-    large: {
-      gap: toNumber(spacing.componentBase250),
-      paddingHorizontal: toNumber(spacing.componentBase300),
-    },
-  };
-}
-
-function createIconEndDefinition(tokens: FlexTokens): StyleDefinition<ViewStyle, typeof textStateLevels> {
-  const { spacing } = tokens;
-  return {
-    small: {
-      gap: toNumber(spacing.componentBase100),
-      paddingRight: toNumber(spacing.componentBase150),
-    },
-    medium: {
-      gap: toNumber(spacing.componentBase100),
-      paddingRight: toNumber(spacing.componentBase250),
-    },
-    large: {
-      gap: toNumber(spacing.componentBase100),
-      paddingRight: toNumber(spacing.componentBase300),
-    },
-  };
-}
-
-function createTextInputDefinition(tokens: FlexTokens): StyleDefinition<TextStyle, TextStateLevels> {
-  const { color, fontFamily } = tokens;
-  const small = getMetrics(tokens, 'small');
-  const medium = getMetrics(tokens, 'medium');
-  const large = getMetrics(tokens, 'large');
-  const base = {
-    color: color.foregroundNeutralPrimary.rest,
-    fontFamily: fontFamily.functional,
-  };
-
-  return {
-    small: {
-      ...base,
-      fontSize: small.textFontSize,
-      marginVertical: small.verticalPadding,
-      disabled: {
-        color: color.foregroundNeutralDisabled.rest,
-      },
-    },
-    medium: {
-      ...base,
-      fontSize: medium.textFontSize,
-      marginVertical: medium.verticalPadding,
-      disabled: {
-        color: color.foregroundNeutralDisabled.rest,
-      },
-    },
-    large: {
-      ...base,
-      fontSize: large.textFontSize,
-      marginVertical: large.verticalPadding,
-      disabled: {
-        color: color.foregroundNeutralDisabled.rest,
-      },
-    },
-  };
-}
-
-function createUnderlineDefinition(tokens: FlexTokens): StyleDefinition<ViewStyle, VisualStateLevels> {
-  const { strokeWidth } = tokens;
-  const base = {
-    bottom: 0,
-    left: 0,
-    position: 'absolute' as const,
-    right: 0,
-  };
-  return {
-    disabled: { ...base, borderBottomWidth: toNumber(strokeWidth.thin) },
-    error: { ...base, borderBottomWidth: toNumber(strokeWidth.thin) },
-    focused: { ...base, borderBottomWidth: toNumber(strokeWidth.thin) },
-    hovered: { ...base, borderBottomWidth: toNumber(strokeWidth.thin) },
-    pressed: { ...base, borderBottomWidth: toNumber(strokeWidth.thin) },
-    readOnly: { ...base, borderBottomWidth: toNumber(strokeWidth.thin) },
-    rest: { ...base, borderBottomWidth: toNumber(strokeWidth.thin) },
-  };
-}
-
-function createUnderlineFocusDefinition(tokens: FlexTokens): StyleDefinition<ViewStyle, VisualStateLevels> {
-  return {
-    bottom: toNumber(tokens.strokeWidth.thin),
-    left: 0,
-    right: 0,
-    position: 'absolute',
-    borderBottomWidth: toNumber(tokens.strokeWidth.thin),
-    borderBottomColor: tokens.color.strokeFocusOuter.rest,
-  };
-}
-
-const getThemedRootStyle = getThemedStateStyleFactory('Input.root', createRootStyleDefinition, rootStateLevels);
-const getThemedContentsLayoutStyle = getThemedStateStyleFactory('Input.contentsLayout', createContentsLayoutDefinition, contentStateLevels);
-const getThemedContentsStrokeStyle = getThemedStateStyleFactory('Input.contentsStroke', createContentsStrokeDefinition, contentStateLevels);
-const getThemedIconTextStackStyle = getThemedStateStyleFactory('Input.iconTextStack', createIconTextStackDefinition, textStateLevels);
-const getThemedIconEndStyle = getThemedStateStyleFactory('Input.iconEnd', createIconEndDefinition, textStateLevels);
-const getThemedTextInputStyle = getThemedStateStyleFactory('Input.textInput', createTextInputDefinition, textStateLevels);
-const getThemedUnderlineStyle = getThemedStateStyleFactory('Input.underline', createUnderlineDefinition, visualStateLevels);
-const getThemedUnderlineFocusStyle = getThemedStateStyleFactory('Input.underlineFocus', createUnderlineFocusDefinition, visualStateLevels);
+const inputTokenDefinition = defineComponentTokens<InputAxes, InputDomains>({ id: 'furn.input', slots, schema });
 
 export type InputResolvedStyles = {
   root: ViewStyle;
@@ -333,12 +69,10 @@ export type InputResolvedStyles = {
   underline: ViewStyle;
   underlineFocus: ViewStyle;
   textInput: TextStyle;
-  iconSize: number;
-  iconColor: ColorValue;
-  placeholderTextColor: ColorValue;
+  icon: Pick<IconElementProps, 'color' | 'height' | 'width'>;
+  placeholderTextColor?: ColorValue;
 };
 
-/** Resolves Input's visual state from its interaction state, in the precedence its style levels apply. */
 export function getInputVisualState(state: {
   disabled: boolean;
   error: boolean;
@@ -347,78 +81,50 @@ export function getInputVisualState(state: {
   pressed: boolean;
   hovered: boolean;
 }): InputVisualState {
-  if (state.disabled) {
-    return 'disabled';
-  }
-  if (state.error) {
-    return 'error';
-  }
-  if (state.readOnly) {
-    return 'readOnly';
-  }
-  if (state.focused) {
-    return 'focused';
-  }
-  if (state.pressed) {
-    return 'pressed';
-  }
-  if (state.hovered) {
-    return 'hovered';
-  }
+  if (state.disabled) return 'disabled';
+  if (state.error) return 'error';
+  if (state.readOnly) return 'readOnly';
+  if (state.focused) return 'focused';
+  if (state.pressed) return 'pressed';
+  if (state.hovered) return 'hovered';
   return 'rest';
 }
 
-export function getInputResolvedStyles(
-  state: ThemeState & { tokens: FlexTokens; size: InputSize; variant: InputVariant; visualState: InputVisualState; focusVisible?: boolean },
-): InputResolvedStyles {
+export function getInputResolvedStyles(state: ThemeState & InputAxes & { focusVisible?: boolean }): InputResolvedStyles {
   const focusVisible = state.visualState !== 'disabled' && (state.focusVisible ?? state.visualState === 'focused');
-  const strokeState = state.visualState === 'focused' && !focusVisible ? 'rest' : state.visualState;
-  const metrics = getMetrics(state.tokens, state.size);
-  const root = getThemedRootStyle(state, [state.variant, state.size]);
-  const contents = {
-    ...inputStyles.contents,
-    ...getThemedContentsLayoutStyle(state, [state.variant, state.size]),
-    ...getThemedContentsStrokeStyle(state, [state.variant, state.size, strokeState]),
-  };
-  const iconTextStack = {
-    ...inputStyles.iconTextStack,
-    ...getThemedIconTextStackStyle(state, [state.size]),
-  };
-  const iconEnd = {
-    ...inputStyles.iconEnd,
-    ...getThemedIconEndStyle(state, [state.size]),
-  };
-  const underline = {
-    ...inputStyles.underline,
-    ...getThemedUnderlineStyle(state, [state.visualState]),
-    ...getThemedContentsStrokeStyle(state, ['underline', state.size, strokeState]),
-  };
-  const underlineFocus = {
-    ...getThemedUnderlineFocusStyle(state, []),
-    opacity: focusVisible ? 1 : 0,
-  };
-  const textInput = {
-    ...inputStyles.textInput,
-    ...getThemedTextInputStyle(state, [state.size, state.visualState]),
-  };
-  const iconColor = textInput.color ?? state.tokens.color.foregroundNeutralPrimary.rest;
-  const placeholderTextColor =
-    state.visualState === 'disabled'
-      ? state.tokens.color.foregroundNeutralDisabled.rest
-      : state.visualState === 'readOnly'
-        ? state.tokens.color.foregroundNeutralPrimary.rest
-        : state.tokens.color.foregroundNeutralTertiary.rest;
-
+  const chromeState = { ...state, visualState: state.visualState === 'focused' && !focusVisible ? ('rest' as const) : state.visualState };
+  const tokens = getComponentTokens(state, inputTokenDefinition);
+  const root = resolveTokenStates(tokens.root, state).style;
+  const field = resolveTokenStates(tokens.contents, chromeState).style;
+  const underline = resolveTokenStates(tokens.underline, chromeState).style;
+  const underlineFocus = resolveTokenStates(tokens.underlineFocus, state).style;
+  const stack = resolveTokenStates(tokens.iconTextStack, state).style;
+  const end = resolveTokenStates(tokens.iconEnd, state).style;
+  const editor = resolveTokenStates(tokens.textInput, state);
+  const icon = resolveTokenStates(tokens.icon, state).props;
+  const outline = state.variant === 'outline';
+  const sideStroke = outline ? (field.borderWidth ?? 0) : 0;
+  const bottomStroke = outline ? sideStroke : (underline.borderBottomWidth ?? 0);
+  const inset = (padding: number | undefined, stroke: number) => Math.max(0, (padding ?? 0) - stroke);
   return {
-    contents,
-    iconColor,
-    iconEnd,
-    iconSize: metrics.iconSize,
-    iconTextStack,
-    placeholderTextColor,
     root,
-    textInput,
-    underline,
-    underlineFocus,
+    contents: {
+      ...inputStyles.contents,
+      ...field,
+      paddingTop: inset(field.paddingTop, sideStroke),
+      paddingBottom: inset(field.paddingBottom, bottomStroke),
+    },
+    iconTextStack: {
+      ...inputStyles.iconTextStack,
+      ...stack,
+      paddingStart: inset(stack.paddingStart, sideStroke),
+      paddingEnd: inset(stack.paddingEnd, sideStroke),
+    },
+    iconEnd: { ...inputStyles.iconEnd, ...end, paddingEnd: inset(end.paddingEnd, sideStroke) },
+    underline: { ...inputStyles.underline, ...underline },
+    underlineFocus: { ...inputStyles.underline, ...underlineFocus, bottom: bottomStroke, opacity: focusVisible ? 1 : 0 },
+    textInput: { ...inputStyles.textInput, ...editor.style },
+    icon: { ...icon },
+    placeholderTextColor: editor.props.placeholderTextColor,
   };
 }

@@ -1,84 +1,60 @@
-import type { StyleProp, ViewStyle } from 'react-native';
-
-import { attachSlotProps } from '@fluentui-react-native/framework-base';
+import { attachSlotDefaults, attachSlotProps } from '@fluentui-react-native/framework-base';
 
 import { hiddenFromAccessibilityProps } from '../../common/accessibility';
 import { applyFocusRingStyles } from '../../common/applyFocusRingStyles';
-import {
-  getMenuItemCheckboxStyle,
-  getMenuItemLeadingStyle,
-  getMenuItemLabelStyle,
-  getMenuItemRootLayoutStyle,
-  getMenuItemRootStyle,
-  getMenuItemSecondaryStyle,
-  getMenuItemTrailingStyle,
-  menuItemStyles,
-} from './menu-item.styles';
+import { getMenuItemChrome, getMenuItemLeadingStyle, getMenuItemTrailingStyle, menuItemStyles } from './menu-item.styles';
 import type { MenuItemState } from './menu-item.types';
 
 export function useMenuItemStyles_unstable(state: MenuItemState) {
-  const labelColor = getMenuItemLabelStyle(state).color;
-  const rootLayoutStyle = getMenuItemRootLayoutStyle(state);
-  const rootStyle: StyleProp<ViewStyle> = [menuItemStyles.root, rootLayoutStyle, getMenuItemRootStyle(state), state.userStyle];
+  const chrome = getMenuItemChrome(state);
+  const { gap, ...rootStyle } = chrome.root;
+  applyFocusRingStyles(state.FocusRing, state, rootStyle.borderRadius);
+  attachSlotProps(state.root, {
+    style: [
+      menuItemStyles.root,
+      { alignItems: state.secondaryContentPosition === 'under' ? 'flex-start' : 'center' },
+      rootStyle,
+      state.userStyle,
+    ],
+  });
+  state.contentStyle = chrome.content.style;
+  state.contentReserveStyle = chrome.contentReserve;
+  state.secondaryStyle = chrome.secondary;
+  state.secondaryReserveStyle = chrome.secondaryReserve;
+  state.contentGap = chrome.content.props.gap;
+  state.layoutGap = gap;
 
-  applyFocusRingStyles(state.FocusRing, state, rootLayoutStyle.borderRadius);
-  attachSlotProps(state.root, { style: rootStyle });
-  state.contentReserveStyle = getMenuItemLabelStyle(state, true);
-  state.contentStyle = getMenuItemLabelStyle(state);
-  state.secondaryReserveStyle = getMenuItemSecondaryStyle(state, true);
-  state.secondaryStyle = getMenuItemSecondaryStyle(state);
-
-  if (state.icon) {
-    attachSlotProps(state.icon, {
-      accessible: false,
-      color: labelColor,
-      height: 20,
-      width: 20,
-    });
+  const color = chrome.content.style.color;
+  for (const icon of [state.icon, state.selectedIcon]) {
+    if (icon) {
+      attachSlotDefaults(icon, { color, ...chrome.leadingIcon });
+      attachSlotProps(icon, hiddenFromAccessibilityProps);
+    }
   }
-
-  if (state.selectedIcon) {
-    attachSlotProps(state.selectedIcon, {
-      accessible: false,
-      color: labelColor,
-      height: 20,
-      width: 20,
-    });
+  for (const icon of [state.chevron, state.trailingIcon]) {
+    if (icon) {
+      attachSlotDefaults(icon, { color, ...chrome.trailingIcon });
+      attachSlotProps(icon, hiddenFromAccessibilityProps);
+    }
   }
-
   if (state.avatar) {
-    attachSlotProps(state.avatar, {
-      accessible: false,
-      style: [getMenuItemLeadingStyle(state), { height: 16, width: 16 }],
-    });
+    attachSlotDefaults(state.avatar, { style: [getMenuItemLeadingStyle(state), chrome.avatar] });
+    attachSlotProps(state.avatar, hiddenFromAccessibilityProps);
   }
-
-  if (state.chevron) {
-    attachSlotProps(state.chevron, {
-      accessible: false,
-      color: labelColor,
-      height: 20,
-      width: 20,
-    });
-  }
-
   if (state.checkmark) {
-    attachSlotProps(state.checkmark, {
-      accessible: false,
-      color: state.hasMultiselect ? state.tokens.color.foregroundBrandOnloud.rest : labelColor,
-      height: state.hasMultiselect ? 12 : 16,
-      style: state.selected ? undefined : { opacity: 0 },
-      width: state.hasMultiselect ? 12 : 16,
-    });
+    attachSlotDefaults(state.checkmark, { color, ...chrome.checkmark });
+    attachSlotProps(state.checkmark, { ...hiddenFromAccessibilityProps, style: state.selected ? undefined : { opacity: 0 } });
   }
-
   if (state.multiselectCheckbox) {
+    attachSlotDefaults(state.multiselectCheckbox, {
+      ...chrome.checkbox.props,
+      style: [{ alignItems: 'center', justifyContent: 'center' }, chrome.checkbox.style, getMenuItemTrailingStyle(state)],
+    });
     attachSlotProps(state.multiselectCheckbox, {
       ...hiddenFromAccessibilityProps,
-      iconColor: state.tokens.color.foregroundBrandOnloud.rest,
-      iconSize: 12,
+      focusable: false,
+      pointerEvents: 'none',
       status: state.selected ? 'checked' : 'unchecked',
-      style: [menuItemStyles.multiselectCheckbox, getMenuItemCheckboxStyle(state), getMenuItemTrailingStyle(state)],
     });
   }
 }

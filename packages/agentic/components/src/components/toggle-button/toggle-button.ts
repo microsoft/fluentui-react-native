@@ -1,5 +1,11 @@
-import type { ReactElement } from 'react';
 import type { ToggleButtonProps } from './toggle-button.types';
+import { renderToggleButton_unstable } from './renderToggleButton';
+import { useToggleButton_unstable } from './useToggleButton';
+import { useToggleButtonStyles_unstable } from './useToggleButtonStyles';
 
-/** Assembly signature only. Do not expose a component value until state, styles and rendering are implemented. */
-export type ToggleButtonComponent = (props: ToggleButtonProps) => ReactElement;
+export function ToggleButton(props: ToggleButtonProps) {
+  const state = useToggleButton_unstable(props);
+  useToggleButtonStyles_unstable(state);
+  return renderToggleButton_unstable(state);
+}
+ToggleButton.displayName = 'ToggleButton';

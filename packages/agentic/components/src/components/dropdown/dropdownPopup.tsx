@@ -204,7 +204,7 @@ export function DropdownPopup(props: DropdownPopupProps) {
 
   const binding = React.useMemo<ListboxItemOptionBinding>(
     () => ({
-      multiselect,
+      selectionMode: multiselect ? 'multiple' : 'single',
       setSize: options.list.length,
       isSelected: (value) => selectedOptions.includes(value),
       getPosition: (value) => options.byValue.get(value)?.position,

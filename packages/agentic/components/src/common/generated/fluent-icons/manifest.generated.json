@@ -12,6 +12,32 @@
   },
   "artifacts": [
     {
+      "output": "CheckmarkCircle12Regular.generated.tsx",
+      "requested": [
+        "CheckmarkCircle12Regular"
+      ],
+      "inputs": [
+        {
+          "file": "checkmark_circle_12_regular.svg",
+          "sha256": "dbfded72fc7b708b2e307f6c334e8bc1be2c3988c413bb68a56e2da0159a3654"
+        }
+      ],
+      "sha256": "546db7e7f8888c3dca648cf958ebdaf696c3d8f6272e587ed158bb8eacb1bd9f"
+    },
+    {
+      "output": "CheckmarkCircle16Regular.generated.tsx",
+      "requested": [
+        "CheckmarkCircle16Regular"
+      ],
+      "inputs": [
+        {
+          "file": "checkmark_circle_16_regular.svg",
+          "sha256": "f0fbf8577d06f4b76de08a0cf8883056f773380089e0787b39d39888e2f98872"
+        }
+      ],
+      "sha256": "68fca3d2664b17352027887fe0ce9b349193b8f686c48704f9bebbc6ea468c1b"
+    },
+    {
       "output": "ChevronDown16Regular.generated.tsx",
       "requested": [
         "ChevronDown16Regular"
@@ -36,6 +62,136 @@
         }
       ],
       "sha256": "84edeca38509494caf5be6ee1c5805231aa8273ed5d963a97ad08de4ac19f32d"
+    },
+    {
+      "output": "ChevronDown24Regular.generated.tsx",
+      "requested": [
+        "ChevronDown24Regular"
+      ],
+      "inputs": [
+        {
+          "file": "chevron_down_24_regular.svg",
+          "sha256": "ee9fd7bce0165d8da4a34e6ec5056873e5eb55102d78321bfba858daff28a36e"
+        }
+      ],
+      "sha256": "123762169d3d427afd074b187bc6a2c760d10e819e9e778c3c5045d904315cef"
+    },
+    {
+      "output": "ChevronUp16Regular.generated.tsx",
+      "requested": [
+        "ChevronUp16Regular"
+      ],
+      "inputs": [
+        {
+          "file": "chevron_up_16_regular.svg",
+          "sha256": "540041d671dfb1c7815bde83212ad161f64100007296adb1246bafe109048fb9"
+        }
+      ],
+      "sha256": "8784d461f962fefc3e9ff9d31cd3ad3704cf241a568020e58f25ae90b5769462"
+    },
+    {
+      "output": "ChevronUp20Regular.generated.tsx",
+      "requested": [
+        "ChevronUp20Regular"
+      ],
+      "inputs": [
+        {
+          "file": "chevron_up_20_regular.svg",
+          "sha256": "a13457e3b0b2a3a9f67058b13135f9d982d2fa1fda58f774dc798980bd1a72ca"
+        }
+      ],
+      "sha256": "fc4b96628084d4b767a2e0904cbcdc0cc7c7b0a1d6f8dd47a51508b2bc102e3c"
+    },
+    {
+      "output": "ChevronUp24Regular.generated.tsx",
+      "requested": [
+        "ChevronUp24Regular"
+      ],
+      "inputs": [
+        {
+          "file": "chevron_up_24_regular.svg",
+          "sha256": "3d6410de6c7dc0cf5c865620d2b5c1c7176e5d8bc38542b7aa7d56ce17b05a52"
+        }
+      ],
+      "sha256": "7fad0813edd6043514de9645947e2bff6c1f43a78d0e4c8d051da7d8e736f5b2"
+    },
+    {
+      "output": "DiamondDismiss12Regular.generated.tsx",
+      "requested": [
+        "DiamondDismiss12Regular"
+      ],
+      "inputs": [
+        {
+          "file": "diamond_dismiss_12_regular.svg",
+          "sha256": "6058c721b4a2d84eb3334adbe4cd3b3087c34bffbe5850a5f4c5981ab1fc796e"
+        }
+      ],
+      "sha256": "808c456c09f739123f0c0a1b45d46956a1029b28c67c7aed77df297e065a010f"
+    },
+    {
+      "output": "DiamondDismiss16Regular.generated.tsx",
+      "requested": [
+        "DiamondDismiss16Regular"
+      ],
+      "inputs": [
+        {
+          "file": "diamond_dismiss_16_regular.svg",
+          "sha256": "130e998fb68876262856d28259d35870b81505b5691a2d6e284ce85e93050206"
+        }
+      ],
+      "sha256": "b6a89e635f676df090fc5d45b3d2bd0aa61f18e3ae8c6f66a15b50a5f63c58fc"
+    },
+    {
+      "output": "Info12Regular.generated.tsx",
+      "requested": [
+        "Info12Regular"
+      ],
+      "inputs": [
+        {
+          "file": "info_12_regular.svg",
+          "sha256": "f9dafe989540c59043ee01400822d37fc4674414b65ae75cbe2d141e4a1c278d"
+        }
+      ],
+      "sha256": "7b9a2222de11f0b5384cf1e9a79e0a9ce055fb49b1199af52872ba224aa199bf"
+    },
+    {
+      "output": "Info16Regular.generated.tsx",
+      "requested": [
+        "Info16Regular"
+      ],
+      "inputs": [
+        {
+          "file": "info_16_regular.svg",
+          "sha256": "0128b038bd7e9bce9257a855d3a5a82bdb20d4b8af4e2d94249524d185ad9ee0"
+        }
+      ],
+      "sha256": "8c50fd7ea0b266f703254d03d4302ea22864a535c98fc084faf45b0e9bfc7253"
+    },
+    {
+      "output": "Warning12Regular.generated.tsx",
+      "requested": [
+        "Warning12Regular"
+      ],
+      "inputs": [
+        {
+          "file": "warning_12_regular.svg",
+          "sha256": "7e68701db65803cb665726bad6a941d231530f01b1eb947af2bcdea4191605f5"
+        }
+      ],
+      "sha256": "343296b093d8242d7cac4d7ff98130433730385051013875433fc1570f2e9f7c"
+    },
+    {
+      "output": "Warning16Regular.generated.tsx",
+      "requested": [
+        "Warning16Regular"
+      ],
+      "inputs": [
+        {
+          "file": "warning_16_regular.svg",
+          "sha256": "f4133a237f025de9d27f0b4c52333d39798b8a282a93797dc41196f832d0827b"
+        }
+      ],
+      "sha256": "a66a88aa945562a4a88ad9f0f66c5160f3e975463a0748a2a7a9a00ad5a40743"
     }
   ]
 }

@@ -1,38 +1,38 @@
 {
   "schemaVersion": 2,
   "component": "popover",
-  "lifecycle": "implemented",
+  "lifecycle": "contract-reviewed",
   "conformance": "reviewed",
-  "reviewedAt": "2026-10-19",
+  "reviewedAt": "2026-11-20",
   "sources": [
     {
       "id": "flex-component",
       "kind": "flex-skill",
       "authority": "normative",
       "skill": "flex-components:popover",
-      "sourceLock": "flex-1.5.0-206c4996",
-      "sourceLockFingerprint": "a69997212ec1b89510c94176801bf5a146ed7e7d8c80cc7db40ac8f60cf9f119",
+      "sourceLock": "flex-1.7.0-9f1df394",
+      "sourceLockFingerprint": "33c7dbb4ff78525a4e0900811f5fa1994579ee8dd95b337de85d8f47133d148c",
       "availableSurfaces": ["shared", "web"],
       "surfacesConsulted": ["shared", "web"],
       "sourceFiles": [
         {
           "role": "skill",
           "marketplacePath": "catalogs/flex/plugins/components/skills/popover/SKILL.md",
-          "marketplaceBlobSha": "bcfde2d9ec118f6b4095d550e48c712e24cf0dfc",
-          "marketplaceSha256": "10076f71bd48209300ad9d9407a2f99e4c19f917008e207ec33e0ac0261513c9",
+          "marketplaceBlobSha": "0a42329a86ee0d7116675cd25b17d23ecd116b75",
+          "marketplaceSha256": "61e62feb1a9c9bc451d4ff1e9bf3309e52d3d9e003949945b92f74774b539078",
           "originPath": "plugins/components/skills/popover/SKILL.md",
-          "originBlobSha": "bcfde2d9ec118f6b4095d550e48c712e24cf0dfc",
-          "originSha256": "10076f71bd48209300ad9d9407a2f99e4c19f917008e207ec33e0ac0261513c9",
+          "originBlobSha": "0a42329a86ee0d7116675cd25b17d23ecd116b75",
+          "originSha256": "61e62feb1a9c9bc451d4ff1e9bf3309e52d3d9e003949945b92f74774b539078",
           "contentDiffers": false
         },
         {
           "role": "usage",
           "marketplacePath": "catalogs/flex/plugins/components/skills/popover/usage.md",
-          "marketplaceBlobSha": "e4202e2c39241544aa583b27a1a7cd9b0fead622",
-          "marketplaceSha256": "672ee5bdc4219b62b2f072ab9f66a7eda3be3a64f82243811ccd033825f16b70",
+          "marketplaceBlobSha": "abc36fecc9359056e079cd1a79170382ba12922b",
+          "marketplaceSha256": "adbe10cadab8c7b1099100eb4ab65d15fbb8f0277e5763d4b7ec9b3578a14dad",
           "originPath": "plugins/components/skills/popover/usage.md",
-          "originBlobSha": "e4202e2c39241544aa583b27a1a7cd9b0fead622",
-          "originSha256": "672ee5bdc4219b62b2f072ab9f66a7eda3be3a64f82243811ccd033825f16b70",
+          "originBlobSha": "abc36fecc9359056e079cd1a79170382ba12922b",
+          "originSha256": "adbe10cadab8c7b1099100eb4ab65d15fbb8f0277e5763d4b7ec9b3578a14dad",
           "contentDiffers": false
         },
         {
@@ -48,21 +48,21 @@
         {
           "role": "web:interaction",
           "marketplacePath": "catalogs/flex/plugins/components/skills/popover/web/interaction.md",
-          "marketplaceBlobSha": "9cc9f30e79895397b2467606efe57468c58869a2",
-          "marketplaceSha256": "81f330b296337b414c66d5899b98323e1734c8747179dcc0f1b3d8d94edcdd2e",
+          "marketplaceBlobSha": "5a3c476e505131aaceedb7e6fe29c84a8362bbd5",
+          "marketplaceSha256": "6591ff6ac98234c395e21ffcc0077787f239d0e9fc8f7a9817ae5f97cbbf7a36",
           "originPath": "plugins/components/skills/popover/web/interaction.md",
-          "originBlobSha": "9cc9f30e79895397b2467606efe57468c58869a2",
-          "originSha256": "81f330b296337b414c66d5899b98323e1734c8747179dcc0f1b3d8d94edcdd2e",
+          "originBlobSha": "5a3c476e505131aaceedb7e6fe29c84a8362bbd5",
+          "originSha256": "6591ff6ac98234c395e21ffcc0077787f239d0e9fc8f7a9817ae5f97cbbf7a36",
           "contentDiffers": false
         },
         {
           "role": "web:tokens",
           "marketplacePath": "catalogs/flex/plugins/components/skills/popover/web/tokens.yaml",
-          "marketplaceBlobSha": "59f55b3c7e482d4c4b0634a64ee60920eb9035e0",
-          "marketplaceSha256": "270f630afc036cb008ecf9dc80fbb4d80354b9facc8b30b76eb1d71bef021954",
+          "marketplaceBlobSha": "b4bc11718abd0ff10665be3f54454bc73af0b154",
+          "marketplaceSha256": "5639c71d1e04b4091ad198b096d829e3df422543d495dbd33479aa304149d1d4",
           "originPath": "plugins/components/skills/popover/web/tokens.yaml",
-          "originBlobSha": "59f55b3c7e482d4c4b0634a64ee60920eb9035e0",
-          "originSha256": "270f630afc036cb008ecf9dc80fbb4d80354b9facc8b30b76eb1d71bef021954",
+          "originBlobSha": "b4bc11718abd0ff10665be3f54454bc73af0b154",
+          "originSha256": "5639c71d1e04b4091ad198b096d829e3df422543d495dbd33479aa304149d1d4",
           "contentDiffers": false
         }
       ],
@@ -84,7 +84,7 @@
     },
     {
       "id": "popover-tab-containment",
-      "status": "deferred"
+      "status": "aligning"
     },
     {
       "id": "popover-native-elevation",

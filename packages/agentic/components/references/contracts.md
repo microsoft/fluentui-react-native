@@ -260,8 +260,9 @@ It validates schema version 2, local references and artifact digests,
 requirement evidence, lifecycle, and review state. It does not claim that a
 remote source is current.
 
-With `GH_TOKEN` or `GITHUB_TOKEN` authorized for the curated Marketplace and X3
-source, generate the Flex-only digest report:
+Use `GH_TOKEN` or `GITHUB_TOKEN` authorized for the curated Marketplace and
+`GH_ENTERPRISE_TOKEN` or `GITHUB_ENTERPRISE_TOKEN` authorized for the X3
+organization on `msft.ghe.com` to generate the Flex-only digest report:
 
 ```sh
 yarn workspace @fluentui-react-native/components report:spec-source-drift --write

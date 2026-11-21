@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Animated, Easing, View } from 'react-native';
-import type { AccessibilityState, AccessibilityValue, ColorValue } from 'react-native';
+import { Animated, Easing, I18nManager, View } from 'react-native';
+import type { AccessibilityState, AccessibilityValue } from 'react-native';
 
 import { useOptionalSlot, useReducedMotion, useSlot } from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
@@ -23,19 +23,6 @@ function clampProgress(value: number | undefined): number {
     return 0;
   }
   return Math.min(100, Math.max(0, number));
-}
-
-function getStatusColor(themeState: ReturnType<typeof useThemeState>, status: ProgressBarStatus): ColorValue {
-  const { color } = themeState.tokens;
-  switch (status) {
-    case 'error':
-      return color.foregroundDangerPrimary.rest;
-    case 'success':
-      return color.foregroundSuccessPrimary.rest;
-    case 'neutral':
-    default:
-      return color.foregroundBrandPrimary.rest;
-  }
 }
 
 function getDefaultIcon(status: ProgressBarStatus) {
@@ -92,14 +79,34 @@ export function useProgressBar_unstable(props: ProgressBarProps): ProgressBarSta
   } = props;
 
   const themeState = useThemeState();
-  const styles = getProgressBarThemeStyles(themeState);
+  const styles = getProgressBarThemeStyles(themeState, status);
   const labelId = React.useId();
   const resolvedProgress = clampProgress(progressProp);
   const [trackLayoutWidth, setTrackLayoutWidth] = React.useState(0);
-  const isReduceMotionEnabled = useReducedMotion() ?? false;
+  const isReduceMotionEnabled = useReducedMotion() !== false;
   const resolvedDeterminateProgress = resolvedProgress;
   const indicatorTranslateX = React.useRef(new Animated.Value(0)).current;
+  const indicatorScaleX = React.useRef(new Animated.Value(resolvedProgress / 100)).current;
   const indeterminateAnimation = React.useRef<Animated.CompositeAnimation | undefined>(undefined);
+  const duration = themeState.tokens.motion.durationBase200;
+  const hasTrackLayout = trackLayoutWidth > 0;
+
+  React.useEffect(() => {
+    const target = resolvedProgress / 100;
+    if (type !== 'determinate' || isReduceMotionEnabled || !hasTrackLayout) {
+      indicatorScaleX.setValue(target);
+      return undefined;
+    }
+    const animation = Animated.timing(indicatorScaleX, {
+      toValue: target,
+      duration,
+      easing: Easing.out(Easing.ease),
+      useNativeDriver: false,
+      isInteraction: false,
+    });
+    animation.start();
+    return () => animation.stop();
+  }, [duration, hasTrackLayout, indicatorScaleX, isReduceMotionEnabled, resolvedProgress, type]);
 
   React.useEffect(() => {
     if (type !== 'indeterminate' || isReduceMotionEnabled || trackLayoutWidth <= 0) {
@@ -108,17 +115,18 @@ export function useProgressBar_unstable(props: ProgressBarProps): ProgressBarSta
       return undefined;
     }
 
-    const indicatorWidth = Math.max(trackLayoutWidth * DEFAULT_INDETERMINATE_SEGMENT_RATIO, 16);
+    const indicatorWidth = Math.min(trackLayoutWidth, Math.max(trackLayoutWidth * DEFAULT_INDETERMINATE_SEGMENT_RATIO, 16));
     const travelDistance = Math.max(trackLayoutWidth - indicatorWidth, 0);
     indicatorTranslateX.setValue(0);
 
     indeterminateAnimation.current?.stop();
     indeterminateAnimation.current = Animated.loop(
       Animated.timing(indicatorTranslateX, {
-        toValue: travelDistance,
+        toValue: I18nManager.isRTL ? -travelDistance : travelDistance,
         duration: DEFAULT_INDETERMINATE_DURATION,
         easing: Easing.linear,
         useNativeDriver: false,
+        isInteraction: false,
       }),
     );
     indeterminateAnimation.current.start();
@@ -129,7 +137,6 @@ export function useProgressBar_unstable(props: ProgressBarProps): ProgressBarSta
   }, [indicatorTranslateX, isReduceMotionEnabled, trackLayoutWidth, type]);
 
   const showValidationIcon = showValidationIconProp ?? status !== 'neutral';
-  const statusColor = getStatusColor(themeState, status);
   const resolvedValueText = getResolvedValueText(type, status, resolvedDeterminateProgress, valueTextProp);
   const accessibilityValueToUse: AccessibilityValue | undefined =
     type === 'indeterminate'
@@ -181,13 +188,12 @@ export function useProgressBar_unstable(props: ProgressBarProps): ProgressBarSta
     accessibilityState: accessibilityStateToUse,
     accessibilityValue: accessibilityValueToUse,
     indicator,
-    indicatorColor: statusColor,
+    indicatorScaleX,
     indicatorTranslateX,
-    indicatorTransitionDuration: type === 'static' || isReduceMotionEnabled ? '0ms' : '200ms',
     indicatorWidth:
       type === 'indeterminate'
         ? trackLayoutWidth > 0
-          ? Math.max(trackLayoutWidth * DEFAULT_INDETERMINATE_SEGMENT_RATIO, 16)
+          ? Math.min(trackLayoutWidth, Math.max(trackLayoutWidth * DEFAULT_INDETERMINATE_SEGMENT_RATIO, 16))
           : 0
         : trackLayoutWidth > 0
           ? (trackLayoutWidth * resolvedDeterminateProgress) / 100
@@ -206,7 +212,6 @@ export function useProgressBar_unstable(props: ProgressBarProps): ProgressBarSta
     trackLayoutWidth,
     type,
     validationIcon,
-    validationIconColor: statusColor,
     valueText: resolvedValueText,
   };
 }

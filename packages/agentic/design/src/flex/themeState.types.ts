@@ -28,6 +28,8 @@ export type FlexThemeDescription = {
 export type ThemeStyleRegistry = Record<symbol, unknown>;
 
 export type ThemeState = {
+  /** True when Flex tokens were projected from a legacy Fluent theme. */
+  readonly isFluentFallback?: boolean;
   /**
    * The set of flex tokens
    */

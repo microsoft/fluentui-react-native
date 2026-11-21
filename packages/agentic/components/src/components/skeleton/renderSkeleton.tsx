@@ -37,7 +37,7 @@ export function renderSkeleton_unstable(state: SkeletonState) {
                 y2={state.bandWidth / 2}
               >
                 <Stop offset={0} stopColor={state.shimmerColor} stopOpacity={0} />
-                <Stop offset={0.5} stopColor={state.shimmerColor} stopOpacity={0.64} />
+                <Stop offset={0.5} stopColor={state.shimmerColor} stopOpacity={state.centerOpacity} />
                 <Stop offset={1} stopColor={state.shimmerColor} stopOpacity={0} />
               </LinearGradient>
             </Defs>

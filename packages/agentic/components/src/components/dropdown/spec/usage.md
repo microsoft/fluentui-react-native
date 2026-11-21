@@ -19,7 +19,7 @@ options.
 ```
 
 ```tsx
-<Dropdown accessibilityLabel="Toppings" multiselect selectedOptions={toppings} onSelectedOptionsChange={setToppings}>
+<Dropdown accessibilityLabel="Toppings" selectionMode="multiple" selectedOptions={toppings} onSelectedOptionsChange={setToppings}>
   <ListboxItem value="cheese" content="Cheese" />
   <ListboxItem value="olives" content="Olives" />
 </Dropdown>
@@ -37,8 +37,8 @@ list is closed.
   verbatim and truncates it with an ellipsis rather than paraphrasing it.
 - When options carry icons, mirror the selected option's icon in `iconStart`.
 - Localize `placeholder` and `formatSelectedCount`.
-- Place error text beside the Dropdown and reference it from
-  `accessibilityHint`; `error` changes only the visuals.
+- Place visible error text beside the Dropdown. `error` changes the visuals; accessible invalid state
+  and programmatically associated error text are separate release requirements.
 - The trigger stretches like Input. Constrain its width with style so that
   it fits the expected values.
 - Never put interactive content in the trigger or a Dropdown inside an option.

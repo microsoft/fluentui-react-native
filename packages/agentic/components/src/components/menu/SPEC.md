@@ -1,9 +1,9 @@
 ---
 name: menu
 platform: react-native (Windows, macOS)
-status: implemented
+status: contract-reviewed
 source: ./spec/source.json
-tokens: ./spec/tokens.yaml
+tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
 interaction: ./spec/interaction.md
 usage: ./spec/usage.md
@@ -114,7 +114,9 @@ popups are private.
 - **MNU-010:** Expose the trigger's expanded state from actual presence and a
   menu hint; expose each surface with the `menu` role and a name (defaulting
   to the trigger or row label); expose submenu rows' expanded state; keep
-  closed content out of the accessibility tree and tab order.
+  closed content out of the accessibility tree and tab order. Require a verified
+  native relationship between the trigger (or submenu row) and its popup;
+  neither the hint nor the expanded state establishes this.
 - **MNU-011:** Resolve each surface's fill, stroke, and radius from Popover's
   bindings with Menu padding and no row gap, size it to the widest row, apply
   native elevation, and apply caller surface styles last.
@@ -149,20 +151,26 @@ Android are unsupported.
 
 ## Divergences from Flex
 
-| ID                        | Disposition | React Native contract                                                                                                                                                       | Follow-up                                                    |
-| ------------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
-| `menu-pointer-entry`      | Accepted    | A pointer open focuses the menu surface without highlighting a row, following native menus (D03). Keyboard and accessibility opens focus the first row.                     | None.                                                        |
-| `menu-trigger-slot`       | Accepted    | The trigger is a component-owned Button slot; context, icon, and shortcut triggers are not offered.                                                                         | Context opening under #4383.                                 |
-| `menu-submenu-prop`       | Accepted    | A submenu is declared through MenuItem's `submenu` prop rather than a nested Menu, so row props stay typed as MenuItem props.                                               | None.                                                        |
-| `menu-hover-open`         | Accepted    | Hover opens and switches submenus after platform default delays, with overrides (D07). Flex does not specify hover.                                                         | None.                                                        |
-| `menu-submenu-intent`     | Deferred    | macOS uses delay-only hover switching; native pointer-travel tolerance toward an open submenu is not implemented.                                                           | Add a native submenu-intent signal.                          |
-| `menu-semantics`          | Accepted    | The trigger exposes expanded state and a hint; has-popup and controls have no typed property (D12). The surface name defaults to the trigger label rather than a reference. | Adopt native relationships if the renderers add them.        |
-| `menu-disabled-focusable` | Accepted    | Disabled rows stay focusable by default on Windows and Win32 and opt in on macOS (D06, R2).                                                                                 | None.                                                        |
-| `menu-native-elevation`   | Accepted    | The native popup window shadow provides elevation, as for Popover.                                                                                                          | Revisit with native inset shadow geometry.                   |
-| `menu-motion`             | Deferred    | Presentation is instant, which equals the reduced-motion behavior.                                                                                                          | Revisit when Flex motion is final and native popups animate. |
-| `menu-edge-margin`        | Deferred    | Native clamping aligns popups with the work-area edge without a margin.                                                                                                     | Add a native margin under #4375.                             |
+| ID                        | Disposition | React Native contract                                                                                                                                   | Follow-up                                                    |
+| ------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| `menu-pointer-entry`      | Accepted    | A pointer open focuses the menu surface without highlighting a row, following native menus (D03). Keyboard and accessibility opens focus the first row. | None.                                                        |
+| `menu-trigger-slot`       | Accepted    | The trigger is a component-owned Button slot; context, icon, and shortcut triggers are not offered.                                                     | Context opening under #4383.                                 |
+| `menu-submenu-prop`       | Accepted    | A submenu is declared through MenuItem's `submenu` prop rather than a nested Menu, so row props stay typed as MenuItem props.                           | None.                                                        |
+| `menu-hover-open`         | Accepted    | Hover opens and switches submenus after platform default delays, with overrides (D07). Flex does not specify hover.                                     | None.                                                        |
+| `menu-submenu-intent`     | Deferred    | macOS uses delay-only hover switching; native pointer-travel tolerance toward an open submenu is not implemented.                                       | Add a native submenu-intent signal.                          |
+| `menu-semantics`          | Aligning    | Expanded state and supplemental hints are implemented. A relationship between each trigger and its popup has not been verified.                         | Release gate: verify the popup relationship in UIA and AX.   |
+| `menu-disabled-focusable` | Accepted    | Disabled rows stay focusable by default on Windows and Win32 and opt in on macOS (D06, R2).                                                             | None.                                                        |
+| `menu-native-elevation`   | Accepted    | The native popup window shadow provides elevation, as for Popover.                                                                                      | Revisit with native inset shadow geometry.                   |
+| `menu-motion`             | Deferred    | Presentation is instant, which equals the reduced-motion behavior.                                                                                      | Revisit when Flex motion is final and native popups animate. |
+| `menu-edge-margin`        | Deferred    | Native clamping aligns popups with the work-area edge without a margin.                                                                                 | Add a native margin under #4375.                             |
 
 ## Conformance
+
+MNU-003/011 delegate surface and gap
+bindings to Popover with a Menu-specific base200 inset and zero row spacing.
+MNU-004/009 preserve native entry and disabled focus policy. MNU-010 needs
+separate desktop verification for the root and submenu associations; the
+existing role, label, and expanded-state evidence does not qualify them.
 
 The listed files exist for every requirement. macOS Fabric and Paper, Windows Fabric, and the Win32 adapters qualify the
 native behavior in the Menu stories.

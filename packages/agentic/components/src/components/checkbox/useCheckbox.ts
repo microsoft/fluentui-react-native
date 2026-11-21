@@ -10,6 +10,7 @@ import {
   useSlot,
 } from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
+import { hiddenFromAccessibilityProps } from '../../common/accessibility';
 import { useFocusVisuals } from '../../common/useFocusVisuals';
 
 import { Text } from '../text/text';
@@ -87,6 +88,9 @@ export function useCheckbox_unstable(props: CheckboxProps): CheckboxState {
     accessibilityHint: rootAccessibilityHint,
     accessibilityLabel: rootAccessibilityLabel,
     accessibilityRole: 'checkbox',
+    role: 'checkbox',
+    'aria-checked': status === 'indeterminate' ? 'mixed' : status === 'checked',
+    'aria-disabled': disabled,
     accessibilityState: {
       ...accessibilityState,
       checked: status === 'indeterminate' ? 'mixed' : status === 'checked',
@@ -103,12 +107,13 @@ export function useCheckbox_unstable(props: CheckboxProps): CheckboxState {
   const { FocusRing, ...nativeFocusProps } = useFocusVisuals({ focused: pressableState.focused && !disabled });
 
   const root = useSlot(Pressable, { ...pressableProps, ...nativeFocusProps, ref: rootRef });
-  const labelText = useOptionalSlot(Text, showLabel ? { accessible: false, children: label, testID: 'checkbox-label' } : null);
+  const labelText = useOptionalSlot(
+    Text,
+    showLabel ? { ...hiddenFromAccessibilityProps, children: label, testID: 'checkbox-label' } : null,
+  );
   const secondaryTextSlot = useOptionalSlot(
     Text,
-    renderSecondaryText
-      ? { accessibilityElementsHidden: true, accessible: false, children: secondaryText, testID: 'checkbox-secondary' }
-      : null,
+    renderSecondaryText ? { ...hiddenFromAccessibilityProps, children: secondaryText, testID: 'checkbox-secondary' } : null,
   );
 
   return {

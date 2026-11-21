@@ -3,7 +3,7 @@ name: text
 platform: react-native (Windows, macOS)
 status: implemented
 source: ./spec/source.json
-tokens: ./spec/tokens.yaml
+tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
 interaction: ./spec/interaction.md
 usage: ./spec/usage.md
@@ -77,6 +77,7 @@ accessibility exposure.
 
 ## Conformance
 
-The contract is implemented and reviewed against React Native 0.81 Text
+The axis-free JSON companion changes the runtime binding format only. The
+local-foundation contract is implemented and reviewed against React Native 0.81 Text
 behavior, the repository Text V1 precedent, the Flex token map, unit and type
 tests, and the component stories.

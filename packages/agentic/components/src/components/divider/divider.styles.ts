@@ -1,110 +1,74 @@
 import { StyleSheet } from 'react-native';
 import type { TextStyle, ViewStyle } from 'react-native';
-
-import type { FlexTokens } from '@fluentui-react-native/design';
-import { getGapStyleValue, getThemedStateStyleFactory } from '@fluentui-react-native/design/styling';
-import type { StyleDefinition } from '@fluentui-react-native/design/styling';
+import {
+  colorToken,
+  defineComponentTokens,
+  dimensionToken,
+  flexDirectionToken,
+  fontWeightToken,
+  getComponentTokens,
+  getGapStyleValue,
+  numericToken,
+  resolveTokenStates,
+  stringToken,
+} from '@fluentui-react-native/design/styling';
+import type { ComponentTokenPatch } from '@fluentui-react-native/design/styling';
+import { iconTokenProps } from '../../common/iconTokenProps';
+import type { IconElementProps } from '../../primitives/icon/icon.types';
 import type { DividerState } from './divider.types';
+import schema from './spec/tokens.json' with { type: 'json' };
 
 export const dividerStyles = StyleSheet.create({
-  root: {
-    alignItems: 'center',
-    alignSelf: 'stretch',
-    justifyContent: 'center',
-  },
-  content: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    flexShrink: 1,
-    justifyContent: 'center',
-  },
-  label: {
-    flexShrink: 1,
-    textAlign: 'center',
-  },
+  root: { alignItems: 'center', alignSelf: 'stretch', justifyContent: 'center' },
+  content: { alignItems: 'center', flexDirection: 'row', flexShrink: 1, justifyContent: 'center' },
+  label: { flexShrink: 1, textAlign: 'center' },
 });
 
-const orientationStateLevels = [['horizontal', 'vertical']] as const;
-type OrientationStateLevels = typeof orientationStateLevels;
-
-function createRootStyleDefinition(_tokens: FlexTokens): StyleDefinition<ViewStyle, OrientationStateLevels> {
-  return {
-    horizontal: { flexDirection: 'row' },
-    vertical: { flexDirection: 'column' },
-  };
-}
-
-const getThemedRootStyle = getThemedStateStyleFactory('Divider.root', createRootStyleDefinition, orientationStateLevels);
-
-export function getDividerRootStyle(state: DividerState): ViewStyle {
-  return getThemedRootStyle(state, [state.vertical ? 'vertical' : 'horizontal']);
-}
-
-function createContentStyleDefinition({ spacing }: FlexTokens): StyleDefinition<ViewStyle, OrientationStateLevels> {
-  const padding = spacing.componentBase300;
-  const gap = getGapStyleValue(spacing.componentBase150);
-
-  return {
-    horizontal: {
-      gap,
-      paddingHorizontal: padding,
+const slots = {
+  root: { style: { flexDirection: flexDirectionToken }, props: {} },
+  line: {
+    style: {
+      backgroundColor: colorToken,
+      width: dimensionToken,
+      height: dimensionToken,
+      flexBasis: dimensionToken,
+      flexGrow: numericToken,
     },
-    vertical: {
-      gap,
-      paddingVertical: padding,
-    },
-  };
+    props: {},
+  },
+  content: { style: { gap: getGapStyleValue, paddingHorizontal: dimensionToken, paddingVertical: dimensionToken }, props: {} },
+  icon: { style: {}, props: iconTokenProps },
+  label: {
+    style: { color: colorToken, fontFamily: stringToken, fontSize: numericToken, fontWeight: fontWeightToken, lineHeight: numericToken },
+    props: {},
+  },
+};
+type DividerTokenState = { vertical: boolean; stub: boolean };
+
+declare module '@fluentui-react-native/design' {
+  interface ComponentTokenRegistry {
+    'furn.divider': ComponentTokenPatch<DividerTokenState, typeof slots>;
+  }
 }
 
-const getThemedContentStyle = getThemedStateStyleFactory('Divider.content', createContentStyleDefinition, orientationStateLevels);
+const definition = defineComponentTokens<DividerTokenState, typeof slots>({ id: 'furn.divider', slots, schema });
 
-export function getDividerContentStyle(state: DividerState): ViewStyle {
-  return getThemedContentStyle(state, [state.vertical ? 'vertical' : 'horizontal']);
-}
-
-function createLabelStyleDefinition({
-  color,
-  fontFamily,
-  fontSize,
-  fontWeight,
-  lineHeight,
-}: FlexTokens): StyleDefinition<TextStyle, OrientationStateLevels> {
-  const bodySmallSize = fontSize.functionalBodySmall;
-  const bodySmallLineHeight = lineHeight.functionalBodySmall;
-
+export function getDividerChrome(state: DividerState): {
+  root: ViewStyle;
+  content: ViewStyle;
+  icon: Pick<IconElementProps, 'color' | 'height' | 'width'>;
+  label: TextStyle;
+  before: ViewStyle;
+  after: ViewStyle;
+} {
+  const tokens = getComponentTokens(state, definition);
+  const variant = { vertical: state.vertical, stub: false };
   return {
-    horizontal: {
-      color: color.foregroundNeutralSecondary.rest,
-      fontFamily: fontFamily.functional,
-      fontSize: bodySmallSize,
-      fontWeight: fontWeight.functionalRegular,
-      lineHeight: bodySmallLineHeight,
-    },
-    vertical: {
-      color: color.foregroundNeutralSecondary.rest,
-      fontFamily: fontFamily.functional,
-      fontSize: bodySmallSize,
-      fontWeight: fontWeight.functionalRegular,
-      lineHeight: bodySmallLineHeight,
-    },
-  };
-}
-
-const getThemedLabelStyle = getThemedStateStyleFactory('Divider.label', createLabelStyleDefinition, orientationStateLevels);
-
-export function getDividerLabelStyle(state: DividerState): TextStyle {
-  return getThemedLabelStyle(state, [state.vertical ? 'vertical' : 'horizontal']);
-}
-
-export function getDividerLineStyle(state: DividerState, position: 'before' | 'after'): ViewStyle {
-  const isStub = (state.layout === 'start' && position === 'before') || (state.layout === 'end' && position === 'after');
-  const flexBasis = isStub ? state.tokens.spacing.componentBase100 : 0;
-  const lineThickness = Number(state.tokens.strokeWidth.thin);
-
-  return {
-    backgroundColor: state.tokens.color.strokeNeutralSubtle.rest,
-    ...(state.vertical ? { width: lineThickness } : { height: lineThickness }),
-    flexBasis,
-    flexGrow: isStub ? 0 : 1,
+    root: resolveTokenStates(tokens.root, variant).style,
+    content: resolveTokenStates(tokens.content, variant).style,
+    icon: resolveTokenStates(tokens.icon, variant).props,
+    label: resolveTokenStates(tokens.label, variant).style,
+    before: resolveTokenStates(tokens.line, variant, { stub: state.contentVisible && state.layout === 'start' }).style,
+    after: resolveTokenStates(tokens.line, variant, { stub: state.contentVisible && state.layout === 'end' }).style,
   };
 }

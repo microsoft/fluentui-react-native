@@ -69,6 +69,24 @@ function Scene(props: Partial<DropdownProps>) {
 describe('Dropdown', () => {
   beforeEach(() => dispatchCommand.mockClear());
 
+  it.each([
+    ['small', 16],
+    ['medium', 20],
+    ['large', 24],
+  ] as const)('DRP-003 renders a %s chevron and uses distinct artwork when open', async (size, dimension) => {
+    const component = await render(<Scene size={size} open={false} />);
+    function getChevron() {
+      const [frame] = screen.getByTestId('trigger').queryAll((child) => child.type === 'RNSVGSvgView');
+      const [path] = frame.queryAll((child) => child.type === 'RNSVGPath');
+      expect([Number(frame.props.bbWidth), Number(frame.props.bbHeight)]).toEqual([dimension, dimension]);
+      expect(frame.props.accessible).toBe(false);
+      return path.props.d;
+    }
+    const closedPath = getChevron();
+    await component.rerender(<Scene size={size} open />);
+    expect(getChevron()).not.toBe(closedPath);
+  });
+
   // The first case can pay the cold-start cost of rendering the themed popup on CI.
   it.each(
     (['controlled', 'uncontrolled'] as const).flatMap((owner) =>
@@ -115,7 +133,7 @@ describe('Dropdown', () => {
         <Dropdown
           accessibilityLabel="Fruit"
           defaultOpen
-          multiselect
+          selectionMode="multiple"
           selectedOptions={owner === 'controlled' ? selection : undefined}
           defaultSelectedOptions={initial}
           onSelectedOptionsChange={onSelectedOptionsChange}
@@ -351,7 +369,7 @@ describe('Dropdown', () => {
 
   it('toggles options in multiple mode, keeps the list open, and joins labels in option order', async () => {
     const onSelectedOptionsChange = jest.fn();
-    await render(<Scene multiselect defaultOpen onSelectedOptionsChange={onSelectedOptionsChange} />);
+    await render(<Scene selectionMode="multiple" defaultOpen onSelectedOptionsChange={onSelectedOptionsChange} />);
     expect(screen.getByTestId('listbox').props.accessibilityState).toMatchObject({ multiselectable: true });
     await fireEvent(screen.getByTestId('date'), 'press', keyboardPress);
     await fireEvent(screen.getByTestId('apple'), 'press', pointerPress);
@@ -364,7 +382,9 @@ describe('Dropdown', () => {
 
   it('applies multiple-mode selection actions: select replaces, add adds, remove removes', async () => {
     const onSelectedOptionsChange = jest.fn();
-    await render(<Scene multiselect defaultOpen defaultSelectedOptions={['apple']} onSelectedOptionsChange={onSelectedOptionsChange} />);
+    await render(
+      <Scene selectionMode="multiple" defaultOpen defaultSelectedOptions={['apple']} onSelectedOptionsChange={onSelectedOptionsChange} />,
+    );
     await fireEvent(screen.getByTestId('cherry'), 'accessibilityAction', action('AddToSelection'));
     expect(onSelectedOptionsChange).toHaveBeenLastCalledWith(['apple', 'cherry'], { value: 'cherry' });
     await fireEvent(screen.getByTestId('apple'), 'accessibilityAction', action('RemoveFromSelection'));
@@ -375,7 +395,9 @@ describe('Dropdown', () => {
   });
 
   it('shows the count summary in multiple mode when the labels do not fit', async () => {
-    await render(<Scene multiselect defaultSelectedOptions={['apple', 'cherry']} formatSelectedCount={(count) => `${count} fruits`} />);
+    await render(
+      <Scene selectionMode="multiple" defaultSelectedOptions={['apple', 'cherry']} formatSelectedCount={(count) => `${count} fruits`} />,
+    );
     const measure = screen.getAllByText('Apple, Cherry', { includeHiddenElements: true });
     expect(measure).toHaveLength(2);
     const layoutOf = (node: ReactTestInstance) => {

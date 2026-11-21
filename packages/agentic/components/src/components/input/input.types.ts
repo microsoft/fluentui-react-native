@@ -1,4 +1,4 @@
-import type { AccessibilityState, ColorValue, Pressable, StyleProp, TextInput, TextStyle, View, ViewStyle } from 'react-native';
+import type { AccessibilityState, Pressable, StyleProp, TextInput, TextStyle, View, ViewStyle } from 'react-native';
 
 import type { ThemeState } from '@fluentui-react-native/design';
 import type {
@@ -12,6 +12,7 @@ import type {
 } from '@fluentui-react-native/framework-base';
 
 import type { Icon } from '../../primitives/icon/icon';
+import type { IconElementProps } from '../../primitives/icon/icon.types';
 import type { FocusVisualsSlots } from '../../common/useFocusVisuals';
 
 export type InputVariant = 'outline' | 'underline';
@@ -75,8 +76,7 @@ export type InputState = ComponentState<InputStateSlots> &
     underlineStyle: ViewStyle;
     underlineFocusStyle: ViewStyle;
     textInputStyle: TextStyle;
-    iconSize: number;
-    iconColor: ColorValue;
+    iconDefaults: Pick<IconElementProps, 'color' | 'height' | 'width'>;
   };
 
 export type InputAccessibilityState = AccessibilityState & {

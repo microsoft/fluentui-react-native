@@ -18,7 +18,7 @@ dismiss glyph separately, which is intentional: the whole tag is the target.
 
 Desktop native button actions register an accessibility-tap callback. Unless
 the caller supplies its own callback, the original native event is forwarded
-to `onPress` once. Disabled tags do not activate, and activation never removes
+to the effective dismissal handler once. Disabled tags do not activate, and activation never removes
 the tag itself.
 
 ## Naming
@@ -42,7 +42,7 @@ affordance when it matters. If a screen reader user cannot tell from context
 that activating the tag removes it, put that in the name.
 
 The component never removes itself. When the caller drops a tag in response to
-`onPress`, focus is destroyed with it, so the caller must move focus somewhere
+`onDismiss`, focus is destroyed with it, so the caller must move focus somewhere
 sensible: the next tag, or the container that held the list. Announce the
 removal from the surrounding surface if the change is not otherwise visible.
 

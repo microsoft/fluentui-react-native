@@ -27,7 +27,7 @@ function NewScene({ appearance, size, disabled }: SceneProps) {
   const row = (content: string): MenuItemProps => ({
     content,
     secondaryContent: null,
-    icon: null,
+    leadingIcon: null,
     testID: `menu-button-${content.toLowerCase()}`,
     onFocus: () => setFocus(content),
     onPress: () => {
@@ -86,7 +86,7 @@ function VariantsScene() {
               <MenuItem content="Action" secondaryContent={null} icon={null} />
             </MenuButton>
           ))}
-          <MenuButton size={size} icon={{ fontSource: { codepoint: 0x002b } }} accessibilityLabel={`Add ${size}`}>
+          <MenuButton size={size} leadingIcon={{ fontSource: { codepoint: 0x002b } }} accessibilityLabel={`Add ${size}`}>
             <MenuItem content="Action" secondaryContent={null} icon={null} />
           </MenuButton>
         </View>

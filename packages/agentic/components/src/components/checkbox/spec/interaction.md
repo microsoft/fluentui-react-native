@@ -7,7 +7,7 @@ shared pressable-state hook. Color resolution reads the status first, then
 disabled, pressed, and hovered in that order. Hover and press values come from
 the hover and pressed sub-palettes of the same semantic color the status
 already selected, so an unchecked indicator shifts within its neutral stroke
-and a checked indicator shifts within its brand fill.
+and a checked or mixed indicator shifts within its neutral-heavy fill.
 
 The caller `style` is the final layer applied to the root, after all
 token-derived styles.

@@ -3,7 +3,7 @@ name: card
 platform: react-native (Windows, macOS)
 status: implemented
 source: ./spec/source.json
-tokens: ./spec/tokens.yaml
+tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
 interaction: ./spec/interaction.md
 usage: ./spec/usage.md
@@ -52,7 +52,7 @@ Static cards use a non-focusable `View`. A caller can explicitly make a static r
 
 Static cards gain neither a ring nor a focus stop.
 
-On Windows and macOS, interactive overlays respond to native pointer, touch, `Enter`, and `Space` press behavior. The overlay is disabled and unfocusable when `disabled`; nested controls remain rendered as sibling content and keep their own press behavior. Windows maps the overlay to a UI Automation button; macOS maps it to an AX button. The component does not navigate, manage a card collection, or animate state changes.
+Interactive overlays use native pointer, touch, `Enter`, and `Space` press behavior. The overlay is disabled and unfocusable when `disabled`; nested controls are sibling content with their own press behavior. The component does not navigate, manage a card collection, or animate state changes.
 
 ## Divergences from Flex
 
@@ -62,6 +62,8 @@ On Windows and macOS, interactive overlays respond to native pointer, touch, `En
 - `card-static-accessibility-opt-in` — **accepted.** FURN cannot infer a title-to-region association from generic `View` slots. Static cards are hidden from accessibility by default and become a labeled group only when the caller explicitly sets `accessible`.
 
 ## Conformance
+
+Runtime bindings cover the translucent surface, selected/disabled visuals and inset layout without adding delayed feedback. Native overlay focus and independent nested activation require renderer evidence.
 
 | Requirement | Evidence                                                                  |
 | ----------- | ------------------------------------------------------------------------- |

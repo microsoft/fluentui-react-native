@@ -2,6 +2,7 @@ import * as React from 'react';
 import type { GestureResponderEvent } from 'react-native';
 
 import type { FocusKeyboardEvent, FocusTarget } from '@fluentui-react-native/framework-base';
+import type { ListboxItemSelectionMode } from './listbox-item.types';
 
 /** The selection actions a bound option declares. */
 export type ListboxItemOptionAction = 'select' | 'add' | 'remove';
@@ -22,7 +23,7 @@ export interface ListboxItemOptionRegistration {
  * imports Dropdown or native-core; an item outside a list sees `undefined`.
  */
 export interface ListboxItemOptionBinding {
-  readonly multiselect: boolean;
+  readonly selectionMode: Exclude<ListboxItemSelectionMode, 'none'>;
   /** The number of options in the list. */
   readonly setSize: number;
   isSelected(value: string): boolean;

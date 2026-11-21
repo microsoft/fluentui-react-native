@@ -53,6 +53,19 @@ export const Default: Story = {
   },
 };
 
+export const EndContent: Story = {
+  render: () => (
+    <TabList
+      accessibilityLabel="Content sections"
+      defaultSelectedValue="overview"
+      endContent={<Button content="Add section" testID="tablist-end-action" />}
+    >
+      <Tab controls="overview-panel" content="Overview" value="overview" />
+      <Tab controls="activity-panel" content="Activity" value="activity" />
+    </TabList>
+  ),
+};
+
 function FocusManagementScene({
   selectionFollowsFocus = true,
   orientation = 'horizontal',

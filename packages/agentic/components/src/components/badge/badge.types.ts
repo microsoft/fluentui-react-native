@@ -13,11 +13,11 @@ import type { ThemeState } from '@fluentui-react-native/design';
 import type { Icon } from '../../primitives/icon/icon';
 import type { Text } from '../text/text';
 
-export type BadgeAppearance = 'tint' | 'outline';
-export type BadgeColor = 'brand' | 'danger' | 'success' | 'warning' | 'informative';
+export type BadgeAppearance = 'tint' | 'outline' | 'filled';
+export type BadgeColor = 'danger' | 'success' | 'warning' | 'informative';
 export type BadgeSize = 'small' | 'medium';
 export type BadgeShape = 'circular' | 'rounded';
-export type BadgeLayout = 'iconAndText' | 'iconOnly';
+export type BadgeLayout = 'iconAndText' | 'iconOnly' | 'counter' | 'dot';
 
 export type BadgeSlots = {
   /**
@@ -42,13 +42,17 @@ export type BadgeSlots = {
 };
 
 type BadgeCommonProps = {
-  appearance?: BadgeAppearance;
   color?: BadgeColor;
   size?: BadgeSize;
-  shape?: BadgeShape;
 };
 
-type BadgeIconAndTextProps = BadgeCommonProps & {
+type BadgeStatusProps = BadgeCommonProps & {
+  appearance?: Exclude<BadgeAppearance, 'filled'>;
+  shape?: BadgeShape;
+  count?: never;
+};
+
+type BadgeIconAndTextProps = BadgeStatusProps & {
   layout?: 'iconAndText';
   content?: OptionalSlot<typeof Text>;
   leadingIcon?: OptionalSlot<typeof Icon>;
@@ -57,16 +61,25 @@ type BadgeIconAndTextProps = BadgeCommonProps & {
   trailingIconVisible?: boolean;
 };
 
-type BadgeIconOnlyProps = BadgeCommonProps & {
+type BadgeIconOnlyProps = BadgeStatusProps & {
   layout: 'iconOnly';
-  leadingIcon: SlotProp<typeof Icon>;
+  leadingIcon?: SlotProp<typeof Icon>;
   content?: never;
   trailingIcon?: never;
   leadingIconVisible?: never;
   trailingIconVisible?: never;
 };
 
-export type BadgeStateProps = BadgeIconAndTextProps | BadgeIconOnlyProps;
+type BadgeNotificationProps = BadgeCommonProps & {
+  appearance?: 'filled';
+  content?: never;
+  leadingIcon?: never;
+  trailingIcon?: never;
+  leadingIconVisible?: never;
+  trailingIconVisible?: never;
+} & ({ layout: 'counter'; count: number | string; shape?: BadgeShape } | { layout: 'dot'; count?: never; shape?: 'circular' });
+
+export type BadgeStateProps = BadgeIconAndTextProps | BadgeIconOnlyProps | BadgeNotificationProps;
 
 export type BadgeExposedViewProps = OwnedRootProps<PropsWithRefOf<typeof View>, 'accessibilityRole' | 'focusable'>;
 
@@ -85,5 +98,7 @@ export type BadgeState = ComponentState<BadgeSlots> &
     hasContent: boolean;
     hasLeadingIcon: boolean;
     hasTrailingIcon: boolean;
+    themeState: ThemeState;
+    tintStyle?: ViewStyle;
     userStyle?: StyleProp<ViewStyle>;
   };

@@ -105,8 +105,8 @@ function ActivationProbe() {
   return (
     <View style={styles.story}>
       <TextInput accessibilityLabel="Tag keyboard entry" style={styles.keyboardInput} testID="tag-keyboard-entry" />
-      <Tag content="Engineering" onPress={() => setPresses((count) => count + 1)} testID="tag-keyboard-target" />
-      <Tag content="Locked filter" disabled onPress={() => setPresses((count) => count + 100)} testID="tag-keyboard-disabled" />
+      <Tag content="Engineering" onDismiss={() => setPresses((count) => count + 1)} testID="tag-keyboard-target" />
+      <Tag content="Locked filter" disabled onDismiss={() => setPresses((count) => count + 100)} testID="tag-keyboard-disabled" />
       <TextInput accessibilityLabel="Tag keyboard exit" style={styles.keyboardInput} testID="tag-keyboard-exit" />
       <StoryStatus testID="tag-keyboard-count">{`Presses: ${presses}`}</StoryStatus>
     </View>

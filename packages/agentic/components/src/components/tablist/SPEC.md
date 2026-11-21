@@ -3,7 +3,7 @@ name: tablist
 platform: react-native (Windows, macOS)
 status: implemented
 source: ./spec/source.json
-tokens: ./spec/tokens.yaml
+tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
 interaction: ./spec/interaction.md
 usage: ./spec/usage.md
@@ -28,6 +28,7 @@ selection indicator. It is not a navigation bar and does not change routes.
 | Prop                    | Type                      | Default                 | Contract                                                                                    |
 | ----------------------- | ------------------------- | ----------------------- | ------------------------------------------------------------------------------------------- |
 | `children`              | `ReactNode`               | required                | Tab children in visual and keyboard order.                                                  |
+| `endContent`            | `ReactNode`               | absent                  | A trailing node outside the tabs' roving navigation and selection.                          |
 | `selectedValue`         | `string`                  | absent                  | Externally driven selected Tab value.                                                       |
 | `defaultSelectedValue`  | `string`                  | first enabled Tab value | Initial selection while internally driven.                                                  |
 | `onSelectionChange`     | `(value: string) => void` | none                    | Reports the requested value in controlled and uncontrolled modes.                           |
@@ -56,7 +57,8 @@ initial value is supplied.
 
 The root renders children in caller order without cloning their visual slots.
 An internal context supplies selection, disabled state, set position, roving
-focus, and interaction handlers to each Tab.
+focus, and interaction handlers to each Tab. `endContent` is rendered after
+the Tabs, outside their context; a focusable child retains its own tab stop.
 
 **TBL-003:** Preserve caller child order and styles while coordinating Tab
 behavior through package-private context.
@@ -102,8 +104,8 @@ one-based position and the enabled and disabled items both contribute to the
 set size.
 
 Windows and macOS use native focus commands on the next Tab after a handled
-navigation key. Native Tab and Shift+Tab enter and leave the list through its
-single tabbable item. Pointer activation moves both active focus ownership and
+navigation key. Native Tab and Shift+Tab enter and leave the tabs through the
+single tabbable Tab; interactive end content is separate. Pointer activation moves both active focus ownership and
 selection to the pressed Tab.
 
 **TBL-007:** Expose tab-list, tab, selected, disabled, controlled-panel, set
@@ -122,6 +124,11 @@ styles last.
 | `tablist-native-focus-command`    | Accepted    | Roving navigation uses native React Native focus refs rather than browser tabindex and DOM query behavior.                                       | None.     |
 
 ## Conformance
+
+Flex 1.7 adds optional `endContent`: a trailing, caller-owned React node
+outside selection and roving navigation. Interactive end content has its own
+native tab stop; verify native Tab traversal separately from JS arrow/selection
+coverage. The list retains base100 gaps without container chrome or motion.
 
 | Requirement | Evidence                                                       |
 | ----------- | -------------------------------------------------------------- |

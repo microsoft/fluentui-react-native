@@ -37,7 +37,7 @@ value.
 
 ## Component token companions (v2)
 
-Button and MenuButton import `spec/tokens.json` in their module-scoped `defineComponentTokens` calls. JSON is the only
+Higher-order components import `spec/tokens.json` in their module-scoped `defineComponentTokens` calls. JSON is the only
 runtime source of ordered axes. Use the component's state type for typed resolution and theme patches; don't redeclare
 the axes in TypeScript. Reuse the named field validators from `@fluentui-react-native/design/styling`. Each slot contains
 flat React Native style keys and reviewed prop settings:

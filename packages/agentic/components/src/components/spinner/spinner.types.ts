@@ -1,4 +1,4 @@
-import type { Animated, StyleProp, ViewStyle } from 'react-native';
+import type { Animated, ColorValue, StyleProp, ViewStyle } from 'react-native';
 import type { View } from 'react-native';
 import type { Svg } from 'react-native-svg';
 
@@ -28,11 +28,13 @@ export type SpinnerState = ComponentState<SpinnerStateSlots> &
   ThemeState & {
     center: number;
     diameter: number;
-    indicatorColor: string;
+    indicatorColor?: ColorValue;
     radius: number;
     reduceMotionEnabled?: boolean;
     rotation: Animated.Value;
     strokeWidth: number;
-    trackColor: string;
+    trackColor?: ColorValue;
+    rootStyle: ViewStyle;
+    svgStyle: ViewStyle;
     userStyle?: StyleProp<ViewStyle>;
   };

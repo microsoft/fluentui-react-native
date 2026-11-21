@@ -10,6 +10,7 @@ import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing
 
 import { StoryStatus } from '../../common/StoryStatus.story-helpers';
 import { Skeleton } from './skeleton';
+import { resolveSkeletonChrome } from './skeleton.styles';
 
 type StoryGroupProps = {
   children: ReactNode;
@@ -60,7 +61,7 @@ type Story = WdioStory<StoryObj<typeof Skeleton>>;
 
 function MotionExample() {
   const reduceMotion = useReducedMotion();
-  const highlightColor: unknown = useThemeState().tokens.color.backgroundNeutralSubtle.rest;
+  const { shimmerColor } = resolveSkeletonChrome(useThemeState(), reduceMotion !== false);
   return (
     <View style={styles.story}>
       <View accessible accessibilityLabel="Skeleton animation example" role="group" testID="skeleton-motion">
@@ -71,7 +72,7 @@ function MotionExample() {
           ? 'Motion preference pending'
           : reduceMotion
             ? 'Reduced motion enabled'
-            : typeof highlightColor !== 'string'
+            : shimmerColor === undefined
               ? 'Gradient unavailable for native platform colors'
               : 'Motion enabled'}
       </StoryStatus>

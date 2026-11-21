@@ -105,7 +105,7 @@ describe('ListboxItem', () => {
 
   it('renders selection without changing it on press', async () => {
     const onPress = jest.fn();
-    const component = await renderListboxItem({ content: 'Inbox', multiselect: true, onPress, selected: false });
+    const component = await renderListboxItem({ content: 'Inbox', selectionMode: 'multiple', onPress, selected: false });
 
     expect(component.queryByText('✓')).toBeNull();
 
@@ -119,14 +119,15 @@ describe('ListboxItem', () => {
     expect(isDirectComponent(ListboxItem)).toBe(false);
   });
 
-  it('renders the default list item content, icon, and secondary text', async () => {
-    const component = await renderListboxItem({ content: 'Choice' });
+  it('renders no implicit icon even when selected', async () => {
+    const component = await renderListboxItem({ content: 'Choice', selected: true });
 
     expect(component.getByRole('button').props.accessibilityState).toMatchObject({ disabled: false });
     expect(component.getByRole('button').props.accessibilityActions).toContainEqual({ name: 'Toggle' });
     expect(component.getByText('Choice')).toBeOnTheScreen();
     expect(component.getByText('Secondary')).toBeOnTheScreen();
-    expect(component.getByText('○')).toBeOnTheScreen();
+    expect(component.queryByText('○', { includeHiddenElements: true })).toBeNull();
+    expect(component.queryByText('●', { includeHiddenElements: true })).toBeNull();
   });
 
   it('applies selected visual state, swaps the icon, and preserves the label width', async () => {
@@ -138,18 +139,18 @@ describe('ListboxItem', () => {
     });
 
     expect(component.getByRole('button').props.accessibilityState).toMatchObject({ disabled: false });
-    expect(component.getByTestId('filled-icon')).toBeOnTheScreen();
+    expect(component.getByTestId('filled-icon', { includeHiddenElements: true })).toBeOnTheScreen();
     expect(component.queryByTestId('regular-icon')).toBeNull();
     expect(component.getAllByText('Choice', { includeHiddenElements: true })).toHaveLength(2);
   });
 
   it('suppresses selected styling for multiselect rows and shows a checkbox visual', async () => {
-    const component = await renderListboxItem({ content: 'Choice', multiselect: true, selected: true });
+    const component = await renderListboxItem({ content: 'Choice', selectionMode: 'multiple', selected: true });
     const root = component.getByRole('button');
 
     expect(StyleSheet.flatten(root.props.style).backgroundColor).toBe(defaultFlexTokens.color.backgroundNeutralTransparent.rest);
     expect(StyleSheet.flatten(component.getByText('Choice').props.style).fontWeight).toBe(defaultFlexTokens.fontWeight.functionalRegular);
-    expect(component.getByText('✓')).toBeOnTheScreen();
+    expect(component.getByText('✓', { includeHiddenElements: true })).toBeOnTheScreen();
   });
 
   it('renders secondary content under the label when requested', async () => {
@@ -198,7 +199,7 @@ describe('ListboxItem', () => {
       icon: { as: ReplacementAvatar },
     });
 
-    expect(component.getByAccessibilityHint('avatar')).toBeOnTheScreen();
+    expect(component.getByAccessibilityHint('avatar', { includeHiddenElements: true })).toBeOnTheScreen();
   });
 });
 
@@ -207,7 +208,7 @@ describe('ListboxItem bound to a list (LBI-006)', () => {
     const calls: string[] = [];
     const registrations: ListboxItemOptionRegistration[] = [];
     const binding: ListboxItemOptionBinding = {
-      multiselect: false,
+      selectionMode: 'single',
       setSize: 3,
       isSelected: (value) => value === 'b',
       getPosition: (value) => ({ a: 1, b: 2, c: 3 })[value],
@@ -241,7 +242,7 @@ describe('ListboxItem bound to a list (LBI-006)', () => {
       value: 'b',
       content: 'Bravo',
       selected: false,
-      checkmark: false,
+      selectionMode: 'multiple',
       testID: 'b',
       accessibilityState: { busy: true, selected: false, disabled: true },
       'aria-selected': false,
@@ -307,7 +308,7 @@ describe('ListboxItem bound to a list (LBI-006)', () => {
   });
 
   it('shows the checkbox indicator in multiple mode', async () => {
-    const { binding } = createBinding({ multiselect: true });
+    const { binding } = createBinding({ selectionMode: 'multiple' });
     const component = await renderBound(binding, { value: 'b', content: 'Bravo', testID: 'b' });
     expect(component.getByText('✓', { includeHiddenElements: true }).props.style).toMatchObject({ position: 'absolute' });
     expect(component.getByTestId('b').props.accessibilityState).toMatchObject({ selected: true });

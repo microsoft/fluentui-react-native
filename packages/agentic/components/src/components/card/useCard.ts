@@ -62,6 +62,7 @@ export function useCard_unstable(props: CardProps): CardState {
     accessibilityLabel,
     accessibilityLabelledBy,
     accessibilityRole: 'button',
+    role: 'button',
     accessibilityState: {
       ...accessibilityState,
       disabled,
@@ -88,9 +89,14 @@ export function useCard_unstable(props: CardProps): CardState {
   const { FocusRing, ...nativeFocusProps } = useFocusVisuals({ focused: pressableState.focused && !disabled && isInteractive });
 
   const rootProps: PropsWithRefOf<typeof View> = isInteractive
-    ? ({ ...rest, accessible: false, accessibilityState: { ...accessibilityState, disabled }, ref: rootRef, testID } as PropsWithRefOf<
-        typeof View
-      >)
+    ? ({
+        ...rest,
+        accessible: false,
+        focusable: false,
+        accessibilityState: { ...accessibilityState, disabled },
+        ref: rootRef,
+        testID,
+      } as PropsWithRefOf<typeof View>)
     : ({
         ...rest,
         accessibilityLabel,
@@ -101,6 +107,7 @@ export function useCard_unstable(props: CardProps): CardState {
         },
         accessible: accessible ?? false,
         accessibilityRole: (accessible ?? false) ? 'group' : undefined,
+        role: accessible ? 'group' : undefined,
         focusable: false,
         ref: rootRef,
         testID,

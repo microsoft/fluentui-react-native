@@ -7,7 +7,9 @@ import { fireEvent } from '@testing-library/react-native';
 import { render } from '../../common/renderWithTheme';
 import type { RenderResult } from '@testing-library/react-native';
 
-import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
+import { ThemeProvider } from '@fluentui-react-native/design';
+import { defaultFlexTokens, mockTheme } from '@fluentui-react-native/design/testing';
+import { ThemeReference } from '@fluentui-react-native/design/theming';
 
 import { Tag } from './tag';
 
@@ -26,6 +28,16 @@ function getRootStyle(component: RenderResult): ViewStyle {
 describe('Tag', () => {
   afterEach(() => {
     jest.restoreAllMocks();
+  });
+
+  it('uses the legacy Fluent theme’s inverted neutral fill for a Primary tag', async () => {
+    const theme = new ThemeReference({ ...mockTheme, colors: { ...mockTheme.colors, neutralBackgroundInverted: '#314159' } });
+    const component = await render(
+      <ThemeProvider theme={theme}>
+        <Tag appearance="primary" content="Engineering" />
+      </ThemeProvider>,
+    );
+    expect(getRootStyle(component).backgroundColor).toBe('#314159');
   });
 
   it.each(['win32', 'windows', 'macos'] as const)(
@@ -104,13 +116,13 @@ describe('Tag', () => {
     });
 
     expect(getRoot(component).children).toEqual([
-      component.getByTestId('tag-spec-leading'),
+      component.getByTestId('tag-spec-leading', { includeHiddenElements: true }),
       component.getByTestId('tag-spec-content'),
-      component.getByTestId('tag-spec-dismiss'),
+      component.getByTestId('tag-spec-dismiss', { includeHiddenElements: true }),
     ]);
     expect(component.getAllByRole('button')).toHaveLength(1);
     for (const id of ['tag-spec-leading', 'tag-spec-dismiss']) {
-      expect(component.getByTestId(id).props.accessible).toBe(false);
+      expect(component.getByTestId(id, { includeHiddenElements: true }).props.accessible).toBe(false);
     }
   });
 
@@ -141,9 +153,8 @@ describe('Tag', () => {
     expect(getRootStyle(component)).toMatchObject({
       alignItems: 'center',
       backgroundColor: defaultFlexTokens.color.backgroundNeutralSubtle.rest,
-      minHeight: 24,
-      minWidth: 24,
     });
+    expect(getRootStyle(component).minHeight).toBeUndefined();
     expect(getRoot(component).children).toHaveLength(2);
   });
 
@@ -184,8 +195,14 @@ describe('Tag', () => {
       leadingIcon: { fontSource: { codepoint: 0x2605, fontFamily: 'Arial' }, testID: 'leading' },
     });
 
-    expect(StyleSheet.flatten(component.getByTestId('leading').props.style)).toMatchObject({ height: 20, width: 20 });
-    expect(StyleSheet.flatten(component.getByTestId('dismiss').props.style)).toMatchObject({ height: 16, width: 16 });
+    expect(StyleSheet.flatten(component.getByTestId('leading', { includeHiddenElements: true }).props.style)).toMatchObject({
+      height: 20,
+      width: 20,
+    });
+    expect(StyleSheet.flatten(component.getByTestId('dismiss', { includeHiddenElements: true }).props.style)).toMatchObject({
+      height: 16,
+      width: 16,
+    });
     expect(getRoot(component).children).toHaveLength(3);
   });
 
@@ -205,8 +222,14 @@ describe('Tag', () => {
       paddingHorizontal: 4,
       paddingVertical: 4,
     });
-    expect(StyleSheet.flatten(component.getByTestId('leading').props.style)).toMatchObject({ height: 16, width: 16 });
-    expect(StyleSheet.flatten(component.getByTestId('dismiss').props.style)).toMatchObject({ height: 12, width: 12 });
+    expect(StyleSheet.flatten(component.getByTestId('leading', { includeHiddenElements: true }).props.style)).toMatchObject({
+      height: 16,
+      width: 16,
+    });
+    expect(StyleSheet.flatten(component.getByTestId('dismiss', { includeHiddenElements: true }).props.style)).toMatchObject({
+      height: 12,
+      width: 12,
+    });
   });
 
   it('warns when an icon-only tag has no accessible name', async () => {
@@ -228,19 +251,19 @@ describe('Tag', () => {
     const restForeground = StyleSheet.flatten(text.props.style).color;
 
     expect(getRootStyle(component)).toMatchObject({
-      backgroundColor: tokens.color.backgroundBrandHeavy.rest,
+      backgroundColor: tokens.color.backgroundNeutralHeavy.rest,
     });
     expect(restForeground).toBe(tokens.color.foregroundNeutralOnloud.rest);
 
     await fireEvent(root, 'hoverIn', {});
     expect(getRootStyle(component)).toMatchObject({
-      backgroundColor: tokens.color.backgroundBrandHeavy.hover,
+      backgroundColor: tokens.color.backgroundNeutralHeavy.hover,
     });
     expect(StyleSheet.flatten(text.props.style).color).toBe(tokens.color.foregroundNeutralOnloud.rest);
 
     await fireEvent(root, 'pressIn', {});
     expect(getRootStyle(component)).toMatchObject({
-      backgroundColor: tokens.color.backgroundBrandHeavy.pressed,
+      backgroundColor: tokens.color.backgroundNeutralHeavy.pressed,
     });
     expect(StyleSheet.flatten(text.props.style).color).toBe(tokens.color.foregroundNeutralOnloud.rest);
   });
@@ -256,7 +279,7 @@ describe('Tag', () => {
   });
 
   it.each([
-    ['primary', 'backgroundBrandHeavy'],
+    ['primary', 'backgroundNeutralHeavy'],
     ['secondary', 'backgroundNeutralSubtle'],
   ] as const)('resolves the %s appearance', async (appearance, backgroundToken) => {
     const component = await renderTag({ appearance, content: appearance });
@@ -278,8 +301,14 @@ describe('Tag', () => {
       fontFamily: expect.any(String),
       fontSize,
     });
-    expect(StyleSheet.flatten(component.getByTestId('leading').props.style)).toMatchObject({ height: leadingSize, width: leadingSize });
-    expect(StyleSheet.flatten(component.getByTestId('dismiss').props.style)).toMatchObject({ height: dismissSize, width: dismissSize });
+    expect(StyleSheet.flatten(component.getByTestId('leading', { includeHiddenElements: true }).props.style)).toMatchObject({
+      height: leadingSize,
+      width: leadingSize,
+    });
+    expect(StyleSheet.flatten(component.getByTestId('dismiss', { includeHiddenElements: true }).props.style)).toMatchObject({
+      height: dismissSize,
+      width: dismissSize,
+    });
   });
 
   it.each([
@@ -318,5 +347,26 @@ describe('Tag', () => {
     expect(component.queryByTestId('dismiss')).toBeNull();
     expect(getRootStyle(component).backgroundColor).toBe('hotpink');
     expect(getRoot(component).children).toHaveLength(2);
+  });
+
+  it('routes activation only to onDismiss during migration and leaves removal to the caller', async () => {
+    jest.replaceProperty(Platform, 'OS', 'macos');
+    const onPress = jest.fn();
+    const onDismiss = jest.fn();
+    const onAccessibilityTap = jest.fn();
+    const component = await renderTag({ content: 'Engineering', onDismiss, onPress, onAccessibilityTap });
+    await fireEvent.press(getRoot(component));
+    await fireEvent(getRoot(component), 'accessibilityTap');
+    expect(onDismiss).toHaveBeenCalledTimes(2);
+    expect(onPress).not.toHaveBeenCalled();
+    expect(onAccessibilityTap).not.toHaveBeenCalled();
+    expect(component.getByText('Engineering')).toBeOnTheScreen();
+
+    await component.rerender(<Tag content="Engineering" onDismiss={onDismiss} onPress={onPress} dismiss={false} />);
+    await fireEvent.press(getRoot(component));
+    await component.rerender(<Tag content="Engineering" onDismiss={onDismiss} disabled />);
+    await fireEvent.press(getRoot(component));
+    expect(onDismiss).toHaveBeenCalledTimes(2);
+    expect(onPress).not.toHaveBeenCalled();
   });
 });

@@ -70,7 +70,7 @@ describe('Divider', () => {
     const root = getRoot(component);
 
     expect(root.children).toHaveLength(3);
-    expect(component.getByTestId('divider-icon')).toBeOnTheScreen();
+    expect(component.getByTestId('divider-icon', { includeHiddenElements: true })).toBeOnTheScreen();
     expect(component.queryByText('Text')).toBeNull();
     expect(root.props.accessibilityLabel).toBeUndefined();
   });
@@ -191,7 +191,7 @@ describe('Divider', () => {
       icon: { as: ReplacementIcon, testID: 'divider-icon' },
       label: 'Section',
     });
-    const icon = visible.getByTestId('divider-icon');
+    const icon = visible.getByTestId('divider-icon', { includeHiddenElements: true });
 
     expect(icon.props.accessibilityHint).toBe('replacement');
     expect(icon.props.accessible).toBe(false);
@@ -201,6 +201,24 @@ describe('Divider', () => {
 
     const plain = await renderDivider({ icon: null, label: null });
     expect(plain.queryByText('Text')).toBeNull();
-    expect(getRoot(plain).children).toHaveLength(2);
+    expect(getRoot(plain).children).toHaveLength(1);
+  });
+
+  it('removes the content, stub and implicit name until showContent becomes true again', async () => {
+    const icon = { fontSource: { codepoint: 0x2605 }, testID: 'restored-icon' };
+    const component = await renderDivider({ layout: 'start', label: 'Section', icon, showContent: false });
+    const divider = getRoot(component);
+    const line = divider.children[0];
+    if (typeof line === 'string') throw new TypeError('Divider line must be a native view.');
+    expect(divider.props.accessibilityLabel).toBeUndefined();
+    expect(divider.children).toHaveLength(1);
+    expect(StyleSheet.flatten(line.props.style)).toMatchObject({ flexBasis: 0, flexGrow: 1 });
+    expect(component.queryByText('Section', { includeHiddenElements: true })).toBeNull();
+    expect(component.queryByTestId('restored-icon', { includeHiddenElements: true })).toBeNull();
+
+    await component.rerender(<Divider layout="start" label="Section" icon={icon} showContent />);
+    expect(getRoot(component).props.accessibilityLabel).toBe('Section');
+    expect(component.getByText('Section')).toBeOnTheScreen();
+    expect(component.getByTestId('restored-icon', { includeHiddenElements: true })).toBeOnTheScreen();
   });
 });

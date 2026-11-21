@@ -33,16 +33,15 @@ Capitalize local optional slot variables when that improves readability. Render 
 return <state.root>{content}</state.root>;
 ```
 
-Keep slot order visible in JSX. Button renders its active icon before or after content according to `iconPosition`.
+Keep slot order visible in JSX. Button renders the leading icon, content, and trailing icon in that order.
 Avoid array construction or opaque helper loops when direct JSX makes the public ordering contract clearer.
 
 ## Resolve conditional structure from state
 
 The render function may select among already-resolved slots and compose conditional layout:
 
-- Button chooses `selectedIcon` when selected and falls back to `icon`.
-- Toggle content uses the private container, hidden ghost, and visible label.
-- Ordinary content renders without that wrapper.
+- ToggleButton resolves each selected icon and falls back to that side's regular icon before rendering.
+- ToggleButton uses a private width reservation and visible label; action-only Button renders the content directly.
 
 Do not create missing slots in the render stage. If a structural element can exist, represent it in the state type and
 construct it in the state hook.

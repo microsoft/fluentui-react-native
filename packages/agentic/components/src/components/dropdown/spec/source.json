@@ -1,68 +1,68 @@
 {
   "schemaVersion": 2,
   "component": "dropdown",
-  "lifecycle": "implemented",
+  "lifecycle": "contract-reviewed",
   "conformance": "reviewed",
-  "reviewedAt": "2026-10-19",
+  "reviewedAt": "2026-11-20",
   "sources": [
     {
       "id": "flex-component",
       "kind": "flex-skill",
       "authority": "normative",
       "skill": "flex-components:dropdown",
-      "sourceLock": "flex-1.5.0-206c4996",
-      "sourceLockFingerprint": "a69997212ec1b89510c94176801bf5a146ed7e7d8c80cc7db40ac8f60cf9f119",
+      "sourceLock": "flex-1.7.0-9f1df394",
+      "sourceLockFingerprint": "33c7dbb4ff78525a4e0900811f5fa1994579ee8dd95b337de85d8f47133d148c",
       "availableSurfaces": ["shared", "web"],
       "surfacesConsulted": ["shared", "web"],
       "sourceFiles": [
         {
           "role": "skill",
           "marketplacePath": "catalogs/flex/plugins/components/skills/dropdown/SKILL.md",
-          "marketplaceBlobSha": "3be39f4ccb3b599a78d1e595209402ac118c1f74",
-          "marketplaceSha256": "90e1eeb0225d4898b3ee9d5790bf161e9700a1aebf81f0813f37361aee80d3e3",
+          "marketplaceBlobSha": "fae2af790abed72e5d34c172b4f0fcc40b1347f1",
+          "marketplaceSha256": "cf592bcdb94a39e043e8602bf3fb89d8c24b3049c7bd95fe12cdb2ef46dc1e62",
           "originPath": "plugins/components/skills/dropdown/SKILL.md",
-          "originBlobSha": "3be39f4ccb3b599a78d1e595209402ac118c1f74",
-          "originSha256": "90e1eeb0225d4898b3ee9d5790bf161e9700a1aebf81f0813f37361aee80d3e3",
+          "originBlobSha": "fae2af790abed72e5d34c172b4f0fcc40b1347f1",
+          "originSha256": "cf592bcdb94a39e043e8602bf3fb89d8c24b3049c7bd95fe12cdb2ef46dc1e62",
           "contentDiffers": false
         },
         {
           "role": "usage",
           "marketplacePath": "catalogs/flex/plugins/components/skills/dropdown/usage.md",
-          "marketplaceBlobSha": "da605850f4e889744402311b23e1b16073c5cbda",
-          "marketplaceSha256": "ab7b9d721133baa0b2f4334c3d7c08a9d0b96c37297d8487cd8355cd34bfd825",
+          "marketplaceBlobSha": "482298d1fea22f134d433dddebb072c9d64ff1e9",
+          "marketplaceSha256": "93193145de70e6b43e7e9f609039f1584bea12cf2c159fdeaab3dc7905fd81be",
           "originPath": "plugins/components/skills/dropdown/usage.md",
-          "originBlobSha": "da605850f4e889744402311b23e1b16073c5cbda",
-          "originSha256": "ab7b9d721133baa0b2f4334c3d7c08a9d0b96c37297d8487cd8355cd34bfd825",
+          "originBlobSha": "482298d1fea22f134d433dddebb072c9d64ff1e9",
+          "originSha256": "93193145de70e6b43e7e9f609039f1584bea12cf2c159fdeaab3dc7905fd81be",
           "contentDiffers": false
         },
         {
           "role": "web:accessibility",
           "marketplacePath": "catalogs/flex/plugins/components/skills/dropdown/web/accessibility.md",
-          "marketplaceBlobSha": "f93db6f9b5c8269ae9904bd761a3b3d8363ccf32",
-          "marketplaceSha256": "989cbd718c3eb9e3ea9bed1906621cc86ea2ed3499242839bf0859357c04b1e3",
+          "marketplaceBlobSha": "31d6e686fc802f028ab5ec4fd62bb72a6f4efda8",
+          "marketplaceSha256": "829fe7d2af01bc5fb59eeb879e9181d2ab6c01ddc591bfa93ec0c4b00bb00958",
           "originPath": "plugins/components/skills/dropdown/web/accessibility.md",
-          "originBlobSha": "f93db6f9b5c8269ae9904bd761a3b3d8363ccf32",
-          "originSha256": "989cbd718c3eb9e3ea9bed1906621cc86ea2ed3499242839bf0859357c04b1e3",
+          "originBlobSha": "31d6e686fc802f028ab5ec4fd62bb72a6f4efda8",
+          "originSha256": "829fe7d2af01bc5fb59eeb879e9181d2ab6c01ddc591bfa93ec0c4b00bb00958",
           "contentDiffers": false
         },
         {
           "role": "web:interaction",
           "marketplacePath": "catalogs/flex/plugins/components/skills/dropdown/web/interaction.md",
-          "marketplaceBlobSha": "f603daeba563886b4d7b795961683adbfb531b2e",
-          "marketplaceSha256": "0d6dbb8a3f3eef1daffc5d40d10ec3e1eca274e02a2d54bb00a0e92e21a0262c",
+          "marketplaceBlobSha": "a734e1dd4a130c5f97d73ba9e47f1d7da49ef3e0",
+          "marketplaceSha256": "57315b809ea27d83009f55f0bff9aad9296c59db7f2034a4523af6bdc4776eb8",
           "originPath": "plugins/components/skills/dropdown/web/interaction.md",
-          "originBlobSha": "f603daeba563886b4d7b795961683adbfb531b2e",
-          "originSha256": "0d6dbb8a3f3eef1daffc5d40d10ec3e1eca274e02a2d54bb00a0e92e21a0262c",
+          "originBlobSha": "a734e1dd4a130c5f97d73ba9e47f1d7da49ef3e0",
+          "originSha256": "57315b809ea27d83009f55f0bff9aad9296c59db7f2034a4523af6bdc4776eb8",
           "contentDiffers": false
         },
         {
           "role": "web:tokens",
           "marketplacePath": "catalogs/flex/plugins/components/skills/dropdown/web/tokens.yaml",
-          "marketplaceBlobSha": "002e918b795b3a0773c943a135bb55804bf30dfd",
-          "marketplaceSha256": "91bc29fe8de636a028ed58673967fa79842d9991e13f62dbd4cd189d492b5983",
+          "marketplaceBlobSha": "6768d288296e5394e8c2f3b0ef66d5953a3daf05",
+          "marketplaceSha256": "e45acb6ff595627cd1becb0db222df678ffcc3c0b86d01ad369a308f7d326a19",
           "originPath": "plugins/components/skills/dropdown/web/tokens.yaml",
-          "originBlobSha": "002e918b795b3a0773c943a135bb55804bf30dfd",
-          "originSha256": "91bc29fe8de636a028ed58673967fa79842d9991e13f62dbd4cd189d492b5983",
+          "originBlobSha": "6768d288296e5394e8c2f3b0ef66d5953a3daf05",
+          "originSha256": "e45acb6ff595627cd1becb0db222df678ffcc3c0b86d01ad369a308f7d326a19",
           "contentDiffers": false
         }
       ],
@@ -76,7 +76,7 @@
     },
     {
       "id": "dropdown-combobox-relationships",
-      "status": "accepted"
+      "status": "aligning"
     },
     {
       "id": "dropdown-list-roles",
@@ -84,19 +84,19 @@
     },
     {
       "id": "dropdown-invalid-state",
-      "status": "accepted"
+      "status": "aligning"
     },
     {
       "id": "dropdown-tab-exit",
-      "status": "accepted"
+      "status": "aligning"
     },
     {
       "id": "dropdown-trigger-width",
-      "status": "accepted"
+      "status": "deferred"
     },
     {
       "id": "dropdown-chevron-glyph",
-      "status": "accepted"
+      "status": "resolved"
     },
     {
       "id": "dropdown-native-elevation",
@@ -108,7 +108,7 @@
     },
     {
       "id": "dropdown-token-strip",
-      "status": "deferred"
+      "status": "not-applicable"
     },
     {
       "id": "dropdown-motion",

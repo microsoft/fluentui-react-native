@@ -28,12 +28,9 @@ Do not resolve token styles or render elements in this hook.
 
 ## Preserve raw presence before applying defaults
 
-Derive presence-sensitive behavior from raw props. Button computes `hasContent`, `hasIcon`, and `hasSelectedIcon` before
-constructing slots. It uses those values to derive `iconOnly`, while `selected !== undefined` determines whether toggle
-semantics are enabled even when `selected` is false.
-
-Apply context-sensitive defaults only after those facts are known. Button defaults shape to `circle` for icon-only use
-and `rounded` otherwise.
+Derive presence-sensitive behavior from raw props. Button derives `iconOnly` from the absence of content and presence
+of a leading icon. Its default shape is `rounded` regardless of layout. ToggleButton treats `selected={false}` as
+controlled and always exposes its checked state.
 
 ## Decide who owns a stateful axis
 
@@ -87,8 +84,8 @@ it could never deselect and nothing would clear its siblings.
 ### Watch axes that change component identity
 
 When `selected !== undefined` switches a component between two shapes, that is an identity change rather than a value
-change. Button uses it to become a toggle button, which adds the Semibold ghost label that reserves layout width, and
-Card uses it to become selectable, which adds the interactive overlay.
+change. Card uses it to become selectable, which adds the interactive overlay. ToggleButton always reserves the
+semibold label width regardless of which state owner is in use.
 
 Keep those axes stable for a given instance and do not expose them as a Storybook control, because flipping the control
 between `undefined` and `false` visibly resizes or re-roles the component. Demonstrate the axis with focused stories

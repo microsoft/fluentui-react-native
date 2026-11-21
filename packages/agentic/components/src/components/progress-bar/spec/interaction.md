@@ -47,10 +47,9 @@ when the type is indeterminate, reduced motion is off, and the track has a
 measured width; otherwise it is stopped and the offset is reset so the segment
 rests at the leading edge.
 
-Determinate value changes apply immediately. The intent to ease the width over
-two hundred milliseconds is expressed with web-only style keys that the Windows
-and macOS renderers ignore, so a determinate change and a static change look the
-same in practice.
+Determinate changes ease the scale transform anchored to the logical start of
+the track. Static changes apply immediately; reduced motion also snaps
+determinate changes.
 
 With reduced motion enabled the loop does not run and the segment stays at rest,
 while the busy state continues to carry the work-in-flight meaning to assistive

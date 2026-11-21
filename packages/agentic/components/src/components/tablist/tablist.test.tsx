@@ -10,6 +10,7 @@ import type { RenderResult } from '@testing-library/react-native';
 import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
 
 import { Tab } from '../tab/tab';
+import { Button } from '../button/button';
 import { TabList } from './tablist';
 import { TabListContext } from './TabListContext';
 import type { TabListContextValue } from './TabListContext';
@@ -339,6 +340,25 @@ describe('TabList', () => {
     expect(tabs.map((tab) => tab.props.focusable)).toEqual([false, true]);
     expect(onSelectionChange).toHaveBeenCalledWith('activity');
     expect(onPress).toHaveBeenCalledTimes(1);
+  });
+
+  it('keeps trailing controls outside roving selection and activates them independently', async () => {
+    const onPress = jest.fn();
+    const onSelectionChange = jest.fn();
+    let endContext: TabListContextValue | undefined;
+    function EndAction() {
+      endContext = React.useContext(TabListContext);
+      return <Button content="Add tab" onPress={onPress} />;
+    }
+    const component = await renderTabList({ endContent: <EndAction />, onSelectionChange });
+    const end = component.getByRole('button', { name: 'Add tab' });
+    expect(endContext).toBeUndefined();
+    expect(end.props.focusable).toBe(true);
+    await fireEvent.press(end);
+    expect(onPress).toHaveBeenCalledTimes(1);
+    expect(onSelectionChange).not.toHaveBeenCalled();
+    expect(getTabs(component).map((tab) => tab.props.accessibilitySetSize)).toEqual([3, 3, 3]);
+    expect(getTabs(component).map(selected)).toEqual([true, false, false]);
   });
 
   it('reports controlled selection requests without mutating the selected value', async () => {

@@ -3,7 +3,7 @@ name: tab
 platform: react-native (Windows, macOS)
 status: implemented
 source: ./spec/source.json
-tokens: ./spec/tokens.yaml
+tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
 interaction: ./spec/interaction.md
 usage: ./spec/usage.md
@@ -150,6 +150,10 @@ native invocation limits.
 | `tab-selected-weight-reservation` | Accepted    | The selected label is heavier than the resting label, and the width for that heavier text is reserved on every tab so selection does not reflow the list. Flex describes only the weight change. | None. The reservation is an implementation requirement of the shared text layout, not a visual addition.  |
 
 ## Conformance
+
+TAB-005 adopts the Flex 1.7 brand-soft selected fill and brand-primary
+foreground. Verify disabled precedence, theme overrides, native focus,
+selected-icon swaps, and reserved label width independently.
 
 | Requirement | Evidence                                                         |
 | ----------- | ---------------------------------------------------------------- |

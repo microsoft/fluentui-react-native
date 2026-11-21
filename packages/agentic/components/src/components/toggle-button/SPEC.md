@@ -1,7 +1,7 @@
 ---
 name: toggle-button
 platform: react-native (Windows, macOS)
-status: contract-draft
+status: contract-reviewed
 source: ./spec/source.json
 tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
@@ -15,7 +15,7 @@ usage: ./spec/usage.md
 
 A ToggleButton changes one persistent boolean option, such as whether text is bold. Unlike an action-only Button,
 its unchecked state is meaningful even when the caller supplies no state prop. It does not own a group, selection
-among peers, a popup, or navigation. This is a pre-implementation scaffold, not a package export.
+among peers, a popup, or navigation.
 
 ## Public contract
 
@@ -45,8 +45,7 @@ among peers, a popup, or navigation. This is a pre-implementation scaffold, not 
   their respective paths; do not synthesize a press from an assistive action. Disabled is announced and not
   focusable. Follow the [shared focus policy](../../../references/higher-order-components.md#focus-visual-policy)
   on the actual root without moving focus on selection.
-- **TGB-006 - Migration.** Keep the existing [Button](../button/SPEC.md) usable until ToggleButton is implemented,
-  exported, qualified and a migration is available. The [migration examples](spec/usage.md) distinguish Subtle from
+- **TGB-006 - Migration.** The [migration examples](spec/usage.md) distinguish Subtle from
   non-Subtle callers and remove the old manual double-toggle risk. There is no silent replacement for Primary,
   Secondary, Outline, or square toggles.
 
@@ -59,11 +58,8 @@ behavior or endpoint qualification is claimed.
 
 ## Divergences from Flex
 
-- `toggle-button-release-appearance`: the locked 1.5 catalog includes four appearances. The owner chose the
-  promoted 1.7 Subtle-only model. `flex-component` identifies the package lock; `flex-promoted` identifies the five
-  directly verified promoted files governing this proposal. The promotion records Enterprise X3 commit
-  `34d42dee014daed6fe4cd4580bb9e7d526a4cf63`; independent verification there and package-wide repinning remain
-  outstanding. Do not substitute the GitHub.com mirror HEAD.
+- `toggle-button-release-appearance`: the prior 1.5 catalog included four appearances. The verified
+  promoted 1.7 Subtle-only model governs this contract and intentionally removes those other appearances.
 - `toggle-button-native-state`: expose the native button/checked and Toggle-action contract rather than a browser
   pressed attribute. Actual assistive announcement and invocation are release gates.
 - `native-system-focus-visuals`: retain native rings on Windows/macOS and root-modality-aware custom focus on Win32.
@@ -71,14 +67,13 @@ behavior or endpoint qualification is claimed.
 
 ## Conformance
 
-The interface, slot model and native adaptation have had owner review. The contract remains a draft pending source
-reconciliation. Only the types and selected token definition are scaffolded; stage signatures are not runnable
-components. Do not register a story or add a package export until a real implementation exists.
+The interface, slot model and native adaptation have had owner review. Local assertions are separate from native
+pipeline evidence, and native checked-state projection is not assumed on macOS.
 
-| Requirement      | Planned implementation and evidence                                                                                                                     |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| TGB-001, TGB-003 | Type checks for both layouts, forbidden legacy props, native ref; runtime slot order, fallback, wrap and width reservation.                             |
-| TGB-002          | Controlled rejection, uncontrolled toggles, prop changes without notification, disabled suppression, and callback counts.                               |
-| TGB-004          | Test the JSON overlay independently and with refreshed Button. Check theme overrides, caller precedence, high contrast and reduced motion.              |
-| TGB-005          | Test press and semantic action separately; qualify checked state, accessible name, focus, and one transition per actual input on each desktop endpoint. |
-| TGB-006          | Exercise the controlled and uncontrolled replacement in a consumer; audit non-Subtle and square callers before removing legacy props.                   |
+| Requirement      | Planned implementation and evidence                                                                                                        |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| TGB-001, TGB-003 | Type checks for both layouts, forbidden legacy props, native ref; runtime slot order, fallback, wrap and width reservation.                |
+| TGB-002          | Controlled rejection, uncontrolled toggles, prop changes without notification, disabled suppression, and callback counts.                  |
+| TGB-004          | Test the JSON overlay independently and with refreshed Button. Check theme overrides, caller precedence, high contrast and reduced motion. |
+| TGB-005          | Runtime press/action tests plus Storybook native role, keyboard, pointer and named Toggle cases. Checked-state projection is separate.     |
+| TGB-006          | Exercise the controlled and uncontrolled replacement in a consumer; audit non-Subtle and square callers before removing legacy props.      |

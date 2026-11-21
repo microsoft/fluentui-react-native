@@ -31,19 +31,19 @@ through `huge` sit alone in an empty region.
 
 ## Pairing with visible text
 
-Spinner has no text slot and publishes no spacing, so the caller owns the
-layout. When the wait has a visible caption, point the spinner at that text
-instead of duplicating it, and hide the spinner from assistive technology so the
-region announces once.
+Spinner has no text slot. Use an adjacent caption gap of 4 for `x-tiny`
+through `x-small`, 6 for `small` and `medium`, or 8 for `large` through `huge`.
+Name an exposed spinner with `accessibilityLabelledBy`, or hide it and put the
+busy state on the surrounding region. Do not announce both.
 
 ```tsx
-<View style={{ alignItems: 'center', flexDirection: 'row', gap: 8 }}>
+<View accessibilityState={{ busy: true }} style={{ alignItems: 'center', flexDirection: 'row', gap: 4 }}>
   <Spinner size="x-small" accessible={false} />
-  <Text nativeID="save-status">Saving your changes</Text>
+  <Text>Saving your changes</Text>
 </View>
 ```
 
-If the caption is not addressable, name the spinner directly instead:
+If there is no adjacent name to reference, name the spinner directly:
 
 ```tsx
 <Spinner size="x-small" accessibilityLabel="Saving your changes" />

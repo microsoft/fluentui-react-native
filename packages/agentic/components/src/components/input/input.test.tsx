@@ -4,6 +4,7 @@ import { StyleSheet } from 'react-native';
 import type { TextInput, View, ViewStyle } from 'react-native';
 
 import { act, fireEvent } from '@testing-library/react-native';
+import { FlexThemeReference, ThemeProvider } from '@fluentui-react-native/design';
 import { render } from '../../common/renderWithTheme';
 import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
 
@@ -237,14 +238,20 @@ describe('Input', () => {
     const textbox = getTextbox(component);
     const colors = defaultFlexTokens.color;
 
-    await fireEvent(textbox, 'hoverIn', {});
+    await fireEvent(getContents(component), 'hoverIn', {});
+    expect(flattenStyle(getContents(component).props.style).borderColor).toBe(colors.strokeNeutralLoud.hover);
+    await fireEvent(getContents(component), 'pressIn', {});
+    expect(flattenStyle(getContents(component).props.style).borderColor).toBe(colors.strokeNeutralLoud.pressed);
+    await fireEvent(getContents(component), 'pressOut', {});
     await fireEvent(textbox, 'pressIn', {});
+    expect(flattenStyle(getContents(component).props.style).borderColor).toBe(colors.strokeNeutralLoud.pressed);
+    await fireEvent(textbox, 'pressOut', {});
     await fireEvent(component.getByTestId('test-scene-root'), 'keyDownCapture', { nativeEvent: { key: 'Tab' } });
     await fireEvent(textbox, 'focus', {});
     await fireEvent.changeText(textbox, 'hello');
 
     expect(onHoverIn).toHaveBeenCalledTimes(1);
-    expect(onPressIn).toHaveBeenCalledTimes(1);
+    expect(onPressIn).toHaveBeenCalledTimes(2);
     expect(onFocus).toHaveBeenCalledTimes(1);
     expect(onChangeText).toHaveBeenCalledWith('hello');
     expect(flattenStyle(getContents(component).props.style)).toMatchObject({
@@ -384,44 +391,72 @@ describe('Input', () => {
     const cases = [
       {
         fontSize: Number(tokens.fontSize.functionalBodySmall),
-        marginVertical: Number(tokens.spacing.componentBase100),
-        minHeight: Number(tokens.lineHeight.functionalBodySmall) + Number(tokens.spacing.componentBase100) * 2,
+        padding: Number(tokens.spacing.componentBase100),
+        minHeight: 24,
         size: 'small',
       },
       {
         fontSize: Number(tokens.fontSize.functionalBodyMedium),
-        marginVertical: Number(tokens.spacing.componentBase150),
-        minHeight: Number(tokens.lineHeight.functionalBodyMedium) + Number(tokens.spacing.componentBase150) * 2,
+        padding: Number(tokens.spacing.componentBase150),
+        minHeight: 32,
         size: 'medium',
       },
       {
         fontSize: Number(tokens.fontSize.functionalBodyLarge),
-        marginVertical: Number(tokens.spacing.componentBase200),
-        minHeight: Number(tokens.lineHeight.functionalBodyLarge) + Number(tokens.spacing.componentBase200) * 2,
+        padding: Number(tokens.spacing.componentBase200),
+        minHeight: 40,
         size: 'large',
       },
     ] as const;
 
-    for (const { fontSize, marginVertical, minHeight, size } of cases) {
+    for (const { fontSize, padding, minHeight, size } of cases) {
       const component = await render(<Input placeholder={size} size={size} />);
       expect(flattenStyle(component.getByRole('textbox').props.style)).toMatchObject({
         fontSize,
-        marginVertical,
         padding: 0,
       });
       expect(flattenStyle(component.getByRole('textbox').props.style)).not.toHaveProperty('lineHeight');
       expect(flattenStyle(component.getByRole('textbox').props.style)).not.toHaveProperty('paddingVertical');
-      expect(flattenStyle(getContents(component).props.style)).toMatchObject({ minHeight });
+      const inset = padding - Number(tokens.strokeWidth.thin);
+      expect(flattenStyle(getContents(component).props.style)).toMatchObject({ minHeight, paddingTop: inset, paddingBottom: inset });
       expect(component.queryByTestId('icon-start')).toBeNull();
     }
   });
 
   it('warns when iconEnd2 is provided without iconEnd1', async () => {
     const warn = jest.spyOn(console, 'warn').mockImplementation();
-    await render(<Input iconEnd2={{ imageSource: { uri: 'end2.png' } }} />);
+    const component = await render(<Input iconEnd2={{ imageSource: { uri: 'end2.png' } }} />);
 
     expect(warn).toHaveBeenCalledWith('Input: iconEnd2 requires iconEnd1 to be provided.');
+    expect(component.queryByTestId('input-icon-end')).toBeNull();
     warn.mockRestore();
+  });
+
+  it('compensates only the border edges in the resolved variant, including the trailing inset', async () => {
+    const theme = new FlexThemeReference({
+      componentTokens: {
+        'furn.input': {
+          contents: { paddingTop: 8, paddingBottom: 8, 'when.variant.outline': { borderWidth: 3 } },
+          iconTextStack: { paddingStart: 10, paddingEnd: 10 },
+          iconEnd: { paddingEnd: 7 },
+          underline: { borderBottomWidth: 4 },
+        },
+      },
+    });
+    const scene = (variant: 'outline' | 'underline') => (
+      <ThemeProvider theme={theme}>
+        <Input variant={variant} iconEnd1={{ imageSource: { uri: 'end.png' } }} />
+      </ThemeProvider>
+    );
+    const component = await render(scene('outline'));
+    expect(flattenStyle(getContents(component).props.style)).toMatchObject({ paddingTop: 5, paddingBottom: 5 });
+    expect(flattenStyle(component.getByTestId('input-icon-text-stack').props.style)).toMatchObject({ paddingStart: 7, paddingEnd: 7 });
+    expect(flattenStyle(component.getByTestId('input-icon-end').props.style)).toMatchObject({ paddingEnd: 4 });
+
+    await component.rerender(scene('underline'));
+    expect(flattenStyle(getContents(component).props.style)).toMatchObject({ paddingTop: 8, paddingBottom: 4 });
+    expect(flattenStyle(component.getByTestId('input-icon-text-stack').props.style)).toMatchObject({ paddingStart: 10, paddingEnd: 10 });
+    expect(flattenStyle(component.getByTestId('input-icon-end').props.style)).toMatchObject({ paddingEnd: 7 });
   });
 
   it('keeps user styles last', async () => {

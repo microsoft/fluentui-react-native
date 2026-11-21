@@ -3,17 +3,17 @@
   "component": "button",
   "lifecycle": "implemented",
   "conformance": "reviewed",
-  "reviewedAt": "2026-09-14",
+  "reviewedAt": "2026-11-20",
   "sources": [
     {
       "id": "flex-component",
       "kind": "flex-skill",
       "authority": "normative",
       "skill": "flex-components:button",
-      "sourceLock": "flex-1.5.0-206c4996",
-      "sourceLockFingerprint": "a69997212ec1b89510c94176801bf5a146ed7e7d8c80cc7db40ac8f60cf9f119",
+      "sourceLock": "flex-1.7.0-9f1df394",
+      "sourceLockFingerprint": "33c7dbb4ff78525a4e0900811f5fa1994579ee8dd95b337de85d8f47133d148c",
       "availableSurfaces": ["mobile", "shared", "web"],
-      "surfacesConsulted": ["mobile", "shared", "web"],
+      "surfacesConsulted": ["shared", "web"],
       "sourceFiles": [
         {
           "role": "mobile:android:accessibility",
@@ -58,71 +58,71 @@
         {
           "role": "mobile:overview",
           "marketplacePath": "catalogs/flex/plugins/components/skills/button/mobile/overview.md",
-          "marketplaceBlobSha": "2668a2fba548663ea7cc0753aad6cb5f3f53ab3b",
-          "marketplaceSha256": "881a47dec1535e572c1e5bfc0d454f031c514e7402a129b7d3109abcc88a4c87",
+          "marketplaceBlobSha": "b777571901d13a949f1ac3522bb9a68711f74375",
+          "marketplaceSha256": "dad6c6b63eb28936af7d0641a672908ce4831e50a1c7f3584fa0fc62ef4a863c",
           "originPath": "plugins/components/skills/button/mobile/overview.md",
-          "originBlobSha": "2668a2fba548663ea7cc0753aad6cb5f3f53ab3b",
-          "originSha256": "881a47dec1535e572c1e5bfc0d454f031c514e7402a129b7d3109abcc88a4c87",
+          "originBlobSha": "b777571901d13a949f1ac3522bb9a68711f74375",
+          "originSha256": "dad6c6b63eb28936af7d0641a672908ce4831e50a1c7f3584fa0fc62ef4a863c",
           "contentDiffers": false
         },
         {
           "role": "mobile:tokens",
           "marketplacePath": "catalogs/flex/plugins/components/skills/button/mobile/tokens.yaml",
-          "marketplaceBlobSha": "a7f0686f41bf5502d310c727cad02f6dee7ec650",
-          "marketplaceSha256": "27b5bad579bd882b014ac8e0131960da4bcfd11ff249328b8ddd43f3435a5169",
+          "marketplaceBlobSha": "80f1454b4ecb299681f24c1368149ee619222688",
+          "marketplaceSha256": "eb4d2bd58eb65286c461bf601111e5b05d1550b7e4504b9a9d956758e6f875d1",
           "originPath": "plugins/components/skills/button/mobile/tokens.yaml",
-          "originBlobSha": "a7f0686f41bf5502d310c727cad02f6dee7ec650",
-          "originSha256": "27b5bad579bd882b014ac8e0131960da4bcfd11ff249328b8ddd43f3435a5169",
+          "originBlobSha": "80f1454b4ecb299681f24c1368149ee619222688",
+          "originSha256": "eb4d2bd58eb65286c461bf601111e5b05d1550b7e4504b9a9d956758e6f875d1",
           "contentDiffers": false
         },
         {
           "role": "skill",
           "marketplacePath": "catalogs/flex/plugins/components/skills/button/SKILL.md",
-          "marketplaceBlobSha": "c4bf5eeb245b2e59efa3885e2a008d93dfb820fe",
-          "marketplaceSha256": "b8ea0b2de61164bbcf1b496cd8b5236a0b424653470c07fc78d151239e80d36f",
+          "marketplaceBlobSha": "f88a74de3d29f11893ee93dd3ef77d93c82bad21",
+          "marketplaceSha256": "5ee711816a070f1b28edf7a61288a735bd44dea257ed283cc047e6064d6f6eee",
           "originPath": "plugins/components/skills/button/SKILL.md",
-          "originBlobSha": "c4bf5eeb245b2e59efa3885e2a008d93dfb820fe",
-          "originSha256": "b8ea0b2de61164bbcf1b496cd8b5236a0b424653470c07fc78d151239e80d36f",
+          "originBlobSha": "f88a74de3d29f11893ee93dd3ef77d93c82bad21",
+          "originSha256": "5ee711816a070f1b28edf7a61288a735bd44dea257ed283cc047e6064d6f6eee",
           "contentDiffers": false
         },
         {
           "role": "usage",
           "marketplacePath": "catalogs/flex/plugins/components/skills/button/usage.md",
-          "marketplaceBlobSha": "aa86bbbba0efbaa8c254aef2cfaccecd9ed736df",
-          "marketplaceSha256": "727bfe3a3f7402a539b8d58dcc7760df6d383d10699be7597f82addef7ca725c",
+          "marketplaceBlobSha": "eda273d8779e2e4c24a7e7dd72951d067f66cd41",
+          "marketplaceSha256": "0eb20385b2562a70c9e435da81d18b78a52af143469ab9a5ab1ed7b508ca1f04",
           "originPath": "plugins/components/skills/button/usage.md",
-          "originBlobSha": "aa86bbbba0efbaa8c254aef2cfaccecd9ed736df",
-          "originSha256": "727bfe3a3f7402a539b8d58dcc7760df6d383d10699be7597f82addef7ca725c",
+          "originBlobSha": "eda273d8779e2e4c24a7e7dd72951d067f66cd41",
+          "originSha256": "0eb20385b2562a70c9e435da81d18b78a52af143469ab9a5ab1ed7b508ca1f04",
           "contentDiffers": false
         },
         {
           "role": "web:accessibility",
           "marketplacePath": "catalogs/flex/plugins/components/skills/button/web/accessibility.md",
-          "marketplaceBlobSha": "f13b8cf376aa43d054edb7a85ed5b9e5ba9453bc",
-          "marketplaceSha256": "ad8a3ab790333655adf039ead2438da0c982fafedb2923afab9c404baf4df477",
+          "marketplaceBlobSha": "3121f3b999fcb4b561c3f8f8bbd9fa7f83910155",
+          "marketplaceSha256": "4a7fbc7cc08b112766b636ad1bb78d188e1feaea76309de608110212216bfd85",
           "originPath": "plugins/components/skills/button/web/accessibility.md",
-          "originBlobSha": "f13b8cf376aa43d054edb7a85ed5b9e5ba9453bc",
-          "originSha256": "ad8a3ab790333655adf039ead2438da0c982fafedb2923afab9c404baf4df477",
+          "originBlobSha": "3121f3b999fcb4b561c3f8f8bbd9fa7f83910155",
+          "originSha256": "4a7fbc7cc08b112766b636ad1bb78d188e1feaea76309de608110212216bfd85",
           "contentDiffers": false
         },
         {
           "role": "web:interaction",
           "marketplacePath": "catalogs/flex/plugins/components/skills/button/web/interaction.md",
-          "marketplaceBlobSha": "ade44d3e4499e7943926d351a8b44bf08cb8e39e",
-          "marketplaceSha256": "c269ba511e1d0de1f49ff01438df6a171de638a8b03a3d49d248fda4ce8b626c",
+          "marketplaceBlobSha": "596e2ec66c39eb6cf75b94404b5a5fd92336d2fe",
+          "marketplaceSha256": "d6b38096f48652078fc78c26d9efa817bc6fdecdcee228142d46a2e385896090",
           "originPath": "plugins/components/skills/button/web/interaction.md",
-          "originBlobSha": "ade44d3e4499e7943926d351a8b44bf08cb8e39e",
-          "originSha256": "c269ba511e1d0de1f49ff01438df6a171de638a8b03a3d49d248fda4ce8b626c",
+          "originBlobSha": "596e2ec66c39eb6cf75b94404b5a5fd92336d2fe",
+          "originSha256": "d6b38096f48652078fc78c26d9efa817bc6fdecdcee228142d46a2e385896090",
           "contentDiffers": false
         },
         {
           "role": "web:tokens",
           "marketplacePath": "catalogs/flex/plugins/components/skills/button/web/tokens.yaml",
-          "marketplaceBlobSha": "5f7d568af69fb9f9cc8548f4290ea5d7a1476422",
-          "marketplaceSha256": "3dcdf1d787d2a028f3e279d6b82b32adbfbc8b81532656332642433fcd870f8e",
+          "marketplaceBlobSha": "367069ac41d81e3e1c1790686145a6f833e6fc82",
+          "marketplaceSha256": "a437f241f1ed8731b2428c29f24a06b2111c286e9344fd31917e8ea9e3f9eb7b",
           "originPath": "plugins/components/skills/button/web/tokens.yaml",
-          "originBlobSha": "5f7d568af69fb9f9cc8548f4290ea5d7a1476422",
-          "originSha256": "3dcdf1d787d2a028f3e279d6b82b32adbfbc8b81532656332642433fcd870f8e",
+          "originBlobSha": "367069ac41d81e3e1c1790686145a6f833e6fc82",
+          "originSha256": "a437f241f1ed8731b2428c29f24a06b2111c286e9344fd31917e8ea9e3f9eb7b",
           "contentDiffers": false
         }
       ],
@@ -136,15 +136,15 @@
     },
     {
       "id": "button-selection-axis",
-      "status": "deferred"
+      "status": "resolved"
     },
     {
       "id": "button-single-icon-slot",
-      "status": "deferred"
+      "status": "resolved"
     },
     {
       "id": "button-square-shape",
-      "status": "accepted"
+      "status": "resolved"
     }
   ],
   "requirements": [
@@ -166,7 +166,7 @@
     },
     {
       "id": "BTN-005",
-      "evidence": ["useButton.ts", "renderButton.tsx", "button.test.tsx", "button.stories.tsx"]
+      "evidence": ["spec/tokens.json", "button.styles.ts", "button.test.tsx", "button.stories.tsx"]
     },
     {
       "id": "BTN-006",

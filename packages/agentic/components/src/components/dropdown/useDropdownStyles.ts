@@ -1,8 +1,9 @@
-import { attachSlotProps } from '@fluentui-react-native/framework-base';
+import { attachSlotDefaults, attachSlotProps } from '@fluentui-react-native/framework-base';
 
 import { applyFocusRingStyles } from '../../common/applyFocusRingStyles';
-import { getMenuGap } from '../menu/menu.styles';
-import { dropdownStyles, getDropdownThemeStyles } from './dropdown.styles';
+import { hiddenFromAccessibilityProps } from '../../common/accessibility';
+import { getPopoverChrome, getPopoverSurfaceStyle } from '../popover/popover.styles';
+import { dropdownStyles, getDropdownChevron } from './dropdown.styles';
 import type { DropdownState } from './dropdown.types';
 
 export function useDropdownStyles_unstable(state: DropdownState) {
@@ -16,18 +17,14 @@ export function useDropdownStyles_unstable(state: DropdownState) {
     style: [resolved.root, resolved.contents, dropdownStyles.trigger],
   });
   if (state.iconStart) {
-    attachSlotProps(state.iconStart, {
-      accessible: false,
-      color: resolved.iconColor,
-      height: resolved.iconSize,
-      width: resolved.iconSize,
-    });
+    attachSlotDefaults(state.iconStart, resolved.icon);
+    attachSlotProps(state.iconStart, hiddenFromAccessibilityProps);
   }
+  const { source, ...chevron } = getDropdownChevron(state);
   attachSlotProps(state.chevron, {
-    accessible: false,
-    color: state.chevronColor,
-    height: resolved.iconSize,
-    width: resolved.iconSize,
+    ...hiddenFromAccessibilityProps,
+    ...chevron,
+    ...source,
   });
   attachSlotProps(state.value, {
     accessible: false,
@@ -39,6 +36,7 @@ export function useDropdownStyles_unstable(state: DropdownState) {
   if (state.underlineFocus) {
     attachSlotProps(state.underlineFocus, { accessible: false, pointerEvents: 'none', style: resolved.underlineFocus });
   }
-  state.popupProps.surfaceStyle = getDropdownThemeStyles(state).surface;
-  state.popupProps.gap = getMenuGap(state.tokens);
+  const { surface, gap } = getPopoverChrome(state);
+  state.popupProps.surfaceStyle = getPopoverSurfaceStyle(surface);
+  state.popupProps.gap = gap;
 }

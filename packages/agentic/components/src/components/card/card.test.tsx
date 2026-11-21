@@ -7,6 +7,7 @@ import { act, fireEvent } from '@testing-library/react-native';
 import { render } from '../../common/renderWithTheme';
 import type { RenderResult } from '@testing-library/react-native';
 
+import { FlexThemeReference, ThemeProvider } from '@fluentui-react-native/design';
 import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
 
 import { Button } from '../button/button';
@@ -283,6 +284,19 @@ describe('Card', () => {
     expect(StyleSheet.flatten(component.getByTestId('nested-content').props.style)).toMatchObject({
       borderRadius: defaultFlexTokens.borderRadius.base400,
     });
+  });
+
+  it('keeps the nested radius concentric with theme-overridden Card padding and radius', async () => {
+    const theme = new FlexThemeReference({
+      componentTokens: { 'furn.card': { root: { padding: 10, borderRadius: 26 } } },
+    });
+    const component = await render(
+      <ThemeProvider theme={theme}>
+        <Card layout="nested" content02={{ testID: 'nested-content' }} />
+      </ThemeProvider>,
+    );
+
+    expect(StyleSheet.flatten(component.getByTestId('nested-content').props.style).borderRadius).toBe(16);
   });
 
   it('preserves consumer accessibility state values', async () => {

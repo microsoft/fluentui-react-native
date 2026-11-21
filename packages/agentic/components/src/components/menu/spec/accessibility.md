@@ -8,7 +8,8 @@ presence, so a natively dismissed menu reads as collapsed, and the default
 hint `Opens a menu` when the caller gives no `accessibilityHint`. React Native
 has no typed has-popup or controls property on Windows or macOS; the hint
 describes the behavior but is not a programmatic relationship
-(`menu-semantics`).
+(`menu-semantics`). Native popup association is a release gate for the root
+trigger and each submenu row. A matching name or hint is not evidence of that association.
 
 Menu registers native accessibility-tap activation on the trigger. It toggles
 presence with reason `trigger` and enters the first row, independently of
@@ -27,8 +28,8 @@ content.
 
 ## Rows
 
-MenuItem keeps its reviewed roles: `menuitem`, `menuitemradio` with a
-checkmark, and `menuitemcheckbox` with multiselect, each with checked state
+MenuItem projects `menuitem`, `menuitemradio` in `selectionMode="single"`,
+and `menuitemcheckbox` in `selectionMode="multiple"`, each with checked state
 when selectable. A row with a submenu also exposes `expanded` from its
 submenu's actual presence and MenuItem's `Has submenu` hint. Section headers
 are not focus stops. Disabled rows announce their disabled state; whether they

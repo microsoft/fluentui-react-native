@@ -8,8 +8,7 @@ import { renderDivider_unstable } from './renderDivider';
  */
 export const Divider = (props: DividerProps) => {
   const state = useDivider_unstable(props);
-  useDividerStyles_unstable(state);
-  return renderDivider_unstable(state);
+  return renderDivider_unstable(state, useDividerStyles_unstable(state));
 };
 
 Divider.displayName = 'Divider';

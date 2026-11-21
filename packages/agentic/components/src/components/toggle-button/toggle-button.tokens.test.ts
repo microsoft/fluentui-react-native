@@ -20,11 +20,15 @@ export type TwoIconOnly = Accepts<{ leadingIcon: IconProps; selectedTrailingIcon
 it('leaves unselected Button chrome alone and changes the selected fill without dropping the strong label when disabled', () => {
   const theme = { appearance: defaultResolvedThemeAppearance, highContrast: false, themeStyles: {}, tokens: defaultFlexTokens };
   const tokens = getComponentTokens(theme, toggleButtonTokenDefinition);
-  expect(resolveTokenStates(tokens.root, { selected: false, visualState: 'hovered' }).style).toEqual({});
-  expect(resolveTokenStates(tokens.root, { selected: true, visualState: 'hovered' }).style.backgroundColor).toBe(
+  expect(resolveTokenStates(tokens.root, { selected: false, highContrast: false, visualState: 'hovered' }).style).toEqual({});
+  expect(resolveTokenStates(tokens.root, { selected: true, highContrast: false, visualState: 'hovered' }).style.backgroundColor).toBe(
     theme.tokens.color.backgroundNeutralSoft.hover,
   );
-  const disabled = { selected: true, visualState: 'disabled' } as const;
+  const disabled = { selected: true, highContrast: true, visualState: 'disabled' } as const;
+  expect(resolveTokenStates(tokens.root, { ...disabled, visualState: 'rest' }).style.borderColor).toBe(
+    theme.tokens.color.strokeNeutralLoud.rest,
+  );
+  expect(resolveTokenStates(tokens.root, disabled).style.borderColor).toBe('transparent');
   expect(resolveTokenStates(tokens.root, disabled).style.backgroundColor).toBe(theme.tokens.color.backgroundNeutralSubtleDisabled.rest);
   expect(resolveTokenStates(tokens.content, disabled).style).toMatchObject({
     color: theme.tokens.color.foregroundNeutralDisabled.rest,

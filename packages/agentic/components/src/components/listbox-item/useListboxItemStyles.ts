@@ -1,126 +1,56 @@
-import type { StyleProp, TextStyle, ViewStyle } from 'react-native';
-
-import { attachSlotProps } from '@fluentui-react-native/framework-base';
+import { attachSlotDefaults, attachSlotProps } from '@fluentui-react-native/framework-base';
 import { applyFocusRingStyles } from '../../common/applyFocusRingStyles';
-
-import {
-  getListboxItemAvatarSize,
-  getListboxItemCheckmarkSize,
-  getListboxItemHeaderStyle,
-  getListboxItemIconSize,
-  getListboxItemLabelColorStyle,
-  getListboxItemLabelTypographyStyle,
-  getListboxItemRootStyle,
-  getListboxItemSecondaryColorStyle,
-  getListboxItemSecondaryTypographyStyle,
-  listboxItemStyles,
-} from './listbox-item.styles';
+import { hiddenFromAccessibilityProps } from '../../common/accessibility';
+import { getListboxItemChrome, listboxItemStyles } from './listbox-item.styles';
 import type { ListboxItemState } from './listbox-item.types';
 
 export function useListboxItemStyles_unstable(state: ListboxItemState) {
-  const resolvedRootStyle = getListboxItemRootStyle(state);
-  const rootStyle: StyleProp<ViewStyle> = [listboxItemStyles.root, resolvedRootStyle, state.userStyle];
-  applyFocusRingStyles(state.FocusRing, state, resolvedRootStyle.borderRadius);
+  const chrome = getListboxItemChrome(state);
+  const { gap, ...rootChrome } = chrome.root;
+  applyFocusRingStyles(state.FocusRing, state, rootChrome.borderRadius);
+  const rootStyle = [listboxItemStyles.root, rootChrome, state.userStyle];
   attachSlotProps(state.root, { style: rootStyle });
-
-  const headerStyle: StyleProp<ViewStyle> = [listboxItemStyles.root, getListboxItemHeaderStyle(state), state.userStyle];
-  attachSlotProps(state.header, { style: headerStyle });
-
-  if (state.content) {
-    const contentStyle: StyleProp<TextStyle> = [getListboxItemLabelTypographyStyle(state), getListboxItemLabelColorStyle(state)];
-    attachSlotProps(state.content, { style: contentStyle });
-  }
+  attachSlotProps(state.header, { style: rootStyle });
+  attachSlotDefaults(state.content, { style: chrome.content.style });
+  state.contentStyle = { gap: chrome.content.props.gap };
+  state.trailingStyle = { gap };
+  state.layoutGap = gap;
+  state.iconSize = chrome.icon.width;
 
   if (state.contentHidden) {
-    attachSlotProps(state.contentHidden, {
-      style: [
-        {
-          fontFamily: state.tokens.fontFamily.functional,
-          fontSize: state.tokens.fontSize.functionalBodyMedium,
-          fontWeight: state.tokens.fontWeight.functionalSemibold,
-          lineHeight: state.tokens.lineHeight.functionalBodyMedium,
-        },
-        getListboxItemLabelColorStyle(state),
-      ],
-    });
+    attachSlotDefaults(state.contentHidden, { style: chrome.contentReserve });
   }
-
   if (state.secondaryContent) {
-    attachSlotProps(state.secondaryContent, {
-      style: [
-        getListboxItemSecondaryTypographyStyle(state),
-        getListboxItemSecondaryColorStyle(state),
-        state.secondaryContentPosition === 'right' ? { flexShrink: 1, textAlign: 'right' } : { flexShrink: 1 },
-      ],
+    attachSlotDefaults(state.secondaryContent, {
+      style: [chrome.secondary, { flexShrink: 1, textAlign: state.secondaryContentPosition === 'right' ? 'right' : undefined }],
     });
   }
 
-  if (state.icon) {
-    attachSlotProps(state.icon, {
-      accessible: false,
-      color: getListboxItemLabelColorStyle(state).color,
-      height: getListboxItemIconSize(),
-      width: getListboxItemIconSize(),
-      ...(state.secondaryContentPosition === 'under' ? { style: { alignSelf: 'flex-start' } } : {}),
-    });
+  const color = chrome.content.style.color;
+  for (const icon of [state.icon, state.selectedIcon, state.chevronIndicator]) {
+    if (icon) {
+      attachSlotDefaults(icon, { color, ...chrome.icon });
+      attachSlotProps(icon, hiddenFromAccessibilityProps);
+    }
   }
-
-  if (state.selectedIcon) {
-    attachSlotProps(state.selectedIcon, {
-      accessible: false,
-      color: getListboxItemLabelColorStyle(state).color,
-      height: getListboxItemIconSize(),
-      width: getListboxItemIconSize(),
-      ...(state.secondaryContentPosition === 'under' ? { style: { alignSelf: 'flex-start' } } : {}),
-    });
-  }
-
   if (state.avatar) {
-    attachSlotProps(state.avatar, {
-      accessible: false,
-      style: {
-        borderRadius: getListboxItemAvatarSize() / 2,
-        height: getListboxItemAvatarSize(),
-        overflow: 'hidden',
-        width: getListboxItemAvatarSize(),
-      },
-    });
+    attachSlotDefaults(state.avatar, { style: [chrome.avatar, { overflow: 'hidden' }] });
+    attachSlotProps(state.avatar, hiddenFromAccessibilityProps);
   }
-
-  if (state.chevronIndicator) {
-    attachSlotProps(state.chevronIndicator, {
-      accessible: false,
-      color: state.tokens.color.foregroundNeutralPrimary.rest,
-      height: getListboxItemIconSize(),
-      width: getListboxItemIconSize(),
-    });
-  }
-
   if (state.checkmarkIndicator) {
-    attachSlotProps(state.checkmarkIndicator, {
-      accessible: false,
-      color: state.tokens.color.foregroundNeutralPrimary.rest,
-      height: getListboxItemCheckmarkSize(),
-      width: getListboxItemCheckmarkSize(),
-    });
+    attachSlotDefaults(state.checkmarkIndicator, { color, ...chrome.checkmark });
+    attachSlotProps(state.checkmarkIndicator, hiddenFromAccessibilityProps);
   }
-
   if (state.checkboxIndicator) {
+    attachSlotDefaults(state.checkboxIndicator, {
+      ...chrome.checkbox.props,
+      style: [{ alignItems: 'center', justifyContent: 'center' }, chrome.checkbox.style],
+    });
     attachSlotProps(state.checkboxIndicator, {
-      iconColor: state.tokens.color.foregroundNeutralOnloud.rest,
-      iconSize: 12,
+      ...hiddenFromAccessibilityProps,
+      focusable: false,
+      pointerEvents: 'none',
       status: state.selected ? 'checked' : 'unchecked',
-      style: [
-        listboxItemStyles.checkboxBox,
-        {
-          backgroundColor: state.selected
-            ? state.tokens.color.backgroundBrandHeavy.rest
-            : state.tokens.color.backgroundNeutralTransparent.rest,
-          borderColor: state.selected ? state.tokens.color.backgroundBrandHeavy.rest : state.tokens.color.foregroundNeutralSecondary.rest,
-          height: getListboxItemCheckmarkSize(),
-          width: getListboxItemCheckmarkSize(),
-        },
-      ],
     });
   }
 }

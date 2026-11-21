@@ -51,8 +51,16 @@ function githubToken() {
   return token;
 }
 
-async function githubJson(repository, route, token) {
-  const url = `https://api.github.com/repos/${repository}${route}`;
+const enterpriseOrigin = 'https://msft.ghe.com/x3-design/fluent-design';
+
+async function githubJson(repository, route, githubDotComToken) {
+  const enterprise = repository === enterpriseOrigin;
+  invariant(enterprise || /^[\w.-]+\/[\w.-]+$/.test(repository), `Unsupported source repository ${repository}.`);
+  const token = enterprise ? process.env.GH_ENTERPRISE_TOKEN || process.env.GITHUB_ENTERPRISE_TOKEN : githubDotComToken;
+  invariant(token, 'Enterprise source reporting requires GH_ENTERPRISE_TOKEN or GITHUB_ENTERPRISE_TOKEN.');
+  const url = enterprise
+    ? `https://api.msft.ghe.com/repos/x3-design/fluent-design${route}`
+    : `https://api.github.com/repos/${repository}${route}`;
   for (let attempt = 0; attempt < 3; attempt += 1) {
     let response;
     try {
@@ -100,10 +108,20 @@ async function decodedContent(repository, filePath, ref, token) {
   return Buffer.from(payload.content.replace(/\s/g, ''), 'base64').toString('utf8');
 }
 
-async function blobContent(repository, blobSha, token) {
-  const payload = await githubJson(repository, `/git/blobs/${blobSha}`, token);
-  invariant(payload.encoding === 'base64' && typeof payload.content === 'string', `Unsupported blob ${blobSha}.`);
-  return Buffer.from(payload.content.replace(/\s/g, ''), 'base64').toString('utf8');
+const cachedBlobs = new Map();
+
+function blobContent(repository, blobSha, token) {
+  const key = `${repository}:${blobSha}`;
+  if (!cachedBlobs.has(key)) {
+    cachedBlobs.set(
+      key,
+      githubJson(repository, `/git/blobs/${blobSha}`, token).then((payload) => {
+        invariant(payload.encoding === 'base64' && typeof payload.content === 'string', `Unsupported blob ${blobSha}.`);
+        return Buffer.from(payload.content.replace(/\s/g, ''), 'base64').toString('utf8');
+      }),
+    );
+  }
+  return cachedBlobs.get(key);
 }
 
 function componentSourceEntries(tree, prefix) {
@@ -235,7 +253,7 @@ async function updateComponentSources(lock, marketplaceTree, originTree, token) 
     const contract = {
       schemaVersion: 2,
       component: target,
-      lifecycle: existing.lifecycle || 'contract-draft',
+      lifecycle: sameSource ? existing.lifecycle || 'contract-draft' : 'contract-draft',
       conformance,
       reviewedAt: conformance === 'review-required' ? null : existing.reviewedAt,
       sources: [...(existing.sources || []).filter((source) => source.kind !== 'flex-skill'), flexSource].sort((left, right) =>
@@ -422,6 +440,13 @@ async function liveReport(lock) {
     const sourcePath = sourcePathFor(target);
     fs.mkdirSync(path.dirname(sourcePath), { recursive: true });
     writeJsonAtomic(sourcePath, source);
+    const specPath = path.resolve(path.dirname(sourcePath), '../SPEC.md');
+    const spec = fs.readFileSync(specPath, 'utf8');
+    const frontEnd = spec.indexOf('\n---\n', 3);
+    invariant(frontEnd !== -1, `${specPath} is missing its front matter terminator.`);
+    const front = spec.slice(0, frontEnd);
+    const updatedSpec = front.replace(/^status: [^\n]+$/m, `status: ${source.lifecycle}`) + spec.slice(frontEnd);
+    if (updatedSpec !== spec) fs.writeFileSync(specPath, updatedSpec);
   }
 
   const candidateEntries = parseCatalogNames(candidateCatalogSource);

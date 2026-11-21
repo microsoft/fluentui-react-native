@@ -3,7 +3,7 @@ name: radio
 platform: react-native (Windows, macOS)
 status: implemented
 source: ./spec/source.json
-tokens: ./spec/tokens.yaml
+tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
 interaction: ./spec/interaction.md
 usage: ./spec/usage.md
@@ -29,15 +29,15 @@ styles.
 The root renders its optional `FocusRing`, the 16-unit indicator, its
 10-unit dot, and a label container. The label container contains the label and
 the secondary text only when `showSecondaryText` is true. A selected dot is
-opaque and uses the brand foreground. An unselected dot remains in the tree
+opaque and uses the neutral-primary foreground. An unselected dot remains in the tree
 with zero opacity.
 
 `selected` is externally owned. Pressing reports through `onPress` without
 modifying it. The root always has the `radio` role, merges caller accessibility
 state with `checked` and `disabled`, and uses the label as its default
 accessible name. Visible secondary text becomes the default accessibility
-hint. The implementation relies on the accessible root to group its descendants
-rather than explicitly hiding the indicator and text children.
+hint. The indicator, dot, and visible text subtrees are explicitly hidden so
+the named radio remains the sole accessible target.
 
 ### Requirements
 
@@ -98,6 +98,11 @@ implemented by the component that renders the radios.
   named radio root as the single announced element.
 
 ## Conformance
+
+RAD-002 and RAD-004 adopt the Flex 1.7 16-unit outline and 10-unit dot with
+neutral-heavy stroke and neutral-primary selection; disabled colors win.
+Verify resolved appearance and hidden descendants in JavaScript and confirm
+native selection actions and focus separately.
 
 | Requirement | Evidence                                                                  |
 | ----------- | ------------------------------------------------------------------------- |

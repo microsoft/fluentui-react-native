@@ -18,9 +18,16 @@ const CheckboxSlot: SlotProp<typeof Checkbox> = {
 
 const CheckboxOwnsChildren: Expect<Equal<CheckboxProps['children'], never>> = true;
 
+type OwnedAliases = Extract<keyof CheckboxProps, 'role' | 'accessibilityRole' | 'aria-checked' | 'aria-disabled'>;
+const CheckboxOwnsAliases: Expect<Equal<OwnedAliases, never>> = true;
+type CheckboxAccessibilityState = NonNullable<CheckboxProps['accessibilityState']>;
+const CheckboxOwnsCheckedAndDisabled: Expect<Equal<CheckboxAccessibilityState['checked' | 'disabled'], undefined>> = true;
+
 describe('Checkbox slot types', () => {
   it('accepts the public checkbox contract as a slot prop', () => {
     expect(CheckboxSlot).toBeDefined();
     expect(CheckboxOwnsChildren).toBe(true);
+    expect(CheckboxOwnsAliases).toBe(true);
+    expect(CheckboxOwnsCheckedAndDisabled).toBe(true);
   });
 });

@@ -2,18 +2,17 @@ import type { StyleProp, ViewStyle } from 'react-native';
 
 import { attachSlotProps } from '@fluentui-react-native/framework-base';
 
-import { spinnerStyles, getSpinnerRootStyle } from './spinner.styles';
 import type { SpinnerState } from './spinner.types';
 
 /**
  * Applies token-derived and instance-derived styles to Spinner slots.
  */
 export function useSpinnerStyles_unstable(state: SpinnerState) {
-  const rootStyle: StyleProp<ViewStyle> = [spinnerStyles.root, getSpinnerRootStyle(state), state.userStyle];
+  const rootStyle: StyleProp<ViewStyle> = [state.rootStyle, state.userStyle];
   const svgStyle: StyleProp<ViewStyle> =
     state.reduceMotionEnabled === false
       ? [
-          spinnerStyles.svg,
+          state.svgStyle,
           {
             transform: [
               {
@@ -25,7 +24,7 @@ export function useSpinnerStyles_unstable(state: SpinnerState) {
             ],
           },
         ]
-      : spinnerStyles.svg;
+      : state.svgStyle;
 
   attachSlotProps(state.root, {
     style: rootStyle,

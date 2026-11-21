@@ -1,12 +1,12 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import { act, createRef } from 'react';
-import { Animated, I18nManager, PlatformColor, StyleSheet, type View, processColor } from 'react-native';
+import { Animated, Easing, I18nManager, PlatformColor, StyleSheet, type View, processColor } from 'react-native';
 import type { ViewStyle } from 'react-native';
 
 import { fireEvent } from '@testing-library/react-native';
 import { render } from '../../common/renderWithTheme';
-import { defaultFlexTokens, mockTheme } from '@fluentui-react-native/design/testing';
-import { ThemeProvider, ThemeReference } from '@fluentui-react-native/design/theming';
+import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
+import { FlexThemeReference, ThemeProvider } from '@fluentui-react-native/design';
 
 import { useReducedMotion } from '@fluentui-react-native/framework-base';
 
@@ -80,17 +80,19 @@ describe('Skeleton', () => {
   });
 
   it('SKEL-005 removes a running sweep when reduced motion changes and resumes after it is disabled', async () => {
+    const timing = jest.spyOn(Animated, 'timing');
     const component = await renderSkeleton({ style: { width: 120, height: 16 } });
     await fireEvent(getRoot(component), 'layout', { nativeEvent: { layout: { width: 120, height: 16, x: 0, y: 0 } } });
     const animation = jest.mocked(Animated.loop).mock.results[0].value;
     expect(animation.start).toHaveBeenCalledTimes(1);
+    expect(timing).toHaveBeenCalledWith(expect.any(Animated.Value), expect.objectContaining({ duration: 1800, easing: Easing.linear }));
     expect(component.getByTestId('skeleton-shimmer', { includeHiddenElements: true })).toBeOnTheScreen();
 
     mockUseReducedMotion.mockReturnValue(true);
     await component.rerender(<Skeleton testID="skeleton" style={{ width: 120, height: 16 }} />);
     expect(animation.stop).toHaveBeenCalledTimes(1);
     expect(getRoot(component).children).toHaveLength(0);
-    expect(getRootStyle(component).backgroundColor).toBe(defaultFlexTokens.color.backgroundNeutralSoft.rest);
+    expect(getRootStyle(component).backgroundColor).toBe(defaultFlexTokens.color.backgroundNeutralSubtle.rest);
 
     mockUseReducedMotion.mockReturnValue(false);
     await component.rerender(<Skeleton testID="skeleton" style={{ width: 120, height: 16 }} />);
@@ -164,7 +166,7 @@ describe('Skeleton', () => {
       y2: bandWidth / 2,
     });
     expect(gradient.props.x2 - gradient.props.x1).toBe(gradient.props.y2 - gradient.props.y1);
-    const color = processColor(defaultFlexTokens.color.backgroundNeutralSubtle.rest);
+    const color = processColor(defaultFlexTokens.color.backgroundNeutralSoft.rest);
     if (typeof color !== 'number') {
       throw new Error('The test theme must supply a concrete SVG highlight color.');
     }
@@ -230,13 +232,16 @@ describe('Skeleton', () => {
     });
 
     expect(component.queryByTestId('skeleton-shimmer', { includeHiddenElements: true })).toBeNull();
-    expect(getRootStyle(component).backgroundColor).toBe(defaultFlexTokens.color.backgroundNeutralSoft.rest);
-    expect(getRootStyle(component).backgroundColor).not.toBe(defaultFlexTokens.color.backgroundNeutralSubtle.rest);
+    expect(getRootStyle(component)).toMatchObject({
+      backgroundColor: defaultFlexTokens.color.backgroundNeutralSubtle.rest,
+      borderColor: defaultFlexTokens.color.strokeNeutralSubtle.rest,
+      borderWidth: defaultFlexTokens.strokeWidth.thin,
+    });
   });
 
   it('reports unsupported opaque gradient colors and retains a native outlined placeholder', async () => {
     const warn = jest.spyOn(console, 'warn').mockImplementation();
-    const theme = new ThemeReference(mockTheme, { colors: { neutralBackground2: PlatformColor('windowBackgroundColor') } });
+    const theme = new FlexThemeReference({ base: { color: { backgroundNeutralSoft: PlatformColor('windowBackgroundColor') } } });
     const component = await render(
       <ThemeProvider theme={theme} appearance={{ colorScheme: 'dark', contrast: 'highContrast' }}>
         <Skeleton testID="skeleton" style={{ width: 120, height: 16 }} />

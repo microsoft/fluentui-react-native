@@ -38,13 +38,18 @@ export type TagStateProps = {
 
 export type TagRootProps = OwnedRootProps<PropsWithRefOf<typeof Pressable>>;
 
-export type TagProps = TagStateProps & ComponentProps<TagSlots, TagRootProps>;
+export type TagProps = TagStateProps &
+  ComponentProps<TagSlots, TagRootProps> & {
+    /** Requests removal; the caller controls whether the tag remains mounted. Takes precedence over `onPress`. */
+    onDismiss?: () => void;
+  };
 
 export type TagState = ComponentState<TagSlots & FocusVisualsSlots> &
   FocusTargetBinding &
   Required<TagStateProps> &
   Omit<ThemeState, 'appearance'> &
   PressableState & {
+    themeState: ThemeState;
     hasContent: boolean;
     hasLeadingIcon: boolean;
     iconOnly: boolean;

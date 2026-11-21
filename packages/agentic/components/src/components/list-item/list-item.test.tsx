@@ -114,25 +114,25 @@ describe('ListItem', () => {
   it.each([
     ['none', false, undefined],
     ['none', true, undefined],
-    ['single', false, '○'],
-    ['single', true, '◉'],
-    ['multiple', false, '☐'],
-    ['multiple', true, '☑'],
-  ] as const)('LIT-003 keeps %s selection=%s caller-owned and presents only its glyph', async (selectionMode, selected, glyph) => {
+    ['single', false, 'list-item-radio-indicator'],
+    ['single', true, 'list-item-radio-indicator'],
+    ['multiple', false, 'list-item-checkbox-indicator'],
+    ['multiple', true, 'list-item-checkbox-indicator'],
+  ] as const)('LIT-003 keeps %s selection=%s caller-owned and renders a hidden indicator', async (selectionMode, selected, indicator) => {
     const onPress = jest.fn();
     const component = await renderListItem({ content: 'Choice', selectionMode, selected, onPress });
     await fireEvent.press(getRoot(component));
     expect(onPress).toHaveBeenCalledTimes(1);
     expect(getRoot(component).props.accessibilityState.selected).toBe(selected);
-    for (const candidate of ['○', '◉', '☐', '☑']) {
-      if (candidate === glyph) {
-        expect(component.getByText(candidate, { includeHiddenElements: true }).props).toMatchObject({
+    for (const candidate of ['list-item-radio-indicator', 'list-item-checkbox-indicator']) {
+      if (candidate === indicator) {
+        expect(component.getByTestId(candidate, { includeHiddenElements: true }).props).toMatchObject({
           accessible: false,
           accessibilityElementsHidden: true,
           importantForAccessibility: 'no-hide-descendants',
         });
       } else {
-        expect(component.queryByText(candidate, { includeHiddenElements: true })).toBeNull();
+        expect(component.queryByTestId(candidate, { includeHiddenElements: true })).toBeNull();
       }
     }
     expect(getRootStyle(component).backgroundColor).toBe(
@@ -212,12 +212,20 @@ describe('ListItem', () => {
     expect(onPress).not.toHaveBeenCalled();
   });
 
-  it('renders selection indicators for single and multiple selection modes', async () => {
-    const single = await renderListItem({ content: 'Single', selectionMode: 'single', selected: true });
-    expect(single.getByText('◉', { includeHiddenElements: true })).toBeOnTheScreen();
-
-    const multiple = await renderListItem({ content: 'Multiple', selectionMode: 'multiple', selected: true });
-    expect(multiple.getByText('☑', { includeHiddenElements: true })).toBeOnTheScreen();
+  it('uses a neutral radio dot and preserves Checkbox colors for delegated visuals', async () => {
+    const colors = defaultFlexTokens.color;
+    const component = await renderListItem({ content: 'Choice', selectionMode: 'single', selected: true });
+    const getDecoration = (id: string) => component.getByTestId(id, { includeHiddenElements: true });
+    expect(StyleSheet.flatten(getDecoration('list-item-radio-dot').props.style).backgroundColor).toBe(colors.foregroundNeutralPrimary.rest);
+    await component.rerender(<ListItem selectionMode="multiple" selected />);
+    expect(StyleSheet.flatten(getDecoration('list-item-checkbox-indicator').props.style).backgroundColor).toBe(
+      colors.backgroundNeutralHeavy.rest,
+    );
+    expect(getDecoration('checkbox-check-icon')).toBeOnTheScreen();
+    await component.rerender(<ListItem disabled selectionMode="multiple" selected />);
+    expect(StyleSheet.flatten(getDecoration('list-item-checkbox-indicator').props.style).backgroundColor).toBe(
+      colors.backgroundNeutralHeavyDisabled.rest,
+    );
   });
 
   it('suppresses the selected fill in multiple selection mode', async () => {
@@ -267,8 +275,10 @@ describe('ListItem', () => {
       secondaryContentPosition: 'under',
     });
 
-    expect(StyleSheet.flatten(component.getByTestId('secondary').props.style)).toMatchObject({
-      marginTop: 4,
+    const secondaryGroup = component.getByTestId('secondary').parent?.parent;
+    expect(StyleSheet.flatten(secondaryGroup?.props.style)).toMatchObject({
+      flexDirection: 'column',
+      gap: defaultFlexTokens.spacing.componentBase100,
     });
   });
 

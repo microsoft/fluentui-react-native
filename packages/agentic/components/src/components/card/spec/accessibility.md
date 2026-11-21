@@ -4,7 +4,7 @@ A static Card is inaccessible by default so its slot contents remain the accessi
 
 An interactive Card exposes its overlay as a React Native button. The overlay reports `accessibilityState.disabled`; when `selected` was supplied, it also reports `accessibilityState.selected`. The structural root is hidden from accessibility in this mode. Card does not synthesize a name from header or content, so supply `accessibilityLabel` or a supported label reference for an interactive card.
 
-On Windows, the interactive overlay maps to a UI Automation button; on macOS, it maps to an AX button.
+Verify the overlay's button role, name, and state independently on each supported renderer.
 
 Nested controls supplied through slots are separate controls and must have their own names and semantics.
 

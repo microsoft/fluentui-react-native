@@ -6,10 +6,10 @@ import { useThemeState } from '@fluentui-react-native/design';
 import { useReducedMotion, useSharedAnimatedLoop, useSlot } from '@fluentui-react-native/framework-base';
 
 import { hiddenFromAccessibilityProps } from '../../common/accessibility';
-import { skeletonStyles } from './skeleton.styles';
+import { resolveSkeletonChrome } from './skeleton.styles';
 import type { SkeletonProps, SkeletonState } from './skeleton.types';
 
-const animationDuration = 1700;
+const animationDuration = 1800;
 
 function createEmptyLayout(): LayoutRectangle {
   return { height: 0, width: 0, x: 0, y: 0 };
@@ -19,10 +19,10 @@ export function useSkeleton_unstable(props: SkeletonProps): SkeletonState {
   const { onLayout, style: userStyle, ...rest } = props;
   const themeState = useThemeState();
   const gradientId = `skeleton-gradient-${React.useId().replace(/:/g, '')}`;
-  const highlightColor: unknown = themeState.tokens.color.backgroundNeutralSubtle.rest;
-  const shimmerColor = typeof highlightColor === 'string' ? highlightColor : undefined;
   const [layout, setLayout] = React.useState<LayoutRectangle>(createEmptyLayout);
-  const reduceMotion = useReducedMotion() ?? false;
+  const reduceMotion = useReducedMotion() !== false;
+  const chrome = resolveSkeletonChrome(themeState, reduceMotion);
+  const { shimmerColor } = chrome;
   const progress = useSharedAnimatedLoop({
     channel: 'agentic-components:skeleton',
     duration: animationDuration,
@@ -59,6 +59,7 @@ export function useSkeleton_unstable(props: SkeletonProps): SkeletonState {
 
   const root = useSlot(View, {
     ...rest,
+    focusable: false,
     pointerEvents: rest.pointerEvents ?? 'none',
     ...hiddenFromAccessibilityProps,
     onLayout: handleLayout,
@@ -71,11 +72,13 @@ export function useSkeleton_unstable(props: SkeletonProps): SkeletonState {
     reduceMotion,
     userStyle,
     bandWidth,
+    centerOpacity: chrome.centerOpacity,
     gradientId,
     shimmerColor,
     shimmerWidth,
     translateX,
-    shimmerContainerStyle: skeletonStyles.shimmerContainer,
+    rootChrome: chrome.root,
+    shimmerContainerStyle: chrome.shimmerContainer,
     onLayout: handleLayout,
     progress,
   };

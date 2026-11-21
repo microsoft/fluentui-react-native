@@ -13,10 +13,19 @@ is documented in the owning reference, component contract, or the repository foc
 
 ## ToggleButton and the Button migration
 
-The [ToggleButton scaffold](../src/components/toggle-button/SPEC.md) is not exported. Reconcile its promoted source
-with the package lock, implement TGB-001 through TGB-005, and qualify actual native Toggle delivery, checked state
-and high-contrast selection on each desktop endpoint. Complete the [consumer migration](../src/components/toggle-button/spec/usage.md),
-including non-Subtle and square callers, before removing any selection or icon props from Button (TGB-006).
+The [ToggleButton contract](../src/components/toggle-button/SPEC.md) implements a separate Subtle control. Check
+native Toggle delivery, checked state and high-contrast selection on each desktop endpoint before claiming parity.
+The [consumer migration](../src/components/toggle-button/spec/usage.md) requires an explicit decision for
+non-Subtle and square callers.
+
+## Flex 1.7 endpoint gates
+
+- Require a verifiable native popup relationship for Menu, MenuButton and Dropdown, not only an expanded property
+  or a hint. Qualify Dropdown's invalid-state projection and associated error text separately.
+- Qualify Popover's natural boundary exit before changing its current Tab cycle. Qualify Dropdown and MenuButton
+  continuation per renderer; Office Win32 does not yet support forward continuation from these popups.
+- Author and review PresenceBadge before enabling visible presence in Avatar. The identity marker and its activity ring
+  do not stand in for presence.
 
 ## Desktop focus qualification
 

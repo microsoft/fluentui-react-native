@@ -242,8 +242,8 @@ export const Overview: Story = {
       </StoryGroup>
       <StoryGroup label="Indicators">
         <ListboxItem content="Chevron" chevron />
-        <ListboxItem content="Checkmark" checkmark selected />
-        <ListboxItem content="Multiselect" multiselect selected />
+        <ListboxItem content="Checkmark" selectionMode="single" selected />
+        <ListboxItem content="Multiselect" selectionMode="multiple" selected />
       </StoryGroup>
       <StoryGroup label="Custom">
         <ListboxItem content="Avatar" avatar={{ as: Avatar }} />
