@@ -1,5 +1,23 @@
 # Change Log - @fluentui-react-native/notification
 
+## 0.26.21
+
+### Patch Changes
+
+- Updated dependencies [c64353f]
+- Updated dependencies [c64353f]
+  - @fluentui-react-native/design@0.7.0
+  - @fluentui-react-native/framework-base@0.10.0
+  - @fluentui-react-native/button@0.40.21
+  - @fluentui-react-native/text@0.25.21
+  - @fluentui-react-native/experimental-shadow@0.7.20
+  - @fluentui-react-native/framework@0.17.14
+  - @fluentui-react-native/icon@0.22.21
+  - @fluentui-react-native/experimental-appearance-additions@0.8.15
+  - @fluentui-react-native/use-styling@0.16.9
+  - @fluentui-react-native/interactive-hooks@0.28.15
+  - @fluentui-react-native/pressable@0.13.15
+
 ## 0.26.20
 
 ### Patch Changes
