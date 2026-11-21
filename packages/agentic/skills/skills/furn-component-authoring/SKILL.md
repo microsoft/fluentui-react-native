@@ -34,8 +34,9 @@ These shared references are not additional skills.
 ## Workflow
 
 For a plan-only request, perform steps 1-4 read-only and return the proposed
-contract revision, selected references, implementation order, and validation
-plan. Do not edit files or start native workloads.
+contract changes (if any), affected requirement IDs, selected references,
+implementation order, and planned evidence and blockers by affected endpoint.
+Do not edit files or start native workloads.
 
 1. Read the host instructions and existing component contract. Higher-order
    components use `SPEC.md` and `spec/` companions; primitives may use a
@@ -50,20 +51,28 @@ plan. Do not edit files or start native workloads.
    higher-order and primitive examples. Do not assume those source paths
    exist in a consuming application.
 4. Establish public props, slots, native roots/refs, state ownership,
-   accessibility, interaction, tokens, and target platforms. Resolve product
-   and renderer constraints before implementation.
+   accessibility, interaction, tokens, and target platforms. Use the affected
+   requirements to identify what must be verified. Distinguish a theme or
+   caller visual override from a change to a reviewed default. For requirements
+   that depend on a native capability, verify the renderer and host
+   registration on the affected endpoints or record the blocker.
 5. Implement types and slots, state and accessibility, styling and slot
    props, pure rendering, component assembly, and explicit named exports.
    Keep React Native adaptation distinct from web anatomy.
-6. Preserve token meaning and the reviewed contract. Record genuine missing
-   tokens or platform capabilities rather than guessing substitutes.
+6. Preserve token meaning and follow the contract's token companion where
+   applicable. Visual overrides do not replace component-owned handlers,
+   refs, focus behavior, or accessibility. Record missing tokens rather than
+   guessing substitutes.
 7. Add focused runtime/type tests and stories for the public API and resolved
-   native output. Native action, focus, and input claims need native evidence.
-8. Reconcile the contract, implementation, and evidence. Source refreshes
-   propose changes; they never automatically ratify local behavior.
+   output. Native action, focus, and input claims need native evidence on the
+   affected endpoints.
+8. Reconcile the contract, implementation, and
+   [qualification evidence](../../references/shared/portable/context.md#permissions-and-evidence)
+   by requirement. Record new native dependencies and host setup requirements
+   for consumers. Do not assign a maturity label without the host's readiness
+   policy and the evidence it requires.
 9. Run the target workspace's declared checks, narrowest first, then its
-   acceptance checks. Report passed, failed, skipped, not run, and unsupported
-   distinctly. Follow the host's release rules.
+   acceptance checks. Report the outcomes and follow the host's release rules.
 
 Keep one component's types, state, styling, and rendering in one implementation
 context. In a FURN source checkout, its root/scoped instructions additionally

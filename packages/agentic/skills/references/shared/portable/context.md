@@ -71,8 +71,16 @@ workloads, capture unrelated windows, or access restricted sources without the
 necessary authorization. Clean up only resources whose ownership was recorded.
 Keep credentials and private source bodies out of outputs.
 
-Report checks as passed, failed, skipped, not run, or unsupported. JavaScript
-tests, mocks, and bundles do not qualify native behavior. Record the client,
-activated skill identity, package/renderer versions, and actual evidence when
-making behavior claims. No eval runner or automatic paid invocation is part of
-this suite.
+Report checks as passed, failed, skipped, not run, or unsupported. Record
+excluded input lanes and any manual checks not run. A listed test or story,
+a passing contract validator, and JavaScript tests, mocks, and bundles do not
+qualify native behavior.
+
+For a native claim, link the actual result to the requirement it covers and
+record the tested revision, endpoint, renderer and package versions, input
+lane (when applicable), date, and outcome. When a change affects a requirement
+on an endpoint, rerun the affected check or narrow the claim. Keep unaffected
+evidence labeled with its original revision and scope.
+
+Record the client and activated skill identity when reporting workflow
+evidence. No eval runner or automatic paid invocation is part of this suite.
