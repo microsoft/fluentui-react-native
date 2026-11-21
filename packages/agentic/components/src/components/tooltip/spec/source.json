@@ -1,0 +1,233 @@
+{
+  "schemaVersion": 2,
+  "component": "tooltip",
+  "lifecycle": "contract-draft",
+  "conformance": "review-required",
+  "reviewedAt": null,
+  "sources": [
+    {
+      "id": "flex-component",
+      "kind": "flex-skill",
+      "authority": "normative",
+      "skill": "flex-components:tooltip",
+      "sourceLock": "flex-1.7.0-9f1df394",
+      "sourceLockFingerprint": "33c7dbb4ff78525a4e0900811f5fa1994579ee8dd95b337de85d8f47133d148c",
+      "availableSurfaces": ["shared", "web"],
+      "surfacesConsulted": ["shared", "web"],
+      "sourceFiles": [
+        {
+          "role": "skill",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/tooltip/SKILL.md",
+          "marketplaceBlobSha": "6ac940f8bab9132aaaa05abc6b185af06fe7d27d",
+          "marketplaceSha256": "94dc2e5caa6e8e2fe3681975a8dfffc38b35c20be7c41173734b52183357d9db",
+          "originPath": "plugins/components/skills/tooltip/SKILL.md",
+          "originBlobSha": "6ac940f8bab9132aaaa05abc6b185af06fe7d27d",
+          "originSha256": "94dc2e5caa6e8e2fe3681975a8dfffc38b35c20be7c41173734b52183357d9db",
+          "contentDiffers": false
+        },
+        {
+          "role": "usage",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/tooltip/usage.md",
+          "marketplaceBlobSha": "aa6b8bb2dfc2fff53cc513d07671eb2062c5624e",
+          "marketplaceSha256": "a86123d4830bbcc757a72ba8e29026953d3a35668abeab93955bbcfb89cd32c6",
+          "originPath": "plugins/components/skills/tooltip/usage.md",
+          "originBlobSha": "aa6b8bb2dfc2fff53cc513d07671eb2062c5624e",
+          "originSha256": "a86123d4830bbcc757a72ba8e29026953d3a35668abeab93955bbcfb89cd32c6",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:accessibility",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/tooltip/web/accessibility.md",
+          "marketplaceBlobSha": "2bef2e014feeef4d7d52309ec6fd0058c02d93ff",
+          "marketplaceSha256": "a3436ee6836d2c507076d37858ad542753afd17d0bed9b800919e48d39c05912",
+          "originPath": "plugins/components/skills/tooltip/web/accessibility.md",
+          "originBlobSha": "2bef2e014feeef4d7d52309ec6fd0058c02d93ff",
+          "originSha256": "a3436ee6836d2c507076d37858ad542753afd17d0bed9b800919e48d39c05912",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:interaction",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/tooltip/web/interaction.md",
+          "marketplaceBlobSha": "85f8c6ba89e55fc6ea26c0a1f225c360cd983285",
+          "marketplaceSha256": "4d229801c4533caca86287d13276859d397704d24adfec68293ef851fa6706f4",
+          "originPath": "plugins/components/skills/tooltip/web/interaction.md",
+          "originBlobSha": "85f8c6ba89e55fc6ea26c0a1f225c360cd983285",
+          "originSha256": "4d229801c4533caca86287d13276859d397704d24adfec68293ef851fa6706f4",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:tokens",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/tooltip/web/tokens.yaml",
+          "marketplaceBlobSha": "edc391b38e8753f11061aa348af731219299bc09",
+          "marketplaceSha256": "727f83ec4553a26e7ff62babad3ea7524eec6d66ec754117da3434bef082d4bc",
+          "originPath": "plugins/components/skills/tooltip/web/tokens.yaml",
+          "originBlobSha": "edc391b38e8753f11061aa348af731219299bc09",
+          "originSha256": "727f83ec4553a26e7ff62babad3ea7524eec6d66ec754117da3434bef082d4bc",
+          "contentDiffers": false
+        }
+      ],
+      "releaseDifferences": []
+    },
+    {
+      "id": "furn-legacy",
+      "kind": "git-files",
+      "authority": "compatibility-reference",
+      "repository": "microsoft/fluentui-react-native",
+      "commit": "0fdcd3bcb0c67cd2ef266f6353059f659a55db88",
+      "files": [
+        {
+          "role": "contract",
+          "path": "packages/experimental/Tooltip/SPEC.md",
+          "sha256": "33e93ad94c4228892befe8911d6fb6ffe390b8afcdd5ab945072e7b92fd89ad0"
+        },
+        {
+          "role": "api",
+          "path": "packages/experimental/Tooltip/src/Tooltip.types.ts",
+          "sha256": "b3820cceea13fddedef2e9bf0498ccd432636d654f0204f6a0c6212e63c0cffa"
+        },
+        {
+          "role": "host",
+          "path": "packages/experimental/Tooltip/src/TooltipNativeComponent.win32.ts",
+          "sha256": "dc0479f68b4f0d2893f9aa35d61c436df1a07f564a5b07df03ce7c3c63fcec0e"
+        }
+      ]
+    },
+    {
+      "id": "rn-core",
+      "kind": "git-files",
+      "authority": "platform-contract",
+      "repository": "facebook/react-native",
+      "commit": "cddf8a7536de12db889e35e946281cfaf327197a",
+      "files": [
+        {
+          "role": "view",
+          "path": "packages/react-native/Libraries/Components/View/ViewPropTypes.js",
+          "sha256": "ae633b71c1dbb37c969a1d7aa8a26811d806d127ca3971f2fc3a1f113aa8a7fb"
+        },
+        {
+          "role": "ios",
+          "path": "packages/react-native/React/Views/RCTViewManager.m",
+          "sha256": "e1737393be95d567b8fcf8870ad1e56dfc48b7c5ea3bfb04fbfe48acac52bf8b"
+        },
+        {
+          "role": "android",
+          "path": "packages/react-native/ReactAndroid/src/main/java/com/facebook/react/views/view/ReactViewManager.kt",
+          "sha256": "c8337c0cafe15d6399f9f2e9ea620c18b6aad17a1326bf59a1a1755bc3ef2867"
+        }
+      ]
+    },
+    {
+      "id": "rn-macos",
+      "kind": "git-files",
+      "authority": "implementation-evidence",
+      "repository": "microsoft/react-native-macos",
+      "commit": "3693ac91a00df6374e610a0a06b0f90aaa1fe4b3",
+      "files": [
+        {
+          "role": "view",
+          "path": "packages/react-native/Libraries/Components/View/ViewPropTypes.js",
+          "sha256": "ffc62bd29d0403c4ec44a6fd68127e567d4b0b3eb5c439d99f1dce35e0a30f60"
+        },
+        {
+          "role": "fabric",
+          "path": "packages/react-native/React/Fabric/Mounting/ComponentViews/View/RCTViewComponentView.mm",
+          "sha256": "75a6b7f98bbfdc8367bc12a5bd25512ce949b8a29ad2452bc9dd88fd295db17e"
+        },
+        {
+          "role": "paper",
+          "path": "packages/react-native/React/Views/RCTViewManager.m",
+          "sha256": "2885ad194df4ccefbb47c0c050f64ca31c3bb97474ed77d27ba609e147944387"
+        }
+      ]
+    },
+    {
+      "id": "rn-windows",
+      "kind": "git-files",
+      "authority": "implementation-evidence",
+      "repository": "microsoft/react-native-windows",
+      "commit": "3eaa23597552160257ad24a2d9142e9c6435f2f8",
+      "files": [
+        {
+          "role": "win32:attributes",
+          "path": "packages/@office-iss/react-native-win32/src-win/Libraries/Components/View/ReactNativeViewAttributes.win32.js",
+          "sha256": "b3a759aa0e6b7c875b5ddd83903234a7441a159d62ff69a7c7cd6e3dff85a183"
+        },
+        {
+          "role": "win32:props",
+          "path": "packages/@office-iss/react-native-win32/src-win/Libraries/Components/View/ViewPropTypes.d.ts",
+          "sha256": "9d00a007c3cc703687d19d6c67a836eebac785c838d1480c30ee2549300dca27"
+        },
+        {
+          "role": "fabric:uia",
+          "path": "vnext/Microsoft.ReactNative/Fabric/Composition/CompositionDynamicAutomationProvider.cpp",
+          "sha256": "b3da4ea76ede46e6481b78f8fc22ab972a24d38dbfc27ce64c81c071d8da579b"
+        },
+        {
+          "role": "fabric:view",
+          "path": "vnext/Microsoft.ReactNative/Fabric/Composition/CompositionViewComponentView.cpp",
+          "sha256": "a3840d71ed1f3566c30f845f9b7cbcede45b08e8d85a604a88edd6a5342fe5a0"
+        },
+        {
+          "role": "fabric:service",
+          "path": "vnext/Microsoft.ReactNative/Fabric/Composition/TooltipService.cpp",
+          "sha256": "d256e1be22c06454f57fe6cece2696872ed09b073d62cc2f4db7eea62579ae87"
+        },
+        {
+          "role": "paper",
+          "path": "vnext/Microsoft.ReactNative/Views/FrameworkElementViewManager.cpp",
+          "sha256": "98c4b44a412d8d62cb087bb9aad9d6fcadb6f79b8f4cf98efd3348e3137cb0ee"
+        }
+      ]
+    }
+  ],
+  "divergences": [
+    {
+      "id": "system-presentation",
+      "status": "accepted"
+    },
+    {
+      "id": "keyboard-and-hover",
+      "status": "deferred"
+    },
+    {
+      "id": "trigger-description",
+      "status": "aligning"
+    },
+    {
+      "id": "view-anchor-only",
+      "status": "accepted"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "TIP-001",
+      "sources": ["flex-component", "furn-legacy", "rn-macos", "rn-windows"],
+      "plannedEvidence": ["tooltip.types.test.tsx", "tooltip.test.tsx"]
+    },
+    {
+      "id": "TIP-002",
+      "sources": ["flex-component", "furn-legacy", "rn-macos", "rn-windows"],
+      "plannedEvidence": ["tooltip.test.tsx", "tooltip.stories.tsx"]
+    },
+    {
+      "id": "TIP-003",
+      "sources": ["flex-component", "furn-legacy", "rn-macos", "rn-windows"],
+      "plannedEvidence": ["tooltip.stories.tsx", "tooltip.wdio.ts"]
+    },
+    {
+      "id": "TIP-004",
+      "sources": ["flex-component", "furn-legacy", "rn-macos", "rn-windows"],
+      "plannedEvidence": ["tooltip.test.tsx", "tooltip.wdio.ts"]
+    },
+    {
+      "id": "TIP-005",
+      "sources": ["furn-legacy", "rn-macos", "rn-windows"],
+      "plannedEvidence": ["tooltip.stories.tsx", "tooltip.wdio.ts"]
+    },
+    {
+      "id": "TIP-006",
+      "sources": ["furn-legacy", "rn-core", "rn-macos", "rn-windows"],
+      "plannedEvidence": ["tooltip.wdio.ts"]
+    }
+  ]
+}

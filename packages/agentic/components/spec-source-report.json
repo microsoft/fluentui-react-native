@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-21T07:23:34.361Z",
+  "generatedAt": "2026-11-21T21:38:48.217Z",
   "sourceLock": "flex-1.7.0-9f1df394",
   "sourceLockFingerprint": "33c7dbb4ff78525a4e0900811f5fa1994579ee8dd95b337de85d8f47133d148c",
   "baseline": {
@@ -10,7 +10,7 @@
   "external": {
     "mode": "live",
     "status": "drift-detected",
-    "marketplaceHead": "0542e4c2f18c39670c7f05c973c1d20a999c601f",
+    "marketplaceHead": "b3f232d0c21fa3d5edface7b4beed235a1e43825",
     "originHead": "3e54b26a30207168b9e2c07fad528d94c964d226"
   },
   "catalog": {
@@ -184,9 +184,10 @@
       "tablist",
       "tag",
       "text",
-      "toggle-button"
+      "toggle-button",
+      "tooltip"
     ],
-    "adaptedDrafts": ["avatar", "dropdown", "menu", "menu-button", "popover"],
+    "adaptedDrafts": ["avatar", "dropdown", "menu", "menu-button", "popover", "tooltip"],
     "implemented": [
       "accordion",
       "badge",
@@ -298,7 +299,6 @@
       "textarea",
       "toast",
       "toolbar",
-      "tooltip",
       "tree",
       "tree-item"
     ],
@@ -908,6 +908,23 @@
       "component": "toggle-button",
       "lifecycle": "implemented",
       "conformance": "reviewed",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "candidateStatus": "current"
+    },
+    {
+      "component": "tooltip",
+      "lifecycle": "contract-draft",
+      "conformance": "review-required",
       "releaseDifferences": [],
       "marketplaceDrift": {
         "added": [],

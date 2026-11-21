@@ -61,6 +61,13 @@ non-Subtle and square callers.
   disabled and removed targets neither activate nor keep phantom focus, collection focus matches committed selection,
   popups restore focus by dismissal reason, and theme or high-contrast changes keep stable identities.
 
+## Tooltip native routing
+
+Review the [draft Tooltip contract](../src/components/tooltip/SPEC.md) for
+[#4249](https://github.com/microsoft/fluentui-react-native/issues/4249). Qualify trigger help, keyboard dismissal
+and persistence on macOS Paper/Fabric and Windows Fabric. Compare Office Win32's view prop with `RCTTooltip`
+before deciding whether to extract its legacy binding. The contract is not an implementation or export.
+
 ## Components without a local contract
 
 These components had staged specs that were removed under
@@ -83,7 +90,6 @@ row against the current package before drafting its contract.
 | Scrollbar       | [#4238](https://github.com/microsoft/fluentui-react-native/issues/4238) | Blocked                        | Scroll metrics, tokenized thumb control, and drag interaction need a native host | Define a scroll-source API and platform scrollbar bridge                   |
 | Textarea        | [#4245](https://github.com/microsoft/fluentui-react-native/issues/4245) | Blocked as authored            | HTML textarea semantics and CSS resize behavior                                  | Make the product/API choice described below                                |
 | Toolbar         | [#4248](https://github.com/microsoft/fluentui-react-native/issues/4248) | Partial; blocked               | Roving focus needs focusable Button refs; Divider was absent                     | Reuse implemented Divider and define imperative focus for toolbar children |
-| Tooltip         | [#4249](https://github.com/microsoft/fluentui-react-native/issues/4249) | Blocked as authored            | Anchor/overlay host and trigger-coupled accessibility                            | Establish overlay infrastructure or retarget the contract                  |
 
 **Done when:** each component has a reviewed local contract and implementation, or its issue records a decision not to
 provide it.
