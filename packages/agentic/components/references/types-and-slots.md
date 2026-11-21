@@ -47,6 +47,11 @@ Do not blindly inherit every root prop when the component owns part of the nativ
 Button uses `OwnedRootProps<PropsWithRefOf<typeof Pressable>>`. This prevents native children from bypassing slot order,
 preserves the native style type, and retains `ref`.
 
+For a `View` or `Pressable` root that supports desktop tooltips, include the package-local `DesktopTooltipProps`
+in its public root props and forward `tooltip?: string` unchanged to that view, once. Do not augment stock RN
+types, create a second view, or add focus/hit testing just to show a tip. A polymorphic Icon and the pointer-transparent
+FocusVisual are not tooltip targets. See the [Tooltip contract](../src/components/tooltip/SPEC.md#public-contract).
+
 Compose the final public props with:
 
 ```ts

@@ -1,9 +1,9 @@
 {
   "schemaVersion": 2,
   "component": "tooltip",
-  "lifecycle": "contract-draft",
-  "conformance": "review-required",
-  "reviewedAt": null,
+  "lifecycle": "contract-reviewed",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-11-21",
   "sources": [
     {
       "id": "flex-component",
@@ -202,32 +202,40 @@
     {
       "id": "TIP-001",
       "sources": ["flex-component", "furn-legacy", "rn-macos", "rn-windows"],
-      "plannedEvidence": ["tooltip.types.test.tsx", "tooltip.test.tsx"]
+      "evidence": ["tooltip.types.test.tsx", "tooltip.test.tsx"]
     },
     {
       "id": "TIP-002",
       "sources": ["flex-component", "furn-legacy", "rn-macos", "rn-windows"],
-      "plannedEvidence": ["tooltip.test.tsx", "tooltip.stories.tsx"]
+      "evidence": ["useTooltip.ts", "renderTooltip.ts", "tooltip.test.tsx"]
     },
     {
       "id": "TIP-003",
       "sources": ["flex-component", "furn-legacy", "rn-macos", "rn-windows"],
-      "plannedEvidence": ["tooltip.stories.tsx", "tooltip.wdio.ts"]
+      "evidence": ["tooltip.stories.tsx"],
+      "plannedEvidence": ["tooltip.wdio.ts"]
     },
     {
       "id": "TIP-004",
       "sources": ["flex-component", "furn-legacy", "rn-macos", "rn-windows"],
-      "plannedEvidence": ["tooltip.test.tsx", "tooltip.wdio.ts"]
+      "evidence": ["tooltip.test.tsx"],
+      "plannedEvidence": ["tooltip.wdio.ts"]
     },
     {
       "id": "TIP-005",
       "sources": ["furn-legacy", "rn-macos", "rn-windows"],
-      "plannedEvidence": ["tooltip.stories.tsx", "tooltip.wdio.ts"]
+      "evidence": ["useTooltip.ts", "spec/platforms.md"],
+      "plannedEvidence": ["tooltip.wdio.ts"]
     },
     {
       "id": "TIP-006",
       "sources": ["furn-legacy", "rn-core", "rn-macos", "rn-windows"],
       "plannedEvidence": ["tooltip.wdio.ts"]
+    },
+    {
+      "id": "TIP-007",
+      "sources": ["rn-core", "rn-macos", "rn-windows"],
+      "evidence": ["tooltip.types.test.tsx", "tooltip.test.tsx"]
     }
   ]
 }

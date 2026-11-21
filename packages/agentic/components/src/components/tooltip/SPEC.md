@@ -1,7 +1,7 @@
 ---
 name: tooltip
 platform: react-native (Windows, macOS)
-status: contract-draft
+status: contract-reviewed
 source: ./spec/source.json
 tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
@@ -15,12 +15,21 @@ usage: ./spec/usage.md
 
 A Tooltip attaches a short, nonessential text description to an existing control. The control remains the only
 activation and focus target. Prefer the tooltip the renderer already knows how to show; do not build a second popup
-just to display a string. Use Popover for interactive content. This is a proposed desktop contract for
+just to display a string. Use Popover for interactive content. This is the reviewed desktop contract for
 [#4249](https://github.com/microsoft/fluentui-react-native/issues/4249), not an export or a legacy migration.
 
 ## Public contract
 
-| Prop       | Proposed type                      | Meaning                                                                                                               |
+Prefer `<Button tooltip="Save a local copy" />` for a native text tip. View-backed FURN components that support
+desktop tooltips declare `tooltip?: string` on their own public props and forward it to their native view. Stock
+React Native's `ViewProps` does not declare it; do not augment that interface or require consumers to cast. This
+prop requests native presentation, not an accessible name or a mobile tooltip. It does not change hit testing or
+make a structural view focusable. For a composite with a separate focusable child, put keyboard help on that child.
+
+`Tooltip` is a compatibility wrapper for a single trigger; it is not required around components that accept `tooltip`.
+Only use one way to set the text on a given view.
+
+| Prop       | Wrapper type                       | Meaning                                                                                                               |
 | ---------- | ---------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
 | `content`  | `string` (required)                | Localized plain text. Empty or whitespace-only content removes the tip and its generated description.                 |
 | `children` | one view-backed React element      | The trigger and only root slot. It must forward the tooltip, accessibility props and ref to the **same** native view. |
@@ -42,9 +51,12 @@ just to display a string. Use Popover for interactive content. This is a propose
   twice or introduce a focusable tooltip. See [accessibility](spec/accessibility.md).
 - **TIP-005 — Native boundary.** The wrapper and public API belong to `components`. Start with renderer props in
   platform files, not a new native-core registration. Use the existing Office host only if an endpoint comparison
-  demonstrates a need. Neither native-core's root nor the experimental package changes under this draft.
+  demonstrates a need. Neither native-core's root nor the experimental package changes for the view-prop route.
 - **TIP-006 — Admission.** Qualify macOS Paper, macOS Fabric, Windows Fabric and Office Win32 independently; a
   renderer source path, OS API or passing mock is not a support claim. iOS and Android are research only.
+- **TIP-007 — Direct prop.** Forward `tooltip?: string` through supported public `View` and `Pressable` roots,
+  including updates and removal. No wrapper node, tooltip registration, timer or extra accessible element is needed.
+  The prop alone does not synthesize a description; the wrapper's naming and description rules are in TIP-004.
 
 ## Platform behavior
 
@@ -66,21 +78,23 @@ shim. Do not add a second registration, introduce new baked-host commands, or ma
 
 ## Divergences
 
-- `system-presentation` (accepted for draft): adopt Flex's single noninteractive text label; adapt its styling,
+- `system-presentation` (accepted): adopt Flex's single noninteractive text label; adapt its styling,
   suggested directions, and timing to host policy. No Fluent surface is rendered or themed by the wrapper.
 - `keyboard-and-hover` (deferred to qualification): focus discovery, Escape and persistence while moving onto the
   tip are design goals, not promises made by a native string prop. If a host misses a requirement, withhold admission
   until a native alternative, scoped fix, or explicit platform divergence is reviewed. Do not layer a JS popup over it.
 - `trigger-description` (adapted): a native trigger description is not a browser ID relationship. Consumers provide
   a name for icon-only controls; the tooltip itself is never the sole source of that name.
-- `view-anchor-only` (accepted for draft): no legacy string/ref targets or inline text anchoring
+- `view-anchor-only` (accepted): no legacy string/ref targets or inline text anchoring
   ([#4378](https://github.com/microsoft/fluentui-react-native/issues/4378)). Plain-text mobile OS APIs are not
   evidence of a supported RN endpoint.
 
 ## Conformance
 
-Draft; review required before implementation. [Provenance](spec/source.json) pins the design input, FURN compatibility
+Approved for implementation on 2026-11-21; native qualification is still required. [Provenance](spec/source.json) pins the design input, FURN compatibility
 evidence and renderer sources. Flex governs purpose; native sources govern transport, not verified user experience.
-See [platform evidence](spec/platforms.md) for the source paths and [usage](spec/usage.md) for an example. Planned
-evidence is a type test for the API, a component test for prop/ref preservation and cleanup, and native stories for
-the discovery, dismissal and accessibility cases. No renderer has been qualified by this contract.
+The [type fixtures](tooltip.types.test.tsx) cover the direct prop and wrapper API. The
+[component tests](tooltip.test.tsx) exercise forwarding, ref cleanup and description updates. The
+[Storybook fixture](tooltip.stories.tsx) exposes both routes for native qualification. See
+[platform evidence](spec/platforms.md) for source paths and the [interaction matrix](spec/interaction.md) for
+outstanding checks. The direct prop is public; the wrapper stays package-internal until native qualification.

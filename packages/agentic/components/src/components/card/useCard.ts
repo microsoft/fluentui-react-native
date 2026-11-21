@@ -39,6 +39,7 @@ export function useCard_unstable(props: CardProps): CardState {
     padding = 'default',
     pressRetentionOffset,
     ref: rootRef,
+    tooltip,
     selected,
     size = 'small',
     style: userStyle,
@@ -113,7 +114,7 @@ export function useCard_unstable(props: CardProps): CardState {
         testID,
       } as PropsWithRefOf<typeof View>);
 
-  const root = useSlot(View, rootProps);
+  const root = useSlot(View, { ...rootProps, ...(tooltip !== undefined && { tooltip }) });
   const overlay = useOptionalSlot(Pressable, isInteractive ? { ...overlayProps, ...nativeFocusProps } : null);
   const header = useOptionalSlot(View, headerProp);
   const content = useSlot(View, contentProp);

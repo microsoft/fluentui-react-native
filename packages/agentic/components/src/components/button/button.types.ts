@@ -1,3 +1,4 @@
+import type { DesktopTooltipProps } from '../../common/desktopTooltipProps';
 import type { FocusTargetBinding } from '@fluentui-react-native/framework-base';
 import type { Pressable, StyleProp, ViewStyle } from 'react-native';
 import type {
@@ -59,7 +60,7 @@ export type ButtonStateProps = {
  * Props that are exposed from the underlying Pressable component at the top level. A button controls its
  * own children and resolves styles from tokens, so those props are exposed separately.
  */
-export type ButtonExposedPressableProps = OwnedRootProps<PropsWithRefOf<typeof Pressable>>;
+export type ButtonExposedPressableProps = DesktopTooltipProps & OwnedRootProps<PropsWithRefOf<typeof Pressable>>;
 
 /**
  * Props for the Button component, including state props, slot props, and exposed Pressable props.

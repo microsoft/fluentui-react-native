@@ -1,3 +1,4 @@
+import type { DesktopTooltipProps } from '../../common/desktopTooltipProps';
 import type { AccessibilityState, Pressable, StyleProp, TextInput, TextStyle, View, ViewStyle } from 'react-native';
 
 import type { ThemeState } from '@fluentui-react-native/design';
@@ -54,7 +55,7 @@ export type InputStateProps = {
   onPressOut?: (...args: any[]) => void;
 };
 
-export type InputExposedRootProps = OwnedRootProps<PropsWithRefOf<typeof View>>;
+export type InputExposedRootProps = DesktopTooltipProps & OwnedRootProps<PropsWithRefOf<typeof View>>;
 
 export type InputProps = InputStateProps & ComponentProps<InputSlots, InputExposedRootProps>;
 

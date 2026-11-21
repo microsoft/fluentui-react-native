@@ -923,8 +923,8 @@
     },
     {
       "component": "tooltip",
-      "lifecycle": "contract-draft",
-      "conformance": "review-required",
+      "lifecycle": "contract-reviewed",
+      "conformance": "reviewed",
       "releaseDifferences": [],
       "marketplaceDrift": {
         "added": [],

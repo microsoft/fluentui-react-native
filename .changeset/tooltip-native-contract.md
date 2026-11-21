@@ -1,5 +1,5 @@
 ---
-'@fluentui-react-native/components': patch
+'@fluentui-react-native/components': minor
 ---
 
-Document the proposed desktop Tooltip contract and native renderer routes. No Tooltip runtime API is exported.
+Expose a native `tooltip?: string` prop on supported view-backed components. The compatibility wrapper is implemented for desktop qualification but is not yet exported.

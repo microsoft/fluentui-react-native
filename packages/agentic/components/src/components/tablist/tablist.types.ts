@@ -1,3 +1,4 @@
+import type { DesktopTooltipProps } from '../../common/desktopTooltipProps';
 import type * as React from 'react';
 import type { View, ViewProps } from 'react-native';
 
@@ -67,10 +68,8 @@ export type TabListStateProps = {
   selectionFollowsFocus?: boolean;
 };
 
-export type TabListExposedViewProps = OwnedRootProps<
-  PropsWithRefOf<typeof View>,
-  'accessibilityRole' | 'accessibilityState' | 'accessible' | 'focusable'
->;
+export type TabListExposedViewProps = DesktopTooltipProps &
+  OwnedRootProps<PropsWithRefOf<typeof View>, 'accessibilityRole' | 'accessibilityState' | 'accessible' | 'focusable'>;
 
 export type TabListSlots = {
   root: Slot<typeof View>;

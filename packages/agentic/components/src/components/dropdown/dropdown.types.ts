@@ -1,3 +1,4 @@
+import type { DesktopTooltipProps } from '../../common/desktopTooltipProps';
 import type * as React from 'react';
 import type { Pressable, PressableProps, StyleProp, Text as NativeText, TextStyle, View, ViewStyle } from 'react-native';
 
@@ -37,7 +38,7 @@ export interface DropdownSelectionChangeData {
 }
 
 /** Props for the trigger Pressable. Its values win over the props Dropdown lifts from the root. */
-export type DropdownTriggerProps = Omit<PropsWithRefOf<typeof Pressable>, 'children'>;
+export type DropdownTriggerProps = DesktopTooltipProps & Omit<PropsWithRefOf<typeof Pressable>, 'children'>;
 
 /**
  * Props for the list surface. It is the native popup's content attachment, so it accepts View props and a ref but
@@ -77,7 +78,7 @@ export type DropdownStateProps = {
 /** Pressable handlers Dropdown lifts from the root to the trigger, as Input lifts them to its editor. */
 export type DropdownLiftedProps = Pick<PressableProps, 'onHoverIn' | 'onHoverOut' | 'onPressIn' | 'onPressOut'>;
 
-export type DropdownExposedRootProps = OwnedRootProps<PropsWithRefOf<typeof View>>;
+export type DropdownExposedRootProps = DesktopTooltipProps & OwnedRootProps<PropsWithRefOf<typeof View>>;
 
 export type DropdownProps = DropdownStateProps &
   DropdownLiftedProps &

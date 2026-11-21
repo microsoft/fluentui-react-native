@@ -1,3 +1,4 @@
+import type { DesktopTooltipProps } from '../../common/desktopTooltipProps';
 import type * as React from 'react';
 import type { FocusTargetBinding } from '@fluentui-react-native/framework-base';
 import type { Pressable, StyleProp, TextStyle, View, ViewStyle } from 'react-native';
@@ -55,7 +56,7 @@ export type MenuItemSlots = {
   multiselectCheckbox: OptionalSlot<typeof CheckboxIndicator>;
 };
 
-export type MenuItemExposedPressableProps = OwnedRootProps<PropsWithRefOf<typeof Pressable>>;
+export type MenuItemExposedPressableProps = DesktopTooltipProps & OwnedRootProps<PropsWithRefOf<typeof Pressable>>;
 
 export type MenuItemProps = MenuItemStateProps & {
   content?: string | null;

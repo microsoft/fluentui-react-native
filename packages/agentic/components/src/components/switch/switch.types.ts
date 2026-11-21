@@ -1,3 +1,4 @@
+import type { DesktopTooltipProps } from '../../common/desktopTooltipProps';
 import type { FocusTargetBinding } from '@fluentui-react-native/framework-base';
 import type { Pressable, StyleProp, View, ViewStyle } from 'react-native';
 
@@ -42,7 +43,7 @@ export type SwitchStateProps = {
   onChange?: (checked: boolean) => void;
 };
 
-export type SwitchExposedPressableProps = OwnedRootProps<PropsWithRefOf<typeof Pressable>>;
+export type SwitchExposedPressableProps = DesktopTooltipProps & OwnedRootProps<PropsWithRefOf<typeof Pressable>>;
 
 export type SwitchProps = SwitchStateProps & ComponentProps<SwitchSlots, SwitchExposedPressableProps>;
 

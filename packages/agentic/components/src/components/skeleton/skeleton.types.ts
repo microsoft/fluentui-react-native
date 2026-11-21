@@ -1,3 +1,4 @@
+import type { DesktopTooltipProps } from '../../common/desktopTooltipProps';
 import type { LayoutChangeEvent, LayoutRectangle, ViewProps, ViewStyle } from 'react-native';
 import type { Animated } from 'react-native';
 
@@ -11,7 +12,7 @@ export type SkeletonSlots = {
   root: Slot<typeof View>;
 };
 
-export interface SkeletonRootProps extends Omit<ViewProps, 'children' | 'focusable'> {
+export interface SkeletonRootProps extends DesktopTooltipProps, Omit<ViewProps, 'children' | 'focusable'> {
   children?: never;
   focusable?: never;
   ref?: PropsWithRefOf<typeof View>['ref'];

@@ -1,3 +1,4 @@
+import type { DesktopTooltipProps } from '../../common/desktopTooltipProps';
 import type { FocusTargetBinding } from '@fluentui-react-native/framework-base';
 import type { Pressable, StyleProp, TextStyle, ViewStyle } from 'react-native';
 
@@ -43,9 +44,10 @@ export type RadioStateProps = {
   selected?: boolean;
 };
 
-export type RadioExposedPressableProps = OwnedRootProps<PropsWithRefOf<typeof Pressable>> & {
-  children?: never;
-};
+export type RadioExposedPressableProps = DesktopTooltipProps &
+  OwnedRootProps<PropsWithRefOf<typeof Pressable>> & {
+    children?: never;
+  };
 
 export type RadioProps = RadioStateProps & ComponentProps<RadioSlots, RadioExposedPressableProps>;
 

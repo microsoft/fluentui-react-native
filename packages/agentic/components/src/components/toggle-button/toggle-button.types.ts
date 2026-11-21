@@ -1,3 +1,4 @@
+import type { DesktopTooltipProps } from '../../common/desktopTooltipProps';
 import type { ComponentState, OptionalSlot, PropsWithRefOf, Slot, SlotProp } from '@fluentui-react-native/framework-base';
 import type { Pressable, PressableProps } from 'react-native';
 import type { Icon } from '../../primitives/icon/icon';
@@ -14,10 +15,10 @@ export type ToggleButtonSlots = {
   selectedTrailingIcon: OptionalSlot<typeof Icon>;
 };
 
-interface ToggleButtonBaseProps extends Omit<
-  PressableProps,
-  'children' | 'accessibilityRole' | 'role' | 'aria-checked' | 'aria-disabled' | 'accessibilityState'
-> {
+interface ToggleButtonBaseProps
+  extends
+    DesktopTooltipProps,
+    Omit<PressableProps, 'children' | 'accessibilityRole' | 'role' | 'aria-checked' | 'aria-disabled' | 'accessibilityState'> {
   ref?: PropsWithRefOf<typeof Pressable>['ref'];
   accessibilityState?: Omit<NonNullable<PressableProps['accessibilityState']>, 'checked' | 'disabled'>;
   disabled?: boolean;

@@ -63,10 +63,10 @@ non-Subtle and square callers.
 
 ## Tooltip native routing
 
-Review the [draft Tooltip contract](../src/components/tooltip/SPEC.md) for
-[#4249](https://github.com/microsoft/fluentui-react-native/issues/4249). Qualify trigger help, keyboard dismissal
+Before exporting the [Tooltip wrapper](../src/components/tooltip/SPEC.md) for
+[#4249](https://github.com/microsoft/fluentui-react-native/issues/4249), qualify trigger help, keyboard dismissal
 and persistence on macOS Paper/Fabric and Windows Fabric. Compare Office Win32's view prop with `RCTTooltip`
-before deciding whether to extract its legacy binding. The contract is not an implementation or export.
+before deciding whether to extract its legacy binding. The wrapper is not yet exported.
 
 ## Components without a local contract
 

@@ -1,3 +1,4 @@
+import type { DesktopTooltipProps } from '../../common/desktopTooltipProps';
 import type { Image, StyleProp, Text, View, ViewStyle } from 'react-native';
 import type {
   ComponentProps,
@@ -34,7 +35,7 @@ export type AvatarStateProps = {
   size?: AvatarSize;
 };
 
-export type AvatarRootProps = OwnedRootProps<PropsWithRefOf<typeof View>, 'focusable'>;
+export type AvatarRootProps = DesktopTooltipProps & OwnedRootProps<PropsWithRefOf<typeof View>, 'focusable'>;
 
 type AvatarContentProps = Pick<ComponentProps<AvatarSlots, AvatarRootProps>, 'image' | 'initials' | 'icon'>;
 type AvatarContent = {

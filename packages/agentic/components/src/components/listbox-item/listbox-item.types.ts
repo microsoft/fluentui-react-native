@@ -1,3 +1,4 @@
+import type { DesktopTooltipProps } from '../../common/desktopTooltipProps';
 import type { FocusTargetBinding } from '@fluentui-react-native/framework-base';
 import type { Pressable, Text as NativeText, View, ViewStyle } from 'react-native';
 import type { StyleProp } from 'react-native';
@@ -59,7 +60,7 @@ export type ListboxItemStateProps = {
   value?: string;
 };
 
-export type ListboxItemRootProps = OwnedRootProps<PropsWithRefOf<typeof Pressable>>;
+export type ListboxItemRootProps = DesktopTooltipProps & OwnedRootProps<PropsWithRefOf<typeof Pressable>>;
 
 export type ListboxItemProps = ListboxItemStateProps & ComponentProps<ListboxItemSlots, ListboxItemRootProps>;
 

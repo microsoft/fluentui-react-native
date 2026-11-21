@@ -1,3 +1,4 @@
+import type { DesktopTooltipProps } from '../../common/desktopTooltipProps';
 import type { FocusTargetBinding } from '@fluentui-react-native/framework-base';
 import type { Pressable, StyleProp, Text as NativeText, View, ViewStyle } from 'react-native';
 
@@ -47,7 +48,7 @@ export type ListItemStateProps = {
   selected?: boolean;
 };
 
-export type ListItemExposedPressableProps = OwnedRootProps<PropsWithRefOf<typeof Pressable>>;
+export type ListItemExposedPressableProps = DesktopTooltipProps & OwnedRootProps<PropsWithRefOf<typeof Pressable>>;
 
 export type ListItemProps = ListItemStateProps & ComponentProps<ListItemSlots, ListItemExposedPressableProps>;
 

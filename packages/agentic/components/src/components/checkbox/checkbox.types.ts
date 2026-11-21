@@ -1,3 +1,4 @@
+import type { DesktopTooltipProps } from '../../common/desktopTooltipProps';
 import type { FocusTargetBinding } from '@fluentui-react-native/framework-base';
 import type { ColorValue, Pressable, PressableProps, StyleProp, ViewStyle } from 'react-native';
 import type {
@@ -52,10 +53,10 @@ export type CheckboxStateProps = {
  */
 export type CheckboxStatusDriverKeys = 'defaultStatus' | 'onStatusChange';
 
-export interface CheckboxRootProps extends Omit<
-  PressableProps,
-  'children' | 'accessibilityRole' | 'role' | 'accessibilityState' | 'aria-checked' | 'aria-disabled' | 'disabled'
-> {
+export interface CheckboxRootProps
+  extends
+    DesktopTooltipProps,
+    Omit<PressableProps, 'children' | 'accessibilityRole' | 'role' | 'accessibilityState' | 'aria-checked' | 'aria-disabled' | 'disabled'> {
   accessibilityState?: Omit<NonNullable<PressableProps['accessibilityState']>, 'checked' | 'disabled'> & {
     checked?: never;
     disabled?: never;

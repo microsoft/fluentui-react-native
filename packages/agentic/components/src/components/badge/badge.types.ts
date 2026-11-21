@@ -1,3 +1,4 @@
+import type { DesktopTooltipProps } from '../../common/desktopTooltipProps';
 import type { StyleProp, View, ViewStyle } from 'react-native';
 import type {
   ComponentProps,
@@ -81,7 +82,7 @@ type BadgeNotificationProps = BadgeCommonProps & {
 
 export type BadgeStateProps = BadgeIconAndTextProps | BadgeIconOnlyProps | BadgeNotificationProps;
 
-export type BadgeExposedViewProps = OwnedRootProps<PropsWithRefOf<typeof View>, 'accessibilityRole' | 'focusable'>;
+export type BadgeExposedViewProps = DesktopTooltipProps & OwnedRootProps<PropsWithRefOf<typeof View>, 'accessibilityRole' | 'focusable'>;
 
 export type BadgeProps = BadgeStateProps & ComponentProps<BadgeSlots, BadgeExposedViewProps>;
 

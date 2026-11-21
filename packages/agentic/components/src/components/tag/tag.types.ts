@@ -1,3 +1,4 @@
+import type { DesktopTooltipProps } from '../../common/desktopTooltipProps';
 import type { FocusTargetBinding } from '@fluentui-react-native/framework-base';
 import type { Pressable, StyleProp, ViewStyle } from 'react-native';
 import type {
@@ -36,7 +37,7 @@ export type TagStateProps = {
   dismiss?: boolean;
 };
 
-export type TagRootProps = OwnedRootProps<PropsWithRefOf<typeof Pressable>>;
+export type TagRootProps = DesktopTooltipProps & OwnedRootProps<PropsWithRefOf<typeof Pressable>>;
 
 export type TagProps = TagStateProps &
   ComponentProps<TagSlots, TagRootProps> & {

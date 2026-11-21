@@ -1,3 +1,4 @@
+import type { DesktopTooltipProps } from '../../common/desktopTooltipProps';
 import type * as React from 'react';
 import type { StyleProp, View, ViewStyle } from 'react-native';
 
@@ -58,7 +59,7 @@ export type PopoverStateProps = {
   align?: PopoverAlign;
 };
 
-export type PopoverExposedViewProps = OwnedRootProps<PropsWithRefOf<typeof View>>;
+export type PopoverExposedViewProps = DesktopTooltipProps & OwnedRootProps<PropsWithRefOf<typeof View>>;
 
 type PopoverSlotProps = ComponentProps<PopoverSlots, PopoverExposedViewProps>;
 

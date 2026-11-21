@@ -1,3 +1,4 @@
+import type { DesktopTooltipProps } from '../../common/desktopTooltipProps';
 import type { Animated, AccessibilityState, AccessibilityValue, StyleProp, View, ViewStyle } from 'react-native';
 
 import type {
@@ -36,7 +37,7 @@ export type ProgressBarStateProps = {
   showValidationIcon?: boolean;
 };
 
-export type ProgressBarRootProps = OwnedRootProps<PropsWithRefOf<typeof View>>;
+export type ProgressBarRootProps = DesktopTooltipProps & OwnedRootProps<PropsWithRefOf<typeof View>>;
 
 export type ProgressBarProps = ProgressBarStateProps & ComponentProps<ProgressBarSlots, ProgressBarRootProps>;
 
