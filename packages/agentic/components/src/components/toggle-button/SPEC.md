@@ -1,7 +1,7 @@
 ---
 name: toggle-button
 platform: react-native (Windows, macOS)
-status: contract-reviewed
+status: implemented
 source: ./spec/source.json
 tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md

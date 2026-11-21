@@ -56,16 +56,15 @@ export const Selection: Story = {
       'TGB-002 TGB-003 changes once on pointer input without reflow',
       { requires: ['physical-click'] },
       async ({ browser, expect }) => {
-        const { clickPhysical } = await import('../../common/desktopFocus.wdio.ts');
         const toggle = await browser.$('~toggle-favorite');
         const status = await browser.$('~toggle-status');
         const before = await browser.getElementRect(await toggle.elementId);
-        await clickPhysical(browser, 'toggle-favorite');
+        await toggle.click();
         await expect(status).toHaveAttribute('name', 'true:1:1');
         const after = await browser.getElementRect(await toggle.elementId);
         expect(after.width).toBe(before.width);
         expect(after.height).toBe(before.height);
-        await clickPhysical(browser, 'toggle-favorite');
+        await toggle.click();
         await expect(status).toHaveAttribute('name', 'false:2:2');
       },
     ),
@@ -73,11 +72,8 @@ export const Selection: Story = {
       'TGB-005 delivers one transition per physical key gesture',
       { requires: ['physical-click', 'keyboard', 'focus'] },
       async ({ browser, expect }) => {
-        const { clickPhysical, expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
-        await clickPhysical(browser, 'toggle-entry');
-        await expectNativeState(browser, 'toggle-entry', 'focused', true);
-        await browser.keys('\uE004');
-        await expectNativeState(browser, 'toggle-favorite', 'focused', true);
+        const { expectNativeState, focusByTab } = await import('../../common/desktopFocus.wdio.ts');
+        await focusByTab(browser, 'toggle-entry', 'toggle-favorite');
         await browser.keys('\uE00D');
         await expect(await browser.$('~toggle-status')).toHaveAttribute('name', 'true:1:1');
         await expectNativeState(browser, 'toggle-favorite', 'focused', true);

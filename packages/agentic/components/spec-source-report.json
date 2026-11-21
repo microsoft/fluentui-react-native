@@ -186,7 +186,7 @@
       "text",
       "toggle-button"
     ],
-    "adaptedDrafts": ["avatar", "dropdown", "menu", "menu-button", "popover", "toggle-button"],
+    "adaptedDrafts": ["avatar", "dropdown", "menu", "menu-button", "popover"],
     "implemented": [
       "accordion",
       "badge",
@@ -206,7 +206,8 @@
       "tab",
       "tablist",
       "tag",
-      "text"
+      "text",
+      "toggle-button"
     ],
     "implementationGap": [
       "avatar",
@@ -252,7 +253,6 @@
       "teaching-popover",
       "textarea",
       "toast",
-      "toggle-button",
       "toolbar",
       "tooltip",
       "tree",
@@ -906,7 +906,7 @@
     },
     {
       "component": "toggle-button",
-      "lifecycle": "contract-reviewed",
+      "lifecycle": "implemented",
       "conformance": "reviewed",
       "releaseDifferences": [],
       "marketplaceDrift": {
