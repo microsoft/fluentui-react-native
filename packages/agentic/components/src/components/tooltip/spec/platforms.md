@@ -1,6 +1,8 @@
 # Native evidence
 
-These are source observations, not native test results. The [contract](../SPEC.md) records the proposed routing.
+## Renderer sources
+
+These are source observations, not native test results. The [contract](../SPEC.md) records the reviewed routing.
 The [source inventory](source.json) pins the files and digests used to make the decision.
 
 - **macOS:** The RNmacOS [view prop](https://github.com/microsoft/react-native-macos/blob/3693ac91a00df6374e610a0a06b0f90aaa1fe4b3/packages/react-native/Libraries/Components/View/ViewPropTypes.js),
@@ -20,3 +22,17 @@ The [source inventory](source.json) pins the files and digests used to make the 
 - **Mobile:** The stock RN [view props](https://github.com/facebook/react-native/blob/cddf8a7536de12db889e35e946281cfaf327197a/packages/react-native/Libraries/Components/View/ViewPropTypes.js)
   do not advertise tooltip text. An accessibility role named `tooltip` does not attach a platform tooltip. The OS
   mechanisms in the [platform table](../SPEC.md#platform-behavior) would need separate RN transport and input policy.
+
+## Native qualification
+
+At [c2ddac4df](https://github.com/microsoft/fluentui-react-native/commit/c2ddac4dffca7d6d06d0ce8f5098fc6524e87972),
+the `components-tooltip--native-text` Storybook fixture ran on macOS 27.2.1, RNmacOS 0.81.9, with the physical input lane.
+
+| Endpoint     | Passing observations                                                                                                                                                                                              | Run                                    |
+| ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
+| macOS Fabric | Both native buttons retained their names. The wrapped trigger retained focus on Escape; Tab moved onward without activation, and one click fired once. Its AX help updated and cleared without changing its name. | `4005cc91-7505-46e6-9b81-dadf026fe59d` |
+| macOS Paper  | The same assertions passed independently on the Paper host.                                                                                                                                                       | `1fc55181-3b00-404c-bc87-8eb6373de8cb` |
+
+These checks cover parts of TIP-001, TIP-003, and TIP-004. They do **not** establish that a visible tooltip opened,
+that Escape dismissed a visible tip, or what VoiceOver announced. Hover dwell and persistence, magnification,
+Windows Fabric and Office Win32 presentation, and the Win32 legacy-host comparison remain separate admission gates.
