@@ -1,338 +1,113 @@
 import { StyleSheet } from 'react-native';
-import type { TextStyle, ViewStyle } from 'react-native';
+import type { ViewStyle } from 'react-native';
 
-import type { FlexTokens } from '@fluentui-react-native/design';
-import { getThemedColorStyleFactory, getThemedStateStyleFactory, interactiveStatePriority } from '@fluentui-react-native/design/styling';
-import type {
-  ColorStyleDefinition,
-  StateNames,
-  StyleDefinition,
-  TextColorStyle,
-  ViewColorStyle,
+import {
+  colorToken,
+  defineComponentTokens,
+  getComponentTokens,
+  fontWeightToken,
+  numericToken,
+  resolveTokenStates,
+  stringToken,
 } from '@fluentui-react-native/design/styling';
-import { size160, size400, sizeNone } from '@fluentui-react-native/design/tokens/global';
-
+import type { ComponentTokenPatch, ResolvedSlotTokens } from '@fluentui-react-native/design/styling';
+import { iconTokenProps } from '../../common/iconTokenProps';
 import type { MenuItemState } from './menu-item.types';
+import schema from './spec/tokens.json' with { type: 'json' };
 
 export const menuItemStyles = StyleSheet.create({
-  root: {
-    borderStyle: 'solid',
-    flexDirection: 'row',
-    gap: size160,
-    justifyContent: 'flex-start',
-    minHeight: size400,
-    paddingHorizontal: 12,
-    paddingVertical: 10,
-  },
-  leading: {
-    alignItems: 'center',
-    flexShrink: 0,
-    justifyContent: 'center',
-  },
-  contentColumn: {
-    flexGrow: 1,
-    flexShrink: 1,
-    minWidth: 0,
-  },
-  contentRow: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    flexGrow: 1,
-    flexShrink: 1,
-    justifyContent: 'space-between',
-    minWidth: 0,
-  },
-  trailing: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    flexShrink: 0,
-    gap: size160,
-    justifyContent: 'flex-end',
-  },
-  multiselectCheckbox: {
-    alignItems: 'center',
-    borderStyle: 'solid',
-    justifyContent: 'center',
-  },
-  skeletonIcon: {
-    borderRadius: 4,
-    height: 20,
-    width: 20,
-  },
-  skeletonLabel: {
-    borderRadius: 4,
-    height: 24,
-    width: 120,
-  },
-  skeletonSecondary: {
-    borderRadius: 4,
-    height: 20,
-    width: 96,
-  },
+  root: { flexDirection: 'row', justifyContent: 'flex-start' },
+  skeletonIcon: { borderRadius: 4, height: 20, width: 20 },
+  skeletonLabel: { borderRadius: 4, height: 24, width: 120 },
+  skeletonSecondary: { borderRadius: 4, height: 20, width: 96 },
 });
 
-const backgroundStateLevels = [['list-item', 'section-header'], ['selected'], interactiveStatePriority] as const;
-type BackgroundStateLevels = typeof backgroundStateLevels;
-type BackgroundState = StateNames<BackgroundStateLevels>;
-
-const backgroundColorDefinition: ColorStyleDefinition<ViewColorStyle, BackgroundStateLevels> = {
-  'list-item': {
-    backgroundColor: 'backgroundNeutralTransparent',
-    disabled: {
-      backgroundColor: 'backgroundNeutralTransparent',
+const typography = {
+  fontFamily: stringToken,
+  fontSize: numericToken,
+  fontWeight: fontWeightToken,
+  lineHeight: numericToken,
+  color: colorToken,
+};
+const icon = { style: {}, props: iconTokenProps };
+const slots = {
+  root: {
+    style: {
+      borderRadius: numericToken,
+      paddingHorizontal: numericToken,
+      paddingVertical: numericToken,
+      gap: numericToken,
+      backgroundColor: colorToken,
     },
-    selected: {
-      backgroundColor: 'backgroundNeutralSoft',
-      disabled: {
-        backgroundColor: 'backgroundNeutralSubtleDisabled',
-      },
-    },
+    props: {},
   },
-  'section-header': {
-    backgroundColor: 'backgroundNeutralTransparent',
-    disabled: {
-      backgroundColor: 'backgroundNeutralTransparent',
+  content: { style: typography, props: { gap: numericToken } },
+  secondaryContent: { style: typography, props: {} },
+  leadingIcon: icon,
+  trailingIcon: icon,
+  checkmark: icon,
+  avatar: { style: { height: numericToken, width: numericToken }, props: {} },
+  checkbox: {
+    style: {
+      backgroundColor: colorToken,
+      borderColor: colorToken,
+      borderRadius: numericToken,
+      borderWidth: numericToken,
+      height: numericToken,
+      width: numericToken,
     },
+    props: { iconColor: colorToken, iconSize: numericToken },
   },
 };
-
-const getThemedBackground = getThemedColorStyleFactory<ViewColorStyle, BackgroundStateLevels>(
-  'MenuItem.background',
-  backgroundColorDefinition,
-  backgroundStateLevels,
-);
-
-function getBackgroundStateSource(state: MenuItemState): BackgroundState[] {
-  const source: BackgroundState[] = [state.menuStyle];
-  if (state.isSelectedVisual) {
-    source.push('selected');
+type MenuItemAxes = Pick<MenuItemState, 'menuStyle' | 'isSelectedVisual' | 'selected' | 'visualState' | 'secondaryContentPosition'>;
+type MenuItemDomains = typeof slots;
+declare module '@fluentui-react-native/design' {
+  interface ComponentTokenRegistry {
+    'furn.menu-item': ComponentTokenPatch<MenuItemAxes, MenuItemDomains>;
   }
-  if (state.disabled) {
-    source.push('disabled');
-  } else if (state.pressed) {
-    source.push('pressed');
-  } else if (state.hovered) {
-    source.push('hovered');
-  }
-  return source;
 }
+const menuItemTokenDefinition = defineComponentTokens<MenuItemAxes, MenuItemDomains>({ id: 'furn.menu-item', slots, schema });
 
-export function getMenuItemRootStyle(state: MenuItemState): ViewStyle {
-  return getThemedBackground(state, getBackgroundStateSource(state));
-}
+type Chrome<K extends keyof MenuItemDomains> = ResolvedSlotTokens<MenuItemDomains[K]['style'], MenuItemDomains[K]['props']>;
 
-const labelFontStateLevels = [['list-item', 'section-header'], ['selected']] as const;
-type LabelFontStateLevels = typeof labelFontStateLevels;
-
-function createLabelFontDefinition({
-  fontFamily,
-  fontSize,
-  fontWeight,
-  lineHeight,
-}: FlexTokens): StyleDefinition<TextStyle, LabelFontStateLevels> {
+export function getMenuItemChrome(state: MenuItemState): {
+  root: Chrome<'root'>['style'];
+  content: Chrome<'content'>;
+  secondary: Chrome<'secondaryContent'>['style'];
+  contentReserve: Chrome<'content'>['style'];
+  secondaryReserve: Chrome<'secondaryContent'>['style'];
+  leadingIcon: Chrome<'leadingIcon'>['props'];
+  trailingIcon: Chrome<'trailingIcon'>['props'];
+  checkmark: Chrome<'checkmark'>['props'];
+  avatar: Chrome<'avatar'>['style'];
+  checkbox: Chrome<'checkbox'>;
+} {
+  const tokens = getComponentTokens(state, menuItemTokenDefinition);
+  const reserve = { ...state, isSelectedVisual: state.selectionMode !== 'multiple' };
   return {
-    'list-item': {
-      fontFamily: fontFamily.functional,
-      fontSize: fontSize.functionalBodyMedium,
-      fontWeight: fontWeight.functionalRegular,
-      lineHeight: lineHeight.functionalBodyMedium,
-      selected: {
-        fontWeight: fontWeight.functionalSemibold,
-      },
-    },
-    'section-header': {
-      fontFamily: fontFamily.functional,
-      fontSize: fontSize.functionalBodySmall,
-      fontWeight: fontWeight.functionalSemibold,
-      lineHeight: lineHeight.functionalBodySmall,
-    },
-  };
-}
-
-const getThemedLabelFont = getThemedStateStyleFactory('MenuItem.labelFont', createLabelFontDefinition, labelFontStateLevels);
-
-const secondaryFontStateLevels = [['list-item', 'section-header'], ['selected']] as const;
-type SecondaryFontStateLevels = typeof secondaryFontStateLevels;
-
-function createSecondaryFontDefinition({
-  fontFamily,
-  fontSize,
-  fontWeight,
-  lineHeight,
-}: FlexTokens): StyleDefinition<TextStyle, SecondaryFontStateLevels> {
-  return {
-    'list-item': {
-      fontFamily: fontFamily.functional,
-      fontSize: fontSize.functionalBodySmall,
-      fontWeight: fontWeight.functionalRegular,
-      lineHeight: lineHeight.functionalBodySmall,
-      selected: {
-        fontWeight: fontWeight.functionalSemibold,
-      },
-    },
-    'section-header': {
-      fontFamily: fontFamily.functional,
-      fontSize: fontSize.functionalBodySmall,
-      fontWeight: fontWeight.functionalRegular,
-      lineHeight: lineHeight.functionalBodySmall,
-    },
-  };
-}
-
-const getThemedSecondaryFont = getThemedStateStyleFactory(
-  'MenuItem.secondaryFont',
-  createSecondaryFontDefinition,
-  secondaryFontStateLevels,
-);
-
-const labelColorStateLevels = [['list-item', 'section-header'], ['selected'], interactiveStatePriority] as const;
-type LabelColorStateLevels = typeof labelColorStateLevels;
-type LabelColorState = StateNames<LabelColorStateLevels>;
-
-const labelColorDefinition: ColorStyleDefinition<TextColorStyle, LabelColorStateLevels> = {
-  'list-item': {
-    color: 'foregroundNeutralPrimary',
-    disabled: {
-      color: 'foregroundNeutralDisabled',
-    },
-    selected: {
-      color: 'foregroundNeutralPrimary',
-    },
-  },
-  'section-header': {
-    color: 'foregroundNeutralPrimary',
-    disabled: {
-      color: 'foregroundNeutralDisabled',
-    },
-  },
-};
-
-const getThemedLabelColor = getThemedColorStyleFactory<TextColorStyle, LabelColorStateLevels>(
-  'MenuItem.labelColor',
-  labelColorDefinition,
-  labelColorStateLevels,
-);
-
-function getLabelColorStateSource(state: MenuItemState): LabelColorState[] {
-  const source: LabelColorState[] = [state.menuStyle];
-  if (state.isSelectedVisual) {
-    source.push('selected');
-  }
-  if (state.disabled) {
-    source.push('disabled');
-  } else if (state.pressed) {
-    source.push('pressed');
-  } else if (state.hovered) {
-    source.push('hovered');
-  }
-  return source;
-}
-
-const secondaryColorStateLevels = [['list-item', 'section-header'], ['selected'], interactiveStatePriority] as const;
-type SecondaryColorStateLevels = typeof secondaryColorStateLevels;
-type SecondaryColorState = StateNames<SecondaryColorStateLevels>;
-
-const secondaryColorDefinition: ColorStyleDefinition<TextColorStyle, SecondaryColorStateLevels> = {
-  'list-item': {
-    color: 'foregroundNeutralSecondary',
-    disabled: {
-      color: 'foregroundNeutralDisabled',
-    },
-    selected: {
-      color: 'foregroundNeutralPrimary',
-    },
-  },
-  'section-header': {
-    color: 'foregroundNeutralPrimary',
-    disabled: {
-      color: 'foregroundNeutralDisabled',
-    },
-  },
-};
-
-const getThemedSecondaryColor = getThemedColorStyleFactory<TextColorStyle, SecondaryColorStateLevels>(
-  'MenuItem.secondaryColor',
-  secondaryColorDefinition,
-  secondaryColorStateLevels,
-);
-
-function getSecondaryColorStateSource(state: MenuItemState): SecondaryColorState[] {
-  const source: SecondaryColorState[] = [state.menuStyle];
-  if (state.isSelectedVisual) {
-    source.push('selected');
-  }
-  if (state.disabled) {
-    source.push('disabled');
-  } else if (state.pressed) {
-    source.push('pressed');
-  } else if (state.hovered) {
-    source.push('hovered');
-  }
-  return source;
-}
-
-export function getMenuItemLabelStyle(state: MenuItemState, reserveSelected = false): TextStyle {
-  return {
-    ...getThemedLabelFont(state, [state.menuStyle, ...(reserveSelected || state.isSelectedVisual ? ['selected'] : [])]),
-    ...getThemedLabelColor(state, getLabelColorStateSource(state)),
-  };
-}
-
-export function getMenuItemSecondaryStyle(state: MenuItemState, reserveSelected = false): TextStyle {
-  return {
-    ...getThemedSecondaryFont(state, [state.menuStyle, ...(reserveSelected || state.isSelectedVisual ? ['selected'] : [])]),
-    ...getThemedSecondaryColor(state, getSecondaryColorStateSource(state)),
-  };
-}
-
-export function getMenuItemCheckboxStyle(state: MenuItemState): ViewStyle {
-  const colors = state.tokens.color;
-  return {
-    alignItems: 'center',
-    backgroundColor: state.selected ? colors.backgroundBrandHeavy.rest : colors.backgroundNeutralTransparent.rest,
-    borderColor: state.selected ? colors.backgroundBrandHeavy.rest : colors.strokeNeutralLoud.rest,
-    borderRadius: 4,
-    borderWidth: 1,
-    height: size160,
-    justifyContent: 'center',
-    width: size160,
+    root: resolveTokenStates(tokens.root, state).style,
+    content: resolveTokenStates(tokens.content, state),
+    secondary: resolveTokenStates(tokens.secondaryContent, state).style,
+    contentReserve: resolveTokenStates(tokens.content, reserve).style,
+    secondaryReserve: resolveTokenStates(tokens.secondaryContent, reserve).style,
+    leadingIcon: resolveTokenStates(tokens.leadingIcon, state).props,
+    trailingIcon: resolveTokenStates(tokens.trailingIcon, state).props,
+    checkmark: resolveTokenStates(tokens.checkmark, state).props,
+    avatar: resolveTokenStates(tokens.avatar, state).style,
+    checkbox: resolveTokenStates(tokens.checkbox, state),
   };
 }
 
 export function getMenuItemLeadingStyle(state: MenuItemState): ViewStyle {
-  return {
-    alignSelf:
-      state.secondaryContentText &&
-      state.secondaryContentText !== null &&
-      state.secondaryContentText !== '' &&
-      state.secondaryContentPosition === 'under'
-        ? 'flex-start'
-        : 'center',
-    justifyContent: 'center',
-  };
+  return { alignSelf: state.hasSecondaryContent && state.secondaryContentPosition === 'under' ? 'flex-start' : 'center' };
 }
 
 export function getMenuItemTrailingStyle(state: MenuItemState): ViewStyle {
-  return {
-    alignSelf: state.secondaryContentPosition === 'under' ? 'flex-start' : 'center',
-  };
+  return { alignSelf: state.secondaryContentPosition === 'under' ? 'flex-start' : 'center' };
 }
 
 export function getMenuItemContentLayoutStyle(state: MenuItemState): ViewStyle {
   return state.secondaryContentPosition === 'under'
-    ? {
-        flexDirection: 'column',
-        gap: sizeNone,
-      }
-    : {
-        alignItems: 'center',
-        flexDirection: 'row',
-        gap: size160,
-      };
-}
-
-export function getMenuItemRootLayoutStyle(state: MenuItemState): ViewStyle {
-  return {
-    alignItems: state.secondaryContentPosition === 'under' ? 'flex-start' : 'center',
-  };
+    ? { flexDirection: 'column', gap: state.contentGap }
+    : { alignItems: 'center', flexDirection: 'row', gap: state.contentGap };
 }

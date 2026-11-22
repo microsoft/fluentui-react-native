@@ -21,14 +21,14 @@ the ExpandCollapse pattern. On Win32 the trigger also declares them, because
 UI Automation there exposes ExpandCollapse only for an element that declares
 them.
 
-Pressable carries no invalid state on any renderer, so `error` changes only
-the visuals (`dropdown-invalid-state`). Render the error message beside the
-Dropdown and reference it from `accessibilityHint`. Dropdown supplies no
-default hint.
+No verified native Pressable invalid state is available, so `error` currently
+changes only the visuals (`dropdown-invalid-state`). Render adjacent visible
+error text. Releasing the refresh requires a native invalid state and
+programmatically discoverable error text; a hint does not meet either gate.
 
-React Native has no typed has-popup, controls, or active-descendant property,
-so the expanded state, the value, and real option focus stand in for them
-(`dropdown-combobox-relationships`).
+The expanded state and value do not establish a relationship with the popup.
+Native association is a release gate (`dropdown-combobox-relationships`).
+Real option focus is intentional and does not require an active descendant.
 
 ## List
 

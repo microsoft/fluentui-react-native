@@ -27,7 +27,7 @@ const validProps: DropdownProps = {
   error: true,
   formatSelectedCount: (count: number) => `${count} fruits`,
   listbox,
-  multiselect: true,
+  selectionMode: 'multiple',
   onOpenChange: (open: boolean, data: { reason: DropdownOpenChangeReason }) => [open, data.reason],
   onPressIn: () => undefined,
   onSelectedOptionsChange: (selected: string[], data: DropdownSelectionChangeData) => [selected, data.value],

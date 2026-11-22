@@ -5,58 +5,10 @@ import { useThemeState } from '@fluentui-react-native/design';
 import { useOptionalSlot, useFocusablePressable, useSlot } from '@fluentui-react-native/framework-base';
 
 import { Icon } from '../../primitives/icon/icon';
-import { hideSlotProps } from '../../common/accessibility';
 import { useFocusVisuals } from '../../common/useFocusVisuals';
 import { Text } from '../text/text';
 
-import { getListItemAvatarSize, getListItemIconSize, getListItemSelectionIndicatorGlyph } from './list-item.styles';
-import type { ListItemMetrics, ListItemProps, ListItemState } from './list-item.types';
-
-function getMetrics(size: ListItemState['size'], tokens: ListItemState['tokens']): ListItemMetrics {
-  const { spacing } = tokens;
-  switch (size) {
-    case 'small':
-      return {
-        contentGap: spacing.componentBase100,
-        leadingContentMargin: spacing.componentBase100,
-        rootPaddingHorizontal: spacing.componentBase200,
-        rootPaddingVertical: spacing.componentBase150,
-        selectionIndicatorMargin: spacing.componentBase150,
-        selectionIndicatorSize: getListItemIconSize(size),
-        trailingGap: spacing.componentBase100,
-        trailingMargin: spacing.componentBase150,
-        avatarSize: getListItemAvatarSize(size),
-        iconSize: getListItemIconSize(size),
-      };
-    case 'large':
-      return {
-        contentGap: spacing.componentBase100,
-        leadingContentMargin: spacing.componentBase200,
-        rootPaddingHorizontal: spacing.componentBase400,
-        rootPaddingVertical: spacing.componentBase300,
-        selectionIndicatorMargin: spacing.componentBase200,
-        selectionIndicatorSize: getListItemIconSize(size),
-        trailingGap: spacing.componentBase100,
-        trailingMargin: spacing.componentBase250,
-        avatarSize: getListItemAvatarSize(size),
-        iconSize: getListItemIconSize(size),
-      };
-    case 'medium':
-    default:
-      return {
-        contentGap: spacing.componentBase100,
-        leadingContentMargin: spacing.componentBase150,
-        rootPaddingHorizontal: spacing.componentBase300,
-        rootPaddingVertical: spacing.componentBase250,
-        selectionIndicatorMargin: spacing.componentBase200,
-        selectionIndicatorSize: getListItemIconSize(size),
-        trailingGap: spacing.componentBase100,
-        trailingMargin: spacing.componentBase200,
-        avatarSize: getListItemAvatarSize(size),
-        iconSize: getListItemIconSize(size),
-      };
-  }
-}
+import type { ListItemProps, ListItemState } from './list-item.types';
 
 /**
  * Hook to create the state for a ListItem component.
@@ -81,9 +33,7 @@ export function useListItem_unstable(props: ListItemProps): ListItemState {
   } = props;
 
   const themeState = useThemeState();
-  const metrics = getMetrics(size, themeState.tokens);
   const selectedFill = selected && selectionMode !== 'multiple' && !disabled;
-  const selectionGlyph = selectionMode === 'none' ? undefined : getListItemSelectionIndicatorGlyph(selected, selectionMode);
   const platform: string = Platform.OS;
   const role = rest.role ?? rest.accessibilityRole ?? 'button';
   // Fabric exposes Invoke only when accessibility-tap is registered.
@@ -120,7 +70,6 @@ export function useListItem_unstable(props: ListItemProps): ListItemState {
   const selectedIcon = useOptionalSlot(Icon, selectedIconProp);
   const avatar = useOptionalSlot(View, avatarProp);
   const trailing = useOptionalSlot(View, trailingProp);
-  const selectionIndicator = useOptionalSlot(NativeText, selectionGlyph, { transform: hideSlotProps });
 
   return {
     FocusRing,
@@ -132,15 +81,12 @@ export function useListItem_unstable(props: ListItemProps): ListItemState {
     selectedIcon,
     avatar,
     trailing,
-    selectionIndicator,
     disabled,
     selected,
     selectionMode,
     secondaryContentPosition,
     size,
-    metrics,
     selectedFill,
-    selectionGlyph,
     userStyle,
     ...themeState,
     ...pressableState,

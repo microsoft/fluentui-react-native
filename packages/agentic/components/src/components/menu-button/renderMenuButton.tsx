@@ -4,7 +4,7 @@ import type { MenuButtonState } from './menu-button.types';
 
 /** Renders the trigger Pressable with its leading icon, label, and chevron, and the menu popup family outside it. */
 export function renderMenuButton_unstable(state: MenuButtonState) {
-  const { chevron: Chevron, content: Content, icon: Icon } = state;
+  const { chevron: Chevron, content: Content, leadingIcon: Icon } = state;
   return (
     <>
       <state.root ref={state.triggerRef}>

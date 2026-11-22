@@ -1,6 +1,7 @@
 import type { ThemeState } from '../flex/themeState.types';
 import type { FlexTokens } from '../flex/tokens.types';
 import type { AssetField } from './assetField';
+import type { tokenPlatforms } from './tokenPlatforms';
 
 export type TokenMember = string | number | boolean;
 export type TokenAxes = readonly (readonly [field: string, members: readonly TokenMember[]])[];
@@ -31,11 +32,14 @@ type TokenValues<F extends TokenFields> = {
   readonly [K in keyof F]?: AuthoredField<F[K]>;
 };
 type TokenBranches<State extends object, F extends TokenFields> = {
+  readonly [K in `when.platform.${(typeof tokenPlatforms)[number]}`]?: TokenValues<F>;
+} & {
   readonly [K in keyof State & string as `when.${K}.${Extract<State[K], TokenMember>}`]?: TokenValues<F> & TokenBranches<Omit<State, K>, F>;
 };
 
 export type ComponentTokenPatch<State extends object, D extends TokenSlotDomains> = {
-  readonly [S in keyof D]?: TokenValues<D[S]['style'] & D[S]['props']> & TokenBranches<State, D[S]['style'] & D[S]['props']>;
+  readonly [S in keyof D]?: TokenValues<D[S]['style'] & D[S]['props']> &
+    TokenBranches<Omit<State, 'platform'>, D[S]['style'] & D[S]['props']>;
 };
 
 /** Components augment this registry with their qualified component IDs and patch types. */

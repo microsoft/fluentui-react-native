@@ -8,9 +8,9 @@ import type { ButtonProps, ButtonSlots, ButtonState } from '../button/button.typ
 import type { MenuPopupState, MenuStateProps, MenuSurfaceProps } from '../menu/menu.types';
 import type { MenuButtonTokens } from './menu-button.styles';
 
-export type MenuButtonSlots = Pick<ButtonSlots, 'root' | 'content' | 'icon'>;
+export type MenuButtonSlots = Pick<ButtonSlots, 'root' | 'content' | 'leadingIcon'>;
 
-export type MenuButtonProps = Omit<ButtonProps, 'selected' | 'shape' | 'iconPosition' | 'selectedIcon'> &
+export type MenuButtonProps = Omit<ButtonProps, 'shape' | 'trailingIcon'> &
   MenuStateProps & {
     /** Props for the menu surface. Its name defaults to the trigger's string content. */
     menu?: MenuSurfaceProps;

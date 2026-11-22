@@ -1,165 +1,81 @@
-import { StyleSheet } from 'react-native';
 import type { TextStyle, ViewStyle } from 'react-native';
-
-import type { FlexTokens } from '@fluentui-react-native/design';
-
 import {
+  alignItemsToken,
+  alignSelfToken,
+  borderStyleToken,
+  colorToken,
+  defineComponentTokens,
+  dimensionToken,
+  flexDirectionToken,
+  fontWeightToken,
+  getComponentTokens,
   getGapStyleValue,
-  getThemedColorStyleFactory,
-  getThemedStateStyleFactory,
-  interactiveStatePriority,
+  justifyContentToken,
+  numericToken,
+  resolveTokenStates,
+  stringToken,
+  textAlignToken,
 } from '@fluentui-react-native/design/styling';
-import type {
-  ColorStyleDefinition,
-  StateNames,
-  StyleDefinition,
-  TextColorStyle,
-  ViewColorStyle,
-} from '@fluentui-react-native/design/styling';
-
+import type { ComponentTokenPatch } from '@fluentui-react-native/design/styling';
+import { iconTokenProps } from '../../common/iconTokenProps';
+import type { IconElementProps } from '../../primitives/icon/icon.types';
 import type { TabState } from './tab.types';
+import schema from './spec/tokens.json' with { type: 'json' };
 
-export const tabStyles = StyleSheet.create({
+type TabTokenState = Pick<TabState, 'layout' | 'selected'> & { visualState: 'rest' | 'hovered' | 'pressed' | 'disabled' };
+const domains = {
   root: {
-    alignItems: 'center',
-    alignSelf: 'flex-start',
-    borderStyle: 'solid',
-    flexDirection: 'row',
-    justifyContent: 'center',
+    style: {
+      alignItems: alignItemsToken,
+      alignSelf: alignSelfToken,
+      borderStyle: borderStyleToken,
+      flexDirection: flexDirectionToken,
+      justifyContent: justifyContentToken,
+      borderRadius: numericToken,
+      gap: getGapStyleValue,
+      paddingHorizontal: dimensionToken,
+      paddingVertical: dimensionToken,
+      backgroundColor: colorToken,
+    },
+    props: {},
   },
   content: {
-    flexShrink: 1,
-    textAlign: 'center',
-  },
-});
-
-const colorStateLevels = [['selected'], interactiveStatePriority] as const;
-type ColorStateLevels = typeof colorStateLevels;
-type ColorState = StateNames<ColorStateLevels>;
-
-const backgroundColorDefinition: ColorStyleDefinition<ViewColorStyle, ColorStateLevels> = {
-  backgroundColor: 'backgroundNeutralTransparent',
-  selected: {
-    backgroundColor: 'backgroundNeutralHeavy',
-    disabled: {
-      backgroundColor: 'backgroundNeutralHeavyDisabled',
+    style: {
+      flexShrink: numericToken,
+      textAlign: textAlignToken,
+      fontFamily: stringToken,
+      fontSize: numericToken,
+      fontWeight: fontWeightToken,
+      lineHeight: numericToken,
+      color: colorToken,
     },
+    props: {},
   },
-  disabled: {
-    backgroundColor: 'backgroundNeutralTransparent',
-  },
+  icon: { style: {}, props: iconTokenProps },
 };
 
-const foregroundColorDefinition: ColorStyleDefinition<TextColorStyle, ColorStateLevels> = {
-  color: 'foregroundNeutralPrimary',
-  selected: {
-    color: 'foregroundNeutralOnloud',
-    disabled: {
-      color: 'foregroundNeutralDisabled',
-    },
-  },
-  disabled: {
-    color: 'foregroundNeutralDisabled',
-  },
-};
-
-const getThemedBackgroundStyle = getThemedColorStyleFactory<ViewColorStyle, ColorStateLevels>(
-  'Tab.background',
-  backgroundColorDefinition,
-  colorStateLevels,
-);
-const getThemedForegroundStyle = getThemedColorStyleFactory<TextColorStyle, ColorStateLevels>(
-  'Tab.foreground',
-  foregroundColorDefinition,
-  colorStateLevels,
-);
-
-function getColorStateSource(state: TabState): ColorState[] {
-  const source: ColorState[] = [];
-  if (state.selected) {
-    source.push('selected');
+declare module '@fluentui-react-native/design' {
+  interface ComponentTokenRegistry {
+    'furn.tab': ComponentTokenPatch<TabTokenState, typeof domains>;
   }
-  if (state.disabled) {
-    source.push('disabled');
-  }
-  if (state.pressed) {
-    source.push('pressed');
-  }
-  if (state.hovered) {
-    source.push('hovered');
-  }
-  return source;
 }
 
-export function getTabColorStyles(state: TabState): {
-  background: ViewColorStyle;
-  foreground: TextColorStyle;
+const tabTokens = defineComponentTokens<TabTokenState, typeof domains>({ id: 'furn.tab', slots: domains, schema });
+
+export function resolveTabChrome(state: TabState): {
+  root: ViewStyle;
+  content: TextStyle;
+  contentHidden: TextStyle;
+  icon: Pick<IconElementProps, 'color' | 'height' | 'width'>;
 } {
-  const source = getColorStateSource(state);
+  const tokens = getComponentTokens(state, tabTokens);
+  const visualState = state.disabled ? 'disabled' : state.pressed ? 'pressed' : state.hovered ? 'hovered' : 'rest';
+  const selection = { ...state, visualState } satisfies TabTokenState;
+  const content = resolveTokenStates(tokens.content, selection).style;
   return {
-    background: getThemedBackgroundStyle(state, source),
-    foreground: getThemedForegroundStyle(state, source),
+    root: resolveTokenStates(tokens.root, selection).style,
+    content,
+    contentHidden: { ...content, fontWeight: resolveTokenStates(tokens.content, { ...selection, selected: true }).style.fontWeight },
+    icon: resolveTokenStates(tokens.icon, selection).props,
   };
-}
-
-const rootStyleStateLevels = [['iconAndText', 'iconOnly']] as const;
-type RootStyleStateLevels = typeof rootStyleStateLevels;
-type RootStyleState = StateNames<RootStyleStateLevels>;
-
-function createRootStyleDefinition({ borderRadius, spacing }: FlexTokens): StyleDefinition<ViewStyle, RootStyleStateLevels> {
-  return {
-    iconAndText: {
-      borderRadius: borderRadius.base300,
-      gap: getGapStyleValue(spacing.componentBase100),
-      paddingHorizontal: spacing.componentBase300,
-      paddingVertical: spacing.componentBase150,
-    },
-    iconOnly: {
-      borderRadius: borderRadius.circular,
-      paddingHorizontal: spacing.componentBase150,
-      paddingVertical: spacing.componentBase150,
-    },
-  };
-}
-
-const getThemedRootStyle = getThemedStateStyleFactory('Tab.root', createRootStyleDefinition, rootStyleStateLevels);
-
-function getRootStyleStateSource(state: TabState): RootStyleState[] {
-  return [state.layout];
-}
-
-export function getTabRootStyle(state: TabState): ViewStyle {
-  return getThemedRootStyle(state, getRootStyleStateSource(state));
-}
-
-const contentStyleStateLevels = [['selected']] as const;
-type ContentStyleStateLevels = typeof contentStyleStateLevels;
-type ContentStyleState = StateNames<ContentStyleStateLevels>;
-
-function createContentStyleDefinition({
-  fontFamily,
-  fontSize,
-  fontWeight,
-  lineHeight,
-}: FlexTokens): StyleDefinition<TextStyle, ContentStyleStateLevels> {
-  return {
-    fontFamily: fontFamily.functional,
-    fontSize: fontSize.functionalBodyMedium,
-    fontWeight: fontWeight.functionalRegular,
-    lineHeight: lineHeight.functionalBodyMedium,
-    selected: {
-      fontWeight: fontWeight.functionalSemibold,
-    },
-  };
-}
-
-const getThemedContentStyle = getThemedStateStyleFactory('Tab.content', createContentStyleDefinition, contentStyleStateLevels);
-
-export function getTabContentStyle(state: TabState, selected = state.selected): TextStyle {
-  const source: ContentStyleState[] = selected ? ['selected'] : [];
-  return getThemedContentStyle(state, source);
-}
-
-export function getTabIconSize(): number {
-  return 20;
 }

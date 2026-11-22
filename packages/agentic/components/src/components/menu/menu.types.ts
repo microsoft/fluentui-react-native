@@ -1,3 +1,4 @@
+import type { DesktopTooltipProps } from '../../common/desktopTooltipProps';
 import type * as React from 'react';
 import type { StyleProp, View, ViewStyle } from 'react-native';
 
@@ -59,7 +60,7 @@ export type MenuPlacementProps = {
   align?: MenuAlign;
 };
 
-export type MenuExposedViewProps = OwnedRootProps<PropsWithRefOf<typeof View>>;
+export type MenuExposedViewProps = DesktopTooltipProps & OwnedRootProps<PropsWithRefOf<typeof View>>;
 
 type MenuSlotProps = ComponentProps<MenuSlots, MenuExposedViewProps>;
 

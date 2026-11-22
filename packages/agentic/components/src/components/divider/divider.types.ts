@@ -1,3 +1,4 @@
+import type { DesktopTooltipProps } from '../../common/desktopTooltipProps';
 import type { StyleProp, ViewStyle, View } from 'react-native';
 
 import type {
@@ -27,10 +28,11 @@ type DividerStateSlots = DividerSlots & {
 
 export type DividerStateProps = {
   layout?: DividerLayout;
+  showContent?: boolean;
   vertical?: boolean;
 };
 
-export type DividerExposedViewProps = OwnedRootProps<PropsWithRefOf<typeof View>, 'accessibilityRole' | 'focusable'>;
+export type DividerExposedViewProps = DesktopTooltipProps & OwnedRootProps<PropsWithRefOf<typeof View>, 'accessibilityRole' | 'focusable'>;
 
 export type DividerProps = DividerStateProps & ComponentProps<DividerSlots, DividerExposedViewProps>;
 

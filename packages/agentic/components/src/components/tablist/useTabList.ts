@@ -48,6 +48,7 @@ export function useTabList_unstable(props: TabListProps): TabListState {
     circularNavigation = true,
     defaultSelectedValue,
     disabled = false,
+    endContent,
     onSelectionChange,
     orientation = 'horizontal',
     selectedValue: selectedValueProp,
@@ -272,6 +273,7 @@ export function useTabList_unstable(props: TabListProps): TabListState {
   return {
     children,
     contextValue,
+    endContent,
     orientation,
     root,
     userStyle: style,

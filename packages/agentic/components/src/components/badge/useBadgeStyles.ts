@@ -1,57 +1,28 @@
-import type { StyleProp, TextStyle, ViewStyle } from 'react-native';
-
-import { attachSlotProps } from '@fluentui-react-native/framework-base';
-
-import {
-  badgeStyles,
-  getBadgeAppearanceStyle,
-  getBadgeBackgroundStyle,
-  getBadgeContentStyle,
-  getBadgeForegroundStyle,
-  getBadgeIconSize,
-  getBadgeRootStyle,
-} from './badge.styles';
+import { StyleSheet } from 'react-native';
+import { attachSlotDefaults, attachSlotProps } from '@fluentui-react-native/framework-base';
+import { hiddenFromAccessibilityProps } from '../../common/accessibility';
+import { badgeStyles, getBadgeChrome } from './badge.styles';
 import type { BadgeState } from './badge.types';
 
 /**
  * Applies Badge styles and resolved slot props.
  */
 export function useBadgeStyles_unstable(state: BadgeState) {
-  const { size, userStyle } = state;
-  const colors = {
-    background: getBadgeBackgroundStyle(state),
-    foreground: getBadgeForegroundStyle(state),
-  };
-  const rootStyle: StyleProp<ViewStyle> = [
-    badgeStyles.root,
-    getBadgeRootStyle(state),
-    getBadgeAppearanceStyle(state),
-    colors.background,
-    userStyle,
-  ];
-  const contentStyle: StyleProp<TextStyle> = [badgeStyles.content, getBadgeContentStyle(state), colors.foreground];
-  const iconSize = getBadgeIconSize(size);
+  const chrome = getBadgeChrome(state);
+  const rootStyle = [badgeStyles.root, chrome.root, state.userStyle];
+  if (state.appearance === 'tint' && StyleSheet.flatten(state.userStyle)?.backgroundColor === undefined) {
+    state.tintStyle = { ...StyleSheet.absoluteFillObject, ...chrome.tint, borderRadius: StyleSheet.flatten(rootStyle).borderRadius };
+  }
 
   attachSlotProps(state.root, { style: rootStyle });
-  if (state.leadingIcon) {
-    attachSlotProps(state.leadingIcon, {
-      accessible: false,
-      color: colors.foreground.color,
-      height: iconSize,
-      width: iconSize,
-    });
-  }
-  if (state.trailingIcon) {
-    attachSlotProps(state.trailingIcon, {
-      accessible: false,
-      color: colors.foreground.color,
-      height: iconSize,
-      width: iconSize,
-    });
+  for (const slot of [state.leadingIcon, state.trailingIcon]) {
+    if (slot) {
+      attachSlotDefaults(slot, { ...chrome.icon, color: chrome.icon.color ?? chrome.content.color });
+      attachSlotProps(slot, hiddenFromAccessibilityProps);
+    }
   }
   if (state.content) {
-    attachSlotProps(state.content, {
-      style: contentStyle,
-    });
+    attachSlotDefaults(state.content, { style: [badgeStyles.content, chrome.content] });
+    attachSlotProps(state.content, { accessible: false });
   }
 }

@@ -3,7 +3,7 @@ name: switch
 platform: react-native (Windows, macOS)
 status: implemented
 source: ./spec/source.json
-tokens: ./spec/tokens.yaml
+tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
 interaction: ./spec/interaction.md
 usage: ./spec/usage.md
@@ -65,7 +65,8 @@ while `disabled`.
 | `aboveLabel`  | `Text`          | `vertical` layout                      | Defaults to `label`; pass `null` to suppress it.                       |
 
 An internal container `View` wraps the whole component and owns the layout
-direction, gap, and padding; it is not replaceable. Render order is: container,
+direction; it is not replaceable. Labels own their logical inner and outer
+padding. Render order is: container,
 then per layout — `switch` renders the hit area alone, `horizontal` renders
 before label, hit area, after label, and `vertical` renders the above label then
 the hit area. Inside the hit area the optional `FocusRing` renders first, then the
@@ -85,13 +86,13 @@ text, and drop a label slot when it is passed `null`.
 The switch owns its checked value only while `checked` is absent. Hover, press,
 and focus come from the shared pressable state and drive colors and the focus
 visual; nothing else is stateful. The animated progress value that drives the
-thumb and the color crossfade is derived from the checked value, never the
+thumb transform is derived from the checked value, never the
 source of it, so an externally driven switch that never receives a new `checked`
 value never moves.
 
-**SWCH-004:** Drive track and thumb colors from checked, disabled, pressed, and
-hovered state through the shared interactive precedence, and interpolate the
-track and thumb colors together with the thumb position from one progress value.
+**SWCH-004:** Resolve track and thumb colors immediately from checked, disabled,
+pressed, and hovered state, in that interaction precedence. Separate the
+inner label gap from the outer inset and keep the track fixed inside its padded hit area.
 
 **SWCH-005:** Follow the [shared focus visual policy](../../../references/higher-order-components.md#focus-visual-policy)
 on the hit-area root, not the label container or track. Retain the mounted
@@ -104,7 +105,7 @@ accessible name from `label` when the caller supplies none.
 **SWCH-007:** Keep the thumb travel equal to the track width minus the two
 border widths, the two inset offsets, and the thumb width.
 
-**SWCH-008:** Animate the thumb and colors over a short eased transition, skip
+**SWCH-008:** Animate only the thumb transform with the functional motion tokens, skip
 the animation on first mount, and snap to the end value while the platform
 reduced-motion setting is on.
 
@@ -143,19 +144,20 @@ the equivalent switch element for VoiceOver. The disabled state is exposed on
 both platforms rather than the control being removed.
 
 Hover is a real state on both platforms and changes the track and thumb colors.
-The color and position transition runs on the JavaScript driver because it
-interpolates colors, which the native driver cannot animate.
+The thumb transform runs on the JavaScript driver across the supported
+renderers. Native animation and activation evidence remain separate from
+runtime token and state tests.
 
 ## Divergences from Flex
 
 `native-system-focus-visuals` is an **accepted** [shared native adaptation](../../../references/higher-order-components.md#focus-visual-policy).
 
-| ID                                | Disposition | React Native contract                                                                                                                                                         | Follow-up                                                                                                    |
-| --------------------------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| `switch-label-association-ids`    | Resolved    | When the caller supplies no name, the component copies visible label text to the root as the single accessible-name mechanism and emits no unresolved labelled-by references. | Implemented in `useSwitch.ts` and covered by naming tests.                                                   |
-| `switch-label-spacing`            | Accepted    | One container gap separates the control from whichever labels render. Flex distinguishes inner and outer label spacing per side.                                              | None. A single gap is the natural React Native flex-container expression and matches the inner spacing step. |
-| `switch-focus-modality`           | Accepted    | Custom visibility follows keyboard modality from the scene root rather than a component-local pointer tracker. Native appearance remains renderer-owned.                      | Preserve the shared hook and component modality matrix.                                                      |
-| `switch-keyboard-activation-path` | Resolved    | One shared activation path owns each key gesture; the component no longer toggles separately on key-up.                                                                       | Retain exact-count native keyboard and accessibility-action coverage.                                        |
+| ID                                | Disposition | React Native contract                                                                                                                                                         | Follow-up                                                             |
+| --------------------------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| `switch-label-association-ids`    | Resolved    | When the caller supplies no name, the component copies visible label text to the root as the single accessible-name mechanism and emits no unresolved labelled-by references. | Implemented in `useSwitch.ts` and covered by naming tests.            |
+| `switch-label-spacing`            | Resolved    | Labeled layouts use separate logical inner (4) and outer (8) spacing; padding never stretches the track.                                                                      | Verify each layout and RTL (SWCH-004).                                |
+| `switch-focus-modality`           | Accepted    | Custom visibility follows keyboard modality from the scene root rather than a component-local pointer tracker. Native appearance remains renderer-owned.                      | Preserve the shared hook and component modality matrix.               |
+| `switch-keyboard-activation-path` | Resolved    | One shared activation path owns each key gesture; the component no longer toggles separately on key-up.                                                                       | Retain exact-count native keyboard and accessibility-action coverage. |
 
 ## Conformance
 

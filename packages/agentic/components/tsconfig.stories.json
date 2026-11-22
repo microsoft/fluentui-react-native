@@ -32,6 +32,8 @@
     "src/components/tablist/tablist.stories.tsx",
     "src/components/tag/tag.stories.tsx",
     "src/components/text/text.stories.tsx",
+    "src/components/toggle-button/toggle-button.stories.tsx",
+    "src/components/tooltip/tooltip.stories.tsx",
     "src/primitives/focus-zone/focus-zone.stories.tsx",
     "src/primitives/icon/icon.stories.tsx",
     "src/primitives/layout-stable-text/layout-stable-text.stories.tsx",

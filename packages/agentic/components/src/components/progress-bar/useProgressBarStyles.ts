@@ -1,53 +1,29 @@
-import type { StyleProp, ViewStyle } from 'react-native';
-
-import { attachSlotProps } from '@fluentui-react-native/framework-base';
-
+import { I18nManager } from 'react-native';
+import { attachSlotDefaults, attachSlotProps } from '@fluentui-react-native/framework-base';
 import type { ProgressBarState } from './progress-bar.types';
 
-/**
- * Applies stable theme styles and state-specific layout to the progress bar slots.
- */
 export function useProgressBarStyles_unstable(state: ProgressBarState) {
-  const styles = state.styles;
-  const trackStyle: StyleProp<ViewStyle> = [styles.track];
-  const indicatorStyle: StyleProp<ViewStyle> = [
-    styles.indicator,
-    {
-      backgroundColor: state.indicatorColor,
-      width: state.indicatorWidth,
-    },
-    state.type === 'indeterminate' && !state.isReduceMotionEnabled
-      ? {
-          transform: [{ translateX: state.indicatorTranslateX }],
-        }
-      : undefined,
-    state.type !== 'indeterminate'
-      ? {
-          ...({
-            transitionDuration: state.indicatorTransitionDuration,
-            transitionTimingFunction: 'ease-out',
-            transitionProperty: 'width',
-          } as any),
-        }
-      : undefined,
-  ];
+  const { styles, trackLayoutWidth } = state;
+  const animateDeterminate = state.type === 'determinate' && !state.isReduceMotionEnabled;
+  const direction = I18nManager.isRTL ? -1 : 1;
+  const transform = animateDeterminate
+    ? [
+        // Compensate for center-origin scaling to pin the fill at the logical start.
+        { translateX: state.indicatorScaleX.interpolate({ inputRange: [0, 1], outputRange: [(-direction * trackLayoutWidth) / 2, 0] }) },
+        { scaleX: state.indicatorScaleX },
+      ]
+    : state.type === 'indeterminate' && !state.isReduceMotionEnabled
+      ? [{ translateX: state.indicatorTranslateX }]
+      : undefined;
 
   attachSlotProps(state.root, { style: [styles.root, state.rootStyle] });
-  attachSlotProps(state.track, {
-    style: trackStyle,
-    testID: 'progress-bar-track',
-  });
+  attachSlotProps(state.track, { style: styles.track, testID: 'progress-bar-track' });
   attachSlotProps(state.indicator, {
-    style: indicatorStyle,
+    style: [styles.indicator, { width: animateDeterminate ? trackLayoutWidth : state.indicatorWidth, transform }],
     testID: 'progress-bar-indicator',
   });
-
   if (state.validationIcon) {
-    attachSlotProps(state.validationIcon, {
-      accessible: false,
-      color: state.validationIconColor,
-      height: styles.validationIcon.height,
-      width: styles.validationIcon.width,
-    });
+    attachSlotDefaults(state.validationIcon, styles.validationIcon);
+    attachSlotProps(state.validationIcon, { accessible: false });
   }
 }

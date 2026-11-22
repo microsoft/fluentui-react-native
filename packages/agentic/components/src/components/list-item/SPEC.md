@@ -3,7 +3,7 @@ name: list-item
 platform: react-native (Windows, macOS)
 status: implemented
 source: ./spec/source.json
-tokens: ./spec/tokens.yaml
+tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
 interaction: ./spec/interaction.md
 usage: ./spec/usage.md
@@ -28,15 +28,15 @@ props; its caller style is applied last.
 The public slots are `root`, required `content`, and optional
 `secondaryContent`, `icon`, `selectedIcon`, `avatar`, and `trailing`.
 `selectionIndicator` and the hidden content reservation are state-only slots.
-The rendered root contains the optional `FocusRing`, the selection glyph,
+The rendered root contains the optional `FocusRing`, the decorative selection indicator,
 then CompoundItemLayout. The layout renders avatar before the active icon,
 the layout-stable content, optional secondary content, and optional trailing
 content. A selected `selectedIcon` replaces `icon`; avatar takes precedence
 over either icon.
 
 `selected` is externally owned. Pressing the root forwards `onPress` but never
-changes it. `selectionMode` chooses no glyph, a radio-like glyph, or a
-checkbox-like glyph. A selected multiple-selection row deliberately omits its
+changes it. `selectionMode` chooses no indicator, a decorative radio, or a
+decorative checkbox. A selected multiple-selection row deliberately omits its
 row fill. Disabled rows also omit selection fill; other selected rows reserve
 semibold content width and show the selected fill.
 
@@ -85,13 +85,18 @@ those behaviors through its own React Native composition.
 - `native-system-focus-visuals` (**accepted**): Apply the [shared native adaptation](../../../references/higher-order-components.md#focus-visual-policy).
 
 - `list-item-native-selection-indicators` (**accepted**): FURN renders the
-  single- and multi-select indicators as inaccessible text glyphs rather than
-  composing Radio or Checkbox controls.
+  single- and multi-select indicators as hidden decorative visuals rather than
+  composing focusable Radio or Checkbox controls. Checkbox's neutral checked
+  colors take precedence over brand language in the row source.
 - `list-item-native-role` (**accepted**): FURN gives the standalone row a
   button role by default and publishes `accessibilityState.selected`; it does
   not derive container-specific item semantics.
 
 ## Conformance
+
+Verify the 1.7 indicators, selected fill and weight by selection mode, theme
+overrides, and immediate content swaps in runtime tests. The standalone
+button's selected semantics and sole native focus stop need endpoint evidence.
 
 | Requirement | Evidence                                                             |
 | ----------- | -------------------------------------------------------------------- |

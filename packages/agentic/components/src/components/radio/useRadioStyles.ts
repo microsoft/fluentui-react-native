@@ -1,52 +1,17 @@
 import { attachSlotProps } from '@fluentui-react-native/framework-base';
-import type { StyleProp, TextStyle, ViewStyle } from 'react-native';
 import { applyFocusRingStyles } from '../../common/applyFocusRingStyles';
-
-import {
-  radioStyles,
-  getRadioIndicatorBorder,
-  getRadioIndicatorDotColorStyle,
-  getRadioIndicatorDotLayout,
-  getRadioIndicatorLayout,
-  getRadioLabelColorStyle,
-  getRadioLabelContainerLayout,
-  getRadioLabelTypography,
-  getRadioRootLayout,
-  getRadioSecondaryTextColorStyle,
-  getRadioSecondaryTypography,
-} from './radio.styles';
+import { resolveRadioChrome } from './radio.styles';
 import type { RadioState } from './radio.types';
 
-/**
- * Applies styles and slot props to the Radio component state.
- */
 export function useRadioStyles_unstable(state: RadioState) {
-  const rootLayoutStyle = getRadioRootLayout(state);
-  const rootStyle: StyleProp<ViewStyle> = [radioStyles.root, rootLayoutStyle, state.userStyle];
-  const indicatorStyle: StyleProp<ViewStyle> = [radioStyles.indicator, getRadioIndicatorLayout(state), getRadioIndicatorBorder(state)];
-  const indicatorDotStyle: StyleProp<ViewStyle> = [
-    radioStyles.dot,
-    getRadioIndicatorDotLayout(state),
-    getRadioIndicatorDotColorStyle(state),
-    { opacity: state.selected ? 1 : 0 },
-  ];
-  const labelContainerStyle: StyleProp<ViewStyle> = [radioStyles.labelContainer, getRadioLabelContainerLayout(state)];
-  const labelStyle: StyleProp<TextStyle> = [radioStyles.label, getRadioLabelTypography(state), getRadioLabelColorStyle(state)];
-  const secondaryTextStyle: StyleProp<TextStyle> = [
-    radioStyles.secondaryText,
-    getRadioSecondaryTypography(state),
-    getRadioSecondaryTextColorStyle(state),
-  ];
-
-  applyFocusRingStyles(state.FocusRing, state, rootLayoutStyle.borderRadius);
+  const chrome = resolveRadioChrome(state);
+  const rootStyle = [chrome.root, state.userStyle];
+  applyFocusRingStyles(state.FocusRing, state, chrome.root.borderRadius);
   state.rootStyle = rootStyle;
-  state.indicatorStyle = indicatorStyle;
-  state.indicatorDotStyle = indicatorDotStyle;
-  state.labelContainerStyle = labelContainerStyle;
-  state.labelStyle = labelStyle;
-  state.secondaryTextStyle = secondaryTextStyle;
-
-  attachSlotProps(state.root, {
-    style: rootStyle,
-  });
+  state.indicatorStyle = chrome.indicator;
+  state.indicatorDotStyle = [chrome.dot, { opacity: state.selected ? 1 : 0 }];
+  state.labelContainerStyle = chrome.labelContainer;
+  state.labelStyle = chrome.label;
+  state.secondaryTextStyle = chrome.secondaryText;
+  attachSlotProps(state.root, { style: rootStyle });
 }

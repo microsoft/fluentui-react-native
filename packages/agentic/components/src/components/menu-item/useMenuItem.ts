@@ -35,9 +35,7 @@ export function useMenuItem_unstable(props: MenuItemProps): MenuItemState {
     secondaryContentPosition = 'right',
     disabled = false,
     disabledFocusable: disabledFocusableProp,
-    hasCheckmark = false,
-    hasChevron = false,
-    hasMultiselect = false,
+    selectionMode: selectionModeProp = 'none',
     loading = false,
     menuStyle = 'list-item',
     selected = false,
@@ -47,6 +45,7 @@ export function useMenuItem_unstable(props: MenuItemProps): MenuItemState {
     ref: rootRef,
     style: userStyle,
     submenu,
+    trailingIcon: trailingIconProp,
     ...rest
   } = props;
 
@@ -55,6 +54,10 @@ export function useMenuItem_unstable(props: MenuItemProps): MenuItemState {
   const isListItem = menuStyle === 'list-item';
   const isInteractive = isListItem;
   const resolvedLoading = !isListItem && loading;
+  const hasSubmenu = isListItem && submenu !== undefined;
+  const selectionMode = isListItem && !hasSubmenu ? selectionModeProp : 'none';
+  const hasCheckmark = selectionMode === 'single';
+  const hasMultiselect = selectionMode === 'multiple';
   const isSelectionIndicator = hasCheckmark || hasMultiselect;
 
   const isSelectedVisual = selected && !hasMultiselect && isListItem;
@@ -63,20 +66,15 @@ export function useMenuItem_unstable(props: MenuItemProps): MenuItemState {
   const hasSecondaryContent = secondaryContentText !== null && secondaryContentText !== undefined && secondaryContentText !== '';
   const themeState = useThemeState();
 
-  if (__DEV__ && hasCheckmark && hasMultiselect) {
-    console.warn('MenuItem: checkmark and multiselect are mutually exclusive.');
-  }
-
   const menuRowId = React.useId();
   const inMenu = menu !== undefined && isListItem;
-  const hasSubmenu = isListItem && submenu !== undefined;
   const submenuOpen = inMenu && hasSubmenu && menu.isSubmenuOpen(menuRowId);
   React.useEffect(() => {
     if (__DEV__ && submenu !== undefined && !inMenu) {
       console.warn('MenuItem: a submenu opens only from a list row inside a Menu.');
     }
   }, [inMenu, submenu]);
-  const showChevron = hasChevron || hasSubmenu;
+  const showChevron = hasSubmenu;
   const rowFocusable = isInteractive && (!disabled || disabledFocusable);
   const ownsChecked = isInteractive && isSelectionIndicator;
   const ownsSelected = ownsChecked && !hasMultiselect;
@@ -157,7 +155,8 @@ export function useMenuItem_unstable(props: MenuItemProps): MenuItemState {
   const icon = useOptionalSlot(Icon, iconProp, { defaultProps: defaultRegularIcon, renderByDefault: true });
   const selectedIcon = useOptionalSlot(Icon, selectedIconProp, { defaultProps: defaultSelectedIcon, renderByDefault: selected });
   const avatar = useOptionalSlot(View, avatarProp);
-  const chevronSlot = useOptionalSlot(Icon, chevronProp, { defaultProps: defaultChevron, renderByDefault: showChevron });
+  const chevronSlot = useOptionalSlot(Icon, showChevron ? (chevronProp ?? {}) : null, { defaultProps: defaultChevron });
+  const trailingIcon = useOptionalSlot(Icon, isListItem && !hasSubmenu && !isSelectionIndicator ? trailingIconProp : null);
 
   const { focusTarget } = focusBinding;
   const register = inMenu ? menu.register : undefined;
@@ -175,8 +174,13 @@ export function useMenuItem_unstable(props: MenuItemProps): MenuItemState {
       },
     });
   }, [contentText, focusTarget, hasSubmenu, menuRowId, register, rowFocusable]);
-  const checkmarkSlot = useOptionalSlot(Icon, checkmarkProp, { defaultProps: defaultCheckmark, renderByDefault: hasCheckmark });
-  const multiselectCheckbox = useOptionalSlot(CheckboxIndicator, multiselectCheckboxProp, { renderByDefault: hasMultiselect });
+  const checkmarkSlot = useOptionalSlot(Icon, hasCheckmark ? checkmarkProp : null, {
+    defaultProps: defaultCheckmark,
+    renderByDefault: true,
+  });
+  const multiselectCheckbox = useOptionalSlot(CheckboxIndicator, hasMultiselect ? multiselectCheckboxProp : null, {
+    renderByDefault: true,
+  });
 
   const styleState: MenuItemState = {
     FocusRing: isInteractive ? FocusRing : undefined,
@@ -186,9 +190,6 @@ export function useMenuItem_unstable(props: MenuItemProps): MenuItemState {
     contentText,
     disabled,
     disabledFocusable,
-    hasCheckmark,
-    hasChevron: showChevron,
-    hasMultiselect,
     hasSecondaryContent,
     icon,
     isListItem,
@@ -201,6 +202,9 @@ export function useMenuItem_unstable(props: MenuItemProps): MenuItemState {
     secondaryContentText,
     selected,
     selectedIcon,
+    selectionMode,
+    trailingIcon,
+    visualState: disabled ? 'disabled' : pressableState.pressed ? 'pressed' : pressableState.hovered ? 'hovered' : 'rest',
     userStyle,
     rootAccessibilityHint: pressableProps.accessibilityHint,
     rootAccessibilityLabel: pressableProps.accessibilityLabel ?? contentText,

@@ -1,68 +1,128 @@
 {
   "schemaVersion": 2,
   "component": "avatar",
-  "lifecycle": "implemented",
+  "lifecycle": "contract-reviewed",
   "conformance": "reviewed",
-  "reviewedAt": "2026-09-21",
+  "reviewedAt": "2026-11-20",
   "sources": [
     {
       "id": "flex-component",
       "kind": "flex-skill",
       "authority": "normative",
       "skill": "flex-components:avatar",
-      "sourceLock": "flex-1.5.0-206c4996",
-      "sourceLockFingerprint": "a69997212ec1b89510c94176801bf5a146ed7e7d8c80cc7db40ac8f60cf9f119",
-      "availableSurfaces": ["shared", "web"],
+      "sourceLock": "flex-1.7.0-9f1df394",
+      "sourceLockFingerprint": "33c7dbb4ff78525a4e0900811f5fa1994579ee8dd95b337de85d8f47133d148c",
+      "availableSurfaces": ["mobile", "shared", "web"],
       "surfacesConsulted": ["shared", "web"],
       "sourceFiles": [
         {
+          "role": "mobile:android:accessibility",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/avatar/mobile/android/accessibility.md",
+          "marketplaceBlobSha": "ef0586638bf33e779b025da7c642e5ff5525dee6",
+          "marketplaceSha256": "c8380c73b1cde6c8a3added1769af5e5ba21b736252b61261fcf7c40319e6a37",
+          "originPath": "plugins/components/skills/avatar/mobile/android/accessibility.md",
+          "originBlobSha": "ef0586638bf33e779b025da7c642e5ff5525dee6",
+          "originSha256": "c8380c73b1cde6c8a3added1769af5e5ba21b736252b61261fcf7c40319e6a37",
+          "contentDiffers": false
+        },
+        {
+          "role": "mobile:android:interaction",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/avatar/mobile/android/interaction.md",
+          "marketplaceBlobSha": "166f39a329600d434baf2b7f161bb489aef35e36",
+          "marketplaceSha256": "7b6fc61ead04bfbf9775c22de49bda2b0d726ff19d3b24b6c394f5e071946d61",
+          "originPath": "plugins/components/skills/avatar/mobile/android/interaction.md",
+          "originBlobSha": "166f39a329600d434baf2b7f161bb489aef35e36",
+          "originSha256": "7b6fc61ead04bfbf9775c22de49bda2b0d726ff19d3b24b6c394f5e071946d61",
+          "contentDiffers": false
+        },
+        {
+          "role": "mobile:ios:accessibility",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/avatar/mobile/ios/accessibility.md",
+          "marketplaceBlobSha": "4945b9b00c37d422148f3a1487a63d8051d62cab",
+          "marketplaceSha256": "de46c907c786e611842a833c321f38f36442ef5f48867278540c40b2d2555afe",
+          "originPath": "plugins/components/skills/avatar/mobile/ios/accessibility.md",
+          "originBlobSha": "4945b9b00c37d422148f3a1487a63d8051d62cab",
+          "originSha256": "de46c907c786e611842a833c321f38f36442ef5f48867278540c40b2d2555afe",
+          "contentDiffers": false
+        },
+        {
+          "role": "mobile:ios:interaction",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/avatar/mobile/ios/interaction.md",
+          "marketplaceBlobSha": "c43f5d77aac2b95d83847b20a94ae4231c2c4d87",
+          "marketplaceSha256": "c97bd2c5238043e90d3c0cab3c95796d1d215c3d962fcaf44294c7515b422ae2",
+          "originPath": "plugins/components/skills/avatar/mobile/ios/interaction.md",
+          "originBlobSha": "c43f5d77aac2b95d83847b20a94ae4231c2c4d87",
+          "originSha256": "c97bd2c5238043e90d3c0cab3c95796d1d215c3d962fcaf44294c7515b422ae2",
+          "contentDiffers": false
+        },
+        {
+          "role": "mobile:overview",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/avatar/mobile/overview.md",
+          "marketplaceBlobSha": "7695efa07676ea3ef0f4e77f858fc5890505cbf4",
+          "marketplaceSha256": "3b7187e67d2329532b732647c113e9eb2a2d62268f05ce642894015b5098302f",
+          "originPath": "plugins/components/skills/avatar/mobile/overview.md",
+          "originBlobSha": "7695efa07676ea3ef0f4e77f858fc5890505cbf4",
+          "originSha256": "3b7187e67d2329532b732647c113e9eb2a2d62268f05ce642894015b5098302f",
+          "contentDiffers": false
+        },
+        {
+          "role": "mobile:tokens",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/avatar/mobile/tokens.yaml",
+          "marketplaceBlobSha": "7a3973f2eb6357408361a6ccfaf1e62269e76eb6",
+          "marketplaceSha256": "5e2ae4d8970f526e0e49f27f516a6310467882d0e12c923d82846d57349f6807",
+          "originPath": "plugins/components/skills/avatar/mobile/tokens.yaml",
+          "originBlobSha": "7a3973f2eb6357408361a6ccfaf1e62269e76eb6",
+          "originSha256": "5e2ae4d8970f526e0e49f27f516a6310467882d0e12c923d82846d57349f6807",
+          "contentDiffers": false
+        },
+        {
           "role": "skill",
           "marketplacePath": "catalogs/flex/plugins/components/skills/avatar/SKILL.md",
-          "marketplaceBlobSha": "2fe0b969fc2358d716e2a2d1e7b48e74dd5f6200",
-          "marketplaceSha256": "cbfeee595a3fddf0e02399bc25c4de3bbc4a6ed8ab439c48be3fd88d4882af93",
+          "marketplaceBlobSha": "caa4a97550527769bcf76f0b8c6b4ebddbb7101f",
+          "marketplaceSha256": "96aa350be1a78d772b5ab935c09b2770a25a3325814125f02cab7b3282f7d0c6",
           "originPath": "plugins/components/skills/avatar/SKILL.md",
-          "originBlobSha": "2fe0b969fc2358d716e2a2d1e7b48e74dd5f6200",
-          "originSha256": "cbfeee595a3fddf0e02399bc25c4de3bbc4a6ed8ab439c48be3fd88d4882af93",
+          "originBlobSha": "caa4a97550527769bcf76f0b8c6b4ebddbb7101f",
+          "originSha256": "96aa350be1a78d772b5ab935c09b2770a25a3325814125f02cab7b3282f7d0c6",
           "contentDiffers": false
         },
         {
           "role": "usage",
           "marketplacePath": "catalogs/flex/plugins/components/skills/avatar/usage.md",
-          "marketplaceBlobSha": "3ff5d8c3aa3d36e72f598a6956966345c1234359",
-          "marketplaceSha256": "d2dc6baf4249e40b508b41d9b1665dc992863f81b177f3859340a21e735cc8a4",
+          "marketplaceBlobSha": "d78a692936470f9013e08a24a9845645c46454ff",
+          "marketplaceSha256": "69f74f51b68474125a26a21ff7ea370f720c26384199bce0f458ad7c981ac0e4",
           "originPath": "plugins/components/skills/avatar/usage.md",
-          "originBlobSha": "3ff5d8c3aa3d36e72f598a6956966345c1234359",
-          "originSha256": "d2dc6baf4249e40b508b41d9b1665dc992863f81b177f3859340a21e735cc8a4",
+          "originBlobSha": "d78a692936470f9013e08a24a9845645c46454ff",
+          "originSha256": "69f74f51b68474125a26a21ff7ea370f720c26384199bce0f458ad7c981ac0e4",
           "contentDiffers": false
         },
         {
           "role": "web:accessibility",
           "marketplacePath": "catalogs/flex/plugins/components/skills/avatar/web/accessibility.md",
-          "marketplaceBlobSha": "1e4c4955a80a74ea321d00d985993077ae63fc0c",
-          "marketplaceSha256": "7a499cf97a53458cee2c396311fcf2f22552e7e66afb40ddfb01bdb65284508d",
+          "marketplaceBlobSha": "e44e3b0b8547cf80718177b599e8b3478e946438",
+          "marketplaceSha256": "11d85e2e815723bc2bb9eeb5ba8d84be64196de64d6aa0d5797820d312d37a60",
           "originPath": "plugins/components/skills/avatar/web/accessibility.md",
-          "originBlobSha": "1e4c4955a80a74ea321d00d985993077ae63fc0c",
-          "originSha256": "7a499cf97a53458cee2c396311fcf2f22552e7e66afb40ddfb01bdb65284508d",
+          "originBlobSha": "e44e3b0b8547cf80718177b599e8b3478e946438",
+          "originSha256": "11d85e2e815723bc2bb9eeb5ba8d84be64196de64d6aa0d5797820d312d37a60",
           "contentDiffers": false
         },
         {
           "role": "web:interaction",
           "marketplacePath": "catalogs/flex/plugins/components/skills/avatar/web/interaction.md",
-          "marketplaceBlobSha": "15067f0130fc17bac54d1a7e5594c8079aacf1b6",
-          "marketplaceSha256": "4fa014add135165f4e736387838e669358b5293cd3eb3bea956bf0195b0bf939",
+          "marketplaceBlobSha": "9b27575106e18ce76aa01c6646b80bb0dff7c155",
+          "marketplaceSha256": "18be4f08be31d8ec2028f6e16d2708ad6c8f998cd8e7d71d18da4900694f5f14",
           "originPath": "plugins/components/skills/avatar/web/interaction.md",
-          "originBlobSha": "15067f0130fc17bac54d1a7e5594c8079aacf1b6",
-          "originSha256": "4fa014add135165f4e736387838e669358b5293cd3eb3bea956bf0195b0bf939",
+          "originBlobSha": "9b27575106e18ce76aa01c6646b80bb0dff7c155",
+          "originSha256": "18be4f08be31d8ec2028f6e16d2708ad6c8f998cd8e7d71d18da4900694f5f14",
           "contentDiffers": false
         },
         {
           "role": "web:tokens",
           "marketplacePath": "catalogs/flex/plugins/components/skills/avatar/web/tokens.yaml",
-          "marketplaceBlobSha": "b2b13ebc81fda59a1e9cd31f5d39ac8331d950ae",
-          "marketplaceSha256": "d28b1fef9f1888889727611504daeb6257dad78330e4c011354c640d93e8251a",
+          "marketplaceBlobSha": "57423f0243ee19564f49c0f0d39efd88e1b676f6",
+          "marketplaceSha256": "184fc9d40c30a5d01da2930073803203af5b253a3b8fdec7232dca40bad6bef4",
           "originPath": "plugins/components/skills/avatar/web/tokens.yaml",
-          "originBlobSha": "b2b13ebc81fda59a1e9cd31f5d39ac8331d950ae",
-          "originSha256": "d28b1fef9f1888889727611504daeb6257dad78330e4c011354c640d93e8251a",
+          "originBlobSha": "57423f0243ee19564f49c0f0d39efd88e1b676f6",
+          "originSha256": "184fc9d40c30a5d01da2930073803203af5b253a3b8fdec7232dca40bad6bef4",
           "contentDiffers": false
         }
       ],
@@ -72,11 +132,11 @@
   "divergences": [
     {
       "id": "avatar-content-precedence",
-      "status": "accepted"
+      "status": "resolved"
     },
     {
       "id": "avatar-focusable-prop-surface",
-      "status": "deferred"
+      "status": "resolved"
     }
   ],
   "requirements": [

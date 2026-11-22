@@ -3,66 +3,66 @@
   "component": "menu-item",
   "lifecycle": "implemented",
   "conformance": "reviewed",
-  "reviewedAt": "2026-10-16",
+  "reviewedAt": "2026-11-20",
   "sources": [
     {
       "id": "flex-component",
       "kind": "flex-skill",
       "authority": "normative",
       "skill": "flex-components:menu-item",
-      "sourceLock": "flex-1.5.0-206c4996",
-      "sourceLockFingerprint": "a69997212ec1b89510c94176801bf5a146ed7e7d8c80cc7db40ac8f60cf9f119",
+      "sourceLock": "flex-1.7.0-9f1df394",
+      "sourceLockFingerprint": "33c7dbb4ff78525a4e0900811f5fa1994579ee8dd95b337de85d8f47133d148c",
       "availableSurfaces": ["shared", "web"],
       "surfacesConsulted": ["shared", "web"],
       "sourceFiles": [
         {
           "role": "skill",
           "marketplacePath": "catalogs/flex/plugins/components/skills/menu-item/SKILL.md",
-          "marketplaceBlobSha": "b83c2be00a4935894631edf0458c5d1625fb93b0",
-          "marketplaceSha256": "7376258a1288a5a1dc2c40a4f3888b023cb0378632638be79fc2eed9db645b08",
+          "marketplaceBlobSha": "f2c09cde8dbeeb0cf147258ca49d551ae2b59e57",
+          "marketplaceSha256": "cb55f3fd6c7f627e414358a281e19985ec9a8a943b986f7f304ab567528e613d",
           "originPath": "plugins/components/skills/menu-item/SKILL.md",
-          "originBlobSha": "b83c2be00a4935894631edf0458c5d1625fb93b0",
-          "originSha256": "7376258a1288a5a1dc2c40a4f3888b023cb0378632638be79fc2eed9db645b08",
+          "originBlobSha": "f2c09cde8dbeeb0cf147258ca49d551ae2b59e57",
+          "originSha256": "cb55f3fd6c7f627e414358a281e19985ec9a8a943b986f7f304ab567528e613d",
           "contentDiffers": false
         },
         {
           "role": "usage",
           "marketplacePath": "catalogs/flex/plugins/components/skills/menu-item/usage.md",
-          "marketplaceBlobSha": "75e4c44aed0be5ca9855fe754db19cb279a28c43",
-          "marketplaceSha256": "c5eca76d1fab6440a40b49e6e9a624124f7010e9532b19e05b846458587eae7d",
+          "marketplaceBlobSha": "1ffdc380778fb5d9819f9f014cbdcd1f82304066",
+          "marketplaceSha256": "3f742bd1ca287d204c99700685b750669f6f5d8fb60245dd028aebe80620f46b",
           "originPath": "plugins/components/skills/menu-item/usage.md",
-          "originBlobSha": "75e4c44aed0be5ca9855fe754db19cb279a28c43",
-          "originSha256": "c5eca76d1fab6440a40b49e6e9a624124f7010e9532b19e05b846458587eae7d",
+          "originBlobSha": "1ffdc380778fb5d9819f9f014cbdcd1f82304066",
+          "originSha256": "3f742bd1ca287d204c99700685b750669f6f5d8fb60245dd028aebe80620f46b",
           "contentDiffers": false
         },
         {
           "role": "web:accessibility",
           "marketplacePath": "catalogs/flex/plugins/components/skills/menu-item/web/accessibility.md",
-          "marketplaceBlobSha": "7d8c6db9b7c30ad79998e6b12458a620e4d84d88",
-          "marketplaceSha256": "bb7e3005ea3e6ecc5b795ce9fe8dc1ac191b11885eb41a956974ffa5473c723d",
+          "marketplaceBlobSha": "79f9d84787572f50446685d9688ba9d38b0ad258",
+          "marketplaceSha256": "19d8440fe774764284cf5641c56a8384da41852ba6e9500562cd7d289d1fb5ef",
           "originPath": "plugins/components/skills/menu-item/web/accessibility.md",
-          "originBlobSha": "7d8c6db9b7c30ad79998e6b12458a620e4d84d88",
-          "originSha256": "bb7e3005ea3e6ecc5b795ce9fe8dc1ac191b11885eb41a956974ffa5473c723d",
+          "originBlobSha": "79f9d84787572f50446685d9688ba9d38b0ad258",
+          "originSha256": "19d8440fe774764284cf5641c56a8384da41852ba6e9500562cd7d289d1fb5ef",
           "contentDiffers": false
         },
         {
           "role": "web:interaction",
           "marketplacePath": "catalogs/flex/plugins/components/skills/menu-item/web/interaction.md",
-          "marketplaceBlobSha": "a5bf707904379a1b10c92064a75b5c9a1e587d50",
-          "marketplaceSha256": "cf6155f944f29e322011b1f228ed934d49032cd4b4701a40c51f536899155d58",
+          "marketplaceBlobSha": "8b8bd9a514835fd24abae66f0c5fda48c29c8511",
+          "marketplaceSha256": "c1e7c609e1faa1e633a91bbda81a9a41b0a527f62222c16a399ea6d636cd83e6",
           "originPath": "plugins/components/skills/menu-item/web/interaction.md",
-          "originBlobSha": "a5bf707904379a1b10c92064a75b5c9a1e587d50",
-          "originSha256": "cf6155f944f29e322011b1f228ed934d49032cd4b4701a40c51f536899155d58",
+          "originBlobSha": "8b8bd9a514835fd24abae66f0c5fda48c29c8511",
+          "originSha256": "c1e7c609e1faa1e633a91bbda81a9a41b0a527f62222c16a399ea6d636cd83e6",
           "contentDiffers": false
         },
         {
           "role": "web:tokens",
           "marketplacePath": "catalogs/flex/plugins/components/skills/menu-item/web/tokens.yaml",
-          "marketplaceBlobSha": "a22f331f21072ae9129093fb95027fbd120b87d2",
-          "marketplaceSha256": "b2cfff32737cc9997e34621fa8d8ba6f422d130994bc95413b276f5f5e4ab59b",
+          "marketplaceBlobSha": "652ae6c870abb059e4f591828ff31a2d40bb31dd",
+          "marketplaceSha256": "ebdb0684afd55da816cfecb0ad290063481f90a0bd5c7e5c3d92eeac72ed8d79",
           "originPath": "plugins/components/skills/menu-item/web/tokens.yaml",
-          "originBlobSha": "a22f331f21072ae9129093fb95027fbd120b87d2",
-          "originSha256": "b2cfff32737cc9997e34621fa8d8ba6f422d130994bc95413b276f5f5e4ab59b",
+          "originBlobSha": "652ae6c870abb059e4f591828ff31a2d40bb31dd",
+          "originSha256": "ebdb0684afd55da816cfecb0ad290063481f90a0bd5c7e5c3d92eeac72ed8d79",
           "contentDiffers": false
         }
       ],
@@ -80,7 +80,7 @@
     },
     {
       "id": "menu-item-multiselect-precedence",
-      "status": "accepted"
+      "status": "resolved"
     },
     {
       "id": "menu-item-disabled-focusable",

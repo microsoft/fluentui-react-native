@@ -1,3 +1,4 @@
+import type { DesktopTooltipProps } from '../../common/desktopTooltipProps';
 import type { FocusTargetBinding } from '@fluentui-react-native/framework-base';
 import type { Pressable, StyleProp, ViewStyle } from 'react-native';
 import type {
@@ -28,26 +29,13 @@ export type ButtonSlots = {
    */
   content: OptionalSlot<typeof Text>;
 
-  /**
-   * The icon displayed within the button. This slot is optional and requires an icon
-   * to be set in ButtonProps['icon'] for the slot to appear.
-   */
-  icon: OptionalSlot<typeof Icon>;
-
-  /**
-   * Optional filled icon displayed in place of `icon` while the button is selected.
-   */
-  selectedIcon: OptionalSlot<typeof Icon>;
-};
-
-type ButtonStateSlots = ButtonSlots & {
-  contentHidden: OptionalSlot<typeof Text>;
+  leadingIcon: OptionalSlot<typeof Icon>;
+  trailingIcon: OptionalSlot<typeof Icon>;
 };
 
 export type ButtonAppearance = 'primary' | 'secondary' | 'outline' | 'subtle';
 export type ButtonSize = 'small' | 'medium' | 'large';
-export type ButtonShape = 'rounded' | 'square' | 'circle';
-export type ButtonIconPosition = 'before' | 'after';
+export type ButtonShape = 'rounded' | 'circular';
 
 export type ButtonStateProps = {
   /**
@@ -66,38 +54,29 @@ export type ButtonStateProps = {
    * The shape of the button.
    */
   shape?: ButtonShape;
-  /**
-   * The position of the icon relative to the button content.
-   */
-  iconPosition?: ButtonIconPosition;
-  /**
-   * Whether the button renders as selected. Supplying this prop enables toggle-button accessibility semantics.
-   * Selection is externally driven: the button never changes it on press, because a press is an action rather than a
-   * state change. Own the value in the caller and update it from `onPress`.
-   */
-  selected?: boolean;
 };
 
 /**
  * Props that are exposed from the underlying Pressable component at the top level. A button controls its
  * own children and resolves styles from tokens, so those props are exposed separately.
  */
-export type ButtonExposedPressableProps = OwnedRootProps<PropsWithRefOf<typeof Pressable>>;
+export type ButtonExposedPressableProps = DesktopTooltipProps & OwnedRootProps<PropsWithRefOf<typeof Pressable>>;
 
 /**
  * Props for the Button component, including state props, slot props, and exposed Pressable props.
  */
 export type ButtonProps = ButtonStateProps & ComponentProps<ButtonSlots, ButtonExposedPressableProps>;
 
-export type ButtonTokenState = Required<Pick<ButtonStateProps, 'size' | 'shape' | 'appearance' | 'selected'>> & {
+export type ButtonTokenState = Required<Pick<ButtonStateProps, 'size' | 'shape' | 'appearance'>> & {
   /** Effective interaction presentation; raw interaction fields remain available for behavior. */
   visualState: 'rest' | 'hovered' | 'pressed' | 'disabled';
   /** Whether the button has an icon without a label. */
   iconOnly: boolean;
+  fluentFallback: boolean;
 };
 
 /** The button state, returned from the useButton hook. */
-export type ButtonState = ComponentState<ButtonStateSlots & FocusVisualsSlots> &
+export type ButtonState = ComponentState<ButtonSlots & FocusVisualsSlots> &
   FocusTargetBinding &
   Required<ButtonStateProps> &
   Omit<ThemeState, 'appearance'> &
@@ -105,10 +84,6 @@ export type ButtonState = ComponentState<ButtonStateSlots & FocusVisualsSlots> &
   ButtonTokenState & {
     themeState: ThemeState;
     buttonTokens: ButtonTokens;
-    /**
-     * Whether selected-state semantics are enabled.
-     */
-    isToggleButton: boolean;
     /**
      * User styling applied after the component's token-derived root styles.
      */

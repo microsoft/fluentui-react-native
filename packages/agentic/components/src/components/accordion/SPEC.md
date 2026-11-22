@@ -3,7 +3,7 @@ name: accordion
 platform: react-native (Windows, macOS)
 status: implemented
 source: ./spec/source.json
-tokens: ./spec/tokens.yaml
+tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
 interaction: ./spec/interaction.md
 usage: ./spec/usage.md
@@ -19,7 +19,7 @@ Accordion is a disclosure component with one pressable header and one body regio
 
 `layout` defaults to `chevronStart`; `size` is currently always `small`. Expansion is self-driving: `defaultExpanded` initializes uncontrolled state, `expanded` makes the value controlled, and `onExpandedChange` receives the requested next value in either mode. `focused` overrides resolved focus for an instance, but does not bypass root modality or force native focus or its system ring. The root accepts the owned `ViewProps` surface, including `style`, while the component owns its accessibility and focus behavior.
 
-`root` is required. `title` and `leadingIcon` are optional public slots but render by default as “Section title” and a selected-circle icon; pass `null` to omit either. `bodyContent` is optional. The rendered root contains the header, then the body. Header children begin with optional `FocusRing`, followed by chevron, leading icon, and title for `chevronStart`; `chevronEnd` orders leading icon, title, then chevron. The body always exists and renders `bodyContent` or a text placeholder.
+`root` is required. `title` and `leadingIcon` are optional public slots but render by default as “Section title” and a selected-circle icon; pass `null` to omit either. `bodyContent` is optional. The rendered root contains the header, then the body. Header children begin with optional `FocusRing`, followed by chevron, leading icon, and title for `chevronStart`; `chevronEnd` orders leading icon, title, then chevron. The body retains its identity and `bodyContent` (or a text placeholder) while collapsed, but is removed from layout and hidden from accessibility.
 
 The resolved state retains the controlled/uncontrolled expansion result, pressable hover/press/focus state, layout, size, theme state, and user root style. User root style follows the structural root style. Header colors give pressed state priority over hovered state.
 
@@ -56,9 +56,12 @@ The body remains mounted. Collapsing it sets height to zero, hides overflow, rem
 
 - `native-system-focus-visuals` — **accepted.** Apply the [shared native adaptation](../../../references/higher-order-components.md#focus-visual-policy).
 
-- `accordion-chevron-end-rotation` — **accepted.** Flex design evidence gives the trailing chevron a down-to-up caret sequence. FURN uses the same chevron source in both layouts and rotates it right-to-down as expansion changes. Changing that sequence requires an implementation and visual-contract review.
+- `accordion-chevron-end-rotation` — **resolved.** The leading disclosure points inward (right in LTR, left in RTL) when collapsed and down when open. The trailing chevron points down when collapsed and up when open.
+- `accordion-panel-and-chevron-motion` — **deferred.** Chevron orientation, header feedback, and panel visibility change immediately; timed motion is not part of this contract revision.
 
 ## Conformance
+
+Unit tests cover direction and state selection; native orientation, focus, and the controls relationship need separate renderer evidence.
 
 | Requirement | Evidence                                                                                   |
 | ----------- | ------------------------------------------------------------------------------------------ |

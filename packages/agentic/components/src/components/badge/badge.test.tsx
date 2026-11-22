@@ -5,6 +5,7 @@ import type { ViewStyle } from 'react-native';
 
 import { render } from '../../common/renderWithTheme';
 
+import { FlexThemeReference, ThemeProvider } from '@fluentui-react-native/design';
 import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
 
 import { Badge } from './badge';
@@ -24,6 +25,21 @@ function getRootStyle(component: Awaited<ReturnType<typeof renderBadge>>): ViewS
   return StyleSheet.flatten(getRoot(component).props.style);
 }
 
+function getIcon(component: Awaited<ReturnType<typeof renderBadge>>, id: string) {
+  return component.getByTestId(id, { includeHiddenElements: true });
+}
+
+function getGlyphPath(node: ReturnType<typeof getIcon>): string | undefined {
+  if (typeof node.props.d === 'string') return node.props.d;
+  for (const child of node.children) {
+    if (typeof child !== 'string') {
+      const path = getGlyphPath(child);
+      if (path) return path;
+    }
+  }
+  return undefined;
+}
+
 describe('Badge', () => {
   it('BDG-002 forwards the root ref and permits a deliberately empty badge without restoring default content', async () => {
     const ref = React.createRef<React.ComponentRef<typeof View>>();
@@ -35,7 +51,7 @@ describe('Badge', () => {
       testID: 'empty-badge',
     });
     expect(ref.current).not.toBeNull();
-    expect(component.getByTestId('empty-badge').children).toHaveLength(0);
+    expect(component.getByTestId('empty-badge').children).toHaveLength(1); // Only the decorative tint layer.
     expect(component.queryByText('Badge')).toBeNull();
     expect(getRoot(component).props).toMatchObject({ accessibilityLabel: 'Status', focusable: false });
     await component.unmount();
@@ -54,7 +70,7 @@ describe('Badge', () => {
       focusable: false,
     });
     expect(component.getByText('Badge', { includeHiddenElements: true })).toBeOnTheScreen();
-    expect(root.children).toHaveLength(2);
+    expect(root.children).toHaveLength(3);
   });
 
   it.each([
@@ -72,7 +88,11 @@ describe('Badge', () => {
       trailingIconVisible,
     });
 
-    expect(getRoot(component).children.map((child) => (typeof child === 'string' ? child : child.props.testID))).toEqual(order);
+    expect(
+      getRoot(component)
+        .children.slice(1)
+        .map((child) => (typeof child === 'string' ? child : child.props.testID)),
+    ).toEqual(order);
   });
 
   it('renders default icon-and-text styling with forwarded icons and label', async () => {
@@ -86,22 +106,26 @@ describe('Badge', () => {
     expect(getRoot(component).props.accessible).toBe(true);
     expect(getRootStyle(component)).toMatchObject({
       alignItems: 'center',
-      backgroundColor: tokens.color.backgroundBrandSoft.rest,
+      backgroundColor: tokens.color.surfaceNeutralNearer.rest,
       borderRadius: tokens.borderRadius.circular,
       minHeight: 20,
       paddingHorizontal: tokens.spacing.componentBase150,
     });
     expect(StyleSheet.flatten(component.getByText('Badge').props.style)).toMatchObject({
-      color: tokens.color.foregroundBrandPrimary.rest,
+      color: tokens.color.foregroundNeutralPrimary.rest,
       fontFamily: expect.any(String),
       fontSize: tokens.fontSize.functionalBodySmall,
     });
-    expect(StyleSheet.flatten(component.getByTestId('leading-icon').props.style)).toMatchObject({
+    expect(StyleSheet.flatten(getIcon(component, 'leading-icon').props.style)).toMatchObject({
       height: 16,
       width: 16,
     });
-    expect(StyleSheet.flatten(component.getByText(String.fromCodePoint(badgeIcon.fontSource.codepoint)).props.style)).toMatchObject({
-      color: tokens.color.foregroundBrandPrimary.rest,
+    expect(
+      StyleSheet.flatten(
+        component.getByText(String.fromCodePoint(badgeIcon.fontSource.codepoint), { includeHiddenElements: true }).props.style,
+      ),
+    ).toMatchObject({
+      color: tokens.color.foregroundNeutralPrimary.rest,
     });
   });
 
@@ -115,7 +139,7 @@ describe('Badge', () => {
     expect(getRoot(component).props.accessibilityRole).toBe('image');
     expect(getRoot(component).props.accessibilityLabel).toBe('3 unread messages');
     expect(component.queryByText('Badge')).toBeNull();
-    expect(component.getByTestId('leading-icon')).toBeOnTheScreen();
+    expect(getIcon(component, 'leading-icon')).toBeOnTheScreen();
   });
 
   it('warns when an icon-only badge is missing an accessibility label', async () => {
@@ -153,16 +177,14 @@ describe('Badge', () => {
 
     expect(getRoot(component).children).toHaveLength(3);
     expect(getRootStyle(component).backgroundColor).toBe('hotpink');
-    expect(component.getByTestId('trailing-icon')).toBeOnTheScreen();
+    expect(getIcon(component, 'trailing-icon')).toBeOnTheScreen();
   });
 
   it.each([
-    ['tint', 'brand', 'backgroundBrandSoft', 'foregroundBrandPrimary', 'strokeNeutralTransparent', 0],
     ['tint', 'danger', 'backgroundDangerSoft', 'foregroundDangerPrimary', 'strokeNeutralTransparent', 0],
     ['tint', 'success', 'backgroundSuccessSoft', 'foregroundSuccessPrimary', 'strokeNeutralTransparent', 0],
     ['tint', 'warning', 'backgroundWarningSoft', 'foregroundWarningPrimary', 'strokeNeutralTransparent', 0],
     ['tint', 'informative', 'backgroundNeutralSoft', 'foregroundNeutralPrimary', 'strokeNeutralTransparent', 0],
-    ['outline', 'brand', 'backgroundNeutralTransparent', 'foregroundBrandPrimary', 'strokeBrandLoud', 1],
     ['outline', 'danger', 'backgroundNeutralTransparent', 'foregroundDangerPrimary', 'strokeDangerLoud', 1],
     ['outline', 'success', 'backgroundNeutralTransparent', 'foregroundSuccessPrimary', 'strokeSuccessLoud', 1],
     ['outline', 'warning', 'backgroundNeutralTransparent', 'foregroundWarningPrimary', 'strokeWarningLoud', 1],
@@ -178,10 +200,16 @@ describe('Badge', () => {
     });
 
     expect(getRootStyle(component)).toMatchObject({
-      backgroundColor: tokens.color[backgroundToken].rest,
+      backgroundColor: appearance === 'tint' ? tokens.color.surfaceNeutralNearer.rest : tokens.color[backgroundToken].rest,
       borderColor: tokens.color[borderToken].rest,
       borderWidth,
     });
+    if (appearance === 'tint') {
+      const tint = getRoot(component).children[0];
+      if (typeof tint === 'string') throw new TypeError('Tint must be a native view.');
+      expect(tint.props.pointerEvents).toBe('none');
+      expect(StyleSheet.flatten(tint.props.style).backgroundColor).toBe(tokens.color[backgroundToken].rest);
+    }
     expect(StyleSheet.flatten(component.getByText('Badge').props.style).color).toBe(tokens.color[foregroundToken].rest);
   });
 
@@ -209,22 +237,93 @@ describe('Badge', () => {
       minHeight: height,
       paddingHorizontal: tokens.spacing[paddingToken],
     });
-    expect(StyleSheet.flatten(rounded.getByTestId('leading-icon').props.style).height).toBe(iconSize);
-    expect(StyleSheet.flatten(rounded.getByTestId('leading-icon').props.style).width).toBe(iconSize);
+    expect(StyleSheet.flatten(getIcon(rounded, 'leading-icon').props.style).height).toBe(iconSize);
+    expect(StyleSheet.flatten(getIcon(rounded, 'leading-icon').props.style).width).toBe(iconSize);
     expect(getRootStyle(rounded).borderRadius).toBe(tokens.borderRadius[roundedRadiusToken]);
     expect(getRootStyle(circular).borderRadius).toBe(tokens.borderRadius.circular);
   });
 
-  it('renders content before the trailing icon and does not render a hidden label on icon-only layouts', async () => {
+  it('renders the default icon for a named icon-only status without adding a label slot', async () => {
     const component = await renderBadge({
       accessibilityLabel: 'Verified',
       layout: 'iconOnly',
-      leadingIcon: { ...badgeIcon, testID: 'leading-icon' },
-      trailingIcon: { ...trailingIcon, testID: 'trailing-icon' },
+      leadingIcon: { testID: 'default-icon' },
     });
 
-    expect(component.queryByTestId('trailing-icon')).toBeNull();
+    expect(getIcon(component, 'default-icon')).toBeOnTheScreen();
     expect(component.queryByText('Badge')).toBeNull();
-    expect(getRoot(component).children).toHaveLength(1);
+    expect(getRoot(component).children).toHaveLength(2);
+  });
+
+  it('changes the default glyph with status and does not replace a caller glyph', async () => {
+    const props = { appearance: 'outline', layout: 'iconOnly', accessibilityLabel: 'Status' } as const;
+    const icon = { testID: 'status-icon' };
+    const component = await renderBadge({ ...props, color: 'warning', leadingIcon: icon });
+    const glyphPath = () => getGlyphPath(getIcon(component, 'status-icon'));
+    const warning = glyphPath();
+    expect(warning).toEqual(expect.any(String));
+
+    await component.rerender(<Badge {...props} color="success" leadingIcon={icon} />);
+    expect(glyphPath()).toEqual(expect.any(String));
+    expect(glyphPath()).not.toBe(warning);
+
+    await component.rerender(<Badge {...props} color="danger" leadingIcon={{ ...badgeIcon, testID: 'status-icon' }} />);
+    expect(glyphPath()).toBeUndefined();
+    expect(component.getByText(String.fromCodePoint(badgeIcon.fontSource.codepoint), { includeHiddenElements: true })).toBeOnTheScreen();
+  });
+
+  it('lets theme patches control the independently stacked tint layers', async () => {
+    const theme = new FlexThemeReference({
+      componentTokens: { 'furn.badge': { root: { backgroundColor: '#102030' }, tint: { backgroundColor: '#456789' } } },
+    });
+    const component = await render(
+      <ThemeProvider theme={theme} appearance={{ colorScheme: 'dark', contrast: 'highContrast' }}>
+        <Badge accessibilityLabel="Status" color="danger" />
+      </ThemeProvider>,
+    );
+
+    expect(getRootStyle(component).backgroundColor).toBe('#102030');
+    const tint = getRoot(component).children[0];
+    if (typeof tint === 'string') throw new TypeError('Tint must be a native view.');
+    expect(StyleSheet.flatten(tint.props.style).backgroundColor).toBe('#456789');
+  });
+
+  it.each([
+    ['small', 16, 6],
+    ['medium', 20, 8],
+  ] as const)('keeps %s notifications decorative while switching from an expanding counter to a fixed dot', async (size, counter, dot) => {
+    const component = await renderBadge({
+      layout: 'counter',
+      size,
+      count: '99+',
+      color: 'danger',
+      testID: 'notification',
+      accessible: true,
+    });
+    const getNotification = () => component.getByTestId('notification', { includeHiddenElements: true });
+    const tokens = defaultFlexTokens;
+    expect(getNotification().props).toMatchObject({
+      accessible: false,
+      focusable: false,
+      importantForAccessibility: 'no-hide-descendants',
+    });
+    expect(StyleSheet.flatten(getNotification().props.style)).toMatchObject({
+      minHeight: counter,
+      minWidth: counter,
+      backgroundColor: tokens.color.backgroundDangerLoud.rest,
+    });
+    expect(StyleSheet.flatten(getNotification().props.style).width).toBeUndefined();
+    expect(StyleSheet.flatten(component.getByText('99+', { includeHiddenElements: true }).props.style).color).toBe(
+      tokens.color.foregroundDangerOnloud.rest,
+    );
+
+    await component.rerender(<Badge layout="dot" size={size} testID="notification" />);
+    expect(getNotification().children).toHaveLength(0);
+    expect(StyleSheet.flatten(getNotification().props.style)).toMatchObject({
+      width: dot,
+      height: dot,
+      borderRadius: tokens.borderRadius.circular,
+      borderColor: tokens.color.strokeNeutralOnloud.rest,
+    });
   });
 });

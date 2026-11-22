@@ -1,40 +1,40 @@
 {
   "schemaVersion": 1,
-  "id": "flex-1.5.0-206c4996",
-  "fingerprint": "a69997212ec1b89510c94176801bf5a146ed7e7d8c80cc7db40ac8f60cf9f119",
-  "verifiedDate": "2026-08-28",
+  "id": "flex-1.7.0-9f1df394",
+  "fingerprint": "33c7dbb4ff78525a4e0900811f5fa1994579ee8dd95b337de85d8f47133d148c",
+  "verifiedDate": "2026-11-20",
   "release": {
     "marketplaceRepository": "agency-microsoft/.github-private",
-    "marketplaceIndexCommit": "206c4996205b027f4d806ac4ac7366f1f0ab0d5a",
-    "promotionCommit": "6adfeccb3d49ed600beed98f14ee159e8c7a6208",
+    "marketplaceIndexCommit": "9f1df394126dd9ad2339b786ab7dcc090131533c",
+    "promotionCommit": "1f7e7d93f32dd948caae77130f7c6920b86f8799",
     "playgroundRepository": "agency-microsoft/playground",
-    "playgroundSyncCommit": "cbf3f8b7dbc024a9acc338c276cefcab009cd667",
-    "originRepository": "x3-design/fluent-design",
-    "originCommit": "334d3b82a08b610b0002fe922ce9b4dac4db64f2",
-    "originComponentTreeSha": "b7e8a28465aa336223709e91f35d4c4684e16f61",
-    "originCatalogBlobSha": "df2e433c0d7501642179fa54f628203bc05d5ab6"
+    "playgroundSyncCommit": "d1d2662883a13a503074136477ff20bf0844985b",
+    "originRepository": "https://msft.ghe.com/x3-design/fluent-design",
+    "originCommit": "34d42dee014daed6fe4cd4580bb9e7d526a4cf63",
+    "originComponentTreeSha": "cc59e014742b99214d72e1bcdc3e5ae362c8db71",
+    "originCatalogBlobSha": "496f62eb85ce1b9b37497ad3446d3f943a7cf1fa"
   },
   "plugins": [
     {
       "name": "flex-components",
-      "version": "1.5.0",
+      "version": "1.7.0",
       "versionIsAdvisory": true,
-      "spec": "market:flex-components@curated#206c4996205b027f4d806ac4ac7366f1f0ab0d5a",
-      "treeSha": "b08bdc0d5ad2677f34d2010fd384bd37109a14e3"
+      "spec": "market:flex-components@curated#9f1df394126dd9ad2339b786ab7dcc090131533c",
+      "treeSha": "723f98ffbb7495f6b35dd2d04232c2d1f37b7774"
     },
     {
       "name": "flex-system",
-      "version": "1.5.0",
+      "version": "1.6.1",
       "versionIsAdvisory": true,
-      "spec": "market:flex-system@curated#206c4996205b027f4d806ac4ac7366f1f0ab0d5a",
-      "treeSha": "4529d8f9af7a4790ca66de183487147a08667916"
+      "spec": "market:flex-system@curated#9f1df394126dd9ad2339b786ab7dcc090131533c",
+      "treeSha": "18f20905f28118dfce3520f9b4dbaebc239a1a13"
     },
     {
       "name": "flex-tokens",
-      "version": "1.4.0",
+      "version": "1.6.0",
       "versionIsAdvisory": true,
-      "spec": "market:flex-tokens@curated#206c4996205b027f4d806ac4ac7366f1f0ab0d5a",
-      "treeSha": "0ccc639601bff986c4c197813df85eebacf4909e"
+      "spec": "market:flex-tokens@curated#9f1df394126dd9ad2339b786ab7dcc090131533c",
+      "treeSha": "9dd0bd16ebd7687d3092658d106a3b9ea0b4c551"
     }
   ],
   "catalog": {
@@ -48,7 +48,11 @@
       "button",
       "card",
       "checkbox",
+      "color-area",
+      "color-picker",
+      "color-slider",
       "combobox",
+      "compound-button",
       "destructive-button",
       "dialog",
       "divider",
@@ -69,26 +73,39 @@
       "message-bar",
       "nav",
       "nav-item",
+      "persona",
       "popover",
+      "presence-badge",
       "progress-bar",
       "radio",
       "radio-group",
+      "rating",
+      "rating-display",
+      "rating-item",
       "scrollbar",
       "search-box",
       "select",
       "simple-nav",
       "skeleton",
+      "slider",
+      "spin-button",
       "spinner",
       "split-button",
+      "swatch",
+      "swatch-picker",
       "switch",
       "tab",
       "tablist",
       "tag",
+      "tag-picker",
       "teaching-popover",
       "textarea",
+      "toast",
       "toggle-button",
       "toolbar",
-      "tooltip"
+      "tooltip",
+      "tree",
+      "tree-item"
     ]
   },
   "legacySpecEvidence": {

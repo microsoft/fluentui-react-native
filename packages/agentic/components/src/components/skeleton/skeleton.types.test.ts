@@ -19,9 +19,12 @@ const InvalidSkeletonProps: SkeletonProps = {
   children: 'nope',
 };
 
+const SkeletonOwnsFocusable: SkeletonProps['focusable'] extends undefined ? true : never = true;
+
 describe('Skeleton slot types', () => {
   it('accepts root view props and slot consumption', () => {
     expect(BasicSkeletonProps).toBeDefined();
     expect(SkeletonSlot).toBeDefined();
+    expect(SkeletonOwnsFocusable).toBe(true);
   });
 });

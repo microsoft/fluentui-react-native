@@ -1,8 +1,9 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import * as React from 'react';
-import { Text } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 import type { View } from 'react-native';
 import { act, fireEvent, screen } from '@testing-library/react-native';
+import { FlexThemeReference, ThemeProvider } from '@fluentui-react-native/design';
 
 import { render } from '../../common/renderWithTheme';
 import { Popover } from './popover';
@@ -189,6 +190,18 @@ describe('Popover', () => {
     expect(style).toMatchObject({ borderStyle: 'solid', padding: 2 });
     expect(style.backgroundColor).toBeDefined();
     expect(style.borderRadius).toBeGreaterThan(0);
+  });
+
+  it('subtracts the resolved stroke from the themed surface inset', async () => {
+    const theme = new FlexThemeReference({
+      componentTokens: { 'furn.popover': { surface: { padding: 19, borderWidth: 3 } } },
+    });
+    await render(
+      <ThemeProvider theme={theme}>
+        <Scene defaultOpen />
+      </ThemeProvider>,
+    );
+    expect(StyleSheet.flatten(screen.getByTestId('surface').props.style)).toMatchObject({ padding: 16, borderWidth: 3 });
   });
 
   it('enters the first eligible content after native readiness', async () => {

@@ -1,3 +1,4 @@
+import type { DesktopTooltipProps } from '../../common/desktopTooltipProps';
 import type * as React from 'react';
 import type { FocusTargetBinding } from '@fluentui-react-native/framework-base';
 import type { Pressable, StyleProp, TextStyle, View, ViewStyle } from 'react-native';
@@ -6,6 +7,7 @@ import type {
   ComponentState,
   OptionalSlot,
   OwnedRootProps,
+  OptionalSlotProp,
   PropsWithRefOf,
   Slot,
 } from '@fluentui-react-native/framework-base';
@@ -17,6 +19,7 @@ import type { CheckboxIndicator } from '../../primitives/checkbox-indicator/chec
 import type { ItemSecondaryContentPosition } from '../../common/item.types';
 
 export type MenuItemStyle = 'list-item' | 'section-header';
+export type MenuItemSelectionMode = 'none' | 'single' | 'multiple';
 
 /**
  * A submenu declared by a list row inside a Menu: View props with `ref` for the submenu surface, plus its MenuItem and
@@ -32,11 +35,9 @@ export type MenuItemStateProps = {
   /** Keep a disabled list row focusable without allowing activation. Headers remain nonfocusable. */
   disabledFocusable?: boolean;
   loading?: boolean;
-  hasMultiselect?: boolean;
-  hasCheckmark?: boolean;
-  hasChevron?: boolean;
   menuStyle?: MenuItemStyle;
   secondaryContentPosition?: MenuItemSecondaryContentPosition;
+  selectionMode?: MenuItemSelectionMode;
   /**
    * Whether the component renders as selected. Selection is externally driven: the caller or the surrounding group
    * owns the value, and the component reports interactions through `onPress` rather than changing it.
@@ -48,20 +49,24 @@ export type MenuItemSlots = {
   root: Slot<typeof Pressable>;
   icon: OptionalSlot<typeof Icon>;
   selectedIcon: OptionalSlot<typeof Icon>;
+  trailingIcon: OptionalSlot<typeof Icon>;
   avatar: OptionalSlot<typeof View>;
   chevron: OptionalSlot<typeof Icon>;
   checkmark: OptionalSlot<typeof Icon>;
   multiselectCheckbox: OptionalSlot<typeof CheckboxIndicator>;
 };
 
-export type MenuItemExposedPressableProps = OwnedRootProps<PropsWithRefOf<typeof Pressable>>;
+export type MenuItemExposedPressableProps = DesktopTooltipProps & OwnedRootProps<PropsWithRefOf<typeof Pressable>>;
 
 export type MenuItemProps = MenuItemStateProps & {
   content?: string | null;
   secondaryContent?: string | null;
-  /** Inside a Menu, the submenu this row opens. Outside a Menu it renders no popup. */
-  submenu?: MenuItemSubmenuProps;
-} & ComponentProps<MenuItemSlots, MenuItemExposedPressableProps>;
+} & (
+    | { selectionMode?: 'none'; submenu?: never; trailingIcon?: OptionalSlotProp<typeof Icon> }
+    | { selectionMode: 'single' | 'multiple'; submenu?: never; trailingIcon?: never }
+    | { selectionMode?: 'none'; submenu: MenuItemSubmenuProps; trailingIcon?: never }
+  ) &
+  ComponentProps<Omit<MenuItemSlots, 'trailingIcon'>, MenuItemExposedPressableProps>;
 
 export type MenuItemState = ComponentState<MenuItemSlots & FocusVisualsSlots> &
   FocusTargetBinding &
@@ -70,6 +75,9 @@ export type MenuItemState = ComponentState<MenuItemSlots & FocusVisualsSlots> &
     contentText: string;
     secondaryContentText?: string | null;
     hasSecondaryContent: boolean;
+    visualState: 'rest' | 'hovered' | 'pressed' | 'disabled';
+    contentGap?: number;
+    layoutGap?: number;
     isListItem: boolean;
     isSelectedVisual: boolean;
     userStyle?: StyleProp<ViewStyle>;

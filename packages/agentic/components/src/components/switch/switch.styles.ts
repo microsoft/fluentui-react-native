@@ -1,227 +1,129 @@
-import { StyleSheet } from 'react-native';
 import type { TextStyle, ViewStyle } from 'react-native';
-
-import type { FlexTokens } from '@fluentui-react-native/design';
+import type { ThemeState } from '@fluentui-react-native/design';
 import {
-  getStateStyleFactory,
-  getThemedColorStyleFactory,
-  getThemedStateStyleFactory,
-  interactiveStatePriority,
+  alignItemsToken,
+  alignSelfToken,
+  borderStyleToken,
+  colorToken,
+  defineComponentTokens,
+  dimensionToken,
+  flexDirectionToken,
+  fontWeightToken,
+  getComponentTokens,
+  justifyContentToken,
+  numericToken,
+  positionToken,
+  resolveTokenStates,
+  stringToken,
 } from '@fluentui-react-native/design/styling';
-import type { ColorStyleDefinition, StateNames, StyleDefinition, ViewColorStyle } from '@fluentui-react-native/design/styling';
-import { size20, size40, size80, size200, size360, size400, size560 } from '@fluentui-react-native/design/tokens/global';
-
+import type { ComponentTokenPatch } from '@fluentui-react-native/design/styling';
 import type { SwitchState } from './switch.types';
+import schema from './spec/tokens.json' with { type: 'json' };
 
-export const switchStyles = StyleSheet.create({
+type SwitchTokenState = Pick<SwitchState, 'checked' | 'layout'> & { visualState: 'rest' | 'hovered' | 'pressed' | 'disabled' };
+const domains = {
   container: {
-    alignSelf: 'flex-start',
+    style: {
+      alignItems: alignItemsToken,
+      alignSelf: alignSelfToken,
+      flexDirection: flexDirectionToken,
+    },
+    props: {},
   },
   root: {
-    alignItems: 'center',
-    alignSelf: 'flex-start',
-    backgroundColor: 'transparent',
-    borderStyle: 'solid',
-    justifyContent: 'center',
-    minHeight: size360,
-    minWidth: size560,
-    paddingHorizontal: size80,
-    paddingVertical: size80,
+    style: {
+      alignItems: alignItemsToken,
+      alignSelf: alignSelfToken,
+      backgroundColor: colorToken,
+      borderStyle: borderStyleToken,
+      justifyContent: justifyContentToken,
+      minHeight: dimensionToken,
+      minWidth: dimensionToken,
+      paddingHorizontal: dimensionToken,
+      paddingVertical: dimensionToken,
+      borderRadius: numericToken,
+    },
+    props: {},
   },
   track: {
-    alignItems: 'center',
-    height: size200,
-    justifyContent: 'center',
-    position: 'relative',
-    borderStyle: 'solid',
-    width: size400,
+    style: {
+      alignItems: alignItemsToken,
+      justifyContent: justifyContentToken,
+      position: positionToken,
+      borderStyle: borderStyleToken,
+      width: numericToken,
+      height: numericToken,
+      borderRadius: numericToken,
+      borderWidth: numericToken,
+      flexShrink: numericToken,
+      backgroundColor: colorToken,
+      borderColor: colorToken,
+    },
+    props: {},
   },
   thumb: {
-    height: 14,
-    position: 'absolute',
-    top: size20,
-    width: 14,
-    left: size20,
+    style: {
+      width: numericToken,
+      height: numericToken,
+      position: positionToken,
+      start: numericToken,
+      top: numericToken,
+      borderRadius: numericToken,
+      backgroundColor: colorToken,
+    },
+    props: {},
   },
   label: {
-    flexShrink: 1,
-    minWidth: 0,
+    style: {
+      flexShrink: numericToken,
+      minWidth: dimensionToken,
+      color: colorToken,
+      fontFamily: stringToken,
+      fontSize: numericToken,
+      fontWeight: fontWeightToken,
+      lineHeight: numericToken,
+    },
+    props: {},
   },
-});
-
-const layoutStateLevels = [['switch', 'horizontal', 'vertical']] as const;
-type LayoutStateLevels = typeof layoutStateLevels;
-
-const getLayoutStyle = getStateStyleFactory<ViewStyle, LayoutStateLevels>(
-  {
-    switch: {
-      flexDirection: 'column',
-      gap: 0,
-      padding: 0,
-    },
-    horizontal: {
-      alignItems: 'center',
-      flexDirection: 'row',
-      gap: size40,
-      padding: size80,
-    },
-    vertical: {
-      alignItems: 'flex-start',
-      flexDirection: 'column',
-      gap: size40,
-      padding: size80,
-    },
-  },
-  layoutStateLevels,
-);
-
-export function getSwitchLayoutStyle(layout: SwitchState['layout']): ViewStyle {
-  return getLayoutStyle([layout]);
-}
-
-const baseStateLevels = [['base']] as const;
-
-const getRootBaseStyle = getThemedStateStyleFactory(
-  'Switch.rootBase',
-  ({ borderRadius }: FlexTokens): StyleDefinition<ViewStyle, typeof baseStateLevels> => ({
-    base: {
-      borderRadius: borderRadius.circular,
-    },
-  }),
-  baseStateLevels,
-);
-
-export function getSwitchRootBaseStyle(state: SwitchState): ViewStyle {
-  return getRootBaseStyle(state, ['base']);
-}
-
-const getTrackBaseStyle = getThemedStateStyleFactory(
-  'Switch.trackBase',
-  ({ borderRadius, strokeWidth }: FlexTokens): StyleDefinition<ViewStyle, typeof baseStateLevels> => ({
-    base: {
-      borderRadius: borderRadius.circular,
-      borderWidth: strokeWidth.thin,
-    },
-  }),
-  baseStateLevels,
-);
-
-export function getSwitchTrackBaseStyle(state: SwitchState): ViewStyle {
-  return getTrackBaseStyle(state, ['base']);
-}
-
-const getThumbBaseStyle = getThemedStateStyleFactory(
-  'Switch.thumbBase',
-  ({ borderRadius }: FlexTokens): StyleDefinition<ViewStyle, typeof baseStateLevels> => ({
-    base: {
-      borderRadius: borderRadius.circular,
-    },
-  }),
-  baseStateLevels,
-);
-
-export function getSwitchThumbBaseStyle(state: SwitchState): ViewStyle {
-  return getThumbBaseStyle(state, ['base']);
-}
-
-const labelStateLevels = [['disabled']] as const;
-
-const getLabelStyle = getThemedStateStyleFactory(
-  'Switch.label',
-  ({ color, fontFamily, fontSize, fontWeight, lineHeight }: FlexTokens): StyleDefinition<TextStyle, typeof labelStateLevels> => ({
-    color: color.foregroundNeutralPrimary.rest,
-    fontFamily: fontFamily.functional,
-    fontSize: fontSize.functionalBodyMedium,
-    fontWeight: fontWeight.functionalRegular,
-    lineHeight: lineHeight.functionalBodyMedium,
-    disabled: {
-      color: color.foregroundNeutralDisabled.rest,
-    },
-  }),
-  labelStateLevels,
-);
-
-export function getSwitchLabelStyle(state: SwitchState): TextStyle {
-  return getLabelStyle(state, state.disabled ? ['disabled'] : []);
-}
-
-const colorStateLevels = [['checked'], interactiveStatePriority] as const;
-type ColorStateLevels = typeof colorStateLevels;
-type ColorState = StateNames<ColorStateLevels>;
-
-const trackColorDefinition: ColorStyleDefinition<ViewColorStyle, ColorStateLevels> = {
-  backgroundColor: 'backgroundNeutralTransparent',
-  borderColor: 'foregroundNeutralSecondary',
-  disabled: {
-    backgroundColor: 'backgroundNeutralTransparent',
-    borderColor: 'strokeNeutralDisabled',
-  },
-  checked: {
-    backgroundColor: 'backgroundNeutralHeavy',
-    borderColor: 'strokeNeutralHeavy',
-    disabled: {
-      backgroundColor: 'backgroundNeutralHeavyDisabled',
-      borderColor: 'strokeNeutralDisabled',
-    },
-  },
+  beforeLabel: { style: { paddingStart: dimensionToken, paddingEnd: dimensionToken }, props: {} },
+  afterLabel: { style: { paddingStart: dimensionToken, paddingEnd: dimensionToken }, props: {} },
+  aboveLabel: { style: { paddingTop: dimensionToken, paddingBottom: dimensionToken }, props: {} },
+  motion: { style: {}, props: { duration: numericToken } },
 };
 
-const thumbColorDefinition: ColorStyleDefinition<ViewColorStyle, ColorStateLevels> = {
-  backgroundColor: 'foregroundNeutralSecondary',
-  disabled: {
-    backgroundColor: 'foregroundNeutralDisabled',
-  },
-  checked: {
-    backgroundColor: 'foregroundNeutralOnloud',
-    disabled: {
-      backgroundColor: 'foregroundNeutralDisabled',
-    },
-  },
-};
-
-const getTrackColors = getThemedColorStyleFactory<ViewColorStyle, ColorStateLevels>(
-  'Switch.trackColor',
-  trackColorDefinition,
-  colorStateLevels,
-);
-
-const getThumbColors = getThemedColorStyleFactory<ViewColorStyle, ColorStateLevels>(
-  'Switch.thumbColor',
-  thumbColorDefinition,
-  colorStateLevels,
-);
-
-function getColorStateSource(state: Pick<SwitchState, 'disabled' | 'hovered' | 'pressed'>, checked: boolean): ColorState[] {
-  const source: ColorState[] = [];
-  if (checked) {
-    source.push('checked');
+declare module '@fluentui-react-native/design' {
+  interface ComponentTokenRegistry {
+    'furn.switch': ComponentTokenPatch<SwitchTokenState, typeof domains>;
   }
-  if (state.disabled) {
-    source.push('disabled');
-  }
-  if (state.pressed) {
-    source.push('pressed');
-  }
-  if (state.hovered) {
-    source.push('hovered');
-  }
-  return source;
 }
 
-export function getSwitchTrackColorStyle(
-  state: Pick<SwitchState, 'tokens' | 'disabled' | 'hovered' | 'pressed'>,
-  checked: boolean,
-): ViewColorStyle {
-  return getTrackColors(state as SwitchState, getColorStateSource(state, checked));
+const switchTokens = defineComponentTokens<SwitchTokenState, typeof domains>({ id: 'furn.switch', slots: domains, schema });
+
+export function getSwitchDuration(theme: ThemeState, state: SwitchTokenState) {
+  return resolveTokenStates(getComponentTokens(theme, switchTokens).motion, state).props.duration ?? 0;
 }
 
-export function getSwitchThumbColorStyle(
-  state: Pick<SwitchState, 'tokens' | 'disabled' | 'hovered' | 'pressed'>,
-  checked: boolean,
-): ViewColorStyle {
-  return getThumbColors(state as SwitchState, getColorStateSource(state, checked));
-}
-
-export function getSwitchThumbTranslateDistance(state: Pick<SwitchState, 'tokens'>): number {
-  return size400 - state.tokens.strokeWidth.thin * 2 - size20 * 2 - 14;
+export function resolveSwitchChrome(state: SwitchState): {
+  container: ViewStyle;
+  root: ViewStyle;
+  track: ViewStyle & { width?: number };
+  thumb: ViewStyle & { start?: number; width?: number };
+  label: TextStyle;
+  beforeLabel: TextStyle;
+  afterLabel: TextStyle;
+  aboveLabel: TextStyle;
+} {
+  const tokens = getComponentTokens(state, switchTokens);
+  const visualState = state.disabled ? 'disabled' : state.pressed ? 'pressed' : state.hovered ? 'hovered' : 'rest';
+  const selection = { ...state, visualState } satisfies SwitchTokenState;
+  return {
+    container: resolveTokenStates(tokens.container, selection).style,
+    root: resolveTokenStates(tokens.root, selection).style,
+    track: resolveTokenStates(tokens.track, selection).style,
+    thumb: resolveTokenStates(tokens.thumb, selection).style,
+    label: resolveTokenStates(tokens.label, selection).style,
+    beforeLabel: resolveTokenStates(tokens.beforeLabel, selection).style,
+    afterLabel: resolveTokenStates(tokens.afterLabel, selection).style,
+    aboveLabel: resolveTokenStates(tokens.aboveLabel, selection).style,
+  };
 }

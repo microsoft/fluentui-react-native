@@ -5,6 +5,7 @@ import { fireEvent } from '@testing-library/react-native';
 import { render } from '../../common/renderWithTheme';
 import { useReducedMotion } from '@fluentui-react-native/framework-base';
 import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
+import { FlexThemeReference, ThemeProvider } from '@fluentui-react-native/design';
 
 import { ProgressBar } from './progress-bar';
 
@@ -116,7 +117,7 @@ describe('ProgressBar', () => {
   );
 
   it.each([
-    ['neutral', 'foregroundBrandPrimary'],
+    ['neutral', 'foregroundNeutralPrimary'],
     ['error', 'foregroundDangerPrimary'],
     ['success', 'foregroundSuccessPrimary'],
   ] as const)('PGB-007 shares the %s status color between indicator and decorative validation icon', async (status, token) => {
@@ -153,7 +154,11 @@ describe('ProgressBar', () => {
           await fireEvent(getTrack(component), 'layout', {
             nativeEvent: { layout: { height: 4, width, x: 0, y: 0 } },
           });
-          expect(getIndicatorStyle(component).width).toBeCloseTo((width * resolved) / 100);
+          if (type === 'determinate') {
+            expect(getIndicatorStyle(component)).toMatchObject({ width, transform: [expect.any(Object), { scaleX: resolved / 100 }] });
+          } else {
+            expect(getIndicatorStyle(component).width).toBeCloseTo((width * resolved) / 100);
+          }
         }
         await component.unmount();
       }
@@ -210,7 +215,7 @@ describe('ProgressBar', () => {
     expect(root.props.accessibilityValue).toMatchObject({ max: 100, min: 0, now: 0 });
   });
 
-  it('resolves the determinate indicator width from progress and preserves user styles last', async () => {
+  it('anchors the determinate scale at the start and preserves user styles last', async () => {
     const component = await renderProgressBar({
       progress: 50,
       style: { backgroundColor: 'hotpink' },
@@ -222,24 +227,45 @@ describe('ProgressBar', () => {
     });
 
     expect(getIndicatorStyle(component)).toMatchObject({
-      backgroundColor: defaultFlexTokens.color.foregroundBrandPrimary.rest,
-      width: 100,
+      backgroundColor: defaultFlexTokens.color.foregroundNeutralPrimary.rest,
+      width: 200,
+      transform: [{ translateX: -50 }, { scaleX: 0.5 }],
     });
     expect(StyleSheet.flatten(getRoot(component).props.style)).toMatchObject({ backgroundColor: 'hotpink' });
     expect(component.getByText('Halfway there')).toBeOnTheScreen();
   });
 
-  it('allows determinate progress to decrease', async () => {
+  it('animates a decrease in determinate progress and snaps when reduced motion is enabled', async () => {
+    const animation = { start: jest.fn(), stop: jest.fn(), reset: jest.fn() };
+    const timing = jest.spyOn(Animated, 'timing').mockReturnValue(animation);
     const component = await renderProgressBar({ progress: 80 });
 
     await fireEvent(getTrack(component), 'layout', {
       nativeEvent: { layout: { height: 4, width: 200, x: 0, y: 0 } },
     });
-    expect(getIndicatorStyle(component).width).toBe(160);
-
+    expect(getIndicatorStyle(component).transform).toEqual([{ translateX: -20 }, { scaleX: 0.8 }]);
     await component.rerender(<ProgressBar progress={25} />);
-    expect(getIndicatorStyle(component).width).toBe(50);
+    expect(timing).toHaveBeenLastCalledWith(expect.any(Animated.Value), expect.objectContaining({ toValue: 0.25 }));
+    expect(animation.start).toHaveBeenCalled();
     expect(getRoot(component).props.accessibilityValue.now).toBe(25);
+    mockUseReducedMotion.mockReturnValue(true);
+    await component.rerender(<ProgressBar progress={25} />);
+    expect(animation.stop).toHaveBeenCalled();
+    expect(getIndicatorStyle(component).width).toBe(50);
+    expect(getIndicatorStyle(component).transform).toBeUndefined();
+  });
+
+  it('lets a theme change the track thickness without changing the header spacing', async () => {
+    const theme = new FlexThemeReference({
+      componentTokens: { 'furn.progress-bar': { track: { height: 10 } } },
+    });
+    const component = await render(
+      <ThemeProvider theme={theme}>
+        <ProgressBar />
+      </ThemeProvider>,
+    );
+    expect(StyleSheet.flatten(getTrack(component).props.style).height).toBe(10);
+    expect(StyleSheet.flatten(getRoot(component).props.style).gap).toBe(defaultFlexTokens.spacing.componentBase100);
   });
 
   it('separates header content and omits an empty trailing group', async () => {

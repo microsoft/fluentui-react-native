@@ -3,8 +3,7 @@
 ## Pointer and keyboard
 
 Skeleton is not a `Pressable`, exposes no press, hover, or focus handlers, and
-holds no interaction state. The root is not focusable by default, but a caller
-can opt it into focus through forwarded `ViewProps`. The root and highlight
+holds no interaction state. The root cannot be focused. The root and highlight
 overlay default to `pointerEvents="none"`, so a placeholder layered over an
 interactive surface does not intercept input. An explicit root override is
 preserved.
@@ -34,7 +33,7 @@ runs between minus that viewport width and the root width, reversed in RTL, so
 the highlight is fully outside the clipped root at both ends of the loop.
 Resizing recomputes the geometry without creating a separate animation clock.
 
-The animation runs through the shared `Animated` loop. It uses the native
+The animation runs through a shared 1.8-second linear `Animated` loop. It uses the native
 driver except on macOS Fabric, whose native transform updates remain static;
 that renderer uses the JavaScript driver. Active placeholders subscribe to one
 shared sweep channel, so instances mounted at different times read the same
@@ -48,7 +47,8 @@ limitation instead of silently substituting a solid moving band.
 ## Motion and lifecycle
 
 While the platform reduced-motion setting is on, the loop is stopped, the clock
-is reset, and the highlight overlay is not rendered. Turning the setting off
+is reset, and the highlight overlay is not rendered. The subtle fill and
+static outline retain the silhouette. Turning the setting off
 restarts the loop from the beginning. No alternative motion is substituted.
 
 There is no enter or exit animation. Mounting a placeholder shows it

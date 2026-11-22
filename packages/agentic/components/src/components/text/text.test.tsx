@@ -129,7 +129,7 @@ describe('Text', () => {
     expect(component.getByTestId('text').props.accessibilityLabel).toBeUndefined();
   });
 
-  it('applies theme typography and foreground defaults', async () => {
+  it('applies theme typography and lets a Text-specific theme patch override the defaults', async () => {
     const theme = new FlexThemeReference({
       base: {
         color: { foregroundNeutralPrimary: '#123456' },
@@ -138,6 +138,7 @@ describe('Text', () => {
         fontWeight: { functionalRegular: '600' },
         lineHeight: { functionalBodyMedium: 23 },
       },
+      componentTokens: { 'furn.text': { root: { lineHeight: 24 } } },
     });
     const { getByTestId } = await render(
       <ThemeProvider theme={theme}>
@@ -150,7 +151,7 @@ describe('Text', () => {
       fontFamily: 'Test Family',
       fontSize: 17,
       fontWeight: '600',
-      lineHeight: 23,
+      lineHeight: 24,
     });
   });
 

@@ -1,6 +1,6 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import * as React from 'react';
-import { Platform, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import type { Pressable, PressableProps, ViewStyle } from 'react-native';
 
 import { fireEvent } from '@testing-library/react-native';
@@ -9,6 +9,7 @@ import type { RenderResult } from '@testing-library/react-native';
 
 import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
 import { FlexThemeReference, ThemeProvider } from '@fluentui-react-native/design';
+import { fluentTheme } from '@fluentui-react-native/design/themes';
 
 import { Button } from './button';
 import type { ButtonAppearance } from './button.types';
@@ -37,7 +38,7 @@ describe('Button', () => {
         <Button
           appearance="primary"
           content={{ children: 'Save', style: { color: '#556677' } }}
-          icon={{ imageSource: { uri: 'save.png' }, testID: 'icon', width: 40 }}
+          leadingIcon={{ imageSource: { uri: 'save.png' }, testID: 'icon', width: 40 }}
           style={{ minWidth: 75 }}
         />
       </ThemeProvider>,
@@ -77,7 +78,7 @@ describe('Button', () => {
     expect(getRootStyle(component)).toMatchObject({
       alignItems: 'center',
       backgroundColor: defaultFlexTokens.color.backgroundNeutralSubtle.rest,
-      minHeight: 24,
+      minHeight: 32,
       minWidth: 24,
     });
   });
@@ -157,7 +158,7 @@ describe('Button', () => {
   it('renders an accessible icon-only button at the minimum target size', async () => {
     const component = await renderButton({
       accessibilityLabel: 'Confirm',
-      icon: { imageSource: { uri: 'confirm.png' }, testID: 'confirm-icon' },
+      leadingIcon: { imageSource: { uri: 'confirm.png' }, testID: 'confirm-icon' },
       size: 'small',
     });
     const root = getRoot(component);
@@ -165,123 +166,27 @@ describe('Button', () => {
 
     expect(root.props.accessibilityLabel).toBe('Confirm');
     expect(getRootStyle(component)).toMatchObject({
-      borderRadius: 9999,
+      borderRadius: defaultFlexTokens.borderRadius.base200,
       minHeight: 24,
       minWidth: 24,
-      paddingHorizontal: 4,
-      paddingVertical: 4,
+      paddingHorizontal: 3,
+      paddingVertical: 3,
     });
     expect(image.props.style).toMatchObject({ height: 16, width: 16 });
   });
 
   it('warns when an icon-only button has no accessible name', async () => {
     const warn = jest.spyOn(console, 'warn').mockImplementation();
-    await renderButton({ icon: { imageSource: { uri: 'confirm.png' } } });
+    await renderButton({ leadingIcon: { imageSource: { uri: 'confirm.png' } } });
 
     expect(warn).toHaveBeenCalledWith('Button: icon-only buttons require an accessibilityLabel that describes the action.');
     warn.mockRestore();
-  });
-
-  it('uses the regular icon while a toggle button is not selected', async () => {
-    const component = await renderButton({
-      accessibilityLabel: 'Favorite',
-      icon: { imageSource: { uri: 'regular.png' }, testID: 'regular-icon' },
-      selected: false,
-      selectedIcon: { imageSource: { uri: 'filled.png' }, testID: 'filled-icon' },
-    });
-
-    expect(component.getByTestId('regular-icon').props.source).toEqual({ uri: 'regular.png' });
-    expect(component.queryByTestId('filled-icon')).toBeNull();
-  });
-
-  it('uses selected semantics, selected icon, and a ghost label to prevent reflow', async () => {
-    const component = await renderButton({
-      content: 'Favorite',
-      icon: { imageSource: { uri: 'regular.png' }, testID: 'regular-icon' },
-      selected: true,
-      selectedIcon: { imageSource: { uri: 'filled.png' }, testID: 'filled-icon' },
-    });
-    const root = getRoot(component);
-    const labels = component.getAllByText('Favorite', { includeHiddenElements: true });
-
-    expect(root.props.accessibilityState).toEqual({ checked: true, disabled: false });
-    expect(component.getByTestId('filled-icon').props.source).toEqual({ uri: 'filled.png' });
-    expect(component.queryByTestId('regular-icon')).toBeNull();
-    expect(labels).toHaveLength(2);
-    expect(StyleSheet.flatten(labels[0].props.style)).toMatchObject({ fontWeight: '600', opacity: 0 });
-    expect(StyleSheet.flatten(labels[1].props.style)).toMatchObject({ fontWeight: '600' });
-    expect(StyleSheet.flatten(labels[1].parent?.props.style)).toMatchObject({ position: 'absolute', justifyContent: 'center' });
-  });
-
-  it('renders selection without changing it on press', async () => {
-    const onPress = jest.fn();
-    const component = await renderButton({ content: 'Favorite', onPress, selected: false });
-
-    expect(getRoot(component).props.accessibilityState.checked).toBe(false);
-
-    await fireEvent.press(getRoot(component));
-
-    expect(onPress).toHaveBeenCalledTimes(1);
-    expect(getRoot(component).props.accessibilityState.checked).toBe(false);
-  });
-
-  it('reserves the selected label width in both selected states so toggling cannot reflow', async () => {
-    const unselected = await renderButton({ content: 'Favorite', selected: false });
-    const selected = await renderButton({ content: 'Favorite', selected: true });
-    const tokens = defaultFlexTokens;
-
-    for (const component of [unselected, selected]) {
-      const labels = component.getAllByText('Favorite', { includeHiddenElements: true });
-      expect(labels).toHaveLength(2);
-      // The ghost always reserves Semibold width, so the visible weight swap cannot resize the button.
-      expect(StyleSheet.flatten(labels[0].props.style)).toMatchObject({
-        fontWeight: tokens.fontWeight.functionalSemibold,
-        opacity: 0,
-      });
-      expect(StyleSheet.flatten(labels[1].parent?.props.style)).toMatchObject({ position: 'absolute', justifyContent: 'center' });
-    }
   });
 
   it('omits selection semantics when no selection prop is supplied', async () => {
     const component = await renderButton({ content: 'Action' });
 
     expect(getRoot(component).props.accessibilityState).toEqual({ disabled: false });
-  });
-
-  it.each([false, true])('declares a native toggle action for selected=%s and owns the checked alias', async (selected) => {
-    const component = await renderButton({ content: 'Favorite', selected, 'aria-checked': !selected });
-    const root = getRoot(component);
-
-    expect(root.props.accessibilityActions).toEqual([{ name: 'Toggle' }]);
-    expect(root.props.accessibilityState.checked).toBe(selected);
-  });
-
-  it.each([
-    ['win32', 'Toggle'],
-    ['windows', 'toggle'],
-    ['macos', 'Toggle'],
-  ] as const)('resolves the native toggle action on %s', async (platform, action) => {
-    const replacement = jest.replaceProperty(Platform, 'OS', platform as typeof Platform.OS);
-    try {
-      const component = await renderButton({ content: 'Favorite', selected: false });
-
-      expect(getRoot(component).props.accessibilityActions).toEqual([{ name: action }]);
-    } finally {
-      replacement.restore();
-    }
-  });
-
-  it('preserves caller action labels and custom actions while deduplicating toggle declarations', async () => {
-    const component = await renderButton({
-      content: 'Favorite',
-      selected: false,
-      accessibilityActions: [{ name: 'toggle' }, { name: 'Toggle', label: 'Choose favorite' }, { name: 'custom', label: 'Details' }],
-    });
-
-    expect(getRoot(component).props.accessibilityActions).toEqual([
-      { name: 'Toggle', label: 'Choose favorite' },
-      { name: 'custom', label: 'Details' },
-    ]);
   });
 
   it('does not add a toggle action to an ordinary button', async () => {
@@ -292,45 +197,43 @@ describe('Button', () => {
     expect(getRoot(component).props['aria-checked']).toBeUndefined();
   });
 
-  it.each([false, true])('preserves the caller action handler with disabled=%s', async (disabled) => {
-    const onAccessibilityAction = jest.fn();
-    const component = await renderButton({ content: 'Favorite', selected: true, disabled, onAccessibilityAction });
-    const root = getRoot(component);
-
-    expect(root.props.onAccessibilityAction).toBe(onAccessibilityAction);
-    expect(root.props.accessibilityState).toEqual({ disabled, checked: true });
-    expect(root.props.accessibilityActions).toEqual([{ name: 'Toggle' }]);
-  });
-
-  it('forwards the original native toggle event without synthesizing a press or changing controlled state', async () => {
-    const onAccessibilityAction = jest.fn();
-    const onPress = jest.fn();
-    const component = await renderButton({ content: 'Favorite', selected: false, onAccessibilityAction, onPress });
-    const event = { nativeEvent: { actionName: 'Toggle' } };
-
-    await fireEvent(getRoot(component), 'accessibilityAction', event);
-
-    expect(onAccessibilityAction).toHaveBeenCalledTimes(1);
-    expect(onAccessibilityAction).toHaveBeenCalledWith(event);
-    expect(onPress).not.toHaveBeenCalled();
-    expect(getRoot(component).props.accessibilityState.checked).toBe(false);
-  });
-
   it('places the icon after content and applies user styles last', async () => {
     const style: ViewStyle = { backgroundColor: 'hotpink' };
     const component = await renderButton({
       content: { children: 'Next', testID: 'content' },
-      icon: { imageSource: { uri: 'next.png' }, testID: 'icon' },
-      iconPosition: 'after',
+      leadingIcon: { imageSource: { uri: 'back.png' }, testID: 'leading' },
+      trailingIcon: { imageSource: { uri: 'next.png' }, testID: 'icon' },
       style,
     });
     const root = getRoot(component);
     const content = component.getByTestId('content');
     const icon = component.getByTestId('icon');
 
-    expect(root.children).toEqual([content, icon]);
+    expect(root.children).toEqual([component.getByTestId('leading'), content, icon]);
     expect(getRootStyle(component).backgroundColor).toBe('hotpink');
   });
+
+  it.each(['leadingIcon', 'trailingIcon'] as const)(
+    'compacts only the edge with a %s and preserves explicit caller padding',
+    async (slot) => {
+      const props = { content: 'Next', [slot]: { imageSource: { uri: 'next.png' } } };
+      const component = await renderButton(props);
+      const { spacing, strokeWidth } = defaultFlexTokens;
+      const horizontal = Number(spacing.componentBase250) - strokeWidth.thin;
+      const edge = slot === 'leadingIcon' ? 'paddingStart' : 'paddingEnd';
+      const oppositeEdge = slot === 'leadingIcon' ? 'paddingEnd' : 'paddingStart';
+
+      expect(getRootStyle(component)).toMatchObject({
+        paddingHorizontal: horizontal,
+        [edge]: horizontal - Number(spacing.componentBase100),
+      });
+      expect(getRootStyle(component)[oppositeEdge]).toBeUndefined();
+
+      await component.rerender(<Button {...props} style={{ paddingHorizontal: 24 }} />);
+      expect(getRootStyle(component).paddingHorizontal).toBe(24);
+      expect(getRootStyle(component)[edge]).toBeUndefined();
+    },
+  );
 
   it('uses native focus visuals without mounting custom rings', async () => {
     const component = await renderButton({ content: 'Focused' });
@@ -355,117 +258,54 @@ describe('Button', () => {
   });
 
   it.each([
-    ['outline', 'backgroundNeutralTransparent', 'strokeNeutralLoud', 'backgroundNeutralTransparent', 'strokeNeutralLoud'],
-    ['subtle', 'backgroundNeutralTransparent', 'strokeNeutralTransparent', 'backgroundNeutralSubtle', 'strokeNeutralTransparent'],
-  ] as const)(
-    'resolves visible interaction feedback for the %s appearance',
-    async (appearance, restBackground, restBorder, interactionBackground, interactionBorder) => {
-      const colors = defaultFlexTokens.color;
-      const component = await renderButton({ appearance, content: appearance });
-      const root = getRoot(component);
+    ['outline', defaultFlexTokens.color.strokeNeutralSubtle.rest],
+    ['subtle', 'transparent'],
+  ] as const)('resolves visible interaction feedback for the %s appearance', async (appearance, borderColor) => {
+    const fill = defaultFlexTokens.color.backgroundNeutralTransparent;
+    const component = await renderButton({ appearance, content: appearance });
+    const root = getRoot(component);
 
-      expect(getRootStyle(component)).toMatchObject({
-        backgroundColor: colors[restBackground].rest,
-        borderColor: colors[restBorder].rest,
-      });
+    expect(getRootStyle(component)).toMatchObject({
+      backgroundColor: fill.rest,
+      borderColor,
+    });
 
-      await fireEvent(root, 'hoverIn', {});
-      expect(getRootStyle(component)).toMatchObject({
-        backgroundColor: colors[interactionBackground].hover,
-        borderColor: colors[interactionBorder].hover,
-      });
+    await fireEvent(root, 'hoverIn', {});
+    expect(getRootStyle(component)).toMatchObject({
+      backgroundColor: fill.hover,
+      borderColor,
+    });
 
-      await fireEvent(root, 'pressIn', {});
-      expect(getRootStyle(component)).toMatchObject({
-        backgroundColor: colors[interactionBackground].pressed,
-        borderColor: colors[interactionBorder].pressed,
-      });
-    },
-  );
+    await fireEvent(root, 'pressIn', {});
+    expect(getRootStyle(component)).toMatchObject({
+      backgroundColor: fill.pressed,
+      borderColor,
+    });
+  });
 
   it('allows constrained content to wrap', async () => {
     const component = await renderButton({
       content: { children: 'Long button content', testID: 'content' },
       style: { width: 120 },
     });
+
     const content = component.getByTestId('content');
 
     expect(content.props.numberOfLines).toBeUndefined();
     expect(StyleSheet.flatten(content.props.style)).toMatchObject({ flexShrink: 1 });
   });
 
-  it.each([
-    [
-      'primary',
-      'backgroundBrandHeavy',
-      'strokeNeutralTransparent',
-      'foregroundBrandOnloud',
-      'backgroundNeutralHeavyDisabled',
-      'strokeNeutralTransparent',
-    ],
-    [
-      'secondary',
-      'backgroundNeutralHeavy',
-      'strokeNeutralTransparent',
-      'foregroundNeutralOnloud',
-      'backgroundNeutralHeavyDisabled',
-      'strokeNeutralTransparent',
-    ],
-    [
-      'outline',
-      'backgroundNeutralHeavy',
-      'strokeNeutralHeavy',
-      'foregroundNeutralOnloud',
-      'backgroundNeutralHeavyDisabled',
-      'strokeNeutralDisabled',
-    ],
-    [
-      'subtle',
-      'backgroundNeutralSoft',
-      'strokeNeutralTransparent',
-      'foregroundNeutralPrimary',
-      'backgroundNeutralSubtleDisabled',
-      'strokeNeutralTransparent',
-    ],
-  ] as const)(
-    'resolves selected %s colors by interaction state',
-    async (appearance, background, border, foreground, disabledBackground, disabledBorder) => {
-      const colors = defaultFlexTokens.color;
-      const component = await renderButton({ appearance, content: appearance, selected: true });
-      const root = getRoot(component);
-      const getForegroundColor = () =>
-        StyleSheet.flatten(component.getAllByText(appearance, { includeHiddenElements: true })[1].props.style).color;
-
-      expect(getRootStyle(component)).toMatchObject({
-        backgroundColor: colors[background].rest,
-        borderColor: colors[border].rest,
-      });
-      expect(getForegroundColor()).toBe(colors[foreground].rest);
-
-      await fireEvent(root, 'hoverIn', {});
-      expect(getRootStyle(component)).toMatchObject({
-        backgroundColor: colors[background].hover,
-        borderColor: colors[border].hover,
-      });
-      expect(getForegroundColor()).toBe(colors[foreground].hover);
-
-      await fireEvent(root, 'pressIn', {});
-      expect(getRootStyle(component)).toMatchObject({
-        backgroundColor: colors[background].pressed,
-        borderColor: colors[border].pressed,
-      });
-      expect(getForegroundColor()).toBe(colors[foreground].pressed);
-
-      const disabledComponent = await renderButton({ appearance, content: appearance, disabled: true, selected: true });
-      expect(getRootStyle(disabledComponent)).toMatchObject({
-        backgroundColor: colors[disabledBackground].rest,
-        borderColor: colors[disabledBorder].rest,
-      });
-      expect(StyleSheet.flatten(disabledComponent.getAllByText(appearance, { includeHiddenElements: true })[1].props.style).color).toBe(
-        colors.foregroundNeutralDisabled.rest,
-      );
-    },
-  );
+  it('preserves visible Subtle hover feedback in the Fluent fallback theme', async () => {
+    const component = await render(
+      <ThemeProvider theme={fluentTheme}>
+        <Button appearance="subtle" content="Act" />
+      </ThemeProvider>,
+    );
+    const before = getRootStyle(component).backgroundColor;
+    await fireEvent(getRoot(component), 'hoverIn', {});
+    expect(getRootStyle(component).backgroundColor).not.toBe(before);
+    expect(getRootStyle(component).borderColor).toBe('transparent');
+  });
 
   it.each([
     ['small', 12, 8, defaultFlexTokens.borderRadius.base200],
@@ -477,7 +317,7 @@ describe('Button', () => {
       fontFamily: expect.any(String),
       fontSize,
     });
-    expect(getRootStyle(component).paddingHorizontal).toBe(paddingHorizontal);
+    expect(getRootStyle(component).paddingHorizontal).toBe(paddingHorizontal - defaultFlexTokens.strokeWidth.thin);
     expect(getRootStyle(component).borderRadius).toBe(borderRadius);
   });
 
@@ -490,21 +330,14 @@ describe('Button', () => {
   });
 
   const appearances: ButtonAppearance[] = ['primary', 'secondary', 'outline', 'subtle'];
-  const visualStates = ['rest', 'hovered', 'pressed', 'focused', 'disabled', 'selected'] as const;
+  const visualStates = ['rest', 'hovered', 'pressed', 'focused', 'disabled'] as const;
 
   it.each(visualStates)('matches the %s visual state snapshot across appearances', async (visualState) => {
     const disabled = visualState === 'disabled';
-    const selected = visualState === 'selected';
     const component = await render(
       <View>
         {appearances.map((appearance) => (
-          <Button
-            key={appearance}
-            appearance={appearance}
-            content={appearance}
-            disabled={disabled}
-            selected={selected ? true : undefined}
-          />
+          <Button key={appearance} appearance={appearance} content={appearance} disabled={disabled} />
         ))}
       </View>,
     );

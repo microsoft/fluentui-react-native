@@ -42,8 +42,10 @@ trigger was activated by pointer, keyboard, or an accessibility action.
 Outcomes come from native confirmation; refused, stale, and cancelled requests
 are not retried with delays.
 
-Tab and Shift+Tab move through focusable content in the popup window and wrap
-there; Escape is the keyboard exit. Popover adds no Tab handling and no
+Tab and Shift+Tab currently move through focusable content in the popup window
+and wrap there; Escape is the keyboard exit. The target is continuation only
+at the content boundary; Callout's existing continuation exits on the first
+Tab and is not appropriate for a multi-control Popover. Popover adds no Tab handling and no
 roving arrow-key behavior; content owns its own navigation.
 
 ## Dismissal and focus return

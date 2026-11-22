@@ -1,3 +1,4 @@
+import type { DesktopTooltipProps } from '../../common/desktopTooltipProps';
 import type { FocusTargetBinding } from '@fluentui-react-native/framework-base';
 import type { Pressable, PressableProps, StyleProp, View, ViewStyle } from 'react-native';
 
@@ -42,9 +43,10 @@ export type CardStateProps = {
   selected?: boolean;
 };
 
-export type CardExposedPressableProps = OwnedRootProps<PressableProps, 'accessibilityRole'> & {
-  children?: never;
-} & Pick<PropsWithRefOf<typeof View>, 'ref'>;
+export type CardExposedPressableProps = DesktopTooltipProps &
+  OwnedRootProps<PressableProps, 'accessibilityRole'> & {
+    children?: never;
+  } & Pick<PropsWithRefOf<typeof View>, 'ref'>;
 
 export type CardProps = CardStateProps & ComponentProps<CardSlots, CardExposedPressableProps>;
 

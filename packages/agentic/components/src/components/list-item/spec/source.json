@@ -3,17 +3,17 @@
   "component": "list-item",
   "lifecycle": "implemented",
   "conformance": "reviewed",
-  "reviewedAt": "2026-09-14",
+  "reviewedAt": "2026-11-20",
   "sources": [
     {
       "id": "flex-component",
       "kind": "flex-skill",
       "authority": "normative",
       "skill": "flex-components:list-item",
-      "sourceLock": "flex-1.5.0-206c4996",
-      "sourceLockFingerprint": "a69997212ec1b89510c94176801bf5a146ed7e7d8c80cc7db40ac8f60cf9f119",
+      "sourceLock": "flex-1.7.0-9f1df394",
+      "sourceLockFingerprint": "33c7dbb4ff78525a4e0900811f5fa1994579ee8dd95b337de85d8f47133d148c",
       "availableSurfaces": ["shared", "web"],
-      "surfacesConsulted": ["shared", "web"],
+      "surfacesConsulted": ["web"],
       "sourceFiles": [
         {
           "role": "skill",
@@ -38,31 +38,31 @@
         {
           "role": "web:accessibility",
           "marketplacePath": "catalogs/flex/plugins/components/skills/list-item/web/accessibility.md",
-          "marketplaceBlobSha": "7518007cec46b09daef813a01f73ef1bea680444",
-          "marketplaceSha256": "f1d77e547b1b23c04cc175d815c8ca31b96dc16c66790d409c3bffdd3bbbd7c4",
+          "marketplaceBlobSha": "9da91c231505a8e27b0d9ead36707bd0560abbe4",
+          "marketplaceSha256": "fea83da8981f74277bfc4f87df8e474aa5839659f1d94f87fab5ac340b8425d6",
           "originPath": "plugins/components/skills/list-item/web/accessibility.md",
-          "originBlobSha": "7518007cec46b09daef813a01f73ef1bea680444",
-          "originSha256": "f1d77e547b1b23c04cc175d815c8ca31b96dc16c66790d409c3bffdd3bbbd7c4",
+          "originBlobSha": "9da91c231505a8e27b0d9ead36707bd0560abbe4",
+          "originSha256": "fea83da8981f74277bfc4f87df8e474aa5839659f1d94f87fab5ac340b8425d6",
           "contentDiffers": false
         },
         {
           "role": "web:interaction",
           "marketplacePath": "catalogs/flex/plugins/components/skills/list-item/web/interaction.md",
-          "marketplaceBlobSha": "1ab0233491f014b96b661a8865c5f88ee19ac5c0",
-          "marketplaceSha256": "2d55c9d6a07afa3268cb03acf0c4430584d9f4c7d009cf75d22e907e832d965b",
+          "marketplaceBlobSha": "cbd77939907e861bb606c23cbf8ec32bcec7acac",
+          "marketplaceSha256": "40d47cdf8955b92bf075327d1fc6258e25dfc48d197912cc7488bbd51444bd3c",
           "originPath": "plugins/components/skills/list-item/web/interaction.md",
-          "originBlobSha": "1ab0233491f014b96b661a8865c5f88ee19ac5c0",
-          "originSha256": "2d55c9d6a07afa3268cb03acf0c4430584d9f4c7d009cf75d22e907e832d965b",
+          "originBlobSha": "cbd77939907e861bb606c23cbf8ec32bcec7acac",
+          "originSha256": "40d47cdf8955b92bf075327d1fc6258e25dfc48d197912cc7488bbd51444bd3c",
           "contentDiffers": false
         },
         {
           "role": "web:tokens",
           "marketplacePath": "catalogs/flex/plugins/components/skills/list-item/web/tokens.yaml",
-          "marketplaceBlobSha": "cdd550012283398483b6588a9521b2468880a278",
-          "marketplaceSha256": "6a22dd9afbec673016cc5e6bfd5fab82e103da901982a2b17a3b6341ffd4f299",
+          "marketplaceBlobSha": "c8c085b5e56b7a0d8894e849cd70950c401c4cec",
+          "marketplaceSha256": "173a1a0a8166f6bb88034199c78116ce263ccb45657464fe25b27c1cdf494f47",
           "originPath": "plugins/components/skills/list-item/web/tokens.yaml",
-          "originBlobSha": "cdd550012283398483b6588a9521b2468880a278",
-          "originSha256": "6a22dd9afbec673016cc5e6bfd5fab82e103da901982a2b17a3b6341ffd4f299",
+          "originBlobSha": "c8c085b5e56b7a0d8894e849cd70950c401c4cec",
+          "originSha256": "173a1a0a8166f6bb88034199c78116ce263ccb45657464fe25b27c1cdf494f47",
           "contentDiffers": false
         }
       ],

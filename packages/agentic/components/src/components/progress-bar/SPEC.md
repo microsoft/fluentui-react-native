@@ -3,7 +3,7 @@ name: progress-bar
 platform: react-native (Windows, macOS)
 status: implemented
 source: ./spec/source.json
-tokens: ./spec/tokens.yaml
+tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
 interaction: ./spec/interaction.md
 usage: ./spec/usage.md
@@ -113,20 +113,24 @@ by the platform accessibility settings, stops the loop and leaves the segment at
 its starting position.
 
 Determinate and static values follow the clamped incoming percentage in either
-direction and apply immediately on both platforms; there is no animated width
-transition.
+direction. Determinate animates a start-anchored scale transform; Static and
+reduced motion snap to the incoming value.
 
 ## Divergences from Flex
 
-| ID                                  | Disposition    | React Native contract                                                                                                                                                                                                                        | Follow-up                                                                                                  |
-| ----------------------------------- | -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| `progress-bar-value-transition`     | Deferred       | Determinate value changes snap to the new width. The transition intent is carried by web-only style keys that the Windows and macOS renderers ignore, so a determinate bar and a static bar animate identically, which is to say not at all. | Drive the width through an animated value so determinate transitions ease and static changes stay instant. |
-| `progress-bar-monotonic-value`      | Resolved       | Determinate and static values follow the clamped incoming value in both directions, including genuine decreases such as freed quota.                                                                                                         | Implemented in `useProgressBar.ts` and covered by value update tests.                                      |
-| `progress-bar-header-alignment`     | Resolved       | The label grows into available space and the header distributes its label and trailing group to opposite edges.                                                                                                                              | Implemented in `progress-bar.styles.ts` and covered by layout tests.                                       |
-| `progress-bar-status-live-region`   | Not applicable | React Native exposes no live-region primitive here, so a status change to error or success is not announced. The component reports role, name, and value only.                                                                               | None available at the component level. The surrounding surface must announce the outcome.                  |
-| `progress-bar-empty-trailing-group` | Resolved       | The trailing group renders only when the resolved validation icon slot exists or value text is visible, so neutral and explicitly null icon cases leave no empty view.                                                                       | Implemented in `renderProgressBar.tsx` and covered by anatomy tests.                                       |
+| ID                                  | Disposition    | React Native contract                                                                                                                                                  | Follow-up                                                                                 |
+| ----------------------------------- | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `progress-bar-value-transition`     | Resolved       | Determinate changes animate a transform in both directions; Static and reduced motion snap. Indeterminate uses a two-second linear loop.                               | Verify the transform, reduced-motion behavior, and real renderer animation separately.    |
+| `progress-bar-monotonic-value`      | Resolved       | Determinate and static values follow the clamped incoming value in both directions, including genuine decreases such as freed quota.                                   | Implemented in `useProgressBar.ts` and covered by value update tests.                     |
+| `progress-bar-header-alignment`     | Resolved       | The label grows into available space and the header distributes its label and trailing group to opposite edges.                                                        | Implemented in `progress-bar.styles.ts` and covered by layout tests.                      |
+| `progress-bar-status-live-region`   | Not applicable | React Native exposes no live-region primitive here, so a status change to error or success is not announced. The component reports role, name, and value only.         | None available at the component level. The surrounding surface must announce the outcome. |
+| `progress-bar-empty-trailing-group` | Resolved       | The trailing group renders only when the resolved validation icon slot exists or value text is visible, so neutral and explicitly null icon cases leave no empty view. | Implemented in `renderProgressBar.tsx` and covered by anatomy tests.                      |
 
 ## Conformance
+
+Verify independent base100 header gap and track thickness bindings, neutral /
+semantic status colors, and the absence of an empty trailing group. Native
+motion and host-owned outcome announcements require their own evidence.
 
 | Requirement | Evidence                                                                                            |
 | ----------- | --------------------------------------------------------------------------------------------------- |

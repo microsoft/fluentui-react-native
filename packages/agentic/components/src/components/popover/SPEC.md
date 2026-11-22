@@ -1,9 +1,9 @@
 ---
 name: popover
 platform: react-native (Windows, macOS)
-status: implemented
+status: contract-reviewed
 source: ./spec/source.json
-tokens: ./spec/tokens.yaml
+tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
 interaction: ./spec/interaction.md
 usage: ./spec/usage.md
@@ -76,11 +76,12 @@ are private. Content refs inside `children` attach only while presented.
 - **POP-005:** Escape, outside pointer input, application deactivation, and
   anchor loss close the popup. Escape and a caller-driven close of a focused
   presentation return focus to the live trigger; outside pointer input leaves
-  focus where the input put it. Tab stays within the popup.
+  focus where the input put it. Tab should traverse content and continue in the owner
+  window at the boundary; until supported, it stays within the popup.
 - **POP-006:** Expose the trigger's expanded state from actual presence and a
-  popup hint; expose the surface as a named group, warn in development when its
+  supplemental popup hint; expose the surface as a named group, warn in development when its
   name is missing, and keep closed content out of the accessibility tree and
-  tab order.
+  tab order. Native popup association is a release gate, separately from the group role and hint.
 - **POP-007:** Resolve the surface's fill, stroke, radius, and padding from Flex
   tokens, apply native elevation, and apply the caller surface style last.
 - **POP-008:** Warn in development when a Popover renders inside another
@@ -128,18 +129,25 @@ iOS and Android are unsupported.
 
 ## Divergences from Flex
 
-| ID                         | Disposition | React Native contract                                                                                                                                                               | Follow-up                                                    |
-| -------------------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
-| `popover-arrow`            | Deferred    | No arrow is rendered; the modern native popup has no beak geometry.                                                                                                                 | Revisit with a native beak and silhouette-aware shadow.      |
-| `popover-motion`           | Deferred    | Presentation is instant, which equals the reduced-motion behavior. Flex motion is pending.                                                                                          | Revisit when Flex motion is final and native popups animate. |
-| `popover-group-semantics`  | Accepted    | The surface is a named group, not a dialog: React Native Windows maps no dialog role. The trigger exposes expanded state and a hint; has-popup and controls have no typed property. | Adopt native relationships if the renderers add them.        |
-| `popover-tab-containment`  | Deferred    | Tab and Shift+Tab move within the popup and wrap; Escape is the keyboard exit. Flex permits closing at the boundary with natural continuation.                                      | Adopt when owner-relative continuation lands (#4377).        |
-| `popover-native-elevation` | Accepted    | The native popup window shadow provides elevation instead of drawing `shadow.low`, which a window sized to its content would clip.                                                  | Revisit if native-core supports inset shadow geometry.       |
-| `popover-edge-margin`      | Deferred    | Native clamping aligns the popup with the work-area edge without the small margin Flex suggests.                                                                                    | Add a native margin under #4375.                             |
-| `popover-win32-gap`        | Accepted    | On Win32 the popup sits flush against the trigger; the Office host's popup ignores the requested gap.                                                                               | Pass the gap through when the host honors it.                |
-| `popover-trigger-slot`     | Accepted    | The trigger is a component-owned Button slot instead of a wrapped arbitrary child, so refs and handlers compose without cloning children.                                           | Composite components add an external-trigger binding.        |
+| ID                            | Disposition | React Native contract                                                                                                                                                                                                                              | Follow-up                                                                   |
+| ----------------------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `popover-arrow`               | Deferred    | No arrow is rendered; the modern native popup has no beak geometry.                                                                                                                                                                                | Revisit with a native beak and silhouette-aware shadow.                     |
+| `popover-motion`              | Deferred    | Presentation is instant, which equals the reduced-motion behavior. Flex motion is pending.                                                                                                                                                         | Revisit when Flex motion is final and native popups animate.                |
+| `popover-group-semantics`     | Accepted    | The surface is a named group where a native dialog role is not available.                                                                                                                                                                          | Verify the named group and its children in UIA and AX.                      |
+| `popover-popup-relationships` | Aligning    | Expanded state and a hint do not supply a popup relationship.                                                                                                                                                                                      | Release gate: verify trigger-to-popup association on each endpoint.         |
+| `popover-tab-containment`     | Aligning    | Target native traversal followed by directional continuation at the boundary. The current continuation mode dismisses on the first Tab and cannot traverse arbitrary popup content, so keep cycling and Escape while boundary exit is unsupported. | Verify in-popup traversal and owner-relative continuation on each endpoint. |
+| `popover-native-elevation`    | Accepted    | The native popup window shadow provides elevation instead of drawing `shadow.low`, which a window sized to its content would clip.                                                                                                                 | Revisit if native-core supports inset shadow geometry.                      |
+| `popover-edge-margin`         | Deferred    | Native clamping aligns the popup with the work-area edge without the small margin Flex suggests.                                                                                                                                                   | Add a native margin under #4375.                                            |
+| `popover-win32-gap`           | Accepted    | On Win32 the popup sits flush against the trigger; the Office host's popup ignores the requested gap.                                                                                                                                              | Pass the gap through when the host honors it.                               |
+| `popover-trigger-slot`        | Accepted    | The trigger is a component-owned Button slot instead of a wrapped arbitrary child, so refs and handlers compose without cloning children.                                                                                                          | Composite components add an external-trigger binding.                       |
 
 ## Conformance
+
+POP-003/007 adopt the runtime surface
+bindings, subtracting the resolved stroke from all four content insets. POP-005/006
+require separate desktop evidence for in-popup Tab traversal, release-gated
+association, and focus after close; expanded-state JS checks do not establish
+a native association.
 
 The listed files exist for every requirement. macOS Fabric and Paper, Windows Fabric, and the Win32 adapter qualify the
 native behavior in the Popover stories.

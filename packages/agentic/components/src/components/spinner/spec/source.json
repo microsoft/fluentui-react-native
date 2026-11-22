@@ -3,26 +3,26 @@
   "component": "spinner",
   "lifecycle": "implemented",
   "conformance": "reviewed",
-  "reviewedAt": "2026-09-21",
+  "reviewedAt": "2026-11-20",
   "sources": [
     {
       "id": "flex-component",
       "kind": "flex-skill",
       "authority": "normative",
       "skill": "flex-components:spinner",
-      "sourceLock": "flex-1.5.0-206c4996",
-      "sourceLockFingerprint": "a69997212ec1b89510c94176801bf5a146ed7e7d8c80cc7db40ac8f60cf9f119",
+      "sourceLock": "flex-1.7.0-9f1df394",
+      "sourceLockFingerprint": "33c7dbb4ff78525a4e0900811f5fa1994579ee8dd95b337de85d8f47133d148c",
       "availableSurfaces": ["shared", "web"],
-      "surfacesConsulted": ["shared", "web"],
+      "surfacesConsulted": ["web"],
       "sourceFiles": [
         {
           "role": "skill",
           "marketplacePath": "catalogs/flex/plugins/components/skills/spinner/SKILL.md",
-          "marketplaceBlobSha": "3c61677e18f349cd4551fee124c94ea181ae4a0c",
-          "marketplaceSha256": "259c4715f9c97a130c587a5373778203c3d1a25a58f442094cce90cc0fdc589f",
+          "marketplaceBlobSha": "1a873107e4453dbad89b4af09d425646c25dbb33",
+          "marketplaceSha256": "2614f8dd36b40b7001e01568443ba1b2f0fd0235d3c1c201ad8b1bc79168506b",
           "originPath": "plugins/components/skills/spinner/SKILL.md",
-          "originBlobSha": "3c61677e18f349cd4551fee124c94ea181ae4a0c",
-          "originSha256": "259c4715f9c97a130c587a5373778203c3d1a25a58f442094cce90cc0fdc589f",
+          "originBlobSha": "1a873107e4453dbad89b4af09d425646c25dbb33",
+          "originSha256": "2614f8dd36b40b7001e01568443ba1b2f0fd0235d3c1c201ad8b1bc79168506b",
           "contentDiffers": false
         },
         {
@@ -58,11 +58,11 @@
         {
           "role": "web:tokens",
           "marketplacePath": "catalogs/flex/plugins/components/skills/spinner/web/tokens.yaml",
-          "marketplaceBlobSha": "9288191474c19aaa10878fb8a3f48d76e8e47996",
-          "marketplaceSha256": "ad5ba5130124464515bc9fb9fda36bd8ee4278fc0a40917533d67d6d1b66bfd7",
+          "marketplaceBlobSha": "1de0770b320d693bc4d0efa462182e72821011fc",
+          "marketplaceSha256": "ae4cb15aa8631753febc4b5e51414312367ffa8132ba6e2e4667aa08e622e8bc",
           "originPath": "plugins/components/skills/spinner/web/tokens.yaml",
-          "originBlobSha": "9288191474c19aaa10878fb8a3f48d76e8e47996",
-          "originSha256": "ad5ba5130124464515bc9fb9fda36bd8ee4278fc0a40917533d67d6d1b66bfd7",
+          "originBlobSha": "1de0770b320d693bc4d0efa462182e72821011fc",
+          "originSha256": "ae4cb15aa8631753febc4b5e51414312367ffa8132ba6e2e4667aa08e622e8bc",
           "contentDiffers": false
         }
       ],
@@ -72,7 +72,7 @@
   "divergences": [
     {
       "id": "spinner-busy-state-on-root",
-      "status": "accepted"
+      "status": "resolved"
     },
     {
       "id": "spinner-instance-timeline",

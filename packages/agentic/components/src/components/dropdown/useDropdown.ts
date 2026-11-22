@@ -13,7 +13,6 @@ import type {
 } from '@fluentui-react-native/framework-base';
 
 import { composeHandlers } from '../../common/eventHandlers';
-import { semanticIconSources } from '../../common/iconSources';
 import { withTriggerExpandActions } from '../../common/triggerExpandActions';
 import { useFocusVisuals } from '../../common/useFocusVisuals';
 import { Icon } from '../../primitives/icon/icon';
@@ -21,7 +20,6 @@ import { getInputResolvedStyles, getInputVisualState } from '../input/input.styl
 import type { ListboxItemOptionAction } from '../listbox-item/listboxItemOptionContext';
 import { useDropdownController } from './dropdownController';
 import { collectDropdownOptions, getDisplayedOptions } from './dropdownOptions';
-import { getDropdownChevronColor } from './dropdown.styles';
 import type { DropdownProps, DropdownState } from './dropdown.types';
 
 const defaultPlaceholder = 'Select an option';
@@ -56,7 +54,7 @@ export function useDropdown_unstable(props: DropdownProps): DropdownState {
     formatSelectedCount = defaultFormatSelectedCount,
     iconStart: iconStartProp,
     listbox,
-    multiselect = false,
+    selectionMode = 'single',
     onBlur,
     onFocus,
     onHoverIn,
@@ -84,6 +82,7 @@ export function useDropdown_unstable(props: DropdownProps): DropdownState {
   });
 
   const themeState = useThemeState();
+  const multiselect = selectionMode === 'multiple';
   const options = React.useMemo(() => collectDropdownOptions(children), [children]);
 
   const [internalSelection, setInternalSelection] = React.useState<readonly string[]>(() => defaultSelectedOptions ?? noSelection);
@@ -295,7 +294,7 @@ export function useDropdown_unstable(props: DropdownProps): DropdownState {
     typeof Pressable
   >);
   const iconStart = useOptionalSlot(Icon, iconStartProp);
-  const chevron = useSlot(Icon, { fontSource: controller.presented ? semanticIconSources.chevronUp : semanticIconSources.chevronDown });
+  const chevron = useSlot(Icon, {});
   const value = useSlot(NativeText, { children: valueText, numberOfLines: 1 });
   const underline = useOptionalSlot(View, variant === 'underline' ? {} : null);
   const underlineFocus = useOptionalSlot(View, variant === 'underline' ? {} : null);
@@ -317,7 +316,7 @@ export function useDropdown_unstable(props: DropdownProps): DropdownState {
     size,
     disabled,
     error,
-    multiselect,
+    selectionMode,
     open: controller.presented,
     visualState,
     focusVisible,
@@ -340,7 +339,6 @@ export function useDropdown_unstable(props: DropdownProps): DropdownState {
       children,
     },
     resolved,
-    chevronColor: getDropdownChevronColor(themeState.tokens, visualState, focusVisible),
     userStyle,
   };
 }

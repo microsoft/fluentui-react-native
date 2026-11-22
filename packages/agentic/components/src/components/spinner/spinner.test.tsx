@@ -70,12 +70,12 @@ describe('Spinner', () => {
     expect(animation.stop).toHaveBeenCalledTimes(1);
     expect(resetValue).toHaveBeenLastCalledWith(0);
     expect(StyleSheet.flatten(getSvg(component).props.style).transform).toBeUndefined();
-    expect(getRoot(component).props.accessibilityState.busy).toBe(true);
+    expect(getRoot(component).props.accessibilityState).toBeUndefined();
     await component.unmount();
     expect(reduceMotionSubscription.remove).toHaveBeenCalled();
   });
 
-  it('SPIN-002 SPIN-004 preserves caller root props and styles but owns busy state', async () => {
+  it('SPIN-002 SPIN-004 preserves caller root props and styles without imposing busy state', async () => {
     jest.spyOn(AccessibilityInfo, 'isReduceMotionEnabled').mockResolvedValue(true);
     const ref = React.createRef<React.ComponentRef<typeof View>>();
     const component = await renderSpinner({
@@ -87,7 +87,7 @@ describe('Spinner', () => {
     });
     expect(ref.current).not.toBeNull();
     expect(getRoot(component).props).toMatchObject({
-      accessibilityState: { busy: true, selected: true },
+      accessibilityState: { busy: false, selected: true },
       pointerEvents: 'box-only',
       focusable: false,
     });
@@ -101,7 +101,11 @@ describe('Spinner', () => {
     const component = await renderSpinner({ accessible: false, testID: 'decorative-spinner' });
     expect(component.queryByRole('progressbar')).toBeNull();
     expect(warn).not.toHaveBeenCalled();
-    expect(component.getByTestId('decorative-spinner').props.accessible).toBe(false);
+    expect(component.getByTestId('decorative-spinner', { includeHiddenElements: true }).props).toMatchObject({
+      accessible: false,
+      accessibilityElementsHidden: true,
+      importantForAccessibility: 'no-hide-descendants',
+    });
   });
 
   beforeEach(() => {
@@ -123,7 +127,7 @@ describe('Spinner', () => {
     const tokens = defaultFlexTokens;
 
     expect(root.props.accessibilityRole).toBe('progressbar');
-    expect(root.props.accessibilityState).toEqual({ busy: true });
+    expect(root.props.accessibilityState).toBeUndefined();
     expect(root.props.focusable).toBe(false);
     expect(root.props.pointerEvents).toBe('none');
     expect(getRootStyle(component)).toMatchObject({ height: 32, width: 32 });

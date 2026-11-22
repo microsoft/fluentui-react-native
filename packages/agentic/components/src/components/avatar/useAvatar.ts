@@ -44,7 +44,11 @@ export function useAvatar_unstable(props: AvatarProps): AvatarState {
   const hasIcon = iconProp !== null && iconProp !== undefined;
   const hasInitials = initialsProp !== null && initialsProp !== undefined;
   const contentMode = hasImage ? 'image' : hasInitials ? 'initials' : 'icon';
-  const isInformative = accessibilityLabel !== undefined;
+  const isInformative =
+    accessibilityLabel !== undefined ||
+    rest.accessibilityLabelledBy !== undefined ||
+    rest['aria-label'] !== undefined ||
+    rest['aria-labelledby'] !== undefined;
   const isAccessible = accessible ?? isInformative;
 
   React.useEffect(() => {
@@ -60,11 +64,12 @@ export function useAvatar_unstable(props: AvatarProps): AvatarState {
     accessibilityElementsHidden: isAccessible ? accessibilityElementsHidden : true,
     accessibilityLabel,
     accessibilityRole: 'image',
+    focusable: false,
     importantForAccessibility: isAccessible ? importantForAccessibility : 'no-hide-descendants',
   });
 
   const image = useOptionalSlot(Image, contentMode === 'image' ? imageProp : null);
-  const icon = useOptionalSlot(Icon, contentMode === 'icon' ? iconProp : null, {
+  const icon = useOptionalSlot(Icon, contentMode === 'icon' ? (iconProp ?? undefined) : null, {
     defaultProps: defaultAvatarIcon,
     renderByDefault: true,
   });

@@ -3,7 +3,7 @@ name: skeleton
 platform: react-native (Windows, macOS)
 status: implemented
 source: ./spec/source.json
-tokens: ./spec/tokens.yaml
+tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
 interaction: ./spec/interaction.md
 usage: ./spec/usage.md
@@ -112,9 +112,8 @@ or replace the caller's platform color with an invented RGB value.
 
 ## Platform behavior
 
-Windows and macOS behave identically. The root is hidden from accessibility
-and has no tab stop by default, but the broad `ViewProps` surface permits a
-caller to set `focusable`. The root defaults to `pointerEvents="none"` so an
+Windows and macOS use the same decorative root contract. The root is hidden
+from accessibility and has no focus stop; `focusable` is not exposed. The root defaults to `pointerEvents="none"` so an
 overlay cannot intercept input, while preserving an explicit caller override.
 
 The shared sweep requests the native driver. On macOS Fabric, where native
@@ -133,14 +132,18 @@ height, which is the caller's responsibility to avoid.
 | ID                                | Disposition    | React Native contract                                                                                                                                                                                                                  | Follow-up                                                                          |
 | --------------------------------- | -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
 | `skeleton-highlight-band-fill`    | Resolved       | A three-stop SVG linear gradient fades through transparent edges and a themed center, replacing the solid rectangular strip. It sweeps diagonally with aspect-ratio-independent geometry.                                              | Covered by gradient, geometry, identifier, RTL, and native motion checks.          |
-| `skeleton-static-silhouette`      | Accepted       | The soft neutral token supplies the base and the subtle neutral token supplies the band. This reverses the previous local assignment, whose base was indistinguishable from the subtle Storybook surface.                              | Preserve visible static placeholders when reduced motion suppresses the sweep.     |
+| `skeleton-static-silhouette`      | Accepted       | The subtle neutral token supplies the base and the soft neutral token supplies the band. Static placeholders retain a subtle outline on matching surfaces.                                                                             | Verify static silhouettes and theme overrides in light, dark and high contrast.    |
 | `skeleton-opaque-gradient-color`  | Accepted       | Native SVG stops cannot represent opaque platform colors. A static native View uses a token-colored outline and a development warning explains the omitted sweep.                                                                      | Revisit when the SVG renderer supports native platform-color gradient stops.       |
 | `skeleton-instance-timeline`      | Resolved       | Active placeholders share one package-level sweep timeline, so instances mounted at different times render at the same phase.                                                                                                          | Implemented through the shared animation hook and covered by multi-instance tests. |
 | `skeleton-container-busy-state`   | Not applicable | The root is removed from the accessibility tree and exposes no busy state. Flex assigns the busy semantic to the container that owns the loading region, which in FURN is caller-owned composition rather than part of this component. | None.                                                                              |
 | `skeleton-pointer-events`         | Resolved       | The root defaults to `pointerEvents="none"` so it cannot intercept covered controls, while an explicit caller value is preserved.                                                                                                      | Implemented in `useSkeleton.ts` and covered by root-prop tests.                    |
-| `skeleton-focusable-prop-surface` | Deferred       | The root type forwards `focusable` even though the component is hidden from accessibility and supplies no focus visual or action.                                                                                                      | Omit or override `focusable` in a separately reviewed native-prop correction.      |
+| `skeleton-focusable-prop-surface` | Resolved       | The public root excludes `focusable`; the placeholder is never a focus stop.                                                                                                                                                           | Verify type coverage and native focus traversal.                                   |
 
 ## Conformance
+
+SKEL-004 through SKEL-006 use the Flex 1.7 palette and a synchronized 1.8-second
+linear loop. Measure RTL geometry and reduced-motion suppression separately
+from each renderer's SVG and animation evidence.
 
 | Requirement | Evidence                                                                                                  |
 | ----------- | --------------------------------------------------------------------------------------------------------- |

@@ -1,15 +1,34 @@
-import { StyleSheet } from 'react-native';
+import type { TextStyle } from 'react-native';
+import {
+  colorToken,
+  defineComponentTokens,
+  fontWeightToken,
+  getComponentTokens,
+  numericToken,
+  resolveTokenStates,
+  stringToken,
+} from '@fluentui-react-native/design/styling';
+import type { ComponentTokenPatch } from '@fluentui-react-native/design/styling';
+import type { TextState } from './text.types';
+import schema from './spec/tokens.json' with { type: 'json' };
 
-import { themedStyleSheetFactory } from '@fluentui-react-native/design';
+const slots = {
+  root: {
+    style: { color: colorToken, fontFamily: stringToken, fontSize: numericToken, fontWeight: fontWeightToken, lineHeight: numericToken },
+    props: {},
+  },
+};
 
-export const getTextStyles = themedStyleSheetFactory('Text.styles', ({ tokens }) =>
-  StyleSheet.create({
-    root: {
-      color: tokens.color.foregroundNeutralPrimary.rest,
-      fontFamily: tokens.fontFamily.functional,
-      fontSize: tokens.fontSize.functionalBodyMedium,
-      fontWeight: tokens.fontWeight.functionalRegular,
-      lineHeight: tokens.lineHeight.functionalBodyMedium,
-    },
-  }),
-);
+type TextTokenState = Record<never, never>;
+
+declare module '@fluentui-react-native/design' {
+  interface ComponentTokenRegistry {
+    'furn.text': ComponentTokenPatch<TextTokenState, typeof slots>;
+  }
+}
+
+const definition = defineComponentTokens<TextTokenState, typeof slots>({ id: 'furn.text', slots, schema });
+
+export function getTextStyles(state: TextState): { root: TextStyle } {
+  return { root: resolveTokenStates(getComponentTokens(state, definition).root, state).style };
+}

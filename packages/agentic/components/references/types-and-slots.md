@@ -20,9 +20,8 @@ Define public slots in `<component>.types.ts`:
 - Document what causes an optional slot to render and whether shorthand children are accepted.
 - Keep the slot surface small. A slot is public customization API, not merely an element in the render tree.
 
-Button exposes `root`, `content`, `icon`, and `selectedIcon`. Its `contentContainer` and `contentHidden` slots support the
-selected-label layout but remain in the private `ButtonStateSlots` type. Follow that split whenever measuring, overlay,
-ghost, or structural slots are implementation details.
+Button exposes `root`, `content`, `leadingIcon`, and `trailingIcon`. ToggleButton’s width reservation remains private.
+Follow that split whenever measuring, overlay, or structural slots are implementation details.
 
 ## Model variants explicitly
 
@@ -35,7 +34,7 @@ export type ComponentSize = 'small' | 'medium' | 'large';
 
 Collect state-bearing public props in `<Component>StateProps`. Optional public values become required in resolved state
 after the state hook applies defaults. Preserve a meaningful distinction between omitted and false values when omission
-enables behavior; Button uses `selected !== undefined` to distinguish an ordinary button from a toggle button.
+enables behavior; ToggleButton uses the presence of `selected` to distinguish controlled from uncontrolled state.
 
 ## Expose native props deliberately
 
@@ -47,6 +46,11 @@ Do not blindly inherit every root prop when the component owns part of the nativ
 
 Button uses `OwnedRootProps<PropsWithRefOf<typeof Pressable>>`. This prevents native children from bypassing slot order,
 preserves the native style type, and retains `ref`.
+
+For a `View` or `Pressable` root that supports desktop tooltips, include the package-local `DesktopTooltipProps`
+in its public root props and forward `tooltip?: string` unchanged to that view, once. Do not augment stock RN
+types, create a second view, or add focus/hit testing just to show a tip. A polymorphic Icon and the pointer-transparent
+FocusVisual are not tooltip targets. See the [Tooltip contract](../src/components/tooltip/SPEC.md#public-contract).
 
 Compose the final public props with:
 
@@ -78,7 +82,7 @@ Build state from:
 - derived booleans or values needed by styles and rendering
 - preserved user values that must be applied at a later stage
 
-Button state includes `ThemeState`, `PressableState`, `iconOnly`, `isToggleButton`, and `userStyle`. Avoid carrying raw
+Button state includes `ThemeState`, `PressableState`, `iconOnly`, and `userStyle`. Avoid carrying raw
 props that no later stage uses.
 
 ## Primitive contracts

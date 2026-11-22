@@ -37,7 +37,7 @@ value.
 
 ## Component token companions (v2)
 
-Button and MenuButton import `spec/tokens.json` in their module-scoped `defineComponentTokens` calls. JSON is the only
+Higher-order components import `spec/tokens.json` in their module-scoped `defineComponentTokens` calls. JSON is the only
 runtime source of ordered axes. Use the component's state type for typed resolution and theme patches; don't redeclare
 the axes in TypeScript. Reuse the named field validators from `@fluentui-react-native/design/styling`. Each slot contains
 flat React Native style keys and reviewed prop settings:
@@ -66,6 +66,10 @@ Variants story exercises the production trigger.
 property; the higher differing axis wins within the same layer. Provide a component-owned combined `visualState` for
 exclusive presentation; Button's order is disabled, pressed, hovered, then rest. Independent booleans such as `selected`
 remain separate. Do not mutate raw interaction state.
+
+For a measured platform-specific visual adjustment, use a final `when.platform.<host>` selector; `platform` is
+reserved and is not listed in `axes` or passed as component state. MenuButton uses this to adjust only its macOS
+label. Keep cross-platform typography in ordinary bindings and renderer-specific behavior out of token selectors.
 
 Retrieve the cached definition with `getComponentTokens` using the original `ThemeState`, then pass the component state
 directly to `resolveTokenStates`. A slot's domain splits the resolved `style` from `props`. Non-style icon color and

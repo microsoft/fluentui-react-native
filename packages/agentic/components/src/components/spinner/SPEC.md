@@ -3,7 +3,7 @@ name: spinner
 platform: react-native (Windows, macOS)
 status: implemented
 source: ./spec/source.json
-tokens: ./spec/tokens.yaml
+tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
 interaction: ./spec/interaction.md
 usage: ./spec/usage.md
@@ -33,7 +33,7 @@ the spacing. It never manages focus and never blocks input by itself.
 | `size`                    | `x-tiny \| tiny \| x-small \| small \| medium \| large \| x-large \| huge` | `medium` | Selects the diameter and the stroke width token for both circles.                                                                    |
 | `accessibilityLabel`      | `string`                                                                   | none     | Names what is loading. Required unless the caller opts the root out of the accessibility tree or supplies `accessibilityLabelledBy`. |
 | `accessibilityLabelledBy` | `string \| string[]`                                                       | none     | Points at an adjacent visible label instead of duplicating its text.                                                                 |
-| `accessibilityState`      | `AccessibilityState`                                                       | none     | Merged under the component's own busy state.                                                                                         |
+| `accessibilityState`      | `AccessibilityState`                                                       | none     | Caller state is preserved; the spinner does not set busy.                                                                            |
 | `accessible`              | `boolean`                                                                  | `true`   | Setting `false` hides the root from assistive technology and suppresses the missing-name warning.                                    |
 | `pointerEvents`           | `ViewProps['pointerEvents']`                                               | `none`   | Overridable, but the default keeps the indicator out of hit testing.                                                                 |
 | `style`                   | `StyleProp<ViewStyle>`                                                     | none     | Applied after the resolved root styles.                                                                                              |
@@ -46,9 +46,9 @@ both, and `children` is not accepted.
 `medium`, and apply the resolved diameter to both the root box and the drawing
 surface.
 
-**SPIN-002:** Expose indeterminate progress semantics on the root, merge caller
-accessibility state under the component's busy state, keep the root
-non-focusable, and default it out of hit testing.
+**SPIN-002:** Expose indeterminate progress semantics on the named root or
+hide a decorative spinner entirely. Keep the root non-focusable and default
+it out of hit testing.
 
 ### Slots and anatomy
 
@@ -91,12 +91,9 @@ Windows and macOS behave identically. The root is not focusable, is not in the
 keyboard tab order, and defaults to `pointerEvents="none"`, so it is never a
 keyboard or pointer target and never becomes the initial focus of a dialog.
 
-On Windows the root maps to a UI Automation progress element in the
-indeterminate pattern: the busy state is exposed and no current, minimum, or
-maximum value is published. On macOS it maps to the equivalent indeterminate
-progress element. Narrator and VoiceOver read the accessible name and the busy
-state when the element is encountered, and neither platform re-announces the
-spinner while it rotates.
+The named root targets the indeterminate progress element in Windows UIA and
+macOS AX without a current, minimum, or maximum value. Verify the name and
+absence of rotation announcements separately with Narrator and VoiceOver.
 
 The shared rotation requests the native driver. macOS Fabric uses the
 JavaScript driver because native transform updates remain static on that
@@ -107,11 +104,11 @@ loop only when reduced motion is known to be off.
 
 ## Divergences from Flex
 
-| ID                           | Disposition    | React Native contract                                                                                                                                                       | Follow-up                                                                          |
-| ---------------------------- | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `spinner-busy-state-on-root` | Accepted       | The single root carries both the progress role and the busy state. Flex treats the role pattern and the busy container pattern as alternatives owned by different elements. | None. React Native has one accessibility node here, so the two cannot collide.     |
-| `spinner-instance-timeline`  | Resolved       | Active spinners share one package-level rotation timeline, so instances mounted at different times render at the same phase.                                                | Implemented through the shared animation hook and covered by multi-instance tests. |
-| `spinner-adjacent-label-gap` | Not applicable | Spinner has no label slot and publishes no spacing. Flex documents size-stepped gap tokens for a spinner paired with adjacent status text.                                  | None. That spacing belongs to the caller's layout in React Native.                 |
+| ID                           | Disposition    | React Native contract                                                                                                        | Follow-up                                                                          |
+| ---------------------------- | -------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `spinner-busy-state-on-root` | Resolved       | Use named indeterminate progress or a decorative spinner in a caller-owned busy region. The root does not force busy.        | Verify both compositions independently with native assistive technology.           |
+| `spinner-instance-timeline`  | Resolved       | Active spinners share one package-level rotation timeline, so instances mounted at different times render at the same phase. | Implemented through the shared animation hook and covered by multi-instance tests. |
+| `spinner-adjacent-label-gap` | Not applicable | Spinner has no label slot. Adjacent text uses caller-owned 4/6/8 spacing at the corresponding size steps.                    | Verify consumer composition when used.                                             |
 
 ## Conformance
 

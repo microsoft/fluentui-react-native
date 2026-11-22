@@ -1,3 +1,4 @@
+import type { DesktopTooltipProps } from '../../common/desktopTooltipProps';
 import type { FocusTargetBinding } from '@fluentui-react-native/framework-base';
 import type { Pressable, Text as NativeText, View, ViewStyle } from 'react-native';
 import type { StyleProp } from 'react-native';
@@ -21,6 +22,7 @@ import type { Text } from '../text/text';
 
 export type ListboxItemSecondaryContentPosition = ItemSecondaryContentPosition;
 export type ListboxItemVariant = 'listItem' | 'sectionHeader';
+export type ListboxItemSelectionMode = 'none' | 'single' | 'multiple';
 
 export type ListboxItemSlots = {
   root: Slot<typeof Pressable>;
@@ -43,9 +45,8 @@ export type ListboxItemStateProps = {
   variant?: ListboxItemVariant;
   disabled?: boolean;
   secondaryContentPosition?: ListboxItemSecondaryContentPosition;
-  checkmark?: boolean;
   chevron?: boolean;
-  multiselect?: boolean;
+  selectionMode?: ListboxItemSelectionMode;
   loading?: boolean;
   /**
    * Whether the component renders as selected. Selection is externally driven: the caller or the surrounding group
@@ -59,7 +60,7 @@ export type ListboxItemStateProps = {
   value?: string;
 };
 
-export type ListboxItemRootProps = OwnedRootProps<PropsWithRefOf<typeof Pressable>>;
+export type ListboxItemRootProps = DesktopTooltipProps & OwnedRootProps<PropsWithRefOf<typeof Pressable>>;
 
 export type ListboxItemProps = ListboxItemStateProps & ComponentProps<ListboxItemSlots, ListboxItemRootProps>;
 
@@ -69,4 +70,10 @@ export type ListboxItemState = ComponentState<ListboxItemStateSlots & FocusVisua
   ThemeState &
   PressableState & {
     userStyle?: StyleProp<ViewStyle>;
+    visualState: 'rest' | 'hovered' | 'pressed' | 'disabled';
+    isSelectedVisual: boolean;
+    contentStyle?: ViewStyle;
+    trailingStyle?: ViewStyle;
+    layoutGap?: number;
+    iconSize?: number;
   };

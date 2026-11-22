@@ -9,6 +9,7 @@ import type { MenuItemState } from './menu-item.types';
 
 export function renderMenuItem_unstable(state: MenuItemState) {
   const Leading = state.avatar ?? (state.selected && state.selectedIcon ? state.selectedIcon : state.icon);
+  const Trailing = state.chevron ?? state.checkmark ?? state.multiselectCheckbox ?? state.trailingIcon;
   const primary = state.isListItem ? (
     <LayoutStableText
       reserve={<Text style={state.contentReserveStyle}>{state.contentText}</Text>}
@@ -42,6 +43,7 @@ export function renderMenuItem_unstable(state: MenuItemState) {
           primary={<Skeleton style={menuItemStyles.skeletonLabel} />}
           secondary={<Skeleton style={menuItemStyles.skeletonSecondary} />}
           secondaryPosition="under"
+          style={{ gap: state.layoutGap }}
         />
       ) : (
         <CompoundItemLayout
@@ -51,13 +53,8 @@ export function renderMenuItem_unstable(state: MenuItemState) {
           primary={primary}
           secondary={secondary}
           secondaryPosition={state.secondaryContentPosition}
-          trailing={
-            <>
-              {state.hasChevron && <state.chevron />}
-              {state.hasCheckmark && !state.hasMultiselect && <state.checkmark />}
-              {state.hasMultiselect && state.multiselectCheckbox && <state.multiselectCheckbox />}
-            </>
-          }
+          style={{ gap: state.layoutGap }}
+          trailing={Trailing ? <Trailing /> : undefined}
           trailingStyle={getMenuItemTrailingStyle(state)}
         />
       )}

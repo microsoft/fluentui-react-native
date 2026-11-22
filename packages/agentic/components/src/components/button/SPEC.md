@@ -14,26 +14,19 @@ usage: ./spec/usage.md
 ## Scope
 
 Button presents a single action through a React Native `Pressable`. It supports
-text, an icon, or both on Windows and macOS. This contract describes the
-existing public API; issue #4252 does not change Button behavior to match newer
-Flex APIs.
-
-Button is not a link, menu trigger, split button, or state container. Supplying
-`selected` opts into toggle-button presentation, but the caller owns and
-updates that value.
+text, an icon, or both on Windows and macOS. Use [ToggleButton](../toggle-button/SPEC.md)
+to change a persistent boolean option. Use MenuButton to open a command menu.
 
 ## Public contract
 
 ### Props and defaults
 
-| Prop           | Type                                        | Default                                         | Contract                                                    |
-| -------------- | ------------------------------------------- | ----------------------------------------------- | ----------------------------------------------------------- |
-| `appearance`   | `primary \| secondary \| outline \| subtle` | `secondary`                                     | Selects the visual emphasis.                                |
-| `size`         | `small \| medium \| large`                  | `medium`                                        | Selects typography, icon size, spacing, and rounded radius. |
-| `shape`        | `rounded \| square \| circle`               | `rounded` with content; `circle` when icon-only | Controls the root corner radius.                            |
-| `disabled`     | `boolean`                                   | `false`                                         | Disables activation and removes the root from focus.        |
-| `iconPosition` | `before \| after`                           | `before`                                        | Places the active icon relative to content.                 |
-| `selected`     | `boolean`                                   | absent                                          | When present, exposes externally controlled toggle state.   |
+| Prop         | Type                                        | Default     | Contract                                                    |
+| ------------ | ------------------------------------------- | ----------- | ----------------------------------------------------------- |
+| `appearance` | `primary \| secondary \| outline \| subtle` | `secondary` | Selects the visual emphasis.                                |
+| `size`       | `small \| medium \| large`                  | `medium`    | Selects typography, icon size, spacing, and rounded radius. |
+| `shape`      | `rounded \| circular`                       | `rounded`   | Controls the root corner radius independently of layout.    |
+| `disabled`   | `boolean`                                   | `false`     | Disables activation and removes the root from focus.        |
 
 The root also exposes owned `PressableProps`, except children and styles that
 the component resolves itself. A user `style` is applied after token-derived
@@ -44,32 +37,36 @@ root styles.
 The render order is the optional `FocusRing`, the icon when positioned
 before, content, and the icon when positioned after.
 
-| Slot           | Required | Contract                                                          |
-| -------------- | -------- | ----------------------------------------------------------------- |
-| `root`         | yes      | A `Pressable` that owns action semantics and interaction state.   |
-| `content`      | no       | A `Text` slot. It may wrap when the root width is constrained.    |
-| `icon`         | no       | The normal `Icon` slot. It is hidden from the accessibility tree. |
-| `selectedIcon` | no       | Replaces `icon` while selected; falls back to `icon` when absent. |
+| Slot           | Required | Contract                                                        |
+| -------------- | -------- | --------------------------------------------------------------- |
+| `root`         | yes      | A `Pressable` that owns action semantics and interaction state. |
+| `content`      | no       | A `Text` slot. It may wrap when the root width is constrained.  |
+| `leadingIcon`  | no       | Decorative icon before the label or centered when icon-only.    |
+| `trailingIcon` | no       | Decorative icon after the label; rendered only with content.    |
 
-An icon-only button has an icon and no content. It keeps a minimum 24 by 24
-layout and requires an action-oriented `accessibilityLabel`.
+An icon-only button has a leading icon and no content. It requires an
+action-oriented accessible name.
+
+`tooltip?: string` requests a native desktop tip on the same Pressable
+([TIP-007](../tooltip/SPEC.md#public-contract)). It does not supply that name or synthesize accessible help.
 
 ### Requirements
 
 - **BTN-001:** Resolve documented defaults and preserve supported native root
   props.
-- **BTN-002:** Render only supplied optional slots in the documented order,
-  with the selected-icon fallback and wrapping content behavior.
+- **BTN-002:** Render only supplied optional slots in the documented order.
+  Labels wrap when constrained; trailing icons are omitted without content.
 - **BTN-003:** Resolve slot visuals from the component token companion, then
   theme component-token layers, then caller visuals. Disabled, pressed,
-  hovered, and rest form one visual axis in that priority order. Selection
-  remains independent. Decorative accessibility and slot presence are unchanged.
+  hovered, and rest form one visual axis in that priority order. Outline uses
+  the subtle stroke; Subtle uses the interactive transparent fill with an
+  explicit Fluent fallback to visible neutral feedback.
 - **BTN-004:** Expose button semantics and a native name from plain content
   unless the caller supplies naming, merge caller accessibility state, warn
   for an unnamed icon-only button, and hide decorative icons.
-- **BTN-005:** Treat `selected` as externally owned state, expose checked
-  accessibility state and the resolved native Toggle action when that prop is
-  present, and reserve semibold label width to prevent toggle reflow.
+- **BTN-005:** Use minimum outer heights 24/32/40 and icon frames 16/20/20
+  in size order. Subtract the resolved stroke from the token inset so the
+  border does not inflate the layout. Circular is always explicit.
 - **BTN-006:** Follow the [shared focus visual policy](../../../references/higher-order-components.md#focus-visual-policy)
   on the root: default to native rings on Windows/macOS and root-modality-aware
   custom rings on Win32, retaining the same dual-ring geometry.
@@ -95,25 +92,17 @@ Windows and macOS use React Native press, hover, and focus events. `Enter` and
 `Space` activation are supplied by the native `Pressable` button behavior.
 Disabled buttons are not focusable.
 
-The checked React Native state and resolved Toggle declaration do not imply
-identical native accessibility projection. Windows exposes toggle state through
-UI Automation. With the pinned macOS renderer and desktop provider, the retained
-AXButton role has no supported native `checked` read, and Toggle is a custom
-action rather than an AXPress mapping. Native role and enabled-state checks
-remain shared; checked projection is qualified separately on Windows.
-Caller-owned pointer transitions on macOS require physical input.
-
 Button adds no component-owned motion.
 
 ## Divergences from Flex
 
 `native-system-focus-visuals` is an **accepted** [shared native adaptation](../../../references/higher-order-components.md#focus-visual-policy).
 
-| ID                        | Disposition              | React Native contract                                                                                                                                 | Follow-up                                                           |
-| ------------------------- | ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `button-selection-axis`   | Deferred alignment       | FURN retains `selected` on Button and exposes checked state. Current Flex models toggle behavior as a separate ToggleButton.                          | A separate API proposal, migration, and changeset are required.     |
-| `button-single-icon-slot` | Deferred alignment       | FURN has one `icon` plus `iconPosition`, with `selectedIcon` for selected presentation. Current Flex has independent leading and trailing icon slots. | Align only through a separately reviewed public API change.         |
-| `button-square-shape`     | Accepted local extension | FURN supports `square` in addition to rounded and circular forms.                                                                                     | Preserve for compatibility unless a future API proposal removes it. |
+| ID                        | Disposition | React Native contract                           | Follow-up |
+| ------------------------- | ----------- | ----------------------------------------------- | --------- |
+| `button-selection-axis`   | Resolved    | ToggleButton owns persistent selection.         |
+| `button-single-icon-slot` | Resolved    | Leading and trailing icons are independent.     |
+| `button-square-shape`     | Resolved    | Only rounded and circular shapes are available. |
 
 ## Conformance
 
@@ -123,5 +112,5 @@ Button adds no component-owned motion.
 | BTN-002     | `renderButton.tsx`, `button.test.tsx`, `button.stories.tsx`                     |
 | BTN-003     | `spec/tokens.json`, `button.styles.ts`, `useButtonStyles.ts`, `button.test.tsx` |
 | BTN-004     | `useButton.ts`, `useButtonStyles.ts`, `button.test.tsx`, `button.stories.tsx`   |
-| BTN-005     | `useButton.ts`, `renderButton.tsx`, `button.test.tsx`, `button.stories.tsx`     |
+| BTN-005     | `spec/tokens.json`, `button.styles.ts`, `button.test.tsx`, `button.stories.tsx` |
 | BTN-006     | `useButton.ts`, `useButtonStyles.ts`, `renderButton.tsx`, `button.test.tsx`     |

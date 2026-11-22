@@ -18,7 +18,7 @@ type SceneProps = {
   size?: DropdownSize;
   disabled?: boolean;
   error?: boolean;
-  multiselect?: boolean;
+  selectionMode?: 'single' | 'multiple';
   placeholder?: string;
 };
 
@@ -52,7 +52,7 @@ const valueOf = (label: string) => label.toLowerCase();
 const labelOf = (value: string) => value.charAt(0).toUpperCase() + value.slice(1);
 
 /** A scene that reports presence, selection, and focused option through status rows. */
-function FruitScene({ multiselect, ...props }: SceneProps) {
+function FruitScene({ selectionMode, ...props }: SceneProps) {
   const [reason, setReason] = React.useState('None');
   const [selection, setSelection] = React.useState('None');
   const [focus, setFocus] = React.useState('None');
@@ -66,7 +66,7 @@ function FruitScene({ multiselect, ...props }: SceneProps) {
       <Dropdown
         {...props}
         accessibilityLabel="Fruit"
-        multiselect={multiselect}
+        selectionMode={selectionMode}
         onOpenChange={onOpenChange}
         onSelectedOptionsChange={(selected: string[]) => setSelection(selected.length ? selected.map(labelOf).join(', ') : 'None')}
         trigger={{ testID: 'dropdown-trigger' }}
@@ -95,13 +95,13 @@ function FruitScene({ multiselect, ...props }: SceneProps) {
 const meta: Meta<SceneProps> = {
   title: 'Components/Dropdown',
   render: (args) => <FruitScene {...args} />,
-  args: { variant: 'outline', size: 'medium', disabled: false, error: false, multiselect: false },
+  args: { variant: 'outline', size: 'medium', disabled: false, error: false, selectionMode: 'single' },
   argTypes: {
     variant: { control: 'select', options: ['outline', 'underline'] },
     size: { control: 'select', options: ['small', 'medium', 'large'] },
     disabled: { control: 'boolean' },
     error: { control: 'boolean' },
-    multiselect: { control: 'boolean' },
+    selectionMode: { control: 'select', options: ['single', 'multiple'] },
     placeholder: { control: 'text' },
   },
   parameters: {
@@ -157,6 +157,23 @@ export const Default: Story = {
       // macOS Fabric converts empty accessibilityValue.text to nil; Paper and UIA retain the empty string.
       expect(await trigger.getProperty('value')).toBe(platform === 'macos' && renderer === 'fabric' ? null : '');
     }),
+    desktopIt(
+      'DRP-010 opens below and start-aligned with the trigger',
+      { platforms: ['windows', 'win32'], requires: ['physical-click'] },
+      async ({ browser, expect, platform }) => {
+        const trigger = await browser.$('~dropdown-trigger');
+        const anchor = await browser.getElementRect(await trigger.elementId);
+        await trigger.click();
+        const listbox = await browser.$('~dropdown-list');
+        await listbox.waitForDisplayed();
+        const popup = await browser.getElementRect(await listbox.elementId);
+        // Win32 ignores the native placement gap and places the list flush with the trigger.
+        const gap = platform === 'win32' ? 0 : 4;
+        expect(Math.abs(popup.x - anchor.x)).toBeLessThanOrEqual(1);
+        expect(Math.abs(popup.y - (anchor.y + anchor.height + gap))).toBeLessThanOrEqual(1);
+        expect(popup.width).toBeGreaterThanOrEqual(anchor.width - 1);
+      },
+    ),
     desktopIt(
       'opens from the keyboard on the first option and commits with Enter',
       { requires: ['physical-click', 'keyboard', 'focus'] },
@@ -274,7 +291,7 @@ export const Default: Story = {
 };
 
 export const Multiple: Story = {
-  args: { multiselect: true },
+  args: { selectionMode: 'multiple' },
   tags: ['desktop-focus'],
   parameters: {
     docs: { description: { story: 'Activation toggles options and keeps the list open; the trigger summarizes long selections.' } },

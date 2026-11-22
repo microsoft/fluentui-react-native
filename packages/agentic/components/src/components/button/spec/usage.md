@@ -1,76 +1,21 @@
 # Button usage
 
-Use Button for a discrete action such as saving, creating, confirming, or
-opening a command surface. Use navigation components for destinations and a
-dedicated menu or split-button component when the action has choices.
-
-`secondary` is the default appearance. Reserve `primary` for the highest
-emphasis action in a surface, use `outline` for lighter containment, and use
-`subtle` where the action should not compete with surrounding content.
+Use Button for a one-time action. Use ToggleButton for persistent on/off
+state and MenuButton for a menu of commands. Use `primary` for the highest
+emphasis action, `secondary` (the default) for ordinary actions, `outline`
+for lighter containment and `subtle` for low emphasis.
 
 ```tsx
 <Button appearance="primary" content="Save" onPress={save} />
-<Button content="Add item" icon={addIcon} onPress={addItem} />
-<Button accessibilityLabel="Close dialog" icon={closeIcon} onPress={close} />
+<Button content="Next" leadingIcon={documentIcon} trailingIcon={nextIcon} onPress={next} />
+<Button accessibilityLabel="Close dialog" leadingIcon={closeIcon} shape="circular" onPress={close} />
 ```
 
-Icon-only buttons need an action-oriented accessible label and visible product
-context such as a tooltip. Small buttons are intended for dense command
-surfaces; medium is the general default; large gives an action more physical
-presence.
+Rounded is the default even without a label. Both icon slots are optional
+with a label; an icon-only button renders only its leading icon. Render inside
+`ThemedRoot` so the platform focus policy can read the scene's input modality.
 
-## Externally controlled selection
-
-The existing FURN API permits toggle presentation on Button. Treat the value
-as controlled state:
-
-```tsx
-const [favorite, setFavorite] = useState(false);
-
-<Button
-  content="Favorite"
-  icon={regularStar}
-  selected={favorite}
-  selectedIcon={filledStar}
-  onPress={() => setFavorite((value) => !value)}
-/>;
-```
-
-Do not use `disabled` to represent an unselected value. Avoid introducing new
-uses of this Button-specific selection API when a dedicated ToggleButton
-contract is required for alignment with current Flex guidance.
-
-Native Toggle actions arrive through `onAccessibilityAction`, independently
-of pointer and keyboard `onPress`. A caller supporting that transport also
-handles the resolved Toggle name and updates its own selected value:
-
-```tsx
-const toggleName = resolveAccessibilityAction('toggle', Platform.OS).name;
-
-<Button
-  content="Favorite"
-  selected={favorite}
-  onPress={() => setFavorite((value) => !value)}
-  onAccessibilityAction={(event) => {
-    if (event.nativeEvent.actionName === toggleName) {
-      setFavorite((value) => !value);
-    }
-  }}
-/>;
-```
-
-Import `Platform` from `react-native` and `resolveAccessibilityAction` from
-`@fluentui-react-native/framework-base`. Button declares the native action;
-the caller need not supply `accessibilityActions` or synthesize a press.
-On macOS this is a custom action declaration, not a guarantee that default
-AX activation invokes Toggle.
-
-Content wraps when a consumer constrains the root. Supply a content-slot
-override only when a product deliberately needs a different truncation or
-text presentation policy.
-
-## Scene root
-
-Render the scene inside `ThemedRoot` so focus policy can query `useRootSettings`.
-A nested theme boundary may override appearance without creating a separate
-input-modality tracker. Component test scenes use the shared themed renderer.
+Replace the old `icon` and `iconPosition` combination with the desired slot.
+An old `shape="circle"` becomes `shape="circular"`; there is no square shape.
+See the [ToggleButton migration guide](../../toggle-button/spec/usage.md) before
+replacing `selected`, including on callers that formerly used non-Subtle styling.

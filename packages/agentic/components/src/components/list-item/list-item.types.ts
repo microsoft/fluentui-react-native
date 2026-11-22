@@ -1,3 +1,4 @@
+import type { DesktopTooltipProps } from '../../common/desktopTooltipProps';
 import type { FocusTargetBinding } from '@fluentui-react-native/framework-base';
 import type { Pressable, StyleProp, Text as NativeText, View, ViewStyle } from 'react-native';
 
@@ -32,7 +33,6 @@ export type ListItemSlots = {
 };
 
 export type ListItemStateSlots = ListItemSlots & {
-  selectionIndicator: OptionalSlot<typeof NativeText>;
   contentHidden: Slot<typeof NativeText>;
 };
 
@@ -48,30 +48,16 @@ export type ListItemStateProps = {
   selected?: boolean;
 };
 
-export type ListItemExposedPressableProps = OwnedRootProps<PropsWithRefOf<typeof Pressable>>;
+export type ListItemExposedPressableProps = DesktopTooltipProps & OwnedRootProps<PropsWithRefOf<typeof Pressable>>;
 
 export type ListItemProps = ListItemStateProps & ComponentProps<ListItemSlots, ListItemExposedPressableProps>;
-
-export type ListItemMetrics = {
-  contentGap: number;
-  leadingContentMargin: number;
-  rootPaddingHorizontal: number;
-  rootPaddingVertical: number;
-  selectionIndicatorMargin: number;
-  selectionIndicatorSize: number;
-  trailingMargin: number;
-  trailingGap: number;
-  avatarSize: number;
-  iconSize: number;
-};
 
 export type ListItemState = ComponentState<ListItemStateSlots & FocusVisualsSlots> &
   FocusTargetBinding &
   Required<ListItemStateProps> &
   ThemeState &
   PressableState & {
-    metrics: ListItemMetrics;
+    chrome?: ReturnType<typeof import('./list-item.styles').resolveListItemChrome>;
     selectedFill: boolean;
-    selectionGlyph?: string;
     userStyle?: StyleProp<ViewStyle>;
   };

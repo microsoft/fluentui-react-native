@@ -1,4 +1,5 @@
-import type { Animated, StyleProp, ViewStyle } from 'react-native';
+import type { DesktopTooltipProps } from '../../common/desktopTooltipProps';
+import type { Animated, ColorValue, StyleProp, ViewStyle } from 'react-native';
 import type { View } from 'react-native';
 import type { Svg } from 'react-native-svg';
 
@@ -19,7 +20,7 @@ export type SpinnerStateProps = {
   size?: SpinnerSize;
 };
 
-export type SpinnerExposedViewProps = OwnedRootProps<PropsWithRefOf<typeof View>, 'accessibilityRole' | 'focusable'>;
+export type SpinnerExposedViewProps = DesktopTooltipProps & OwnedRootProps<PropsWithRefOf<typeof View>, 'accessibilityRole' | 'focusable'>;
 
 export type SpinnerProps = SpinnerStateProps & ComponentProps<SpinnerSlots, SpinnerExposedViewProps>;
 
@@ -28,11 +29,13 @@ export type SpinnerState = ComponentState<SpinnerStateSlots> &
   ThemeState & {
     center: number;
     diameter: number;
-    indicatorColor: string;
+    indicatorColor?: ColorValue;
     radius: number;
     reduceMotionEnabled?: boolean;
     rotation: Animated.Value;
     strokeWidth: number;
-    trackColor: string;
+    trackColor?: ColorValue;
+    rootStyle: ViewStyle;
+    svgStyle: ViewStyle;
     userStyle?: StyleProp<ViewStyle>;
   };

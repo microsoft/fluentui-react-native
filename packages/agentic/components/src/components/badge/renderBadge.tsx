@@ -1,4 +1,6 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
+import { View } from 'react-native';
+import { hiddenFromAccessibilityProps } from '../../common/accessibility';
 import type { BadgeState } from './badge.types';
 
 /**
@@ -11,6 +13,7 @@ export function renderBadge_unstable(state: BadgeState) {
 
   return (
     <state.root>
+      {state.tintStyle && <View {...hiddenFromAccessibilityProps} pointerEvents="none" style={state.tintStyle} />}
       {LeadingIcon && <LeadingIcon />}
       {Content && <Content />}
       {TrailingIcon && <TrailingIcon />}

@@ -27,7 +27,7 @@ function NewScene({ appearance, size, disabled }: SceneProps) {
   const row = (content: string): MenuItemProps => ({
     content,
     secondaryContent: null,
-    icon: null,
+    leadingIcon: null,
     testID: `menu-button-${content.toLowerCase()}`,
     onFocus: () => setFocus(content),
     onPress: () => {
@@ -86,7 +86,7 @@ function VariantsScene() {
               <MenuItem content="Action" secondaryContent={null} icon={null} />
             </MenuButton>
           ))}
-          <MenuButton size={size} icon={{ fontSource: { codepoint: 0x002b } }} accessibilityLabel={`Add ${size}`}>
+          <MenuButton size={size} leadingIcon={{ fontSource: { codepoint: 0x002b } }} accessibilityLabel={`Add ${size}`}>
             <MenuItem content="Action" secondaryContent={null} icon={null} />
           </MenuButton>
         </View>
@@ -151,6 +151,22 @@ export const Default: Story = {
       expect(await trigger.getProperty('expanded')).toBe(false);
       await expect(trigger).toBeEnabled();
     }),
+    desktopIt(
+      'MNB-003 opens below and start-aligned with the trigger',
+      { platforms: ['windows', 'win32'], requires: ['physical-click'] },
+      async ({ browser, expect, platform }) => {
+        const trigger = await browser.$('~menu-button-trigger');
+        const anchor = await browser.getElementRect(await trigger.elementId);
+        await trigger.click();
+        const menu = await browser.$('~menu-button-menu');
+        await menu.waitForDisplayed();
+        const popup = await browser.getElementRect(await menu.elementId);
+        // Win32 ignores the native placement gap and places the menu flush with the trigger.
+        const gap = platform === 'win32' ? 0 : 4;
+        expect(Math.abs(popup.x - anchor.x)).toBeLessThanOrEqual(1);
+        expect(Math.abs(popup.y - (anchor.y + anchor.height + gap))).toBeLessThanOrEqual(1);
+      },
+    ),
     desktopIt(
       'opens on Down to the first row and on Up to the last row',
       { requires: ['physical-click', 'keyboard', 'focus'] },

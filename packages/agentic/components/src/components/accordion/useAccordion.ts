@@ -94,9 +94,7 @@ export function useAccordion_unstable(props: AccordionProps): AccordionState {
     defaultProps: {
       accessible: false,
       fontSource: defaultLeadingIconSource,
-      height: 16,
       testID: 'accordion-leading-icon',
-      width: 16,
     },
     renderByDefault: true,
   });
@@ -115,9 +113,7 @@ export function useAccordion_unstable(props: AccordionProps): AccordionState {
   const chevron = useSlot(Icon, {
     accessible: false,
     fontSource: defaultChevronSource,
-    height: 16,
     testID: 'accordion-chevron-icon',
-    width: 16,
   });
 
   return {

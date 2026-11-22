@@ -1,48 +1,30 @@
-import type { ImageStyle, StyleProp, TextStyle, ViewStyle } from 'react-native';
-
-import { attachSlotProps } from '@fluentui-react-native/framework-base';
+import { attachSlotDefaults, attachSlotProps } from '@fluentui-react-native/framework-base';
 
 import { hiddenFromAccessibilityProps } from '../../common/accessibility';
-import { avatarStyles, getAvatarActivityRingStyle, getAvatarIconSize, getAvatarInitialsStyle, getAvatarRootStyle } from './avatar.styles';
+import { avatarStyles, getAvatarChrome } from './avatar.styles';
 import type { AvatarState } from './avatar.types';
 
 export function useAvatarStyles_unstable(state: AvatarState) {
-  const foregroundColor = state.tokens.color.foregroundNeutralPrimary.rest;
-  const imageStyle: StyleProp<ImageStyle> = [
-    avatarStyles.image,
-    {
-      borderRadius: state.tokens.borderRadius.circular,
-    },
-  ];
-  const rootStyle: StyleProp<ViewStyle> = [avatarStyles.root, getAvatarRootStyle(state), state.userStyle];
-  const initialsStyle: StyleProp<TextStyle> = [avatarStyles.initials, getAvatarInitialsStyle(state), { color: foregroundColor }];
-  const iconSize = getAvatarIconSize(state.size);
+  const chrome = getAvatarChrome(state);
+  const { style: ringStyle, props: ring } = chrome.activityRing;
+  const inset = -((ring.gap ?? 0) + (ringStyle.borderWidth ?? 0));
 
   state.activityRingProps = {
-    style: getAvatarActivityRingStyle(state),
+    style: { ...ringStyle, borderStyle: 'solid', bottom: inset, left: inset, right: inset, top: inset },
     testID: 'avatar-activity-ring',
     visible: state.activityRing,
   };
-  attachSlotProps(state.root, { style: rootStyle });
+  attachSlotProps(state.root, { style: [avatarStyles.root, chrome.root, state.userStyle] });
   if (state.image) {
-    attachSlotProps(state.image, {
-      ...hiddenFromAccessibilityProps,
-      resizeMode: 'cover',
-      style: imageStyle,
-    });
+    attachSlotDefaults(state.image, { resizeMode: 'cover', style: [avatarStyles.image, chrome.image] });
+    attachSlotProps(state.image, hiddenFromAccessibilityProps);
   }
   if (state.icon) {
-    attachSlotProps(state.icon, {
-      ...hiddenFromAccessibilityProps,
-      color: foregroundColor,
-      height: iconSize,
-      width: iconSize,
-    });
+    attachSlotDefaults(state.icon, chrome.icon);
+    attachSlotProps(state.icon, hiddenFromAccessibilityProps);
   }
   if (state.initials) {
-    attachSlotProps(state.initials, {
-      ...hiddenFromAccessibilityProps,
-      style: initialsStyle,
-    });
+    attachSlotDefaults(state.initials, { style: [avatarStyles.initials, chrome.initials] });
+    attachSlotProps(state.initials, hiddenFromAccessibilityProps);
   }
 }

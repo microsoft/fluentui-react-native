@@ -3,66 +3,66 @@
   "component": "accordion",
   "lifecycle": "implemented",
   "conformance": "reviewed",
-  "reviewedAt": "2026-09-14",
+  "reviewedAt": "2026-11-20",
   "sources": [
     {
       "id": "flex-component",
       "kind": "flex-skill",
       "authority": "normative",
       "skill": "flex-components:accordion",
-      "sourceLock": "flex-1.5.0-206c4996",
-      "sourceLockFingerprint": "a69997212ec1b89510c94176801bf5a146ed7e7d8c80cc7db40ac8f60cf9f119",
+      "sourceLock": "flex-1.7.0-9f1df394",
+      "sourceLockFingerprint": "33c7dbb4ff78525a4e0900811f5fa1994579ee8dd95b337de85d8f47133d148c",
       "availableSurfaces": ["shared", "web"],
-      "surfacesConsulted": ["shared", "web"],
+      "surfacesConsulted": ["web"],
       "sourceFiles": [
         {
           "role": "skill",
           "marketplacePath": "catalogs/flex/plugins/components/skills/accordion/SKILL.md",
-          "marketplaceBlobSha": "2b18787639ff817789e36ba1e318c86f65e59929",
-          "marketplaceSha256": "c1ea94d075eaf931903f7df8d4767aefc4c741227ca4318f34cdb64436aa1320",
+          "marketplaceBlobSha": "78cb54b809d2aefa2785d17a2481cea2b8ff57a6",
+          "marketplaceSha256": "251d630816f0150f20f7c5a3dc710e92135d15adcd21a08e7aac5800fd7c9190",
           "originPath": "plugins/components/skills/accordion/SKILL.md",
-          "originBlobSha": "2b18787639ff817789e36ba1e318c86f65e59929",
-          "originSha256": "c1ea94d075eaf931903f7df8d4767aefc4c741227ca4318f34cdb64436aa1320",
+          "originBlobSha": "78cb54b809d2aefa2785d17a2481cea2b8ff57a6",
+          "originSha256": "251d630816f0150f20f7c5a3dc710e92135d15adcd21a08e7aac5800fd7c9190",
           "contentDiffers": false
         },
         {
           "role": "usage",
           "marketplacePath": "catalogs/flex/plugins/components/skills/accordion/usage.md",
-          "marketplaceBlobSha": "cd263e7897b28545a6f61c7e1a8162b95ce4687d",
-          "marketplaceSha256": "ee8cb81565a6ebc612231a57440301605dac65155f068cd3afa6b974ea668e75",
+          "marketplaceBlobSha": "13f23b690bfa56ca37882cc79b5afabb51c7a60d",
+          "marketplaceSha256": "45209d4ff83a4c6bece87a6ea359d8d130de140a8222efd3b0e79edbd971edad",
           "originPath": "plugins/components/skills/accordion/usage.md",
-          "originBlobSha": "cd263e7897b28545a6f61c7e1a8162b95ce4687d",
-          "originSha256": "ee8cb81565a6ebc612231a57440301605dac65155f068cd3afa6b974ea668e75",
+          "originBlobSha": "13f23b690bfa56ca37882cc79b5afabb51c7a60d",
+          "originSha256": "45209d4ff83a4c6bece87a6ea359d8d130de140a8222efd3b0e79edbd971edad",
           "contentDiffers": false
         },
         {
           "role": "web:accessibility",
           "marketplacePath": "catalogs/flex/plugins/components/skills/accordion/web/accessibility.md",
-          "marketplaceBlobSha": "28ed0f0b8a04dafa52bff9145c14b4eef0de0306",
-          "marketplaceSha256": "7aa113875a4643a3796321407b86de321e81cebf9705eb37a923da3835c89e0c",
+          "marketplaceBlobSha": "caed75877e46aed6cb142941d9af18937fe8b5c3",
+          "marketplaceSha256": "4b9cabb659ba5e9a7d21ac775f73d29328024975d2a922050ddc048d5cef22c7",
           "originPath": "plugins/components/skills/accordion/web/accessibility.md",
-          "originBlobSha": "28ed0f0b8a04dafa52bff9145c14b4eef0de0306",
-          "originSha256": "7aa113875a4643a3796321407b86de321e81cebf9705eb37a923da3835c89e0c",
+          "originBlobSha": "caed75877e46aed6cb142941d9af18937fe8b5c3",
+          "originSha256": "4b9cabb659ba5e9a7d21ac775f73d29328024975d2a922050ddc048d5cef22c7",
           "contentDiffers": false
         },
         {
           "role": "web:interaction",
           "marketplacePath": "catalogs/flex/plugins/components/skills/accordion/web/interaction.md",
-          "marketplaceBlobSha": "a587e8d12cdf037f63a8f0f38556c8df928e536a",
-          "marketplaceSha256": "84b518e67a94c048d834765a8a834ab030dcc2c2cf539056d1c50e172871f2d9",
+          "marketplaceBlobSha": "ebaf38e699846bd2db475ff7c74386415f414898",
+          "marketplaceSha256": "89387c13a1f9ee0bcf108b2c3716bea150a25237863febc1ec32df9e6d5c296d",
           "originPath": "plugins/components/skills/accordion/web/interaction.md",
-          "originBlobSha": "a587e8d12cdf037f63a8f0f38556c8df928e536a",
-          "originSha256": "84b518e67a94c048d834765a8a834ab030dcc2c2cf539056d1c50e172871f2d9",
+          "originBlobSha": "ebaf38e699846bd2db475ff7c74386415f414898",
+          "originSha256": "89387c13a1f9ee0bcf108b2c3716bea150a25237863febc1ec32df9e6d5c296d",
           "contentDiffers": false
         },
         {
           "role": "web:tokens",
           "marketplacePath": "catalogs/flex/plugins/components/skills/accordion/web/tokens.yaml",
-          "marketplaceBlobSha": "d7d162ea334a50f0498d14c7b79880979e90a66d",
-          "marketplaceSha256": "af44425f9ddac74743e9b91c803865f0ce331aff65175a074744bed73eab2d1f",
+          "marketplaceBlobSha": "acd63e1aa6a905322d7398f7a2083cab9b523ac8",
+          "marketplaceSha256": "6a52735ff0c3f77ad1f83a4019a13c2f7df9daad2f94d4b6e757c5f40e5d6919",
           "originPath": "plugins/components/skills/accordion/web/tokens.yaml",
-          "originBlobSha": "d7d162ea334a50f0498d14c7b79880979e90a66d",
-          "originSha256": "af44425f9ddac74743e9b91c803865f0ce331aff65175a074744bed73eab2d1f",
+          "originBlobSha": "acd63e1aa6a905322d7398f7a2083cab9b523ac8",
+          "originSha256": "6a52735ff0c3f77ad1f83a4019a13c2f7df9daad2f94d4b6e757c5f40e5d6919",
           "contentDiffers": false
         }
       ],
@@ -76,7 +76,7 @@
     },
     {
       "id": "accordion-chevron-end-rotation",
-      "status": "accepted"
+      "status": "resolved"
     }
   ],
   "requirements": [

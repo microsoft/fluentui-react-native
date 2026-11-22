@@ -3,26 +3,26 @@
   "component": "progress-bar",
   "lifecycle": "implemented",
   "conformance": "reviewed",
-  "reviewedAt": "2026-08-28",
+  "reviewedAt": "2026-11-20",
   "sources": [
     {
       "id": "flex-component",
       "kind": "flex-skill",
       "authority": "normative",
       "skill": "flex-components:progress-bar",
-      "sourceLock": "flex-1.5.0-206c4996",
-      "sourceLockFingerprint": "a69997212ec1b89510c94176801bf5a146ed7e7d8c80cc7db40ac8f60cf9f119",
+      "sourceLock": "flex-1.7.0-9f1df394",
+      "sourceLockFingerprint": "33c7dbb4ff78525a4e0900811f5fa1994579ee8dd95b337de85d8f47133d148c",
       "availableSurfaces": ["shared", "web"],
-      "surfacesConsulted": ["shared", "web"],
+      "surfacesConsulted": ["web"],
       "sourceFiles": [
         {
           "role": "skill",
           "marketplacePath": "catalogs/flex/plugins/components/skills/progress-bar/SKILL.md",
-          "marketplaceBlobSha": "fff90659253e9b1480208a32396999fcfd44bcd5",
-          "marketplaceSha256": "0c91374fd4a0daaa512b49af07e2b7203d15150b01316bf06cc1b177c68d0f86",
+          "marketplaceBlobSha": "76ea80ee24478a3de7a116707b41bfb45415a9e4",
+          "marketplaceSha256": "01bc4ee7f4a9ab1a5d1b160828d3e435a4f71c78868bbcd8f7de42767003322a",
           "originPath": "plugins/components/skills/progress-bar/SKILL.md",
-          "originBlobSha": "fff90659253e9b1480208a32396999fcfd44bcd5",
-          "originSha256": "0c91374fd4a0daaa512b49af07e2b7203d15150b01316bf06cc1b177c68d0f86",
+          "originBlobSha": "76ea80ee24478a3de7a116707b41bfb45415a9e4",
+          "originSha256": "01bc4ee7f4a9ab1a5d1b160828d3e435a4f71c78868bbcd8f7de42767003322a",
           "contentDiffers": false
         },
         {
@@ -58,11 +58,11 @@
         {
           "role": "web:tokens",
           "marketplacePath": "catalogs/flex/plugins/components/skills/progress-bar/web/tokens.yaml",
-          "marketplaceBlobSha": "84df4df9c5a795147e8d62ad34eb82d17f0b86d8",
-          "marketplaceSha256": "0c93ee9d7ace8b4e601f6e4d434317d1202f9b5e43acf393bf309f15ff3f5768",
+          "marketplaceBlobSha": "21645c2c344cefa02be98704b2a8838164793e96",
+          "marketplaceSha256": "188a119468ae7a4bfc58598138332d508a86e4973f987d4005a4dd6004582f9b",
           "originPath": "plugins/components/skills/progress-bar/web/tokens.yaml",
-          "originBlobSha": "84df4df9c5a795147e8d62ad34eb82d17f0b86d8",
-          "originSha256": "0c93ee9d7ace8b4e601f6e4d434317d1202f9b5e43acf393bf309f15ff3f5768",
+          "originBlobSha": "21645c2c344cefa02be98704b2a8838164793e96",
+          "originSha256": "188a119468ae7a4bfc58598138332d508a86e4973f987d4005a4dd6004582f9b",
           "contentDiffers": false
         }
       ],
@@ -72,7 +72,7 @@
   "divergences": [
     {
       "id": "progress-bar-value-transition",
-      "status": "deferred"
+      "status": "resolved"
     },
     {
       "id": "progress-bar-monotonic-value",

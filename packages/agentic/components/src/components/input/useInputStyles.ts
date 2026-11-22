@@ -1,15 +1,17 @@
+import { StyleSheet } from 'react-native';
 import type { StyleProp, ViewStyle } from 'react-native';
 
-import { attachSlotProps } from '@fluentui-react-native/framework-base';
+import { attachSlotDefaults, attachSlotProps } from '@fluentui-react-native/framework-base';
 import { applyFocusRingStyles } from '../../common/applyFocusRingStyles';
 
 import { inputStyles } from './input.styles';
 import type { InputState } from './input.types';
 
 export function useInputStyles_unstable(state: InputState) {
-  applyFocusRingStyles(state.FocusRing, state, state.rootStyle.borderRadius);
   const rootStyle: StyleProp<ViewStyle> = [inputStyles.root, state.rootStyle, state.userStyle];
-  const contentsStyle: StyleProp<ViewStyle> = [inputStyles.contents, state.contentsStyle];
+  const { borderRadius } = StyleSheet.flatten(rootStyle);
+  applyFocusRingStyles(state.FocusRing, state, borderRadius);
+  const contentsStyle: StyleProp<ViewStyle> = [inputStyles.contents, state.contentsStyle, state.variant === 'outline' && { borderRadius }];
   const iconTextStackStyle: StyleProp<ViewStyle> = [inputStyles.iconTextStack, state.iconTextStackStyle];
   const iconEndStyle: StyleProp<ViewStyle> = [inputStyles.iconEnd, state.iconEndStyle];
   const underlineStyle: StyleProp<ViewStyle> = [inputStyles.underline, state.underlineStyle];
@@ -56,28 +58,10 @@ export function useInputStyles_unstable(state: InputState) {
       testID: 'input-underline-focus',
     });
   }
-  if (state.iconStart) {
-    attachSlotProps(state.iconStart, {
-      accessible: false,
-      color: state.iconColor,
-      height: state.iconSize,
-      width: state.iconSize,
-    });
-  }
-  if (state.iconEnd1) {
-    attachSlotProps(state.iconEnd1, {
-      accessible: false,
-      color: state.iconColor,
-      height: state.iconSize,
-      width: state.iconSize,
-    });
-  }
-  if (state.iconEnd2) {
-    attachSlotProps(state.iconEnd2, {
-      accessible: false,
-      color: state.iconColor,
-      height: state.iconSize,
-      width: state.iconSize,
-    });
+  for (const icon of [state.iconStart, state.iconEnd1, state.iconEnd2]) {
+    if (icon) {
+      attachSlotDefaults(icon, state.iconDefaults);
+      attachSlotProps(icon, { accessible: false });
+    }
   }
 }

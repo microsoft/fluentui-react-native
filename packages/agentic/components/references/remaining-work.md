@@ -11,6 +11,22 @@ Open work for the agentic component catalog. Completed work is removed rather th
 is documented in the owning reference, component contract, or the repository focus references (`focus.common`,
 `focus.windows-win32`, and `focus.macos`).
 
+## ToggleButton and the Button migration
+
+The [ToggleButton contract](../src/components/toggle-button/SPEC.md) implements a separate Subtle control. Check
+native Toggle delivery, checked state and high-contrast selection on each desktop endpoint before claiming parity.
+The [consumer migration](../src/components/toggle-button/spec/usage.md) requires an explicit decision for
+non-Subtle and square callers.
+
+## Flex 1.7 endpoint gates
+
+- Require a verifiable native popup relationship for Menu, MenuButton and Dropdown, not only an expanded property
+  or a hint. Qualify Dropdown's invalid-state projection and associated error text separately.
+- Qualify Popover's natural boundary exit before changing its current Tab cycle. Qualify Dropdown and MenuButton
+  continuation per renderer; Office Win32 does not yet support forward continuation from these popups.
+- Author and review PresenceBadge before enabling visible presence in Avatar. The identity marker and its activity ring
+  do not stand in for presence.
+
 ## Desktop focus qualification
 
 - **Issues:** [#4274](https://github.com/microsoft/fluentui-react-native/issues/4274); popup-family restoration in
@@ -45,6 +61,13 @@ is documented in the owning reference, component contract, or the repository foc
   disabled and removed targets neither activate nor keep phantom focus, collection focus matches committed selection,
   popups restore focus by dismissal reason, and theme or high-contrast changes keep stable identities.
 
+## Tooltip native routing
+
+Before exporting the [Tooltip wrapper](../src/components/tooltip/SPEC.md) for
+[#4249](https://github.com/microsoft/fluentui-react-native/issues/4249), qualify trigger help, keyboard dismissal
+and persistence on macOS Paper/Fabric and Windows Fabric. Compare Office Win32's view prop with `RCTTooltip`
+before deciding whether to extract its legacy binding. The wrapper is not yet exported.
+
 ## Components without a local contract
 
 These components had staged specs that were removed under
@@ -67,7 +90,6 @@ row against the current package before drafting its contract.
 | Scrollbar       | [#4238](https://github.com/microsoft/fluentui-react-native/issues/4238) | Blocked                        | Scroll metrics, tokenized thumb control, and drag interaction need a native host | Define a scroll-source API and platform scrollbar bridge                   |
 | Textarea        | [#4245](https://github.com/microsoft/fluentui-react-native/issues/4245) | Blocked as authored            | HTML textarea semantics and CSS resize behavior                                  | Make the product/API choice described below                                |
 | Toolbar         | [#4248](https://github.com/microsoft/fluentui-react-native/issues/4248) | Partial; blocked               | Roving focus needs focusable Button refs; Divider was absent                     | Reuse implemented Divider and define imperative focus for toolbar children |
-| Tooltip         | [#4249](https://github.com/microsoft/fluentui-react-native/issues/4249) | Blocked as authored            | Anchor/overlay host and trigger-coupled accessibility                            | Establish overlay infrastructure or retarget the contract                  |
 
 **Done when:** each component has a reviewed local contract and implementation, or its issue records a decision not to
 provide it.

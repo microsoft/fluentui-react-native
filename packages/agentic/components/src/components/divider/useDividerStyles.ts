@@ -1,50 +1,30 @@
-import type { StyleProp, TextStyle, ViewStyle } from 'react-native';
-
-import { attachSlotProps } from '@fluentui-react-native/framework-base';
-
-import { dividerStyles, getDividerContentStyle, getDividerLabelStyle, getDividerLineStyle, getDividerRootStyle } from './divider.styles';
+import { attachSlotDefaults, attachSlotProps } from '@fluentui-react-native/framework-base';
+import { hiddenFromAccessibilityProps } from '../../common/accessibility';
+import { dividerStyles, getDividerChrome } from './divider.styles';
 import type { DividerState } from './divider.types';
 
 /**
  * Applies token-derived and instance-derived styles to Divider slots.
  */
 export function useDividerStyles_unstable(state: DividerState) {
-  const rootStyle: StyleProp<ViewStyle> = [dividerStyles.root, getDividerRootStyle(state), state.userStyle];
-  const contentStyle: StyleProp<ViewStyle> = [dividerStyles.content, getDividerContentStyle(state)];
-  const labelStyle: StyleProp<TextStyle> = [dividerStyles.label, getDividerLabelStyle(state)];
-
-  attachSlotProps(state.root, {
-    style: rootStyle,
-  });
+  const chrome = getDividerChrome(state);
+  attachSlotProps(state.root, { style: [dividerStyles.root, chrome.root, state.userStyle] });
 
   if (state.contentContainer) {
     attachSlotProps(state.contentContainer, {
       accessible: false,
-      style: contentStyle,
+      style: [dividerStyles.content, chrome.content],
     });
   }
 
   if (state.icon) {
-    attachSlotProps(state.icon, {
-      accessible: false,
-      color: state.tokens.color.foregroundNeutralSecondary.rest,
-      height: 20,
-      width: 20,
-    });
+    attachSlotDefaults(state.icon, chrome.icon);
+    attachSlotProps(state.icon, hiddenFromAccessibilityProps);
   }
 
   if (state.label) {
-    attachSlotProps(state.label, {
-      accessible: false,
-      style: labelStyle,
-    });
+    attachSlotDefaults(state.label, { style: [dividerStyles.label, chrome.label] });
+    attachSlotProps(state.label, { accessible: false });
   }
-}
-
-export function getDividerBeforeLineStyle(state: DividerState): ViewStyle {
-  return getDividerLineStyle(state, 'before');
-}
-
-export function getDividerAfterLineStyle(state: DividerState): ViewStyle {
-  return getDividerLineStyle(state, 'after');
+  return { before: chrome.before, after: chrome.after };
 }

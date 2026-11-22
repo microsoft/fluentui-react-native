@@ -79,7 +79,7 @@ export function useInput_unstable(props: InputProps): InputState {
     }
   }, [iconEnd1Prop, iconEnd2Prop]);
 
-  const visualState = getInputVisualState({ disabled, error, focused, hovered, pressed, readOnly });
+  const visualState = getInputVisualState({ disabled, error, focused: focusVisible, hovered, pressed, readOnly });
   const resolvedStyles = getInputResolvedStyles({ ...themeState, size, variant, visualState, focusVisible });
 
   const handleChangeText = React.useCallback(
@@ -115,6 +115,8 @@ export function useInput_unstable(props: InputProps): InputState {
   const handlePressOut = React.useCallback(() => {
     setPressed(false);
   }, []);
+  const handleFieldPressIn = composeHandlers(onPressIn, handlePressIn);
+  const handleFieldPressOut = composeHandlers(onPressOut, handlePressOut);
 
   const root = useSlot(View, rootProps);
   const contents = useSlot(Pressable, {
@@ -122,10 +124,14 @@ export function useInput_unstable(props: InputProps): InputState {
     accessible: false,
     disabled,
     focusable: false,
+    onHoverIn: composeHandlers(onHoverIn, handleHoverIn),
+    onHoverOut: composeHandlers(onHoverOut, handleHoverOut),
+    onPressIn: handleFieldPressIn,
+    onPressOut: handleFieldPressOut,
     onPress: focusTextInput,
   });
   const iconTextStack = useSlot(View, {});
-  const iconEnd = useOptionalSlot(View, iconEnd1Prop || iconEnd2Prop ? {} : null);
+  const iconEnd = useOptionalSlot(View, iconEnd1Prop ? {} : null);
   const underline = useOptionalSlot(View, variant === 'underline' ? {} : null);
   const underlineFocus = useOptionalSlot(View, variant === 'underline' ? {} : null);
   const iconStart = useOptionalSlot(Icon, iconStartProp);
@@ -152,10 +158,9 @@ export function useInput_unstable(props: InputProps): InputState {
       onBlur: composeHandlers(slotProps.onBlur, onBlur, handleBlur),
       onChangeText: composeHandlers(slotProps.onChangeText, onChangeText, handleChangeText),
       onFocus: composeHandlers(slotProps.onFocus, onFocus, focus.onFocus),
-      onHoverIn: composeHandlers(slotProps.onHoverIn, onHoverIn, handleHoverIn),
-      onHoverOut: composeHandlers(slotProps.onHoverOut, onHoverOut, handleHoverOut),
-      onPressIn: composeHandlers(slotProps.onPressIn, onPressIn, handlePressIn),
-      onPressOut: composeHandlers(slotProps.onPressOut, onPressOut, handlePressOut),
+      // The editor is the press responder over its own area for caret placement and selection.
+      onPressIn: composeHandlers(slotProps.onPressIn, handleFieldPressIn),
+      onPressOut: composeHandlers(slotProps.onPressOut, handleFieldPressOut),
       placeholder: placeholder ?? slotProps.placeholder,
       placeholderTextColor: resolvedStyles.placeholderTextColor,
       style: [resolvedStyles.textInput, slotProps.style],
@@ -176,12 +181,11 @@ export function useInput_unstable(props: InputProps): InputState {
     focused,
     focusVisible,
     hovered,
-    iconColor: resolvedStyles.iconColor,
+    iconDefaults: resolvedStyles.icon,
     iconEnd,
     iconEnd1,
     iconEnd2,
     iconEndStyle: resolvedStyles.iconEnd,
-    iconSize: resolvedStyles.iconSize,
     iconStart,
     iconTextStack,
     iconTextStackStyle: resolvedStyles.iconTextStack,

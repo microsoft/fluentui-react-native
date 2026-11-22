@@ -24,6 +24,9 @@ export function useTag_unstable(props: TagProps): TagState {
     disabled = false,
     layout = 'iconAndText',
     leadingIcon: leadingIconProp,
+    onDismiss,
+    onPress,
+    onAccessibilityTap: callerAccessibilityTap,
     ref: rootRef,
     shape = 'rounded',
     size = 'medium',
@@ -52,19 +55,26 @@ export function useTag_unstable(props: TagProps): TagState {
 
   const themeState = useThemeState();
   const platform: string = Platform.OS;
-  // Native desktop button actions need an accessibility-tap callback.
-  // Forward its original event rather than inventing a pointer press.
-  const onAccessibilityTap =
-    rest.onAccessibilityTap ??
-    ((platform === 'win32' || platform === 'windows' || platform === 'macos') && rest.onPress
-      ? (event?: GestureResponderEvent) => {
-          if (event) rest.onPress?.(event);
-        }
-      : undefined);
+  // A migrated handler replaces the legacy route; never call both for a single action.
+  const requestDismiss = dismiss && onDismiss ? () => onDismiss() : undefined;
+  const activate = onDismiss === undefined ? onPress : requestDismiss;
+  const desktop = platform === 'win32' || platform === 'windows' || platform === 'macos';
+  const onAccessibilityTap = disabled
+    ? undefined
+    : callerAccessibilityTap && onDismiss === undefined
+      ? callerAccessibilityTap
+      : desktop && activate
+        ? (event?: GestureResponderEvent) => {
+            if (requestDismiss) requestDismiss();
+            else if (event) onPress?.(event);
+          }
+        : undefined;
   const [pressableProps, pressableState, focusBinding] = useFocusablePressable({
     ...rest,
+    onPress: activate,
     onAccessibilityTap,
     accessibilityRole: 'button',
+    role: 'button',
     accessibilityState: {
       ...accessibilityState,
       disabled,
@@ -106,6 +116,7 @@ export function useTag_unstable(props: TagProps): TagState {
     showDismissIcon,
     userStyle,
     ...themeState,
+    themeState,
     ...pressableState,
     ...focusBinding,
     appearance,

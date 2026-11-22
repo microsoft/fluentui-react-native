@@ -32,7 +32,7 @@ describe('MenuItem', () => {
       icon: { imageSource: { uri: 'regular.png' }, testID: 'regular' },
       selectedIcon: { imageSource: { uri: 'selected.png' }, testID: 'selected' },
     });
-    expect(component.getByTestId('avatar').props.accessible).toBe(false);
+    expect(component.getByTestId('avatar', { includeHiddenElements: true }).props.accessible).toBe(false);
     expect(component.queryByTestId('regular')).toBeNull();
     expect(component.queryByTestId('selected')).toBeNull();
   });
@@ -53,7 +53,7 @@ describe('MenuItem', () => {
 
   it('renders selection without changing it on press', async () => {
     const onPress = jest.fn();
-    const component = await renderMenuItem({ content: 'Inbox', hasMultiselect: true, onPress, selected: false });
+    const component = await renderMenuItem({ content: 'Inbox', selectionMode: 'multiple', onPress, selected: false });
 
     await fireEvent.press(getRoot(component, 'menuitemcheckbox'));
 
@@ -69,8 +69,8 @@ describe('MenuItem', () => {
     expect(component.getAllByText('Secondary', { includeHiddenElements: true })).toHaveLength(2);
     expect(getRootStyle(component)).toMatchObject({
       backgroundColor: defaultFlexTokens.color.backgroundNeutralTransparent.rest,
-      minHeight: 40,
     });
+    expect(getRootStyle(component).minHeight).toBeUndefined();
   });
 
   it('uses the selected icon, selected background, and semibold text when selected', async () => {
@@ -82,7 +82,7 @@ describe('MenuItem', () => {
     });
 
     expect(component.queryByTestId('regular-icon')).toBeNull();
-    expect(component.getByTestId('selected-icon')).toBeOnTheScreen();
+    expect(component.getByTestId('selected-icon', { includeHiddenElements: true })).toBeOnTheScreen();
     expect(getRootStyle(component).backgroundColor).toBe(defaultFlexTokens.color.backgroundNeutralSoft.rest);
     expect(
       component
@@ -93,7 +93,7 @@ describe('MenuItem', () => {
   });
 
   it('renders a right-aligned checkmark row without selected styling', async () => {
-    const component = await renderMenuItem({ hasCheckmark: true, content: 'Single select', selected: false });
+    const component = await renderMenuItem({ selectionMode: 'single', content: 'Single select', selected: false });
 
     expect(getRoot(component, 'menuitemradio').props.accessibilityRole).toBe('menuitemradio');
     expect(getRoot(component, 'menuitemradio').props.accessibilityState).toMatchObject({ checked: false });
@@ -103,7 +103,7 @@ describe('MenuItem', () => {
   it('renders a multiselect checkbox and keeps the row background transparent', async () => {
     const component = await renderMenuItem({
       content: 'Multi select',
-      hasMultiselect: true,
+      selectionMode: 'multiple',
       selected: true,
     });
 
@@ -182,16 +182,16 @@ describe('MenuItem', () => {
   it('renders custom leading and trailing slots in a stable order', async () => {
     const component = await renderMenuItem({
       avatar: { as: View, testID: 'avatar' },
-      chevron: { fontSource: { codepoint: 0x203a, fontFamily: 'Arial' }, testID: 'chevron' },
+      trailingIcon: { fontSource: { codepoint: 0x203a, fontFamily: 'Arial' }, testID: 'trailing' },
       content: 'Ordered',
       icon: { fontSource: { codepoint: 0x25cb, fontFamily: 'Arial' }, testID: 'icon' },
-      hasChevron: true,
-      hasMultiselect: true,
       selected: true,
     });
 
-    expect(component.getByTestId('avatar')).toBeOnTheScreen();
-    expect(component.getByTestId('chevron')).toBeOnTheScreen();
+    expect(component.getByTestId('avatar', { includeHiddenElements: true })).toBeOnTheScreen();
+    const trailing = component.getByTestId('trailing', { includeHiddenElements: true });
+    expect(trailing.props.accessible).toBe(false);
+    expect(StyleSheet.flatten(trailing.props.style)).toMatchObject({ width: 20, height: 20 });
   });
 });
 
@@ -305,7 +305,7 @@ describe('MenuItem inside a Menu (MNI-007)', () => {
         testID: 'share',
       });
       expect(warn).toHaveBeenCalledWith('MenuItem: a submenu opens only from a list row inside a Menu.');
-      expect(component.getByTestId('chevron')).toBeOnTheScreen();
+      expect(component.getByTestId('chevron', { includeHiddenElements: true })).toBeOnTheScreen();
       expect(component.getByTestId('share').props.accessibilityHint).toBe('Has submenu');
       expect(component.getByTestId('share').props.accessibilityState.expanded).toBeUndefined();
     } finally {
@@ -325,7 +325,7 @@ describe('MenuItem native indicator semantics (MNI-003)', () => {
   ] as const)('declares native indicator actions on %s with multiselect %s', async (platform, hasMultiselect, actions) => {
     const replacement = jest.replaceProperty(Platform, 'OS', platform as typeof Platform.OS);
     try {
-      const component = await renderMenuItem({ hasCheckmark: !hasMultiselect, hasMultiselect });
+      const component = await renderMenuItem({ selectionMode: hasMultiselect ? 'multiple' : 'single' });
       expect(getRoot(component, hasMultiselect ? 'menuitemcheckbox' : 'menuitemradio').props.accessibilityActions).toEqual(
         actions.map((name) => ({ name })),
       );
@@ -336,7 +336,7 @@ describe('MenuItem native indicator semantics (MNI-003)', () => {
 
   it('preserves caller labels and deduplicates both owned actions', async () => {
     const component = await renderMenuItem({
-      hasCheckmark: true,
+      selectionMode: 'single',
       accessibilityActions: [
         { name: 'Toggle', label: 'Toggle choice' },
         { name: 'Toggle' },
@@ -359,8 +359,7 @@ describe('MenuItem native indicator semantics (MNI-003)', () => {
     [true, true],
   ] as const)('owns checked aliases with multiselect %s and selected %s', async (hasMultiselect, selected) => {
     const component = await renderMenuItem({
-      hasCheckmark: !hasMultiselect,
-      hasMultiselect,
+      selectionMode: hasMultiselect ? 'multiple' : 'single',
       selected,
       accessibilityState: { busy: true, checked: !selected, selected: !selected },
       'aria-checked': !selected,
@@ -377,14 +376,14 @@ describe('MenuItem native indicator semantics (MNI-003)', () => {
   it('does not add owned actions to ordinary rows or section headers', async () => {
     const ordinary = await renderMenuItem({ accessibilityActions: [{ name: 'custom' }] });
     expect(getRoot(ordinary).props.accessibilityActions).toEqual([{ name: 'custom' }]);
-    const header = await renderMenuItem({ menuStyle: 'section-header', hasCheckmark: true });
+    const header = await renderMenuItem({ menuStyle: 'section-header', selectionMode: 'single' });
     expect(getRoot(header, 'none').props.accessibilityActions).toBeUndefined();
   });
 
   it.each([false, true])('preserves original custom events without pressing or selecting when disabled is %s', async (disabled) => {
     const onAccessibilityAction = jest.fn();
     const onPress = jest.fn();
-    const component = await renderMenuItem({ hasMultiselect: true, selected: false, disabled, onAccessibilityAction, onPress });
+    const component = await renderMenuItem({ selectionMode: 'multiple', selected: false, disabled, onAccessibilityAction, onPress });
     const event = { nativeEvent: { actionName: 'Toggle' } };
     const root = getRoot(component, 'menuitemcheckbox');
     root.props.onAccessibilityAction(event);

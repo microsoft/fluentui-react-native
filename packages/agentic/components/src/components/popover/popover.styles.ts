@@ -1,8 +1,16 @@
 import { StyleSheet } from 'react-native';
 
-import { themedStyleSheetFactory } from '@fluentui-react-native/design';
-import type { FlexTokens } from '@fluentui-react-native/design';
-import { getNumericStyleValue } from '@fluentui-react-native/design/styling';
+import type { ThemeState } from '@fluentui-react-native/design';
+import {
+  borderStyleToken,
+  colorToken,
+  defineComponentTokens,
+  getComponentTokens,
+  numericToken,
+  resolveTokenStates,
+} from '@fluentui-react-native/design/styling';
+import type { ComponentTokenPatch, ResolvedSlotTokens } from '@fluentui-react-native/design/styling';
+import schema from './spec/tokens.json' with { type: 'json' };
 
 export const popoverStyles = StyleSheet.create({
   root: {
@@ -10,20 +18,38 @@ export const popoverStyles = StyleSheet.create({
   },
 });
 
-export const getPopoverThemeStyles = themedStyleSheetFactory('Popover.surface', ({ tokens }) =>
-  StyleSheet.create({
-    surface: {
-      backgroundColor: tokens.color.surfaceNeutralNearer.rest,
-      borderColor: tokens.color.strokeNeutralSubtle.rest,
-      borderRadius: tokens.borderRadius.base400,
-      borderStyle: 'solid',
-      borderWidth: tokens.strokeWidth.thin,
-      padding: tokens.spacing.componentBase400,
+const slots = {
+  surface: {
+    style: {
+      backgroundColor: colorToken,
+      borderColor: colorToken,
+      borderRadius: numericToken,
+      borderStyle: borderStyleToken,
+      borderWidth: numericToken,
+      padding: numericToken,
     },
-  }),
-);
+    props: {},
+  },
+  placement: { style: {}, props: { gap: numericToken } },
+};
+type SurfaceSlots = typeof slots;
+type SurfaceAxes = Record<never, never>;
+declare module '@fluentui-react-native/design' {
+  interface ComponentTokenRegistry {
+    'furn.popover': ComponentTokenPatch<SurfaceAxes, SurfaceSlots>;
+  }
+}
+const popoverTokenDefinition = defineComponentTokens<SurfaceAxes, SurfaceSlots>({ id: 'furn.popover', slots, schema });
 
-/** The trigger-to-surface gap. Native placement requires a nonnegative integer in logical units. */
-export function getPopoverGap(tokens: FlexTokens): number {
-  return Math.max(0, Math.round(Number(getNumericStyleValue(tokens.spacing.componentBase100))));
+type SurfaceStyle = ResolvedSlotTokens<SurfaceSlots['surface']['style'], SurfaceSlots['surface']['props']>['style'];
+
+export function getPopoverChrome(state: ThemeState): { surface: SurfaceStyle; gap: number } {
+  const tokens = getComponentTokens(state, popoverTokenDefinition);
+  const surface = resolveTokenStates(tokens.surface, {}).style;
+  const { gap = 0 } = resolveTokenStates(tokens.placement, {}).props;
+  return { surface, gap: Math.max(0, Math.round(gap)) };
+}
+
+export function getPopoverSurfaceStyle(surface: SurfaceStyle): SurfaceStyle {
+  return { ...surface, padding: Math.max(0, (surface.padding ?? 0) - (surface.borderWidth ?? 0)) };
 }

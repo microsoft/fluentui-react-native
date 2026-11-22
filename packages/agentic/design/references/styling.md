@@ -46,6 +46,12 @@ selector order is validated against the schema at runtime. `getComponentTokens` 
 `themeStyles`; `resolveTokenStates` reads the declared fields directly from component state and caches immutable slot
 results by relevant axis members. State objects and caller styles are never part of a shared cache key.
 
+`platform` is a reserved final axis. Use `when.platform.macos`, for example, at the root of a slot or inside a
+state branch; do not declare it in `axes`. Its value comes from the React Native host, never component props or
+state overrides. The recognized hosts are `android`, `ios`, `macos`, `win32`, and `windows`; any other host uses
+the ordinary bindings. A matching platform rule wins for the fields it sets within its layer, not over later theme
+layers or caller styles. Use it for host-specific visuals, not to infer renderer capabilities or change behavior.
+
 Bindings may contain native literals or `tokens:<group>.<name>` references. Colors require `.rest`, `.hover`, `.pressed`,
 or `.active`. `.active` follows the component's `visualState` (`hovered`/`pressed`, otherwise rest). Choosing the winning
 property across all theme layers does not read any losing interaction color getters.

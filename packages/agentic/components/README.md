@@ -10,8 +10,8 @@ and accessibility behavior, and colocated tests and stories.
 | `@fluentui-react-native/components/primitives` | Unstyled building blocks: `CheckboxIndicator`, `CompoundItemLayout`, `FocusVisual`, `Icon`, `LayoutStableText` |
 
 Higher-order components: Accordion, Avatar, Badge, Button, Card, Checkbox, Divider, Dropdown, Input, ListItem,
-ListboxItem, Menu, MenuButton, MenuItem, Popover, ProgressBar, Radio, Skeleton, Spinner, Switch, Tab, TabList, Tag, and
-Text.
+ListboxItem, Menu, MenuButton, MenuItem, Popover, ProgressBar, Radio, Skeleton, Spinner, Switch, Tab, TabList, Tag,
+Text, and ToggleButton.
 
 ## Quick start
 
@@ -30,6 +30,10 @@ export const App = () => (
 ```
 
 Each component's `src/components/<name>/SPEC.md` describes its supported props, behavior, and platform differences.
+
+For native desktop tooltip text, pass `tooltip` directly to a supported view-backed component, for example
+`<Button content="Save" tooltip="Save a local copy" />`. This forwards text to the host, not an accessible name or
+description. The [Tooltip contract](src/components/tooltip/SPEC.md) distinguishes the direct prop from the compatibility wrapper.
 
 ## Documentation
 

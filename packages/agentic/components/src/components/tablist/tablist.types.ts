@@ -1,3 +1,4 @@
+import type { DesktopTooltipProps } from '../../common/desktopTooltipProps';
 import type * as React from 'react';
 import type { View, ViewProps } from 'react-native';
 
@@ -41,6 +42,9 @@ export type TabListStateProps = {
    */
   disabled?: boolean;
 
+  /** Trailing content outside the list's roving focus and selection. */
+  endContent?: React.ReactNode;
+
   /** Called whenever a child Tab requests selection. */
   onSelectionChange?: (value: string) => void;
 
@@ -64,10 +68,8 @@ export type TabListStateProps = {
   selectionFollowsFocus?: boolean;
 };
 
-export type TabListExposedViewProps = OwnedRootProps<
-  PropsWithRefOf<typeof View>,
-  'accessibilityRole' | 'accessibilityState' | 'accessible' | 'focusable'
->;
+export type TabListExposedViewProps = DesktopTooltipProps &
+  OwnedRootProps<PropsWithRefOf<typeof View>, 'accessibilityRole' | 'accessibilityState' | 'accessible' | 'focusable'>;
 
 export type TabListSlots = {
   root: Slot<typeof View>;
@@ -82,6 +84,7 @@ export type TabListState = ComponentState<TabListSlots> &
   ThemeState & {
     children: React.ReactNode;
     contextValue: import('./TabListContext').TabListContextValue;
+    endContent?: React.ReactNode;
     orientation: TabListOrientation;
     userStyle: ViewProps['style'];
   };

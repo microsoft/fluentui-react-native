@@ -81,7 +81,10 @@ export function resolveButtonChrome(state: ButtonState): {
   icon: Pick<IconElementProps, 'color' | 'width' | 'height'>;
 } {
   const { buttonTokens } = state;
-  const root = resolveTokenStates(buttonTokens.root, state).style;
+  const { paddingHorizontal, paddingVertical, ...frame } = resolveTokenStates(buttonTokens.root, state).style;
+  const stroke = frame.borderWidth ?? 0;
+  const inset = (padding: ViewStyle['paddingHorizontal']) => (typeof padding === 'number' ? Math.max(0, padding - stroke) : padding);
+  const root = { ...frame, paddingHorizontal: inset(paddingHorizontal), paddingVertical: inset(paddingVertical) };
   const content = resolveTokenStates(buttonTokens.content, state).style;
   const icon = resolveTokenStates(buttonTokens.icon, state).props;
   return { root, content, icon };

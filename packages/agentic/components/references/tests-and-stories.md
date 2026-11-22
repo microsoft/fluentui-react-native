@@ -113,13 +113,14 @@ For a self-driving control such as Checkbox, Switch, or Accordion, do not put th
 nothing and the story looks broken. Expose `default<State>` as the on-device control and use it in `args`, including for
 variant-scan stories, so each instance starts in the demonstrated state and still responds to presses.
 
-For externally driven selection such as Button, Tab, Radio, Card, or the item components, a fixed `selected` arg is
+For externally driven selection such as Tab, Radio, Card, or the item components, a fixed `selected` arg is
 correct: the component never changes it. Give the interactive demonstration in one story that owns the value with
 `React.useState` and updates it from `onPress`.
 
-Do not expose an axis that changes component identity as a control. Button's `selected` decides whether it is a toggle
-button at all, and Card's decides whether it is selectable, so a control that flips between `undefined` and `false`
-resizes or re-roles the component instead of demonstrating a value.
+Do not expose an axis that changes component identity as a control. Card's `selected` determines whether it is
+selectable, so a control that flips between `undefined` and `false` changes the component instead of demonstrating
+a value. ToggleButton is self-driving; use `defaultSelected` for a variant scan or bind a controlled story to
+`onSelectedChange`.
 
 Each story module should provide:
 

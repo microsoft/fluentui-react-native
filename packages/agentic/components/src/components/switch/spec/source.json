@@ -3,17 +3,17 @@
   "component": "switch",
   "lifecycle": "implemented",
   "conformance": "reviewed",
-  "reviewedAt": "2026-09-15",
+  "reviewedAt": "2026-11-20",
   "sources": [
     {
       "id": "flex-component",
       "kind": "flex-skill",
       "authority": "normative",
       "skill": "flex-components:switch",
-      "sourceLock": "flex-1.5.0-206c4996",
-      "sourceLockFingerprint": "a69997212ec1b89510c94176801bf5a146ed7e7d8c80cc7db40ac8f60cf9f119",
+      "sourceLock": "flex-1.7.0-9f1df394",
+      "sourceLockFingerprint": "33c7dbb4ff78525a4e0900811f5fa1994579ee8dd95b337de85d8f47133d148c",
       "availableSurfaces": ["shared", "web"],
-      "surfacesConsulted": ["shared", "web"],
+      "surfacesConsulted": ["web"],
       "sourceFiles": [
         {
           "role": "skill",
@@ -48,21 +48,21 @@
         {
           "role": "web:interaction",
           "marketplacePath": "catalogs/flex/plugins/components/skills/switch/web/interaction.md",
-          "marketplaceBlobSha": "61cf6c42ca454ca481f38111c08daf8e4176794c",
-          "marketplaceSha256": "053aedc2d42fc355dbab0603986d0abd1e04958c197c5f8d312f05a3f645c799",
+          "marketplaceBlobSha": "e3edaa79d3658d47634a10ac7e8ee674f5d78e03",
+          "marketplaceSha256": "cfbb1e9169107a26ec76da4e76e819961d72c15cd3a36f61d720806e259028db",
           "originPath": "plugins/components/skills/switch/web/interaction.md",
-          "originBlobSha": "61cf6c42ca454ca481f38111c08daf8e4176794c",
-          "originSha256": "053aedc2d42fc355dbab0603986d0abd1e04958c197c5f8d312f05a3f645c799",
+          "originBlobSha": "e3edaa79d3658d47634a10ac7e8ee674f5d78e03",
+          "originSha256": "cfbb1e9169107a26ec76da4e76e819961d72c15cd3a36f61d720806e259028db",
           "contentDiffers": false
         },
         {
           "role": "web:tokens",
           "marketplacePath": "catalogs/flex/plugins/components/skills/switch/web/tokens.yaml",
-          "marketplaceBlobSha": "26c4305c1c928834324d5aa0c2b47898f380cc36",
-          "marketplaceSha256": "d965f2469095e36034214719999b2b847d41101ef2cac3562d02602965e374d8",
+          "marketplaceBlobSha": "d569a4fdb3f633af673cce462d4d0d7cb664a3c1",
+          "marketplaceSha256": "f5714997f658129e3574bc7546757e89b4b35d08c5adb3e4f3e55d1f8af46a20",
           "originPath": "plugins/components/skills/switch/web/tokens.yaml",
-          "originBlobSha": "26c4305c1c928834324d5aa0c2b47898f380cc36",
-          "originSha256": "d965f2469095e36034214719999b2b847d41101ef2cac3562d02602965e374d8",
+          "originBlobSha": "d569a4fdb3f633af673cce462d4d0d7cb664a3c1",
+          "originSha256": "f5714997f658129e3574bc7546757e89b4b35d08c5adb3e4f3e55d1f8af46a20",
           "contentDiffers": false
         }
       ],
@@ -80,7 +80,7 @@
     },
     {
       "id": "switch-label-spacing",
-      "status": "accepted"
+      "status": "resolved"
     },
     {
       "id": "switch-focus-modality",

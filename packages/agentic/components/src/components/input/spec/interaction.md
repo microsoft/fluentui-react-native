@@ -19,11 +19,10 @@ token-derived root styles.
 
 ## Pointer
 
-Hover and press handlers are attached to the text input, together with any
-caller handlers and any handlers set on the `textInput` slot; all of them run.
-Because the tracking lives on the text input rather than the container, the
-horizontal padding and the icon areas are not hover targets, so moving the
-pointer from the text into the padding drops the hovered state.
+The contents row tracks hover for the full field and press in its padding
+and icons. The editor routes its own press events to the same field state
+without relinquishing its native responder. Root-level handlers cover both
+paths; handlers on the `textInput` slot remain on the editor.
 
 Hover recolors the boundary to the hovered neutral stroke and press recolors it
 to the pressed neutral stroke. Neither changes the layout, so the field does not

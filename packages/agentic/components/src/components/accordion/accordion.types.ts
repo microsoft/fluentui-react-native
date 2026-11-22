@@ -1,3 +1,4 @@
+import type { DesktopTooltipProps } from '../../common/desktopTooltipProps';
 import type { FocusTargetBinding } from '@fluentui-react-native/framework-base';
 import type { AccessibilityState, Pressable, StyleProp, View, ViewStyle } from 'react-native';
 import type {
@@ -87,10 +88,11 @@ export type AccordionStateProps = {
   size?: AccordionSize;
 };
 
-export type AccordionRootProps = OwnedRootProps<
-  PropsWithRefOf<typeof View>,
-  'accessible' | 'accessibilityHint' | 'accessibilityLabel' | 'accessibilityRole' | 'accessibilityState' | 'focusable'
->;
+export type AccordionRootProps = DesktopTooltipProps &
+  OwnedRootProps<
+    PropsWithRefOf<typeof View>,
+    'accessible' | 'accessibilityHint' | 'accessibilityLabel' | 'accessibilityRole' | 'accessibilityState' | 'focusable'
+  >;
 
 export type AccordionProps = AccordionStateProps & ComponentProps<AccordionSlots, AccordionRootProps>;
 

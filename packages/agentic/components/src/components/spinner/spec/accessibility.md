@@ -2,17 +2,13 @@
 
 ## Native semantics
 
-The root is a single accessible element with `accessibilityRole="progressbar"`
-and `accessibilityState.busy` set to `true`. No progress value is published, so
-the element is reported as indeterminate: on Windows it surfaces as a UI
-Automation progress element in the indeterminate pattern, and on macOS as the
-equivalent indeterminate progress element. Narrator and VoiceOver read the
-accessible name and the busy state once when the element is reached.
+The named root exposes `accessibilityRole="progressbar"` without an imposed
+busy state or progress value. A decorative spinner is hidden, with the host
+region carrying the busy state instead. Verify the resulting indeterminate
+progress element and name separately on Windows UIA and macOS AX.
 
-Caller-supplied `accessibilityState` is merged first and the component's busy
-state is applied over it, so a caller cannot clear busy while the spinner is
-mounted. `accessibilityRole` and `focusable` are removed from the public props
-because the component owns both.
+`accessibilityRole` and `focusable` are removed from the public props because
+the component owns both.
 
 The drawing surface inside the root sets `accessible={false}`, so the circles
 never appear as separate elements and never produce a second announcement.
@@ -47,5 +43,5 @@ remaps per surface, and the indicator is intentionally the higher-contrast of
 the two so the moving arc stays readable at the smallest diameter.
 
 While the platform reduced-motion setting is on, the rotation does not run and
-the arc renders at its starting angle. Presence plus the busy state carries the
-meaning; no slower rotation, fade, or pulse is substituted.
+the arc renders at its starting angle. The named role or the host's busy
+state still conveys meaning; no slower rotation, fade, or pulse is substituted.

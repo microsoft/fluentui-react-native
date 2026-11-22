@@ -36,18 +36,16 @@ export { useBadgeStyles_unstable } from './components/badge/useBadgeStyles';
 export { useBadge_unstable } from './components/badge/useBadge';
 
 export { Button } from './components/button/button';
-export type {
-  ButtonAppearance,
-  ButtonIconPosition,
-  ButtonProps,
-  ButtonShape,
-  ButtonSize,
-  ButtonSlots,
-  ButtonState,
-} from './components/button/button.types';
+export type { ButtonAppearance, ButtonProps, ButtonShape, ButtonSize, ButtonSlots, ButtonState } from './components/button/button.types';
 export { renderButton_unstable } from './components/button/renderButton';
 export { useButtonStyles_unstable } from './components/button/useButtonStyles';
 export { useButton_unstable } from './components/button/useButton';
+
+export { ToggleButton } from './components/toggle-button/toggle-button';
+export type { ToggleButtonProps, ToggleButtonSlots, ToggleButtonState } from './components/toggle-button/toggle-button.types';
+export { renderToggleButton_unstable } from './components/toggle-button/renderToggleButton';
+export { useToggleButtonStyles_unstable } from './components/toggle-button/useToggleButtonStyles';
+export { useToggleButton_unstable } from './components/toggle-button/useToggleButton';
 
 export { Card } from './components/card/card';
 export type { CardDirection, CardLayout, CardPadding, CardProps, CardSize, CardSlots, CardState } from './components/card/card.types';

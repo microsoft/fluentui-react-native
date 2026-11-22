@@ -1,7 +1,7 @@
 ---
 name: menu-button
 platform: react-native (Windows, macOS)
-status: implemented
+status: contract-reviewed
 source: ./spec/source.json
 tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
@@ -33,16 +33,19 @@ Dropdown (value selection) or a toggle.
 | `size`                                            | Button size           | `medium`    | Forwarded to Button's chrome; also sizes the chevron 16/20/20.                   |
 | `disabled`                                        | `boolean`             | `false`     | Disables the trigger; a disabled MenuButton never opens and closes an open menu. |
 | `content`                                         | Button content slot   | absent      | Optional label. Never mirrors the chosen action.                                 |
-| `icon`                                            | Button icon slot      | absent      | Optional leading icon.                                                           |
+| `leadingIcon`                                     | Button icon slot      | absent      | Optional leading icon.                                                           |
 | `open` / `defaultOpen` / `onOpenChange`           | as Menu               | as Menu     | Menu's presence contract (MNU-002), including the `action` reason.               |
 | `disabledFocusable`, `submenuOpenOnHover`, delays | as Menu               | as Menu     | Forwarded to the menu.                                                           |
 | `menu`                                            | View props with `ref` | `{}`        | The menu surface that hosts `children`.                                          |
 | `children`                                        | React nodes           | required    | MenuItem list rows and Dividers.                                                 |
 
 All other Button root props, including handlers, `accessibilityLabel`, and
-`ref`, apply to the actual trigger Pressable. `selected`, `shape`,
-`iconPosition`, and `selectedIcon` are not accepted. Caller-driven `open`
+`ref`, apply to the actual trigger Pressable. `shape` and `trailingIcon`
+are not accepted. Caller-driven `open`
 changes never call `onOpenChange`.
+
+Button's direct `tooltip?: string` applies to the trigger, not the menu surface or its items. It does not replace
+the trigger name or its menu-opening accessibility hint.
 
 ### Slots and anatomy
 
@@ -50,12 +53,12 @@ The trigger Pressable contains the optional leading icon, the optional label,
 and the private chevron, in that order. The menu popup renders outside the
 Pressable and takes no layout space.
 
-| Slot      | Rendered when         | Contract                                                                       |
-| --------- | --------------------- | ------------------------------------------------------------------------------ |
-| `root`    | always                | The actual trigger Pressable, with Button's focus target and the caller `ref`. |
-| `content` | `content` is supplied | Button's label slot.                                                           |
-| `icon`    | `icon` is supplied    | Button's leading icon slot.                                                    |
-| `menu`    | the menu is presented | The root menu surface, as Menu's `surface` (MNU-010, MNU-011).                 |
+| Slot          | Rendered when             | Contract                                                                       |
+| ------------- | ------------------------- | ------------------------------------------------------------------------------ |
+| `root`        | always                    | The actual trigger Pressable, with Button's focus target and the caller `ref`. |
+| `content`     | `content` is supplied     | Button's label slot.                                                           |
+| `leadingIcon` | `leadingIcon` is supplied | Button's leading icon slot.                                                    |
+| `menu`        | the menu is presented     | The root menu surface, as Menu's `surface` (MNU-010, MNU-011).                 |
 
 The chevron is private and cannot be replaced or hidden.
 
@@ -70,7 +73,8 @@ The chevron is private and cannot be replaced or hidden.
   chevron in the trigger foreground at 16, 20, and 20 for small, medium, and large, and
   draw the pressed chrome while the menu is presented, unless disabled.
   Use the effective Button theme tokens for the trigger, with separate
-  MenuButton theme tokens for the chevron and caller trigger visuals last.
+  MenuButton theme tokens for its chevron and macOS label offset, and caller trigger visuals last.
+  The open trigger uses a distinct border in high contrast.
 - **MNB-003:** Present the children through Menu's presence, family,
   navigation, and dismissal (MNU-002 to MNU-011), placed below the trigger and
   start-aligned. Warn in development for section-header rows and for a
@@ -106,11 +110,11 @@ every supported host. The chevron is decorative and does not receive pointer inp
 
 ## Divergences from Flex
 
-| ID                          | Disposition | React Native contract                                                                                        | Follow-up                                             |
-| --------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------- |
-| `menu-button-haspopup`      | Accepted    | Expanded state plus a hint replace `menu` has-popup and controls, which have no typed property (D12).        | Adopt native relationships if the renderers add them. |
-| `menu-button-pointer-entry` | Accepted    | A pointer open follows Menu's native pointer entry (`menu-pointer-entry`) instead of focusing the first row. | None.                                                 |
-| `menu-button-motion`        | Deferred    | Menu presentation and trigger color changes are instant, which equals the reduced-motion behavior.           | Revisit when Flex motion is final.                    |
+| ID                          | Disposition | React Native contract                                                                                                      | Follow-up                                                                        |
+| --------------------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `menu-button-haspopup`      | Deferred    | Expanded state plus a hint are the interim native representation. They do not establish a programmatic popup relationship. | Verify real native popup type and controls relationships before claiming parity. |
+| `menu-button-pointer-entry` | Accepted    | A pointer open follows Menu's native pointer entry (`menu-pointer-entry`) instead of focusing the first row.               | None.                                                                            |
+| `menu-button-motion`        | Deferred    | Menu presentation and trigger color changes are instant, which equals the reduced-motion behavior.                         | Revisit when Flex motion is final.                                               |
 
 ## Conformance
 

@@ -26,6 +26,7 @@ For `layout="center"` both line segments grow equally and the content sits at
 the midpoint. For `layout="start"` the leading line becomes a fixed stub and
 the trailing line takes the remaining space; `layout="end"` is the mirror
 image. Writing direction determines which end reads as the start.
+While the content is hidden, one flexible rule spans the divider without a stub.
 
 A horizontal Divider fixes the line's height and lets its width grow, and pads
 the content on the horizontal axis. A vertical Divider fixes the line's width

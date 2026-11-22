@@ -6,12 +6,12 @@ the rule into noise rather than a signal.
 
 ```tsx
 <Divider label="Recent files" />
-<Divider label={null} icon={null} />
+<Divider showContent={false} />
 ```
 
-The label renders by default. Pass `label={null}` together with `icon={null}`
-for a plain rule, which is the right choice when the sections around it are
-already named by headings.
+The label renders by default. Use `showContent={false}` to display a bare rule
+without clearing either slot. Passing `null` to both slots also produces a
+bare rule. Prefer one when headings already identify the surrounding sections.
 
 ## Layout
 

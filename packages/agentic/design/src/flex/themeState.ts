@@ -49,6 +49,7 @@ export function getThemeState(source: ThemeSource, appearance: Readonly<Normaliz
   const cache = getThemeAppearanceCache(source, appearance);
   if (!cache.themeState) {
     cache.themeState = {
+      isFluentFallback: source.kind === 'legacy',
       tokens: getFlexTokens(source, appearance),
       appearance,
       highContrast: appearance.contrast === 'highContrast',

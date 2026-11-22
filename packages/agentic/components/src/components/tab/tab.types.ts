@@ -1,3 +1,4 @@
+import type { DesktopTooltipProps } from '../../common/desktopTooltipProps';
 import type { FocusTargetBinding } from '@fluentui-react-native/framework-base';
 import type { Pressable, StyleProp, ViewStyle } from 'react-native';
 
@@ -56,13 +57,14 @@ export type TabStateProps = {
   controls: string;
 };
 
-export type TabExposedPressableProps = OwnedRootProps<
-  PropsWithRefOf<typeof Pressable> & {
-    accessibilityPosInSet?: number;
-    accessibilitySetSize?: number;
-    onKeyDown?: (event: TabKeyEvent) => void;
-  }
->;
+export type TabExposedPressableProps = DesktopTooltipProps &
+  OwnedRootProps<
+    PropsWithRefOf<typeof Pressable> & {
+      accessibilityPosInSet?: number;
+      accessibilitySetSize?: number;
+      onKeyDown?: (event: TabKeyEvent) => void;
+    }
+  >;
 
 type TabIconOnlyProps = {
   layout: 'iconOnly';

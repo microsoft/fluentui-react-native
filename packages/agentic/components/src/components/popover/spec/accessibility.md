@@ -24,7 +24,9 @@ to any caller actions. Invoking them sets the requested presence. The caller's
 React Native has no typed has-popup or controls property on Windows or macOS.
 Popover therefore supplies the default hint `Opens a popover` when the caller
 gives the trigger no `accessibilityHint`. A hint describes the behavior; it is
-not a programmatic relationship (`popover-group-semantics`).
+not a programmatic relationship (`popover-popup-relationships`). Releasing the
+refresh requires verifying the trigger-to-popup relationship independently
+in UIA and AX, including Win32 and both macOS renderers.
 
 ## Surface
 

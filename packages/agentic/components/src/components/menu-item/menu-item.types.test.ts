@@ -14,12 +14,15 @@ const validProps: MenuItemProps = {
   content: 'Menu item',
   icon: IconSlot,
   avatar: AvatarSlot,
-  hasCheckmark: true,
-  hasChevron: true,
-  hasMultiselect: false,
+  selectionMode: 'single',
   selected: true,
   secondaryContent: 'Secondary',
 };
+
+// @ts-expect-error A selection indicator owns the trailing position.
+const invalidIndicator: MenuItemProps = { selectionMode: 'multiple', trailingIcon: IconSlot };
+// @ts-expect-error A submenu chevron owns the trailing position.
+const invalidSubmenu: MenuItemProps = { submenu: { children: null }, trailingIcon: IconSlot };
 
 describe('MenuItem types', () => {
   it('accepts the expected slot props', () => {

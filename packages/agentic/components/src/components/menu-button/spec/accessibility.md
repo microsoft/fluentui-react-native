@@ -16,9 +16,9 @@ Explicit naming props (`accessibilityLabel`, `aria-label`,
 `accessibilityLabelledBy`, or `aria-labelledby`) suppress this fallback and
 retain their native precedence. Rich content needs an explicit naming prop.
 
-React Native has no typed has-popup or controls property on Windows or macOS;
-the hint describes the behavior but is not a programmatic relationship
-(`menu-button-haspopup`). The chevron is decorative and inaccessible.
+The hint describes the behavior but is not a programmatic relationship
+(`menu-button-haspopup`). Verifiable native popup type and controls relationships
+remain a release requirement. The chevron is decorative and inaccessible.
 
 ## Menu
 

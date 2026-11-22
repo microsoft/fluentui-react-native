@@ -4,7 +4,8 @@ import { Svg } from 'react-native-svg';
 import { useThemeState } from '@fluentui-react-native/design';
 import { useAccessibilityLabelWarning, useReducedMotion, useSharedAnimatedLoop, useSlot } from '@fluentui-react-native/framework-base';
 
-import { getSpinnerMetrics } from './spinner.styles';
+import { hiddenFromAccessibilityProps } from '../../common/accessibility';
+import { resolveSpinnerChrome } from './spinner.styles';
 import type { SpinnerProps, SpinnerState } from './spinner.types';
 
 const AnimatedSvg = Animated.createAnimatedComponent(Svg);
@@ -18,9 +19,8 @@ export function useSpinner_unstable(props: SpinnerProps): SpinnerState {
   const { accessibilityLabel, accessibilityLabelledBy, accessibilityState, accessible, size = 'medium', style: userStyle, ...rest } = props;
 
   const themeState = useThemeState();
-  const { center, diameter, radius, strokeWidth } = getSpinnerMetrics(size, themeState.tokens);
-  const trackColor = themeState.tokens.color.strokeNeutralSubtle.rest;
-  const indicatorColor = themeState.tokens.color.strokeNeutralLoud.rest;
+  const chrome = resolveSpinnerChrome(themeState, size);
+  const { diameter } = chrome;
   const reduceMotionEnabled = useReducedMotion();
   const rotation = useSharedAnimatedLoop({
     channel: 'agentic-components:spinner',
@@ -41,12 +41,10 @@ export function useSpinner_unstable(props: SpinnerProps): SpinnerState {
     ...rest,
     accessibilityLabel,
     accessibilityLabelledBy,
-    accessibilityRole: 'progressbar',
-    accessibilityState: {
-      ...accessibilityState,
-      busy: true,
-    },
+    accessibilityRole: accessible === false ? undefined : 'progressbar',
+    accessibilityState,
     accessible: accessible ?? true,
+    ...(accessible === false && hiddenFromAccessibilityProps),
     focusable: false,
     pointerEvents: rest.pointerEvents ?? 'none',
   });
@@ -58,17 +56,12 @@ export function useSpinner_unstable(props: SpinnerProps): SpinnerState {
     width: diameter,
   });
   return {
-    center,
-    diameter,
-    indicatorColor,
+    ...chrome,
     reduceMotionEnabled,
-    radius,
     rotation,
     root,
     size,
     svg,
-    strokeWidth,
-    trackColor,
     userStyle,
     ...themeState,
   };

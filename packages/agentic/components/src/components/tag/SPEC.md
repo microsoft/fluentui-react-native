@@ -3,7 +3,7 @@ name: tag
 platform: react-native (Windows, macOS)
 status: implemented
 source: ./spec/source.json
-tokens: ./spec/tokens.yaml
+tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
 interaction: ./spec/interaction.md
 usage: ./spec/usage.md
@@ -27,16 +27,17 @@ list or group behavior.
 
 ### Props and defaults
 
-| Prop         | Type                        | Default       | Contract                                                                                  |
-| ------------ | --------------------------- | ------------- | ----------------------------------------------------------------------------------------- |
-| `appearance` | `primary \| secondary`      | `secondary`   | Selects the background and foreground color family.                                       |
-| `layout`     | `iconAndText \| iconOnly`   | `iconAndText` | `iconOnly` suppresses the label and forces the circular radius.                           |
-| `size`       | `small \| medium`           | `medium`      | Selects padding, text style, and both icon sizes.                                         |
-| `shape`      | `rounded \| circular`       | `rounded`     | Selects the corner radius in the icon-and-text layout. Ignored in the icon-only layout.   |
-| `dismiss`    | `boolean`                   | `true`        | Controls whether the trailing dismiss glyph is drawn. It does not add or remove behavior. |
-| `disabled`   | `boolean`                   | `false`       | Blocks presses, removes the tag from the tab order, and selects the disabled colors.      |
-| `onPress`    | `PressableProps['onPress']` | none          | The only signal a tag emits, and the hook a caller uses to remove it.                     |
-| `style`      | `StyleProp<ViewStyle>`      | none          | Applied after the resolved root styles.                                                   |
+| Prop         | Type                        | Default       | Contract                                                                                |
+| ------------ | --------------------------- | ------------- | --------------------------------------------------------------------------------------- |
+| `appearance` | `primary \| secondary`      | `secondary`   | Selects the background and foreground color family.                                     |
+| `layout`     | `iconAndText \| iconOnly`   | `iconAndText` | `iconOnly` suppresses the label and forces the circular radius.                         |
+| `size`       | `small \| medium`           | `medium`      | Selects padding, text style, and both icon sizes.                                       |
+| `shape`      | `rounded \| circular`       | `rounded`     | Selects the corner radius in the icon-and-text layout. Ignored in the icon-only layout. |
+| `dismiss`    | `boolean`                   | `true`        | Controls the dismiss glyph and whether `onDismiss` can be requested.                    |
+| `disabled`   | `boolean`                   | `false`       | Blocks presses, removes the tag from the tab order, and selects the disabled colors.    |
+| `onDismiss`  | `() => void`                | none          | The removal request. Pass it to the existing root target rather than the glyph.         |
+| `onPress`    | `PressableProps['onPress']` | none          | Legacy route only when `onDismiss` is omitted.                                          |
+| `style`      | `StyleProp<ViewStyle>`      | none          | Applied after the resolved root styles.                                                 |
 
 **TAG-001:** Resolve `appearance`, `layout`, `size`, `shape`, `dismiss`, and
 `disabled` to the documented defaults and expose the remaining owned pressable
@@ -67,7 +68,8 @@ dismiss icon in that order.
 Tag owns nothing beyond hover, press, and focus, which come from the shared
 pressable state. It has no selection, no internal dismissed state, and no
 lifecycle: a dismissed tag disappears only because the caller stops rendering
-it in response to `onPress`.
+it in response to `onDismiss`. During migration `onDismiss` replaces `onPress`
+and a caller accessibility tap handler; the events do not fan out.
 
 **TAG-004:** Present exactly one interactive element. The icons are decorative
 and non-accessible, the dismiss glyph is not separately pressable, and the
@@ -76,10 +78,12 @@ component never removes itself.
 **TAG-005:** Resolve the background from appearance together with disabled,
 pressed, and hovered state, and resolve the foreground from appearance and
 disabled only, so the label and icon color do not shift on hover or press.
+Primary uses neutral-heavy with neutral on-loud text and icons; Secondary
+uses neutral-subtle and is the default.
 
 **TAG-006:** Resolve the corner radius, padding, and gap from size, layout, and
 shape together, and use the circular radius for every icon-only tag regardless
-of `shape`.
+of `shape`. The control's height follows its content and padding.
 
 **TAG-007:** Size the leading and dismiss icons from `size`, keeping the dismiss
 glyph one step smaller than the leading glyph, and paint both with the resolved
@@ -113,14 +117,12 @@ These hook options do not add new component props. Scenes require `ThemedRoot`.
 Windows and macOS share the following activation behavior; focus rendering follows
 the shared platform policy. The root is focusable while enabled and
 leaves the tab order while disabled. Enter and Space activate the focused tag
-through the shared pressable behavior and produce the same `onPress` a pointer
-press produces.
+through the shared pressable behavior and invoke the same handler as a pointer
+press.
 
-On Windows the root maps to a UI Automation button that exposes its disabled
-state; Narrator reads the name and the control type, and the decorative icons
-contribute nothing. On macOS it maps to the equivalent button element for
-VoiceOver. Because the tag is a single element on both platforms, there is no
-way to reach the dismiss glyph on its own.
+The root supplies button semantics and a disabled state; decorative icons
+are not exposed as separate targets. Verify the resulting UI Automation and
+VoiceOver output on each supported renderer.
 
 Hover and press change the background only. The foreground is deliberately held
 constant across those states so the label does not flicker while the pointer
@@ -130,14 +132,16 @@ moves across a row of tags.
 
 `native-system-focus-visuals` is an **accepted** [shared native adaptation](../../../references/higher-order-components.md#focus-visual-policy).
 
-| ID                            | Disposition | React Native contract                                                                                                                                                                                  | Follow-up                                                                             |
-| ----------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------- |
-| `tag-small-circular-padding`  | Resolved    | Small icon-and-text tags use the same horizontal and vertical padding and icon gap for circular and rounded shapes; shape changes only the radius.                                                     | Implemented in `tag.styles.ts` and covered by shape and size tests.                   |
-| `tag-dismiss-is-caller-owned` | Accepted    | `dismiss` only draws the glyph. Activating a tag reports `onPress`; the caller removes the tag from its own data. Flex describes activation as dismissing the tag.                                     | None. Removing itself is not something a controlled React Native component can do.    |
-| `tag-appearance-prop-name`    | Accepted    | The color family axis is named `appearance` with the values `primary` and `secondary`, matching the other components in this package. Flex names the axis differently while using the same two values. | None.                                                                                 |
-| `tag-no-state-transition`     | Accepted    | Hover, press, and disabled color changes are applied immediately with no transition. Flex calls for a short eased color transition.                                                                    | Needs motion tokens and an animated color layer on the root before it can be adopted. |
+| ID                            | Disposition | React Native contract                                                                                                                                                                                  | Follow-up                                                           |
+| ----------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------- |
+| `tag-small-circular-padding`  | Resolved    | Small icon-and-text tags use the same horizontal and vertical padding and icon gap for circular and rounded shapes; shape changes only the radius.                                                     | Implemented in `tag.styles.ts` and covered by shape and size tests. |
+| `tag-dismiss-is-caller-owned` | Accepted    | Activation requests removal with `onDismiss`; the caller removes the tag from its data. The old `onPress` route remains only while migrating without `onDismiss`.                                      | Verify one effective handler for each activation route.             |
+| `tag-appearance-prop-name`    | Accepted    | The color family axis is named `appearance` with the values `primary` and `secondary`, matching the other components in this package. Flex names the axis differently while using the same two values. | None.                                                               |
+| `tag-no-state-transition`     | Resolved    | Flex 1.7 and FURN both use immediate state changes by default. Entry and exit belong to the parent.                                                                                                    | None.                                                               |
 
 ## Conformance
+
+Unit and type evidence covers neutral styling and dismissal routing; native activation and focus require renderer evidence.
 
 | Requirement | Evidence                                                         |
 | ----------- | ---------------------------------------------------------------- |

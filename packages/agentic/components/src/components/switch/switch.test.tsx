@@ -1,5 +1,5 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
-import { Animated, Platform, Text, View } from 'react-native';
+import { Animated, Platform, StyleSheet, Text, View } from 'react-native';
 import type { TextProps, ViewProps } from 'react-native';
 import type { ComponentProps } from 'react';
 
@@ -10,7 +10,7 @@ import { defaultFlexTokens, defaultResolvedThemeAppearance } from '@fluentui-rea
 import { directComponent, useReducedMotion } from '@fluentui-react-native/framework-base';
 
 import { Switch } from './switch';
-import { getSwitchThumbTranslateDistance, getSwitchThumbColorStyle, getSwitchTrackColorStyle } from './switch.styles';
+import { resolveSwitchChrome } from './switch.styles';
 import type { SwitchState } from './switch.types';
 import { useSwitch_unstable } from './useSwitch';
 import { useSwitchStyles_unstable } from './useSwitchStyles';
@@ -40,19 +40,24 @@ describe('Switch', () => {
     const timing = jest.spyOn(Animated, 'timing').mockReturnValue(animation);
     jest.mocked(useReducedMotion).mockReturnValue(false);
     try {
-      const component = await renderSwitch({ checked: true });
+      const track = { testID: 'switch-motion-track' };
+      const component = await renderSwitch({ checked: true, track });
       expect(timing).not.toHaveBeenCalled();
 
-      await component.rerender(<Switch checked={false} />);
+      await component.rerender(<Switch checked={false} track={track} />);
+      expect(StyleSheet.flatten(component.getByTestId('switch-motion-track').props.style).backgroundColor).toBe(
+        defaultFlexTokens.color.backgroundNeutralTransparent.rest,
+      );
       expect(timing).toHaveBeenCalledTimes(1);
       const progress = timing.mock.calls[0][0];
       expect(timing).toHaveBeenLastCalledWith(progress, {
         toValue: 0,
-        duration: 150,
+        duration: defaultFlexTokens.motion.durationBase100,
         easing: expect.any(Function),
         useNativeDriver: false,
+        isInteraction: false,
       });
-      await component.rerender(<Switch checked />);
+      await component.rerender(<Switch checked track={track} />);
       expect(timing).toHaveBeenCalledTimes(2);
       expect(timing).toHaveBeenLastCalledWith(progress, expect.objectContaining({ toValue: 1 }));
       expect(animation.start).toHaveBeenCalledTimes(2);
@@ -85,6 +90,9 @@ describe('Switch', () => {
         expect(setValue.mock.calls).toEqual([[0], [1]]);
         expect(timing).not.toHaveBeenCalled();
         expect(component.getByRole('switch').props.accessibilityState.checked).toBe(true);
+        jest.mocked(useReducedMotion).mockReturnValue(false);
+        await component.rerender(<Harness checked />);
+        expect(timing).not.toHaveBeenCalled();
       } finally {
         setValue.mockRestore();
       }
@@ -392,7 +400,7 @@ describe('Switch', () => {
     ['checked pressed', true, false, false, true],
     ['disabled unchecked', false, true, false, false],
     ['disabled checked', true, true, false, false],
-  ] as const)('resolves switch token colors for %s', async (_label, checked, disabled, hovered, pressed) => {
+  ] as const)('resolves switch token colors for %s', (_label, checked, disabled, hovered, pressed) => {
     const tokens = defaultFlexTokens;
     const colors = tokens.color;
     const state = {
@@ -400,6 +408,7 @@ describe('Switch', () => {
       disabled,
       hovered,
       pressed,
+      layout: 'horizontal',
       appearance: defaultResolvedThemeAppearance,
       highContrast: false,
       themeStyles: {},
@@ -432,17 +441,28 @@ describe('Switch', () => {
           ? colors[baseThumbKey].hover
           : colors[baseThumbKey].rest;
 
-    const resolvedTrack = getSwitchTrackColorStyle(state, checked);
-    const resolvedThumb = getSwitchThumbColorStyle(state, checked);
+    const { track: resolvedTrack, thumb: resolvedThumb } = resolveSwitchChrome(state);
 
     expect(resolvedTrack.backgroundColor).toBe(expectedTrackBackground);
     expect(resolvedTrack.borderColor).toBe(expectedTrackBorder);
     expect(resolvedThumb.backgroundColor).toBe(expectedThumb);
   });
 
-  it('uses the documented thumb translation distance', () => {
-    const tokens = defaultFlexTokens;
-
-    expect(getSwitchThumbTranslateDistance({ tokens })).toBe(20);
+  it('uses separate label spacing and keeps a fixed track inside the hit area', async () => {
+    const component = await renderSwitch({
+      checked: true,
+      beforeLabel: { testID: 'test-before' },
+      afterLabel: { testID: 'test-after' },
+      track: { testID: 'test-track' },
+      thumb: { testID: 'test-thumb' },
+    });
+    expect(StyleSheet.flatten(component.getByTestId('switch-layout-container').props.style).gap).toBeUndefined();
+    expect(StyleSheet.flatten(component.getByTestId('test-before').props.style)).toMatchObject({ paddingStart: 8, paddingEnd: 4 });
+    expect(StyleSheet.flatten(component.getByTestId('test-after').props.style)).toMatchObject({ paddingStart: 4, paddingEnd: 8 });
+    expect(StyleSheet.flatten(component.getByRole('switch').props.style)).toMatchObject({ minWidth: 56, minHeight: 36 });
+    expect(StyleSheet.flatten(component.getByTestId('test-track').props.style)).toMatchObject({ width: 40, height: 20 });
+    expect(StyleSheet.flatten(component.getByTestId('test-thumb').props.style)).toMatchObject({
+      transform: [{ translateX: 20 }],
+    });
   });
 });
