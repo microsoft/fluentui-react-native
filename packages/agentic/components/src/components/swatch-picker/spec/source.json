@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 2,
+  "component": "swatch-picker",
+  "lifecycle": "contract-draft",
+  "conformance": "review-required",
+  "reviewedAt": null,
+  "sources": [
+    {
+      "id": "flex-component",
+      "kind": "flex-skill",
+      "authority": "normative",
+      "skill": "flex-components:swatch-picker",
+      "sourceLock": "flex-1.7.0-9f1df394",
+      "sourceLockFingerprint": "33c7dbb4ff78525a4e0900811f5fa1994579ee8dd95b337de85d8f47133d148c",
+      "availableSurfaces": ["shared", "web"],
+      "surfacesConsulted": ["shared", "web"],
+      "sourceFiles": [
+        {
+          "role": "skill",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/swatch-picker/SKILL.md",
+          "marketplaceBlobSha": "9aab800863cce9e67a80f9cc140a3e9a040836f9",
+          "marketplaceSha256": "9f185609aa025c27bfd8e67f4a8615b4acfe62b8ff33675789f10e81f67b54f2",
+          "originPath": "plugins/components/skills/swatch-picker/SKILL.md",
+          "originBlobSha": "9aab800863cce9e67a80f9cc140a3e9a040836f9",
+          "originSha256": "9f185609aa025c27bfd8e67f4a8615b4acfe62b8ff33675789f10e81f67b54f2",
+          "contentDiffers": false
+        },
+        {
+          "role": "usage",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/swatch-picker/usage.md",
+          "marketplaceBlobSha": "0b2a7ba37c4e25c5c7371418774d4b2b3801aa1b",
+          "marketplaceSha256": "4986726967d3e0eed15a06420609faa8878dc1da212f4893bdd36b36b6084b29",
+          "originPath": "plugins/components/skills/swatch-picker/usage.md",
+          "originBlobSha": "0b2a7ba37c4e25c5c7371418774d4b2b3801aa1b",
+          "originSha256": "4986726967d3e0eed15a06420609faa8878dc1da212f4893bdd36b36b6084b29",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:accessibility",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/swatch-picker/web/accessibility.md",
+          "marketplaceBlobSha": "088e60bea0f2527a326c736f7640747382b6dd19",
+          "marketplaceSha256": "43d910eb23e65de474eb4fcfce7cac76c2d0ffb00d0880ed3b62fbb637d41013",
+          "originPath": "plugins/components/skills/swatch-picker/web/accessibility.md",
+          "originBlobSha": "088e60bea0f2527a326c736f7640747382b6dd19",
+          "originSha256": "43d910eb23e65de474eb4fcfce7cac76c2d0ffb00d0880ed3b62fbb637d41013",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:interaction",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/swatch-picker/web/interaction.md",
+          "marketplaceBlobSha": "b04b8654a747af761f039a39a7f2053835bc73a8",
+          "marketplaceSha256": "b5c48ab766ee506921540f685f2d12bcd66a6e2da766a5ad1ab8a0af15b03ddb",
+          "originPath": "plugins/components/skills/swatch-picker/web/interaction.md",
+          "originBlobSha": "b04b8654a747af761f039a39a7f2053835bc73a8",
+          "originSha256": "b5c48ab766ee506921540f685f2d12bcd66a6e2da766a5ad1ab8a0af15b03ddb",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:tokens",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/swatch-picker/web/tokens.yaml",
+          "marketplaceBlobSha": "9e7cf1389de75257bf0d0bf11b7c09bc46ce2168",
+          "marketplaceSha256": "857cb15998df43043654686ec86a2b09bb4d199f42713bfb4d20d340dfa8ba62",
+          "originPath": "plugins/components/skills/swatch-picker/web/tokens.yaml",
+          "originBlobSha": "9e7cf1389de75257bf0d0bf11b7c09bc46ce2168",
+          "originSha256": "857cb15998df43043654686ec86a2b09bb4d199f42713bfb4d20d340dfa8ba62",
+          "contentDiffers": false
+        }
+      ],
+      "releaseDifferences": []
+    },
+    {
+      "id": "furn-desktop",
+      "kind": "git-files",
+      "authority": "compatibility-reference",
+      "repository": "microsoft/fluentui-react-native",
+      "commit": "1c29f4e33695d5d9e44528b0c3137fac7c5fd5f0",
+      "files": [
+        {
+          "role": "compatibility",
+          "path": "packages/agentic/components/src/components/radio/SPEC.md",
+          "sha256": "9f4f053f229883b07a020637047429f601cbb3d421753291ae16fb95a6377399"
+        },
+        {
+          "role": "compatibility",
+          "path": "packages/agentic/components/src/components/tablist/SPEC.md",
+          "sha256": "6183c1b9f0f7306a28d3f7fce2c6bfdc872b3fc1d475cd8af0cc74dbd8ab36bc"
+        },
+        {
+          "role": "compatibility",
+          "path": "packages/agentic/native-core/src/components/focus-zone/SPEC.md",
+          "sha256": "97f6c4626523cd5ee8fdd73ed10d32ef46912e4cbb28099844feb202b249cf03"
+        }
+      ]
+    }
+  ],
+  "divergences": [
+    {
+      "id": "one-model-for-both-layouts",
+      "status": "accepted"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "SWP-001",
+      "sources": ["flex-component", "furn-desktop"],
+      "plannedEvidence": ["swatch-picker.test.tsx", "swatch-picker.stories.tsx"]
+    },
+    {
+      "id": "SWP-002",
+      "sources": ["flex-component", "furn-desktop"],
+      "plannedEvidence": ["swatch-picker.test.tsx", "swatch-picker.wdio.ts"]
+    },
+    {
+      "id": "SWP-003",
+      "sources": ["flex-component"],
+      "plannedEvidence": ["swatch-picker.test.tsx", "swatch-picker.stories.tsx"]
+    },
+    {
+      "id": "SWP-004",
+      "sources": ["flex-component", "furn-desktop"],
+      "plannedEvidence": ["swatch-picker.wdio.ts", "swatch-picker.stories.tsx"]
+    }
+  ]
+}

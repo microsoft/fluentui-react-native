@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 2,
+  "component": "teaching-popover",
+  "lifecycle": "contract-draft",
+  "conformance": "review-required",
+  "reviewedAt": null,
+  "sources": [
+    {
+      "id": "flex-component",
+      "kind": "flex-skill",
+      "authority": "normative",
+      "skill": "flex-components:teaching-popover",
+      "sourceLock": "flex-1.7.0-9f1df394",
+      "sourceLockFingerprint": "33c7dbb4ff78525a4e0900811f5fa1994579ee8dd95b337de85d8f47133d148c",
+      "availableSurfaces": ["shared", "web"],
+      "surfacesConsulted": ["shared", "web"],
+      "sourceFiles": [
+        {
+          "role": "skill",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/teaching-popover/SKILL.md",
+          "marketplaceBlobSha": "d3848326e8d6d6e3326c663051d5bbb38f56a3d7",
+          "marketplaceSha256": "294bf2853a8a47133f34c9bc9caab92243542aeab6ac91cba14e06776d3a74a2",
+          "originPath": "plugins/components/skills/teaching-popover/SKILL.md",
+          "originBlobSha": "d3848326e8d6d6e3326c663051d5bbb38f56a3d7",
+          "originSha256": "294bf2853a8a47133f34c9bc9caab92243542aeab6ac91cba14e06776d3a74a2",
+          "contentDiffers": false
+        },
+        {
+          "role": "usage",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/teaching-popover/usage.md",
+          "marketplaceBlobSha": "2bae74ba2623d0c4e8fe3e5f52f31248b20b8232",
+          "marketplaceSha256": "d7a01780028353e329218806fb1c5b4c214f90fcca155ddf9a1d1aa722aae9cf",
+          "originPath": "plugins/components/skills/teaching-popover/usage.md",
+          "originBlobSha": "2bae74ba2623d0c4e8fe3e5f52f31248b20b8232",
+          "originSha256": "d7a01780028353e329218806fb1c5b4c214f90fcca155ddf9a1d1aa722aae9cf",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:accessibility",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/teaching-popover/web/accessibility.md",
+          "marketplaceBlobSha": "b9d13e0427b77008b4805f0e8165e6ba145730c8",
+          "marketplaceSha256": "9f165b30c8ca00d6bdc709b7d4f718ff9e1f1a2c715ab99514f96a892df93fcc",
+          "originPath": "plugins/components/skills/teaching-popover/web/accessibility.md",
+          "originBlobSha": "b9d13e0427b77008b4805f0e8165e6ba145730c8",
+          "originSha256": "9f165b30c8ca00d6bdc709b7d4f718ff9e1f1a2c715ab99514f96a892df93fcc",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:interaction",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/teaching-popover/web/interaction.md",
+          "marketplaceBlobSha": "2abb2201aa0719313fc2006d63c810a22c09af09",
+          "marketplaceSha256": "b9063f3b6b5d9b48faa995cffb20435c2f897b6534903a502439a5525817675d",
+          "originPath": "plugins/components/skills/teaching-popover/web/interaction.md",
+          "originBlobSha": "2abb2201aa0719313fc2006d63c810a22c09af09",
+          "originSha256": "b9063f3b6b5d9b48faa995cffb20435c2f897b6534903a502439a5525817675d",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:tokens",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/teaching-popover/web/tokens.yaml",
+          "marketplaceBlobSha": "734ec57dc559098c70eaa956dd14ece0786f223e",
+          "marketplaceSha256": "e29b1d16d975422322172cb4065eb63ad5e5627de920a3c70da043eb8e4428a7",
+          "originPath": "plugins/components/skills/teaching-popover/web/tokens.yaml",
+          "originBlobSha": "734ec57dc559098c70eaa956dd14ece0786f223e",
+          "originSha256": "e29b1d16d975422322172cb4065eb63ad5e5627de920a3c70da043eb8e4428a7",
+          "contentDiffers": false
+        }
+      ],
+      "releaseDifferences": []
+    },
+    {
+      "id": "furn-desktop",
+      "kind": "git-files",
+      "authority": "compatibility-reference",
+      "repository": "microsoft/fluentui-react-native",
+      "commit": "1c29f4e33695d5d9e44528b0c3137fac7c5fd5f0",
+      "files": [
+        {
+          "role": "compatibility",
+          "path": "packages/agentic/components/src/components/button/SPEC.md",
+          "sha256": "35ec7d36949b34f7c60c03831deebde92c2fdbf96647304771682ccbcff9c1b1"
+        },
+        {
+          "role": "compatibility",
+          "path": "packages/agentic/components/src/components/popover/SPEC.md",
+          "sha256": "542f8b016f2532c6c3b5da456e7771bd5c8bf9ae2b104b17ed27d8a07149dbef"
+        },
+        {
+          "role": "compatibility",
+          "path": "packages/agentic/native-core/references/remaining-work.md",
+          "sha256": "ce6f906272c618f3d95831c90575f2d687bba551cb82a5ce2f497d5bcbed32f9"
+        }
+      ]
+    }
+  ],
+  "divergences": [
+    {
+      "id": "coachmark-nonmodal-exit",
+      "status": "accepted"
+    },
+    {
+      "id": "coachmark-tab-continuation",
+      "status": "deferred"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "TCP-001",
+      "sources": ["flex-component", "furn-desktop"],
+      "plannedEvidence": ["teaching-popover.test.tsx", "teaching-popover.stories.tsx"]
+    },
+    {
+      "id": "TCP-002",
+      "sources": ["flex-component", "furn-desktop"],
+      "plannedEvidence": ["teaching-popover.test.tsx", "teaching-popover.wdio.ts"]
+    },
+    {
+      "id": "TCP-003",
+      "sources": ["flex-component"],
+      "plannedEvidence": ["teaching-popover.test.tsx", "teaching-popover.stories.tsx"]
+    },
+    {
+      "id": "TCP-004",
+      "sources": ["flex-component", "furn-desktop"],
+      "plannedEvidence": ["teaching-popover.wdio.ts", "teaching-popover.stories.tsx"]
+    }
+  ]
+}

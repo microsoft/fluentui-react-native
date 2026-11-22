@@ -30,6 +30,8 @@ export const App = () => (
 ```
 
 Each component's `src/components/<name>/SPEC.md` describes its supported props, behavior, and platform differences.
+For components not in the public list above, see the [draft review order](references/remaining-work.md#catalog-draft-review-order).
+A draft specifies proposed behavior; it does not mean the component can be imported.
 
 For native desktop tooltip text, pass `tooltip` directly to a supported view-backed component, for example
 `<Button content="Save" tooltip="Save a local copy" />`. This forwards text to the host, not an accessible name or

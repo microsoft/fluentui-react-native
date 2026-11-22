@@ -1,0 +1,137 @@
+{
+  "schemaVersion": 2,
+  "component": "spin-button",
+  "lifecycle": "contract-draft",
+  "conformance": "review-required",
+  "reviewedAt": null,
+  "sources": [
+    {
+      "id": "flex-component",
+      "kind": "flex-skill",
+      "authority": "normative",
+      "skill": "flex-components:spin-button",
+      "sourceLock": "flex-1.7.0-9f1df394",
+      "sourceLockFingerprint": "33c7dbb4ff78525a4e0900811f5fa1994579ee8dd95b337de85d8f47133d148c",
+      "availableSurfaces": ["shared", "web"],
+      "surfacesConsulted": ["shared", "web"],
+      "sourceFiles": [
+        {
+          "role": "skill",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/spin-button/SKILL.md",
+          "marketplaceBlobSha": "df58da896602a6ce60d6b1010e476638c1d28fcb",
+          "marketplaceSha256": "d4ea73f87b5d2e5828852290ca7ad7a321394c27a36d12be50962bab39a79872",
+          "originPath": "plugins/components/skills/spin-button/SKILL.md",
+          "originBlobSha": "df58da896602a6ce60d6b1010e476638c1d28fcb",
+          "originSha256": "d4ea73f87b5d2e5828852290ca7ad7a321394c27a36d12be50962bab39a79872",
+          "contentDiffers": false
+        },
+        {
+          "role": "usage",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/spin-button/usage.md",
+          "marketplaceBlobSha": "8771e31f0eca83c35bf4702088f2d1c7f6d1de63",
+          "marketplaceSha256": "ef307683c277d395578a445bc3dae72b4012b518962bfa2107b01eed102f8dd2",
+          "originPath": "plugins/components/skills/spin-button/usage.md",
+          "originBlobSha": "8771e31f0eca83c35bf4702088f2d1c7f6d1de63",
+          "originSha256": "ef307683c277d395578a445bc3dae72b4012b518962bfa2107b01eed102f8dd2",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:accessibility",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/spin-button/web/accessibility.md",
+          "marketplaceBlobSha": "2d512762e29be5469342ad213e24af60c18828cb",
+          "marketplaceSha256": "f038df93b87aa82971c661e5b52dd9a43c51be93ce468255a5b5b6a263ac2df9",
+          "originPath": "plugins/components/skills/spin-button/web/accessibility.md",
+          "originBlobSha": "2d512762e29be5469342ad213e24af60c18828cb",
+          "originSha256": "f038df93b87aa82971c661e5b52dd9a43c51be93ce468255a5b5b6a263ac2df9",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:interaction",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/spin-button/web/interaction.md",
+          "marketplaceBlobSha": "4b5b35bfb40c76d8fec562234cc69eaec6080ee1",
+          "marketplaceSha256": "a95b0998eaac7450507857032d1254d97f390226c572a92f1b41dd00f683a738",
+          "originPath": "plugins/components/skills/spin-button/web/interaction.md",
+          "originBlobSha": "4b5b35bfb40c76d8fec562234cc69eaec6080ee1",
+          "originSha256": "a95b0998eaac7450507857032d1254d97f390226c572a92f1b41dd00f683a738",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:tokens",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/spin-button/web/tokens.yaml",
+          "marketplaceBlobSha": "618961bf870c96e1acf41c705c4836bfab5dc602",
+          "marketplaceSha256": "800dce84973b8826eaaf6993dde30fec1578860ebb7a0b7287c9a787f42a8e40",
+          "originPath": "plugins/components/skills/spin-button/web/tokens.yaml",
+          "originBlobSha": "618961bf870c96e1acf41c705c4836bfab5dc602",
+          "originSha256": "800dce84973b8826eaaf6993dde30fec1578860ebb7a0b7287c9a787f42a8e40",
+          "contentDiffers": false
+        }
+      ],
+      "releaseDifferences": []
+    },
+    {
+      "id": "furn-desktop",
+      "kind": "git-files",
+      "authority": "compatibility-reference",
+      "repository": "microsoft/fluentui-react-native",
+      "commit": "1c29f4e33695d5d9e44528b0c3137fac7c5fd5f0",
+      "files": [
+        {
+          "role": "compatibility",
+          "path": "packages/agentic/components/src/components/field/SPEC.md",
+          "sha256": "02bb0c8fcf71c440ea234aa386b82abfec1bf7fe2eec5f9acacc6107276bb152"
+        },
+        {
+          "role": "compatibility",
+          "path": "packages/agentic/components/src/components/input/SPEC.md",
+          "sha256": "972144b0fd904dd1709bfd825f7f8a4bb3cde7c1ea042520eef50008d76a3c57"
+        }
+      ]
+    },
+    {
+      "id": "rnw-range",
+      "kind": "git-files",
+      "authority": "implementation-evidence",
+      "repository": "microsoft/react-native-windows",
+      "commit": "3eaa23597552160257ad24a2d9142e9c6435f2f8",
+      "files": [
+        {
+          "role": "provider",
+          "path": "vnext/Microsoft.ReactNative/Fabric/Composition/CompositionDynamicAutomationProvider.cpp",
+          "sha256": "b3da4ea76ede46e6481b78f8fc22ab972a24d38dbfc27ce64c81c071d8da579b"
+        }
+      ]
+    }
+  ],
+  "divergences": [
+    {
+      "id": "numeric-draft-buffer",
+      "status": "accepted"
+    },
+    {
+      "id": "spin-provider-value",
+      "status": "deferred"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "SPBNU-001",
+      "sources": ["flex-component", "furn-desktop"],
+      "plannedEvidence": ["spin-button.test.tsx", "spin-button.stories.tsx"]
+    },
+    {
+      "id": "SPBNU-002",
+      "sources": ["flex-component", "furn-desktop"],
+      "plannedEvidence": ["spin-button.test.tsx", "spin-button.wdio.ts"]
+    },
+    {
+      "id": "SPBNU-003",
+      "sources": ["flex-component"],
+      "plannedEvidence": ["spin-button.test.tsx", "spin-button.stories.tsx"]
+    },
+    {
+      "id": "SPBNU-004",
+      "sources": ["flex-component", "furn-desktop", "rnw-range"],
+      "plannedEvidence": ["spin-button.wdio.ts", "spin-button.stories.tsx"]
+    }
+  ]
+}

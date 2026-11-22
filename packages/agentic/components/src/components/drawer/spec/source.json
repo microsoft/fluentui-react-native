@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 2,
+  "component": "drawer",
+  "lifecycle": "contract-draft",
+  "conformance": "review-required",
+  "reviewedAt": null,
+  "sources": [
+    {
+      "id": "flex-component",
+      "kind": "flex-skill",
+      "authority": "normative",
+      "skill": "flex-components:drawer",
+      "sourceLock": "flex-1.7.0-9f1df394",
+      "sourceLockFingerprint": "33c7dbb4ff78525a4e0900811f5fa1994579ee8dd95b337de85d8f47133d148c",
+      "availableSurfaces": ["shared", "web"],
+      "surfacesConsulted": ["shared", "web"],
+      "sourceFiles": [
+        {
+          "role": "skill",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/drawer/SKILL.md",
+          "marketplaceBlobSha": "37195d8181321774eacacc4588c5b047aa278d40",
+          "marketplaceSha256": "2f7f4ef9e3ec54e216ff1b8e843928b30c30aba528c76836ab2f63f917034a07",
+          "originPath": "plugins/components/skills/drawer/SKILL.md",
+          "originBlobSha": "37195d8181321774eacacc4588c5b047aa278d40",
+          "originSha256": "2f7f4ef9e3ec54e216ff1b8e843928b30c30aba528c76836ab2f63f917034a07",
+          "contentDiffers": false
+        },
+        {
+          "role": "usage",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/drawer/usage.md",
+          "marketplaceBlobSha": "5a88f96fde3c17033c25cf56bdb26803aafb52e5",
+          "marketplaceSha256": "e0ac4221f7ceca4fc90e9a40a365e7c7e5e348a496870c6522e85b45feae0f56",
+          "originPath": "plugins/components/skills/drawer/usage.md",
+          "originBlobSha": "5a88f96fde3c17033c25cf56bdb26803aafb52e5",
+          "originSha256": "e0ac4221f7ceca4fc90e9a40a365e7c7e5e348a496870c6522e85b45feae0f56",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:accessibility",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/drawer/web/accessibility.md",
+          "marketplaceBlobSha": "71b056c6830850341106d3e89398881b87b92294",
+          "marketplaceSha256": "bd907faaf50f5d1ef634807c76beb2235b5cd1ddc52984e4f97e1739c0f9728b",
+          "originPath": "plugins/components/skills/drawer/web/accessibility.md",
+          "originBlobSha": "71b056c6830850341106d3e89398881b87b92294",
+          "originSha256": "bd907faaf50f5d1ef634807c76beb2235b5cd1ddc52984e4f97e1739c0f9728b",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:interaction",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/drawer/web/interaction.md",
+          "marketplaceBlobSha": "4d9f3e444593d1b637038b7594494baad5c04d05",
+          "marketplaceSha256": "104c0136b4dd4d94253cd3a202a2bac8aee4bf3a1963a43252a0939a3cdfe2a5",
+          "originPath": "plugins/components/skills/drawer/web/interaction.md",
+          "originBlobSha": "4d9f3e444593d1b637038b7594494baad5c04d05",
+          "originSha256": "104c0136b4dd4d94253cd3a202a2bac8aee4bf3a1963a43252a0939a3cdfe2a5",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:tokens",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/drawer/web/tokens.yaml",
+          "marketplaceBlobSha": "700ba24e43b3ae9da1aad0550ca1d610fac444b2",
+          "marketplaceSha256": "0aec0521b5005438e63cfb83852dbf5f8b8366cfb8227872acab1e5924890c2a",
+          "originPath": "plugins/components/skills/drawer/web/tokens.yaml",
+          "originBlobSha": "700ba24e43b3ae9da1aad0550ca1d610fac444b2",
+          "originSha256": "0aec0521b5005438e63cfb83852dbf5f8b8366cfb8227872acab1e5924890c2a",
+          "contentDiffers": false
+        }
+      ],
+      "releaseDifferences": []
+    },
+    {
+      "id": "furn-desktop",
+      "kind": "git-files",
+      "authority": "compatibility-reference",
+      "repository": "microsoft/fluentui-react-native",
+      "commit": "1c29f4e33695d5d9e44528b0c3137fac7c5fd5f0",
+      "files": [
+        {
+          "role": "compatibility",
+          "path": "packages/agentic/components/src/components/popover/SPEC.md",
+          "sha256": "542f8b016f2532c6c3b5da456e7771bd5c8bf9ae2b104b17ed27d8a07149dbef"
+        },
+        {
+          "role": "compatibility",
+          "path": "packages/agentic/native-core/references/remaining-work.md",
+          "sha256": "ce6f906272c618f3d95831c90575f2d687bba551cb82a5ce2f497d5bcbed32f9"
+        },
+        {
+          "role": "compatibility",
+          "path": "packages/agentic/native-core/src/components/focus-zone/SPEC.md",
+          "sha256": "97f6c4626523cd5ee8fdd73ed10d32ef46912e4cbb28099844feb202b249cf03"
+        }
+      ]
+    }
+  ],
+  "divergences": [
+    {
+      "id": "drawer-mode-admission",
+      "status": "deferred"
+    },
+    {
+      "id": "owner-sized-drawer",
+      "status": "accepted"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "DWR-001",
+      "sources": ["flex-component", "furn-desktop"],
+      "plannedEvidence": ["drawer.test.tsx", "drawer.stories.tsx"]
+    },
+    {
+      "id": "DWR-002",
+      "sources": ["flex-component", "furn-desktop"],
+      "plannedEvidence": ["drawer.test.tsx", "drawer.wdio.ts"]
+    },
+    {
+      "id": "DWR-003",
+      "sources": ["flex-component", "furn-desktop"],
+      "plannedEvidence": ["drawer.wdio.ts", "drawer.stories.tsx"]
+    },
+    {
+      "id": "DWR-004",
+      "sources": ["flex-component"],
+      "plannedEvidence": ["drawer.test.tsx", "drawer.stories.tsx"]
+    }
+  ]
+}

@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 2,
+  "component": "compound-button",
+  "lifecycle": "contract-draft",
+  "conformance": "review-required",
+  "reviewedAt": null,
+  "sources": [
+    {
+      "id": "flex-component",
+      "kind": "flex-skill",
+      "authority": "normative",
+      "skill": "flex-components:compound-button",
+      "sourceLock": "flex-1.7.0-9f1df394",
+      "sourceLockFingerprint": "33c7dbb4ff78525a4e0900811f5fa1994579ee8dd95b337de85d8f47133d148c",
+      "availableSurfaces": ["shared", "web"],
+      "surfacesConsulted": ["shared", "web"],
+      "sourceFiles": [
+        {
+          "role": "skill",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/compound-button/SKILL.md",
+          "marketplaceBlobSha": "c3dad71125aac7ea3e362cf38284124de355b0f2",
+          "marketplaceSha256": "85344978f2757190b5d247166ed480ea679150d4583dd468e43b562c38a1d48d",
+          "originPath": "plugins/components/skills/compound-button/SKILL.md",
+          "originBlobSha": "c3dad71125aac7ea3e362cf38284124de355b0f2",
+          "originSha256": "85344978f2757190b5d247166ed480ea679150d4583dd468e43b562c38a1d48d",
+          "contentDiffers": false
+        },
+        {
+          "role": "usage",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/compound-button/usage.md",
+          "marketplaceBlobSha": "17e154b7c3d84b25c65a7bb44e811dbadf3120b0",
+          "marketplaceSha256": "5c808440a9ddd4d8b8df9e2f832333e0555d7b8c97475dff5eaae8749b65191e",
+          "originPath": "plugins/components/skills/compound-button/usage.md",
+          "originBlobSha": "17e154b7c3d84b25c65a7bb44e811dbadf3120b0",
+          "originSha256": "5c808440a9ddd4d8b8df9e2f832333e0555d7b8c97475dff5eaae8749b65191e",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:accessibility",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/compound-button/web/accessibility.md",
+          "marketplaceBlobSha": "385ebd9c8ccde798908d94bb05a11c110e9acddb",
+          "marketplaceSha256": "661c31b6aabcc0e85c054befb22fa23a74d504bcd93e20d1ef1ac421d4a02029",
+          "originPath": "plugins/components/skills/compound-button/web/accessibility.md",
+          "originBlobSha": "385ebd9c8ccde798908d94bb05a11c110e9acddb",
+          "originSha256": "661c31b6aabcc0e85c054befb22fa23a74d504bcd93e20d1ef1ac421d4a02029",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:interaction",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/compound-button/web/interaction.md",
+          "marketplaceBlobSha": "6440386b038837d43244e8730c25dde17d2bcd8f",
+          "marketplaceSha256": "ed627d4f951f379c2af9a5f1c155850970e37eeec2af6e0a3f2b2ea417953cb4",
+          "originPath": "plugins/components/skills/compound-button/web/interaction.md",
+          "originBlobSha": "6440386b038837d43244e8730c25dde17d2bcd8f",
+          "originSha256": "ed627d4f951f379c2af9a5f1c155850970e37eeec2af6e0a3f2b2ea417953cb4",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:tokens",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/compound-button/web/tokens.yaml",
+          "marketplaceBlobSha": "4e35596cdcea2c43b4f946c2a8c8af50fa5774ea",
+          "marketplaceSha256": "8ffc71f6296b13b52cbc3944c75766778d67c983e4a87155ff6c630e158c7694",
+          "originPath": "plugins/components/skills/compound-button/web/tokens.yaml",
+          "originBlobSha": "4e35596cdcea2c43b4f946c2a8c8af50fa5774ea",
+          "originSha256": "8ffc71f6296b13b52cbc3944c75766778d67c983e4a87155ff6c630e158c7694",
+          "contentDiffers": false
+        }
+      ],
+      "releaseDifferences": []
+    },
+    {
+      "id": "furn-desktop",
+      "kind": "git-files",
+      "authority": "compatibility-reference",
+      "repository": "microsoft/fluentui-react-native",
+      "commit": "1c29f4e33695d5d9e44528b0c3137fac7c5fd5f0",
+      "files": [
+        {
+          "role": "compatibility",
+          "path": "packages/agentic/components/src/components/button/SPEC.md",
+          "sha256": "35ec7d36949b34f7c60c03831deebde92c2fdbf96647304771682ccbcff9c1b1"
+        },
+        {
+          "role": "compatibility",
+          "path": "packages/components/Button/src/CompoundButton/CompoundButton.types.ts",
+          "sha256": "bcb0693617f2cb281bae4a633b6d5eabbbc9bd3407158a435e930e97fc87f67c"
+        }
+      ]
+    }
+  ],
+  "divergences": [
+    {
+      "id": "single-compound-action",
+      "status": "accepted"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "CPB-001",
+      "sources": ["flex-component", "furn-desktop"],
+      "plannedEvidence": ["compound-button.types.test.tsx"]
+    },
+    {
+      "id": "CPB-002",
+      "sources": ["flex-component"],
+      "plannedEvidence": ["compound-button.test.tsx", "compound-button.stories.tsx"]
+    },
+    {
+      "id": "CPB-003",
+      "sources": ["flex-component", "furn-desktop"],
+      "plannedEvidence": ["compound-button.test.tsx", "compound-button.wdio.ts"]
+    },
+    {
+      "id": "CPB-004",
+      "sources": ["flex-component", "furn-desktop"],
+      "plannedEvidence": ["compound-button.wdio.ts", "compound-button.stories.tsx"]
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-22T19:44:15.238Z",
+  "generatedAt": "2026-11-22T20:35:08.954Z",
   "sourceLock": "flex-1.7.0-9f1df394",
   "sourceLockFingerprint": "33c7dbb4ff78525a4e0900811f5fa1994579ee8dd95b337de85d8f47133d148c",
   "baseline": {
@@ -162,35 +162,121 @@
     "contracts": [
       "accordion",
       "avatar",
+      "avatar-group",
       "badge",
+      "breadcrumb",
       "button",
       "card",
       "checkbox",
+      "color-area",
+      "color-picker",
+      "color-slider",
+      "combobox",
+      "compound-button",
+      "destructive-button",
+      "dialog",
       "divider",
+      "drawer",
       "dropdown",
       "field",
       "info-label",
       "input",
+      "interaction-tag",
       "label",
+      "link",
+      "list",
       "list-item",
       "listbox-item",
       "menu",
       "menu-button",
       "menu-item",
+      "message-bar",
+      "nav",
+      "nav-item",
+      "persona",
       "popover",
+      "presence-badge",
       "progress-bar",
       "radio",
+      "radio-group",
+      "rating",
+      "rating-display",
+      "rating-item",
+      "scrollbar",
+      "search-box",
+      "select",
+      "simple-nav",
       "skeleton",
+      "slider",
+      "spin-button",
       "spinner",
+      "split-button",
+      "swatch",
+      "swatch-picker",
       "switch",
       "tab",
       "tablist",
       "tag",
+      "tag-picker",
+      "teaching-popover",
       "text",
+      "textarea",
+      "toast",
       "toggle-button",
-      "tooltip"
+      "toolbar",
+      "tooltip",
+      "tree",
+      "tree-item"
     ],
-    "adaptedDrafts": ["avatar", "dropdown", "field", "info-label", "label", "menu", "menu-button", "popover", "tooltip"],
+    "adaptedDrafts": [
+      "avatar",
+      "avatar-group",
+      "breadcrumb",
+      "color-area",
+      "color-picker",
+      "color-slider",
+      "combobox",
+      "compound-button",
+      "destructive-button",
+      "dialog",
+      "drawer",
+      "dropdown",
+      "field",
+      "info-label",
+      "interaction-tag",
+      "label",
+      "link",
+      "list",
+      "menu",
+      "menu-button",
+      "message-bar",
+      "nav",
+      "nav-item",
+      "persona",
+      "popover",
+      "presence-badge",
+      "radio-group",
+      "rating",
+      "rating-display",
+      "rating-item",
+      "scrollbar",
+      "search-box",
+      "select",
+      "simple-nav",
+      "slider",
+      "spin-button",
+      "split-button",
+      "swatch",
+      "swatch-picker",
+      "tag-picker",
+      "teaching-popover",
+      "textarea",
+      "toast",
+      "toolbar",
+      "tooltip",
+      "tree",
+      "tree-item"
+    ],
     "implemented": [
       "accordion",
       "badge",
@@ -262,46 +348,7 @@
       "tree",
       "tree-item"
     ],
-    "noLocalContract": [
-      "avatar-group",
-      "breadcrumb",
-      "color-area",
-      "color-picker",
-      "color-slider",
-      "combobox",
-      "compound-button",
-      "destructive-button",
-      "dialog",
-      "drawer",
-      "interaction-tag",
-      "link",
-      "list",
-      "message-bar",
-      "nav",
-      "nav-item",
-      "persona",
-      "presence-badge",
-      "radio-group",
-      "rating",
-      "rating-display",
-      "rating-item",
-      "scrollbar",
-      "search-box",
-      "select",
-      "simple-nav",
-      "slider",
-      "spin-button",
-      "split-button",
-      "swatch",
-      "swatch-picker",
-      "tag-picker",
-      "teaching-popover",
-      "textarea",
-      "toast",
-      "toolbar",
-      "tree",
-      "tree-item"
-    ],
+    "noLocalContract": [],
     "legacyMigration": [
       {
         "component": "breadcrumb",
@@ -539,9 +586,43 @@
       "candidateStatus": "review-required"
     },
     {
+      "component": "avatar-group",
+      "lifecycle": "contract-draft",
+      "conformance": "review-required",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "candidateStatus": "current"
+    },
+    {
       "component": "badge",
       "lifecycle": "implemented",
       "conformance": "reviewed",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "candidateStatus": "current"
+    },
+    {
+      "component": "breadcrumb",
+      "lifecycle": "contract-draft",
+      "conformance": "review-required",
       "releaseDifferences": [],
       "marketplaceDrift": {
         "added": [],
@@ -607,9 +688,145 @@
       "candidateStatus": "current"
     },
     {
+      "component": "color-area",
+      "lifecycle": "contract-draft",
+      "conformance": "review-required",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "candidateStatus": "current"
+    },
+    {
+      "component": "color-picker",
+      "lifecycle": "contract-draft",
+      "conformance": "review-required",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "candidateStatus": "current"
+    },
+    {
+      "component": "color-slider",
+      "lifecycle": "contract-draft",
+      "conformance": "review-required",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "candidateStatus": "current"
+    },
+    {
+      "component": "combobox",
+      "lifecycle": "contract-draft",
+      "conformance": "review-required",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "candidateStatus": "current"
+    },
+    {
+      "component": "compound-button",
+      "lifecycle": "contract-draft",
+      "conformance": "review-required",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "candidateStatus": "current"
+    },
+    {
+      "component": "destructive-button",
+      "lifecycle": "contract-draft",
+      "conformance": "review-required",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "candidateStatus": "current"
+    },
+    {
+      "component": "dialog",
+      "lifecycle": "contract-draft",
+      "conformance": "review-required",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "candidateStatus": "current"
+    },
+    {
       "component": "divider",
       "lifecycle": "implemented",
       "conformance": "reviewed",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "candidateStatus": "current"
+    },
+    {
+      "component": "drawer",
+      "lifecycle": "contract-draft",
+      "conformance": "review-required",
       "releaseDifferences": [],
       "marketplaceDrift": {
         "added": [],
@@ -692,6 +909,23 @@
       "candidateStatus": "current"
     },
     {
+      "component": "interaction-tag",
+      "lifecycle": "contract-draft",
+      "conformance": "review-required",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "candidateStatus": "current"
+    },
+    {
       "component": "label",
       "lifecycle": "contract-draft",
       "conformance": "review-required",
@@ -707,6 +941,40 @@
         "modified": ["SKILL.md", "usage.md", "web/accessibility.md"]
       },
       "candidateStatus": "review-required"
+    },
+    {
+      "component": "link",
+      "lifecycle": "contract-draft",
+      "conformance": "review-required",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "candidateStatus": "current"
+    },
+    {
+      "component": "list",
+      "lifecycle": "contract-draft",
+      "conformance": "review-required",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "candidateStatus": "current"
     },
     {
       "component": "list-item",
@@ -794,6 +1062,74 @@
       "candidateStatus": "review-required"
     },
     {
+      "component": "message-bar",
+      "lifecycle": "contract-draft",
+      "conformance": "review-required",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "candidateStatus": "current"
+    },
+    {
+      "component": "nav",
+      "lifecycle": "contract-draft",
+      "conformance": "review-required",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "candidateStatus": "current"
+    },
+    {
+      "component": "nav-item",
+      "lifecycle": "contract-draft",
+      "conformance": "review-required",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "candidateStatus": "current"
+    },
+    {
+      "component": "persona",
+      "lifecycle": "contract-draft",
+      "conformance": "review-required",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "candidateStatus": "current"
+    },
+    {
       "component": "popover",
       "lifecycle": "contract-reviewed",
       "conformance": "reviewed",
@@ -809,6 +1145,23 @@
         "modified": []
       },
       "candidateStatus": "current"
+    },
+    {
+      "component": "presence-badge",
+      "lifecycle": "contract-draft",
+      "conformance": "review-required",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": ["SKILL.md", "usage.md", "web/accessibility.md", "web/interaction.md", "web/tokens.yaml"]
+      },
+      "candidateStatus": "review-required"
     },
     {
       "component": "progress-bar",
@@ -845,6 +1198,142 @@
       "candidateStatus": "review-required"
     },
     {
+      "component": "radio-group",
+      "lifecycle": "contract-draft",
+      "conformance": "review-required",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": ["SKILL.md", "usage.md", "web/accessibility.md", "web/interaction.md", "web/tokens.yaml"]
+      },
+      "candidateStatus": "review-required"
+    },
+    {
+      "component": "rating",
+      "lifecycle": "contract-draft",
+      "conformance": "review-required",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": ["SKILL.md", "usage.md", "web/accessibility.md", "web/interaction.md"]
+      },
+      "candidateStatus": "review-required"
+    },
+    {
+      "component": "rating-display",
+      "lifecycle": "contract-draft",
+      "conformance": "review-required",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": ["SKILL.md", "usage.md", "web/accessibility.md", "web/interaction.md", "web/tokens.yaml"]
+      },
+      "candidateStatus": "review-required"
+    },
+    {
+      "component": "rating-item",
+      "lifecycle": "contract-draft",
+      "conformance": "review-required",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": ["SKILL.md", "usage.md", "web/accessibility.md", "web/interaction.md", "web/tokens.yaml"]
+      },
+      "candidateStatus": "review-required"
+    },
+    {
+      "component": "scrollbar",
+      "lifecycle": "contract-draft",
+      "conformance": "review-required",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "candidateStatus": "current"
+    },
+    {
+      "component": "search-box",
+      "lifecycle": "contract-draft",
+      "conformance": "review-required",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": ["SKILL.md", "web/accessibility.md", "web/interaction.md", "web/tokens.yaml"]
+      },
+      "candidateStatus": "review-required"
+    },
+    {
+      "component": "select",
+      "lifecycle": "contract-draft",
+      "conformance": "review-required",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": ["SKILL.md", "usage.md", "web/accessibility.md", "web/interaction.md"]
+      },
+      "candidateStatus": "review-required"
+    },
+    {
+      "component": "simple-nav",
+      "lifecycle": "contract-draft",
+      "conformance": "review-required",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "candidateStatus": "current"
+    },
+    {
       "component": "skeleton",
       "lifecycle": "implemented",
       "conformance": "reviewed",
@@ -862,9 +1351,94 @@
       "candidateStatus": "review-required"
     },
     {
+      "component": "slider",
+      "lifecycle": "contract-draft",
+      "conformance": "review-required",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "candidateStatus": "current"
+    },
+    {
+      "component": "spin-button",
+      "lifecycle": "contract-draft",
+      "conformance": "review-required",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "candidateStatus": "current"
+    },
+    {
       "component": "spinner",
       "lifecycle": "implemented",
       "conformance": "reviewed",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "candidateStatus": "current"
+    },
+    {
+      "component": "split-button",
+      "lifecycle": "contract-draft",
+      "conformance": "review-required",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": ["SKILL.md", "usage.md", "web/accessibility.md", "web/interaction.md"]
+      },
+      "candidateStatus": "review-required"
+    },
+    {
+      "component": "swatch",
+      "lifecycle": "contract-draft",
+      "conformance": "review-required",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": ["SKILL.md", "usage.md", "web/accessibility.md", "web/interaction.md"]
+      },
+      "candidateStatus": "review-required"
+    },
+    {
+      "component": "swatch-picker",
+      "lifecycle": "contract-draft",
+      "conformance": "review-required",
       "releaseDifferences": [],
       "marketplaceDrift": {
         "added": [],
@@ -947,6 +1521,40 @@
       "candidateStatus": "current"
     },
     {
+      "component": "tag-picker",
+      "lifecycle": "contract-draft",
+      "conformance": "review-required",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": ["SKILL.md", "usage.md", "web/accessibility.md", "web/interaction.md"]
+      },
+      "candidateStatus": "review-required"
+    },
+    {
+      "component": "teaching-popover",
+      "lifecycle": "contract-draft",
+      "conformance": "review-required",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "candidateStatus": "current"
+    },
+    {
       "component": "text",
       "lifecycle": "implemented",
       "conformance": "reviewed",
@@ -954,6 +1562,40 @@
       "marketplaceDrift": null,
       "originDrift": null,
       "candidateStatus": "not-applicable"
+    },
+    {
+      "component": "textarea",
+      "lifecycle": "contract-draft",
+      "conformance": "review-required",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": ["usage.md"]
+      },
+      "candidateStatus": "review-required"
+    },
+    {
+      "component": "toast",
+      "lifecycle": "contract-draft",
+      "conformance": "review-required",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "candidateStatus": "current"
     },
     {
       "component": "toggle-button",
@@ -973,9 +1615,60 @@
       "candidateStatus": "current"
     },
     {
+      "component": "toolbar",
+      "lifecycle": "contract-draft",
+      "conformance": "review-required",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "candidateStatus": "current"
+    },
+    {
       "component": "tooltip",
       "lifecycle": "contract-reviewed",
       "conformance": "reviewed",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "candidateStatus": "current"
+    },
+    {
+      "component": "tree",
+      "lifecycle": "contract-draft",
+      "conformance": "review-required",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "candidateStatus": "current"
+    },
+    {
+      "component": "tree-item",
+      "lifecycle": "contract-draft",
+      "conformance": "review-required",
       "releaseDifferences": [],
       "marketplaceDrift": {
         "added": [],

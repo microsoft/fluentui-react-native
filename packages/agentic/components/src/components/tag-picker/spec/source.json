@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 2,
+  "component": "tag-picker",
+  "lifecycle": "contract-draft",
+  "conformance": "review-required",
+  "reviewedAt": null,
+  "sources": [
+    {
+      "id": "flex-component",
+      "kind": "flex-skill",
+      "authority": "normative",
+      "skill": "flex-components:tag-picker",
+      "sourceLock": "flex-1.7.0-9f1df394",
+      "sourceLockFingerprint": "33c7dbb4ff78525a4e0900811f5fa1994579ee8dd95b337de85d8f47133d148c",
+      "availableSurfaces": ["shared", "web"],
+      "surfacesConsulted": ["shared", "web"],
+      "sourceFiles": [
+        {
+          "role": "skill",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/tag-picker/SKILL.md",
+          "marketplaceBlobSha": "258b915851302fe98b9160b86a52ad9d20521f76",
+          "marketplaceSha256": "d807a746764dbbfbdf3365c49bd7bb438038bba1695652b97568e3489fbb3a71",
+          "originPath": "plugins/components/skills/tag-picker/SKILL.md",
+          "originBlobSha": "258b915851302fe98b9160b86a52ad9d20521f76",
+          "originSha256": "d807a746764dbbfbdf3365c49bd7bb438038bba1695652b97568e3489fbb3a71",
+          "contentDiffers": false
+        },
+        {
+          "role": "usage",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/tag-picker/usage.md",
+          "marketplaceBlobSha": "4aefe4d7ed6aa1ae877e63c6126f6a1322e6ca29",
+          "marketplaceSha256": "7bcfd5c392bd3a09f1a277825b1f33e2c8ad9e9b0a292c83937ffe007a3d8352",
+          "originPath": "plugins/components/skills/tag-picker/usage.md",
+          "originBlobSha": "4aefe4d7ed6aa1ae877e63c6126f6a1322e6ca29",
+          "originSha256": "7bcfd5c392bd3a09f1a277825b1f33e2c8ad9e9b0a292c83937ffe007a3d8352",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:accessibility",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/tag-picker/web/accessibility.md",
+          "marketplaceBlobSha": "9a20693ab048c6c72393e37ee8afcc5367fe515d",
+          "marketplaceSha256": "c3baa1fc1b631764f648ce3fd722f7784f2fa3921021ac484b2eca807858748e",
+          "originPath": "plugins/components/skills/tag-picker/web/accessibility.md",
+          "originBlobSha": "9a20693ab048c6c72393e37ee8afcc5367fe515d",
+          "originSha256": "c3baa1fc1b631764f648ce3fd722f7784f2fa3921021ac484b2eca807858748e",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:interaction",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/tag-picker/web/interaction.md",
+          "marketplaceBlobSha": "8ba3f17d9355d243af84c8077c92bdf66a3012f5",
+          "marketplaceSha256": "b0414d75e985a1afdccc8b6fb4395838b08a682b8dbc204013e0d01419a6fd64",
+          "originPath": "plugins/components/skills/tag-picker/web/interaction.md",
+          "originBlobSha": "8ba3f17d9355d243af84c8077c92bdf66a3012f5",
+          "originSha256": "b0414d75e985a1afdccc8b6fb4395838b08a682b8dbc204013e0d01419a6fd64",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:tokens",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/tag-picker/web/tokens.yaml",
+          "marketplaceBlobSha": "e91f3416f6a2663f3812076d745a5b85cc2f3a62",
+          "marketplaceSha256": "271a95d2018545fc70fb09f51c479077dd8cfe021a78d2ed9f296de0151aca99",
+          "originPath": "plugins/components/skills/tag-picker/web/tokens.yaml",
+          "originBlobSha": "e91f3416f6a2663f3812076d745a5b85cc2f3a62",
+          "originSha256": "271a95d2018545fc70fb09f51c479077dd8cfe021a78d2ed9f296de0151aca99",
+          "contentDiffers": false
+        }
+      ],
+      "releaseDifferences": []
+    },
+    {
+      "id": "furn-desktop",
+      "kind": "git-files",
+      "authority": "compatibility-reference",
+      "repository": "microsoft/fluentui-react-native",
+      "commit": "1c29f4e33695d5d9e44528b0c3137fac7c5fd5f0",
+      "files": [
+        {
+          "role": "compatibility",
+          "path": "packages/agentic/components/src/components/dropdown/SPEC.md",
+          "sha256": "4608b3ba9480829442883bb35533ceff86c0b4da48c9884680199414ba251a3c"
+        },
+        {
+          "role": "compatibility",
+          "path": "packages/agentic/components/src/components/field/SPEC.md",
+          "sha256": "02bb0c8fcf71c440ea234aa386b82abfec1bf7fe2eec5f9acacc6107276bb152"
+        },
+        {
+          "role": "compatibility",
+          "path": "packages/agentic/components/src/components/input/SPEC.md",
+          "sha256": "972144b0fd904dd1709bfd825f7f8a4bb3cde7c1ea042520eef50008d76a3c57"
+        },
+        {
+          "role": "compatibility",
+          "path": "packages/agentic/components/src/components/tag/SPEC.md",
+          "sha256": "158d0d94d19dc08fd90991cc75abc79af5b0148b0bfd31c5288ebfcad8d1e35f"
+        }
+      ]
+    }
+  ],
+  "divergences": [
+    {
+      "id": "tag-picker-native-focus",
+      "status": "accepted"
+    },
+    {
+      "id": "tag-picker-host-readiness",
+      "status": "deferred"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "TGP-001",
+      "sources": ["flex-component", "furn-desktop"],
+      "plannedEvidence": ["tag-picker.test.tsx", "tag-picker.stories.tsx"]
+    },
+    {
+      "id": "TGP-002",
+      "sources": ["flex-component", "furn-desktop"],
+      "plannedEvidence": ["tag-picker.test.tsx", "tag-picker.wdio.ts"]
+    },
+    {
+      "id": "TGP-003",
+      "sources": ["flex-component", "furn-desktop"],
+      "plannedEvidence": ["tag-picker.test.tsx", "tag-picker.wdio.ts"]
+    },
+    {
+      "id": "TGP-004",
+      "sources": ["flex-component", "furn-desktop"],
+      "plannedEvidence": ["tag-picker.wdio.ts", "tag-picker.stories.tsx"]
+    }
+  ]
+}

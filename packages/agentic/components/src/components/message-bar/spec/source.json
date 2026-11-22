@@ -1,0 +1,183 @@
+{
+  "schemaVersion": 2,
+  "component": "message-bar",
+  "lifecycle": "contract-draft",
+  "conformance": "review-required",
+  "reviewedAt": null,
+  "sources": [
+    {
+      "id": "flex-component",
+      "kind": "flex-skill",
+      "authority": "normative",
+      "skill": "flex-components:message-bar",
+      "sourceLock": "flex-1.7.0-9f1df394",
+      "sourceLockFingerprint": "33c7dbb4ff78525a4e0900811f5fa1994579ee8dd95b337de85d8f47133d148c",
+      "availableSurfaces": ["mobile", "shared", "web"],
+      "surfacesConsulted": ["mobile", "shared", "web"],
+      "sourceFiles": [
+        {
+          "role": "mobile:android:accessibility",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/message-bar/mobile/android/accessibility.md",
+          "marketplaceBlobSha": "40cb0c7dfd1e1406bff91ecb14f3dbb3cb43fb1c",
+          "marketplaceSha256": "28a53f94def6e1366247072a529ade7ee1b7131619db8bc0ea482fdc3a1504ad",
+          "originPath": "plugins/components/skills/message-bar/mobile/android/accessibility.md",
+          "originBlobSha": "40cb0c7dfd1e1406bff91ecb14f3dbb3cb43fb1c",
+          "originSha256": "28a53f94def6e1366247072a529ade7ee1b7131619db8bc0ea482fdc3a1504ad",
+          "contentDiffers": false
+        },
+        {
+          "role": "mobile:android:interaction",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/message-bar/mobile/android/interaction.md",
+          "marketplaceBlobSha": "0ec5f961e586be22e2eae6421dbd4a667990506a",
+          "marketplaceSha256": "35e074b94691003400c421cf985315cdefcbf4d7c17dfc3b3e5f8666c82bf017",
+          "originPath": "plugins/components/skills/message-bar/mobile/android/interaction.md",
+          "originBlobSha": "0ec5f961e586be22e2eae6421dbd4a667990506a",
+          "originSha256": "35e074b94691003400c421cf985315cdefcbf4d7c17dfc3b3e5f8666c82bf017",
+          "contentDiffers": false
+        },
+        {
+          "role": "mobile:ios:accessibility",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/message-bar/mobile/ios/accessibility.md",
+          "marketplaceBlobSha": "7d7cebea4d4d5a4ae329fa2db24e295bb7cd9d61",
+          "marketplaceSha256": "eea8196224c803faf01eb05540f69c8c3d1d46ad6df5c808524b5ede494da757",
+          "originPath": "plugins/components/skills/message-bar/mobile/ios/accessibility.md",
+          "originBlobSha": "7d7cebea4d4d5a4ae329fa2db24e295bb7cd9d61",
+          "originSha256": "eea8196224c803faf01eb05540f69c8c3d1d46ad6df5c808524b5ede494da757",
+          "contentDiffers": false
+        },
+        {
+          "role": "mobile:ios:interaction",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/message-bar/mobile/ios/interaction.md",
+          "marketplaceBlobSha": "3660a231bae0206e876eb4735864e332390f9285",
+          "marketplaceSha256": "c6f2eec5ff63388fbb2bec238ad655b12b28bfef54ffc800b1ebab1fe1f124a5",
+          "originPath": "plugins/components/skills/message-bar/mobile/ios/interaction.md",
+          "originBlobSha": "3660a231bae0206e876eb4735864e332390f9285",
+          "originSha256": "c6f2eec5ff63388fbb2bec238ad655b12b28bfef54ffc800b1ebab1fe1f124a5",
+          "contentDiffers": false
+        },
+        {
+          "role": "mobile:overview",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/message-bar/mobile/overview.md",
+          "marketplaceBlobSha": "b983ef9184678983330e434271c688a4bee1072d",
+          "marketplaceSha256": "c804a1b46a31d7b15c0db5e9ae3b45b55eaac6a2893791d05935134643faa5d7",
+          "originPath": "plugins/components/skills/message-bar/mobile/overview.md",
+          "originBlobSha": "b983ef9184678983330e434271c688a4bee1072d",
+          "originSha256": "c804a1b46a31d7b15c0db5e9ae3b45b55eaac6a2893791d05935134643faa5d7",
+          "contentDiffers": false
+        },
+        {
+          "role": "mobile:tokens",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/message-bar/mobile/tokens.yaml",
+          "marketplaceBlobSha": "e12c8e007534830b8f9e32d78d13058590adcf6a",
+          "marketplaceSha256": "434528d743bd7b7694b156ab9a7868761c78da5338d882fdaf8f7bdfabf3a512",
+          "originPath": "plugins/components/skills/message-bar/mobile/tokens.yaml",
+          "originBlobSha": "e12c8e007534830b8f9e32d78d13058590adcf6a",
+          "originSha256": "434528d743bd7b7694b156ab9a7868761c78da5338d882fdaf8f7bdfabf3a512",
+          "contentDiffers": false
+        },
+        {
+          "role": "skill",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/message-bar/SKILL.md",
+          "marketplaceBlobSha": "80164681dd483a005780d2280f1d2579933b0713",
+          "marketplaceSha256": "b0b6f6da5a79c105bae51ea99b8054fc111336489f713ae9b4f9552242515001",
+          "originPath": "plugins/components/skills/message-bar/SKILL.md",
+          "originBlobSha": "80164681dd483a005780d2280f1d2579933b0713",
+          "originSha256": "b0b6f6da5a79c105bae51ea99b8054fc111336489f713ae9b4f9552242515001",
+          "contentDiffers": false
+        },
+        {
+          "role": "usage",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/message-bar/usage.md",
+          "marketplaceBlobSha": "fcd99d0ed5779bb08c480852f3327b91fd930277",
+          "marketplaceSha256": "a1bc1215dc1dbf8dad72ebd2097b500a638108109703428fbd790eb8de83fd43",
+          "originPath": "plugins/components/skills/message-bar/usage.md",
+          "originBlobSha": "fcd99d0ed5779bb08c480852f3327b91fd930277",
+          "originSha256": "a1bc1215dc1dbf8dad72ebd2097b500a638108109703428fbd790eb8de83fd43",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:accessibility",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/message-bar/web/accessibility.md",
+          "marketplaceBlobSha": "baa78e44e7cbef35b381ba24705ccdac9ec82bcd",
+          "marketplaceSha256": "bcb0d2a47c7c4acb98b660ac975adf83f7779c8e94640f9e3a67f42affd29439",
+          "originPath": "plugins/components/skills/message-bar/web/accessibility.md",
+          "originBlobSha": "baa78e44e7cbef35b381ba24705ccdac9ec82bcd",
+          "originSha256": "bcb0d2a47c7c4acb98b660ac975adf83f7779c8e94640f9e3a67f42affd29439",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:interaction",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/message-bar/web/interaction.md",
+          "marketplaceBlobSha": "09a6865842bb5fb5056f9e8b8cf47b8a11a319cf",
+          "marketplaceSha256": "6d3140b33867a3f8aaf17b6a1d2b79aef139003ff648d03260d7def5e589c3dd",
+          "originPath": "plugins/components/skills/message-bar/web/interaction.md",
+          "originBlobSha": "09a6865842bb5fb5056f9e8b8cf47b8a11a319cf",
+          "originSha256": "6d3140b33867a3f8aaf17b6a1d2b79aef139003ff648d03260d7def5e589c3dd",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:tokens",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/message-bar/web/tokens.yaml",
+          "marketplaceBlobSha": "b8cc4d6cadac232eb9b2023ae405564a03027408",
+          "marketplaceSha256": "123060f3ad0997e4f4bcf96b80a62beadc65e0e3f9753d7b9467141ed1136985",
+          "originPath": "plugins/components/skills/message-bar/web/tokens.yaml",
+          "originBlobSha": "b8cc4d6cadac232eb9b2023ae405564a03027408",
+          "originSha256": "123060f3ad0997e4f4bcf96b80a62beadc65e0e3f9753d7b9467141ed1136985",
+          "contentDiffers": false
+        }
+      ],
+      "releaseDifferences": []
+    },
+    {
+      "id": "furn-desktop",
+      "kind": "git-files",
+      "authority": "compatibility-reference",
+      "repository": "microsoft/fluentui-react-native",
+      "commit": "1c29f4e33695d5d9e44528b0c3137fac7c5fd5f0",
+      "files": [
+        {
+          "role": "compatibility",
+          "path": "packages/agentic/components/src/components/button/SPEC.md",
+          "sha256": "35ec7d36949b34f7c60c03831deebde92c2fdbf96647304771682ccbcff9c1b1"
+        },
+        {
+          "role": "compatibility",
+          "path": "packages/agentic/components/src/components/field/SPEC.md",
+          "sha256": "02bb0c8fcf71c440ea234aa386b82abfec1bf7fe2eec5f9acacc6107276bb152"
+        }
+      ]
+    }
+  ],
+  "divergences": [
+    {
+      "id": "desktop-inline-feedback",
+      "status": "accepted"
+    },
+    {
+      "id": "banner-announcement-delivery",
+      "status": "deferred"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "MSB-001",
+      "sources": ["flex-component", "furn-desktop"],
+      "plannedEvidence": ["message-bar.test.tsx", "message-bar.stories.tsx"]
+    },
+    {
+      "id": "MSB-002",
+      "sources": ["flex-component"],
+      "plannedEvidence": ["message-bar.test.tsx", "message-bar.stories.tsx"]
+    },
+    {
+      "id": "MSB-003",
+      "sources": ["flex-component", "furn-desktop"],
+      "plannedEvidence": ["message-bar.test.tsx", "message-bar.wdio.ts"]
+    },
+    {
+      "id": "MSB-004",
+      "sources": ["flex-component", "furn-desktop"],
+      "plannedEvidence": ["message-bar.wdio.ts", "message-bar.stories.tsx"]
+    }
+  ]
+}

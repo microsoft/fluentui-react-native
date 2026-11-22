@@ -1,0 +1,137 @@
+{
+  "schemaVersion": 2,
+  "component": "rating",
+  "lifecycle": "contract-draft",
+  "conformance": "review-required",
+  "reviewedAt": null,
+  "sources": [
+    {
+      "id": "flex-component",
+      "kind": "flex-skill",
+      "authority": "normative",
+      "skill": "flex-components:rating",
+      "sourceLock": "flex-1.7.0-9f1df394",
+      "sourceLockFingerprint": "33c7dbb4ff78525a4e0900811f5fa1994579ee8dd95b337de85d8f47133d148c",
+      "availableSurfaces": ["shared", "web"],
+      "surfacesConsulted": ["shared", "web"],
+      "sourceFiles": [
+        {
+          "role": "skill",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/rating/SKILL.md",
+          "marketplaceBlobSha": "3a2440be42dc4dc3d17685aef4fb7bcb27e479ca",
+          "marketplaceSha256": "21205991d926b8f42628297252fd00648b300350261036f844d9bea03cd7af39",
+          "originPath": "plugins/components/skills/rating/SKILL.md",
+          "originBlobSha": "3a2440be42dc4dc3d17685aef4fb7bcb27e479ca",
+          "originSha256": "21205991d926b8f42628297252fd00648b300350261036f844d9bea03cd7af39",
+          "contentDiffers": false
+        },
+        {
+          "role": "usage",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/rating/usage.md",
+          "marketplaceBlobSha": "3651456393661c37e420365660e987de7260db06",
+          "marketplaceSha256": "94e05b158c08477b477b55aac2754fc454083bd9d9dd9fb2f08f92d9314abcbe",
+          "originPath": "plugins/components/skills/rating/usage.md",
+          "originBlobSha": "3651456393661c37e420365660e987de7260db06",
+          "originSha256": "94e05b158c08477b477b55aac2754fc454083bd9d9dd9fb2f08f92d9314abcbe",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:accessibility",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/rating/web/accessibility.md",
+          "marketplaceBlobSha": "c71d9f6fed804b3cff5e753259ccbd8fae78c046",
+          "marketplaceSha256": "440b90d54e3e5ea3a5530d33b3f9df186c8454025214d76882acd2276a9e55d8",
+          "originPath": "plugins/components/skills/rating/web/accessibility.md",
+          "originBlobSha": "c71d9f6fed804b3cff5e753259ccbd8fae78c046",
+          "originSha256": "440b90d54e3e5ea3a5530d33b3f9df186c8454025214d76882acd2276a9e55d8",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:interaction",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/rating/web/interaction.md",
+          "marketplaceBlobSha": "06d9ff36e0049d15905008a4f83979f20bc62521",
+          "marketplaceSha256": "994f5706bf3b5ea1f0bb02362277593456eb60b462cd4d26f18b313a485f8692",
+          "originPath": "plugins/components/skills/rating/web/interaction.md",
+          "originBlobSha": "06d9ff36e0049d15905008a4f83979f20bc62521",
+          "originSha256": "994f5706bf3b5ea1f0bb02362277593456eb60b462cd4d26f18b313a485f8692",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:tokens",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/rating/web/tokens.yaml",
+          "marketplaceBlobSha": "e34c05d27d11916bd52507a9e86e2d8802c137c9",
+          "marketplaceSha256": "cb39a16e9471cb4c9cbe4a0c093ea94a0516cc5f79415c6d3ab365978e668591",
+          "originPath": "plugins/components/skills/rating/web/tokens.yaml",
+          "originBlobSha": "e34c05d27d11916bd52507a9e86e2d8802c137c9",
+          "originSha256": "cb39a16e9471cb4c9cbe4a0c093ea94a0516cc5f79415c6d3ab365978e668591",
+          "contentDiffers": false
+        }
+      ],
+      "releaseDifferences": []
+    },
+    {
+      "id": "furn-desktop",
+      "kind": "git-files",
+      "authority": "compatibility-reference",
+      "repository": "microsoft/fluentui-react-native",
+      "commit": "1c29f4e33695d5d9e44528b0c3137fac7c5fd5f0",
+      "files": [
+        {
+          "role": "compatibility",
+          "path": "packages/agentic/components/src/components/field/SPEC.md",
+          "sha256": "02bb0c8fcf71c440ea234aa386b82abfec1bf7fe2eec5f9acacc6107276bb152"
+        },
+        {
+          "role": "compatibility",
+          "path": "packages/agentic/skills/references/shared/focus/common.md",
+          "sha256": "5e1b0c14353aaaa2856d6e81bc8f610c03b41c75287cc59aed1855bf0cd48397"
+        }
+      ]
+    },
+    {
+      "id": "rnw-range",
+      "kind": "git-files",
+      "authority": "implementation-evidence",
+      "repository": "microsoft/react-native-windows",
+      "commit": "3eaa23597552160257ad24a2d9142e9c6435f2f8",
+      "files": [
+        {
+          "role": "provider",
+          "path": "vnext/Microsoft.ReactNative/Fabric/Composition/CompositionDynamicAutomationProvider.cpp",
+          "sha256": "b3da4ea76ede46e6481b78f8fc22ab972a24d38dbfc27ce64c81c071d8da579b"
+        }
+      ]
+    }
+  ],
+  "divergences": [
+    {
+      "id": "single-adjustable-rating",
+      "status": "accepted"
+    },
+    {
+      "id": "rating-adjustment-proof",
+      "status": "deferred"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "RTG-001",
+      "sources": ["flex-component", "furn-desktop"],
+      "plannedEvidence": ["rating.test.tsx", "rating.stories.tsx"]
+    },
+    {
+      "id": "RTG-002",
+      "sources": ["flex-component", "furn-desktop"],
+      "plannedEvidence": ["rating.test.tsx", "rating.wdio.ts"]
+    },
+    {
+      "id": "RTG-003",
+      "sources": ["flex-component"],
+      "plannedEvidence": ["rating.test.tsx", "rating.stories.tsx"]
+    },
+    {
+      "id": "RTG-004",
+      "sources": ["flex-component", "furn-desktop", "rnw-range"],
+      "plannedEvidence": ["rating.wdio.ts", "rating.stories.tsx"]
+    }
+  ]
+}
