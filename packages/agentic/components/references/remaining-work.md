@@ -80,9 +80,7 @@ row against the current package before drafting its contract.
 | --------------- | ----------------------------------------------------------------------- | ------------------------------ | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
 | Breadcrumb      | [#4219](https://github.com/microsoft/fluentui-react-native/issues/4219) | Partial; blocked               | Popover, Menu, and Tooltip surfaces are absent                                   | Define or provide the overlay/menu stack                                   |
 | Drawer          | [#4223](https://github.com/microsoft/fluentui-react-native/issues/4223) | Partial; blocked as authored   | Arbitrary-child focus trap and return-focus lifecycle                            | Define a supported native focus-management path                            |
-| InfoLabel       | [#4226](https://github.com/microsoft/fluentui-react-native/issues/4226) | Blocked                        | Popover anchoring, dismissal, focus, and trigger accessibility                   | Unblock the shared overlay contract                                        |
 | Interaction Tag | [#4227](https://github.com/microsoft/fluentui-react-native/issues/4227) | Feasible in principle; blocked | Avatar/Tag contracts and public package wiring                                   | Re-evaluate against implemented Avatar and Tag, then decide export scope   |
-| Label           | [#4228](https://github.com/microsoft/fluentui-react-native/issues/4228) | Blocked as authored            | HTML label/control association has no pure RN equivalent                         | Choose an RN association or visual-only contract                           |
 | Link            | [#4229](https://github.com/microsoft/fluentui-react-native/issues/4229) | Partial; blocked as authored   | Web navigation semantics and unsupported underline geometry                      | Explicitly accept an RN text-link approximation or retarget                |
 | List            | [#4230](https://github.com/microsoft/fluentui-react-native/issues/4230) | Feasible in principle; blocked | ListItem row, focus, and accessibility contract                                  | Reuse implemented ListItem and define collection focus and accessibility   |
 | MessageBar      | [#4233](https://github.com/microsoft/fluentui-react-native/issues/4233) | Partial; blocked               | Cross-platform Fluent status-icon source                                         | Provide canonical status-icon assets                                       |
@@ -93,6 +91,15 @@ row against the current package before drafting its contract.
 
 **Done when:** each component has a reviewed local contract and implementation, or its issue records a decision not to
 provide it.
+
+## Form contracts awaiting review
+
+Review [Label](../src/components/label/SPEC.md) ([#4228](https://github.com/microsoft/fluentui-react-native/issues/4228)),
+[Field](../src/components/field/SPEC.md) ([#4225](https://github.com/microsoft/fluentui-react-native/issues/4225)),
+and [InfoLabel](../src/components/info-label/SPEC.md) ([#4226](https://github.com/microsoft/fluentui-react-native/issues/4226))
+together. Their proposed binding distinguishes the visible name, the actual control, and a label click. Open native
+gates are discoverable error descriptions and state, single announcements, help-popup association, and boundary
+focus continuation. None of the three drafts is implemented or exported.
 
 ## Textarea API decision
 

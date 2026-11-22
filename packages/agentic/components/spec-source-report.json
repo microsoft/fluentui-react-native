@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-21T21:38:48.217Z",
+  "generatedAt": "2026-11-22T19:44:15.238Z",
   "sourceLock": "flex-1.7.0-9f1df394",
   "sourceLockFingerprint": "33c7dbb4ff78525a4e0900811f5fa1994579ee8dd95b337de85d8f47133d148c",
   "baseline": {
@@ -10,7 +10,7 @@
   "external": {
     "mode": "live",
     "status": "drift-detected",
-    "marketplaceHead": "b3f232d0c21fa3d5edface7b4beed235a1e43825",
+    "marketplaceHead": "67480aa52a07c42fd51dd9186a56b97e9f6eebaa",
     "originHead": "3e54b26a30207168b9e2c07fad528d94c964d226"
   },
   "catalog": {
@@ -168,7 +168,10 @@
       "checkbox",
       "divider",
       "dropdown",
+      "field",
+      "info-label",
       "input",
+      "label",
       "list-item",
       "listbox-item",
       "menu",
@@ -187,7 +190,7 @@
       "toggle-button",
       "tooltip"
     ],
-    "adaptedDrafts": ["avatar", "dropdown", "menu", "menu-button", "popover", "tooltip"],
+    "adaptedDrafts": ["avatar", "dropdown", "field", "info-label", "label", "menu", "menu-button", "popover", "tooltip"],
     "implemented": [
       "accordion",
       "badge",
@@ -270,10 +273,7 @@
       "destructive-button",
       "dialog",
       "drawer",
-      "field",
-      "info-label",
       "interaction-tag",
-      "label",
       "link",
       "list",
       "message-bar",
@@ -641,6 +641,40 @@
       "candidateStatus": "current"
     },
     {
+      "component": "field",
+      "lifecycle": "contract-draft",
+      "conformance": "review-required",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "candidateStatus": "current"
+    },
+    {
+      "component": "info-label",
+      "lifecycle": "contract-draft",
+      "conformance": "review-required",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "candidateStatus": "current"
+    },
+    {
       "component": "input",
       "lifecycle": "implemented",
       "conformance": "reviewed",
@@ -656,6 +690,23 @@
         "modified": []
       },
       "candidateStatus": "current"
+    },
+    {
+      "component": "label",
+      "lifecycle": "contract-draft",
+      "conformance": "review-required",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": ["SKILL.md", "usage.md", "web/accessibility.md"]
+      },
+      "candidateStatus": "review-required"
     },
     {
       "component": "list-item",
