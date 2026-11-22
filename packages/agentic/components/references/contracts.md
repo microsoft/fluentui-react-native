@@ -233,9 +233,10 @@ component, with its status, recorded feasibility, reason, re-evaluation
 decision, and last-evaluated date. `legacySpecEvidence` pins the repository
 commit and path template that contain the complete original blocker analysis.
 The recorded outcomes are staging-time evidence, not a claim that a named
-dependency is still absent; re-evaluate them against the current package before
-drafting a contract. Components that still lack a local contract are listed in
-[remaining work](remaining-work.md#components-without-a-local-contract).
+dependency is still absent. Use `local.noLocalContract` in the
+[source report](../spec-source-report.json) to identify missing contracts and
+the [catalog draft review order](remaining-work.md#catalog-draft-review-order)
+for the current drafts and their native qualification gates.
 
 Issue #4252 originally required commands that copied an upstream skill into
 `specs/<name>` and later promoted that folder. Those criteria are intentionally
