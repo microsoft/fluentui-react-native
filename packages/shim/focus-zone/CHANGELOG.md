@@ -1,5 +1,11 @@
 # Change Log - @fluentui-react-native/focus-zone
 
+## 0.23.13
+
+### Patch Changes
+
+- @fluentui-react-native/native-core@0.2.5
+
 ## 0.23.12
 
 ### Patch Changes

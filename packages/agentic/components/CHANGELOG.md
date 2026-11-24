@@ -1,5 +1,36 @@
 # @fluentui-react-native/components
 
+## 0.9.0
+
+### Minor Changes
+
+- c64353f: Add typed asset references to component tokens and use size-specific Fluent SVG chevrons in MenuButton on macOS, Windows, and Win32. The extractor can emit a provenance manifest for generated icons.
+  
+  Render the MenuButton chevron adapters directly without an extra React component layer.
+- c64353f: Add JSON component tokens and theme override layers for Button and MenuButton. Caller visual styles and slot props take precedence over component and theme defaults.
+  
+  Export reusable token validators and React Native style enum value lists from `@fluentui-react-native/design/styling` for custom components.
+- b93f0e9: Align the agentic component contracts and token bindings with Flex 1.7. Button is action-only: migrate selection to the new Subtle ToggleButton, and use independent leading and trailing icon slots instead of `icon` and `iconPosition`. Use `circular` explicitly in place of `circle`; the square shape was removed.
+  
+  MenuButton uses `leadingIcon`. Dropdown uses `selectionMode` instead of `multiselect`; MenuItem and ListboxItem use a single selection mode instead of independent indicator flags. Badge defaults to Informative, removes Brand, and adds Filled Counter and Dot layouts. Avatar content modes are mutually exclusive. Tag supports an explicit caller-owned dismiss request, and busy status belongs to the host of a decorative Spinner. Visual defaults and component token overrides now follow the v2 JSON bindings.
+- b93f0e9: Expose a native `tooltip?: string` prop on supported view-backed components. The compatibility wrapper is implemented for desktop qualification but is not yet exported.
+
+### Patch Changes
+
+- 6d2b340: Document the remaining 38 desktop component contracts from the pinned Flex catalog, including native behavior differences and qualification requirements. The drafts do not add runtime exports.
+- 6d2b340: Document draft desktop contracts for Label, Field, and InfoLabel. These design references do not add runtime exports.
+- b93f0e9: Support host-specific component token bindings and theme overrides with the reserved final `when.platform.<host>` selector. MenuButton now declares its macOS label alignment in its token companion.
+- b93f0e9: Add native Storybook coverage for MenuButton and Dropdown popup alignment on Windows Fabric and Win32.
+- b93f0e9: Balance icon-side padding in Button and MenuButton, align MenuButton and Dropdown labels with their chevrons, and restore rounded Input outlines and the Input Icons story's width constraint.
+- b93f0e9: Add the pre-implementation ToggleButton contract, selected-state tokens, and typed scaffold. ToggleButton is not yet exported; Button's API is unchanged.
+- Updated dependencies [b93f0e9]
+- Updated dependencies [c64353f]
+- Updated dependencies [c64353f]
+- Updated dependencies [b93f0e9]
+  - @fluentui-react-native/design@0.7.0
+  - @fluentui-react-native/framework-base@0.10.0
+  - @fluentui-react-native/native-core@0.2.5
+
 ## 0.8.4
 
 ### Patch Changes

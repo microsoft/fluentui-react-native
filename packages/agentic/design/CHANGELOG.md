@@ -1,5 +1,25 @@
 # @fluentui-react-native/design
 
+## 0.7.0
+
+### Minor Changes
+
+- b93f0e9: Support host-specific component token bindings and theme overrides with the reserved final `when.platform.<host>` selector. MenuButton now declares its macOS label alignment in its token companion.
+- c64353f: Add typed asset references to component tokens and use size-specific Fluent SVG chevrons in MenuButton on macOS, Windows, and Win32. The extractor can emit a provenance manifest for generated icons.
+  
+  Render the MenuButton chevron adapters directly without an extra React component layer.
+- c64353f: Add JSON component tokens and theme override layers for Button and MenuButton. Caller visual styles and slot props take precedence over component and theme defaults.
+  
+  Export reusable token validators and React Native style enum value lists from `@fluentui-react-native/design/styling` for custom components.
+
+### Patch Changes
+
+- b93f0e9: Align the agentic component contracts and token bindings with Flex 1.7. Button is action-only: migrate selection to the new Subtle ToggleButton, and use independent leading and trailing icon slots instead of `icon` and `iconPosition`. Use `circular` explicitly in place of `circle`; the square shape was removed.
+  
+  MenuButton uses `leadingIcon`. Dropdown uses `selectionMode` instead of `multiselect`; MenuItem and ListboxItem use a single selection mode instead of independent indicator flags. Badge defaults to Informative, removes Brand, and adds Filled Counter and Dot layouts. Avatar content modes are mutually exclusive. Tag supports an explicit caller-owned dismiss request, and busy status belongs to the host of a decorative Spinner. Visual defaults and component token overrides now follow the v2 JSON bindings.
+- Updated dependencies [c64353f]
+  - @fluentui-react-native/framework-base@0.10.0
+
 ## 0.6.2
 
 ### Patch Changes

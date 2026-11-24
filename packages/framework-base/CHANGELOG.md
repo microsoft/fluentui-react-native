@@ -1,5 +1,13 @@
 # Change Log - @fluentui-react-native/framework-base
 
+## 0.10.0
+
+### Minor Changes
+
+- c64353f: Add JSON component tokens and theme override layers for Button and MenuButton. Caller visual styles and slot props take precedence over component and theme defaults.
+  
+  Export reusable token validators and React Native style enum value lists from `@fluentui-react-native/design/styling` for custom components.
+
 ## 0.9.2
 
 ### Patch Changes

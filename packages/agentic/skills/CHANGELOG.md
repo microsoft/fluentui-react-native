@@ -1,5 +1,11 @@
 # @fluentui-react-native/skills
 
+## 0.1.2
+
+### Patch Changes
+
+- b93f0e9: Follow the owning component contract's token companion and carry requirement-level source and native qualification evidence through the authoring workflow.
+
 ## 0.1.1
 
 ### Patch Changes

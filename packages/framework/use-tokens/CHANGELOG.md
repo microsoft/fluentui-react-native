@@ -1,5 +1,12 @@
 # Change Log - @fluentui-react-native/use-tokens
 
+## 0.9.9
+
+### Patch Changes
+
+- Updated dependencies [c64353f]
+  - @fluentui-react-native/framework-base@0.10.0
+
 ## 0.9.8
 
 ### Patch Changes
