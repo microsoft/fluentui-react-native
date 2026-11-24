@@ -1,9 +1,9 @@
 {
   "schemaVersion": 2,
   "component": "nav",
-  "lifecycle": "contract-draft",
-  "conformance": "review-required",
-  "reviewedAt": null,
+  "lifecycle": "implemented",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-11-24",
   "sources": [
     {
       "id": "flex-component",
@@ -107,22 +107,24 @@
     {
       "id": "NVC-001",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["nav.test.tsx", "nav.stories.tsx"]
+      "evidence": ["nav.test.tsx", "nav.stories.tsx"]
     },
     {
       "id": "NVC-002",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["nav.test.tsx", "nav.wdio.ts"]
+      "evidence": ["renderNav.tsx", "nav.test.tsx"],
+      "plannedEvidence": ["nav.wdio.ts"]
     },
     {
       "id": "NVC-003",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["nav.wdio.ts", "nav.stories.tsx"]
+      "evidence": ["useNav.ts", "spec/interaction.md"],
+      "plannedEvidence": ["nav.wdio.ts"]
     },
     {
       "id": "NVC-004",
       "sources": ["flex-component"],
-      "plannedEvidence": ["nav.test.tsx", "nav.stories.tsx"]
+      "evidence": ["useNavStyles.ts", "nav.stories.tsx"]
     }
   ]
 }

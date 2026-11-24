@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Platform, Pressable, Text as NativeText, View } from 'react-native';
-import type { AccessibilityActionEvent, LayoutChangeEvent } from 'react-native';
+import type { AccessibilityActionEvent, GestureResponderEvent, LayoutChangeEvent } from 'react-native';
 
 import { useRootInputModality, useThemeState } from '@fluentui-react-native/design';
 import { useAccessibilityLabelWarning, useFocusablePressable, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
@@ -218,6 +218,7 @@ export function useDropdown_unstable(props: DropdownProps): DropdownState {
     accessibilityState: triggerAccessibilityState,
     keyDownEvents: triggerKeyDownEvents,
     onAccessibilityAction: triggerOnAccessibilityAction,
+    onAccessibilityTap: triggerOnAccessibilityTap,
     onKeyDown: triggerOnKeyDown,
     onLayout: triggerOnLayout,
     onPress: triggerOnPress,
@@ -248,6 +249,12 @@ export function useDropdown_unstable(props: DropdownProps): DropdownState {
       enableFocusRing: false,
       keyDownEvents: [...(triggerKeyDownEvents ?? []), ...triggerKeys],
       onAccessibilityAction: composeHandlers(handleAccessibilityAction, triggerOnAccessibilityAction),
+      onAccessibilityTap:
+        Platform.OS === 'macos'
+          ? composeHandlers<[event?: GestureResponderEvent]>(() => {
+              if (!disabled) setExpanded(!controller.presented);
+            }, triggerOnAccessibilityTap)
+          : triggerOnAccessibilityTap,
       onKeyDown: composeHandlers(triggerOnKeyDown as FocusablePressableProps['onKeyDown'], handleKeyDown),
       onLayout: composeHandlers(triggerOnLayout, handleTriggerLayout),
       onPress: composeHandlers(triggerOnPress, controller.handlePress),

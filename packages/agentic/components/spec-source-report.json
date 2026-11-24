@@ -234,23 +234,12 @@
       "color-picker",
       "color-slider",
       "combobox",
-      "dialog",
       "dropdown",
-      "list",
       "menu",
       "menu-button",
-      "nav",
       "popover",
-      "rating",
-      "select",
-      "simple-nav",
-      "slider",
-      "spin-button",
-      "tag-picker",
       "toast",
-      "tooltip",
-      "tree",
-      "tree-item"
+      "tooltip"
     ],
     "implemented": [
       "accordion",
@@ -262,6 +251,7 @@
       "checkbox",
       "compound-button",
       "destructive-button",
+      "dialog",
       "divider",
       "drawer",
       "field",
@@ -270,21 +260,28 @@
       "interaction-tag",
       "label",
       "link",
+      "list",
       "list-item",
       "listbox-item",
       "menu-item",
       "message-bar",
+      "nav",
       "nav-item",
       "persona",
       "presence-badge",
       "progress-bar",
       "radio",
       "radio-group",
+      "rating",
       "rating-display",
       "rating-item",
       "scrollbar",
       "search-box",
+      "select",
+      "simple-nav",
       "skeleton",
+      "slider",
+      "spin-button",
       "spinner",
       "split-button",
       "swatch",
@@ -293,11 +290,14 @@
       "tab",
       "tablist",
       "tag",
+      "tag-picker",
       "teaching-popover",
       "text",
       "textarea",
       "toggle-button",
-      "toolbar"
+      "toolbar",
+      "tree",
+      "tree-item"
     ],
     "implementationGap": [
       "avatar",
@@ -305,23 +305,12 @@
       "color-picker",
       "color-slider",
       "combobox",
-      "dialog",
       "dropdown",
-      "list",
       "menu",
       "menu-button",
-      "nav",
       "popover",
-      "rating",
-      "select",
-      "simple-nav",
-      "slider",
-      "spin-button",
-      "tag-picker",
       "toast",
-      "tooltip",
-      "tree",
-      "tree-item"
+      "tooltip"
     ],
     "noLocalContract": [],
     "legacyMigration": [
@@ -766,8 +755,8 @@
     },
     {
       "component": "dialog",
-      "lifecycle": "contract-draft",
-      "conformance": "review-required",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
       "releaseDifferences": [],
       "marketplaceDrift": {
         "added": [],
@@ -936,8 +925,8 @@
     },
     {
       "component": "list",
-      "lifecycle": "contract-draft",
-      "conformance": "review-required",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
       "releaseDifferences": [],
       "marketplaceDrift": {
         "added": [],
@@ -1055,8 +1044,8 @@
     },
     {
       "component": "nav",
-      "lifecycle": "contract-draft",
-      "conformance": "review-required",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
       "releaseDifferences": [],
       "marketplaceDrift": {
         "added": [],
@@ -1191,8 +1180,8 @@
     },
     {
       "component": "rating",
-      "lifecycle": "contract-draft",
-      "conformance": "review-required",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
       "releaseDifferences": [],
       "marketplaceDrift": {
         "added": [],
@@ -1276,8 +1265,8 @@
     },
     {
       "component": "select",
-      "lifecycle": "contract-draft",
-      "conformance": "review-required",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
       "releaseDifferences": [],
       "marketplaceDrift": {
         "added": [],
@@ -1293,8 +1282,8 @@
     },
     {
       "component": "simple-nav",
-      "lifecycle": "contract-draft",
-      "conformance": "review-required",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
       "releaseDifferences": [],
       "marketplaceDrift": {
         "added": [],
@@ -1327,8 +1316,8 @@
     },
     {
       "component": "slider",
-      "lifecycle": "contract-draft",
-      "conformance": "review-required",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
       "releaseDifferences": [],
       "marketplaceDrift": {
         "added": [],
@@ -1344,8 +1333,8 @@
     },
     {
       "component": "spin-button",
-      "lifecycle": "contract-draft",
-      "conformance": "review-required",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
       "releaseDifferences": [],
       "marketplaceDrift": {
         "added": [],
@@ -1497,8 +1486,8 @@
     },
     {
       "component": "tag-picker",
-      "lifecycle": "contract-draft",
-      "conformance": "review-required",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
       "releaseDifferences": [],
       "marketplaceDrift": {
         "added": [],
@@ -1625,8 +1614,8 @@
     },
     {
       "component": "tree",
-      "lifecycle": "contract-draft",
-      "conformance": "review-required",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
       "releaseDifferences": [],
       "marketplaceDrift": {
         "added": [],
@@ -1642,8 +1631,8 @@
     },
     {
       "component": "tree-item",
-      "lifecycle": "contract-draft",
-      "conformance": "review-required",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
       "releaseDifferences": [],
       "marketplaceDrift": {
         "added": [],

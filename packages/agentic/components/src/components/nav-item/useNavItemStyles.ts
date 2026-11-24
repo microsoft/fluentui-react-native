@@ -10,7 +10,7 @@ export function useNavItemStyles_unstable(state: NavItemState) {
   const label = resolveTokenStates(tokens.label, state).style;
   const { avatarSize, ...leading } = resolveTokenStates(tokens.leading, state).props;
   attachSlotProps(state.root, { style: [navItemStyles.root, state.userStyle] });
-  attachSlotProps(state.primary, { style: [navItemStyles.primary, primary] });
+  attachSlotProps(state.primary, { style: [navItemStyles.primary, primary, !state.label && navItemStyles.iconOnly] });
   if (state.label) attachSlotProps(state.label, { style: [navItemStyles.label, label] });
   if (state.icon) attachSlotDefaults(state.icon, { ...leading, color: label.color });
   if (state.avatar) attachSlotDefaults(state.avatar, { size: avatarSize });

@@ -144,7 +144,11 @@
     "ios": {
       "componentProvider": {
         "Callout": "RCTCalloutComponentView",
-        "FocusZone": "RCTFocusZoneComponentView"
+        "FocusZone": "RCTFocusZoneComponentView",
+        "FRNNativeCoreDialogWindow": "FRNNativeCoreDialogWindowComponentView",
+        "FRNNativeCoreRangeTarget": "FRNNativeCoreRangeTargetComponentView",
+        "FRNNativeCoreSingleSelect": "FRNNativeCoreSingleSelectComponentView",
+        "FRNNativeCoreSpinEditor": "FRNNativeCoreSpinEditorComponentView"
       }
     },
     "windows": {

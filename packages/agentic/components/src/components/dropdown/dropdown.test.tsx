@@ -295,6 +295,24 @@ describe('Dropdown', () => {
     expect(screen.getByTestId('listbox')).toBeTruthy();
   });
 
+  it('opens and closes once through the macOS accessibility tap without forwarding a synthetic press', async () => {
+    const change = jest.fn();
+    const tap = jest.fn();
+    const press = jest.fn();
+    await render(<Scene onOpenChange={change} trigger={{ testID: 'trigger', onAccessibilityTap: tap, onPress: press }} />);
+    const event = { nativeEvent: {} };
+    await fireEvent(screen.getByTestId('trigger'), 'accessibilityTap', event);
+    expect(screen.getByTestId('listbox')).toBeOnTheScreen();
+    await fireEvent(screen.getByTestId('trigger'), 'accessibilityTap', event);
+    expect(screen.queryByTestId('listbox')).toBeNull();
+    expect(change.mock.calls).toEqual([
+      [true, { reason: 'trigger' }],
+      [false, { reason: 'trigger' }],
+    ]);
+    expect(tap.mock.calls).toEqual([[event], [event]]);
+    expect(press).not.toHaveBeenCalled();
+  });
+
   it('exposes bound options with list-item semantics, positions, and selection actions', async () => {
     await render(<Scene defaultOpen defaultSelectedOptions={['cherry']} />);
     const cherry = screen.getByTestId('cherry');

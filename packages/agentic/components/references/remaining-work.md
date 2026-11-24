@@ -92,8 +92,8 @@ stack layout until transparent cutouts over nonuniform native surfaces are quali
 
 - Verify [PresenceBadge](../src/components/presence-badge/SPEC.md) and [Persona](../src/components/persona/SPEC.md)
   host focus during a status update and high-contrast artwork; Avatar itself still has no presence slot.
-- Verify native [Swatch](../src/components/swatch/SPEC.md) Select and constrained contrast independent of
-  SwatchPicker's unimplemented collection navigation.
+- Verify native [Swatch](../src/components/swatch/SPEC.md) Select and constrained contrast independently of
+  SwatchPicker's collection navigation.
 - Verify [InteractionTag](../src/components/interaction-tag/SPEC.md) focus when the owner removes a tag and
   [SplitButton](../src/components/split-button/SPEC.md) owner-relative popup exit, focus return and native association.
 - Verify [Textarea](../src/components/textarea/SPEC.md) multiline copy, IME, and native read-only and disabled state.
@@ -123,19 +123,33 @@ stack layout until transparent cutouts over nonuniform native surfaces are quali
 - Verify [Scrollbar](../src/components/scrollbar/SPEC.md) native thumb drag, resize, keyboard paging, accessible scroll
   actions and OS visibility policies. Do not add a separately writable thumb.
 
+## Fourth-wave native gates
+
+- [Dialog](../src/components/dialog/SPEC.md) and Nav/SimpleNav overlays use AppKit sheets or panels. Prove native
+  background traversal, nested ownership, and focus return before closing [#4379](https://github.com/microsoft/fluentui-react-native/issues/4379).
+  Windows and Office overlays remain gated on their own providers.
+- [Select](../src/components/select/SPEC.md), [Rating](../src/components/rating/SPEC.md),
+  [Slider](../src/components/slider/SPEC.md), and [SpinButton](../src/components/spin-button/SPEC.md) are in the
+  macOS entry point only. Verify direct numeric write/readback, native picker cancellation and form state, and
+  add a real Windows/Win32 provider rather than substituting a generic accessibility role or Dropdown.
+- [List](../src/components/list/SPEC.md) ships a mounted model: qualify Win32 child hosting and separate nested
+  action/virtualized traversal before admitting those modes. [Tree](../src/components/tree/SPEC.md) and
+  [TreeItem](../src/components/tree-item/SPEC.md) need native hierarchy, checked/mixed projection, sibling-action focus,
+  and collapse checks. A native single-selection assertion does not qualify the multiple-selection checkbox model.
+- [TagPicker](../src/components/tag-picker/SPEC.md) ships select-only. Before admitting filtering/freeform, verify
+  active-option speech with retained editor focus and ensure IME confirmation cannot create or select a tag.
+
 ## Catalog draft review order
 
 The [source report](../spec-source-report.json) distinguishes **missing contracts** from **missing implementations**.
 Review the following drafts in dependency order. Entries in the same wave are independently reviewable against the
 earlier contracts. A relationship can reuse semantics without requiring the composed component to share its renderer.
 
-| Wave                        | Drafts to review                                                                                                                                                                                                                                                                                      | What the next wave needs                                                                        |
-| --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| 1: Forms and values         | [Select](../src/components/select/SPEC.md), [Combobox](../src/components/combobox/SPEC.md), [SpinButton](../src/components/spin-button/SPEC.md), [Slider](../src/components/slider/SPEC.md), [ColorArea](../src/components/color-area/SPEC.md), [ColorSlider](../src/components/color-slider/SPEC.md) | Real editor/scroll/picker owners and independent writable values.                               |
-| 1: Feedback and collections | [List](../src/components/list/SPEC.md), [TreeItem](../src/components/tree-item/SPEC.md)                                                                                                                                                                                                               | Native focus boundaries, stable row identities and independent actions.                         |
-| 2: First compositions       | [TagPicker](../src/components/tag-picker/SPEC.md), [Rating](../src/components/rating/SPEC.md), [Dialog](../src/components/dialog/SPEC.md), [Toast](../src/components/toast/SPEC.md), [Tree](../src/components/tree/SPEC.md)                                                                           | In particular, resolve Dialog's mode-specific isolation.                                        |
-| 3: Composite surfaces       | [ColorPicker](../src/components/color-picker/SPEC.md)                                                                                                                                                                                                                                                 | Synchronize exact and continuous color edits.                                                   |
-| 4: Application navigation   | [Nav](../src/components/nav/SPEC.md), [SimpleNav](../src/components/simple-nav/SPEC.md)                                                                                                                                                                                                               | Qualify route ownership, hidden/rail focus recovery and overlay isolation with an actual shell. |
+| Wave                  | Drafts to review                                                                                                                                         | What the next wave needs                                     |
+| --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| 1: Forms and values   | [Combobox](../src/components/combobox/SPEC.md), [ColorArea](../src/components/color-area/SPEC.md), [ColorSlider](../src/components/color-slider/SPEC.md) | Preserve native caret and independent writable color values. |
+| 2: First compositions | [Toast](../src/components/toast/SPEC.md)                                                                                                                 | Define host, queue, and announcement lifetime.               |
+| 3: Composite surfaces | [ColorPicker](../src/components/color-picker/SPEC.md)                                                                                                    | Synchronize exact and continuous color edits.                |
 
 Do not infer release readiness from catalog coverage. The main cross-component gates are native picker and range
 actions, editor-preserving active-option announcements, modal input and accessibility isolation, nested/virtualized

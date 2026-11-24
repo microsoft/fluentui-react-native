@@ -1,7 +1,7 @@
 ---
 name: tree
 platform: react-native (Windows, macOS)
-status: contract-draft
+status: implemented
 source: ./spec/source.json
 tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
@@ -36,7 +36,9 @@ Related contracts used by this design: [TreeItem](../tree-item/SPEC.md), [List](
 
 ### Data and callbacks
 
-`onOpenChange(nextKeys, { key })` and `onSelectionChange(nextKeys, { key })` are separate requests. IDs
+`onOpenChange(nextKeys, { key })` and `onSelectionChange(nextKeys, { key })` are separate requests. In multiple
+mode callback keys represent selected leaves; a supplied branch key expands to its enabled descendant leaves.
+Disabled leaves can remain externally selected but do not change as part of a branch request. IDs
 represent nodes across collapse and recycling, not array positions. Derive ancestor state from the complete
 graph even if its visible representation is flat; a disabled discoverable node must still refuse disclosure,
 selection and primary/quick actions.
@@ -67,6 +69,7 @@ list virtualizes.
 Select a collapsed branch, clear one hidden descendant through a model update, expand it, then delete the
 focused node. Check mixed ancestors, correct level/position and surviving native focus.
 
-Draft for Windows Fabric, Office Win32, macOS Fabric and macOS Paper. The [requirement evidence](spec/source.json) is planned; no runtime export or native qualification is claimed.
+The [source evidence](spec/source.json) captures full mounted-data support; partial/virtualized graphs require
+separate capability evidence. Native hierarchy, actions, and quick-action focus remain endpoint gates.
 
 Review the [token bindings](spec/tokens.json), [accessibility](spec/accessibility.md), [interaction](spec/interaction.md) and [usage](spec/usage.md) with this draft.

@@ -7,7 +7,7 @@ import type {
   Slot,
   SlotProp,
 } from '@fluentui-react-native/framework-base';
-import type { Pressable, StyleProp, View, ViewProps, ViewStyle } from 'react-native';
+import type { Pressable, PressableProps, StyleProp, View, ViewProps, ViewStyle } from 'react-native';
 import type { DesktopTooltipProps } from '../../common/desktopTooltipProps';
 import type { FocusVisualsSlots } from '../../common/useFocusVisuals';
 import type { Icon } from '../../primitives/icon/icon';
@@ -54,7 +54,8 @@ export type NavItemProps = NavItemBehavior &
     leading?: NavItemLeading;
     badge?: BadgeProps;
     secondaryActions?: readonly NavItemAction[];
-    primary?: Partial<Pick<PropsWithRefOf<typeof Pressable>, 'ref'>> & Pick<ViewProps, 'testID' | 'accessibilityHint'>;
+    primary?: Partial<Pick<PropsWithRefOf<typeof Pressable>, 'ref'>> &
+      Pick<PressableProps, 'testID' | 'accessibilityHint' | 'onFocus' | 'onBlur'>;
   };
 
 export type NavItemState = ThemeState &

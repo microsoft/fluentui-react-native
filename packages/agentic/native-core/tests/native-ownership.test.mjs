@@ -15,6 +15,10 @@ test('owns one codegen boundary for both native components and future modules', 
   assert.deepEqual(manifest.codegenConfig.ios.componentProvider, {
     Callout: 'RCTCalloutComponentView',
     FocusZone: 'RCTFocusZoneComponentView',
+    FRNNativeCoreDialogWindow: 'FRNNativeCoreDialogWindowComponentView',
+    FRNNativeCoreRangeTarget: 'FRNNativeCoreRangeTargetComponentView',
+    FRNNativeCoreSingleSelect: 'FRNNativeCoreSingleSelectComponentView',
+    FRNNativeCoreSpinEditor: 'FRNNativeCoreSpinEditorComponentView',
   });
   assert.deepEqual(manifest.codegenConfig.windows.generators, ['componentsWindows', 'modulesWindows']);
 });

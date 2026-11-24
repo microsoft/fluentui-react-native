@@ -1,9 +1,9 @@
 {
   "schemaVersion": 2,
   "component": "spin-button",
-  "lifecycle": "contract-draft",
-  "conformance": "review-required",
-  "reviewedAt": null,
+  "lifecycle": "implemented",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-11-24",
   "sources": [
     {
       "id": "flex-component",
@@ -116,22 +116,24 @@
     {
       "id": "SPBNU-001",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["spin-button.test.tsx", "spin-button.stories.tsx"]
+      "evidence": ["spin-button.test.tsx", "spin-button.stories.tsx"]
     },
     {
       "id": "SPBNU-002",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["spin-button.test.tsx", "spin-button.wdio.ts"]
+      "evidence": ["spin-button.test.tsx", "spin-button.stories.tsx"],
+      "plannedEvidence": ["spin-button.wdio.ts"]
     },
     {
       "id": "SPBNU-003",
       "sources": ["flex-component"],
-      "plannedEvidence": ["spin-button.test.tsx", "spin-button.stories.tsx"]
+      "evidence": ["useSpinButtonStyles.ts", "spin-button.test.tsx"]
     },
     {
       "id": "SPBNU-004",
       "sources": ["flex-component", "furn-desktop", "rnw-range"],
-      "plannedEvidence": ["spin-button.wdio.ts", "spin-button.stories.tsx"]
+      "evidence": ["spin-button.test.tsx", "spin-button.stories.tsx"],
+      "plannedEvidence": ["spin-button.wdio.ts"]
     }
   ]
 }

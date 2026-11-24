@@ -1,9 +1,9 @@
 {
   "schemaVersion": 2,
   "component": "tree",
-  "lifecycle": "contract-draft",
-  "conformance": "review-required",
-  "reviewedAt": null,
+  "lifecycle": "implemented",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-11-24",
   "sources": [
     {
       "id": "flex-component",
@@ -107,22 +107,25 @@
     {
       "id": "TRE-001",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["tree.test.tsx", "tree.stories.tsx"]
+      "evidence": ["treeSelection.ts", "tree.test.tsx"]
     },
     {
       "id": "TRE-002",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["tree.test.tsx", "tree.wdio.ts"]
+      "evidence": ["useTree.ts", "tree.stories.tsx"],
+      "plannedEvidence": ["tree.wdio.ts"]
     },
     {
       "id": "TRE-003",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["tree.test.tsx", "tree.stories.tsx"]
+      "evidence": ["useTree.ts", "tree.test.tsx"],
+      "plannedEvidence": ["tree.wdio.ts"]
     },
     {
       "id": "TRE-004",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["tree.wdio.ts", "tree.stories.tsx"]
+      "evidence": ["treeEntry.tsx", "tree.stories.tsx"],
+      "plannedEvidence": ["tree.wdio.ts"]
     }
   ]
 }

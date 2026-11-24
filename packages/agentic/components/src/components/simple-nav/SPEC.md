@@ -1,7 +1,7 @@
 ---
 name: simple-nav
 platform: react-native (Windows, macOS)
-status: contract-draft
+status: implemented
 source: ./spec/source.json
 tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
@@ -35,10 +35,10 @@ Related contracts used by this design: [NavItem](../nav-item/SPEC.md), [Drawer](
 
 ### Data and callbacks
 
-`breakpoints: { railBelow: number; hideBelow: number }` is caller-defined in logical units of the containing
-layout, with `hideBelow < railBelow`. Do not infer it from physical display resolution. Measure once per layout
-change; crossing a threshold updates presentation, not the route. A hamburger-only toggle can collapse or
-restore the inline rail within the permitted width.
+`breakpoints: { railBelow: number; hideBelow: number }` is caller-defined in logical units, with
+`hideBelow < railBelow`. The containing layout passes its own measured `availableWidth`. Measuring the nav
+itself would not detect owner growth after it hides. Thresholds update presentation, not route or selection.
+Provide localized collapse and expand labels together to show the optional toggle.
 
 The public React 19 `ref` remains on the declared root. A supported View/Pressable root forwards `tooltip?: string`
 only to that root; it does not use the tip as a name, description or popup relationship. Caller visual styles apply last.
@@ -65,6 +65,7 @@ depend on modal infrastructure; do not claim an overlay is modal merely because 
 Test expanded to rail to hidden transitions while focused, reopen the overlay, and inspect all names, route
 ownership, focus return and scroll retention.
 
-Draft for Windows Fabric, Office Win32, macOS Fabric and macOS Paper. The [requirement evidence](spec/source.json) is planned; no runtime export or native qualification is claimed.
+The [source evidence](spec/source.json) separates inline panel/rail/hidden behavior from the AppKit overlay
+preview and the remaining cross-host native qualification.
 
 Review the [token bindings](spec/tokens.json), [accessibility](spec/accessibility.md), [interaction](spec/interaction.md) and [usage](spec/usage.md) with this draft.

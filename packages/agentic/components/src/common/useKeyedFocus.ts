@@ -7,7 +7,7 @@ type FocusTargetEvent = Parameters<typeof isSelfTargetEvent>[0];
 
 export type KeyedFocusEntry = { value: string; disabled?: boolean };
 type MoveDirection = 'previous' | 'next' | 'first' | 'last' | 'up' | 'down';
-type NavigationMode = 'horizontal' | 'linear' | 'grid';
+type NavigationMode = 'horizontal' | 'vertical' | 'linear' | 'grid';
 type FocusMove = { value: string; intent: FocusIntent };
 
 function collectionKeys(mode: NavigationMode): Readonly<Record<string, MoveDirection | undefined>> {
@@ -15,10 +15,10 @@ function collectionKeys(mode: NavigationMode): Readonly<Record<string, MoveDirec
     ? ({ ArrowLeft: 'next', ArrowRight: 'previous' } as const)
     : ({ ArrowLeft: 'previous', ArrowRight: 'next' } as const);
   return {
-    ...horizontal,
+    ...(mode !== 'vertical' && horizontal),
     Home: 'first',
     End: 'last',
-    ...(mode === 'linear' && { ArrowUp: 'previous', ArrowDown: 'next' }),
+    ...((mode === 'vertical' || mode === 'linear') && { ArrowUp: 'previous', ArrowDown: 'next' }),
     ...(mode === 'grid' && { ArrowUp: 'up', ArrowDown: 'down' }),
   };
 }
@@ -47,12 +47,18 @@ export function useKeyedFocus(
     mode,
     onNavigate,
     moveVertically,
+    extraKeys,
+    onOtherKey,
+    recoverValue,
   }: {
     entryValue?: string | null;
     remember?: boolean;
     mode: NavigationMode;
     onNavigate?: (value: string) => void;
     moveVertically?: (value: string, direction: 'up' | 'down') => string | undefined;
+    extraKeys?: readonly string[];
+    onOtherKey?: (value: string, key: string) => boolean;
+    recoverValue?: (value: string) => string | undefined;
   },
 ) {
   const [focusedValue, setFocusedValue] = useState<string>();
@@ -79,11 +85,12 @@ export function useKeyedFocus(
     if (focusedRemoved) {
       setFocusedValue(undefined);
       const currentHost = currentHostFocus();
-      if (!pendingValue && fallback && (currentHost == null || currentHost === hostAtFocus.current)) {
-        setPending({ value: fallback, intent: 'restore' });
+      const recovery = recoverValue?.(focusedValue) ?? fallback;
+      if (!pendingValue && recovery && (currentHost == null || currentHost === hostAtFocus.current)) {
+        setPending({ value: recovery, intent: 'restore' });
       }
     }
-  }, [fallback, focusedRemoved, pendingValue]);
+  }, [fallback, focusedRemoved, focusedValue, pendingValue, recoverValue]);
 
   useLayoutEffect(() => {
     if (!pending) return undefined;
@@ -101,6 +108,7 @@ export function useKeyedFocus(
   return {
     register,
     activeValue,
+    focusedValue,
     requestFocus: (value: string, intent: FocusIntent) => {
       if (eligible(value)) setPending({ value, intent });
     },
@@ -109,7 +117,13 @@ export function useKeyedFocus(
         focusable: value === activeValue,
         keyDownEvents:
           eligible(value) && String(Platform.OS) === 'win32'
-            ? Object.keys(keys).map((key) => ({ key, altKey: false, ctrlKey: false, metaKey: false, shiftKey: false }))
+            ? [...Object.keys(keys), ...(extraKeys ?? [])].map((key) => ({
+                key,
+                altKey: false,
+                ctrlKey: false,
+                metaKey: false,
+                shiftKey: false,
+              }))
             : undefined,
         onFocus: (event: FocusTargetEvent) => {
           if (!eligible(value) || !isSelfTargetEvent(event)) return;
@@ -126,7 +140,13 @@ export function useKeyedFocus(
           if (!eligible(value) || !isSelfTargetEvent(event) || event.defaultPrevented || altKey || ctrlKey || metaKey || shiftKey) return;
           const nativeKey = key && key !== 'Unidentified' ? key : code;
           const direction = nativeKey && Object.hasOwn(keys, nativeKey) ? keys[nativeKey] : undefined;
-          if (!direction) return;
+          if (!direction) {
+            if (nativeKey && onOtherKey?.(value, nativeKey)) {
+              event.preventDefault?.();
+              event.stopPropagation?.();
+            }
+            return;
+          }
           event.preventDefault?.();
           event.stopPropagation?.();
           const next =

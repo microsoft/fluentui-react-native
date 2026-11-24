@@ -182,6 +182,19 @@ export { renderLink_unstable } from './components/link/renderLink';
 export { useLink_unstable } from './components/link/useLink';
 export { useLinkStyles_unstable } from './components/link/useLinkStyles';
 
+export { List } from './components/list/list';
+export type {
+  ListActionDetail,
+  ListEntry,
+  ListItemPresentation,
+  ListNavigationMode,
+  ListProps,
+  ListState,
+} from './components/list/list.types';
+export { renderList_unstable } from './components/list/renderList';
+export { useList_unstable } from './components/list/useList';
+export { useListStyles_unstable } from './components/list/useListStyles';
+
 export { ListItem } from './components/list-item/list-item';
 export type {
   ListItemProps,
@@ -267,6 +280,12 @@ export type { MessageBarAction, MessageBarProps, MessageBarState, MessageBarStat
 export { renderMessageBar_unstable } from './components/message-bar/renderMessageBar';
 export { useMessageBar_unstable } from './components/message-bar/useMessageBar';
 export { useMessageBarStyles_unstable } from './components/message-bar/useMessageBarStyles';
+
+export { Nav } from './components/nav/nav';
+export type { NavCategory, NavDestination, NavEntry, NavPresentation, NavProps, NavState } from './components/nav/nav.types';
+export { renderNav_unstable } from './components/nav/renderNav';
+export { useNav_unstable } from './components/nav/useNav';
+export { useNavStyles_unstable } from './components/nav/useNavStyles';
 
 export { NavItem } from './components/nav-item/nav-item';
 export type {
@@ -354,6 +373,12 @@ export type { SearchBoxProps, SearchBoxState } from './components/search-box/sea
 export { renderSearchBox_unstable } from './components/search-box/renderSearchBox';
 export { useSearchBox_unstable } from './components/search-box/useSearchBox';
 export { useSearchBoxStyles_unstable } from './components/search-box/useSearchBoxStyles';
+
+export { SimpleNav } from './components/simple-nav/simple-nav';
+export type { SimpleNavBreakpoints, SimpleNavDestination, SimpleNavProps, SimpleNavState } from './components/simple-nav/simple-nav.types';
+export { renderSimpleNav_unstable } from './components/simple-nav/renderSimpleNav';
+export { useSimpleNav_unstable } from './components/simple-nav/useSimpleNav';
+export { useSimpleNavStyles_unstable } from './components/simple-nav/useSimpleNavStyles';
 
 export { Skeleton } from './components/skeleton/skeleton';
 export type { SkeletonProps, SkeletonSlots, SkeletonState } from './components/skeleton/skeleton.types';
@@ -445,6 +470,41 @@ export type { ToolbarProps, ToolbarSize, ToolbarState } from './components/toolb
 export { renderToolbar_unstable } from './components/toolbar/renderToolbar';
 export { useToolbar_unstable } from './components/toolbar/useToolbar';
 export { useToolbarStyles_unstable } from './components/toolbar/useToolbarStyles';
+
+export { Tree } from './components/tree/tree';
+export type { TreeNode, TreeProps, TreeSelectionMode, TreeState } from './components/tree/tree.types';
+export { renderTree_unstable } from './components/tree/renderTree';
+export { useTree_unstable } from './components/tree/useTree';
+export { useTreeStyles_unstable } from './components/tree/useTreeStyles';
+
+export { TreeItem } from './components/tree-item/tree-item';
+export type {
+  TreeItemAppearance,
+  TreeItemBranchState,
+  TreeItemChecked,
+  TreeItemLayout,
+  TreeItemLeafState,
+  TreeItemPresentation,
+  TreeItemProps,
+  TreeItemSelectionState,
+  TreeItemSize,
+  TreeItemState,
+} from './components/tree-item/tree-item.types';
+export { renderTreeItem_unstable } from './components/tree-item/renderTreeItem';
+export { useTreeItem_unstable } from './components/tree-item/useTreeItem';
+export { useTreeItemStyles_unstable } from './components/tree-item/useTreeItemStyles';
+
+export { TagPicker } from './components/tag-picker/tag-picker';
+export type {
+  TagPickerOption,
+  TagPickerProps,
+  TagPickerSelectionChange,
+  TagPickerSelectionReason,
+  TagPickerState,
+} from './components/tag-picker/tag-picker.types';
+export { renderTagPicker_unstable } from './components/tag-picker/renderTagPicker';
+export { useTagPicker_unstable } from './components/tag-picker/useTagPicker';
+export { useTagPickerStyles_unstable } from './components/tag-picker/useTagPickerStyles';
 
 export { Text } from './components/text/text';
 export { renderText_unstable } from './components/text/renderText';

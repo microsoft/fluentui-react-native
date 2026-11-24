@@ -1,9 +1,9 @@
 {
   "schemaVersion": 2,
   "component": "dialog",
-  "lifecycle": "contract-draft",
-  "conformance": "review-required",
-  "reviewedAt": null,
+  "lifecycle": "implemented",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-11-24",
   "sources": [
     {
       "id": "flex-component",
@@ -112,22 +112,25 @@
     {
       "id": "DLG-001",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["dialog.test.tsx", "dialog.stories.tsx"]
+      "evidence": ["dialog.test.tsx", "dialog.stories.tsx"]
     },
     {
       "id": "DLG-002",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["dialog.test.tsx", "dialog.wdio.ts"]
+      "evidence": ["dialog.test.tsx", "dialog.stories.tsx"],
+      "plannedEvidence": ["dialog.wdio.ts"]
     },
     {
       "id": "DLG-003",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["dialog.wdio.ts", "dialog.stories.tsx"]
+      "evidence": ["useDialog.ts", "spec/accessibility.md"],
+      "plannedEvidence": ["dialog.wdio.ts"]
     },
     {
       "id": "DLG-004",
       "sources": ["flex-component"],
-      "plannedEvidence": ["dialog.test.tsx", "dialog.stories.tsx"]
+      "evidence": ["useDialogStyles.ts", "dialog.stories.tsx"],
+      "plannedEvidence": ["dialog.wdio.ts"]
     }
   ]
 }

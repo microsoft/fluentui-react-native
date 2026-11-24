@@ -33,6 +33,15 @@ Each issue retains the applicable baseline, native qualification limits, and
 acceptance criteria. Record exact executed commands and results in the owning
 issue or pull request; compilation and skipped cases are not native qualification.
 
+## Native control provider follow-up
+
+- Verify `DialogWindow` child versus sheet behavior, nested isolation and actual assistive traversal on each macOS
+  renderer. Windows Fabric needs an integration that proves background isolation; Office Win32 needs its own host
+  implementation or explicitly verified registration. Generated bindings alone do not add a view to either host.
+- Qualify nonadjacent AX writes and committed value read-back for `RangeTarget` and `SpinEditor`, and native menu
+  selection, cancellation and form state for `SingleSelect`. Windows Fabric still needs writable UIA providers
+  (including the requested number), and the prebuilt Office Win32 host cannot acquire native providers from these Pods.
+
 ## RNmacOS upstream replacement
 
 - **Outcome:** consumers receive the macOS accessibility and native-props synchronization fixes without this repository's RNmacOS patches.

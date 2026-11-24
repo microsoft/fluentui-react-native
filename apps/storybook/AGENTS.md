@@ -40,9 +40,9 @@ configuration, driver, and runtime behavior belongs to package-owned guidance:
   declared helper and identity setup.
 - Win32 uses the prebuilt REX Paper host. Bundle before run; native build is
   unsupported. Keep app-owned story exclusions in `desktop.config.mts`.
-- The app excludes Windows Accordion and Win32 Accordion/ListItem due to
-  current native-host failures. Remove exclusions only after the owning
-  component is verified on that endpoint.
+- Windows and Win32 exclude the AppKit-only Dialog, Rating, Select, Slider and SpinButton stories.
+  Windows excludes Accordion; Win32 excludes Accordion and the List/ListItem stories pending the native
+  child-host check. Remove exclusions only after the owning component is verified on that endpoint.
 
 ## Diagnostics and validation
 

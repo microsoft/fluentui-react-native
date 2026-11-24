@@ -78,5 +78,6 @@ export const navItemStyles = StyleSheet.create({
   primary: { flex: 1, minWidth: 0 },
   indicator: { position: 'absolute', top: '25%', bottom: '25%', start: 0 },
   label: { flexGrow: 1 },
+  iconOnly: { justifyContent: 'center' },
   secondary: { alignSelf: 'center' },
 });

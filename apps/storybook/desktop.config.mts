@@ -47,10 +47,16 @@ export default defineDesktopConfig({
         {
           platformSettings: {
             windows: {
-              storyPatterns: ['src/primitives/**/*.stories.?(ts|tsx)', 'src/components/!(accordion)/**/*.stories.?(ts|tsx)'],
+              storyPatterns: [
+                'src/primitives/**/*.stories.?(ts|tsx)',
+                'src/components/!(accordion|dialog|rating|select|slider|spin-button)/**/*.stories.?(ts|tsx)',
+              ],
             },
             win32: {
-              storyPatterns: ['src/primitives/**/*.stories.?(ts|tsx)', 'src/components/!(accordion|list-item)/**/*.stories.?(ts|tsx)'],
+              storyPatterns: [
+                'src/primitives/**/*.stories.?(ts|tsx)',
+                'src/components/!(accordion|dialog|list|list-item|rating|select|slider|spin-button)/**/*.stories.?(ts|tsx)',
+              ],
             },
           },
         },

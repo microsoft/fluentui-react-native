@@ -79,3 +79,5 @@ option's role, selected state, position, and selection actions, with Narrator
 on Windows Fabric and Win32 and with VoiceOver on macOS. Invoke the
 ExpandCollapse and SelectionItem patterns rather than inferring them from
 pointer or keyboard results.
+On macOS, the trigger's native accessibility tap requests the same expand or collapse as the physical trigger,
+without fabricating a press event. An option's native selection actions remain a separate path.
