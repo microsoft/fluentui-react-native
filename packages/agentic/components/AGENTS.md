@@ -45,6 +45,12 @@ Metro, bundle, or CocoaPods work follows `apps/storybook/AGENTS.md`.
   wildcard exports (R-REPO-001).
 - Colocate runtime tests, type tests, and stories, include every test-bearing story in `tsconfig.stories.json`, and keep
   Node-only story helpers in `*.wdio.ts` files imported dynamically inside callbacks.
+- Follow the [runtime-test guidance](references/tests-and-stories.md#runtime-tests) for decorative boundaries,
+  localized visible and spoken output, and the distinction between configured styles and measured layout.
+- When composing a command, verify [naming](references/state-and-accessibility.md#merge-accessibility-deliberately)
+  from the wrapper's inputs and export only [supported slots](references/types-and-slots.md#exports).
+- Preserve [outstanding native evidence](references/contracts.md#contract-lifecycle) when recording realized
+  source and test evidence for an implemented contract.
 - Do not copy web-only APIs, CSS behavior, or DOM assumptions into React Native, and do not copy or mechanically
   transform private source bodies into this public package (R-REPO-004).
 - Track open work only in [remaining work](references/remaining-work.md) (R-PKGDOC-009).

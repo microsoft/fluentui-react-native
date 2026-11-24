@@ -1,9 +1,9 @@
 {
   "schemaVersion": 2,
   "component": "compound-button",
-  "lifecycle": "contract-draft",
-  "conformance": "review-required",
-  "reviewedAt": null,
+  "lifecycle": "implemented",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-11-23",
   "sources": [
     {
       "id": "flex-component",
@@ -98,22 +98,24 @@
     {
       "id": "CPB-001",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["compound-button.types.test.tsx"]
+      "evidence": ["compound-button.types.test.ts", "useCompoundButton.ts"]
     },
     {
       "id": "CPB-002",
       "sources": ["flex-component"],
-      "plannedEvidence": ["compound-button.test.tsx", "compound-button.stories.tsx"]
+      "evidence": ["compound-button.test.tsx", "compound-button.stories.tsx"]
     },
     {
       "id": "CPB-003",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["compound-button.test.tsx", "compound-button.wdio.ts"]
+      "evidence": ["compound-button.test.tsx", "renderCompoundButton.tsx"],
+      "plannedEvidence": ["compound-button.wdio.ts"]
     },
     {
       "id": "CPB-004",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["compound-button.wdio.ts", "compound-button.stories.tsx"]
+      "evidence": ["compound-button.test.tsx", "useCompoundButton.ts"],
+      "plannedEvidence": ["compound-button.wdio.ts"]
     }
   ]
 }

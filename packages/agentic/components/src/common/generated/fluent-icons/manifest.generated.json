@@ -168,6 +168,84 @@
       "sha256": "8c50fd7ea0b266f703254d03d4302ea22864a535c98fc084faf45b0e9bfc7253"
     },
     {
+      "output": "Star12Filled.generated.tsx",
+      "requested": [
+        "Star12Filled"
+      ],
+      "inputs": [
+        {
+          "file": "star_12_filled.svg",
+          "sha256": "30c55cbfb8721854ebf294da2a9d6ba861fdd9b0631d9b523da2832369361429"
+        }
+      ],
+      "sha256": "5d681f09843ba9ebe3aee427cca151bb225b2466f10f29d20a7cc87f24b4507b"
+    },
+    {
+      "output": "Star12Regular.generated.tsx",
+      "requested": [
+        "Star12Regular"
+      ],
+      "inputs": [
+        {
+          "file": "star_12_regular.svg",
+          "sha256": "0d964f196cc479bb5b4e943ed0e6613464ecc5b762bdbd348a9af215aee25a32"
+        }
+      ],
+      "sha256": "492d97a9ab6f5104c9627b55c33f35d0dfe9469c8cc568b05da518d78c688e5b"
+    },
+    {
+      "output": "Star16Filled.generated.tsx",
+      "requested": [
+        "Star16Filled"
+      ],
+      "inputs": [
+        {
+          "file": "star_16_filled.svg",
+          "sha256": "2979412aabff467a12d002929b0b155d2289079f5aa42a1123f3f1075f018370"
+        }
+      ],
+      "sha256": "8680c8caf92f43dd058b1653a29036935a9ed05edfd47d85b70cbef85af47730"
+    },
+    {
+      "output": "Star16Regular.generated.tsx",
+      "requested": [
+        "Star16Regular"
+      ],
+      "inputs": [
+        {
+          "file": "star_16_regular.svg",
+          "sha256": "6669c812cdec59e45228236e2527c12624c4ee2bc1cb81d11879885038b718ef"
+        }
+      ],
+      "sha256": "b7f2659220222b11e7c1d8db5d9a8331811a7879fa37dc25b8fc1e3ab29a6345"
+    },
+    {
+      "output": "Star20Filled.generated.tsx",
+      "requested": [
+        "Star20Filled"
+      ],
+      "inputs": [
+        {
+          "file": "star_20_filled.svg",
+          "sha256": "cc9978158a2dc62250a2321e1ba54d6f96108e3ec739eef52ed48c628604cbac"
+        }
+      ],
+      "sha256": "0e9631ca51ef28a6ee74de6308cbc01c6385e40d906c4f0531c82951006a7c77"
+    },
+    {
+      "output": "Star20Regular.generated.tsx",
+      "requested": [
+        "Star20Regular"
+      ],
+      "inputs": [
+        {
+          "file": "star_20_regular.svg",
+          "sha256": "ed9f5a8c58c4a2b0f240467fe5f63d5849425004971214bee6ba8afbced27e7d"
+        }
+      ],
+      "sha256": "20812a23577a44cf5ad774a90b456d71f064c7448eb08583b5b1b5dc1e3fe6e0"
+    },
+    {
       "output": "Warning12Regular.generated.tsx",
       "requested": [
         "Warning12Regular"

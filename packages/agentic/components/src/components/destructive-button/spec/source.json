@@ -1,9 +1,9 @@
 {
   "schemaVersion": 2,
   "component": "destructive-button",
-  "lifecycle": "contract-draft",
-  "conformance": "review-required",
-  "reviewedAt": null,
+  "lifecycle": "implemented",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-11-23",
   "sources": [
     {
       "id": "flex-component",
@@ -153,22 +153,24 @@
     {
       "id": "DSB-001",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["destructive-button.types.test.tsx"]
+      "evidence": ["destructive-button.types.test.ts"]
     },
     {
       "id": "DSB-002",
       "sources": ["flex-component"],
-      "plannedEvidence": ["destructive-button.test.tsx", "destructive-button.stories.tsx"]
+      "evidence": ["destructive-button.test.tsx", "destructive-button.stories.tsx"]
     },
     {
       "id": "DSB-003",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["destructive-button.test.tsx", "destructive-button.wdio.ts"]
+      "evidence": ["useDestructiveButton.ts", "destructive-button.test.tsx"],
+      "plannedEvidence": ["destructive-button.wdio.ts"]
     },
     {
       "id": "DSB-004",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["destructive-button.wdio.ts", "destructive-button.stories.tsx"]
+      "evidence": ["destructive-button.types.test.ts", "destructive-button.test.tsx"],
+      "plannedEvidence": ["destructive-button.wdio.ts"]
     }
   ]
 }

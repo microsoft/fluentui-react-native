@@ -1,7 +1,7 @@
 ---
 name: compound-button
 platform: react-native (Windows, macOS)
-status: contract-draft
+status: implemented
 source: ./spec/source.json
 tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
@@ -18,7 +18,7 @@ contain a second command or become a focus stop.
 
 ## Public contract
 
-| Proposed prop                | Default                 | Purpose                                                                                        |
+| Prop                         | Default                 | Purpose                                                                                        |
 | ---------------------------- | ----------------------- | ---------------------------------------------------------------------------------------------- |
 | `content / secondaryContent` | required strings        | Use a short command and a description. If no supporting line is needed, use Button.            |
 | `appearance / size`          | `secondary` / `medium`  | primary, secondary, outline or subtle; small, medium or large. Color hierarchy follows Button. |
@@ -36,6 +36,8 @@ Related contracts used by this design: [Button](../button/SPEC.md).
 `onPress` receives Button's native press event. Caller-supplied text styles may affect the two lines
 independently; neither line accepts a competing activation handler. Reserve room for an image only when
 supplied, and never use a fixed two-line height to clip translated or scaled text.
+The default accessible name is `content`. An explicit name should retain the visible command. The supporting
+line is exposed as the native button's hint; the visual lines and media are decorative to accessibility.
 
 The public React 19 `ref` remains on the declared root. A supported View/Pressable root forwards `tooltip?: string`
 only to that root; it does not use the tip as a name, description or popup relationship. Caller visual styles apply last.
@@ -61,6 +63,8 @@ accessible name and description on both desktop accessibility APIs rather than a
 Compare activation on the image versus each line, then enlarge text and check the accessible command and its
 description on both Windows and macOS.
 
-Draft for Windows Fabric, Office Win32, macOS Fabric and macOS Paper. The [requirement evidence](spec/source.json) is planned; no runtime export or native qualification is claimed.
+The [requirement evidence](spec/source.json) identifies the implementation and tests. Native activation, description
+and scaling are not yet qualified on Windows Fabric, Office Win32, macOS Fabric or macOS Paper.
+The Jest style assertions check the sizing configuration only; the constrained story reports the actual layout height.
 
-Review the [token bindings](spec/tokens.json), [accessibility](spec/accessibility.md), [interaction](spec/interaction.md) and [usage](spec/usage.md) with this draft.
+See the [token bindings](spec/tokens.json), [accessibility](spec/accessibility.md), [interaction](spec/interaction.md) and [usage](spec/usage.md).

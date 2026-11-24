@@ -32,6 +32,18 @@ Prefer public semantics:
 
 Flatten styles only when the resolved visual contract is the behavior under test.
 
+Testing Library filters deliberately hidden roots out of `getByTestId` by default. Opt in with
+`{ includeHiddenElements: true }` to inspect a decorative root or layer. A default role query below a hidden
+ancestor does not prove that the leaf itself lacks a role or action; inspect the leaf props when that is part of the contract.
+
+For localized data, pin the formatter in tests and include a non-default locale. Assert that visible and spoken
+output preserve precision and distinguish omitted data from zero. Avoid requiring `Intl` just to import the
+components package; use caller formatting or initialize optional host formatting lazily.
+
+Style assertions establish layout configuration, not measured wrapping or growth. When a fixture overrides
+`fontSize`, pair it with a compatible `lineHeight`. To verify growth, use a constrained native story that measures
+the root under wrapped, enlarged text and compares it with the configured minimum.
+
 Button coverage demonstrates:
 
 - default props, role, accessibility, and styling

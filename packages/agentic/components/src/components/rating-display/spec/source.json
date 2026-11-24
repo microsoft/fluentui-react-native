@@ -1,9 +1,9 @@
 {
   "schemaVersion": 2,
   "component": "rating-display",
-  "lifecycle": "contract-draft",
-  "conformance": "review-required",
-  "reviewedAt": null,
+  "lifecycle": "implemented",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-11-23",
   "sources": [
     {
       "id": "flex-component",
@@ -98,22 +98,23 @@
     {
       "id": "RTD-001",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["rating-display.types.test.tsx"]
+      "evidence": ["rating-display.types.test.ts", "useRatingDisplay.ts"]
     },
     {
       "id": "RTD-002",
       "sources": ["flex-component"],
-      "plannedEvidence": ["rating-display.test.tsx", "rating-display.stories.tsx"]
+      "evidence": ["rating-display.test.tsx", "rating-display.stories.tsx"]
     },
     {
       "id": "RTD-003",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["rating-display.test.tsx", "rating-display.stories.tsx"]
+      "evidence": ["rating-display.test.tsx"]
     },
     {
       "id": "RTD-004",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["rating-display.wdio.ts", "rating-display.stories.tsx"]
+      "evidence": ["useRatingDisplay.ts", "rating-display.test.tsx"],
+      "plannedEvidence": ["rating-display.wdio.ts"]
     }
   ]
 }

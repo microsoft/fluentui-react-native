@@ -1,9 +1,9 @@
 {
   "schemaVersion": 2,
   "component": "avatar-group",
-  "lifecycle": "contract-draft",
-  "conformance": "review-required",
-  "reviewedAt": null,
+  "lifecycle": "implemented",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-11-23",
   "sources": [
     {
       "id": "flex-component",
@@ -97,22 +97,24 @@
     {
       "id": "AVG-001",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["avatar-group.test.tsx", "avatar-group.stories.tsx"]
+      "evidence": ["avatar-group.test.tsx", "avatar-group.stories.tsx"]
     },
     {
       "id": "AVG-002",
       "sources": ["flex-component"],
-      "plannedEvidence": ["avatar-group.test.tsx", "avatar-group.stories.tsx"]
+      "evidence": ["renderAvatarGroup.tsx", "avatar-group.stories.tsx"]
     },
     {
       "id": "AVG-003",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["avatar-group.test.tsx", "avatar-group.wdio.ts"]
+      "evidence": ["avatar-group.types.test.ts", "avatar-group.test.tsx", "useAvatarGroup.ts"],
+      "plannedEvidence": ["avatar-group.wdio.ts"]
     },
     {
       "id": "AVG-004",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["avatar-group.wdio.ts", "avatar-group.stories.tsx"]
+      "evidence": ["avatar-group.test.tsx", "avatar-group.stories.tsx"],
+      "plannedEvidence": ["avatar-group.wdio.ts"]
     }
   ]
 }

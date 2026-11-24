@@ -1,7 +1,7 @@
 ---
 name: rating-display
 platform: react-native (Windows, macOS)
-status: contract-draft
+status: implemented
 source: ./spec/source.json
 tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
@@ -18,7 +18,7 @@ nor an invitation to submit a new score.
 
 ## Public contract
 
-| Proposed prop           | Default                                              | Purpose                                                                                                                                            |
+| Prop                    | Default                                              | Purpose                                                                                                                                            |
 | ----------------------- | ---------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `value / max`           | required finite score / 5                            | A score within the named scale. The numeric text preserves the supplied precision; visual half-star rounding does not change the underlying score. |
 | `layout / size`         | `default` / `medium`                                 | default shows the star sequence; compact uses a single star and a numeric value. Small, medium and large affect visuals, not the scale.            |
@@ -33,9 +33,14 @@ Related contracts used by this design: [RatingItem](../rating-item/SPEC.md), [Te
 
 ### Data and callbacks
 
-`formatSummary(value, max, count?)` supplies the localized standalone summary. Omitted count renders no count
-slot; count zero is deliberate content. The component accepts neither `onValueChange` nor a disabled/editable
-flag; use Rating when the person can change the result.
+`formatSummary(value, max, count?)` supplies the localized standalone summary. Set `decorative` when equivalent
+text is already supplied by the parent. Omitted count renders no count slot; count zero is deliberate content.
+Supply `formatNumber` to share an application locale with `formatSummary`. By default the visible result uses
+device number formatting where available and plain numeric text otherwise. Negative zero is displayed and reported as zero.
+Use a positive safe integer `max`, a finite in-range `value` and an optional nonnegative safe-integer `count`.
+An invalid score or scale renders nothing; an invalid count is omitted. Scales above 100 use compact artwork
+to bound the visual sequence without changing the displayed value. The component accepts
+neither `onValueChange` nor a disabled/editable flag.
 
 The public React 19 `ref` remains on the declared root. A supported View/Pressable root forwards `tooltip?: string`
 only to that root; it does not use the tip as a name, description or popup relationship. Caller visual styles apply last.
@@ -61,6 +66,7 @@ the absence of adjustable semantics, not an identical native class name.
 Compare compact and default summaries for a fractional average and count zero; inspect the native tree for
 exactly one summary and no slider actions.
 
-Draft for Windows Fabric, Office Win32, macOS Fabric and macOS Paper. The [requirement evidence](spec/source.json) is planned; no runtime export or native qualification is claimed.
+The [requirement evidence](spec/source.json) identifies the source, tests and story. Native accessibility traversal
+is not yet qualified on Windows Fabric, Office Win32, macOS Fabric or macOS Paper.
 
-Review the [token bindings](spec/tokens.json), [accessibility](spec/accessibility.md), [interaction](spec/interaction.md) and [usage](spec/usage.md) with this draft.
+See the [token bindings](spec/tokens.json), [accessibility](spec/accessibility.md), [interaction](spec/interaction.md) and [usage](spec/usage.md).

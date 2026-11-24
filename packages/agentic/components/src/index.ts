@@ -20,6 +20,18 @@ export { renderAvatar_unstable } from './components/avatar/renderAvatar';
 export { useAvatarStyles_unstable } from './components/avatar/useAvatarStyles';
 export { useAvatar_unstable } from './components/avatar/useAvatar';
 
+export { AvatarGroup } from './components/avatar-group/avatar-group';
+export type {
+  AvatarGroupMember,
+  AvatarGroupOverflow,
+  AvatarGroupProps,
+  AvatarGroupSize,
+  AvatarGroupState,
+} from './components/avatar-group/avatar-group.types';
+export { renderAvatarGroup_unstable } from './components/avatar-group/renderAvatarGroup';
+export { useAvatarGroup_unstable } from './components/avatar-group/useAvatarGroup';
+export { useAvatarGroupStyles_unstable } from './components/avatar-group/useAvatarGroupStyles';
+
 export { Badge } from './components/badge/badge';
 export type {
   BadgeAppearance,
@@ -58,6 +70,30 @@ export type { CheckboxProps, CheckboxSlots, CheckboxState, CheckboxStatus, Check
 export { renderCheckbox_unstable } from './components/checkbox/renderCheckbox';
 export { useCheckboxStyles_unstable } from './components/checkbox/useCheckboxStyles';
 export { useCheckbox_unstable } from './components/checkbox/useCheckbox';
+
+export { CompoundButton } from './components/compound-button/compound-button';
+export type {
+  CompoundButtonAppearance,
+  CompoundButtonProps,
+  CompoundButtonSize,
+  CompoundButtonSlots,
+  CompoundButtonState,
+} from './components/compound-button/compound-button.types';
+export { renderCompoundButton_unstable } from './components/compound-button/renderCompoundButton';
+export { useCompoundButton_unstable } from './components/compound-button/useCompoundButton';
+export { useCompoundButtonStyles_unstable } from './components/compound-button/useCompoundButtonStyles';
+
+export { DestructiveButton } from './components/destructive-button/destructive-button';
+export type {
+  DestructiveButtonAppearance,
+  DestructiveButtonProps,
+  DestructiveButtonShape,
+  DestructiveButtonSize,
+  DestructiveButtonState,
+} from './components/destructive-button/destructive-button.types';
+export { renderDestructiveButton_unstable } from './components/destructive-button/renderDestructiveButton';
+export { useDestructiveButtonStyles_unstable } from './components/destructive-button/useDestructiveButtonStyles';
+export { useDestructiveButton_unstable } from './components/destructive-button/useDestructiveButton';
 
 export { Divider } from './components/divider/divider';
 export type { DividerLayout, DividerProps, DividerSlots, DividerState } from './components/divider/divider.types';
@@ -188,6 +224,18 @@ export type { RadioProps, RadioSlots, RadioState } from './components/radio/radi
 export { renderRadio_unstable } from './components/radio/renderRadio';
 export { useRadioStyles_unstable } from './components/radio/useRadioStyles';
 export { useRadio_unstable } from './components/radio/useRadio';
+
+export { RatingDisplay } from './components/rating-display/rating-display';
+export type {
+  RatingDisplayLayout,
+  RatingDisplayProps,
+  RatingDisplaySize,
+  RatingDisplaySlots,
+  RatingDisplayState,
+} from './components/rating-display/rating-display.types';
+export { renderRatingDisplay_unstable } from './components/rating-display/renderRatingDisplay';
+export { useRatingDisplayStyles_unstable } from './components/rating-display/useRatingDisplayStyles';
+export { useRatingDisplay_unstable } from './components/rating-display/useRatingDisplay';
 
 export { Skeleton } from './components/skeleton/skeleton';
 export type { SkeletonProps, SkeletonSlots, SkeletonState } from './components/skeleton/skeleton.types';

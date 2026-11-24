@@ -113,6 +113,8 @@ The component must own its role and state semantics while preserving unrelated c
 
 Button warns in development when an icon-only instance lacks an `accessibilityLabel`. Put warnings in an effect so
 render remains free of observable side effects, and make the dependency list match every value used by the warning.
+When a composed command narrows `content` to text, distinguish a nonblank name from a supplied and empty string.
+Resolve blank content as absent before delegating to Button, and test the icon-only path with blank text and without a name.
 
 For a component-owned toggle or select action, use `resolveAccessibilityAction`
 from Framework Base with the semantic action, `Platform.OS`, and the caller's
