@@ -120,6 +120,17 @@ Reusing Button's pointer/keyboard handler does not register desktop assistive ac
 compositions connect the native accessibility tap separately: for enabled commands it calls the same callback
 without fabricating a gesture event. Do not wire both the tap and an `activate` notification to the same command.
 Run the accessible lane to verify AXPress or UIA Invoke independently of the physical lane.
+When changing a shared trigger for a composition, keep its existing explicit naming channels and handler
+composition. Add a regression to the shared trigger's own suite; a composite alone may not exercise the other inputs.
+
+For a persistent announcement, distinguish a new event identity from temporary opt-out. Verify an unchanged
+message through opted-in → opted-out → opted-in, and compare it with an actual removal and later reinsertion.
+
+In stepped surfaces, list the interactive slots that can disappear during a transition. Preserve a surviving
+native target; when the activated target disappears, choose a live successor after the accepted step commits.
+Qualify that transition with physical keyboard input, not a click that never focused the old target.
+Clear a pending close-and-focus intent when the controlled owner rejects the requested change. Test the rejection
+followed by an unrelated controlled update to ensure stale intent cannot steal focus.
 
 For a component-owned toggle or select action, use `resolveAccessibilityAction`
 from Framework Base with the semantic action, `Platform.OS`, and the caller's

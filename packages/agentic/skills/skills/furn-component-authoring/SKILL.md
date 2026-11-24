@@ -53,7 +53,13 @@ Do not edit files or start native workloads.
 4. Establish public props, slots, native roots/refs, state ownership,
    accessibility, interaction, tokens, and target platforms. Use the affected
    requirements to identify what must be verified. Agree on the localization
-   owner for both visible and spoken data before choosing formatters.
+   owner for both visible and spoken data before choosing formatters. Keep
+   distinct optional roles identifiable to the formatter.
+   For announcements, define event identity separately from delivery options
+   so changing the delivery gate cannot replay an unchanged message.
+   When a state transition can remove the focused action, define its live
+   successor and test keyboard continuity. For controlled actions, also test
+   rejection followed by an unrelated update so stale intent never moves focus.
    Distinguish a theme or caller visual override from a change to a reviewed
    default. For requirements that depend on a native capability, verify the
    renderer and host registration on the affected endpoints or record the
@@ -63,18 +69,26 @@ Do not edit files or start native workloads.
    When reusing another component, check blank naming inputs and export only
    the slots the new contract supports. Verify which assistive activation
    routes the composition inherits; a native role is not an action. Keep
-   native adaptation distinct from web anatomy.
+   native adaptation distinct from web anatomy. Test a shared-hook change at
+   the owning component's boundary as well as in the composition.
 6. Preserve token meaning and follow the contract's token companion where
    applicable. Visual overrides do not replace component-owned handlers,
-   refs, focus behavior, or accessibility. Record missing tokens rather than
+   refs, focus behavior, or accessibility. Distinguish state-dependent chrome
+   from data colors that must not change. For segmented controls, use matching
+   chrome and focus-ring geometry on each target. Record missing tokens rather than
    guessing substitutes.
 7. Add focused runtime/type tests and stories for the public API and resolved
    output. For decorative output, verify the hidden root and any independently
-   rendered layers using the host's test-query guidance. For wrapping or text
+   rendered layers using the host's test-query guidance; an accessible parent
+   can conceal a leak in a decorative child. For wrapping or text
    scaling, distinguish assertions on configured styles from measured layout.
    Inspect native visual evidence for the variants most likely to regress,
    not just the default preview. Native action, focus, and input claims need
-   separate native evidence on the affected endpoints.
+   separate native evidence on the affected endpoints. Check that evidence
+   actually exercises the component, not only its unchanged fixture peers
+   or a guard the test library applies first.
+   For native-backed editors, locate naming, value, and focus evidence on the
+   native elements that actually own those facts.
 8. Reconcile the contract, implementation, and
    [qualification evidence](../../references/shared/portable/context.md#permissions-and-evidence)
    by requirement. Retain outstanding native evidence when recording

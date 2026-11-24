@@ -1,9 +1,9 @@
 {
   "schemaVersion": 2,
   "component": "presence-badge",
-  "lifecycle": "contract-draft",
-  "conformance": "review-required",
-  "reviewedAt": null,
+  "lifecycle": "implemented",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-11-23",
   "sources": [
     {
       "id": "flex-component",
@@ -107,22 +107,23 @@
     {
       "id": "PRS-001",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["presence-badge.types.test.tsx"]
+      "evidence": ["presence-badge.types.test.ts"]
     },
     {
       "id": "PRS-002",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["presence-badge.test.tsx", "presence-badge.stories.tsx"]
+      "evidence": ["presence-badge.test.tsx", "presence-badge.stories.tsx"]
     },
     {
       "id": "PRS-003",
       "sources": ["flex-component"],
-      "plannedEvidence": ["presence-badge.test.tsx", "presence-badge.stories.tsx"]
+      "evidence": ["presence-badge.test.tsx", "presence-badge.stories.tsx"]
     },
     {
       "id": "PRS-004",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["presence-badge.wdio.ts", "presence-badge.stories.tsx"]
+      "evidence": ["presence-badge.test.tsx", "presence-badge.stories.tsx"],
+      "plannedEvidence": ["presence-badge.wdio.ts"]
     }
   ]
 }

@@ -67,6 +67,10 @@ property; the higher differing axis wins within the same layer. Provide a compon
 exclusive presentation; Button's order is disabled, pressed, hovered, then rest. Independent booleans such as `selected`
 remain separate. Do not mutate raw interaction state.
 
+An `.active` color can consume an interaction state even without an explicit `when.visualState` branch.
+Check the semantic envelope before adding duplicate selectors. Where interaction affects only chrome, call out
+which authored values (such as a product swatch) must remain unchanged.
+
 For a measured platform-specific visual adjustment, use a final `when.platform.<host>` selector; `platform` is
 reserved and is not listed in `axes` or passed as component state. MenuButton uses this to adjust only its macOS
 label. Keep cross-platform typography in ordinary bindings and renderer-specific behavior out of token selectors.
@@ -164,6 +168,10 @@ remain mounted across visibility changes.
 Keep `ThemeState` in the styling phase. Call `applyFocusRingStyles(state.FocusRing, state, resolvedRadius)`
 to bind shared focus colors and widths while retaining component-specific geometry. The helper uses an
 immutable theme stylesheet; props, focus state, and radius remain outside that cache.
+If a segmented control squares a logical edge, pass the same per-corner overrides to the ring. Do not copy the
+outer group's radius to a ring spanning both command targets.
+Inspect an outlined segment seam at native scale: when a divider supplies the seam, remove the two facing
+outline strokes from the regions so all three are not painted together.
 
 Native rings default to Windows/macOS; Win32 uses the root-modality-aware custom ring. The Windows native
 path requires RNW 0.81.35 or newer. Do not introduce `outline*` focus styles, local modality trackers, or

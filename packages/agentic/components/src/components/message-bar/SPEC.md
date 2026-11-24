@@ -1,7 +1,7 @@
 ---
 name: message-bar
 platform: react-native (Windows, macOS)
-status: contract-draft
+status: implemented
 source: ./spec/source.json
 tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
@@ -52,7 +52,10 @@ only to that root; it does not use the tip as a name, description or popup relat
 ## Platform behavior
 
 Use desktop inline behavior, not the toast presentation described in the mobile comparison material. UIA live
-behavior and AppKit announcements are distinct transports; choose one effective announcement owner per host.
+behavior and AppKit announcements are distinct transports. This implementation requests a single imperative
+announcement; it does not also attach a live region. Set `announce={false}` when the application already
+announces the message. Native speech and urgency remain separate qualification gates.
+Changing only `announce` never replays an unchanged message; an empty message ends the current presentation.
 
 ## Divergences from Flex
 
@@ -64,6 +67,6 @@ behavior and AppKit announcements are distinct transports; choose one effective 
 Insert, replace and rerender a warning while an editor has focus, invoke its secondary action and dismiss it
 from the keyboard. Count announcements and callbacks separately.
 
-Draft for Windows Fabric, Office Win32, macOS Fabric and macOS Paper. The [requirement evidence](spec/source.json) is planned; no runtime export or native qualification is claimed.
+The [requirement evidence](spec/source.json) separates authoring and native action cases from unverified speech.
 
-Review the [token bindings](spec/tokens.json), [accessibility](spec/accessibility.md), [interaction](spec/interaction.md) and [usage](spec/usage.md) with this draft.
+See the [token bindings](spec/tokens.json), [accessibility](spec/accessibility.md), [interaction](spec/interaction.md) and [usage](spec/usage.md).

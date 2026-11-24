@@ -1,7 +1,7 @@
 ---
 name: label
 platform: react-native (Windows, macOS)
-status: contract-draft
+status: implemented
 source: ./spec/source.json
 tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
@@ -31,6 +31,8 @@ label can name a group without acting on any group member. Use Text, not Label, 
 `{ kind: 'editor'; focus: () => void } | { kind: 'choice'; activate: () => void } | { kind: 'group' }`.
 Supply an owner operation, not a synthetic native event. The owner resolves the currently mounted, enabled
 control when called. Only a group name is shared; individual options keep their own names.
+Keep the owner operation stable across renders for a given target; changing it or disabling the label
+cancels a press already in progress.
 
 The `root` slot is a structural `View`; `ref` is its native React 19 ref, never the control ref.
 Root style and `tooltip?: string` apply to that view once. The text and optional trailing marker
@@ -38,6 +40,8 @@ are private. The text can wrap at system text sizes. The marker shares its basel
 but is not part of the control's name. The internal `muted` token axis reflects standalone disabled
 presentation; [Field](../field/SPEC.md) keeps its label readable without enabling its target.
 Label does not own hover, pressed or focus visuals.
+The outer View exposes the static caption once where native text fragments do not expose a reliable role.
+That readable caption is not a second invocation target and does not establish a native naming relationship.
 
 ### Requirements
 
@@ -65,7 +69,6 @@ is the agreed fallback, not evidence that the relationship exists. See [accessib
 
 ## Conformance
 
-Draft only. Type cases should distinguish each target kind. Runtime cases should cover disabled and
-replaced targets, marker presence and exactly-once delegation. Native cases must separately observe
-focus, name, relationship and action on Windows Fabric, Office Win32 and macOS Paper/Fabric.
-No implementation, public export or native result is claimed.
+The [source evidence](spec/source.json) includes guarded pointer delegation and a naming-fallback example.
+A label identity does not prove a native relationship. Native click/focus and relationship checks remain separate
+per endpoint.

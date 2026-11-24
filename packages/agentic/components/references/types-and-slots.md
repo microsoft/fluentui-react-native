@@ -113,6 +113,8 @@ an internal part must remain absent from that list.
 - Every public slot is intentional and documented.
 - Render-only slots are private to resolved state.
 - Variant unions match the spec exactly.
+- A localization callback receives named fields when optional text has distinct roles; a filtered array must not
+  make a status indistinguishable from a supporting description.
 - Omitted and false values retain distinct semantics where required.
 - Root native props cannot bypass owned children or style ordering.
 - Stable native roots expose a correctly typed `ref`, and the state/render pipeline does not replace it.

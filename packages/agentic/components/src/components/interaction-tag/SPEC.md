@@ -1,7 +1,7 @@
 ---
 name: interaction-tag
 platform: react-native (Windows, macOS)
-status: contract-draft
+status: implemented
 source: ./spec/source.json
 tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
@@ -36,7 +36,7 @@ Related contracts used by this design: [Tag](../tag/SPEC.md), [Avatar](../avatar
 
 `onDismiss(): void` requests removal without a fabricated press event. The owner updates its keyed collection
 after accepting the request; an unchanged array means the tag stays. The primary callback receives only
-activations of the primary region.
+activations of the primary region. An assistive invocation requests the same action without a fabricated gesture event.
 
 The public React 19 `ref` remains on the declared root. A supported View/Pressable root forwards `tooltip?: string`
 only to that root; it does not use the tip as a name, description or popup relationship. Caller visual styles apply last.
@@ -62,6 +62,7 @@ descendants cannot claim two actions based on visual separation.
 Count both callbacks for pointer and keyboard activation on each half; test removal of the final focused tag and
 RTL order.
 
-Draft for Windows Fabric, Office Win32, macOS Fabric and macOS Paper. The [requirement evidence](spec/source.json) is planned; no runtime export or native qualification is claimed.
+The [requirement evidence](spec/source.json) identifies the implementation and separate native stories. Focus
+recovery after removing a tag belongs to the collection.
 
-Review the [token bindings](spec/tokens.json), [accessibility](spec/accessibility.md), [interaction](spec/interaction.md) and [usage](spec/usage.md) with this draft.
+See the [token bindings](spec/tokens.json), [accessibility](spec/accessibility.md), [interaction](spec/interaction.md) and [usage](spec/usage.md).

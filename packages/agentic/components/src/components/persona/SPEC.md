@@ -1,7 +1,7 @@
 ---
 name: persona
 platform: react-native (Windows, macOS)
-status: contract-draft
+status: implemented
 source: ./spec/source.json
 tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
@@ -38,6 +38,8 @@ Related contracts used by this design: [PresenceBadge](../presence-badge/SPEC.md
 `name` is required independently of image load. Optional secondary, tertiary and quaternary lines remain in the
 same semantic order for each layout. Do not derive an availability statement from an image color, missing data
 or a reused person's previous props.
+When no portrait is supplied, use Avatar's generic icon; supply localized initials explicitly. `formatIdentity`
+receives named fields, including `presenceLabel`, so an omitted supporting line never moves another field into its role.
 
 The public React 19 `ref` remains on the declared root. A supported View/Pressable root forwards `tooltip?: string`
 only to that root; it does not use the tip as a name, description or popup relationship. Caller visual styles apply last.
@@ -51,8 +53,9 @@ only to that root; it does not use the tip as a name, description or popup relat
 
 ## Platform behavior
 
-Do not widen the existing Avatar contract by implication. Visible integrated presence is gated on an explicitly
-supported host composition; Persona without a presence mark can be reviewed independently.
+Persona places PresenceBadge as a sibling of the decorative Avatar, anchored to its logical bottom-end. It does
+not add an Avatar slot. Provide `presence: { status, label }` only when availability is known; the label is
+caller-localized. Pass `decorative` when an enclosing action supplies the identity.
 
 ## Divergences from Flex
 
@@ -64,6 +67,7 @@ supported host composition; Persona without a presence mark can be reviewed inde
 Compare standalone and nested output with two and four lines, with and without presence. Switch identities on a
 reused row and confirm names, status, layout and number of targets.
 
-Draft for Windows Fabric, Office Win32, macOS Fabric and macOS Paper. The [requirement evidence](spec/source.json) is planned; no runtime export or native qualification is claimed.
+The [requirement evidence](spec/source.json) points to the implementation and stories. Endpoint qualification,
+including the host's accessibility naming, is separate.
 
-Review the [token bindings](spec/tokens.json), [accessibility](spec/accessibility.md), [interaction](spec/interaction.md) and [usage](spec/usage.md) with this draft.
+See the [token bindings](spec/tokens.json), [accessibility](spec/accessibility.md), [interaction](spec/interaction.md) and [usage](spec/usage.md).

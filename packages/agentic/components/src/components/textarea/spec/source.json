@@ -1,9 +1,9 @@
 {
   "schemaVersion": 2,
   "component": "textarea",
-  "lifecycle": "contract-draft",
-  "conformance": "review-required",
-  "reviewedAt": null,
+  "lifecycle": "implemented",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-11-23",
   "sources": [
     {
       "id": "flex-component",
@@ -98,22 +98,26 @@
     {
       "id": "TXA-001",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["textarea.types.test.tsx"]
+      "evidence": ["textarea.types.test.ts", "textarea.test.tsx"],
+      "plannedEvidence": ["textarea.wdio.ts"]
     },
     {
       "id": "TXA-002",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["textarea.test.tsx", "textarea.wdio.ts"]
+      "evidence": ["textarea.test.tsx", "textarea.stories.tsx"],
+      "plannedEvidence": ["textarea.wdio.ts"]
     },
     {
       "id": "TXA-003",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["textarea.test.tsx", "textarea.stories.tsx"]
+      "evidence": ["textarea.test.tsx", "textarea.stories.tsx"],
+      "plannedEvidence": ["textarea.wdio.ts"]
     },
     {
       "id": "TXA-004",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["textarea.wdio.ts", "textarea.stories.tsx"]
+      "evidence": ["textarea.stories.tsx"],
+      "plannedEvidence": ["textarea.wdio.ts"]
     }
   ]
 }

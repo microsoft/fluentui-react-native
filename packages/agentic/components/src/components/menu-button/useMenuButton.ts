@@ -47,6 +47,12 @@ export function useMenuButton_unstable(props: MenuButtonProps): MenuButtonState 
     ...buttonProps
   } = props;
 
+  const { accessibilityLabel, accessibilityLabelledBy, leadingIcon } = buttonProps;
+  const ariaLabel = buttonProps['aria-label'];
+  const ariaLabelledBy = buttonProps['aria-labelledby'];
+  const hasExplicitName =
+    accessibilityLabel !== undefined || ariaLabel !== undefined || accessibilityLabelledBy !== undefined || ariaLabelledBy !== undefined;
+  const chevronOnly = buttonProps.content == null && leadingIcon == null;
   const inMenu = React.useContext(MenuItemMenuContext) !== undefined;
   React.useEffect(() => {
     if (!__DEV__) {
@@ -55,7 +61,7 @@ export function useMenuButton_unstable(props: MenuButtonProps): MenuButtonState 
     if (inMenu) {
       console.warn('MenuButton: do not render a MenuButton inside a menu; use a MenuItem submenu.');
     }
-    if (buttonProps.content == null && buttonProps.leadingIcon == null) {
+    if (chevronOnly && !hasExplicitName) {
       console.warn('MenuButton: supply a label, a leading icon, or both.');
     }
     React.Children.forEach(children, (child) => {
@@ -63,7 +69,7 @@ export function useMenuButton_unstable(props: MenuButtonProps): MenuButtonState 
         console.warn('MenuButton: its menu is a flat list of actions; do not compose section headers.');
       }
     });
-  }, [buttonProps.content, buttonProps.leadingIcon, children, inMenu]);
+  }, [chevronOnly, hasExplicitName, children, inMenu]);
   useMenuChildrenWarning('MenuButton', children);
 
   // The controller restores focus to the Button's own focus target, which exists only after the Button state below.
@@ -76,11 +82,6 @@ export function useMenuButton_unstable(props: MenuButtonProps): MenuButtonState 
   const content = buttonProps.content;
   const contentChildren = content && typeof content === 'object' && 'children' in content ? content.children : content;
   const contentLabel = typeof contentChildren === 'string' || typeof contentChildren === 'number' ? String(contentChildren) : undefined;
-  const hasExplicitName =
-    buttonProps.accessibilityLabel !== undefined ||
-    buttonProps['aria-label'] !== undefined ||
-    buttonProps.accessibilityLabelledBy !== undefined ||
-    buttonProps['aria-labelledby'] !== undefined;
   const controller = useMenuController({
     componentName: 'MenuButton',
     children,
@@ -125,6 +126,10 @@ export function useMenuButton_unstable(props: MenuButtonProps): MenuButtonState 
         onKeyDown: handleKeyDown,
         onPress: composeHandlers(onPress, controller.handlePress),
         onPressIn: composeHandlers(controller.handlePressIn, onPressIn),
+        onAccessibilityTap:
+          chevronOnly && hasExplicitName && !disabled
+            ? composeHandlers(() => controller.setExpanded(!controller.presented), buttonProps.onAccessibilityTap)
+            : buttonProps.onAccessibilityTap,
         shape: 'rounded',
       },
       controller.setExpanded,

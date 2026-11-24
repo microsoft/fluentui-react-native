@@ -22,6 +22,11 @@ const getStyles = themedStyleSheetFactory('FocusRing', ({ tokens }) =>
   }),
 );
 
+type FocusRingCorners = Pick<
+  ViewStyle,
+  'borderTopStartRadius' | 'borderTopEndRadius' | 'borderBottomStartRadius' | 'borderBottomEndRadius'
+>;
+
 /**
  * Applies shared theme defaults without replacing the hook's visibility decision.
  */
@@ -29,10 +34,11 @@ export function applyFocusRingStyles(
   FocusRing: FocusVisualsState['FocusRing'],
   theme: ThemeState,
   borderRadius?: ViewStyle['borderRadius'],
+  corners?: FocusRingCorners,
 ): void {
   if (FocusRing) {
     const styles = getStyles(theme);
-    const radius = { borderRadius };
+    const radius = { borderRadius, ...corners };
     attachSlotProps(FocusRing, {
       style: [styles.outer, radius],
       inner: { style: [styles.inner, radius] },

@@ -1,9 +1,9 @@
 {
   "schemaVersion": 2,
   "component": "label",
-  "lifecycle": "contract-draft",
-  "conformance": "review-required",
-  "reviewedAt": null,
+  "lifecycle": "implemented",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-11-23",
   "sources": [
     {
       "id": "flex-component",
@@ -102,22 +102,24 @@
     {
       "id": "LBL-001",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["label.types.test.tsx"]
+      "evidence": ["label.types.test.ts", "label.test.tsx"]
     },
     {
       "id": "LBL-002",
       "sources": ["flex-component"],
-      "plannedEvidence": ["label.test.tsx", "label.stories.tsx"]
+      "evidence": ["label.test.tsx", "label.stories.tsx"]
     },
     {
       "id": "LBL-003",
       "sources": ["flex-component", "furn-desktop"],
+      "evidence": ["label.stories.tsx", "spec/accessibility.md"],
       "plannedEvidence": ["label.wdio.ts"]
     },
     {
       "id": "LBL-004",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["label.test.tsx", "label.wdio.ts"]
+      "evidence": ["label.test.tsx", "label.stories.tsx"],
+      "plannedEvidence": ["label.wdio.ts"]
     }
   ]
 }

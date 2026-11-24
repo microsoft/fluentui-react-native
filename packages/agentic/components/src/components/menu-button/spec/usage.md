@@ -23,7 +23,8 @@ opens more actions uses MenuItem's `submenu`, not a nested MenuButton.
 
 - The label names the category of actions and never changes to the chosen
   action. Item labels omit that category.
-- Give an icon-only trigger an `accessibilityLabel`. Use its `tooltip` prop for a supplemental desktop tip,
+- Give an icon-only trigger an `accessibilityLabel`. A named chevron-only trigger needs no additional leading icon.
+  Use its `tooltip` prop for a supplemental desktop tip,
   without wrapping it or relying on the tip to name the action.
 - Match `appearance` and `size` to sibling Buttons, and place the MenuButton
   at the end of an action group with room for the menu to extend.

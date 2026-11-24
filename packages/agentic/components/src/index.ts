@@ -101,6 +101,12 @@ export { renderDivider_unstable } from './components/divider/renderDivider';
 export { useDividerStyles_unstable } from './components/divider/useDividerStyles';
 export { useDivider_unstable } from './components/divider/useDivider';
 
+export { Drawer } from './components/drawer/drawer';
+export type { DrawerPosition, DrawerProps, DrawerSize, DrawerState } from './components/drawer/drawer.types';
+export { renderDrawer_unstable } from './components/drawer/renderDrawer';
+export { useDrawer_unstable } from './components/drawer/useDrawer';
+export { useDrawerStyles_unstable } from './components/drawer/useDrawerStyles';
+
 export { Dropdown } from './components/dropdown/dropdown';
 export type {
   DropdownExposedRootProps,
@@ -126,6 +132,24 @@ export type { InputProps, InputSize, InputSlots, InputState, InputVariant } from
 export { renderInput_unstable } from './components/input/renderInput';
 export { useInputStyles_unstable } from './components/input/useInputStyles';
 export { useInput_unstable } from './components/input/useInput';
+
+export { InteractionTag } from './components/interaction-tag/interaction-tag';
+export type {
+  InteractionTagAppearance,
+  InteractionTagProps,
+  InteractionTagShape,
+  InteractionTagSize,
+  InteractionTagState,
+} from './components/interaction-tag/interaction-tag.types';
+export { renderInteractionTag_unstable } from './components/interaction-tag/renderInteractionTag';
+export { useInteractionTag_unstable } from './components/interaction-tag/useInteractionTag';
+export { useInteractionTagStyles_unstable } from './components/interaction-tag/useInteractionTagStyles';
+
+export { Label } from './components/label/label';
+export type { LabelProps, LabelSize, LabelState, LabelTarget, LabelWeight } from './components/label/label.types';
+export { renderLabel_unstable } from './components/label/renderLabel';
+export { useLabel_unstable } from './components/label/useLabel';
+export { useLabelStyles_unstable } from './components/label/useLabelStyles';
 
 export { ListItem } from './components/list-item/list-item';
 export type {
@@ -207,6 +231,37 @@ export { renderPopover_unstable } from './components/popover/renderPopover';
 export { usePopoverStyles_unstable } from './components/popover/usePopoverStyles';
 export { usePopover_unstable } from './components/popover/usePopover';
 
+export { MessageBar } from './components/message-bar/message-bar';
+export type { MessageBarAction, MessageBarProps, MessageBarState, MessageBarStatus } from './components/message-bar/message-bar.types';
+export { renderMessageBar_unstable } from './components/message-bar/renderMessageBar';
+export { useMessageBar_unstable } from './components/message-bar/useMessageBar';
+export { useMessageBarStyles_unstable } from './components/message-bar/useMessageBarStyles';
+
+export { Persona } from './components/persona/persona';
+export type {
+  PersonaAlignment,
+  PersonaAvatar,
+  PersonaIdentity,
+  PersonaLayout,
+  PersonaPresence,
+  PersonaProps,
+  PersonaState,
+} from './components/persona/persona.types';
+export { renderPersona_unstable } from './components/persona/renderPersona';
+export { usePersona_unstable } from './components/persona/usePersona';
+export { usePersonaStyles_unstable } from './components/persona/usePersonaStyles';
+
+export { PresenceBadge } from './components/presence-badge/presence-badge';
+export type {
+  PresenceBadgeProps,
+  PresenceBadgeSize,
+  PresenceBadgeState,
+  PresenceBadgeStatus,
+} from './components/presence-badge/presence-badge.types';
+export { renderPresenceBadge_unstable } from './components/presence-badge/renderPresenceBadge';
+export { usePresenceBadge_unstable } from './components/presence-badge/usePresenceBadge';
+export { usePresenceBadgeStyles_unstable } from './components/presence-badge/usePresenceBadgeStyles';
+
 export { ProgressBar } from './components/progress-bar/progress-bar';
 export type {
   ProgressBarProps,
@@ -249,6 +304,18 @@ export { renderSpinner_unstable } from './components/spinner/renderSpinner';
 export { useSpinnerStyles_unstable } from './components/spinner/useSpinnerStyles';
 export { useSpinner_unstable } from './components/spinner/useSpinner';
 
+export { SplitButton } from './components/split-button/split-button';
+export type { SplitButtonAppearance, SplitButtonProps, SplitButtonState } from './components/split-button/split-button.types';
+export { renderSplitButton_unstable } from './components/split-button/renderSplitButton';
+export { useSplitButton_unstable } from './components/split-button/useSplitButton';
+export { useSplitButtonStyles_unstable } from './components/split-button/useSplitButtonStyles';
+
+export { Swatch } from './components/swatch/swatch';
+export type { SwatchProps, SwatchSample, SwatchShape, SwatchSize, SwatchState } from './components/swatch/swatch.types';
+export { renderSwatch_unstable } from './components/swatch/renderSwatch';
+export { useSwatch_unstable } from './components/swatch/useSwatch';
+export { useSwatchStyles_unstable } from './components/swatch/useSwatchStyles';
+
 export { Switch } from './components/switch/switch';
 export type { SwitchLayout, SwitchProps, SwitchSlots, SwitchState } from './components/switch/switch.types';
 export { renderSwitch_unstable } from './components/switch/renderSwitch';
@@ -280,6 +347,23 @@ export type { TagAppearance, TagLayout, TagProps, TagShape, TagSize, TagSlots, T
 export { renderTag_unstable } from './components/tag/renderTag';
 export { useTagStyles_unstable } from './components/tag/useTagStyles';
 export { useTag_unstable } from './components/tag/useTag';
+
+export { TeachingPopover } from './components/teaching-popover/teaching-popover';
+export type {
+  TeachingPopoverAction,
+  TeachingPopoverProps,
+  TeachingPopoverState,
+  TeachingPopoverStep,
+} from './components/teaching-popover/teaching-popover.types';
+export { renderTeachingPopover_unstable } from './components/teaching-popover/renderTeachingPopover';
+export { useTeachingPopover_unstable } from './components/teaching-popover/useTeachingPopover';
+export { useTeachingPopoverStyles_unstable } from './components/teaching-popover/useTeachingPopoverStyles';
+
+export { Textarea } from './components/textarea/textarea';
+export type { TextareaEditorProps, TextareaProps, TextareaSize, TextareaState } from './components/textarea/textarea.types';
+export { renderTextarea_unstable } from './components/textarea/renderTextarea';
+export { useTextarea_unstable } from './components/textarea/useTextarea';
+export { useTextareaStyles_unstable } from './components/textarea/useTextareaStyles';
 
 export { Text } from './components/text/text';
 export { renderText_unstable } from './components/text/renderText';

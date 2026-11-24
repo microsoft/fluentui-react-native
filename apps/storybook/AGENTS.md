@@ -53,6 +53,12 @@ diagnostics. Use the platform agent map for additional commands. Prefer
 target-scoped capture through `desktop-driver`; screenshots do not replace
 accessibility lookup.
 
+If owned macOS smoke launches an app but cannot establish its exact lease,
+follow the desktop-test lifecycle recovery guidance before retrying. Once
+settled, use `storybook driver`, `storybook run`, and `storybook test` for a
+verified attach-only qualification; report authored cases separately from full
+smoke traversal. Clean up the separately launched app by its exact identity.
+
 Use the package references for the native helper, authenticated readiness,
 reporting, and smoke contracts. Respect the
 [repository permission rules](../../references/agents/repository/permissions.md),

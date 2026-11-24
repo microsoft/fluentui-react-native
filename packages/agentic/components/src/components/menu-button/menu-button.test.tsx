@@ -53,6 +53,21 @@ function backgroundColor(node: ReactTestInstance): unknown {
 describe('MenuButton', () => {
   beforeEach(() => dispatchCommand.mockClear());
 
+  it('lets a named chevron-only trigger forward native tap after requesting the menu', async () => {
+    const calls: string[] = [];
+    const tree = await render(
+      <Scene
+        content={null}
+        aria-label="Export options"
+        open={false}
+        onOpenChange={(open, { reason }) => calls.push(`${open}:${reason}`)}
+        onAccessibilityTap={() => calls.push('tap')}
+      />,
+    );
+    await fireEvent(tree.getByRole('button', { name: 'Export options' }), 'accessibilityTap');
+    expect(calls).toEqual(['true:trigger', 'tap']);
+  });
+
   it.each([
     ['ChevronDown16Regular', ChevronDown16Regular],
     ['ChevronDown20Regular', ChevronDown20Regular],
@@ -278,7 +293,7 @@ describe('MenuButton', () => {
     const warn = jest.spyOn(console, 'warn').mockImplementation(() => undefined);
     try {
       await render(
-        <MenuButton accessibilityLabel="More">
+        <MenuButton>
           <MenuItem content="Group" menuStyle="section-header" />
         </MenuButton>,
       );

@@ -1,9 +1,9 @@
 {
   "schemaVersion": 2,
   "component": "persona",
-  "lifecycle": "contract-draft",
-  "conformance": "review-required",
-  "reviewedAt": null,
+  "lifecycle": "implemented",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-11-23",
   "sources": [
     {
       "id": "flex-component",
@@ -107,22 +107,23 @@
     {
       "id": "PSN-001",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["persona.test.tsx", "persona.stories.tsx"]
+      "evidence": ["persona.test.tsx", "persona.stories.tsx"]
     },
     {
       "id": "PSN-002",
       "sources": ["flex-component"],
-      "plannedEvidence": ["persona.test.tsx", "persona.stories.tsx"]
+      "evidence": ["persona.test.tsx", "persona.stories.tsx"]
     },
     {
       "id": "PSN-003",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["persona.wdio.ts", "persona.stories.tsx"]
+      "evidence": ["persona.stories.tsx"]
     },
     {
       "id": "PSN-004",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["persona.test.tsx", "persona.wdio.ts"]
+      "evidence": ["persona.test.tsx", "persona.stories.tsx"],
+      "plannedEvidence": ["persona.wdio.ts"]
     }
   ]
 }

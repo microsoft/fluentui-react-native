@@ -1,9 +1,9 @@
 {
   "schemaVersion": 2,
   "component": "split-button",
-  "lifecycle": "contract-draft",
-  "conformance": "review-required",
-  "reviewedAt": null,
+  "lifecycle": "implemented",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-11-23",
   "sources": [
     {
       "id": "flex-component",
@@ -107,22 +107,23 @@
     {
       "id": "SPB-001",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["split-button.types.test.tsx"]
+      "evidence": ["split-button.types.test.ts", "split-button.test.tsx"]
     },
     {
       "id": "SPB-002",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["split-button.test.tsx", "split-button.wdio.ts"]
+      "evidence": ["split-button.test.tsx", "split-button.stories.tsx"]
     },
     {
       "id": "SPB-003",
       "sources": ["flex-component"],
-      "plannedEvidence": ["split-button.test.tsx", "split-button.stories.tsx"]
+      "evidence": ["useSplitButtonStyles.ts", "split-button.stories.tsx"]
     },
     {
       "id": "SPB-004",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["split-button.wdio.ts", "split-button.stories.tsx"]
+      "evidence": ["useSplitButton.ts", "split-button.stories.tsx"],
+      "plannedEvidence": ["split-button.wdio.ts"]
     }
   ]
 }

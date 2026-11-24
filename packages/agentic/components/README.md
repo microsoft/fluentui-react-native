@@ -9,9 +9,10 @@ and accessibility behavior, and colocated tests and stories.
 | `@fluentui-react-native/components`            | Higher-order components, public types, and component-qualified `_unstable` state, style, and render stages     |
 | `@fluentui-react-native/components/primitives` | Unstyled building blocks: `CheckboxIndicator`, `CompoundItemLayout`, `FocusVisual`, `Icon`, `LayoutStableText` |
 
-Higher-order components: Accordion, Avatar, AvatarGroup, Badge, Button, Card, Checkbox, CompoundButton, DestructiveButton, Divider, Dropdown, Input, ListItem,
-ListboxItem, Menu, MenuButton, MenuItem, Popover, ProgressBar, Radio, RatingDisplay, Skeleton, Spinner, Switch, Tab, TabList, Tag,
-Text, and ToggleButton.
+Higher-order components: Accordion, Avatar, AvatarGroup, Badge, Button, Card, Checkbox, CompoundButton,
+DestructiveButton, Divider, Drawer (inline), Dropdown, Input, InteractionTag, Label, ListItem, ListboxItem, Menu,
+MenuButton, MenuItem, MessageBar, Persona, Popover, PresenceBadge, ProgressBar, Radio, RatingDisplay, Skeleton,
+Spinner, SplitButton, Swatch, Switch, Tab, TabList, Tag, TeachingPopover, Text, Textarea, and ToggleButton.
 
 ## Quick start
 

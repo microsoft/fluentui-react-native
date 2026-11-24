@@ -1,7 +1,7 @@
 ---
 name: teaching-popover
 platform: react-native (Windows, macOS)
-status: contract-draft
+status: implemented
 source: ./spec/source.json
 tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
@@ -37,6 +37,9 @@ Related contracts used by this design: [Popover](../popover/SPEC.md), [Button](.
 `onStepChange(key, { reason: 'next' | 'back' })` is separate from `onFinish()` and dismissal. A caller changing
 the controlled step must not trigger a finish event. A missing anchor means not presented, never an unanchored
 surface at a guessed screen origin.
+Steps contain a `key`, `title`, `body` and optional decorative image. Supply localized `nextLabel` and `backLabel`
+for navigation and `formatStep` for visible progress. On the final step an optional `primaryAction` can request
+completion and closing; `secondaryAction` and `closeLabel` do not invoke `onFinish`.
 
 The public React 19 `ref` remains on the declared root. A supported View/Pressable root forwards `tooltip?: string`
 only to that root; it does not use the tip as a name, description or popup relationship. Caller visual styles apply last.
@@ -64,6 +67,7 @@ been qualified.
 Advance and retreat without remounting, click a different control to dismiss, then repeat with Escape and
 forward/backward Tab. Compare actual focus targets and lesson events.
 
-Draft for Windows Fabric, Office Win32, macOS Fabric and macOS Paper. The [requirement evidence](spec/source.json) is planned; no runtime export or native qualification is claimed.
+The [requirement evidence](spec/source.json) tracks native focus and actual speech separately from step and
+presence ownership.
 
-Review the [token bindings](spec/tokens.json), [accessibility](spec/accessibility.md), [interaction](spec/interaction.md) and [usage](spec/usage.md) with this draft.
+See the [token bindings](spec/tokens.json), [accessibility](spec/accessibility.md), [interaction](spec/interaction.md) and [usage](spec/usage.md).

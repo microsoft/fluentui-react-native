@@ -51,6 +51,8 @@ Metro, bundle, or CocoaPods work follows `apps/storybook/AGENTS.md`.
   separately from automated behavior and accessibility results.
 - When composing a command, verify [naming](references/state-and-accessibility.md#merge-accessibility-deliberately)
   and native activation independently, and export only [supported slots](references/types-and-slots.md#exports).
+- For controlled transitions that can move focus, test [rejected intent](references/state-and-accessibility.md#merge-accessibility-deliberately)
+  as well as a synchronous owner acceptance.
 - Preserve [outstanding native evidence](references/contracts.md#contract-lifecycle) when recording realized
   source and test evidence for an implemented contract.
 - Do not copy web-only APIs, CSS behavior, or DOM assumptions into React Native, and do not copy or mechanically

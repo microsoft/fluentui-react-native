@@ -1,9 +1,9 @@
 {
   "schemaVersion": 2,
   "component": "interaction-tag",
-  "lifecycle": "contract-draft",
-  "conformance": "review-required",
-  "reviewedAt": null,
+  "lifecycle": "implemented",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-11-23",
   "sources": [
     {
       "id": "flex-component",
@@ -103,22 +103,23 @@
     {
       "id": "ITG-001",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["interaction-tag.types.test.tsx"]
+      "evidence": ["interaction-tag.types.test.ts", "interaction-tag.stories.tsx"]
     },
     {
       "id": "ITG-002",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["interaction-tag.test.tsx", "interaction-tag.stories.tsx"]
+      "evidence": ["interaction-tag.test.tsx", "interaction-tag.stories.tsx"]
     },
     {
       "id": "ITG-003",
       "sources": ["flex-component"],
-      "plannedEvidence": ["interaction-tag.test.tsx", "interaction-tag.stories.tsx"]
+      "evidence": ["useInteractionTagStyles.ts", "interaction-tag.stories.tsx"]
     },
     {
       "id": "ITG-004",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["interaction-tag.wdio.ts", "interaction-tag.stories.tsx"]
+      "evidence": ["interaction-tag.test.tsx", "interaction-tag.stories.tsx"],
+      "plannedEvidence": ["interaction-tag.wdio.ts"]
     }
   ]
 }

@@ -38,6 +38,19 @@
       "sha256": "68fca3d2664b17352027887fe0ce9b349193b8f686c48704f9bebbc6ea468c1b"
     },
     {
+      "output": "CheckmarkCircle20Regular.generated.tsx",
+      "requested": [
+        "CheckmarkCircle20Regular"
+      ],
+      "inputs": [
+        {
+          "file": "checkmark_circle_20_regular.svg",
+          "sha256": "6fa99fea58de6df80d6d08039335c9ed93dca26ba3f6fdbde152f489e72d0feb"
+        }
+      ],
+      "sha256": "dd8a7d9cbe8436bf0c411e9ab138ff88c2c8de9d92d6974d9c6c6d977fd09dea"
+    },
+    {
       "output": "ChevronDown16Regular.generated.tsx",
       "requested": [
         "ChevronDown16Regular"
@@ -142,6 +155,19 @@
       "sha256": "b6a89e635f676df090fc5d45b3d2bd0aa61f18e3ae8c6f66a15b50a5f63c58fc"
     },
     {
+      "output": "DiamondDismiss20Regular.generated.tsx",
+      "requested": [
+        "DiamondDismiss20Regular"
+      ],
+      "inputs": [
+        {
+          "file": "diamond_dismiss_20_regular.svg",
+          "sha256": "81e5f7c324866b5a3a465916ad386fedac53ec75cac40105b8ca9461883d92da"
+        }
+      ],
+      "sha256": "d7e9f555a4f4c2ea077dcd215a4975bff0c61f563b1bac920064d954260d41d5"
+    },
+    {
       "output": "Info12Regular.generated.tsx",
       "requested": [
         "Info12Regular"
@@ -166,6 +192,97 @@
         }
       ],
       "sha256": "8c50fd7ea0b266f703254d03d4302ea22864a535c98fc084faf45b0e9bfc7253"
+    },
+    {
+      "output": "Info20Regular.generated.tsx",
+      "requested": [
+        "Info20Regular"
+      ],
+      "inputs": [
+        {
+          "file": "info_20_regular.svg",
+          "sha256": "b2171313057fcd3cffca9c20cf905a05977e63eebe5275bab4371b1f0d4a1ff8"
+        }
+      ],
+      "sha256": "5f913bde036be86312d681be102e973d63a68d199fe3e74e528f4cbec7a722f5"
+    },
+    {
+      "output": "PresenceAvailable16Filled.generated.tsx",
+      "requested": [
+        "PresenceAvailable16Filled"
+      ],
+      "inputs": [
+        {
+          "file": "presence_available_16_filled.svg",
+          "sha256": "d2db1d3b4c2ab4b1132bd9c77c445cd62fba981d978503a2b3a874d316dffdcc"
+        }
+      ],
+      "sha256": "28daeb45c05f4027c3330eb42c0da985a3fd062b2716e5a697312d998f1d0b66"
+    },
+    {
+      "output": "PresenceAway16Filled.generated.tsx",
+      "requested": [
+        "PresenceAway16Filled"
+      ],
+      "inputs": [
+        {
+          "file": "presence_away_16_filled.svg",
+          "sha256": "84045be216c99e82b2da07b29bb14b65780e1eb8a8d525033c0e0dd9e2741bc5"
+        }
+      ],
+      "sha256": "2012292dcafa6d5eb38e2fe81a6133e9d8b0bfdbc8a35a9a9483632047d8c534"
+    },
+    {
+      "output": "PresenceBusy16Filled.generated.tsx",
+      "requested": [
+        "PresenceBusy16Filled"
+      ],
+      "inputs": [
+        {
+          "file": "presence_busy_16_filled.svg",
+          "sha256": "d76a631f64e1da76da7f564dbf1e840759c9f80ef483def16242d168b93ce8f2"
+        }
+      ],
+      "sha256": "57d357c6aa6a219769b73146b81a76cea52b3348eb56d674fbc1a5b6349a394e"
+    },
+    {
+      "output": "PresenceDnd16Filled.generated.tsx",
+      "requested": [
+        "PresenceDnd16Filled"
+      ],
+      "inputs": [
+        {
+          "file": "presence_dnd_16_filled.svg",
+          "sha256": "23780f6596f9a45400afbafd68ce60989bd56518f215089f44dc0bbd12468cf3"
+        }
+      ],
+      "sha256": "e17dc967b72feb743b78121c3339752394810f2029d79961e15859df3f85f60d"
+    },
+    {
+      "output": "PresenceOffline16Regular.generated.tsx",
+      "requested": [
+        "PresenceOffline16Regular"
+      ],
+      "inputs": [
+        {
+          "file": "presence_offline_16_regular.svg",
+          "sha256": "943dc052ece67678ba117b7a4a50fef7c4d6b91bd6f0a8beaadf4cf566741d10"
+        }
+      ],
+      "sha256": "b53a7a285b2a6eebb85a61ada7032b5185963c433b4026cceb6e3d4ea1da869e"
+    },
+    {
+      "output": "PresenceOof16Regular.generated.tsx",
+      "requested": [
+        "PresenceOof16Regular"
+      ],
+      "inputs": [
+        {
+          "file": "presence_oof_16_regular.svg",
+          "sha256": "02eab4de724fb7c0e80b0cb760331b22a369741a22c0b01ecb7ebde6d9b2b3f1"
+        }
+      ],
+      "sha256": "eb4707f6fdeff4ea08f67e074a701d93441d90a68c6d682cd4d0408a807b2c35"
     },
     {
       "output": "Star12Filled.generated.tsx",
@@ -270,6 +387,19 @@
         }
       ],
       "sha256": "a66a88aa945562a4a88ad9f0f66c5160f3e975463a0748a2a7a9a00ad5a40743"
+    },
+    {
+      "output": "Warning20Regular.generated.tsx",
+      "requested": [
+        "Warning20Regular"
+      ],
+      "inputs": [
+        {
+          "file": "warning_20_regular.svg",
+          "sha256": "7a256990981850e1d9a82cf0689adc0ce9f77563795c1d40dacb5806d7f2b639"
+        }
+      ],
+      "sha256": "20a432a2909e37a076dbc4b8d2e9ef4d0bd8baa7e0af187fd9de85fadd7b98dc"
     }
   ]
 }

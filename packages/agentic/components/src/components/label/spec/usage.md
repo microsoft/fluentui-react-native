@@ -1,4 +1,4 @@
-# Using Label (proposed)
+# Using Label
 
 For a text entry titled **Project code**, use the same localized string for `content` and for the
 editor's accessible name fallback. If using native association, give the text a stable `labelID`

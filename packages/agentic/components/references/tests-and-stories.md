@@ -35,6 +35,13 @@ Flatten styles only when the resolved visual contract is the behavior under test
 Testing Library filters deliberately hidden roots out of `getByTestId` by default. Opt in with
 `{ includeHiddenElements: true }` to inspect a decorative root or layer. A default role query below a hidden
 ancestor does not prove that the leaf itself lacks a role or action; inspect the leaf props when that is part of the contract.
+For a native negative assertion, include a fixture that exposes the leaf's own behavior without a labelled
+ancestor that can absorb it. Assert the native owner and the absence of the extra target separately.
+An evidence assertion must fail on a regression in the component under test. Reading an unchanged hard-coded
+name from a different native element proves neither visible label matching nor a labeling relationship.
+Test a component-owned guard directly when the test library would suppress the event itself. For instance,
+calling the resolved `onChangeText` exercises late delivery to a noneditable editor; `fireEvent.changeText`
+may ignore the event before it reaches that guard.
 
 For localized data, pin the formatter in tests and include a non-default locale. Assert that visible and spoken
 output preserve precision and distinguish omitted data from zero. Avoid requiring `Intl` just to import the
@@ -220,6 +227,12 @@ Native-rendered story helpers use `*.story-helpers.tsx` and are also excluded
 from library emit while checked by the story project. Use `StoryStatus` for
 counter/modality probes: its named accessible View is observable on macOS
 Fabric, where a plain paragraph's `testID` is not exposed as an AX element.
+An identifier on a structural View does not necessarily appear in AX. Verify the
+element's native role and visibility before using it as a click target; prefer a
+correctly named static caption over teaching the test to click an unrelated peer.
+For multiline editors, prove what owns each native fact. macOS Fabric can put the automation ID and name
+on the scroll host while the AppKit text view owns the value. Read the value within that host's subtree
+and send Return to the focused editor; `setValue` against a host with no readable value cannot verify clearing.
 
 Focus cases use native `focused`, `checked`, and `selected` properties together
 with activation and event-order probes. Cover stale key-up, repeats, disabled
