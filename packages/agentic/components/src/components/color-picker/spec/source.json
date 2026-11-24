@@ -1,0 +1,142 @@
+{
+  "schemaVersion": 2,
+  "component": "color-picker",
+  "lifecycle": "contract-draft",
+  "conformance": "review-required",
+  "reviewedAt": null,
+  "sources": [
+    {
+      "id": "flex-component",
+      "kind": "flex-skill",
+      "authority": "normative",
+      "skill": "flex-components:color-picker",
+      "sourceLock": "flex-1.7.0-9f1df394",
+      "sourceLockFingerprint": "33c7dbb4ff78525a4e0900811f5fa1994579ee8dd95b337de85d8f47133d148c",
+      "availableSurfaces": ["shared", "web"],
+      "surfacesConsulted": ["shared", "web"],
+      "sourceFiles": [
+        {
+          "role": "skill",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/color-picker/SKILL.md",
+          "marketplaceBlobSha": "cdccbe06b3846749934b1138ad70863f2534cb1b",
+          "marketplaceSha256": "ea9ee2658a00bb97884c106545ea20c45e40eadc22eca06413c5565af0c2ab84",
+          "originPath": "plugins/components/skills/color-picker/SKILL.md",
+          "originBlobSha": "cdccbe06b3846749934b1138ad70863f2534cb1b",
+          "originSha256": "ea9ee2658a00bb97884c106545ea20c45e40eadc22eca06413c5565af0c2ab84",
+          "contentDiffers": false
+        },
+        {
+          "role": "usage",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/color-picker/usage.md",
+          "marketplaceBlobSha": "ecd28e01ed45baa05fe5aa5c950d071f3e5aa8a7",
+          "marketplaceSha256": "41e787a30143809c2bfbd48f720a000860bc7342e9127795f1609663c894f014",
+          "originPath": "plugins/components/skills/color-picker/usage.md",
+          "originBlobSha": "ecd28e01ed45baa05fe5aa5c950d071f3e5aa8a7",
+          "originSha256": "41e787a30143809c2bfbd48f720a000860bc7342e9127795f1609663c894f014",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:accessibility",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/color-picker/web/accessibility.md",
+          "marketplaceBlobSha": "a4020045ea8c099c89ad3d7c4c1cda34b5be9ea1",
+          "marketplaceSha256": "67ee8759c1e6a77dd7f9b963a0c124fb3854b5771bcc5c0e63442e12ba478e9a",
+          "originPath": "plugins/components/skills/color-picker/web/accessibility.md",
+          "originBlobSha": "a4020045ea8c099c89ad3d7c4c1cda34b5be9ea1",
+          "originSha256": "67ee8759c1e6a77dd7f9b963a0c124fb3854b5771bcc5c0e63442e12ba478e9a",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:interaction",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/color-picker/web/interaction.md",
+          "marketplaceBlobSha": "9d94fc109a08fa77091214a45d9a21a53066eeb4",
+          "marketplaceSha256": "89dbbc980805952d3979df9b3e432c86abd3a27ed0cff76f4836c668e532aa07",
+          "originPath": "plugins/components/skills/color-picker/web/interaction.md",
+          "originBlobSha": "9d94fc109a08fa77091214a45d9a21a53066eeb4",
+          "originSha256": "89dbbc980805952d3979df9b3e432c86abd3a27ed0cff76f4836c668e532aa07",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:tokens",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/color-picker/web/tokens.yaml",
+          "marketplaceBlobSha": "1844a69c9cd1ee9d528624c3bc3815557502faf8",
+          "marketplaceSha256": "d9a7f8285f03b6d79abc9922f1c467a89cf1f8647563b5dc01729033cb6d7aea",
+          "originPath": "plugins/components/skills/color-picker/web/tokens.yaml",
+          "originBlobSha": "1844a69c9cd1ee9d528624c3bc3815557502faf8",
+          "originSha256": "d9a7f8285f03b6d79abc9922f1c467a89cf1f8647563b5dc01729033cb6d7aea",
+          "contentDiffers": false
+        }
+      ],
+      "releaseDifferences": []
+    },
+    {
+      "id": "furn-desktop",
+      "kind": "git-files",
+      "authority": "compatibility-reference",
+      "repository": "microsoft/fluentui-react-native",
+      "commit": "1c29f4e33695d5d9e44528b0c3137fac7c5fd5f0",
+      "files": [
+        {
+          "role": "compatibility",
+          "path": "packages/agentic/components/src/components/button/SPEC.md",
+          "sha256": "35ec7d36949b34f7c60c03831deebde92c2fdbf96647304771682ccbcff9c1b1"
+        },
+        {
+          "role": "compatibility",
+          "path": "packages/agentic/components/src/components/field/SPEC.md",
+          "sha256": "02bb0c8fcf71c440ea234aa386b82abfec1bf7fe2eec5f9acacc6107276bb152"
+        },
+        {
+          "role": "compatibility",
+          "path": "packages/agentic/components/src/components/input/SPEC.md",
+          "sha256": "972144b0fd904dd1709bfd825f7f8a4bb3cde7c1ea042520eef50008d76a3c57"
+        }
+      ]
+    },
+    {
+      "id": "rnw-range",
+      "kind": "git-files",
+      "authority": "implementation-evidence",
+      "repository": "microsoft/react-native-windows",
+      "commit": "3eaa23597552160257ad24a2d9142e9c6435f2f8",
+      "files": [
+        {
+          "role": "provider",
+          "path": "vnext/Microsoft.ReactNative/Fabric/Composition/CompositionDynamicAutomationProvider.cpp",
+          "sha256": "b3da4ea76ede46e6481b78f8fc22ab972a24d38dbfc27ce64c81c071d8da579b"
+        }
+      ]
+    }
+  ],
+  "divergences": [
+    {
+      "id": "color-editor-single-owner",
+      "status": "accepted"
+    },
+    {
+      "id": "color-picker-child-gates",
+      "status": "deferred"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "CPK-001",
+      "sources": ["flex-component", "furn-desktop"],
+      "plannedEvidence": ["color-picker.test.tsx", "color-picker.stories.tsx"]
+    },
+    {
+      "id": "CPK-002",
+      "sources": ["flex-component", "furn-desktop"],
+      "plannedEvidence": ["color-picker.test.tsx", "color-picker.wdio.ts"]
+    },
+    {
+      "id": "CPK-003",
+      "sources": ["flex-component"],
+      "plannedEvidence": ["color-picker.test.tsx", "color-picker.stories.tsx"]
+    },
+    {
+      "id": "CPK-004",
+      "sources": ["flex-component", "furn-desktop", "rnw-range"],
+      "plannedEvidence": ["color-picker.wdio.ts", "color-picker.stories.tsx"]
+    }
+  ]
+}

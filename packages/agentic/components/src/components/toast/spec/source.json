@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 2,
+  "component": "toast",
+  "lifecycle": "contract-draft",
+  "conformance": "review-required",
+  "reviewedAt": null,
+  "sources": [
+    {
+      "id": "flex-component",
+      "kind": "flex-skill",
+      "authority": "normative",
+      "skill": "flex-components:toast",
+      "sourceLock": "flex-1.7.0-9f1df394",
+      "sourceLockFingerprint": "33c7dbb4ff78525a4e0900811f5fa1994579ee8dd95b337de85d8f47133d148c",
+      "availableSurfaces": ["shared", "web"],
+      "surfacesConsulted": ["shared", "web"],
+      "sourceFiles": [
+        {
+          "role": "skill",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/toast/SKILL.md",
+          "marketplaceBlobSha": "cb0ba09c23867b1806940944f234e5baecd40e5d",
+          "marketplaceSha256": "eac47876874cdc2de2d03c11467219a30e93e0f11c3d6397de57f7cea4d6e0e7",
+          "originPath": "plugins/components/skills/toast/SKILL.md",
+          "originBlobSha": "cb0ba09c23867b1806940944f234e5baecd40e5d",
+          "originSha256": "eac47876874cdc2de2d03c11467219a30e93e0f11c3d6397de57f7cea4d6e0e7",
+          "contentDiffers": false
+        },
+        {
+          "role": "usage",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/toast/usage.md",
+          "marketplaceBlobSha": "405120021e2750702f2e73092882b6c02827a2f1",
+          "marketplaceSha256": "29df1c40d1081092f791903fddd34121f8143e1edf4aab2785e89f106284d00f",
+          "originPath": "plugins/components/skills/toast/usage.md",
+          "originBlobSha": "405120021e2750702f2e73092882b6c02827a2f1",
+          "originSha256": "29df1c40d1081092f791903fddd34121f8143e1edf4aab2785e89f106284d00f",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:accessibility",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/toast/web/accessibility.md",
+          "marketplaceBlobSha": "2d17debe7997bad13e4e1f475f1b93adeaf65787",
+          "marketplaceSha256": "f47a6769189d963ea01b65b0bbadeb12b141ee8d3fef2c3dc153cad0701c6611",
+          "originPath": "plugins/components/skills/toast/web/accessibility.md",
+          "originBlobSha": "2d17debe7997bad13e4e1f475f1b93adeaf65787",
+          "originSha256": "f47a6769189d963ea01b65b0bbadeb12b141ee8d3fef2c3dc153cad0701c6611",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:interaction",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/toast/web/interaction.md",
+          "marketplaceBlobSha": "49a3761f5e8d0d6ba604fc95e17b03f29ddc8b7d",
+          "marketplaceSha256": "873fe74e15940d3f85591e95772983d21482d6837bd2f9cb5a06fe341e1c28e0",
+          "originPath": "plugins/components/skills/toast/web/interaction.md",
+          "originBlobSha": "49a3761f5e8d0d6ba604fc95e17b03f29ddc8b7d",
+          "originSha256": "873fe74e15940d3f85591e95772983d21482d6837bd2f9cb5a06fe341e1c28e0",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:tokens",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/toast/web/tokens.yaml",
+          "marketplaceBlobSha": "e300030e9f0d0fb2a587fc8ce4fc814141411f16",
+          "marketplaceSha256": "7074f7a0bb94aef5fe43a6c0ad29d6b6c35519893f9d37e39f1ddf3f1b41d6a1",
+          "originPath": "plugins/components/skills/toast/web/tokens.yaml",
+          "originBlobSha": "e300030e9f0d0fb2a587fc8ce4fc814141411f16",
+          "originSha256": "7074f7a0bb94aef5fe43a6c0ad29d6b6c35519893f9d37e39f1ddf3f1b41d6a1",
+          "contentDiffers": false
+        }
+      ],
+      "releaseDifferences": []
+    },
+    {
+      "id": "furn-desktop",
+      "kind": "git-files",
+      "authority": "compatibility-reference",
+      "repository": "microsoft/fluentui-react-native",
+      "commit": "1c29f4e33695d5d9e44528b0c3137fac7c5fd5f0",
+      "files": [
+        {
+          "role": "compatibility",
+          "path": "packages/agentic/components/src/components/button/SPEC.md",
+          "sha256": "35ec7d36949b34f7c60c03831deebde92c2fdbf96647304771682ccbcff9c1b1"
+        },
+        {
+          "role": "compatibility",
+          "path": "packages/agentic/components/src/components/field/SPEC.md",
+          "sha256": "02bb0c8fcf71c440ea234aa386b82abfec1bf7fe2eec5f9acacc6107276bb152"
+        },
+        {
+          "role": "compatibility",
+          "path": "packages/agentic/components/src/components/progress-bar/SPEC.md",
+          "sha256": "999ae8de30da46e95919df65c47c9334dfb3c5ffe3d8c53aa2104ea50dbaa815"
+        }
+      ]
+    }
+  ],
+  "divergences": [
+    {
+      "id": "app-local-toast",
+      "status": "accepted"
+    },
+    {
+      "id": "accessible-expiration",
+      "status": "accepted"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "TST-001",
+      "sources": ["flex-component", "furn-desktop"],
+      "plannedEvidence": ["toast.test.tsx", "toast.stories.tsx"]
+    },
+    {
+      "id": "TST-002",
+      "sources": ["flex-component", "furn-desktop"],
+      "plannedEvidence": ["toast.test.tsx", "toast.wdio.ts"]
+    },
+    {
+      "id": "TST-003",
+      "sources": ["flex-component", "furn-desktop"],
+      "plannedEvidence": ["toast.wdio.ts", "toast.stories.tsx"]
+    },
+    {
+      "id": "TST-004",
+      "sources": ["flex-component"],
+      "plannedEvidence": ["toast.test.tsx", "toast.stories.tsx"]
+    }
+  ]
+}

@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 2,
+  "component": "split-button",
+  "lifecycle": "contract-draft",
+  "conformance": "review-required",
+  "reviewedAt": null,
+  "sources": [
+    {
+      "id": "flex-component",
+      "kind": "flex-skill",
+      "authority": "normative",
+      "skill": "flex-components:split-button",
+      "sourceLock": "flex-1.7.0-9f1df394",
+      "sourceLockFingerprint": "33c7dbb4ff78525a4e0900811f5fa1994579ee8dd95b337de85d8f47133d148c",
+      "availableSurfaces": ["shared", "web"],
+      "surfacesConsulted": ["shared", "web"],
+      "sourceFiles": [
+        {
+          "role": "skill",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/split-button/SKILL.md",
+          "marketplaceBlobSha": "320fab6b61ab40d4be5e87ec503106141f9e0b47",
+          "marketplaceSha256": "f8d61e993d441aabdee02b9ae0be72b2b40dfff72ba6f03065c1ad2ca43036a4",
+          "originPath": "plugins/components/skills/split-button/SKILL.md",
+          "originBlobSha": "320fab6b61ab40d4be5e87ec503106141f9e0b47",
+          "originSha256": "f8d61e993d441aabdee02b9ae0be72b2b40dfff72ba6f03065c1ad2ca43036a4",
+          "contentDiffers": false
+        },
+        {
+          "role": "usage",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/split-button/usage.md",
+          "marketplaceBlobSha": "22daf3431939f315bfb2efeffc3abf41981a6b19",
+          "marketplaceSha256": "20da7f1454b0548e5e50ac36ed8a0d2adb147405712a27e8a4c438397736f9a8",
+          "originPath": "plugins/components/skills/split-button/usage.md",
+          "originBlobSha": "22daf3431939f315bfb2efeffc3abf41981a6b19",
+          "originSha256": "20da7f1454b0548e5e50ac36ed8a0d2adb147405712a27e8a4c438397736f9a8",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:accessibility",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/split-button/web/accessibility.md",
+          "marketplaceBlobSha": "6720eab3c28f7b24939cf28d532b0ab18822f172",
+          "marketplaceSha256": "76a1cff15d1278868eebe583e67b1529461550268a233a39cda586fc9d4dc38f",
+          "originPath": "plugins/components/skills/split-button/web/accessibility.md",
+          "originBlobSha": "6720eab3c28f7b24939cf28d532b0ab18822f172",
+          "originSha256": "76a1cff15d1278868eebe583e67b1529461550268a233a39cda586fc9d4dc38f",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:interaction",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/split-button/web/interaction.md",
+          "marketplaceBlobSha": "b100fa4be16370ffd096cc333c540df3b499ca7c",
+          "marketplaceSha256": "7fcf76fce046ea1eb7fbff97897433dde7f70a258c93c11ba45c4540767d8165",
+          "originPath": "plugins/components/skills/split-button/web/interaction.md",
+          "originBlobSha": "b100fa4be16370ffd096cc333c540df3b499ca7c",
+          "originSha256": "7fcf76fce046ea1eb7fbff97897433dde7f70a258c93c11ba45c4540767d8165",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:tokens",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/split-button/web/tokens.yaml",
+          "marketplaceBlobSha": "a5438d2fe57dccc70761ea29ec3d0f4a776d4435",
+          "marketplaceSha256": "fabff6ad9492d0d80654de876203649efb87e693f3799d8301eaa60127d373b6",
+          "originPath": "plugins/components/skills/split-button/web/tokens.yaml",
+          "originBlobSha": "a5438d2fe57dccc70761ea29ec3d0f4a776d4435",
+          "originSha256": "fabff6ad9492d0d80654de876203649efb87e693f3799d8301eaa60127d373b6",
+          "contentDiffers": false
+        }
+      ],
+      "releaseDifferences": []
+    },
+    {
+      "id": "furn-desktop",
+      "kind": "git-files",
+      "authority": "compatibility-reference",
+      "repository": "microsoft/fluentui-react-native",
+      "commit": "1c29f4e33695d5d9e44528b0c3137fac7c5fd5f0",
+      "files": [
+        {
+          "role": "compatibility",
+          "path": "packages/agentic/components/src/components/button/SPEC.md",
+          "sha256": "35ec7d36949b34f7c60c03831deebde92c2fdbf96647304771682ccbcff9c1b1"
+        },
+        {
+          "role": "compatibility",
+          "path": "packages/agentic/components/src/components/menu-button/SPEC.md",
+          "sha256": "04674ad9fff999f29113940b1ae1b82e8dded44d8ac18a12046aec2a6faafb5a"
+        },
+        {
+          "role": "compatibility",
+          "path": "packages/agentic/components/src/components/menu/SPEC.md",
+          "sha256": "ffefebe6aa70ee0bc1738b0cf91466205479ac52194dfc678357435204fd462f"
+        }
+      ]
+    }
+  ],
+  "divergences": [
+    {
+      "id": "independent-split-targets",
+      "status": "accepted"
+    },
+    {
+      "id": "split-popup-continuation",
+      "status": "deferred"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "SPB-001",
+      "sources": ["flex-component", "furn-desktop"],
+      "plannedEvidence": ["split-button.types.test.tsx"]
+    },
+    {
+      "id": "SPB-002",
+      "sources": ["flex-component", "furn-desktop"],
+      "plannedEvidence": ["split-button.test.tsx", "split-button.wdio.ts"]
+    },
+    {
+      "id": "SPB-003",
+      "sources": ["flex-component"],
+      "plannedEvidence": ["split-button.test.tsx", "split-button.stories.tsx"]
+    },
+    {
+      "id": "SPB-004",
+      "sources": ["flex-component", "furn-desktop"],
+      "plannedEvidence": ["split-button.wdio.ts", "split-button.stories.tsx"]
+    }
+  ]
+}

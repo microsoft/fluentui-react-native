@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 2,
+  "component": "rating-display",
+  "lifecycle": "contract-draft",
+  "conformance": "review-required",
+  "reviewedAt": null,
+  "sources": [
+    {
+      "id": "flex-component",
+      "kind": "flex-skill",
+      "authority": "normative",
+      "skill": "flex-components:rating-display",
+      "sourceLock": "flex-1.7.0-9f1df394",
+      "sourceLockFingerprint": "33c7dbb4ff78525a4e0900811f5fa1994579ee8dd95b337de85d8f47133d148c",
+      "availableSurfaces": ["shared", "web"],
+      "surfacesConsulted": ["shared", "web"],
+      "sourceFiles": [
+        {
+          "role": "skill",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/rating-display/SKILL.md",
+          "marketplaceBlobSha": "4722d031380a2724e37ecf710c96fba716b812d2",
+          "marketplaceSha256": "a1365c20b2f1789e25c5d85676f4c5283e8f23bfa0af35c18df43c612b64e98a",
+          "originPath": "plugins/components/skills/rating-display/SKILL.md",
+          "originBlobSha": "4722d031380a2724e37ecf710c96fba716b812d2",
+          "originSha256": "a1365c20b2f1789e25c5d85676f4c5283e8f23bfa0af35c18df43c612b64e98a",
+          "contentDiffers": false
+        },
+        {
+          "role": "usage",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/rating-display/usage.md",
+          "marketplaceBlobSha": "736a0e6775660ff7a028d8c9ab2b1ce125dd1283",
+          "marketplaceSha256": "559c3095a8d003de3a00bc72939fa3a8ad7bda6f2630c38536fc9664d6331697",
+          "originPath": "plugins/components/skills/rating-display/usage.md",
+          "originBlobSha": "736a0e6775660ff7a028d8c9ab2b1ce125dd1283",
+          "originSha256": "559c3095a8d003de3a00bc72939fa3a8ad7bda6f2630c38536fc9664d6331697",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:accessibility",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/rating-display/web/accessibility.md",
+          "marketplaceBlobSha": "076a907f750e397e14deacbd2c8ea72844639c94",
+          "marketplaceSha256": "e4465b516ced84feff4b51c60b87e150f732fffc82b4f278520e2da913193d9f",
+          "originPath": "plugins/components/skills/rating-display/web/accessibility.md",
+          "originBlobSha": "076a907f750e397e14deacbd2c8ea72844639c94",
+          "originSha256": "e4465b516ced84feff4b51c60b87e150f732fffc82b4f278520e2da913193d9f",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:interaction",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/rating-display/web/interaction.md",
+          "marketplaceBlobSha": "fda5c8d926860bcd57322a95a4d42b091b3a3a8e",
+          "marketplaceSha256": "919b9e44b01e6dccc3ffd5ad6169268357aa873f19cd071e203bf39130dae663",
+          "originPath": "plugins/components/skills/rating-display/web/interaction.md",
+          "originBlobSha": "fda5c8d926860bcd57322a95a4d42b091b3a3a8e",
+          "originSha256": "919b9e44b01e6dccc3ffd5ad6169268357aa873f19cd071e203bf39130dae663",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:tokens",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/rating-display/web/tokens.yaml",
+          "marketplaceBlobSha": "00764e5fd4ff708fbaefcb3a44597fc69588aba4",
+          "marketplaceSha256": "76b312078991402962e7c6dc6b8ab896a3159fd5f5029dd7a2b9e1b6d0407b70",
+          "originPath": "plugins/components/skills/rating-display/web/tokens.yaml",
+          "originBlobSha": "00764e5fd4ff708fbaefcb3a44597fc69588aba4",
+          "originSha256": "76b312078991402962e7c6dc6b8ab896a3159fd5f5029dd7a2b9e1b6d0407b70",
+          "contentDiffers": false
+        }
+      ],
+      "releaseDifferences": []
+    },
+    {
+      "id": "furn-desktop",
+      "kind": "git-files",
+      "authority": "compatibility-reference",
+      "repository": "microsoft/fluentui-react-native",
+      "commit": "1c29f4e33695d5d9e44528b0c3137fac7c5fd5f0",
+      "files": [
+        {
+          "role": "compatibility",
+          "path": "packages/agentic/components/src/components/badge/SPEC.md",
+          "sha256": "3b812ce068a19e8bda7ab48b8bd5d5e2dcd3b8aebbd959a2604e80723ec7c307"
+        },
+        {
+          "role": "compatibility",
+          "path": "packages/agentic/components/src/components/text/SPEC.md",
+          "sha256": "48392a4e9dd009076aec007e658904fb3f367cb847599086cb20d2e10a23a809"
+        }
+      ]
+    }
+  ],
+  "divergences": [
+    {
+      "id": "read-only-rating-summary",
+      "status": "accepted"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "RTD-001",
+      "sources": ["flex-component", "furn-desktop"],
+      "plannedEvidence": ["rating-display.types.test.tsx"]
+    },
+    {
+      "id": "RTD-002",
+      "sources": ["flex-component"],
+      "plannedEvidence": ["rating-display.test.tsx", "rating-display.stories.tsx"]
+    },
+    {
+      "id": "RTD-003",
+      "sources": ["flex-component", "furn-desktop"],
+      "plannedEvidence": ["rating-display.test.tsx", "rating-display.stories.tsx"]
+    },
+    {
+      "id": "RTD-004",
+      "sources": ["flex-component", "furn-desktop"],
+      "plannedEvidence": ["rating-display.wdio.ts", "rating-display.stories.tsx"]
+    }
+  ]
+}

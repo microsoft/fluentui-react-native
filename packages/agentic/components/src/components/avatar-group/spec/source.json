@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 2,
+  "component": "avatar-group",
+  "lifecycle": "contract-draft",
+  "conformance": "review-required",
+  "reviewedAt": null,
+  "sources": [
+    {
+      "id": "flex-component",
+      "kind": "flex-skill",
+      "authority": "normative",
+      "skill": "flex-components:avatar-group",
+      "sourceLock": "flex-1.7.0-9f1df394",
+      "sourceLockFingerprint": "33c7dbb4ff78525a4e0900811f5fa1994579ee8dd95b337de85d8f47133d148c",
+      "availableSurfaces": ["shared", "web"],
+      "surfacesConsulted": ["shared", "web"],
+      "sourceFiles": [
+        {
+          "role": "skill",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/avatar-group/SKILL.md",
+          "marketplaceBlobSha": "b04f466b00855501c6a6660eac0285e79abc7913",
+          "marketplaceSha256": "14784780b2b96678086d18fa3b45b6ec4c147331c284b2bbc49db0d237b612f2",
+          "originPath": "plugins/components/skills/avatar-group/SKILL.md",
+          "originBlobSha": "b04f466b00855501c6a6660eac0285e79abc7913",
+          "originSha256": "14784780b2b96678086d18fa3b45b6ec4c147331c284b2bbc49db0d237b612f2",
+          "contentDiffers": false
+        },
+        {
+          "role": "usage",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/avatar-group/usage.md",
+          "marketplaceBlobSha": "0b201138d17812149e229d2002524577c2249c46",
+          "marketplaceSha256": "55db9fa50d87ecbce624413c6e78a46f541c403d1f93cf5463b4e3279ef2d259",
+          "originPath": "plugins/components/skills/avatar-group/usage.md",
+          "originBlobSha": "0b201138d17812149e229d2002524577c2249c46",
+          "originSha256": "55db9fa50d87ecbce624413c6e78a46f541c403d1f93cf5463b4e3279ef2d259",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:accessibility",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/avatar-group/web/accessibility.md",
+          "marketplaceBlobSha": "d7a438b5eafd5d14c1dd4d20b46ec5a917f95a8e",
+          "marketplaceSha256": "c5ad0376c7749e60f4216bbe17c01eb32a9e1be0da56ff79e0ef910ae673269e",
+          "originPath": "plugins/components/skills/avatar-group/web/accessibility.md",
+          "originBlobSha": "d7a438b5eafd5d14c1dd4d20b46ec5a917f95a8e",
+          "originSha256": "c5ad0376c7749e60f4216bbe17c01eb32a9e1be0da56ff79e0ef910ae673269e",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:interaction",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/avatar-group/web/interaction.md",
+          "marketplaceBlobSha": "447331ff436601d85299a5cef6abb3ad7a679a8d",
+          "marketplaceSha256": "4524b36de5a2efa1be7ead4c574ad46cd814c2930112116a61816c5be733690d",
+          "originPath": "plugins/components/skills/avatar-group/web/interaction.md",
+          "originBlobSha": "447331ff436601d85299a5cef6abb3ad7a679a8d",
+          "originSha256": "4524b36de5a2efa1be7ead4c574ad46cd814c2930112116a61816c5be733690d",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:tokens",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/avatar-group/web/tokens.yaml",
+          "marketplaceBlobSha": "2d691d50915c183ee2387911adb04164c29db21b",
+          "marketplaceSha256": "4ad9f92e9adb828f1b3671381e644ec3acab14941527d6afa1262b3b974798e2",
+          "originPath": "plugins/components/skills/avatar-group/web/tokens.yaml",
+          "originBlobSha": "2d691d50915c183ee2387911adb04164c29db21b",
+          "originSha256": "4ad9f92e9adb828f1b3671381e644ec3acab14941527d6afa1262b3b974798e2",
+          "contentDiffers": false
+        }
+      ],
+      "releaseDifferences": []
+    },
+    {
+      "id": "furn-desktop",
+      "kind": "git-files",
+      "authority": "compatibility-reference",
+      "repository": "microsoft/fluentui-react-native",
+      "commit": "1c29f4e33695d5d9e44528b0c3137fac7c5fd5f0",
+      "files": [
+        {
+          "role": "compatibility",
+          "path": "packages/agentic/components/src/components/avatar/SPEC.md",
+          "sha256": "585e34e458d0920a4fe5b4e942392e3949c7be2904813bfcc2ea7244287cf9d2"
+        }
+      ]
+    }
+  ],
+  "divergences": [
+    {
+      "id": "overflow-is-information",
+      "status": "accepted"
+    },
+    {
+      "id": "native-stack-mask",
+      "status": "deferred"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "AVG-001",
+      "sources": ["flex-component", "furn-desktop"],
+      "plannedEvidence": ["avatar-group.test.tsx", "avatar-group.stories.tsx"]
+    },
+    {
+      "id": "AVG-002",
+      "sources": ["flex-component"],
+      "plannedEvidence": ["avatar-group.test.tsx", "avatar-group.stories.tsx"]
+    },
+    {
+      "id": "AVG-003",
+      "sources": ["flex-component", "furn-desktop"],
+      "plannedEvidence": ["avatar-group.test.tsx", "avatar-group.wdio.ts"]
+    },
+    {
+      "id": "AVG-004",
+      "sources": ["flex-component", "furn-desktop"],
+      "plannedEvidence": ["avatar-group.wdio.ts", "avatar-group.stories.tsx"]
+    }
+  ]
+}

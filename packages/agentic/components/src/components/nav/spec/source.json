@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 2,
+  "component": "nav",
+  "lifecycle": "contract-draft",
+  "conformance": "review-required",
+  "reviewedAt": null,
+  "sources": [
+    {
+      "id": "flex-component",
+      "kind": "flex-skill",
+      "authority": "normative",
+      "skill": "flex-components:nav",
+      "sourceLock": "flex-1.7.0-9f1df394",
+      "sourceLockFingerprint": "33c7dbb4ff78525a4e0900811f5fa1994579ee8dd95b337de85d8f47133d148c",
+      "availableSurfaces": ["shared", "web"],
+      "surfacesConsulted": ["shared", "web"],
+      "sourceFiles": [
+        {
+          "role": "skill",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/nav/SKILL.md",
+          "marketplaceBlobSha": "48e35f437271459ca1194d1d0cfd4ea8234de92a",
+          "marketplaceSha256": "a630fdf2a1826e53edf7b6abb44e2723d23538e4812009b42557ceab1ef5bfea",
+          "originPath": "plugins/components/skills/nav/SKILL.md",
+          "originBlobSha": "48e35f437271459ca1194d1d0cfd4ea8234de92a",
+          "originSha256": "a630fdf2a1826e53edf7b6abb44e2723d23538e4812009b42557ceab1ef5bfea",
+          "contentDiffers": false
+        },
+        {
+          "role": "usage",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/nav/usage.md",
+          "marketplaceBlobSha": "8445126d339115aebf8e38fe9cc5daf6b5f01744",
+          "marketplaceSha256": "e719298d5ab306f763725a2357e4e516aa32730509bbe6baad7b699f07047749",
+          "originPath": "plugins/components/skills/nav/usage.md",
+          "originBlobSha": "8445126d339115aebf8e38fe9cc5daf6b5f01744",
+          "originSha256": "e719298d5ab306f763725a2357e4e516aa32730509bbe6baad7b699f07047749",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:accessibility",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/nav/web/accessibility.md",
+          "marketplaceBlobSha": "c1260403476745df4642c1d0241f48a047eb44c8",
+          "marketplaceSha256": "3961a89b0a1f24c6a3f9da42be58d60d18bd665fda6c92ce35ce15aaa4980f80",
+          "originPath": "plugins/components/skills/nav/web/accessibility.md",
+          "originBlobSha": "c1260403476745df4642c1d0241f48a047eb44c8",
+          "originSha256": "3961a89b0a1f24c6a3f9da42be58d60d18bd665fda6c92ce35ce15aaa4980f80",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:interaction",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/nav/web/interaction.md",
+          "marketplaceBlobSha": "801bcee72bfb6727e8a6dba7a98cf5bb0d7a7197",
+          "marketplaceSha256": "0d087702c4fe0906d2bbee15dce95455aa6ca59741fc0b2fbef295e3ed5ad5bb",
+          "originPath": "plugins/components/skills/nav/web/interaction.md",
+          "originBlobSha": "801bcee72bfb6727e8a6dba7a98cf5bb0d7a7197",
+          "originSha256": "0d087702c4fe0906d2bbee15dce95455aa6ca59741fc0b2fbef295e3ed5ad5bb",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:tokens",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/nav/web/tokens.yaml",
+          "marketplaceBlobSha": "d38e8157dc1dfdf30ba4c1c7b34abaf42d83f9b5",
+          "marketplaceSha256": "2f06dd1048b8f9a69deed94ace2491b7e0e8eddfdbe92a1640ea4a73bbc8f451",
+          "originPath": "plugins/components/skills/nav/web/tokens.yaml",
+          "originBlobSha": "d38e8157dc1dfdf30ba4c1c7b34abaf42d83f9b5",
+          "originSha256": "2f06dd1048b8f9a69deed94ace2491b7e0e8eddfdbe92a1640ea4a73bbc8f451",
+          "contentDiffers": false
+        }
+      ],
+      "releaseDifferences": []
+    },
+    {
+      "id": "furn-desktop",
+      "kind": "git-files",
+      "authority": "compatibility-reference",
+      "repository": "microsoft/fluentui-react-native",
+      "commit": "1c29f4e33695d5d9e44528b0c3137fac7c5fd5f0",
+      "files": [
+        {
+          "role": "compatibility",
+          "path": "packages/agentic/components/src/components/accordion/SPEC.md",
+          "sha256": "a8dd2e78850c8a46cdff90939c61bda870b59016f2821120521bc3dab11b70d8"
+        },
+        {
+          "role": "compatibility",
+          "path": "packages/agentic/components/src/components/button/SPEC.md",
+          "sha256": "35ec7d36949b34f7c60c03831deebde92c2fdbf96647304771682ccbcff9c1b1"
+        },
+        {
+          "role": "compatibility",
+          "path": "packages/agentic/native-core/references/remaining-work.md",
+          "sha256": "ce6f906272c618f3d95831c90575f2d687bba551cb82a5ce2f497d5bcbed32f9"
+        }
+      ]
+    }
+  ],
+  "divergences": [
+    {
+      "id": "app-owned-routes",
+      "status": "accepted"
+    },
+    {
+      "id": "modal-nav-overlay",
+      "status": "deferred"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "NVC-001",
+      "sources": ["flex-component", "furn-desktop"],
+      "plannedEvidence": ["nav.test.tsx", "nav.stories.tsx"]
+    },
+    {
+      "id": "NVC-002",
+      "sources": ["flex-component", "furn-desktop"],
+      "plannedEvidence": ["nav.test.tsx", "nav.wdio.ts"]
+    },
+    {
+      "id": "NVC-003",
+      "sources": ["flex-component", "furn-desktop"],
+      "plannedEvidence": ["nav.wdio.ts", "nav.stories.tsx"]
+    },
+    {
+      "id": "NVC-004",
+      "sources": ["flex-component"],
+      "plannedEvidence": ["nav.test.tsx", "nav.stories.tsx"]
+    }
+  ]
+}
