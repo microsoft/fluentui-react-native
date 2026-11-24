@@ -1,5 +1,14 @@
 # Change Log - @fluentui-react-native/composition
 
+## 0.14.9
+
+### Patch Changes
+
+- Updated dependencies [c64353f]
+  - @fluentui-react-native/framework-base@0.10.0
+  - @fluentui-react-native/use-slots@0.13.9
+  - @fluentui-react-native/use-styling@0.16.9
+
 ## 0.14.8
 
 ### Patch Changes

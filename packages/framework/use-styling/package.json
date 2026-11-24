@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/use-styling",
-  "version": "0.16.8",
+  "version": "0.16.9",
   "description": "Opinionated use styling hook implementation",
   "keywords": [],
   "license": "MIT",
