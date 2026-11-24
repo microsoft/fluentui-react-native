@@ -66,7 +66,8 @@ the absence of adjustable semantics, not an identical native class name.
 Compare compact and default summaries for a fractional average and count zero; inspect the native tree for
 exactly one summary and no slider actions.
 
-The [requirement evidence](spec/source.json) identifies the source, tests and story. Native accessibility traversal
-is not yet qualified on Windows Fabric, Office Win32, macOS Fabric or macOS Paper.
+The [requirement evidence](spec/source.json) identifies the source, tests and story. On macOS Fabric and Paper,
+the native story verified one static summary for each informative display and no press or range actions.
+Visual review covered default, compact and decorative layouts. Windows and Win32 qualification remains open.
 
 See the [token bindings](spec/tokens.json), [accessibility](spec/accessibility.md), [interaction](spec/interaction.md) and [usage](spec/usage.md).

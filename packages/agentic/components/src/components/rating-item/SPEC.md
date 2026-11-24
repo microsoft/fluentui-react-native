@@ -56,7 +56,8 @@ editable parent's input target, not the clipped glyph, supplies the accessible v
 Inspect half fill in both directions and verify a native accessibility traversal cannot focus, invoke or adjust
 any individual star.
 
-The implementation is internal. The [requirement evidence](spec/source.json) identifies the applicable source,
-tests, and story. Native clipping and accessibility traversal are not yet qualified on the desktop endpoints.
+The implementation is internal. The [requirement evidence](spec/source.json) identifies the source, tests and
+story. On macOS Fabric and Paper, Tab skipped the passive stars and visual review verified logical half-fill
+at each size. Nonintegral backing scales and Windows endpoints remain open.
 
 See the [token bindings](spec/tokens.json), [accessibility](spec/accessibility.md), [interaction](spec/interaction.md) and [usage](spec/usage.md).

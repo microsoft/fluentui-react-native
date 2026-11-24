@@ -107,14 +107,13 @@
     {
       "id": "AVG-003",
       "sources": ["flex-component", "furn-desktop"],
-      "evidence": ["avatar-group.types.test.ts", "avatar-group.test.tsx", "useAvatarGroup.ts"],
+      "evidence": ["avatar-group.types.test.ts", "avatar-group.test.tsx", "avatar-group.stories.tsx"],
       "plannedEvidence": ["avatar-group.wdio.ts"]
     },
     {
       "id": "AVG-004",
       "sources": ["flex-component", "furn-desktop"],
-      "evidence": ["avatar-group.test.tsx", "avatar-group.stories.tsx"],
-      "plannedEvidence": ["avatar-group.wdio.ts"]
+      "evidence": ["avatar-group.test.tsx", "avatar-group.stories.tsx"]
     }
   ]
 }

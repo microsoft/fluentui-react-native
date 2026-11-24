@@ -30,6 +30,10 @@ configuration, driver, and runtime behavior belongs to package-owned guidance:
   `prep` when switching renderer. Bundle before prep if Pods must embed the
   JavaScript bundle. Only `macos/Podfile` is hand-authored; Pods, lockfiles,
   workspaces, build products, and DerivedData are generated.
+- If `prep` fails in React Native Test App with `JSON.fast_generate` missing,
+  check the JSON gem loaded by CocoaPods. JSON 3 removed that API. Use a
+  compatible toolchain for `prep` (or activate an already-installed JSON 2
+  with a command-local Ruby preload); do not patch generated dependencies.
 - macOS native smoke uses the instance-specific bundle embedded in the app.
   The interactive development commands still use Metro.
 - Windows project files and registrations are generated. Preserve the app's

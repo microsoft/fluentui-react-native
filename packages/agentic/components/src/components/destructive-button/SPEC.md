@@ -36,6 +36,8 @@ Related contracts used by this design: [Button](../button/SPEC.md).
 The API does not accept `selected`, `defaultSelected` or a toggle action. The secondary/subtle distinction is
 significant: the permitted lower-emphasis danger treatment is **subtle**, not Button's ordinary secondary
 appearance. A confirm dialog receives its own safe focus target independently of the initiating control.
+`onPress` receives the native press event for pointer and keyboard activation. Desktop assistive invocation
+requests the same command without a gesture event.
 Blank text does not name a command. With a leading icon it resolves as icon-only; if neither text nor an
 explicit name identifies the command, no button is rendered.
 
@@ -64,7 +66,9 @@ focus.
 Verify enabled, disabled and icon-only cases, one callback, label clarity without color, and focus return
 managed by a caller-owned confirmation.
 
-The [requirement evidence](spec/source.json) identifies the implementation and tests. Native focus, contrast
-and invocation are not yet qualified on Windows Fabric, Office Win32, macOS Fabric or macOS Paper.
+The [requirement evidence](spec/source.json) identifies the implementation and tests. The macOS Fabric and Paper
+stories verified native naming, disabled state, focus and exactly-once assistive and physical activation. Visual review covered
+subtle, primary, disabled and icon-only chrome in the standard theme. The high-contrast and Windows endpoint
+checks remain open.
 
 See the [token bindings](spec/tokens.json), [accessibility](spec/accessibility.md), [interaction](spec/interaction.md) and [usage](spec/usage.md).

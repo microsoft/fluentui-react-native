@@ -116,6 +116,11 @@ render remains free of observable side effects, and make the dependency list mat
 When a composed command narrows `content` to text, distinguish a nonblank name from a supplied and empty string.
 Resolve blank content as absent before delegating to Button, and test the icon-only path with blank text and without a name.
 
+Reusing Button's pointer/keyboard handler does not register desktop assistive activation. The new command
+compositions connect the native accessibility tap separately: for enabled commands it calls the same callback
+without fabricating a gesture event. Do not wire both the tap and an `activate` notification to the same command.
+Run the accessible lane to verify AXPress or UIA Invoke independently of the physical lane.
+
 For a component-owned toggle or select action, use `resolveAccessibilityAction`
 from Framework Base with the semantic action, `Platform.OS`, and the caller's
 action list. Assign its `accessibilityActions` and compare incoming

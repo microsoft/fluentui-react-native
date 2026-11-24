@@ -47,8 +47,10 @@ Metro, bundle, or CocoaPods work follows `apps/storybook/AGENTS.md`.
   Node-only story helpers in `*.wdio.ts` files imported dynamically inside callbacks.
 - Follow the [runtime-test guidance](references/tests-and-stories.md#runtime-tests) for decorative boundaries,
   localized visible and spoken output, and the distinction between configured styles and measured layout.
+- Use [native visual review](references/tests-and-stories.md#visual-review-of-native-stories) to inspect edge variants
+  separately from automated behavior and accessibility results.
 - When composing a command, verify [naming](references/state-and-accessibility.md#merge-accessibility-deliberately)
-  from the wrapper's inputs and export only [supported slots](references/types-and-slots.md#exports).
+  and native activation independently, and export only [supported slots](references/types-and-slots.md#exports).
 - Preserve [outstanding native evidence](references/contracts.md#contract-lifecycle) when recording realized
   source and test evidence for an implemented contract.
 - Do not copy web-only APIs, CSS behavior, or DOM assumptions into React Native, and do not copy or mechanically

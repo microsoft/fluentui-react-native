@@ -80,22 +80,22 @@ focus continuation. None of the three drafts is implemented or exported.
 ## Rating artwork qualification
 
 Verify [RatingItem](../src/components/rating-item/SPEC.md) half-star clipping in both directions at nonintegral
-display scales and confirm that individual stars do not expose native accessibility targets on Windows Fabric,
-Office Win32, macOS Fabric, or macOS Paper. Verify that [RatingDisplay](../src/components/rating-display/SPEC.md)
-exposes only one static summary (none when decorative), with no native adjustment or press action.
+display scales. Confirm that individual stars do not expose native accessibility targets, and that
+[RatingDisplay](../src/components/rating-display/SPEC.md) exposes one static summary (none when decorative)
+with no native adjustment or press action, on Windows Fabric and Office Win32.
 
 ## Command qualification
 
-Verify [CompoundButton](../src/components/compound-button/SPEC.md) native activation, undisrupted focus and
-one useful description in AX and UIA; exercise wrapping at enlarged text sizes on each desktop endpoint.
-Verify [DestructiveButton](../src/components/destructive-button/SPEC.md) native focus, high contrast and
-exactly-once command invocation on the same endpoints without involving a caller-owned confirmation.
+On the Windows endpoints, verify [CompoundButton](../src/components/compound-button/SPEC.md) native activation,
+focus continuation, one useful UIA description and wrapping. Verify [DestructiveButton](../src/components/destructive-button/SPEC.md)
+native focus and exactly-once command invocation on those endpoints; qualify its high-contrast presentation
+separately on all desktop renderers. VoiceOver and Narrator speech are separate checks.
 
 ## AvatarGroup qualification and stack layout
 
-Verify the [AvatarGroup](../src/components/avatar-group/SPEC.md) standalone summary, nested suppression and
-overflow at enlarged text sizes on each desktop endpoint. Do not admit stack layout until transparent cutouts
-over nonuniform native surfaces are qualified.
+Verify the [AvatarGroup](../src/components/avatar-group/SPEC.md) standalone summary and nested suppression on both
+Windows endpoints, and Tab traversal and overflow at enlarged text sizes on each desktop endpoint. Do not admit
+stack layout until transparent cutouts over nonuniform native surfaces are qualified.
 
 ## Catalog draft review order
 

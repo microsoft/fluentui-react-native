@@ -68,7 +68,9 @@ pretending parity.
 Compare five, six and zero members, remove a visible person, and inspect both the named standalone group and a
 group inside a single button.
 
-The [requirement evidence](spec/source.json) identifies the spread implementation, tests and story. Native traversal
-and clipping are not yet qualified on Windows Fabric, Office Win32, macOS Fabric or macOS Paper.
+The [requirement evidence](spec/source.json) identifies the spread implementation, tests and stories. On macOS
+Fabric and Paper, the native stories verified the visible-member summary and suppressed the nested duplicate.
+Visual review covered the two density extremes and the five-member overflow boundary. Windows and Win32
+qualification and stack masking remain open.
 
 See the [token bindings](spec/tokens.json), [accessibility](spec/accessibility.md), [interaction](spec/interaction.md) and [usage](spec/usage.md).

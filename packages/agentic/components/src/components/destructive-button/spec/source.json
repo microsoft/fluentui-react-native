@@ -163,14 +163,12 @@
     {
       "id": "DSB-003",
       "sources": ["flex-component", "furn-desktop"],
-      "evidence": ["useDestructiveButton.ts", "destructive-button.test.tsx"],
-      "plannedEvidence": ["destructive-button.wdio.ts"]
+      "evidence": ["useDestructiveButton.ts", "destructive-button.test.tsx", "destructive-button.stories.tsx"]
     },
     {
       "id": "DSB-004",
       "sources": ["flex-component", "furn-desktop"],
-      "evidence": ["destructive-button.types.test.ts", "destructive-button.test.tsx"],
-      "plannedEvidence": ["destructive-button.wdio.ts"]
+      "evidence": ["destructive-button.types.test.ts", "destructive-button.test.tsx", "destructive-button.stories.tsx"]
     }
   ]
 }

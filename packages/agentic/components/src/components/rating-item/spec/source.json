@@ -108,7 +108,7 @@
     {
       "id": "RTI-004",
       "sources": ["flex-component", "furn-desktop"],
-      "evidence": ["useRatingItem.ts", "rating-item.test.tsx"],
+      "evidence": ["useRatingItem.ts", "rating-item.test.tsx", "rating-item.stories.tsx"],
       "plannedEvidence": ["rating-item.wdio.ts"]
     }
   ]

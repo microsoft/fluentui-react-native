@@ -33,7 +33,8 @@ Related contracts used by this design: [Button](../button/SPEC.md).
 
 ### Data and callbacks
 
-`onPress` receives Button's native press event. Caller-supplied text styles may affect the two lines
+`onPress` receives Button's native press event for pointer and keyboard activation. Desktop assistive invocation
+requests the same command without a gesture event. Caller-supplied text styles may affect the two lines
 independently; neither line accepts a competing activation handler. Reserve room for an image only when
 supplied, and never use a fixed two-line height to clip translated or scaled text.
 The default accessible name is `content`. An explicit name should retain the visible command. The supporting
@@ -63,8 +64,8 @@ accessible name and description on both desktop accessibility APIs rather than a
 Compare activation on the image versus each line, then enlarge text and check the accessible command and its
 description on both Windows and macOS.
 
-The [requirement evidence](spec/source.json) identifies the implementation and tests. Native activation, description
-and scaling are not yet qualified on Windows Fabric, Office Win32, macOS Fabric or macOS Paper.
-The Jest style assertions check the sizing configuration only; the constrained story reports the actual layout height.
+The [requirement evidence](spec/source.json) identifies the implementation and tests. On macOS Fabric and Paper,
+the constrained story verified native AX help, both assistive and physical activation, physical focus, and wrapping beyond the minimum.
+The Jest style assertions check sizing configuration only. Windows and Win32 qualification remains open.
 
 See the [token bindings](spec/tokens.json), [accessibility](spec/accessibility.md), [interaction](spec/interaction.md) and [usage](spec/usage.md).

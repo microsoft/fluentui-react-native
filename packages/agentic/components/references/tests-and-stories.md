@@ -295,6 +295,24 @@ so its contract is visible.
 Keep stories accessible. Icon-only controls need action-oriented labels. Standalone informative icons need descriptive
 labels. Decorative icon slots inside a labeled control should be inaccessible.
 
+### Visual review of native stories
+
+Reuse the behavior fixture for visual review when it shows the required variants at a usable size. Include the
+edge cases that a default preview would miss: the smallest and largest density, wrapped text, disabled chrome,
+or both directions. Keep the Windows Fabric fixture within its fixed preview; do not bypass native hit testing
+to reach clipped controls.
+
+In `apps/storybook`, first list the selected tag with `yarn storybook test --<platform> --list --tag <tag> --input <lane>`.
+`STORYBOOK_SMOKE_TAG=<tag>` limits the authored test phase of `smoke --mode stories-and-tests`, not its render
+traversal. Run both lanes for a command that supports both: physical success and an AX/UIA role do not prove
+that the action exists or invokes the callback. Inspect the actual target-window PNGs alongside the native
+results. For stories that explicitly call
+`recordVisualReview` in a `*.wdio.ts` helper, `FURN_STORYBOOK_VISUAL_REVIEW=<batch>` opts in to writing the
+owned-window captures beneath `artifacts/visual-review`. Use a distinct batch per renderer and attempt. This
+local capture requires OS permission; it does not add a capture requirement to normal hosted tests. A screenshot
+that was saved but not inspected is not a visual pass. A visually correct frame is not proof of focus, native
+accessibility, or screen-reader speech.
+
 ## Validation
 
 Use declared workspace scripts:

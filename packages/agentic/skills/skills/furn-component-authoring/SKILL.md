@@ -61,8 +61,9 @@ Do not edit files or start native workloads.
 5. Implement types and slots, state and accessibility, styling and slot
    props, pure rendering, component assembly, and explicit named exports.
    When reusing another component, check blank naming inputs and export only
-   the slots the new contract supports. Keep native adaptation distinct from
-   web anatomy.
+   the slots the new contract supports. Verify which assistive activation
+   routes the composition inherits; a native role is not an action. Keep
+   native adaptation distinct from web anatomy.
 6. Preserve token meaning and follow the contract's token companion where
    applicable. Visual overrides do not replace component-owned handlers,
    refs, focus behavior, or accessibility. Record missing tokens rather than
@@ -71,8 +72,9 @@ Do not edit files or start native workloads.
    output. For decorative output, verify the hidden root and any independently
    rendered layers using the host's test-query guidance. For wrapping or text
    scaling, distinguish assertions on configured styles from measured layout.
-   Native action, focus, and input claims need native evidence on the affected
-   endpoints.
+   Inspect native visual evidence for the variants most likely to regress,
+   not just the default preview. Native action, focus, and input claims need
+   separate native evidence on the affected endpoints.
 8. Reconcile the contract, implementation, and
    [qualification evidence](../../references/shared/portable/context.md#permissions-and-evidence)
    by requirement. Retain outstanding native evidence when recording

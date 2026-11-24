@@ -2,6 +2,7 @@ import type { ComponentState, OptionalSlot, PropsWithRefOf, Slot } from '@fluent
 import type { Image, ImageSourcePropType, Pressable, PressableProps, StyleProp, TextStyle, View } from 'react-native';
 import type { DesktopTooltipProps } from '../../common/desktopTooltipProps';
 import type { ButtonAppearance, ButtonSize, ButtonState } from '../button/button.types';
+import type { CommandPress } from '../button/commandPress';
 import type { Text } from '../text/text';
 
 export type CompoundButtonAppearance = ButtonAppearance;
@@ -9,13 +10,15 @@ export type CompoundButtonSize = ButtonSize;
 export type CompoundButtonSlots = { root: Slot<typeof Pressable> };
 
 export type CompoundButtonProps = DesktopTooltipProps &
-  Pick<PressableProps, 'testID' | 'nativeID' | 'style' | 'onPress' | 'onFocus' | 'onBlur' | 'onLayout' | 'accessibilityLabel'> & {
+  Pick<PressableProps, 'testID' | 'nativeID' | 'style' | 'onFocus' | 'onBlur' | 'onLayout' | 'accessibilityLabel'> & {
     ref?: PropsWithRefOf<typeof Pressable>['ref'];
     content: string;
     secondaryContent: string;
     appearance?: CompoundButtonAppearance;
     size?: CompoundButtonSize;
     disabled?: boolean;
+    /** The gesture event is omitted for desktop assistive activation. */
+    onPress?: CommandPress | null;
     image?: ImageSourcePropType;
     contentStyle?: StyleProp<TextStyle>;
     secondaryContentStyle?: StyleProp<TextStyle>;

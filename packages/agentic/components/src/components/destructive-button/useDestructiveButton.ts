@@ -1,4 +1,5 @@
 import { hiddenFromAccessibilityProps } from '../../common/accessibility';
+import { commandPressProps } from '../button/commandPress';
 import { useButton_unstable } from '../button/useButton';
 import type { DestructiveButtonProps, DestructiveButtonState } from './destructive-button.types';
 
@@ -6,6 +7,8 @@ export function useDestructiveButton_unstable({
   content,
   accessibilityLabel,
   appearance: appearanceProp,
+  disabled = false,
+  onPress,
   ...props
 }: DestructiveButtonProps): DestructiveButtonState {
   const appearance = appearanceProp === 'primary' ? 'primary' : 'subtle';
@@ -13,6 +16,8 @@ export function useDestructiveButton_unstable({
   const name = accessibilityLabel?.trim() ? accessibilityLabel : undefined;
   const button = useButton_unstable({
     ...props,
+    ...commandPressProps(onPress, disabled),
+    disabled,
     content: visibleContent === undefined ? undefined : { ...hiddenFromAccessibilityProps, children: visibleContent },
     accessibilityLabel: name,
     appearance,

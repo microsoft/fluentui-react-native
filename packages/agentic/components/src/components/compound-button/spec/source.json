@@ -108,13 +108,12 @@
     {
       "id": "CPB-003",
       "sources": ["flex-component", "furn-desktop"],
-      "evidence": ["compound-button.test.tsx", "renderCompoundButton.tsx"],
-      "plannedEvidence": ["compound-button.wdio.ts"]
+      "evidence": ["compound-button.test.tsx", "compound-button.stories.tsx"]
     },
     {
       "id": "CPB-004",
       "sources": ["flex-component", "furn-desktop"],
-      "evidence": ["compound-button.test.tsx", "useCompoundButton.ts"],
+      "evidence": ["compound-button.test.tsx", "compound-button.stories.tsx"],
       "plannedEvidence": ["compound-button.wdio.ts"]
     }
   ]

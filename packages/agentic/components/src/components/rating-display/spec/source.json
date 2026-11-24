@@ -113,7 +113,7 @@
     {
       "id": "RTD-004",
       "sources": ["flex-component", "furn-desktop"],
-      "evidence": ["useRatingDisplay.ts", "rating-display.test.tsx"],
+      "evidence": ["useRatingDisplay.ts", "rating-display.test.tsx", "rating-display.stories.tsx"],
       "plannedEvidence": ["rating-display.wdio.ts"]
     }
   ]

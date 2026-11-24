@@ -16,6 +16,9 @@ describe('CompoundButton', () => {
     expect(tree.queryByRole('image', { includeHiddenElements: true })).toBeNull();
     await fireEvent.press(target);
     expect(onPress).toHaveBeenCalledTimes(1);
+    await fireEvent(target, 'accessibilityTap');
+    expect(onPress).toHaveBeenCalledTimes(2);
+    expect(onPress).toHaveBeenLastCalledWith();
 
     await tree.rerender(
       <CompoundButton
@@ -28,8 +31,9 @@ describe('CompoundButton', () => {
     );
     const disabled = tree.getByRole('button', { name: 'Archive file' });
     expect(disabled).toBeDisabled();
+    expect(disabled.props.onAccessibilityTap).toBeUndefined();
     await fireEvent.press(disabled);
-    expect(onPress).toHaveBeenCalledTimes(1);
+    expect(onPress).toHaveBeenCalledTimes(2);
   });
 
   it.each([

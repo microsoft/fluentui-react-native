@@ -39,10 +39,14 @@ describe('DestructiveButton', () => {
     expect(target().props.accessibilityState.checked).toBeUndefined();
     await fireEvent.press(target());
     expect(onPress).toHaveBeenCalledTimes(1);
+    await fireEvent(target(), 'accessibilityTap');
+    expect(onPress).toHaveBeenCalledTimes(2);
+    expect(onPress).toHaveBeenLastCalledWith();
 
     await tree.rerender(<DestructiveButton leadingIcon={leadingIcon} accessibilityLabel="Remove saved item" onPress={onPress} disabled />);
+    expect(target().props.onAccessibilityTap).toBeUndefined();
     await fireEvent.press(target());
-    expect(onPress).toHaveBeenCalledTimes(1);
+    expect(onPress).toHaveBeenCalledTimes(2);
   });
 
   it('does not expose a command when its only nominal name is blank text', async () => {
