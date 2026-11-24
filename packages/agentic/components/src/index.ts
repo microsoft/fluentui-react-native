@@ -47,6 +47,19 @@ export { renderBadge_unstable } from './components/badge/renderBadge';
 export { useBadgeStyles_unstable } from './components/badge/useBadgeStyles';
 export { useBadge_unstable } from './components/badge/useBadge';
 
+export { Breadcrumb } from './components/breadcrumb/breadcrumb';
+export type {
+  BreadcrumbAncestor,
+  BreadcrumbCurrent,
+  BreadcrumbItems,
+  BreadcrumbProps,
+  BreadcrumbSize,
+  BreadcrumbState,
+} from './components/breadcrumb/breadcrumb.types';
+export { renderBreadcrumb_unstable } from './components/breadcrumb/renderBreadcrumb';
+export { useBreadcrumb_unstable } from './components/breadcrumb/useBreadcrumb';
+export { useBreadcrumbStyles_unstable } from './components/breadcrumb/useBreadcrumbStyles';
+
 export { Button } from './components/button/button';
 export type { ButtonAppearance, ButtonProps, ButtonShape, ButtonSize, ButtonSlots, ButtonState } from './components/button/button.types';
 export { renderButton_unstable } from './components/button/renderButton';
@@ -133,6 +146,18 @@ export { renderInput_unstable } from './components/input/renderInput';
 export { useInputStyles_unstable } from './components/input/useInputStyles';
 export { useInput_unstable } from './components/input/useInput';
 
+export { Field } from './components/field/field';
+export type { FieldBinding, FieldOrientation, FieldProps, FieldState, FieldStatus } from './components/field/field.types';
+export { renderField_unstable } from './components/field/renderField';
+export { useField_unstable } from './components/field/useField';
+export { useFieldStyles_unstable } from './components/field/useFieldStyles';
+
+export { InfoLabel } from './components/info-label/info-label';
+export type { InfoLabelHelp, InfoLabelProps, InfoLabelState } from './components/info-label/info-label.types';
+export { renderInfoLabel_unstable } from './components/info-label/renderInfoLabel';
+export { useInfoLabel_unstable } from './components/info-label/useInfoLabel';
+export { useInfoLabelStyles_unstable } from './components/info-label/useInfoLabelStyles';
+
 export { InteractionTag } from './components/interaction-tag/interaction-tag';
 export type {
   InteractionTagAppearance,
@@ -150,6 +175,12 @@ export type { LabelProps, LabelSize, LabelState, LabelTarget, LabelWeight } from
 export { renderLabel_unstable } from './components/label/renderLabel';
 export { useLabel_unstable } from './components/label/useLabel';
 export { useLabelStyles_unstable } from './components/label/useLabelStyles';
+
+export { Link } from './components/link/link';
+export type { LinkDestination, LinkProps, LinkState, LinkTypography } from './components/link/link.types';
+export { renderLink_unstable } from './components/link/renderLink';
+export { useLink_unstable } from './components/link/useLink';
+export { useLinkStyles_unstable } from './components/link/useLinkStyles';
 
 export { ListItem } from './components/list-item/list-item';
 export type {
@@ -237,6 +268,20 @@ export { renderMessageBar_unstable } from './components/message-bar/renderMessag
 export { useMessageBar_unstable } from './components/message-bar/useMessageBar';
 export { useMessageBarStyles_unstable } from './components/message-bar/useMessageBarStyles';
 
+export { NavItem } from './components/nav-item/nav-item';
+export type {
+  NavItemAction,
+  NavItemBehavior,
+  NavItemDensity,
+  NavItemLeading,
+  NavItemNesting,
+  NavItemProps,
+  NavItemState,
+} from './components/nav-item/nav-item.types';
+export { renderNavItem_unstable } from './components/nav-item/renderNavItem';
+export { useNavItem_unstable } from './components/nav-item/useNavItem';
+export { useNavItemStyles_unstable } from './components/nav-item/useNavItemStyles';
+
 export { Persona } from './components/persona/persona';
 export type {
   PersonaAlignment,
@@ -280,6 +325,12 @@ export { renderRadio_unstable } from './components/radio/renderRadio';
 export { useRadioStyles_unstable } from './components/radio/useRadioStyles';
 export { useRadio_unstable } from './components/radio/useRadio';
 
+export { RadioGroup } from './components/radio-group/radio-group';
+export type { RadioGroupOption, RadioGroupOrientation, RadioGroupProps, RadioGroupState } from './components/radio-group/radio-group.types';
+export { renderRadioGroup_unstable } from './components/radio-group/renderRadioGroup';
+export { useRadioGroup_unstable } from './components/radio-group/useRadioGroup';
+export { useRadioGroupStyles_unstable } from './components/radio-group/useRadioGroupStyles';
+
 export { RatingDisplay } from './components/rating-display/rating-display';
 export type {
   RatingDisplayLayout,
@@ -291,6 +342,18 @@ export type {
 export { renderRatingDisplay_unstable } from './components/rating-display/renderRatingDisplay';
 export { useRatingDisplayStyles_unstable } from './components/rating-display/useRatingDisplayStyles';
 export { useRatingDisplay_unstable } from './components/rating-display/useRatingDisplay';
+
+export { Scrollbar } from './components/scrollbar/scrollbar';
+export type { ScrollbarOrientation, ScrollbarOwnerProps, ScrollbarProps, ScrollbarState } from './components/scrollbar/scrollbar.types';
+export { renderScrollbar_unstable } from './components/scrollbar/renderScrollbar';
+export { useScrollbar_unstable } from './components/scrollbar/useScrollbar';
+export { useScrollbarStyles_unstable } from './components/scrollbar/useScrollbarStyles';
+
+export { SearchBox } from './components/search-box/search-box';
+export type { SearchBoxProps, SearchBoxState } from './components/search-box/search-box.types';
+export { renderSearchBox_unstable } from './components/search-box/renderSearchBox';
+export { useSearchBox_unstable } from './components/search-box/useSearchBox';
+export { useSearchBoxStyles_unstable } from './components/search-box/useSearchBoxStyles';
 
 export { Skeleton } from './components/skeleton/skeleton';
 export type { SkeletonProps, SkeletonSlots, SkeletonState } from './components/skeleton/skeleton.types';
@@ -315,6 +378,18 @@ export type { SwatchProps, SwatchSample, SwatchShape, SwatchSize, SwatchState } 
 export { renderSwatch_unstable } from './components/swatch/renderSwatch';
 export { useSwatch_unstable } from './components/swatch/useSwatch';
 export { useSwatchStyles_unstable } from './components/swatch/useSwatchStyles';
+
+export { SwatchPicker } from './components/swatch-picker/swatch-picker';
+export type {
+  SwatchPickerItem,
+  SwatchPickerItems,
+  SwatchPickerLayout,
+  SwatchPickerProps,
+  SwatchPickerState,
+} from './components/swatch-picker/swatch-picker.types';
+export { renderSwatchPicker_unstable } from './components/swatch-picker/renderSwatchPicker';
+export { useSwatchPicker_unstable } from './components/swatch-picker/useSwatchPicker';
+export { useSwatchPickerStyles_unstable } from './components/swatch-picker/useSwatchPickerStyles';
 
 export { Switch } from './components/switch/switch';
 export type { SwitchLayout, SwitchProps, SwitchSlots, SwitchState } from './components/switch/switch.types';
@@ -364,6 +439,12 @@ export type { TextareaEditorProps, TextareaProps, TextareaSize, TextareaState } 
 export { renderTextarea_unstable } from './components/textarea/renderTextarea';
 export { useTextarea_unstable } from './components/textarea/useTextarea';
 export { useTextareaStyles_unstable } from './components/textarea/useTextareaStyles';
+
+export { Toolbar } from './components/toolbar/toolbar';
+export type { ToolbarProps, ToolbarSize, ToolbarState } from './components/toolbar/toolbar.types';
+export { renderToolbar_unstable } from './components/toolbar/renderToolbar';
+export { useToolbar_unstable } from './components/toolbar/useToolbar';
+export { useToolbarStyles_unstable } from './components/toolbar/useToolbarStyles';
 
 export { Text } from './components/text/text';
 export { renderText_unstable } from './components/text/renderText';

@@ -1,7 +1,7 @@
 ---
 name: search-box
 platform: react-native (Windows, macOS)
-status: contract-draft
+status: implemented
 source: ./spec/source.json
 tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
@@ -50,18 +50,22 @@ only to that root; it does not use the tip as a name, description or popup relat
 
 ## Platform behavior
 
-Request native search semantics where supported, retaining edit/value semantics on hosts without a distinct
-search role. Do not mark every SearchBox as a separate application search landmark.
+Keep the native editor's edit/value semantics; request a search return key, not an application landmark.
+macOS claims Escape only while a nonempty editor can clear and only through AppKit's marked-text-aware key path.
+Windows and Win32 keep their editor Escape behavior pending composition-safe native delivery evidence. Explicit
+submission uses native editor submission, not a Return listener. Qualify IME confirmation per host.
 
 ## Divergences from Flex
 
 - `search-editor-owner` — **accepted.** Use the actual input and an independent button; result announcements and landmark scope belong to the containing screen.
+- `composition-safe-shortcuts` — **deferred.** Windows and Win32 need composition-safe Escape evidence, and all renderers need native IME submission checks.
 
 ## Conformance
 
 Clear with mouse, keyboard and assistive invocation; assert one change and the actual editor focus. Exercise
 empty Escape and composing Return against a containing dialog.
 
-Draft for Windows Fabric, Office Win32, macOS Fabric and macOS Paper. The [requirement evidence](spec/source.json) is planned; no runtime export or native qualification is claimed.
+The [requirement evidence](spec/source.json) distinguishes authored editor and clear cases from the remaining host
+input-method checks.
 
-Review the [token bindings](spec/tokens.json), [accessibility](spec/accessibility.md), [interaction](spec/interaction.md) and [usage](spec/usage.md) with this draft.
+See the [token bindings](spec/tokens.json), [accessibility](spec/accessibility.md), [interaction](spec/interaction.md) and [usage](spec/usage.md).

@@ -285,6 +285,19 @@
       "sha256": "eb4707f6fdeff4ea08f67e074a701d93441d90a68c6d682cd4d0408a807b2c35"
     },
     {
+      "output": "Search20Regular.generated.tsx",
+      "requested": [
+        "Search20Regular"
+      ],
+      "inputs": [
+        {
+          "file": "search_20_regular.svg",
+          "sha256": "bdcaed7e5348ba774acf854b840ef8bcf30c024bf5d3bf50b1e08d3aac8aab17"
+        }
+      ],
+      "sha256": "64324cd1ab1df1adaa98f36255ef0a9ef9fd765bd756eab79a7805e9962910fb"
+    },
+    {
       "output": "Star12Filled.generated.tsx",
       "requested": [
         "Star12Filled"

@@ -1,9 +1,9 @@
 {
   "schemaVersion": 2,
   "component": "toolbar",
-  "lifecycle": "contract-draft",
-  "conformance": "review-required",
-  "reviewedAt": null,
+  "lifecycle": "implemented",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-11-24",
   "sources": [
     {
       "id": "flex-component",
@@ -108,22 +108,25 @@
     {
       "id": "TLB-001",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["toolbar.types.test.tsx"]
+      "evidence": ["toolbar.types.test.ts", "toolbar.test.tsx"]
     },
     {
       "id": "TLB-002",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["toolbar.test.tsx", "toolbar.wdio.ts"]
+      "evidence": ["toolbar.test.tsx", "toolbar.stories.tsx"],
+      "plannedEvidence": ["toolbar.wdio.ts"]
     },
     {
       "id": "TLB-003",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["toolbar.test.tsx", "toolbar.stories.tsx"]
+      "evidence": ["useToolbar.ts", "toolbar.test.tsx"],
+      "plannedEvidence": ["toolbar.wdio.ts"]
     },
     {
       "id": "TLB-004",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["toolbar.wdio.ts", "toolbar.stories.tsx"]
+      "evidence": ["toolbarCommand.ts", "toolbar.stories.tsx"],
+      "plannedEvidence": ["toolbar.wdio.ts"]
     }
   ]
 }

@@ -1,7 +1,7 @@
 ---
 name: radio-group
 platform: react-native (Windows, macOS)
-status: contract-draft
+status: implemented
 source: ./spec/source.json
 tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
@@ -45,7 +45,8 @@ only to that root; it does not use the tip as a name, description or popup relat
 ### Requirements
 
 - **RDG-001:** Enforce mutual exclusion by stable key; group disable blocks all changes. Removing the selected option does not fabricate a user selection callback.
-- **RDG-002:** Tab enters at the selected enabled option or first enabled one. Arrow navigation wraps, skips disabled members, and requests the newly reached value once; Tab then leaves.
+- **RDG-002:** Tab enters at the selected enabled option or first enabled one. All four arrows wrap through enabled members
+  and request the newly reached value once, independently of layout; Tab then leaves.
 - **RDG-003:** Expose a named radio group, individually named radios and a coherent checked state. Actuating native Select and pointer activation use the same selection owner.
 - **RDG-004:** Lay out options along the requested axis, keeping legend and options separate and individual Radio styling delegated.
 
@@ -64,6 +65,7 @@ independent Tab stops.
 Enter with no selection, move across a disabled option, wrap, remove the focused option, and compare UIA/AX
 selection with exactly one change per accepted choice.
 
-Draft for Windows Fabric, Office Win32, macOS Fabric and macOS Paper. The [requirement evidence](spec/source.json) is planned; no runtime export or native qualification is claimed.
+The [requirement evidence](spec/source.json) separates the implemented group from native Select, removal and
+controlled-rejection qualification on each endpoint.
 
-Review the [token bindings](spec/tokens.json), [accessibility](spec/accessibility.md), [interaction](spec/interaction.md) and [usage](spec/usage.md) with this draft.
+See the [token bindings](spec/tokens.json), [accessibility](spec/accessibility.md), [interaction](spec/interaction.md) and [usage](spec/usage.md).

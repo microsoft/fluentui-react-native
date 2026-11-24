@@ -125,12 +125,20 @@ composition. Add a regression to the shared trigger's own suite; a composite alo
 
 For a persistent announcement, distinguish a new event identity from temporary opt-out. Verify an unchanged
 message through opted-in → opted-out → opted-in, and compare it with an actual removal and later reinsertion.
+If a disabled form hides its feedback temporarily, preserve the identity until feedback is removed or changes.
 
 In stepped surfaces, list the interactive slots that can disappear during a transition. Preserve a surviving
 native target; when the activated target disappears, choose a live successor after the accepted step commits.
 Qualify that transition with physical keyboard input, not a click that never focused the old target.
 Clear a pending close-and-focus intent when the controlled owner rejects the requested change. Test the rejection
 followed by an unrelated controlled update to ensure stale intent cannot steal focus.
+Treat a clear-and-return request as one-shot, even when a controlled editor rejects the value. Re-enabling a control
+must not replay a pending focus request. Declare native handled keys only where the editor gives IME composition
+precedence; a JavaScript `preventDefault()` cannot undo an AppKit key equivalent that already blurred the editor.
+
+Collections must distinguish requested focus from observed focus. A command callback may move focus before the
+next layout effect; a pending pointer-focus request must not pull it back from that destination. For a measured grid,
+register layout observers before entering the grid mode so unchanged first-row tiles already have geometry.
 
 For a component-owned toggle or select action, use `resolveAccessibilityAction`
 from Framework Base with the semantic action, `Platform.OS`, and the caller's

@@ -1,7 +1,7 @@
 ---
 name: info-label
 platform: react-native (Windows, macOS)
-status: contract-draft
+status: implemented
 source: ./spec/source.json
 tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
@@ -36,7 +36,8 @@ The structural `root` View owns the public React 19 ref, style and any native `t
 The Label and Popover's Button trigger are siblings. Popover supplies the one trigger, not a Button
 wrapped around another button. Use a subtle icon-only Button with a decorative Info glyph: a small
 Button for a small/medium label and a medium Button for a large label. The help surface is anchored to
-that mounted button, prefers top/center and can flip; it reserves no layout space. Button owns the
+that mounted button, prefers top/center and can flip; it reserves no layout space. Give the surface a readable
+width independent of the icon-only trigger. Button owns the
 focus treatment and Popover owns surface styling. No global registry of open labels is introduced.
 
 ### Requirements
@@ -71,7 +72,6 @@ Windows Fabric, Office Win32 and macOS Fabric/Paper; do not swallow Tab and call
 
 ## Conformance
 
-Draft only. Planned checks distinguish label clicks from help activation, controlled/native dismissal
-from ordinary rerenders, and mouse, keyboard and assistive invocation. Branches with wrapped labels
-and text-only versus interactive help need separate native focus checks. No implementation or native
-qualification is claimed.
+The [source evidence](spec/source.json) separates label and help activation and covers controlled and disabled
+requests. Native trigger association and natural boundary continuation, and native focus on text-only help,
+remain separate from testing the visible contents or invoking its trigger.

@@ -40,10 +40,11 @@ export const IdentityUpdate: Story = {
       { requires: ['click'] },
       async ({ browser, desktop, expect }) => {
         await expect(await browser.$('~presence-owner')).toHaveAttribute('name', 'Ana, away');
-        expect(await desktop.session.findElements('accessibility id', 'passive-presence-mark')).toHaveLength(0);
+        const { expectNoAccessiblePresenceMark } = await import('./presence-badge.wdio.ts');
+        await expectNoAccessiblePresenceMark({ desktop, expect });
         await (await browser.$('~change-presence')).click();
         await expect(await browser.$('~presence-owner')).toHaveAttribute('name', 'Ana, busy');
-        expect(await desktop.session.findElements('accessibility id', 'passive-presence-mark')).toHaveLength(0);
+        await expectNoAccessiblePresenceMark({ desktop, expect });
       },
     ),
   ],

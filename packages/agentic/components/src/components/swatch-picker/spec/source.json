@@ -1,9 +1,9 @@
 {
   "schemaVersion": 2,
   "component": "swatch-picker",
-  "lifecycle": "contract-draft",
-  "conformance": "review-required",
-  "reviewedAt": null,
+  "lifecycle": "implemented",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-11-24",
   "sources": [
     {
       "id": "flex-component",
@@ -103,22 +103,24 @@
     {
       "id": "SWP-001",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["swatch-picker.test.tsx", "swatch-picker.stories.tsx"]
+      "evidence": ["swatch-picker.test.tsx", "swatch-picker.stories.tsx"]
     },
     {
       "id": "SWP-002",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["swatch-picker.test.tsx", "swatch-picker.wdio.ts"]
+      "evidence": ["swatch-picker.test.tsx", "swatch-picker.stories.tsx"],
+      "plannedEvidence": ["swatch-picker.wdio.ts"]
     },
     {
       "id": "SWP-003",
       "sources": ["flex-component"],
-      "plannedEvidence": ["swatch-picker.test.tsx", "swatch-picker.stories.tsx"]
+      "evidence": ["swatch-picker.types.test.ts", "swatch-picker.stories.tsx"]
     },
     {
       "id": "SWP-004",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["swatch-picker.wdio.ts", "swatch-picker.stories.tsx"]
+      "evidence": ["swatchPickerChoice.ts", "swatch-picker.stories.tsx"],
+      "plannedEvidence": ["swatch-picker.wdio.ts"]
     }
   ]
 }

@@ -46,6 +46,8 @@ registration; it cannot start with its published dependencies.
    not a JavaScript event or a successful bundle. For visual review, capture
    only the verified target, inspect the image, and report that observation
    separately from behavioral checks.
+   An automation ID can resolve a native node that is not in accessible
+   traversal; use the exposed accessibility tree to verify a negative claim.
    A verified attach-only case run may qualify the cases, but cannot replace
    an uncompleted owned smoke lifecycle or full-catalog traversal.
 6. Follow the consumer repository's validation and release rules. In FURN,

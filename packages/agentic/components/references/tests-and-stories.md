@@ -37,6 +37,12 @@ Testing Library filters deliberately hidden roots out of `getByTestId` by defaul
 ancestor does not prove that the leaf itself lacks a role or action; inspect the leaf props when that is part of the contract.
 For a native negative assertion, include a fixture that exposes the leaf's own behavior without a labelled
 ancestor that can absorb it. Assert the native owner and the absence of the extra target separately.
+An automation-ID lookup may also match a non-control UIA node. Use the exposed accessibility tree, with a known
+owner as a positive control, when the requirement is absence from independent accessible traversal.
+For a native scroll wrapper, put the automation identity on the real scroll viewport, not a text descendant.
+Use its scroll callback and native input to verify that the observed viewport actually moved.
+Inspect compact anchors with scrollable popup content. An unconstrained ScrollView can contribute no intrinsic
+width, leaving every destination clipped even when native lookup still finds its name.
 An evidence assertion must fail on a regression in the component under test. Reading an unchanged hard-coded
 name from a different native element proves neither visible label matching nor a labeling relationship.
 Test a component-owned guard directly when the test library would suppress the event itself. For instance,
@@ -327,6 +333,9 @@ that was saved but not inspected is not a visual pass. A visually correct frame 
 accessibility, or screen-reader speech.
 
 ## Validation
+
+Run repository CI validation after interactive Storybook smoke has settled. The desktop-test ownership tests share
+the machine's per-user workload claim, even when their temporary directories differ.
 
 Use declared workspace scripts:
 

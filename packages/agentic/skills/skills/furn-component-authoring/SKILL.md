@@ -60,6 +60,8 @@ Do not edit files or start native workloads.
    When a state transition can remove the focused action, define its live
    successor and test keyboard continuity. For controlled actions, also test
    rejection followed by an unrelated update so stale intent never moves focus.
+   When a responsive layout moves items between regions, preserve the identity
+   of targets that remain visible and restore only to a surviving target.
    Distinguish a theme or caller visual override from a change to a reviewed
    default. For requirements that depend on a native capability, verify the
    renderer and host registration on the affected endpoints or record the
@@ -71,6 +73,8 @@ Do not edit files or start native workloads.
    routes the composition inherits; a native role is not an action. Keep
    native adaptation distinct from web anatomy. Test a shared-hook change at
    the owning component's boundary as well as in the composition.
+   Resolve structural child props before an early phased component consumes
+   them; a later styling attachment cannot create an absent child slot.
 6. Preserve token meaning and follow the contract's token companion where
    applicable. Visual overrides do not replace component-owned handlers,
    refs, focus behavior, or accessibility. Distinguish state-dependent chrome
@@ -83,7 +87,9 @@ Do not edit files or start native workloads.
    can conceal a leak in a decorative child. For wrapping or text
    scaling, distinguish assertions on configured styles from measured layout.
    Inspect native visual evidence for the variants most likely to regress,
-   not just the default preview. Native action, focus, and input claims need
+   not just the default preview. For compact anchors and scrollable popup
+   content, check that the viewport fits complete, operable destinations.
+   Native action, focus, and input claims need
    separate native evidence on the affected endpoints. Check that evidence
    actually exercises the component, not only its unchanged fixture peers
    or a guard the test library applies first.

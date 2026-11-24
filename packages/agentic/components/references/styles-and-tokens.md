@@ -84,6 +84,10 @@ a state-specific default. A caller's slot visual props and styles win through `a
 handlers, refs, slot presence, and accessibility are not token overrides. Keep shared focus behavior and Menu popup
 styling outside MenuButton's chevron tokens.
 
+Declare a runtime domain for every JSON slot, including icon-source-only bindings. When theme props target a nested
+composition input such as Popover's `trigger`, merge them into the complete input before attaching it. Slot attachment
+replaces nested objects; attaching only size or appearance drops the trigger's name, action, and disabled state.
+
 ## Legacy state-style factories
 
 For components without a v2 companion, use module-scoped structural styles, state factories, and themed factories,

@@ -1,9 +1,9 @@
 {
   "schemaVersion": 2,
   "component": "breadcrumb",
-  "lifecycle": "contract-draft",
-  "conformance": "review-required",
-  "reviewedAt": null,
+  "lifecycle": "implemented",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-11-24",
   "sources": [
     {
       "id": "flex-component",
@@ -107,22 +107,25 @@
     {
       "id": "BRC-001",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["breadcrumb.test.tsx", "breadcrumb.stories.tsx"]
+      "evidence": ["breadcrumb.test.tsx", "breadcrumb.stories.tsx"]
     },
     {
       "id": "BRC-002",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["breadcrumb.test.tsx", "breadcrumb.wdio.ts"]
+      "evidence": ["breadcrumb.test.tsx", "breadcrumb.stories.tsx"],
+      "plannedEvidence": ["breadcrumb.wdio.ts"]
     },
     {
       "id": "BRC-003",
       "sources": ["flex-component"],
-      "plannedEvidence": ["breadcrumb.test.tsx", "breadcrumb.stories.tsx"]
+      "evidence": ["breadcrumb.test.tsx", "breadcrumb.stories.tsx"],
+      "plannedEvidence": ["breadcrumb.wdio.ts"]
     },
     {
       "id": "BRC-004",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["breadcrumb.wdio.ts", "breadcrumb.stories.tsx"]
+      "evidence": ["breadcrumb.types.test.ts", "breadcrumb.stories.tsx"],
+      "plannedEvidence": ["breadcrumb.wdio.ts"]
     }
   ]
 }
