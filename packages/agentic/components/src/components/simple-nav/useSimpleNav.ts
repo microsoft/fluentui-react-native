@@ -35,7 +35,9 @@ export function useSimpleNav_unstable({
   style: userStyle,
   ...rootProps
 }: SimpleNavProps): SimpleNavState {
-  if (presentation === 'overlay' && !desktopControls) throw new Error('SimpleNav overlay requires a qualified native DialogWindow host.');
+  if (presentation === 'overlay' && !desktopControls?.DialogWindow) {
+    throw new Error('SimpleNav overlay requires a qualified native DialogWindow host.');
+  }
   if (
     breakpoints &&
     (!Number.isFinite(availableWidth) ||

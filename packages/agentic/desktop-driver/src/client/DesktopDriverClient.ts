@@ -444,6 +444,16 @@ export class DesktopElementClient {
     return this.command('POST', '/furn/accessibility-action', { name }, options);
   }
 
+  /** Reads the native range value; null means that the provider exposed an unset number. */
+  getRangeValue(options?: DesktopClientCallOptions): Promise<number | null> {
+    return this.command('GET', '/furn/range-value', undefined, options);
+  }
+
+  /** Writes an exact numeric argument through the native accessibility range pattern, never through keyboard input. */
+  setRangeValue(value: number, options?: DesktopClientCallOptions): Promise<null> {
+    return this.command('POST', '/furn/range-value', { value }, options);
+  }
+
   getText(options?: DesktopClientCallOptions): Promise<string> {
     return this.command('GET', '/text', undefined, options);
   }

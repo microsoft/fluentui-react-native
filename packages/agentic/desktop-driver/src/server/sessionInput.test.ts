@@ -308,6 +308,34 @@ describe('Desktop Driver session input policy', () => {
     });
   });
 
+  test('an accessible session delivers a finite range write separately from named actions and keys', async () => {
+    await withSession(
+      'accessible',
+      async ({ harness, session }) => {
+        let current: number | null = null;
+        const setRangeValue = jest.fn(async (_id: string, value: number) => {
+          current = value;
+        });
+        Object.assign(harness.host, { getRangeValue: async () => current, setRangeValue });
+        const target = await session.findElement('accessibility id', 'stepper');
+        await expect(target.getRangeValue()).resolves.toBeNull();
+        await expect(session.command('POST', `/element/${target.id}/furn/range-value`, { value: '3.625' })).rejects.toMatchObject({
+          code: 'invalid argument',
+        });
+        await target.setRangeValue(3.625);
+        expect(setRangeValue).toHaveBeenCalledTimes(1);
+        expect(setRangeValue.mock.calls[0].slice(0, 2)).toEqual(['stepper', 3.625]);
+        await expect(target.getRangeValue()).resolves.toBe(3.625);
+        const { receipts } = await session.getInput();
+        expect(receipts).toEqual({ 'accessibility-range-value': 1 });
+        expect(compareDesktopInputReceipts({ requires: ['perform-accessibility-action'] }, receipts).undeclared).toEqual([
+          'accessibility-range-value',
+        ]);
+      },
+      { features: { rangeValue: true } },
+    );
+  });
+
   test('agent operations in an accessible session never type or move the pointer', async () => {
     await withSession('accessible', async ({ harness, session }) => {
       await expect(session.act({ action: 'click', find: { automationId: 'save' } })).rejects.toMatchObject({

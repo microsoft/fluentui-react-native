@@ -20,7 +20,7 @@ import type { Text } from '../text/text';
 export type NavItemDensity = 'comfortable' | 'compact';
 export type NavItemNesting = 'top-level' | 'subitem';
 export type NavItemLeading = { kind: 'icon'; icon: SlotProp<typeof Icon> } | { kind: 'avatar'; avatar: AvatarProps };
-export type NavItemAction = { key: string; label: string; onPress: () => void };
+export type NavItemAction = { key: string; label: string; onPress: () => void; testID?: string };
 export type NavItemBehavior =
   | {
       type?: 'item';

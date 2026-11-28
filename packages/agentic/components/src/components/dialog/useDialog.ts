@@ -28,7 +28,7 @@ export function useDialog_unstable({
   style: userStyle,
   ...rootProps
 }: DialogProps): DialogState {
-  if (!desktopControls) throw new Error('Dialog requires the macOS native DialogWindow registration.');
+  if (!desktopControls?.DialogWindow) throw new Error('Dialog requires a native DialogWindow registration.');
   const { width, height } = useWindowDimensions();
   const [footerWidth, setFooterWidth] = useState<number>();
   const actions = uniqueByKey(supplied, (action) => action.key).filter((action) => action.label.trim());

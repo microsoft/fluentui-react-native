@@ -27,7 +27,7 @@ export function useSpinButton_unstable({
   style: userStyle,
   ...rootProps
 }: SpinButtonProps): SpinButtonState {
-  if (!desktopControls) throw new Error('SpinButton requires a native writable numeric editor. The current preview supports AppKit only.');
+  if (!desktopControls?.SpinEditor) throw new Error('SpinButton requires a native writable numeric editor.');
   if (
     !Number.isFinite(min) ||
     !Number.isFinite(max) ||

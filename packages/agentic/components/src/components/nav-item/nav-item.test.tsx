@@ -14,14 +14,16 @@ describe('NavItem', () => {
         expanded={false}
         carriedCurrent
         onExpandedChange={onExpandedChange}
-        secondaryActions={[{ key: 'pin', label: 'Pin Projects', onPress: secondary }]}
+        secondaryActions={[{ key: 'pin', label: 'Pin Projects', testID: 'pin-projects', onPress: secondary }]}
       />,
     );
     const category = tree.getByRole('button', { name: 'Projects' });
     expect(category.props.accessibilityState).toMatchObject({ expanded: false });
     expect(category.props.accessibilityState.selected).toBeUndefined();
     expect(category.props.accessibilityValue?.text).toBeUndefined();
-    await fireEvent(tree.getByRole('button', { name: 'Pin Projects' }), 'accessibilityTap');
+    const pin = tree.getByRole('button', { name: 'Pin Projects' });
+    expect(pin).toBe(tree.getByTestId('pin-projects'));
+    await fireEvent(pin, 'accessibilityTap');
     expect(secondary).toHaveBeenCalledTimes(1);
     expect(onExpandedChange).not.toHaveBeenCalled();
     await fireEvent(category, 'accessibilityTap');

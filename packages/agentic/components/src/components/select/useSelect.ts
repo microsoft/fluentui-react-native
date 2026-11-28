@@ -22,7 +22,7 @@ export function useSelect_unstable({
   style: userStyle,
   ...rootProps
 }: SelectProps): SelectState {
-  if (!desktopControls) throw new Error('Select requires a native picker. The current preview supports AppKit only.');
+  if (!desktopControls?.SingleSelect) throw new Error('Select requires a native picker.');
   const [selected, setSelected] = useControllableValue<string | null>(value, defaultValue);
   const records = useMemo(
     () =>

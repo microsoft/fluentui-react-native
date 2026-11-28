@@ -1,4 +1,5 @@
 import { fireEvent } from '@testing-library/react-native';
+import { Platform, StyleSheet } from 'react-native';
 import { render } from '../../common/renderWithTheme';
 import { buildHierarchy } from '../../common/keyedHierarchy';
 import { Tree } from './tree';
@@ -18,6 +19,17 @@ const items: readonly TreeNode[] = [
 ];
 
 describe('Tree', () => {
+  it('omits transparent Flex fills on the Win32 host without overriding caller colors', async () => {
+    const platform = jest.replaceProperty(Platform, 'OS', 'win32' as typeof Platform.OS);
+    try {
+      const tree = await render(<Tree testID="tree" accessibilityLabel="Files" items={items} style={{ backgroundColor: '#eee' }} />);
+      expect(StyleSheet.flatten(tree.getByTestId('tree').props.style).backgroundColor).toBe('#eee');
+      expect(StyleSheet.flatten(tree.getByTestId('folder').props.style).backgroundColor).toBeUndefined();
+    } finally {
+      platform.restore();
+    }
+  });
+
   it('cascades through collapsed descendants and derives mixed state from controlled changes', async () => {
     const onSelectionChange = jest.fn();
     const props = { items, accessibilityLabel: 'Files', selectionMode: 'multiple' as const, onSelectionChange };

@@ -89,7 +89,7 @@
       </AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>dwmapi.lib;user32.lib;windowsapp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>dwmapi.lib;oleaut32.lib;uiautomationcore.lib;user32.lib;windowsapp.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
       <GenerateWindowsMetadata>true</GenerateWindowsMetadata>
       <ModuleDefinitionFile>NativeCore.def</ModuleDefinitionFile>
@@ -109,6 +109,7 @@
   <ItemGroup>
     <ClInclude Include="components\Callout\Callout.h" />
     <ClInclude Include="components\FocusZone\FocusZoneComponentView.h" />
+    <ClInclude Include="components\RangeTarget\RangeTarget.h" />
     <ClInclude Include="shared\FocusRequest.h" />
     <ClInclude Include="shared\FocusTree.h" />
     <ClInclude Include="ReactPackageProvider.h">
@@ -120,6 +121,7 @@
   <ItemGroup>
     <ClCompile Include="components\Callout\Callout.cpp" />
     <ClCompile Include="components\FocusZone\FocusZoneComponentView.cpp" />
+    <ClCompile Include="components\RangeTarget\RangeTarget.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>

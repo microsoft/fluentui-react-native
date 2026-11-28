@@ -29,7 +29,9 @@ export function useNav_unstable({
   style: userStyle,
   ...rootProps
 }: NavProps): NavState {
-  if (presentation === 'overlay' && !desktopControls) throw new Error('Nav overlay requires a qualified native DialogWindow host.');
+  if (presentation === 'overlay' && !desktopControls?.DialogWindow) {
+    throw new Error('Nav overlay requires a qualified native DialogWindow host.');
+  }
   const graph = useMemo(
     () =>
       buildHierarchy(

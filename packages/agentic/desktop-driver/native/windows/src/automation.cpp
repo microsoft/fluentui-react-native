@@ -413,6 +413,9 @@ json::Value SerializeSnapshot(const ElementSnapshot& snapshot) {
   value.Set("focused", SerializeSupported(snapshot.focused));
   value.Set("helpText", SerializeSupported(snapshot.helpText));
   value.Set("required", SerializeSupported(snapshot.required));
+  if (snapshot.level) value.Set("level", json::Value::Number(*snapshot.level));
+  if (snapshot.positionInSet) value.Set("positionInSet", json::Value::Number(*snapshot.positionInSet));
+  if (snapshot.sizeOfSet) value.Set("sizeOfSet", json::Value::Number(*snapshot.sizeOfSet));
   if (!snapshot.name.empty()) {
     value.Set("name", json::Value::String(snapshot.name));
   }
@@ -560,6 +563,9 @@ winrt::com_ptr<IUIAutomationCacheRequest> Automation::CreateCacheRequest(TreeSco
       UIA_BoundingRectanglePropertyId,
       UIA_IsEnabledPropertyId,
       UIA_IsRequiredForFormPropertyId,
+      UIA_LevelPropertyId,
+      UIA_PositionInSetPropertyId,
+      UIA_SizeOfSetPropertyId,
       UIA_HasKeyboardFocusPropertyId,
       UIA_IsKeyboardFocusablePropertyId,
       UIA_IsOffscreenPropertyId,
@@ -748,6 +754,16 @@ ElementSnapshot Automation::ReadSnapshot(IUIAutomationElement* element, const st
   snapshot.enabled = readBool(UIA_IsEnabledPropertyId, "The provider does not report an enabled state.");
   snapshot.focused = readBool(UIA_HasKeyboardFocusPropertyId, "The provider does not report keyboard focus.");
   snapshot.required = readBool(UIA_IsRequiredForFormPropertyId, "The provider does not report required-form state.");
+  const auto readPositiveInt = [&](PROPERTYID property) -> std::optional<int32_t> {
+    if (SUCCEEDED(element->GetCachedPropertyValueEx(property, TRUE, variant.put())) &&
+        variant.type() == VT_I4 && variant.get().lVal > 0) {
+      return variant.get().lVal;
+    }
+    return std::nullopt;
+  };
+  snapshot.level = readPositiveInt(UIA_LevelPropertyId);
+  snapshot.positionInSet = readPositiveInt(UIA_PositionInSetPropertyId);
+  snapshot.sizeOfSet = readPositiveInt(UIA_SizeOfSetPropertyId);
   const SupportedBool focusable =
       readBool(UIA_IsKeyboardFocusablePropertyId, "The provider does not report keyboard focusability.");
   snapshot.keyboardFocusable = focusable.supported && focusable.value;
@@ -1539,6 +1555,37 @@ void Automation::PerformAccessibilityAction(const std::string& elementId, const 
       PerformPatternAction(element.get(), UIA_ScrollItemPatternId, &IUIAutomationScrollItemPattern::ScrollIntoView, token);
       break;
   }
+}
+
+json::Value Automation::GetRangeValue(const std::string& elementId, const CancellationToken& token) {
+  const auto query = QueryPattern<IUIAutomationRangeValuePattern>(RequireRecord(elementId).element.get(), UIA_RangeValuePatternId);
+  if (!RequirePatternQuery(query, "Reading the RangeValue pattern")) {
+    Fail(kErrorUnsupported, "The element does not expose RangeValue.");
+  }
+  token.ThrowIfCancelled();
+  const auto value = std::make_shared<double>();
+  const HRESULT status = BoundedRead([pattern = query.pattern, value]() {
+    return pattern->get_CurrentValue(value.get());
+  }, "Reading the current range value");
+  CheckHresult(kErrorAutomationFailed, "Reading the current range value", status);
+  if (std::isnan(*value)) return json::Value::Null();
+  if (!std::isfinite(*value)) Fail(kErrorAutomationFailed, "The range provider returned an invalid value.");
+  return json::Value::Number(*value);
+}
+
+void Automation::SetRangeValue(const std::string& elementId, double value, const CancellationToken& token) {
+  const auto query = QueryPattern<IUIAutomationRangeValuePattern>(RequireRecord(elementId).element.get(), UIA_RangeValuePatternId);
+  if (!RequirePatternQuery(query, "Reading the RangeValue pattern")) {
+    Fail(kErrorUnsupported, "The element does not expose RangeValue.");
+  }
+  token.ThrowIfCancelled();
+  const HRESULT status = CountedMutation([pattern = query.pattern, value]() {
+    return pattern->SetValue(value);
+  }, "Setting the current range value");
+  if (status == E_INVALIDARG) Fail(kErrorInvalidParams, "The provider rejected the requested range value.");
+  if (status == UIA_E_ELEMENTNOTAVAILABLE) Fail(kErrorStaleElement, "The element is no longer available.");
+  if (status == UIA_E_INVALIDOPERATION) Fail(kErrorNotInteractable, "The element does not accept a range write.");
+  CheckClickResult("Setting the current range value", status);
 }
 
 bool Automation::TryClearValue(const std::string& elementId, bool strict) {

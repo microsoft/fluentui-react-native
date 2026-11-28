@@ -59,7 +59,7 @@ json::Value CreateHello() {
   hello.Set("protocol", protocol);
 
   json::Value features = json::Value::Array();
-  for (const char* feature : {"accessibilityActions", "accessibilityClick", "performAccessibilityAction",
+  for (const char* feature : {"accessibilityActions", "accessibilityClick", "performAccessibilityAction", "rangeValue",
                               "activeElement", "boundedObservation", "capture", "elementCapture",
                               "find", "hitTest", "keyboard", "launch", "attach", "inspectApplication", "recoverApplication",
                               "pointer", "probe", "releaseActions",

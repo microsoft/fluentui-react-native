@@ -40,8 +40,9 @@ The macOS entry point additionally exposes AppKit previews for
 [DialogWindow](../src/components/dialog-window/SPEC.md),
 [RangeTarget](../src/components/range-target/SPEC.md),
 [SingleSelect](../src/components/single-select/SPEC.md), and
-[SpinEditor](../src/components/spin-editor/SPEC.md). These do not imply
-Windows or Win32 registration or cross-platform admission.
+[SpinEditor](../src/components/spin-editor/SPEC.md). The Windows Fabric
+entry point additionally exposes the native [RangeTarget](../src/components/range-target/SPEC.md)
+preview. These registrations do not imply Office Win32 support or cross-platform admission.
 
 ## Legacy components and shims
 

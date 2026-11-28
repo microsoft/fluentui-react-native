@@ -19,6 +19,26 @@ export const Qualities: Story = {
   ),
   wdio: [
     desktopIt(
+      'RTG-004 UIA writes nonadjacent fractions and distinguishes unset from zero',
+      { platforms: ['windows'], requires: ['set-range-value'] },
+      async (context) => {
+        const { browser, desktop, expect } = context;
+        const { recordVisualReview } = await import('../../common/recordVisualReview.wdio.ts');
+        const score = await desktop.session.findElement('accessibility id', 'quality-score');
+        const unrated = await desktop.session.findElement('accessibility id', 'quality-unrated');
+        await expect(await browser.$('~quality-score')).toHaveAttribute('name', 'Quality');
+        expect(await score.getRangeValue()).toBe(3.5);
+        expect(await unrated.getRangeValue()).toBeNull();
+        await recordVisualReview(context, 'rating-fraction-and-unset');
+        await score.setRangeValue(1.5);
+        await browser.waitUntil(async () => (await score.getRangeValue()) === 1.5);
+        await unrated.setRangeValue(0);
+        await browser.waitUntil(async () => (await unrated.getRangeValue()) === 0);
+        await unrated.setRangeValue(4.5);
+        await browser.waitUntil(async () => (await unrated.getRangeValue()) === 4.5);
+      },
+    ),
+    desktopIt(
       'RTG-004 exposes a committed fractional value independently of the star artwork',
       { platforms: ['macos'] },
       async (context) => {

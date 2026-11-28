@@ -1054,6 +1054,25 @@ async function handleElementCommand(
   if (method === 'POST' && operation[0] === 'furn' && operation[1] === 'accessibility-action' && operation.length === 2) {
     return performNamedAccessibilityAction(body, record, session, sessions);
   }
+  if ((method === 'GET' || method === 'POST') && operation[0] === 'furn' && operation[1] === 'range-value' && operation.length === 2) {
+    const host = session.target.host;
+    if (session.hostInfo.features.rangeValue !== true || !host.getRangeValue || !host.setRangeValue) {
+      throw new WebDriverError('unsupported operation', 'The target does not support native range values.');
+    }
+    if (method === 'GET') {
+      return hostCommand(session, 'Reading the native range value', (signal) => host.getRangeValue!(record.nativeId, signal));
+    }
+    const { value } = requireObject(body, 'range value request');
+    if (typeof value !== 'number' || !Number.isFinite(value)) throw invalidArgument('A range write requires a finite numeric value.');
+    const description = 'Setting the native range value';
+    assertInputAllowed(session, 'accessibility-range-value', description);
+    await sessions.runInputCommand(() =>
+      mutationCommand(sessions, session, description, (signal) =>
+        deliverInput(session, ['accessibility-range-value'], () => host.setRangeValue!(record.nativeId, value, signal)),
+      ),
+    );
+    return null;
+  }
   if (method === 'GET' && operation[0] === 'screenshot') {
     const image = await hostCommand(session, `Capturing element "${record.id}"`, (signal) =>
       session.target.host.captureElement(record.nativeId, signal),
@@ -1069,7 +1088,10 @@ function isElementMutation(method: string, operation: string[]): boolean {
   if (method !== 'POST') {
     return false;
   }
-  return ['click', 'clear', 'value'].includes(operation[0]) || (operation[0] === 'furn' && operation[1] === 'accessibility-action');
+  return (
+    ['click', 'clear', 'value'].includes(operation[0]) ||
+    (operation[0] === 'furn' && ['accessibility-action', 'range-value'].includes(operation[1]))
+  );
 }
 
 /**
@@ -1207,6 +1229,10 @@ function getElementValue(snapshot: NativeElementSnapshot, name: string): unknown
       return snapshot.name ?? null;
     case 'role':
       return snapshot.role;
+    case 'level':
+    case 'positionInSet':
+    case 'sizeOfSet':
+      return snapshot[name] ?? null;
     case 'helpText':
       return requireSupported(
         snapshot.helpText ?? { supported: false, reason: 'The provider does not expose accessibility help text.' },

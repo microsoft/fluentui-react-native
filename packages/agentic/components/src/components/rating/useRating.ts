@@ -20,7 +20,7 @@ export function useRating_unstable({
   style: userStyle,
   ...rootProps
 }: RatingProps): RatingState {
-  if (!desktopControls) throw new Error('Rating requires a native writable range target. The current preview supports AppKit only.');
+  if (!desktopControls?.RangeTarget) throw new Error('Rating requires a native writable range target.');
   if (!Number.isSafeInteger(max) || max <= 0 || max > 100 || (step !== 0.5 && step !== 1)) {
     throw new TypeError('Rating requires 1–100 whole stars and a step of 0.5 or 1.');
   }

@@ -42,6 +42,9 @@ struct ElementSnapshot {
   SupportedBool expanded;
   SupportedBool selected;
   SupportedChecked checked;
+  std::optional<int32_t> level;
+  std::optional<int32_t> positionInSet;
+  std::optional<int32_t> sizeOfSet;
   bool invokePattern{false};
   bool legacyPattern{false};
   bool togglePattern{false};
@@ -107,6 +110,8 @@ class Automation {
   void AccessibilityClick(const std::string& elementId, const CancellationToken& token);
   json::Value AccessibilityActions(const std::string& elementId, const CancellationToken& token);
   void PerformAccessibilityAction(const std::string& elementId, const std::string& key, const CancellationToken& token);
+  json::Value GetRangeValue(const std::string& elementId, const CancellationToken& token);
+  void SetRangeValue(const std::string& elementId, double value, const CancellationToken& token);
   // Writes an empty value through the Value pattern and reports whether that
   // cleared the element. Without `strict`, an element without a writable value
   // or a refused write returns false so the caller can clear with the

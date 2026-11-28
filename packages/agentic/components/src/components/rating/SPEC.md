@@ -51,7 +51,9 @@ only to that root; it does not use the tip as a name, description or popup relat
 
 The AppKit preview exposes one RangeTarget with no numeric value when unset; supply a locale-aware `formatValue`
 for both null and numeric scores. The renderer never receives the hover preview as its accessibility value.
-Windows and Win32 are not admitted by this preview.
+The isolated Windows Fabric preview uses the native-core RangeValue peer: it retains exact half scores and
+distinguishes an unset score from zero. The public component entry point and default Windows story catalog
+remain gated pending physical-input and visual qualification. Office Win32 has no matching provider.
 
 ## Divergences from Flex
 

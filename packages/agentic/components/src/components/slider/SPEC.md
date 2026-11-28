@@ -52,8 +52,10 @@ only to that root; it does not use the tip as a name, description or popup relat
 ## Platform behavior
 
 The AppKit preview gives each thumb a native RangeTarget, with writable `AXValue` and increment/decrement
-operations over its allowed interval. Generic Windows Fabric numeric metadata can omit a SetValue request's
-number; Windows and Win32 are not admitted by this preview.
+operations over its allowed interval. The isolated Windows Fabric preview uses a custom RangeValue peer
+per thumb to deliver the requested number and reject crossing. The public component entry point and default
+Windows story catalog remain gated pending physical-input and visual qualification. Office Win32 has no
+matching provider.
 
 ## Divergences from Flex
 

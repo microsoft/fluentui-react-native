@@ -36,7 +36,7 @@ export const ProjectRoutes: Story = {
           carriedCurrent={route === 'files'}
           onExpandedChange={setExpanded}
           primary={{ testID: 'nav-projects' }}
-          secondaryActions={[{ key: 'pin', label: 'Pin', onPress: () => setPinned((n) => n + 1) }]}
+          secondaryActions={[{ key: 'pin', label: 'Pin', testID: 'nav-projects-pin', onPress: () => setPinned((n) => n + 1) }]}
         />
         {expanded && (
           <NavItem
@@ -67,7 +67,7 @@ export const ProjectRoutes: Story = {
       const { browser, expect } = context;
       const { recordVisualReview } = await import('../../common/recordVisualReview.wdio.ts');
       await recordVisualReview(context, 'nav-item');
-      await (await browser.$('=Pin')).click();
+      await (await browser.$('~nav-projects-pin')).click();
       await expect(await browser.$('~nav-result')).toHaveAttribute('name', 'files; collapsed; pins: 1');
       await (await browser.$('~nav-projects')).click();
       await expect(await browser.$('~nav-result')).toHaveAttribute('name', 'files; expanded; pins: 1');

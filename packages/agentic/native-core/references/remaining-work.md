@@ -38,9 +38,14 @@ issue or pull request; compilation and skipped cases are not native qualificatio
 - Verify `DialogWindow` child versus sheet behavior, nested isolation and actual assistive traversal on each macOS
   renderer. Windows Fabric needs an integration that proves background isolation; Office Win32 needs its own host
   implementation or explicitly verified registration. Generated bindings alone do not add a view to either host.
-- Qualify nonadjacent AX writes and committed value read-back for `RangeTarget` and `SpinEditor`, and native menu
-  selection, cancellation and form state for `SingleSelect`. Windows Fabric still needs writable UIA providers
-  (including the requested number), and the prebuilt Office Win32 host cannot acquire native providers from these Pods.
+- The Windows Fabric `RangeTarget` delivers the requested UIA number and reads back the accepted prop; physical
+  focus, gestures and visual review remain separate gates. Qualify nonadjacent AX writes and committed read-back
+  independently. Windows Fabric `SpinEditor` still needs the native draft/IME and writable numeric provider;
+  the initial XAML editor experiment failed fast on mount.
+- Qualify native pickers independently. The Office REX host registers `RCTPicker` and `RCTPickerItem`, but the
+  installed item metadata does not declare per-option disabling. Selection and cancellation must be verified before
+  reusing it. The prebuilt Office host cannot acquire any Windows Fabric registrations; track the missing contracts in
+  [#4384](https://github.com/microsoft/fluentui-react-native/issues/4384).
 
 ## RNmacOS upstream replacement
 

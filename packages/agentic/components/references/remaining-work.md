@@ -128,14 +128,22 @@ stack layout until transparent cutouts over nonuniform native surfaces are quali
 - [Dialog](../src/components/dialog/SPEC.md) and Nav/SimpleNav overlays use AppKit sheets or panels. Prove native
   background traversal, nested ownership, and focus return before closing [#4379](https://github.com/microsoft/fluentui-react-native/issues/4379).
   Windows and Office overlays remain gated on their own providers.
-- [Select](../src/components/select/SPEC.md), [Rating](../src/components/rating/SPEC.md),
-  [Slider](../src/components/slider/SPEC.md), and [SpinButton](../src/components/spin-button/SPEC.md) are in the
-  macOS entry point only. Verify direct numeric write/readback, native picker cancellation and form state, and
-  add a real Windows/Win32 provider rather than substituting a generic accessibility role or Dropdown.
+- [Rating](../src/components/rating/SPEC.md) and [Slider](../src/components/slider/SPEC.md) have a writable native
+  Windows Fabric RangeValue provider. The isolated accessible cohort exercised fractional and unset Rating and
+  independent noncrossing Slider writes. Keep the public Windows entry point and normal story catalog gated
+  until physical and visual qualification. The Office Win32 host needs its own numeric provider.
+- [Select](../src/components/select/SPEC.md) and [SpinButton](../src/components/spin-button/SPEC.md) remain gated
+  on Windows and Win32. Verify native picker cancellation, keyboard and focus return, and numeric editor IME and
+  read-only behavior. Do not substitute a generic accessibility role or Dropdown. A Windows Fabric WinUI
+  ComboBox prototype rendered and exposed disabled options, but UIA selection was not qualified across its
+  owner and popup projections. The Windows Fabric SpinEditor prototype failed fast on first mount.
+  Neither prototype is included.
 - [List](../src/components/list/SPEC.md) ships a mounted model: qualify Win32 child hosting and separate nested
   action/virtualized traversal before admitting those modes. [Tree](../src/components/tree/SPEC.md) and
   [TreeItem](../src/components/tree-item/SPEC.md) need native hierarchy, checked/mixed projection, sibling-action focus,
-  and collapse checks. A native single-selection assertion does not qualify the multiple-selection checkbox model.
+  and collapse checks. Office REX passed expansion, selected and mixed/checked state in the focused lanes,
+  but returned no native UIA Level on the branch. Track hierarchy projection separately under
+  [#4384](https://github.com/microsoft/fluentui-react-native/issues/4384).
 - [TagPicker](../src/components/tag-picker/SPEC.md) ships select-only. Before admitting filtering/freeform, verify
   active-option speech with retained editor focus and ensure IME confirmation cannot create or select a tag.
 

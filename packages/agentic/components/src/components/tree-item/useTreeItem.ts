@@ -57,12 +57,14 @@ export function useTreeItem(
   const valid = !!value.trim() && !!label.trim() && Number.isInteger(level) && level > 0;
   const inactive = disabled || !valid;
   const invokeLeaf: ((key: string) => void) | undefined = onActivate;
+  const windowsDisclosure = Platform.OS === 'windows' && expanded !== undefined && !inactive;
   const select = resolveAccessibilityAction(checked === undefined ? 'select' : 'toggle', Platform.OS, [
     {
       name: checked === undefined ? 'Select' : 'Toggle',
       label,
     },
   ]);
+  const selectionActions = !inactive && onSelection ? select.accessibilityActions : undefined;
   const disclose = (next: boolean) => {
     if (!inactive && expanded !== undefined && expanded !== next) onExpandedChange?.(next, value);
   };
@@ -94,9 +96,11 @@ export function useTreeItem(
     disabled: inactive,
     focusable: !inactive && focusable,
     onAccessibilityTap: inactive ? undefined : primary,
-    accessibilityActions: !inactive && onSelection ? select.accessibilityActions : undefined,
+    accessibilityActions: windowsDisclosure ? [{ name: 'expand' }, { name: 'collapse' }, ...(selectionActions ?? [])] : selectionActions,
     onAccessibilityAction: (event) => {
-      if (!inactive && event.nativeEvent.actionName === select.name) onSelection?.(value);
+      const { actionName } = event.nativeEvent;
+      if (windowsDisclosure && (actionName === 'expand' || actionName === 'collapse')) disclose(actionName === 'expand');
+      else if (!inactive && actionName === select.name) onSelection?.(value);
     },
     onPress: (event) => {
       const { key, code } = (event?.nativeEvent as FocusKeyboardEvent['nativeEvent'] | undefined) ?? {};

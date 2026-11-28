@@ -43,6 +43,15 @@
       "duration": { "type": "integer", "minimum": 0, "capMilliseconds": 30000 }
     }
   },
+  "rangeValue": {
+    "windows": {
+      "get": "getRangeValue",
+      "set": "setRangeValue",
+      "feature": "rangeValue",
+      "writeValue": "finite-number",
+      "unsetReadValue": null
+    }
+  },
   "inputRecovery": {
     "mode": "--release-input",
     "ledgerFields": ["keys", "buttons"],

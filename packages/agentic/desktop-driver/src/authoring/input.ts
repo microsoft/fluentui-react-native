@@ -10,6 +10,7 @@ export const desktopRequirements = [
   'perform-accessibility-action',
   'physical-click',
   'screenshot',
+  'set-range-value',
   'set-window-rect',
   'wheel',
 ] as const;
@@ -34,6 +35,7 @@ export type DesktopInputMode = (typeof desktopInputModes)[number];
 export const desktopInputMechanisms = [
   'accessibility-action',
   'accessibility-click',
+  'accessibility-range-value',
   'keyboard',
   'physical-click',
   'pointer',
@@ -60,7 +62,12 @@ export type DesktopSessionInput = {
 export function desktopInputModeAllows(mode: DesktopInputMode, mechanism: DesktopInputMechanism): boolean {
   switch (mode) {
     case 'accessible':
-      return mechanism === 'accessibility-action' || mechanism === 'accessibility-click' || mechanism === 'semantic-clear';
+      return (
+        mechanism === 'accessibility-action' ||
+        mechanism === 'accessibility-click' ||
+        mechanism === 'accessibility-range-value' ||
+        mechanism === 'semantic-clear'
+      );
     case 'physical':
       return mechanism !== 'semantic-clear' && mechanism !== 'unattributed-clear';
     default:
@@ -75,6 +82,7 @@ export function desktopInputModeAllows(mode: DesktopInputMode, mechanism: Deskto
 const mechanismRequirements: Readonly<Record<DesktopInputMechanism, readonly DesktopRequirement[]>> = {
   'accessibility-action': ['perform-accessibility-action'],
   'accessibility-click': ['accessibility-click', 'click'],
+  'accessibility-range-value': ['set-range-value'],
   keyboard: ['keyboard'],
   'physical-click': ['physical-click', 'click'],
   pointer: ['physical-click'],
@@ -204,7 +212,7 @@ export function parseDesktopQuarantineDate(value: unknown): number | undefined {
 }
 
 const physicalRequirements = new Set<DesktopRequirement>(['physical-click', 'keyboard', 'wheel']);
-const accessibleRequirements = new Set<DesktopRequirement>(['accessibility-click', 'perform-accessibility-action']);
+const accessibleRequirements = new Set<DesktopRequirement>(['accessibility-click', 'perform-accessibility-action', 'set-range-value']);
 /** Requirements that promise input, so receipts can show one went unused. */
 const inputRequirements = new Set<DesktopRequirement>(['click', ...physicalRequirements, ...accessibleRequirements]);
 const clickRequirements = new Set<DesktopRequirement>(['accessibility-click', 'click', 'physical-click']);

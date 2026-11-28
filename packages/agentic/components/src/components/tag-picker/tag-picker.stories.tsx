@@ -41,6 +41,8 @@ export const Default: Story = {
         await expect(await browser.$('~tag-picker-blue')).toBeDisplayed();
         await recordVisualReview(context, 'tag-picker-options');
       });
+      await expect(await browser.$('=Remove Red')).toBeDisplayed();
+      await expect(await browser.$('=Remove Green')).toBeDisplayed();
     }),
     desktopIt(
       'TGP-004 uses native macOS AddToSelection without replacing existing tags',

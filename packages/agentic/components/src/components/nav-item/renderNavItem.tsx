@@ -20,6 +20,7 @@ export function renderNavItem_unstable(state: NavItemState) {
       {state.actions.map((action) => (
         <Button
           key={action.key}
+          testID={action.testID}
           content={action.label}
           size="small"
           appearance="subtle"

@@ -37,6 +37,47 @@ export const PriceRange: Story = {
     </View>
   ),
   wdio: [
+    desktopIt(
+      'SLD-004 UIA writes each named thumb and rejects crossing',
+      { platforms: ['windows'], requires: ['set-range-value'] },
+      async (context) => {
+        const { browser, desktop, expect } = context;
+        const { recordVisualReview } = await import('../../common/recordVisualReview.wdio.ts');
+        const lower = await desktop.session.findElement('accessibility id', 'price-low');
+        const upper = await desktop.session.findElement('accessibility id', 'price-high');
+        await expect(await browser.$('~price-low')).toHaveAttribute('name', 'Minimum price');
+        await expect(await browser.$('~price-high')).toHaveAttribute('name', 'Maximum price');
+        expect(await lower.getRangeValue()).toBe(25);
+        expect(await upper.getRangeValue()).toBe(75);
+        await lower.setRangeValue(60);
+        await browser.waitUntil(async () => (await lower.getRangeValue()) === 60);
+        expect(await upper.getRangeValue()).toBe(75);
+        await upper.setRangeValue(90);
+        await browser.waitUntil(async () => (await upper.getRangeValue()) === 90);
+        await expect(lower.setRangeValue(95)).rejects.toThrow();
+        await expect(upper.setRangeValue(55)).rejects.toThrow();
+        expect(await lower.getRangeValue()).toBe(60);
+        expect(await upper.getRangeValue()).toBe(90);
+        await recordVisualReview(context, 'slider-range');
+      },
+    ),
+    desktopIt(
+      'SLD-002 tabs to and adjusts each Windows range thumb independently',
+      { platforms: ['windows'], requires: ['physical-click', 'keyboard', 'focus'] },
+      async ({ browser, desktop, expect }) => {
+        const { expectNativeState, focusByTab } = await import('../../common/desktopFocus.wdio.ts');
+        const lower = await desktop.session.findElement('accessibility id', 'price-low');
+        const upper = await desktop.session.findElement('accessibility id', 'price-high');
+        await focusByTab(browser, 'price-previous', 'price-low');
+        await browser.keys('\uE014');
+        await browser.waitUntil(async () => (await lower.getRangeValue()) === 30);
+        await browser.keys('\uE004');
+        await expectNativeState(browser, 'price-high', 'focused', true);
+        await browser.keys('\uE014');
+        await browser.waitUntil(async () => (await upper.getRangeValue()) === 80);
+        expect(await lower.getRangeValue()).toBe(30);
+      },
+    ),
     desktopIt('SLD-004 exposes distinct lower and upper native range values', { platforms: ['macos'] }, async (context) => {
       const { browser, expect } = context;
       const { recordVisualReview } = await import('../../common/recordVisualReview.wdio.ts');

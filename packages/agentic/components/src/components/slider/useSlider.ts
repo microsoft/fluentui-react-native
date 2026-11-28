@@ -12,7 +12,7 @@ const sameValue = (left: SliderValue, right: SliderValue) =>
   typeof left === 'number' || typeof right === 'number' ? left === right : left[0] === right[0] && left[1] === right[1];
 
 export function useSlider_unstable(props: SliderProps): SliderState {
-  if (!desktopControls) throw new Error('Slider requires a native writable range target. The current preview supports AppKit only.');
+  if (!desktopControls?.RangeTarget) throw new Error('Slider requires a native writable range target.');
   const {
     mode,
     min = 0,

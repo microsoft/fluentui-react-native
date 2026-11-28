@@ -67,6 +67,14 @@ WDIO's `element.desktopPerformAccessibilityAction(name)` invokes a uniquely
 published accessibility action without pointer or keyboard input. Declare
 `perform-accessibility-action` on the case that uses it.
 
+On Windows, `desktop.session.findElement(...)` returns an element client with
+`setRangeValue(number)` and `getRangeValue()`. These call UI Automation
+RangeValue directly; they neither type nor invoke a named `setValue` action.
+Declare `set-range-value` for the write. Poll the current value separately to
+verify that the application committed the requested number.
+For Windows hierarchy, `getProperty('level')`, `'positionInSet'` and
+`'sizeOfSet'` read positive UI Automation metadata when the provider supplies it.
+
 `setValue(value, options)` is native here: it checks that the session's input
 mode permits the keyboard, then clears with `clearValue` and types with
 `addValue(value, options)`. It never reaches WDIO's own `setValue`, whose

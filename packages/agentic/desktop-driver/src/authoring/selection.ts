@@ -93,6 +93,7 @@ const requirementFeature: Record<Exclude<DesktopRequirement, 'click'>, string> =
   'perform-accessibility-action': 'performAccessibilityAction',
   'physical-click': 'physicalClick',
   screenshot: 'screenshot',
+  'set-range-value': 'rangeValue',
   'set-window-rect': 'setWindowRect',
   wheel: 'wheel',
 };

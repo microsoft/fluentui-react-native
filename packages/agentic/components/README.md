@@ -18,8 +18,10 @@ Skeleton, Spinner, SplitButton, Swatch, SwatchPicker, Switch, Tab, TabList, Tag,
 Text, Textarea, ToggleButton, Toolbar, Tree, and TreeItem.
 
 The macOS-only previews require a consuming app that directly autolinks `@fluentui-react-native/native-core`.
-See `@fluentui-react-native/native-core/README.md` for integration. Their native providers are not registered on
-Windows or Win32. The overlay modes of Nav and SimpleNav use the same AppKit dialog scope.
+See `@fluentui-react-native/native-core/README.md` for integration. Their public component previews are not
+admitted on Windows or Win32. Native-core includes a Windows Fabric RangeTarget preview used by the isolated
+Rating and Slider UIA cases; it does not add a Win32 registration. The overlay modes of Nav and SimpleNav use
+the same AppKit dialog scope.
 
 ## Quick start
 
