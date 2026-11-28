@@ -106,6 +106,16 @@ test(
         await compile('clang', [...clang, '-include', bridge, headerProbe]);
         await compile('clang', [...clang, path.join(packageRoot, 'macos/components/Callout/paper/FRNCalloutManager.m')]);
         await compile('clang', [...clang, path.join(packageRoot, 'macos/components/FocusZone/paper/RCTFocusZoneManager.m')]);
+        await compile('clang', [
+          ...clang,
+          path.join(packageRoot, 'macos/components/DialogWindow/paper/FRNNativeCoreDialogWindowManager.m'),
+        ]);
+        await compile('clang', [...clang, path.join(packageRoot, 'macos/components/RangeTarget/paper/FRNNativeCoreRangeTargetManager.m')]);
+        await compile('clang', [
+          ...clang,
+          path.join(packageRoot, 'macos/components/SingleSelect/paper/FRNNativeCoreSingleSelectManager.m'),
+        ]);
+        await compile('clang', [...clang, path.join(packageRoot, 'macos/components/SpinEditor/paper/FRNNativeCoreSpinEditorManager.m')]);
       });
     } finally {
       await rm(output, { recursive: true, force: true });

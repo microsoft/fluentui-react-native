@@ -1,9 +1,9 @@
 {
   "schemaVersion": 2,
   "component": "tag-picker",
-  "lifecycle": "contract-draft",
-  "conformance": "review-required",
-  "reviewedAt": null,
+  "lifecycle": "implemented",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-11-24",
   "sources": [
     {
       "id": "flex-component",
@@ -112,22 +112,25 @@
     {
       "id": "TGP-001",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["tag-picker.test.tsx", "tag-picker.stories.tsx"]
+      "evidence": ["tag-picker.test.tsx", "tag-picker.stories.tsx"]
     },
     {
       "id": "TGP-002",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["tag-picker.test.tsx", "tag-picker.wdio.ts"]
+      "evidence": ["useTagPicker.ts", "tag-picker.test.tsx"],
+      "plannedEvidence": ["tag-picker.wdio.ts"]
     },
     {
       "id": "TGP-003",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["tag-picker.test.tsx", "tag-picker.wdio.ts"]
+      "evidence": ["tag-picker.types.ts", "spec/interaction.md"],
+      "plannedEvidence": ["tag-picker.wdio.ts"]
     },
     {
       "id": "TGP-004",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["tag-picker.wdio.ts", "tag-picker.stories.tsx"]
+      "evidence": ["tagPickerTag.ts", "tag-picker.stories.tsx"],
+      "plannedEvidence": ["tag-picker.wdio.ts"]
     }
   ]
 }

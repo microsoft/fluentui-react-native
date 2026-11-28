@@ -15,7 +15,8 @@ namespace {
 // unsettled so the session can be re-observed and shut down safely.
 bool IsGuardedMutation(const std::string& command) {
   return command == "click" || command == "clear" || command == "sendKeys" || command == "performActions" ||
-         command == "activate" || command == "setWindowRect" || command == "performAccessibilityAction";
+         command == "activate" || command == "setWindowRect" || command == "performAccessibilityAction" ||
+         command == "setRangeValue";
 }
 
 json::Value EffectDetail(MutationEffect effect) {
@@ -328,6 +329,7 @@ json::Value Driver::ProbeResult(const json::Value& params) {
   json::Value features = json::Value::Object();
   features.Set("accessibilityActions", json::Value::Bool(true));
   features.Set("performAccessibilityAction", json::Value::Bool(true));
+  features.Set("rangeValue", json::Value::Bool(true));
   features.Set("accessibilityClick", json::Value::Bool(true));
   features.Set("boundedObservation", json::Value::Bool(true));
   features.Set("elementScreenshot", json::Value::Bool(screenshot));
@@ -894,6 +896,22 @@ CommandResult Driver::ExecuteCommand(const std::string& command, const json::Val
     const MutationScope scope(LeaseIdForElement(elementId));
     automation_.PerformAccessibilityAction(elementId, key, token);
     result.result = json::Value::Null();
+    return result;
+  }
+  if (command == "getRangeValue" || command == "setRangeValue") {
+    const std::string elementId = RequireString(params, "elementId");
+    RequireLiveElement(elementId, token);
+    if (command == "getRangeValue") {
+      result.result = automation_.GetRangeValue(elementId, token);
+    } else {
+      const auto* value = params.Find("value");
+      if (!value || !value->IsNumber() || !std::isfinite(value->AsNumber())) {
+        Fail(kErrorInvalidParams, "A range write requires a finite numeric value.");
+      }
+      const MutationScope scope(LeaseIdForElement(elementId));
+      automation_.SetRangeValue(elementId, value->AsNumber(), token);
+      result.result = json::Value::Null();
+    }
     return result;
   }
   if (command == "clear") {

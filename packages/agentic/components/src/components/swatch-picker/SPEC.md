@@ -1,7 +1,7 @@
 ---
 name: swatch-picker
 platform: react-native (Windows, macOS)
-status: contract-draft
+status: implemented
 source: ./spec/source.json
 tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
@@ -62,6 +62,7 @@ Windows and AppKit tab preferences can differ but each sample must remain reacha
 Resize a grid while the last tile is selected, remove or disable the focused option, and check row/column
 movement, one group entry, RTL and controlled rejection.
 
-Draft for Windows Fabric, Office Win32, macOS Fabric and macOS Paper. The [requirement evidence](spec/source.json) is planned; no runtime export or native qualification is claimed.
+The [requirement evidence](spec/source.json) records implementation and authored coverage. Native action, reflow,
+removal, and focus/selection convergence evidence remain separate per host.
 
-Review the [token bindings](spec/tokens.json), [accessibility](spec/accessibility.md), [interaction](spec/interaction.md) and [usage](spec/usage.md) with this draft.
+See the [token bindings](spec/tokens.json), [accessibility](spec/accessibility.md), [interaction](spec/interaction.md) and [usage](spec/usage.md).

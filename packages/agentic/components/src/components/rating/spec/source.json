@@ -1,9 +1,9 @@
 {
   "schemaVersion": 2,
   "component": "rating",
-  "lifecycle": "contract-draft",
-  "conformance": "review-required",
-  "reviewedAt": null,
+  "lifecycle": "implemented",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-11-24",
   "sources": [
     {
       "id": "flex-component",
@@ -116,22 +116,25 @@
     {
       "id": "RTG-001",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["rating.test.tsx", "rating.stories.tsx"]
+      "evidence": ["rating.test.tsx", "rating.stories.tsx"]
     },
     {
       "id": "RTG-002",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["rating.test.tsx", "rating.wdio.ts"]
+      "evidence": ["useRating.ts", "rating.test.tsx"],
+      "plannedEvidence": ["rating.wdio.ts"]
     },
     {
       "id": "RTG-003",
       "sources": ["flex-component"],
-      "plannedEvidence": ["rating.test.tsx", "rating.stories.tsx"]
+      "evidence": ["useRating.ts", "rating.stories.tsx"],
+      "plannedEvidence": ["rating.wdio.ts"]
     },
     {
       "id": "RTG-004",
       "sources": ["flex-component", "furn-desktop", "rnw-range"],
-      "plannedEvidence": ["rating.wdio.ts", "rating.stories.tsx"]
+      "evidence": ["rating.test.tsx", "rating.stories.tsx"],
+      "plannedEvidence": ["rating.wdio.ts"]
     }
   ]
 }

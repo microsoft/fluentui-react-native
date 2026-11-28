@@ -1,9 +1,9 @@
 {
   "schemaVersion": 2,
   "component": "tree-item",
-  "lifecycle": "contract-draft",
-  "conformance": "review-required",
-  "reviewedAt": null,
+  "lifecycle": "implemented",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-11-24",
   "sources": [
     {
       "id": "flex-component",
@@ -103,22 +103,25 @@
     {
       "id": "TRI-001",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["tree-item.types.test.tsx"]
+      "evidence": ["tree-item.types.test.ts", "tree-item.test.tsx"]
     },
     {
       "id": "TRI-002",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["tree-item.test.tsx", "tree-item.wdio.ts"]
+      "evidence": ["tree-item.test.tsx", "useTreeItem.ts"],
+      "plannedEvidence": ["tree-item.wdio.ts"]
     },
     {
       "id": "TRI-003",
       "sources": ["flex-component"],
-      "plannedEvidence": ["tree-item.test.tsx", "tree-item.stories.tsx"]
+      "evidence": ["useTreeItemStyles.ts", "tree-item.stories.tsx"],
+      "plannedEvidence": ["tree-item.wdio.ts"]
     },
     {
       "id": "TRI-004",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["tree-item.wdio.ts", "tree-item.stories.tsx"]
+      "evidence": ["tree-item.test.tsx", "tree-item.stories.tsx"],
+      "plannedEvidence": ["tree-item.wdio.ts"]
     }
   ]
 }

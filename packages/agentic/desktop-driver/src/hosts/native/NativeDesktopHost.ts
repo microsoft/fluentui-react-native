@@ -367,6 +367,14 @@ export class NativeDesktopHost implements DesktopHost {
     await this.request('performAccessibilityAction', { elementId, key }, signal);
   }
 
+  getRangeValue(elementId: string, signal?: AbortSignal): Promise<number | null> {
+    return this.request('getRangeValue', { elementId }, signal);
+  }
+
+  async setRangeValue(elementId: string, value: number, signal?: AbortSignal): Promise<void> {
+    await this.request('setRangeValue', { elementId, value }, signal);
+  }
+
   async observe(request: NativeObserveRequest, signal?: AbortSignal): Promise<NativeObservation> {
     const violation = describeObserveRequestViolation(request);
     if (violation) {

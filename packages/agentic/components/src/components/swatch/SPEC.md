@@ -1,7 +1,7 @@
 ---
 name: swatch
 platform: react-native (Windows, macOS)
-status: contract-draft
+status: implemented
 source: ./spec/source.json
 tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
@@ -35,6 +35,9 @@ assigns radio semantics and focus eligibility. None of the artwork participates 
 A color sample is `{ kind: 'color'; color: ColorValue }`; an image sample is `{ kind: 'image'; source:
 ImageSourcePropType }`. Both use the same parent key/label model. The collection receives the stable option key,
 not a pixel, URI or color object used as identity.
+`onSelect(value)` requests the owner change; `focusable` lets that owner decide Tab eligibility without disabling
+the choice. Full collection navigation remains with the separately specified SwatchPicker.
+Hover and press resolve the boundary's active stroke colors, never the product sample's fill.
 
 The public React 19 `ref` remains on the declared root. A supported View/Pressable root forwards `tooltip?: string`
 only to that root; it does not use the tip as a name, description or popup relationship. Caller visual styles apply last.
@@ -60,6 +63,6 @@ distinguishable at normal scale its text name remains available, not a generated
 Request an already-selected value and a disabled value, and inspect the selection indication on a transparent
 sample in high contrast.
 
-Draft for Windows Fabric, Office Win32, macOS Fabric and macOS Paper. The [requirement evidence](spec/source.json) is planned; no runtime export or native qualification is claimed.
+The [requirement evidence](spec/source.json) tracks runtime and native story coverage separately from collection navigation.
 
-Review the [token bindings](spec/tokens.json), [accessibility](spec/accessibility.md), [interaction](spec/interaction.md) and [usage](spec/usage.md) with this draft.
+See the [token bindings](spec/tokens.json), [accessibility](spec/accessibility.md), [interaction](spec/interaction.md) and [usage](spec/usage.md).

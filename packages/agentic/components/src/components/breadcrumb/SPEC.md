@@ -1,7 +1,7 @@
 ---
 name: breadcrumb
 platform: react-native (Windows, macOS)
-status: contract-draft
+status: implemented
 source: ./spec/source.json
 tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
@@ -64,6 +64,7 @@ focus continuation separately.
 Measure with two then five levels, resize while the overflow is open, invoke a hidden destination, and verify
 every ancestor remains reachable exactly once.
 
-Draft for Windows Fabric, Office Win32, macOS Fabric and macOS Paper. The [requirement evidence](spec/source.json) is planned; no runtime export or native qualification is claimed.
+The [requirement evidence](spec/source.json) distinguishes implemented layout and overflow routing from native
+focus during resize and natural Tab continuation, which need endpoint-specific evidence.
 
-Review the [token bindings](spec/tokens.json), [accessibility](spec/accessibility.md), [interaction](spec/interaction.md) and [usage](spec/usage.md) with this draft.
+See the [token bindings](spec/tokens.json), [accessibility](spec/accessibility.md), [interaction](spec/interaction.md) and [usage](spec/usage.md).

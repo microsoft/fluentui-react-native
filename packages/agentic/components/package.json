@@ -42,6 +42,12 @@
       "react-native": "./src/primitives/index.ts",
       "import": "./lib/primitives/index.js",
       "default": "./src/primitives/index.ts"
+    },
+    "./macos": {
+      "types": "./lib/macos/index.d.ts",
+      "react-native": "./src/macos/index.ts",
+      "import": "./lib/macos/index.js",
+      "default": "./src/macos/index.ts"
     }
   },
   "scripts": {

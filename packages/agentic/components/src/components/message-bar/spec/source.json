@@ -1,9 +1,9 @@
 {
   "schemaVersion": 2,
   "component": "message-bar",
-  "lifecycle": "contract-draft",
-  "conformance": "review-required",
-  "reviewedAt": null,
+  "lifecycle": "implemented",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-11-23",
   "sources": [
     {
       "id": "flex-component",
@@ -162,22 +162,24 @@
     {
       "id": "MSB-001",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["message-bar.test.tsx", "message-bar.stories.tsx"]
+      "evidence": ["message-bar.test.tsx", "message-bar.stories.tsx"]
     },
     {
       "id": "MSB-002",
       "sources": ["flex-component"],
-      "plannedEvidence": ["message-bar.test.tsx", "message-bar.stories.tsx"]
+      "evidence": ["message-bar.styles.ts", "message-bar.stories.tsx"]
     },
     {
       "id": "MSB-003",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["message-bar.test.tsx", "message-bar.wdio.ts"]
+      "evidence": ["message-bar.test.tsx", "message-bar.stories.tsx"],
+      "plannedEvidence": ["message-bar.wdio.ts"]
     },
     {
       "id": "MSB-004",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["message-bar.wdio.ts", "message-bar.stories.tsx"]
+      "evidence": ["message-bar.test.tsx"],
+      "plannedEvidence": ["message-bar.wdio.ts"]
     }
   ]
 }

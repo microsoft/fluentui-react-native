@@ -1,7 +1,7 @@
 ---
 name: slider
 platform: react-native (Windows, macOS)
-status: contract-draft
+status: implemented
 source: ./spec/source.json
 tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
@@ -51,9 +51,11 @@ only to that root; it does not use the tip as a name, description or popup relat
 
 ## Platform behavior
 
-Generic Windows Fabric numeric metadata can expose a range while its SetValue dispatch omits the requested
-number. Use a qualified native provider or gate that mode. Confirm increment/decrement or value-setting on the
-actual AppKit target, including the upper thumb.
+The AppKit preview gives each thumb a native RangeTarget, with writable `AXValue` and increment/decrement
+operations over its allowed interval. The isolated Windows Fabric preview uses a custom RangeValue peer
+per thumb to deliver the requested number and reject crossing. The public component entry point and default
+Windows story catalog remain gated pending physical-input and visual qualification. Office Win32 has no
+matching provider.
 
 ## Divergences from Flex
 
@@ -65,6 +67,6 @@ actual AppKit target, including the upper thumb.
 Bring both thumbs together, select the rail at a tie, then adjust the upper target with UIA or AX. Inspect
 ordering, callback identity, cancel behavior and RTL direction.
 
-Draft for Windows Fabric, Office Win32, macOS Fabric and macOS Paper. The [requirement evidence](spec/source.json) is planned; no runtime export or native qualification is claimed.
+The [source evidence](spec/source.json) separates the AppKit preview from outstanding endpoint qualification.
 
 Review the [token bindings](spec/tokens.json), [accessibility](spec/accessibility.md), [interaction](spec/interaction.md) and [usage](spec/usage.md) with this draft.

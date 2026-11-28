@@ -1,7 +1,7 @@
 ---
 name: presence-badge
 platform: react-native (Windows, macOS)
-status: contract-draft
+status: implemented
 source: ./spec/source.json
 tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
@@ -47,8 +47,9 @@ localization concern; do not promise built-in English speech or a timer for stat
 
 ## Platform behavior
 
-Avatar currently suppresses visible presence. This draft defines the child but does not revise Avatar's public
-slots. Qualify the host's accessible name on each renderer before enabling the composition.
+Avatar does not admit a presence slot. PresenceBadge is a sibling visual placed by its host, which supplies the
+accessible name. The mark is excluded from independent traversal and hit testing; qualify status changes and
+host focus on Windows Fabric, Office Win32, macOS Fabric and macOS Paper.
 
 ## Divergences from Flex
 
@@ -60,6 +61,7 @@ slots. Qualify the host's accessible name on each renderer before enabling the c
 Read the same focused row before and after a status change; switch direction and high contrast, and check the
 smallest size without relying on color alone.
 
-Draft for Windows Fabric, Office Win32, macOS Fabric and macOS Paper. The [requirement evidence](spec/source.json) is planned; no runtime export or native qualification is claimed.
+The [requirement evidence](spec/source.json) identifies the implementation, tests and native story. Endpoint
+qualification is tracked separately.
 
-Review the [token bindings](spec/tokens.json), [accessibility](spec/accessibility.md), [interaction](spec/interaction.md) and [usage](spec/usage.md) with this draft.
+See the [token bindings](spec/tokens.json), [accessibility](spec/accessibility.md), [interaction](spec/interaction.md) and [usage](spec/usage.md).

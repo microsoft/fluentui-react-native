@@ -1,0 +1,19 @@
+#import <React/RCTViewManager.h>
+
+@interface RCT_EXTERN_MODULE(FRNNativeCoreSpinEditorManager, RCTViewManager)
+RCT_EXPORT_VIEW_PROPERTY(targetLabel, NSString)
+RCT_EXPORT_VIEW_PROPERTY(targetTestID, NSString)
+RCT_EXPORT_VIEW_PROPERTY(incrementLabel, NSString)
+RCT_EXPORT_VIEW_PROPERTY(decrementLabel, NSString)
+RCT_EXPORT_VIEW_PROPERTY(draft, NSString)
+RCT_EXPORT_VIEW_PROPERTY(numericValue, double)
+RCT_EXPORT_VIEW_PROPERTY(minimum, double)
+RCT_EXPORT_VIEW_PROPERTY(maximum, double)
+RCT_EXPORT_VIEW_PROPERTY(canIncrement, BOOL)
+RCT_EXPORT_VIEW_PROPERTY(canDecrement, BOOL)
+RCT_EXPORT_VIEW_PROPERTY(hasLargeStep, BOOL)
+RCT_EXPORT_VIEW_PROPERTY(disabled, BOOL)
+RCT_EXPORT_VIEW_PROPERTY(readOnly, BOOL)
+RCT_EXPORT_VIEW_PROPERTY(invalid, BOOL)
+RCT_EXPORT_VIEW_PROPERTY(onEditorInput, RCTDirectEventBlock)
+@end

@@ -34,7 +34,8 @@ registration; it cannot start with its published dependencies.
    declared scripts. Do not change installed package source to configure a test.
 2. Reproduce with the narrowest declared stage, suite, story, or filter.
    Provision the verified helper explicitly; never guess flags or invoke
-   private runner internals.
+   private runner internals. Preview case selection separately for each
+   endpoint and input lane before starting the native workload.
 3. Obtain authorization before changing privacy settings. Do not overlap
    interactive workloads or stop resources not owned by this run.
 4. Use the documented reporter modes for bounded machine-readable output;
@@ -42,7 +43,13 @@ registration; it cannot start with its published dependencies.
 5. Report failures, skips, unsupported capabilities, empty work, and incomplete
    work distinctly. Skips are not passes. Native accessibility claims require
    [native accessibility evidence](../../references/shared/portable/accessibility.md),
-   not a JavaScript event or a successful bundle.
+   not a JavaScript event or a successful bundle. For visual review, capture
+   only the verified target, inspect the image, and report that observation
+   separately from behavioral checks.
+   An automation ID can resolve a native node that is not in accessible
+   traversal; use the exposed accessibility tree to verify a negative claim.
+   A verified attach-only case run may qualify the cases, but cannot replace
+   an uncompleted owned smoke lifecycle or full-catalog traversal.
 6. Follow the consumer repository's validation and release rules. In FURN,
    root and app/package instructions own contributor checks and routing to
    maintenance or Storybook build workflows.

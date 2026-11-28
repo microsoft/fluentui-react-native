@@ -1,9 +1,9 @@
 {
   "schemaVersion": 2,
   "component": "teaching-popover",
-  "lifecycle": "contract-draft",
-  "conformance": "review-required",
-  "reviewedAt": null,
+  "lifecycle": "implemented",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-11-23",
   "sources": [
     {
       "id": "flex-component",
@@ -107,22 +107,24 @@
     {
       "id": "TCP-001",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["teaching-popover.test.tsx", "teaching-popover.stories.tsx"]
+      "evidence": ["teaching-popover.test.tsx", "teaching-popover.stories.tsx"]
     },
     {
       "id": "TCP-002",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["teaching-popover.test.tsx", "teaching-popover.wdio.ts"]
+      "evidence": ["useTeachingPopover.ts"],
+      "plannedEvidence": ["teaching-popover.wdio.ts"]
     },
     {
       "id": "TCP-003",
       "sources": ["flex-component"],
-      "plannedEvidence": ["teaching-popover.test.tsx", "teaching-popover.stories.tsx"]
+      "evidence": ["teaching-popover.styles.ts", "teaching-popover.stories.tsx"]
     },
     {
       "id": "TCP-004",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["teaching-popover.wdio.ts", "teaching-popover.stories.tsx"]
+      "evidence": ["teaching-popover.stories.tsx", "stepAnnouncement.ts"],
+      "plannedEvidence": ["teaching-popover.wdio.ts"]
     }
   ]
 }

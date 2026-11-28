@@ -1,7 +1,7 @@
 ---
 name: select
 platform: react-native (Windows, macOS)
-status: contract-draft
+status: implemented
 source: ./spec/source.json
 tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
@@ -50,9 +50,10 @@ only to that root; it does not use the tip as a name, description or popup relat
 
 ## Platform behavior
 
-A Windows combo control and an AppKit pop-up button need not expose identical roles or key chords. No cross-host
-picker is qualified by this draft. Gate each unsupported endpoint; a dependency installed elsewhere is not
-evidence of integration.
+The first implementation is an AppKit `NSPopUpButton` over the macOS native-core provider. React owns the
+accepted selection; the system menu owns opening, traversal, and cancellation. The placeholder is a closed-button
+presentation only and never becomes a menu item. Keep Windows and Win32 gated until they ship a native picker.
+The macOS appearance uses the system border for both requested variants; the size controls the outer layout metrics.
 
 ## Divergences from Flex
 
@@ -64,6 +65,7 @@ evidence of integration.
 Open and cancel, then commit an enabled option and attempt a disabled one. Compare keyboard and assistive
 invocation without dispatching synthetic open actions.
 
-Draft for Windows Fabric, Office Win32, macOS Fabric and macOS Paper. The [requirement evidence](spec/source.json) is planned; no runtime export or native qualification is claimed.
+The [requirement evidence](spec/source.json) separates the macOS preview from outstanding endpoint support
+and native required/invalid/description projection.
 
 Review the [token bindings](spec/tokens.json), [accessibility](spec/accessibility.md), [interaction](spec/interaction.md) and [usage](spec/usage.md) with this draft.

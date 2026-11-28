@@ -198,6 +198,11 @@ contract automatically.
 | `contract-reviewed` | `reviewed`        | The pre-code contract is approved; evidence may still be planned.                                 |
 | `implemented`       | `reviewed`        | Every requirement names an existing type, implementation, test, story, or platform-evidence file. |
 
+`reviewed` records pre-code approval, not endpoint qualification. Record existing source and test files in `evidence`
+without implying they ran. When a requirement still needs native coverage, retain the outstanding native work in
+`plannedEvidence`; source or Jest assertions do not replace it. A native test file's existence likewise does not prove
+that it ran or passed. Keep the endpoint and observed result separate from the lifecycle.
+
 A changed source identity resets document conformance to `review-required` and
 clears the review date until the affected requirements and divergences are
 reviewed again.
@@ -278,4 +283,5 @@ affected contract before restoring conformance.
 Only `flex-skill` currently has automated release and candidate drift. Contract
 entries without a Flex source report candidate status `not-applicable`.
 `--offline --write` refreshes locally derived lifecycle and conformance fields
-while preserving the last committed live Flex evidence.
+while preserving the last committed live Flex evidence. Format the rewritten
+report with the workspace formatter before running repository lint.

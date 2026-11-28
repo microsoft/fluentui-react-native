@@ -1,7 +1,7 @@
 ---
 name: nav
 platform: react-native (Windows, macOS)
-status: contract-draft
+status: implemented
 source: ./spec/source.json
 tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
@@ -22,14 +22,14 @@ this is neither an arrow-only Tree nor a Menu for running commands.
 | ------------------------------------------------------- | ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
 | `items / currentValue / onNavigate`                     | required model / caller route / required        | Use stable keys for destinations and categories. Emit a navigation request; the router decides when the destination becomes current.           |
 | `expandedKeys / defaultExpandedKeys / onExpandedChange` | uncontrolled, initially empty                   | State of categories only. Hiding and reopening the panel does not erase route or expanded keys.                                                |
-| `presentation / density`                                | `inline` / `comfortable`                        | Inline or overlay, comfortable or compact. Use available container space; full Nav hides rather than becoming an icon rail.                    |
+| `presentation / density`                                | `inline` / `comfortable`                        | Inline on desktop; overlay uses the AppKit DialogWindow where present. Use available container space; full Nav never becomes an icon rail.     |
 | `open / defaultOpen / onOpenChange / openerRef`         | inline visible; overlay closed unless requested | The shell provides a live external reopening target for a hidden panel. Optional header/footer and labelled groups do not become destinations. |
 
 ### Slots and ownership
 
-A named navigation View/ref, header/toggle, scrollable body of NavItems, optional separators and footer. Inline
-participates in layout; overlay needs a genuine modal navigation owner with a scrim. Current ancestry is derived
-from the data graph.
+A named navigation View/ref with optional header/footer and a scrollable body of NavItems. The shell can place its
+named toggle in the header or supply an external opener. Inline participates in layout; AppKit overlay uses a sheet,
+not an authored scrim. Current ancestry comes from the data graph.
 
 Related contracts used by this design: [NavItem](../nav-item/SPEC.md), [Drawer](../drawer/SPEC.md), [Divider](../divider/SPEC.md), [Button](../button/SPEC.md).
 
@@ -64,6 +64,7 @@ remain discoverable. Use the Drawer/Dialog modal gate (#4379) rather than cyclin
 Navigate from a nested destination, collapse/reopen its category, resize and hide the focused panel. Inspect
 current route, visible order, opener restoration and overlay isolation.
 
-Draft for Windows Fabric, Office Win32, macOS Fabric and macOS Paper. The [requirement evidence](spec/source.json) is planned; no runtime export or native qualification is claimed.
+The [source evidence](spec/source.json) keeps Windows overlay, native hierarchy/state projection and shell focus
+qualification separate from inline source behavior.
 
 Review the [token bindings](spec/tokens.json), [accessibility](spec/accessibility.md), [interaction](spec/interaction.md) and [usage](spec/usage.md) with this draft.

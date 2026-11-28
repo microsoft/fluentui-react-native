@@ -1,7 +1,7 @@
 ---
 name: list
 platform: react-native (Windows, macOS)
-status: contract-draft
+status: implemented
 source: ./spec/source.json
 tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
@@ -18,18 +18,18 @@ with independently operable actions do not share the same focus behavior.
 
 ## Public contract
 
-| Proposed prop                                            | Default                                | Purpose                                                                                                                                                                    |
-| -------------------------------------------------------- | -------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `items / renderItem`                                     | required                               | Stable unique string key and label per entry; use ListItem presentation. A virtualized host must provide order, position and aggregate data independently of mounted rows. |
-| `navigationMode / selectionMode`                         | `passive` / `none`                     | passive, items or composite; none, single or multiple. Single or multiple selection upgrades passive navigation to items. Nested actions require explicit composite mode.  |
-| `selectedKeys / defaultSelectedKeys / onSelectionChange` | uncontrolled, empty                    | An ordered key set under group ownership. A row never toggles itself independently. Single mode accepts at most one key.                                                   |
-| `onAction / size / accessibilityLabel`                   | optional / `medium` / supplied context | Primary row activation is distinct from selecting. Small, medium or large is delegated to ListItem.                                                                        |
+| Proposed prop                                            | Default                                | Purpose                                                                                                                                                              |
+| -------------------------------------------------------- | -------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `items / renderItem`                                     | required / optional presentation       | Stable unique string key and label per entry. `renderItem` can supply supporting text and icon presentation, not an interactive child or a replacement focus target. |
+| `navigationMode / selectionMode`                         | `passive` / `none`                     | `passive` or `items`; selection can be none, single or multiple. Selection or an `onAction` upgrades passive navigation to items.                                    |
+| `selectedKeys / defaultSelectedKeys / onSelectionChange` | uncontrolled, empty                    | An ordered key set under group ownership. A row never toggles itself independently. Single mode accepts at most one key.                                             |
+| `onAction / size / accessibilityLabel`                   | optional / `medium` / supplied context | Primary row activation is distinct from selecting. Small, medium or large is delegated to ListItem.                                                                  |
 
 ### Slots and ownership
 
-Structural View/ref, logical rows and optional separator siblings. In items mode register real row targets;
-composite mode additionally requires a supported way to reach independent row actions. ListItem's presentational
-trailing content is not by itself an accessible action.
+Structural View/ref and logical rows. Passive rows do not register press handlers. In items mode use actual row
+focus targets and ListItem presentation. Composite and virtualized modes are not exposed by the first public
+implementation; a decorative trailing slot is not a substitute for an accessible action.
 
 Related contracts used by this design: [ListItem](../list-item/SPEC.md), [Divider](../divider/SPEC.md).
 
@@ -52,9 +52,9 @@ only to that root; it does not use the tip as a name, description or popup relat
 
 ## Platform behavior
 
-Do not assume native option/listbox semantics for generic independent rows. Verify Win32 child-host and focus
-behavior (#4344); virtualization and composite navigation are capability gates, not implied by accepting an
-array of items.
+Do not assume native option/listbox semantics for generic independent rows. Office Win32 admits passive rows;
+items mode is gated on child-host and focus behavior (#4344). Virtualization and composite navigation are
+capability gates, not implied by accepting an array of items.
 
 ## Divergences from Flex
 
@@ -66,6 +66,7 @@ array of items.
 Try rows with equal labels and different keys, select then reorder them, unmount the focused row and invoke a
 nested action. Verify callback separation and focus after scrolling.
 
-Draft for Windows Fabric, Office Win32, macOS Fabric and macOS Paper. The [requirement evidence](spec/source.json) is planned; no runtime export or native qualification is claimed.
+The [requirement evidence](spec/source.json) separates the mounted-list behavior from endpoint checks and deferred
+composite/virtualized behavior. The Win32 child-host gate is not closed by this contract review.
 
 Review the [token bindings](spec/tokens.json), [accessibility](spec/accessibility.md), [interaction](spec/interaction.md) and [usage](spec/usage.md) with this draft.

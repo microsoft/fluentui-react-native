@@ -1,7 +1,7 @@
 ---
 name: rating
 platform: react-native (Windows, macOS)
-status: contract-draft
+status: implemented
 source: ./spec/source.json
 tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
@@ -18,11 +18,11 @@ but must not share a reported value or meaning.
 
 ## Public contract
 
-| Proposed prop                                 | Default                                                   | Purpose                                                                                                                    |
-| --------------------------------------------- | --------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| `max / step / size`                           | 5 / 0.5 / `medium`                                        | Positive whole star count, step 0.5 or 1, and small, medium or large. The numeric scale is not a count of radio positions. |
-| `value / defaultValue / onValueChange`        | uncontrolled, unset                                       | A bounded numeric score or null for no rating. Supplying null is controlled; omission is not.                              |
-| `accessibilityLabel / formatValue / disabled` | required name / localized score or no-rating text / false | The group owns the value, name and adjustments. When required, validation is owned by the form.                            |
+| Proposed prop                                 | Default                                                   | Purpose                                                                                                            |
+| --------------------------------------------- | --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `max / step / size`                           | 5 / 0.5 / `medium`                                        | 1–100 whole stars, step 0.5 or 1, and small, medium or large. The numeric scale is not a count of radio positions. |
+| `value / defaultValue / onValueChange`        | uncontrolled, unset                                       | A bounded numeric score or null for no rating. Supplying null is controlled; omission is not.                      |
+| `accessibilityLabel / formatValue / disabled` | required name / localized score or no-rating text / false | The group owns the value, name and adjustments. When required, validation is owned by the form.                    |
 
 ### Slots and ownership
 
@@ -49,9 +49,11 @@ only to that root; it does not use the tip as a name, description or popup relat
 
 ## Platform behavior
 
-An ordinary native range may not support unset. Make the human-readable unset state explicit without
-misrepresenting zero; gate if the host cannot deliver the value-changing operation. The generic Windows Fabric
-SetValue path is not sufficient evidence.
+The AppKit preview exposes one RangeTarget with no numeric value when unset; supply a locale-aware `formatValue`
+for both null and numeric scores. The renderer never receives the hover preview as its accessibility value.
+The isolated Windows Fabric preview uses the native-core RangeValue peer: it retains exact half scores and
+distinguishes an unset score from zero. The public component entry point and default Windows story catalog
+remain gated pending physical-input and visual qualification. Office Win32 has no matching provider.
 
 ## Divergences from Flex
 
@@ -63,6 +65,6 @@ SetValue path is not sufficient evidence.
 Start unset, choose zero, preview 3.5, commit it, clear, then set a fraction through assistive adjustment.
 Observe names, values and exactly one callback per change.
 
-Draft for Windows Fabric, Office Win32, macOS Fabric and macOS Paper. The [requirement evidence](spec/source.json) is planned; no runtime export or native qualification is claimed.
+The [source evidence](spec/source.json) separates the AppKit preview from outstanding endpoint qualification.
 
 Review the [token bindings](spec/tokens.json), [accessibility](spec/accessibility.md), [interaction](spec/interaction.md) and [usage](spec/usage.md) with this draft.

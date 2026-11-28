@@ -1,7 +1,7 @@
 ---
 name: nav-item
 platform: react-native (Windows, macOS)
-status: contract-draft
+status: implemented
 source: ./spec/source.json
 tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
@@ -38,6 +38,8 @@ Related contracts used by this design: [Link](../link/SPEC.md), [Avatar](../avat
 A destination supplies a route key and one navigation operation. A category instead accepts `expanded` and
 `onExpandedChange(next)`. `carriedCurrent` is only presentation derived by Nav; it is not another selected route
 or a second current-page accessibility value.
+Pass a localized `currentDescription` on a route to expose its current state as descriptive data when current.
+Supply an informative badge's accessible label as its description; the visual badge is not another target.
 
 The public React 19 `ref` remains on the declared root. A supported View/Pressable root forwards `tooltip?: string`
 only to that root; it does not use the tip as a name, description or popup relationship. Caller visual styles apply last.
@@ -64,6 +66,7 @@ target.
 Collapse a category containing the current child, inspect announcement and current markers, then activate its
 secondary action with no change of route or expansion.
 
-Draft for Windows Fabric, Office Win32, macOS Fabric and macOS Paper. The [requirement evidence](spec/source.json) is planned; no runtime export or native qualification is claimed.
+The [requirement evidence](spec/source.json) distinguishes implemented route and disclosure behavior from native
+current-location projection and speech, which must be qualified on their actual renderer.
 
-Review the [token bindings](spec/tokens.json), [accessibility](spec/accessibility.md), [interaction](spec/interaction.md) and [usage](spec/usage.md) with this draft.
+See the [token bindings](spec/tokens.json), [accessibility](spec/accessibility.md), [interaction](spec/interaction.md) and [usage](spec/usage.md).

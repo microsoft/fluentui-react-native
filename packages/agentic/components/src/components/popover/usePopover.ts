@@ -27,6 +27,10 @@ const defaultTriggerHint = 'Opens a popover';
  * Native presence is authoritative; a native dismissal latches a controlled request closed until it is rearmed.
  */
 export function usePopover_unstable(props: PopoverProps): PopoverState {
+  return usePopover(props);
+}
+
+export function usePopover(props: PopoverProps, restoreOnControlledClose = true): PopoverState {
   const host = popupHost;
   if (!host) {
     throw new Error("Popover requires native-core's Callout, available on macOS, Windows, and Win32.");
@@ -142,10 +146,10 @@ export function usePopover_unstable(props: PopoverProps): PopoverState {
     closeCause.current = undefined;
     focusedPresentation.current = null;
     setFallback(null);
-    if (cause === undefined && heldFocus) {
+    if (cause === undefined && heldFocus && restoreOnControlledClose) {
       setRestore((value) => value + 1);
     }
-  }, [requested]);
+  }, [requested, restoreOnControlledClose]);
 
   React.useEffect(() => {
     if (restore === 0) {

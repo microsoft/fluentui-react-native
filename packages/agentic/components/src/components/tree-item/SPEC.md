@@ -1,7 +1,7 @@
 ---
 name: tree-item
 platform: react-native (Windows, macOS)
-status: contract-draft
+status: implemented
 source: ./spec/source.json
 tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
@@ -63,6 +63,7 @@ and independent quick-action support; do not replace tree semantics with a colle
 Invoke each operation separately on branch and leaf, render a mixed parent, and remove a focused quick action.
 Inspect actual native actions, roles and successor focus.
 
-Draft for Windows Fabric, Office Win32, macOS Fabric and macOS Paper. The [requirement evidence](spec/source.json) is planned; no runtime export or native qualification is claimed.
+The [source evidence](spec/source.json) distinguishes the branch/leaf implementation from native hierarchy and
+quick-action qualification on each endpoint.
 
 Review the [token bindings](spec/tokens.json), [accessibility](spec/accessibility.md), [interaction](spec/interaction.md) and [usage](spec/usage.md) with this draft.

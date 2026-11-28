@@ -1,7 +1,7 @@
 ---
 name: textarea
 platform: react-native (Windows, macOS)
-status: contract-draft
+status: implemented
 source: ./spec/source.json
 tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
@@ -54,6 +54,10 @@ only to that root; it does not use the tip as a name, description or popup relat
 
 Let the host layout constrain the field and scroll its contents. Verify multiline selection/copy, line wrapping
 and actual read-only/disabled projection independently on Windows Fabric, Win32 and both macOS renderers.
+On macOS Fabric the named scroll host and value-bearing AppKit text view may be separate AX nodes.
+Read multiline value within the named host's native subtree; the named host need not itself report AXValue.
+On remount, Fabric can also lose the scroll host's native name and automation identifier while the backed
+editor remains operable. Name qualification remains gated there; a successful physical edit does not close it.
 
 ## Divergences from Flex
 
@@ -64,6 +68,7 @@ and actual read-only/disabled projection independently on Windows Fabric, Win32 
 Type two paragraphs with an IME, paste a multiline string, then switch to read-only, copy, resize and disable.
 Verify value and selection behavior, not just rendered text.
 
-Draft for Windows Fabric, Office Win32, macOS Fabric and macOS Paper. The [requirement evidence](spec/source.json) is planned; no runtime export or native qualification is claimed.
+The [requirement evidence](spec/source.json) links runtime behavior and native stories. Verify copy, IME
+and platform state projection separately; the implementation does not infer parity from Input.
 
-Review the [token bindings](spec/tokens.json), [accessibility](spec/accessibility.md), [interaction](spec/interaction.md) and [usage](spec/usage.md) with this draft.
+See the [token bindings](spec/tokens.json), [accessibility](spec/accessibility.md), [interaction](spec/interaction.md) and [usage](spec/usage.md).

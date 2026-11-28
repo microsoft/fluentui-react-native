@@ -7,6 +7,7 @@
 
 #include "components/Callout/Callout.h"
 #include "components/FocusZone/FocusZoneComponentView.h"
+#include "components/RangeTarget/RangeTarget.h"
 
 using namespace winrt::Microsoft::ReactNative;
 
@@ -19,6 +20,7 @@ void ReactPackageProvider::CreatePackage(IReactPackageBuilder const &packageBuil
   AddAttributedModules(packageBuilder, true);
   RegisterCalloutComponentView(packageBuilder);
   RegisterFocusZoneComponentView(packageBuilder);
+  RegisterRangeTargetComponentView(packageBuilder);
 #else
   UNREFERENCED_PARAMETER(packageBuilder);
 #endif

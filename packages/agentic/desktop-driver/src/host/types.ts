@@ -30,6 +30,7 @@ export type DesktopHostFeatures = {
   performAccessibilityAction?: boolean;
   physicalClick: boolean;
   screenshot: boolean;
+  rangeValue?: boolean;
   setWindowRect: boolean;
   /**
    * The host clears with the mechanism it is asked for: `semantic` only sets the value through the accessibility tree,
@@ -113,13 +114,16 @@ export type NativeElementSnapshot = {
   expanded: SupportedValue<boolean>;
   focused: SupportedValue<boolean>;
   helpText?: SupportedValue<string>;
+  level?: number;
   name?: string;
   parentId?: string;
+  positionInSet?: number;
   rect: Rect;
   required?: SupportedValue<boolean>;
   role: string;
   scope: NativeElementScope;
   selected: SupportedValue<boolean>;
+  sizeOfSet?: number;
   text?: string;
   value?: string;
   visible: SupportedValue<boolean>;
@@ -334,6 +338,8 @@ export interface DesktopHost {
    * `features.performAccessibilityAction`.
    */
   performAccessibilityAction?(elementId: string, key: string, signal?: AbortSignal): Promise<void>;
+  getRangeValue?(elementId: string, signal?: AbortSignal): Promise<number | null>;
+  setRangeValue?(elementId: string, value: number, signal?: AbortSignal): Promise<void>;
 
   /**
    * Samples a window's tree within explicit budgets without failing on large trees. Read-only: it never carries an

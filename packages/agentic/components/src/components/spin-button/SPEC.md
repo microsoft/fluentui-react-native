@@ -1,7 +1,7 @@
 ---
 name: spin-button
 platform: react-native (Windows, macOS)
-status: contract-draft
+status: implemented
 source: ./spec/source.json
 tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
@@ -22,14 +22,14 @@ the committed number. Stepping is not string concatenation or a substitute for a
 | -------------------------------------- | ---------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
 | `value / defaultValue / onValueChange` | uncontrolled, initially 0 when permitted | Finite committed number. Use a valid in-range initial value; prop changes do not echo requests.                        |
 | `min / max / step / largeStep`         | unbounded / unbounded / 1 / absent       | Finite bounds when provided, positive finite steps; no wrap at a boundary. Reject reversed bounds.                     |
-| `parse / format`                       | matching locale conventions              | A paired text-to-number and number-to-text policy. Do not format away a trailing decimal or minus sign during editing. |
+| `parse / format`                       | required matching locale policy          | A paired text-to-number and number-to-text policy. Do not format away a trailing decimal or minus sign during editing. |
 | `variant / size / disabled / readOnly` | `outline` / `medium` / false / false     | Input-style presentation. Read-only keeps text selectable but blocks adjustments; disabled also disables step targets. |
 
 ### Slots and ownership
 
-Structural root/ref, one native text editor, increment/decrement affordances and optional validation indicator.
-The editor is the single sequential stop. Field can render the associated error; the icon is never its only
-explanation.
+Structural root/ref, one AppKit text editor and native increment/decrement affordances with localized
+pointer help. The editor is the single sequential stop and owns native value-changing operations. Field can
+render the associated error; the icon is never its only explanation.
 
 Related contracts used by this design: [Input](../input/SPEC.md), [Field](../field/SPEC.md), [Tooltip](../tooltip/SPEC.md).
 
@@ -51,9 +51,8 @@ only to that root; it does not use the tip as a name, description or popup relat
 
 ## Platform behavior
 
-The generic RN Windows 0.81.38 range provider dispatches a setValue action without the requested number. A
-readout and a working pointer stepper do not qualify direct assistive adjustment. Gate editable numeric support
-on a qualified provider on each host.
+The AppKit preview uses the native SpinEditor and tokenized Input-like chrome. Windows and Win32 are not
+admitted: the generic RN Windows 0.81.38 provider does not deliver the requested SetValue number.
 
 ## Divergences from Flex
 
@@ -65,6 +64,6 @@ on a qualified provider on each host.
 Try a localized decimal, an incomplete sign, invalid text and a step at the maximum. Then invoke a native set to
 a nonadjacent value and verify both callback and resulting value.
 
-Draft for Windows Fabric, Office Win32, macOS Fabric and macOS Paper. The [requirement evidence](spec/source.json) is planned; no runtime export or native qualification is claimed.
+The [source evidence](spec/source.json) separates the AppKit preview from outstanding endpoint qualification.
 
 Review the [token bindings](spec/tokens.json), [accessibility](spec/accessibility.md), [interaction](spec/interaction.md) and [usage](spec/usage.md) with this draft.

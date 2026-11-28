@@ -1,9 +1,9 @@
 {
   "schemaVersion": 2,
   "component": "simple-nav",
-  "lifecycle": "contract-draft",
-  "conformance": "review-required",
-  "reviewedAt": null,
+  "lifecycle": "implemented",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-11-24",
   "sources": [
     {
       "id": "flex-component",
@@ -107,22 +107,24 @@
     {
       "id": "SNV-001",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["simple-nav.test.tsx", "simple-nav.stories.tsx"]
+      "evidence": ["simple-nav.test.tsx", "simple-nav.stories.tsx"]
     },
     {
       "id": "SNV-002",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["simple-nav.test.tsx", "simple-nav.wdio.ts"]
+      "evidence": ["useSimpleNav.ts", "simple-nav.test.tsx"],
+      "plannedEvidence": ["simple-nav.wdio.ts"]
     },
     {
       "id": "SNV-003",
       "sources": ["flex-component"],
-      "plannedEvidence": ["simple-nav.test.tsx", "simple-nav.stories.tsx"]
+      "evidence": ["simple-nav.test.tsx", "simple-nav.stories.tsx"]
     },
     {
       "id": "SNV-004",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["simple-nav.wdio.ts", "simple-nav.stories.tsx"]
+      "evidence": ["renderSimpleNav.tsx", "simple-nav.stories.tsx"],
+      "plannedEvidence": ["simple-nav.wdio.ts"]
     }
   ]
 }

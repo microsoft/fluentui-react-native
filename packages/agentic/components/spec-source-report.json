@@ -230,31 +230,47 @@
     ],
     "adaptedDrafts": [
       "avatar",
-      "avatar-group",
-      "breadcrumb",
       "color-area",
       "color-picker",
       "color-slider",
       "combobox",
+      "dropdown",
+      "menu",
+      "menu-button",
+      "popover",
+      "toast",
+      "tooltip"
+    ],
+    "implemented": [
+      "accordion",
+      "avatar-group",
+      "badge",
+      "breadcrumb",
+      "button",
+      "card",
+      "checkbox",
       "compound-button",
       "destructive-button",
       "dialog",
+      "divider",
       "drawer",
-      "dropdown",
       "field",
       "info-label",
+      "input",
       "interaction-tag",
       "label",
       "link",
       "list",
-      "menu",
-      "menu-button",
+      "list-item",
+      "listbox-item",
+      "menu-item",
       "message-bar",
       "nav",
       "nav-item",
       "persona",
-      "popover",
       "presence-badge",
+      "progress-bar",
+      "radio",
       "radio-group",
       "rating",
       "rating-display",
@@ -263,90 +279,38 @@
       "search-box",
       "select",
       "simple-nav",
+      "skeleton",
       "slider",
       "spin-button",
+      "spinner",
       "split-button",
       "swatch",
       "swatch-picker",
-      "tag-picker",
-      "teaching-popover",
-      "textarea",
-      "toast",
-      "toolbar",
-      "tooltip",
-      "tree",
-      "tree-item"
-    ],
-    "implemented": [
-      "accordion",
-      "badge",
-      "button",
-      "card",
-      "checkbox",
-      "divider",
-      "input",
-      "list-item",
-      "listbox-item",
-      "menu-item",
-      "progress-bar",
-      "radio",
-      "skeleton",
-      "spinner",
       "switch",
       "tab",
       "tablist",
       "tag",
+      "tag-picker",
+      "teaching-popover",
       "text",
-      "toggle-button"
+      "textarea",
+      "toggle-button",
+      "toolbar",
+      "tree",
+      "tree-item"
     ],
     "implementationGap": [
       "avatar",
-      "avatar-group",
-      "breadcrumb",
       "color-area",
       "color-picker",
       "color-slider",
       "combobox",
-      "compound-button",
-      "destructive-button",
-      "dialog",
-      "drawer",
       "dropdown",
-      "field",
-      "info-label",
-      "interaction-tag",
-      "label",
-      "link",
-      "list",
       "menu",
       "menu-button",
-      "message-bar",
-      "nav",
-      "nav-item",
-      "persona",
       "popover",
-      "presence-badge",
-      "radio-group",
-      "rating",
-      "rating-display",
-      "rating-item",
-      "scrollbar",
-      "search-box",
-      "select",
-      "simple-nav",
-      "slider",
-      "spin-button",
-      "split-button",
-      "swatch",
-      "swatch-picker",
-      "tag-picker",
-      "teaching-popover",
-      "textarea",
       "toast",
-      "toolbar",
-      "tooltip",
-      "tree",
-      "tree-item"
+      "tooltip"
     ],
     "noLocalContract": [],
     "legacyMigration": [
@@ -587,8 +551,8 @@
     },
     {
       "component": "avatar-group",
-      "lifecycle": "contract-draft",
-      "conformance": "review-required",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
       "releaseDifferences": [],
       "marketplaceDrift": {
         "added": [],
@@ -621,8 +585,8 @@
     },
     {
       "component": "breadcrumb",
-      "lifecycle": "contract-draft",
-      "conformance": "review-required",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
       "releaseDifferences": [],
       "marketplaceDrift": {
         "added": [],
@@ -757,8 +721,8 @@
     },
     {
       "component": "compound-button",
-      "lifecycle": "contract-draft",
-      "conformance": "review-required",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
       "releaseDifferences": [],
       "marketplaceDrift": {
         "added": [],
@@ -774,8 +738,8 @@
     },
     {
       "component": "destructive-button",
-      "lifecycle": "contract-draft",
-      "conformance": "review-required",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
       "releaseDifferences": [],
       "marketplaceDrift": {
         "added": [],
@@ -791,8 +755,8 @@
     },
     {
       "component": "dialog",
-      "lifecycle": "contract-draft",
-      "conformance": "review-required",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
       "releaseDifferences": [],
       "marketplaceDrift": {
         "added": [],
@@ -825,8 +789,8 @@
     },
     {
       "component": "drawer",
-      "lifecycle": "contract-draft",
-      "conformance": "review-required",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
       "releaseDifferences": [],
       "marketplaceDrift": {
         "added": [],
@@ -859,8 +823,8 @@
     },
     {
       "component": "field",
-      "lifecycle": "contract-draft",
-      "conformance": "review-required",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
       "releaseDifferences": [],
       "marketplaceDrift": {
         "added": [],
@@ -876,8 +840,8 @@
     },
     {
       "component": "info-label",
-      "lifecycle": "contract-draft",
-      "conformance": "review-required",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
       "releaseDifferences": [],
       "marketplaceDrift": {
         "added": [],
@@ -910,8 +874,8 @@
     },
     {
       "component": "interaction-tag",
-      "lifecycle": "contract-draft",
-      "conformance": "review-required",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
       "releaseDifferences": [],
       "marketplaceDrift": {
         "added": [],
@@ -927,8 +891,8 @@
     },
     {
       "component": "label",
-      "lifecycle": "contract-draft",
-      "conformance": "review-required",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
       "releaseDifferences": [],
       "marketplaceDrift": {
         "added": [],
@@ -944,8 +908,8 @@
     },
     {
       "component": "link",
-      "lifecycle": "contract-draft",
-      "conformance": "review-required",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
       "releaseDifferences": [],
       "marketplaceDrift": {
         "added": [],
@@ -961,8 +925,8 @@
     },
     {
       "component": "list",
-      "lifecycle": "contract-draft",
-      "conformance": "review-required",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
       "releaseDifferences": [],
       "marketplaceDrift": {
         "added": [],
@@ -1063,8 +1027,8 @@
     },
     {
       "component": "message-bar",
-      "lifecycle": "contract-draft",
-      "conformance": "review-required",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
       "releaseDifferences": [],
       "marketplaceDrift": {
         "added": [],
@@ -1080,8 +1044,8 @@
     },
     {
       "component": "nav",
-      "lifecycle": "contract-draft",
-      "conformance": "review-required",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
       "releaseDifferences": [],
       "marketplaceDrift": {
         "added": [],
@@ -1097,8 +1061,8 @@
     },
     {
       "component": "nav-item",
-      "lifecycle": "contract-draft",
-      "conformance": "review-required",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
       "releaseDifferences": [],
       "marketplaceDrift": {
         "added": [],
@@ -1114,8 +1078,8 @@
     },
     {
       "component": "persona",
-      "lifecycle": "contract-draft",
-      "conformance": "review-required",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
       "releaseDifferences": [],
       "marketplaceDrift": {
         "added": [],
@@ -1148,8 +1112,8 @@
     },
     {
       "component": "presence-badge",
-      "lifecycle": "contract-draft",
-      "conformance": "review-required",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
       "releaseDifferences": [],
       "marketplaceDrift": {
         "added": [],
@@ -1199,8 +1163,8 @@
     },
     {
       "component": "radio-group",
-      "lifecycle": "contract-draft",
-      "conformance": "review-required",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
       "releaseDifferences": [],
       "marketplaceDrift": {
         "added": [],
@@ -1216,8 +1180,8 @@
     },
     {
       "component": "rating",
-      "lifecycle": "contract-draft",
-      "conformance": "review-required",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
       "releaseDifferences": [],
       "marketplaceDrift": {
         "added": [],
@@ -1233,8 +1197,8 @@
     },
     {
       "component": "rating-display",
-      "lifecycle": "contract-draft",
-      "conformance": "review-required",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
       "releaseDifferences": [],
       "marketplaceDrift": {
         "added": [],
@@ -1250,8 +1214,8 @@
     },
     {
       "component": "rating-item",
-      "lifecycle": "contract-draft",
-      "conformance": "review-required",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
       "releaseDifferences": [],
       "marketplaceDrift": {
         "added": [],
@@ -1267,8 +1231,8 @@
     },
     {
       "component": "scrollbar",
-      "lifecycle": "contract-draft",
-      "conformance": "review-required",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
       "releaseDifferences": [],
       "marketplaceDrift": {
         "added": [],
@@ -1284,8 +1248,8 @@
     },
     {
       "component": "search-box",
-      "lifecycle": "contract-draft",
-      "conformance": "review-required",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
       "releaseDifferences": [],
       "marketplaceDrift": {
         "added": [],
@@ -1301,8 +1265,8 @@
     },
     {
       "component": "select",
-      "lifecycle": "contract-draft",
-      "conformance": "review-required",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
       "releaseDifferences": [],
       "marketplaceDrift": {
         "added": [],
@@ -1318,8 +1282,8 @@
     },
     {
       "component": "simple-nav",
-      "lifecycle": "contract-draft",
-      "conformance": "review-required",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
       "releaseDifferences": [],
       "marketplaceDrift": {
         "added": [],
@@ -1352,8 +1316,8 @@
     },
     {
       "component": "slider",
-      "lifecycle": "contract-draft",
-      "conformance": "review-required",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
       "releaseDifferences": [],
       "marketplaceDrift": {
         "added": [],
@@ -1369,8 +1333,8 @@
     },
     {
       "component": "spin-button",
-      "lifecycle": "contract-draft",
-      "conformance": "review-required",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
       "releaseDifferences": [],
       "marketplaceDrift": {
         "added": [],
@@ -1403,8 +1367,8 @@
     },
     {
       "component": "split-button",
-      "lifecycle": "contract-draft",
-      "conformance": "review-required",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
       "releaseDifferences": [],
       "marketplaceDrift": {
         "added": [],
@@ -1420,8 +1384,8 @@
     },
     {
       "component": "swatch",
-      "lifecycle": "contract-draft",
-      "conformance": "review-required",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
       "releaseDifferences": [],
       "marketplaceDrift": {
         "added": [],
@@ -1437,8 +1401,8 @@
     },
     {
       "component": "swatch-picker",
-      "lifecycle": "contract-draft",
-      "conformance": "review-required",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
       "releaseDifferences": [],
       "marketplaceDrift": {
         "added": [],
@@ -1522,8 +1486,8 @@
     },
     {
       "component": "tag-picker",
-      "lifecycle": "contract-draft",
-      "conformance": "review-required",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
       "releaseDifferences": [],
       "marketplaceDrift": {
         "added": [],
@@ -1539,8 +1503,8 @@
     },
     {
       "component": "teaching-popover",
-      "lifecycle": "contract-draft",
-      "conformance": "review-required",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
       "releaseDifferences": [],
       "marketplaceDrift": {
         "added": [],
@@ -1565,8 +1529,8 @@
     },
     {
       "component": "textarea",
-      "lifecycle": "contract-draft",
-      "conformance": "review-required",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
       "releaseDifferences": [],
       "marketplaceDrift": {
         "added": [],
@@ -1616,8 +1580,8 @@
     },
     {
       "component": "toolbar",
-      "lifecycle": "contract-draft",
-      "conformance": "review-required",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
       "releaseDifferences": [],
       "marketplaceDrift": {
         "added": [],
@@ -1650,8 +1614,8 @@
     },
     {
       "component": "tree",
-      "lifecycle": "contract-draft",
-      "conformance": "review-required",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
       "releaseDifferences": [],
       "marketplaceDrift": {
         "added": [],
@@ -1667,8 +1631,8 @@
     },
     {
       "component": "tree-item",
-      "lifecycle": "contract-draft",
-      "conformance": "review-required",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
       "releaseDifferences": [],
       "marketplaceDrift": {
         "added": [],

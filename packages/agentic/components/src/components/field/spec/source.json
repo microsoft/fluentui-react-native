@@ -1,9 +1,9 @@
 {
   "schemaVersion": 2,
   "component": "field",
-  "lifecycle": "contract-draft",
-  "conformance": "review-required",
-  "reviewedAt": null,
+  "lifecycle": "implemented",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-11-24",
   "sources": [
     {
       "id": "flex-component",
@@ -115,32 +115,35 @@
     {
       "id": "FLD-001",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["field.types.test.tsx", "field.test.tsx"]
+      "evidence": ["field.types.test.ts", "field.test.tsx", "field.stories.tsx"]
     },
     {
       "id": "FLD-002",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["field.test.tsx"]
+      "evidence": ["field.test.tsx", "field.stories.tsx"]
     },
     {
       "id": "FLD-003",
       "sources": ["flex-component", "furn-desktop"],
+      "evidence": ["field.test.tsx", "spec/accessibility.md"],
       "plannedEvidence": ["field.wdio.ts"]
     },
     {
       "id": "FLD-004",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["field.test.tsx", "field.wdio.ts"]
+      "evidence": ["field.test.tsx", "field.stories.tsx", "fieldInfoLabel.ts"],
+      "plannedEvidence": ["field.wdio.ts"]
     },
     {
       "id": "FLD-005",
       "sources": ["flex-component"],
-      "plannedEvidence": ["field.stories.tsx"]
+      "evidence": ["field.stories.tsx", "field.styles.ts"]
     },
     {
       "id": "FLD-006",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["field.test.tsx", "field.stories.tsx"]
+      "evidence": ["field.test.tsx", "field.stories.tsx"],
+      "plannedEvidence": ["field.wdio.ts"]
     }
   ]
 }

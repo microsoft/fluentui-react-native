@@ -1,9 +1,9 @@
 {
   "schemaVersion": 2,
   "component": "scrollbar",
-  "lifecycle": "contract-draft",
-  "conformance": "review-required",
-  "reviewedAt": null,
+  "lifecycle": "implemented",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-11-24",
   "sources": [
     {
       "id": "flex-component",
@@ -102,22 +102,24 @@
     {
       "id": "SCB-001",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["scrollbar.types.test.tsx"]
+      "evidence": ["scrollbar.types.test.ts", "useScrollbar.ts"]
     },
     {
       "id": "SCB-002",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["scrollbar.test.tsx", "scrollbar.stories.tsx"]
+      "evidence": ["scrollbar.test.tsx", "scrollbar.stories.tsx", "scrollbar.wdio.ts"]
     },
     {
       "id": "SCB-003",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["scrollbar.test.tsx", "scrollbar.wdio.ts"]
+      "evidence": ["scrollbar.test.tsx", "scrollbar.stories.tsx", "scrollbar.wdio.ts"],
+      "plannedEvidence": ["scrollbar-paging.wdio.ts"]
     },
     {
       "id": "SCB-004",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["scrollbar.wdio.ts", "scrollbar.stories.tsx"]
+      "evidence": ["renderScrollbar.tsx", "spec/accessibility.md"],
+      "plannedEvidence": ["scrollbar-paging.wdio.ts"]
     }
   ]
 }

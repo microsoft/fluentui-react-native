@@ -1,7 +1,7 @@
 ---
 name: scrollbar
 platform: react-native (Windows, macOS)
-status: contract-draft
+status: implemented
 source: ./spec/source.json
 tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
@@ -20,8 +20,8 @@ Position, visibility policy, pointer dragging and accessibility remain coordinat
 
 | Proposed prop | Default    | Purpose                                                                                                                         |
 | ------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| `scrollOwner` | required   | The actual scrollable viewport, not an arbitrary View ref or an independently supplied percent.                                 |
-| `orientation` | `vertical` | Vertical or horizontal; configure the matching native indicator where supported.                                                |
+| `scrollOwner` | required   | Native ScrollView props for the one viewport this component renders, including its content and scroll callbacks.                |
+| `orientation` | `vertical` | Vertical or horizontal; configure the viewport axis and the matching native indicator.                                          |
 | `enabled`     | true       | Permit the native indicator when the content overflows. This is not a command to override OS always-show/auto-hide preferences. |
 
 ### Slots and ownership
@@ -31,9 +31,10 @@ root/ref; do not insert a wrapper that takes scrolling or accessibility away fro
 
 ### Data and callbacks
 
-`scrollOwner` denotes one mounted scrollable instance in its own window. An integration can request that the
-owner show its horizontal or vertical indicator; content extents, wheel delta conversion and native UIA/AX
-scroll operations remain the owner's. No `onValueChange`, thumb renderer or independent percent is exposed.
+Configure the owner declaratively rather than patching an already-mounted instance. `ref` reaches that `ScrollView`;
+root `style` applies after `scrollOwner.style`. The owner cannot override the two indicator booleans or the axis.
+Content extents, wheel delta conversion and native UIA/AX operations remain the owner's. No `onValueChange`, thumb
+renderer or independent percent is exposed.
 
 ### Requirements
 
@@ -58,6 +59,7 @@ styled draggable one.
 Compare an overflowing and a fitting pane, switch OS visibility preferences, drag, wheel and page with the
 keyboard, then inspect native scroll position and focus.
 
-Draft for Windows Fabric, Office Win32, macOS Fabric and macOS Paper. The [requirement evidence](spec/source.json) is planned; no runtime export or native qualification is claimed.
+The [requirement evidence](spec/source.json) records the declarative owner and authored checks. Native thumb
+drag, keyboard paging, OS visibility preferences and accessible scroll actions remain separate qualification gates.
 
-Review the [token bindings](spec/tokens.json), [accessibility](spec/accessibility.md), [interaction](spec/interaction.md) and [usage](spec/usage.md) with this draft.
+See the [token bindings](spec/tokens.json), [accessibility](spec/accessibility.md), [interaction](spec/interaction.md) and [usage](spec/usage.md).

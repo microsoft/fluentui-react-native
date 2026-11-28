@@ -1,9 +1,9 @@
 {
   "schemaVersion": 2,
   "component": "swatch",
-  "lifecycle": "contract-draft",
-  "conformance": "review-required",
-  "reviewedAt": null,
+  "lifecycle": "implemented",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-11-23",
   "sources": [
     {
       "id": "flex-component",
@@ -98,22 +98,23 @@
     {
       "id": "SWT-001",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["swatch.types.test.tsx"]
+      "evidence": ["swatch.types.test.ts"]
     },
     {
       "id": "SWT-002",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["swatch.test.tsx", "swatch.stories.tsx"]
+      "evidence": ["swatch.test.tsx", "swatch.stories.tsx"]
     },
     {
       "id": "SWT-003",
       "sources": ["flex-component"],
-      "plannedEvidence": ["swatch.test.tsx", "swatch.stories.tsx"]
+      "evidence": ["swatch.test.tsx", "swatch.stories.tsx"]
     },
     {
       "id": "SWT-004",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["swatch.wdio.ts", "swatch.stories.tsx"]
+      "evidence": ["swatch.stories.tsx"],
+      "plannedEvidence": ["swatch.wdio.ts"]
     }
   ]
 }

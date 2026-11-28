@@ -13,3 +13,5 @@ export type { FocusZoneProps, FocusZoneHandle, FocusZoneCommands } from '../comp
 export { useNativeViewTarget } from '../components/nativeTarget';
 export type { NativeViewTarget } from '../components/nativeTarget';
 export type { NativeOperationOptions, NativeOperationOutcome, NativeOperationStatus } from '../components/nativeOperation';
+export { RangeTarget } from '../components/range-target/RangeTarget.windows';
+export type { RangeTargetProps } from '../components/range-target/RangeTarget.windows';

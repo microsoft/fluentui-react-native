@@ -113,6 +113,32 @@ The component must own its role and state semantics while preserving unrelated c
 
 Button warns in development when an icon-only instance lacks an `accessibilityLabel`. Put warnings in an effect so
 render remains free of observable side effects, and make the dependency list match every value used by the warning.
+When a composed command narrows `content` to text, distinguish a nonblank name from a supplied and empty string.
+Resolve blank content as absent before delegating to Button, and test the icon-only path with blank text and without a name.
+
+Reusing Button's pointer/keyboard handler does not register desktop assistive activation. The new command
+compositions connect the native accessibility tap separately: for enabled commands it calls the same callback
+without fabricating a gesture event. Do not wire both the tap and an `activate` notification to the same command.
+Run the accessible lane to verify AXPress or UIA Invoke independently of the physical lane.
+When changing a shared trigger for a composition, keep its existing explicit naming channels and handler
+composition. Add a regression to the shared trigger's own suite; a composite alone may not exercise the other inputs.
+
+For a persistent announcement, distinguish a new event identity from temporary opt-out. Verify an unchanged
+message through opted-in → opted-out → opted-in, and compare it with an actual removal and later reinsertion.
+If a disabled form hides its feedback temporarily, preserve the identity until feedback is removed or changes.
+
+In stepped surfaces, list the interactive slots that can disappear during a transition. Preserve a surviving
+native target; when the activated target disappears, choose a live successor after the accepted step commits.
+Qualify that transition with physical keyboard input, not a click that never focused the old target.
+Clear a pending close-and-focus intent when the controlled owner rejects the requested change. Test the rejection
+followed by an unrelated controlled update to ensure stale intent cannot steal focus.
+Treat a clear-and-return request as one-shot, even when a controlled editor rejects the value. Re-enabling a control
+must not replay a pending focus request. Declare native handled keys only where the editor gives IME composition
+precedence; a JavaScript `preventDefault()` cannot undo an AppKit key equivalent that already blurred the editor.
+
+Collections must distinguish requested focus from observed focus. A command callback may move focus before the
+next layout effect; a pending pointer-focus request must not pull it back from that destination. For a measured grid,
+register layout observers before entering the grid mode so unchanged first-row tiles already have geometry.
 
 For a component-owned toggle or select action, use `resolveAccessibilityAction`
 from Framework Base with the semantic action, `Platform.OS`, and the caller's

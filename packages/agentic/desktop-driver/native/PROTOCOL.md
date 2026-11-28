@@ -125,6 +125,15 @@ These fields are trusted supervisor configuration, not WebDriver capabilities.
 
 ### Action values
 
+The Windows `rangeValue` feature reports `getRangeValue` and `setRangeValue`.
+Both take a live helper-private `elementId` and require `UIA_RangeValuePatternId`.
+`getRangeValue` reads the provider's current number, returning `null` for an
+unset value. `setRangeValue` passes a finite numeric `value` to `SetValue`
+with no string conversion, synthetic input, or fallback. A successful write
+acknowledges the provider call, not a subsequent controlled value change.
+Windows snapshots may also include positive `level`, `positionInSet`, and
+`sizeOfSet` values from their UI Automation properties.
+
 Before dispatching `performActions`, Node requires `x`, `y`, `deltaX`, and
 `deltaY` where applicable to be finite numbers in the inclusive range
 `-2147483648` to `2147483647`. Fractional values are retained.

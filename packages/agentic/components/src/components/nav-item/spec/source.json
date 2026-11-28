@@ -1,9 +1,9 @@
 {
   "schemaVersion": 2,
   "component": "nav-item",
-  "lifecycle": "contract-draft",
-  "conformance": "review-required",
-  "reviewedAt": null,
+  "lifecycle": "implemented",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-11-24",
   "sources": [
     {
       "id": "flex-component",
@@ -103,22 +103,25 @@
     {
       "id": "NVI-001",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["nav-item.types.test.tsx"]
+      "evidence": ["nav-item.types.test.ts", "nav-item.test.tsx"]
     },
     {
       "id": "NVI-002",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["nav-item.test.tsx", "nav-item.wdio.ts"]
+      "evidence": ["nav-item.test.tsx", "nav-item.stories.tsx"],
+      "plannedEvidence": ["nav-item.wdio.ts"]
     },
     {
       "id": "NVI-003",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["nav-item.test.tsx", "nav-item.stories.tsx"]
+      "evidence": ["nav-item.test.tsx", "nav-item.stories.tsx"],
+      "plannedEvidence": ["nav-item.wdio.ts"]
     },
     {
       "id": "NVI-004",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["nav-item.wdio.ts", "nav-item.stories.tsx"]
+      "evidence": ["nav-item.test.tsx", "nav-item.stories.tsx"],
+      "plannedEvidence": ["nav-item.wdio.ts"]
     }
   ]
 }

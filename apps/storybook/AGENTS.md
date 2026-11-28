@@ -30,15 +30,19 @@ configuration, driver, and runtime behavior belongs to package-owned guidance:
   `prep` when switching renderer. Bundle before prep if Pods must embed the
   JavaScript bundle. Only `macos/Podfile` is hand-authored; Pods, lockfiles,
   workspaces, build products, and DerivedData are generated.
+- If `prep` fails in React Native Test App with `JSON.fast_generate` missing,
+  check the JSON gem loaded by CocoaPods. JSON 3 removed that API. Use a
+  compatible toolchain for `prep` (or activate an already-installed JSON 2
+  with a command-local Ruby preload); do not patch generated dependencies.
 - macOS native smoke uses the instance-specific bundle embedded in the app.
   The interactive development commands still use Metro.
 - Windows project files and registrations are generated. Preserve the app's
   declared helper and identity setup.
 - Win32 uses the prebuilt REX Paper host. Bundle before run; native build is
   unsupported. Keep app-owned story exclusions in `desktop.config.mts`.
-- The app excludes Windows Accordion and Win32 Accordion/ListItem due to
-  current native-host failures. Remove exclusions only after the owning
-  component is verified on that endpoint.
+- Windows and Win32 exclude the AppKit-only Dialog, Rating, Select, Slider and SpinButton stories.
+  Windows excludes Accordion; Win32 excludes Accordion and the List/ListItem stories pending the native
+  child-host check. Remove exclusions only after the owning component is verified on that endpoint.
 
 ## Diagnostics and validation
 
@@ -48,6 +52,12 @@ and `yarn storybook --verbose smoke --<platform>` for owned runtime
 diagnostics. Use the platform agent map for additional commands. Prefer
 target-scoped capture through `desktop-driver`; screenshots do not replace
 accessibility lookup.
+
+If owned macOS smoke launches an app but cannot establish its exact lease,
+follow the desktop-test lifecycle recovery guidance before retrying. Once
+settled, use `storybook driver`, `storybook run`, and `storybook test` for a
+verified attach-only qualification; report authored cases separately from full
+smoke traversal. Clean up the separately launched app by its exact identity.
 
 Use the package references for the native helper, authenticated readiness,
 reporting, and smoke contracts. Respect the

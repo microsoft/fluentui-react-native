@@ -46,8 +46,16 @@ The render function may select among already-resolved slots and compose conditio
 Do not create missing slots in the render stage. If a structural element can exist, represent it in the state type and
 construct it in the state hook.
 
+`useSlot` runs a phased child immediately. If styling supplies structural props such as Input's leading icon,
+resolve the complete child props before its first phase. SearchBox passes the resolved props to an ordinary child
+element so the Input phase sees the leading icon and its presentation at once.
+
 Components that own children should render only their declared slots. Do not spread native `children` into the tree and
 let consumers bypass slot order.
+
+When responsive overflow changes a trail, render all visible items in one keyed sequence. A key does not preserve
+the native target if it moves between separately rendered arrays. Pair a genuinely removed focused target with a
+live successor; do not restore over an accepted navigation.
 
 ## Assemble the component in one small file
 

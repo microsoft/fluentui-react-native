@@ -32,6 +32,31 @@ Prefer public semantics:
 
 Flatten styles only when the resolved visual contract is the behavior under test.
 
+Testing Library filters deliberately hidden roots out of `getByTestId` by default. Opt in with
+`{ includeHiddenElements: true }` to inspect a decorative root or layer. A default role query below a hidden
+ancestor does not prove that the leaf itself lacks a role or action; inspect the leaf props when that is part of the contract.
+For a native negative assertion, include a fixture that exposes the leaf's own behavior without a labelled
+ancestor that can absorb it. Assert the native owner and the absence of the extra target separately.
+An automation-ID lookup may also match a non-control UIA node. Use the exposed accessibility tree, with a known
+owner as a positive control, when the requirement is absence from independent accessible traversal.
+For a native scroll wrapper, put the automation identity on the real scroll viewport, not a text descendant.
+Use its scroll callback and native input to verify that the observed viewport actually moved.
+Inspect compact anchors with scrollable popup content. An unconstrained ScrollView can contribute no intrinsic
+width, leaving every destination clipped even when native lookup still finds its name.
+An evidence assertion must fail on a regression in the component under test. Reading an unchanged hard-coded
+name from a different native element proves neither visible label matching nor a labeling relationship.
+Test a component-owned guard directly when the test library would suppress the event itself. For instance,
+calling the resolved `onChangeText` exercises late delivery to a noneditable editor; `fireEvent.changeText`
+may ignore the event before it reaches that guard.
+
+For localized data, pin the formatter in tests and include a non-default locale. Assert that visible and spoken
+output preserve precision and distinguish omitted data from zero. Avoid requiring `Intl` just to import the
+components package; use caller formatting or initialize optional host formatting lazily.
+
+Style assertions establish layout configuration, not measured wrapping or growth. When a fixture overrides
+`fontSize`, pair it with a compatible `lineHeight`. To verify growth, use a constrained native story that measures
+the root under wrapped, enlarged text and compares it with the configured minimum.
+
 Button coverage demonstrates:
 
 - default props, role, accessibility, and styling
@@ -208,6 +233,12 @@ Native-rendered story helpers use `*.story-helpers.tsx` and are also excluded
 from library emit while checked by the story project. Use `StoryStatus` for
 counter/modality probes: its named accessible View is observable on macOS
 Fabric, where a plain paragraph's `testID` is not exposed as an AX element.
+An identifier on a structural View does not necessarily appear in AX. Verify the
+element's native role and visibility before using it as a click target; prefer a
+correctly named static caption over teaching the test to click an unrelated peer.
+For multiline editors, prove what owns each native fact. macOS Fabric can put the automation ID and name
+on the scroll host while the AppKit text view owns the value. Read the value within that host's subtree
+and send Return to the focused editor; `setValue` against a host with no readable value cannot verify clearing.
 
 Focus cases use native `focused`, `checked`, and `selected` properties together
 with activation and event-order probes. Cover stale key-up, repeats, disabled
@@ -283,7 +314,28 @@ so its contract is visible.
 Keep stories accessible. Icon-only controls need action-oriented labels. Standalone informative icons need descriptive
 labels. Decorative icon slots inside a labeled control should be inaccessible.
 
+### Visual review of native stories
+
+Reuse the behavior fixture for visual review when it shows the required variants at a usable size. Include the
+edge cases that a default preview would miss: the smallest and largest density, wrapped text, disabled chrome,
+or both directions. Keep the Windows Fabric fixture within its fixed preview; do not bypass native hit testing
+to reach clipped controls.
+
+In `apps/storybook`, first list the selected tag with `yarn storybook test --<platform> --list --tag <tag> --input <lane>`.
+`STORYBOOK_SMOKE_TAG=<tag>` limits the authored test phase of `smoke --mode stories-and-tests`, not its render
+traversal. Run both lanes for a command that supports both: physical success and an AX/UIA role do not prove
+that the action exists or invokes the callback. Inspect the actual target-window PNGs alongside the native
+results. For stories that explicitly call
+`recordVisualReview` in a `*.wdio.ts` helper, `FURN_STORYBOOK_VISUAL_REVIEW=<batch>` opts in to writing the
+owned-window captures beneath `artifacts/visual-review`. Use a distinct batch per renderer and attempt. This
+local capture requires OS permission; it does not add a capture requirement to normal hosted tests. A screenshot
+that was saved but not inspected is not a visual pass. A visually correct frame is not proof of focus, native
+accessibility, or screen-reader speech.
+
 ## Validation
+
+Run repository CI validation after interactive Storybook smoke has settled. The desktop-test ownership tests share
+the machine's per-user workload claim, even when their temporary directories differ.
 
 Use declared workspace scripts:
 

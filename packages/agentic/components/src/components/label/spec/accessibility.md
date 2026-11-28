@@ -1,7 +1,8 @@
 # Label accessibility
 
-There is one field name, even when the indicator is visible. Expose `labelID` on the native text
-which supplies that name. The required marker is decorative; the control exposes its own required
+There is one visible caption, even when the indicator is visible. `labelID` identifies the native text for a
+future verified relation; an independently readable static View projects the caption when the text fragment
+is not a reliable native element. The required marker is decorative; the control exposes its own required
 state where its native role supports it. Do not put a second required announcement on the label.
 For a named group, preserve the distinct name and role of every option.
 

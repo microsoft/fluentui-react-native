@@ -1,9 +1,9 @@
 {
   "schemaVersion": 2,
   "component": "slider",
-  "lifecycle": "contract-draft",
-  "conformance": "review-required",
-  "reviewedAt": null,
+  "lifecycle": "implemented",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-11-24",
   "sources": [
     {
       "id": "flex-component",
@@ -116,22 +116,25 @@
     {
       "id": "SLD-001",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["slider.test.tsx", "slider.stories.tsx"]
+      "evidence": ["slider.types.test.ts", "slider.test.tsx", "slider.stories.tsx"]
     },
     {
       "id": "SLD-002",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["slider.test.tsx", "slider.wdio.ts"]
+      "evidence": ["useSlider.ts", "slider.test.tsx"],
+      "plannedEvidence": ["slider.wdio.ts"]
     },
     {
       "id": "SLD-003",
       "sources": ["flex-component"],
-      "plannedEvidence": ["slider.test.tsx", "slider.stories.tsx"]
+      "evidence": ["renderSlider.tsx", "slider.stories.tsx"],
+      "plannedEvidence": ["slider.wdio.ts"]
     },
     {
       "id": "SLD-004",
       "sources": ["flex-component", "furn-desktop", "rnw-range"],
-      "plannedEvidence": ["slider.wdio.ts", "slider.stories.tsx"]
+      "evidence": ["slider.test.tsx", "slider.stories.tsx"],
+      "plannedEvidence": ["slider.wdio.ts"]
     }
   ]
 }

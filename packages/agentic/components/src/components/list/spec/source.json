@@ -1,9 +1,9 @@
 {
   "schemaVersion": 2,
   "component": "list",
-  "lifecycle": "contract-draft",
-  "conformance": "review-required",
-  "reviewedAt": null,
+  "lifecycle": "implemented",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-11-24",
   "sources": [
     {
       "id": "flex-component",
@@ -107,22 +107,25 @@
     {
       "id": "LST-001",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["list.test.tsx", "list.stories.tsx"]
+      "evidence": ["list.test.tsx", "list.stories.tsx"]
     },
     {
       "id": "LST-002",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["list.test.tsx", "list.wdio.ts"]
+      "evidence": ["list.test.tsx", "list.stories.tsx"],
+      "plannedEvidence": ["list.wdio.ts"]
     },
     {
       "id": "LST-003",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["list.wdio.ts", "list.stories.tsx"]
+      "evidence": ["listEntry.tsx", "list.test.tsx"],
+      "plannedEvidence": ["list.wdio.ts"]
     },
     {
       "id": "LST-004",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["list.test.tsx", "list.stories.tsx"]
+      "evidence": ["useList.ts", "list.test.tsx"],
+      "plannedEvidence": ["list.wdio.ts"]
     }
   ]
 }

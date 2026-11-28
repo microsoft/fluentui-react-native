@@ -8,6 +8,9 @@ import { FlexThemeReference, ThemeProvider } from '@fluentui-react-native/design
 import { render } from '../../common/renderWithTheme';
 import { Popover } from './popover';
 import type { PopoverProps } from './popover.types';
+import { renderPopover_unstable } from './renderPopover';
+import { usePopover } from './usePopover';
+import { usePopoverStyles_unstable } from './usePopoverStyles';
 
 type ReactTestInstance = ReturnType<typeof screen.getByTestId>;
 
@@ -59,6 +62,20 @@ function Scene(props: Partial<PopoverProps>) {
       <Text>Content</Text>
     </Popover>
   );
+}
+
+function NavigationScene({ open, triggerRef }: { open: boolean; triggerRef: React.Ref<View> }) {
+  const state = usePopover(
+    {
+      open,
+      trigger: { content: 'Earlier locations', testID: 'trigger', ref: triggerRef },
+      surface: { accessibilityLabel: 'Earlier locations', testID: 'surface' },
+      children: <Text>Destination</Text>,
+    },
+    false,
+  );
+  usePopoverStyles_unstable(state);
+  return renderPopover_unstable(state);
 }
 
 describe('Popover', () => {
@@ -259,6 +276,17 @@ describe('Popover', () => {
     await settle(host, focusCommands()[0], 'confirmed');
     await view.rerender(<Scene open={false} {...props} />);
     expect(focus).toHaveBeenCalledTimes(1);
+  });
+
+  it('does not replace destination focus after a navigation-driven close', async () => {
+    const triggerRef = React.createRef<View>();
+    const view = await render(<NavigationScene open triggerRef={triggerRef} />);
+    const host = await ready();
+    await settle(host, focusCommands()[0], 'confirmed');
+    const focus = jest.spyOn(triggerRef.current, 'focus').mockClear();
+    await view.rerender(<NavigationScene open={false} triggerRef={triggerRef} />);
+    expect(screen.queryByTestId('surface')).toBeNull();
+    expect(focus).not.toHaveBeenCalled();
   });
 
   it('does not move focus when the caller closes a presentation that never held focus', async () => {

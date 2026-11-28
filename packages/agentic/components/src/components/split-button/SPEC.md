@@ -1,7 +1,7 @@
 ---
 name: split-button
 platform: react-native (Windows, macOS)
-status: contract-draft
+status: implemented
 source: ./spec/source.json
 tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
@@ -64,6 +64,7 @@ relationship with the menu; inspect that relationship on all four endpoints.
 Open and Escape repeatedly from the second region, select a menu command, then invoke the first region; observe
 distinct callbacks and the real focus destination after each.
 
-Draft for Windows Fabric, Office Win32, macOS Fabric and macOS Paper. The [requirement evidence](spec/source.json) is planned; no runtime export or native qualification is claimed.
+The [requirement evidence](spec/source.json) separates the implemented visual and action owners from native
+focus restoration and popup association, which still need endpoint qualification.
 
-Review the [token bindings](spec/tokens.json), [accessibility](spec/accessibility.md), [interaction](spec/interaction.md) and [usage](spec/usage.md) with this draft.
+See the [token bindings](spec/tokens.json), [accessibility](spec/accessibility.md), [interaction](spec/interaction.md) and [usage](spec/usage.md).

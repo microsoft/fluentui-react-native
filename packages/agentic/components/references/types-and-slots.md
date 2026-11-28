@@ -97,20 +97,24 @@ sources. Verify the primitive remains assignable to `SlotProp<typeof Primitive>`
 Export each component and its composition pipeline explicitly from
 [`src/index.ts`](../src/index.ts):
 
-- the component and its public props, slots, variants, and resolved state type
+- the component and its public props, variants, resolved state type, and any supported public slots
 - the state hook as `use<Component>_unstable`
 - the style-application hook as `use<Component>Styles_unstable`
 - the render helper as `render<Component>_unstable`
 
 Name the source file `use<Component>Styles.ts` and the implementation `use<Component>Styles_unstable` so the local and
-public composition APIs match without aliases. Never use wildcard exports. Do not export private state-only slots or
-internal style definitions.
+public composition APIs match without aliases. Never use wildcard exports. Do not export private state-only slots,
+an inherited replacement slot type not accepted by the wrapper's public props, or internal style definitions.
+Keep the exact runtime export check in [`src/index.test.ts`](../src/index.test.ts) aligned with public additions;
+an internal part must remain absent from that list.
 
 ## Review checklist
 
 - Every public slot is intentional and documented.
 - Render-only slots are private to resolved state.
 - Variant unions match the spec exactly.
+- A localization callback receives named fields when optional text has distinct roles; a filtered array must not
+  make a status indistinguishable from a supporting description.
 - Omitted and false values retain distinct semantics where required.
 - Root native props cannot bypass owned children or style ordering.
 - Stable native roots expose a correctly typed `ref`, and the state/render pipeline does not replace it.

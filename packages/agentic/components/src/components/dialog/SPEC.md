@@ -1,7 +1,7 @@
 ---
 name: dialog
 platform: react-native (Windows, macOS)
-status: contract-draft
+status: implemented
 source: ./spec/source.json
 tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
@@ -35,10 +35,10 @@ Related contracts used by this design: [Button](../button/SPEC.md), [Destructive
 
 ### Data and callbacks
 
-`onOpenChange(next, { reason })` distinguishes trigger, dismiss request and explicit resolution. A click on an
-ordinary modal scrim requests dismissal and return to the opener; nonmodal has no scrim and alert ignores scrim
-input. Below a measured 320-unit footer width, stack primary, secondary and tertiary actions without losing any
-action to clipping.
+`onOpenChange(next, { reason })` distinguishes a dismiss request, native closure, and explicit resolution.
+The first AppKit host presents modal/alert as an owner-window sheet and nonmodal as a child panel. The sheet
+blocks owner clicks rather than drawing a synthetic scrim; ordinary modal dismissal is through Escape or the
+close action. Below a measured 320-unit footer width, stack actions without clipping.
 
 The public React 19 `ref` remains on the declared root. A supported View/Pressable root forwards `tooltip?: string`
 only to that root; it does not use the tip as a name, description or popup relationship. Caller visual styles apply last.
@@ -52,9 +52,9 @@ only to that root; it does not use the tip as a name, description or popup relat
 
 ## Platform behavior
 
-Modern Callout is nonmodal and FocusZone only navigates. Require the native modal scope tracked in
-[#4379](https://github.com/microsoft/fluentui-react-native/issues/4379) for modal/alert; do not put an
-accessibility-isolated role on a non-isolated popup.
+Modern Callout is light-dismissed and FocusZone only navigates. The AppKit preview uses the native DialogWindow
+scope instead. Windows Fabric and Office Win32 are not supported by this preview; the cross-host gate remains
+tracked in [#4379](https://github.com/microsoft/fluentui-react-native/issues/4379).
 
 ## Divergences from Flex
 
@@ -66,6 +66,7 @@ accessibility-isolated role on a non-isolated popup.
 Nest a confirmation, attempt background input and assistive traversal, remove the opener, and dismiss in each
 mode. Inspect actual focus and background operability, not only callback results.
 
-Draft for Windows Fabric, Office Win32, macOS Fabric and macOS Paper. The [requirement evidence](spec/source.json) is planned; no runtime export or native qualification is claimed.
+The [requirement evidence](spec/source.json) distinguishes the AppKit scope from nested isolation, speech,
+and focus cases requiring separate native proof.
 
 Review the [token bindings](spec/tokens.json), [accessibility](spec/accessibility.md), [interaction](spec/interaction.md) and [usage](spec/usage.md) with this draft.

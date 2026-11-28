@@ -1,7 +1,7 @@
 ---
 name: toolbar
 platform: react-native (Windows, macOS)
-status: contract-draft
+status: implemented
 source: ./spec/source.json
 tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
@@ -18,11 +18,11 @@ moving to a toggle must not execute the command or change it.
 
 ## Public contract
 
-| Proposed prop        | Default  | Purpose                                                                                                                                                           |
-| -------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `children`           | required | Button or ToggleButton targets with stable identities and optional noninteractive Dividers. Unsupported structural children do not become implicit focus targets. |
-| `size`               | `large`  | small or large; delegate the matching size to participating children. Toolbar does not add a medium override.                                                     |
-| `accessibilityLabel` | required | Name the command group separately from each action. Icon-only commands need their own actual names.                                                               |
+| Proposed prop        | Default  | Purpose                                                                                                                                     |
+| -------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `children`           | required | Button or ToggleButton targets with stable React keys and optional noninteractive Dividers. The strip does not render unsupported children. |
+| `size`               | `large`  | small or large; delegate the matching size to participating children. Toolbar does not add a medium override.                               |
+| `accessibilityLabel` | required | Name the command group separately from each action. Icon-only commands need their own actual names.                                         |
 
 ### Slots and ownership
 
@@ -61,6 +61,7 @@ modified shortcuts. Check actual Tab entry on Win32 and AppKit under their respe
 Arrow across both child types, check toggle value is unchanged, activate once, remove the active child and Tab
 away in LTR and RTL.
 
-Draft for Windows Fabric, Office Win32, macOS Fabric and macOS Paper. The [requirement evidence](spec/source.json) is planned; no runtime export or native qualification is claimed.
+The [requirement evidence](spec/source.json) distinguishes authored focus and activation coverage from outstanding
+native re-entry, removal and RTL checks.
 
-Review the [token bindings](spec/tokens.json), [accessibility](spec/accessibility.md), [interaction](spec/interaction.md) and [usage](spec/usage.md) with this draft.
+See the [token bindings](spec/tokens.json), [accessibility](spec/accessibility.md), [interaction](spec/interaction.md) and [usage](spec/usage.md).

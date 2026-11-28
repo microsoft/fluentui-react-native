@@ -1,9 +1,9 @@
 {
   "schemaVersion": 2,
   "component": "search-box",
-  "lifecycle": "contract-draft",
-  "conformance": "review-required",
-  "reviewedAt": null,
+  "lifecycle": "implemented",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-11-24",
   "sources": [
     {
       "id": "flex-component",
@@ -97,28 +97,34 @@
     {
       "id": "search-editor-owner",
       "status": "accepted"
+    },
+    {
+      "id": "composition-safe-shortcuts",
+      "status": "deferred"
     }
   ],
   "requirements": [
     {
       "id": "SRB-001",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["search-box.test.tsx", "search-box.stories.tsx"]
+      "evidence": ["search-box.test.tsx", "search-box.stories.tsx"]
     },
     {
       "id": "SRB-002",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["search-box.test.tsx", "search-box.wdio.ts"]
+      "evidence": ["search-box.test.tsx", "search-box.stories.tsx"],
+      "plannedEvidence": ["search-box.wdio.ts"]
     },
     {
       "id": "SRB-003",
       "sources": ["flex-component"],
-      "plannedEvidence": ["search-box.test.tsx", "search-box.stories.tsx"]
+      "evidence": ["search-box.test.tsx", "search-box.stories.tsx"]
     },
     {
       "id": "SRB-004",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["search-box.wdio.ts", "search-box.stories.tsx"]
+      "evidence": ["search-box.test.tsx", "search-box.stories.tsx", "spec/interaction.md"],
+      "plannedEvidence": ["search-box.wdio.ts"]
     }
   ]
 }

@@ -8,10 +8,20 @@ and accessibility behavior, and colocated tests and stories.
 | ---------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
 | `@fluentui-react-native/components`            | Higher-order components, public types, and component-qualified `_unstable` state, style, and render stages     |
 | `@fluentui-react-native/components/primitives` | Unstyled building blocks: `CheckboxIndicator`, `CompoundItemLayout`, `FocusVisual`, `Icon`, `LayoutStableText` |
+| `@fluentui-react-native/components/macos`      | AppKit-backed previews: Dialog, Rating, Select, Slider, and SpinButton                                         |
 
-Higher-order components: Accordion, Avatar, Badge, Button, Card, Checkbox, Divider, Dropdown, Input, ListItem,
-ListboxItem, Menu, MenuButton, MenuItem, Popover, ProgressBar, Radio, Skeleton, Spinner, Switch, Tab, TabList, Tag,
-Text, and ToggleButton.
+Higher-order components: Accordion, Avatar, AvatarGroup, Badge, Breadcrumb, Button, Card, Checkbox, CompoundButton,
+DestructiveButton, Divider, Drawer (inline), Dropdown, Field, InfoLabel, Input, InteractionTag, Label, Link (standalone),
+List (mounted passive/items), ListItem, ListboxItem, Menu, MenuButton, MenuItem, MessageBar, Nav, NavItem, Persona,
+Popover, PresenceBadge, ProgressBar, Radio, RadioGroup, RatingDisplay, Scrollbar (native owner), SearchBox, SimpleNav,
+Skeleton, Spinner, SplitButton, Swatch, SwatchPicker, Switch, Tab, TabList, Tag, TagPicker (select-only), TeachingPopover,
+Text, Textarea, ToggleButton, Toolbar, Tree, and TreeItem.
+
+The macOS-only previews require a consuming app that directly autolinks `@fluentui-react-native/native-core`.
+See `@fluentui-react-native/native-core/README.md` for integration. Their public component previews are not
+admitted on Windows or Win32. Native-core includes a Windows Fabric RangeTarget preview used by the isolated
+Rating and Slider UIA cases; it does not add a Win32 registration. The overlay modes of Nav and SimpleNav use
+the same AppKit dialog scope.
 
 ## Quick start
 

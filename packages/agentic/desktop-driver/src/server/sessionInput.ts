@@ -10,6 +10,7 @@ import type { DesktopSession } from './SessionManager.js';
 const mechanismFeature: Readonly<Record<DesktopInputMechanism, keyof DesktopHostFeatures | undefined>> = {
   'accessibility-action': 'performAccessibilityAction',
   'accessibility-click': 'accessibilityClick',
+  'accessibility-range-value': 'rangeValue',
   keyboard: 'keyboard',
   'physical-click': 'physicalClick',
   pointer: 'physicalClick',

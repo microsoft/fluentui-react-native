@@ -1,9 +1,9 @@
 {
   "schemaVersion": 2,
   "component": "radio-group",
-  "lifecycle": "contract-draft",
-  "conformance": "review-required",
-  "reviewedAt": null,
+  "lifecycle": "implemented",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-11-24",
   "sources": [
     {
       "id": "flex-component",
@@ -103,22 +103,24 @@
     {
       "id": "RDG-001",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["radio-group.test.tsx", "radio-group.stories.tsx"]
+      "evidence": ["radio-group.test.tsx", "radio-group.stories.tsx"]
     },
     {
       "id": "RDG-002",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["radio-group.test.tsx", "radio-group.wdio.ts"]
+      "evidence": ["radio-group.test.tsx", "radio-group.stories.tsx"],
+      "plannedEvidence": ["radio-group.wdio.ts"]
     },
     {
       "id": "RDG-003",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["radio-group.wdio.ts", "radio-group.stories.tsx"]
+      "evidence": ["radio-group.stories.tsx", "radioGroupChoice.ts"],
+      "plannedEvidence": ["radio-group.wdio.ts"]
     },
     {
       "id": "RDG-004",
       "sources": ["flex-component"],
-      "plannedEvidence": ["radio-group.test.tsx", "radio-group.stories.tsx"]
+      "evidence": ["radio-group.styles.ts", "radio-group.stories.tsx"]
     }
   ]
 }

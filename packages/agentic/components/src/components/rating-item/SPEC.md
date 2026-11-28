@@ -1,7 +1,7 @@
 ---
 name: rating-item
 platform: react-native (Windows, macOS)
-status: contract-draft
+status: implemented
 source: ./spec/source.json
 tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
@@ -18,7 +18,7 @@ tiny selectable button.
 
 ## Public contract
 
-| Proposed prop        | Default        | Purpose                                                                                          |
+| Part prop            | Default        | Purpose                                                                                          |
 | -------------------- | -------------- | ------------------------------------------------------------------------------------------------ |
 | `fill`               | `empty`        | empty, half or full, derived by its parent from the current presentation value.                  |
 | `size`               | `medium`       | small, medium or large. The icon measure changes; it is not a separate keyboard or touch target. |
@@ -31,9 +31,9 @@ start; the glyph itself is not flipped. The ref, if composed, denotes the visual
 
 ### Data and callbacks
 
-Only `fill: 'empty' | 'half' | 'full'` and parent-supplied presentation affect the glyph. Keep the filled and
-outline shapes registered to the same frame. This is a documented internal part, not a free-standing control
-users must import.
+`preview` is an optional fill from the parent. Removing it restores `fill`, and disabled presentation
+always uses `fill`. Keep the filled and outline shapes registered to the same frame. This is an internal
+part, not a standalone control or a package export.
 
 ### Requirements
 
@@ -56,6 +56,8 @@ editable parent's input target, not the clipped glyph, supplies the accessible v
 Inspect half fill in both directions and verify a native accessibility traversal cannot focus, invoke or adjust
 any individual star.
 
-Draft for Windows Fabric, Office Win32, macOS Fabric and macOS Paper. The [requirement evidence](spec/source.json) is planned; no runtime export or native qualification is claimed.
+The implementation is internal. The [requirement evidence](spec/source.json) identifies the source, tests and
+story. On macOS Fabric and Paper, Tab skipped the passive stars and visual review verified logical half-fill
+at each size. Nonintegral backing scales and Windows endpoints remain open.
 
-Review the [token bindings](spec/tokens.json), [accessibility](spec/accessibility.md), [interaction](spec/interaction.md) and [usage](spec/usage.md) with this draft.
+See the [token bindings](spec/tokens.json), [accessibility](spec/accessibility.md), [interaction](spec/interaction.md) and [usage](spec/usage.md).

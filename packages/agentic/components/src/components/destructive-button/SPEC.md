@@ -1,7 +1,7 @@
 ---
 name: destructive-button
 platform: react-native (Windows, macOS)
-status: contract-draft
+status: implemented
 source: ./spec/source.json
 tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
@@ -18,7 +18,7 @@ Button, and it neither decides whether confirmation is needed nor executes an ir
 
 ## Public contract
 
-| Proposed prop                          | Default                        | Purpose                                                                                                                             |
+| Prop                                   | Default                        | Purpose                                                                                                                             |
 | -------------------------------------- | ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------- |
 | `appearance / size`                    | `subtle` / `medium`            | Only subtle and primary danger treatments; small, medium or large. Use primary deliberately for the emphasized destructive command. |
 | `content / leadingIcon / trailingIcon` | content or named icon required | Icon-only requires a specific action name. Trailing decoration is permitted with text.                                              |
@@ -36,6 +36,10 @@ Related contracts used by this design: [Button](../button/SPEC.md).
 The API does not accept `selected`, `defaultSelected` or a toggle action. The secondary/subtle distinction is
 significant: the permitted lower-emphasis danger treatment is **subtle**, not Button's ordinary secondary
 appearance. A confirm dialog receives its own safe focus target independently of the initiating control.
+`onPress` receives the native press event for pointer and keyboard activation. Desktop assistive invocation
+requests the same command without a gesture event.
+Blank text does not name a command. With a leading icon it resolves as icon-only; if neither text nor an
+explicit name identifies the command, no button is rendered.
 
 The public React 19 `ref` remains on the declared root. A supported View/Pressable root forwards `tooltip?: string`
 only to that root; it does not use the tip as a name, description or popup relationship. Caller visual styles apply last.
@@ -62,6 +66,9 @@ focus.
 Verify enabled, disabled and icon-only cases, one callback, label clarity without color, and focus return
 managed by a caller-owned confirmation.
 
-Draft for Windows Fabric, Office Win32, macOS Fabric and macOS Paper. The [requirement evidence](spec/source.json) is planned; no runtime export or native qualification is claimed.
+The [requirement evidence](spec/source.json) identifies the implementation and tests. The macOS Fabric and Paper
+stories verified native naming, disabled state, focus and exactly-once assistive and physical activation. Visual review covered
+subtle, primary, disabled and icon-only chrome in the standard theme. The high-contrast and Windows endpoint
+checks remain open.
 
-Review the [token bindings](spec/tokens.json), [accessibility](spec/accessibility.md), [interaction](spec/interaction.md) and [usage](spec/usage.md) with this draft.
+See the [token bindings](spec/tokens.json), [accessibility](spec/accessibility.md), [interaction](spec/interaction.md) and [usage](spec/usage.md).

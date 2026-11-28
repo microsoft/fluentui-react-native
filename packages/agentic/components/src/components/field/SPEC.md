@@ -1,7 +1,7 @@
 ---
 name: field
 platform: react-native (Windows, macOS)
-status: contract-draft
+status: implemented
 source: ./spec/source.json
 tokens: ./spec/tokens.json
 accessibility: ./spec/accessibility.md
@@ -83,7 +83,6 @@ for the same change. See [interaction](spec/interaction.md).
 
 ## Conformance
 
-Draft only. Exercise the binding in a two-field form and a group with individually named options.
-Test status changes, repeated messages and disabled recovery while editing. Verify UIA/Narrator and
-AX/VoiceOver results, including after navigating away and back; a Jest tree cannot qualify them.
-Implementation, exports and endpoint qualification are not part of this contract change.
+The [source evidence](spec/source.json) records implementation and authored checks for binding, status changes,
+and disabled recovery. Native description relations and required/invalid projection, and Narrator/VoiceOver
+speech after leaving and returning to the field, are separate qualification gates.

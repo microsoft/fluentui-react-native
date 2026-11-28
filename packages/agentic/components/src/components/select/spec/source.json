@@ -1,9 +1,9 @@
 {
   "schemaVersion": 2,
   "component": "select",
-  "lifecycle": "contract-draft",
-  "conformance": "review-required",
-  "reviewedAt": null,
+  "lifecycle": "implemented",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-11-24",
   "sources": [
     {
       "id": "flex-component",
@@ -107,22 +107,24 @@
     {
       "id": "SEL-001",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["select.types.test.tsx"]
+      "evidence": ["select.types.test.ts", "useSelect.ts"]
     },
     {
       "id": "SEL-002",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["select.test.tsx", "select.stories.tsx"]
+      "evidence": ["select.test.tsx", "select.stories.tsx"]
     },
     {
       "id": "SEL-003",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["select.test.tsx", "select.wdio.ts"]
+      "evidence": ["select.types.test.ts", "spec/interaction.md"],
+      "plannedEvidence": ["select.wdio.ts"]
     },
     {
       "id": "SEL-004",
       "sources": ["flex-component", "furn-desktop"],
-      "plannedEvidence": ["select.wdio.ts", "select.stories.tsx"]
+      "evidence": ["select.stories.tsx", "useSelect.ts"],
+      "plannedEvidence": ["select.wdio.ts"]
     }
   ]
 }
